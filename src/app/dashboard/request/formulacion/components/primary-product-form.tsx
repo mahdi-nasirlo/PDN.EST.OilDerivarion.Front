@@ -1,44 +1,40 @@
 "use client";
-import {Button, Col, Divider, Form, Input, InputNumber, notification, Row, Select, Typography,} from "antd";
+import {Button, Col, Divider, Form, Input, InputNumber, Row, Select, Typography,} from "antd";
 import {SvgIcon} from "@/components/layout/sidebar";
 import useSWR from "swr";
-import {getAllMaterial} from "../../../../../../units/Material/getAllMaterial";
-// import {createRequestDetailProduct} from "../../../../../../units/RequestDetail/createMaterial";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useRouter} from "next/navigation";
 import {getCookie} from "cookies-next";
-import {IconType, NotificationPlacement,} from "antd/es/notification/interface";
 import {useForm} from "antd/lib/form/Form";
-import {createRequestDetailProduct} from "../../../../../../units/RequestDetail/createRequestDetailProduct";
+import useSWRMutation from "swr/mutation";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 
-export default function PrimaryProductForm({mute}: { mute: any }) {
+export default function PrimaryProductForm({mute, data, setData}: {
+    mute: any,
+    data: MaterialRequest | undefined,
+    setData: (arg: any) => void
+}) {
     const [form] = useForm();
 
     const router = useRouter();
 
-    const {data: material, isLoading: isLoadingMaterial} = useSWR("/Material/GetAll", getAllMaterial);
+    const {
+        data: material,
+        isLoading: isLoadingMaterial
+    } = useSWR("/Material/GetAll", url => listFetcher(url, {arg: {name: null, is_active: true}}));
 
-    const [isLoading, setLoading] = useState(false);
+    const {
+        isMutating: isMutatingCreate,
+        trigger: create
+    } = useSWRMutation("/RequestDetail/CreateMaterial", mutationFetcher)
 
-    const handleChange = (value: string) => {
-        console.log(`selected ${value}`);
-    };
+    const {
+        isMutating: isMutatingEdit,
+        trigger: edit
+    } = useSWRMutation("/RequestDetail/UpdateMaterial", mutationFetcher)
 
-    const [api, contextHolder] = notification.useNotification();
-
-    const openNotification = (
-        placement: NotificationPlacement,
-        type: IconType,
-        msg: string
-    ) => {
-        api.open({
-            type: type,
-            message: msg,
-            placement,
-        });
-    };
-
-    const onFinish = (values: MaterialRequest) => {
+    const onFinish = async (values: MaterialRequest) => {
         values.requestMasterUid = `${getCookie("requestMasterUid")}`;
         values.materialImportDeclarationNumber =
             values.materialImportDeclarationNumber.toString();
@@ -48,35 +44,49 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
         values.materialSupplyPersonTypeId = 1;
         values.materialSupplyMethodId = 1;
 
-        createRequestDetailProduct(
-            values,
-            setLoading,
-            () => {
-                form.resetFields();
-                mute();
-                openNotification("top", "success", "شرح فرایند با موفقیت ثبت شد.");
-                // router.push("/dashboard/request/select-product");
-            },
-            () => {
-                openNotification("top", "error", "مواد اولیه تکراری می باشد");
-            }
-        );
 
-        mute();
+        let res;
+
+        console.log(data?.uid)
+        if (data?.uid) {
+
+            values.uid = data.uid;
+            // @ts-ignore
+            res = await edit(values);
+
+        } else {
+
+            // @ts-ignore
+            res = await create(values);
+
+        }
+
+        if (res?.success) {
+            form.resetFields();
+            setData(undefined)
+        }
+
+
+        await mute()
+
     };
 
     useEffect(() => {
+
         if (!getCookie("requestMasterUid")) {
             return router.push("/dashboard/request/production-process");
         }
-    });
+
+        form.setFieldsValue(data)
+
+    }, [data, form, router]);
+
 
     return (
         <>
-            {contextHolder}
             <Form
                 form={form}
-                disabled={isLoading}
+                disabled={isMutatingCreate || isMutatingEdit}
                 name="form_item_path"
                 layout="vertical"
                 onFinish={onFinish}
@@ -92,11 +102,13 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                             ]}
                         >
                             <Select
+                                showSearch
+                                //@ts-ignore
+                                filterOption={filterOption}
                                 loading={isLoadingMaterial}
                                 fieldNames={{value: "Uid", label: "Name"}}
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                onChange={handleChange}
                                 tokenSeparators={[","]}
                                 options={material || []}
                             />
@@ -114,7 +126,8 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 {type: "string"},
                             ]}
                         >
-                            <Input size="large" type={"number"} placeholder={"وارد نمایید"}/>
+                            <Input size="large" type={"number"}
+                                   placeholder={"وارد نمایید"}/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -139,7 +152,7 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 min={0}
                                 max={100}
                                 formatter={(value) => `${value}%`}
-                                placeholder={"وارد نمایید"}
+                                placeholder="وارد کنید"
                             />
                         </Form.Item>
                     </Col>
@@ -152,7 +165,7 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 {type: "string"},
                             ]}
                         >
-                            <Input size="large" type={"number"} placeholder={"وارد نمایید"}/>
+                            <Input size="large" type={"number"} placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -170,7 +183,6 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 fieldNames={{value: "Uid", label: "Name"}}
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                onChange={handleChange}
                                 tokenSeparators={[","]}
                                 options={HowToSupply}
                             />
@@ -185,14 +197,12 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                     required: true,
                                     message: "شماره اظهارنامه واردات اجباری است",
                                 },
-                                {type: "number"},
                             ]}
                         >
-                            <InputNumber
+                            <Input
                                 className="w-full rounded-lg"
                                 size="large"
-                                placeholder={"وارد نمایید"}
-                            />
+                                placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -216,7 +226,7 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 min={0}
                                 max={100}
                                 formatter={(value) => `${value}%`}
-                                placeholder={"وارد نمایید"}
+                                placeholder="وارد کنید"
                             />
                         </Form.Item>
                     </Col>
@@ -235,7 +245,7 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 min={0}
                                 max={100}
                                 formatter={(value) => `${value}%`}
-                                placeholder={"وارد نمایید"}
+                                placeholder="وارد کنید"
                                 // onChange={onChange}
                             />
                         </Form.Item>
@@ -271,7 +281,6 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                                 fieldNames={{value: "Uid", label: "Name"}}
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                onChange={handleChange}
                                 tokenSeparators={[","]}
                                 options={Character}
                             />
@@ -304,10 +313,9 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                             label="ایرانکد"
                             rules={[
                                 {required: true, message: "ایرانکد اجباری است"},
-                                {type: "number"},
                             ]}
                         >
-                            <InputNumber
+                            <Input
                                 className="w-full rounded-lg"
                                 size="large"
                                 type={"number"}
@@ -329,23 +337,16 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                     </Col>
                 </Row>
                 <Row dir="ltr">
-                    <Col xs={10} md={3} lg={2}>
-                        <Button
-                            loading={isLoading}
-                            className="w-full management-info-form-submit"
-                            size="large"
-                            type="primary"
-                            htmlType="submit"
-                        >
-              <span
-                  style={{display: "flex"}}
-                  className="flex gap-2 justify-center"
-              >
-                ذخیره
-                <SvgIcon src="/static/save.svg"/>
-              </span>
-                        </Button>
-                    </Col>
+                    <Button
+                        icon={<SvgIcon src="/static/save.svg"/>}
+                        loading={isMutatingCreate || isMutatingEdit}
+                        size="large"
+                        danger
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        ذخیره
+                    </Button>
                 </Row>
             </Form>
         </>
@@ -353,6 +354,7 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
 }
 
 export type MaterialRequest = {
+    uid: string;
     requestMasterUid: string | null;
     materialUid: string;
     materialSupplyMethodId: number;
@@ -369,36 +371,11 @@ export type MaterialRequest = {
     materialSupplyAddress: string;
 };
 
-const RawMaterials = [
-    {
-        Uid: "1",
-        Name: "کلر",
-    },
-    {
-        Uid: "2",
-        Name: "بوتادیین",
-    },
-    {
-        Uid: "3",
-        Name: "پروپیلن",
-    },
-    {
-        Uid: "4",
-        Name: "اتیلن",
-    },
-    {
-        Uid: "5",
-        Name: "آمونیاک",
-    },
-    {
-        Uid: "6",
-        Name: "سولفور",
-    },
-    {
-        Uid: "7",
-        Name: "تولوئن ",
-    },
-];
+const filterOption = (input: string, option: {
+    Uid: string;
+    Name: string,
+    ID: number
+}) => (option?.Name ?? '').toLowerCase().includes(input.toLowerCase());
 
 const HowToSupply = [
     {
@@ -425,3 +402,4 @@ const Character = [
         Name: "حقیقی",
     },
 ];
+

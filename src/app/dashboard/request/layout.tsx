@@ -1,7 +1,9 @@
 "use client";
-import {Steps} from "antd";
+import {Grid, Steps} from "antd";
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
+
+const {useBreakpoint} = Grid;
 
 export default function RootLayout({
                                        children,
@@ -22,6 +24,11 @@ export default function RootLayout({
         router.push(`${currentLink}`);
         setCurrent(value);
     };
+    
+    const screens = useBreakpoint();
+    const isLgSize = screens.lg;
+
+    const progressDot = (isLgSize !== true);
 
     useEffect(() => {
         setCurrent(currentNumber);
@@ -30,6 +37,7 @@ export default function RootLayout({
     return (
         <>
             <Steps
+                progressDot={progressDot}
                 current={current}
                 onChange={onChange}
                 className="pb-0 lg:pb-8"

@@ -1,6 +1,6 @@
 "use client";
 
-import {Alert, Button, Col, Divider, Form, Input, InputNumber, Row,} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, InputNumber, Row, } from "antd";
 import React from "react";
 import staticMessages from "../../../../../lib/staticMessages";
 
@@ -12,7 +12,7 @@ export default function NewRequest() {
                 message={staticMessages.formAlert}
                 type="error"
             />
-            <Divider/>
+            <Divider />
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
@@ -29,7 +29,7 @@ export default function NewRequest() {
                                 },
                             ]}
                         >
-                            <Input size="large"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -37,7 +37,7 @@ export default function NewRequest() {
                             name="national-code"
                             label="شناسه ملی"
                             rules={[
-                                {required: true, message: "کد ملی اجباری است"},
+                                { required: true, message: "کد ملی اجباری است" },
                                 {
                                     validator: (_, value) => {
                                         if (!value || value.length === 10) {
@@ -48,7 +48,7 @@ export default function NewRequest() {
                                 },
                             ]}
                         >
-                            <InputNumber size="large" className="w-full rounded-lg"/>
+                            <InputNumber size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -59,11 +59,11 @@ export default function NewRequest() {
                             name="lastName"
                             label="نام واحد تولیدی"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "string", message: "باید به صورت متن باشد"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "string", message: "باید به صورت متن باشد" },
                             ]}
                         >
-                            <Input size="large"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -71,15 +71,15 @@ export default function NewRequest() {
                             name="lastName"
                             label="نوع مالکیت"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "string"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "string" },
                             ]}
                         >
-                            <Input size="large"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
-                <Divider/>
+                <Divider />
 
                 <Button
                     className="w-full management-info-form-submit btn-filter"

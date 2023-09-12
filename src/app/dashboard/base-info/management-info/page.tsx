@@ -1,9 +1,9 @@
 "use client";
 
-import {ColumnsType} from "antd/es/table";
-import {Button, Col, DatePicker, Divider, Form, Input, InputNumber, Row, Select, Space, Table, Typography,} from "antd";
+import { ColumnsType } from "antd/es/table";
+import { Button, Col, DatePicker, Divider, Form, Input, InputNumber, Row, Select, Space, Table, Typography, } from "antd";
 import React from "react";
-import {SvgIcon} from "@/components/layout/sidebar";
+import { SvgIcon } from "@/components/layout/sidebar";
 import Link from "next/link";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
             <Typography className="text-right font-medium text-base">
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
-            <Divider/>
+            <Divider />
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
@@ -20,11 +20,11 @@ export default function Home() {
                             name="lastName"
                             label="نام و نام خانوادگی"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "string", message: "باید به صورت متن باشد"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "string", message: "باید به صورت متن باشد" },
                             ]}
                         >
-                            <Input size="large"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -32,7 +32,7 @@ export default function Home() {
                             name="lastName"
                             label="کد ملی / کد اتباع"
                             rules={[
-                                {required: true, message: "کد ملی اجباری است"},
+                                { required: true, message: "کد ملی اجباری است" },
                                 {
                                     validator: (_, value) => {
                                         if (!value || value.length === 10) {
@@ -43,7 +43,7 @@ export default function Home() {
                                 },
                             ]}
                         >
-                            <InputNumber size="large" className="w-full rounded-lg"/>
+                            <InputNumber size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -62,11 +62,11 @@ export default function Home() {
                             name="lastName"
                             label="سمت"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "string"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "string" },
                             ]}
                         >
-                            <Select size="large"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -76,11 +76,11 @@ export default function Home() {
                             name={"phone_number"}
                             label="شماره تماس"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "number", message: "باید به صورت عدد باشد"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "number", message: "باید به صورت عدد باشد" },
                             ]}
                         >
-                            <InputNumber className="w-full rounded-lg" size="large"/>
+                            <InputNumber className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -92,13 +92,13 @@ export default function Home() {
                             size="large"
                             type="primary"
                         >
-              <span
-                  style={{display: "flex"}}
-                  className="flex gap-2 justify-center"
-              >
-                ذخیره
-                <SvgIcon src="/static/save.svg"/>
-              </span>
+                            <span
+                                style={{ display: "flex" }}
+                                className="flex gap-2 justify-center"
+                            >
+                                ذخیره
+                                <SvgIcon src="/static/save.svg" />
+                            </span>
                         </Button>
                     </Col>
                 </Row>
@@ -111,7 +111,7 @@ export default function Home() {
                 dataSource={data}
             />
 
-            <Divider/>
+            <Divider />
             <Button
                 className="w-full management-info-form-submit btn-filter"
                 size="large"

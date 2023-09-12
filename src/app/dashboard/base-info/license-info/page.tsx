@@ -1,10 +1,10 @@
 "use client";
 
-import {SvgIcon} from "@/components/layout/sidebar";
-import {Button, Col, DatePicker, Divider, Form, Input, Row, Space, Table, Typography,} from "antd";
+import { SvgIcon } from "@/components/layout/sidebar";
+import { Button, Col, DatePicker, Divider, Form, Input, Row, Space, Table, Typography, } from "antd";
 import React from "react";
 import Link from "next/link";
-import {ColumnsType} from "antd/es/table";
+import { ColumnsType } from "antd/es/table";
 
 export default function Page() {
     return (
@@ -13,7 +13,7 @@ export default function Page() {
                 لطفا اطلاعات را با دقت بررسی کرده و سپس در صورت صحیح بودن باقی مراحل را
                 کامل نمایید.
             </Typography>
-            <Divider/>
+            <Divider />
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
@@ -21,11 +21,11 @@ export default function Page() {
                             name="year-establishment"
                             label="نام مجوز"
                             rules={[
-                                {required: true, message: "این فیلد اجباری است"},
-                                {type: "number", message: "باید به صورت عدد باشد"},
+                                { required: true, message: "این فیلد اجباری است" },
+                                { type: "number", message: "باید به صورت عدد باشد" },
                             ]}
                         >
-                            <Input size="large"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -57,13 +57,13 @@ export default function Page() {
                             size="large"
                             type="primary"
                         >
-              <span
-                  style={{display: "flex"}}
-                  className="flex gap-2 justify-center"
-              >
-                ثبت
-                <SvgIcon src="/static/save.svg"/>
-              </span>
+                            <span
+                                style={{ display: "flex" }}
+                                className="flex gap-2 justify-center"
+                            >
+                                ثبت
+                                <SvgIcon src="/static/save.svg" />
+                            </span>
                         </Button>
                     </Col>
                 </Row>
@@ -75,7 +75,7 @@ export default function Page() {
                 dataSource={data}
             />
 
-            <Divider/>
+            <Divider />
             <div className="flex gap-6">
                 <Button
                     className="w-full management-info-form-submit btn-filter"

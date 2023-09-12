@@ -1,9 +1,9 @@
 "use client";
 
-import {Button, Col, Form, FormItemProps, Input, Row, Select, Space, Table, Tag,} from "antd";
+import { Button, Col, Form, FormItemProps, Input, Row, Select, Space, Table, Tag, } from "antd";
 import React from "react";
 import Link from "next/link";
-import {ColumnsType} from "antd/es/table";
+import { ColumnsType } from "antd/es/table";
 
 
 export default function Page() {
@@ -13,38 +13,42 @@ export default function Page() {
                 <Form name="form_item_path" layout="vertical">
                     <MyFormItemGroup prefix={["user"]}>
                         <MyFormItemGroup prefix={["name"]}>
-                            <Row gutter={32}>
-                                <Col span={12}>
+                            <Row gutter={[16, 16]}>
+                                <Col xs={24} md={12}>
                                     <MyFormItem name="year-establishment" label="نام محصول ">
-                                        <Input size="large"/>
+                                        <Input size="large" placeholder="وارد کنید" />
                                     </MyFormItem>
                                 </Col>
-                                <Col span={12}>
+                                <Col xs={24} md={12}>
                                     <MyFormItem name="lastName" label=" وضعیت فعالیت">
-                                        <Select size="large"/>
+                                        <Select size="large" placeholder="انتخاب کنید" />
                                     </MyFormItem>
                                 </Col>
                             </Row>
-                            <Row dir="ltr">
-                                <Col span={2}>
-                                    <div className="flex gap-6 ">
-                                        <Button
-                                            className="w-full management-info-form-submit btn-delete-filter"
-                                            size="large"
-                                            type="primary"
-                                        >
-                      <span className="flex gap-3 justify-center ">
-                        حذف فیلتر
-                      </span>
-                                        </Button>
+                            <Row dir="ltr" gutter={[16, 16]}>
+                                <Col xs={12} md={3} lg={2}>
+                                    <div className="flex">
                                         <Button
                                             className="w-full management-info-form-submit btn-filter"
                                             size="large"
                                             type="primary"
                                         >
-                      <span className="flex gap-3 justify-center ">
-                        اعمال فیلتر
-                      </span>
+                                            <span className="flex gap-3 justify-center ">
+                                                اعمال فیلتر
+                                            </span>
+                                        </Button>
+                                    </div>
+                                </Col>
+                                <Col xs={12} md={3} lg={2}>
+                                    <div className="flex">
+                                        <Button
+                                            className="w-full management-info-form-submit btn-delete-filter"
+                                            size="large"
+                                            type="primary"
+                                        >
+                                            <span className="flex gap-2 justify-center ">
+                                                حذف فیلتر
+                                            </span>
                                         </Button>
                                     </div>
                                 </Col>
@@ -52,7 +56,7 @@ export default function Page() {
                         </MyFormItemGroup>
                     </MyFormItemGroup>
                 </Form>
-            </div>
+            </div >
             <Table
                 className='mt-8'
                 columns={columns}
@@ -62,7 +66,7 @@ export default function Page() {
                     showSizeChanger: true,
                     pageSizeOptions: ['10', '20', '50'],
                     defaultCurrent: 1,
-                    style: {display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "16px 0",},
+                    style: { display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "16px 0", },
                 }}
             />
         </>
@@ -109,19 +113,35 @@ const columns: ColumnsType<DataType> = [
         title: "وضعیت فعالیت",
         dataIndex: "ActivityStatus",
         key: "6",
-        render: (_, {ActivityStatus}) => (
+        render: (_, { ActivityStatus }) => (
             <>
-                {ActivityStatus.map((ActivityStatus) => {
-                    let color = ActivityStatus.length > 16 ? 'geekblue' : 'green';
-                    if (ActivityStatus === 'loser') {
-                        color = 'volcano';
+                {ActivityStatus.map((activityStatus) => {
+                    let color;
+                    switch (activityStatus) {
+                        case 'دریافت استاندارد':
+                            color = 'green';
+                            break;
+                        case 'عدم دریافت استاندارد':
+                            color = 'red';
+                            break;
+                        case 'در حال آزمایش':
+                            color = 'yellow';
+                            break;
+                        case 'loser':
+                            color = 'volcano';
+                            break;
+                        default:
+                            color = 'geekblue'; // Default color if none of the conditions match
+                            break;
                     }
+
                     return (
-                        <Tag color={color} key={ActivityStatus}>
-                            {ActivityStatus.toUpperCase()}
+                        <Tag color={color} key={activityStatus}>
+                            {activityStatus.toUpperCase()}
                         </Tag>
                     );
                 })}
+
             </>
         ),
     },
@@ -153,7 +173,7 @@ function toArr(
     return Array.isArray(str) ? str : [str];
 }
 
-const MyFormItemGroup = ({prefix, children}: MyFormItemGroupProps) => {
+const MyFormItemGroup = ({ prefix, children }: MyFormItemGroupProps) => {
     const prefixPath = React.useContext(MyFormItemContext);
     const concatPath = React.useMemo(
         () => [...prefixPath, ...toArr(prefix)],
@@ -167,7 +187,7 @@ const MyFormItemGroup = ({prefix, children}: MyFormItemGroupProps) => {
     );
 };
 
-const MyFormItem = ({name, ...props}: FormItemProps) => {
+const MyFormItem = ({ name, ...props }: FormItemProps) => {
     const prefixPath = React.useContext(MyFormItemContext);
     const concatName =
         name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;

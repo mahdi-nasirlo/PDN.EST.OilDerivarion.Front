@@ -1,5 +1,5 @@
 import DisplayData from "@/app/dashboard/components/showData";
-import {Typography} from "antd";
+import { Typography } from "antd";
 import Link from "next/link";
 
 
@@ -10,15 +10,15 @@ export default async function Home() {
 
     return (
         <>
-            <div className="box-border w-full mt-8 p-6 max-md:p-2 mt-3">
-                <DisplayData data={data}/>
+            <div className="box-border w-full lg:mt-8 lg:p-6 p-2 mt-3">
+                <DisplayData data={data} />
                 <div className="flex">
                     <Typography className="text-1xl">
                         ورود به پنل
                     </Typography>
                     <Typography>
                         <Link className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-                              href="/manufacturer">
+                            href="/manufacturer">
                             رییس اجرایی
                         </Link>
                     </Typography>
@@ -29,7 +29,7 @@ export default async function Home() {
                     </Typography>
                     <Typography>
                         <Link className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-                              href="/admin-pannel">
+                            href="/admin-pannel">
                             ادمین
                         </Link>
                     </Typography>

@@ -1,102 +1,94 @@
 "use client";
 
-import {SvgIcon} from "@/components/layout/sidebar";
 import {Button, Col, Form, Row, Select} from "antd";
 import React, {useState} from "react";
-import useSWR from "swr";
-import {getAllProductSelectable} from "../../../../../../units/RequestDetail/getAllProductSelectable";
-import {useRouter} from "next/navigation";
+import {SvgIcon} from "@/components/layout/sidebar";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {getCookie} from "cookies-next";
+
 
 export default function PrimaryProductForm({mute}: { mute: any }) {
 
-    const [isLoading, setLoading] = useState(false);
+    const [dunsite, Setdunsite] = useState();
 
-    const [secondSelectVisible, setSecondSelectVisible] = useState<
-        boolean | undefined
-    >(undefined);
+    const {
+        data: selectableProduct,
+        isMutating: isLDSelectable,
+        trigger: getSelectableProduct
+    } = useSWRMutation("/RequestDetail/GetAllProductSelectable", mutationFetcher);
 
-    const router = useRouter();
+    const {
+        isMutating: isLDCreateProduct,
+        trigger: createProduct
+    } = useSWRMutation("/RequestDetail/CreateProduct", mutationFetcher)
 
-    const {data: selectableProduct} = useSWR(
-        ["/RequestDetail/GetAllProductSelectable", secondSelectVisible],
-        getAllProductSelectable
-    );
 
-    // const onFinish = (values: { dansite: boolean; productUid: string }) => {
-    //   createRequestDetailProduct(
-    //     { productUid: values.productUid },
-    //     setLoading,
-    //     () => {
-    //       router.push("/dashboard/request/select-product");
-    //     }
-    //   );
+    const onFinish = async (values: { productUid: string, densityType: boolean }) => {
 
-    //   mute();
-    // };
+        await createProduct(values.productUid)
 
-    const handleChange = (value: boolean) => {
-
-        setSecondSelectVisible(value);
-
-        console.log(secondSelectVisible)
+        mute();
 
     };
 
+    const ChangeDunsite = async (value: any) => {
+
+        Setdunsite(value)
+
+        await getSelectableProduct({
+            requestMasterUid: getCookie("requestMasterUid"),
+            densityType: value,
+        })
+
+    };
 
     return (
         <>
             <Form
-                disabled={isLoading}
-                // onFinish={onFinish}
+                disabled={isLDCreateProduct}
+                onFinish={onFinish}
                 name="form_item_path"
                 layout="vertical"
             >
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="dansite" label="دانسیته محصول ">
+                        <Form.Item name="densityType" label="دانسیته محصول ">
                             <Select
                                 placeholder="انتخاب نمایید"
-                                onChange={handleChange}
+                                onChange={ChangeDunsite}
                                 tokenSeparators={[","]}
                                 options={Character}
                                 size="large"
+                                value={dunsite}
                                 fieldNames={{value: "is_Active", label: "Name"}}
                             />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="نام محصول">
+                        <Form.Item name="productUid" label="نام محصول">
                             <Select
-                                fieldNames={{value: "Uid", label: "densityType"}}
+                                loading={isLDSelectable}
+                                fieldNames={{value: "Uid", label: "Name"}}
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                onChange={handleChange}
-                                disabled={typeof secondSelectVisible !== "boolean"}
+                                disabled={typeof dunsite !== "boolean"}
                                 tokenSeparators={[","]}
-                                options={typeof secondSelectVisible !== "boolean" ? [] : selectableProduct || []}
+                                options={selectableProduct || []}
                             />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row dir="ltr">
-                    <Col xs={10} md={3} lg={2}>
-                        <Button
-                            disabled={typeof secondSelectVisible !== "boolean"}
-                            loading={isLoading}
-                            className="w-full management-info-form-submit"
-                            size="large"
-                            type="primary"
-                            htmlType="submit"
-                        >
-              <span
-                  style={{display: "flex"}}
-                  className="flex gap-2 justify-center"
-              >
-                ذخیره
-                <SvgIcon src="/static/save.svg"/>
-              </span>
-                        </Button>
-                    </Col>
+                    <Button
+                        icon={<SvgIcon src="/static/save.svg"/>}
+                        danger
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        ذخیره
+                    </Button>
                 </Row>
             </Form>
         </>

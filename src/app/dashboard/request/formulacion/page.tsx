@@ -1,23 +1,23 @@
 "use client";
 
-import {Button, Divider, Typography} from "antd";
+import {Button, Divider, Row, Typography} from "antd";
 import React, {useState} from "react";
 import PrimaryProductTable from "@/app/dashboard/request/formulacion/components/primary-product-table";
 import PrimaryProductForm from "./components/primary-product-form";
 import useSWR from "swr";
-import {getAllRequestDetailMaterial} from "../../../../../units/RequestDetail/getAllRequestDetailMaterial";
-import {useRouter} from "next/navigation";
+import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {getCookie} from "cookies-next";
 
 export default function Formulacion() {
-    const router = useRouter();
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(undefined)
 
     const {
         mutate,
         data: requestMasterMaterial,
         isLoading: requestMasterMaterialLoading,
-    } = useSWR("/RequestDetail/GetPageMaterial", getAllRequestDetailMaterial);
+    } = useSWR("/RequestDetail/GetPageMaterial", url => listFetcher(url, {arg: {requestMasterUid: getCookie("requestMasterUid")}}));
 
     return (
         <>
@@ -30,56 +30,24 @@ export default function Formulacion() {
             </Typography>
 
             <Divider/>
-            <PrimaryProductForm mute={mutate}/>
+            <PrimaryProductForm mute={mutate} setData={setData} data={convertKeysToLowerCase(data)}/>
             <PrimaryProductTable
+                setData={setData}
+                mute={mutate}
                 data={requestMasterMaterial}
                 loading={requestMasterMaterialLoading}
             />
-            <Divider/>
-            <Button
-                className="w-full management-info-form-submit btn-filter"
-                size="large"
-                type="primary"
-                htmlType="submit"
-            >
-                <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
-            </Button>
+            <Row>
+                <Divider/>
+                <Button
+                    className="w-full management-info-form-submit btn-filter"
+                    size="large"
+                    type="primary"
+                    htmlType="submit"
+                >
+                    <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
+                </Button>
+            </Row>
         </>
     );
 }
-
-// async function getAllRequestMaster() {
-//     const cookieStore = cookies();
-//     const requestMasterUid = cookieStore.get("requestMasterUid")?.value;
-//
-//     return await axios
-//         .request({
-//             method: "get",
-//             url: `${process.env["NEXT_PUBLIC_API_URL"]}/api/RequestDetail/GetPageMaterial`,
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             data: {
-//                 requestMasterUid: requestMasterUid,
-//                 fromRecord: 0,
-//                 selectRecord: 20,
-//             },
-//         })
-//         .then((res: any) => res.data.data);
-// }
-//
-// async function getAllMaterial() {
-//     return await axios
-//         .request({
-//             method: "get",
-//             url: `${process.env["NEXT_PUBLIC_API_URL"]}/api/Material/GetAll`,
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             data: {
-//                 name: null,
-//                 is_Active: true,
-//             },
-//         })
-//         .then((res: any) => res.data.data);
-// }

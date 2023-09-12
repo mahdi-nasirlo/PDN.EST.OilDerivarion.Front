@@ -1,19 +1,65 @@
 "use client";
-import {Button, Checkbox, Divider, Table, Typography,} from "antd";
+import {Button, Checkbox, Divider, Form, Table, Typography} from "antd";
 import React from "react";
 import {ColumnsType} from "antd/es/table";
 import PrimaryProductForm from "./components/primary-product-form";
 import useSWR from "swr";
-import {getAllProduct} from "../../../../../units/RequestDetail/getAllProduct";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {getCookie} from "cookies-next";
+
 
 export default function Page() {
 
+    const [form] = Form.useForm();
 
-    const {data: product, mutate} = useSWR(
-        "/api/RequestDetail/GetAllProduct",
-        getAllProduct
+
+    const {data: product, mutate, isLoading} = useSWR<{ records: [], count: number }>(
+        "/RequestDetail/GetPageProduct",
+        url => listFetcher(url, {
+            arg: {
+                requestMasterUid: getCookie("requestMasterUid"),
+                fromRecord: 0,
+                selectRecord: 100
+            }
+        })
     );
 
+    const {isMutating: isDeleting, trigger} = useSWRMutation("/RequestDetail/DeleteProduct", mutationFetcher)
+
+    const columns: ColumnsType<DataType> = [
+        {
+            title: "ردیف",
+            dataIndex: "index",
+            key: "1",
+        },
+        {
+            title: "نام محصول",
+            dataIndex: "ProductName",
+            key: "2",
+        },
+        {
+            title: "دانسیته",
+            dataIndex: "density",
+            key: "3",
+        },
+
+        {
+            title: "جزئیات",
+            key: "جزئیات",
+            render: (_, record) => (
+                <Button onClick={async () => {
+                    //@ts-ignore
+                    await trigger(record.Uid)
+
+                    await mutate()
+                }} danger type="text">
+                    <Typography className="text-red-500"> حذف</Typography>
+                </Button>
+            ),
+        },
+    ];
     return (
         <>
             <Typography className="text-right font-medium text-base">
@@ -25,30 +71,47 @@ export default function Page() {
             </Typography>
             <PrimaryProductForm mute={mutate}/>
 
+
             <Table
+                loading={isLoading}
                 pagination={false}
                 className="mt-6"
                 columns={columns}
-                dataSource={product || null}
+                dataSource={product?.records || []}
             />
             <Divider/>
-            <div className="flex">
-                <Checkbox></Checkbox>
-                <Typography className="mr-3 font-medium">
-                    شرایط و قوانین را خوانده و می پذیرم!
-                </Typography>
-            </div>
-            <Divider/>
-            <div className="flex gap-6">
-                <Button
-                    className="w-full management-info-form-submit btn-filter"
-                    size="large"
-                    type="primary"
-                    htmlType="submit"
+            <Form
+                form={form}
+                name="register"
+            >
+                <Form.Item
+                    className=" mr-3 font-medium"
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value ? Promise.resolve() : Promise.reject(new Error('پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد')),
+                        },
+                    ]}
                 >
-                    <span className="flex gap-3 justify-center ">ذخیره</span>
-                </Button>
-            </div>
+                    <Checkbox>
+                        شرایط و <a href="https://google.com" target="_blank" className="text-primary-500">قوانین</a> را
+                        خوانده و می پذیرم!
+                    </Checkbox>
+                </Form.Item>
+                <Divider/>
+                <div className="flex gap-6">
+                    <Button
+                        className="w-full management-info-form-submit btn-filter"
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        <span className="flex gap-3 justify-center ">ذخیره</span>
+                    </Button>
+                </div>
+            </Form>
         </>
     );
 }
@@ -64,35 +127,6 @@ interface DataType {
     role: string;
 }
 
-const columns: ColumnsType<DataType> = [
-    {
-        title: "ردیف",
-        dataIndex: "row",
-        key: "1",
-    },
-    {
-        title: "نام محصول",
-        dataIndex: "productname",
-        key: "2",
-    },
-    {
-        title: "دانسیته",
-        dataIndex: "density",
-        key: "2",
-    },
-
-    {
-        title: "جزئیات",
-        key: "جزئیات",
-        // render: (_, record) => (
-        //   <Space size="middle">
-        //     <Link href={""} className="action-btn-delete">
-        //       حذف
-        //     </Link>
-        //   </Space>
-        // ),
-    },
-];
 
 const data: DataType[] = [
     {

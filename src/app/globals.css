@@ -85,6 +85,30 @@ body {
         --background-end-rgb: 0, 0, 0;
     }
 }
+/* scrollbar style */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: theme("colors.gray.300");
+    /* border-top-right-radius: 100px !important;
+    border-radius: 5px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: theme("colors.primary.500");
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: theme("backgroundColor.green.500");
+}
 
 .text-secondary {
     color: theme('textColor.secondary.500') !important;
@@ -122,6 +146,10 @@ body {
     display: none !important;
 }
 
+.ant-menu{
+    @apply border-e-0 lg:border-e-[1px] !important
+}
+
 
 .ant-menu-item {
     margin-right: 0 !important;
@@ -144,6 +172,14 @@ body {
     background-color: theme("backgroundColor.primary.500") !important;
     color: theme("colors.white") !important;
     /* filter: brightness(0) invert(1); */
+}
+
+.ant-steps-icon-dot::after {
+    margin: 10px !important;
+}
+
+.ant-drawer-mask{
+    @apply opacity-75 !important
 }
 
 .ant-alert-error .ant-alert-content .ant-alert-message {
@@ -284,7 +320,7 @@ body {
 
 @media screen and (max-width: 1024px) {
     .ant-divider {
-        margin: 10px 0 !important;
+        margin: 20px 0 !important;
 
     }
 }
@@ -317,4 +353,7 @@ body {
 .ant-notification-notice {
     direction: rtl;
     font-family: IRANSans !important;
+}
+.ant-form-item-control-input-content{
+    @apply flex
 }

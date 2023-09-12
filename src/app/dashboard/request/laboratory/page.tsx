@@ -73,25 +73,24 @@ export default function Page() {
                                     name="operation-license"
                                     label="محل فروش و یا دفن ضایعات"
                                 >
-                                    <Input size="large"/>
+                                    <Input size="large" placeholder="وارد کنید"/>
                                 </MyFormItem>
                             </Col>
                         </Row>
                     </MyFormItemGroup>
                 </MyFormItemGroup>
+                <Divider/>
+                <Link href={"/dashboard/request/formulacion"}>
+                    <Button
+                        className="w-full management-info-form-submit btn-filter"
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
+                    </Button>
+                </Link>
             </Form>
-
-            <Divider/>
-            <Link href={"/dashboard/request/formulacion"}>
-                <Button
-                    className="w-full management-info-form-submit btn-filter"
-                    size="large"
-                    type="primary"
-                    htmlType="submit"
-                >
-                    <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
-                </Button>
-            </Link>
         </>
     );
 }

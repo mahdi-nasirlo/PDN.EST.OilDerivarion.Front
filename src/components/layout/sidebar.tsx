@@ -1,34 +1,58 @@
 "use client";
 import React from "react";
-import type {MenuProps} from "antd";
-import {Menu} from "antd";
+import type { MenuProps } from "antd";
+import { Drawer, Menu } from "antd";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function LayoutSidebar({
-                                          menu,
-                                          isMenuVisible,
-                                      }: {
+    menu,
+    onClose,
+    open,
+    isLgSize
+}: {
     menu: MenuProps["items"];
-    isMenuVisible: any;
+    onClose: any;
+    open: any;
+    isLgSize: any;
 }) {
+
     const pathname = usePathname();
+
+    const CommonMenu = ({ style = {}, className = "" }: { style: object, className: string }) => {
+        return <Menu
+            style={style}
+            defaultSelectedKeys={[pathname]}
+            className={className}
+            mode="inline"
+            items={menu}
+        />
+    }
 
     return (
         <>
-            <div style={{display: isMenuVisible ? "flex" : "none"}}>
-                <Menu
-                    defaultSelectedKeys={[pathname]}
-                    style={{
-                        width: "272px",
+
+            <div className="hidden lg:block" style={{
+                position: "fixed",
+                bottom: 0,
+                top: 97,
+                left: "auto",
+                right: 0,
+                zIndex: 99,
+            }}
+            >
+                {isLgSize ?
+                    <CommonMenu style={{
+                        width: "270px",
                         padding: "0 16px",
                         paddingTop: "40px",
                         height: "100%",
-                    }}
-                    className="px-4"
-                    mode="inline"
-                    items={menu}
-                />
+                    }} className="px-4" />
+                    :
+                    <Drawer title="سازمان ملی استاندارد" placement="right" width={300} onClose={onClose} open={open} >
+                        <CommonMenu style={{ height: "100%" }} className="" />
+                    </Drawer>
+                }
             </div>
         </>
     );
@@ -55,15 +79,15 @@ export function getMenuItem(
 }
 
 export const SvgIcon = ({
-                            src,
-                            width = 16,
-                            height = 16,
-                            className,
-                        }: {
+    src,
+    width = 16,
+    height = 16,
+    className,
+}: {
     src: string;
     width?: number;
     height?: number;
     className?: string;
 }) => (
-    <Image src={src} width={width} height={height} className={className} alt=""/>
+    <Image src={src} width={width} height={height} className={className} alt="" />
 );

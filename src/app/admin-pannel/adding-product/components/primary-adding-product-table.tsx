@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Table } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select, Switch, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -13,7 +13,6 @@ interface DataType {
     ProductName: string;
     TrackingCode: string;
     ConfirmedRequestCode: string;
-    DateRegistration: string;
 }
 
 
@@ -71,20 +70,30 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
             key: "1",
         },
         {
-            title: "    نام محصول",
+            title: "نام محصول",
             dataIndex: "ProductName",
             key: "2",
         },
         {
-            title: " کد",
+            title: "نام دسته بندی",
             dataIndex: "TrackingCode",
             key: "3",
         },
-
         {
-            title: " دانسیته",
+            title: "فعال/غیر فعال ",
             dataIndex: "ConfirmedRequestCode",
             key: "4",
+            render: (e, record) => <Switch defaultChecked />,
+        },
+        {
+            title: "کد محصول",
+            dataIndex: "ConfirmedRequestCode",
+            key: "5",
+        },
+        {
+            title: "فاکتور آزمون",
+            dataIndex: "ConfirmedRequestCode",
+            key: "6",
         },
         {
             title: "عملیات",
@@ -100,7 +109,8 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست محصولات</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -108,8 +118,8 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <span className="flex gap-2">افزودن محصول</span>
                         <PlusIcon width={24} height={24} />
+                        <span className="flex gap-2">افزودن محصول جدید</span>
                     </Button>
                 </div>
                 <Table
@@ -206,23 +216,17 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
-                            <Form.Item labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }} name="lastName" label="کد">
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[32, 1]}>
-                        <Col xs={24} md={12}>
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="establishment"
-                                label="دانسیته"
+                                label="دسته بندی محصول"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
                                 labelCol={{ span: 24 }}
@@ -246,16 +250,14 @@ const data: DataType[] = [
         key: "1",
         Row: 1,
         ProductName: "  بنزین پیرولیز",
-        TrackingCode: "32154421",
+        TrackingCode: "خام",
         ConfirmedRequestCode: "123",
-        DateRegistration: "خصوصی",
     },
     {
         key: "2",
         Row: 2,
         ProductName: "   بنزین پیرولیز",
-        TrackingCode: "32154421",
+        TrackingCode: "خام",
         ConfirmedRequestCode: "456",
-        DateRegistration: "خصوصی",
     },
 ];

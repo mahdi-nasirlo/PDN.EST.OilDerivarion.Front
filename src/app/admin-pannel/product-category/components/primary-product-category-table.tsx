@@ -2,7 +2,7 @@
 
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Switch, Table } from 'antd'
+import { Button, Col, Form, Modal, Row, Select, Switch, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -95,7 +95,8 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست دسته بندی محصولات</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"

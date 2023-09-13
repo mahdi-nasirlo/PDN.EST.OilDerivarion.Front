@@ -68,23 +68,17 @@ export default function PrimaryAddingProductModal({ modalVisible, setModalVisibl
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }} name="lastName" label="کد">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="establishment"
-                            label="دانسیته"
+                            label="دسته بندی محصول"
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}

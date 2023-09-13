@@ -40,7 +40,7 @@ export default async function Home() {
                     </Typography>
                     <Typography>
                         <Link className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-                            href="/state-org-manager">
+                            href="/state-general-management">
                             پنل مدیر کل استان
                         </Link>
                     </Typography>

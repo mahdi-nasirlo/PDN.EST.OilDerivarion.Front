@@ -22,23 +22,23 @@ export default function RootLayout({
 
 const items: MenuProps["items"] = [
     getMenuItem(
-        <Link href={"/state-org-manager"}>خانه</Link>,
-        "state-org-manager",
+        <Link href={"/state-general-management"}>خانه</Link>,
+        "state-general-management",
         <HomeIcon width={16} height={16} />
     ),
 
     getMenuItem(
         "پیشخوان",
-        "state-org-manager",
+        "state-general-management",
         null,
         [
             getMenuItem(
-                <Link href={"/state-org-manager/requests-list"}>لیست درخواست ها</Link>,
+                <Link href={"/state-general-management/requests-list"}>لیست درخواست ها</Link>,
                 "requests-list",
                 <FolderPlusIcon width={16} height={16} />
             ),
             getMenuItem(
-                <Link href={"/state-org-manager/delays-list"}>تاخیر ها</Link>,
+                <Link href={"/state-general-management/delays-list"}>تاخیر ها</Link>,
                 "delays-list",
                 <FolderPlusIcon width={16} height={16} />
             ),
@@ -46,7 +46,7 @@ const items: MenuProps["items"] = [
         "group"
     ),
     getMenuItem(
-        <Link href={"/state-org-manager/requests-list"}>ارتباط با پشتیبانی</Link>,
+        <Link href={"/state-general-management/requests-list"}>ارتباط با پشتیبانی</Link>,
         "requests-list",
         <FolderPlusIcon width={16} height={16} />
     ),

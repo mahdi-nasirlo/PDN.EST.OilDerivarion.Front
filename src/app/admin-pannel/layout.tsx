@@ -50,20 +50,29 @@ const items: MenuProps["items"] = [
     <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
+    "مدیریت کاربران",
+    "management-user",
+    <FolderPlusIcon width={16} height={16} />,
+    [
+      getMenuItem(
+        <Link href={"/admin-pannel/management-user"}>مدیریت کاربران</Link>,
+        "management-user",
+        <FolderPlusIcon width={16} height={16} />,
+      ),
+      getMenuItem(
+        <Link href={"/admin-pannel/management-user-role"}>مدیریت نقش کاربران</Link>,
+        "management-user-role",
+        <FolderPlusIcon width={16} height={16} />
+      ),
+    ]
+  ),
+
+  getMenuItem(
     <Link href={"/admin-pannel/laboratory"}>آزمایشگاه ها</Link>,
     "laboratory",
     <FolderPlusIcon width={16} height={16} />
   ),
-  getMenuItem(
-    <Link href={"/admin-pannel/management-user"}>مدیریت کاربران</Link>,
-    "management-user",
-    <FolderPlusIcon width={16} height={16} />
-  ),
-  getMenuItem(
-    <Link href={"/admin-pannel/management-user-role"}>مدیریت نقش کاربران</Link>,
-    "management-user-role",
-    <FolderPlusIcon width={16} height={16} />
-  ),
+
   getMenuItem(
     <Link href={"/admin-pannel/test-factors"}>فاکتورهای آزمون</Link>,
     "test-factors",

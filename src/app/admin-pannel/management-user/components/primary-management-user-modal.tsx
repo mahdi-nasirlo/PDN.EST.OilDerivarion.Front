@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
@@ -62,19 +62,45 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="year"
-                            label="نام و نام خانوادگی کاربر"
-                        >
+                            name="year-establishment" label="نام">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
+                        <Form.Item labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="yeasr"
-                            label="نام کاربری"
-                        >
+                            name="lastName" label="نام خانوادگی">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment" label="کد ملی">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }} name="lastName" label="شناسه کاربری">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment" label="شماره تماس">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="lastName" label="استان">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
@@ -84,8 +110,8 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="yeara"
-                            label="کد ملی"
+                            name="year-establishment"
+                            label="شهر"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -94,10 +120,10 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="yearc"
-                            label="شماره همراه"
+                            name="year-establishment"
+                            label="فعال/غیر فعال"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -106,20 +132,8 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="yearf"
-                            label="ایمیل"
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="yearm"
-                            label="رمز عبور"
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
+                            name="year-establishment" label="نقش">
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

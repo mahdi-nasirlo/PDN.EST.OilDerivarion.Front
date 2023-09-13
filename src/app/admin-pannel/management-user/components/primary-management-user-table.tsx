@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select, Switch, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -10,12 +10,14 @@ import React, { useState } from 'react'
 interface DataType {
     key: string;
     Row: number;
+    Name: string;
     LastName: string;
     UserName: string;
     NationalCode: string;
     phone: string;
     mail: string;
     password: string;
+    test: string;
 }
 
 export default function PrimaryManagementUserTable({ setModalVisible }: { setModalVisible: any }) {
@@ -72,13 +74,13 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
             key: "1",
         },
         {
-            title: "نام و نام خانوادگی کاربر",
-            dataIndex: "LastName",
+            title: "نام",
+            dataIndex: "Name",
             key: "2",
         },
         {
-            title: "نام کاربری",
-            dataIndex: "UserName",
+            title: "نام خانوادگی",
+            dataIndex: "LastName",
             key: "3",
         },
         {
@@ -87,19 +89,35 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
             key: "4",
         },
         {
-            title: "شماره همراه",
-            dataIndex: "phone",
+            title: "شناسه کاربری",
+            dataIndex: "UserName",
             key: "5",
         },
         {
-            title: "ایمیل",
-            dataIndex: "mail",
+            title: "شماره تماس",
+            dataIndex: "phone",
             key: "6",
         },
         {
-            title: "رمز عبور",
-            dataIndex: "password",
+            title: "استان",
+            dataIndex: "mail",
             key: "7",
+        },
+        {
+            title: "شهر",
+            dataIndex: "password",
+            key: "8",
+        },
+        {
+            title: "فعال/غیرفعال",
+            dataIndex: "password",
+            key: "9",
+            render: (e, record) => <Switch defaultChecked />,
+        },
+        {
+            title: "نقش",
+            dataIndex: "test",
+            key: "10",
         },
         {
             title: "عملیات",
@@ -116,8 +134,11 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
-                    <Button
+                <div className="flex justify-start items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                        لیست کاربران
+                    </Typography>
+                    {/* <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
                         type="primary"
@@ -128,8 +149,7 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
                             افزودن محصول
                         </span>
                         <PlusIcon width={24} height={24} />
-
-                    </Button>
+                    </Button> */}
                 </div>
                 <Table
                     scroll={{ x: 1500, y: 300 }}
@@ -219,19 +239,45 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="year"
-                                label="نام و نام خانوادگی کاربر"
-                            >
+                                name="year-establishment" label="نام">
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
+                            <Form.Item labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="yeasr"
-                                label="نام کاربری"
-                            >
+                                name="lastName" label="نام خانوادگی">
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment" label="کد ملی">
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }} name="lastName" label="شناسه کاربری">
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment" label="شماره تماس">
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="lastName" label="استان">
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
@@ -241,8 +287,8 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="yeara"
-                                label="کد ملی"
+                                name="year-establishment"
+                                label="شهر"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -251,10 +297,10 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="yearc"
-                                label="شماره همراه"
+                                name="year-establishment"
+                                label="فعال/غیر فعال"
                             >
-                                <Input size="large" placeholder="وارد کنید" />
+                                <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -263,20 +309,8 @@ export default function PrimaryManagementUserTable({ setModalVisible }: { setMod
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="yearf"
-                                label="ایمیل"
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="yearm"
-                                label="رمز عبور"
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
+                                name="year-establishment" label="نقش">
+                                <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -291,23 +325,25 @@ const data: DataType[] = [
     {
         key: "1",
         Row: 1,
-        LastName: "امیرحسام خالویی",
+        Name: "امیرحسام",
+        LastName: "اخالویی",
         UserName: "Hesam",
         NationalCode: "0642303088",
         phone: "09117276762",
         mail: "Hesam@gmail.com",
-        password: "123456"
-
+        password: "123456",
+        test: "-"
     },
     {
         key: "2",
         Row: 2,
-        LastName: "امیرحسام خالویی",
+        Name: "امیرحسام",
+        LastName: "خالویی",
         UserName: "Hesam",
         NationalCode: "0642303088",
         phone: "09117276762",
         mail: "Hesam@gmail.com",
-        password: "123456"
-
+        password: "123456",
+        test: "مدیر",
     },
 ];

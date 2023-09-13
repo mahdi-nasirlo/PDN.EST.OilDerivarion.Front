@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Input, Row } from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 
 export default function PrimaryManagementUserForm() {
@@ -10,12 +10,12 @@ export default function PrimaryManagementUserForm() {
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="نام و نام خانوادگی کاربر">
+                        <Form.Item name="year-establishment" label="نام">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="نام کاربری">
+                        <Form.Item name="lastName" label="نام خانوادگی">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
@@ -27,7 +27,19 @@ export default function PrimaryManagementUserForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="شماره همراه">
+                        <Form.Item name="lastName" label="شناسه کاربری">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="year-establishment" label="شماره تماس">
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="استان">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
@@ -36,7 +48,7 @@ export default function PrimaryManagementUserForm() {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
-                            label="ایمیل"
+                            label="شهر"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -44,9 +56,16 @@ export default function PrimaryManagementUserForm() {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
-                            label="رمز عبور"
+                            label="فعال/غیر فعال"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="year-establishment" label="نقش">
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

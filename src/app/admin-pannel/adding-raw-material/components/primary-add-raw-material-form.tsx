@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Col, Form, Row, Select } from 'antd'
+import Input from 'antd/lib/input';
 import React from 'react'
 
 export default function PrimaryAddRawMaterialForm() {
@@ -13,6 +14,42 @@ export default function PrimaryAddRawMaterialForm() {
                         <Form.Item
                             name="year-establishment"
                             label="نام ماده اولیه"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="واحد اندازه گیری"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="وضعیت"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="کد ماده"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="فاکتور آزمون "
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
@@ -41,5 +78,6 @@ export default function PrimaryAddRawMaterialForm() {
                     </Col>
                 </Row>
             </Form>
-        </div>)
+        </div>
+    )
 }

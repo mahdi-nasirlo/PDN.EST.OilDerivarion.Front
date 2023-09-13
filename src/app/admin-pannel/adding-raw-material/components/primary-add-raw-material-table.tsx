@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -80,22 +80,22 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
             ),
         },
     ];
+
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
-                    <Button
+                <div className="flex justify-between items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست مواد اولیه</Typography>                    <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
                         type="primary"
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <span className="flex">
-                            افزودن محصول
-                        </span>
                         <PlusIcon width={24} height={24} />
-
+                        <span className="flex">
+                            افزودن ماده اولیه
+                        </span>
                     </Button>
                 </div>
                 <Table
@@ -150,7 +150,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
             </Modal>
             {/* ویرایش */}
             <Modal
-                width={600}
+                width={800}
                 title="ویرایش ماده اولیه"
                 visible={isEditModalVisible}
                 onOk={handleConfirmEdit}
@@ -180,15 +180,59 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                 ]}
             >
                 <Form form={form} >
-                    <Row gutter={[32, 1]}>
-                        <Col xs={24} md={24}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="year"
+                                name="year-establishment"
                                 label="نام ماده اولیه"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="واحد اندازه گیری"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="وضعیت"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="کد ماده"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="فاکتور آزمون "
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -197,6 +241,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
         </>
     )
 }
+
 const data: DataType[] = [
     {
         key: "1",

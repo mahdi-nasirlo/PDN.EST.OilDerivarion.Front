@@ -41,7 +41,7 @@ export default async function Home() {
                     <Typography>
                         <Link className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
                             href="/state-org-manager">
-                            پنل اداره کل استان
+                            پنل مدیر کل استان
                         </Link>
                     </Typography>
                 </div>

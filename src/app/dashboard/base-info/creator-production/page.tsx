@@ -1,17 +1,14 @@
 "use client";
 
-import { Alert, Button, Col, Divider, Form, Input, InputNumber, Row, } from "antd";
+import { Button, Col, Divider, Form, Input, InputNumber, Row, Typography, } from "antd";
 import React from "react";
-import staticMessages from "../../../../../lib/staticMessages";
 
 export default function NewRequest() {
     return (
         <>
-            <Alert
-                className="border-none w-full text-right text-base font-normal text-red-500"
-                message={staticMessages.formAlert}
-                type="error"
-            />
+            <Typography className="text-right font-medium text-base">
+                لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
+            </Typography>
             <Divider />
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>

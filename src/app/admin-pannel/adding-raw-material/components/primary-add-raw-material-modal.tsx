@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
@@ -23,7 +23,7 @@ export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisib
     };
     return (
         <Modal
-            width={600}
+            width={800}
             title={<div>
                 <div className="text-base mb-2">افزودن ماده اولیه</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
@@ -55,15 +55,59 @@ export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisib
             ]}
         >
             <Form form={form} >
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={24}>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="year"
+                            name="year-establishment"
                             label="نام ماده اولیه"
                         >
                             <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="واحد اندازه گیری"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="وضعیت"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="کد ماده"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="فاکتور آزمون "
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

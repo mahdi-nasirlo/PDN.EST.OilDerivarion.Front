@@ -16,18 +16,29 @@ export default function PrimaryAddingProductForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد">
+                        <Form.Item name="lastName" label="نام دسته بندی">
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="year-establishment" label="فعال/غیر فعال">
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="year-establishment" label="کد محصول ">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label=" دانسیته">
+                        <Form.Item name="year-establishment" label="فاکتور آزمون">
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12} />
                 </Row>
                 <Row dir="ltr">
                     <Col xs={10} md={3} lg={2}>

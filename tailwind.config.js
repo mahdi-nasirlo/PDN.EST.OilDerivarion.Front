@@ -26,6 +26,7 @@ module.exports = {
       gray: {
         300: "#D1D5DB",
         900: "#F9FAFB",
+        901:"#111827"
       },
     },
     backgroundColor: {

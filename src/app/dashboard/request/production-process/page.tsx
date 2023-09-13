@@ -1,17 +1,19 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Typography, Upload,} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, Row, Typography, Upload, } from "antd";
 import React from "react";
-import {UploadOutlined} from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import useSWRMutation from "swr/mutation";
-import {useRouter} from "next/navigation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { useRouter } from "next/navigation";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import staticMessages from "../../../../../lib/staticMessages";
+
 
 export default function Page() {
 
     const router = useRouter()
 
-    const {trigger, isMutating} = useSWRMutation("/RequestMaster/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/RequestMaster/Create", mutationFetcher)
 
     const onFinish = async (values: RequestMasterForm) => {
 
@@ -31,10 +33,15 @@ export default function Page() {
 
     return (
         <>
+            <Alert
+                className="border-none w-full text-right text-base font-normal text-red-500 mb-6"
+                message={staticMessages.formAlert}
+                type="error"
+            />
             <Typography className="text-right font-medium text-base">
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
-            <Divider/>
+            <Divider />
             <Form
                 disabled={isMutating}
                 onFinish={onFinish}
@@ -43,8 +50,8 @@ export default function Page() {
             >
                 <Row gutter={32}>
                     <Col span={24}>
-                        <Form.Item rules={[{required: true, message: "لطفا فیلد را وارد نمایید"}]}
-                                   name="processDescription" label="شرح فرآیند تولید">
+                        <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
+                            name="processDescription" label="شرح فرآیند تولید">
                             <Input.TextArea
                                 maxLength={100}
                                 style={{
@@ -66,12 +73,12 @@ export default function Page() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
+                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
                 </Row>
-                <Divider/>
+                <Divider />
                 <div className="flex gap-6">
                     <Button
                         loading={isMutating}

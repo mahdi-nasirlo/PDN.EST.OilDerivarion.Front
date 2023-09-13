@@ -1,13 +1,13 @@
 "use client";
-import {Grid, Steps} from "antd";
-import {useEffect, useState} from "react";
-import {usePathname, useRouter} from "next/navigation";
+import { Grid, Steps } from "antd";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
-const {useBreakpoint} = Grid;
+const { useBreakpoint } = Grid;
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
@@ -24,7 +24,7 @@ export default function RootLayout({
         router.push(`${currentLink}`);
         setCurrent(value);
     };
-    
+
     const screens = useBreakpoint();
     const isLgSize = screens.lg;
 
@@ -40,7 +40,7 @@ export default function RootLayout({
                 progressDot={progressDot}
                 current={current}
                 onChange={onChange}
-                className="pb-0 lg:pb-8"
+                className="pb-0 lg:pb-4"
                 items={[
                     {
                         title: "فرآیند تولید",
@@ -60,14 +60,14 @@ export default function RootLayout({
                     },
                 ]}
             />
-            <div className="box-border w-full mt-8 p-6">{children}</div>
+            <div className="box-border w-full mt-4 p-6">{children}</div>
         </>
     );
 }
 
 const stepLinks: { number: number; href: string }[] = [
-    {number: 0, href: "/dashboard/request/production-process"},
-    {number: 1, href: "/dashboard/request/laboratory"},
-    {number: 2, href: "/dashboard/request/formulacion"},
-    {number: 3, href: "/dashboard/request/select-product"},
+    { number: 0, href: "/dashboard/request/production-process" },
+    { number: 1, href: "/dashboard/request/laboratory" },
+    { number: 2, href: "/dashboard/request/formulacion" },
+    { number: 3, href: "/dashboard/request/select-product" },
 ];

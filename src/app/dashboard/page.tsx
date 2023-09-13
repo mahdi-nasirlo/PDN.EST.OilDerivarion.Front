@@ -34,6 +34,17 @@ export default async function Home() {
                         </Link>
                     </Typography>
                 </div>
+                <div className="flex">
+                    <Typography className="text-1xl">
+                        ورود به پنل
+                    </Typography>
+                    <Typography>
+                        <Link className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
+                            href="/state-org-manager">
+                            پنل اداره کل استان
+                        </Link>
+                    </Typography>
+                </div>
             </div>
         </>
     )

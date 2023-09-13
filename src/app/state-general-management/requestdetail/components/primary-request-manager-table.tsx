@@ -4,8 +4,6 @@
 import {Table, Typography} from 'antd';
 import {ColumnsType} from 'antd/es/table';
 import React from 'react'
-import PrimaryRequestLicenseInfoForm
-    from "@/app/state-general-management/requestdetail/components/primary-request-license-info-form";
 
 
 interface DataType {
@@ -87,7 +85,7 @@ export default function PrimaryRequestsManagerTable() {
                     },
                 }}
             />
-            <PrimaryRequestLicenseInfoForm/>
+            {/*<PrimaryRequestLicenseInfoForm/>*/}
         </>
     )
 }

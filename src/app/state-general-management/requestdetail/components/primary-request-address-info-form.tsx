@@ -3,8 +3,6 @@
 
 import {Col, Divider, Form, Input, Row, Typography} from 'antd'
 import React from 'react'
-import PrimaryRequestsProductionProcessForm
-    from "@/app/state-general-management/requestdetail/components/primary-request-production-process-form";
 
 export default function PrimaryRequestAddressInfoForm() {
     return (
@@ -43,7 +41,7 @@ export default function PrimaryRequestAddressInfoForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <PrimaryRequestsProductionProcessForm/>
+                {/*<PrimaryRequestsProductionProcessForm/>*/}
 
 
                 {/*<Row dir="ltr">*/}

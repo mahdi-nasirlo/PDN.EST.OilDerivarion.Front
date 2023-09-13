@@ -73,7 +73,7 @@ export default function PrimaryRequestsFromulacionTable() {
         <>
             <Divider/>
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
-                اطلاعات اعضای هیئت مدیره و مدیرعامل
+                فرمولاسیون مواد اولیه
             </Typography>
             <Table
                 className="mt-8"
@@ -82,7 +82,7 @@ export default function PrimaryRequestsFromulacionTable() {
                 pagination={false}
 
             />
-            {/*<PrimaryRequestLicenseInfoForm/>*/}
+            {/*<PrimaryRequestsFinalProductForm/>*/}
         </>
     )
 }

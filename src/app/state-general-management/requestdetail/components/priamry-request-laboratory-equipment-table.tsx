@@ -4,8 +4,6 @@
 import {Divider, Table, Typography} from 'antd';
 import {ColumnsType} from 'antd/es/table';
 import React from 'react'
-import PrimaryRequestsOtherOptionTableForm
-    from "@/app/state-general-management/requestdetail/components/primary-requests-other-option-Table-form";
 
 
 interface DataType {
@@ -65,7 +63,7 @@ export default function PrimaryRequestsLaboratoryEquipmentTable() {
                 // }}
                 pagination={false}
             />
-            <PrimaryRequestsOtherOptionTableForm/>
+            {/*<PrimaryRequestsOtherOptionTableForm/>*/}
         </>
     )
 }

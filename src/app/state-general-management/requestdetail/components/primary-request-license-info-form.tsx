@@ -3,8 +3,6 @@
 
 import {Col, Divider, Form, Input, Row, Typography} from 'antd'
 import React from 'react'
-import PrimaryRequestAddressInfoForm
-    from "@/app/state-general-management/requestdetail/components/primary-request-address-info-form";
 
 export default function PrimaryRequestLicenseInfoForm() {
     return (
@@ -51,7 +49,7 @@ export default function PrimaryRequestLicenseInfoForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <PrimaryRequestAddressInfoForm/>
+                {/*<PrimaryRequestAddressInfoForm/>*/}
 
                 {/*<Row dir="ltr">*/}
                 {/*    <Col xs={10} md={3} lg={2}>*/}

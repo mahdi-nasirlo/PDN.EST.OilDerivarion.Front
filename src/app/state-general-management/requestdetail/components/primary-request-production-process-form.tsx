@@ -3,12 +3,9 @@
 
 import {Button, Col, Divider, Form, Input, Row, Typography, Upload} from 'antd';
 import React from 'react'
-import {UploadOutlined} from "@ant-design/icons";
-import PrimaryRequestsLaboratoryEquipmentTable
-    from "@/app/state-general-management/requestdetail/components/priamry-request-laboratory-equipment-table";
 
 
-export default function PrimaryRequestsManagerTable() {
+export default function PrimaryRequestsProductionProcessTable() {
     return (
         <>
             <Divider/>
@@ -45,13 +42,13 @@ export default function PrimaryRequestsManagerTable() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
+                                <Button className="cahrt-btn">مشاهده نمودار</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
                 </Row>
             </Form>
-            <PrimaryRequestsLaboratoryEquipmentTable/>
+            {/*<PrimaryRequestsLaboratoryEquipmentTable/>*/}
         </>
     );
 }

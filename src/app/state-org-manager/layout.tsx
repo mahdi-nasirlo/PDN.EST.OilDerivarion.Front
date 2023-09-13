@@ -38,8 +38,8 @@ const items: MenuProps["items"] = [
                 <FolderPlusIcon width={16} height={16} />
             ),
             getMenuItem(
-                <Link href={"/state-org-manager/requests-list"}>تاخیر ها</Link>,
-                "requests-list",
+                <Link href={"/state-org-manager/delays-list"}>تاخیر ها</Link>,
+                "delays-list",
                 <FolderPlusIcon width={16} height={16} />
             ),
         ],

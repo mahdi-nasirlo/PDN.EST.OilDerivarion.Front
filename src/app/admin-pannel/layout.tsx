@@ -4,8 +4,7 @@ import AppLayout from "@/components/layout/layout";
 import React from "react";
 import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
-import { HomeIcon } from "@heroicons/react/24/outline";
-import { Divider, MenuProps } from "antd";
+import { MenuProps } from "antd";
 import { FolderPlusIcon } from "@heroicons/react/24/solid";
 
 export default function RootLayout({
@@ -43,6 +42,11 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href={"/admin-pannel/adding-raw-material"}>ماده اولیه</Link>,
     "adding-raw-material",
+    <FolderPlusIcon width={16} height={16} />
+  ),
+  getMenuItem(
+    <Link href={"/admin-pannel/province"}>استان</Link>,
+    "province",
     <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(

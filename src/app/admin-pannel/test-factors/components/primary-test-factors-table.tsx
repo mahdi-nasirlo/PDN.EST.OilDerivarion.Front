@@ -1,10 +1,11 @@
 "use client"
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Form, Input, Modal, Row, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import {TableColumnsType} from "antd/lib";
 
 
 interface DataType {
@@ -13,9 +14,8 @@ interface DataType {
     factorsName: string;
 }
 
-export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalVisible: any }) {
+export default function PrimaryTestFactorsTable({setModalVisible}: { setModalVisible: any }) {
 
-    //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
@@ -26,20 +26,17 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
     };
 
     const handleConfirmDelete = () => {
-        // Perform the delete action here with recordToDelete
-        // After successful delete, you can close the modal
         setIsDeleteModalVisible(false);
     };
     const handleCancelDelete = () => {
         setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
+        setRecordToDelete(null);
     };
 
     const showModal = () => {
         setModalVisible(true);
     };
 
-    //ادیت
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [recordToEdit, setRecordToEdit] = useState<DataType | null>(null);
@@ -49,15 +46,12 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
         setIsEditModalVisible(true);
     };
     const handleConfirmEdit = () => {
-        // Perform the edit action here with recordToEdit
-        // After successful edit, you can close the modal
         setIsEditModalVisible(false);
     };
     const handleCancelEdit = () => {
         setIsEditModalVisible(false);
-        setRecordToEdit(null); // Clear the recordToEdit
+        setRecordToEdit(null);
     };
-
 
 
     const columns: ColumnsType<DataType> = [
@@ -76,18 +70,47 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
             key: "جزئیات",
             render: (_, record) => (
                 <div className={"flex justify-start"}>
-                    <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
-                    <Button type="link" className={"text-red-500 font-bold"} onClick={() => handleDelete(record)}>حذف</Button>
+                    <Button type="link" className="text-secondary-500 font-bold"
+                            onClick={() => handleEdit(record)}>ویرایش</Button>
+                    <Button type="link" className={"text-red-500 font-bold"}
+                            onClick={() => handleDelete(record)}>حذف</Button>
                 </div>
             ),
         },
     ];
 
+    interface ExpandedDataType {
+        key: React.Key;
+        date: string;
+        name: string;
+        upgradeNum: string;
+    }
+
+    const expandedRowRender = () => {
+        const columns: TableColumnsType<ExpandedDataType> = [
+            {title: '#', dataIndex: '1', key: 'date'},
+            {title: 'نام ماده اولیه', dataIndex: '1', key: 'name'},
+            {title: 'عملیات', dataIndex: '2', key: 'upgradeNum'},
+        ];
+
+        const data = [];
+        for (let i = 0; i < 3; ++i) {
+            data.push({
+                key: i.toString(),
+                date: '2014-12-24 23:12:00',
+                name: 'This is production name',
+                upgradeNum: 'Upgraded: 56',
+            });
+        }
+        return <Table columns={columns} dataSource={[]} pagination={false}/>;
+    };
+
 
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                    <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -99,12 +122,12 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
                             افزودن محصول
                         </span>
                         <PlusIcon width={24} height={24} />
-
                     </Button>
                 </div>
                 <Table
                     className="mt-4"
                     columns={columns}
+                    expandable={{expandedRowRender: expandedRowRender}}
                     dataSource={data}
                     pagination={{
                         defaultPageSize: 10,
@@ -120,7 +143,6 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
                     }}
                 />
             </div>
-            {/* جذف */}
             <Modal
                 width={600}
                 footer={[
@@ -152,7 +174,7 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
             >
                 <p>آیا از حذف این فاکتور مطمئن هستید؟</p>
             </Modal>
-            {/* ویرایش */}
+
             <Modal
                 width={600}
                 title="ویرایش فاکتور"
@@ -183,16 +205,16 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form form={form}>
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={24}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
+                                labelCol={{span: 24}}
+                                wrapperCol={{span: 24}}
                                 name="year"
                                 label="نام فاکتور"
                             >
-                                <Input size="large" placeholder="وارد کنید" />
+                                <Input size="large" placeholder="وارد کنید"/>
                             </Form.Item>
                         </Col>
                     </Row>

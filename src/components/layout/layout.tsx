@@ -1,18 +1,27 @@
-import type { MenuProps } from "antd";
-import { Button, ConfigProvider, Divider, Drawer, Grid, Menu, Space } from "antd";
-import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
-import React, { useEffect, useState } from "react";
+import type {MenuProps} from "antd";
+import {Button, ConfigProvider, Divider, Grid, Space} from "antd";
+import Layout, {Content} from "antd/es/layout/layout";
+import React, {useEffect, useState} from "react";
 import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import LayoutBreadcrumb from "./breadcrumb";
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
 import StyledComponentsRegistry from "../../../lib/AntdRegistry";
 import theme from "../../../theme/themeConfig";
 import fa_IR from "antd/locale/fa_IR";
-import Sider from "antd/es/layout/Sider";
-import { AppstoreOutlined, BarChartOutlined, CloudOutlined, ShopOutlined, TeamOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import {
+    AppstoreOutlined,
+    BarChartOutlined,
+    CloudOutlined,
+    ShopOutlined,
+    TeamOutlined,
+    UploadOutlined,
+    UserOutlined,
+    VideoCameraOutlined
+} from "@ant-design/icons";
+import {useRouter} from "next/navigation";
 
-const { useBreakpoint } = Grid;
+const {useBreakpoint} = Grid;
 
 const items: MenuProps['items'] = [
     UserOutlined,
@@ -36,6 +45,8 @@ export default function AppLayout({
     children: React.ReactNode;
     sidebarItems: MenuProps["items"];
 }) {
+
+    const router = useRouter();
 
     const [open, setOpen] = useState(false);
 
@@ -85,10 +96,14 @@ export default function AppLayout({
                                 <Content
                                     style={contentStyle}>
                                     <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-                                        <span>
-                                            <LayoutBreadcrumb />
-                                        </span>
-                                        <Divider className="my-8" />
+                                        <div className="flex justify-between items-center">
+                                            <LayoutBreadcrumb/>
+
+                                            <Button type="dashed" size="large" onClick={() => router.back()}>
+                                                بازگشت
+                                            </Button>
+                                        </div>
+                                        <Divider className="my-8"/>
                                         {children}
                                     </Layout>
                                 </Content>

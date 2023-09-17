@@ -26,5 +26,12 @@ const items: MenuProps["items"] = [
         "/state-org-manager",
         <HomeIcon width={16} height={16} />
     ),
+
     { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/list-requests">لیست درخواست ها</Link>,
+        "/list-requests",
+        <HomeIcon width={16} height={16} />
+    ),
 ];

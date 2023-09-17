@@ -41,8 +41,8 @@ const items: MenuProps["items"] = [
             ),
 
             getMenuItem(
-                <Link href={"/manufacturer/lab-results"}>نتایج آزمایشگاه</Link>,
-                "lab-results",
+                <Link href={"/manufacturer/lab-results-list"}>نتایج آزمایشگاه</Link>,
+                "lab-results-list",
             ),
 
         ],

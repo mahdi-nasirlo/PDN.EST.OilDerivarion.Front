@@ -1,16 +1,25 @@
-import {Space, Table, Tag} from 'antd'
+import {Space, Table, Tag, Typography} from 'antd'
 import {ColumnsType} from 'antd/es/table';
 import Link from 'next/link';
 import React from 'react'
 import useSWR from "swr";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {ExeManagerProducer, Person} from "../../../../../interfaces/page";
 import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {GetPage_ExeManager, Person} from "../../../../../interfaces/producer";
 
 
 export default function PrimaryManufacturerListTable() {
 
-    const {data, isLoading, mutate} = useSWR<ExeManagerProducer>("/Page/ExeManagerProducers", listFetcher)
+    const {
+        data,
+        isLoading,
+    } = useSWR<GetPage_ExeManager>("/Producer/GetPage_ExeManager", (url) => listFetcher(url, {
+        arg: {
+            "fromRecord": 0,
+            "selectRecord": 100000
+        }
+    }))
+
 
     const columns: ColumnsType<Person & { Row: number }> = [
         {
@@ -44,8 +53,6 @@ export default function PrimaryManufacturerListTable() {
             key: "6",
             render: (_, record: any) => {
 
-                console.log(record);
-
                 let color = "";
 
                 if (record.status === "غیرفعال") {
@@ -71,7 +78,7 @@ export default function PrimaryManufacturerListTable() {
             key: "جزئیات",
             render: (_, record) => (
                 <Space size="middle">
-                    <Link href={`/manufacturer/info/${record.row}`} className="action-btn-info">
+                    <Link href={`/manufacturer/info/${record.nationalCode}`} className="action-btn-info">
                         مشاهده اطلاعات
                     </Link>
                 </Space>
@@ -80,23 +87,26 @@ export default function PrimaryManufacturerListTable() {
     ];
 
     return (
-        <Table
-            loading={isLoading}
-            className="mt-8"
-            columns={columns}
-            dataSource={addIndexToData(data?.persons)}
-            pagination={{
-                defaultPageSize: 10,
-                showSizeChanger: true,
-                pageSizeOptions: ["10", "20", "50"],
-                defaultCurrent: 1,
-                style: {
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    margin: "16px 0",
-                },
-            }}
-        />
+        <div className="box-border w-full p-6 mt-8">
+            <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
+            <Table
+                loading={isLoading}
+                className="mt-8"
+                columns={columns}
+                dataSource={addIndexToData(data?.records)}
+                pagination={{
+                    defaultPageSize: 10,
+                    showSizeChanger: true,
+                    pageSizeOptions: ["10", "20", "50"],
+                    defaultCurrent: 1,
+                    style: {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-start",
+                        margin: "16px 0",
+                    },
+                }}
+            />
+        </div>
     )
 }

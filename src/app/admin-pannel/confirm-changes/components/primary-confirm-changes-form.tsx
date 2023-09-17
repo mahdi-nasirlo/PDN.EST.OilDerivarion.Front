@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Col, Form, Row, Select, Input } from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import React from 'react'
 
-export default function PrimaryAddRawMaterialForm() {
+export default function PrimaryConfirmChangesForm() {
 
     return (
         <div className="box-border w-full p-6">
@@ -12,7 +12,7 @@ export default function PrimaryAddRawMaterialForm() {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
-                            label="نام ماده اولیه"
+                            label="نام"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -20,35 +20,25 @@ export default function PrimaryAddRawMaterialForm() {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
-                            label="واحد اندازه گیری"
+                            label="نام خانوادگی"
                         >
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="نقش کاربر"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
                             label="وضعیت"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label="کد ماده"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label="فاکتور آزمون "
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>

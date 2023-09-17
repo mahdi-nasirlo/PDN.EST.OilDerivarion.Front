@@ -1,22 +1,23 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Switch, Table, Typography } from 'antd'
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { Button, Col, Form, Input, Modal, Row, Select, Table, Typography } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 
+
 interface DataType {
     key: string;
     Row: number;
-    NameRawMaterial: string;
-    UnitMeasurement: string;
-    ConfirmedRequestCode: string;
-    MaterialCode: string;
-    TestInvoice: string;
+    Name: string;
+    LName: string;
+    UserRole: string;
+    Status: string;
 }
 
-export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setModalVisible: any }) {
+
+export default function PrimaryConfirmChangesTable({ setModalVisible }: { setModalVisible: any }) {
 
     //حذف
 
@@ -69,30 +70,24 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
             key: "1",
         },
         {
-            title: "نام ماده اولیه",
-            dataIndex: "NameRawMaterial",
+            title: "نام",
+            dataIndex: "Name",
             key: "2",
         },
         {
-            title: "واحد اندازه گیری",
-            dataIndex: "UnitMeasurement",
+            title: "نام خانوادگی",
+            dataIndex: "LName",
             key: "3",
         },
         {
-            title: "فعال/غیر فعال",
-            dataIndex: "ConfirmedRequestCode",
+            title: "نقش کاربر",
+            dataIndex: "UserRole",
             key: "4",
-            render: (e, record) => <Switch defaultChecked />,
         },
         {
-            title: "کد ماده",
-            dataIndex: "MaterialCode",
+            title: "فعال/غیر فعال",
+            dataIndex: "Status",
             key: "5",
-        },
-        {
-            title: "فاکتور آزمون",
-            dataIndex: "TestInvoice",
-            key: "6",
         },
         {
             title: "عملیات",
@@ -110,7 +105,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست مواد اولیه</Typography>
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست کاربران</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -120,7 +115,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                     >
                         <PlusIcon width={24} height={24} />
                         <span className="flex">
-                            افزودن ماده اولیه
+                            ثبت تغییرات
                         </span>
                     </Button>
                 </div>
@@ -168,16 +163,16 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                         </Col>
                     </Row>
                 ]}
-                title="حذف ماده اولیه"
+                title="حذف کاربر"
                 visible={isDeleteModalVisible}
                 onCancel={handleCancelDelete}
             >
-                <p>آیا از حذف این ماده اولیه مطمئن هستید؟</p>
+                <p>آیا از حذف این کاربر مطمئن هستید؟</p>
             </Modal>
             {/* ویرایش */}
             <Modal
                 width={800}
-                title="ویرایش ماده اولیه"
+                title="ویرایش کاربر"
                 visible={isEditModalVisible}
                 onOk={handleConfirmEdit}
                 onCancel={handleCancelEdit}
@@ -212,7 +207,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="year-establishment"
-                                label="نام ماده اولیه"
+                                label="نام"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -222,41 +217,29 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="year-establishment"
-                                label="واحد اندازه گیری"
+                                label="نام خانوادگی"
                             >
-                                <Select size="large" placeholder="انتخاب کنید" />
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="نقش کاربر"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="year-establishment"
                                 label="وضعیت"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="کد ماده"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="فاکتور آزمون "
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
@@ -268,23 +251,30 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
     )
 }
 
+
 const data: DataType[] = [
     {
         key: "1",
         Row: 1,
-        NameRawMaterial: "بنزین پیرولیز",
-        UnitMeasurement: "گرم",
-        ConfirmedRequestCode: "",
-        MaterialCode: "123456",
-        TestInvoice: "123",
+        Name: "حسام",
+        LName: "خالویی",
+        UserRole: "مدیر کل",
+        Status: "مسدود",
     },
     {
         key: "2",
         Row: 2,
-        NameRawMaterial: "بنزین پیرولیز",
-        UnitMeasurement: "گرم",
-        ConfirmedRequestCode: "",
-        MaterialCode: "123456",
-        TestInvoice: "123",
+        Name: "حسام",
+        LName: "خالویی",
+        UserRole: "مدیر کل",
+        Status: "رفع مسدودی",
+    },
+    {
+        key: "3",
+        Row: 3,
+        Name: "حسام",
+        LName: "خالویی",
+        UserRole: "مدیر کل",
+        Status: "غیر فعال",
     },
 ];

@@ -1,20 +1,21 @@
 "use client";
 
-
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 
-
 interface DataType {
     key: string;
     Row: number;
-    NameRole: string;
+    Name: string;
     LastName: string;
+    Code: string;
+    UserName: string;
+    State: string;
+    City: string;
+    Role: string;
 }
-
 
 export default function PrimaryManagementUserRoleTable({ setModalVisible }: { setModalVisible: any }) {
 
@@ -69,14 +70,39 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
             key: "1",
         },
         {
-            title: "نام نقش",
-            dataIndex: "NameRole",
+            title: "نام",
+            dataIndex: "Name",
             key: "2",
         },
         {
             title: "نام و نام خانوادگی",
             dataIndex: "LastName",
             key: "3",
+        },
+        {
+            title: "کد ملی",
+            dataIndex: "Code",
+            key: "4",
+        },
+        {
+            title: "شناسه کاربری",
+            dataIndex: "UserName",
+            key: "5",
+        },
+        {
+            title: "استان",
+            dataIndex: "State",
+            key: "6",
+        },
+        {
+            title: "شهر",
+            dataIndex: "City",
+            key: "7",
+        },
+        {
+            title: "نقش",
+            dataIndex: "Role",
+            key: "7",
         },
         {
             title: "جزئیات",
@@ -94,20 +120,10 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-end">
-                    <Button
-                        className="max-md:w-full flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        onClick={showModal}
-                    >
-                        <span className="flex">
-                            افزودن محصول
-                        </span>
-                        <PlusIcon width={24} height={24} />
-
-                    </Button>
+                <div className="flex justify-start">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                        لیست نقش کاربران
+                    </Typography>
                 </div>
                 <Table
                     className="mt-4"
@@ -196,8 +212,8 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="year"
-                                label="نام نقش"
+                                name="years"
+                                label="نام و نام خانوادگی"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -206,8 +222,8 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="years"
-                                label="نام و نام خانوادگی"
+                                name="year"
+                                label="نام نقش"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -223,13 +239,23 @@ const data: DataType[] = [
     {
         key: "1",
         Row: 1,
-        NameRole: "مدیر عامل",
-        LastName: "امیرحسام خالویی",
+        Name: "حسام",
+        LastName: "خالویی",
+        Code: "2063069022",
+        UserName: "Hesam",
+        State: "مازندران",
+        City: "بابل",
+        Role: "-",
     },
     {
         key: "2",
         Row: 2,
-        NameRole: "مدیر عامل ",
-        LastName: "امیرحسام خالویی",
+        Name: "حسام",
+        LastName: "خالویی",
+        Code: "2063069022",
+        UserName: "Hesam",
+        State: "مازندران",
+        City: "بابل",
+        Role: "مدیر",
     },
 ];

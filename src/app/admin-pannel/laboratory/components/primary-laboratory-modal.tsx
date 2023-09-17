@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Col, Form, Input, Modal, Row } from 'antd'
+import { Button, Col, Divider, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
@@ -56,6 +56,7 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
             ]}
         >
             <Form form={form} >
+                مشخصات آزمایشگاه
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
@@ -72,7 +73,7 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="years"
-                            label="نام مدیر عامل"
+                            label="شماره ثابت"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -84,7 +85,7 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="yeard"
-                            label="شماره تلفن آزمایشگاه"
+                            label="مشخصه یکتای جواز"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -94,7 +95,55 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="yearb"
-                            label="کد"
+                            label="عکس جواز کسب (پروانه بهره برداری)"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="yearm"
+                            label="فعال/غیر فعال"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={24}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="yearm"
+                            label="آدرس"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Divider />
+                مشخصات فرد مسئول
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="Name"
+                            label="نام"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="lastName"
+                            label="نام خانوادگی"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -105,8 +154,64 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="yearm"
-                            label="آدرس"
+                            name="code"
+                            label="کد ملی"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="phone"
+                            label="شماره موبایل"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Divider />
+                مشخصات مدیر
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="Name"
+                            label="نام"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="lastName"
+                            label="نام خانوادگی"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="code"
+                            label="کد ملی"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="phone"
+                            label="شماره موبایل"
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>

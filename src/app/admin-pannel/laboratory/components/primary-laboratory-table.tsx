@@ -1,7 +1,7 @@
 "use client"
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Table } from 'antd'
+import { Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table'
 import React, { useState } from 'react'
@@ -96,10 +96,10 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
             key: "عملیات",
             fixed: 'right',
             render: (_, record) => (
-                <div className={"flex justify-start"}>
+                <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"} onClick={() => handleDelete(record)}>حذف</Button>
-                </div>
+                </Space>
             ),
         },
     ];
@@ -117,17 +117,16 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         htmlType="submit"
                         onClick={showModal}
                     >
+                        <PlusIcon width={24} height={24} />
                         <span className="flex">
                             افزودن آزمایشگاه
                         </span>
-                        <PlusIcon width={24} height={24} />
-
                     </Button>
                 </div>
                 <Table
                     scroll={{ x: 1500, y: 300 }}
                     dataSource={data || []}
-                    className="mt-4"
+                    className="mt-6"
                     columns={columns}
                     pagination={{
                         defaultPageSize: 10,
@@ -207,6 +206,7 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                 ]}
             >
                 <Form form={form} >
+                    مشخصات آزمایشگاه
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
@@ -223,7 +223,7 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="years"
-                                label="نام مدیر عامل"
+                                label="شماره ثابت"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -235,7 +235,7 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="yeard"
-                                label="شماره تلفن آزمایشگاه"
+                                label="مشخصه یکتای جواز"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -245,7 +245,55 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="yearb"
-                                label="کد"
+                                label="عکس جواز کسب (پروانه بهره برداری)"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="yearm"
+                                label="فعال/غیر فعال"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={24}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="yearm"
+                                label="آدرس"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Divider />
+                    مشخصات فرد مسئول
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="Name"
+                                label="نام"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="lastName"
+                                label="نام خانوادگی"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -256,8 +304,64 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="yearm"
-                                label="آدرس"
+                                name="code"
+                                label="کد ملی"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="phone"
+                                label="شماره موبایل"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Divider />
+                    مشخصات مدیر
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="Name"
+                                label="نام"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="lastName"
+                                label="نام خانوادگی"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="code"
+                                label="کد ملی"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="phone"
+                                label="شماره موبایل"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>

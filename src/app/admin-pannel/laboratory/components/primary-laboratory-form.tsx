@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Col, Form, Input, Row } from 'antd'
+import { Button, Col, Form, Select, Row } from 'antd'
 import React from 'react'
 
 export default function PrimaryLaboratoryForm() {
@@ -10,24 +10,12 @@ export default function PrimaryLaboratoryForm() {
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="year-establishment" label="نام آزمایشگاه ">
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="نام مدیرعامل">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="شماره تلفن آزمایشگاه">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد">
-                            <Input size="large" placeholder="وارد کنید" />
+                        <Form.Item name="lastName" label="شماره ثابت">
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -35,9 +23,14 @@ export default function PrimaryLaboratoryForm() {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
-                            label="آدرس"
+                            label="فعال/غیر فعال"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="کد ملی">
+                            <Select size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

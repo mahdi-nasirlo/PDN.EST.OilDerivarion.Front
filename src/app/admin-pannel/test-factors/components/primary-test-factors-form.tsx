@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Col, Form, Input, Row } from 'antd'
+import {Button, Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
 
 export default function PrimaryTestFactorsForm() {
@@ -8,10 +8,20 @@ export default function PrimaryTestFactorsForm() {
     return (
         <div className="box-border w-full p-6">
             <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام فاکتور">
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="نام ماده اولیه">
+                            <Select size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="نام محصول">
+                            <Select size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>

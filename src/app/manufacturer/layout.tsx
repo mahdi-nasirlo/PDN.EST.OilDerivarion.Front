@@ -40,6 +40,11 @@ const items: MenuProps["items"] = [
                 "msnufscturer-list",
             ),
 
+            getMenuItem(
+                <Link href={"/manufacturer/lab-results"}>نتایج آزمایشگاه</Link>,
+                "lab-results",
+            ),
+
         ],
         "group"
     ),

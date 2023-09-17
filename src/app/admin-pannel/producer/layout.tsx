@@ -68,8 +68,8 @@ export default function RootLayout({
 const stepLinks: { number: number; href: string }[] = [
     { number: 0, href: "/admin-pannel/producer/production-unit" },
     { number: 1, href: "/admin-pannel/producer/managerial" },
-    { number: 2, href: "/dashboard/request/formulacion" },
-    { number: 3, href: "/dashboard/request/select-product" },
-    { number: 4, href: "/dashboard/request/select-product" },
+    { number: 2, href: "/admin-pannel/producer/personnel" },
+    { number: 3, href: "/admin-pannel/producer/license" },
+    { number: 4, href: "/admin-pannel/producer/calls" },
 
 ];

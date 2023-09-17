@@ -1,21 +1,25 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Table, Typography} from "antd";
+import {Button, Col, Divider, Form, Input, Row, Spin, Table, Typography} from "antd";
 import React, {useEffect, useState} from "react";
 import {ColumnsType} from "antd/es/table";
 import PrimaryManufacturerListModal from "./components/primary-manufacturer-list-modal";
 import useSWR from "swr";
-import {ExeManagerProducerInfo} from "../../../../../interfaces/page";
 import {useForm} from "antd/lib/form/Form";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {Get_ExeManager} from "../../../../../interfaces/producer";
 
-export default function Page() {
+export default function Page({params}: { params: { nationalCode: string } }) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
     const [form] = useForm()
 
-    const {data, isLoading} = useSWR<ExeManagerProducerInfo>("/Page/ExeManagerProducerInfo", listFetcher)
+    const {data, isLoading} = useSWR<Get_ExeManager>("/Producer/Get_ExeManager", (url) => listFetcher(url, {
+        arg: {
+            "nationalCode": params.nationalCode
+        }
+    }))
 
     const showModal = () => {
         setModalVisible(true);
@@ -23,40 +27,42 @@ export default function Page() {
 
     useEffect(() => {
 
-        form.setFieldsValue(data?.person)
+        form.setFieldsValue(data)
 
     }, [data])
 
     return (
         <>
             <div className="box-border w-full mt-4 p-6">
-                <Form disabled={isLoading} form={form} initialValues={data?.person} name="form_item_path"
-                      layout="vertical">
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="name" label="نام واحد تولیدی">
-                                <Input disabled size="large"/>
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="nationalCode" label="  شناسه ملی">
-                                <Input disabled size="large"/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="ceoName" label="نام مدیر عامل">
-                                <Input disabled size="large"/>
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="companyOwnershipTypeName" label="   نوع مالکیت">
-                                <Input disabled size="large"/>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Form>
+                <Spin spinning={isLoading}>
+                    <Form disabled={isLoading} form={form} initialValues={data?.data} name="form_item_path"
+                          layout="vertical">
+                        <Row gutter={[16, 16]}>
+                            <Col xs={24} md={12}>
+                                <Form.Item name="name" label="نام واحد تولیدی">
+                                    <Input disabled size="large"/>
+                                </Form.Item>
+                            </Col>
+                            <Col xs={24} md={12}>
+                                <Form.Item name="nationalCode" label="  شناسه ملی">
+                                    <Input disabled size="large"/>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={[16, 16]}>
+                            <Col xs={24} md={12}>
+                                <Form.Item name="ceoName" label="نام مدیر عامل">
+                                    <Input disabled size="large"/>
+                                </Form.Item>
+                            </Col>
+                            <Col xs={24} md={12}>
+                                <Form.Item name="companyOwnershipTypeName" label="   نوع مالکیت">
+                                    <Input disabled size="large"/>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Spin>
                 <Divider/>
                 <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
                     اطلاعات اعضای هیئت مدیره و مدیرعامل
@@ -151,7 +157,7 @@ export default function Page() {
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={24}>
                         <div className="flex gap-4">
-                            {isLoading ? <Typography>is loading...</Typography> : data?.choices.map((button) => (<>
+                            {isLoading ? <Typography>is loading...</Typography> : data?.choices?.map((button) => (<>
                                 <Button
                                     className="w-full management-info-form-submit btn-filter"
                                     size="large"

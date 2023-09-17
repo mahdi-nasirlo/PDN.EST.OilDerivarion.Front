@@ -1,9 +1,11 @@
 "use client";
 
+import { UploadOutlined } from '@ant-design/icons';
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { Button, Col, Form, Input, Modal, Row, Select, Table, Typography } from 'antd';
+import { Button, Col, Form, Modal, Row, Select, Space, Table, Typography, Upload } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
+import TextArea from 'antd/lib/input/TextArea';
 import React, { useState } from 'react'
 
 
@@ -93,10 +95,10 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
             title: "عملیات",
             key: "عملیات",
             render: (_, record) => (
-                <div className={"flex justify-start"}>
+                <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className="text-red-500 font-bold" onClick={() => handleDelete(record)}>حذف</Button>
-                </div>
+                </Space>
             ),
         },
     ];
@@ -120,7 +122,7 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
                     </Button>
                 </div>
                 <Table
-                    className="mt-4"
+                    className="mt-6"
                     columns={columns}
                     dataSource={data}
                     pagination={{
@@ -201,37 +203,15 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
                 ]}
             >
                 <Form form={form} >
-                    <Row gutter={[16, 16]}>
+                    <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
                                 name="year-establishment"
-                                label="نام"
+                                label="نام/ نقش کاربر"
                             >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="نام خانوادگی"
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="نقش کاربر"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
+                                <Select size="large" placeholder="انتخاب کنید" tokenSeparators={[',']} mode="multiple" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
@@ -242,6 +222,41 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
                                 label="وضعیت"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col md={24}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="آپلود سند"
+                            >
+                                <Upload
+                                    multiple={false}
+                                    maxCount={1}
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    listType="picture"
+                                    className="w-full"
+                                >
+                                    <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
+                                </Upload>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[32, 1]}>
+                        <Col md={24}>
+                            <Form.Item
+                                label="آپلود سند"
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="establishment"
+                            >
+                                <TextArea
+                                    placeholder="توضیحات"
+                                    autoSize={{ minRows: 3, maxRows: 6 }}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>

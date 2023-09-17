@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Table, Typography } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Space, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -108,10 +108,10 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
             title: "جزئیات",
             key: "جزئیات",
             render: (_, record) => (
-                <div className={"flex justify-start"}>
+                <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"} onClick={() => handleDelete(record)}>حذف</Button>
-                </div>
+                </Space>
             ),
         },
     ];
@@ -126,7 +126,7 @@ export default function PrimaryManagementUserRoleTable({ setModalVisible }: { se
                     </Typography>
                 </div>
                 <Table
-                    className="mt-4"
+                    className="mt-6"
                     columns={columns}
                     dataSource={data}
                     pagination={{

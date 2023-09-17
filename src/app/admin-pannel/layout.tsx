@@ -65,7 +65,7 @@ const items: MenuProps["items"] = [
         <FolderPlusIcon width={16} height={16} />,
       ),
       getMenuItem(
-        <Link href={"/admin-pannel/management-user-role"}>مدیریت نقش کاربران</Link>,
+        <Link href={"/admin-pannel/management-user-role"}>نقش کاربران</Link>,
         "management-user-role",
         <FolderPlusIcon width={16} height={16} />
       ),

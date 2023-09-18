@@ -40,4 +40,12 @@ const items: MenuProps["items"] = [
         "/requests-details",
         // <HomeIcon width={16} height={16} />
     ),
+
+    { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/producer-list">لیست تولید کننده ها</Link>,
+        "/producer-list",
+        // <HomeIcon width={16} height={16} />
+    ),
 ];

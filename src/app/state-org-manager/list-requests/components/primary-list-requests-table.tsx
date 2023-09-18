@@ -3,6 +3,10 @@
 import { Button, Space, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
+import useSWR from 'swr';
+import { listFetcher } from '../../../../../lib/server/listFetcher';
+import { StateOrgManager } from '../../../../../interfaces/requestMaster';
+import { addIndexToData } from '../../../../../lib/addIndexToData';
 
 
 interface DataType {
@@ -17,7 +21,17 @@ interface DataType {
 
 export default function PrimaryListRequestsTable() {
 
-    const columns: ColumnsType<DataType> = [
+    const {
+        data,
+        isLoading
+    } = useSWR<{ item1: boolean, item3: StateOrgManager[] }>("/RequestMaster/GetPage_StateOrgManager", (url) => listFetcher(url, {
+        arg: {
+            fromRecord: 0,
+            selectRecord: 100000
+        }
+    }))
+
+    const columns: ColumnsType<StateOrgManager> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -25,7 +39,7 @@ export default function PrimaryListRequestsTable() {
         },
         {
             title: "نام واحد تولیدی",
-            dataIndex: "Name",
+            dataIndex: "userDescription",
             key: "2",
         },
         {
@@ -63,8 +77,9 @@ export default function PrimaryListRequestsTable() {
                 </div>
                 <Table
                     className="mt-6"
+                    loading={isLoading}
                     columns={columns}
-                    dataSource={data}
+                    dataSource={addIndexToData(data?.item3, "Row")}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,

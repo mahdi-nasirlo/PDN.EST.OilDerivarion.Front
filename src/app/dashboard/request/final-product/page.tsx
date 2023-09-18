@@ -1,5 +1,5 @@
 "use client";
-import {Button, Checkbox, Divider, Form, Table, Typography} from "antd";
+import {Button, Divider, Form, Typography} from "antd";
 import React from "react";
 import {ColumnsType} from "antd/es/table";
 import PrimaryProductForm from "./components/primary-product-form";
@@ -70,48 +70,6 @@ export default function Page() {
                 محصول تولیدی
             </Typography>
             <PrimaryProductForm mute={mutate}/>
-
-
-            <Table
-                loading={isLoading}
-                pagination={false}
-                className="mt-6"
-                columns={columns}
-                dataSource={product?.records || []}
-            />
-            <Divider/>
-            <Form
-                form={form}
-                name="register"
-            >
-                <Form.Item
-                    className=" mr-3 font-medium"
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value ? Promise.resolve() : Promise.reject(new Error('پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد')),
-                        },
-                    ]}
-                >
-                    <Checkbox>
-                        شرایط و <a href="https://google.com" target="_blank" className="text-primary-500">قوانین</a> را
-                        خوانده و می پذیرم!
-                    </Checkbox>
-                </Form.Item>
-                <Divider/>
-                <div className="flex gap-6">
-                    <Button
-                        className="w-full management-info-form-submit btn-filter"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        <span className="flex gap-3 justify-center ">ذخیره</span>
-                    </Button>
-                </div>
-            </Form>
         </>
     );
 }

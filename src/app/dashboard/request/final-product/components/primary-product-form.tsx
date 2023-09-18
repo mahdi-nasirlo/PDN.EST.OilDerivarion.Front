@@ -1,8 +1,7 @@
 "use client";
 
-import {Button, Col, Form, Row, Select} from "antd";
+import {Button, Col, Divider, Form, Row, Select} from "antd";
 import React, {useState} from "react";
-import {SvgIcon} from "@/components/layout/sidebar";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {getCookie} from "cookies-next";
@@ -80,15 +79,17 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
                     </Col>
                 </Row>
                 <Row dir="ltr">
+                    <Divider/>
+
                     <Button
-                        icon={<SvgIcon src="/static/save.svg"/>}
-                        danger
+                        className="w-full management-info-form-submit btn-filter"
                         size="large"
                         type="primary"
                         htmlType="submit"
                     >
-                        ذخیره
+                        <span className="flex gap-3 justify-center ">ذخیره</span>
                     </Button>
+
                 </Row>
             </Form>
         </>

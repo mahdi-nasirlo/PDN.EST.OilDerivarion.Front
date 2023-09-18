@@ -62,5 +62,10 @@ const items: MenuProps["items"] = [
         "/experts-list",
         // <HomeIcon width={16} height={16} />
     ),
+    getMenuItem(
+        <Link href="/state-org-manager/experts-details">مشاهده اطلاعات کارشناسان</Link>,
+        "/experts-details",
+        // <HomeIcon width={16} height={16} />
+    ),
 
 ];

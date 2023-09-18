@@ -28,7 +28,7 @@ export default function Page() {
 
         setCookie("requestMasterUid", res)
 
-        router.push("/dashboard/request/laboratory")
+        router.push("/dashboard/request/formulacion")
 
     };
 

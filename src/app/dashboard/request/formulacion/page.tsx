@@ -2,12 +2,13 @@
 
 import {Button, Divider, Row, Typography} from "antd";
 import React, {useState} from "react";
-import PrimaryProductTable from "@/app/dashboard/request/formulacion/components/primary-product-table";
 import PrimaryProductForm from "./components/primary-product-form";
 import useSWR from "swr";
 import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
 import {getCookie} from "cookies-next";
+import PrimaryProductTable from "@/app/dashboard/request/formulacion/components/primary-product-table";
+import {RequestDetail} from "../../../../../interfaces/requestDetail";
 
 export default function Formulacion() {
 
@@ -17,7 +18,13 @@ export default function Formulacion() {
         mutate,
         data: requestMasterMaterial,
         isLoading: requestMasterMaterialLoading,
-    } = useSWR("/RequestDetail/GetPageMaterial", url => listFetcher(url, {arg: {requestMasterUid: getCookie("requestMasterUid")}}));
+    } = useSWR<{ records: RequestDetail[] }>("/RequestDetail/GetPageMaterial", url => listFetcher(url, {
+        arg: {
+            "requestMasterUid": getCookie("requestMasterUid"),
+            "fromRecord": 0,
+            "selectRecord": 10000
+        }
+    }));
 
     return (
         <>
@@ -34,7 +41,7 @@ export default function Formulacion() {
             <PrimaryProductTable
                 setData={setData}
                 mute={mutate}
-                data={requestMasterMaterial}
+                data={requestMasterMaterial?.records || []}
                 loading={requestMasterMaterialLoading}
             />
             <Row>

@@ -6,7 +6,7 @@ export interface RequestDetail {
     IsProduct: boolean,
     UniqueCode: null | string,
     MaterialSupplyMethodId: number,
-    CreateDate: null | string,
+    CreateDate: string,
     MaterialTotalConsumption: string,
     MaterialUnitConsumption: string,
     MaterialUsagePercentage: number,
@@ -18,7 +18,9 @@ export interface RequestDetail {
     MaterialSupplyNationalCode: string,
     MaterialSupplyIranCode: string,
     MaterialSupplyAddress: string,
-    ProductOrMaterialName: string
+    ProductOrMaterialName: string,
+    ProductDensityTypeId: null | number,
+    StepNumber: number
 }
 
 export interface selectableProduct{

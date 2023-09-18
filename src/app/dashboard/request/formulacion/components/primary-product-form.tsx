@@ -26,7 +26,8 @@ export default function PrimaryProductForm({mute, data, setData}: {
 
     const {
         isMutating: isMutatingCreate,
-        trigger: create
+        trigger: create,
+        error
     } = useSWRMutation("/RequestDetail/CreateMaterial", mutationFetcher)
 
     const {
@@ -61,11 +62,8 @@ export default function PrimaryProductForm({mute, data, setData}: {
 
         }
 
-        if (res?.success) {
-            form.resetFields();
-            setData(undefined)
-        }
-
+        form.resetFields();
+        setData(undefined)
 
         await mute()
 
@@ -79,7 +77,9 @@ export default function PrimaryProductForm({mute, data, setData}: {
 
         form.setFieldsValue(data)
 
-    }, [data, form, router]);
+        console.log(error)
+
+    }, [data, form, router, error]);
 
 
     return (

@@ -5,9 +5,15 @@ import React, {useState} from "react";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {getCookie} from "cookies-next";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import useSWR from "swr";
+import {DefaultOptionType} from "rc-select/es/Select";
+import {useRouter} from "next/navigation";
 
 
-export default function PrimaryProductForm({mute}: { mute: any }) {
+export default function PrimaryProductForm() {
+
+    const router = useRouter()
 
     const [dunsite, Setdunsite] = useState();
 
@@ -15,29 +21,39 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
         data: selectableProduct,
         isMutating: isLDSelectable,
         trigger: getSelectableProduct
-    } = useSWRMutation("/RequestDetail/GetAllProductSelectable", mutationFetcher);
+    } = useSWRMutation("/RequestDetail/GetAllProductSelectable", listFetcher);
 
     const {
         isMutating: isLDCreateProduct,
         trigger: createProduct
     } = useSWRMutation("/RequestDetail/CreateProduct", mutationFetcher)
 
+    const {
+        isLoading: ldDensity,
+        data: density
+    } = useSWR<DefaultOptionType[]>("/BaseInfo/GetAllDensityType", listFetcher)
 
     const onFinish = async (values: { productUid: string, densityType: boolean }) => {
 
-        await createProduct(values.productUid)
+        await createProduct({
+            "requestMasterUid": getCookie("requestMasterUid"),
+            "productUid": values.productUid,
+            "densityTypeId": values.densityType
+        })
 
-        mute();
+        router.push("/dashboard/request/final-preview")
 
     };
 
     const ChangeDunsite = async (value: any) => {
 
+        console.log(value)
+
         Setdunsite(value)
 
         await getSelectableProduct({
             requestMasterUid: getCookie("requestMasterUid"),
-            densityType: value,
+            densityTypeId: value,
         })
 
     };
@@ -52,26 +68,23 @@ export default function PrimaryProductForm({mute}: { mute: any }) {
             >
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="densityType" label="دانسیته محصول ">
-                            <Select
-                                placeholder="انتخاب نمایید"
-                                onChange={ChangeDunsite}
-                                tokenSeparators={[","]}
-                                options={Character}
-                                size="large"
-                                value={dunsite}
-                                fieldNames={{value: "is_Active", label: "Name"}}
-                            />
+                        <Form.Item rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]} name="densityType"
+                                   label="دانسیته محصول ">
+
+                            <Select onChange={ChangeDunsite} placeholder="انتخاب نمایید" size="large"
+                                    loading={ldDensity} options={density}
+                                    fieldNames={{value: "Id", label: "Name"}}/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="productUid" label="نام محصول">
+                        <Form.Item rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]} name="productUid"
+                                   label="نام محصول">
                             <Select
                                 loading={isLDSelectable}
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{value: "uid", label: "name"}}
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                disabled={typeof dunsite !== "boolean"}
+                                disabled={typeof dunsite !== "number"}
                                 tokenSeparators={[","]}
                                 options={selectableProduct || []}
                             />

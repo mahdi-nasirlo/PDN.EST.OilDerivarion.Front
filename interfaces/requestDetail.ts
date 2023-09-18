@@ -48,6 +48,28 @@ export interface Product {
     StepNumber: number
 }
 
+export interface Get_ExeManager {
+    choices: Choice[],
+    requestMaster: RequestMaster
+}
+
+export interface RequestMaster {
+    id: number,
+    uid: string,
+    processDescription: string,
+    fileName: string | null,
+    isReqDetailCompleted: boolean,
+    ownerId: number
+}
+
+export interface Choice {
+    choice_Key: string,
+    choice_id: string,
+    counting_position: number,
+    keyword: string,
+    label: string,
+}
+
 export interface selectableProduct {
     uid: string
     densityType: boolean

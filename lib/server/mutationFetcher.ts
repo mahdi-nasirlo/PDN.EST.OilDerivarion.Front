@@ -23,7 +23,7 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
 
         console.error("Error:", error);
 
-        return []
+        return undefined
     }
 
 }

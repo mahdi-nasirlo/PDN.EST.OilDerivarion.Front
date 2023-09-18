@@ -1,113 +1,98 @@
-import {Space, Table, Tag} from 'antd'
+import {Button, Table} from 'antd'
 import {ColumnsType} from 'antd/es/table';
-import Link from 'next/link';
-import React from 'react'
+import React, {useState} from 'react'
 import useSWR from "swr";
-import {GetPage_ExeManager, Person} from "../../../../../../interfaces/producer";
+import {GetPage_ExeManager} from "../../../../../../interfaces/producer";
 import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import {getCookie} from "cookies-next";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {Product} from "../../../../../../interfaces/requestDetail";
 
 
 export default function ReviewDataTable() {
 
+    const [open, setOpen] = useState(false);
+
+    const [deleteUid, setDeleteUid] = useState("")
+
     const {
+        mutate,
         data,
         isLoading,
-    } = useSWR<GetPage_ExeManager>("/Producer/GetPage_ExeManager", (url) => listFetcher(url, {
+    } = useSWR<GetPage_ExeManager>("/RequestDetail/GetPageProduct", (url) => listFetcher(url, {
         arg: {
+            "requestMasterUid": getCookie("requestMasterUid"),
             "fromRecord": 0,
-            "selectRecord": 100000
+            "selectRecord": 110
         }
     }))
 
+    const {isMutating: isDeleting, trigger} = useSWRMutation("/RequestDetail/DeleteProduct", mutationFetcher)
 
-    const columns: ColumnsType<Person & { Row: number }> = [
+    const columns: ColumnsType<Product & { Row: number }> = [
         {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
         },
         {
-            title: "شناسه درخواست",
-            dataIndex: "name",
+            title: "نام محصول",
+            dataIndex: "ProductOrMaterialName",
             key: "2",
         },
         {
-            title: "کد ماده",
-            dataIndex: "nationalCode",
+            title: "دانسیته",
+            dataIndex: "ProductDensityTypeId",
             key: "3",
         },
         {
-            title: "تاریخ درخواست",
-            dataIndex: "ceoName",
-            key: "4",
-        },
-        {
-            title: "زمان باقی مانده",
-            dataIndex: "companyOwnershipTypeName",
-            key: "5",
-        },
-        {
-            title: "وضعیت",
-            dataIndex: "companyOwnershipTypeName",
-            key: "6",
-        },
-        {
-            title: "جزئیات",
-            dataIndex: "status",
-            key: "6",
-            render: (_, record: any) => {
-
-                let color = "";
-
-                if (record.status === "غیرفعال") {
-                    color = "red";
-                } else if (record.status === "فعال") {
-                    color = "green";
-                } else {
-                    color = "yellow";
-                }
-
-                return (
-                    <>
-                        <Tag color={color}>
-                            {record.status}
-                        </Tag>
-                    </>
-                );
-            },
-
-        },
-        {
-            title: "جزئیات",
-            key: "جزئیات",
+            title: "عملیات",
+            key: "عملیات",
             render: (_, record) => (
-                <Space size="middle">
-                    <Link href={`/manufacturer/info/${record.nationalCode}`} className="action-btn-info">
-                        مشاهده اطلاعات
-                    </Link>
-                </Space>
+                <Button onClick={() => {
+                    setOpen(true)
+                    setDeleteUid(record.Uid)
+                }} danger type="text">
+                    حذف
+                </Button>
             ),
         },
     ];
 
+    const handleDelete = async () => {
+        await trigger({
+            "uid": deleteUid
+        })
+
+        setOpen(false)
+
+        await mutate()
+    }
+
     return (
-        <Table
-            loading={isLoading}
-            columns={columns}
-            dataSource={addIndexToData(data?.records)}
-            pagination={{
-                defaultPageSize: 10,
-                showSizeChanger: true,
-                pageSizeOptions: ["10", "20", "50"],
-                defaultCurrent: 1,
-                style: {
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-start",
-                    margin: "16px 0",
-                },
-            }}
-        />
+        <>
+            <Table
+                loading={isLoading}
+                columns={columns}
+                dataSource={addIndexToData(data?.records)}
+                pagination={{
+                    defaultPageSize: 10,
+                    showSizeChanger: true,
+                    pageSizeOptions: ["10", "20", "50"],
+                    defaultCurrent: 1,
+                    style: {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-start",
+                        margin: "16px 0",
+                    },
+                }}
+            />
+            <ConfirmDeleteModal setOpen={setOpen} open={open}
+                                handleDelete={handleDelete}/>
+        </>
     )
 }

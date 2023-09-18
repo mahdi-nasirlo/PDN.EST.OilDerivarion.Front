@@ -23,7 +23,32 @@ export interface RequestDetail {
     StepNumber: number
 }
 
-export interface selectableProduct{
-    uid:string
-    densityType:boolean
+export interface Product {
+    Id: number,
+    Uid: string,
+    RequestMasterId: number,
+    ProductOrMaterialId: number,
+    IsProduct: boolean,
+    UniqueCode: string | number,
+    MaterialSupplyMethodId: number | null,
+    CreateDate: string,
+    MaterialTotalConsumption: string | null,
+    MaterialUnitConsumption: string | null,
+    MaterialUsagePercentage: string | null,
+    MaterialInternalSupplyPercentage: string | null,
+    MaterialForeignSupplyPercentage: string | null,
+    MaterialImportDeclarationNumber: string | null,
+    MaterialSupplyName: string | null,
+    MaterialSupplyPersonTypeId: string | null,
+    MaterialSupplyNationalCode: string | null,
+    MaterialSupplyIranCode: string | null,
+    MaterialSupplyAddress: string | null,
+    ProductOrMaterialName: string,
+    ProductDensityTypeId: number,
+    StepNumber: number
+}
+
+export interface selectableProduct {
+    uid: string
+    densityType: boolean
 }

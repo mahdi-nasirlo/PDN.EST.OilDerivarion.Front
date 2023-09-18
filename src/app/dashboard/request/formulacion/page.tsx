@@ -9,8 +9,11 @@ import {listFetcher} from "../../../../../lib/server/listFetcher";
 import {getCookie} from "cookies-next";
 import PrimaryProductTable from "@/app/dashboard/request/formulacion/components/primary-product-table";
 import {RequestDetail} from "../../../../../interfaces/requestDetail";
+import {useRouter} from "next/navigation";
 
 export default function Formulacion() {
+
+    const router = useRouter()
 
     const [data, setData] = useState(undefined)
 
@@ -51,6 +54,7 @@ export default function Formulacion() {
                     size="large"
                     type="primary"
                     htmlType="submit"
+                    onClick={() => router.push("/dashboard/request/final-product")}
                 >
                     <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
                 </Button>

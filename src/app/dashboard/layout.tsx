@@ -50,10 +50,31 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/dashboard">خانه</Link>,
         "/dashboard",
-        <HomeIcon width={16} height={16} />
+        <HomeIcon width={16} height={16}/>
     ),
 
-    { type: "divider" },
+    {type: "divider"},
+
+
+    getMenuItem(
+        <a href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</a>,
+        "StateOrgManager",
+    ),
+    getMenuItem(
+        <a href={"/state-general-management/process/ExeManager/list"}>فرایند 2</a>,
+        "ExeManager",
+    ),
+
+    getMenuItem(
+        <a href={"/state-general-management/process/Rejected/list"}>فرایند 3</a>,
+        "Rejected",
+    ),
+    getMenuItem(
+        <a href={"/state-general-management/process/End/list"}>فرایند 4</a>,
+        "End",
+    ),
+
+    {type: "divider"},
 
     getMenuItem(
         "پیشخوان",
@@ -61,9 +82,9 @@ const items: MenuProps["items"] = [
         null,
         [
             getMenuItem(
-                <MakeRequest />,
+                <MakeRequest/>,
                 "/dashboard/request/production-process",
-                <PencilIcon width={16} height={16} />
+                <PencilIcon width={16} height={16}/>
             ),
             getMenuItem(
                 <RequestList />,
@@ -134,24 +155,4 @@ const items: MenuProps["items"] = [
         "group"
     ),
 
-    {type: 'divider'},
-
-
-    getMenuItem(
-        <Link href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</Link>,
-        "StateOrgManager",
-    ),
-    getMenuItem(
-        <Link href={"/state-general-management/process/ExeManager/list"}>فرایند 2</Link>,
-        "ExeManager",
-    ),
-
-    getMenuItem(
-        <Link href={"/state-general-management/process/Rejected/list"}>فرایند 3</Link>,
-        "Rejected",
-    ),
-    getMenuItem(
-        <Link href={"/state-general-management/process/End/list"}>فرایند 4</Link>,
-        "End",
-    ),
 ];

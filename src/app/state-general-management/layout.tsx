@@ -60,20 +60,20 @@ const items: MenuProps["items"] = [
 
 
     getMenuItem(
-        <Link href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</Link>,
+        <a href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</a>,
         "StateOrgManager",
     ),
     getMenuItem(
-        <Link href={"/state-general-management/process/ExeManager/list"}>فرایند 2</Link>,
+        <a href={"/state-general-management/process/ExeManager/list"}>فرایند 2</a>,
         "ExeManager",
     ),
 
     getMenuItem(
-        <Link href={"/state-general-management/process/Rejected/list"}>فرایند 3</Link>,
+        <a href={"/state-general-management/process/Rejected/list"}>فرایند 3</a>,
         "Rejected",
     ),
     getMenuItem(
-        <Link href={"/state-general-management/process/End/list"}>فرایند 4</Link>,
+        <a href={"/state-general-management/process/End/list"}>فرایند 4</a>,
         "End",
     ),
 ];

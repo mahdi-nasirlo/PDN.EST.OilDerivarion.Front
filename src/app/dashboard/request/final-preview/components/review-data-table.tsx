@@ -1,15 +1,15 @@
-import {Button, Table} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Table } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {GetPage_ExeManager} from "../../../../../../interfaces/producer";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
-import {getCookie} from "cookies-next";
+import { GetPage_ExeManager } from "../../../../../../interfaces/producer";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import { getCookie } from "cookies-next";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {Product} from "../../../../../../interfaces/requestDetail";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { Product } from "../../../../../../interfaces/requestDetail";
 
 
 export default function ReviewDataTable() {
@@ -30,7 +30,7 @@ export default function ReviewDataTable() {
         }
     }))
 
-    const {isMutating: isDeleting, trigger} = useSWRMutation("/RequestDetail/DeleteProduct", mutationFetcher)
+    const { isMutating: isDeleting, trigger } = useSWRMutation("/RequestDetail/DeleteProduct", mutationFetcher)
 
     const columns: ColumnsType<Product & { Row: number }> = [
         {
@@ -78,21 +78,9 @@ export default function ReviewDataTable() {
                 loading={isLoading}
                 columns={columns}
                 dataSource={addIndexToData(data?.records)}
-                pagination={{
-                    defaultPageSize: 10,
-                    showSizeChanger: true,
-                    pageSizeOptions: ["10", "20", "50"],
-                    defaultCurrent: 1,
-                    style: {
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "flex-start",
-                        margin: "16px 0",
-                    },
-                }}
+                pagination={false}
             />
-            <ConfirmDeleteModal setOpen={setOpen} open={open}
-                                handleDelete={handleDelete}/>
+            <ConfirmDeleteModal setOpen={setOpen} open={open} handleDelete={handleDelete} />
         </>
     )
 }

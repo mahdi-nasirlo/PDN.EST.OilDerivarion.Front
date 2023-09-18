@@ -89,5 +89,10 @@ const items: MenuProps["items"] = [
         "/laboratory-results-list",
         // <HomeIcon width={16} height={16} />
     ),
+    getMenuItem(
+        <Link href="/state-org-manager/lab-results-details">جزئیات نتایج آزمایشگاه</Link>,
+        "/lab-results-details",
+        // <HomeIcon width={16} height={16} />
+    ),
 
 ];

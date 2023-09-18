@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, Col, Modal, Row} from "antd";
+import { Button, Col, Modal, Row } from "antd";
 
-function ConfirmDeleteModal({open, setOpen, handleDelete}: {
+function ConfirmDeleteModal({ open, setOpen, handleDelete }: {
     open: boolean,
     setOpen: (arg: boolean) => void,
     handleDelete: () => void
@@ -34,13 +34,13 @@ function ConfirmDeleteModal({open, setOpen, handleDelete}: {
                     </Col>
                 </Row>
             ]}
-            title="حذف موارد اولیه یا محصول"
+            title="حذف مواد اولیه یا محصول"
             visible={open}
             onCancel={() => {
                 setOpen(false)
             }}
         >
-            <p>آیا از حذف این اولیه یا محصول مطمئن هستید؟</p>
+            <p>آیا از حذف این مواد اولیه یا محصول مطمئن هستید؟</p>
         </Modal>
     );
 }

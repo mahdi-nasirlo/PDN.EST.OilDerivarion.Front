@@ -2,7 +2,7 @@
 
 
 import { Button, Col, Form, Modal, Row } from 'antd';
-import { useForm } from 'antd/es/form/Form';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function ReviewDataModalFinalSubmit(
@@ -10,12 +10,15 @@ export default function ReviewDataModalFinalSubmit(
         { modalVisibleFinalSubmit: any, setModalVisibleFinalSubmit: any }
 ) {
 
-    const [form] = useForm()
+    const router = useRouter()
 
     const closeModal = () => {
         setModalVisibleFinalSubmit(false);
     };
 
+    const handleFormSubmit = () => {
+        router.push("/dashboard")
+    };
 
 
     return (
@@ -32,7 +35,7 @@ export default function ReviewDataModalFinalSubmit(
                                 size="large"
                                 className="w-full"
                                 type="primary"
-                                onClick={closeModal}
+                                onClick={handleFormSubmit}
                                 key={"submit"} >
                                 ثبت
                             </Button >
@@ -40,7 +43,7 @@ export default function ReviewDataModalFinalSubmit(
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form>
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={24}>
                             <Form.Item>

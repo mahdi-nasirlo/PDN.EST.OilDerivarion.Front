@@ -76,5 +76,9 @@ const items: MenuProps["items"] = [
         "/expired-requests-list",
         // <HomeIcon width={16} height={16} />
     ),
-
+    getMenuItem(
+        <Link href="/state-org-manager/expired-requests-details">جزئیات درخواست منقضی شده</Link>,
+        "/expired-requests-details",
+        // <HomeIcon width={16} height={16} />
+    ),
 ];

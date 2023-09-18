@@ -1,19 +1,20 @@
 "use client";
 
-import { Alert, Button, Col, Divider, Form, Input, Row, Typography, Upload, } from "antd";
+import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload} from "antd";
 import React from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import {UploadOutlined} from "@ant-design/icons";
 import useSWRMutation from "swr/mutation";
-import { useRouter } from "next/navigation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {useRouter} from "next/navigation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import staticMessages from "../../../../../lib/staticMessages";
+import {setCookie} from "cookies-next";
 
 
 export default function Page() {
 
     const router = useRouter()
 
-    const { trigger, isMutating } = useSWRMutation("/RequestMaster/Create", mutationFetcher)
+    const {trigger, isMutating} = useSWRMutation("/RequestMaster/Create", mutationFetcher)
 
     const onFinish = async (values: RequestMasterForm) => {
 
@@ -25,6 +26,7 @@ export default function Page() {
         // @ts-ignore
         const res = await trigger(data)
 
+        setCookie("requestMasterUid", res)
 
         router.push("/dashboard/request/laboratory")
 
@@ -73,12 +75,68 @@ export default function Page() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
+                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
                 </Row>
-                <Divider />
+                <Divider/>
+
+                <Row gutter={[16, 0]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="company-registratuon-num"
+                            label="کشورهای مقصد صادراتی محصول"
+                        >
+                            <Select
+                                size="large"
+                                mode="tags"
+                                placeholder="انتخاب نمایید"
+                                tokenSeparators={[","]}
+                                options={ProductExportCountries}
+                                fieldNames={{label: "name", value: "key"}}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="license-establish" label="ضایعات">
+                            <Select
+                                size="large"
+                                mode="tags"
+                                placeholder="انتخاب نمایید"
+                                tokenSeparators={[","]}
+                                options={OilWaste}
+                                fieldNames={{label: "name", value: "key"}}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="operation-license"
+                            label="محل فروش و یا دفن ضایعات"
+                        >
+                            <Input size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label=" تجهیزات آزمایشگاه"
+                        >
+                            <Select
+                                size="large"
+                                mode="tags"
+                                placeholder="انتخاب نمایید"
+                                tokenSeparators={[","]}
+                                options={LaboratoryEquipment}
+                                fieldNames={{label: "name", value: "key"}}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Divider/>
+
                 <div className="flex gap-6">
                     <Button
                         loading={isMutating}
@@ -104,3 +162,129 @@ type RequestMasterForm = {
     processDescription: string;
     fileName: { file: { name: string } };
 };
+
+
+const ProductExportCountries = [
+    {
+        key: "1",
+        name: "امارات",
+    },
+    {
+        key: "2",
+        name: "چین",
+    },
+    {
+        key: "3",
+        name: "عراق",
+    },
+    {
+        key: "4",
+        name: "روسیه",
+    },
+    {
+        key: "5",
+        name: "هند",
+    },
+    {
+        key: "6",
+        name: "روسیه",
+    },
+    {
+        key: "7",
+        name: "پاکستان",
+    },
+    {
+        key: "8",
+        name: "کویت",
+    },
+    {
+        key: "9",
+        name: "لبنان",
+    },
+    {
+        key: "10",
+        name: "ترکیه",
+    },
+    {
+        key: "11",
+        name: "لبنان",
+    },
+];
+
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+
+const LaboratoryEquipment = [
+    {
+        key: "1",
+        name: "دستگاه تقطیر",
+    },
+    {
+        key: "2",
+        name: "دستگاه نقطه ریزش",
+    },
+    {
+        key: "3",
+        name: "گام تستر",
+    },
+    {
+        key: "4",
+        name: "ویسکومتر",
+    },
+    {
+        key: "5",
+        name: "مادون قرمز FITR",
+    },
+    {
+        key: "6",
+        name: "حمام سیرکلاسیون",
+    },
+    {
+        key: "7",
+        name: "اکسیژن متر",
+    },
+    {
+        key: "8",
+        name: "چگالی سنج",
+    },
+    {
+        key: "9",
+        name: "دستگاه آنالیز H2S",
+    },
+];
+
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+///////////////////////////////////////////////
+
+const OilWaste = [
+    {
+        key: "1",
+        name: "گوگرد",
+    },
+    {
+        key: "2",
+        name: "نمونه بنزین",
+    },
+    {
+        key: "3",
+        name: "نمونه نفت چراغ",
+    },
+    {
+        key: "4",
+        name: "آسفالت",
+    },
+    {
+        key: "5",
+        name: "روغن موتور",
+    },
+    {
+        key: "6",
+        name: "نمونه سوخت دیزل(گازوئیل)",
+    },
+    {
+        key: "7",
+        name: "ال‌پی‌جی در سیلندر گاز",
+    },
+];

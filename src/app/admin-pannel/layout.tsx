@@ -95,4 +95,10 @@ const items: MenuProps["items"] = [
     "list-experts",
     // <FolderPlusIcon width={16} height={16}/>
   ),
+
+  getMenuItem(
+    <Link href={"/admin-pannel/add-box"}>افزودن جعبه</Link>,
+    "add-box",
+    // <FolderPlusIcon width={16} height={16}/>
+  ),
 ];

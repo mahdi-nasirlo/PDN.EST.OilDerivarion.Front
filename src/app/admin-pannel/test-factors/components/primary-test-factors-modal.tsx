@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Col, Form, Input, Modal, Row } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
@@ -25,7 +25,7 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
 
     return (
         <Modal
-            width={600}
+            width={800}
             title={<div>
                 <div className="text-base mb-2">افزودن فاکتور جدید</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
@@ -58,7 +58,7 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
         >
             <Form form={form} >
                 <Row gutter={[32, 1]}>
-                    <Col xs={24} md={24}>
+                    <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
@@ -66,6 +66,28 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
                             label="نام فاکتور"
                         >
                             <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="years"
+                            label="نام ماده اولیه"
+                        >
+                            <Select size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="yea"
+                            label="نام محصول"
+                        >
+                            <Select size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

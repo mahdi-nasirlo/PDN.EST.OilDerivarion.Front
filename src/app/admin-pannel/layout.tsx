@@ -42,17 +42,17 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href={"/admin-pannel/adding-raw-material"}>ماده اولیه</Link>,
     "adding-raw-material",
-    <FolderPlusIcon width={16} height={16} />
+    // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
     <Link href={"/admin-pannel/province"}>استان</Link>,
     "province",
-    <FolderPlusIcon width={16} height={16} />
+    // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
     "مدیریت کاربران",
     "management-user",
-    <FolderPlusIcon width={16} height={16} />,
+    null,
     [
       getMenuItem(
         <Link href={"/admin-pannel/management-user"}>لیست کاربران</Link>,
@@ -75,19 +75,19 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href={"/admin-pannel/producer/production-unit"}>تولید کننده</Link>,
     "producer/production-unit",
-    <FolderPlusIcon width={16} height={16} />
+    // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
-    <Link href={"/admin-pannel/laboratory"}>آزمایشگاه ها</Link>,
+    <Link href={"/admin-pannel/laboratory"}>آزمایشگاه</Link>,
     "laboratory",
-    <FolderPlusIcon width={16} height={16} />
+    // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
     <Link href={"/admin-pannel/test-factors"}>فاکتورهای آزمون</Link>,
     "test-factors",
-    <FolderPlusIcon width={16} height={16} />
+    // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(

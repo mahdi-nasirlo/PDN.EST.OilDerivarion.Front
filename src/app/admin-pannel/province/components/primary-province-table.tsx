@@ -42,7 +42,7 @@ export default function PrimaryProvinceTable() {
                 <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست مواد اولیه</Typography>
             </div>
             <Table
-                className="mt-4"
+                className="mt-6"
                 columns={columns}
                 dataSource={data}
                 pagination={{

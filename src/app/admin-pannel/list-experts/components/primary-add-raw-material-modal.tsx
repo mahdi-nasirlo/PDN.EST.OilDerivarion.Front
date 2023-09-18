@@ -1,10 +1,10 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row, Select} from 'antd'
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryAddRawMaterialModal({modalVisible, setModalVisible}: {
+export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisible }: {
     modalVisible: any,
     setModalVisible: any
 }) {
@@ -28,7 +28,7 @@ export default function PrimaryAddRawMaterialModal({modalVisible, setModalVisibl
         <Modal
             width={800}
             title={<div>
-                <div className="text-base mb-2">ویرایش کارشناس</div>
+                <div className="text-base mb-2">افزودن کارشناس</div>
             </div>}
             open={modalVisible}
             onCancel={closeModal}
@@ -60,66 +60,66 @@ export default function PrimaryAddRawMaterialModal({modalVisible, setModalVisibl
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="نام کارشناس"
                         >
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="کد ملی"
                         >
-                            <Input size="large" placeholder="انتخاب کنید"/>
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="شماره همراه"
                         >
-                            <Input size="large" placeholder="انتخاب کنید"/>
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="فعال/غیر فعال"
                         >
-                            <Select size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="اداره مربوطه"
                         >
-                            <Select size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{span: 24}}
-                            wrapperCol={{span: 24}}
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="استان مربوطه"
                         >
-                            <Select size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

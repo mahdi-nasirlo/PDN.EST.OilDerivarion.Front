@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Switch, Table, Typography } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -98,10 +98,10 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
             title: "عملیات",
             key: "عملیات",
             render: (_, record) => (
-                <div className={"flex justify-start"}>
+                <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className="text-red-500 font-bold" onClick={() => handleDelete(record)}>حذف</Button>
-                </div>
+                </Space>
             ),
         },
     ];
@@ -125,7 +125,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                     </Button>
                 </div>
                 <Table
-                    className="mt-4"
+                    className="mt-6"
                     columns={columns}
                     dataSource={data}
                     pagination={{

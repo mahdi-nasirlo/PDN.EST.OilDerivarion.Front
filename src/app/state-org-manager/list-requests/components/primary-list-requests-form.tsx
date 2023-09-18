@@ -1,36 +1,34 @@
-"use client"
+"use client";
 
-import { Button, Col, Form, Select, Row } from 'antd'
+
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import React from 'react'
 
-export default function PrimaryLaboratoryForm() {
+export default function PrimaryListRequestsForm() {
     return (
         <div className="box-border w-full p-6">
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="نام آزمایشگاه ">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                        <Form.Item name="year-establishment" label="نام واحد تولیدی ">
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="شماره ثابت">
+                        <Form.Item name="lastName" label="محصول تولیدی">
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label="فعال/غیر فعال"
-                        >
+                        <Form.Item name="year-establishment" label="وضعیت">
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد ملی">
-                            <Select size="large" placeholder="وارد کنید" />
+                        <Form.Item name="year-establishment" label="کد رهگیری ">
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -57,5 +55,6 @@ export default function PrimaryLaboratoryForm() {
                     </Col>
                 </Row>
             </Form>
-        </div>)
+        </div >
+    )
 }

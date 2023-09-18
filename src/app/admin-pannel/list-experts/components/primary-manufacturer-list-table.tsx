@@ -1,16 +1,59 @@
-import {Button, Col, Modal, Row, Space, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {GetPage_ExeManager, Person} from "../../../../../interfaces/producer";
-import {PlusIcon} from "@heroicons/react/24/outline";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { GetPage_ExeManager, Person } from "../../../../../interfaces/producer";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { useForm } from 'antd/es/form/Form';
 
 
-export default function PrimaryManufacturerListTable({setModalVisible}: { setModalVisible: any }) {
 
-    const [visibleDelete, setVisibleDelete] = useState(false);
+export default function PrimaryManufacturerListTable({ setModalVisible }: { setModalVisible: any }) {
+
+    //حذف
+
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [recordToDelete, setRecordToDelete] = useState(null);
+
+    const handleDelete = (record: any) => {
+        setRecordToDelete(record);
+        setIsDeleteModalVisible(true);
+    };
+
+    const handleConfirmDelete = () => {
+        // Perform the delete action here with recordToDelete
+        // After successful delete, you can close the modal
+        setIsDeleteModalVisible(false);
+    };
+    const handleCancelDelete = () => {
+        setIsDeleteModalVisible(false);
+        setRecordToDelete(null); // Clear the recordToDelete
+    };
+
+    const showModal = () => {
+        setModalVisible(true);
+    };
+
+    //ادیت
+    const [form] = useForm()
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const [recordToEdit, setRecordToEdit] = useState(null);
+
+    const handleEdit = (record: any) => {
+        setRecordToEdit(record);
+        setIsEditModalVisible(true);
+    };
+    const handleConfirmEdit = () => {
+        // Perform the edit action here with recordToEdit
+        // After successful edit, you can close the modal
+        setIsEditModalVisible(false);
+    };
+    const handleCancelEdit = () => {
+        setIsEditModalVisible(false);
+        setRecordToEdit(null); // Clear the recordToEdit
+    };
 
     const {
         data,
@@ -65,12 +108,8 @@ export default function PrimaryManufacturerListTable({setModalVisible}: { setMod
             key: "8",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type="text" onClick={() => setModalVisible(false)}>
-                        ویرایش
-                    </Button>
-                    <Button type="text" danger onClick={() => setVisibleDelete(true)}>
-                        حذف
-                    </Button>
+                    <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
+                    <Button type="link" className={"text-red-500 font-bold"} onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
@@ -79,7 +118,9 @@ export default function PrimaryManufacturerListTable({setModalVisible}: { setMod
     return (
         <div className="box-border w-full p-6 mt-8">
             <div className="flex justify-between items-center">
-                <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
+                <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                    لیست کارشناسان
+                </Typography>
                 <Button
                     className="max-md:w-full flex justify-center items-center gap-2"
                     size="large"
@@ -89,15 +130,15 @@ export default function PrimaryManufacturerListTable({setModalVisible}: { setMod
                         setModalVisible(true)
                     }}
                 >
-                    <PlusIcon width={24} height={24}/>
+                    <PlusIcon width={24} height={24} />
                     <span className="flex">
-                            افزودن کارشناس
-                        </span>
+                        افزودن کارشناس
+                    </span>
                 </Button>
             </div>
             <Table
                 loading={isLoading}
-                className="mt-8"
+                className="mt-6"
                 columns={columns}
                 dataSource={addIndexToData(data?.records)}
                 pagination={{
@@ -113,7 +154,7 @@ export default function PrimaryManufacturerListTable({setModalVisible}: { setMod
                     },
                 }}
             />
-
+            {/* جذف */}
             <Modal
                 width={600}
                 footer={[
@@ -123,32 +164,128 @@ export default function PrimaryManufacturerListTable({setModalVisible}: { setMod
                                 size="large"
                                 className="w-full bg-red-500"
                                 type="primary"
-                                // onClick={handleConfirmDelete}
-                                key={"submit"}>
+                                onClick={handleConfirmDelete}
+                                key={"submit"} >
                                 حذف
-                            </Button>
+                            </Button >
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={() => {
-                                    setModalVisible(false)
-                                }}
-                                key={"cancel"}>
+                                onClick={handleConfirmDelete}
+                                key={"cancel"} >
                                 انصراف
-                            </Button>
+                            </Button >
                         </Col>
                     </Row>
                 ]}
-                title="حذف کاربر"
-                open={visibleDelete}
-                onCancel={() => {
-                    setVisibleDelete(false)
-                }}
+                title="حذف کارشناس"
+                visible={isDeleteModalVisible}
+                onCancel={handleCancelDelete}
             >
-                <p>آیا از حذف این کاربر مطمئن هستید؟</p>
+                <p>آیا از حذف این کارشناس مطمئن هستید؟</p>
             </Modal>
+            {/* ویرایش */}
+            <Modal
+                width={800}
+                title="ویرایش کارشناس"
+                visible={isEditModalVisible}
+                onOk={handleConfirmEdit}
+                onCancel={handleCancelEdit}
+                footer={[
+                    <Row key={"box"} gutter={[16, 16]} className="my-2">
+                        <Col xs={24} md={12}>
+                            <Button
+                                size="large"
+                                className="w-full"
+                                type="primary"
+                                onClick={handleConfirmEdit}
+                                key={"submit"} >
+                                ثبت
+                            </Button >
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Button
+                                size="large"
+                                className="w-full bg-gray-100 text-warmGray-500"
+                                onClick={handleCancelEdit}
+                                key={"cancel"} >
+                                انصراف
+                            </Button >
+                        </Col>
+                    </Row>
+                ]}
+            >
+                <Form form={form}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="نام کارشناس"
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="کد ملی"
+                            >
+                                <Input size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="شماره همراه"
+                            >
+                                <Input size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="فعال/غیر فعال"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="اداره مربوطه"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                labelCol={{ span: 24 }}
+                                wrapperCol={{ span: 24 }}
+                                name="year-establishment"
+                                label="استان مربوطه"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            </Modal >
 
         </div>
     )

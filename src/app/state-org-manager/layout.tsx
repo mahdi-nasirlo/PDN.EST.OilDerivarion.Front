@@ -81,4 +81,13 @@ const items: MenuProps["items"] = [
         "/expired-requests-details",
         // <HomeIcon width={16} height={16} />
     ),
+
+    { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/laboratory-results-list">نتایج آزمایشگاه</Link>,
+        "/laboratory-results-list",
+        // <HomeIcon width={16} height={16} />
+    ),
+
 ];

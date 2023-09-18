@@ -48,4 +48,33 @@ const items: MenuProps["items"] = [
         "/producer-list",
         // <HomeIcon width={16} height={16} />
     ),
+    getMenuItem(
+        <Link href="/state-org-manager/producer-details">جزئیات تولید کننده</Link>,
+        "/producer-details",
+        // <HomeIcon width={16} height={16} />
+    ),
+
+
+    { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/experts-list">لیست کارشناسان</Link>,
+        "/experts-list",
+        // <HomeIcon width={16} height={16} />
+    ),
+    getMenuItem(
+        <Link href="/state-org-manager/experts-details">مشاهده اطلاعات کارشناسان</Link>,
+        "/experts-details",
+        // <HomeIcon width={16} height={16} />
+    ),
+
+
+    { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/expired-requests-list">درخواست های منقضی شده</Link>,
+        "/expired-requests-list",
+        // <HomeIcon width={16} height={16} />
+    ),
+
 ];

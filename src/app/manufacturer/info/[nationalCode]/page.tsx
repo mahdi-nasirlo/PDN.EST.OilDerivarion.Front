@@ -7,7 +7,8 @@ import PrimaryManufacturerListModal from "./components/primary-manufacturer-list
 import useSWR from "swr";
 import {useForm} from "antd/lib/form/Form";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {Get_ExeManager} from "../../../../../interfaces/producer";
+import {Ceo, Employee, Get_ExeManager} from "../../../../../interfaces/producer";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 
 export default function Page({params}: { params: { nationalCode: string } }) {
 
@@ -16,6 +17,24 @@ export default function Page({params}: { params: { nationalCode: string } }) {
     const [form] = useForm()
 
     const {data, isLoading} = useSWR<Get_ExeManager>("/Producer/Get_ExeManager", (url) => listFetcher(url, {
+        arg: {
+            "nationalCode": params.nationalCode
+        }
+    }))
+
+    const {
+        data: employees,
+        isLoading: ldEmployees
+    } = useSWR<Employee[]>("/Producer/GetAllEmployee", (url) => listFetcher(url, {
+        arg: {
+            "nationalCode": params.nationalCode
+        }
+    }))
+
+    const {
+        data: ceo,
+        isLoading: ldCeo
+    } = useSWR<Ceo[]>("/Producer/GetAllMember", (url) => listFetcher(url, {
         arg: {
             "nationalCode": params.nationalCode
         }
@@ -69,8 +88,9 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                 </Typography>
                 <Table
                     className="mt-8"
-                    columns={columns}
-                    dataSource={[]}
+                    loading={ldCeo}
+                    columns={ceoColumns}
+                    dataSource={addIndexToData(ceo)}
                     pagination={false}
                 />
                 <Divider/>
@@ -78,9 +98,10 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     اطلاعات کارکنان
                 </Typography>
                 <Table
+                    loading={ldEmployees}
                     className="mt-8"
-                    columns={columns2}
-                    dataSource={[]}
+                    columns={employeeColumns}
+                    dataSource={addIndexToData(employees, "Row")}
                     pagination={false}
                 />
                 <Divider/>
@@ -204,7 +225,7 @@ interface DataType {
     call: string;
 }
 
-const columns: ColumnsType<DataType> = [
+const ceoColumns: ColumnsType<Ceo> = [
     {
         title: "ردیف",
         dataIndex: "Row",
@@ -212,12 +233,12 @@ const columns: ColumnsType<DataType> = [
     },
     {
         title: "  نام و نام خانوادگی",
-        dataIndex: "ProductName",
+        dataIndex: "memberName",
         key: "2",
     },
     {
         title: "  کد ملی / کد اتباع",
-        dataIndex: "TrackingCode",
+        dataIndex: "memberNationalCode",
         key: "3",
     },
     {
@@ -227,7 +248,7 @@ const columns: ColumnsType<DataType> = [
     },
     {
         title: " سمت",
-        dataIndex: "DateRegistration",
+        dataIndex: "companyRoleName",
         key: "5",
     },
 
@@ -237,7 +258,7 @@ const columns: ColumnsType<DataType> = [
         key: "6",
     },
 ];
-const columns2: ColumnsType<DataType> = [
+const employeeColumns: ColumnsType<Employee> = [
     {
         title: "ردیف",
         dataIndex: "Row",
@@ -245,16 +266,16 @@ const columns2: ColumnsType<DataType> = [
     },
     {
         title: "  نام و نام خانوادگی",
-        dataIndex: "ProductName",
+        dataIndex: "memberName",
         key: "2",
     },
     {
         title: "  کد ملی / کد اتباع",
-        dataIndex: "TrackingCode",
+        dataIndex: "memberNationalCode",
         key: "3",
     },
     {
-        title: " تاریخ تولد   ",
+        title: " تاریخ تولد",
         dataIndex: "ConfirmedRequestCode",
         key: "4",
     },

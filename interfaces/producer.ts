@@ -16,3 +16,16 @@ export type Person = {
     companyOwnershipTypeName: string
 }
 
+export type Employee = {
+    companyRoleId: number,
+    companyRoleName: string,
+    memberName: string,
+    memberNationalCode: string
+}
+
+export type Ceo = {
+    companyRoleId: number,
+    memberNationalCode: string,
+    companyRoleName: string,
+    memberName: string
+}

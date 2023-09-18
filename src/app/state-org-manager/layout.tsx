@@ -53,4 +53,14 @@ const items: MenuProps["items"] = [
         "/producer-details",
         // <HomeIcon width={16} height={16} />
     ),
+
+
+    { type: "divider" },
+
+    getMenuItem(
+        <Link href="/state-org-manager/experts-list">لیست کارشناسان</Link>,
+        "/experts-list",
+        // <HomeIcon width={16} height={16} />
+    ),
+
 ];

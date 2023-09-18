@@ -1,33 +1,34 @@
 "use client";
 
-import { Button, Space, Table, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+
 import React from 'react'
-import useSWR from 'swr';
-import { listFetcher } from '../../../../../lib/server/listFetcher';
-import { StateOrgManager } from '../../../../../interfaces/requestMaster';
-import { addIndexToData } from '../../../../../lib/addIndexToData';
+import PrimaryListRequestsForm
+    from "@/app/state-general-management/process/[key]/list/components/primary-list-requests-form";
+import {Button, Space, Table, Typography} from "antd";
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import {useRouter} from "next/navigation";
+import useSWR from "swr";
+import {StateOrgManager} from "../../../../../../interfaces/requestMaster";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {ColumnsType} from "antd/es/table";
 
+export default function Page({params}: { params: { key: string } }) {
 
-interface DataType {
-    key: string;
-    Row: number;
-    Name: string;
-    Tracking: string;
-    ConfirmedCode: string;
-    status: string;
-}
-
-
-export default function PrimaryListRequestsTable() {
+    const router = useRouter()
 
     const {
         data,
         isLoading
-    } = useSWR<{ item1: boolean, item3: StateOrgManager[] }>("/RequestMaster/GetPage_StateOrgManager", (url) => listFetcher(url, {
+    } = useSWR<{
+        tasks: {
+            item1: boolean,
+            item3: StateOrgManager[]
+        }
+    }>("/RequestWorkFlow/GetPageTask", (url) => listFetcher(url, {
         arg: {
             fromRecord: 0,
-            selectRecord: 100000
+            selectRecord: 1000,
+            stepKey: params.key
         }
     }))
 
@@ -62,7 +63,9 @@ export default function PrimaryListRequestsTable() {
             key: "جزئیات",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => { console.log(record); }}>مشاهده</Button>
+                    <Button type="link" className="text-primary-500 font-bold" onClick={() => {
+                        router.push(`/state-general-management/process/${params.key}/detail/${record.task_id}`)
+                    }}>مشاهده</Button>
                 </Space>
             ),
         },
@@ -71,15 +74,17 @@ export default function PrimaryListRequestsTable() {
 
     return (
         <>
+            <PrimaryListRequestsForm/>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-start items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست درخواست ها</Typography>
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
+                        درخواست ها</Typography>
                 </div>
                 <Table
                     className="mt-6"
                     loading={isLoading}
                     columns={columns}
-                    dataSource={addIndexToData(data?.item3, "Row")}
+                    dataSource={addIndexToData(data?.tasks.item3, "Row")}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -96,25 +101,4 @@ export default function PrimaryListRequestsTable() {
             </div>
         </>
     )
-
 }
-
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        Name: "نام شرکت تولیدی تست",
-        Tracking: "هیدروکربن سبک",
-        ConfirmedCode: "دارد",
-        status: "در انتظار تایید زمان بازدید"
-    },
-    {
-        key: "2",
-        Row: 2,
-        Name: "نام شرکت تولیدی تست",
-        Tracking: "انواع تینر",
-        ConfirmedCode: "ندارد",
-        status: "در انتظار گزارش کارشناس"
-    },
-];

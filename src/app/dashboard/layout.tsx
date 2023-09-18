@@ -2,7 +2,7 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
     ChatBubbleLeftEllipsisIcon,
@@ -14,8 +14,8 @@ import {
     UserCircleIcon,
     UsersIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
     children,
@@ -123,14 +123,35 @@ const items: MenuProps["items"] = [
             getMenuItem(
                 "تنظیمات حساب کاربری",
                 "profile-setting",
-                <Cog6ToothIcon width={16} height={16} />
+                <Cog6ToothIcon width={16} height={16}/>
             ),
             getMenuItem(
                 "ارتباط با پشتیبان",
                 "connect-support",
-                <ChatBubbleLeftEllipsisIcon width={16} height={16} />
+                <ChatBubbleLeftEllipsisIcon width={16} height={16}/>
             ),
         ],
         "group"
+    ),
+
+    {type: 'divider'},
+
+
+    getMenuItem(
+        <Link href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</Link>,
+        "StateOrgManager",
+    ),
+    getMenuItem(
+        <Link href={"/state-general-management/process/ExeManager/list"}>فرایند 2</Link>,
+        "ExeManager",
+    ),
+
+    getMenuItem(
+        <Link href={"/state-general-management/process/Rejected/list"}>فرایند 3</Link>,
+        "Rejected",
+    ),
+    getMenuItem(
+        <Link href={"/state-general-management/process/End/list"}>فرایند 4</Link>,
+        "End",
     ),
 ];

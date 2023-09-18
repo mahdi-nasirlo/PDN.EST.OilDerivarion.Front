@@ -32,6 +32,12 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/list-requests">لیست درخواست ها</Link>,
         "/list-requests",
-        <HomeIcon width={16} height={16} />
+        // <HomeIcon width={16} height={16} />
+    ),
+
+    getMenuItem(
+        <Link href="/state-org-manager/requests-details">جزئیات درخواست</Link>,
+        "/requests-details",
+        // <HomeIcon width={16} height={16} />
     ),
 ];

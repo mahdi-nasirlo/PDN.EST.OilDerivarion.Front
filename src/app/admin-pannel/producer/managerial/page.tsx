@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row, Typography } from 'antd';
+import { Button, Col, DatePicker, Divider, Form, Input, Row, Typography } from 'antd';
 import React from 'react'
 
 export default function Page() {
@@ -41,7 +41,7 @@ export default function Page() {
                             name="company-registratuon-num"
                             label="تاریخ تولد"
                         >
-                            <Input size="large" placeholder="13**/**/**" />
+                            <DatePicker size="large" placeholder="13**/**/**" className="w-full" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>

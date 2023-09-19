@@ -57,20 +57,20 @@ const items: MenuProps["items"] = [
 
 
     getMenuItem(
-        <a href={"/state-general-management/process/StateOrgManager/list"}>فرایند 1</a>,
+        <a href={"/state-general-management/process/StateOrgManager/list"}>اداره کل استان</a>,
         "StateOrgManager",
     ),
     getMenuItem(
-        <a href={"/state-general-management/process/ExeManager/list"}>فرایند 2</a>,
+        <a href={"/state-general-management/process/ExeManager/list"}>رئیس اجرایی</a>,
         "ExeManager",
     ),
 
     getMenuItem(
-        <a href={"/state-general-management/process/Rejected/list"}>فرایند 3</a>,
+        <a href={"/state-general-management/process/Rejected/list"}>رد شده ها</a>,
         "Rejected",
     ),
     getMenuItem(
-        <a href={"/state-general-management/process/End/list"}>فرایند 4</a>,
+        <a href={"/state-general-management/process/End/list"}>تایید شده ها</a>,
         "End",
     ),
 

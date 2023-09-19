@@ -5,26 +5,30 @@ import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typ
 import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
+import useSWR from 'swr';
+import { Product } from '../../../../../interfaces/product';
+import { listFetcher } from '../../../../../lib/server/listFetcher';
+import { addIndexToData } from '../../../../../lib/addIndexToData';
 
-
-interface DataType {
-    key: string;
-    Row: number;
-    ProductName: string;
-    TrackingCode: string;
-    ConfirmedRequestCode: string;
-}
 
 
 export default function PrimaryAddingProductTable({ setModalVisible }: { setModalVisible: any }) {
 
+    const { data } = useSWR<{ records: Product[], count: number }>("/Product/GetPage", (url) => listFetcher(url, {
+        arg: {
+            "name": null,
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 1000
+        }
+    }))
 
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<Product | null>(null);
 
-    const handleDelete = (record: DataType) => {
+    const handleDelete = (record: Product) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
@@ -43,12 +47,14 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
         setModalVisible(true);
     };
 
+
     //ادیت
+
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<DataType | null>(null);
+    const [recordToEdit, setRecordToEdit] = useState<Product | null>(null);
 
-    const handleEdit = (record: DataType) => {
+    const handleEdit = (record: Product) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
@@ -63,7 +69,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
     };
 
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<Product> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -71,7 +77,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
         },
         {
             title: "نام محصول",
-            dataIndex: "ProductName",
+            dataIndex: "Name",
             key: "2",
         },
         {
@@ -81,9 +87,9 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
         },
         {
             title: "فعال/غیر فعال ",
-            dataIndex: "ConfirmedRequestCode",
+            dataIndex: "Is_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked />,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "کد محصول",
@@ -125,7 +131,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                 <Table
                     className="mt-6"
                     columns={columns}
-                    dataSource={data}
+                    dataSource={addIndexToData(data?.records)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -209,7 +215,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="year"
+                                name="Name"
                                 label="نام"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
@@ -219,7 +225,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="establishment"
+                                name=""
                                 label="دسته بندی محصول"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
@@ -231,7 +237,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                             <Form.Item
                                 labelCol={{ span: 24 }}
                                 wrapperCol={{ span: 24 }}
-                                name="establishment"
+                                name="Is_Active"
                                 label="فعال/غیر فعال"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
@@ -243,21 +249,3 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
         </>
     )
 }
-
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        ProductName: "  بنزین پیرولیز",
-        TrackingCode: "خام",
-        ConfirmedRequestCode: "123",
-    },
-    {
-        key: "2",
-        Row: 2,
-        ProductName: "   بنزین پیرولیز",
-        TrackingCode: "خام",
-        ConfirmedRequestCode: "456",
-    },
-];

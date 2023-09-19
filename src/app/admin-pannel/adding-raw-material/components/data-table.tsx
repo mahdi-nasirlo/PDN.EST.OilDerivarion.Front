@@ -20,7 +20,7 @@ interface DataType {
     TestInvoice: string;
 }
 
-export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({setModalVisible}: { setModalVisible: any }) {
 
     //حذف
 

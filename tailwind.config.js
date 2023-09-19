@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors');
+const theme = require("./theme/themeConfig");
 
 module.exports = {
   important: true,
@@ -13,7 +14,7 @@ module.exports = {
     colors: {
       ...colors,
       primary: {
-        500: "#18948A",
+          500: theme.token.colorPrimary,
       },
       secondary: {
         500: "#FFA133",

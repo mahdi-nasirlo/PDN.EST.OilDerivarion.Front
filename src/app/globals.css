@@ -74,6 +74,10 @@
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("/fonts/iransans/ttf/IRANSansWeb.ttf") format("truetype");
 }
 
+.ant-btn-primary {
+    @apply bg-primary-500 !important
+}
+
 body {
     font-family: IRANSans !important;
 }
@@ -129,6 +133,23 @@ body {
     /* background-color: theme("backgroundColor.gray.50") !important; */
     border-radius: 8px !important;
     text-align: right !important;
+}
+
+.ant-input {
+    @apply lg:py-[10px] !important
+}
+
+.ant-btn {
+    height: unset !important;
+    @apply lg:px-6 lg:py-3 !important
+}
+
+.ant-select {
+    height: auto !important;
+}
+
+.ant-select-selector {
+    @apply h-full lg:py-[4.2px] !important;
 }
 
 .ant-select:not(.ant-select-customize-input)

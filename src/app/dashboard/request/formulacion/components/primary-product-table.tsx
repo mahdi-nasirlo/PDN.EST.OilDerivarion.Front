@@ -106,7 +106,7 @@ export default function PrimaryProductTable({data, loading = false, mute, setDat
         <Table loading={loading || isDeleting} className={"mt-6"} pagination={false} columns={columns}
                dataSource={addIndexToData(data) || []}
                scroll={{x: 1500, y: 300}}/>
-        <ConfirmDeleteModal setOpen={setIsDeleteModalVisible} open={isDeleteModalVisible}
+        <ConfirmDeleteModal title="مواد اولیه" setOpen={setIsDeleteModalVisible} open={isDeleteModalVisible}
                             handleDelete={handleDelete}/>
     </>
 }

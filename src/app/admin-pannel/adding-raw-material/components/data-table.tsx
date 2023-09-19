@@ -1,10 +1,14 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import useSWR from "swr";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 interface DataType {
     key: string;
@@ -16,14 +20,14 @@ interface DataType {
     TestInvoice: string;
 }
 
-export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({setModalVisible}: { setModalVisible: any }) {
 
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<Material | null>(null);
 
-    const handleDelete = (record: DataType) => {
+    const handleDelete = (record: Material) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
@@ -45,9 +49,9 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
     //ادیت
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<DataType | null>(null);
+    const [recordToEdit, setRecordToEdit] = useState<Material | null>(null);
 
-    const handleEdit = (record: DataType) => {
+    const handleEdit = (record: Material) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
@@ -62,7 +66,20 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
     };
 
 
-    const columns: ColumnsType<DataType> = [
+    const {data: material, isLoading: ldMaterial} = useSWR<{
+        records: Material[],
+        count: number
+    }>("/Material/GetPage", url => listFetcher(url, {
+        arg: {
+            "name": null,
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 10000
+        }
+    }))
+
+
+    const columns: ColumnsType<Material> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -70,7 +87,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
         },
         {
             title: "نام ماده اولیه",
-            dataIndex: "NameRawMaterial",
+            dataIndex: "Name",
             key: "2",
         },
         {
@@ -82,7 +99,7 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
             title: "فعال/غیر فعال",
             dataIndex: "ConfirmedRequestCode",
             key: "4",
-            render: (e, record) => <Switch defaultChecked />,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
         },
         {
             title: "کد ماده",
@@ -126,8 +143,9 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                 </div>
                 <Table
                     className="mt-6"
+                    loading={ldMaterial}
                     columns={columns}
-                    dataSource={data}
+                    dataSource={addIndexToData(material?.records)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -143,37 +161,8 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
                 />
             </div>
             {/* جذف */}
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
-                title="حذف ماده اولیه"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این ماده اولیه مطمئن هستید؟</p>
-            </Modal>
+            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
+            }} title="مواد اولیه"/>
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -267,24 +256,3 @@ export default function PrimaryAddRawMaterialTable({ setModalVisible }: { setMod
         </>
     )
 }
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        NameRawMaterial: "بنزین پیرولیز",
-        UnitMeasurement: "گرم",
-        ConfirmedRequestCode: "",
-        MaterialCode: "123456",
-        TestInvoice: "123",
-    },
-    {
-        key: "2",
-        Row: 2,
-        NameRawMaterial: "بنزین پیرولیز",
-        UnitMeasurement: "گرم",
-        ConfirmedRequestCode: "",
-        MaterialCode: "123456",
-        TestInvoice: "123",
-    },
-];

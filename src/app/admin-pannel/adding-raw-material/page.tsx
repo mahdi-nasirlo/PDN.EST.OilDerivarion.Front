@@ -1,9 +1,9 @@
 "use client";
 
 import React, {useState} from 'react'
-import PrimaryAddRawMaterialForm from './components/primary-add-raw-material-form';
-import PrimaryAddRawMaterialTable from './components/primary-add-raw-material-table';
-import PrimaryAddRawMaterialModal from './components/primary-add-raw-material-modal';
+import FilterForm from './components/filter-form';
+import DataTable from './components/data-table';
+import CreateModal from './components/create-modal';
 
 export default function Page() {
 
@@ -11,9 +11,9 @@ export default function Page() {
 
     return (
         <>
-            <PrimaryAddRawMaterialForm />
-            <PrimaryAddRawMaterialTable setModalVisible={setModalVisible} />
-            <PrimaryAddRawMaterialModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <FilterForm/>
+            <DataTable setModalVisible={setModalVisible}/>
+            <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
         </>
     );
 }

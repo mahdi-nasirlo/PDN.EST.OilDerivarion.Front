@@ -1,10 +1,10 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
-import { useForm } from 'antd/es/form/Form';
+import {Button, Col, Form, Input, Modal, Row, Select} from 'antd'
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
+export default function CreateModal({modalVisible, setModalVisible}: { modalVisible: any, setModalVisible: any }) {
 
     const [form] = useForm()
 

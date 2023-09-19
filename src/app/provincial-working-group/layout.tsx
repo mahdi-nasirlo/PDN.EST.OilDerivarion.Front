@@ -57,6 +57,13 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
+  getMenuItem(
+    <Link href={"/provincial-working-group/visit-reports"}>
+      گزارشات بازدید
+    </Link>,
+    "visit-reports",
+    // <FolderPlusIcon width={16} height={16} />
+  ),
 
 
   // getMenuItem(

@@ -19,16 +19,6 @@ export default function Page() {
                 <PrimaryRequestsDetailsForm />
                 <PrimaryRequestsDetailsTable />
                 <Divider />
-
-                {/* <Spin spinning={isLoading}>
-                    <div className='flex gap-6'>
-                        {data?.choices?.map((choice) => <>
-                            <Button loading={isMutating} type="primary" className="w-full"
-                                onClick={() => changeStep(choice)}>{choice.label}
-                            </Button>
-                        </>)}
-                    </div>
-                </Spin> */}
                 <Button
                     size="large"
                     className="w-full bg-gray-50 text-warmGray-500">

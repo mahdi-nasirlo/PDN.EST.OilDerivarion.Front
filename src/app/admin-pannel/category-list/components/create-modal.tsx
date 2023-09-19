@@ -4,7 +4,7 @@ import { Button, Col, Form, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryProductCategoryModal({ setModalVisible, modalVisible }: { setModalVisible: any, modalVisible: any }) {
+export default function CreateModal({ setModalVisible, modalVisible }: { setModalVisible: any, modalVisible: any }) {
 
     const [form] = useForm()
 

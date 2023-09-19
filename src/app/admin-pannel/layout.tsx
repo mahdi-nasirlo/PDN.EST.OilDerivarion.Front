@@ -26,8 +26,8 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href={"/admin-pannel/product-category"} className="text-sm">لیست دسته بندی</Link>,
-        "product-category",
+        <Link href={"/admin-pannel/category-list"} className="text-sm">لیست دسته بندی</Link>,
+        "category-list",
         <FolderPlusIcon width={16} height={16} />
       ),
 

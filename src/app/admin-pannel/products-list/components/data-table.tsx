@@ -12,9 +12,9 @@ import { addIndexToData } from '../../../../../lib/addIndexToData';
 
 
 
-export default function PrimaryAddingProductTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
-    const { data } = useSWR<{ records: Product[], count: number }>("/Product/GetPage", (url) => listFetcher(url, {
+    const { data, isLoading } = useSWR<{ records: Product[], count: number }>("/Product/GetPage", (url) => listFetcher(url, {
         arg: {
             "name": null,
             "is_Active": true,
@@ -129,6 +129,7 @@ export default function PrimaryAddingProductTable({ setModalVisible }: { setModa
                     </Button>
                 </div>
                 <Table
+                    loading={isLoading}
                     className="mt-6"
                     columns={columns}
                     dataSource={addIndexToData(data?.records)}

@@ -32,8 +32,8 @@ const items: MenuProps["items"] = [
       ),
 
       getMenuItem(
-        <Link href={"/admin-pannel/adding-product"} className="text-sm">لیست محصولات</Link>,
-        "adding-product",
+        <Link href={"/admin-pannel/products-list"} className="text-sm">لیست محصولات</Link>,
+        "products-list",
         <FolderPlusIcon width={16} height={16} />
       ),
 

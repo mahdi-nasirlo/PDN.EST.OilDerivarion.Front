@@ -139,6 +139,10 @@ body {
     @apply lg:py-[10px] !important
 }
 
+.ant-btn-dangerous {
+    @apply bg-red-500 text-white !important
+}
+
 .ant-btn {
     height: unset !important;
     @apply lg:px-6 lg:py-3 !important

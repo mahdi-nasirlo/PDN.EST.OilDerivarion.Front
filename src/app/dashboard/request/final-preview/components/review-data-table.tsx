@@ -52,12 +52,17 @@ export default function ReviewDataTable() {
             title: "عملیات",
             key: "عملیات",
             render: (_, record) => (
-                <Button onClick={() => {
-                    setOpen(true)
-                    setDeleteUid(record.Uid)
-                }} danger type="text">
-                    حذف
-                </Button>
+                <>
+                    <Button
+                        onClick={() => {
+                            setOpen(true)
+                            setDeleteUid(record.Uid)
+                        }}
+                        type="text"
+                        className='text-red-500 font-bold'>
+                        حذف
+                    </Button>
+                </>
             ),
         },
     ];

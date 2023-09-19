@@ -1,9 +1,13 @@
 "use client";
 
 
-import { Table, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import {Table, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
 import React from 'react'
+import useSWR from "swr";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {State} from "../../../../../interfaces/State";
 
 
 interface DataType {
@@ -14,7 +18,19 @@ interface DataType {
 }
 
 
-export default function PrimaryProvinceTable() {
+export default function DataTable() {
+
+    const {data: state, isLoading: ldState} = useSWR<{
+        count: number,
+        records: State[]
+    }>("/State/GetPage", url => listFetcher(url, {
+        arg: {
+            "name": null,
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 100000
+        }
+    }))
 
 
     const columns: ColumnsType<DataType> = [
@@ -25,7 +41,7 @@ export default function PrimaryProvinceTable() {
         },
         {
             title: "استان",
-            dataIndex: "NameRawMaterial",
+            dataIndex: "Name",
             key: "2",
         },
         {
@@ -43,8 +59,9 @@ export default function PrimaryProvinceTable() {
             </div>
             <Table
                 className="mt-6"
+                loading={ldState}
                 columns={columns}
-                dataSource={data}
+                dataSource={addIndexToData(state?.records)}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: true,

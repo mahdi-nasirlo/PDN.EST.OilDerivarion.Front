@@ -1,11 +1,11 @@
-import type {MenuProps} from "antd";
-import {Button, ConfigProvider, Divider, Grid, Space} from "antd";
-import Layout, {Content} from "antd/es/layout/layout";
-import React, {useEffect, useState} from "react";
+import type { MenuProps } from "antd";
+import { Button, ConfigProvider, Divider, Grid, Space } from "antd";
+import Layout, { Content } from "antd/es/layout/layout";
+import React, { useEffect, useState } from "react";
 import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import LayoutBreadcrumb from "./breadcrumb";
-import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import StyledComponentsRegistry from "../../../lib/AntdRegistry";
 import theme from "../../../theme/themeConfig";
 import fa_IR from "antd/locale/fa_IR";
@@ -19,9 +19,9 @@ import {
     UserOutlined,
     VideoCameraOutlined
 } from "@ant-design/icons";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const {useBreakpoint} = Grid;
+const { useBreakpoint } = Grid;
 
 const items: MenuProps['items'] = [
     UserOutlined,
@@ -97,13 +97,13 @@ export default function AppLayout({
                                     style={contentStyle}>
                                     <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
                                         <div className="flex justify-between items-center">
-                                            <LayoutBreadcrumb/>
+                                            <LayoutBreadcrumb />
 
-                                            <Button type="dashed" size="large" onClick={() => router.back()}>
+                                            <Button type="default" size="large" onClick={() => router.back()}>
                                                 بازگشت
                                             </Button>
                                         </div>
-                                        <Divider className="my-8"/>
+                                        <Divider className="my-8" />
                                         {children}
                                     </Layout>
                                 </Content>

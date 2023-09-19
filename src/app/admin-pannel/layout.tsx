@@ -26,13 +26,13 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href={"/admin-pannel/product-category"}>لیست دسته بندی</Link>,
+        <Link href={"/admin-pannel/product-category"} className="text-sm">لیست دسته بندی</Link>,
         "product-category",
         <FolderPlusIcon width={16} height={16} />
       ),
 
       getMenuItem(
-        <Link href={"/admin-pannel/adding-product"}>لیست محصولات</Link>,
+        <Link href={"/admin-pannel/adding-product"} className="text-sm">لیست محصولات</Link>,
         "adding-product",
         <FolderPlusIcon width={16} height={16} />
       ),
@@ -55,17 +55,17 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href={"/admin-pannel/management-user"}>لیست کاربران</Link>,
+        <Link href={"/admin-pannel/management-user"} className="text-sm">لیست کاربران</Link>,
         "management-user",
         <FolderPlusIcon width={16} height={16} />,
       ),
       getMenuItem(
-        <Link href={"/admin-pannel/confirm-changes"}>ثبت تغییرات</Link>,
+        <Link href={"/admin-pannel/confirm-changes"} className="text-sm">ثبت تغییرات</Link>,
         "confirm-changes",
         <FolderPlusIcon width={16} height={16} />,
       ),
       getMenuItem(
-        <Link href={"/admin-pannel/management-user-role"}>نقش کاربران</Link>,
+        <Link href={"/admin-pannel/management-user-role"} className="text-sm">نقش کاربران</Link>,
         "management-user-role",
         <FolderPlusIcon width={16} height={16} />
       ),

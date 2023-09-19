@@ -1,21 +1,21 @@
 "use client";
 
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {Category} from "../../../../../interfaces/category";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { Category } from "../../../../../interfaces/category";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
-export default function PrimaryProductCategoryTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
-    const {data: category, isLoading: ldCategory} = useSWR<{
+    const { data: category, isLoading: ldCategory } = useSWR<{
         records: Category[],
         count: number
     }>("/ProductCategory/GetPage", (url) => listFetcher(url, {
@@ -86,7 +86,7 @@ export default function PrimaryProductCategoryTable({setModalVisible}: { setModa
             title: "فعال/غیر فعال ",
             dataIndex: "ConfirmedRequestCode",
             key: "3",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
 
         {
@@ -111,7 +111,7 @@ export default function PrimaryProductCategoryTable({setModalVisible}: { setModa
                         type="primary"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex ">
                             افزودن دسته بندی
                         </span>
@@ -140,7 +140,7 @@ export default function PrimaryProductCategoryTable({setModalVisible}: { setModa
             {/* جذف */}
             <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
             }}
-                                title="دسته بندی"/>
+                title="دسته بندی" />
             {/* ویرایش */}
             <Modal
                 width={800}

@@ -27,16 +27,28 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
+
+  getMenuItem(
+    <Link href={"/provincial-working-group/request-list"}>
+      لیست درخواست ها
+    </Link>,
+    "request-list",
+    // <FolderPlusIcon width={16} height={16} />
+  ),
+  { type: "divider" },
+
+
   getMenuItem(
     <Link href={"/provincial-working-group/Invitations"}>
       دعوت نامه ها
     </Link>,
-    "requests-list",
+    "Invitations",
     // <FolderPlusIcon width={16} height={16} />
   ),
 
-
   { type: "divider" },
+
+
 
   // getMenuItem(
   //   "پیشخوان",

@@ -4,7 +4,7 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 
-export default function PrimaryAddingProductForm() {
+export default function FilterForm() {
 
     return (
         <div className="box-border w-full p-6">

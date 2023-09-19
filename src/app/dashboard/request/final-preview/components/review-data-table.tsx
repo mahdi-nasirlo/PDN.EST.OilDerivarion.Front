@@ -80,7 +80,7 @@ export default function ReviewDataTable() {
                 dataSource={addIndexToData(data?.records)}
                 pagination={false}
             />
-            <ConfirmDeleteModal setOpen={setOpen} open={open} handleDelete={handleDelete} title={"محصول"} />
+            <ConfirmDeleteModal title="محصول" setOpen={setOpen} open={open} handleDelete={handleDelete} />
         </>
     )
 }

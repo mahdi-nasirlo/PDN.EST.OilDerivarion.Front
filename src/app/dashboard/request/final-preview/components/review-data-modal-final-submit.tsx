@@ -1,12 +1,12 @@
 "use client";
 
 
-import { Button, Col, Form, Modal, Row } from 'antd';
-import { useRouter } from 'next/navigation';
+import {Button, Col, Form, Modal, Row} from 'antd';
+import {useRouter} from 'next/navigation';
 import React from 'react'
 
 export default function ReviewDataModalFinalSubmit(
-    { modalVisibleFinalSubmit, setModalVisibleFinalSubmit }:
+    {modalVisibleFinalSubmit, setModalVisibleFinalSubmit}:
         { modalVisibleFinalSubmit: any, setModalVisibleFinalSubmit: any }
 ) {
 
@@ -26,8 +26,8 @@ export default function ReviewDataModalFinalSubmit(
             <Modal
                 width={600}
                 title={<div className="text-base">اعلان</div>}
-                visible={modalVisibleFinalSubmit}
-                onCancel={closeModal}
+                open={modalVisibleFinalSubmit}
+                closeIcon={false}
                 footer={[
                     <Row key={"box"} gutter={[32, 16]} className="my-2">
                         <Col xs={24} md={24}>
@@ -36,9 +36,9 @@ export default function ReviewDataModalFinalSubmit(
                                 className="w-full"
                                 type="primary"
                                 onClick={handleFormSubmit}
-                                key={"submit"} >
+                                key={"submit"}>
                                 ثبت
-                            </Button >
+                            </Button>
                         </Col>
                     </Row>
                 ]}

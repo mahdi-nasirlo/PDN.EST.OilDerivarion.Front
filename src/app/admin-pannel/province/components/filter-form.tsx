@@ -1,11 +1,11 @@
 "use client";
 
 
-import { Button, Col, Form, Row, Select } from 'antd';
+import {Button, Col, Form, Row, Select} from 'antd';
 import React from 'react'
 
 
-export default function PrimaryProvinceForm() {
+export default function FilterForm() {
     return (
         <div className="box-border w-full p-6">
             <Form name="form_item_path" layout="vertical">
@@ -15,7 +15,7 @@ export default function PrimaryProvinceForm() {
                             name="year-establishment"
                             label="استان"
                         >
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Select size="large" placeholder="انتخاب کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>

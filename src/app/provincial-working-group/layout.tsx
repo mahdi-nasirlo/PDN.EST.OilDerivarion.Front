@@ -35,6 +35,15 @@ const items: MenuProps["items"] = [
     "request-list",
     // <FolderPlusIcon width={16} height={16} />
   ),
+
+  getMenuItem(
+    <Link href={"/provincial-working-group/request-details"}>
+      جزئیات درخواست ها
+    </Link>,
+    "request-details",
+    // <FolderPlusIcon width={16} height={16} />
+  ),
+
   { type: "divider" },
 
 

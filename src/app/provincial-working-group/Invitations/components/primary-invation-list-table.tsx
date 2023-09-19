@@ -1,19 +1,22 @@
-import { Space, Table, Typography } from "antd";
-import Link from "next/link";
+"use client";
+
+
+import { Button, Space, Table, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
 import React from "react";
 
 interface DataType {
   key: string;
   Row: number;
-  name: string;
+  ProductName: string;
   TrackingCode: string;
-  ConfirmedRequestCode: string;
   DateRegistration: string;
-  ActivityStatus: string[];
-  MaterialName: string;
+  MaterialName: string[];
 }
 
-export default function PrimaryInvationListTable() {
+export default function PrimaryInvationListTable({ setModalVisible }: { setModalVisible: any }) {
+
+
   //   const { data, isLoading } = useSWR<GetPage_ExeManager>(
   //     "/Producer/GetPage_ExeManager",
   //     (url) =>
@@ -26,25 +29,30 @@ export default function PrimaryInvationListTable() {
   //   );
 
   // : ColumnsType<DataType>
-  const columns = [
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const columns: ColumnsType<DataType> = [
     {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
     },
     {
-      title: "نام واحد تولیدی ",
+      title: "نام واحد تولیدی",
       dataIndex: "ProductName",
       key: "2",
     },
     {
-      title: "کدارسال کننده درخواست",
+      title: "ارسال کننده درخواست",
       dataIndex: "TrackingCode",
       key: "3",
     },
     {
       title: "زمان بازدید",
-      dataIndex: "ConfirmedRequestCode",
+      dataIndex: "MaterialName",
       key: "4",
     },
     {
@@ -52,51 +60,14 @@ export default function PrimaryInvationListTable() {
       dataIndex: "DateRegistration",
       key: "5",
     },
-    // {
-    //   title: "جزئیات",
-    //   dataIndex: "ActivityStatus",
-    //   key: "6",
-    //   // render: (_, {ActivityStatus}) => (
-    //   //     <>
-    //   //         {ActivityStatus.map((activityStatus) => {
-    //   //             let color;
-    //   //             switch (activityStatus) {
-    //   //                 case 'دریافت استاندارد':
-    //   //                     color = 'green';
-    //   //                     break;
-    //   //                 case 'عدم دریافت استاندارد':
-    //   //                     color = 'red';
-    //   //                     break;
-    //   //                 case 'در حال آزمایش':
-    //   //                     color = 'yellow';
-    //   //                     break;
-    //   //                 case 'loser':
-    //   //                     color = 'volcano';
-    //   //                     break;
-    //   //                 default:
-    //   //                     color = 'geekblue'; // Default color if none of the conditions match
-    //   //                     break;
-    //   //             }
-    //   //
-    //   //             return (
-    //   //                 <Tag color={color} key={activityStatus}>
-    //   //                     {activityStatus.toUpperCase()}
-    //   //                 </Tag>
-    //   //             );
-    //   //         })}
-    //   //
-    //   //     </>
-    //   // ),
-    // },
-
     {
       title: "جزئیات",
       key: "جزئیات",
       render: () => (
         <Space size="middle">
-          <Link href={""} className="action-btn-delete">
+          <Button type="link" onClick={() => showModal()} className="text-primary-500 font-bold">
             مشاهده دعوت نامه
-          </Link>
+          </Button>
         </Space>
       ),
     },
@@ -105,12 +76,12 @@ export default function PrimaryInvationListTable() {
   return (
     <div className="box-border w-full p-6 mt-8">
       <Typography className="text-right text-[16px] font-normal">
-        لیست درخواست ها
+        لیست درخواست های منقضی شده
       </Typography>
       <Table
         className="mt-8"
         columns={columns}
-        dataSource={[]}
+        dataSource={data}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,
@@ -131,22 +102,18 @@ export default function PrimaryInvationListTable() {
 const data: DataType[] = [
   {
     key: "1",
-    ConfirmedRequestCode: "fhsdhfksjhfkdshfs",
     Row: 1,
-    name: "نفتا",
-    TrackingCode: "02462556215",
-    MaterialName: "امیرحسام خالویی",
-    DateRegistration: "1400/01/01",
-    ActivityStatus: ["1400/01/01", " ", "08:00"],
+    ProductName: "نام شرکت تولیدی تست",
+    TrackingCode: "امیر خالویی",
+    MaterialName: ["1400/01/01", " ", "08:00"],
+    DateRegistration: "5 روز",
   },
   {
     key: "2",
     Row: 2,
-    name: "بنزین پیرولیز",
-    ConfirmedRequestCode: "fhsdhfksjhfkdshfs",
-    TrackingCode: "02462556215",
-    MaterialName: "امیرحسام خالویی",
-    DateRegistration: "1400/01/01",
-    ActivityStatus: ["1400/01/01", " ", "11:00"],
+    ProductName: "نام شرکت تست",
+    TrackingCode: "امیرحسام خالویی",
+    MaterialName: ["1400/10/24", " ", "09:00"],
+    DateRegistration: "8 روز",
   },
 ];

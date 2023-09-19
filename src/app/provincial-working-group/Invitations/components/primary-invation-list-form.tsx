@@ -10,13 +10,13 @@ export default function PrimaryInvationListForm() {
         <Form name="form_item_path" layout="vertical">
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="year-establishment" label=" نام واحد تولیدی ">
+              <Form.Item name="year-establishment" label="نام واحد تولیدی ">
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item name="lastName" label="ارسال کننده درخواست">
-                <Input size="large" placeholder="وارد کنید" />
+                <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>
           </Row>

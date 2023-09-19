@@ -55,13 +55,12 @@ export default async function Home() {
         </div>
         <div className="flex">
           <Typography className="text-1xl">ورود به پنل</Typography>
-
           <Typography>
             <Link
               className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
               href="/provincial-working-group"
             >
-              پنل کار کروه استان
+              پنل کار گروه استان
             </Link>
           </Typography>
         </div>

@@ -1,30 +1,38 @@
 "use client";
 
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Form, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import useSWR from "swr";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {Category} from "../../../../../interfaces/category";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
-interface DataType {
-    key: string;
-    Row: number;
-    ProductName: string;
-    ConfirmedRequestCode: string;
-    ActivityStatus: string[];
-}
+export default function PrimaryProductCategoryTable({setModalVisible}: { setModalVisible: any }) {
 
-
-export default function PrimaryProductCategoryTable({ setModalVisible }: { setModalVisible: any }) {
+    const {data: category, isLoading: ldCategory} = useSWR<{
+        records: Category[],
+        count: number
+    }>("/ProductCategory/GetPage", (url) => listFetcher(url, {
+        arg: {
+            "name": null,
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 100000
+        }
+    }))
 
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<Category | null>(null);
 
-    const handleDelete = (record: DataType) => {
+    const handleDelete = (record: Category) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
@@ -46,9 +54,9 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
     //ادیت
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<DataType | null>(null);
+    const [recordToEdit, setRecordToEdit] = useState<Category | null>(null);
 
-    const handleEdit = (record: DataType) => {
+    const handleEdit = (record: Category) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
@@ -63,7 +71,7 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
     };
 
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<Category> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -71,14 +79,14 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
         },
         {
             title: "نام دسته بندی",
-            dataIndex: "ProductName",
+            dataIndex: "Name",
             key: "2",
         },
         {
             title: "فعال/غیر فعال ",
             dataIndex: "ConfirmedRequestCode",
             key: "3",
-            render: (e, record) => <Switch defaultChecked />,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
         },
 
         {
@@ -103,7 +111,7 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
                         type="primary"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24} />
+                        <PlusIcon width={24} height={24}/>
                         <span className="flex ">
                             افزودن دسته بندی
                         </span>
@@ -113,7 +121,8 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
                 <Table
                     className="mt-6"
                     columns={columns}
-                    dataSource={data}
+                    loading={ldCategory}
+                    dataSource={addIndexToData(category?.records)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -129,37 +138,9 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
                 />
             </div>
             {/* جذف */}
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
-                title="حذف دسته بندی محصول"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این دسته بندی محصول مطمئن هستید؟</p>
-            </Modal>
+            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
+            }}
+                                title="دسته بندی"/>
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -217,20 +198,3 @@ export default function PrimaryProductCategoryTable({ setModalVisible }: { setMo
 }
 
 
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        ProductName: "   دسته اول",
-        ConfirmedRequestCode: "علی امیری",
-        ActivityStatus: [" غیرفعال"],
-    },
-    {
-        key: "2",
-        Row: 2,
-        ProductName: "   دسته دوم ",
-        ConfirmedRequestCode: "امیرحسام خالویی",
-        ActivityStatus: ["  در انتظار بررسی"],
-    },
-];

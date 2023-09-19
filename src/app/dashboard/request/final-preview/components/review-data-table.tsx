@@ -1,15 +1,15 @@
-import { Button, Table } from 'antd'
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {Button, Table} from 'antd'
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import useSWR from "swr";
-import { GetPage_ExeManager } from "../../../../../../interfaces/producer";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
-import { getCookie } from "cookies-next";
+import {GetPage_ExeManager} from "../../../../../../interfaces/producer";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import {getCookie} from "cookies-next";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { Product } from "../../../../../../interfaces/requestDetail";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {Product} from "../../../../../../interfaces/requestDetail";
 
 
 export default function ReviewDataTable() {
@@ -80,7 +80,7 @@ export default function ReviewDataTable() {
                 dataSource={addIndexToData(data?.records)}
                 pagination={false}
             />
-            <ConfirmDeleteModal setOpen={setOpen} open={open} handleDelete={handleDelete} />
+            <ConfirmDeleteModal title="محصول" setOpen={setOpen} open={open} handleDelete={handleDelete}/>
         </>
     )
 }

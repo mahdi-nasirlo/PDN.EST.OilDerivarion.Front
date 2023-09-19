@@ -205,14 +205,7 @@ body {
 
 /* table styles */
 
-:where(.css-dev-only-do-not-override-xam6sq).ant-table-wrapper
-.ant-table-thead
-> tr
-> th,
-:where(.css-dev-only-do-not-override-xam6sq).ant-table-wrapper
-.ant-table-thead
-> tr
-> td {
+.ant-table-thead .ant-table-cell {
     background: theme("backgroundColor.primary.500") !important;
     color: theme("colors.white") !important;
 }
@@ -361,9 +354,11 @@ body {
 
 }
 
-
-/*مدیر کل استان*/
-
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+.ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline{
+background-color:theme("backgroundColor.white") !important;
+margin-right: 24px !important;
+}
 
 /*.cahrt-btn {*/
 /*    background-color: theme("colors.orange.500");*/

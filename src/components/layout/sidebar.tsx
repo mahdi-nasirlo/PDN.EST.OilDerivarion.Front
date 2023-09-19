@@ -47,7 +47,7 @@ export default function LayoutSidebar({
                         padding: "0 16px",
                         paddingTop: "40px",
                         height: "100%",
-                    }} className="px-4" />
+                    }} className="px-4 overflow-auto" />
                     :
                     <Drawer title="سازمان ملی استاندارد" placement="right" width={300} onClose={onClose} open={open} >
                         <CommonMenu style={{ height: "100%" }} className="" />

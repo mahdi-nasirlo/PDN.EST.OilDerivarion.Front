@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Col, Modal, Row } from "antd";
+import {Button, Col, Modal, Row} from "antd";
 
-function ConfirmDeleteModal({ open, setOpen, handleDelete }: {
+function ConfirmDeleteModal({open, setOpen, handleDelete, title}: {
     open: boolean,
     setOpen: (arg: boolean) => void,
-    handleDelete: () => void
+    handleDelete: () => void,
+    title: string
 }) {
     return (
         <Modal
@@ -14,9 +15,10 @@ function ConfirmDeleteModal({ open, setOpen, handleDelete }: {
                     <Col xs={24} md={12}>
                         <Button
                             size="large"
-                            className="w-full bg-red-500"
+                            className="w-full"
                             type="primary"
                             onClick={handleDelete}
+                            danger
                             key={"submit"}>
                             حذف
                         </Button>
@@ -34,13 +36,13 @@ function ConfirmDeleteModal({ open, setOpen, handleDelete }: {
                     </Col>
                 </Row>
             ]}
-            title="حذف مواد اولیه یا محصول"
-            visible={open}
+            title={title}
+            open={open}
             onCancel={() => {
                 setOpen(false)
             }}
         >
-            <p>آیا از حذف این مواد اولیه یا محصول مطمئن هستید؟</p>
+            <p>آیا از حذف این {title} مطمئن هستید؟</p>
         </Modal>
     );
 }

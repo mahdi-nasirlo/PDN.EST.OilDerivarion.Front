@@ -1,16 +1,17 @@
 "use client";
 
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ReviewDataTable from "@/app/dashboard/request/final-preview/components/review-data-table";
-import {Button, Checkbox, Divider, Form} from "antd";
+import { Button, Checkbox, Divider, Form } from "antd";
 import ReviewDataModalAcceptAgreement from "./components/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit from "./components/review-data-modal-final-submit";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {getCookie} from "cookies-next";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {useRouter} from "next/navigation";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { getCookie } from "cookies-next";
 
 
 export default function Page() {
@@ -40,13 +41,13 @@ export default function Page() {
         }
     };
 
-    const {trigger, isMutating} = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
 
 
     return (
         <>
-            <ReviewDataTable/>
-            <Divider/>
+            <ReviewDataTable />
+            <Divider />
             <Form
                 form={form}
                 name="register"
@@ -68,7 +69,7 @@ export default function Page() {
                         خوانده و می پذیرم!
                     </Checkbox>
                 </Form.Item>
-                <Divider/>
+                <Divider />
                 <div className="flex gap-6">
                     <Button
                         className="w-full management-info-form-submit btn-filter"
@@ -76,15 +77,19 @@ export default function Page() {
                         type="primary"
                         htmlType="submit"
                     >
-                        <span className="flex gap-3 justify-center ">ثبت</span>
+                        <span className="flex gap-3 justify-center ">ثبت و تایید نهایی</span>
                     </Button>
                     <Button
+                        disabled
                         className="w-full bg-gray-50 flex items-center justify-center"
                         size="large"
-                        icon={<PlusIcon width={24} height={24}/>}
-                        onClick={() => router.push("/dashboard/request/formulacion")}
+                        icon={<PlusIcon width={24} height={24} />}
+                    // onClick={
+                    //     () => router.push("/dashboard/request/formulacion")
+                    // }
                     >
-                        افزودن محصول
+                        <Link className="w-full" href={"/dashboard/request/formulacion"} >
+                            افزودن مواد اولیه و محصول جدید                        </Link>
                     </Button>
                 </div>
             </Form>

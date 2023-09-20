@@ -1,10 +1,10 @@
 "use client"
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table'
-import React, { useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table'
+import React, {useState} from 'react'
 
 interface DataType {
     key: string;
@@ -14,6 +14,8 @@ interface DataType {
     phoneLaboratory: string;
     code: string;
     Address: string;
+    fax: string
+    tel: string
 }
 export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVisible: any }) {
 
@@ -61,35 +63,46 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
     };
 
     const columns: ColumnsType<DataType> = [
-        {
-            title: "ردیف",
-            dataIndex: "Row",
-            key: "1",
-        },
+        // {
+        //     title: "ردیف",
+        //     dataIndex: "Row",
+        //     key: "1",
+        // },
         {
             title: "نام آزمایشگاه",
             dataIndex: "NameLaboratory",
             key: "2",
         },
         {
-            title: "نام مدیرعامل",
+            title: "استان مربوطه",
             dataIndex: "NameCEO",
             key: "3",
         },
         {
-            title: "شماره تلفن آزمایشگاه",
+            title: "شماره گواهینامه",
             dataIndex: "phoneLaboratory",
             key: "4",
         },
         {
-            title: "کد",
+            title: "تاریخ گواهینامه",
             dataIndex: "code",
             key: "5",
         },
         {
+            title: "تلفن",
+            dataIndex: "fax",
+            key: "6",
+        },
+        {
+            title: "فکس",
+            dataIndex: "fax",
+            key: "7",
+        },
+
+        {
             title: "آدرس",
             dataIndex: "Address",
-            key: "6",
+            key: "8",
         },
         {
             title: "عملیات",
@@ -378,21 +391,25 @@ const data: DataType[] = [
     {
         key: "1",
         Row: 1,
-        NameLaboratory: "رازی",
-        NameCEO: "امیر خالویی",
-        phoneLaboratory: "021326846",
-        code: "32154421",
-        Address: "تهران, سهروردی شمالی, هویزه",
-
+        NameLaboratory: "پژوهشگاه صنعت نفت",
+        NameCEO: "تهران",
+        phoneLaboratory: "T/3188",
+        code: "1402/06/21",
+        tel: "02148255173",
+        fax: "02144739712",
+        Address: "تهران,بلوار غربی مجموعه ورزشی آزادی,پژوهشگاه صنعت نفت کدپستی:1485613111",
     },
     {
         key: "2",
         Row: 2,
-        NameLaboratory: "رازی",
-        NameCEO: "امیرحسام خالویی",
-        phoneLaboratory: "021326846",
-        code: "32154421",
-        Address: "تهران, سهروردی شمالی, هویزه",
-
-    },
+        NameLaboratory: "نوین نت پارس (روغن)",
+        NameCEO: "تهران",
+        phoneLaboratory: "NACI/Lab/1457",
+        code: "1402/09/22",
+        tel: "٠٢١٨٨٥٢٢١٢٨",
+        fax: "02188522127",
+        Address: "تهران، خيابان شهيد بهشتي، خيابان شهيد صابونچي، كوچه" +
+            "مبيني، پلاك ،٣٤ آزمايشگاه نوين نت پارس كدپستي" +
+            "١٥٣٣٦٦٤٣٣٦1485613111",
+    }
 ];

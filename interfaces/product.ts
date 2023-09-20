@@ -2,6 +2,6 @@ export type Product = {
   Id: number;
   Uid: string;
   Name: string;
-  ProductCategory_Id: number;
+  ProductCategoryName: string;
   Is_Active: boolean;
 };

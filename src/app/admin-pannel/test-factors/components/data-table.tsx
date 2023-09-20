@@ -1,25 +1,34 @@
 "use client"
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Modal, Row, Space, Table, Typography } from 'antd'
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
-import { TableColumnsType } from "antd/lib";
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Modal, Row, Space, Switch, Table, Typography} from 'antd'
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import {TableColumnsType} from "antd/lib";
+import useSWR from "swr";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {TestItem} from "../../../../../interfaces/TestItem";
 
 
-interface DataType {
-    key: string;
-    Row: number;
-    factorsName: string;
-}
+export default function DataTable({setModalVisible}: { setModalVisible: any }) {
 
-export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalVisible: any }) {
-
+    const {isLoading: ldFactor, data: factors} = useSWR<{
+        count: number,
+        records: any[]
+    }>("/TestItem/GetPage", url => listFetcher(url, {
+        arg: {
+            "name": "",
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 10000
+        }
+    }))
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<DataType | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<TestItem | null>(null);
 
-    const handleDelete = (record: DataType) => {
+    const handleDelete = (record: TestItem) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
@@ -36,7 +45,7 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
         setModalVisible(true);
     };
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<TestItem> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -44,8 +53,36 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
         },
         {
             title: "نام فاکتور",
-            dataIndex: "factorsName",
+            dataIndex: "Name",
             key: "2",
+        },
+        {
+            title: "روش آزمون",
+            dataIndex: "TestMethod",
+            key: "3",
+        },
+        {
+            title: "مقدار تجدید پذیری",
+            dataIndex: "ReNewabillity_Value",
+            key: "4",
+        },
+        {
+            title: "تجدید پذیری",
+            dataIndex: "ReNewabillity",
+            key: "5",
+            render: (e, record) => "بله"
+        },
+        {
+            title: "مقیاس پذیری",
+            dataIndex: "Measure_Id",
+            key: "6",
+            render: (e, record) => "ppm"
+        },
+        {
+            title: "فعال/غیر فعال ",
+            dataIndex: "Is_Active",
+            key: "4",
+            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
         },
         {
             title: "جزئیات",
@@ -53,7 +90,7 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
             render: (_, record) => (
                 <Space size="middle">
                     <Button type="link" className={"text-red-500 font-bold"}
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                            onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
@@ -98,7 +135,7 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24} />
+                        <PlusIcon width={24} height={24}/>
                         <span className="flex  ">
                             افزودن فاکتور آزمون
                         </span>
@@ -107,8 +144,8 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
                 <Table
                     className="mt-6"
                     columns={columns}
-                    expandable={{ expandedRowRender: expandedRowRender }}
-                    dataSource={data}
+                    // expandable={{expandedRowRender: expandedRowRender}}
+                    dataSource={addIndexToData(factors?.records)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -158,16 +195,3 @@ export default function PrimaryTestFactorsTable({ setModalVisible }: { setModalV
     )
 }
 
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        factorsName: "امیرحسام",
-    },
-    {
-        key: "2",
-        Row: 2,
-        factorsName: "امیرحسام",
-    },
-];

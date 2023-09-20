@@ -1,6 +1,6 @@
 const theme = {
     token: {
-        fontFamily: "IRANSans",
+        fontFamily: "IRANSansfanum",
         fontSize: 16,
         colorPrimary: "#18948a",
         colorTextBase: "#111827",

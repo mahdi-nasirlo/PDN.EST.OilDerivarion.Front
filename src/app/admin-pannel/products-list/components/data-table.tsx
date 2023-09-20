@@ -1,20 +1,22 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import useSWR from 'swr';
-import { Product } from '../../../../../interfaces/product';
-import { listFetcher } from '../../../../../lib/server/listFetcher';
-import { addIndexToData } from '../../../../../lib/addIndexToData';
+import {Product} from '../../../../../interfaces/product';
+import {listFetcher} from '../../../../../lib/server/listFetcher';
+import {addIndexToData} from '../../../../../lib/addIndexToData';
 
 
+export default function DataTable({setModalVisible}: { setModalVisible: any }) {
 
-export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
-
-    const { data, isLoading } = useSWR<{ records: Product[], count: number }>("/Product/GetPage", (url) => listFetcher(url, {
+    const {data, isLoading} = useSWR<{
+        records: Product[],
+        count: number
+    }>("/Product/GetPage", (url) => listFetcher(url, {
         arg: {
             "name": null,
             "is_Active": true,
@@ -82,7 +84,7 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
         },
         {
             title: "نام دسته بندی",
-            dataIndex: "TrackingCode",
+            dataIndex: "ProductCategoryName",
             key: "3",
         },
         {

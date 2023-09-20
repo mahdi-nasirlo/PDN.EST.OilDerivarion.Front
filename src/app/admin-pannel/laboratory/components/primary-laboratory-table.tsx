@@ -5,6 +5,9 @@ import {Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table} fro
 import {useForm} from 'antd/es/form/Form';
 import {ColumnsType} from 'antd/es/table'
 import React, {useState} from 'react'
+import useSWR from "swr";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 
 interface DataType {
     key: string;
@@ -19,6 +22,18 @@ interface DataType {
 }
 export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVisible: any }) {
 
+
+    const {isLoading: ldFactor, data: factors} = useSWR<{
+        count: number,
+        records: any[]
+    }>("/Lab/GetPage", url => listFetcher(url, {
+        arg: {
+            "name": "",
+            "is_Active": true,
+            "fromRecord": 0,
+            "selectRecord": 10000
+        }
+    }))
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -70,17 +85,17 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
         // },
         {
             title: "نام آزمایشگاه",
-            dataIndex: "NameLaboratory",
+            dataIndex: "Name",
             key: "2",
         },
         {
             title: "استان مربوطه",
-            dataIndex: "NameCEO",
+            dataIndex: "StateName",
             key: "3",
         },
         {
             title: "شماره گواهینامه",
-            dataIndex: "phoneLaboratory",
+            dataIndex: "License_No",
             key: "4",
         },
         {
@@ -130,15 +145,15 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24} />
+                        <PlusIcon width={24} height={24}/>
                         <span className="flex">
                             افزودن آزمایشگاه
                         </span>
                     </Button>
                 </div>
                 <Table
-                    scroll={{ x: 1500, y: 300 }}
-                    dataSource={data || []}
+                    scroll={{x: 1500, y: 300}}
+                    dataSource={addIndexToData(factors?.records)}
                     className="mt-6"
                     columns={columns}
                     pagination={{

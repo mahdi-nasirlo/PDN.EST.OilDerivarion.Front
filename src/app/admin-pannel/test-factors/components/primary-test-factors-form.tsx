@@ -15,13 +15,23 @@ export default function PrimaryTestFactorsForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="نام ماده اولیه">
+                        <Form.Item name="lastName" label="مقیاس آزمون">
                             <Select size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="نام محصول">
+                        <Form.Item name="lastName" label="تجدید پذیری">
                             <Select size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="مقدار تجدید پذیری">
+                            <Input size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={24}>
+                        <Form.Item name="lastName" label="روش آزمون">
+                            <Input size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>

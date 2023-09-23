@@ -1,5 +1,5 @@
 import DisplayData from "@/app/dashboard/components/showData";
-import { Typography } from "antd";
+import {Typography} from "antd";
 import Link from "next/link";
 
 export default async function Home() {
@@ -57,10 +57,21 @@ export default async function Home() {
           <Typography className="text-1xl">ورود به پنل</Typography>
           <Typography>
             <Link
-              className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-              href="/provincial-working-group"
+                className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
+                href="/provincial-working-group"
             >
               پنل کار گروه استان
+            </Link>
+          </Typography>
+        </div>
+        <div className="flex">
+          <Typography className="text-1xl">ورود به پنل</Typography>
+          <Typography>
+            <Link
+                className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
+                href="/laboratory"
+            >
+              پنل آزمایشگاه
             </Link>
           </Typography>
         </div>

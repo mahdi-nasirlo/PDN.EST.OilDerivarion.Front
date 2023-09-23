@@ -73,7 +73,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             render: (e, record) => "بله"
         },
         {
-            title: "مقیاس پذیری",
+            title: "مقیاس آزمون",
             dataIndex: "Measure_Id",
             key: "6",
             render: (e, record) => "ppm"

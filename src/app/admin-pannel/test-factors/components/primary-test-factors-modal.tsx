@@ -1,10 +1,13 @@
 "use client"
 
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
-import { useForm } from 'antd/es/form/Form';
+import {Button, Col, Form, Input, Modal, Row, Select} from 'antd'
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible }: { setModalVisible: any, modalVisible: any }) {
+export default function PrimaryTestFactorsModal({setModalVisible, modalVisible}: {
+    setModalVisible: any,
+    modalVisible: any
+}) {
 
     const [form] = useForm()
 
@@ -82,12 +85,32 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
+                            labelCol={{span: 24}}
+                            wrapperCol={{span: 24}}
                             name="yea"
                             label="نام محصول"
                         >
-                            <Select size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{span: 24}}
+                            wrapperCol={{span: 24}}
+                            name="year"
+                            label="واحد تجدید پذیری "
+                        >
+                            <Input size="large" placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={24}>
+                        <Form.Item
+                            labelCol={{span: 24}}
+                            wrapperCol={{span: 24}}
+                            name="year"
+                            label="روش آزمون"
+                        >
+                            <Select size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>

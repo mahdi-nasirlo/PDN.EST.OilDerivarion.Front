@@ -77,12 +77,22 @@ export default function CreateModal({ modalVisible, setModalVisible }: { modalVi
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            name="establishment"
+                            name="Is_Active"
                             label="فعال/غیر فعال"
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year-establishment"
+                            label="کد محصول "
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="Test"

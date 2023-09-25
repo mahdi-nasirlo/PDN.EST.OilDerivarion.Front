@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Row, Select } from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React, { useState } from 'react'
 
 export default function FilterForm() {
@@ -12,7 +12,7 @@ export default function FilterForm() {
     };
 
     return (
-        <div className="box-border w-full p-6">
+        <div className="box-border w-full p-6 ">
             <Form name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
@@ -52,12 +52,23 @@ export default function FilterForm() {
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                name="establishment"
-                                label="میزان دانسیته"
+                                name="top"
+                                label="حد بالا دانسیته"
                             >
-                                <Select
+                                <Input
                                     size="large"
-                                    placeholder="انتخاب کنید"
+                                    placeholder="وارد کنید"
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="bottom"
+                                label="حد پایین دانسیته"
+                            >
+                                <Input
+                                    size="large"
+                                    placeholder="وارد کنید"
                                 />
                             </Form.Item>
                         </Col>

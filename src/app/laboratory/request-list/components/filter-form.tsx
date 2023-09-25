@@ -1,9 +1,11 @@
 "use client";
 
-import {Button, Col, Form, Input, Row, Select} from 'antd';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import React from 'react'
 
-export default function PrimaryLaboratoryListForm() {
+
+
+export default function FilterForm() {
 
     return (
         <>
@@ -12,24 +14,24 @@ export default function PrimaryLaboratoryListForm() {
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item name="year-establishment" label="کد ماده">
-                                <Input size="large" placeholder="وارد کنید"/>
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="lastName" label="شناسه درخواست">
-                                <Input size="large" placeholder="وارد کنید"/>
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item name="year-estale" label="وضعیت">
-                                <Select size="large" placeholder="وارد کنید"/>
+                                <Select size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="year" label="تاریخ درخواست">
-                                <Input size="large" placeholder="انتخاب کنید"/>
+                                <DatePicker size="large" placeholder="13**/**/**" className="w-full" />
                             </Form.Item>
                         </Col>
                     </Row>

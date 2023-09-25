@@ -1,13 +1,13 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 interface DataType {
@@ -20,7 +20,7 @@ interface DataType {
     TestInvoice: string;
 }
 
-export default function DataTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
     //حذف
 
@@ -66,7 +66,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
     };
 
 
-    const {data: material, isLoading: ldMaterial} = useSWR<{
+    const { data: material, isLoading: ldMaterial } = useSWR<{
         records: Material[],
         count: number
     }>("/Material/GetPage", url => listFetcher(url, {
@@ -99,7 +99,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             title: "فعال/غیر فعال",
             dataIndex: "ConfirmedRequestCode",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "کد ماده",
@@ -162,7 +162,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             </div>
             {/* جذف */}
             <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
-            }} title="مواد اولیه"/>
+            }} title="مواد اولیه" />
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -194,12 +194,10 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form form={form} layout="vertical">
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year-establishment"
                                 label="نام ماده اولیه"
                             >
@@ -208,8 +206,6 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year-establishment"
                                 label="واحد اندازه گیری"
                             >
@@ -220,18 +216,14 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year-establishment"
-                                label="وضعیت"
+                                label="فعال/غیر فعال"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year-establishment"
                                 label="کد ماده"
                             >
@@ -242,8 +234,6 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year-establishment"
                                 label="فاکتور آزمون "
                             >

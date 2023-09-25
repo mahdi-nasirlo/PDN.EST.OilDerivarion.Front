@@ -1,10 +1,10 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row, Select} from 'antd'
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function CreateModal({modalVisible, setModalVisible}: { modalVisible: any, setModalVisible: any }) {
+export default function CreateModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
 
     const [form] = useForm()
 
@@ -54,12 +54,10 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                 </Row>
             ]}
         >
-            <Form form={form} >
+            <Form form={form} layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="نام ماده اولیه"
                         >
@@ -68,8 +66,6 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="واحد اندازه گیری"
                         >
@@ -80,8 +76,6 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="وضعیت"
                         >
@@ -90,8 +84,6 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="کد ماده"
                         >
@@ -102,8 +94,6 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year-establishment"
                             label="فاکتور آزمون "
                         >

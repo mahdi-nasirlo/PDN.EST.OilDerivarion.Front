@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import PrimaryLaboratoryListForm from "@/app/laboratory/request-list/components/primary-laboratory-list-form";
-import PrimaryLaboratoryListable from "@/app/laboratory/request-list/components/primary-laboratory-list-table";
+import DataTable from "./components/data-table";
+import FilterForm from "./components/filter-form";
 
 
 export default function Page() {
     return (
         <>
-            <PrimaryLaboratoryListForm/>
-            <PrimaryLaboratoryListable/>
+            <FilterForm />
+            <DataTable />
         </>
     );
 }

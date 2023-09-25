@@ -1,19 +1,19 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from 'swr';
-import {Product} from '../../../../../interfaces/product';
-import {listFetcher} from '../../../../../lib/server/listFetcher';
-import {addIndexToData} from '../../../../../lib/addIndexToData';
+import { Product } from '../../../../../interfaces/product';
+import { listFetcher } from '../../../../../lib/server/listFetcher';
+import { addIndexToData } from '../../../../../lib/addIndexToData';
 
 
-export default function DataTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
-    const {data, isLoading} = useSWR<{
+    const { data, isLoading } = useSWR<{
         records: Product[],
         count: number
     }>("/Product/GetPage", (url) => listFetcher(url, {
@@ -212,12 +212,10 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form form={form} layout="vertical">
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="Name"
                                 label="نام"
                             >
@@ -226,8 +224,6 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name=""
                                 label="دسته بندی محصول"
                             >
@@ -238,10 +234,16 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="Is_Active"
                                 label="فعال/غیر فعال"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="Test"
+                                label="فاکتور آزمون"
                             >
                                 <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>

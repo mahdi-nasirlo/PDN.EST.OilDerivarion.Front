@@ -1,13 +1,13 @@
 "use client"
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table'
-import React, {useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Table } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table'
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 
 interface DataType {
     key: string;
@@ -23,7 +23,7 @@ interface DataType {
 export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVisible: any }) {
 
 
-    const {isLoading: ldFactor, data: factors} = useSWR<{
+    const { isLoading: ldFactor, data: factors } = useSWR<{
         count: number,
         records: any[]
     }>("/Lab/GetPage", url => listFetcher(url, {
@@ -78,11 +78,11 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
     };
 
     const columns: ColumnsType<DataType> = [
-        // {
-        //     title: "ردیف",
-        //     dataIndex: "Row",
-        //     key: "1",
-        // },
+        {
+            title: "ردیف",
+            dataIndex: "Row",
+            key: "1",
+        },
         {
             title: "نام آزمایشگاه",
             dataIndex: "Name",
@@ -145,14 +145,14 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex">
                             افزودن آزمایشگاه
                         </span>
                     </Button>
                 </div>
                 <Table
-                    scroll={{x: 1500, y: 300}}
+                    scroll={{ x: 1500, y: 300 }}
                     dataSource={addIndexToData(factors?.records)}
                     className="mt-6"
                     columns={columns}
@@ -233,13 +233,11 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form form={form} layout="vertical">
                     مشخصات آزمایشگاه
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year"
                                 label="نام آزمایشگاه"
                             >
@@ -248,8 +246,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="years"
                                 label="شماره ثابت"
                             >
@@ -260,8 +256,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="yeard"
                                 label="مشخصه یکتای جواز"
                             >
@@ -270,8 +264,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="yearb"
                                 label="عکس جواز کسب (پروانه بهره برداری)"
                             >
@@ -282,8 +274,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="yearm"
                                 label="فعال/غیر فعال"
                             >
@@ -294,12 +284,18 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={24}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="yearm"
                                 label="آدرس"
                             >
                                 <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="Test"
+                                label="فاکتور آزمون"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -308,8 +304,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="Name"
                                 label="نام"
                             >
@@ -318,8 +312,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="lastName"
                                 label="نام خانوادگی"
                             >
@@ -330,8 +322,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="code"
                                 label="کد ملی"
                             >
@@ -340,8 +330,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="phone"
                                 label="شماره موبایل"
                             >
@@ -354,8 +342,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="Name"
                                 label="نام"
                             >
@@ -364,8 +350,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="lastName"
                                 label="نام خانوادگی"
                             >
@@ -376,8 +360,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="code"
                                 label="کد ملی"
                             >
@@ -386,8 +368,6 @@ export default function PrimaryLaboratoryTable({ setModalVisible }: { setModalVi
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="phone"
                                 label="شماره موبایل"
                             >

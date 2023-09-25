@@ -55,13 +55,11 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 </Row>
             ]}
         >
-            <Form form={form} >
+            <Form form={form} layout="vertical">
                 مشخصات آزمایشگاه
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year"
                             label="نام آزمایشگاه"
                         >
@@ -70,8 +68,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="years"
                             label="شماره ثابت"
                         >
@@ -82,8 +78,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="yeard"
                             label="مشخصه یکتای جواز"
                         >
@@ -92,8 +86,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="yearb"
                             label="عکس جواز کسب (پروانه بهره برداری)"
                         >
@@ -104,10 +96,16 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="yearm"
                             label="فعال/غیر فعال"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="Test"
+                            label="فاکتور آزمون"
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
@@ -116,8 +114,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={24}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="yearm"
                             label="آدرس"
                         >
@@ -130,8 +126,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="Name"
                             label="نام"
                         >
@@ -140,8 +134,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="lastName"
                             label="نام خانوادگی"
                         >
@@ -152,8 +144,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="code"
                             label="کد ملی"
                         >
@@ -162,8 +152,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="phone"
                             label="شماره موبایل"
                         >
@@ -176,8 +164,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="Name"
                             label="نام"
                         >
@@ -186,8 +172,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="lastName"
                             label="نام خانوادگی"
                         >
@@ -198,8 +182,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="code"
                             label="کد ملی"
                         >
@@ -208,8 +190,6 @@ export default function PrimaryLaboratoryModal({ setModalVisible, modalVisible }
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="phone"
                             label="شماره موبایل"
                         >

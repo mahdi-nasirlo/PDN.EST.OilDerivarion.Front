@@ -55,12 +55,10 @@ export default function CreateModal({ modalVisible, setModalVisible }: { modalVi
                 </Row>
             ]}
         >
-            <Form form={form} >
+            <Form form={form} layout="vertical">
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year"
                             label="نام"
                         >
@@ -69,8 +67,6 @@ export default function CreateModal({ modalVisible, setModalVisible }: { modalVi
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="establishment"
                             label="دسته بندی محصول"
                         >
@@ -81,10 +77,16 @@ export default function CreateModal({ modalVisible, setModalVisible }: { modalVi
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="establishment"
                             label="فعال/غیر فعال"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="Test"
+                            label="فاکتور آزمون"
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>

@@ -89,6 +89,11 @@ const items: MenuProps["items"] = [
     "test-factors",
     // <FolderPlusIcon width={16} height={16} />
   ),
+  getMenuItem(
+    <Link href={"/admin-pannel/test-feature"}>ویژگی های آزمون</Link>,
+    "test-feature",
+    // <FolderPlusIcon width={16} height={16} />
+  ),
 
   getMenuItem(
     <Link href={"/admin-pannel/list-experts"}>لیست کارشناسان</Link>,

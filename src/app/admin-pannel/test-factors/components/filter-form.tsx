@@ -1,9 +1,10 @@
 "use client"
 
-import {Button, Col, Form, Input, Row, Select} from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 
-export default function PrimaryTestFactorsForm() {
+
+export default function FilterForm() {
 
     return (
         <div className="box-border w-full p-6">
@@ -11,27 +12,27 @@ export default function PrimaryTestFactorsForm() {
                 <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام فاکتور">
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="مقیاس آزمون">
-                            <Select size="large" placeholder="وارد کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="تجدید پذیری">
-                            <Select size="large" placeholder="وارد کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="مقدار تجدید پذیری">
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={24}>
+                    <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="روش آزمون">
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

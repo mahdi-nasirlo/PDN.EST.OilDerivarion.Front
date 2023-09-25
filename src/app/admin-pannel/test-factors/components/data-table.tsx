@@ -1,25 +1,26 @@
 "use client"
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import {TableColumnsType} from "antd/lib";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Modal, Row, Space, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
+import { TableColumnsType } from "antd/lib";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {TestItem} from "../../../../../interfaces/TestItem";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { TestItem } from "../../../../../interfaces/TestItem";
+import Link from 'next/link';
 
 
-export default function DataTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
-    const {isLoading: ldFactor, data: factors} = useSWR<{
+    const { isLoading: ldFactor, data: factors } = useSWR<{
         count: number,
         records: any[]
     }>("/TestItem/GetPage", url => listFetcher(url, {
         arg: {
             "name": "",
-            "is_Active": true,
+            // "is_Active": true,
             "fromRecord": 0,
             "selectRecord": 10000
         }
@@ -61,16 +62,17 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             dataIndex: "TestMethod",
             key: "3",
         },
-        {
-            title: "مقدار تجدید پذیری",
-            dataIndex: "ReNewabillity_Value",
-            key: "4",
-        },
+
         {
             title: "تجدید پذیری",
             dataIndex: "ReNewabillity",
-            key: "5",
+            key: "4",
             render: (e, record) => "بله"
+        },
+        {
+            title: "واحد تجدید پذیری",
+            dataIndex: "ReNewabillity_Value",
+            key: "5",
         },
         {
             title: "مقیاس آزمون",
@@ -79,10 +81,16 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             render: (e, record) => "ppm"
         },
         {
-            title: "فعال/غیر فعال ",
-            dataIndex: "Is_Active",
-            key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            title: "ویژگی آزمون",
+            dataIndex: "Property",
+            key: "6",
+            render: (e, record) => (
+                <Space size="middle">
+                    <Link href={`/admin-pannel/test-feature`} className="action-btn-info font-bold">
+                        مشاهده
+                    </Link>
+                </Space>
+            ),
         },
         {
             title: "جزئیات",
@@ -90,7 +98,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             render: (_, record) => (
                 <Space size="middle">
                     <Button type="link" className={"text-red-500 font-bold"}
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
@@ -127,7 +135,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
+                    <Typography className="text-right text-[16px] font-normal">لیست فاکتور های آزمون</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -135,7 +143,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex  ">
                             افزودن فاکتور آزمون
                         </span>

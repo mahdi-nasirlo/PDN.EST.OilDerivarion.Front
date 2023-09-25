@@ -2,9 +2,17 @@
 
 import { Button, Col, Form, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function CreateModal({ setModalVisible, modalVisible }: { setModalVisible: any, modalVisible: any }) {
+
+
+    const [selectedDensity, setSelectedDensity] = useState('');
+
+    const handleDensityChange = (value: any) => {
+        setSelectedDensity(value);
+    };
+
 
     const [form] = useForm()
 
@@ -55,12 +63,10 @@ export default function CreateModal({ setModalVisible, modalVisible }: { setModa
                 </Row>
             ]}
         >
-            <Form form={form} >
+            <Form form={form} layout='vertical'>
                 <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
                             name="year"
                             label="نام دسته بندی"
                         >
@@ -68,12 +74,48 @@ export default function CreateModal({ setModalVisible, modalVisible }: { setModa
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }} name="lastName" label="فعال/غیر فعال">
+                        <Form.Item
+                            name="lastName"
+                            label="فعال/غیر فعال"
+                        >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year"
+                            label="روش تولید"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="density" label="دانسیته">
+                            <Select size="large" placeholder="انتخاب کنید"
+                                onChange={handleDensityChange}>
+                                <Select.Option value="yes">دارد</Select.Option>
+                                <Select.Option value="no">ندارد</Select.Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
+                {selectedDensity === 'yes' && (
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="establishment"
+                                label="میزان دانسیته"
+                            >
+                                <Select
+                                    size="large"
+                                    placeholder="انتخاب کنید"
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                )}
             </Form>
         </Modal >
     )

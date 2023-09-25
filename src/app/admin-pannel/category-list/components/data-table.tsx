@@ -15,6 +15,14 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
+
+    const [selectedDensity, setSelectedDensity] = useState('');
+
+    const handleDensityChange = (value: any) => {
+        setSelectedDensity(value);
+    };
+
+
     const { data: category, isLoading: ldCategory } = useSWR<{
         records: Category[],
         count: number
@@ -88,7 +96,16 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
             key: "3",
             render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
-
+        {
+            title: "روش تولید",
+            dataIndex: "MethodProduction",
+            key: "4",
+        },
+        {
+            title: "دانسیته",
+            dataIndex: "Densite",
+            key: "5",
+        },
         {
             title: "عملیات",
             key: "عملیات",
@@ -172,12 +189,10 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
                     </Row>
                 ]}
             >
-                <Form form={form} >
+                <Form form={form} layout='vertical'>
                     <Row gutter={[32, 1]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
                                 name="year"
                                 label="نام دسته بندی"
                             >
@@ -185,12 +200,48 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
-                            <Form.Item labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }} name="lastName" label="فعال/غیر فعال">
+                            <Form.Item
+                                name="lastName"
+                                label="فعال/غیر فعال"
+                            >
                                 <Select size="large" placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="year"
+                                label="روش تولید"
+                            >
+                                <Select size="large" placeholder="انتخاب کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item name="density" label="دانسیته">
+                                <Select size="large" placeholder="انتخاب کنید"
+                                    onChange={handleDensityChange}>
+                                    <Select.Option value="yes">دارد</Select.Option>
+                                    <Select.Option value="no">ندارد</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    {selectedDensity === 'yes' && (
+                        <Row gutter={[16, 16]}>
+                            <Col xs={24} md={12}>
+                                <Form.Item
+                                    name="establishment"
+                                    label="میزان دانسیته"
+                                >
+                                    <Select
+                                        size="large"
+                                        placeholder="انتخاب کنید"
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    )}
                 </Form>
             </Modal >
         </>

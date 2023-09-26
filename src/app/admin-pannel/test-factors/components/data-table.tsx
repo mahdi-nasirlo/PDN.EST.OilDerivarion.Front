@@ -1,29 +1,29 @@
 "use client"
 
 import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Modal, Row, Space, Switch, Table, Typography} from 'antd'
+import {Button, Space, Switch, Table, Typography} from 'antd'
 import {ColumnsType} from 'antd/es/table';
 import React, {useState} from 'react'
 import {TableColumnsType} from "antd/lib";
-import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
 import {addIndexToData} from "../../../../../lib/addIndexToData";
 import {TestItem} from "../../../../../interfaces/TestItem";
+import EditModal from "@/app/admin-pannel/test-factors/components/edit-modal";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 
 
-export default function DataTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate}: {
+    setModalVisible: any,
+    ldTestItem: boolean,
+    mutate: () => void,
+    TestItem: {
+        records: TestItem[],
+        count: number
+    } | undefined
+}) {
 
-    const {isLoading: ldFactor, data: factors} = useSWR<{
-        count: number,
-        records: any[]
-    }>("/TestItem/GetPage", url => listFetcher(url, {
-        arg: {
-            "name": "",
-            "is_Active": true,
-            "fromRecord": 0,
-            "selectRecord": 10000
-        }
-    }))
+    const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined)
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [recordToDelete, setRecordToDelete] = useState<TestItem | null>(null);
@@ -33,8 +33,18 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
         setIsDeleteModalVisible(true);
     };
 
-    const handleConfirmDelete = () => {
+    const {trigger} = useSWRMutation("/TestItem/Delete", mutationFetcher)
+
+    const handleConfirmDelete = async () => {
+
         setIsDeleteModalVisible(false);
+
+        await trigger({
+            uid: recordToDelete?.Uid
+        })
+
+        await mutate()
+
     };
     const handleCancelDelete = () => {
         setIsDeleteModalVisible(false);
@@ -70,13 +80,11 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             title: "تجدید پذیری",
             dataIndex: "ReNewabillity",
             key: "5",
-            render: (e, record) => "بله"
         },
         {
             title: "مقیاس آزمون",
-            dataIndex: "Measure_Id",
+            dataIndex: "MeasureName",
             key: "6",
-            render: (e, record) => "ppm"
         },
         {
             title: "فعال/غیر فعال ",
@@ -89,6 +97,8 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             key: "جزئیات",
             render: (_, record) => (
                 <Space size="middle">
+                    <Button type="link" className={"text-primary-500 font-bold"}
+                            onClick={() => setOpenEdit(record)}>ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
                             onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
@@ -144,8 +154,9 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                 <Table
                     className="mt-6"
                     columns={columns}
+                    loading={ldTestItem}
                     // expandable={{expandedRowRender: expandedRowRender}}
-                    dataSource={addIndexToData(factors?.records)}
+                    dataSource={addIndexToData(TestItem?.records)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -159,38 +170,10 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                         },
                     }}
                 />
+                <EditModal mutate={mutate} editRecord={openEdit} setEditRecord={setOpenEdit}/>
             </div>
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
-                title="حذف فاکتور"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این فاکتور مطمئن هستید؟</p>
-            </Modal>
+            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
+                                handleDelete={handleConfirmDelete} title="مواد اولیه"/>
         </>
     )
 }

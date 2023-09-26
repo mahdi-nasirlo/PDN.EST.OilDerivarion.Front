@@ -1,77 +1,93 @@
-import { Col, Form, Input, Row, Select } from "antd";
-import React, { useState } from "react";
+import React, {useEffect} from "react";
+import {Button, Col, Form, Modal, Row} from "antd";
+import CategoryForm from "@/app/admin-pannel/category-list/components/category-form";
+import {useForm} from "antd/es/form/Form";
+import {Category} from "../../../../../interfaces/category";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 
-export default function EditForm() {
-  const [selectedDensity, setSelectedDensity] = useState<boolean>(false);
+export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate}: {
+    setIsEditModalVisible: (arg: boolean) => void;
+    isEditModalVisible: boolean;
+    recordToEdit: Category | null;
+    setRecordToEdit: (arg: Category | null) => void,
+    mutate: () => void
+}) {
 
-  const handleDensityChange = (value: any) => {
-    setSelectedDensity(value);
-  };
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
-  return (
-    <>
-      <Row gutter={[32, 1]}>
-        <Col xs={24} md={12}>
-          <Form.Item name="name" label="نام دسته بندی">
-            <Input size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="is_Active" label="فعال/غیر فعال">
-            <Select
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیرفعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
-          <Form.Item name="testMethodId" label="روش تولید">
-            <Select
-              loading={isLoading}
-              options={data}
-              fieldNames={{ label: "Name", value: "Id" }}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="densityType" label="دانسیته">
-            <Select
-              options={[
-                { label: "دارد", value: true },
-                { label: "ندارد", value: false },
-              ]}
-              value={selectedDensity}
-              onChange={(value) => setSelectedDensity(value)}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-      </Row>
-      {selectedDensity === true && (
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="top" label="حد بالا دانسیته">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="bottom" label="حد پایین دانسیته">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-      )}
-    </>
-  );
+    const [form] = useForm()
+
+    const handleCancelEdit = () => {
+        setIsEditModalVisible(false);
+        setRecordToEdit(null); // Clear the recordToEdit
+    };
+
+    const {isMutating, trigger} = useSWRMutation("/TestItem/Update", mutationFetcher)
+
+    const handleSubmit = async (values: Category) => {
+
+        values.Uid = data?.Uid
+
+        await trigger(values)
+
+        setRecordToEdit(null)
+
+        await mutate()
+    }
+
+    const {
+        data,
+        isLoading
+    } = useSWR(["/ProductCategory/Get", {uid: recordToEdit?.Uid}], ([url, arg]) => listFetcher(url, {arg}))
+
+    useEffect(() => {
+
+        form.setFieldsValue(convertKeysToLowerCase(data))
+
+    }, [data])
+
+    return (
+        <>
+            <Modal
+                width={800}
+                title="ویرایش دسته بندی محصول"
+                open={isEditModalVisible}
+                onOk={() => setIsEditModalVisible(true)}
+                onCancel={handleCancelEdit}
+                footer={[
+                    <Row key={"box"} gutter={[16, 16]} className="my-2">
+                        <Col xs={24} md={12}>
+                            <Button
+                                loading={isLoading || isMutating}
+                                size="large"
+                                className="w-full"
+                                type="primary"
+                                onClick={() => form.submit()}
+                                key={"submit"}
+                            >
+                                ثبت
+                            </Button>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Button
+                                loading={isLoading || isMutating}
+                                size="large"
+                                className="w-full bg-gray-100 text-warmGray-500"
+                                onClick={handleCancelEdit}
+                                key={"cancel"}
+                            >
+                                انصراف
+                            </Button>
+                        </Col>
+                    </Row>,
+                ]}
+            >
+                <Form onFinish={handleSubmit} disabled={isLoading || isMutating} form={form} layout="vertical">
+                    <CategoryForm defaultSelectedDensity={data?.HasDensity}/>
+                </Form>
+            </Modal>
+        </>
+    );
 }

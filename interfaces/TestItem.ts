@@ -7,3 +7,12 @@ export type TestItem = {
     "Name": string,
     "Is_Active": boolean
 }
+
+export type CreateTestItem = {
+    name: string,
+    measure_Id: number,
+    reNewabillity: number,
+    reNewabillity_Value: number,
+    testMethod: string,
+    is_Active: boolean
+}

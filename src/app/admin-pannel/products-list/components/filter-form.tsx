@@ -1,42 +1,52 @@
 "use client";
 
 
-import { Button, Col, Form, Input, Row, Select } from 'antd'
+import {Button, Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
+import {useForm} from "antd/lib/form/Form";
 
-export default function FilterForm() {
+export default function FilterForm({filter, unsetFilter}: {
+    filter: (arg: MaterialGet) => void,
+    unsetFilter: () => void,
+}) {
+
+    const [form] = useForm()
+
 
     return (
         <div className="box-border w-full p-6">
-            <Form name="form_item_path" layout="vertical">
+            <Form form={form} onFinish={(values) => filter(values)} name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="نام محصول ">
-                            <Input size="large" placeholder="وارد کنید" />
+                        <Form.Item name="name" label="نام محصول ">
+                            <Input size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام دسته بندی">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Select disabled size="large" placeholder="انتخاب کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="فعال/غیر فعال">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                        <Form.Item rules={[{required: true, message: "لطفا وضعیت را وارد کنید"}]} name="is_Active"
+                                   label="فعال/غیر فعال">
+                            <Select
+                                options={[{label: "فعال", value: true}, {label: "غیر فعال", value: false}]}
+                                size="large" placeholder="انتخاب کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="year-establishment" label="کد محصول ">
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input disabled size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="year-establishment" label="فاکتور آزمون">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Select disabled size="large" placeholder="انتخاب کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -55,7 +65,8 @@ export default function FilterForm() {
                                 className="btn-delete-filter"
                                 size="large"
                                 type="primary"
-                                htmlType="submit"
+                                onClick={unsetFilter}
+                                htmlType="reset"
                             >
                                 حذف فیلتر
                             </Button>

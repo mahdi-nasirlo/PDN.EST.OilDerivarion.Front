@@ -7,7 +7,6 @@ import CreateModal from "./components/create-modal";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
-
   return (
     <>
       <FilterForm />

@@ -39,6 +39,8 @@ export default function CreateModal({setModalVisible, modalVisible, mutate}: {
             </div>}
             open={modalVisible}
             onCancel={() => setModalVisible(false)}
+            visible={modalVisible}
+            onCancel={closeModal}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
@@ -61,6 +63,22 @@ export default function CreateModal({setModalVisible, modalVisible, mutate}: {
                             key={"cancel"}>
                             انصراف
                         </Button>
+                            size="large"
+                            className="w-full"
+                            type="primary"
+                            onClick={handleFormSubmit}
+                            key={"submit"} >
+                            ثبت
+                        </Button >
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Button
+                            size="large"
+                            className="w-full bg-gray-100 text-warmGray-500"
+                            onClick={closeModal}
+                            key={"cancel"} >
+                            انصراف
+                        </Button >
                     </Col>
                 </Row>
             ]}
@@ -69,5 +87,52 @@ export default function CreateModal({setModalVisible, modalVisible, mutate}: {
                 <TestFactorForm/>
             </Form>
         </Modal>
+            <Form form={form} layout='vertical'>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year"
+                            label="نام فاکتور"
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="years"
+                            label="نام ماده اولیه"
+                        >
+                            <Select size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="yea"
+                            label="نام محصول"
+                        >
+                            <Select size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year"
+                            label="واحد تجدید پذیری "
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="year"
+                            label="روش آزمون"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+            </Form>
+        </Modal >
     )
 }

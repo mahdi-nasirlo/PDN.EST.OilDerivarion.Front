@@ -1,8 +1,8 @@
 "use client";
 
-import {Button, Space, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {Table} from 'antd/lib';
+import { Button, Space, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { Table } from 'antd/lib';
 import React from 'react'
 
 
@@ -13,11 +13,12 @@ interface DataType {
     Tracking: string;
     ConfirmedCode: string;
     status: string;
-    pdn: string[];
+    pdn: string;
     middle: string;
 }
 
-export default function PrimaryLaboratoryListable() {
+
+export default function DataTable() {
 
 
     const columns: ColumnsType<DataType> = [
@@ -104,7 +105,7 @@ const data: DataType[] = [
         Tracking: "354",
         ConfirmedCode: "1401/10/10",
         status: "8 روز",
-        pdn: ["1400/10/24", " ", "09:00"],
+        pdn: "بررسی نشده",
         middle: "8 روز"
     },
     {
@@ -114,7 +115,7 @@ const data: DataType[] = [
         Tracking: "449",
         ConfirmedCode: "1402/05/10",
         status: "8 روز",
-        pdn: ["1400/10/24", " ", "09:00"],
+        pdn: "بررسی شده",
         middle: "8 روز"
     },
     {
@@ -124,7 +125,7 @@ const data: DataType[] = [
         Tracking: "449",
         ConfirmedCode: "1401/08/08",
         status: "8 روز",
-        pdn: ["1400/10/24", " ", "09:00"],
+        pdn: "در حال بررسی",
         middle: "8 روز"
     },
 ];

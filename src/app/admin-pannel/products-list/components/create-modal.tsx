@@ -69,6 +69,6 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
             <Form disabled={isMutating} onFinish={createProduct} form={form}>
                 <ProductForm/>
             </Form>
-        </Modal>
+        </Modal >
     )
 }

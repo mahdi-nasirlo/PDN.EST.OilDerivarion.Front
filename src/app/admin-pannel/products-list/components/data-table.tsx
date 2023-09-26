@@ -21,7 +21,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
     ldProduct: boolean,
     mutate: () => void,
     product: {
-        records: Material[],
+        records: Product[],
         count: number
     } | undefined
 }) {
@@ -235,7 +235,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                 ]}
             >
                 <Form disabled={isMutating} form={form} onFinish={updateProduct}>
-                    <ProductForm editRecord={recordToEdit}/>
+                    <ProductForm/>
                 </Form>
             </Modal>
         </>

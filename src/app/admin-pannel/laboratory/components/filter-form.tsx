@@ -3,7 +3,8 @@
 import { Button, Col, Form, Select, Row } from 'antd'
 import React from 'react'
 
-export default function PrimaryLaboratoryForm() {
+
+export default function FilterForm() {
     return (
         <div className="box-border w-full p-6">
             <Form name="form_item_path" layout="vertical">
@@ -21,6 +22,11 @@ export default function PrimaryLaboratoryForm() {
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
+                        <Form.Item name="lastName" label="کد ملی">
+                            <Select size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
                         <Form.Item
                             name="year-establishment"
                             label="فعال/غیر فعال"
@@ -28,8 +34,10 @@ export default function PrimaryLaboratoryForm() {
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد ملی">
+                        <Form.Item name="Test" label="فاکتور آزمون">
                             <Select size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
@@ -57,5 +65,6 @@ export default function PrimaryLaboratoryForm() {
                     </Col>
                 </Row>
             </Form>
-        </div>)
+        </div>
+    )
 }

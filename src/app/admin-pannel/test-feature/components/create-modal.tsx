@@ -4,7 +4,12 @@ import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible }: { setModalVisible: any, modalVisible: any }) {
+
+export default function CreateModal({ setModalVisible, modalVisible }: {
+    setModalVisible: any,
+    modalVisible: any
+}) {
+
 
     const [form] = useForm()
 
@@ -27,7 +32,7 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
         <Modal
             width={800}
             title={<div>
-                <div className="text-base mb-2">افزودن فاکتور جدید</div>
+                <div className="text-base mb-2">افزودن ویژگی فاکتور جدید</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
             </div>}
             visible={modalVisible}
@@ -56,37 +61,20 @@ export default function PrimaryTestFactorsModal({ setModalVisible, modalVisible 
                 </Row>
             ]}
         >
-            <Form form={form} >
-                <Row gutter={[32, 1]}>
+            <Form name="form_item_path" layout="vertical">
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year"
-                            label="نام فاکتور"
-                        >
+                        <Form.Item name="lastName" label="عنوان فاکتور">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="years"
-                            label="نام ماده اولیه"
-                        >
+                        <Form.Item name="lastName" label="عنوان استاندارد">
                             <Select size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="yea"
-                            label="نام محصول"
-                        >
+                        <Form.Item name="lastName" label="مرجع">
                             <Select size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>

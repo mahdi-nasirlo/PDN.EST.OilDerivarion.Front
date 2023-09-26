@@ -1,26 +1,34 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row, Select} from 'antd'
+import {Button, Col, Form, Modal, Row} from 'antd'
 import {useForm} from 'antd/es/form/Form';
 import React from 'react'
+import MaterialForm from "@/app/admin-pannel/adding-raw-material/components/material-form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import useSWRMutation from "swr/mutation";
 
-export default function CreateModal({modalVisible, setModalVisible}: { modalVisible: any, setModalVisible: any }) {
+export default function CreateModal({modalVisible, setModalVisible, mutate}: {
+    modalVisible: any,
+    setModalVisible: any,
+    mutate: () => void
+}) {
 
     const [form] = useForm()
 
-    const closeModal = () => {
-        setModalVisible(false);
-    };
 
-    const handleFormSubmit = async () => {
-        try {
-            const values = await form.validateFields();
-            console.log("Form values:", values); // Log the form values to the console
-            closeModal();
-        } catch (error) {
-            console.error("Form validation failed:", error);
-        }
-    };
+    const {isMutating, trigger} = useSWRMutation("/Material/Create", mutationFetcher)
+
+    const createMaterial = async (values: Material) => {
+
+        await trigger(values)
+
+        await mutate()
+
+        setModalVisible(false)
+
+    }
+
+
     return (
         <Modal
             width={800}
@@ -28,89 +36,38 @@ export default function CreateModal({modalVisible, setModalVisible}: { modalVisi
                 <div className="text-base mb-2">افزودن ماده اولیه</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
             </div>}
-            visible={modalVisible}
-            onCancel={closeModal}
+            open={modalVisible}
+            onCancel={() => setModalVisible(false)}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
+                            loading={isMutating}
                             size="large"
                             className="w-full"
                             type="primary"
-                            onClick={handleFormSubmit}
-                            key={"submit"} >
+                            onClick={() => form.submit()}
+                            key={"submit"}>
                             ثبت
-                        </Button >
+                        </Button>
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
+                            loading={isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={closeModal}
-                            key={"cancel"} >
+                            onClick={() => setModalVisible(false)}
+                            key={"cancel"}
+                            htmlType="reset"
+                        >
                             انصراف
-                        </Button >
+                        </Button>
                     </Col>
                 </Row>
             ]}
         >
-            <Form form={form} >
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="نام ماده اولیه"
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="واحد اندازه گیری"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="وضعیت"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="کد ماده"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="فاکتور آزمون "
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
+            <Form disabled={isMutating} onFinish={createMaterial} form={form}>
+                <MaterialForm/>
             </Form>
-        </Modal >)
+        </Modal>)
 }

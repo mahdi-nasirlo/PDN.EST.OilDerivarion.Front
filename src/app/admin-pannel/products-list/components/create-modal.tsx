@@ -1,26 +1,35 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
-import { useForm } from 'antd/es/form/Form';
+import {Button, Col, Form, Modal, Row} from 'antd'
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
+import {ProductCreate} from "../../../../../interfaces/product";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import ProductForm from "@/app/admin-pannel/products-list/components/product-form";
 
-export default function CreateModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
+export default function CreateModal({modalVisible, setModalVisible, mutate}: {
+    modalVisible: any,
+    setModalVisible: any,
+    mutate: () => void
+}) {
 
     const [form] = useForm()
 
-    const closeModal = () => {
-        setModalVisible(false);
-    };
+    const {isMutating, trigger} = useSWRMutation("/Product/Create", mutationFetcher)
 
-    const handleFormSubmit = async () => {
-        try {
-            const values = await form.validateFields();
-            console.log("Form values:", values); // Log the form values to the console
-            closeModal();
-        } catch (error) {
-            console.error("Form validation failed:", error);
-        }
-    };
+    const createProduct = async (values: ProductCreate) => {
+
+        await trigger(values)
+
+        await mutate()
+
+        setModalVisible(false)
+
+        form.resetFields()
+
+    }
+
 
     return (
         <Modal
@@ -29,67 +38,36 @@ export default function CreateModal({ modalVisible, setModalVisible }: { modalVi
                 <div className="text-base mb-2">افزودن محصول جدید</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
             </div>}
-            visible={modalVisible}
-            onCancel={closeModal}
+            open={modalVisible}
+            onCancel={() => setModalVisible(false)}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
+                            disabled={isMutating}
                             size="large"
                             className="w-full"
                             type="primary"
-                            onClick={handleFormSubmit}
-                            key={"submit"} >
+                            onClick={() => form.submit()}
+                            key={"submit"}>
                             ثبت
-                        </Button >
+                        </Button>
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
+                            disabled={isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={closeModal}
-                            key={"cancel"} >
+                            onClick={() => setModalVisible(false)}
+                            key={"cancel"}>
                             انصراف
-                        </Button >
+                        </Button>
                     </Col>
                 </Row>
             ]}
         >
-            <Form form={form} >
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year"
-                            label="نام"
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="establishment"
-                            label="دسته بندی محصول"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="establishment"
-                            label="فعال/غیر فعال"
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
+            <Form disabled={isMutating} onFinish={createProduct} form={form}>
+                <ProductForm/>
             </Form>
         </Modal >
     )

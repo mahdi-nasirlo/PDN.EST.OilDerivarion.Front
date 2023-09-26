@@ -1,14 +1,15 @@
 "use client";
 
 import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Typography} from 'antd'
+import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
 import {useForm} from 'antd/es/form/Form';
 import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import React, {useEffect, useState} from 'react'
 import {addIndexToData} from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import MaterialForm from "@/app/admin-pannel/adding-raw-material/components/material-form";
 
 interface DataType {
     key: string;
@@ -20,7 +21,15 @@ interface DataType {
     TestInvoice: string;
 }
 
-export default function DataTable({setModalVisible}: { setModalVisible: any }) {
+export default function DataTable({setModalVisible, ldMaterial, material, mutate}: {
+    setModalVisible: any,
+    ldMaterial: boolean,
+    mutate: () => void,
+    material: {
+        records: Material[],
+        count: number
+    } | undefined
+}) {
 
     //حذف
 
@@ -32,10 +41,18 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
         setIsDeleteModalVisible(true);
     };
 
-    const handleConfirmDelete = () => {
-        // Perform the delete action here with recordToDelete
-        // After successful delete, you can close the modal
+    const {trigger: deleteMaterial, isMutating: ldDeleteMaterial} = useSWRMutation("/Material/Delete", mutationFetcher)
+
+    const handleConfirmDelete = async () => {
+
+        await deleteMaterial({
+            "uid": recordToDelete?.Uid
+        })
+
+        await mutate()
+
         setIsDeleteModalVisible(false);
+
     };
     const handleCancelDelete = () => {
         setIsDeleteModalVisible(false);
@@ -55,28 +72,23 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
-    const handleConfirmEdit = () => {
-        // Perform the edit action here with recordToEdit
-        // After successful edit, you can close the modal
-        setIsEditModalVisible(false);
-    };
+
+    const sendEditRequest = async (values: Material) => {
+
+        values.Uid = recordToEdit?.Uid
+
+        await trigger(values)
+
+        await mutate()
+
+        setIsEditModalVisible(false)
+
+    }
+
     const handleCancelEdit = () => {
         setIsEditModalVisible(false);
         setRecordToEdit(null); // Clear the recordToEdit
     };
-
-
-    const {data: material, isLoading: ldMaterial} = useSWR<{
-        records: Material[],
-        count: number
-    }>("/Material/GetPage", url => listFetcher(url, {
-        arg: {
-            "name": null,
-            "is_Active": true,
-            "fromRecord": 0,
-            "selectRecord": 10000
-        }
-    }))
 
 
     const columns: ColumnsType<Material> = [
@@ -116,18 +128,27 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
             key: "عملیات",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type="link" className="text-secondary-500 font-bold" onClick={() => handleEdit(record)}>ویرایش</Button>
-                    <Button type="link" className="text-red-500 font-bold" onClick={() => handleDelete(record)}>حذف</Button>
+                    <Button type="link" className="text-secondary-500 font-bold"
+                            onClick={() => handleEdit(record)}>ویرایش</Button>
+                    <Button type="link" className="text-red-500 font-bold"
+                            onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
     ];
 
+    useEffect(() => {
+        form.setFieldsValue(recordToEdit)
+    }, [recordToEdit])
+
+    const {trigger, isMutating, data} = useSWRMutation("/Material/Update", mutationFetcher)
+
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست مواد اولیه</Typography>
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
+                        مواد اولیه</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -135,7 +156,7 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24} />
+                        <PlusIcon width={24} height={24}/>
                         <span className="flex">
                             افزودن ماده اولیه
                         </span>
@@ -161,98 +182,45 @@ export default function DataTable({setModalVisible}: { setModalVisible: any }) {
                 />
             </div>
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
-            }} title="مواد اولیه"/>
+            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
+                                handleDelete={handleConfirmDelete} title="مواد اولیه"/>
             {/* ویرایش */}
             <Modal
                 width={800}
                 title="ویرایش ماده اولیه"
-                visible={isEditModalVisible}
-                onOk={handleConfirmEdit}
+                open={isEditModalVisible}
+                onOk={() => form.submit()}
                 onCancel={handleCancelEdit}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
-                                onClick={handleConfirmEdit}
+                                onClick={() => form.submit()}
                                 key={"submit"} >
                                 ثبت
                             </Button >
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
+                                loading={isMutating}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
-                                key={"cancel"} >
+                                key={"cancel"}>
                                 انصراف
-                            </Button >
+                            </Button>
                         </Col>
                     </Row>
                 ]}
             >
-                <Form form={form} >
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="نام ماده اولیه"
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="واحد اندازه گیری"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="وضعیت"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="کد ماده"
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                labelCol={{ span: 24 }}
-                                wrapperCol={{ span: 24 }}
-                                name="year-establishment"
-                                label="فاکتور آزمون "
-                            >
-                                <Select size="large" placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
+                <Form onFinish={sendEditRequest} disabled={isMutating} form={form}>
+                    <MaterialForm/>
                 </Form>
-            </Modal >
+            </Modal>
         </>
     )
 }

@@ -44,16 +44,40 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-  getMenuItem(
-    <Link href={"/admin-pannel/adding-raw-material"}>ماده اولیه</Link>,
-    "adding-raw-material"
-    // <FolderPlusIcon width={16} height={16} />
-  ),
-  getMenuItem(
-    <Link href={"/admin-pannel/province"}>استان</Link>,
-    "province"
-    // <FolderPlusIcon width={16} height={16} />
-  ),
+  getMenuItem("ماده اولیه", "initail", null, [
+    getMenuItem(
+      <Link href={"/admin-pannel/adding-raw-material"} className="text-sm">
+        لیست ماده اولیه
+      </Link>,
+      "category-list",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+
+    getMenuItem(
+      <Link href={"/admin-pannel/raw-product-factor"} className="text-sm">
+        فاکتور ماده اولیه
+      </Link>,
+      "product-factor",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+  ]),
+  getMenuItem("آزمایشگاه", "labratory", null, [
+    getMenuItem(
+      <Link href={"/admin-pannel/laboratory"} className="text-sm">
+        لیست آزمایشگاه
+      </Link>,
+      "labaratory-list",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+
+    getMenuItem(
+      <Link href={"/admin-pannel/labratory-factor"} className="text-sm">
+        فاکتور آزمایشگاه
+      </Link>,
+      "labratory-factor",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+  ]),
   getMenuItem("مدیریت کاربران", "management-user", null, [
     getMenuItem(
       <Link href={"/admin-pannel/management-user"} className="text-sm">
@@ -77,16 +101,15 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-
   getMenuItem(
-    <Link href={"/admin-pannel/producer/production-unit"}>تولید کننده</Link>,
-    "producer/production-unit"
+    <Link href={"/admin-pannel/province"}>استان</Link>,
+    "province"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
-    <Link href={"/admin-pannel/laboratory"}>آزمایشگاه</Link>,
-    "laboratory"
+    <Link href={"/admin-pannel/producer/production-unit"}>تولید کننده</Link>,
+    "producer/production-unit"
     // <FolderPlusIcon width={16} height={16} />
   ),
 

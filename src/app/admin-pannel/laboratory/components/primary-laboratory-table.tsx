@@ -104,36 +104,52 @@ export default function PrimaryLaboratoryTable({
       key: "2",
     },
     {
-      title: "استان مربوطه",
-      dataIndex: "StateName",
-      key: "3",
-    },
-    {
-      title: "شماره گواهینامه",
-      dataIndex: "License_No",
-      key: "4",
-    },
-    {
-      title: "تاریخ گواهینامه",
-      dataIndex: "code",
-      key: "5",
-    },
-    {
-      title: "تلفن",
+      title: "شماره ثابت",
       dataIndex: "fax",
       key: "6",
     },
     {
-      title: "فکس",
+      title: "نام مسئول",
+      dataIndex: "StateName",
+      key: "3",
+    },
+    {
+      title: "نام خانوادگی مسئول",
+      dataIndex: "License_No",
+      key: "4",
+    },
+    {
+      title: "کد ملی مسئول",
+      dataIndex: "code",
+      key: "5",
+    },
+    {
+      title: "نام مدیر",
       dataIndex: "fax",
       key: "7",
     },
 
     {
-      title: "آدرس",
+      title: "نام خانوادگی مدیر",
       dataIndex: "Address",
       key: "8",
     },
+    {
+      title: "کد ملی مدیر",
+      dataIndex: "Address",
+      key: "8",
+    },
+    {
+      title: "فاکتور آزمون",
+      dataIndex: "Address",
+      key: "8",
+    },
+    {
+      title: "فعال/غیرفعال",
+      dataIndex: "Address",
+      key: "8",
+    },
+
     {
       title: "عملیات",
       key: "عملیات",

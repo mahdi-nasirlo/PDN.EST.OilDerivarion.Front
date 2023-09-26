@@ -20,90 +20,96 @@ export default function RootLayout({
 }
 
 const items: MenuProps["items"] = [
-  getMenuItem(
-    "محصول",
-    "management",
-    null,
-    [
-      getMenuItem(
-        <Link href={"/admin-pannel/category-list"} className="text-sm">لیست دسته بندی</Link>,
-        "category-list",
-        <FolderPlusIcon width={16} height={16} />
-      ),
+  getMenuItem("محصول", "management", null, [
+    getMenuItem(
+      <Link href={"/admin-pannel/category-list"} className="text-sm">
+        لیست دسته بندی
+      </Link>,
+      "category-list",
+      <FolderPlusIcon width={16} height={16} />
+    ),
 
-      getMenuItem(
-        <Link href={"/admin-pannel/products-list"} className="text-sm">لیست محصولات</Link>,
-        "products-list",
-        <FolderPlusIcon width={16} height={16} />
-      ),
-
-    ],
-  ),
+    getMenuItem(
+      <Link href={"/admin-pannel/products-list"} className="text-sm">
+        لیست محصولات
+      </Link>,
+      "products-list",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+    getMenuItem(
+      <Link href={"/admin-pannel/products-factor"} className="text-sm">
+        فاکتور محصول
+      </Link>,
+      "products-factor",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+  ]),
   getMenuItem(
     <Link href={"/admin-pannel/adding-raw-material"}>ماده اولیه</Link>,
-    "adding-raw-material",
+    "adding-raw-material"
     // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
     <Link href={"/admin-pannel/province"}>استان</Link>,
-    "province",
+    "province"
     // <FolderPlusIcon width={16} height={16} />
   ),
-  getMenuItem(
-    "مدیریت کاربران",
-    "management-user",
-    null,
-    [
-      getMenuItem(
-        <Link href={"/admin-pannel/management-user"} className="text-sm">لیست کاربران</Link>,
-        "management-user",
-        <FolderPlusIcon width={16} height={16} />,
-      ),
-      getMenuItem(
-        <Link href={"/admin-pannel/confirm-changes"} className="text-sm">ثبت تغییرات</Link>,
-        "confirm-changes",
-        <FolderPlusIcon width={16} height={16} />,
-      ),
-      getMenuItem(
-        <Link href={"/admin-pannel/management-user-role"} className="text-sm">نقش کاربران</Link>,
-        "management-user-role",
-        <FolderPlusIcon width={16} height={16} />
-      ),
-    ]
-  ),
+  getMenuItem("مدیریت کاربران", "management-user", null, [
+    getMenuItem(
+      <Link href={"/admin-pannel/management-user"} className="text-sm">
+        لیست کاربران
+      </Link>,
+      "management-user",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+    getMenuItem(
+      <Link href={"/admin-pannel/confirm-changes"} className="text-sm">
+        ثبت تغییرات
+      </Link>,
+      "confirm-changes",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+    getMenuItem(
+      <Link href={"/admin-pannel/management-user-role"} className="text-sm">
+        نقش کاربران
+      </Link>,
+      "management-user-role",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+  ]),
 
   getMenuItem(
     <Link href={"/admin-pannel/producer/production-unit"}>تولید کننده</Link>,
-    "producer/production-unit",
+    "producer/production-unit"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
     <Link href={"/admin-pannel/laboratory"}>آزمایشگاه</Link>,
-    "laboratory",
+    "laboratory"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
     <Link href={"/admin-pannel/test-factors"}>فاکتورهای آزمون</Link>,
-    "test-factors",
+    "test-factors"
     // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
     <Link href={"/admin-pannel/test-feature"}>ویژگی های آزمون</Link>,
-    "test-feature",
+    "test-feature"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
     <Link href={"/admin-pannel/list-experts"}>لیست کارشناسان</Link>,
-    "list-experts",
+    "list-experts"
     // <FolderPlusIcon width={16} height={16}/>
   ),
 
   getMenuItem(
     <Link href={"/admin-pannel/add-box"}>افزودن جعبه</Link>,
-    "add-box",
+    "add-box"
     // <FolderPlusIcon width={16} height={16}/>
   ),
 ];

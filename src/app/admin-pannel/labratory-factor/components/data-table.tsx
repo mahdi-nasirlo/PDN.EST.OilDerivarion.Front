@@ -54,7 +54,7 @@ export default function DataTable({
       key: "1",
     },
     {
-      title: "نام ماده اولیه",
+      title: "نام آزمایشگاه",
       dataIndex: "factorsName",
       key: "2",
     },
@@ -146,7 +146,7 @@ export default function DataTable({
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور های ماده اولیه
+            لیست فاکتور های آزمایشگاه{" "}
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"
@@ -155,7 +155,7 @@ export default function DataTable({
             onClick={showModal}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور ماده اولیه</span>
+            <span className="flex ">افزودن فاکتور آزمایشگاه</span>
           </Button>
         </div>
         <Table

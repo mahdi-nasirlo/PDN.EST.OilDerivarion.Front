@@ -9,7 +9,10 @@ export default function FilterForm() {
       <Form name="form_item_path" layout="vertical">
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="ماده اولیه">
+            <Form.Item
+              name="year-establishment"
+              label="افزودن فاکتور آزمایشگاه"
+            >
               <Select size="large" placeholder="انتخاب کنید" />
             </Form.Item>
           </Col>

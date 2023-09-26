@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Row,
+  Select,
+} from "antd";
 import { useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
@@ -16,7 +25,7 @@ export default function CreateModal({
   setModalVisible: any;
   modalVisible: any;
 }) {
-  const [selectedDensity, setSelectedDensity] = useState("");
+  const [selectedDensity, setSelectedDensity] = useState<boolean>(false);
 
   const handleDensityChange = (value: any) => {
     setSelectedDensity(value);
@@ -26,6 +35,7 @@ export default function CreateModal({
     "/ProductCategory/Create",
     mutationFetcher
   );
+  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
 
   const [form] = useForm();
 
@@ -38,16 +48,7 @@ export default function CreateModal({
     form.resetFields();
     trigger(values);
     mutate;
-
-    try {
-      console.log(trigger);
-
-      const values = await form.validateFields();
-      console.log("Form values:", values); // Log the form values to the console
-      closeModal();
-    } catch (error) {
-      console.error("Form validation failed:", error);
-    }
+    setModalVisible(false);
   };
 
   return (
@@ -61,7 +62,7 @@ export default function CreateModal({
           </div>
         </div>
       }
-      visible={modalVisible}
+      open={modalVisible}
       onCancel={closeModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -74,6 +75,7 @@ export default function CreateModal({
               className="w-full"
               type="primary"
               key={"submit"}
+              loading={isMutating}
             >
               ثبت
             </Button>
@@ -91,53 +93,137 @@ export default function CreateModal({
         </Row>,
       ]}
     >
-      <Form onFinish={handleFormSubmit} form={form} layout="vertical">
+      <Form
+        onFinish={handleFormSubmit}
+        disabled={isMutating}
+        form={form}
+        layout="vertical"
+      >
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
-            <Form.Item name="name" label="نام دسته بندی">
+            <Form.Item
+              name="name"
+              label="نام دسته بندی"
+              rules={[
+                {
+                  required: true,
+                  message: ".لطفا نام را وارد کنید",
+                },
+                {
+                  type: "string",
+                },
+              ]}
+            >
               <Input size="large" placeholder="انتخاب کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="فعال/غیر فعال">
-              <Select size="large" placeholder="انتخاب کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="density" label="دانسیته">
+            <Form.Item
+              name="testMethodId"
+              label="روش تولید"
+              rules={[
+                { required: true, message: ".لظفا روش تولید را انتخاب نمایید" },
+              ]}
+            >
               <Select
+                loading={isLoading}
+                options={data}
+                fieldNames={{ label: "Name", value: "Id" }}
                 size="large"
                 placeholder="انتخاب کنید"
-                onChange={handleDensityChange}
-              >
-                <Select.Option value="yes">دارد</Select.Option>
-                <Select.Option value="no">ندارد</Select.Option>
-              </Select>
+              />
             </Form.Item>
           </Col>
-          <Col xs={24} md={6}>
-            <Form.Item name="minimum" label="حداقل بازه">
-              <Input size="large" placeholder="انتخاب کنید" />
+          <Col xs={24} md={12}>
+            <Form.Item
+              name="is_Active"
+              label="فعال/غیر فعال"
+              rules={[
+                {
+                  required: true,
+                  message: ".لطفا وضغیت فعال/غیرفعال بودن را انتخاب نمایید",
+                },
+              ]}
+            >
+              <Select
+                options={[
+                  { label: "فعال", value: true },
+                  { label: "غیرفعال", value: false },
+                ]}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
             </Form.Item>
           </Col>
-          <Col xs={24} md={6}>
-            <Form.Item name="maximum" label="حداکثر بازه">
-              <Input size="large" placeholder="انتخاب کنید" />
+          <Col xs={24} md={12}>
+            <Form.Item
+              name="hasDensity"
+              label="دانسیته"
+              rules={[
+                {
+                  required: true,
+                  message: ".لطفا دانسیته را انتخاب نمایید ",
+                },
+              ]}
+            >
+              <Select
+                options={[
+                  { label: "دارد", value: true },
+                  { label: "ندارد", value: false },
+                ]}
+                value={selectedDensity}
+                onChange={(value) => setSelectedDensity(value)}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
             </Form.Item>
           </Col>
         </Row>
-        {selectedDensity === "yes" && (
+        <Row gutter={[16, 16]}></Row>
+        {selectedDensity === true && (
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="top" label="حد بالا دانسیته">
-                <Input size="large" placeholder="وارد کنید" />
+              <Form.Item
+                name="densityUpperLimit"
+                label="حد بالا دانسیته"
+                rules={[
+                  {
+                    required: true,
+                    message: ".لطفا حد بالا دانسیته را وارد نمایید",
+                  },
+                  {
+                    type: "number",
+                    message: ".باید به صورت عدد باشد",
+                  },
+                ]}
+              >
+                <InputNumber
+                  className="w-full"
+                  size="large"
+                  placeholder="وارد کنید"
+                />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="bottom" label="حد پایین دانسیته">
-                <Input size="large" placeholder="وارد کنید" />
+              <Form.Item
+                name="densityLowerLimit"
+                label="حد پایین دانسیته"
+                rules={[
+                  {
+                    required: true,
+                    message: ".لطفا حد پایین دانسیته را وارد نمایید",
+                  },
+                  {
+                    type: "number",
+                    message: ".باید به صورت عدد باشد ",
+                  },
+                ]}
+              >
+                <InputNumber
+                  className="w-full"
+                  size="large"
+                  placeholder="وارد کنید"
+                />
               </Form.Item>
             </Col>
           </Row>

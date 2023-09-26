@@ -24,18 +24,13 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import EditForm from "./edit-modal";
 
 export default function DataTable({
   setModalVisible,
 }: {
   setModalVisible: any;
 }) {
-  const [selectedDensity, setSelectedDensity] = useState("");
-
-  const handleDensityChange = (value: any) => {
-    setSelectedDensity(value);
-  };
-
   const { data: category, isLoading: ldCategory } = useSWR<{
     records: Category[];
     count: number;
@@ -166,7 +161,7 @@ export default function DataTable({
 
   //     }
   //   }, [])
-
+  const editformrequest = {};
   return (
     <>
       <div className="box-border w-full mt-8 p-6">
@@ -224,7 +219,7 @@ export default function DataTable({
                 size="large"
                 className="w-full"
                 type="primary"
-                onClick={handleConfirmEdit}
+                onClick={() => form.submit()}
                 key={"submit"}
               >
                 ثبت
@@ -244,51 +239,7 @@ export default function DataTable({
         ]}
       >
         <Form form={form} layout="vertical">
-          <Row gutter={[32, 1]}>
-            <Col xs={24} md={12}>
-              <Form.Item name="name" label="نام دسته بندی">
-                <Input size="large" placeholder="انتخاب کنید" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-              <Form.Item name="lastName" label="فعال/غیر فعال">
-                <Select size="large" placeholder="انتخاب کنید" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={12}>
-              <Form.Item name="year" label="روش تولید">
-                <Select size="large" placeholder="انتخاب کنید" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-              <Form.Item name="density" label="دانسیته">
-                <Select
-                  size="large"
-                  placeholder="انتخاب کنید"
-                  onChange={handleDensityChange}
-                >
-                  <Select.Option value="yes">دارد</Select.Option>
-                  <Select.Option value="no">ندارد</Select.Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          {selectedDensity === "yes" && (
-            <Row gutter={[16, 16]}>
-              <Col xs={24} md={12}>
-                <Form.Item name="top" label="حد بالا دانسیته">
-                  <Input size="large" placeholder="وارد کنید" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={12}>
-                <Form.Item name="bottom" label="حد پایین دانسیته">
-                  <Input size="large" placeholder="وارد کنید" />
-                </Form.Item>
-              </Col>
-            </Row>
-          )}
+          <EditForm />
         </Form>
       </Modal>
     </>

@@ -20,7 +20,7 @@ export default function Page() {
         selectRecord: 100000
     }
 
-    const [filter, setFilter] = useState<MaterialGet>(defaultValueTable)
+    const [filter, setFilter] = useState(defaultValueTable)
 
     const {isLoading: ldFactor, data: factors, mutate} = useSWR<{
         count: number,
@@ -29,6 +29,7 @@ export default function Page() {
         ([url, arg]: [string, any]) => listFetcher(url, {arg}))
     const setFilterTable = async (values: ProductGet) => {
 
+        // @ts-ignore
         setFilter({name: values.name, is_Active: true, fromRecord: 0, selectRecord: 1000})
 
         await mutate()

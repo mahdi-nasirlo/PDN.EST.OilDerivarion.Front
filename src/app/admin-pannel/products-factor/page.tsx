@@ -22,7 +22,7 @@ export default function Page() {
         selectRecord: 100000
     }
 
-    const [filter, setFilter] = useState<MaterialGet>(defaultValueTable)
+    const [filter, setFilter] = useState(defaultValueTable)
 
     const {data: product, isLoading: ldProduct, mutate} = useSWR<{
         records: Product[];
@@ -34,6 +34,7 @@ export default function Page() {
 
     const setFilterTable = async (values: ProductGet) => {
 
+        // @ts-ignore
         setFilter({name: values.name, is_Active: null, fromRecord: 0, selectRecord: 1000})
 
         await mutate()

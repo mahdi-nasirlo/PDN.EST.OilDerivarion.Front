@@ -9,7 +9,7 @@ export type Product = {
 
 export interface ProductGet {
     name: string | null,
-    is_Active: boolean,
+    is_Active: boolean | null,
     fromRecord: number,
     selectRecord: number,
 }
@@ -18,4 +18,13 @@ export interface ProductCreate {
     name: "string",
     productCategory_Id: number,
     is_Active: boolean
+}
+
+export interface ProductTestItem {
+    Uid: string,
+    Is_Active: boolean,
+    ProductUid: string,
+    TestItemUid: string,
+    ProductName: string,
+    TestItemName: string
 }

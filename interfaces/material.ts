@@ -6,7 +6,7 @@ interface Material {
 
 interface MaterialGet {
     name: string | null,
-    is_Active: boolean,
+    is_Active: boolean | null,
     fromRecord: number,
     selectRecord: number,
 }

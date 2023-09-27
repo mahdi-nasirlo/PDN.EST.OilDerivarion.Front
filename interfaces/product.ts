@@ -20,3 +20,12 @@ export interface ProductCreate {
   productCategory_Id: number;
   is_Active: boolean;
 }
+
+export interface ProductTestItem {
+  Uid: string;
+  Is_Active: boolean;
+  ProductUid: string;
+  TestItemUid: string;
+  ProductName: string;
+  TestItemName: string;
+}

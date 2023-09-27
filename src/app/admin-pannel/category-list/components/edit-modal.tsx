@@ -1,15 +1,15 @@
-import React, {useEffect} from "react";
-import {Button, Col, Form, Modal, Row} from "antd";
+import React, { useEffect } from "react";
+import { Button, Col, Form, Modal, Row } from "antd";
 import CategoryForm from "@/app/admin-pannel/category-list/components/category-form";
-import {useForm} from "antd/es/form/Form";
-import {Category} from "../../../../../interfaces/category";
+import { useForm } from "antd/es/form/Form";
+import { Category } from "../../../../../interfaces/category";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
-export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate}: {
+export default function EditModal({ recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate }: {
     setIsEditModalVisible: (arg: boolean) => void;
     isEditModalVisible: boolean;
     recordToEdit: Category | null;
@@ -19,12 +19,7 @@ export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModal
 
     const [form] = useForm()
 
-    const handleCancelEdit = () => {
-        setIsEditModalVisible(false);
-        setRecordToEdit(null); // Clear the recordToEdit
-    };
-
-    const {isMutating, trigger} = useSWRMutation("/TestItem/Update", mutationFetcher)
+    const { isMutating, trigger } = useSWRMutation("/ProductCategory/Update", mutationFetcher)
 
     const handleSubmit = async (values: Category) => {
 
@@ -32,21 +27,29 @@ export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModal
 
         await trigger(values)
 
-        setRecordToEdit(null)
-
         await mutate()
-    }
+
+        setRecordToEdit(null);
+
+        setIsEditModalVisible(false);
+
+    };
 
     const {
         data,
         isLoading
-    } = useSWR(["/ProductCategory/Get", {uid: recordToEdit?.Uid}], ([url, arg]) => listFetcher(url, {arg}))
+    } = useSWR(["/ProductCategory/Get", { uid: recordToEdit?.Uid }], ([url, arg]) => listFetcher(url, { arg }));
 
     useEffect(() => {
 
         form.setFieldsValue(convertKeysToLowerCase(data))
 
     }, [data])
+
+    const handleCancelEdit = () => {
+        setIsEditModalVisible(false);
+        setRecordToEdit(null);
+    };
 
     return (
         <>
@@ -72,7 +75,6 @@ export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModal
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isLoading || isMutating}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
@@ -85,7 +87,7 @@ export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModal
                 ]}
             >
                 <Form onFinish={handleSubmit} disabled={isLoading || isMutating} form={form} layout="vertical">
-                    <CategoryForm defaultSelectedDensity={data?.HasDensity}/>
+                    <CategoryForm defaultSelectedDensity={data?.HasDensity} />
                 </Form>
             </Modal>
         </>

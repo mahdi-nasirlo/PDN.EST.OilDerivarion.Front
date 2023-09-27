@@ -1,40 +1,42 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row,} from "antd";
-import {useForm} from "antd/es/form/Form";
+import { Button, Col, Form, Modal, Row, } from "antd";
+import { useForm } from "antd/es/form/Form";
 import React from "react";
-import {mutate} from "swr";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {CategoryProduct} from "../../../../../interfaces/category-product";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { CategoryProduct } from "../../../../../interfaces/category-product";
 import CategoryForm from "@/app/admin-pannel/category-list/components/category-form";
 
-export default function CreateModal({
-                                      setModalVisible,
-                                      modalVisible,
-                                    }: {
+export default function CreateModal({ setModalVisible, modalVisible, mutate
+}: {
   setModalVisible: any;
   modalVisible: any;
+  mutate: () => void
 }) {
 
 
   const { isMutating, trigger } = useSWRMutation(
     "/ProductCategory/Create",
-      mutationFetcher
+    mutationFetcher
   );
 
 
   const [form] = useForm();
 
-  const closeModal = () => {
+  const handleFormSubmit = async (values: CategoryProduct) => {
+
+    await trigger(values);
+
+    await mutate();
+
+    form.resetFields();
+
     setModalVisible(false);
+
   };
 
-  const handleFormSubmit = async (values: CategoryProduct) => {
-    // @ts-ignore
-    form.resetFields();
-    trigger(values);
-    mutate;
+  const closeModal = () => {
     setModalVisible(false);
   };
 
@@ -86,7 +88,7 @@ export default function CreateModal({
         form={form}
         layout="vertical"
       >
-        <CategoryForm/>
+        <CategoryForm />
       </Form>
     </Modal>
   );

@@ -1,13 +1,13 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from 'antd'
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Modal, Row } from 'antd'
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 import MaterialForm from "@/app/admin-pannel/adding-raw-material/components/material-form";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 
-export default function CreateModal({modalVisible, setModalVisible, mutate}: {
+export default function CreateModal({ modalVisible, setModalVisible, mutate }: {
     modalVisible: any,
     setModalVisible: any,
     mutate: () => void
@@ -16,7 +16,7 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
     const [form] = useForm()
 
 
-    const {isMutating, trigger} = useSWRMutation("/Material/Create", mutationFetcher)
+    const { isMutating, trigger } = useSWRMutation("/Material/Create", mutationFetcher)
 
     const createMaterial = async (values: Material) => {
 
@@ -66,8 +66,8 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
                 </Row>
             ]}
         >
-            <Form disabled={isMutating} onFinish={createMaterial} form={form}>
-                <MaterialForm/>
+            <Form disabled={isMutating} onFinish={createMaterial} form={form} layout='vertical'>
+                <MaterialForm />
             </Form>
         </Modal>)
 }

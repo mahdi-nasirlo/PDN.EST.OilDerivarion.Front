@@ -45,6 +45,7 @@ export default function Page() {
 
     return (
         <>
+            {/*// @ts-ignore*/}
             <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
             <DataTable mutate={mutate} ldTestItem={ldFactor} TestItem={factors}
                        setModalVisible={setModalVisible}/>

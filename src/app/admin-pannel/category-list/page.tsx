@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { Category } from "../../../../interfaces/category";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { ProductGet } from "../../../../interfaces/product";
+import {Category} from "../../../../interfaces/category";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import {ProductGet} from "../../../../interfaces/product";
 
 export default function Page() {
 
@@ -34,7 +34,7 @@ export default function Page() {
 
 
     const setFilterTable = async (values: ProductGet) => {
-
+        // @ts-ignore
         setFilter({ name: values.name, is_Active: values.is_Active, hasDensity: values.hasDensity, fromRecord: 0, selectRecord: 1000 })
 
         await mutate()
@@ -52,6 +52,7 @@ export default function Page() {
 
     return (
         <>
+            {/*// @ts-ignore*/}
             <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
             <DataTable mutate={mutate} category={category?.records} ldCategory={ldCategory}
                 setModalVisible={setModalVisible} />

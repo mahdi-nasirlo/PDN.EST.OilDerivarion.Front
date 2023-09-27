@@ -1,54 +1,42 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography } from 'antd'
-import { PlusIcon } from '@heroicons/react/24/outline';
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography} from 'antd'
+import {PlusIcon} from '@heroicons/react/24/outline';
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
+import {TestItemDetail} from "../../../../../interfaces/testItemDetail";
 
 
-interface DataType {
-    key: string;
-    Row: number;
-    Title: string;
-    Standard: string;
-    Reference: string;
-}
-
-
-export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({setModalVisible, testItemDetail, ldTestItemDetail}: {
+    setModalVisible: any,
+    testItemDetail: any[] | undefined,
+    ldTestItemDetail: boolean
+}) {
 
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<Material | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<TestItemDetail | null>(null);
 
-    const handleDelete = (record: Material) => {
+    const handleDelete = (record: TestItemDetail) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
 
-    const handleConfirmDelete = () => {
-        // Perform the delete action here with recordToDelete
-        // After successful delete, you can close the modal
-        setIsDeleteModalVisible(false);
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
-    };
+    const handleSubmit = () => {
 
-    const showModal = () => {
-        setModalVisible(true);
-    };
+        
+    }
+
 
     //ادیت
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<Material | null>(null);
+    const [recordToEdit, setRecordToEdit] = useState<TestItemDetail | null>(null);
 
-    const handleEdit = (record: Material) => {
+    const handleEdit = (record: TestItemDetail) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
@@ -63,9 +51,7 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
     };
 
 
-
-
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<TestItemDetail> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -78,12 +64,12 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
         },
         {
             title: "عنوان استاندارد",
-            dataIndex: "Standard",
+            dataIndex: "TestItemName",
             key: "3",
         },
         {
             title: "مرجع",
-            dataIndex: "Reference",
+            dataIndex: "ReferenceCode",
             key: "4",
         },
         {
@@ -108,18 +94,19 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
                         size="large"
                         type="primary"
                         htmlType="submit"
-                        onClick={showModal}
+                        onClick={() => setModalVisible(true)}
                     >
-                        <PlusIcon width={24} height={24} />
-                        <span className="flex  ">
+                        <PlusIcon width={24} height={24}/>
+                        <span className="flex">
                             افزودن ویژگی آزمون
                         </span>
                     </Button>
                 </div>
                 <Table
                     className="mt-6"
+                    loading={ldTestItemDetail}
                     columns={columns}
-                    dataSource={data}
+                    dataSource={testItemDetail}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -135,8 +122,8 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
                 />
             </div>
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible} handleDelete={() => {
-            }} title="ویژگی آزمون" />
+            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
+                                handleDelete={handleSubmit} title="ویژگی آزمون"/>
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -191,21 +178,3 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
         </>
     )
 }
-
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        Title: "اشتغال باز",
-        Standard: "اندازه",
-        Reference: "INSO 198",
-    },
-    {
-        key: "2",
-        Row: 2,
-        Title: "تقطیر اتمسفر",
-        Standard: "تقطیر در فشار اتمسفر",
-        Reference: "INSO 6261",
-    },
-]

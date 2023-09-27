@@ -92,7 +92,7 @@ const ExpandedRowRender = ({material}: { material: Material }) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const [recordToDelete, setRecordToDelete] = useState<MaterialTestItem>();
+  const [recordToDelete, setRecordToDelete] = useState();
 
   const defaultValue = {
     "productUid": material.Uid,
@@ -112,6 +112,7 @@ const ExpandedRowRender = ({material}: { material: Material }) => {
 
     setOpen(false)
 
+    // @ts-ignore
     await trigger({uid: recordToDelete?.Uid})
 
     await mutate()
@@ -132,6 +133,7 @@ const ExpandedRowRender = ({material}: { material: Material }) => {
                 className="text-red-500 font-bold"
                 onClick={() => {
                   setOpen(true);
+                  // @ts-ignore
                   setRecordToDelete(record)
                 }}
             >

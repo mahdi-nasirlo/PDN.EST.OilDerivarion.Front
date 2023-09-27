@@ -119,7 +119,7 @@ const ExpandedRowRender = ({material}: { material: Material }) => {
 
   }
 
-  const expandColumns: TableColumnsType<MaterialTestItem> = [
+  const expandColumns: TableColumnsType = [
     {title: "#", dataIndex: "Row", key: "1"},
     {title: "نام فاکتور", dataIndex: "TestItemName", key: "2"},
     {
@@ -145,6 +145,7 @@ const ExpandedRowRender = ({material}: { material: Material }) => {
   ];
 
   return <>
+    {/*@ts-ignore*/}
     <Table columns={expandColumns} dataSource={addIndexToData(data)} loading={isLoading}
            pagination={false}/>
     <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={deleteProductFactor} title={"فاکتور محصول"}/>

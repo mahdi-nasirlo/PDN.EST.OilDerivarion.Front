@@ -6,7 +6,7 @@ import {useForm} from 'antd/es/form/Form';
 import {ColumnsType} from 'antd/es/table';
 import React, {useState} from 'react'
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
-import {TestItemDetail} from "../../../../../interfaces/testItemDetail";
+// import {TestItemDetail} from "../../../../../interfaces/testItemDetail";
 
 
 export default function DataTable({setModalVisible, testItemDetail, ldTestItemDetail}: {
@@ -18,9 +18,9 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<TestItemDetail | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
 
-    const handleDelete = (record: TestItemDetail) => {
+    const handleDelete = (record: any) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
@@ -34,9 +34,9 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
     //ادیت
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<TestItemDetail | null>(null);
+    const [recordToEdit, setRecordToEdit] = useState<any | null>(null);
 
-    const handleEdit = (record: TestItemDetail) => {
+    const handleEdit = (record: any) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
     };
@@ -51,7 +51,7 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
     };
 
 
-    const columns: ColumnsType<TestItemDetail> = [
+    const columns: ColumnsType<any> = [
         {
             title: "ردیف",
             dataIndex: "Row",

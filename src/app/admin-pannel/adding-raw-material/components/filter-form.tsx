@@ -1,10 +1,10 @@
 "use client";
 
-import {Button, Col, Form, Input, Row, Select} from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
-import {useForm} from "antd/lib/form/Form";
+import { useForm } from "antd/lib/form/Form";
 
-export default function FilterForm({filter, unsetFilter}: {
+export default function FilterForm({ filter, unsetFilter }: {
     filter: (arg: MaterialGet) => void,
     unsetFilter: () => void,
 }) {
@@ -27,7 +27,7 @@ export default function FilterForm({filter, unsetFilter}: {
                             name="name"
                             label="نام ماده اولیه"
                         >
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -35,7 +35,7 @@ export default function FilterForm({filter, unsetFilter}: {
                             name="year-establishment"
                             label="واحد اندازه گیری"
                         >
-                            <Select disabled size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -46,9 +46,12 @@ export default function FilterForm({filter, unsetFilter}: {
                             label="وضعیت"
                         >
                             <Select size="large"
-                                    defaultValue={true}
-                                    options={[{label: "فعال", value: true}, {label: "غیر فعال", value: false}]}
-                                    placeholder="انتخاب کنید"/>
+                                defaultValue={true}
+                                options={[
+                                    { label: "فعال", value: true },
+                                    { label: "غیر فعال", value: false }
+                                ]}
+                                placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -56,7 +59,7 @@ export default function FilterForm({filter, unsetFilter}: {
                             name="year-establishment"
                             label="کد ماده"
                         >
-                            <Select disabled size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -66,7 +69,7 @@ export default function FilterForm({filter, unsetFilter}: {
                             name="factore"
                             label="فاکتور آزمون "
                         >
-                            <Select disabled size="large" placeholder="انتخاب کنید"/>
+                            <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

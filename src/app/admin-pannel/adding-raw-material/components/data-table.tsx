@@ -1,14 +1,14 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from 'react'
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-pannel/adding-raw-material/components/material-form";
 
 interface DataType {
@@ -21,7 +21,7 @@ interface DataType {
     TestInvoice: string;
 }
 
-export default function DataTable({setModalVisible, ldMaterial, material, mutate}: {
+export default function DataTable({ setModalVisible, ldMaterial, material, mutate }: {
     setModalVisible: any,
     ldMaterial: boolean,
     mutate: () => void,
@@ -41,7 +41,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
         setIsDeleteModalVisible(true);
     };
 
-    const {trigger: deleteMaterial, isMutating: ldDeleteMaterial} = useSWRMutation("/Material/Delete", mutationFetcher)
+    const { trigger: deleteMaterial, isMutating: ldDeleteMaterial } = useSWRMutation("/Material/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -53,10 +53,8 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
 
         setIsDeleteModalVisible(false);
 
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
+        setRecordToDelete(null);
+
     };
 
     const showModal = () => {
@@ -64,6 +62,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
     };
 
     //ادیت
+
     const [form] = useForm()
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [recordToEdit, setRecordToEdit] = useState<Material | null>(null);
@@ -83,12 +82,20 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
 
         setIsEditModalVisible(false)
 
+        setRecordToEdit(null)
     }
 
     const handleCancelEdit = () => {
         setIsEditModalVisible(false);
-        setRecordToEdit(null); // Clear the recordToEdit
+        setRecordToEdit(null);
     };
+
+    const { trigger, isMutating, data } = useSWRMutation("/Material/Update", mutationFetcher)
+
+
+    useEffect(() => {
+        form.setFieldsValue(recordToEdit)
+    }, [recordToEdit])
 
 
     const columns: ColumnsType<Material> = [
@@ -111,7 +118,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
             title: "فعال/غیر فعال",
             dataIndex: "ConfirmedRequestCode",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "کد ماده",
@@ -129,19 +136,14 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
             render: (_, record) => (
                 <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold"
-                            onClick={() => handleEdit(record)}>ویرایش</Button>
+                        onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className="text-red-500 font-bold"
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
     ];
 
-    useEffect(() => {
-        form.setFieldsValue(recordToEdit)
-    }, [recordToEdit])
-
-    const {trigger, isMutating, data} = useSWRMutation("/Material/Update", mutationFetcher)
 
     return (
         <>
@@ -156,7 +158,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex">
                             افزودن ماده اولیه
                         </span>
@@ -182,8 +184,12 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                 />
             </div>
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                                handleDelete={handleConfirmDelete} title="مواد اولیه"/>
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
+                title="مواد اولیه"
+            />
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -217,8 +223,8 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                     </Row>
                 ]}
             >
-                <Form onFinish={sendEditRequest} disabled={isMutating} form={form}>
-                    <MaterialForm/>
+                <Form onFinish={sendEditRequest} disabled={isMutating} form={form} layout='vertical'>
+                    <MaterialForm />
                 </Form>
             </Modal>
         </>

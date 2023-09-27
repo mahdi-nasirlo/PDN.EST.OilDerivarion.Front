@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
-import {Col, Form, Input, InputNumber, Row, Select} from "antd";
+import React, { useEffect, useState } from 'react';
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 
-function CategoryForm({defaultSelectedDensity = false}: { defaultSelectedDensity?: boolean }) {
 
-    const [selectedDensity, setSelectedDensity] = useState<boolean>(defaultSelectedDensity);
+function CategoryForm({ defaultSelectedDensity }: { defaultSelectedDensity?: boolean }) {
 
-    const {data, isLoading} = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
+    const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
 
-    const handleDensityChange = (value: any) => {
-        setSelectedDensity(value);
-    };
+    const [hasDensity, setHasDensity] = useState(defaultSelectedDensity);
+
+    useEffect(() => {
+        setHasDensity(defaultSelectedDensity);
+    }, [defaultSelectedDensity]);
+
 
     return (
         <>
-
             <Row gutter={[32, 1]}>
                 <Col xs={24} md={12}>
                     <Form.Item
@@ -31,7 +32,7 @@ function CategoryForm({defaultSelectedDensity = false}: { defaultSelectedDensity
                             },
                         ]}
                     >
-                        <Input size="large" placeholder="انتخاب کنید"/>
+                        <Input size="large" placeholder="انتخاب کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -39,18 +40,20 @@ function CategoryForm({defaultSelectedDensity = false}: { defaultSelectedDensity
                         name="testMethodId"
                         label="روش تولید"
                         rules={[
-                            {required: true, message: ".لظفا روش تولید را انتخاب نمایید"},
+                            { required: true, message: ".لظفا روش تولید را انتخاب نمایید" },
                         ]}
                     >
                         <Select
                             loading={isLoading}
                             options={data}
-                            fieldNames={{label: "Name", value: "Id"}}
+                            fieldNames={{ label: "Name", value: "Id" }}
                             size="large"
                             placeholder="انتخاب کنید"
                         />
                     </Form.Item>
                 </Col>
+            </Row>
+            <Row gutter={[32, 1]}>
                 <Col xs={24} md={12}>
                     <Form.Item
                         name="is_Active"
@@ -64,8 +67,8 @@ function CategoryForm({defaultSelectedDensity = false}: { defaultSelectedDensity
                     >
                         <Select
                             options={[
-                                {label: "فعال", value: true},
-                                {label: "غیرفعال", value: false},
+                                { label: "فعال", value: true },
+                                { label: "غیرفعال", value: false },
                             ]}
                             size="large"
                             placeholder="انتخاب کنید"
@@ -85,62 +88,32 @@ function CategoryForm({defaultSelectedDensity = false}: { defaultSelectedDensity
                     >
                         <Select
                             options={[
-                                {label: "دارد", value: true},
-                                {label: "ندارد", value: false},
+                                { label: "دارد", value: true },
+                                { label: "ندارد", value: false },
                             ]}
-                            value={selectedDensity}
-                            onChange={(value) => setSelectedDensity(value)}
                             size="large"
                             placeholder="انتخاب کنید"
+                            onChange={(value) => setHasDensity(value)}
                         />
                     </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]}></Row>
-            {selectedDensity === true && (
-                <Row gutter={[16, 16]}>
+            {hasDensity && (
+                <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="densityUpperLimit"
-                            label="حد بالا دانسیته"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: ".لطفا حد بالا دانسیته را وارد نمایید",
-                                },
-                                {
-                                    type: "number",
-                                    message: ".باید به صورت عدد باشد",
-                                },
-                            ]}
+                            label="حداقل بازه"
                         >
-                            <InputNumber
-                                className="w-full"
-                                size="large"
-                                placeholder="وارد کنید"
-                            />
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="densityLowerLimit"
-                            label="حد پایین دانسیته"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: ".لطفا حد پایین دانسیته را وارد نمایید",
-                                },
-                                {
-                                    type: "number",
-                                    message: ".باید به صورت عدد باشد ",
-                                },
-                            ]}
+                            label="حداکثر بازه"
                         >
-                            <InputNumber
-                                className="w-full"
-                                size="large"
-                                placeholder="وارد کنید"
-                            />
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

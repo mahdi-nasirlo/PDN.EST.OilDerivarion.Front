@@ -1,17 +1,17 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Switch, Table, Typography,} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {Category} from "../../../../../interfaces/category";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Switch, Table, Typography, } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { Category } from "../../../../../interfaces/category";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-pannel/category-list/components/edit-modal";
 
-export default function DataTable({setModalVisible, category, ldCategory, mutate}: {
+export default function DataTable({ setModalVisible, category, ldCategory, mutate }: {
     setModalVisible: any;
     category: Category[] | undefined;
     mutate: () => void;
@@ -28,19 +28,19 @@ export default function DataTable({setModalVisible, category, ldCategory, mutate
 
     const {
         trigger: deleteCategory
-    } = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
+    } = useSWRMutation("/ProductCategory/Delete", mutationFetcher)
 
     const handleDelete = async () => {
 
         console.log(recordToDelete?.Uid)
-
-        setIsDeleteModalVisible(false);
 
         await deleteCategory({
             "uid": recordToDelete?.Uid
         })
 
         await mutate()
+
+        setIsDeleteModalVisible(false);
 
         setRecordToDelete(null);
 
@@ -81,7 +81,7 @@ export default function DataTable({setModalVisible, category, ldCategory, mutate
             title: "فعال/غیر فعال ",
             dataIndex: "ConfirmedRequestCode",
             key: "6",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "عملیات",
@@ -126,7 +126,7 @@ export default function DataTable({setModalVisible, category, ldCategory, mutate
                         type="primary"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex ">افزودن دسته بندی</span>
                     </Button>
                 </div>
@@ -154,12 +154,16 @@ export default function DataTable({setModalVisible, category, ldCategory, mutate
                 open={isDeleteModalVisible}
                 setOpen={setIsDeleteModalVisible}
                 handleDelete={handleDelete}
-                title="دسته بندی"
+                title="دسته بندی محصول"
             />
             {/* ویرایش */}
-            <EditModal mutate={mutate} recordToEdit={recordToEdit} setIsEditModalVisible={setIsEditModalVisible}
-                       isEditModalVisible={isVisibleEditModal}
-                       setRecordToEdit={setRecordToEdit}/>
+            <EditModal
+                mutate={mutate}
+                recordToEdit={recordToEdit}
+                setIsEditModalVisible={setIsEditModalVisible}
+                isEditModalVisible={isVisibleEditModal}
+                setRecordToEdit={setRecordToEdit}
+            />
         </>
     );
 }

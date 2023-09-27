@@ -51,6 +51,7 @@ export default function Page() {
 
     return (
         <>
+            {/*// @ts-ignore*/}
             <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
             <div className="box-border w-full p-6 mt-8">
                 <div className="flex justify-between items-center">

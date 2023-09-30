@@ -33,7 +33,7 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
         setIsDeleteModalVisible(true);
     };
 
-    const { trigger } = useSWRMutation("/TestItem/Delete", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/TestItem/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -131,7 +131,7 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
                 <Table
                     className="mt-6"
                     columns={columns}
-                    loading={ldTestItem}
+                    loading={ldTestItem || isMutating}
                     // expandable={{expandedRowRender: expandedRowRender}}
                     dataSource={addIndexToData(TestItem?.records)}
                     pagination={{

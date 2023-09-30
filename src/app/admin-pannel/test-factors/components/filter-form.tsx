@@ -1,10 +1,10 @@
 "use client"
 
-import {Button, Col, Form, Input, Row, Select} from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 
-export default function FilterForm({filter, unsetFilter}: {
+export default function FilterForm({ filter, unsetFilter }: {
     filter: (arg: MaterialGet) => void,
     unsetFilter: () => void,
 }) {
@@ -14,31 +14,36 @@ export default function FilterForm({filter, unsetFilter}: {
 
     return (
         <div className="box-border w-full p-6">
-            <Form onFinish={(values) => filter(values)} form={form} name="form_item_path" layout="vertical">
+            <Form onFinish={(values) => filter(values)} form={form} layout="vertical">
                 <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="name" label="نام فاکتور">
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="مقیاس آزمون">
-                            <Select disabled size="large" placeholder="وارد کنید"/>
+                        <Form.Item name="measure_Id" label="مقیاس آزمون">
+                            <Select disabled size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="تجدید پذیری">
-                            <Select disabled size="large" placeholder="وارد کنید"/>
+                        <Form.Item name="reNewabillity" label="تجدید پذیری">
+                            <Select disabled size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="مقدار تجدید پذیری">
-                            <Input disabled size="large" placeholder="وارد کنید"/>
+                        <Form.Item name="is_Active" label="فعال/غیر فعال">
+                            <Select disabled size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={24}>
-                        <Form.Item name="lastName" label="روش آزمون">
-                            <Input disabled size="large" placeholder="وارد کنید"/>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="reNewabillity_Value" label="مقدار تجدید پذیری">
+                            <Input disabled size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="testMethod" label="روش آزمون">
+                            <Input disabled size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

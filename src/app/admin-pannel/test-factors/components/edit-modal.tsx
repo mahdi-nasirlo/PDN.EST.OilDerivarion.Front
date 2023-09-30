@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
-import {TestItem} from "../../../../../interfaces/TestItem";
-import {Button, Col, Form, Modal, Row} from "antd";
-import {useForm} from "antd/es/form/Form";
+import React, { useEffect } from 'react';
+import { TestItem } from "../../../../../interfaces/TestItem";
+import { Button, Col, Form, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import TestFactorForm from "@/app/admin-pannel/test-factors/components/test-factor-form";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
-function EditModal({editRecord, setEditRecord, mutate}: {
+function EditModal({ editRecord, setEditRecord, mutate }: {
     editRecord: TestItem | undefined,
     setEditRecord: (arg: undefined) => void,
     mutate: () => void
@@ -17,9 +17,9 @@ function EditModal({editRecord, setEditRecord, mutate}: {
 
     const [form] = useForm()
 
-    const {data, isLoading} = useSWR(["/TestItem/Get", {uid: editRecord?.Uid}], ([url, arg]) => listFetcher(url, {arg}))
+    const { data, isLoading } = useSWR(["/TestItem/Get", { uid: editRecord?.Uid }], ([url, arg]) => listFetcher(url, { arg }))
 
-    const {isMutating, trigger} = useSWRMutation("/TestItem/Update", mutationFetcher)
+    const { isMutating, trigger } = useSWRMutation("/TestItem/Update", mutationFetcher)
 
     const handleSubmit = async (values: TestItem) => {
 
@@ -30,6 +30,9 @@ function EditModal({editRecord, setEditRecord, mutate}: {
         setEditRecord(undefined)
 
         await mutate()
+
+        form.resetFields();
+
     }
 
     useEffect(() => {
@@ -74,8 +77,8 @@ function EditModal({editRecord, setEditRecord, mutate}: {
                     </Row>
                 ]}
             >
-                <Form onFinish={handleSubmit} disabled={isLoading || isMutating} form={form}>
-                    <TestFactorForm/>
+                <Form onFinish={handleSubmit} disabled={isLoading || isMutating} form={form} layout='vertical'>
+                    <TestFactorForm />
                 </Form>
             </Modal>
         </>

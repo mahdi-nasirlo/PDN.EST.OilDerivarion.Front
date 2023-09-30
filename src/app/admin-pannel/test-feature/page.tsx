@@ -50,8 +50,12 @@ export default function Page() {
         <>
             {/*@ts-ignore*/}
             <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
-            <DataTable ldTestItemDetail={ldTestItemDetail} testItemDetail={addIndexToData(testItemDetail)}
-                setModalVisible={setModalVisible} />
+            <DataTable
+                ldTestItemDetail={ldTestItemDetail}
+                testItemDetail={addIndexToData(testItemDetail)}
+                setModalVisible={setModalVisible}
+                mutate={mutate}
+            />
             <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} mutate={mutate} />
         </>
     )

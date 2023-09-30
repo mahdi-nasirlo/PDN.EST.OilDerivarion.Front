@@ -28,6 +28,8 @@ export interface TestItemDetail {
 }
 
 export type CreateTestItemDetail = {
+  Uid: string | null;
+  TestItemUid: string;
   testItem_Id: number;
   title: string | null;
   referenceCode: string | null;

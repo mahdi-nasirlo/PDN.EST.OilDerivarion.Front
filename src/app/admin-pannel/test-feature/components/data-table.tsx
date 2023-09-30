@@ -1,53 +1,58 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography } from 'antd'
+import { Button, Space, Table, Typography } from 'antd'
 import { PlusIcon } from '@heroicons/react/24/outline';
-import { useForm } from 'antd/es/form/Form';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
-// import {TestItemDetail} from "../../../../../interfaces/testItemDetail";
+import useSWRMutation from 'swr/mutation';
+import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
+import { CreateTestItemDetail, TestItemDetail } from '../../../../../interfaces/TestItem';
+import EditModal from './edit-modal';
 
 
-export default function DataTable({ setModalVisible, testItemDetail, ldTestItemDetail }: {
+export default function DataTable({ setModalVisible, testItemDetail, ldTestItemDetail, mutate
+}: {
     setModalVisible: any,
     testItemDetail: any[] | undefined,
-    ldTestItemDetail: boolean
+    ldTestItemDetail: boolean,
+    mutate: () => void;
 }) {
 
     //حذف
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<TestItemDetail | null>(null);
 
-    const handleDelete = (record: any) => {
+    const handleDelete = (record: TestItemDetail) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
 
-    const handleSubmit = () => {
+    const { trigger: deleteLab, isMutating } = useSWRMutation("/TestItemDetail/Delete", mutationFetcher);
 
+    const handleConfirmDelete = async () => {
+        await deleteLab({
+            Uid: recordToDelete?.Uid,
+        });
 
-    }
+        await mutate();
+
+        setIsDeleteModalVisible(false);
+
+        setRecordToDelete(null);
+    };
 
 
     //ادیت
-    const [form] = useForm()
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<any | null>(null);
 
-    const handleEdit = (record: any) => {
+
+    const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false)
+    const [recordToEdit, setRecordToEdit] = useState<CreateTestItemDetail | null>(null)
+
+    const handleEdit = (record: CreateTestItemDetail) => {
         setRecordToEdit(record);
         setIsEditModalVisible(true);
-    };
-    const handleConfirmEdit = () => {
-        // Perform the edit action here with recordToEdit
-        // After successful edit, you can close the modal
-        setIsEditModalVisible(false);
-    };
-    const handleCancelEdit = () => {
-        setIsEditModalVisible(false);
-        setRecordToEdit(null); // Clear the recordToEdit
     };
 
 
@@ -88,7 +93,7 @@ export default function DataTable({ setModalVisible, testItemDetail, ldTestItemD
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className="text-right text-[16px] font-normal">لیست استاندارد های آزمون</Typography>
+                    <Typography className="text-right text-[16px] font-normal">لیست استانداردهای آزمون</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -104,7 +109,7 @@ export default function DataTable({ setModalVisible, testItemDetail, ldTestItemD
                 </div>
                 <Table
                     className="mt-6"
-                    loading={ldTestItemDetail}
+                    loading={ldTestItemDetail || isMutating}
                     columns={columns}
                     dataSource={testItemDetail}
                     pagination={{
@@ -122,75 +127,20 @@ export default function DataTable({ setModalVisible, testItemDetail, ldTestItemD
                 />
             </div>
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                handleDelete={handleSubmit} title="ویژگی آزمون" />
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
+                title="استاندارد آزمون"
+            />
             {/* ویرایش */}
-            <Modal
-                width={800}
-                title="ویژگی آزمون"
-                visible={isEditModalVisible}
-                onOk={handleConfirmEdit}
-                onCancel={handleCancelEdit}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full"
-                                type="primary"
-                                onClick={handleConfirmEdit}
-                                key={"submit"} >
-                                ثبت
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleCancelEdit}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
-            >
-                <Form name="form_item_path" layout="vertical">
-                    <Row gutter={[16, 0]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="lastName" label="عنوان فاکتور">
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="lastName" label="عنوان استاندارد">
-                                <Select size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 0]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item name="lastName" label="مرجع">
-                                <Select size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                name="is_Active"
-                                label="فعال / غیر فعال"
-                            >
-                                <Select size="large"
-                                    defaultValue={true}
-                                    options={[
-                                        { label: "فعال", value: true },
-                                        { label: "غیر فعال", value: false }
-                                    ]}
-                                    placeholder="انتخاب کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Form>
-            </Modal >
+            <EditModal
+                mutate={mutate}
+                recordToEdit={recordToEdit}
+                setRecordToEdit={setRecordToEdit}
+                isEditModalVisible={isVisibleEditModal}
+                setIsEditModalVisible={setIsEditModalVisible}
+            />
         </>
     )
 }

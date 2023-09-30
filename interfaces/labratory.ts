@@ -1,4 +1,4 @@
-interface LabratoryGet {
+interface LaboratoryGet {
   Name: string | null;
   is_Active: boolean | null;
   fromRecord: number;
@@ -15,4 +15,10 @@ interface Labratory {
   address: string | null;
   is_Active: boolean | null;
   Uid: string | null;
+}
+
+interface LaboratoryTestItemGet {
+  labUid: string | null;
+  testItemUid: string | null;
+  is_Active: boolean | null;
 }

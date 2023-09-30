@@ -1,19 +1,10 @@
 "use client";
 
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Modal,
-  Row,
-  Select,
-} from "antd";
+import { Button, Col, Form, Modal, Row, Select, } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React, { useState } from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { CategoryProduct } from "../../../../../interfaces/category-product";
@@ -21,9 +12,11 @@ import { CategoryProduct } from "../../../../../interfaces/category-product";
 export default function CreateModal({
   setModalVisible,
   modalVisible,
+  mutate
 }: {
   setModalVisible: any;
   modalVisible: any;
+  mutate: () => void;
 }) {
   const [selectedDensity, setSelectedDensity] = useState<boolean>(false);
 

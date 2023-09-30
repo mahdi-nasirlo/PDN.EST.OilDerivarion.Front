@@ -1,9 +1,10 @@
-interface LabratoryGet {
+interface LaboratoryGet {
   Name: string | null;
   is_Active: boolean | null;
   fromRecord: number;
   selectRecord: number;
 }
+
 interface Labratory {
   name: string | null;
   ranking: number | null;

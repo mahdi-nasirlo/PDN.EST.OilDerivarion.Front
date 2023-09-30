@@ -5,7 +5,7 @@ import React from 'react'
 
 
 export default function FilterForm({ filter, unsetFilter }: {
-    filter: (arg: LabratoryGet) => void,
+    filter: (arg: LaboratoryGet) => void,
     unsetFilter: () => void,
 }) {
 

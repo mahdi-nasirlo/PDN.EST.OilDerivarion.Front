@@ -43,7 +43,7 @@ export default function FilterForm({ filter, unsetFilter }: {
                     <Col xs={24} md={12}>
                         <Form.Item
                             name="is_Active"
-                            label="وضعیت"
+                            label="فعال / غیر فعال"
                         >
                             <Select size="large"
                                 defaultValue={true}

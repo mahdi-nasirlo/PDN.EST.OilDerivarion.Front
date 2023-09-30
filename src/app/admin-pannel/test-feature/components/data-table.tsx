@@ -1,15 +1,15 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography} from 'antd'
-import {PlusIcon} from '@heroicons/react/24/outline';
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography } from 'antd'
+import { PlusIcon } from '@heroicons/react/24/outline';
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 // import {TestItemDetail} from "../../../../../interfaces/testItemDetail";
 
 
-export default function DataTable({setModalVisible, testItemDetail, ldTestItemDetail}: {
+export default function DataTable({ setModalVisible, testItemDetail, ldTestItemDetail }: {
     setModalVisible: any,
     testItemDetail: any[] | undefined,
     ldTestItemDetail: boolean
@@ -27,7 +27,7 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
 
     const handleSubmit = () => {
 
-        
+
     }
 
 
@@ -88,7 +88,7 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className="text-right text-[16px] font-normal">لیست ویژگی های آزمون</Typography>
+                    <Typography className="text-right text-[16px] font-normal">لیست استاندارد های آزمون</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -96,9 +96,9 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
                         htmlType="submit"
                         onClick={() => setModalVisible(true)}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex">
-                            افزودن ویژگی آزمون
+                            افزودن استاندارد آزمون
                         </span>
                     </Button>
                 </div>
@@ -123,7 +123,7 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
             </div>
             {/* جذف */}
             <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                                handleDelete={handleSubmit} title="ویژگی آزمون"/>
+                handleDelete={handleSubmit} title="ویژگی آزمون" />
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -167,9 +167,25 @@ export default function DataTable({setModalVisible, testItemDetail, ldTestItemDe
                                 <Select size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
+                    </Row>
+                    <Row gutter={[16, 0]}>
                         <Col xs={24} md={12}>
                             <Form.Item name="lastName" label="مرجع">
                                 <Select size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="is_Active"
+                                label="فعال / غیر فعال"
+                            >
+                                <Select size="large"
+                                    defaultValue={true}
+                                    options={[
+                                        { label: "فعال", value: true },
+                                        { label: "غیر فعال", value: false }
+                                    ]}
+                                    placeholder="انتخاب کنید" />
                             </Form.Item>
                         </Col>
                     </Row>

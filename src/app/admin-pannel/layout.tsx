@@ -119,7 +119,7 @@ const items: MenuProps["items"] = [
     // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
-    <Link href={"/admin-pannel/test-feature"}>ویژگی های آزمون</Link>,
+    <Link href={"/admin-pannel/test-feature"}>استاندارد های آزمون</Link>,
     "test-feature"
     // <FolderPlusIcon width={16} height={16} />
   ),

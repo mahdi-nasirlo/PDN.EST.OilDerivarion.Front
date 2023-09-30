@@ -1,19 +1,19 @@
 "use client"
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Space, Switch, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import {TableColumnsType} from "antd/lib";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {TestItem} from "../../../../../interfaces/TestItem";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Space, Switch, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
+import { TableColumnsType } from "antd/lib";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { TestItem } from "../../../../../interfaces/TestItem";
 import EditModal from "@/app/admin-pannel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 
-export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate}: {
+export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutate }: {
     setModalVisible: any,
     ldTestItem: boolean,
     mutate: () => void,
@@ -33,7 +33,7 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
         setIsDeleteModalVisible(true);
     };
 
-    const {trigger} = useSWRMutation("/TestItem/Delete", mutationFetcher)
+    const { trigger } = useSWRMutation("/TestItem/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -45,10 +45,6 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
 
         await mutate()
 
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null);
     };
 
     const showModal = () => {
@@ -90,7 +86,7 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
             title: "فعال/غیر فعال ",
             dataIndex: "Is_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "جزئیات",
@@ -98,9 +94,9 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
             render: (_, record) => (
                 <Space size="middle">
                     <Button type="link" className={"text-primary-500 font-bold"}
-                            onClick={() => setOpenEdit(record)}>ویرایش</Button>
+                        onClick={() => setOpenEdit(record)}>ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
@@ -113,31 +109,12 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
         upgradeNum: string;
     }
 
-    const expandedRowRender = () => {
-        const columns: TableColumnsType<ExpandedDataType> = [
-            { title: '#', dataIndex: '1', key: 'date' },
-            { title: 'نام ماده اولیه', dataIndex: '1', key: 'name' },
-            { title: 'عملیات', dataIndex: '2', key: 'upgradeNum' },
-        ];
-
-        const data = [];
-        for (let i = 0; i < 3; ++i) {
-            data.push({
-                key: i.toString(),
-                date: '2014-12-24 23:12:00',
-                name: 'This is production name',
-                upgradeNum: 'Upgraded: 56',
-            });
-        }
-        return <Table columns={columns} dataSource={[]} pagination={false} />;
-    };
-
 
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
+                    <Typography className="text-right text-[16px] font-normal">لیست فاکتورهای آزمون</Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -145,7 +122,7 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex  ">
                             افزودن فاکتور آزمون
                         </span>
@@ -170,10 +147,10 @@ export default function DataTable({setModalVisible, ldTestItem, TestItem, mutate
                         },
                     }}
                 />
-                <EditModal mutate={mutate} editRecord={openEdit} setEditRecord={setOpenEdit}/>
+                <EditModal mutate={mutate} editRecord={openEdit} setEditRecord={setOpenEdit} />
             </div>
             <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                                handleDelete={handleConfirmDelete} title="مواد اولیه"/>
+                handleDelete={handleConfirmDelete} title="مواد اولیه" />
         </>
     )
 }

@@ -1,13 +1,13 @@
 "use client"
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import FilterForm from './components/filter-form';
 import DataTable from './components/data-table';
 import CreateModal from './components/create-modal';
 import useSWR from "swr";
-import {ProductGet} from "../../../../interfaces/product";
-import {listFetcher} from "../../../../lib/server/listFetcher";
-import {TestItem} from "../../../../interfaces/TestItem";
+import { ProductGet } from "../../../../interfaces/product";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import { TestItem } from "../../../../interfaces/TestItem";
 
 export default function Page() {
 
@@ -15,22 +15,22 @@ export default function Page() {
 
     const defaultValueTable = {
         name: null,
-        is_Active: true,
+        is_Active: null,
         fromRecord: 0,
         selectRecord: 100000
     }
 
     const [filter, setFilter] = useState(defaultValueTable)
 
-    const {isLoading: ldFactor, data: factors, mutate} = useSWR<{
+    const { isLoading: ldFactor, data: factors, mutate } = useSWR<{
         count: number,
         records: TestItem[]
     }>(["/TestItem/GetPage", filter],
-        ([url, arg]: [string, any]) => listFetcher(url, {arg}))
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
     const setFilterTable = async (values: ProductGet) => {
 
         // @ts-ignore
-        setFilter({name: values.name, is_Active: true, fromRecord: 0, selectRecord: 1000})
+        setFilter({ name: values.name, is_Active: null, fromRecord: 0, selectRecord: 1000 })
 
         await mutate()
 
@@ -47,10 +47,10 @@ export default function Page() {
     return (
         <>
             {/*// @ts-ignore*/}
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
+            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
             <DataTable mutate={mutate} ldTestItem={ldFactor} TestItem={factors}
-                       setModalVisible={setModalVisible}/>
-            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+                setModalVisible={setModalVisible} />
+            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }

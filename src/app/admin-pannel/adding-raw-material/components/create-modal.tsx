@@ -20,11 +20,13 @@ export default function CreateModal({ modalVisible, setModalVisible, mutate }: {
 
     const createMaterial = async (values: Material) => {
 
-        await trigger(values)
+        await trigger(values);
 
-        await mutate()
+        await mutate();
 
-        setModalVisible(false)
+        setModalVisible(false);
+
+        form.resetFields();
 
     }
 

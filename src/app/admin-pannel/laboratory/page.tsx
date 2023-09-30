@@ -20,14 +20,14 @@ export default function Page() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [filter, setFilter] = useState<LabratoryGet>(defaultValueTable);
+    const [filter, setFilter] = useState<LaboratoryGet>(defaultValueTable);
 
     const {
         data: labratory,
         isLoading: ldMaterial,
         mutate,
     } = useSWR<{
-        records: LabratoryGet[];
+        records: LaboratoryGet[];
         count: number;
     }>(["/Lab/GetPage", filter], ([url, arg]: [url: string, arg: any]) =>
         listFetcher(url, {
@@ -36,7 +36,7 @@ export default function Page() {
     );
 
 
-    const setFilterTable = async (values: LabratoryGet) => {
+    const setFilterTable = async (values: LaboratoryGet) => {
         // @ts-ignore
         setFilter({
             Name: values.Name,

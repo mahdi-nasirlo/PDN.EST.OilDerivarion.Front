@@ -1,11 +1,12 @@
 "use client"
 
 import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
-import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 import useSWRMutation from 'swr/mutation';
 import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 import { CreateTestItemDetail } from '../../../../../interfaces/TestItem';
+import { useForm } from "antd/es/form/Form";
+import TestFeatureForm from './test-feature-form';
 
 
 export default function CreateModal({ setModalVisible, modalVisible, mutate }: {
@@ -16,11 +17,11 @@ export default function CreateModal({ setModalVisible, modalVisible, mutate }: {
 
     const [form] = useForm()
 
-    const { trigger, isMutating } = useSWRMutation("/TestItemDetail/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/TestItemDetail/Create", mutationFetcher);
 
     const createTestFactor = async (values: CreateTestItemDetail) => {
 
-        await trigger(values)
+        await trigger(values);
 
         await mutate();
 
@@ -28,7 +29,7 @@ export default function CreateModal({ setModalVisible, modalVisible, mutate }: {
 
         form.resetFields();
 
-    }
+    };
 
 
     return (
@@ -48,7 +49,7 @@ export default function CreateModal({ setModalVisible, modalVisible, mutate }: {
                             className="w-full"
                             type="primary"
                             onClick={() => form.submit()}
-                            key={"submit"} >
+                            key="submit" >
                             ثبت
                         </Button >
                     </Col>
@@ -64,40 +65,8 @@ export default function CreateModal({ setModalVisible, modalVisible, mutate }: {
                 </Row>
             ]}
         >
-            <Form onFinish={createTestFactor} disabled={isMutating} layout="vertical">
-                <Row gutter={[16, 0]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="title" label="عنوان فاکتور">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="referenceCode" label="عنوان استاندارد">
-                            <Select size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 0]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="مرجع">
-                            <Select size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="is_Active"
-                            label="فعال / غیر فعال"
-                        >
-                            <Select size="large"
-                                defaultValue={true}
-                                options={[
-                                    { label: "فعال", value: true },
-                                    { label: "غیر فعال", value: false }
-                                ]}
-                                placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
+            <Form onFinish={createTestFactor} disabled={isMutating} form={form} layout="vertical">
+                <TestFeatureForm />
             </Form>
         </Modal >
     )

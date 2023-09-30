@@ -23,7 +23,7 @@ export default function DataTable({
     mutate: () => void;
     labratory:
     | {
-        records: LabratoryGet[];
+        records: LaboratoryGet[];
         count: number;
     }
     | undefined;

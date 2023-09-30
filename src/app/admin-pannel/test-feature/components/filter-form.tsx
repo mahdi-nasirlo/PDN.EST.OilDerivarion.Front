@@ -3,6 +3,7 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 import { TestItemDetail } from '../../../../../interfaces/TestItem'
+import TestItemSelect from './test-item-select'
 
 
 export default function FilterForm({ filter, unsetFilter }: {
@@ -19,11 +20,7 @@ export default function FilterForm({ filter, unsetFilter }: {
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="عنوان استاندارد">
-                            <Select disabled size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
+                    <TestItemSelect name={"testItemUid"} />
                 </Row>
                 <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>

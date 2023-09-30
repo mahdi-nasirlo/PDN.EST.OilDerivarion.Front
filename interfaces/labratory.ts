@@ -17,6 +17,12 @@ interface Labratory {
   Uid: string | null;
 }
 
+interface LaboratoryTestItemGet {
+  labUid: string | null;
+  testItemUid: string | null;
+  is_Active: boolean | null;
+}
+
 interface LabCreate {
   address: string,
   fax: string,

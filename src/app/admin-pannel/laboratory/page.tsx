@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
 
 
@@ -56,10 +56,9 @@ export default function Page() {
         await mutate();
     };
 
-
     return (
         <>
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
             <DataTable
                 mutate={mutate}
                 labratory={labratory}

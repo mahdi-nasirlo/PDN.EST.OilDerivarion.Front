@@ -1,17 +1,19 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Typography } from "antd";
-import { useForm } from "antd/es/form/Form";
-import React, { useCallback, useState } from "react";
+import {Button, Col, Modal, Row, Typography} from "antd";
+import {useForm} from "antd/es/form/Form";
+import React, {useCallback, useState} from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import LaboratoryForm from "./laboratory-form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import Step1 from "@/app/admin-pannel/laboratory/components/forms/step1";
+import Step2 from "@/app/admin-pannel/laboratory/components/forms/step2";
+import Step3 from "@/app/admin-pannel/laboratory/components/forms/step3";
 
 export default function CreateModal({
-    modalVisible,
-    setModalVisible,
-    mutate,
-}: {
+                                        modalVisible,
+                                        setModalVisible,
+                                        mutate,
+                                    }: {
     modalVisible: any;
     setModalVisible: any;
     mutate: () => void;
@@ -36,16 +38,13 @@ export default function CreateModal({
 
     };
 
-
-
     const [step, setStep] = useState(1);
 
-    const [data, setData] = useState({});
+    const [labUid, setLabUid] = useState<string | undefined>()
 
     const handleNextStep = useCallback(
-        (data: any) => {
+        () => {
             if (step < 3) {
-                setData(data);
                 setStep(step + 1);
             }
         },
@@ -53,21 +52,73 @@ export default function CreateModal({
     );
 
     const handlePrevStep = useCallback(
-        (data: any) => {
+        () => {
             if (step > 1) {
-                setData(data);
                 setStep(step - 1);
             }
         },
         [step]
     );
 
+    const {trigger: createLab, isMutating: ldCreateLab} = useSWRMutation("/Lab/Create", mutationFetcher)
 
-    const handleSubmit = useCallback((data: any) => {
-        setData(data);
-        console.log("Data", data);
-    }, []);
+    const handleCreateLab = async (values: LabCreate) => {
 
+        const res = await createLab(values)
+
+        await mutate
+
+        if (res?.Uid) {
+
+            setLabUid(res.Uid)
+
+            handleNextStep()
+
+        }
+
+    }
+
+    const {
+        trigger: saveFromResponsible,
+        isMutating: ldSaveForm
+    } = useSWRMutation("/Lab/SaveFormResponsible", mutationFetcher)
+
+
+    const handleCreateSaveFormResponsible = async (values: SaveFormResponsible) => {
+
+        values.uid = labUid
+
+        const res = await saveFromResponsible(values)
+
+        await mutate
+
+        if (res === null) {
+
+            handleNextStep()
+
+        }
+
+    }
+
+    const {
+        trigger: saveFormManager,
+        isMutating: ldSaveFormManager
+    } = useSWRMutation("/Lab/SaveFormManager", mutationFetcher)
+
+    const handleSubmitFormManager = async (values: SaveFormManager) => {
+
+        values.uid = labUid
+
+        const res = await saveFormManager(values)
+
+        await mutate
+
+        if (res === null) {
+
+            setModalVisible(false)
+        }
+
+    }
 
     return (
         <Modal
@@ -96,11 +147,10 @@ export default function CreateModal({
                             size="large"
                             className="w-full"
                             type="primary"
-                            // onClick={() => form.submit()}
-                            onClick={handleNextStep}
+                            onClick={() => form.submit()}
                             key={"submit"}
                         >
-                            ثبت
+                            {step !== 3 ? "ذخیره و ادامه" : "ثبت"}
                         </Button>
                     </Col>
                     <Col xs={24} md={12}>
@@ -108,8 +158,11 @@ export default function CreateModal({
                             loading={isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
-                            // onClick={() => setModalVisible(false)}
-                            onClick={handlePrevStep}
+                            onClick={() => {
+                                form.resetFields()
+                                setStep(1)
+                                setModalVisible(false)
+                            }}
                             key={"cancel"}
                         >
                             انصراف
@@ -118,69 +171,12 @@ export default function CreateModal({
                 </Row>,
             ]}
         >
-            <Form form={form} onFinish={CreateLaboratory} layout="vertical">
-                <>
-                    <div>
-                        {step === 1 && <LaboratoryForm />}
-                        {step === 2 &&
-                            <>
-                                <Row gutter={[32, 1]}>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="Name" label="نام">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="lastName" label="نام خانوادگی">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[32, 1]}>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="code" label="کد ملی">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="phone" label="شماره موبایل">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </>
-                        }
-                        {step === 3 &&
-                            <>
-                                <Row gutter={[32, 1]}>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="Name" label="نام">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="lastName" label="نام خانوادگی">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[32, 1]}>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="code" label="کد ملی">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col xs={24} md={12}>
-                                        <Form.Item name="phone" label="شماره موبایل">
-                                            <Input disabled size="large" placeholder="وارد کنید" />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </>
-                        }
-                    </div>
-                </>
-            </Form>
+            <div>
+                {step === 1 && <Step1 loading={ldCreateLab} handleSubmit={handleCreateLab} form={form}/>}
+                {step === 2 &&
+                    <Step2 isLoading={ldSaveForm} handleSubmit={handleCreateSaveFormResponsible} form={form}/>}
+                {step === 3 && <Step3 isLoading={ldSaveForm} handleSubmit={handleSubmitFormManager} form={form}/>}
+            </div>
         </Modal>
     );
 }

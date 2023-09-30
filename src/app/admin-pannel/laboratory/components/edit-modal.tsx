@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
+import React, {useEffect} from "react";
+import {Button, Col, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import LaboratoryForm from "./laboratory-form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import Step1 from "@/app/admin-pannel/laboratory/components/forms/step1";
 
 
 export default function EditModal(
-    { recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate }: {
+    {recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate}: {
         setIsEditModalVisible: (arg: boolean) => void;
         isEditModalVisible: boolean;
         recordToEdit: Labratory | null;
@@ -90,10 +90,7 @@ export default function EditModal(
                     </Row>,
                 ]}
             >
-                <Form onFinish={handleSubmit} form={form} layout="vertical">
-                    مشخصات آزمایشگاه
-                    <LaboratoryForm />
-                </Form>
+                <Step1 form={form} handleSubmit={handleSubmit} loading={false}/>
             </Modal>
         </>
     );

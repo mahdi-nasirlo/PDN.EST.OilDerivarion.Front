@@ -1,17 +1,21 @@
 "use client"
 
-import { Button, Col, Form, Select, Row } from 'antd'
+import { Button, Col, Form, Select, Row, Input } from 'antd'
 import React from 'react'
 
 
-export default function FilterForm() {
+export default function FilterForm({ filter, unsetFilter }: {
+    filter: (arg: LabratoryGet) => void,
+    unsetFilter: () => void,
+}) {
+
     return (
         <div className="box-border w-full p-6">
-            <Form name="form_item_path" layout="vertical">
+            <Form onFinish={filter} name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-establishment" label="نام آزمایشگاه ">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                        <Form.Item name="Name" label="نام آزمایشگاه ">
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -57,7 +61,8 @@ export default function FilterForm() {
                                 className="btn-delete-filter"
                                 size="large"
                                 type="primary"
-                                htmlType="submit"
+                                htmlType="reset"
+                                onClick={unsetFilter}
                             >
                                 حذف فیلتر
                             </Button>

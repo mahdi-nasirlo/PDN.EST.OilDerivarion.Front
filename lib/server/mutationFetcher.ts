@@ -17,6 +17,14 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
             message: data?.message ? data.message : res.statusText
         })
 
+        if (!res.data?.data && !data.success) {
+            return false
+        }
+
+        if (!res.data?.data && data.success) {
+            return true
+        }
+
         return res.data?.data
 
     } catch (error) {

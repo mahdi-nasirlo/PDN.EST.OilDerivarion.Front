@@ -1,8 +1,8 @@
 "use client"
 
-import { Table, Typography } from "antd";
+import {Table, Typography} from "antd";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
+import {ColumnsType} from "antd/es/table";
 
 export default function Home() {
 
@@ -152,6 +152,12 @@ const data1: any[] = [
         Date: "1402/07/08",
         pannel: "ادمین",
     },
+    {
+        Name: "لیست جعبه ها",
+        Link: "/admin-pannel/add-box",
+        pannel: "ادمین",
+        Date: "1402/07/09"
+    }
     // {
     //   Name: "استان",
     //   Link: "/admin-pannel/province",

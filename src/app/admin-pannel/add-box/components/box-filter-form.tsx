@@ -1,29 +1,37 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from 'antd'
+import {Button, Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
+import {Gps} from "../../../../../interfaces/gps";
+import {useForm} from "antd/es/form/Form";
 
-export default function PrimaryAddBoxForm() {
+export default function BoxFilterForm({filter, unsetFilter}: {
+    filter: (arg: Gps) => void,
+    unsetFilter: () => void,
+}) {
+
+    const [form] = useForm()
+
     return (
         <>
             <div className="box-border w-full p-6">
-                <Form name="form_item_path" layout="vertical">
+                <Form onFinish={filter} name="form_item_path" layout="vertical">
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
-                            <Form.Item name="year-establishment" label="شناسه جعبه">
-                                <Input size="large" placeholder="وارد کنید" />
+                            <Form.Item name="Code" label="شناسه جعبه">
+                                <Input size="large" placeholder="وارد کنید"/>
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="lastName" label="استان">
-                                <Select size="large" placeholder="انتخاب کنید" />
+                                <Select disabled size="large" placeholder="انتخاب کنید"/>
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
-                            <Form.Item name="year-establishment" label="فعال/غیر فعال">
-                                <Select size="large" placeholder="انتخاب کنید" />
+                            <Form.Item name="IsActive" label="فعال/غیر فعال">
+                                <Select size="large" placeholder="انتخاب کنید"/>
                             </Form.Item>
                         </Col>
                     </Row>
@@ -35,6 +43,7 @@ export default function PrimaryAddBoxForm() {
                                     size="large"
                                     type="primary"
                                     htmlType="submit"
+                                    onClick={() => form.submit()}
                                 >
                                     اعمال فیلتر
                                 </Button>
@@ -42,7 +51,8 @@ export default function PrimaryAddBoxForm() {
                                     className="btn-delete-filter"
                                     size="large"
                                     type="primary"
-                                    htmlType="submit"
+                                    onClick={unsetFilter}
+                                    htmlType="reset"
                                 >
                                     حذف فیلتر
                                 </Button>

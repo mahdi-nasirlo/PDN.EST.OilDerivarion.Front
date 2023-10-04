@@ -8,7 +8,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import { Product, ProductGet } from "../../../../interfaces/product";
 import { addIndexToData } from "../../../../lib/addIndexToData";
-import { Button, Typography } from "antd";
+import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
@@ -32,7 +32,7 @@ export default function Page() {
         ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
     );
 
-    const setFilterTable = async (values: ProductGet) => {
+    const setFilterTable = async (values: MaterialGet) => {
 
         // @ts-ignore
         setFilter({ name: values.name, is_Active: null, fromRecord: 0, selectRecord: 1000 })
@@ -52,7 +52,12 @@ export default function Page() {
     return (
         <>
             {/*// @ts-ignore*/}
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                }]}
+            />
             <div className="box-border w-full p-6 mt-8">
                 <div className="flex justify-between items-center">
                     <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">

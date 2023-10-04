@@ -9,6 +9,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import { addIndexToData } from "../../../../lib/addIndexToData";
 import { TestItemDetail } from '../../../../interfaces/TestItem';
+import { Collapse } from 'antd';
 
 export default function Page() {
 
@@ -49,7 +50,12 @@ export default function Page() {
     return (
         <>
             {/*@ts-ignore*/}
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                }]}
+            />
             <DataTable
                 ldTestItemDetail={ldTestItemDetail}
                 testItemDetail={addIndexToData(testItemDetail)}

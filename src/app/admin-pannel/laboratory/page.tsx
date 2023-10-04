@@ -1,11 +1,12 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import {listFetcher} from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
+import { Collapse } from "antd";
 
 
 export default function Page() {
@@ -58,7 +59,12 @@ export default function Page() {
 
     return (
         <>
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                }]}
+            />
             <DataTable
                 mutate={mutate}
                 labratory={labratory}

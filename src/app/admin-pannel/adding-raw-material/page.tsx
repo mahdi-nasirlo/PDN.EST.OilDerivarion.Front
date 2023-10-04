@@ -6,6 +6,7 @@ import DataTable from './components/data-table';
 import CreateModal from './components/create-modal';
 import useSWR from "swr";
 import { listFetcher } from "../../../../lib/server/listFetcher";
+import { Collapse } from 'antd';
 
 export default function Page() {
 
@@ -47,7 +48,12 @@ export default function Page() {
 
     return (
         <>
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                }]}
+            />
             <DataTable mutate={mutate} material={material || undefined} ldMaterial={ldMaterial}
                 setModalVisible={setModalVisible} />
             <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />

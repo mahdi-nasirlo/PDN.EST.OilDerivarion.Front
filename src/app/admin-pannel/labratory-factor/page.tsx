@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { Button, Typography } from "antd";
+import { Button, Collapse, Typography } from "antd";
 import { addIndexToData } from "../../../../lib/addIndexToData";
 import useSWR from "swr";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -51,7 +51,12 @@ export default function Page() {
   return (
     <>
       {/*// @ts-ignore*/}
-      <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+      <Collapse
+        size="large"
+        items={[{
+          label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+        }]}
+      />
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">

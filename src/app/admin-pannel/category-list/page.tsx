@@ -1,13 +1,14 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {Category} from "../../../../interfaces/category";
-import {listFetcher} from "../../../../lib/server/listFetcher";
-import {ProductGet} from "../../../../interfaces/product";
+import { Category } from "../../../../interfaces/category";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import { ProductGet } from "../../../../interfaces/product";
+import { Collapse } from "antd";
 
 export default function Page() {
 
@@ -53,7 +54,10 @@ export default function Page() {
     return (
         <>
             {/*// @ts-ignore*/}
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <Collapse
+                size="large"
+                items={[{ label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} /> }]}
+            />
             <DataTable mutate={mutate} category={category?.records} ldCategory={ldCategory}
                 setModalVisible={setModalVisible} />
             <CreateModal

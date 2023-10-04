@@ -16,36 +16,36 @@ export default function PrimaryRequestLicenseInfoForm() {
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="سال تاسیس">
-                            <DatePicker size="large" placeholder="وارد کنید" className="w-full" />
+                            <DatePicker disabled size="large" placeholder="mysite" className="w-full" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام شرکت ثبت شده">
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input disabled size="large" placeholder="mysite" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="شماره ثبت شرکت">
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input disabled size="large" placeholder="mysite" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label=" شماره پروانه بهره برداری / جواز تاسیس">
-                            <Input size="large" placeholder="انتخاب کنید" />
+                            <Input disabled size="large" placeholder="mysite" />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label=" تاریخ صدور پروانه بهره برداری / جواز تاسیس">
-                            <DatePicker size="large" placeholder="وارد کنید" />
+                            <DatePicker disabled size="large" placeholder="mysite" className='w-full' />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label=" شناسه کسب و کار">
-                            <Input size="large" placeholder="انتخاب کنید" />
+                            <Input disabled size="large" placeholder="mysite" />
                         </Form.Item>
                     </Col>
                 </Row>

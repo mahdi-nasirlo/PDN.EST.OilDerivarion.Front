@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { ProductGet } from "../../../../interfaces/product";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import { TestItem } from "../../../../interfaces/TestItem";
+import { Collapse } from 'antd';
 
 export default function Page() {
 
@@ -47,7 +48,12 @@ export default function Page() {
     return (
         <>
             {/*// @ts-ignore*/}
-            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                }]}
+            />
             <DataTable mutate={mutate} ldTestItem={ldFactor} TestItem={factors}
                 setModalVisible={setModalVisible} />
             <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />

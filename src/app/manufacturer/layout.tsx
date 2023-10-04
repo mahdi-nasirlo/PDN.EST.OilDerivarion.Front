@@ -36,8 +36,8 @@ const items: MenuProps["items"] = [
         [
 
             getMenuItem(
-                <Link href={"/manufacturer/list"}> لیست تولید کننده ها</Link>,
-                "msnufscturer-list",
+                <Link href={"/manufacturer/creator-list"}> لیست تولید کننده ها</Link>,
+                "/manufacturer/creator-list",
             ),
 
             getMenuItem(

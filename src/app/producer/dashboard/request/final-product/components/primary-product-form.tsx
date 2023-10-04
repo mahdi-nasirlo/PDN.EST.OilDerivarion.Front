@@ -3,12 +3,12 @@
 import {Button, Col, Divider, Form, Row, Select} from "antd";
 import React, {useState} from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {getCookie} from "cookies-next";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import {DefaultOptionType} from "rc-select/es/Select";
 import {useRouter} from "next/navigation";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../../lib/server/listFetcher";
 
 
 export default function PrimaryProductForm() {

@@ -7,8 +7,8 @@ import {useRouter} from "next/navigation";
 import {getCookie} from "cookies-next";
 import {useForm} from "antd/lib/form/Form";
 import useSWRMutation from "swr/mutation";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../../lib/server/listFetcher";
 
 export default function PrimaryProductForm({mute, data, setData}: {
     mute: any,
@@ -72,7 +72,7 @@ export default function PrimaryProductForm({mute, data, setData}: {
     useEffect(() => {
 
         if (!getCookie("requestMasterUid")) {
-            return router.push("/dashboard/request/production-process");
+            return router.push("/producer/dashboard/request/production-process");
         }
 
         form.setFieldsValue(data)

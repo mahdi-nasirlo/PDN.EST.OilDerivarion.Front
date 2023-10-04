@@ -1,14 +1,14 @@
 "use client";
 
 
-import {Button, Col, Divider, Form, Input, Row, Typography, Upload} from 'antd';
+import { Button, Col, Divider, Form, Input, Row, Typography, Upload } from 'antd';
 import React from 'react'
 
 
 export default function PrimaryRequestsProductionProcessTable() {
     return (
         <>
-            <Divider/>
+            <Divider />
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                 فرآیند تولید
             </Typography>
@@ -19,15 +19,16 @@ export default function PrimaryRequestsProductionProcessTable() {
             >
                 <Row gutter={32}>
                     <Col span={24}>
-                        <Form.Item rules={[{required: true, message: "لطفا فیلد را وارد نمایید"}]}
-                                   name="processDescription" label="شرح فرآیند تولید">
+                        <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
+                            name="processDescription" label="شرح فرآیند تولید">
                             <Input.TextArea
+                                disabled
                                 maxLength={100}
                                 style={{
                                     height: 120,
                                     resize: "none",
                                 }}
-                                placeholder="وارد کنید"
+                                placeholder="mysite"
                             />
                         </Form.Item>
                     </Col>
@@ -36,6 +37,7 @@ export default function PrimaryRequestsProductionProcessTable() {
                     <Col span={24}>
                         <Form.Item name="fileName" label="نمودار شماتیک فرآیند">
                             <Upload
+                                disabled
                                 multiple={false}
                                 maxCount={1}
                                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"

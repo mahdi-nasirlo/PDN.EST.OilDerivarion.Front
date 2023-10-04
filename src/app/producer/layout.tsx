@@ -32,7 +32,7 @@ export default function RootLayout({
 const MakeRequest = () => (
     <>
         <div className="flex justify-between items-center">
-            <Link href="/dashboard/request/production-process">ثبت درخواست</Link>
+            <Link href="/producer/dashboard/request/production-process">ثبت درخواست</Link>
         </div>
     </>
 );
@@ -40,15 +40,15 @@ const MakeRequest = () => (
 const RequestList = () => (
     <>
         <div className="flex justify-between items-center">
-            <Link href="/dashboard/request-list">لیست درخواست</Link>
-            <Badge style={{ marginLeft: "1px", boxShadow: "none" }} count={5} />
+            <Link href="/producer/dashboard/request-list">لیست درخواست</Link>
+            <Badge style={{marginLeft: "1px", boxShadow: "none"}} count={5}/>
         </div>
     </>
 );
 
 const items: MenuProps["items"] = [
     getMenuItem(
-        <Link href="/dashboard">خانه</Link>,
+        <Link href="/producer">خانه</Link>,
         "/dashboard",
         <HomeIcon width={16} height={16}/>
     ),
@@ -83,13 +83,13 @@ const items: MenuProps["items"] = [
         [
             getMenuItem(
                 <MakeRequest/>,
-                "/dashboard/request/production-process",
+                "/producer/dashboard/request/production-process",
                 <PencilIcon width={16} height={16}/>
             ),
             getMenuItem(
-                <RequestList />,
-                "/dashboard/request/request-list",
-                <ListBulletIcon width={16} height={16} />
+                <RequestList/>,
+                "/producer/dashboard/request/request-list",
+                <ListBulletIcon width={16} height={16}/>
             ),
         ],
         "group"
@@ -102,33 +102,33 @@ const items: MenuProps["items"] = [
         null,
         [
             getMenuItem(
-                <Link href="/dashboard/base-info/creator-production">
+                <Link href="/producer/base-info/creator-production">
                     اطلاعات واحدتولیدی
                 </Link>,
                 "/creator-peoduction",
                 <PencilIcon width={16} height={16} />
             ),
             getMenuItem(
-                <Link href="/dashboard/base-info/management-info">
+                <Link href="/producer/base-info/management-info">
                     اطلاعات مدیریتی
                 </Link>,
                 "/management-info",
                 <UserCircleIcon width={16} height={16} />
             ),
             getMenuItem(
-                <Link href="/dashboard/base-info/personnel-info">اطلاعات پرسنلی</Link>,
+                <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
                 "/personnel-info",
-                <UsersIcon width={16} height={16} />
+                <UsersIcon width={16} height={16}/>
             ),
             getMenuItem(
-                <Link href="/dashboard/base-info/license-info">اطلاعات مجوز</Link>,
+                <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
                 "/license-info",
-                <DocumentDuplicateIcon width={16} height={16} />
+                <DocumentDuplicateIcon width={16} height={16}/>
             ),
             getMenuItem(
-                <Link href="/dashboard/base-info/contact-info">اطلاعات تماس</Link>,
+                <Link href="/producer/base-info/contact-info">اطلاعات تماس</Link>,
                 "/contact-info",
-                <PhoneIcon width={16} height={16} />
+                <PhoneIcon width={16} height={16}/>
             ),
         ],
         "group"

@@ -5,9 +5,10 @@ import React from "react";
 import {UploadOutlined} from "@ant-design/icons";
 import useSWRMutation from "swr/mutation";
 import {useRouter} from "next/navigation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import staticMessages from "../../../../../lib/staticMessages";
+
 import {setCookie} from "cookies-next";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import staticMessages from "../../../../../../lib/staticMessages";
 
 
 export default function Page() {

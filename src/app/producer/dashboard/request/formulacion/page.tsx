@@ -4,12 +4,12 @@ import {Button, Divider, Row, Typography} from "antd";
 import React, {useState} from "react";
 import PrimaryProductForm from "./components/primary-product-form";
 import useSWR from "swr";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
 import {getCookie} from "cookies-next";
-import PrimaryProductTable from "@/app/dashboard/request/formulacion/components/primary-product-table";
-import {RequestDetail} from "../../../../../interfaces/requestDetail";
 import {useRouter} from "next/navigation";
+import {RequestDetail} from "../../../../../../interfaces/requestDetail";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
+import PrimaryProductTable from "@/app/dashboard/dashboard/request/formulacion/components/primary-product-table";
 
 export default function Formulacion() {
 

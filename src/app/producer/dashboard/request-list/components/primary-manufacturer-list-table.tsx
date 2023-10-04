@@ -2,9 +2,8 @@ import {Space, Table, Typography} from 'antd'
 import Link from 'next/link';
 import React from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {GetPage_ExeManager} from "../../../../../interfaces/producer";
-
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {GetPage_ExeManager} from "../../../../../../interfaces/producer";
 
 export default function PrimaryManufacturerListTable() {
 

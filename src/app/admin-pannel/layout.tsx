@@ -135,4 +135,16 @@ const items: MenuProps["items"] = [
     "add-box"
     // <FolderPlusIcon width={16} height={16}/>
   ),
+
+  getMenuItem(
+    <Link href={"/admin-pannel/test-result"}>نتیجه آزمون</Link>,
+    "test-result"
+    // <FolderPlusIcon width={16} height={16}/>
+  ),
+
+  getMenuItem(
+    <Link href={"/admin-pannel/test-result-record"}>ثبت نتیجه آزمون</Link>,
+    "test-result-record"
+    // <FolderPlusIcon width={16} height={16}/>
+  ),
 ];

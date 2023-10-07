@@ -66,8 +66,8 @@ export default function RootLayout({
 }
 
 const stepLinks: { number: number; href: string }[] = [
-    {number: 0, href: "/dashboard/request/production-process"},
-    {number: 1, href: "/dashboard/request/formulacion"},
-    {number: 2, href: "/dashboard/request/final-product"},
-    {number: 3, href: "/dashboard/request/final-preview"},
+    {number: 0, href: "/producer/dashboard/request/production-process"},
+    {number: 1, href: "/producer/dashboard/request/formulacion"},
+    {number: 2, href: "/producer/dashboard/request/final-product"},
+    {number: 3, href: "/producer/dashboard/request/final-preview"},
 ];

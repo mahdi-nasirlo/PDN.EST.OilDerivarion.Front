@@ -1,11 +1,11 @@
 import {Button, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 import React, {useState} from "react";
-import {RequestDetail} from "../../../../../../interfaces/requestDetail";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import {RequestDetail} from "../../../../../../../interfaces/requestDetail";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
+import {addIndexToData} from "../../../../../../../lib/addIndexToData";
 // import {DeleteProductRequestDetail} from "../../../../../../units/RequestDetail/deleteProduct";
 
 

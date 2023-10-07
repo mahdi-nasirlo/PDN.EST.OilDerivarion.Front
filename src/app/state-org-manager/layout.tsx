@@ -1,15 +1,15 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import { getMenuItem } from "@/components/layout/sidebar";
-import { HomeIcon } from "@heroicons/react/24/outline";
-import { MenuProps } from "antd";
+import {getMenuItem} from "@/components/layout/sidebar";
+import {HomeIcon} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
 import Link from "next/link";
 
 
 export default function RootLayout({
-    children,
-}: {
+                                       children,
+                                   }: {
     children: React.ReactNode;
 }) {
     return (
@@ -30,13 +30,13 @@ const items: MenuProps["items"] = [
     { type: "divider" },
 
     getMenuItem(
-        <Link href="/state-org-manager/list-requests">لیست درخواست ها</Link>,
+        <Link href="/state-org-manager/#">لیست درخواست ها</Link>,
         "/list-requests",
         // <HomeIcon width={16} height={16} />
     ),
 
     getMenuItem(
-        <Link href="/state-org-manager/requests-details">جزئیات درخواست</Link>,
+        <Link href="#">جزئیات درخواست</Link>,
         "/requests-details",
         // <HomeIcon width={16} height={16} />
     ),

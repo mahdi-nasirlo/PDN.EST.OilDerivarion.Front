@@ -11,8 +11,7 @@ import {useRouter} from "next/navigation";
 import Link from "next/link";
 import {getCookie} from "cookies-next";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import ReviewDataTable from "@/app/dashboard/dashboard/request/final-preview/components/review-data-table";
-
+import ReviewDataTable from "@/app/producer/dashboard/request/final-preview/components/review-data-table";
 
 export default function Page() {
 

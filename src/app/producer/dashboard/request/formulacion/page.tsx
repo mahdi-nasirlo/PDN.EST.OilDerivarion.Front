@@ -9,7 +9,7 @@ import {useRouter} from "next/navigation";
 import {RequestDetail} from "../../../../../../interfaces/requestDetail";
 import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
-import PrimaryProductTable from "@/app/dashboard/dashboard/request/formulacion/components/primary-product-table";
+import PrimaryProductTable from "@/app/producer/dashboard/request/formulacion/components/primary-product-table";
 
 export default function Formulacion() {
 

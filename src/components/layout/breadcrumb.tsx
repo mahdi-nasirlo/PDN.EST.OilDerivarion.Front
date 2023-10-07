@@ -160,49 +160,52 @@ const items: Items = {
         href: "/admin-panel"
     },
     "add-box": {
-        title: ""
+        title: "افزودن جعبه"
     },
     "adding-raw-material": {
-        title: ""
+        title: "مواد اولیه"
     },
     "category-list": {
-        title: ""
+        title: "لیست دسته بندی"
     },
     "confirm-changes": {
-        title: ""
+        title: "ثبت تغییرات"
     },
     "labratory-factor": {
-        title: ""
+        title: "فاکتور های آزمایشگاه"
     },
     "list-experts": {
-        title: ""
+        title: "لیست کارشناسان"
     },
     "management-user": {
-        title: ""
+        title: "مدیریت کاربران"
     },
     "management-user-role": {
-        title: ""
+        title: "نقش کاربران"
     },
     "products-factor": {
-        title: ""
+        title: "فاکتور های محصول"
     },
     "products-list": {
-        title: ""
+        title: "لیست محصولات"
     },
     "province": {
-        title: ""
+        title: "استان"
     },
     "raw-product-factor": {
-        title: ""
+        title: "مواد اولیه محصول"
     },
     "test-factors": {
-        title: ""
+        title: "فاکتور های آمون"
+    },
+    "test-feature": {
+        title: "استاندارد های آزمون"
     },
     "test-result": {
-        title: ""
+        title: "نتایج آزمون"
     },
     "test-result-record": {
-        title: ""
+        title: "ثبت نتایج آزمایشگاه"
     }
     // end admin panel
 };

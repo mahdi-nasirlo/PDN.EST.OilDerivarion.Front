@@ -1,15 +1,15 @@
 "use client";
 
 
-import { Button, Col, Modal, Row, Space, Switch } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { Table } from 'antd/lib';
-import React, { useState } from 'react'
-import EditModal from "@/app/admin-pannel/add-box/components/edit-modal";
-import { Gps } from "../../../../../interfaces/gps";
+import {Button, Col, Modal, Row, Space, Switch} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import {Table} from 'antd/lib';
+import React, {useState} from 'react'
+import {Gps} from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import EditModal from "@/app/admin-panel/add-box/components/edit-modal";
 
 
 interface DataType {

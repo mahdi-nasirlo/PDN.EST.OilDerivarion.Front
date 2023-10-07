@@ -152,14 +152,59 @@ const items: Items = {
     "gps-confirmations": {
         title: "تاییدیه های GPS"
     },
-    
     // end laboratory panel
 
+    // start admin panel
     "admin-panel": {
         title: "سامانه تولید کننده",
         href: "/admin-panel"
     },
-
+    "add-box": {
+        title: ""
+    },
+    "adding-raw-material": {
+        title: ""
+    },
+    "category-list": {
+        title: ""
+    },
+    "confirm-changes": {
+        title: ""
+    },
+    "labratory-factor": {
+        title: ""
+    },
+    "list-experts": {
+        title: ""
+    },
+    "management-user": {
+        title: ""
+    },
+    "management-user-role": {
+        title: ""
+    },
+    "products-factor": {
+        title: ""
+    },
+    "products-list": {
+        title: ""
+    },
+    "province": {
+        title: ""
+    },
+    "raw-product-factor": {
+        title: ""
+    },
+    "test-factors": {
+        title: ""
+    },
+    "test-result": {
+        title: ""
+    },
+    "test-result-record": {
+        title: ""
+    }
+    // end admin panel
 };
 
 interface Items {

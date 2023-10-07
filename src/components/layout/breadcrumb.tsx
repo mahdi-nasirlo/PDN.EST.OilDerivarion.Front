@@ -140,6 +140,20 @@ const items: Items = {
         title: 'پنل آزمایشگاه',
         href: "/laboratory"
     },
+    "accepted-requests": {
+        title: "درخواست های پذیرفته شده"
+    },
+    "list": {
+        title: "لیست"
+    },
+    "report": {
+        title: "ارسال گزارش"
+    },
+    "gps-confirmations": {
+        title: "تاییدیه های GPS"
+    },
+    
+    // end laboratory panel
 
     "admin-panel": {
         title: "سامانه تولید کننده",

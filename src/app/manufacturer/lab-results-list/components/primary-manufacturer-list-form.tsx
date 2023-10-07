@@ -14,12 +14,12 @@ export default function PrimaryManufacturerListForm() {
                         name="year-establishment"
                         label="کد ماده"
                     >
-                        <Input size="large" placeholder="وارد کنید" />
+                        <Input disabled size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item name="lastName" label="شناسه درخواست">
-                        <Input size="large" placeholder="وارد کنید" />
+                        <Input disabled size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -27,12 +27,12 @@ export default function PrimaryManufacturerListForm() {
                         name="year-establishment"
                         label="وضعیت     "
                     >
-                        <Input size="large" placeholder="وارد کنید" />
+                        <Input disabled size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item name="lastName" label="  نام مدیرعامل">
-                        <Input size="large" placeholder="وارد کنید" />
+                        <Input disabled size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
             </Row>
@@ -40,6 +40,7 @@ export default function PrimaryManufacturerListForm() {
                 <Col xl={3} md={24} sm={24}>
                     <div className="flex gap-4 ">
                         <Button
+                            disabled
                             className="w-full btn-delete-filter"
                             size="large"
                             type="primary"
@@ -47,6 +48,7 @@ export default function PrimaryManufacturerListForm() {
                             <span className="flex gap-2 justify-center ">حذف فیلتر</span>
                         </Button>
                         <Button
+                            disabled
                             className="w-full btn-filter"
                             size="large"
                             type="primary"

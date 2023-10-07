@@ -1,22 +1,22 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
-import {Product} from '../../../../../interfaces/product';
-import {listFetcher} from '../../../../../lib/server/listFetcher';
-import {addIndexToData} from '../../../../../lib/addIndexToData';
+import { Product } from '../../../../../interfaces/product';
+import { listFetcher } from '../../../../../lib/server/listFetcher';
+import { addIndexToData } from '../../../../../lib/addIndexToData';
 import ProductForm from "@/app/admin-pannel/products-list/components/product-form";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
-export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
+export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -37,7 +37,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
         setIsDeleteModalVisible(true);
     };
 
-    const {trigger: deleteProduct} = useSWRMutation("/Product/Delete", mutationFetcher)
+    const { trigger: deleteProduct } = useSWRMutation("/Product/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -49,10 +49,6 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
 
         await mutate()
 
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
     };
 
     const showModal = () => {
@@ -100,7 +96,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
 
     }, [defaultCategory])
 
-    const {trigger, isMutating} = useSWRMutation("/Product/Update", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/Product/Update", mutationFetcher)
 
     const updateProduct = async (values: Product) => {
 
@@ -135,7 +131,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
             title: "فعال/غیر فعال ",
             dataIndex: "vIs_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "کد محصول",
@@ -153,9 +149,9 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
             render: (_, record) => (
                 <Space size="middle">
                     <Button type="link" className="text-secondary-500 font-bold"
-                            onClick={() => handleEdit(record)}>ویرایش</Button>
+                        onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        onClick={() => handleDelete(record)}>حذف</Button>
                 </Space>
             ),
         },
@@ -175,7 +171,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                         htmlType="submit"
                         onClick={showModal}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex gap-2">افزودن محصول جدید</span>
                     </Button>
                 </div>
@@ -199,8 +195,12 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                 />
             </div>
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                                handleDelete={handleConfirmDelete} title="مواد اولیه"/>
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
+                title="مواد اولیه"
+            />
             {/* ویرایش */}
             <Modal
                 width={800}
@@ -235,7 +235,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                 ]}
             >
                 <Form disabled={isMutating} form={form} onFinish={updateProduct}>
-                    <ProductForm/>
+                    <ProductForm />
                 </Form>
             </Modal>
         </>

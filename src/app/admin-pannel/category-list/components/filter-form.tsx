@@ -9,15 +9,14 @@ export default function FilterForm({ filter, unsetFilter }: {
   unsetFilter: () => void,
 }) {
 
-  const [hasDensityLimit, setHasDensityLimit] = useState('');
+  const [hasDensityLimit, setHasDensityLimit] = useState(false);
 
   return (
     // <div className="box-border w-full p-6 ">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]} name="name"
-            label="نام دسته بندی">
+          <Form.Item name="name" label="نام دسته بندی">
             <Input size="large" placeholder="انتخاب کنید" />
           </Form.Item>
         </Col>
@@ -36,8 +35,9 @@ export default function FilterForm({ filter, unsetFilter }: {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="hasDensity" label="دانسیته">
+          <Form.Item name="HasDensity" label="دانسیته">
             <Select
+              disabled
               size="large"
               placeholder="انتخاب کنید"
               options={[

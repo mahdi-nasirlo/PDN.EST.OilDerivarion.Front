@@ -1,13 +1,13 @@
-import {Button, Space, Table} from 'antd';
-import type {ColumnsType} from 'antd/es/table';
-import {Product, ProductTestItem} from "../../../../../interfaces/product";
-import React, {useState} from "react";
+import { Button, Space, Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { Product, ProductTestItem } from "../../../../../interfaces/product";
+import React, { useState } from "react";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {TableColumnsType} from "antd/lib";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { TableColumnsType } from "antd/lib";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 
 
@@ -17,11 +17,15 @@ const columns: ColumnsType<Product> = [
         dataIndex: "Row",
         key: "1",
     },
-    {title: 'نام محصول', dataIndex: 'Name', key: '2'},
+    {
+        title: 'نام محصول',
+        dataIndex: 'Name',
+        key: '2',
+    },
 ];
 
 
-const DataTable = ({product, ldProduct}: { product: Product[], ldProduct: boolean }) => {
+const DataTable = ({ product, ldProduct }: { product: Product[], ldProduct: boolean }) => {
 
     const [activeExpRow, setActiveExpRow] = useState<string[]>()
 
@@ -49,7 +53,7 @@ const DataTable = ({product, ldProduct}: { product: Product[], ldProduct: boolea
                     setActiveExpRow(keys);
 
                 },
-                expandedRowRender: (record: Product) => <ExpandedRowRender product={record}/>,
+                expandedRowRender: (record: Product) => <ExpandedRowRender product={record} />,
             }}
             dataSource={product}
         />
@@ -57,7 +61,7 @@ const DataTable = ({product, ldProduct}: { product: Product[], ldProduct: boolea
 };
 
 
-const ExpandedRowRender = ({product}: { product: Product }) => {
+const ExpandedRowRender = ({ product }: { product: Product }) => {
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -73,23 +77,23 @@ const ExpandedRowRender = ({product}: { product: Product }) => {
         data,
         isLoading,
         mutate
-    } = useSWR<ProductTestItem[]>(["/ProductTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
+    } = useSWR<ProductTestItem[]>(["/ProductTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
-    const {trigger} = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
+    const { trigger } = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
 
     const deleteProductFactor = async () => {
 
-        await trigger({uid: recordToDelete?.Uid})
+        await trigger({ uid: recordToDelete?.Uid });
 
-        await mutate()
+        await mutate();
 
         setOpen(false)
 
     }
 
     const expandColumns: TableColumnsType<ProductTestItem> = [
-        {title: "#", dataIndex: "Row", key: "1"},
-        {title: "نام فاکتور", dataIndex: "TestItemName", key: "2"},
+        { title: "#", dataIndex: "Row", key: "1" },
+        { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
         {
             title: "عملیات",
             dataIndex: "2",
@@ -112,9 +116,18 @@ const ExpandedRowRender = ({product}: { product: Product }) => {
     ];
 
     return <>
-        <Table columns={expandColumns} dataSource={addIndexToData(data)} loading={isLoading}
-               pagination={false}/>
-        <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={deleteProductFactor} title={"فاکتور محصول"}/>
+        <Table
+            columns={expandColumns}
+            dataSource={addIndexToData(data)}
+            loading={isLoading}
+            pagination={false}
+        />
+        <ConfirmDeleteModal
+            open={open}
+            setOpen={setOpen}
+            handleDelete={deleteProductFactor}
+            title={"فاکتور محصول"}
+        />
     </>
 }
 

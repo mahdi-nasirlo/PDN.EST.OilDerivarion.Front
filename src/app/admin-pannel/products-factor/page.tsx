@@ -6,7 +6,7 @@ import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
 import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Product, ProductGet } from "../../../../interfaces/product";
+import { Product } from "../../../../interfaces/product";
 import { addIndexToData } from "../../../../lib/addIndexToData";
 import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -17,7 +17,7 @@ export default function Page() {
 
     const defaultValueTable = {
         name: null,
-        is_Active: true,
+        is_Active: null,
         fromRecord: 0,
         selectRecord: 100000
     }
@@ -35,9 +35,9 @@ export default function Page() {
     const setFilterTable = async (values: MaterialGet) => {
 
         // @ts-ignore
-        setFilter({ name: values.name, is_Active: null, fromRecord: 0, selectRecord: 1000 })
+        setFilter({ name: values.name, is_Active: null, fromRecord: 0, selectRecord: 1000 });
 
-        await mutate()
+        await mutate();
 
     }
 
@@ -45,7 +45,7 @@ export default function Page() {
 
         setFilter(defaultValueTable)
 
-        await mutate()
+        await mutate();
 
     }
 

@@ -1,15 +1,15 @@
 "use client";
 
 
-import {Button, Col, Modal, Row, Space} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {Table} from 'antd/lib';
-import React, {useState} from 'react'
+import { Button, Col, Modal, Row, Space, Switch } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { Table } from 'antd/lib';
+import React, { useState } from 'react'
 import EditModal from "@/app/admin-pannel/add-box/components/edit-modal";
-import {Gps} from "../../../../../interfaces/gps";
+import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 
 interface DataType {
@@ -21,7 +21,7 @@ interface DataType {
 }
 
 
-export default function DataTable({isLoading, boxesData, mutate}: {
+export default function DataTable({ isLoading, boxesData, mutate }: {
     isLoading: boolean,
     boxesData: any,
     mutate: () => void
@@ -52,15 +52,15 @@ export default function DataTable({isLoading, boxesData, mutate}: {
     };
 
 
-    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
 
 
     const handleDeleteSubmit = async () => {
 
-        await trigger({uid: recordToDelete?.Uid})
+        await trigger({ uid: recordToDelete?.Uid })
 
         setIsDeleteModalVisible(false)
-        
+
         await mutate()
 
     }
@@ -85,6 +85,7 @@ export default function DataTable({isLoading, boxesData, mutate}: {
             title: "فعال/غیر فعال ",
             dataIndex: "IsActive",
             key: "4",
+            render: (e, record) => <Switch checked={record.IsActive} />,
         },
         {
             title: "مکان یابی",
@@ -106,10 +107,10 @@ export default function DataTable({isLoading, boxesData, mutate}: {
                         setRecordToEdit(record)
                     }}> ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
-                            onClick={() => {
-                                setIsDeleteModalVisible(true);
-                                setRecordToDelete(record)
-                            }}>حذف</Button>
+                        onClick={() => {
+                            setIsDeleteModalVisible(true);
+                            setRecordToDelete(record)
+                        }}>حذف</Button>
                 </Space>
             ),
         },
@@ -135,11 +136,19 @@ export default function DataTable({isLoading, boxesData, mutate}: {
                 }}
             />
             {/* جذف */}
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                                handleDelete={handleDeleteSubmit} title={"حذف جعبه"}/>
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleDeleteSubmit}
+                title={"حذف جعبه"}
+            />
             {/* ویرایش */}
-            <EditModal recordeToEdit={recordToEdit} setModalVisible={setIsEditModalVisible}
-                       modalVisible={isEditModalVisible} mutate={mutate}/>
+            <EditModal
+                recordeToEdit={recordToEdit}
+                setModalVisible={setIsEditModalVisible}
+                modalVisible={isEditModalVisible}
+                mutate={mutate}
+            />
             {/* مشاهده موقعیت */}
             <Modal
                 title="مشاهده موقعیت"

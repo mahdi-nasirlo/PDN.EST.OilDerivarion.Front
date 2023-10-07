@@ -15,7 +15,7 @@ export default function Page() {
 
     const defaultValueTable = {
         name: null,
-        is_Active: true,
+        is_Active: null,
         fromRecord: 0,
         selectRecord: 100000
     }

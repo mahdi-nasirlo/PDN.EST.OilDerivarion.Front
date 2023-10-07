@@ -1,19 +1,19 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row, Select,} from "antd";
+import { Button, Col, Form, Modal, Row, Select, } from "antd";
 import React from "react";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {Product} from "../../../../../interfaces/product";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { Product } from "../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 export default function CreateModal({
-                                        setModalVisible,
-                                        modalVisible,
-                                        mutate
-                                    }: {
+    setModalVisible,
+    modalVisible,
+    mutate
+}: {
     setModalVisible: any;
     modalVisible: any;
     mutate: () => void
@@ -29,26 +29,24 @@ export default function CreateModal({
     const {
         data: Product,
         isLoading: ldProduct
-    } = useSWR<Product[]>(["/Product/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
+    } = useSWR<Product[]>(["/Product/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
     const {
         data: TestItem,
         isLoading: ldTestProduct
-    } = useSWR(["/TestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
+    } = useSWR(["/TestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
-    const {trigger, isMutating} = useSWRMutation("/ProductTestItem/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/ProductTestItem/Create", mutationFetcher)
 
     const handleFormSubmit = async (values: { "productUid": string, "testItemUid": string }) => {
+
+        await trigger({ ...values, is_Active: true })
+
+        await mutate();
 
         setModalVisible(false)
 
         form.resetFields()
-
-        await trigger({...values, is_Active: true})
-
-        await mutate();
-
-
     }
 
     return (
@@ -111,9 +109,14 @@ export default function CreateModal({
                                 },
                             ]}
                         >
-                            <Select showSearch fieldNames={{value: "Uid", label: "FullName"}}
-                                    loading={ldProduct} options={Product}
-                                    size="large" placeholder="انتخاب کنید"/>
+                            <Select
+                                showSearch
+                                fieldNames={{ value: "Uid", label: "FullName" }}
+                                loading={ldProduct}
+                                options={Product}
+                                size="large"
+                                placeholder="انتخاب کنید"
+                            />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -130,7 +133,7 @@ export default function CreateModal({
                             <Select
                                 options={TestItem}
                                 loading={ldTestProduct}
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                                 size="large"
                                 placeholder="انتخاب کنید"
                             />

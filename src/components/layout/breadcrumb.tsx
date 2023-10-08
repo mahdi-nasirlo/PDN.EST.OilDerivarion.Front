@@ -1,19 +1,31 @@
+"use client"
+
+import {usePathname} from "next/navigation";
 import {Breadcrumb} from "antd";
+import {routDictionary} from "@/components/layout/rout-dictionary";
 
 export default function LayoutBreadcrumb() {
+    const path = usePathname();
+    const pathname = path.split('/').filter(path => path);
+
     return (
-        <Breadcrumb
-            separator="/"
-            items={items}
-        />
+        <>
+            <Breadcrumb items={generateObjects(pathname)}/>
+        </>
     )
 }
 
-const items = [
-    {
-        title: 'خانه',
-    },
-    {
-        title: 'ثبت درخواست جدید',
-    },
-];
+const generateObjects = (keys: string[]) => {
+    return keys.map((key: string) => {
+
+        if (routDictionary[key]) {
+            return routDictionary[key]
+        } else {
+            return {
+                title: key,
+                href: `/${key}`
+            }
+        }
+
+    });
+};

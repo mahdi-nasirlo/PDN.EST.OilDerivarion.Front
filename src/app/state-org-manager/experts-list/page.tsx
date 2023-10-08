@@ -3,11 +3,17 @@
 import React from 'react'
 import PrimaryExpertsListForm from './components/primary-experts-list-form';
 import PrimaryExpertsListTable from './components/primary-experts-list-table';
+import { Collapse } from 'antd';
 
 export default function Page() {
     return (
         <>
-            <PrimaryExpertsListForm />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <PrimaryExpertsListForm />
+                }]}
+            />
             <PrimaryExpertsListTable />
         </>
     )

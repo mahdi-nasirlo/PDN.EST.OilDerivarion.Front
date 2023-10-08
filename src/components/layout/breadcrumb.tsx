@@ -152,14 +152,62 @@ const items: Items = {
     "gps-confirmations": {
         title: "تاییدیه های GPS"
     },
-    
     // end laboratory panel
 
+    // start admin panel
     "admin-panel": {
         title: "سامانه تولید کننده",
         href: "/admin-panel"
     },
-
+    "add-box": {
+        title: "افزودن جعبه"
+    },
+    "adding-raw-material": {
+        title: "مواد اولیه"
+    },
+    "category-list": {
+        title: "لیست دسته بندی"
+    },
+    "confirm-changes": {
+        title: "ثبت تغییرات"
+    },
+    "labratory-factor": {
+        title: "فاکتور های آزمایشگاه"
+    },
+    "list-experts": {
+        title: "لیست کارشناسان"
+    },
+    "management-user": {
+        title: "مدیریت کاربران"
+    },
+    "management-user-role": {
+        title: "نقش کاربران"
+    },
+    "products-factor": {
+        title: "فاکتور های محصول"
+    },
+    "products-list": {
+        title: "لیست محصولات"
+    },
+    "province": {
+        title: "استان"
+    },
+    "raw-product-factor": {
+        title: "مواد اولیه محصول"
+    },
+    "test-factors": {
+        title: "فاکتور های آمون"
+    },
+    "test-feature": {
+        title: "استاندارد های آزمون"
+    },
+    "test-result": {
+        title: "نتایج آزمون"
+    },
+    "test-result-record": {
+        title: "ثبت نتایج آزمایشگاه"
+    }
+    // end admin panel
 };
 
 interface Items {

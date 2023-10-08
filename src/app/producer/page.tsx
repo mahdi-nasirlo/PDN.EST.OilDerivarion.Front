@@ -51,7 +51,7 @@ export default function Home() {
                         <Typography>
                             <Link
                                 className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-                                href="/admin-pannel"
+                                href="/admin-panel"
                             >
                                 ادمین
                             </Link>
@@ -110,85 +110,85 @@ export default function Home() {
 const data1: any[] = [
     {
         Name: "فاکتور های آزمون",
-        Link: "/admin-pannel/test-factors",
+        Link: "/admin-panel/test-factors",
         Date: "1402/07/03",
         pannel: "ادمین",
     },
     {
         Name: "لیست محصولات",
-        Link: "/admin-pannel/products-list",
+        Link: "/admin-panel/products-list",
         Date: "1402/07/04",
         pannel: "ادمین",
     },
     {
         Name: "لیست دسته بندی محصول",
-        Link: "/admin-pannel/category-list",
+        Link: "/admin-panel/category-list",
         Date: "1402/07/04",
         pannel: "ادمین",
     },
     {
         Name: "ماده اولیه",
-        Link: "/admin-pannel/adding-raw-material",
+        Link: "/admin-panel/adding-raw-material",
         Date: "1402/07/04",
         pannel: "ادمین",
     },
     {
         Name: "فاکتور محصول",
-        Link: "/admin-pannel/products-factor",
+        Link: "/admin-panel/products-factor",
         Date: "1402/07/05",
         pannel: "ادمین",
     },
     {
         Name: "فاکتور ماده اولیه",
-        Link: "/admin-pannel/raw-product-factor",
+        Link: "/admin-panel/raw-product-factor",
         Date: "1402/07/05",
         pannel: "ادمین",
     },
     {
         Name: "لیست آزمایشگاه",
-        Link: "/admin-pannel/laboratory",
+        Link: "/admin-panel/laboratory",
         Date: "1402/07/08",
         pannel: "ادمین",
     },
     {
         Name: "استاندارد های آزمون",
-        Link: "/admin-pannel/test-feature",
+        Link: "/admin-panel/test-feature",
         Date: "1402/07/08",
         pannel: "ادمین",
     },
     {
         Name: "فاکتور های آزمایشگاه",
-        Link: "/admin-pannel/labratory-factor",
+        Link: "/admin-panel/labratory-factor",
         Date: "1402/07/08",
         pannel: "ادمین",
     },
     {
         Name: "لیست جعبه ها",
-        Link: "/admin-pannel/add-box",
+        Link: "/admin-panel/add-box",
         pannel: "ادمین",
         Date: "1402/07/09"
     }
     // {
     //   Name: "استان",
-    //   Link: "/admin-pannel/province",
+    //   Link: "/admin-panel/province",
     //   Date: "1402/07/03",
     //   pannel: "ادمین",
     // },
     // {
     //   Name: "لیست کاربران",
-    //   Link: "/admin-pannel/management-user",
+    //   Link: "/admin-panel/management-user",
     //   Date: "1402/07/03",
     //   pannel: "ادمین",
     // },
     // {
     //   Name: "ثبت تغییرات کاربران",
-    //   Link: "/admin-pannel/confirm-changes",
+    //   Link: "/admin-panel/confirm-changes",
     //   Date: "1402/07/03",
     //   pannel: "ادمین",
     // },
     // {
     //   Name: "نقش کاربران",
-    //   Link: "/admin-pannel/management-user-role",
+    //   Link: "/admin-panel/management-user-role",
     //   Date: "1402/07/03",
     //   pannel: "ادمین",
     // },

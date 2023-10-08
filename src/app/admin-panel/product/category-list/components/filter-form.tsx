@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
-import React, { useState } from "react";
-import { ProductGet } from "../../../../../interfaces/product";
+import {Button, Col, Form, Input, Row, Select} from "antd";
+import React, {useState} from "react";
+import {ProductGet} from "../../../../../../interfaces/product";
 
 export default function FilterForm({ filter, unsetFilter }: {
   filter: (arg: ProductGet) => void,

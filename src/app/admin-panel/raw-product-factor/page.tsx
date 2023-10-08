@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { Button, Collapse, Typography } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {Button, Collapse, Typography} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { ProductGet } from "../../../../interfaces/product";
+import {listFetcher} from "../../../../lib/server/listFetcher";
 
 export default function Page() {
 

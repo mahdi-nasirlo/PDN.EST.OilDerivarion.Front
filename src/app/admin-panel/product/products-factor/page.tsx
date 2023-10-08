@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Product } from "../../../../interfaces/product";
-import { addIndexToData } from "../../../../lib/addIndexToData";
-import { Button, Collapse, Typography } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {Button, Collapse, Typography} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {Product} from "../../../../../interfaces/product";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 
 export default function Page() {
 

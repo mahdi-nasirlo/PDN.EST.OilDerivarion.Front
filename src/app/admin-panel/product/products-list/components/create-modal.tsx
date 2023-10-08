@@ -3,10 +3,10 @@
 import {Button, Col, Form, Modal, Row} from 'antd'
 import {useForm} from 'antd/es/form/Form';
 import React from 'react'
-import {ProductCreate} from "../../../../../interfaces/product";
+import {ProductCreate} from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import ProductForm from "@/app/admin-panel/products-list/components/product-form";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
 
 export default function CreateModal({modalVisible, setModalVisible, mutate}: {
     modalVisible: any,

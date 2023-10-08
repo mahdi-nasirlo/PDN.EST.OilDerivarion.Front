@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Form, Input, Row, Select } from "antd";
+import React, {useEffect, useState} from 'react';
+import {Col, Form, Input, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 
 
 function CategoryForm({ defaultSelectedDensity }: { defaultSelectedDensity?: boolean }) {

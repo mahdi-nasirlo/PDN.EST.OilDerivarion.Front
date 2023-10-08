@@ -1,14 +1,14 @@
-import { Button, Space, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import { Product, ProductTestItem } from "../../../../../interfaces/product";
-import React, { useState } from "react";
+import {Button, Space, Table} from 'antd';
+import type {ColumnsType} from 'antd/es/table';
+import React, {useState} from "react";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { TableColumnsType } from "antd/lib";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
+import {TableColumnsType} from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
+import {Product, ProductTestItem} from "../../../../../../interfaces/product";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
 
 
 const columns: ColumnsType<Product> = [
@@ -62,6 +62,8 @@ const DataTable = ({ product, ldProduct }: { product: Product[], ldProduct: bool
 
 
 const ExpandedRowRender = ({ product }: { product: Product }) => {
+
+    const [activeExpRow, setActiveExpRow] = useState<string[]>()
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -119,6 +121,26 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
         <Table
             columns={expandColumns}
             dataSource={addIndexToData(data)}
+            expandable={{
+                expandedRowKeys: activeExpRow,
+                // onExpand: (expanded, record: Material) => {
+                //
+                //     const keys: string[] = [];
+                //
+                //     if (expanded && record.Uid) {
+                //         // @ts-ignore
+                //         keys.push(record.Uid);
+                //     }
+                //
+                //     if (!expanded) {
+                //         keys.pop()
+                //     }
+                //
+                //     setActiveExpRow(keys);
+                //
+                // },
+                // expandedRowRender: (record: Material) => <ExpandedRowRender material={record}/>,
+            }}
             loading={isLoading}
             pagination={false}
         />

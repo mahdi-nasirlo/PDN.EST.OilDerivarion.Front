@@ -1,14 +1,14 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Switch, Table, Typography,} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {Category} from "../../../../../interfaces/category";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Switch, Table, Tag, Typography, } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { Category } from "../../../../../interfaces/category";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/category-list/components/edit-modal";
 
 export default function DataTable({ setModalVisible, category, ldCategory, mutate }: {
@@ -65,7 +65,11 @@ export default function DataTable({ setModalVisible, category, ldCategory, mutat
             title: "دانسیته",
             dataIndex: "HasDensity",
             key: "3",
-            render: (_, record) => <>{record.HasDensity ? "بله" : "خیر"}</>
+            render: (hasDensity) => (
+                <Tag color={hasDensity ? "green" : "red"}>
+                    {hasDensity ? "دارد" : "ندارد"}
+                </Tag>
+            ),
         },
         {
             title: "حداقل بازه",

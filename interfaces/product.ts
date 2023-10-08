@@ -11,10 +11,19 @@ export interface ProductGet {
   name: string | null;
   is_Active: boolean | null;
   hasDensity: boolean | null;
+  densityLowerLimit: number | null;
+  densityUpperLimit: number | null;
   fromRecord: number;
   selectRecord: number;
 }
 
+export interface ProductCategoryGet {
+  name: string | null;
+  is_Active: boolean | null;
+  ProductCategoryName: string | null;
+  fromRecord: number;
+  selectRecord: number;
+}
 export interface ProductCreate {
   name: "string";
   productCategory_Id: number;

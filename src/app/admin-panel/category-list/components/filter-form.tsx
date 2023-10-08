@@ -37,7 +37,6 @@ export default function FilterForm({ filter, unsetFilter }: {
         <Col xs={24} md={12}>
           <Form.Item name="HasDensity" label="دانسیته">
             <Select
-              disabled
               size="large"
               placeholder="انتخاب کنید"
               options={[

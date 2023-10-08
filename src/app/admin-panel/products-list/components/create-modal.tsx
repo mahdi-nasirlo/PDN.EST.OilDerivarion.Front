@@ -1,14 +1,14 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from 'antd'
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Modal, Row } from 'antd'
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
-import {ProductCreate} from "../../../../../interfaces/product";
+import { ProductCreate } from "../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import ProductForm from "@/app/admin-panel/products-list/components/product-form";
 
-export default function CreateModal({modalVisible, setModalVisible, mutate}: {
+export default function CreateModal({ modalVisible, setModalVisible, mutate }: {
     modalVisible: any,
     setModalVisible: any,
     mutate: () => void
@@ -16,7 +16,7 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
 
     const [form] = useForm()
 
-    const {isMutating, trigger} = useSWRMutation("/Product/Create", mutationFetcher)
+    const { isMutating, trigger } = useSWRMutation("/Product/Create", mutationFetcher)
 
     const createProduct = async (values: ProductCreate) => {
 
@@ -66,8 +66,8 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
                 </Row>
             ]}
         >
-            <Form disabled={isMutating} onFinish={createProduct} form={form}>
-                <ProductForm/>
+            <Form disabled={isMutating} onFinish={createProduct} form={form} layout='vertical'>
+                <ProductForm />
             </Form>
         </Modal >
     )

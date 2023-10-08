@@ -1,22 +1,22 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Spin, Table, Typography} from "antd";
-import React, {useEffect, useState} from "react";
-import {ColumnsType} from "antd/es/table";
-import PrimaryManufacturerListModal from "./components/primary-manufacturer-list-modal";
+import { Button, Col, Divider, Form, Input, Row, Spin, Table, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { ColumnsType } from "antd/es/table";
 import useSWR from "swr";
-import {useForm} from "antd/lib/form/Form";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {Ceo, Employee, Get_ExeManager} from "../../../../../interfaces/producer";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { useForm } from "antd/lib/form/Form";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { Ceo, Employee, Get_ExeManager } from "../../../../../interfaces/producer";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import RejectRequestModal from "./components/reject-request-modal";
 
-export default function Page({params}: { params: { nationalCode: string } }) {
+export default function Page({ params }: { params: { nationalCode: string } }) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
     const [form] = useForm()
 
-    const {data, isLoading} = useSWR<Get_ExeManager>("/Producer/Get_ExeManager", (url) => listFetcher(url, {
+    const { data, isLoading } = useSWR<Get_ExeManager>("/Producer/Get_ExeManager", (url) => listFetcher(url, {
         arg: {
             "nationalCode": params.nationalCode
         }
@@ -55,34 +55,34 @@ export default function Page({params}: { params: { nationalCode: string } }) {
             <div className="box-border w-full mt-4 p-6">
                 <Spin spinning={isLoading}>
                     <Form disabled={isLoading} form={form} initialValues={data?.data} name="form_item_path"
-                          layout="vertical">
+                        layout="vertical">
                         <Row gutter={[16, 16]}>
                             <Col xs={24} md={12}>
                                 <Form.Item name="name" label="نام واحد تولیدی">
-                                    <Input disabled size="large"/>
+                                    <Input disabled size="large" />
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item name="nationalCode" label="  شناسه ملی">
-                                    <Input disabled size="large"/>
+                                    <Input disabled size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Row gutter={[16, 16]}>
                             <Col xs={24} md={12}>
                                 <Form.Item name="ceoName" label="نام مدیر عامل">
-                                    <Input disabled size="large"/>
+                                    <Input disabled size="large" />
                                 </Form.Item>
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item name="companyOwnershipTypeName" label="   نوع مالکیت">
-                                    <Input disabled size="large"/>
+                                    <Input disabled size="large" />
                                 </Form.Item>
                             </Col>
                         </Row>
                     </Form>
                 </Spin>
-                <Divider/>
+                <Divider />
                 <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
                     اطلاعات اعضای هیئت مدیره و مدیرعامل
                 </Typography>
@@ -93,7 +93,7 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     dataSource={addIndexToData(ceo)}
                     pagination={false}
                 />
-                <Divider/>
+                <Divider />
                 <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
                     اطلاعات کارکنان
                 </Typography>
@@ -104,7 +104,7 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     dataSource={addIndexToData(employees, "Row")}
                     pagination={false}
                 />
-                <Divider/>
+                <Divider />
                 <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
                     اطلاعات مجوز
                 </Typography>
@@ -114,7 +114,7 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     dataSource={[]}
                     pagination={false}
                 />
-                <Divider/>
+                <Divider />
                 <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
                     اطلاعات آدرس
                 </Typography>
@@ -123,58 +123,58 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
                             <Form.Item name="year-establishment" label=" استان">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item name="lastName" label="   شهرستان">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item name="lastName" label="   شهرک">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
                             <Form.Item name="year-establishment" label=" خیابان اصلی">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item name="lastName" label="   خیابان فرعی ">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item name="lastName" label="   کوچه">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col span={24}>
                             <Form.Item name="year-establishment" label="  نشانی دفتر مرکزی">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item name="year-establishment" label="  تلفن دفتر مرکزی">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="lastName" label="  تلفن تماس کارخانه">
-                                <Input size="large" disabled defaultValue="mysite"/>
+                                <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                     </Row>
                 </Form>
-                <Divider/>
+                <Divider />
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={24}>
                         <div className="flex gap-4">
@@ -209,7 +209,7 @@ export default function Page({params}: { params: { nationalCode: string } }) {
                     </Col>
                 </Row>
             </div>
-            <PrimaryManufacturerListModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <RejectRequestModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     );
 }
@@ -306,76 +306,5 @@ const columns3: ColumnsType<DataType> = [
         title: "  تاریخ اعتبار  ",
         dataIndex: "ConfirmedRequestCode",
         key: "4",
-    },
-];
-
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "رئیس هیئت مدیره",
-        call: "09123456789",
-    },
-    {
-        key: "2",
-        Row: 2,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "عضو هیئت مدیره",
-        call: "09123456789",
-    },
-    {
-        key: "3",
-        Row: 3,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "مدیرعامل",
-        call: "09123456789",
-    },
-];
-const data2: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "رئیس هیئت مدیره",
-        call: "09123456789",
-    },
-    {
-        key: "2",
-        Row: 2,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "عضو هیئت مدیره",
-        call: "09123456789",
-    },
-    {
-        key: "3",
-        Row: 3,
-        ProductName: "   امیرحسام خالویی",
-        TrackingCode: "00351665168",
-        ConfirmedRequestCode: " 1370/01/01",
-        DateRegistration: "مدیرعامل",
-        call: "09123456789",
-    },
-];
-const data3: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        ProductName: "   ارائه دهنده مجوز",
-        TrackingCode: "1400/01/01",
-        ConfirmedRequestCode: " 1405/01/01",
-        DateRegistration: "رئیس هیئت مدیره",
-        call: "09123456789",
     },
 ];

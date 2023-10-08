@@ -2,14 +2,14 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
-import {CreditCardIcon, HomeIcon} from "@heroicons/react/24/outline";
-import {MenuProps} from "antd";
+import { ClipboardDocumentListIcon, CreditCardIcon, DocumentMagnifyingGlassIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
@@ -36,20 +36,22 @@ const items: MenuProps["items"] = [
         [
 
             getMenuItem(
-                <Link href={"/manufacturer/list"}> لیست تولید کننده ها</Link>,
-                "msnufscturer-list",
+                <Link href={"/manufacturer/creator-list"}> لیست تولید کننده ها</Link>,
+                "/manufacturer/creator-list",
+                <ClipboardDocumentListIcon width={16} height={16} />
             ),
 
             getMenuItem(
                 <Link href={"/manufacturer/lab-results-list"}>نتایج آزمایشگاه</Link>,
                 "lab-results-list",
+                <DocumentMagnifyingGlassIcon width={16} height={16} />
             ),
 
         ],
         "group"
     ),
 
-    {type: "divider"},
+    { type: "divider" },
 
     getMenuItem(
         "پنل کاربری",

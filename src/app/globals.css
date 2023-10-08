@@ -180,6 +180,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: theme("backgroundColor.green.500");
 }
+/* scrollbar style */
 
 .text-secondary {
     color: theme('textColor.secondary.500') !important;
@@ -238,6 +239,9 @@ body {
     display: none !important;
 }
 
+.ant-collapse-header-text{
+    text-align: start;
+}
 .ant-menu {
     @apply border-e-0 lg:border-e-[1px] !important
 }
@@ -295,6 +299,10 @@ body {
 }
 
 /* table styles */
+
+.ant-table-content {
+    @apply overflow-auto whitespace-nowrap !important
+}
 
 .ant-table-thead .ant-table-cell {
     background: theme("backgroundColor.primary.500") !important;

@@ -2,14 +2,20 @@
 
 
 import React from 'react'
-import PrimaryVisitReportsForm from './components/primary-visit-reports-form';
-import PrimaryVisitReportsTable from './components/primary-visit-reports-table';
+import { Collapse } from 'antd';
+import FilterForm from './components/filter-form';
+import DataTable from './components/data-table';
 
 export default function Page() {
     return (
         <>
-            <PrimaryVisitReportsForm />
-            <PrimaryVisitReportsTable />
+            <Collapse
+                size="large"
+                items={[{
+                    label: 'فیلتر جدول', children: <FilterForm />
+                }]}
+            />
+            <DataTable />
         </>
     )
 }

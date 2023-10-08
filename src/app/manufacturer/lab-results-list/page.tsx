@@ -1,14 +1,18 @@
 "use client";
 
 import React from "react";
-import PrimaryManufacturerListForm from "./components/primary-manufacturer-list-form";
-import PrimaryManufacturerListTable from "./components/primary-manufacturer-list-table";
+import { Collapse } from "antd";
+import DataTable from "./components/data-table";
+import FilterForm from "./components/filter-form";
 
 export default function Page() {
     return (
         <>
-            <PrimaryManufacturerListForm />
-            <PrimaryManufacturerListTable />
+            <Collapse
+                size="large"
+                items={[{ label: 'فیلتر جدول', children: <FilterForm /> }]}
+            />
+            <DataTable />
         </>
     );
 }

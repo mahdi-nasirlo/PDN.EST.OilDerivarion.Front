@@ -1,11 +1,10 @@
-import type { MenuProps } from "antd";
-import { Button, ConfigProvider, Divider, Grid, Space } from "antd";
-import Layout, { Content } from "antd/es/layout/layout";
-import React, { useEffect, useState } from "react";
+import type {MenuProps} from "antd";
+import {Button, ConfigProvider, Divider, Grid, Space} from "antd";
+import Layout, {Content} from "antd/es/layout/layout";
+import React, {useEffect, useState} from "react";
 import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
-import LayoutBreadcrumb from "./breadcrumb";
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
 import StyledComponentsRegistry from "../../../lib/AntdRegistry";
 import theme from "../../../theme/themeConfig";
 import fa_IR from "antd/locale/fa_IR";
@@ -19,9 +18,10 @@ import {
     UserOutlined,
     VideoCameraOutlined
 } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import LayoutBreadcrumb from "@/components/layout/breadcrumb";
 
-const { useBreakpoint } = Grid;
+const {useBreakpoint} = Grid;
 
 const items: MenuProps['items'] = [
     UserOutlined,

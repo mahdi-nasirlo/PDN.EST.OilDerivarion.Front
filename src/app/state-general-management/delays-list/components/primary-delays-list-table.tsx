@@ -57,8 +57,7 @@ export default function PrimaryDelaysListTable() {
     return (
         <>
             <Table
-                scroll={{ x: 1500, y: 300 }}
-                dataSource={data || []}
+                dataSource={data}
                 className="mt-8"
                 columns={columns}
                 pagination={{

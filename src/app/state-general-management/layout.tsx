@@ -1,16 +1,15 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import {getMenuItem} from "@/components/layout/sidebar";
-import {HomeIcon} from "@heroicons/react/24/outline";
-import {FolderPlusIcon} from "@heroicons/react/24/solid";
-import {MenuProps} from "antd";
+import { getMenuItem } from "@/components/layout/sidebar";
+import { Bars3Icon, ChatBubbleLeftEllipsisIcon, ClockIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
 import Link from "next/link";
 
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
@@ -27,6 +26,8 @@ const items: MenuProps["items"] = [
         <HomeIcon width={16} height={16} />
     ),
 
+    { type: "divider" },
+
     getMenuItem(
         "پیشخوان",
         "state-general-management",
@@ -35,29 +36,27 @@ const items: MenuProps["items"] = [
             getMenuItem(
                 <Link href={"/state-general-management/requests-list"}>لیست درخواست ها</Link>,
                 "requests-list",
-                <FolderPlusIcon width={16} height={16} />
+                <Bars3Icon width={16} height={16} />
             ),
             getMenuItem(
                 <Link href={"/state-general-management/delays-list"}>تاخیر ها</Link>,
                 "delays-list",
-                <FolderPlusIcon width={16} height={16} />
+                <ClockIcon width={16} height={16} />
             ),
         ],
         "group"
     ),
     getMenuItem(
         <Link href={"/state-general-management/requestdetail"}>جزِییات درخواست</Link>,
-        "requestdetail",
-        <FolderPlusIcon width={16} height={16}/>
+        "requestdetail"
     ),
     getMenuItem(
-        <Link href={"/state-general-management/requests-list"}>ارتباط با پشتیبانی</Link>,
-        "requests-list",
-        <FolderPlusIcon width={16} height={16}/>
+        <Link href={"#"}>ارتباط با پشتیبانی</Link>,
+        "customers-support",
+        <ChatBubbleLeftEllipsisIcon width={16} height={16} />
     ),
 
-    {type: 'divider'},
-
+    { type: 'divider' },
 
     getMenuItem(
         <a href={"/state-general-management/process/StateOrgManager/list"}>اداره کل استان</a>,

@@ -1,6 +1,5 @@
 "use client"
 
-
 import React, { useState } from "react";
 import type { MenuProps } from "antd";
 import { Drawer, Menu } from "antd";
@@ -14,7 +13,7 @@ export default function LayoutSidebar({
     open,
     isLgSize,
 }: {
-    menu: MenuProps["items"];
+    menu: MenuProps["items"] | any;
     onClose: any;
     open: any;
     isLgSize: any;
@@ -32,6 +31,13 @@ export default function LayoutSidebar({
         }
     };
 
+    const handleMenuItemClick = (item: any) => {
+        if (item.type !== "LgSize") {
+            onClose(); // Close the Drawer
+        }
+    };
+
+
     const CommonMenu = ({ style = {}, className = "" }: { style: object; className: string }) => {
         return (
             <Menu
@@ -43,6 +49,7 @@ export default function LayoutSidebar({
                 className={className}
                 mode="inline"
                 items={menu}
+                onClick={handleMenuItemClick}
             />
         );
     };
@@ -65,7 +72,8 @@ export default function LayoutSidebar({
                         style={{
                             width: "270px",
                             padding: "0 16px",
-                            paddingTop: "40px",
+                            paddingTop: "30px",
+                            paddingBottom: "30px",
                             height: "100%",
                         }}
                         className="px-4 overflow-auto"

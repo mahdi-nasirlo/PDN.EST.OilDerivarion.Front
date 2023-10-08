@@ -154,8 +154,8 @@ const data1: any[] = [
         pannel: "ادمین",
     },
     {
-        Name: "لیست جعبه ها",
-        Link: "/admin-panel/add-box",
+        Name: "لیست GPS",
+        Link: "/admin-panel/gps-devices",
         pannel: "ادمین",
         Date: "1402/07/09"
     },

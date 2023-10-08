@@ -4,23 +4,19 @@ import AppLayout from "@/components/layout/layout";
 import React from "react";
 import {getMenuItem} from "@/components/layout/sidebar";
 import Link from "next/link";
-import { MenuProps } from "antd";
-import {
-  Bars3Icon,
-  FolderPlusIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
+import {Bars3Icon, FolderPlusIcon, RectangleStackIcon,} from "@heroicons/react/24/outline";
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                       children,
+                                   }: {
+    children: React.ReactNode;
 }) {
-  return (
-    <>
-      <AppLayout sidebarItems={items}>{children}</AppLayout>
-    </>
-  );
+    return (
+        <>
+            <AppLayout sidebarItems={items}>{children}</AppLayout>
+        </>
+    );
 }
 
 const items: MenuProps["items"] = [
@@ -124,38 +120,43 @@ const items: MenuProps["items"] = [
       // <FolderPlusIcon width={16} height={16} />
   ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/test-factors"}>فاکتورهای آزمون</Link>,
-      "test-factors"
-      // <FolderPlusIcon width={16} height={16} />
-  ),
-  getMenuItem(
-      <Link href={"/admin-panel/test-feature"}>استاندارد های آزمون</Link>,
-      "test-feature"
-      // <FolderPlusIcon width={16} height={16} />
-  ),
+    getMenuItem(
+        <Link href={"/admin-panel/test-factors"}>فاکتورهای آزمون</Link>,
+        "test-factors"
+        // <FolderPlusIcon width={16} height={16} />
+    ),
+    getMenuItem(
+        <Link href={"/admin-panel/test-feature"}>استاندارد های آزمون</Link>,
+        "test-feature"
+        // <FolderPlusIcon width={16} height={16} />
+    ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/list-experts"}>لیست کارشناسان</Link>,
-      "list-experts",
-      <Bars3Icon width={16} height={16} />
-  ),
+    getMenuItem(
+        <Link href={"/admin-panel/list-experts"}>لیست کارشناسان</Link>,
+        "list-experts",
+        <Bars3Icon width={16} height={16}/>
+    ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/add-box"}>افزودن جعبه</Link>,
-      "add-box"
-      // <FolderPlusIcon width={16} height={16}/>
-  ),
+    getMenuItem(
+        <Link href={"/admin-panel/add-box"}>افزودن جعبه</Link>,
+        "add-box"
+        // <FolderPlusIcon width={16} height={16}/>
+    ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
-      "test-result"
-      // <FolderPlusIcon width={16} height={16}/>
-  ),
+    getMenuItem(
+        <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
+        "test-result"
+        // <FolderPlusIcon width={16} height={16}/>
+    ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/test-result-record"}>ثبت نتیجه آزمون</Link>,
-      "test-result-record"
-      // <FolderPlusIcon width={16} height={16}/>
-  ),
+    getMenuItem(
+        <Link href={"/admin-panel/test-result-record"}>ثبت نتیجه آزمون</Link>,
+        "test-result-record"
+        // <FolderPlusIcon width={16} height={16}/>
+    ),
+
+    getMenuItem(
+        <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
+        "gps-devices"
+    )
 ];

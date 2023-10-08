@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from 'antd'
+import {Button, Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
-import { Gps } from "../../../../../interfaces/gps";
-import { useForm } from "antd/es/form/Form";
+import {Gps} from "../../../../../interfaces/gps";
+import {useForm} from "antd/es/form/Form";
 
-export default function BoxFilterForm({ filter, unsetFilter }: {
+export default function GpsFilterForm({filter, unsetFilter}: {
     filter: (arg: Gps) => void,
     unsetFilter: () => void,
 }) {
@@ -18,20 +18,13 @@ export default function BoxFilterForm({ filter, unsetFilter }: {
             <Form onFinish={filter} name="form_item_path" layout="vertical">
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="Code" label="شناسه جعبه">
-                            <Input size="large" placeholder="وارد کنید" />
+                        <Form.Item name="Code" label="کد">
+                            <Input size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="استان">
-                            <Select disabled size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="IsActive" label="فعال/غیر فعال">
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Select size="large" placeholder="انتخاب کنید"/>
                         </Form.Item>
                     </Col>
                 </Row>

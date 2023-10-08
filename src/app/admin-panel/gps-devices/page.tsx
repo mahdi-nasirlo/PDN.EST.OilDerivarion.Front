@@ -2,11 +2,11 @@
 
 
 import React, {useState} from 'react'
-import BoxFilterForm from './components/box-filter-form';
+import GpsFilterForm from './components/gps-filter-form';
 import CreateModal from './components/create-modal';
 import useSWR from "swr";
 import {listFetcher} from "../../../../lib/server/listFetcher";
-import DataTable from "@/app/admin-panel/add-box/components/data-table";
+import DataTable from "@/app/admin-panel/gps-devices/components/data-table";
 import {Button, Collapse, Typography} from "antd";
 import {PlusIcon} from "@heroicons/react/24/outline";
 import {Gps} from "../../../../interfaces/gps";
@@ -24,15 +24,15 @@ export default function Page() {
 
     const [filter, setFilter] = useState(defaultValue)
 
-    const { data, mutate, isLoading } = useSWR<{
+    const {data, mutate, isLoading} = useSWR<{
         count: number,
         records: any
-    }>(["/GpsDevice/GetPage", filter], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
+    }>(["/GpsDevice/GetPage", filter], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
 
 
     const setFilterTable = async (values: Gps) => {
         //@ts-ignore
-        setFilter({ Code: values.Code, is_Active: values.is_Active, fromRecord: 0, selectRecord: 100 })
+        setFilter({Code: values.Code, is_Active: values.is_Active, fromRecord: 0, selectRecord: 100})
 
         await mutate()
 
@@ -51,13 +51,13 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <BoxFilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                    label: 'فیلتر جدول', children: <GpsFilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
                 }]}
             />
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
                     <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
-                        لیست جعبه ها
+                        لیست GPS
                     </Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
@@ -66,14 +66,14 @@ export default function Page() {
                         htmlType="submit"
                         onClick={() => setModalVisible(true)}
                     >
-                        <PlusIcon width={24} height={24} />
+                        <PlusIcon width={24} height={24}/>
                         <span className="flex gap-2">افزودن جعبه</span>
                     </Button>
                 </div>
                 <DataTable mutate={mutate} boxesData={data?.records} isLoading={isLoading}
                 />
             </div>
-            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
         </>
     )
 }

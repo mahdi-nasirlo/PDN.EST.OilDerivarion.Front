@@ -3,8 +3,8 @@ import {useForm} from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import {Button, Col, Form, Modal, Row} from "antd";
-import BoxForm from "@/app/admin-panel/add-box/components/box-form";
 import {Gps} from "../../../../../interfaces/gps";
+import GpsForm from "@/app/admin-panel/gps-devices/components/gps-form";
 
 function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
     modalVisible: boolean,
@@ -17,7 +17,6 @@ function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
 
 
     const {trigger, isMutating} = useSWRMutation("/GpsDevice/Update", mutationFetcher)
-
 
     const handleSubmit = async (values: Gps) => {
 
@@ -78,7 +77,7 @@ function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
                 ]}
             >
                 <Form disabled={isMutating} form={form} onFinish={handleSubmit} layout="vertical">
-                    <BoxForm/>
+                    <GpsForm/>
                 </Form>
             </Modal>
         </>

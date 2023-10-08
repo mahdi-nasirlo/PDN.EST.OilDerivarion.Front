@@ -3,9 +3,9 @@
 import {Button, Col, Form, Modal, Row} from 'antd'
 import {useForm} from 'antd/es/form/Form';
 import React from 'react'
-import BoxForm from "@/app/admin-panel/add-box/components/box-form";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import GpsForm from "@/app/admin-panel/gps-devices/components/gps-form";
 
 
 export default function CreateModal({modalVisible, setModalVisible, mutate}: {
@@ -69,7 +69,7 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
             ]}
         >
             <Form disabled={isMutating} form={form} onFinish={handleSubmit} layout="vertical">
-                <BoxForm/>
+                <GpsForm/>
             </Form>
         </Modal>
     )

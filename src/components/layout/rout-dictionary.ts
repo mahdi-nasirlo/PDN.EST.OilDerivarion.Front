@@ -206,6 +206,9 @@ export const routDictionary: Items = {
     },
     "production-unit": {
         title: "تولید کننده"
+    },
+    "gps-devices": {
+        title: "دستگاه های GPS"
     }
     // end admin panel
 }

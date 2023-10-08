@@ -1,18 +1,18 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row, Select,} from "antd";
+import { Button, Col, Form, Modal, Row, Select, } from "antd";
 import React from "react";
 import useSWR from "swr";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 export default function CreateModal({
-                                        setModalVisible,
-                                        modalVisible,
-                                        mutate
-                                    }: {
+    setModalVisible,
+    modalVisible,
+    mutate
+}: {
     mutate: () => void;
     setModalVisible: any;
     modalVisible: any;
@@ -28,21 +28,21 @@ export default function CreateModal({
     const {
         data: material,
         isLoading: ldMaterial
-    } = useSWR<Material[]>(["/Material/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
+    } = useSWR<Material[]>(["/Material/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
     const {
         data: TestItem,
         isLoading: ldTestMaterial
-    } = useSWR(["/TestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg}))
+    } = useSWR(["/TestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
 
-    const {trigger, isMutating} = useSWRMutation("/MaterialTestItem/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/MaterialTestItem/Create", mutationFetcher)
 
     const handleFormSubmit = async (values: { materialUid: string, testItemUid: string }) => {
 
         setModalVisible(false)
 
-        await trigger({...values, is_Active: true})
+        await trigger({ ...values, is_Active: true })
 
         await mutate()
 
@@ -110,9 +110,9 @@ export default function CreateModal({
                                 },
                             ]}
                         >
-                            <Select options={material} loading={ldMaterial} fieldNames={{value: "Uid", label: "Name"}}
-                                    size="large"
-                                    placeholder="انتخاب کنید"/>
+                            <Select options={material} loading={ldMaterial} fieldNames={{ value: "Uid", label: "Name" }}
+                                size="large"
+                                placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -131,7 +131,7 @@ export default function CreateModal({
                                 loading={ldTestMaterial}
                                 size="large"
                                 placeholder="انتخاب کنید"
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                             />
                         </Form.Item>
                     </Col>

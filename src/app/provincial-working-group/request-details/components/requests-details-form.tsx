@@ -5,7 +5,7 @@ import { Button, Col, Divider, Form, Input, Row, Typography } from 'antd'
 import React from 'react'
 import { useForm } from "antd/es/form/Form";
 
-export default function PrimaryRequestsDetailsForm() {
+export default function RequestsDetailsForm() {
 
     const [form] = useForm()
 

@@ -1,14 +1,14 @@
-import {Button, Space, Table} from 'antd';
-import type {ColumnsType} from 'antd/es/table';
-import React, {useState} from "react";
+import { Button, Space, Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import React, { useState } from "react";
 import useSWR from "swr";
-import {TableColumnsType} from "antd/lib";
+import { TableColumnsType } from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {Product, ProductTestItem} from "../../../../../../interfaces/product";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import { Product, ProductTestItem } from "../../../../../../interfaces/product";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
 
 
 const columns: ColumnsType<Product> = [
@@ -81,7 +81,7 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
         mutate
     } = useSWR<ProductTestItem[]>(["/ProductTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
-    const { trigger } = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
 
     const deleteProductFactor = async () => {
 
@@ -123,25 +123,8 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
             dataSource={addIndexToData(data)}
             expandable={{
                 expandedRowKeys: activeExpRow,
-                // onExpand: (expanded, record: Material) => {
-                //
-                //     const keys: string[] = [];
-                //
-                //     if (expanded && record.Uid) {
-                //         // @ts-ignore
-                //         keys.push(record.Uid);
-                //     }
-                //
-                //     if (!expanded) {
-                //         keys.pop()
-                //     }
-                //
-                //     setActiveExpRow(keys);
-                //
-                // },
-                // expandedRowRender: (record: Material) => <ExpandedRowRender material={record}/>,
             }}
-            loading={isLoading}
+            loading={isLoading || isMutating}
             pagination={false}
         />
         <ConfirmDeleteModal

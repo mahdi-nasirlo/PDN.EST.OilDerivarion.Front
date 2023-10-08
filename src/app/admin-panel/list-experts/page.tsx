@@ -1,10 +1,10 @@
 "use client";
 
-import React, {useState} from "react";
-import PrimaryManufacturerListForm from "./components/primary-manufacturer-list-form";
-import PrimaryManufacturerListTable from "./components/primary-manufacturer-list-table";
-import PrimaryAddRawMaterialModal from "@/app/admin-panel/list-experts/components/primary-add-raw-material-modal";
-import {Collapse} from "antd";
+import React, { useState } from "react";
+import { Collapse } from "antd";
+import DataTable from "./components/data-table";
+import FilterForm from "./components/filter-form";
+import CreateModal from "./components/create-modal";
 
 
 export default function Page() {
@@ -16,11 +16,11 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryManufacturerListForm />
+                    label: 'فیلتر جدول', children: <FilterForm />
                 }]}
             />
-            <PrimaryManufacturerListTable setModalVisible={setModalVisible} />
-            <PrimaryAddRawMaterialModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <DataTable setModalVisible={setModalVisible} />
+            <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     );
 }

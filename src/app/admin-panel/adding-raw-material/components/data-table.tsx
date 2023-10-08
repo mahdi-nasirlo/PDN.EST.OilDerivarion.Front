@@ -1,25 +1,15 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from 'react'
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
-
-interface DataType {
-    key: string;
-    Row: number;
-    NameRawMaterial: string;
-    UnitMeasurement: string;
-    ConfirmedRequestCode: string;
-    MaterialCode: string;
-    TestInvoice: string;
-}
 
 export default function DataTable({ setModalVisible, ldMaterial, material, mutate }: {
     setModalVisible: any,
@@ -166,7 +156,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
                 </div>
                 <Table
                     className="mt-6"
-                    loading={ldMaterial}
+                    loading={ldMaterial || ldDeleteMaterial}
                     columns={columns}
                     dataSource={addIndexToData(material?.records)}
                     pagination={{

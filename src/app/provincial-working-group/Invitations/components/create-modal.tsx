@@ -5,7 +5,8 @@ import { Button, Col, Form, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryInvationListModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
+
+export default function CreateModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
 
     const [form] = useForm()
 
@@ -38,7 +39,7 @@ export default function PrimaryInvationListModal({ modalVisible, setModalVisible
                         <Col xs={24} md={24}>
                             <Button
                                 size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
+                                className="w-full"
                                 type="primary"
                                 onClick={handleFormSubmit}
                                 key={"submit"} >

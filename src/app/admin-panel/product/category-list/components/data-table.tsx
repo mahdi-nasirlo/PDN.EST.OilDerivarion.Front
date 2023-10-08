@@ -27,7 +27,8 @@ export default function DataTable({ setModalVisible, category, ldCategory, mutat
     const [recordToDelete, setRecordToDelete] = useState<Category | null>(null);
 
     const {
-        trigger: deleteCategory
+        trigger: deleteCategory,
+        isMutating: ldDelete
     } = useSWRMutation("/ProductCategory/Delete", mutationFetcher)
 
     const handleDelete = async () => {
@@ -133,7 +134,7 @@ export default function DataTable({ setModalVisible, category, ldCategory, mutat
                 <Table
                     className="mt-6"
                     columns={columns}
-                    loading={ldCategory}
+                    loading={ldCategory || ldDelete}
                     dataSource={addIndexToData(category)}
                     pagination={{
                         defaultPageSize: 10,

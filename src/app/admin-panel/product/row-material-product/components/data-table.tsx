@@ -1,18 +1,18 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Switch, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import {Product} from '../../../../../../interfaces/product';
-import {addIndexToData} from '../../../../../../lib/addIndexToData';
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Switch, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
+import { Product } from '../../../../../../interfaces/product';
+import { addIndexToData } from '../../../../../../lib/addIndexToData';
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {ExpandedMaterialTable} from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
+import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 
 
-export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
+export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -33,7 +33,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
         setIsDeleteModalVisible(true);
     };
 
-    const {trigger: deleteProduct} = useSWRMutation("/Product/Delete", mutationFetcher)
+    const { trigger: deleteProduct, isMutating: ldDelete } = useSWRMutation("/Product/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -68,7 +68,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
             title: "فعال/غیر فعال ",
             dataIndex: "vIs_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
             title: "کد محصول",
@@ -85,7 +85,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
             key: "عملیات",
             render: (_, record) => (
                 <Button type="link" className={"text-red-500 font-bold"}
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                    onClick={() => handleDelete(record)}>حذف</Button>
             ),
         },
     ];
@@ -105,12 +105,12 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                         htmlType="submit"
                         onClick={() => setModalVisible(true)}
                     >
-                        <PlusIcon width={24} height={24}/>
+                        <PlusIcon width={24} height={24} />
                         <span className="flex gap-2">افزودن محصول جدید</span>
                     </Button>
                 </div>
                 <Table
-                    loading={ldProduct}
+                    loading={ldProduct || ldDelete}
                     className="mt-6"
                     columns={columns}
                     rowKey={"Uid"}
@@ -133,7 +133,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                             setActiveExpRow(keys);
 
                         },
-                        expandedRowRender: (record: Product) => <ExpandedMaterialTable product={record}/>,
+                        expandedRowRender: (record: Product) => <ExpandedMaterialTable product={record} />,
                     }}
                     dataSource={addIndexToData(product?.records)}
                     pagination={{

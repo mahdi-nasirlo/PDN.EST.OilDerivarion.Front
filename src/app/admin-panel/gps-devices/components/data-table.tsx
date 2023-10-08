@@ -1,16 +1,16 @@
 "use client";
 
 
-import {Button, Col, Modal, Row, Space, Switch} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {Table} from 'antd/lib';
-import React, {useState} from 'react'
-import {Gps} from "../../../../../interfaces/gps";
+import { Button, Col, Modal, Row, Space, Switch } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { Table } from 'antd/lib';
+import React, { useState } from 'react'
+import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 
 
 interface DataType {
@@ -22,7 +22,7 @@ interface DataType {
 }
 
 
-export default function DataTable({isLoading, boxesData, mutate}: {
+export default function DataTable({ isLoading, boxesData, mutate }: {
     isLoading: boolean,
     boxesData: any,
     mutate: () => void
@@ -53,12 +53,12 @@ export default function DataTable({isLoading, boxesData, mutate}: {
     };
 
 
-    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
 
 
     const handleDeleteSubmit = async () => {
 
-        await trigger({uid: recordToDelete?.Uid})
+        await trigger({ uid: recordToDelete?.Uid })
 
         setIsDeleteModalVisible(false)
 
@@ -86,7 +86,7 @@ export default function DataTable({isLoading, boxesData, mutate}: {
             title: "فعال/غیر فعال ",
             dataIndex: "IsActive",
             key: "4",
-            render: (e, record) => <Switch checked={record.IsActive}/>,
+            render: (e, record) => <Switch checked={record.IsActive} />,
         },
         {
             title: "مکان یابی",
@@ -109,10 +109,10 @@ export default function DataTable({isLoading, boxesData, mutate}: {
                         setRecordToEdit(record)
                     }}> ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
-                            onClick={() => {
-                                setIsDeleteModalVisible(true);
-                                setRecordToDelete(record)
-                            }}>حذف</Button>
+                        onClick={() => {
+                            setIsDeleteModalVisible(true);
+                            setRecordToDelete(record)
+                        }}>حذف</Button>
                 </Space>
             ),
         },
@@ -120,7 +120,7 @@ export default function DataTable({isLoading, boxesData, mutate}: {
     return (
         <>
             <Table
-                loading={isLoading}
+                loading={isLoading || isMutating}
                 className="mt-6"
                 columns={columns}
                 dataSource={addIndexToData(boxesData)}

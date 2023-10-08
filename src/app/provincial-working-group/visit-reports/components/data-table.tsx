@@ -15,9 +15,7 @@ interface DataType {
 }
 
 
-
-export default function PrimaryVisitReportsTable() {
-
+export default function DataTable() {
 
     const columns: ColumnsType<DataType> = [
         {

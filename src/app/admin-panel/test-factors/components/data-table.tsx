@@ -1,15 +1,15 @@
 "use client"
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Space, Switch, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {TestItem} from "../../../../../interfaces/TestItem";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Space, Switch, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { TestItem } from "../../../../../interfaces/TestItem";
 import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 
 export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutate }: {
@@ -101,14 +101,6 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
         },
     ];
 
-    interface ExpandedDataType {
-        key: React.Key;
-        date: string;
-        name: string;
-        upgradeNum: string;
-    }
-
-
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
@@ -131,7 +123,6 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
                     className="mt-6"
                     columns={columns}
                     loading={ldTestItem || isMutating}
-                    // expandable={{expandedRowRender: expandedRowRender}}
                     dataSource={addIndexToData(TestItem?.records)}
                     pagination={{
                         defaultPageSize: 10,
@@ -146,10 +137,18 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
                         },
                     }}
                 />
-                <EditModal mutate={mutate} editRecord={openEdit} setEditRecord={setOpenEdit} />
+                <EditModal
+                    mutate={mutate}
+                    editRecord={openEdit}
+                    setEditRecord={setOpenEdit}
+                />
             </div>
-            <ConfirmDeleteModal open={isDeleteModalVisible} setOpen={setIsDeleteModalVisible}
-                handleDelete={handleConfirmDelete} title="مواد اولیه" />
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
+                title="مواد اولیه"
+            />
         </>
     )
 }

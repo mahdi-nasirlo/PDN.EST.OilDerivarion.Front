@@ -98,37 +98,37 @@ export default function DataTable({
             dataIndex: "Address",
             key: "8",
         },
-        // {
-        //   title: "نام خانوادگی مسئول",
-        //   dataIndex: "License_No",
-        //   key: "4",
-        // },
-        // {
-        //   title: "کد ملی مسئول",
-        //   dataIndex: "code",
-        //   key: "5",
-        // },
-        // {
-        //   title: "نام مدیر",
-        //   dataIndex: "fax",
-        //   key: "7",
-        // },
+        {
+            title: "نام خانوادگی مسئول",
+            dataIndex: "License_No",
+            key: "4",
+        },
+        {
+            title: "کد ملی مسئول",
+            dataIndex: "code",
+            key: "5",
+        },
+        {
+            title: "نام مدیر",
+            dataIndex: "fax",
+            key: "7",
+        },
 
-        // {
-        //   title: "نام خانوادگی مدیر",
-        //   dataIndex: "Address",
-        //   key: "8",
-        // },
-        // {
-        //   title: "کد ملی مدیر",
-        //   dataIndex: "Address",
-        //   key: "8",
-        // },
-        // {
-        //   title: "فاکتور آزمون",
-        //   dataIndex: "Address",
-        //   key: "8",
-        // },
+        {
+            title: "نام خانوادگی مدیر",
+            dataIndex: "Address",
+            key: "8",
+        },
+        {
+            title: "کد ملی مدیر",
+            dataIndex: "Address",
+            key: "8",
+        },
+        {
+            title: "فاکتور آزمون",
+            dataIndex: "Address",
+            key: "8",
+        },
 
         {
             title: "عملیات",
@@ -173,7 +173,6 @@ export default function DataTable({
                 </div>
                 <Table
                     loading={ldMaterial || isMutating}
-                    scroll={{ x: 1500, y: 300 }}
                     dataSource={addIndexToData(labratory?.records)}
                     className="mt-6"
                     columns={columns}

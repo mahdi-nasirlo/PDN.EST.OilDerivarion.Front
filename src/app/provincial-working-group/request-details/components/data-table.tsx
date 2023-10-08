@@ -1,11 +1,10 @@
 "use client";
 
-
-import { Button, Col, Divider, Modal, Row, Space, Table, Typography } from 'antd'
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
+import { Button, Divider, Space, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import { TableColumnsType } from "antd/lib";
 import React, { useState } from 'react'
-
 
 interface DataType {
     key: string;
@@ -13,8 +12,7 @@ interface DataType {
     factorsName: string;
 }
 
-
-export default function PrimaryRequestsDetailsTable() {
+export default function DataTable() {
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [recordToDelete, setRecordToDelete] = useState<DataType | ExpandedDataType | null>(null);
@@ -27,11 +25,6 @@ export default function PrimaryRequestsDetailsTable() {
     const handleConfirmDelete = () => {
         setIsDeleteModalVisible(false);
     };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null);
-    };
-
 
     const columns: ColumnsType<DataType> = [
         {
@@ -121,37 +114,12 @@ export default function PrimaryRequestsDetailsTable() {
                 dataSource={data}
                 pagination={false}
             />
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
                 title="حذف فاکتور"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این فاکتور مطمئن هستید؟</p>
-            </Modal>
+            />
         </>
     )
 }

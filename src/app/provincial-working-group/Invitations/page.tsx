@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import PrimaryInvationListForm from "./components/primary-invation-list-form";
-import PrimaryInvationListTable from "./components/primary-invation-list-table";
-import PrimaryInvationListModal from "./components/primary-invation-list-modal";
 import { Collapse } from "antd";
+import FilterForm from "./components/filter-form";
+import DataTable from "./components/data-table";
+import CreateModal from "./components/create-modal";
 
 export default function Page() {
 
@@ -15,11 +15,11 @@ export default function Page() {
       <Collapse
         size="large"
         items={[{
-          label: 'فیلتر جدول', children: <PrimaryInvationListForm />
+          label: 'فیلتر جدول', children: <FilterForm />
         }]}
       />
-      <PrimaryInvationListTable setModalVisible={setModalVisible} />
-      <PrimaryInvationListModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <DataTable setModalVisible={setModalVisible} />
+      <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </>
   );
 }

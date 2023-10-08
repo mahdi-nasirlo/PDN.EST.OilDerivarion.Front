@@ -1,5 +1,6 @@
 "use client";
 
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import { UploadOutlined } from '@ant-design/icons';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import { Button, Col, Form, Modal, Row, Select, Space, Table, Typography, Upload } from 'antd';
@@ -19,7 +20,7 @@ interface DataType {
 }
 
 
-export default function PrimaryConfirmChangesTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
     //حذف
 
@@ -35,10 +36,6 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
         // Perform the delete action here with recordToDelete
         // After successful delete, you can close the modal
         setIsDeleteModalVisible(false);
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
     };
 
     const showModal = () => {
@@ -140,37 +137,12 @@ export default function PrimaryConfirmChangesTable({ setModalVisible }: { setMod
                 />
             </div>
             {/* جذف */}
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
                 title="حذف کاربر"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این کاربر مطمئن هستید؟</p>
-            </Modal>
+            />
             {/* ویرایش */}
             <Modal
                 width={800}

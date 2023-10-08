@@ -4,7 +4,11 @@ import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
-export default function PrimaryManagementUserModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
+
+export default function CreateModal({ modalVisible, setModalVisible }: {
+    modalVisible: any,
+    setModalVisible: any
+}) {
 
     const [form] = useForm()
 
@@ -21,16 +25,13 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
             console.error("Form validation failed:", error);
         }
     };
-
-
     return (
         <Modal
             width={800}
             title={<div>
-                <div className="text-base mb-2">افزودن کاربر جدید</div>
-                <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
+                <div className="text-base mb-2">افزودن کارشناس</div>
             </div>}
-            visible={modalVisible}
+            open={modalVisible}
             onCancel={closeModal}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -40,80 +41,54 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                             className="w-full"
                             type="primary"
                             onClick={handleFormSubmit}
-                            key={"submit"} >
+                            key={"submit"}>
                             ثبت
-                        </Button >
+                        </Button>
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={closeModal}
-                            key={"cancel"} >
+                            key={"cancel"}>
                             انصراف
-                        </Button >
+                        </Button>
                     </Col>
                 </Row>
             ]}
         >
-            <Form form={form} >
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment" label="نام">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="lastName" label="نام خانوادگی">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment" label="کد ملی">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }} name="lastName" label="شناسه کاربری">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment" label="شماره تماس">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="lastName" label="استان">
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[32, 1]}>
+            <Form form={form}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="year-establishment"
-                            label="شهر"
+                            label="نام کارشناس"
                         >
                             <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="کد ملی"
+                        >
+                            <Input size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="شماره همراه"
+                        >
+                            <Input size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -127,16 +102,29 @@ export default function PrimaryManagementUserModal({ modalVisible, setModalVisib
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="year-establishment" label="نقش">
+                            name="year-establishment"
+                            label="اداره مربوطه"
+                        >
+                            <Select size="large" placeholder="انتخاب کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            labelCol={{ span: 24 }}
+                            wrapperCol={{ span: 24 }}
+                            name="year-establishment"
+                            label="استان مربوطه"
+                        >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
             </Form>
-        </Modal >)
+        </Modal>
+    )
 }

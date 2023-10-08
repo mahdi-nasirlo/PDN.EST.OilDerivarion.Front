@@ -1,22 +1,22 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
-import {Product} from '../../../../../../interfaces/product';
-import {listFetcher} from '../../../../../../lib/server/listFetcher';
-import {addIndexToData} from '../../../../../../lib/addIndexToData';
+import { Product } from '../../../../../../interfaces/product';
+import { listFetcher } from '../../../../../../lib/server/listFetcher';
+import { addIndexToData } from '../../../../../../lib/addIndexToData';
 import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
-import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
+import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
-export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
+export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -37,7 +37,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
         setIsDeleteModalVisible(true);
     };
 
-    const { trigger: deleteProduct } = useSWRMutation("/Product/Delete", mutationFetcher)
+    const { trigger: deleteProduct, isMutating: ldDelete } = useSWRMutation("/Product/Delete", mutationFetcher)
 
     const handleConfirmDelete = async () => {
 
@@ -176,7 +176,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                     </Button>
                 </div>
                 <Table
-                    loading={ldProduct}
+                    loading={ldProduct || ldDelete}
                     className="mt-6"
                     columns={columns}
                     dataSource={addIndexToData(product?.records)}

@@ -1,14 +1,14 @@
-import {Space, Table, Tag, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
+import { Space, Table, Tag, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
 import Link from 'next/link';
 import React from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {GetPage_ExeManager, Person} from "../../../../../interfaces/producer";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { GetPage_ExeManager, Person } from "../../../../../interfaces/producer";
 
 
-export default function PrimaryManufacturerListTable() {
+export default function DataTable() {
 
     const {
         data,
@@ -28,32 +28,27 @@ export default function PrimaryManufacturerListTable() {
             key: "1",
         },
         {
-            title: "شناسه درخواست",
+            title: "نام واحد تولیدی",
             dataIndex: "name",
             key: "2",
         },
         {
-            title: "کد ماده",
+            title: " شناسه ملی",
             dataIndex: "nationalCode",
             key: "3",
         },
         {
-            title: "تاریخ درخواست",
+            title: "نام مدیرعامل   ",
             dataIndex: "ceoName",
             key: "4",
         },
         {
-            title: "زمان باقی مانده",
+            title: "نوع مالکیت",
             dataIndex: "companyOwnershipTypeName",
             key: "5",
         },
         {
-            title: "وضعیت",
-            dataIndex: "companyOwnershipTypeName",
-            key: "6",
-        },
-        {
-            title: "جزئیات",
+            title: " وضعیت حساب کاربری ",
             dataIndex: "status",
             key: "6",
             render: (_, record: any) => {
@@ -93,7 +88,7 @@ export default function PrimaryManufacturerListTable() {
 
     return (
         <div className="box-border w-full p-6 mt-8">
-            <Typography className="text-right text-[16px] font-normal">لیست نتایج آزمایشگاه</Typography>
+            <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
             <Table
                 loading={isLoading}
                 className="mt-8"

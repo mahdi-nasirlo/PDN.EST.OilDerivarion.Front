@@ -1,9 +1,10 @@
-import {Space, Table, Typography} from 'antd'
+import { Space, Table, Typography } from 'antd'
 import Link from 'next/link';
 import React from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {GetPage_ExeManager} from "../../../../../../interfaces/producer";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { GetPage_ExeManager } from "../../../../../../interfaces/producer";
+import { ColumnsType } from 'antd/es/table';
 
 export default function PrimaryManufacturerListTable() {
 
@@ -12,13 +13,12 @@ export default function PrimaryManufacturerListTable() {
         isLoading,
     } = useSWR<GetPage_ExeManager>("/Producer/GetPage_ExeManager", (url) => listFetcher(url, {
         arg: {
-            "fromRecord": 0,
-            "selectRecord": 100000
+            fromRecord: 0,
+            selectRecord: 100000
         }
     }))
 
-// : ColumnsType<DataType>
-    const columns = [
+    const columns: ColumnsType<any> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -99,6 +99,7 @@ export default function PrimaryManufacturerListTable() {
             <Typography className="text-right text-[16px] font-normal">لیست درخواست ها</Typography>
             <Table
                 className='mt-8'
+                loading={isLoading}
                 columns={columns}
                 dataSource={[]}
                 pagination={{
@@ -106,7 +107,7 @@ export default function PrimaryManufacturerListTable() {
                     showSizeChanger: true,
                     pageSizeOptions: ['10', '20', '50'],
                     defaultCurrent: 1,
-                    style: {display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "16px 0",},
+                    style: { display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "16px 0", },
                 }}
             />
         </div>

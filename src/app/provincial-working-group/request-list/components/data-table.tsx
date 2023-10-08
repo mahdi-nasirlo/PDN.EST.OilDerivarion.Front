@@ -17,7 +17,7 @@ interface DataType {
     middle: string;
 }
 
-export default function PrimaryRequestListable() {
+export default function DataTable() {
 
 
     const columns: ColumnsType<DataType> = [

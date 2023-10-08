@@ -1,15 +1,16 @@
-import {Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {GetPage_ExeManager, Person} from "../../../../../interfaces/producer";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {useForm} from 'antd/es/form/Form';
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { GetPage_ExeManager, Person } from "../../../../../interfaces/producer";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { useForm } from 'antd/es/form/Form';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
 
-export default function PrimaryManufacturerListTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
 
     //حذف
 
@@ -25,14 +26,6 @@ export default function PrimaryManufacturerListTable({ setModalVisible }: { setM
         // Perform the delete action here with recordToDelete
         // After successful delete, you can close the modal
         setIsDeleteModalVisible(false);
-    };
-    const handleCancelDelete = () => {
-        setIsDeleteModalVisible(false);
-        setRecordToDelete(null); // Clear the recordToDelete
-    };
-
-    const showModal = () => {
-        setModalVisible(true);
     };
 
     const [form] = useForm()
@@ -102,7 +95,6 @@ export default function PrimaryManufacturerListTable({ setModalVisible }: { setM
         },
         {
             title: "عملیات",
-            fixed: "right",
             key: "8",
             render: (_, record) => (
                 <Space size="middle">
@@ -153,37 +145,12 @@ export default function PrimaryManufacturerListTable({ setModalVisible }: { setM
                 }}
             />
             {/* جذف */}
-            <Modal
-                width={600}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-red-500"
-                                type="primary"
-                                onClick={handleConfirmDelete}
-                                key={"submit"} >
-                                حذف
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleConfirmDelete}
-                                key={"cancel"} >
-                                انصراف
-                            </Button >
-                        </Col>
-                    </Row>
-                ]}
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
                 title="حذف کارشناس"
-                visible={isDeleteModalVisible}
-                onCancel={handleCancelDelete}
-            >
-                <p>آیا از حذف این کارشناس مطمئن هستید؟</p>
-            </Modal>
+            />
             {/* ویرایش */}
             <Modal
                 width={800}

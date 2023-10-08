@@ -1,22 +1,22 @@
-import {Button, Table} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
+import { Button, Table } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {RequestDetail} from "../../../../../../../interfaces/requestDetail";
-import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
-import {addIndexToData} from "../../../../../../../lib/addIndexToData";
+import { RequestDetail } from "../../../../../../../interfaces/requestDetail";
+import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
+import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 // import {DeleteProductRequestDetail} from "../../../../../../units/RequestDetail/deleteProduct";
 
 
-export default function PrimaryProductTable({data, loading = false, mute, setData}: {
+export default function PrimaryProductTable({ data, loading = false, mute, setData }: {
     data: RequestDetail[],
     loading: any,
     mute: any,
     setData: (arg: any) => void
 }) {
 
-    const {isMutating: isDeleting, trigger} = useSWRMutation("/RequestDetail/DeleteMaterial", mutationFetcher)
+    const { isMutating: isDeleting, trigger } = useSWRMutation("/RequestDetail/DeleteMaterial", mutationFetcher)
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
@@ -79,7 +79,7 @@ export default function PrimaryProductTable({data, loading = false, mute, setDat
                 <div className={"flex justify-between"}>
                     <Button onClick={() => {
                         setData(record)
-                        window.scrollTo({top: 0, behavior: "smooth"})
+                        window.scrollTo({ top: 0, behavior: "smooth" })
                     }} type="link" className={"text-primary-500"}>ویرایش</Button>
                     <Button loading={isDeleting} type="link" onClick={() => {
                         setDeleteUid(record.Uid)
@@ -103,10 +103,18 @@ export default function PrimaryProductTable({data, loading = false, mute, setDat
     }
 
     return <>
-        <Table loading={loading || isDeleting} className={"mt-6"} pagination={false} columns={columns}
-               dataSource={addIndexToData(data) || []}
-               scroll={{x: 1500, y: 300}}/>
-        <ConfirmDeleteModal title="مواد اولیه" setOpen={setIsDeleteModalVisible} open={isDeleteModalVisible}
-                            handleDelete={handleDelete}/>
+        <Table
+            loading={loading || isDeleting}
+            className={"mt-6"}
+            pagination={false}
+            columns={columns}
+            dataSource={addIndexToData(data) || []}
+        />
+        <ConfirmDeleteModal
+            title="مواد اولیه"
+            setOpen={setIsDeleteModalVisible}
+            open={isDeleteModalVisible}
+            handleDelete={handleDelete}
+        />
     </>
 }

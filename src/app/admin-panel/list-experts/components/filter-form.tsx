@@ -4,7 +4,7 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd';
 import React from 'react'
 
-export default function PrimaryManufacturerListForm() {
+export default function FilterForm() {
     return (
         // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
         <Form name="form_item_path" layout="vertical">

@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useState } from 'react'
-import PrimaryManagementUserForm from './components/primary-management-user-form'
-import PrimaryManagementUserTable from './components/primary-management-user-table'
-import PrimaryManagementUserModal from './components/primary-management-user-modal'
 import { Collapse } from 'antd'
+import FilterForm from './components/filter-form'
+import DataTable from './components/data-table'
+import CreateModal from './components/create-modal'
 
 export default function Page() {
 
@@ -15,11 +15,11 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryManagementUserForm />
+                    label: 'فیلتر جدول', children: <FilterForm />
                 }]}
             />
-            <PrimaryManagementUserTable setModalVisible={setModalVisible} />
-            {/* <PrimaryManagementUserModal modalVisible={modalVisible} setModalVisible={setModalVisible} /> */}
+            <DataTable setModalVisible={setModalVisible} />
+            {/* <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} /> */}
         </>
     )
 }

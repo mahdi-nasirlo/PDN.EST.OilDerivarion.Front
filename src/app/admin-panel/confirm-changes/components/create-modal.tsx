@@ -1,13 +1,12 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Col, Form, Modal, Row, Select, Upload } from 'antd';
 import { useForm } from 'antd/es/form/Form';
+import TextArea from 'antd/lib/input/TextArea';
 import React from 'react'
 
-export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisible }: {
-    modalVisible: any,
-    setModalVisible: any
-}) {
+export default function CreateModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
 
     const [form] = useForm()
 
@@ -25,12 +24,14 @@ export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisib
         }
     };
     return (
+
         <Modal
             width={800}
             title={<div>
-                <div className="text-base mb-2">افزودن کارشناس</div>
+                <div className="text-base mb-2">ثبت تغییرات</div>
+                <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
             </div>}
-            open={modalVisible}
+            visible={modalVisible}
             onCancel={closeModal}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -40,32 +41,32 @@ export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisib
                             className="w-full"
                             type="primary"
                             onClick={handleFormSubmit}
-                            key={"submit"}>
+                            key={"submit"} >
                             ثبت
-                        </Button>
+                        </Button >
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={closeModal}
-                            key={"cancel"}>
+                            key={"cancel"} >
                             انصراف
-                        </Button>
+                        </Button >
                     </Col>
                 </Row>
             ]}
         >
-            <Form form={form}>
-                <Row gutter={[16, 16]}>
+            <Form form={form} >
+                <Row gutter={[32, 1]}>
                     <Col xs={24} md={12}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="year-establishment"
-                            label="نام کارشناس"
+                            label="نام/ نقش کاربر"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select size="large" placeholder="انتخاب کنید" tokenSeparators={[',']} mode="multiple" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -73,56 +74,48 @@ export default function PrimaryAddRawMaterialModal({ modalVisible, setModalVisib
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="year-establishment"
-                            label="کد ملی"
-                        >
-                            <Input size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="شماره همراه"
-                        >
-                            <Input size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            labelCol={{ span: 24 }}
-                            wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="فعال/غیر فعال"
+                            label="وضعیت"
                         >
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
+                <Row gutter={[32, 1]}>
+                    <Col md={24}>
                         <Form.Item
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
                             name="year-establishment"
-                            label="اداره مربوطه"
+                            label="آپلود سند"
                         >
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <Upload
+                                multiple={false}
+                                maxCount={1}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                listType="picture"
+                                className="w-full"
+                            >
+                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
+                            </Upload>
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                </Row>
+                <Row gutter={[32, 1]}>
+                    <Col md={24}>
                         <Form.Item
+                            label="آپلود سند"
                             labelCol={{ span: 24 }}
                             wrapperCol={{ span: 24 }}
-                            name="year-establishment"
-                            label="استان مربوطه"
+                            name="establishment"
                         >
-                            <Select size="large" placeholder="انتخاب کنید" />
+                            <TextArea
+                                placeholder="توضیحات"
+                                autoSize={{ minRows: 3, maxRows: 6 }}
+                            />
                         </Form.Item>
                     </Col>
                 </Row>
             </Form>
-        </Modal>)
+        </Modal >
+    )
 }

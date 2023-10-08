@@ -1,28 +1,26 @@
 "use client";
 
-
 import React, { useState } from 'react'
-import PrimaryConfirmChangesForm from './components/primary-confirm-changes-form';
-import PrimaryConfirmChangesTable from './components/primary-confirm-changes-table';
-import PrimaryConfirmChangesModal from './components/primary-confirm-changes-modal';
 import { Collapse } from 'antd';
+import DataTable from './components/data-table';
+import CreateModal from './components/create-modal';
+import FilterForm from './components/filter-form';
 
 
 export default function Page() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-
     return (
         <>
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryConfirmChangesForm />
+                    label: 'فیلتر جدول', children: <FilterForm />
                 }]}
             />
-            <PrimaryConfirmChangesTable setModalVisible={setModalVisible} />
-            <PrimaryConfirmChangesModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <DataTable setModalVisible={setModalVisible} />
+            <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }

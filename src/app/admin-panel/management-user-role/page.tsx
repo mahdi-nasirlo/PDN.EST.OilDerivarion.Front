@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import PrimaryManagementUserRoleForm from "./components/primary-management-user-role-form";
-import PrimaryManagementUserRoleTable from "./components/primary-management-user-role-table";
+import FilterForm from "./components/filter-form";
+import DataTable from "./components/data-table";
 
 export default function Page() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -10,8 +10,8 @@ export default function Page() {
 
     return (
         <>
-            <PrimaryManagementUserRoleForm />
-            <PrimaryManagementUserRoleTable setModalVisible={setModalVisible} />
+            <FilterForm />
+            <DataTable setModalVisible={setModalVisible} />
         </>
     );
 }

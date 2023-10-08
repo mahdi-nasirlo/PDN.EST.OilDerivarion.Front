@@ -3,8 +3,8 @@
 
 import { Button, Divider, Typography } from 'antd';
 import React from 'react'
-import PrimaryRequestsDetailsForm from './components/primary-requests-details-form';
-import PrimaryRequestsDetailsTable from './components/primary-requests-details-table';
+import RequestsDetailsForm from './components/requests-details-form';
+import DataTable from './components/data-table';
 
 export default function Page() {
 
@@ -16,8 +16,8 @@ export default function Page() {
                 </Typography>
 
                 <Divider />
-                <PrimaryRequestsDetailsForm />
-                <PrimaryRequestsDetailsTable />
+                <RequestsDetailsForm />
+                <DataTable />
                 <Divider />
                 <Button
                     size="large"

@@ -5,7 +5,23 @@ import React from "react";
 import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
 import { MenuProps } from "antd";
-import { FolderPlusIcon } from "@heroicons/react/24/solid";
+import {
+  ArchiveBoxArrowDownIcon,
+  Bars3Icon,
+  BeakerIcon,
+  BuildingOfficeIcon,
+  ChartBarSquareIcon,
+  CogIcon,
+  CubeIcon,
+  CubeTransparentIcon,
+  EyeDropperIcon,
+  FolderPlusIcon,
+  GlobeAsiaAustraliaIcon,
+  IdentificationIcon,
+  PencilSquareIcon,
+  RectangleStackIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 
 export default function RootLayout({
   children,
@@ -26,7 +42,7 @@ const items: MenuProps["items"] = [
         لیست دسته بندی
       </Link>,
       "category-list",
-      <FolderPlusIcon width={16} height={16} />
+      <RectangleStackIcon width={16} height={16} />
     ),
 
     getMenuItem(
@@ -34,7 +50,7 @@ const items: MenuProps["items"] = [
         لیست محصولات
       </Link>,
       "products-list",
-      <FolderPlusIcon width={16} height={16} />
+      <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
       <Link href={"/admin-pannel/products-factor"} className="text-sm">
@@ -50,7 +66,7 @@ const items: MenuProps["items"] = [
         لیست ماده اولیه
       </Link>,
       "category-list",
-      <FolderPlusIcon width={16} height={16} />
+      <Bars3Icon width={16} height={16} />
     ),
 
     getMenuItem(
@@ -67,7 +83,7 @@ const items: MenuProps["items"] = [
         لیست آزمایشگاه
       </Link>,
       "labaratory-list",
-      <FolderPlusIcon width={16} height={16} />
+      <Bars3Icon width={16} height={16} />
     ),
 
     getMenuItem(
@@ -84,7 +100,7 @@ const items: MenuProps["items"] = [
         لیست کاربران
       </Link>,
       "management-user",
-      <FolderPlusIcon width={16} height={16} />
+      <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
       <Link href={"/admin-pannel/confirm-changes"} className="text-sm">
@@ -126,8 +142,8 @@ const items: MenuProps["items"] = [
 
   getMenuItem(
     <Link href={"/admin-pannel/list-experts"}>لیست کارشناسان</Link>,
-    "list-experts"
-    // <FolderPlusIcon width={16} height={16}/>
+    "list-experts",
+    <Bars3Icon width={16} height={16} />
   ),
 
   getMenuItem(

@@ -1,15 +1,15 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import {getMenuItem} from "@/components/layout/sidebar";
-import {HomeIcon} from "@heroicons/react/24/outline";
-import {MenuProps} from "antd";
+import { getMenuItem } from "@/components/layout/sidebar";
+import { Bars3Icon, ChatBubbleLeftEllipsisIcon, ClockIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
 import Link from "next/link";
 
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
@@ -23,10 +23,10 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href={"/state-general-management"}>خانه</Link>,
         "state-general-management",
-        <HomeIcon width={16} height={16}/>
+        <HomeIcon width={16} height={16} />
     ),
 
-    {type: "divider"},
+    { type: "divider" },
 
     getMenuItem(
         "پیشخوان",
@@ -35,11 +35,13 @@ const items: MenuProps["items"] = [
         [
             getMenuItem(
                 <Link href={"/state-general-management/requests-list"}>لیست درخواست ها</Link>,
-                "requests-list"
+                "requests-list",
+                <Bars3Icon width={16} height={16} />
             ),
             getMenuItem(
                 <Link href={"/state-general-management/delays-list"}>تاخیر ها</Link>,
-                "delays-list"
+                "delays-list",
+                <ClockIcon width={16} height={16} />
             ),
         ],
         "group"
@@ -50,10 +52,11 @@ const items: MenuProps["items"] = [
     ),
     getMenuItem(
         <Link href={"#"}>ارتباط با پشتیبانی</Link>,
-        "customers-support"
+        "customers-support",
+        <ChatBubbleLeftEllipsisIcon width={16} height={16} />
     ),
 
-    {type: 'divider'},
+    { type: 'divider' },
 
     getMenuItem(
         <a href={"/state-general-management/process/StateOrgManager/list"}>اداره کل استان</a>,

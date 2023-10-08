@@ -2,7 +2,7 @@
 
 import AppLayout from "@/components/layout/layout";
 import { getMenuItem } from "@/components/layout/sidebar";
-import { HomeIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, DocumentTextIcon, HomeIcon, TicketIcon } from "@heroicons/react/24/outline";
 import { MenuProps } from "antd";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ const items: MenuProps["items"] = [
       لیست درخواست ها
     </Link>,
     "request-list",
-    // <FolderPlusIcon width={16} height={16} />
+    <Bars3Icon width={16} height={16} />
   ),
 
   getMenuItem(
@@ -52,7 +52,7 @@ const items: MenuProps["items"] = [
       دعوت نامه ها
     </Link>,
     "Invitations",
-    // <FolderPlusIcon width={16} height={16} />
+    <TicketIcon width={16} height={16} />
   ),
 
   { type: "divider" },
@@ -62,7 +62,7 @@ const items: MenuProps["items"] = [
       گزارشات بازدید
     </Link>,
     "visit-reports",
-    // <FolderPlusIcon width={16} height={16} />
+    <DocumentTextIcon width={16} height={16} />
   ),
 
 

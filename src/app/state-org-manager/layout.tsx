@@ -1,15 +1,15 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import {getMenuItem} from "@/components/layout/sidebar";
-import {HomeIcon} from "@heroicons/react/24/outline";
-import {MenuProps} from "antd";
+import { getMenuItem } from "@/components/layout/sidebar";
+import { Bars3Icon, DocumentChartBarIcon, DocumentMinusIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
 import Link from "next/link";
 
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
@@ -32,7 +32,7 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/#">لیست درخواست ها</Link>,
         "/list-requests",
-        // <HomeIcon width={16} height={16} />
+        <Bars3Icon width={16} height={16} />
     ),
 
     getMenuItem(
@@ -46,7 +46,7 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/producer-list">لیست تولید کننده ها</Link>,
         "/producer-list",
-        // <HomeIcon width={16} height={16} />
+        <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
         <Link href="/state-org-manager/producer-details">جزئیات تولید کننده</Link>,
@@ -60,7 +60,7 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/experts-list">لیست کارشناسان</Link>,
         "/experts-list",
-        // <HomeIcon width={16} height={16} />
+        <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
         <Link href="/state-org-manager/experts-details">مشاهده اطلاعات کارشناسان</Link>,
@@ -74,7 +74,7 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/expired-requests-list">درخواست های منقضی شده</Link>,
         "/expired-requests-list",
-        // <HomeIcon width={16} height={16} />
+        <DocumentMinusIcon width={16} height={16} />
     ),
     getMenuItem(
         <Link href="/state-org-manager/expired-requests-details">جزئیات درخواست منقضی شده</Link>,
@@ -87,7 +87,7 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/state-org-manager/laboratory-results-list">نتایج آزمایشگاه</Link>,
         "/laboratory-results-list",
-        // <HomeIcon width={16} height={16} />
+        <DocumentChartBarIcon width={16} height={16} />
     ),
     getMenuItem(
         <Link href="/state-org-manager/lab-results-details">جزئیات نتایج آزمایشگاه</Link>,

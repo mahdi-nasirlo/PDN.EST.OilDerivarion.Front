@@ -1,14 +1,14 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from 'antd'
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Modal, Row } from 'antd'
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
-import BoxForm from "@/app/admin-panel/add-box/components/box-form";
+import { ProductCreate } from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
 
-
-export default function CreateModal({modalVisible, setModalVisible, mutate}: {
+export default function CreateModal({ modalVisible, setModalVisible, mutate }: {
     modalVisible: any,
     setModalVisible: any,
     mutate: () => void
@@ -16,28 +16,26 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
 
     const [form] = useForm()
 
-    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Create", mutationFetcher)
+    const { isMutating, trigger } = useSWRMutation("/Product/Create", mutationFetcher)
 
-    const handleSubmit = async (values: { code: string, isActive: boolean, stateID: number }) => {
+    const createProduct = async (values: ProductCreate) => {
 
-        const res = await trigger(values)
+        await trigger(values)
 
-        if (res) {
+        await mutate()
 
-            await mutate()
+        setModalVisible(false)
 
-            setModalVisible(false)
-
-            form.resetFields()
-        }
+        form.resetFields()
 
     }
+
 
     return (
         <Modal
             width={800}
             title={<div>
-                <div className="text-base mb-2">افزودن جعبه</div>
+                <div className="text-base mb-2">افزودن محصول جدید</div>
                 <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
             </div>}
             open={modalVisible}
@@ -46,7 +44,7 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
-                            loading={isMutating}
+                            disabled={isMutating}
                             size="large"
                             className="w-full"
                             type="primary"
@@ -57,7 +55,7 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
-                            loading={isMutating}
+                            disabled={isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={() => setModalVisible(false)}
@@ -68,9 +66,9 @@ export default function CreateModal({modalVisible, setModalVisible, mutate}: {
                 </Row>
             ]}
         >
-            <Form disabled={isMutating} form={form} onFinish={handleSubmit} layout="vertical">
-                <BoxForm/>
+            <Form disabled={isMutating} onFinish={createProduct} form={form}>
+                <ProductForm />
             </Form>
-        </Modal>
+        </Modal >
     )
 }

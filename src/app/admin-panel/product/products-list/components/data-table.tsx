@@ -6,17 +6,17 @@ import {useForm} from 'antd/es/form/Form';
 import {ColumnsType} from 'antd/es/table';
 import React, {useEffect, useState} from 'react'
 import useSWR from 'swr';
-import {Product} from '../../../../../interfaces/product';
-import {listFetcher} from '../../../../../lib/server/listFetcher';
-import {addIndexToData} from '../../../../../lib/addIndexToData';
-import ProductForm from "@/app/admin-panel/products-list/components/product-form";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import {Product} from '../../../../../../interfaces/product';
+import {listFetcher} from '../../../../../../lib/server/listFetcher';
+import {addIndexToData} from '../../../../../../lib/addIndexToData';
+import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
+import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
-export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
+export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,

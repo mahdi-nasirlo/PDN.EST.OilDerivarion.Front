@@ -2,11 +2,11 @@
 
 import {Button, Col, Form, Modal, Row, Select,} from "antd";
 import React from "react";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import {useForm} from "antd/es/form/Form";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 
 export default function CreateModal({
                                         setModalVisible,

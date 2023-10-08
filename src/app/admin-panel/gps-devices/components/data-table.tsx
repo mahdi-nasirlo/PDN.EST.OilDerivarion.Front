@@ -9,7 +9,8 @@ import {Gps} from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import EditModal from "@/app/admin-panel/add-box/components/edit-modal";
+import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 
 
 interface DataType {
@@ -21,7 +22,7 @@ interface DataType {
 }
 
 
-export default function DataTable({ isLoading, boxesData, mutate }: {
+export default function DataTable({isLoading, boxesData, mutate}: {
     isLoading: boolean,
     boxesData: any,
     mutate: () => void
@@ -52,12 +53,12 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
     };
 
 
-    const { trigger, isMutating } = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
+    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Delete", mutationFetcher)
 
 
     const handleDeleteSubmit = async () => {
 
-        await trigger({ uid: recordToDelete?.Uid })
+        await trigger({uid: recordToDelete?.Uid})
 
         setIsDeleteModalVisible(false)
 
@@ -72,7 +73,7 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
             key: "1",
         },
         {
-            title: "شناسه جعبه",
+            title: "کد",
             dataIndex: "Code",
             key: "2",
         },
@@ -85,7 +86,7 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
             title: "فعال/غیر فعال ",
             dataIndex: "IsActive",
             key: "4",
-            render: (e, record) => <Switch checked={record.IsActive} />,
+            render: (e, record) => <Switch checked={record.IsActive}/>,
         },
         {
             title: "مکان یابی",
@@ -93,7 +94,8 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
             key: "5",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => handleGPS()}>مشاهده موقعیت</Button>
+                    <Button type="link" className="text-primary-500 font-bold" onClick={() => handleGPS()}>مشاهده
+                        موقعیت</Button>
                 </Space>
             ),
         },
@@ -107,10 +109,10 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
                         setRecordToEdit(record)
                     }}> ویرایش</Button>
                     <Button type="link" className={"text-red-500 font-bold"}
-                        onClick={() => {
-                            setIsDeleteModalVisible(true);
-                            setRecordToDelete(record)
-                        }}>حذف</Button>
+                            onClick={() => {
+                                setIsDeleteModalVisible(true);
+                                setRecordToDelete(record)
+                            }}>حذف</Button>
                 </Space>
             ),
         },
@@ -121,7 +123,7 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
                 loading={isLoading}
                 className="mt-6"
                 columns={columns}
-                dataSource={boxesData}
+                dataSource={addIndexToData(boxesData)}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: true,

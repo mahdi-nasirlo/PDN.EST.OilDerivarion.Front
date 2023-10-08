@@ -5,8 +5,8 @@ import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Product, ProductCategoryGet } from "../../../../interfaces/product";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { Product } from "../../../../../interfaces/product";
 import { Collapse } from "antd";
 
 export default function Page() {
@@ -16,12 +16,11 @@ export default function Page() {
     const defaultValueTable = {
         name: null,
         is_Active: null,
-        ProductCategoryName: null,
         fromRecord: 0,
         selectRecord: 100000
     }
 
-    const [filter, setFilter] = useState<ProductCategoryGet>(defaultValueTable)
+    const [filter, setFilter] = useState(defaultValueTable)
 
     const { data: product, isLoading: ldProduct, mutate } = useSWR<{
         records: Product[];
@@ -31,18 +30,10 @@ export default function Page() {
         ([url, arg]: [string, any]) => listFetcher(url, { arg })
     );
 
-    const setFilterTable = async (values: ProductCategoryGet) => {
+    const setFilterTable = async (values: MaterialGet) => {
 
         // @ts-ignore
-        setFilter(
-            {
-                name: values.name,
-                is_Active: values.is_Active,
-                ProductCategoryName: values.ProductCategoryName,
-                fromRecord: 0,
-                selectRecord: 1000
-            }
-        )
+        setFilter({ name: values.name, is_Active: values.is_Active, fromRecord: 0, selectRecord: 1000 })
 
         await mutate()
 

@@ -22,16 +22,7 @@ export default function Home() {
                 <Table
                     dataSource={data1}
                     columns={columns}
-                    pagination={{
-                        defaultPageSize: 10,
-
-                        style: {
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            margin: "16px 0",
-                        },
-                    }}
+                    pagination={false}
                 />
                 <div className="mt-8">
                     <Typography className="mb-4 text-right">لینک های دسترسی به پنل های مختلف</Typography>
@@ -116,13 +107,13 @@ const data1: any[] = [
     },
     {
         Name: "لیست محصولات",
-        Link: "/admin-panel/products-list",
+        Link: "/admin-panel/product/products-list",
         Date: "1402/07/04",
         pannel: "ادمین",
     },
     {
         Name: "لیست دسته بندی محصول",
-        Link: "/admin-panel/category-list",
+        Link: "/admin-panel/product/category-list",
         Date: "1402/07/04",
         pannel: "ادمین",
     },
@@ -134,7 +125,7 @@ const data1: any[] = [
     },
     {
         Name: "فاکتور محصول",
-        Link: "/admin-panel/products-factor",
+        Link: "/admin-panel/product/products-factor",
         Date: "1402/07/05",
         pannel: "ادمین",
     },
@@ -163,11 +154,17 @@ const data1: any[] = [
         pannel: "ادمین",
     },
     {
-        Name: "لیست جعبه ها",
-        Link: "/admin-panel/add-box",
+        Name: "لیست GPS",
+        Link: "/admin-panel/gps-devices",
         pannel: "ادمین",
         Date: "1402/07/09"
-    }
+    },
+    {
+        Name: "صفحه مواد اولیه محصول",
+        Link: "/admin-panel/product/row-material-product",
+        pannel: "ادمین",
+        Date: "1402/07/16"
+    },
     // {
     //   Name: "استان",
     //   Link: "/admin-panel/province",

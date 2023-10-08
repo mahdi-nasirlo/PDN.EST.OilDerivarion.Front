@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import {Button, Col, Form, Modal, Row} from "antd";
-import CategoryForm from "@/app/admin-panel/category-list/components/category-form";
+import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
 import {useForm} from "antd/es/form/Form";
-import {Category} from "../../../../../interfaces/category";
+import {Category} from "../../../../../../interfaces/category";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 
-export default function EditModal({ recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate }: {
+export default function EditModal({recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate}: {
     setIsEditModalVisible: (arg: boolean) => void;
     isEditModalVisible: boolean;
     recordToEdit: Category | null;

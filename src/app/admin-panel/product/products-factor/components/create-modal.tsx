@@ -1,19 +1,19 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Select, } from "antd";
+import {Button, Col, Form, Modal, Row, Select,} from "antd";
 import React from "react";
-import { useForm } from "antd/es/form/Form";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { Product } from "../../../../../interfaces/product";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {Product} from "../../../../../../interfaces/product";
 
 export default function CreateModal({
-    setModalVisible,
-    modalVisible,
-    mutate
-}: {
+                                        setModalVisible,
+                                        modalVisible,
+                                        mutate
+                                    }: {
     setModalVisible: any;
     modalVisible: any;
     mutate: () => void
@@ -27,7 +27,7 @@ export default function CreateModal({
     }
 
     const {
-        data: Product,
+        data: product,
         isLoading: ldProduct
     } = useSWR<Product[]>(["/Product/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
 
@@ -113,7 +113,7 @@ export default function CreateModal({
                                 showSearch
                                 fieldNames={{ value: "Uid", label: "FullName" }}
                                 loading={ldProduct}
-                                options={Product}
+                                options={product}
                                 size="large"
                                 placeholder="انتخاب کنید"
                             />

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { filterOption } from "../../../../../lib/filterOption";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
 
@@ -18,6 +18,8 @@ function ProductForm() {
                 <Col xs={24} md={12}>
                     <Form.Item
                         rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 24 }}
                         name="name"
                         label="نام"
                     >
@@ -27,6 +29,8 @@ function ProductForm() {
                 <Col xs={24} md={12}>
                     <Form.Item
                         rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 24 }}
                         name="productCategory_Id"
                         label="دسته بندی محصول"
                     >
@@ -46,6 +50,8 @@ function ProductForm() {
                 <Col xs={24} md={12}>
                     <Form.Item
                         rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 24 }}
                         name="is_Active"
                         label="فعال/غیر فعال"
                     >

@@ -5,11 +5,11 @@ import {ColumnsType} from "antd/es/table";
 import {TableColumnsType} from "antd/lib";
 import React, {useState} from "react";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
 
 
 export default function DataTable({material, ldMaterial}: {

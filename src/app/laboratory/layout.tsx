@@ -1,9 +1,9 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import { getMenuItem } from "@/components/layout/sidebar";
-import { Bars3Icon, DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon } from "@heroicons/react/24/outline";
-import { MenuProps } from "antd";
+import {getMenuItem} from "@/components/layout/sidebar";
+import {Bars3Icon, DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
 import Link from "next/link";
 
 
@@ -49,7 +49,7 @@ const items: MenuProps["items"] = [
             getMenuItem(
                 <Link href={"/laboratory/producer-list"} className="text-sm">درخواست های منقضی شده</Link>,
                 "products-list",
-                <DocumentMinusIcon width={16} height={16} />
+                <DocumentMinusIcon width={16} height={16}/>
             ),
         ],
     ),
@@ -57,6 +57,13 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/laboratory/gps-confirmations">تاییدیه های GPS</Link>,
         "gps-confirmations",
-        <MapPinIcon width={16} height={16} />
+        <MapPinIcon width={16} height={16}/>
+    ),
+
+    getMenuItem(
+        <Link href={"/laboratory/request-details"}>
+            جزئیات درخواست
+        </Link>,
+        "request-detail"
     )
 ];

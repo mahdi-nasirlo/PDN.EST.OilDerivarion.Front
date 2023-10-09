@@ -1,28 +1,52 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, InputNumber, Row, Typography, } from "antd";
+import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
 import React from "react";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { SetBase } from "../../../../../interfaces/setBase";
+import useSWRMutation from "swr/mutation";
+import { useForm } from "antd/es/form/Form";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+
 
 export default function NewRequest() {
+
+    const [form] = useForm();
+
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetBase", mutationFetcher)
+
+    const onFinish = async (values: SetBase) => {
+
+        await trigger(values)
+
+        form.resetFields();
+
+    };
+
+    const { data: CompanyOwnershipTypeGetAll, isLoading: ldCompanyOwnership } = useSWR(
+        ["/BaseInfo/CompanyOwnershipTypeGetAll", {
+            name: null,
+            isActive: null
+        }],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
     return (
         <>
             <Typography className="text-right font-medium text-base">
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
             <Divider />
-            <Form name="form_item_path" layout="vertical">
+            <Form form={form} layout="vertical" onFinish={onFinish}>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            name="lastName"
-                            label="مدیرعامل"
+                            name="currentCEOName"
+                            label="نام مدیر عامل"
                             rules={[
                                 {
                                     required: true,
                                     message: "این فیلد اجباری است",
-                                },
-                                {
-                                    type: "string",
                                 },
                             ]}
                         >
@@ -31,7 +55,23 @@ export default function NewRequest() {
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            name="national-code"
+                            name="currentCEOLastName"
+                            label="نام خانوادگی مدیر عامل"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "این فیلد اجباری است",
+                                },
+                            ]}
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="currentCEONationalCode"
                             label="شناسه ملی"
                             rules={[
                                 { required: true, message: "کد ملی اجباری است" },
@@ -45,40 +85,49 @@ export default function NewRequest() {
                                 },
                             ]}
                         >
-                            <InputNumber size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
+                            <Input size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="name"
+                            label="نام واحد تولیدی"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "این فیلد اجباری است"
+                                },
+                            ]}
+                        >
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>
-
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            name="lastName"
-                            label="نام واحد تولیدی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="lastName"
+                            name="companyOwnershipTypeId"
                             label="نوع مالکیت"
                             rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string" },
+                                {
+                                    required: true,
+                                    message: "این فیلد اجباری است"
+                                },
                             ]}
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Select
+                                loading={ldCompanyOwnership}
+                                options={CompanyOwnershipTypeGetAll}
+                                fieldNames={{ value: "Id", label: "Name" }}
+                                size="large"
+                                placeholder="انتخاب کنید"
+                            />
                         </Form.Item>
                     </Col>
                 </Row>
                 <Divider />
-
                 <Button
+                    loading={isMutating}
                     className="w-full management-info-form-submit btn-filter"
                     size="large"
                     type="primary"
@@ -90,38 +139,3 @@ export default function NewRequest() {
         </>
     );
 }
-
-// const MyFormItemContext = React.createContext<(string | number)[]>([]);
-
-// interface MyFormItemGroupProps {
-//   prefix: string | number | (string | number)[];
-//   children: React.ReactNode;
-// }
-
-// function toArr(
-//   str: string | number | (string | number)[]
-// ): (string | number)[] {
-//   return Array.isArray(str) ? str : [str];
-// }
-
-// const MyFormItemGroup = ({ prefix, children }: MyFormItemGroupProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatPath = React.useMemo(
-//     () => [...prefixPath, ...toArr(prefix)],
-//     [prefixPath, prefix]
-//   );
-
-//   return (
-//     <MyFormItemContext.Provider value={concatPath}>
-//       {children}
-//     </MyFormItemContext.Provider>
-//   );
-// };
-
-// const MyFormItem = ({ name, ...props }: FormItemProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatName =
-//     name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-
-//   return <Form.Item name={concatName} {...props} />;
-// };

@@ -66,7 +66,7 @@ export default function CreateModal({ modalVisible, setModalVisible, mutate }: {
                 </Row>
             ]}
         >
-            <Form disabled={isMutating} onFinish={createProduct} form={form}>
+            <Form disabled={isMutating} onFinish={createProduct} form={form} layout='vertical'>
                 <ProductForm />
             </Form>
         </Modal >

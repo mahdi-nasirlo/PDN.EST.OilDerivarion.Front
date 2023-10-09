@@ -1,14 +1,14 @@
 "use client";
 
-import {Button, Divider, Row, Typography} from "antd";
-import React, {useState} from "react";
+import { Button, Divider, Row, Typography } from "antd";
+import React, { useState } from "react";
 import PrimaryProductForm from "./components/primary-product-form";
 import useSWR from "swr";
-import {getCookie} from "cookies-next";
-import {useRouter} from "next/navigation";
-import {RequestDetail} from "../../../../../../interfaces/requestDetail";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { RequestDetail } from "../../../../../../interfaces/requestDetail";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 import PrimaryProductTable from "@/app/producer/dashboard/request/formulacion/components/primary-product-table";
 
 export default function Formulacion() {
@@ -39,8 +39,8 @@ export default function Formulacion() {
                 نمایید.
             </Typography>
 
-            <Divider/>
-            <PrimaryProductForm mute={mutate} setData={setData} data={convertKeysToLowerCase(data)}/>
+            <Divider />
+            <PrimaryProductForm mute={mutate} setData={setData} data={convertKeysToLowerCase(data)} />
             <PrimaryProductTable
                 setData={setData}
                 mute={mutate}
@@ -48,13 +48,13 @@ export default function Formulacion() {
                 loading={requestMasterMaterialLoading}
             />
             <Row>
-                <Divider/>
+                <Divider />
                 <Button
                     className="w-full management-info-form-submit btn-filter"
                     size="large"
                     type="primary"
                     htmlType="submit"
-                    onClick={() => router.push("/dashboard/request/final-product")}
+                    onClick={() => router.push("/producer/dashboard/request/final-product")}
                 >
                     <span className="flex gap-2 justify-center ">ذخیره و ادامه</span>
                 </Button>

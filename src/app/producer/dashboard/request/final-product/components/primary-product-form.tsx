@@ -1,14 +1,14 @@
 "use client";
 
-import {Button, Col, Divider, Form, Row, Select} from "antd";
-import React, {useState} from "react";
+import { Button, Col, Divider, Form, Row, Select } from "antd";
+import React, { useState } from "react";
 import useSWRMutation from "swr/mutation";
-import {getCookie} from "cookies-next";
+import { getCookie } from "cookies-next";
 import useSWR from "swr";
-import {DefaultOptionType} from "rc-select/es/Select";
-import {useRouter} from "next/navigation";
-import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
+import { DefaultOptionType } from "rc-select/es/Select";
+import { useRouter } from "next/navigation";
+import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
 
 
 export default function PrimaryProductForm() {
@@ -41,7 +41,7 @@ export default function PrimaryProductForm() {
             "densityTypeId": values.densityType
         })
 
-        router.push("/dashboard/request/final-preview")
+        router.push("/producer/dashboard/request/final-preview")
 
     };
 
@@ -68,20 +68,20 @@ export default function PrimaryProductForm() {
             >
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]} name="densityType"
-                                   label="دانسیته محصول ">
+                        <Form.Item rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]} name="densityType"
+                            label="دانسیته محصول ">
 
                             <Select onChange={ChangeDunsite} placeholder="انتخاب نمایید" size="large"
-                                    loading={ldDensity} options={density}
-                                    fieldNames={{value: "Id", label: "Name"}}/>
+                                loading={ldDensity} options={density}
+                                fieldNames={{ value: "Id", label: "Name" }} />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]} name="productUid"
-                                   label="نام محصول">
+                        <Form.Item rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]} name="productUid"
+                            label="نام محصول">
                             <Select
                                 loading={isLDSelectable}
-                                fieldNames={{value: "uid", label: "name"}}
+                                fieldNames={{ value: "uid", label: "name" }}
                                 size="large"
                                 placeholder="انتخاب نمایید"
                                 disabled={typeof dunsite !== "number"}
@@ -92,7 +92,7 @@ export default function PrimaryProductForm() {
                     </Col>
                 </Row>
                 <Row dir="ltr">
-                    <Divider/>
+                    <Divider />
 
                     <Button
                         className="w-full management-info-form-submit btn-filter"

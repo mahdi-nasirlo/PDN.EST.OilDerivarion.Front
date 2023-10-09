@@ -1,13 +1,13 @@
 "use client";
 
-import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload } from "antd";
 import React from "react";
-import {UploadOutlined} from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import useSWRMutation from "swr/mutation";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-import {setCookie} from "cookies-next";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { setCookie } from "cookies-next";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import staticMessages from "../../../../../../lib/staticMessages";
 
 
@@ -15,7 +15,7 @@ export default function Page() {
 
     const router = useRouter()
 
-    const {trigger, isMutating} = useSWRMutation("/RequestMaster/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/RequestMaster/Create", mutationFetcher)
 
     const onFinish = async (values: RequestMasterForm) => {
 
@@ -29,7 +29,7 @@ export default function Page() {
 
         setCookie("requestMasterUid", res)
 
-        router.push("/dashboard/request/formulacion")
+        router.push("/producer/dashboard/request/formulacion")
 
     };
 
@@ -76,12 +76,12 @@ export default function Page() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
+                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
                 </Row>
-                <Divider/>
+                <Divider />
 
                 <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
@@ -95,7 +95,7 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={ProductExportCountries}
-                                fieldNames={{label: "name", value: "key"}}
+                                fieldNames={{ label: "name", value: "key" }}
                             />
                         </Form.Item>
                     </Col>
@@ -107,7 +107,7 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={OilWaste}
-                                fieldNames={{label: "name", value: "key"}}
+                                fieldNames={{ label: "name", value: "key" }}
                             />
                         </Form.Item>
                     </Col>
@@ -116,7 +116,7 @@ export default function Page() {
                             name="operation-license"
                             label="محل فروش و یا دفن ضایعات"
                         >
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -130,13 +130,13 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={LaboratoryEquipment}
-                                fieldNames={{label: "name", value: "key"}}
+                                fieldNames={{ label: "name", value: "key" }}
                             />
                         </Form.Item>
                     </Col>
                 </Row>
 
-                <Divider/>
+                <Divider />
 
                 <div className="flex gap-6">
                     <Button

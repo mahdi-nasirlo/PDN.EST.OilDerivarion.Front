@@ -1,12 +1,12 @@
 "use client";
 
 
-import {Button, Col, Form, Modal, Row} from 'antd';
-import {useRouter} from 'next/navigation';
+import { Button, Col, Form, Modal, Row } from 'antd';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function ReviewDataModalFinalSubmit(
-    {modalVisibleFinalSubmit, setModalVisibleFinalSubmit}:
+    { modalVisibleFinalSubmit, setModalVisibleFinalSubmit }:
         { modalVisibleFinalSubmit: any, setModalVisibleFinalSubmit: any }
 ) {
 
@@ -17,7 +17,7 @@ export default function ReviewDataModalFinalSubmit(
     };
 
     const handleFormSubmit = () => {
-        router.push("/dashboard")
+        router.push("/producer")
     };
 
 

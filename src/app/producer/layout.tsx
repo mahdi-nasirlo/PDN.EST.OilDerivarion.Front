@@ -98,6 +98,14 @@ const items: MenuProps["items"] = [
     { type: "divider" },
 
     getMenuItem(
+        <Link href="/producer/activate/creator-production">ثبت اطلاعات پایه</Link>,
+        "/activate",
+        // <HomeIcon width={16} height={16} />
+    ),
+
+    { type: "divider" },
+
+    getMenuItem(
         "اطلاعات پایه",
         "management",
         null,

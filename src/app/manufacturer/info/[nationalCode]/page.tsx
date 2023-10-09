@@ -275,15 +275,20 @@ const employeeColumns: ColumnsType<Employee> = [
         key: "3",
     },
     {
+        title: "سمت",
+        dataIndex: "companyRoleName",
+        key: "4"
+    },
+    {
         title: " تاریخ تولد",
         dataIndex: "ConfirmedRequestCode",
-        key: "4",
+        key: "5",
     },
 
     {
         title: " شماره تماس",
         dataIndex: "call",
-        key: "5",
+        key: "6",
     },
 ];
 const columns3: ColumnsType<DataType> = [

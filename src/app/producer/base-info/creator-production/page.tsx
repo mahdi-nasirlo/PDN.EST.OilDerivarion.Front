@@ -1,141 +1,58 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
-import React from "react";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { SetBase } from "../../../../../interfaces/setBase";
-import useSWRMutation from "swr/mutation";
-import { useForm } from "antd/es/form/Form";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Button, Divider, Typography, } from "antd";
+import React, { useState } from "react";
+import DisplayForm from "./components/display-form";
+import EditModal from "./components/edit-modal";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 
 
 export default function NewRequest() {
 
-    const [form] = useForm();
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
-    const { trigger, isMutating } = useSWRMutation("/Producer/SetBase", mutationFetcher)
-
-    const onFinish = async (values: SetBase) => {
-
-        await trigger(values)
-
-        form.resetFields();
-
+    const showModal = () => {
+        setIsEditModalVisible(true);
     };
 
-    const { data: CompanyOwnershipTypeGetAll, isLoading: ldCompanyOwnership } = useSWR(
-        ["/BaseInfo/CompanyOwnershipTypeGetAll", {
-            name: null,
-            isActive: null
-        }],
+    const { data, isLoading, mutate } = useSWR(
+        ["/Producer/GetBase"],
         ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
+
 
     return (
         <>
-            <Typography className="text-right font-medium text-base">
-                لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
-            </Typography>
-            <Divider />
-            <Form form={form} layout="vertical" onFinish={onFinish}>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="currentCEOName"
-                            label="نام مدیر عامل"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است",
-                                },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="currentCEOLastName"
-                            label="نام خانوادگی مدیر عامل"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است",
-                                },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="currentCEONationalCode"
-                            label="شناسه ملی"
-                            rules={[
-                                { required: true, message: "کد ملی اجباری است" },
-                                {
-                                    validator: (_, value) => {
-                                        if (!value || value.length === 10) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject("کد ملی باید ۱۰ رقم باشد");
-                                    },
-                                },
-                            ]}
-                        >
-                            <Input size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="name"
-                            label="نام واحد تولیدی"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است"
-                                },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="companyOwnershipTypeId"
-                            label="نوع مالکیت"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است"
-                                },
-                            ]}
-                        >
-                            <Select
-                                loading={ldCompanyOwnership}
-                                options={CompanyOwnershipTypeGetAll}
-                                fieldNames={{ value: "Id", label: "Name" }}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Divider />
+            <div className="flex justify-between items-center">
+                <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                    اطلاعات واحد تولیدی
+                </Typography>
                 <Button
-                    loading={isMutating}
-                    className="w-full management-info-form-submit btn-filter"
+                    className="max-md:w-full flex justify-center items-center gap-2"
                     size="large"
                     type="primary"
                     htmlType="submit"
+                    onClick={showModal}
                 >
-                    <span className="flex gap-2 justify-center "> ثبت</span>
+                    <PencilSquareIcon width={24} height={24} />
+                    <span className="flex">
+                        ویرایش
+                    </span>
                 </Button>
-            </Form>
+            </div>
+            <Divider />
+            <DisplayForm
+                data={data}
+                isLoading={isLoading}
+            />
+            <EditModal
+                mutate={mutate}
+                data={data}
+                isEditModalVisible={isEditModalVisible}
+                setIsEditModalVisible={setIsEditModalVisible}
+            />
         </>
     );
 }

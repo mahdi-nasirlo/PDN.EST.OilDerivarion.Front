@@ -1,18 +1,18 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Switch, Table, Typography } from 'antd'
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
-import { Product } from '../../../../../../interfaces/product';
-import { addIndexToData } from '../../../../../../lib/addIndexToData';
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Switch, Table, Typography} from 'antd'
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import {Product} from '../../../../../../interfaces/product';
+import {addIndexToData} from '../../../../../../lib/addIndexToData';
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
+import {ExpandedMaterialTable} from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 
 
-export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
+export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -76,16 +76,21 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
             key: "5",
         },
         {
-            title: "فاکتور آزمون",
-            dataIndex: "ConfirmedRequestCode",
+            title: "فاکتورهای آزمون",
+            dataIndex: "TestItems",
             key: "6",
+        },
+        {
+            title: "مواد اولیه",
+            dataIndex: "Materials",
+            key: "7"
         },
         {
             title: "عملیات",
             key: "عملیات",
             render: (_, record) => (
                 <Button type="link" className={"text-red-500 font-bold"}
-                    onClick={() => handleDelete(record)}>حذف</Button>
+                        onClick={() => handleDelete(record)}>حذف</Button>
             ),
         },
     ];

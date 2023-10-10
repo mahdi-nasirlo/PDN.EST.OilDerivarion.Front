@@ -2,14 +2,15 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {getMenuItem} from "@/components/layout/sidebar";
 import Link from "next/link";
-import { MenuProps } from "antd";
-import { Bars3Icon, FolderPlusIcon, RectangleStackIcon, } from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
+import {Bars3Icon, FolderPlusIcon, RectangleStackIcon,} from "@heroicons/react/24/outline";
+import {QrCodeIcon} from "@heroicons/react/20/solid";
 
 export default function RootLayout({
-    children,
-}: {
+                                       children,
+                                   }: {
     children: React.ReactNode;
 }) {
     return (
@@ -38,17 +39,17 @@ const items: MenuProps["items"] = [
         ),
         getMenuItem(
             <Link href={"/admin-panel/product/products-factor"} className="text-sm">
-                فاکتور محصول
+                فاکتور های آزمون محصول
             </Link>,
             "products-factor",
-            <FolderPlusIcon width={16} height={16} />
+            <FolderPlusIcon width={16} height={16}/>
         ),
         getMenuItem(
             <Link href={"/admin-panel/product/row-material-product"} className="text-sm">
                 مواد اولیه محصول
             </Link>,
             "row-material-product",
-            <Bars3Icon width={16} height={16} />
+            <Bars3Icon width={16} height={16}/>
         ),
     ]),
     getMenuItem("ماده اولیه", "initail", null, [
@@ -152,5 +153,13 @@ const items: MenuProps["items"] = [
     getMenuItem(
         <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
         "gps-devices"
+    ),
+
+    getMenuItem(
+        <Link href={"/admin-panel/barcode"}>
+            بارکد
+        </Link>,
+        "barcode",
+        <QrCodeIcon width={16} height={16}/>
     )
 ];

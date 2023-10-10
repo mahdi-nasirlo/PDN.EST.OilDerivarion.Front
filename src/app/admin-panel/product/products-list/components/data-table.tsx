@@ -1,22 +1,22 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useEffect, useState } from 'react'
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Space, Switch, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useEffect, useState} from 'react'
 import useSWR from 'swr';
-import { Product } from '../../../../../../interfaces/product';
-import { listFetcher } from '../../../../../../lib/server/listFetcher';
-import { addIndexToData } from '../../../../../../lib/addIndexToData';
-import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
-import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
+import {Product} from '../../../../../../interfaces/product';
+import {listFetcher} from '../../../../../../lib/server/listFetcher';
+import {addIndexToData} from '../../../../../../lib/addIndexToData';
+import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
 
 
-export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
+export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -96,19 +96,7 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
 
     }, [defaultCategory])
 
-    const { trigger, isMutating } = useSWRMutation("/Product/Update", mutationFetcher)
 
-    const updateProduct = async (values: Product) => {
-
-        values.Uid = recordToEdit?.Uid
-
-        await trigger(values)
-
-        await mutate()
-
-        setIsEditModalVisible(false)
-
-    }
 
 
     const columns: ColumnsType<Product> = [
@@ -118,30 +106,30 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
             key: "1",
         },
         {
-            title: "نام محصول",
-            dataIndex: "Name",
-            key: "2",
-        },
-        {
             title: "نام دسته بندی",
             dataIndex: "ProductCategoryName",
             key: "3",
         },
         {
+            title: "نام محصول",
+            dataIndex: "Name",
+            key: "2",
+        },
+        {
             title: "فعال/غیر فعال ",
             dataIndex: "vIs_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
         },
         {
-            title: "کد محصول",
-            dataIndex: "ConfirmedRequestCode",
-            key: "5",
+            title: "مواد اولیه",
+            dataIndex: "Materials",
+            key: "6",
         },
         {
             title: "فاکتور آزمون",
-            dataIndex: "ConfirmedRequestCode",
-            key: "6",
+            dataIndex: "TestItems",
+            key: "7",
         },
         {
             title: "عملیات",
@@ -202,42 +190,8 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
                 title="مواد اولیه"
             />
             {/* ویرایش */}
-            <Modal
-                width={800}
-                title="ویرایش محصول"
-                open={isEditModalVisible}
-                onOk={() => form.submit()}
-                onCancel={handleCancelEdit}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                loading={isMutating}
-                                size="large"
-                                className="w-full"
-                                type="primary"
-                                onClick={() => form.submit()}
-                                key={"submit"}>
-                                ثبت
-                            </Button>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                loading={isMutating}
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleCancelEdit}
-                                key={"cancel"}>
-                                انصراف
-                            </Button>
-                        </Col>
-                    </Row>
-                ]}
-            >
-                <Form disabled={isMutating} form={form} onFinish={updateProduct}>
-                    <ProductForm />
-                </Form>
-            </Modal>
+            <EditModal mutate={mutate} recordToEdit={recordToEdit} isEditModalVisible={isEditModalVisible}
+                       setIsEditModalVisible={setIsEditModalVisible}/>
         </>
     )
 }

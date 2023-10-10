@@ -1,14 +1,14 @@
-import { Button, Space, Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import React, { useState } from "react";
+import {Button, Space, Table} from 'antd';
+import type {ColumnsType} from 'antd/es/table';
+import React, {useState} from "react";
 import useSWR from "swr";
-import { TableColumnsType } from "antd/lib";
+import {TableColumnsType} from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { Product, ProductTestItem } from "../../../../../../interfaces/product";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {Product, ProductTestItem} from "../../../../../../interfaces/product";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
 
 
 const columns: ColumnsType<Product> = [
@@ -22,6 +22,11 @@ const columns: ColumnsType<Product> = [
         dataIndex: 'Name',
         key: '2',
     },
+    {
+        title: "فاکتور های آزمون",
+        dataIndex: "TestItems",
+        key: "3"
+    }
 ];
 
 

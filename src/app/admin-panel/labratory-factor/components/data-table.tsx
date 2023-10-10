@@ -3,7 +3,7 @@
 import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
@@ -89,6 +89,14 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
     setOpen(false)
 
   }
+
+  useEffect(() => {
+
+    if (!isLoading) {
+      mutate()
+    }
+
+  }, [Labratory])
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1" },

@@ -1,6 +1,6 @@
 import { Button, Space, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { TableColumnsType } from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
@@ -92,6 +92,15 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
         setOpen(false)
 
     }
+
+    useEffect(() => {
+
+        if (!isLoading) {
+            mutate()
+        }
+
+    }, [product])
+
 
     const expandColumns: TableColumnsType<ProductTestItem> = [
         { title: "#", dataIndex: "Row", key: "1" },

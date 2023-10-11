@@ -10,7 +10,7 @@ function MeasureForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
-            label="واحد اندازه کیری"
+            label="واحد اندازه گیری"
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />

@@ -54,9 +54,17 @@ export default function Page() {
                     label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
                 }]}
             />
-            <DataTable mutate={mutate} ldTestItem={ldFactor} TestItem={factors}
-                setModalVisible={setModalVisible} />
-            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <DataTable
+                mutate={mutate}
+                ldTestItem={ldFactor}
+                TestItem={factors}
+                setModalVisible={setModalVisible}
+            />
+            <CreateModal
+                mutate={mutate}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+            />
         </>
     )
 }

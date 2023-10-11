@@ -4,15 +4,19 @@ import { Button, Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import { useForm } from "antd/lib/form/Form";
 
-export default function FilterForm() {
-  const [form] = useForm();
+export default function FilterForm({ filter, unsetFilter }: {
+  filter: (arg: MaterialGet) => void,
+  unsetFilter: () => void,
+}) {
 
-  // const resetForm = () => {
+  const [form] = useForm()
 
-  //     unsetFilter()
+  const resetForm = () => {
 
-  //     form.resetFields
-  // }
+    unsetFilter()
+
+    form.resetFields
+  }
 
   return (
     // <div className="box-border w-full p-6">
@@ -68,7 +72,7 @@ export default function FilterForm() {
               اعمال فیلتر
             </Button>
             <Button
-              //   onClick={resetForm}
+              onClick={resetForm}
               className="btn-delete-filter"
               size="large"
               type="primary"

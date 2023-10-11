@@ -22,11 +22,11 @@ export default function DataTable({
   ldMeasure: boolean;
   mutate: () => void;
   measure:
-    | {
-        records: Measure[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: Measure[];
+    count: number;
+  }
+  | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
@@ -81,10 +81,13 @@ export default function DataTable({
       render: (e, record) => <Switch defaultChecked={record.IsDeleted} />,
     },
     {
-      title: "جزئیات",
-      key: "جزئیات",
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: 'right',
+      width: 150,
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="small">
           <Button
             type="link"
             className={"text-secondary-500 font-bold"}

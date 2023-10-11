@@ -1,15 +1,15 @@
-import {Product} from "../../../../../../interfaces/product";
-import React, {useEffect, useState} from "react";
+import { Product } from "../../../../../../interfaces/product";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {TableColumnsType} from "antd/lib";
-import {Button, Space, Table} from "antd";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { TableColumnsType } from "antd/lib";
+import { Button, Space, Table } from "antd";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
-export const ExpandedMaterialTable = ({product}: { product: Product }) => {
+export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ export const ExpandedMaterialTable = ({product}: { product: Product }) => {
         is_Active: null
     }
 
-    const {data, isLoading, mutate} = useSWR("/ProductMaterial/GetAll", (url) => listFetcher(url, {arg: defaultValue}))
+    const { data, isLoading, mutate } = useSWR("/ProductMaterial/GetAll", (url) => listFetcher(url, { arg: defaultValue }))
 
     useEffect(() => {
 
@@ -32,27 +32,30 @@ export const ExpandedMaterialTable = ({product}: { product: Product }) => {
     }, [product])
 
 
-    const {trigger, isMutating} = useSWRMutation("/ProductMaterial/Delete", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/ProductMaterial/Delete", mutationFetcher)
 
     const handleDelete = async () => {
 
         setOpen(false)
 
-        await trigger({Uid: recordToDelete?.Uid})
+        await trigger({ Uid: recordToDelete?.Uid })
 
         await mutate()
-        
+
     }
 
     const expandColumns: TableColumnsType = [
-        {title: "#", dataIndex: "Row", key: "1"},
-        {title: "نام ماده اولیه", dataIndex: "MaterialName", key: "2"},
+        { title: "#", dataIndex: "Row", key: "1" },
+        { title: "نام ماده اولیه", dataIndex: "MaterialName", key: "2" },
         {
             title: "عملیات",
             dataIndex: "2",
             key: "upgradeNum",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Button
                         type="link"
                         className="text-red-500 font-bold"
@@ -72,7 +75,7 @@ export const ExpandedMaterialTable = ({product}: { product: Product }) => {
     return <>
         {/*@ts-ignore*/}
         <Table columns={expandColumns} dataSource={addIndexToData(data)} loading={isLoading}
-               pagination={false}/>
-        <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={handleDelete} title={"فاکتور محصول"}/>
+            pagination={false} />
+        <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={handleDelete} title={"فاکتور محصول"} />
     </>
 }

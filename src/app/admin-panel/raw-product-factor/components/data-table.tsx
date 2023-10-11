@@ -126,8 +126,11 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
       title: "عملیات",
       dataIndex: "2",
       key: "upgradeNum",
+      align: "center",
+      fixed: 'right',
+      width: 150,
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="small">
           <Button
             type="link"
             className="text-red-500 font-bold"

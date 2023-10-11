@@ -123,8 +123,11 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Button type="link" className="text-secondary-500 font-bold"
                         onClick={() => handleEdit(record)}>ویرایش</Button>
                     <Button type="link" className="text-red-500 font-bold"

@@ -87,8 +87,11 @@ export default function DataTable({ setModalVisible, category, ldCategory, mutat
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"

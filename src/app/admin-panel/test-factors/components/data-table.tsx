@@ -90,12 +90,25 @@ export default function DataTable({ setModalVisible, ldTestItem, TestItem, mutat
         {
             title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
-                    <Button type="link" className={"text-primary-500 font-bold"}
-                        onClick={() => setOpenEdit(record)}>ویرایش</Button>
-                    <Button type="link" className={"text-red-500 font-bold"}
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => setOpenEdit(record)}
+                    >
+                        ویرایش
+                    </Button>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => handleDelete(record)}
+                    >
+                        حذف
+                    </Button>
                 </Space>
             ),
         },

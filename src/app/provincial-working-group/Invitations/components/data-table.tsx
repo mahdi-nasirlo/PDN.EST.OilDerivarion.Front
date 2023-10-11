@@ -63,8 +63,11 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
         {
             title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: () => (
-                <Space size="middle">
+                <Space size="small">
                     <Button type="link" onClick={() => showModal()} className="text-primary-500 font-bold">
                         مشاهده دعوت نامه
                     </Button>

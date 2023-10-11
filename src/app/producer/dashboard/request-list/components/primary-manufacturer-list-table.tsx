@@ -82,10 +82,13 @@ export default function PrimaryManufacturerListTable() {
         },
 
         {
-            title: "جزئیات",
-            key: "جزئیات",
+            title: "عملیات",
+            key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: () => (
-                <Space size="middle">
+                <Space size="small">
                     <Link href={""} className="action-btn-delete">
                         حذف
                     </Link>

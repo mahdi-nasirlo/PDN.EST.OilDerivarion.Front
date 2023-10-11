@@ -73,9 +73,16 @@ export default function DataTable() {
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record: any) => (
-                <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => handleSubmit(record)}>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => handleSubmit(record)}
+                    >
                         ثبت نتیجه
                     </Button>
                 </Space >

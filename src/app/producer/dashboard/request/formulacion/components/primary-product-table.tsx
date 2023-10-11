@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import useSWRMutation from "swr/mutation";
@@ -71,21 +71,35 @@ export default function PrimaryProductTable({ data, loading = false, mute, setDa
             ],
         },
         {
-            title: 'جزئیات',
+            title: 'عملیات',
             key: 'operation',
+            align: "center",
             fixed: 'right',
             width: 150,
             render: (_, record) => <>
-                <div className={"flex justify-between"}>
-                    <Button onClick={() => {
-                        setData(record)
-                        window.scrollTo({ top: 0, behavior: "smooth" })
-                    }} type="link" className={"text-primary-500"}>ویرایش</Button>
-                    <Button loading={isDeleting} type="link" onClick={() => {
-                        setDeleteUid(record.Uid)
-                        setIsDeleteModalVisible(true)
-                    }} className={"text-red-500"}>حذف</Button>
-                </div>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => {
+                            setData(record)
+                            window.scrollTo({ top: 0, behavior: "smooth" })
+                        }}
+                    >
+                        ویرایش
+                    </Button>
+                    <Button
+                        className="text-red-500 font-bold"
+                        loading={isDeleting}
+                        type="link"
+                        onClick={() => {
+                            setDeleteUid(record.Uid)
+                            setIsDeleteModalVisible(true)
+                        }}
+                    >
+                        حذف
+                    </Button>
+                </Space>
             </>,
         },
     ];

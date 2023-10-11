@@ -1,8 +1,8 @@
 "use client";
 
-import {Button, Space, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {Table} from 'antd/lib';
+import { Button, Space, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { Table } from 'antd/lib';
 import React from 'react'
 import Link from "next/link";
 
@@ -55,10 +55,13 @@ export default function DataTable() {
         },
 
         {
-            title: "جزئیات",
-            key: "جزئیات",
+            title: "عملیات",
+            key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Button type="link" className="text-primary-500 font-bold">
                         <Link href="/laboratory/accepted-requests/report">
                             ارسال گزارش

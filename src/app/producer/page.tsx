@@ -1,12 +1,13 @@
 "use client";
 
-import { Alert, Table, Typography } from "antd";
+import { Alert, Space, Table, Tooltip, Typography } from "antd";
 import useSWR from "swr";
 
 import Link from "next/link";
 import { ColumnsType } from "antd/es/table";
 import { listFetcher } from "../../../lib/server/listFetcher";
 import { TestGetPage } from "../../../interfaces/test&verify";
+import { addIndexToData } from "../../../lib/addIndexToData";
 
 export default function Home() {
   const {
@@ -34,9 +35,20 @@ export default function Home() {
         </Typography>
         <Table
           loading={isLoading}
-          dataSource={tests?.records}
+          dataSource={addIndexToData(tests?.records)}
           columns={columns}
-          pagination={false}
+          pagination={{
+            defaultPageSize: 10,
+            showSizeChanger: true,
+            pageSizeOptions: ["10", "20", "50"],
+            defaultCurrent: 1,
+            style: {
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              margin: "16px 0",
+            },
+          }}
         />
         <div className="mt-8">
           <Typography className="mb-4 text-right">
@@ -114,100 +126,11 @@ export default function Home() {
   );
 }
 
-// const data1: any[] = [
-//   {
-//     Name: "فاکتور های آزمون",
-//     Link: "/admin-panel/test-factors",
-//     Date: "1402/07/03",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "لیست محصولات",
-//     Link: "/admin-panel/product/products-list",
-//     Date: "1402/07/04",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "لیست دسته بندی محصول",
-//     Link: "/admin-panel/product/category-list",
-//     Date: "1402/07/04",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "ماده اولیه",
-//     Link: "/admin-panel/adding-raw-material",
-//     Date: "1402/07/04",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "فاکتور محصول",
-//     Link: "/admin-panel/product/products-factor",
-//     Date: "1402/07/05",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "فاکتور ماده اولیه",
-//     Link: "/admin-panel/raw-product-factor",
-//     Date: "1402/07/05",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "لیست آزمایشگاه",
-//     Link: "/admin-panel/laboratory",
-//     Date: "1402/07/08",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "استاندارد های آزمون",
-//     Link: "/admin-panel/test-feature",
-//     Date: "1402/07/08",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "فاکتور های آزمایشگاه",
-//     Link: "/admin-panel/labratory-factor",
-//     Date: "1402/07/08",
-//     pannel: "ادمین",
-//   },
-//   {
-//     Name: "لیست GPS",
-//     Link: "/admin-panel/gps-devices",
-//     pannel: "ادمین",
-//     Date: "1402/07/09",
-//   },
-//   {
-//     Name: "صفحه مواد اولیه محصول",
-//     Link: "/admin-panel/product/row-material-product",
-//     pannel: "ادمین",
-//     Date: "1402/07/16",
-//   },
-//   // {
-//   //   Name: "استان",
-//   //   Link: "/admin-panel/province",
-//   //   Date: "1402/07/03",
-//   //   pannel: "ادمین",
-//   // },
-//   // {
-//   //   Name: "لیست کاربران",
-//   //   Link: "/admin-panel/management-user",
-//   //   Date: "1402/07/03",
-//   //   pannel: "ادمین",
-//   // },
-//   // {
-//   //   Name: "ثبت تغییرات کاربران",
-//   //   Link: "/admin-panel/confirm-changes",
-//   //   Date: "1402/07/03",
-//   //   pannel: "ادمین",
-//   // },
-//   // {
-//   //   Name: "نقش کاربران",
-//   //   Link: "/admin-panel/management-user-role",
-//   //   Date: "1402/07/03",
-//   //   pannel: "ادمین",
-//   // },
-// ];
-
 const columns: ColumnsType<any> = [
+  {
+    title: "ردیف",
+    dataIndex: "Row"
+  },
   {
     title: "نام صفحه",
     dataIndex: "Page",
@@ -217,6 +140,17 @@ const columns: ColumnsType<any> = [
     title: "آدرس صفحه",
     dataIndex: "Page_URL",
     key: "1",
+    render: (_, record) => (
+      <Space size="small">
+        {record.Page_URL ? (
+          <Link href={record.Page_URL} className="text-primary-500 font-bold">
+            آدرس صفحه
+          </Link>
+        ) : (
+          <span>آدرس نامعتبر</span>
+        )}
+      </Space>
+    ),
   },
   {
     title: "تستر",
@@ -232,6 +166,11 @@ const columns: ColumnsType<any> = [
     title: "توضیحات تستر",
     dataIndex: "Test_Comment",
     key: "5",
+    render: (_, record) => (
+      <Tooltip placement="top" title={<Typography>{record.Test_Comment}</Typography>}>
+        <Typography.Text className=" max-w-[200px]" ellipsis={true} style={{ width: "40px !important" }}>{record.Test_Comment}</Typography.Text>
+      </Tooltip>
+    ),
   },
   {
     title: "تاریخ تایید از نطر تستر",

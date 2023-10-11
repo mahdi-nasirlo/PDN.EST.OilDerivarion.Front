@@ -301,7 +301,7 @@ body {
 /* table styles */
 
 .ant-table-content {
-    @apply overflow-auto whitespace-nowrap !important
+    @apply overflow-auto overflow-y-hidden rounded-xl whitespace-nowrap !important
 }
 
 .ant-table-thead .ant-table-cell {

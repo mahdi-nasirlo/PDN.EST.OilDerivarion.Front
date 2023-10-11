@@ -42,8 +42,11 @@ export default function DataTable({ ldTestResult, TestResult, mutate }: {
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record: any) => (
-                <Space size="middle">
+                <Space size="small">
                     <Link href={`/admin-panel/test-result-record`} className="text-secondary-500 font-bold">
                         ثبت نتیجه
                     </Link>
@@ -76,32 +79,3 @@ export default function DataTable({ ldTestResult, TestResult, mutate }: {
             />
         </div >)
 }
-
-
-
-// const data: DataType[] = [
-//     {
-//         key: "1",
-//         Row: 1,
-//         Barcode: "235648",
-//         status: "ثبت شده",
-//     },
-//     {
-//         key: "2",
-//         Row: 2,
-//         Barcode: "235648",
-//         status: "ثبت نشده",
-//     },
-//     {
-//         key: "3",
-//         Row: 3,
-//         Barcode: "235648",
-//         status: "ثبت شده",
-//     },
-//     {
-//         key: "4",
-//         Row: 4,
-//         Barcode: "235648",
-//         status: "ثبت نشده",
-//     },
-// ];

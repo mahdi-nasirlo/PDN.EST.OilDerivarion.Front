@@ -105,8 +105,11 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
       title: "عملیات",
       dataIndex: "2",
       key: "upgradeNum",
+      align: "center",
+      fixed: 'right',
+      width: 150,
       render: (_, record: ProductTestItem) => (
-        <Space size="middle">
+        <Space size="small">
           <Button
             type="link"
             className="text-red-500 font-bold"

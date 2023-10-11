@@ -108,9 +108,13 @@ export default function DataTable({
     },
     {
       title: "عملیات",
+      dataIndex: "عملیات",
       key: "8",
+      align: "center",
+      fixed: 'right',
+      width: 150,
       render: (_, record) => (
-        <Space size="middle">
+        <Space size="small">
           <Button
             type="link"
             className="text-secondary-500 font-bold"

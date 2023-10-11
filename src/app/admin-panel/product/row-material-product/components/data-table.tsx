@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Switch, Table, Typography } from 'antd'
+import { Button, Space, Switch, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import { Product } from '../../../../../../interfaces/product';
@@ -83,9 +83,19 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Button type="link" className={"text-red-500 font-bold"}
-                    onClick={() => handleDelete(record)}>حذف</Button>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => handleDelete(record)}
+                    >
+                        حذف
+                    </Button>
+                </Space>
             ),
         },
     ];

@@ -2,7 +2,6 @@
 
 import { Alert, Space, Table, Tooltip, Typography } from "antd";
 import useSWR from "swr";
-
 import Link from "next/link";
 import { ColumnsType } from "antd/es/table";
 import { listFetcher } from "../../../lib/server/listFetcher";

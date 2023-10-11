@@ -7,6 +7,8 @@ import TestFactorForm from "@/app/admin-panel/test-factors/components/test-facto
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { CreateTestItem } from "../../../../../interfaces/TestItem";
+import { CreateMeasure } from "../../../../../interfaces/measures";
+import MeasureForm from "./measure-form";
 
 export default function CreateModal({
   setModalVisible,
@@ -20,11 +22,11 @@ export default function CreateModal({
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
-    "/TestItem/Create",
+    "/Measure/Create",
     mutationFetcher
   );
 
-  const createTestFactor = async (values: CreateTestItem) => {
+  const createTestFactor = async (values: CreateMeasure) => {
     await trigger(values);
 
     await mutate();
@@ -39,7 +41,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن فاکتور جدید</div>
+          <div className="text-base mb-2">افزودن واحد اندازه گیری</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -81,7 +83,7 @@ export default function CreateModal({
         form={form}
         layout="vertical"
       >
-        <TestFactorForm />
+        <MeasureForm />
       </Form>
     </Modal>
   );

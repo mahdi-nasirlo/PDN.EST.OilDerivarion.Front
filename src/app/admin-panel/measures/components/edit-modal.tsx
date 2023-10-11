@@ -8,30 +8,32 @@ import TestFactorForm from "@/app/admin-panel/test-factors/components/test-facto
 import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { Measure } from "../../../../../interfaces/measures";
+import MeasureForm from "./measure-form";
 
 function EditModal({
-  editRecord,
+  editRecords,
   setEditRecord,
   mutate,
 }: {
-  editRecord: TestItem | undefined;
+  editRecords: Measure | undefined;
   setEditRecord: (arg: undefined) => void;
   mutate: () => void;
 }) {
   const [form] = useForm();
 
   const { data, isLoading } = useSWR(
-    ["/TestItem/Get", { uid: editRecord?.Uid }],
+    ["/Measure/Get", { uid: editRecords?.Uid }],
     ([url, arg]) => listFetcher(url, { arg })
   );
 
   const { isMutating, trigger } = useSWRMutation(
-    "/TestItem/Update",
+    "/Measure/Update",
     mutationFetcher
   );
 
-  const handleSubmit = async (values: TestItem) => {
-    values.Uid = editRecord?.Uid;
+  const handleSubmit = async (values: Measure) => {
+    values.Uid = editRecords?.Uid;
 
     await trigger(values);
 
@@ -58,7 +60,7 @@ function EditModal({
             </div>
           </div>
         }
-        open={editRecord !== undefined}
+        open={editRecords !== undefined}
         onCancel={() => setEditRecord(undefined)}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -94,7 +96,7 @@ function EditModal({
           form={form}
           layout="vertical"
         >
-          <TestFactorForm />
+          <MeasureForm />
         </Form>
       </Modal>
     </>

@@ -6,39 +6,40 @@ import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
 import { TestItem } from "../../../../../interfaces/TestItem";
-import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { Measure } from "../../../../../interfaces/measures";
+import EditModal from "../../measures/components/edit-modal";
 
 export default function DataTable({
   setModalVisible,
-  ldTestItem,
-  TestItem,
+  ldMeasure,
+  measure,
   mutate,
 }: {
   setModalVisible: any;
-  ldTestItem: boolean;
+  ldMeasure: boolean;
   mutate: () => void;
-  TestItem:
+  measure:
     | {
-        records: TestItem[];
+        records: Measure[];
         count: number;
       }
     | undefined;
 }) {
-  const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
+  const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [recordToDelete, setRecordToDelete] = useState<TestItem | null>(null);
+  const [recordToDelete, setRecordToDelete] = useState<Measure | null>(null);
 
-  const handleDelete = (record: TestItem) => {
+  const handleDelete = (record: Measure) => {
     setRecordToDelete(record);
     setIsDeleteModalVisible(true);
   };
 
   const { trigger, isMutating } = useSWRMutation(
-    "/TestItem/Delete",
+    "/Measure/Delete",
     mutationFetcher
   );
 
@@ -56,42 +57,28 @@ export default function DataTable({
     setModalVisible(true);
   };
 
-  const columns: ColumnsType<TestItem> = [
+  const columns: ColumnsType<Measure> = [
     {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
     },
     {
-      title: "نام فاکتور",
+      title: "واحد اندازه گیری",
       dataIndex: "Name",
       key: "2",
     },
     {
-      title: "روش آزمون",
-      dataIndex: "TestMethod",
-      key: "3",
-    },
-    {
-      title: "مقدار تجدید پذیری",
-      dataIndex: "ReNewabillity_Value",
-      key: "4",
-    },
-    {
-      title: "تجدید پذیری",
-      dataIndex: "ReNewabillity",
-      key: "5",
-    },
-    {
-      title: "مقیاس آزمون",
-      dataIndex: "MeasureName",
-      key: "6",
-    },
-    {
       title: "فعال/غیر فعال ",
-      dataIndex: "Is_Active",
+      dataIndex: "IsActive",
+      key: "3",
+      render: (e, record) => <Switch defaultChecked={record.IsActive} />,
+    },
+    {
+      title: "حذف شده",
+      dataIndex: "IsDeleted",
       key: "4",
-      render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+      render: (e, record) => <Switch defaultChecked={record.IsDeleted} />,
     },
     {
       title: "جزئیات",
@@ -100,7 +87,7 @@ export default function DataTable({
         <Space size="middle">
           <Button
             type="link"
-            className={"text-primary-500 font-bold"}
+            className={"text-secondary-500 font-bold"}
             onClick={() => setOpenEdit(record)}
           >
             ویرایش
@@ -132,14 +119,14 @@ export default function DataTable({
             onClick={showModal}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex  ">افزودن فاکتور آزمون</span>
+            <span className="flex  ">افزودن واحد اندازه گیری</span>
           </Button>
         </div>
         <Table
           className="mt-6"
           columns={columns}
-          loading={ldTestItem || isMutating}
-          dataSource={addIndexToData(TestItem?.records)}
+          loading={ldMeasure || isMutating}
+          dataSource={addIndexToData(measure?.records)}
           pagination={{
             defaultPageSize: 10,
             showSizeChanger: true,
@@ -155,7 +142,7 @@ export default function DataTable({
         />
         <EditModal
           mutate={mutate}
-          editRecord={openEdit}
+          editRecords={openEdit}
           setEditRecord={setOpenEdit}
         />
       </div>

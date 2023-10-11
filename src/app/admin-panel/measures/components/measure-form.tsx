@@ -4,24 +4,13 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 
 function MeasureForm() {
-  const { data: Measure, isLoading: ldMeasure } = useSWR(
-    [
-      "/Measure/GetAll",
-      {
-        name: null,
-        isActive: null,
-      },
-    ],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-
   return (
     <>
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
-            label="نام فاکتور"
+            label="واحد اندازه کیری"
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />

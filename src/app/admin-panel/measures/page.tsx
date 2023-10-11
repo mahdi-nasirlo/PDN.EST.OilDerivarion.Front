@@ -7,7 +7,7 @@ import { ProductGet } from "../../../../interfaces/product";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import { TestItem } from "../../../../interfaces/TestItem";
 import { Collapse } from "antd";
-import { Measure } from "../../../../interfaces/measures";
+import { Measure, Measurepage } from "../../../../interfaces/measures";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 
@@ -16,7 +16,7 @@ export default function Page() {
 
   const defaultValueTable = {
     name: null,
-    is_Active: null,
+    isActive: null,
     fromRecord: 0,
     selectRecord: 100000,
   };
@@ -33,23 +33,23 @@ export default function Page() {
   }>(["/Measure/GetPage", filter], ([url, arg]: [string, any]) =>
     listFetcher(url, { arg })
   );
-  // const setFilterTable = async (values: Measure) => {
-  //   // @ts-ignore
-  //   setFilter({
-  //     name: values.name,
-  //     is_Active: null,
-  //     fromRecord: 0,
-  //     selectRecord: 1000,
-  //   });
+  const setFilterTable = async (values: Measurepage) => {
+    // @ts-ignore
+    setFilter({
+      name: values.name,
+      isActive: null,
+      fromRecord: 0,
+      selectRecord: 1000,
+    });
 
-  //   await mutate();
-  // };
+    await mutate();
+  };
 
-  // const unsetFilter = async () => {
-  //   setFilter(defaultValueTable);
+  const unsetFilter = async () => {
+    setFilter(defaultValueTable);
 
-  //   await mutate();
-  // };
+    await mutate();
+  };
 
   return (
     <>
@@ -59,7 +59,9 @@ export default function Page() {
         items={[
           {
             label: "فیلتر جدول",
-            children: <FilterForm />,
+            children: (
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            ),
           },
         ]}
       />

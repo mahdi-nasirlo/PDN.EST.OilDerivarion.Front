@@ -10,3 +10,7 @@ export type Measure = {
     name:string ,
     isActive: boolean
   };
+  export type Measurepage = {
+    name:string|null ,
+    isActive: boolean|null
+  };

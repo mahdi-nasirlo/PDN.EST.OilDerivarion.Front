@@ -72,7 +72,7 @@ export default function FilterForm({ filter, unsetFilter }: {
               اعمال فیلتر
             </Button>
             <Button
-              //   onClick={resetForm}
+              onClick={resetForm}
               className="btn-delete-filter"
               size="large"
               type="primary"

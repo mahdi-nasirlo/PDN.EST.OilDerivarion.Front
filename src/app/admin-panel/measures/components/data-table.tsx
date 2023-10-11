@@ -109,7 +109,7 @@ export default function DataTable({
       <div className="box-border w-full mt-8 p-6">
         <div className="flex justify-between items-center">
           <Typography className="text-right text-[16px] font-normal">
-            لیست فاکتورهای آزمون
+            لیست واحد های اندازه گیری
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"
@@ -150,7 +150,7 @@ export default function DataTable({
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
+        title="واحد اندازه گیری"
       />
     </>
   );

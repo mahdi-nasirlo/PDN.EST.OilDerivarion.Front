@@ -1,24 +1,14 @@
 import React from "react";
-import { Col, Form, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
-  const { data: products, isLoading: ldProducts } = useSWR(
-    [
-      "/Product/GetAll",
-      {
-        name: null,
-        is_Active: null,
-      },
-    ],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
 
-  const { data: material, isLoading: ldMaterial } = useSWR(
+  const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
     [
-      "/Material/GetAll",
+      "/ProductCategory/GetAll",
       {
         name: null,
         is_Active: null,
@@ -33,37 +23,48 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="productUid"
+            name="Name"
             label="نام محصول"
           >
-            <Select
-              showSearch
-              fieldNames={{ label: "Name", value: "Uid" }}
+            <Input
               // @ts-ignore
-              filterOption={filterOption}
-              loading={ldProducts}
-              options={products}
               size="large"
-              placeholder="انتخاب کنید"
+              placeholder="وارد کنید"
             />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="materialUid"
-            label="مواد اولیه"
+            name="ProductCategory_Id"
+            label="نام دسته بندی"
           >
             <Select
               showSearch
-              fieldNames={{ label: "Name", value: "Uid" }}
+              fieldNames={{ label: "Name", value: "Id" }}
               // @ts-ignore
               filterOption={filterOption}
-              loading={ldMaterial}
-              options={material}
+              loading={ldProductCategory}
+              options={ProductCategory}
               size="large"
               placeholder="انتخاب کنید"
             />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[32, 1]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="Is_Active"
+            label="فعال/غیر فعال"
+          >
+            <Select
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false }
+              ]}
+              size="large" placeholder="انتخاب کنید" />
           </Form.Item>
         </Col>
       </Row>

@@ -8,7 +8,7 @@ export type Product = {
 };
 
 export interface ProductGet {
-  name: string | null;
+  Name: string | null;
   is_Active: boolean | null;
   hasDensity: boolean | null;
   densityLowerLimit: number | null;
@@ -18,7 +18,7 @@ export interface ProductGet {
 }
 
 export interface ProductCategoryGet {
-  name: string | null;
+  Name: string | null;
   is_Active: boolean | null;
   ProductCategoryName: string | null;
   fromRecord: number;

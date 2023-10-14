@@ -1,12 +1,12 @@
-import React from 'react';
-import {Button, Col, Form, Modal, Row} from "antd";
+import React, { useEffect } from 'react';
+import { Button, Col, Form, Modal, Row } from "antd";
 import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
-import {useForm} from "antd/es/form/Form";
-import {Product} from "../../../../../../interfaces/product";
+import { useForm } from "antd/es/form/Form";
+import { Product } from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
-function EditModal({isEditModalVisible, setIsEditModalVisible, mutate, recordToEdit}: {
+function EditModal({ isEditModalVisible, setIsEditModalVisible, mutate, recordToEdit }: {
     mutate: () => void,
     recordToEdit: Product | null,
     isEditModalVisible: boolean,
@@ -15,7 +15,7 @@ function EditModal({isEditModalVisible, setIsEditModalVisible, mutate, recordToE
 
     const [form] = useForm()
 
-    const {trigger, isMutating} = useSWRMutation("/Product/Update", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/Product/Update", mutationFetcher)
 
     const updateProduct = async (values: Product) => {
 
@@ -27,7 +27,17 @@ function EditModal({isEditModalVisible, setIsEditModalVisible, mutate, recordToE
 
         setIsEditModalVisible(false)
 
+        form.resetFields();
+
     }
+
+    useEffect(() => {
+        console.log(recordToEdit);
+
+        form.setFieldsValue(recordToEdit)
+    }, [recordToEdit])
+
+
 
     return (
         <Modal
@@ -62,8 +72,8 @@ function EditModal({isEditModalVisible, setIsEditModalVisible, mutate, recordToE
                 </Row>
             ]}
         >
-            <Form disabled={isMutating} form={form} onFinish={updateProduct}>
-                <ProductForm/>
+            <Form disabled={isMutating} form={form} onFinish={updateProduct} layout='vertical'>
+                <ProductForm />
             </Form>
         </Modal>
     );

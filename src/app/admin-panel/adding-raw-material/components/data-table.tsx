@@ -1,24 +1,21 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
+import { useForm } from 'antd/es/form/Form';
+import { ColumnsType } from 'antd/es/table';
+import React, { useEffect, useState } from 'react'
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
 
-export default function DataTable({setModalVisible, ldMaterial, material, mutate}: {
+export default function DataTable({ setModalVisible, ldMaterial, material, mutate }: {
     setModalVisible: any,
     ldMaterial: boolean,
     mutate: () => void,
-    material: {
-        records: Material[],
-        count: number
-    } | undefined
+    material: Material[] | undefined;
 }) {
 
     //حذف
@@ -62,11 +59,13 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
         setIsEditModalVisible(true);
     };
 
+    const { trigger: UpdateMaterial, isMutating: ldUpdateMaterial } = useSWRMutation("/Material/Update", mutationFetcher)
+
     const sendEditRequest = async (values: Material) => {
 
         values.Uid = recordToEdit?.Uid
 
-        await trigger(values)
+        await UpdateMaterial(values)
 
         await mutate()
 
@@ -79,9 +78,6 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
         setIsEditModalVisible(false);
         setRecordToEdit(null);
     };
-
-    const { trigger, isMutating, data } = useSWRMutation("/Material/Update", mutationFetcher)
-
 
     useEffect(() => {
         form.setFieldsValue(recordToEdit)
@@ -100,9 +96,9 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
             key: "2",
         },
         {
-            title: "فاکتورهای آزمون",
-            dataIndex: "TestItems",
-            key: "6",
+            title: "واحد اندازه گیری",
+            dataIndex: "MeasureName",
+            key: "3",
         },
         {
             title: "فعال/غیر فعال",
@@ -118,10 +114,20 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
             width: 150,
             render: (_, record) => (
                 <Space size="small">
-                    <Button type="link" className="text-secondary-500 font-bold"
-                        onClick={() => handleEdit(record)}>ویرایش</Button>
-                    <Button type="link" className="text-red-500 font-bold"
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                    <Button
+                        type="link"
+                        className="text-secondary-500 font-bold"
+                        onClick={() => handleEdit(record)}
+                    >
+                        ویرایش
+                    </Button>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => handleDelete(record)}
+                    >
+                        حذف
+                    </Button>
                 </Space>
             ),
         },
@@ -149,9 +155,9 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                 </div>
                 <Table
                     className="mt-6"
-                    loading={ldMaterial || ldDeleteMaterial}
+                    loading={ldMaterial || ldDeleteMaterial || ldUpdateMaterial}
                     columns={columns}
-                    dataSource={addIndexToData(material?.records)}
+                    dataSource={addIndexToData(material)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -184,7 +190,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                loading={ldUpdateMaterial}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -195,7 +201,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                loading={ldUpdateMaterial}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
@@ -206,7 +212,7 @@ export default function DataTable({setModalVisible, ldMaterial, material, mutate
                     </Row>
                 ]}
             >
-                <Form onFinish={sendEditRequest} disabled={isMutating} form={form} layout='vertical'>
+                <Form onFinish={sendEditRequest} disabled={ldUpdateMaterial} form={form} layout='vertical'>
                     <MaterialForm />
                 </Form>
             </Modal>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Col, Form, Row, Select} from "antd";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
+import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
 
 function BarcodeForm() {
 
@@ -17,11 +18,6 @@ function BarcodeForm() {
     const {isLoading: ldSampleType, data: sampleTypes} = useSWR("/BaseInfo/GetAllSampleType", listFetcher)
 
     const {
-        isLoading: isLdMaterial,
-        data: materials
-    } = useSWR("/Material/GetAll", (url) => listFetcher(url, {arg: {name: "", isActive: null}}))
-
-    const {
         isLoading: isLdProduct,
         data: products
     } = useSWR("/Product/GetAll", (url) => listFetcher(url, {arg: {name: "", isActive: null}}))
@@ -32,7 +28,6 @@ function BarcodeForm() {
             "isActive": null
         }
     }))
-
 
     return (
         <Row gutter={[32, 1]}>
@@ -59,27 +54,28 @@ function BarcodeForm() {
                     />
                 </Form.Item>
             </Col>
-            <Col className={`${!containerType && "hidden"}`} xs={24} md={12}>
-                <Form.Item
-                    name="requestDetailUid"
-                    label={containerType?.Name}
-                    rules={[
-                        {
-                            required: true,
-                            message: "لطفا مقدار را وارد کنید",
-                        },
-                    ]}
-                >
-                    <Select
-                        showSearch
-                        fieldNames={{value: "Id", label: containerType?.Id === 1 ? "Code" : "Name"}}
-                        loading={isLdMaterial || isLdGps || isLdProduct}
-                        options={containerType?.Id === 1 ? gps : containerType?.Id === 2 ? materials : products}
-                        size="large"
-                        placeholder="انتخاب کنید"
-                    />
-                </Form.Item>
-            </Col>
+            {/*<Col className={`${!containerType && "hidden"}`} xs={24} md={12}>*/}
+            {/*    <Form.Item*/}
+            {/*        name="requestDetailUid"*/}
+            {/*        label={containerType?.Name}*/}
+            {/*        rules={[*/}
+            {/*            {*/}
+            {/*                required: true,*/}
+            {/*                message: "لطفا مقدار را وارد کنید",*/}
+            {/*            },*/}
+            {/*        ]}*/}
+            {/*    >*/}
+            {/*        {containerType?.Id === 1 && <Select*/}
+            {/*            showSearch*/}
+            {/*            loading={isLdGps}*/}
+            {/*            fieldNames={{value: "Uid", label: "Code"}}*/}
+            {/*            size="large"*/}
+            {/*            options={gps}*/}
+            {/*        />}*/}
+
+            {/*    </Form.Item>*/}
+            {/*</Col>*/}
+            <BarcodeFormInteractive ID={containerType?.Id} name={containerType?.Name}/>
             <Col xs={24} md={12}>
                 <Form.Item
                     name="barcodeUsePlaceTypeId"
@@ -125,6 +121,5 @@ function BarcodeForm() {
         </Row>
     );
 }
-
 // @ts-ignore
 export default BarcodeForm;

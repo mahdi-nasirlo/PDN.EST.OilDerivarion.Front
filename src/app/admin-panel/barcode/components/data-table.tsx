@@ -1,10 +1,10 @@
 import {Table} from 'antd';
 import type {ColumnsType} from 'antd/es/table';
 import React from "react";
-import {Product} from "../../../../../interfaces/product";
+import {RequestMaster} from "../../../../../interfaces/requestMaster";
 
 
-const columns: ColumnsType<Product> = [
+const columns: ColumnsType<RequestMaster> = [
     {
         title: "ردیف",
         dataIndex: "Row",
@@ -12,21 +12,36 @@ const columns: ColumnsType<Product> = [
     },
     {
         title: 'نام محصول',
-        dataIndex: 'Name',
+        dataIndex: 'SampleTypeName',
         key: '2',
     },
+    {
+        title: "محل استفاده بارکد",
+        dataIndex: "BarcodeUsePlaceTypeName",
+        key: "3"
+    },
+    {
+        title: "نوع ظرف",
+        dataIndex: "ContainerTypeName",
+        key: "4"
+    },
+    {
+        title: "کد دستگاه GPS",
+        dataIndex: "GpsDeviceCode",
+        key: "5"
+    }
 ];
 
 
-const DataTable = ({product, ldProduct}: { product: Product[], ldProduct: boolean }) => {
+const DataTable = ({requestMaster, ldRequestMaster}: { requestMaster: RequestMaster[], ldRequestMaster: boolean }) => {
 
     return (
         <Table
             className="mt-6"
             columns={columns}
             rowKey={"Uid"}
-            loading={ldProduct}
-            dataSource={product}
+            loading={ldRequestMaster}
+            dataSource={requestMaster}
         />
     )
 };

@@ -4,17 +4,14 @@ import AppLayout from "@/components/layout/layout";
 import React from "react";
 import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
-import { MenuProps } from "antd";
-import {
-  Bars3Icon,
-  FolderPlusIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
+import {Bars3Icon, FolderPlusIcon, RectangleStackIcon,} from "@heroicons/react/24/outline";
+import {QrCodeIcon} from "@heroicons/react/20/solid";
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                       children,
+                                   }: {
+    children: React.ReactNode;
 }) {
   return (
     <>
@@ -33,39 +30,36 @@ const items: MenuProps["items"] = [
       <RectangleStackIcon width={16} height={16} />
     ),
 
-    getMenuItem(
-      <Link href={"/admin-panel/product/products-list"} className="text-sm">
-        لیست محصولات
-      </Link>,
-      "products-list",
-      <Bars3Icon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link href={"/admin-panel/product/products-factor"} className="text-sm">
-        فاکتور محصول
-      </Link>,
-      "products-factor",
-      <FolderPlusIcon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link
-        href={"/admin-panel/product/row-material-product"}
-        className="text-sm"
-      >
-        مواد اولیه محصول
-      </Link>,
-      "row-material-product",
-      <Bars3Icon width={16} height={16} />
-    ),
-  ]),
-  getMenuItem("ماده اولیه", "initail", null, [
-    getMenuItem(
-      <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
-        لیست ماده اولیه
-      </Link>,
-      "category-list",
-      <Bars3Icon width={16} height={16} />
-    ),
+        getMenuItem(
+            <Link href={"/admin-panel/product/products-list"} className="text-sm">
+                لیست محصولات
+            </Link>,
+            "products-list",
+            <Bars3Icon width={16} height={16} />
+        ),
+        getMenuItem(
+            <Link href={"/admin-panel/product/products-factor"} className="text-sm">
+                فاکتور های آزمون محصول
+            </Link>,
+            "products-factor",
+            <FolderPlusIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href={"/admin-panel/product/row-material-product"} className="text-sm">
+                مواد اولیه محصول
+            </Link>,
+            "row-material-product",
+            <Bars3Icon width={16} height={16}/>
+        ),
+    ]),
+    getMenuItem("ماده اولیه", "initail", null, [
+        getMenuItem(
+            <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
+                لیست ماده اولیه
+            </Link>,
+            "category-list",
+            <Bars3Icon width={16} height={16} />
+        ),
 
     getMenuItem(
       <Link href={"/admin-panel/raw-product-factor"} className="text-sm">
@@ -164,4 +158,11 @@ const items: MenuProps["items"] = [
     <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
     "measures"
   ),
+    getMenuItem(
+        <Link href={"/admin-panel/barcode"}>
+            بارکد
+        </Link>,
+        "barcode",
+        <QrCodeIcon width={16} height={16}/>
+    )
 ];

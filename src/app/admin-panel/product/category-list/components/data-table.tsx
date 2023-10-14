@@ -1,17 +1,17 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Typography, } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { Category } from "../../../../../../interfaces/category";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Switch, Table, Typography,} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
+import {Category} from "../../../../../../interfaces/category";
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
 
-export default function DataTable({ setModalVisible, category, ldCategory, mutate }: {
+export default function DataTable({setModalVisible, category, ldCategory, mutate}: {
     setModalVisible: any;
     category: Category[] | undefined;
     mutate: () => void;
@@ -63,26 +63,31 @@ export default function DataTable({ setModalVisible, category, ldCategory, mutat
             key: "2",
         },
         {
+            title: "روش تولید",
+            dataIndex: "TestMethodName",
+            key: "3"
+        },
+        {
             title: "دانسیته",
             dataIndex: "HasDensity",
-            key: "3",
+            key: "4",
             render: (_, record) => <>{record.HasDensity ? "بله" : "خیر"}</>
         },
         {
-            title: "حداقل بازه",
+            title: "حداقل بازه دانسیته",
             dataIndex: "DensityLowerLimit",
-            key: "4",
+            key: "5",
         },
         {
-            title: "حداکثر بازه",
+            title: "حداکثر بازه دانسیته",
             dataIndex: "DensityUpperLimit",
-            key: "5",
+            key: "6",
         },
         {
             title: "فعال/غیر فعال ",
             dataIndex: "ConfirmedRequestCode",
-            key: "6",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+            key: "7",
+            render: (e, record) => <Switch defaultChecked={record.Is_Active}/>,
         },
         {
             title: "عملیات",

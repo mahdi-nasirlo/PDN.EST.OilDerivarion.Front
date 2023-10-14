@@ -12,7 +12,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 
 
-export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
+export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -76,26 +76,21 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
             key: "5",
         },
         {
-            title: "فاکتور آزمون",
-            dataIndex: "ConfirmedRequestCode",
+            title: "فاکتورهای آزمون",
+            dataIndex: "TestItems",
             key: "6",
+        },
+        {
+            title: "مواد اولیه",
+            dataIndex: "Materials",
+            key: "7"
         },
         {
             title: "عملیات",
             key: "عملیات",
-            align: "center",
-            fixed: 'right',
-            width: 150,
             render: (_, record) => (
-                <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => handleDelete(record)}
-                    >
-                        حذف
-                    </Button>
-                </Space>
+                <Button type="link" className={"text-red-500 font-bold"}
+                        onClick={() => handleDelete(record)}>حذف</Button>
             ),
         },
     ];

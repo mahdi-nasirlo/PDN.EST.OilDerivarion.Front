@@ -1,17 +1,17 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Col, Form, Modal, Row, Space, Switch, Table, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import { ColumnsType } from 'antd/es/table';
-import React, { useEffect, useState } from 'react'
-import { addIndexToData } from "../../../../../lib/addIndexToData";
+import {PlusIcon} from '@heroicons/react/24/outline'
+import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import {ColumnsType} from 'antd/es/table';
+import React, {useEffect, useState} from 'react'
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
 
-export default function DataTable({ setModalVisible, ldMaterial, material, mutate }: {
+export default function DataTable({setModalVisible, ldMaterial, material, mutate}: {
     setModalVisible: any,
     ldMaterial: boolean,
     mutate: () => void,
@@ -100,25 +100,15 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
             key: "2",
         },
         {
-            title: "واحد اندازه گیری",
-            dataIndex: "UnitMeasurement",
-            key: "3",
+            title: "فاکتورهای آزمون",
+            dataIndex: "TestItems",
+            key: "6",
         },
         {
             title: "فعال/غیر فعال",
             dataIndex: "ConfirmedRequestCode",
             key: "4",
             render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
-        },
-        {
-            title: "کد ماده",
-            dataIndex: "MaterialCode",
-            key: "5",
-        },
-        {
-            title: "فاکتور آزمون",
-            dataIndex: "TestInvoice",
-            key: "6",
         },
         {
             title: "عملیات",

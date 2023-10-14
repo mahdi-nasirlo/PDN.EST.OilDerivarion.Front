@@ -9,26 +9,27 @@ import {Button, Collapse, Typography} from "antd";
 import {PlusIcon} from "@heroicons/react/24/outline";
 import {listFetcher} from "../../../../lib/server/listFetcher";
 import {addIndexToData} from "../../../../lib/addIndexToData";
-import {Product} from "../../../../interfaces/product";
+import {RequestMaster} from "../../../../interfaces/requestMaster";
 
 export default function Page() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
     const defaultValueTable = {
-        name: null,
-        is_Active: null,
+        sampleTypeId: null,
+        containerTypeId: null,
+        barcodeUsePlaceTypeId: null,
         fromRecord: 0,
-        selectRecord: 100000
+        selectRecord: 1000
     }
 
     const [filter, setFilter] = useState(defaultValueTable)
 
-    const {data: product, isLoading: ldProduct, mutate} = useSWR<{
-        records: Product[];
+    const {data: requestMaster, isLoading: ldRequestMaster, mutate} = useSWR<{
+        records: RequestMaster[];
         count: number;
     }>(
-        ["/Product/GetPage", filter],
+        ["/RequestBarcode/GetPage", filter],
         ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg})
     );
 
@@ -73,7 +74,7 @@ export default function Page() {
                         <span className="flex ">افزودن فاکتور محصول</span>
                     </Button>
                 </div>
-                <DataTable product={addIndexToData(product?.records)} ldProduct={ldProduct}/>
+                <DataTable requestMaster={addIndexToData(requestMaster?.records)} ldRequestMaster={ldRequestMaster}/>
             </div>
             <CreateModal
                 mutate={mutate}

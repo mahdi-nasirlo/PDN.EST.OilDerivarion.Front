@@ -119,6 +119,17 @@ export default function Home() {
               </Link>
             </Typography>
           </div>
+          <div className="flex">
+            <Typography className="text-1xl">ورود به پنل</Typography>
+            <Typography>
+              <Link
+                className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
+                href="/central-working-group"
+              >
+                پنل کارگروه مرکزی
+              </Link>
+            </Typography>
+          </div>
         </div>
       </div>
     </>
@@ -128,7 +139,7 @@ export default function Home() {
 const columns: ColumnsType<any> = [
   {
     title: "ردیف",
-    dataIndex: "Row"
+    dataIndex: "Row",
   },
   {
     title: "نام صفحه",
@@ -166,8 +177,17 @@ const columns: ColumnsType<any> = [
     dataIndex: "Test_Comment",
     key: "5",
     render: (_, record) => (
-      <Tooltip placement="top" title={<Typography>{record.Test_Comment}</Typography>}>
-        <Typography.Text className=" max-w-[200px]" ellipsis={true} style={{ width: "40px !important" }}>{record.Test_Comment}</Typography.Text>
+      <Tooltip
+        placement="top"
+        title={<Typography>{record.Test_Comment}</Typography>}
+      >
+        <Typography.Text
+          className=" max-w-[200px]"
+          ellipsis={true}
+          style={{ width: "40px !important" }}
+        >
+          {record.Test_Comment}
+        </Typography.Text>
       </Tooltip>
     ),
   },

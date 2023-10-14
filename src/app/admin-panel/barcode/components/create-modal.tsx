@@ -80,7 +80,7 @@ export default function CreateModal({
                 form={form}
                 layout="vertical"
             >
-                <BarcodeForm/>
+                <BarcodeForm form={form}/>
             </Form>
         </Modal>
     );

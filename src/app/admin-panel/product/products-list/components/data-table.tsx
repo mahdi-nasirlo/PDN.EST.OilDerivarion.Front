@@ -22,24 +22,19 @@ import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
 import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
 
-export default function DataTable({
-  setModalVisible,
-  ldProduct,
-  product,
-  mutate,
-}: {
-  setModalVisible: any;
-  ldProduct: boolean;
-  mutate: () => void;
-  product:
-  | {
-    records: Product[];
-    count: number;
-  }
-  | undefined;
+
+export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
+    setModalVisible: any,
+    ldProduct: boolean,
+    mutate: () => void,
+    product: {
+        records: Product[],
+        count: number
+    } | undefined
 }) {
   //حذف
 
@@ -101,24 +96,14 @@ export default function DataTable({
         })
     );
 
-  useEffect(() => {
-    form.setFieldValue("productCategory_Id", recordToEdit?.ProductCategory_Id);
-  }, [defaultCategory]);
+    useEffect(() => {
 
-  const { trigger, isMutating } = useSWRMutation(
-    "/Product/Update",
-    mutationFetcher
-  );
+        form.setFieldValue("productCategory_Id", recordToEdit?.ProductCategory_Id)
 
-  const updateProduct = async (values: Product) => {
-    values.Uid = recordToEdit?.Uid;
+    }, [defaultCategory])
 
-    await trigger(values);
 
-    await mutate();
 
-    setIsEditModalVisible(false);
-  };
 
   const columns: ColumnsType<Product> = [
     {
@@ -179,94 +164,53 @@ export default function DataTable({
     },
   ];
 
-  return (
-    <>
-      <div className="box-border w-full mt-8 p-6">
-        <div className="flex justify-between items-center">
-          <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست محصولات
-          </Typography>
-          <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
-          >
-            <PlusIcon width={24} height={24} />
-            <span className="flex gap-2">افزودن محصول جدید</span>
-          </Button>
-        </div>
-        <Table
-          loading={ldProduct || ldDelete}
-          className="mt-6"
-          columns={columns}
-          dataSource={addIndexToData(product?.records)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
-        />
-      </div>
-      {/* جذف */}
-      <ConfirmDeleteModal
-        open={isDeleteModalVisible}
-        setOpen={setIsDeleteModalVisible}
-        handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
-      />
-      {/* ویرایش */}
-      <Modal
-        width={800}
-        title="ویرایش محصول"
-        open={isEditModalVisible}
-        onOk={() => form.submit()}
-        onCancel={handleCancelEdit}
-        footer={[
-          <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={12}>
-              <Button
-                loading={isMutating}
-                size="large"
-                className="w-full"
-                type="primary"
-                onClick={() => form.submit()}
-                key={"submit"}
-              >
-                ثبت
-              </Button>
-            </Col>
-            <Col xs={24} md={12}>
-              <Button
-                loading={isMutating}
-                size="large"
-                className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelEdit}
-                key={"cancel"}
-              >
-                انصراف
-              </Button>
-            </Col>
-          </Row>,
-        ]}
-      >
-        <Form
-          disabled={isMutating}
-          form={form}
-          onFinish={updateProduct}
-          layout="vertical"
-        >
-          <ProductForm />
-        </Form>
-      </Modal>
-    </>
-  );
+
+    return (
+        <>
+            <div className="box-border w-full mt-8 p-6">
+                <div className="flex justify-between items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
+                        محصولات</Typography>
+                    <Button
+                        className="max-md:w-full flex justify-center items-center gap-2"
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
+                        onClick={showModal}
+                    >
+                        <PlusIcon width={24} height={24} />
+                        <span className="flex gap-2">افزودن محصول جدید</span>
+                    </Button>
+                </div>
+                <Table
+                    loading={ldProduct || ldDelete}
+                    className="mt-6"
+                    columns={columns}
+                    dataSource={addIndexToData(product?.records)}
+                    pagination={{
+                        defaultPageSize: 10,
+                        showSizeChanger: true,
+                        pageSizeOptions: ["10", "20", "50"],
+                        defaultCurrent: 1,
+                        style: {
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "flex-start",
+                            margin: "16px 0",
+                        },
+                    }}
+                />
+            </div>
+            {/* جذف */}
+            <ConfirmDeleteModal
+                open={isDeleteModalVisible}
+                setOpen={setIsDeleteModalVisible}
+                handleDelete={handleConfirmDelete}
+                title="مواد اولیه"
+            />
+            {/* ویرایش */}
+            <EditModal mutate={mutate} recordToEdit={recordToEdit} isEditModalVisible={isEditModalVisible}
+                       setIsEditModalVisible={setIsEditModalVisible}/>
+        </>
+    )
 }

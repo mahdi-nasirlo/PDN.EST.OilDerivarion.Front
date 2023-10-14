@@ -15,10 +15,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
     setModalVisible: any,
     ldMaterial: boolean,
     mutate: () => void,
-    material: {
-        records: Material[],
-        count: number
-    } | undefined
+    material: Material[] | undefined;
 }) {
 
     //حذف
@@ -62,11 +59,13 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
         setIsEditModalVisible(true);
     };
 
+    const { trigger: UpdateMaterial, isMutating: ldUpdateMaterial } = useSWRMutation("/Material/Update", mutationFetcher)
+
     const sendEditRequest = async (values: Material) => {
 
         values.Uid = recordToEdit?.Uid
 
-        await trigger(values)
+        await UpdateMaterial(values)
 
         await mutate()
 
@@ -79,9 +78,6 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
         setIsEditModalVisible(false);
         setRecordToEdit(null);
     };
-
-    const { trigger, isMutating, data } = useSWRMutation("/Material/Update", mutationFetcher)
-
 
     useEffect(() => {
         form.setFieldsValue(recordToEdit)
@@ -101,7 +97,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
         },
         {
             title: "واحد اندازه گیری",
-            dataIndex: "UnitMeasurement",
+            dataIndex: "MeasureName",
             key: "3",
         },
         {
@@ -111,16 +107,6 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
             render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
-            title: "کد ماده",
-            dataIndex: "MaterialCode",
-            key: "5",
-        },
-        {
-            title: "فاکتور آزمون",
-            dataIndex: "TestInvoice",
-            key: "6",
-        },
-        {
             title: "عملیات",
             key: "عملیات",
             align: "center",
@@ -128,10 +114,20 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
             width: 150,
             render: (_, record) => (
                 <Space size="small">
-                    <Button type="link" className="text-secondary-500 font-bold"
-                        onClick={() => handleEdit(record)}>ویرایش</Button>
-                    <Button type="link" className="text-red-500 font-bold"
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                    <Button
+                        type="link"
+                        className="text-secondary-500 font-bold"
+                        onClick={() => handleEdit(record)}
+                    >
+                        ویرایش
+                    </Button>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => handleDelete(record)}
+                    >
+                        حذف
+                    </Button>
                 </Space>
             ),
         },
@@ -159,9 +155,9 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
                 </div>
                 <Table
                     className="mt-6"
-                    loading={ldMaterial || ldDeleteMaterial}
+                    loading={ldMaterial || ldDeleteMaterial || ldUpdateMaterial}
                     columns={columns}
-                    dataSource={addIndexToData(material?.records)}
+                    dataSource={addIndexToData(material)}
                     pagination={{
                         defaultPageSize: 10,
                         showSizeChanger: true,
@@ -194,7 +190,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                loading={ldUpdateMaterial}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -205,7 +201,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                loading={ldUpdateMaterial}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
@@ -216,7 +212,7 @@ export default function DataTable({ setModalVisible, ldMaterial, material, mutat
                     </Row>
                 ]}
             >
-                <Form onFinish={sendEditRequest} disabled={isMutating} form={form} layout='vertical'>
+                <Form onFinish={sendEditRequest} disabled={ldUpdateMaterial} form={form} layout='vertical'>
                     <MaterialForm />
                 </Form>
             </Modal>

@@ -15,6 +15,7 @@ export default function Page() {
     const defaultValueTable = {
         name: null,
         is_Active: null,
+        MeasureUid: null,
         fromRecord: 0,
         selectRecord: 10000,
     }
@@ -31,7 +32,7 @@ export default function Page() {
 
     const setFilterTable = async (values: MaterialGet) => {
         //@ts-ignore
-        setFilter({ name: values.name, is_Active: values.is_Active, fromRecord: 0, selectRecord: 100 })
+        setFilter({ name: values.name, is_Active: values.is_Active, MeasureUid: values.MeasureUid, fromRecord: 0, selectRecord: 1000 })
 
         await mutate()
 
@@ -54,9 +55,16 @@ export default function Page() {
                     label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
                 }]}
             />
-            <DataTable mutate={mutate} material={material || undefined} ldMaterial={ldMaterial}
+            <DataTable
+                mutate={mutate}
+                material={material?.records}
+                ldMaterial={ldMaterial}
                 setModalVisible={setModalVisible} />
-            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <CreateModal
+                mutate={mutate}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+            />
         </>
     );
 }

@@ -22,6 +22,11 @@ const columns: ColumnsType<Product> = [
         dataIndex: 'Name',
         key: '2',
     },
+    {
+        title: "فاکتور های آزمون",
+        dataIndex: "TestItems",
+        key: "3"
+    }
 ];
 
 
@@ -113,7 +118,7 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
             fixed: 'right',
             width: 150,
             render: (_, record: ProductTestItem) => (
-                <Space size="small">
+                <Space size="middle">
                     <Button
                         type="link"
                         className="text-red-500 font-bold"

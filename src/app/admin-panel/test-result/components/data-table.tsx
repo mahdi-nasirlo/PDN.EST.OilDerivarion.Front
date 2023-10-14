@@ -40,6 +40,36 @@ export default function DataTable({ ldTestResult, TestResult, mutate }: {
             key: "3",
         },
         {
+            title: "TestItemName",
+            dataIndex: "TestItemName",
+            key: "4",
+        },
+        {
+            title: "TestItemReNewabillity",
+            dataIndex: "TestItemReNewabillity",
+            key: "5",
+        },
+        {
+            title: "TestItemReNewabillityValue",
+            dataIndex: "TestItemReNewabillityValue",
+            key: "6",
+        },
+        {
+            title: "LabName",
+            dataIndex: "LabName",
+            key: "7",
+        },
+        {
+            title: "Result",
+            dataIndex: "Result",
+            key: "8",
+        },
+        {
+            title: "Range",
+            dataIndex: "Range",
+            key: "9",
+        },
+        {
             title: "عملیات",
             key: "عملیات",
             align: "center",
@@ -47,7 +77,10 @@ export default function DataTable({ ldTestResult, TestResult, mutate }: {
             width: 150,
             render: (_, record: any) => (
                 <Space size="small">
-                    <Link href={`/admin-panel/test-result-record`} className="text-secondary-500 font-bold">
+                    <Link
+                        href={`/admin-panel/test-result-record/${record.TestItemUid}`}
+                        className="text-secondary-500 font-bold"
+                    >
                         ثبت نتیجه
                     </Link>
                 </Space >

@@ -6,15 +6,15 @@ interface LaboratoryGet {
 }
 
 interface Labratory {
-  name: string | null;
-  ranking: number | null;
-  stateId: number;
-  license_No: string | null;
-  license_Expire_Date: string | null;
-  tel: string | null;
-  fax: string | null;
-  address: string | null;
-  is_Active: boolean | null;
+  Name: string | null;
+  Ranking: number | null;
+  StateId: number;
+  License_No: string | null;
+  License_Expire_Date: string | null;
+  Tel: string | null;
+  Fax: string | null;
+  Address: string | null;
+  Is_Active: boolean | null;
   Uid: string | null;
 }
 

@@ -213,4 +213,5 @@ export const routDictionary: Items = {
     title: "دستگاه های GPS",
   },
   // end admin panel
+ 
 };

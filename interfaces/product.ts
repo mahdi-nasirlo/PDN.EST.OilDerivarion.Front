@@ -19,6 +19,7 @@ export interface ProductCategoryGet {
   Name: string | null;
   is_Active: boolean | null;
   ProductCategoryName: string | null;
+  // productCategoryUid;
   fromRecord: number;
   selectRecord: number;
 }

@@ -40,12 +40,12 @@ export default function FilterForm({ filter, unsetFilter }: {
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="productCategory_Id"
+                        name="productCategoryUid"
                         label="نام دسته بندی"
                     >
                         <Select
                             showSearch
-                            fieldNames={{ label: "Name", value: "Id" }}
+                            fieldNames={{ label: "Name", value: "Uid" }}
                             // @ts-ignore
                             filterOption={filterOption}
                             loading={ldProductCategory}

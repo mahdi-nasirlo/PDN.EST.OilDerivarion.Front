@@ -52,10 +52,13 @@ export default function PrimaryRequestsListTable() {
             key: "6",
         },
         {
-            title: "عملیات",
+            title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Link href={""} className="action-btn-info">
                         مشاهده
                     </Link>

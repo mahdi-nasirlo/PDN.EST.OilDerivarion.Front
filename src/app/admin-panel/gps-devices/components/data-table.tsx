@@ -93,26 +93,45 @@ export default function DataTable({ isLoading, boxesData, mutate }: {
             dataIndex: "ConfirmedRequest",
             key: "5",
             render: (_, record) => (
-                <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => handleGPS()}>مشاهده
-                        موقعیت</Button>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => handleGPS()}
+                    >
+                        مشاهده موقعیت
+                    </Button>
                 </Space>
             ),
         },
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
-                    <Button type="link" className="text-secondary-500 font-bold" onClick={() => {
-                        setIsEditModalVisible(true);
-                        setRecordToEdit(record)
-                    }}> ویرایش</Button>
-                    <Button type="link" className={"text-red-500 font-bold"}
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-secondary-500 font-bold"
+                        onClick={() => {
+                            setIsEditModalVisible(true);
+                            setRecordToEdit(record)
+                        }}
+                    >
+                        ویرایش
+                    </Button>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
                         onClick={() => {
                             setIsDeleteModalVisible(true);
                             setRecordToDelete(record)
-                        }}>حذف</Button>
+                        }}
+                    >
+                        حذف
+                    </Button>
                 </Space>
             ),
         },

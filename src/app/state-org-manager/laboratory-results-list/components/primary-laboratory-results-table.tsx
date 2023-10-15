@@ -54,8 +54,11 @@ export default function PrimaryLaboratoryResultsTable() {
         {
             title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Button type="link" className="text-primary-500 font-bold" onClick={() => { console.log(record); }}>مشاهده اطلاعات</Button>
                 </Space>
             ),

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
-import { Collapse } from "antd";
+import {Collapse} from "antd";
 
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const [filter, setFilter] = useState<LaboratoryGet>(defaultValueTable);
+    const [filter, setFilter] = useState(defaultValueTable);
 
     const {
         data: labratory,
@@ -38,9 +38,10 @@ export default function Page() {
 
 
     const setFilterTable = async (values: LaboratoryGet) => {
-        // @ts-ignore
         setFilter({
+            // @ts-ignore
             Name: values.Name,
+            // @ts-ignore
             is_Active: values.is_Active,
             fromRecord: 0,
             selectRecord: 1000,

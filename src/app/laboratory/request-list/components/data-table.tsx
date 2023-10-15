@@ -54,13 +54,22 @@ export default function DataTable() {
         },
 
         {
-            title: "جزئیات",
-            key: "جزئیات",
+            title: "عملیات",
+            key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => {
-                        console.log(record);
-                    }}>مشاهده اطلاعات</Button>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => {
+                            console.log(record);
+                        }}
+                    >
+                        مشاهده اطلاعات
+                    </Button>
                 </Space>
             ),
         },

@@ -76,8 +76,11 @@ export default function DataTable() {
         {
             title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Link href={`/manufacturer/info/${record.nationalCode}`} className="action-btn-info">
                         مشاهده اطلاعات
                     </Link>

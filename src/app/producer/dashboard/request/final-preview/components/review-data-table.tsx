@@ -1,15 +1,15 @@
-import {Button, Table} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Space, Table } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import useSWR from "swr";
-import {getCookie} from "cookies-next";
+import { getCookie } from "cookies-next";
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import useSWRMutation from "swr/mutation";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
-import {GetPage_ExeManager} from "../../../../../../../interfaces/producer";
-import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
-import {Product} from "../../../../../../../interfaces/requestDetail";
-import {addIndexToData} from "../../../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
+import { GetPage_ExeManager } from "../../../../../../../interfaces/producer";
+import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
+import { Product } from "../../../../../../../interfaces/requestDetail";
+import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 
 export default function ReviewDataTable() {
 
@@ -50,8 +50,11 @@ export default function ReviewDataTable() {
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <>
+                <Space size="small">
                     <Button
                         onClick={() => {
                             setOpen(true)
@@ -61,7 +64,7 @@ export default function ReviewDataTable() {
                         className='text-red-500 font-bold'>
                         حذف
                     </Button>
-                </>
+                </Space>
             ),
         },
     ];

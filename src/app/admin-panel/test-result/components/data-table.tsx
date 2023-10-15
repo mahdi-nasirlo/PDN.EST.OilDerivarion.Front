@@ -14,7 +14,14 @@ interface DataType {
 }
 
 
-export default function DataTable() {
+export default function DataTable({ ldTestResult, TestResult, mutate }: {
+    ldTestResult: boolean,
+    mutate: () => void,
+    TestResult: {
+        records: any[],
+        count: number
+    } | undefined
+}) {
 
     const columns: ColumnsType<DataType> = [
         {
@@ -33,11 +40,47 @@ export default function DataTable() {
             key: "3",
         },
         {
+            title: "TestItemName",
+            dataIndex: "TestItemName",
+            key: "4",
+        },
+        {
+            title: "TestItemReNewabillity",
+            dataIndex: "TestItemReNewabillity",
+            key: "5",
+        },
+        {
+            title: "TestItemReNewabillityValue",
+            dataIndex: "TestItemReNewabillityValue",
+            key: "6",
+        },
+        {
+            title: "LabName",
+            dataIndex: "LabName",
+            key: "7",
+        },
+        {
+            title: "Result",
+            dataIndex: "Result",
+            key: "8",
+        },
+        {
+            title: "Range",
+            dataIndex: "Range",
+            key: "9",
+        },
+        {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record: any) => (
-                <Space size="middle">
-                    <Link href={`/admin-panel/test-result-record`} className="text-secondary-500 font-bold">
+                <Space size="small">
+                    <Link
+                        href={`/admin-panel/test-result-record/${record.TestItemUid}`}
+                        className="text-secondary-500 font-bold"
+                    >
                         ثبت نتیجه
                     </Link>
                 </Space >
@@ -50,9 +93,10 @@ export default function DataTable() {
     return (
         <div className="box-border w-full mt-8 p-6">
             <Table
+                loading={ldTestResult}
                 className="mt-6"
                 columns={columns}
-                dataSource={addIndexToData(data)}
+                dataSource={addIndexToData(TestResult?.records)}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: true,
@@ -68,32 +112,3 @@ export default function DataTable() {
             />
         </div >)
 }
-
-
-
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        Barcode: "235648",
-        status: "ثبت شده",
-    },
-    {
-        key: "2",
-        Row: 2,
-        Barcode: "235648",
-        status: "ثبت نشده",
-    },
-    {
-        key: "3",
-        Row: 3,
-        Barcode: "235648",
-        status: "ثبت شده",
-    },
-    {
-        key: "4",
-        Row: 4,
-        Barcode: "235648",
-        status: "ثبت نشده",
-    },
-];

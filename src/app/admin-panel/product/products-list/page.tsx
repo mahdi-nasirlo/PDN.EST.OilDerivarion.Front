@@ -6,7 +6,7 @@ import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { Product } from "../../../../../interfaces/product";
+import { Product, ProductCategoryGet } from "../../../../../interfaces/product";
 import { Collapse } from "antd";
 
 export default function Page() {
@@ -14,10 +14,11 @@ export default function Page() {
     const [modalVisible, setModalVisible] = useState(false);
 
     const defaultValueTable = {
-        name: null,
+        Name: null,
         is_Active: null,
+        productCategoryUid: null,
         fromRecord: 0,
-        selectRecord: 100000
+        selectRecord: 1000
     }
 
     const [filter, setFilter] = useState(defaultValueTable)
@@ -27,15 +28,15 @@ export default function Page() {
         count: number;
     }>(
         ["/Product/GetPage", filter],
-        ([url, arg]: [string, any]) => listFetcher(url, { arg })
+        ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
     );
 
-    const setFilterTable = async (values: MaterialGet) => {
+    const setFilterTable = async (values: ProductCategoryGet) => {
 
         // @ts-ignore
-        setFilter({ name: values.name, is_Active: values.is_Active, fromRecord: 0, selectRecord: 1000 })
+        setFilter({ Name: values.Name, is_Active: values.is_Active, productCategoryUid: values.productCategoryUid, fromRecord: 0, selectRecord: 100 })
 
-        await mutate()
+        await mutate();
 
     }
 
@@ -43,7 +44,7 @@ export default function Page() {
 
         setFilter(defaultValueTable)
 
-        await mutate()
+        await mutate();
 
     }
 
@@ -56,9 +57,17 @@ export default function Page() {
                     label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
                 }]}
             />
-            <DataTable mutate={mutate} product={product} ldProduct={ldProduct}
-                setModalVisible={setModalVisible} />
-            <CreateModal mutate={mutate} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <DataTable
+                mutate={mutate}
+                product={product?.records}
+                ldProduct={ldProduct}
+                setModalVisible={setModalVisible}
+            />
+            <CreateModal
+                mutate={mutate}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+            />
         </>
     );
 }

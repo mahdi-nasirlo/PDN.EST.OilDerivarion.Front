@@ -2,7 +2,12 @@
 
 import AppLayout from "@/components/layout/layout";
 import { getMenuItem } from "@/components/layout/sidebar";
-import { Bars3Icon, DocumentTextIcon, HomeIcon, TicketIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  DocumentTextIcon,
+  HomeIcon,
+  TicketIcon,
+} from "@heroicons/react/24/outline";
 import { MenuProps } from "antd";
 import Link from "next/link";
 
@@ -21,18 +26,17 @@ export default function RootLayout({
 const items: MenuProps["items"] = [
   getMenuItem(
     <Link href={"/provincial-working-group"}>خانه</Link>,
-    "provincial-working-group",
+    "/provincial-working-group",
     <HomeIcon width={16} height={16} />
   ),
 
   { type: "divider" },
 
-
   getMenuItem(
     <Link href={"/provincial-working-group/request-list"}>
       لیست درخواست ها
     </Link>,
-    "request-list",
+    "/provincial-working-group/request-list",
     <Bars3Icon width={16} height={16} />
   ),
 
@@ -40,18 +44,15 @@ const items: MenuProps["items"] = [
     <Link href={"/provincial-working-group/request-details"}>
       جزئیات درخواست ها
     </Link>,
-    "request-details",
+    "/provincial-working-group/request-details"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   { type: "divider" },
 
-
   getMenuItem(
-    <Link href={"/provincial-working-group/Invitations"}>
-      دعوت نامه ها
-    </Link>,
-    "Invitations",
+    <Link href={"/provincial-working-group/Invitations"}>دعوت نامه ها</Link>,
+    "/provincial-working-group/Invitations",
     <TicketIcon width={16} height={16} />
   ),
 
@@ -61,10 +62,9 @@ const items: MenuProps["items"] = [
     <Link href={"/provincial-working-group/visit-reports"}>
       گزارشات بازدید
     </Link>,
-    "visit-reports",
+    "/provincial-working-group/visit-reports",
     <DocumentTextIcon width={16} height={16} />
   ),
-
 
   // getMenuItem(
   //   "پیشخوان",

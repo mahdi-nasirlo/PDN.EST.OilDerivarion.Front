@@ -160,7 +160,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
@@ -301,7 +301,7 @@ body {
 /* table styles */
 
 .ant-table-content {
-    @apply overflow-auto whitespace-nowrap !important
+    @apply overflow-auto overflow-y-hidden rounded-xl whitespace-nowrap !important
 }
 
 .ant-table-thead .ant-table-cell {
@@ -365,6 +365,7 @@ body {
 
 .ant-pagination
 .ant-pagination-item-active {
+        @apply h-full lg:py-[4.2px] !important;
     background-color: theme("colors.primary.500") !important;
     border-color: theme("colors.gray.900") !important;
 }
@@ -377,16 +378,19 @@ body {
 .ant-pagination
 .ant-pagination-next
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination
 .ant-pagination-prev
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination-item {
+        @apply h-full lg:py-[4.2px] !important;
     color: theme("colors.primary.500") !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
@@ -463,3 +467,6 @@ margin-right: 24px !important;
 /*    background-color: theme("colors.orange.500");*/
 /*}*/
 
+.ant-input-group > .ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child {
+    @apply rounded-e-none !important
+}

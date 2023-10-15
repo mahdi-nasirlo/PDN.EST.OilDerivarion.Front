@@ -1,7 +1,14 @@
 import React from 'react';
 import { Col, Form, Input, Row, Select } from "antd";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import useSWR from "swr";
 
 function MaterialForm() {
+
+    const { data: Measure, isLoading: ldMeasure } = useSWR("/Measure/GetAll", (url) =>
+        listFetcher(url, { arg: { name: null, is_Active: null, }, })
+    );
+
     return (
         <>
             <Row gutter={[16, 16]}>
@@ -16,40 +23,30 @@ function MaterialForm() {
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="year-establishment"
-                        label="واحد اندازه گیری"
-                    >
-                        <Select size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item
                         name="Is_Active"
                         label="وضعیت"
                     >
-                        <Select defaultValue={true}
-                            options={[{ label: "فعال", value: true }, { label: "غیر فعال", value: false }]}
-                            size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        name="year-establishment"
-                        label="کد ماده"
-                    >
-                        <Select size="large" placeholder="انتخاب کنید" />
+                        <Select
+                            options={[
+                                { label: "فعال", value: true },
+                                { label: "غیر فعال", value: false }
+                            ]}
+                            size="large"
+                            placeholder="انتخاب کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
-                    <Form.Item
-                        name="year-establishment"
-                        label="فاکتور آزمون "
-                    >
-                        <Select size="large" placeholder="انتخاب کنید" />
+                    <Form.Item name="MeasureUid" label="واحد اندازه گیری">
+                        <Select
+                            options={Measure}
+                            loading={ldMeasure}
+                            fieldNames={{ value: "Uid", label: "Name" }}
+                            size="large"
+                            placeholder="انتخاب کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>

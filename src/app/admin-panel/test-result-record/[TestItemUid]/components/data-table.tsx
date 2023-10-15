@@ -3,7 +3,7 @@
 import { Button, Space, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
-import { addIndexToData } from '../../../../../lib/addIndexToData';
+import { addIndexToData } from '../../../../../../lib/addIndexToData';
 import ModalRegisterResult from './modal-register-result';
 
 interface DataType {
@@ -73,9 +73,16 @@ export default function DataTable() {
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record: any) => (
-                <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => handleSubmit(record)}>
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => handleSubmit(record)}
+                    >
                         ثبت نتیجه
                     </Button>
                 </Space >

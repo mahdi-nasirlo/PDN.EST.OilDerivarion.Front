@@ -8,19 +8,18 @@ export type Product = {
 };
 
 export interface ProductGet {
-  name: string | null;
+  Name: string | null;
   is_Active: boolean | null;
-  hasDensity: boolean | null;
-  densityLowerLimit: number | null;
-  densityUpperLimit: number | null;
+  densityTypeId: number | null;
   fromRecord: number;
   selectRecord: number;
 }
 
 export interface ProductCategoryGet {
-  name: string | null;
+  Name: string | null;
   is_Active: boolean | null;
   ProductCategoryName: string | null;
+  // productCategoryUid;
   fromRecord: number;
   selectRecord: number;
 }

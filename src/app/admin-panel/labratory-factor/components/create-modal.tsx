@@ -1,48 +1,72 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Select, } from "antd";
+import { Button, Col, Form, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
-import React, { useState } from "react";
+import React from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { CategoryProduct } from "../../../../../interfaces/category-product";
+import { TestItem } from "../../../../../interfaces/TestItem";
 
 export default function CreateModal({
   setModalVisible,
   modalVisible,
-  mutate
+  mutate,
 }: {
   setModalVisible: any;
   modalVisible: any;
   mutate: () => void;
 }) {
-  const [selectedDensity, setSelectedDensity] = useState<boolean>(false);
-
-  const handleDensityChange = (value: any) => {
-    setSelectedDensity(value);
-  };
+  const [form] = useForm();
 
   const { isMutating, trigger } = useSWRMutation(
-    "/ProductCategory/Create",
+    "/LabTestItem/Create",
     mutationFetcher
   );
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
+  const defaultValueTable = {
+    Name: "",
+    is_Active: null,
+    fromRecord: 0,
+    selectRecord: 100000,
+  };
 
-  const [form] = useForm();
+  const handleFormSubmit = async (values: any) => {
+    values.is_Active = true;
+    // @ts-ignore
+    // form.resetFields();
+    trigger(values);
+    mutate();
+    form.resetFields();
+    setModalVisible(false);
+  };
+
+  // const { data: test, isLoading } = useSWR(
+  //   "/BaseInfo/GetAllTestMethod",
+  //   listFetcher
+  // );
+  const { data: test, isLoading } = useSWR<TestItem[]>(
+    [
+      "/TestItem/GetAll",
+      {
+        name: "",
+        is_Active: null,
+      },
+    ],
+
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   const closeModal = () => {
     setModalVisible(false);
   };
 
-  const handleFormSubmit = async (values: CategoryProduct) => {
-    // @ts-ignore
-    form.resetFields();
-    trigger(values);
-    mutate;
-    setModalVisible(false);
-  };
+  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: Labratory[] }>(
+    ["/Lab/GetPage", defaultValueTable],
+
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   return (
     <Modal
@@ -95,33 +119,39 @@ export default function CreateModal({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              name="is_Active"
+              name="labUid"
               label="نام آزمایشگاه"
               rules={[
                 {
                   required: true,
-                  message: "",
-                },
-              ]}
-            >
-              <Select options={[]} size="large" placeholder="انتخاب کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="hasDensity"
-              label="نام فاکتور"
-              rules={[
-                {
-                  required: true,
-                  message: "",
+                  message: ".لطفا نام آزمایشگاه را وارد کنید",
                 },
               ]}
             >
               <Select
-                options={[]}
-                value={selectedDensity}
-                onChange={(value) => setSelectedDensity(value)}
+                fieldNames={{ label: "Name", value: "Uid" }}
+                options={Lab?.records}
+                loading={ldProduct}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item
+              name="testItemUid"
+              label="نام فاکتور"
+              rules={[
+                {
+                  required: true,
+                  message: ".لطفا نام فاکتور را وارد کنید",
+                },
+              ]}
+            >
+              <Select
+                fieldNames={{ label: "Name", value: "Uid" }}
+                options={test}
+                loading={isLoading || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"
               />

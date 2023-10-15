@@ -17,39 +17,46 @@ export default function FilterForm({ filter, unsetFilter }: {
 
     const [form] = useForm()
 
-    const { data, isLoading } = useSWR(["/ProductCategory/GetAll", {
-        name: null,
-        is_Active: null
-    }], ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+    const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
+        ["/ProductCategory/GetAll", { name: null, is_Active: null, },],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg })
+    );
 
     return (
         // <div className="box-border w-full p-6">
         <Form form={form} onFinish={filter} name="form_item_path" layout="vertical">
-            <Row gutter={[16, 16]}>
+            <Row gutter={[32, 1]}>
                 <Col xs={24} md={12}>
-                    <Form.Item name="name" label="نام محصول ">
-                        <Input size="large" placeholder="وارد کنید" />
+                    <Form.Item
+                        name="Name"
+                        label="نام محصول"
+                    >
+                        <Input
+                            // @ts-ignore
+                            size="large"
+                            placeholder="وارد کنید"
+                        />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="productCategory_Id"
-                        label="دسته بندی محصول"
+                        name="productCategoryUid"
+                        label="نام دسته بندی"
                     >
                         <Select
-                            disabled
                             showSearch
-                            fieldNames={{ label: "Name", value: "Id" }}
+                            fieldNames={{ label: "Name", value: "Uid" }}
                             // @ts-ignore
                             filterOption={filterOption}
-                            loading={isLoading}
-                            options={data}
+                            loading={ldProductCategory}
+                            options={ProductCategory}
                             size="large"
-                            placeholder="انتخاب کنید" />
+                            placeholder="انتخاب کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]}>
+            <Row gutter={[32, 1]}>
                 <Col xs={24} md={12}>
                     <Form.Item name="is_Active" label="فعال/غیر فعال">
                         <Select
@@ -58,18 +65,6 @@ export default function FilterForm({ filter, unsetFilter }: {
                                 { label: "غیر فعال", value: false }
                             ]}
                             size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item name="year-establishment" label="کد محصول ">
-                        <Input disabled size="large" placeholder="وارد کنید" />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item name="year-establishment" label="فاکتور آزمون">
-                        <Select disabled size="large" placeholder="انتخاب کنید" />
                     </Form.Item>
                 </Col>
             </Row>

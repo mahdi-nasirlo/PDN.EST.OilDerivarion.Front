@@ -1,23 +1,21 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {Category} from "../../../../../interfaces/category";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {ProductGet} from "../../../../../interfaces/product";
-import {Collapse} from "antd";
+import { Category } from "../../../../../interfaces/category";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { ProductGet } from "../../../../../interfaces/product";
+import { Collapse } from "antd";
 
 export default function Page() {
 
     const defaultValueTable = {
-        name: null,
+        Name: null,
         is_Active: null,
-        hasDensity: null,
-        densityLowerLimit: null,
-        densityUpperLimit: null,
+        densityTypeId: null,
         fromRecord: 0,
         selectRecord: 100000
     }
@@ -40,11 +38,9 @@ export default function Page() {
         // @ts-ignore
         setFilter(
             {
-                name: values.name,
+                Name: values.Name,
                 is_Active: values.is_Active,
-                hasDensity: values.hasDensity,
-                densityLowerLimit: values.densityLowerLimit,
-                densityUpperLimit: values.densityUpperLimit,
+                densityTypeId: values.densityTypeId,
                 fromRecord: 0,
                 selectRecord: 1000
             }

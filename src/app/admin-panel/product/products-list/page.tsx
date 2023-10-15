@@ -16,7 +16,7 @@ export default function Page() {
     const defaultValueTable = {
         Name: null,
         is_Active: null,
-        productCategory_Id: null,
+        productCategoryUid: null,
         fromRecord: 0,
         selectRecord: 1000
     }
@@ -34,7 +34,7 @@ export default function Page() {
     const setFilterTable = async (values: ProductCategoryGet) => {
 
         // @ts-ignore
-        setFilter({ Name: values.Name, is_Active: values.is_Active, productCategory_Id: values.productCategory_Id, fromRecord: 0, selectRecord: 100 })
+        setFilter({ Name: values.Name, is_Active: values.is_Active, productCategoryUid: values.productCategoryUid, fromRecord: 0, selectRecord: 100 })
 
         await mutate();
 

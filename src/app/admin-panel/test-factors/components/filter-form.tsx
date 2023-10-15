@@ -34,8 +34,17 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="is_Active" label="فعال/غیر فعال">
-            <Select disabled size="large" placeholder="انتخاب کنید" />
+          <Form.Item name="Is_Active" label="فعال/غیر فعال">
+            <Select
+              disabled
+              defaultValue={true}
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false },
+              ]}
+              size="large"
+              placeholder="انتخاب کنید"
+            />{" "}
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>

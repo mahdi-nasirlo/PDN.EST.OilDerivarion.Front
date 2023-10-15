@@ -103,7 +103,7 @@ export default function DataTable({
         <Space size="small">
           <Button
             type="link"
-            className="text-primary-500 font-bold"
+            className="text-secondary-500 font-bold"
             onClick={() => setOpenEdit(record)}
           >
             ویرایش

@@ -80,7 +80,7 @@ export default function PrimaryProductTable({ data, loading = false, mute, setDa
                 <Space size="small">
                     <Button
                         type="link"
-                        className="text-primary-500 font-bold"
+                        className="text-secondary-500 font-bold"
                         onClick={() => {
                             setData(record)
                             window.scrollTo({ top: 0, behavior: "smooth" })

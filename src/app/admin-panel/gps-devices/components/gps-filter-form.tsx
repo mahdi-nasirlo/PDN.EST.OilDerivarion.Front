@@ -1,11 +1,11 @@
 "use client";
 
-import {Button, Col, Form, Input, Row, Select} from 'antd'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
-import {Gps} from "../../../../../interfaces/gps";
-import {useForm} from "antd/es/form/Form";
+import { Gps } from "../../../../../interfaces/gps";
+import { useForm } from "antd/es/form/Form";
 
-export default function GpsFilterForm({filter, unsetFilter}: {
+export default function GpsFilterForm({ filter, unsetFilter }: {
     filter: (arg: Gps) => void,
     unsetFilter: () => void,
 }) {
@@ -19,12 +19,19 @@ export default function GpsFilterForm({filter, unsetFilter}: {
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="Code" label="کد">
-                            <Input size="large" placeholder="وارد کنید"/>
+                            <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="IsActive" label="فعال/غیر فعال">
-                            <Select size="large" placeholder="انتخاب کنید"/>
+                        <Form.Item name="IsActive" label="فعال / غیر فعال">
+                            <Select
+                                size="large"
+                                options={[
+                                    { label: "فعال", value: true },
+                                    { label: "غیر فعال", value: false },
+                                ]}
+                                placeholder="انتخاب کنید"
+                            />
                         </Form.Item>
                     </Col>
                 </Row>

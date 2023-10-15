@@ -6,7 +6,7 @@ import moment from "jalali-moment";
 import dayjs from "dayjs";
 import {DatePickerProps} from "antd/lib";
 
-function Datepicker(props: DatePickerProps) {
+function CustomDatePicker(props: DatePickerProps) {
 
     const currentDate = new Date();
 
@@ -17,4 +17,4 @@ function Datepicker(props: DatePickerProps) {
     );
 }
 
-export default Datepicker;
+export default CustomDatePicker;

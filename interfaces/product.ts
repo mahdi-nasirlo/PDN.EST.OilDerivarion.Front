@@ -10,9 +10,7 @@ export type Product = {
 export interface ProductGet {
   Name: string | null;
   is_Active: boolean | null;
-  hasDensity: boolean | null;
-  densityLowerLimit: number | null;
-  densityUpperLimit: number | null;
+  densityTypeId: number | null;
   fromRecord: number;
   selectRecord: number;
 }

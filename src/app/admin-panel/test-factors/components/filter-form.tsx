@@ -24,6 +24,18 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
+          <Form.Item name="Is_Active" label="فعال/غیر فعال">
+            <Select
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false },
+              ]}
+              size="large"
+              placeholder="انتخاب کنید"
+            />
+          </Form.Item>
+        </Col>
+        {/* <Col xs={24} md={12}>
           <Form.Item name="measure_Id" label="مقیاس آزمون">
             <Select disabled size="large" placeholder="انتخاب کنید" />
           </Form.Item>
@@ -31,20 +43,6 @@ export default function FilterForm({
         <Col xs={24} md={12}>
           <Form.Item name="reNewabillity" label="تجدید پذیری">
             <Select disabled size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="Is_Active" label="فعال/غیر فعال">
-            <Select
-              disabled
-              defaultValue={true}
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
-            />{" "}
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
@@ -56,9 +54,8 @@ export default function FilterForm({
           <Form.Item name="testMethod" label="روش آزمون">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
-
       <Row dir="ltr">
         <Col xs={10} md={3} lg={2}>
           <div className="flex gap-4">

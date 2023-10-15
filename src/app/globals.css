@@ -463,3 +463,6 @@ margin-right: 24px !important;
 /*    background-color: theme("colors.orange.500");*/
 /*}*/
 
+.ant-input-group > .ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child {
+    @apply rounded-e-none !important
+}

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Col, Form, Row, Select} from "antd";
+import {Col, Form, FormInstance, Row, Select} from "antd";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
 
-function BarcodeForm() {
+function BarcodeForm(props: { form: undefined | FormInstance }) {
 
     const [containerType, setContainerType] = useState<{ Id: number, Name: string }>()
 
@@ -17,17 +17,6 @@ function BarcodeForm() {
 
     const {isLoading: ldSampleType, data: sampleTypes} = useSWR("/BaseInfo/GetAllSampleType", listFetcher)
 
-    const {
-        isLoading: isLdProduct,
-        data: products
-    } = useSWR("/Product/GetAll", (url) => listFetcher(url, {arg: {name: "", isActive: null}}))
-
-    const {isLoading: isLdGps, data: gps} = useSWR("/GpsDevice/GetAll", (url) => listFetcher(url, {
-        arg: {
-            "code": "",
-            "isActive": null
-        }
-    }))
 
     return (
         <Row gutter={[32, 1]}>
@@ -54,28 +43,8 @@ function BarcodeForm() {
                     />
                 </Form.Item>
             </Col>
-            {/*<Col className={`${!containerType && "hidden"}`} xs={24} md={12}>*/}
-            {/*    <Form.Item*/}
-            {/*        name="requestDetailUid"*/}
-            {/*        label={containerType?.Name}*/}
-            {/*        rules={[*/}
-            {/*            {*/}
-            {/*                required: true,*/}
-            {/*                message: "لطفا مقدار را وارد کنید",*/}
-            {/*            },*/}
-            {/*        ]}*/}
-            {/*    >*/}
-            {/*        {containerType?.Id === 1 && <Select*/}
-            {/*            showSearch*/}
-            {/*            loading={isLdGps}*/}
-            {/*            fieldNames={{value: "Uid", label: "Code"}}*/}
-            {/*            size="large"*/}
-            {/*            options={gps}*/}
-            {/*        />}*/}
-
-            {/*    </Form.Item>*/}
-            {/*</Col>*/}
-            <BarcodeFormInteractive ID={containerType?.Id} name={containerType?.Name}/>
+            {props.form &&
+                <BarcodeFormInteractive form={props.form} ID={containerType?.Id} name={containerType?.Name}/>}
             <Col xs={24} md={12}>
                 <Form.Item
                     name="barcodeUsePlaceTypeId"

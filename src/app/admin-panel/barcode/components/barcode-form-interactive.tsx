@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {Col, Form, Input, Select} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Col, Form, FormInstance, Input, Select} from "antd";
 import useSWR from "swr";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
 import {PlusIcon} from "@heroicons/react/24/outline";
 import BarcodeFormLockup from "@/app/admin-panel/barcode/components/barcode-form-lockup";
 
 
-function BarcodeFormInteractive(props: { ID: number | undefined, name: string | undefined }) {
+function BarcodeFormInteractive(props: { ID: number | undefined, name: string | undefined, form: FormInstance }) {
 
     const [open, setOpen] = useState(false)
 
@@ -37,17 +37,23 @@ function BarcodeFormInteractive(props: { ID: number | undefined, name: string | 
     )
 
     const {
-        isLoading: isLdRequestMaster,
-        data: requestMasters
+        isLoading: isLdGps,
+        data: GPS
     } = useSWR(
-        props.ID === 3 ? "/RequestDetail/GetAllProduct" : null,
+        props.ID === 1 ? "/GpsDevice/GetAll" : null,
         (url) => listFetcher(url, {
             arg: {
-                requestMasterUid: null,
-                isLastStep: null
+                code: null,
+                isActive: null
             }
         })
     )
+
+    useEffect(() => {
+    }, [props.ID])
+
+
+    const [requestMasterUid, setRequestMasterUid] = useState<string>("")
 
     if (props.ID === null) {
         return <></>
@@ -59,7 +65,7 @@ function BarcodeFormInteractive(props: { ID: number | undefined, name: string | 
             <Col xs={24} md={12}>
                 <Form.Item
                     name="requestMasterUid"
-                    label="لیست درخواست ها"
+                    label="شناسه درخواست"
                     rules={[
                         {
                             required: true,
@@ -67,23 +73,41 @@ function BarcodeFormInteractive(props: { ID: number | undefined, name: string | 
                         },
                     ]}
                 >
+                    <div className="hidden">
+                        {requestMasterUid}
+                    </div>
                     <Input
+                        value={requestMasterUid}
                         size="large"
                         placeholder={"انتخاب کنید"}
-                        addonAfter={<><PlusIcon onClick={() => setOpen(true)} className="cursor-pointer" width="12"
-                                                height="12"/></>}
+                        addonAfter={<><PlusIcon className="text-primary-500 cursor-pointer"
+                                                onClick={() => setOpen(true)} width="20"
+                                                height="20"/></>}
                     />
-                    {/*<Select*/}
-                    {/*    showSearch*/}
-                    {/*    fieldNames={{value: "Uid", label: "MaterialName"}}*/}
-                    {/*    loading={isLdMaterial}*/}
-                    {/*    options={materials}*/}
-                    {/*    size="large"*/}
-                    {/*    placeholder="انتخاب کنید"*/}
-                    {/*/>*/}
                 </Form.Item>
             </Col>
-            <BarcodeFormLockup open={open} setOpen={setOpen}/>
+            <Col xs={24} md={12}>
+                <Form.Item
+                    name="gpsDeviceUid"
+                    label="دستگاه GPS"
+                    rules={[
+                        {
+                            required: true,
+                            message: "لطفا مقدار را وارد کنید",
+                        },
+                    ]}
+                >
+                    <Select
+                        showSearch
+                        fieldNames={{value: "Uid", label: "Code"}}
+                        loading={isLdGps}
+                        options={GPS}
+                        size="large"
+                        placeholder="انتخاب کنید"
+                    />
+                </Form.Item>
+            </Col>
+            <BarcodeFormLockup form={props.form} setUid={setRequestMasterUid} open={open} setOpen={setOpen}/>
         </>
     }
 

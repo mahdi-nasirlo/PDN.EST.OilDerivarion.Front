@@ -56,7 +56,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                name="companyOwnershipTypeId"
+                                name="companyOwnershipTypeName"
                                 label="نوع مالکیت"
                             >
                                 <Input size="large" placeholder="وارد کنید" />

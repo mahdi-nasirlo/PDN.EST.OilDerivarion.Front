@@ -12,21 +12,31 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { ProductTestItem } from "../../../../../interfaces/product";
 
-
 const columns: ColumnsType<Labratory> = [
   {
     title: "ردیف",
     dataIndex: "Row",
     key: "1",
   },
-  { title: 'آزمایشگاه', dataIndex: 'Name', key: '2' },
-  { title: 'استان', dataIndex: 'StateName', key: '3' },
+  { title: "آزمایشگاه", dataIndex: "Name", key: "2" },
+  { title: "استان", dataIndex: "StateName", key: "3" },
+  { title: "مجوز ها", dataIndex: "License_No", key: "2" },
+
+  { title: "تاریخ اعتبار مجوز", dataIndex: "License_Expire_Date", key: "2" },
+  { title: "شماره ثابت", dataIndex: "Tel", key: "2" },
+
+  { title: "فکس", dataIndex: "Fax", key: "2" },
+  { title: "آدرس", dataIndex: "Address", key: "2" },
 ];
 
-
-const DataTable = ({ Labratory, ldProduct }: { Labratory: Labratory[], ldProduct: boolean }) => {
-
-  const [activeExpRow, setActiveExpRow] = useState<string[]>()
+const DataTable = ({
+  Labratory,
+  ldProduct,
+}: {
+  Labratory: Labratory[];
+  ldProduct: boolean;
+}) => {
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   return (
     <Table
@@ -37,7 +47,6 @@ const DataTable = ({ Labratory, ldProduct }: { Labratory: Labratory[], ldProduct
       expandable={{
         expandedRowKeys: activeExpRow,
         onExpand: (expanded, record: Labratory) => {
-
           const keys: string[] = [];
 
           if (expanded && record.Uid) {
@@ -46,57 +55,56 @@ const DataTable = ({ Labratory, ldProduct }: { Labratory: Labratory[], ldProduct
           }
 
           if (!expanded) {
-            keys.pop()
+            keys.pop();
           }
 
           setActiveExpRow(keys);
-
         },
-        expandedRowRender: (record: Labratory) => <ExpandedRowRender Labratory={record} />,
+        expandedRowRender: (record: Labratory) => (
+          <ExpandedRowRender Labratory={record} />
+        ),
       }}
       dataSource={Labratory}
     />
-  )
+  );
 };
 
-
 const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
-
   const [open, setOpen] = useState<boolean>(false);
 
-  const [recordToDelete, setRecordToDelete] = useState<ProductTestItem | undefined>();
+  const [recordToDelete, setRecordToDelete] = useState<
+    ProductTestItem | undefined
+  >();
 
   const defaultValue = {
-    "productUid": Labratory.Uid,
-    "testItemUid": null,
-    "is_Active": true
-  }
+    productUid: Labratory.Uid,
+    testItemUid: null,
+    is_Active: true,
+  };
 
-  const {
-    data,
-    isLoading,
-    mutate
-  } = useSWR<ProductTestItem[]>(["/LabTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
+  const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(
+    ["/LabTestItem/GetAll", defaultValue],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+  );
 
-  const { trigger, isMutating } = useSWRMutation("/LabTestItem/Delete", mutationFetcher)
+  const { trigger, isMutating } = useSWRMutation(
+    "/LabTestItem/Delete",
+    mutationFetcher
+  );
 
   const deleteProductFactor = async () => {
+    await trigger({ uid: recordToDelete?.Uid });
 
-    await trigger({ uid: recordToDelete?.Uid })
+    await mutate();
 
-    await mutate()
-
-    setOpen(false)
-
-  }
+    setOpen(false);
+  };
 
   useEffect(() => {
-
     if (!isLoading) {
-      mutate()
+      mutate();
     }
-
-  }, [Labratory])
+  }, [Labratory]);
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1" },
@@ -106,7 +114,7 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
       dataIndex: "2",
       key: "upgradeNum",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record: ProductTestItem) => (
         <Space size="small">
@@ -115,7 +123,7 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
             className="text-red-500 font-bold"
             onClick={() => {
               setOpen(true);
-              setRecordToDelete(record)
+              setRecordToDelete(record);
             }}
           >
             حذف
@@ -125,20 +133,22 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
     },
   ];
 
-  return <>
-    <Table
-      columns={expandColumns}
-      dataSource={addIndexToData(data)}
-      loading={isLoading || isMutating}
-      pagination={false}
-    />
-    <ConfirmDeleteModal
-      open={open}
-      setOpen={setOpen}
-      handleDelete={deleteProductFactor}
-      title={"فاکتور آزمایشگاه"}
-    />
-  </>
-}
+  return (
+    <>
+      <Table
+        columns={expandColumns}
+        dataSource={addIndexToData(data)}
+        loading={isLoading || isMutating}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        open={open}
+        setOpen={setOpen}
+        handleDelete={deleteProductFactor}
+        title={"فاکتور آزمایشگاه"}
+      />
+    </>
+  );
+};
 
 export default DataTable;

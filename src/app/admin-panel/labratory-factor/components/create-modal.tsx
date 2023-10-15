@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Select, } from "antd";
+import { Button, Col, Form, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
@@ -8,42 +8,65 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { CategoryProduct } from "../../../../../interfaces/category-product";
+import { TestItem } from "../../../../../interfaces/TestItem";
 
 export default function CreateModal({
   setModalVisible,
   modalVisible,
-  mutate
+  mutate,
 }: {
   setModalVisible: any;
   modalVisible: any;
   mutate: () => void;
 }) {
-
-
   const [form] = useForm();
 
-
   const { isMutating, trigger } = useSWRMutation(
-    "/ProductCategory/Create",
+    "/LabTestItem/Create",
     mutationFetcher
   );
+  const defaultValueTable = {
+    Name: "",
+    is_Active: null,
+    fromRecord: 0,
+    selectRecord: 100000,
+  };
 
-
-  const handleFormSubmit = async (values: CategoryProduct) => {
+  const handleFormSubmit = async (values: any) => {
+    values.is_Active = true;
     // @ts-ignore
     // form.resetFields();
     trigger(values);
     mutate();
+    form.resetFields();
     setModalVisible(false);
   };
 
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
+  // const { data: test, isLoading } = useSWR(
+  //   "/BaseInfo/GetAllTestMethod",
+  //   listFetcher
+  // );
+  const { data: test, isLoading } = useSWR<TestItem[]>(
+    [
+      "/TestItem/GetAll",
+      {
+        name: "",
+        is_Active: null,
+      },
+    ],
 
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   const closeModal = () => {
     setModalVisible(false);
   };
 
+  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: Labratory[] }>(
+    ["/Lab/GetPage", defaultValueTable],
+
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   return (
     <Modal
@@ -106,7 +129,9 @@ export default function CreateModal({
               ]}
             >
               <Select
-                options={[]}
+                fieldNames={{ label: "Name", value: "Uid" }}
+                options={Lab?.records}
+                loading={ldProduct}
                 size="large"
                 placeholder="انتخاب کنید"
               />
@@ -125,8 +150,8 @@ export default function CreateModal({
             >
               <Select
                 fieldNames={{ label: "Name", value: "Uid" }}
-                options={data}
-                loading={isLoading}
+                options={test}
+                loading={isLoading || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"
               />

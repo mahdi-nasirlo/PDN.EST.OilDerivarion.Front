@@ -36,12 +36,12 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="ProductCategory_Id"
+            name="ProductCategoryUid"
             label="نام دسته بندی"
           >
             <Select
               showSearch
-              fieldNames={{ label: "Name", value: "Id" }}
+              fieldNames={{ label: "Name", value: "Uid" }}
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProductCategory}

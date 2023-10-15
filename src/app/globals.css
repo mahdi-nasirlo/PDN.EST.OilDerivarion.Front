@@ -160,7 +160,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
@@ -365,6 +365,7 @@ body {
 
 .ant-pagination
 .ant-pagination-item-active {
+        @apply h-full lg:py-[4.2px] !important;
     background-color: theme("colors.primary.500") !important;
     border-color: theme("colors.gray.900") !important;
 }
@@ -377,16 +378,19 @@ body {
 .ant-pagination
 .ant-pagination-next
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination
 .ant-pagination-prev
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination-item {
+        @apply h-full lg:py-[4.2px] !important;
     color: theme("colors.primary.500") !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }

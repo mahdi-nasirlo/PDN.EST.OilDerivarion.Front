@@ -51,7 +51,7 @@ const items: MenuProps["items"] = [
         <Link href={"/central-working-group/request-detail"}>
           جزئیات درخواست
         </Link>,
-        "lab-results-list",
+        "/central-working-group/request-detail",
         <ClipboardDocumentListIcon width={16} height={16} />
       ),
     ],

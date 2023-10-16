@@ -3,11 +3,9 @@
 import React, { useState } from "react";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { ProductGet } from "../../../../interfaces/product";
 import { listFetcher } from "../../../../lib/server/listFetcher";
-import { TestItem } from "../../../../interfaces/TestItem";
 import { Collapse } from "antd";
-import { Measure, Measurepage } from "../../../../interfaces/measures";
+import { Measure, MeasureGetPage } from "../../../../interfaces/measures";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 
@@ -15,17 +13,17 @@ export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValueTable = {
-    name: null,
-    isActive: null,
+    Name: null,
+    IsActive: null,
     fromRecord: 0,
-    selectRecord: 100000,
+    selectRecord: 10000,
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
 
   const {
-    isLoading: ldFactor,
-    data: factors,
+    isLoading: ldMeasure,
+    data: Measure,
     mutate,
   } = useSWR<{
     count: number;
@@ -33,14 +31,9 @@ export default function Page() {
   }>(["/Measure/GetPage", filter], ([url, arg]: [string, any]) =>
     listFetcher(url, { arg })
   );
-  const setFilterTable = async (values: Measurepage) => {
+  const setFilterTable = async (values: MeasureGetPage) => {
     // @ts-ignore
-    setFilter({
-      name: values.name,
-      isActive: null,
-      fromRecord: 0,
-      selectRecord: 1000,
-    });
+    setFilter({ Name: values.Name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000, });
 
     await mutate();
   };
@@ -67,8 +60,8 @@ export default function Page() {
       />
       <DataTable
         mutate={mutate}
-        ldMeasure={ldFactor}
-        measure={factors}
+        ldMeasure={ldMeasure}
+        measure={Measure}
         setModalVisible={setModalVisible}
       />
       <CreateModal

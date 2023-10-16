@@ -3,14 +3,13 @@
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import { useForm } from "antd/es/form/Form";
-import { ProductGet } from "../../../../../interfaces/product";
-import { Measurepage } from "../../../../../interfaces/measures";
+import { MeasureGetPage } from "../../../../../interfaces/measures";
 
 export default function FilterForm({
   filter,
   unsetFilter,
 }: {
-  filter: (arg: Measurepage) => void;
+  filter: (arg: MeasureGetPage) => void;
   unsetFilter: () => void;
 }) {
   const [form] = useForm();
@@ -20,14 +19,13 @@ export default function FilterForm({
     <Form onFinish={(values) => filter(values)} form={form} layout="vertical">
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="name" label=" واحد اندازه گیری">
+          <Form.Item name="Name" label=" واحد اندازه گیری">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="isActive" label="فعال/غیرفعال">
+          <Form.Item name="IsActive" label="فعال/غیرفعال">
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },

@@ -3,8 +3,13 @@
 import { Button, Divider, Typography, } from "antd";
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import DisplayForm from "./components/display-form";
-import EditModal from "./components/edit-modal";
+import DataTable from "./components/data-table";
+import CreateModal from "./components/create-modal";
+import { SetMainMember } from "../../../../../interfaces/Base-info";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import useSWR from "swr";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+
 
 export default function Home() {
 
@@ -13,6 +18,20 @@ export default function Home() {
     const showModal = () => {
         setIsEditModalVisible(true);
     };
+
+    const { data: MainMember, isLoading: ldMainMember, mutate } = useSWR<{
+        records: SetMainMember[];
+        count: number;
+    }>(
+        ["/Producer/GetPageMainMember"],
+        ([url, arg]: [url: string, arg: any]) => listFetcher(url, {
+            arg: {
+                fromRecord: 0,
+                selectRecord: 10000
+            }
+        })
+    );
+
 
     return (
         <>
@@ -34,12 +53,13 @@ export default function Home() {
                 </Button>
             </div>
             <Divider />
-            <DisplayForm
-            // data={data}
-            // isLoading={isLoading}
+            <DataTable
+                mutate={mutate}
+                MainMember={addIndexToData(MainMember?.records)}
+                ldMainMember={ldMainMember}
             />
-            <EditModal
-                // mutate={mutate}
+            <CreateModal
+                mutate={mutate}
                 // data={data}
                 isEditModalVisible={isEditModalVisible}
                 setIsEditModalVisible={setIsEditModalVisible}

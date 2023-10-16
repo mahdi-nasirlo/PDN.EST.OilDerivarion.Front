@@ -4,7 +4,7 @@ import { Button, Col, Divider, Form, Input, Row, Select, Typography } from 'antd
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
-import { SetBase } from '../../../../../interfaces/setBase';
+import { SetBase } from '../../../../../interfaces/Base-info';
 import { listFetcher } from '../../../../../lib/server/listFetcher';
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";

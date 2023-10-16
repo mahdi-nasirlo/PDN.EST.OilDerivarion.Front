@@ -3,7 +3,7 @@
 import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
 import React from "react";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { SetBase } from "../../../../../interfaces/setBase";
+import { SetBase } from "../../../../../interfaces/Base-info";
 import useSWRMutation from "swr/mutation";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";

@@ -65,6 +65,18 @@ const DataTable = ({
         ),
       }}
       dataSource={Labratory}
+      pagination={{
+        defaultPageSize: 10,
+        showSizeChanger: true,
+        pageSizeOptions: ["10", "20", "50"],
+        defaultCurrent: 1,
+        style: {
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          margin: "16px 0",
+        },
+      }}
     />
   );
 };

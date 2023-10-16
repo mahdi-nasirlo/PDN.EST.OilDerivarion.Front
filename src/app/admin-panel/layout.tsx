@@ -8,6 +8,7 @@ import { MenuProps } from "antd";
 import {
   Bars3Icon,
   FolderPlusIcon,
+  HomeIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/outline";
 import { QrCodeIcon } from "@heroicons/react/20/solid";
@@ -25,6 +26,14 @@ export default function RootLayout({
 }
 
 const items: MenuProps["items"] = [
+  getMenuItem(
+    <Link href={"/admin-panel"} className="text-sm">خانه</Link>,
+    "/admin-panel",
+    <HomeIcon width={16} height={16} />
+  ),
+
+  { type: "divider" },
+
   getMenuItem("محصول", "management", null, [
     getMenuItem(
       <Link href={"/admin-panel/product/category-list"} className="text-sm">

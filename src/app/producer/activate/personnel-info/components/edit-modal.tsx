@@ -24,6 +24,7 @@ export default function EditModal(
 
     const [form] = useForm()
 
+
     const { trigger: UpdateSetEmployeeMember, isMutating: ldUpdateSetEmployeeMember } = useSWRMutation(
         "/Producer/SetEmployeeMember", mutationFetcher)
 
@@ -33,7 +34,7 @@ export default function EditModal(
 
         await UpdateSetEmployeeMember(values)
 
-        await mutate();
+        await mutate()
 
         setIsEditModalVisible(false)
 

@@ -1,26 +1,29 @@
-import {useReducer, useState} from "react";
-import stepReducer from "@/app/producer/dashboard/request/state-managment/step-reducer";
+import {Dispatch, useReducer, useState} from "react";
+import stepReducer, {StepAction} from "@/app/producer/dashboard/request/state-managment/step-reducer";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {RequestMaster, RequestMasterForm} from "@/app/producer/dashboard/request/steps/Step1";
-import {MaterialRequest} from "@/app/producer/dashboard/request/formulacion/components/primary-product-form";
-import useCrudRequestDetailMaterial from "../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
-import useCrudRequestDetailProduct from "../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
+import {RequestMaster, RequestMasterForm} from "@/app/producer/dashboard/request/steps/step1";
+import useRequestDetailCompleteMaterial from "../../../../../../hooks/requestDetail/useRequestDetailCompleteMaterial";
+import useRequestDetailCompleteProduct from "../../../../../../hooks/requestDetail/useRequestDetailCompleteProduct";
+import useRequestMasterNextStep from "../../../../../../hooks/requestMaster/useRequestMasterNextStep";
 
 export interface ControllerProcessType {
     step: number,
-    // dispatch: Dispatch<StepAction>,
+    dispatch: Dispatch<StepAction>,
     isMutating: boolean,
     requestMaster: ProcessRequestMaster,
     getStep2: (arg: RequestMasterForm) => void
-    getStep3: (arg: MaterialRequest) => void,
-    getStep4: (arg: any) => void
+    getStep3: () => void,
+    getStep4: () => void,
+    getNextStep: () => void
 }
 
 interface ProcessRequestMaster {
     requestMasterUid: string,
     productionMethodId: number
 }
+
+const stepNumber = 4
 
 const useControlProcess = (): ControllerProcessType => {
 
@@ -48,46 +51,52 @@ const useControlProcess = (): ControllerProcessType => {
                 productionMethodId: values.productionMethodId
             })
 
-            dispatch({type: "NEXT", stepNumber: 4})
+            dispatch({type: "NEXT", stepNumber})
 
         }
     };
 
 
-    const requestDetailMaterial = useCrudRequestDetailMaterial()
+    const confirmStep2 = useRequestDetailCompleteMaterial()
 
-    const getStep3 = async (value: MaterialRequest) => {
+    const getStep3 = async () => {
 
-        value.requestMasterUid = requestMaster.requestMasterUid;
-        value.materialImportDeclarationNumber =
-            value.materialImportDeclarationNumber.toString();
-        value.materialSupplyIranCode = value.materialSupplyIranCode.toString();
-        value.materialSupplyNationalCode =
-            value.materialSupplyNationalCode.toString();
-        value.materialSupplyPersonTypeId = 1;
-        value.materialSupplyMethodId = 1;
+        const res = await confirmStep2.trigger({requestMasterUid: requestMaster.requestMasterUid})
 
-        const res = await requestDetailMaterial.create.trigger(value)
+        if (res) {
 
-        if (res)
-            dispatch({type: "NEXT", stepNumber: 4})
+            dispatch({type: "NEXT", stepNumber})
+
+        }
 
     }
 
-    const requestDetailProduct = useCrudRequestDetailProduct()
 
-    const getStep4 = async (value: any) => {
+    const confirmStep3 = useRequestDetailCompleteProduct()
 
-        value.requestMasterUid = requestMaster.requestMasterUid
+    const getStep4 = async () => {
 
-        const res = await requestDetailProduct.create.trigger(value)
+        const res = await confirmStep3.trigger({requestMasterUid: requestMaster.requestMasterUid})
 
         if (res)
-            dispatch({type: "NEXT", stepNumber: 4})
+            dispatch({type: "NEXT", stepNumber})
 
     }
 
-    return {step, isMutating, requestMaster, getStep2, getStep3, getStep4}
+    const requestNextStep = useRequestMasterNextStep()
+
+    const getNextStep = async () => {
+
+        console.log("lfskajl")
+
+        const res = await requestNextStep.trigger({uid: requestMaster.requestMasterUid})
+
+        if (res)
+            dispatch({type: "GET_STEP", stepNumber, step: 2})
+
+    }
+
+    return {step, isMutating, requestMaster, dispatch, getStep2, getStep3, getStep4, getNextStep}
 
 }
 

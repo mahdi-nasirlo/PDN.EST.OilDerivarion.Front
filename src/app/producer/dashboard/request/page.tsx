@@ -2,11 +2,12 @@
 
 import React from 'react';
 import {Steps} from "antd";
-import Step1 from "@/app/producer/dashboard/request/steps/Step1";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useControlProcess from "@/app/producer/dashboard/request/state-managment/useControlProcess";
-import Step2Method1 from "@/app/producer/dashboard/request/steps/step2/method1";
-import Step3Method1 from "@/app/producer/dashboard/request/steps/step3/method1";
+import Step1 from "@/app/producer/dashboard/request/steps/step1";
+import Step2 from "@/app/producer/dashboard/request/steps/step2";
+import Step3 from "@/app/producer/dashboard/request/steps/step3";
+import Step4 from "@/app/producer/dashboard/request/steps/step4";
 
 
 function Page() {
@@ -20,18 +21,13 @@ function Page() {
             CurrentStep = <Step1/>
             break;
         case 1:
-
-            if (processController.requestMaster.productionMethodId === 1)
-                CurrentStep = <Step2Method1/>
-
-            // if (processController.requestMaster.productionMethodId === 2)
-            //     CurrentStep = <Method/>
+            CurrentStep = <Step2/>
             break;
         case 2:
-
-            if (processController.requestMaster.productionMethodId === 1)
-                CurrentStep = <Step3Method1/>
-
+            CurrentStep = <Step3/>
+            break;
+        case 3:
+            CurrentStep = <Step4/>
             break;
 
         default:

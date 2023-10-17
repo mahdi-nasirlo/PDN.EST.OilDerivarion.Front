@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {Button, Col, Divider, Form, Row, Select} from "antd";
+import React, {useContext, useState} from 'react';
+import {Col, Form, Row, Select} from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
-import useControlProcess from "@/app/producer/dashboard/request/state-managment/useControlProcess";
+import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 
 const SelectProductForm = () => {
 
-    const processController = useControlProcess()
+    const processController = useContext(StepContext)
 
     const densityData = useGetAllDensityType()
 
@@ -65,19 +65,6 @@ const SelectProductForm = () => {
                         />
                     </Form.Item>
                 </Col>
-            </Row>
-            <Row dir="ltr">
-                <Divider/>
-
-                <Button
-                    className="w-full management-info-form-submit btn-filter"
-                    size="large"
-                    type="primary"
-                    htmlType="submit"
-                >
-                    <span className="flex gap-3 justify-center ">ذخیره</span>
-                </Button>
-
             </Row>
         </>
     );

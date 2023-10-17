@@ -1,14 +1,29 @@
 import React, {useContext} from 'react';
-import {Divider, Form, Typography} from "antd";
+import {Button, Col, Divider, Form, Row, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import {MaterialRequest} from "@/app/producer/dashboard/request/formulacion/components/primary-product-form";
+import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
+import {SvgIcon} from "@/components/layout/sidebar";
 
 function Index() {
 
     const [form] = useForm()
 
     const processControl = useContext(StepContext)
+
+    const crudMaterialRequestDetail = useCrudRequestDetailMaterial()
+
+    const handleSubmit = async (value: MaterialRequest) => {
+
+        value.requestMasterUid = processControl.requestMaster.requestMasterUid;
+
+        await crudMaterialRequestDetail.create.trigger(value)
+
+        await processControl.getStep3()
+
+    }
 
     return (
         <>
@@ -23,12 +38,37 @@ function Index() {
             <Divider/>
             <Form
                 form={form}
-                // disabled={requestDetailMaterial.create.isLoading}
+                disabled={crudMaterialRequestDetail.create.isLoading}
                 name="form_item_path"
                 layout="vertical"
-                onFinish={processControl.getStep3}
+                onFinish={handleSubmit}
             >
                 <FormulationFrom/>
+                <Divider/>
+                <Row gutter={[12, 12]}>
+                    <Col span={12}>
+                        <Button
+                            disabled={true}
+                            className="w-full bg-gray-100"
+                            size="large"
+                            type="dashed"
+                        >
+                            مرحله قبلی
+                        </Button>
+                    </Col>
+                    <Col span={12}>
+                        <Button
+                            className="w-full"
+                            icon={<SvgIcon src="/static/save.svg"/>}
+                            // loading={requestDetailMaterial.create.isLoading}
+                            size="large"
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            ذخیره
+                        </Button>
+                    </Col>
+                </Row>
             </Form>
         </>
     );

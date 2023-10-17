@@ -1,7 +1,6 @@
 import React from 'react';
-import {Button, Col, Divider, Form, Input, InputNumber, Row, Select, Typography} from "antd";
+import {Col, Divider, Form, Input, InputNumber, Row, Select, Typography} from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
-import {SvgIcon} from "@/components/layout/sidebar";
 
 const FormulationFrom = () => {
 
@@ -253,18 +252,6 @@ const FormulationFrom = () => {
                         <Input size="large" placeholder="انتخاب نمایید"/>
                     </Form.Item>
                 </Col>
-            </Row>
-            <Row dir="ltr">
-                <Button
-                    icon={<SvgIcon src="/static/save.svg"/>}
-                    // loading={requestDetailMaterial.create.isLoading}
-                    size="large"
-                    danger
-                    type="primary"
-                    htmlType="submit"
-                >
-                    ذخیره
-                </Button>
             </Row>
         </>
     );

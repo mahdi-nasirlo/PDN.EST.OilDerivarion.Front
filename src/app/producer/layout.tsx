@@ -2,21 +2,21 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  ChatBubbleLeftEllipsisIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    ChatBubbleLeftEllipsisIcon,
+    Cog6ToothIcon,
+    DocumentDuplicateIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -33,8 +33,8 @@ export default function RootLayout({
 const MakeRequest = () => (
   <>
     <div className="flex justify-between items-center">
-      <Link href="/producer/dashboard/request/production-process">
-        ثبت درخواست
+      <Link href="/producer/dashboard/request">
+          ثبت درخواست
       </Link>
     </div>
   </>

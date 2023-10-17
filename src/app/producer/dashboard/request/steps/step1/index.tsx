@@ -3,9 +3,9 @@
 import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload} from "antd";
 import React, {useContext} from "react";
 import {UploadOutlined} from "@ant-design/icons";
-import staticMessages from "../../../../../../lib/staticMessages";
-import {useGetAllProductionMethod} from "../../../../../../hooks/baseInfo/useGetAllProductionMethod";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import staticMessages from "../../../../../../../lib/staticMessages";
+import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
 
 
 export default function Step1() {
@@ -81,7 +81,7 @@ export default function Step1() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={ProductExportCountries}
-                                fieldNames={{ label: "name", value: "key" }}
+                                fieldNames={{label: "name", value: "key"}}
                             />
                         </Form.Item>
                     </Col>
@@ -93,7 +93,7 @@ export default function Step1() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={OilWaste}
-                                fieldNames={{ label: "name", value: "key" }}
+                                fieldNames={{label: "name", value: "key"}}
                             />
                         </Form.Item>
                     </Col>
@@ -102,7 +102,7 @@ export default function Step1() {
                             name="operation-license"
                             label="محل فروش و یا دفن ضایعات"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>

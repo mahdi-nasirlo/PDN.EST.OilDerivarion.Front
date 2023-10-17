@@ -1,19 +1,18 @@
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../lib/server/mutationFetcher";
+import {listFetcher} from "../../lib/server/listFetcher";
 
 interface RequestDetailMaterialType {
     create: {
         isLoading: boolean,
-        trigger: (arg: Create) => any
+        trigger: (arg: Create, notify?: boolean) => any
     },
     update: {
-        isLoading: boolean
-    },
-    getAll: {
-        isLoading: boolean
+        isLoading: boolean,
     },
     delete: {
-        isLoading: boolean
+        isLoading: boolean,
+        trigger: (arg: { uid: any }) => void
     }
 }
 
@@ -28,21 +27,41 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
     const {
         isMutating: isLDCreateProduct,
         trigger: createProduct
+    } = useSWRMutation("/RequestDetail/CreateProduct", listFetcher)
+
+    const {
+        isMutating: isLdCreateProductWithNotify,
+        trigger: createProductWithNotify
     } = useSWRMutation("/RequestDetail/CreateProduct", mutationFetcher)
+
+
+    const handleCreate = async (value: Create, notify: boolean = false) => {
+
+
+        if (notify)
+            return await createProduct(value)
+        else
+            return await createProductWithNotify(value)
+
+    }
+
+    const {
+        isMutating: isLdDeleteProduct,
+        trigger: deleteProduct
+    } = useSWRMutation("/RequestDetail/DeleteProduct", mutationFetcher)
+
 
     return {
         create: {
             isLoading: isLDCreateProduct,
-            trigger: createProduct
+            trigger: handleCreate
         },
         update: {
-            isLoading: false
-        },
-        getAll: {
-            isLoading: false
+            isLoading: false,
         },
         delete: {
-            isLoading: false
+            isLoading: isLdDeleteProduct,
+            trigger: deleteProduct
         }
     }
 

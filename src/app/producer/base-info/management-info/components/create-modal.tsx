@@ -20,11 +20,15 @@ export default function CreateModal({ isEditModalVisible, setIsEditModalVisible,
 
         values.nationalCode = values.nationalCode.toString();
 
-        values.mobileNumber = values.mobileNumber.toString();
+        values.currentMobile = values.currentMobile.toString();
 
-        await trigger(values);
+        await trigger(values)
 
         await mutate();
+
+        setIsEditModalVisible(false)
+
+        form.resetFields();
     };
 
 
@@ -139,7 +143,7 @@ export default function CreateModal({ isEditModalVisible, setIsEditModalVisible,
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                name="mobileNumber"
+                                name="currentMobile"
                                 label="شماره تماس"
                                 rules={[{ required: true, message: "این فیلد اجباری است" },]}
                             >

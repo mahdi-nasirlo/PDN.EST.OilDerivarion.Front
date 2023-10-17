@@ -35,7 +35,7 @@ export default function EditModal(
 
         await mutate();
 
-        setIsEditModalVisible(false)
+        setIsEditModalVisible(false);
 
         form.resetFields();
     }
@@ -143,6 +143,6 @@ export default function EditModal(
                     </Row>
                 </Form>
             </Modal>
-        </>)
-
+        </>
+    )
 }

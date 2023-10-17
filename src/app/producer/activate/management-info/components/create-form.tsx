@@ -19,7 +19,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
 
         values.nationalCode = values.nationalCode.toString();
 
-        values.mobileNumber = values.mobileNumber.toString();
+        values.currentMobile = values.currentMobile.toString();
 
         await trigger(values);
 
@@ -106,7 +106,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
                     </Col>
                     <Col xs={24} md={12}>
                         <Form.Item
-                            name="mobileNumber"
+                            name="currentMobile"
                             label="شماره تماس"
                             rules={[{ required: true, message: "این فیلد اجباری است" },]}
                         >

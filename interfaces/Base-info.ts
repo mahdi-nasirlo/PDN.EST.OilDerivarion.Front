@@ -6,6 +6,27 @@ export interface SetBase {
   companyOwnershipTypeId: number | string;
 }
 
+export interface GerPagePresonLicence {
+  Uid: string,
+        Name: string,
+        LicenseTypeId: number,
+        Number: string,
+        Exporter: string,
+        Code: string,
+        IssueDate: string
+        ExpirationDate: string
+        IsCurrent: boolean
+        LicenseTypeName: string
+}
+export interface CreatePresonLicence {
+  name: string,
+  licenseTypeId: number,
+  number: string,
+  exporter: string,
+  issueDate: string
+  expirationDate: string
+}
+
 export interface SetMainMember {
   name: string;
   lastName: string;
@@ -14,6 +35,7 @@ export interface SetMainMember {
   companyRoleId: string;
   currentMobile: string;
 }
+
 
 export interface GetPageMainMember {
   key: string | null;

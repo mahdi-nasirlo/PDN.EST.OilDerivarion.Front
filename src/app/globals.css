@@ -202,9 +202,15 @@ body {
     text-align: right !important;
 }
 
-.ant-input {
+.ant-input,
+.ant-picker{
     @apply lg:py-[10px] !important
 }
+
+.ant-input-number{
+    @apply lg:py-[5px] !important
+}
+
 
 .ant-btn-dangerous {
     @apply bg-red-500 text-white !important

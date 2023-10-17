@@ -1,26 +1,42 @@
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
+import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import React, { useEffect } from 'react'
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
-import { listFetcher } from '../../../../../../lib/server/listFetcher';
+import React from 'react'
+import { SetMainMember } from '../../../../../../interfaces/Base-info';
 import { mutationFetcher } from '../../../../../../lib/server/mutationFetcher';
+import { listFetcher } from '../../../../../../lib/server/listFetcher';
+import useSWRMutation from "swr/mutation";
+import useSWR from "swr";
 
 
-export default function EditModal(
-    {
-        mutate,
-        recordToEdit,
-        setRecordToEdit,
-        setIsEditModalVisible,
-        isEditModalVisible
-    }: {
-        mutate: () => void,
-        recordToEdit: any
-        setRecordToEdit: any,
-        isEditModalVisible: any,
-        setIsEditModalVisible: any,
-    }) {
+export default function CreateModal({ isEditModalVisible, setIsEditModalVisible, mutate }:
+    { isEditModalVisible: any, setIsEditModalVisible: any, mutate: () => void }
+) {
+
+    const [form] = useForm();
+
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetMainMember", mutationFetcher)
+
+    const onFinish = async (values: SetMainMember) => {
+
+        values.nationalCode = values.nationalCode.toString();
+
+        values.currentMobile = values.currentMobile.toString();
+
+        await trigger(values)
+
+        await mutate();
+
+        setIsEditModalVisible(false)
+
+        form.resetFields();
+    };
+
+
+
+    const handleCancelEdit = () => {
+        setIsEditModalVisible(false);
+    };
+
 
     const { data: CompanyRoleGetAll, isLoading: ldCompanyRoleGetAll } = useSWR(
         ["/BaseInfo/CompanyRoleGetAll", {
@@ -29,53 +45,19 @@ export default function EditModal(
         }],
         ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
-
-
-    //ادیت
-
-    const [form] = useForm()
-
-
-    const { trigger: UpdateSetMainMember, isMutating: ldUpdateSetMainMember } = useSWRMutation(
-        "/Producer/SetMainMember", mutationFetcher)
-
-    const handleConfirmEdit = async (values: any) => {
-
-        values.nationalCode = values.nationalCode.toString();
-        values.currentMobile = values.currentMobile.toString();
-        values.uid = recordToEdit?.uid
-
-        await UpdateSetMainMember(values)
-
-        await mutate()
-
-        setIsEditModalVisible(false)
-
-        form.resetFields();
-    }
-
-    const handleCancelEdit = () => {
-        setIsEditModalVisible(false);
-        setRecordToEdit(null);
-    };
-
-    useEffect(() => {
-        form.setFieldsValue(recordToEdit)
-    }, [recordToEdit])
-
     return (
         <>
             <Modal
                 width={800}
-                title="ویرایش عضو شرکت"
-                open={isEditModalVisible}
+                title="افزودن اطلاعات مدیریتی"
+                visible={isEditModalVisible}
                 onOk={() => form.submit()}
                 onCancel={handleCancelEdit}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                loading={ldUpdateSetMainMember}
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -89,14 +71,14 @@ export default function EditModal(
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
-                                key={"cancel"}>
+                                key={"cancel"} >
                                 انصراف
-                            </Button>
+                            </Button >
                         </Col>
                     </Row>
                 ]}
             >
-                <Form onFinish={handleConfirmEdit} disabled={ldUpdateSetMainMember} form={form} layout='vertical'>
+                <Form form={form} layout="vertical" onFinish={onFinish}>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
@@ -135,12 +117,11 @@ export default function EditModal(
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="birthDate" label="تاریخ تولد">
-                                <Input />
-                                {/* <DatePicker
+                                <DatePicker
                                     className="w-full"
-                                    placeholder="13**//**"
+                                    placeholder="13**/**/**"
                                     size="large"
-                                /> */}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -171,7 +152,8 @@ export default function EditModal(
                         </Col>
                     </Row>
                 </Form>
-            </Modal>
-        </>)
+            </Modal >
+        </>
+    )
 
 }

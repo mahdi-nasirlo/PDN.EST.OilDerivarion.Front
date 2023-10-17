@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Typography } from "antd";
+import { Button, Space, Switch, Table, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Category } from "../../../../../../interfaces/category";
@@ -73,7 +73,16 @@ export default function DataTable({
       title: "دانسیته",
       dataIndex: "HasDensity",
       key: "4",
-      render: (_, record) => <>{record.HasDensity ? "بله" : "خیر"}</>,
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        if (record.HasDensity === false) {
+          color = "red";
+          name = "ندارد";
+        } else { color = "green"; name = "دارد"; }
+
+        return (<Tag color={color}>{name}</Tag>);
+      },
     },
     {
       title: "حداقل بازه دانسیته",

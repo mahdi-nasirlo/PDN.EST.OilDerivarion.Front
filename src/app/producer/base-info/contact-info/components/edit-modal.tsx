@@ -1,17 +1,71 @@
-import { Button, Col, Form, Input, Modal, Row } from 'antd'
+import { Button, Col, Form, Input, Modal, Row, Select, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { mutationFetcher } from '../../../../../../lib/server/mutationFetcher';
+import { listFetcher } from '../../../../../../lib/server/listFetcher';
+import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 export default function EditModal(
-    { isEditModalVisible, setIsEditModalVisible }:
-        { isEditModalVisible: any, setIsEditModalVisible: any }
+    {
+        isEditModalVisible,
+        setIsEditModalVisible,
+        data,
+        mutate
+    }: {
+        isEditModalVisible: any,
+        setIsEditModalVisible: any,
+        data: any,
+        mutate: any
+    }
 ) {
     const [form] = useForm();
+
+    useEffect(() => {
+
+        form.setFieldsValue(data)
+
+    }, [data])
+
+
+    const { trigger, isMutating } = useSWRMutation("/ProfilePersonContact/Set", mutationFetcher)
+
+    const onFinish = async (values: any) => {
+
+        const res = await trigger(values);
+        if (res) {
+            await mutate()
+            setIsEditModalVisible(false);
+        }
+
+    };
+
+
+    const { data: StateGetAll, isLoading: ldStateGetAll } = useSWR(
+        ["/BaseInfo/StateGetAll"],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
+    const [ProvinceCity, SetProvinceCity] = useState(null)
+
+    const handleFactoryProvinceChange = (value: any) => {
+        SetProvinceCity(value);
+        form.setFieldValue("factoryCityName", null)
+    };
+
+    const handleCentralOfficeProvinceChange = (value: any) => {
+        SetProvinceCity(value);
+        form.setFieldValue("centralOfficeCityName", null)
+    };
+
+    const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
+        ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
 
     const handleCancelEdit = () => {
         setIsEditModalVisible(false);
     };
+
     return (
         <>
             <Modal
@@ -24,7 +78,7 @@ export default function EditModal(
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                // loading={isMutating}
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -45,80 +99,47 @@ export default function EditModal(
                     </Row>
                 ]}
             >
-                <Form name="form_item_path" layout="vertical" form={form}>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
+                <Form form={form} layout="vertical" onFinish={onFinish}>
+                    <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
+                        اطلاعات کارخانه
+                    </Typography>
+                    <Row gutter={[16, 1]}>
+                        <Col xs={24} md={8}>
                             <Form.Item
-                                name="year-establishment"
-                                label="استان "
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string" },
-                                ]}
+                                name="factoryStateName"
+                                label="استان"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
-                                <Input size="large" placeholder="انتخاب کنید" />
+                                <Select
+                                    loading={ldStateGetAll}
+                                    options={StateGetAll}
+                                    fieldNames={{ value: "Id", label: "Name" }}
+                                    size="large"
+                                    placeholder="انتخاب کنید"
+                                    onChange={handleFactoryProvinceChange}
+                                />
                             </Form.Item>
                         </Col>
-                        <Col xs={24} md={12}>
+                        <Col xs={24} md={8}>
                             <Form.Item
-                                name="lastName"
+                                name="factoryCityName"
                                 label="شهرستان"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string" },
-                                ]}
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
-                                <Input size="large" placeholder="انتخاب کنید" />
+                                <Select
+                                    loading={ldCityGetAll}
+                                    options={CityGetAll}
+                                    fieldNames={{ value: "Id", label: "Name" }}
+                                    size="large"
+                                    placeholder="انتخاب کنید"
+                                />
                             </Form.Item>
                         </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
+                        <Col xs={24} md={8}>
                             <Form.Item
-                                name="company-registratuon-num"
-                                label="شهرک"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                name="license-establish"
-                                label="خیابان اصلی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                name="operation-license"
-                                label="خیابان فرعی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                name={"phone_number"}
-                                label="کوچه"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
+                                name="factoryPhone"
+                                label="شماره تماس"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
@@ -127,40 +148,67 @@ export default function EditModal(
                     <Row>
                         <Col span={24}>
                             <Form.Item
-                                name="operation-license"
-                                label="نشانی دفتر مرکزی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
+                                name="factoryAddressDetail"
+                                label="جزئیات آدرس"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
+                    <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
+                        اطلاعات دفتر مرکزی
+                    </Typography>
+                    <Row gutter={[16, 1]}>
+                        <Col xs={24} md={8}>
                             <Form.Item
-                                name="operation-license"
-                                label="تلفن دفتر مرکزی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "number", message: "باید به صورت عدد باشد" },
-                                ]}
+                                name="centralOfficeStateName"
+                                label="استان"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
-                                <Input className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
+                                <Select
+                                    loading={ldStateGetAll}
+                                    options={StateGetAll}
+                                    fieldNames={{ value: "Id", label: "Name" }}
+                                    size="large"
+                                    placeholder="انتخاب کنید"
+                                    onChange={handleCentralOfficeProvinceChange}
+                                />
                             </Form.Item>
                         </Col>
-                        <Col xs={24} md={12}>
+                        <Col xs={24} md={8}>
                             <Form.Item
-                                name={"phone_number"}
-                                label="تلفن تماس کارخانه"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "number", message: "باید به صورت عدد باشد" },
-                                ]}
+                                name="centralOfficeCityName"
+                                label="شهرستان"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
-                                <Input className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
+                                <Select
+                                    loading={ldCityGetAll}
+                                    options={CityGetAll}
+                                    fieldNames={{ value: "Id", label: "Name" }}
+                                    size="large"
+                                    placeholder="انتخاب کنید"
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} md={8}>
+                            <Form.Item
+                                name="centralOfficePhone"
+                                label="شماره تماس"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Form.Item
+                                name="centralOfficeAddressDetail"
+                                label="جزئیات آدرس"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                            >
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                     </Row>

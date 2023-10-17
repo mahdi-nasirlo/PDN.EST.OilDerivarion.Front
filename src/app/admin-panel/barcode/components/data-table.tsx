@@ -1,7 +1,7 @@
-import {Table} from 'antd';
-import type {ColumnsType} from 'antd/es/table';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import React from "react";
-import {RequestMaster} from "../../../../../interfaces/requestMaster";
+import { RequestMaster } from "../../../../../interfaces/requestMaster";
 
 
 const columns: ColumnsType<RequestMaster> = [
@@ -33,7 +33,7 @@ const columns: ColumnsType<RequestMaster> = [
 ];
 
 
-const DataTable = ({requestMaster, ldRequestMaster}: { requestMaster: RequestMaster[], ldRequestMaster: boolean }) => {
+const DataTable = ({ requestMaster, ldRequestMaster }: { requestMaster: RequestMaster[], ldRequestMaster: boolean }) => {
 
     return (
         <Table
@@ -42,6 +42,18 @@ const DataTable = ({requestMaster, ldRequestMaster}: { requestMaster: RequestMas
             rowKey={"Uid"}
             loading={ldRequestMaster}
             dataSource={requestMaster}
+            pagination={{
+                defaultPageSize: 10,
+                showSizeChanger: true,
+                pageSizeOptions: ["10", "20", "50"],
+                defaultCurrent: 1,
+                style: {
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    margin: "16px 0",
+                },
+            }}
         />
     )
 };

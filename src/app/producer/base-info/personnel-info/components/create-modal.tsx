@@ -1,81 +1,48 @@
-import { Button, Col, Form, Input, Modal, Row, Select } from 'antd'
+import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import React, { useEffect } from 'react'
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
-import { listFetcher } from '../../../../../../lib/server/listFetcher';
+import React from 'react'
+import { SetEmployeeMember } from '../../../../../../interfaces/Base-info';
 import { mutationFetcher } from '../../../../../../lib/server/mutationFetcher';
+import useSWRMutation from "swr/mutation";
 
 
-export default function EditModal(
-    {
-        mutate,
-        recordToEdit,
-        setRecordToEdit,
-        setIsEditModalVisible,
-        isEditModalVisible
-    }: {
-        mutate: () => void,
-        recordToEdit: any
-        setRecordToEdit: any,
-        isEditModalVisible: any,
-        setIsEditModalVisible: any,
-    }) {
+export default function CreateModal({ isEditModalVisible, setIsEditModalVisible, mutate }:
+    { isEditModalVisible: any, setIsEditModalVisible: any, mutate: () => void }
+) {
 
-    const { data: CompanyRoleGetAll, isLoading: ldCompanyRoleGetAll } = useSWR(
-        ["/BaseInfo/CompanyRoleGetAll", {
-            name: null,
-            isActive: null
-        }],
-        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+    const [form] = useForm();
 
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetEmployeeMember", mutationFetcher)
 
+    const onFinish = async (values: SetEmployeeMember) => {
 
-    //ادیت
+        await trigger(values);
 
-    const [form] = useForm()
+        await mutate();
 
-
-    const { trigger: UpdateSetMainMember, isMutating: ldUpdateSetMainMember } = useSWRMutation(
-        "/Producer/SetMainMember", mutationFetcher)
-
-    const handleConfirmEdit = async (values: any) => {
-
-        values.nationalCode = values.nationalCode.toString();
-        values.currentMobile = values.currentMobile.toString();
-        values.uid = recordToEdit?.uid
-
-        await UpdateSetMainMember(values)
-
-        await mutate()
-
-        setIsEditModalVisible(false)
+        setIsEditModalVisible(false);
 
         form.resetFields();
-    }
+    };
 
     const handleCancelEdit = () => {
         setIsEditModalVisible(false);
-        setRecordToEdit(null);
     };
 
-    useEffect(() => {
-        form.setFieldsValue(recordToEdit)
-    }, [recordToEdit])
 
     return (
         <>
             <Modal
                 width={800}
-                title="ویرایش عضو شرکت"
-                open={isEditModalVisible}
+                title="افزودن اطلاعات پرسنلی"
+                visible={isEditModalVisible}
                 onOk={() => form.submit()}
                 onCancel={handleCancelEdit}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                loading={ldUpdateSetMainMember}
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -89,14 +56,14 @@ export default function EditModal(
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}
-                                key={"cancel"}>
+                                key={"cancel"} >
                                 انصراف
-                            </Button>
+                            </Button >
                         </Col>
                     </Row>
                 ]}
             >
-                <Form onFinish={handleConfirmEdit} disabled={ldUpdateSetMainMember} form={form} layout='vertical'>
+                <Form form={form} layout="vertical" onFinish={onFinish}>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={12}>
                             <Form.Item
@@ -135,31 +102,15 @@ export default function EditModal(
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="birthDate" label="تاریخ تولد">
-                                <Input />
-                                {/* <DatePicker
+                                <DatePicker
                                     className="w-full"
-                                    placeholder="13**//**"
+                                    placeholder="13**/**/**"
                                     size="large"
-                                /> */}
+                                />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
-                        <Col xs={24} md={12}>
-                            <Form.Item
-                                name="companyRoleId"
-                                label="سمت"
-                                rules={[{ required: true, message: "این فیلد اجباری است" },]}
-                            >
-                                <Select
-                                    loading={ldCompanyRoleGetAll}
-                                    options={CompanyRoleGetAll}
-                                    fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
-                            </Form.Item>
-                        </Col>
                         <Col xs={24} md={12}>
                             <Form.Item
                                 name="currentMobile"
@@ -171,7 +122,7 @@ export default function EditModal(
                         </Col>
                     </Row>
                 </Form>
-            </Modal>
-        </>)
-
+            </Modal >
+        </>
+    )
 }

@@ -61,7 +61,18 @@ const DataTable = ({ product, ldProduct }: { product: Product[], ldProduct: bool
                 expandedRowRender: (record: Product) => <ExpandedRowRender product={record} />,
             }}
             dataSource={product}
-        />
+            pagination={{
+                defaultPageSize: 10,
+                showSizeChanger: true,
+                pageSizeOptions: ["10", "20", "50"],
+                defaultCurrent: 1,
+                style: {
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    margin: "16px 0",
+                },
+            }} />
     )
 };
 

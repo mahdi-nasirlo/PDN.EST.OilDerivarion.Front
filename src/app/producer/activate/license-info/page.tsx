@@ -1,155 +1,58 @@
 "use client";
 
-import { SvgIcon } from "@/components/layout/sidebar";
-import { Button, Col, DatePicker, Divider, Form, Input, Row, Space, Table, Typography, } from "antd";
+import { Button, Divider } from "antd";
 import React from "react";
+import CreateForm from "./components/create-form";
+import { useRouter } from "next/navigation";
+import DataTable from "./components/data-table";
+import {
+  GerPagePresonLicence,
+  SetMainMember,
+} from "../../../../../interfaces/Base-info";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
 
-export default function Page() {
-    return (
-        <>
-            <Typography className="text-right font-medium text-base">
-                لطفا اطلاعات را با دقت بررسی کرده و سپس در صورت صحیح بودن باقی مراحل را
-                کامل نمایید.
-            </Typography>
-            <Divider />
-            <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label="نام مجوز"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "number", message: "باید به صورت عدد باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="تاریخ دریافت ">
-                            <DatePicker
-                                className="w-full"
-                                placeholder="13**/**/**"
-                                size="large"
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="company-registratuon-num" label="تاریخ اعتبار">
-                            <DatePicker
-                                className="w-full"
-                                placeholder="13**/**/**"
-                                size="large"
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row dir="ltr">
-                    <Col xs={10} md={3} lg={2}>
-                        <Button
-                            htmlType="submit"
-                            className="w-full management-info-form-submit"
-                            size="large"
-                            type="primary"
-                        >
-                            <span
-                                style={{ display: "flex" }}
-                                className="flex gap-2 justify-center"
-                            >
-                                ثبت
-                                <SvgIcon src="/static/save.svg" />
-                            </span>
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
-            <Table
-                pagination={false}
-                className="mt-6"
-                columns={columns}
-                dataSource={data}
-            />
+export default function Home() {
+  const router = useRouter();
 
-            <Divider />
-            <div className="flex gap-6">
-                <Button
-                    className="w-full management-info-form-submit btn-filter"
-                    size="large"
-                    type="primary"
-                    htmlType="submit"
-                >
-                    <span className="flex gap-3 justify-center "> ثبت</span>
-                </Button>
-                {/* <Button type="primary" size="large" className="w-full py-3  btn-error">
-          گزارش اطلاعات اشتباه
-        </Button> */}
-            </div>
-        </>
-    );
+  const {
+    data: License,
+    isLoading: ldLicense,
+    mutate,
+  } = useSWR<{
+    records: GerPagePresonLicence[];
+    count: number;
+  }>(["/ProfilePersonLicense/GetPage"], ([url, arg]: [url: string, arg: any]) =>
+    listFetcher(url, {
+      arg: {
+        licenseTypeId: null,
+        fromRecord: 0,
+        selectRecord: 10000,
+      },
+    })
+  );
+
+  return (
+    <>
+      <CreateForm mutate={mutate} />
+      <DataTable
+        MainMember={addIndexToData(License?.records)}
+        ldMainMember={ldLicense}
+        mutate={mutate}
+      />
+      <Divider />
+
+      <Button
+        className="w-full management-info-form-submit btn-filter"
+        size="large"
+        type="primary"
+        htmlType="submit"
+        onClick={() => router.push("/producer/activate/contact-info")}
+      >
+        <span className="flex gap-3 justify-center "> ثبت</span>
+      </Button>
+    </>
+  );
 }
-
-interface DataType {
-    key: string;
-    name: string;
-    row: number;
-    nationalcode: string;
-    phonenum: string;
-    brithdate: string;
-
-    role: string;
-}
-
-const columns: ColumnsType<DataType> = [
-    {
-        title: "ردیف",
-        dataIndex: "row",
-        key: "1",
-    },
-    {
-        title: "نام و نام خانوادگی",
-        dataIndex: "name",
-        key: "2",
-    },
-    {
-        title: "تاریخ دریافت",
-        dataIndex: "nationalcode",
-        key: "3",
-    },
-    {
-        title: "تاریخ اعتبار",
-        dataIndex: "brithdate",
-        key: "4",
-    },
-
-    {
-        title: "جزئیات",
-        key: "جزئیات",
-        render: () => (
-            <Space size="middle">
-                <Link href={""} className="action-btn-edit">
-                    ویرایش
-                </Link>
-                <Link href={""} className="action-btn-delete">
-                    حذف
-                </Link>
-            </Space>
-        ),
-    },
-];
-
-const data: DataType[] = [
-    {
-        key: "1",
-        row: 1,
-        name: "پروانه بهره برداری",
-        nationalcode: "1401/01/01",
-        phonenum: "09337161523",
-        role: "مدیرعامل",
-        brithdate: "1382/12/02",
-    },
-];

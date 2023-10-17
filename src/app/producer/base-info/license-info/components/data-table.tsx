@@ -1,12 +1,14 @@
-import { Button, Space } from "antd";
+import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { Table } from "antd/lib";
 import React, { useState } from "react";
-import { GetPageMainMember } from "../../../../../../interfaces/Base-info";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import {
+  GerPagePresonLicence,
+  GetPageMainMember,
+} from "../../../../../../interfaces/Base-info";
+import EditModal from "./edit-modal";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import EditModal from "./edit-modal";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function DataTable({
   MainMember,
@@ -17,25 +19,21 @@ export default function DataTable({
   ldMainMember: any;
   mutate: () => void;
 }) {
-  //حذف
-
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [recordToDelete, setRecordToDelete] =
-    useState<GetPageMainMember | null>(null);
+    useState<GerPagePresonLicence | null>(null);
 
   const handleDelete = (record: any) => {
     setRecordToDelete(record);
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger: DeleteMember, isMutating: ldDeleteMember } = useSWRMutation(
-    "/Producer/DeleteMember",
-    mutationFetcher
-  );
+  const { trigger: DeleteLicense, isMutating: ldDeleteLicense } =
+    useSWRMutation("/ProfilePersonLicense/Delete", mutationFetcher);
 
   const handleConfirmDelete = async () => {
-    await DeleteMember({
-      uid: recordToDelete?.uid,
+    await DeleteLicense({
+      uid: recordToDelete?.Uid,
     });
 
     await mutate();
@@ -48,7 +46,7 @@ export default function DataTable({
   //ادیت
 
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [recordToEdit, setRecordToEdit] = useState<GetPageMainMember | null>(
+  const [recordToEdit, setRecordToEdit] = useState<GerPagePresonLicence | null>(
     null
   );
 
@@ -57,42 +55,43 @@ export default function DataTable({
     setIsEditModalVisible(true);
   };
 
-  const columns: ColumnsType<GetPageMainMember> = [
+  const columns: ColumnsType<GerPagePresonLicence> = [
     {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
     },
     {
-      title: "نام",
-      dataIndex: "name",
+      title: "نام سند",
+      dataIndex: "Name",
       key: "2",
     },
     {
-      title: "نام خانوادگی",
-      dataIndex: "lastName",
+      title: "شماره سند",
+      dataIndex: "Number",
+      key: "7",
+    },
+    {
+      title: "نوع مجوز",
+      dataIndex: "LicenseTypeName",
       key: "3",
     },
     {
-      title: "کد ملی / اتباع",
-      dataIndex: "nationalCode",
+      title: "صادر کننده",
+      dataIndex: "Exporter",
       key: "4",
     },
     {
-      title: "تاریخ تولد",
-      dataIndex: "birthDate",
+      title: "تاریخ صدور",
+      dataIndex: "IssueDate",
       key: "5",
     },
     {
-      title: "سمت",
-      dataIndex: "companyRoleName",
+      title: "تاریخ انقضاء",
+      dataIndex: "ExpirationDate",
       key: "6",
     },
-    {
-      title: "شماره تماس",
-      dataIndex: "currentMobile",
-      key: "7",
-    },
+
     {
       title: "عملیات",
       key: "عملیات",
@@ -127,10 +126,10 @@ export default function DataTable({
   return (
     <>
       <Table
+        loading={ldMainMember || ldDeleteLicense}
         className="mt-6"
         columns={columns}
-        dataSource={MainMember || ldDeleteMember}
-        loading={ldMainMember}
+        dataSource={MainMember}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,

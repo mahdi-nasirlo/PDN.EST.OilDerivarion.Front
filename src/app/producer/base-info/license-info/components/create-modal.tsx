@@ -1,40 +1,33 @@
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
-import React, { useEffect } from "react";
-import useSWR from "swr";
-import useSWRMutation from "swr/mutation";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import React from "react";
+import {
+  CreatePresonLicence,
+  SetMainMember,
+} from "../../../../../../interfaces/Base-info";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import useSWRMutation from "swr/mutation";
+import useSWR from "swr";
 
-export default function EditModal({
-  mutate,
-  recordToEdit,
-  setRecordToEdit,
-  setIsEditModalVisible,
+export default function CreateModal({
   isEditModalVisible,
+  setIsEditModalVisible,
+  mutate,
 }: {
-  mutate: () => void;
-  recordToEdit: any;
-  setRecordToEdit: any;
   isEditModalVisible: any;
   setIsEditModalVisible: any;
+  mutate: () => void;
 }) {
-  const { data: LicenseTypeGetAll, isLoading: ldLicenseTypeGetAll } = useSWR(
-    ["/BaseInfo/LicenseTypeGetAll"],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-
-  //ادیت
-
   const [form] = useForm();
 
-  const { trigger: UpdateLicense, isMutating: ldUpdateLicense } =
-    useSWRMutation("/ProfilePersonLicense/Update", mutationFetcher);
+  const { trigger, isMutating } = useSWRMutation(
+    "/ProfilePersonLicense/Create",
+    mutationFetcher
+  );
 
-  const handleConfirmEdit = async (values: any) => {
-    values.Uid = recordToEdit?.Uid;
-
-    await UpdateLicense(values);
+  const onFinish = async (values: CreatePresonLicence) => {
+    await trigger(values);
 
     await mutate();
 
@@ -45,18 +38,18 @@ export default function EditModal({
 
   const handleCancelEdit = () => {
     setIsEditModalVisible(false);
-    setRecordToEdit(null);
   };
 
-  useEffect(() => {
-    form.setFieldsValue(recordToEdit);
-  }, [recordToEdit]);
+  const { data: LicenseTypeGetAll, isLoading: ldLicenseTypeGetAll } = useSWR(
+    ["/BaseInfo/LicenseTypeGetAll"],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   return (
     <>
       <Modal
         width={800}
-        title="ویرایش مجوز"
+        title="افزودن مجوز"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}
@@ -64,7 +57,7 @@ export default function EditModal({
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={24} md={12}>
               <Button
-                loading={ldUpdateLicense}
+                loading={isMutating}
                 size="large"
                 className="w-full"
                 type="primary"
@@ -87,16 +80,11 @@ export default function EditModal({
           </Row>,
         ]}
       >
-        <Form
-          onFinish={handleConfirmEdit}
-          disabled={ldUpdateLicense}
-          form={form}
-          layout="vertical"
-        >
+        <Form form={form} layout="vertical" onFinish={onFinish}>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Name"
+                name="name"
                 label="نام سند"
                 rules={[
                   { required: true, message: "این فیلد اجباری است" },
@@ -108,7 +96,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Number"
+                name="number"
                 label="شماره سند"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
@@ -118,48 +106,50 @@ export default function EditModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="LicenseTypeId" label="نوع مجوز">
+              <Form.Item name="licenseTypeId" label="نوع مجوز">
                 <Select
                   loading={ldLicenseTypeGetAll}
                   options={LicenseTypeGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
-                  placeholder="انتخاب کنید"
+                  placeholder="وارد کنید"
                 />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="IssueDate" label="تاریخ صدور">
-                <Input size="large" />
-                {/* <DatePicker
-                                    className="w-full"
-                                    placeholder="13**/
-                /**"
-                                    size="large"
-                                /> */}
+              <Form.Item name="exporter" label="صادر کننده">
+                <Input
+                  className="w-full rounded-lg"
+                  size="large"
+                  placeholder="وارد کنید"
+                />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="ExpirationDate"
-                label="تاریخ انقضاء"
+                name="issueDate"
+                label="زمان صدور"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <Input size="large" />
+                <DatePicker
+                  className="w-full"
+                  placeholder="13**/**/**"
+                  size="large"
+                />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Exporter"
-                label="صادرکننده"
+                name="expirationDate"
+                label="تاریخ انقضاء"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <Input
-                  className="w-full rounded-lg"
+                <DatePicker
+                  className="w-full"
+                  placeholder="13**/**/**"
                   size="large"
-                  placeholder="وارد کنید"
                 />
               </Form.Item>
             </Col>

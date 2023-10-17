@@ -22,7 +22,7 @@ interface Create {
     densityTypeId: number
 }
 
-const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
+const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
 
     const {
         isMutating: isLDCreateProduct,
@@ -67,4 +67,4 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
 
 };
 
-export default useCrudRequestDetailMaterial;
+export default useCrudRequestDetailProduct;

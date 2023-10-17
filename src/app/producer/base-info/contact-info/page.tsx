@@ -5,6 +5,9 @@ import { Button, Divider, Typography, } from "antd";
 import React, { useState } from "react";
 import DisplayForm from "./components/display-form";
 import EditModal from "./components/edit-modal";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+
 
 export default function Page() {
 
@@ -13,6 +16,12 @@ export default function Page() {
     const showModal = () => {
         setIsEditModalVisible(true);
     };
+
+    const { data, isLoading, mutate } = useSWR(
+        ["/ProfilePersonContact/Get"],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
+
 
 
     return (
@@ -37,12 +46,12 @@ export default function Page() {
                 </div>
                 <Divider />
                 <DisplayForm
-                // data={data}
-                // isLoading={isLoading}
+                    data={data}
+                    isLoading={isLoading}
                 />
                 <EditModal
-                    // mutate={mutate}
-                    // data={data}
+                    mutate={mutate}
+                    data={data}
                     isEditModalVisible={isEditModalVisible}
                     setIsEditModalVisible={setIsEditModalVisible}
                 />

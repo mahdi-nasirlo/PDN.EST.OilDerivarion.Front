@@ -2,6 +2,7 @@ export interface RequestDetail {
     Id: number,
     Uid: string,
     RequestMasterId: number,
+    requestMasterUid: string,
     ProductOrMaterialId: number,
     IsProduct: boolean,
     UniqueCode: null | string,

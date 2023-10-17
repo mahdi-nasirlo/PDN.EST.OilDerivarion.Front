@@ -3,8 +3,8 @@
 
 import React, {useState} from "react";
 import {Button, Checkbox, Divider, Form} from "antd";
-import ReviewDataModalAcceptAgreement from "./components/review-data-modal-accept-agreement";
-import ReviewDataModalFinalSubmit from "./components/review-data-modal-final-submit";
+import ReviewDataModalAcceptAgreement from "../steps/step4/review-data-modal-accept-agreement";
+import ReviewDataModalFinalSubmit from "../steps/step4/review-data-modal-final-submit";
 import useSWRMutation from "swr/mutation";
 import {PlusIcon} from "@heroicons/react/24/outline";
 import {useRouter} from "next/navigation";

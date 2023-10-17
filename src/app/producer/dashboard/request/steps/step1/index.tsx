@@ -1,38 +1,18 @@
 "use client";
 
-import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload } from "antd";
-import React from "react";
-import { UploadOutlined } from "@ant-design/icons";
-import useSWRMutation from "swr/mutation";
-import { useRouter } from "next/navigation";
-
-import { setCookie } from "cookies-next";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import staticMessages from "../../../../../../lib/staticMessages";
+import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload} from "antd";
+import React, {useContext} from "react";
+import {UploadOutlined} from "@ant-design/icons";
+import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import staticMessages from "../../../../../../../lib/staticMessages";
+import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
 
 
-export default function Page() {
+export default function Step1() {
 
-    const router = useRouter()
+    const processControl = useContext(StepContext)
 
-    const { trigger, isMutating } = useSWRMutation("/RequestMaster/Create", mutationFetcher)
-
-    const onFinish = async (values: RequestMasterForm) => {
-
-        let data: RequestMaster = {
-            ...values,
-            fileName: values.fileName?.file.name,
-        };
-
-        // @ts-ignore
-        const res = await trigger(data)
-
-        setCookie("requestMasterUid", res)
-
-        router.push("/producer/dashboard/request/formulacion")
-
-    };
-
+    const {isLoadingProductionMethods, productionMethods, fieldNames} = useGetAllProductionMethod()
 
     return (
         <>
@@ -44,17 +24,17 @@ export default function Page() {
             <Typography className="text-right font-medium text-base">
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
-            <Divider />
+            <Divider/>
             <Form
-                disabled={isMutating}
-                onFinish={onFinish}
+                disabled={processControl.isMutating}
+                onFinish={processControl.getStep2}
                 name="form_item_path"
                 layout="vertical"
             >
                 <Row gutter={32}>
                     <Col span={24}>
-                        <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
-                            name="processDescription" label="شرح فرآیند تولید">
+                        <Form.Item rules={[{required: true, message: "لطفا فیلد را وارد نمایید"}]}
+                                   name="processDescription" label="شرح فرآیند تولید">
                             <Input.TextArea
                                 maxLength={100}
                                 style={{
@@ -67,8 +47,8 @@ export default function Page() {
                     </Col>
                 </Row>
                 <Row className="mt-3" gutter={32}>
-                    <Col span={24}>
-                        <Form.Item name="fileName" label="نمودار شماتیک فرآیند">
+                    <Col span={12}>
+                        <Form.Item name="fileNameass" label="نمودار شماتیک فرآیند">
                             <Upload
                                 multiple={false}
                                 maxCount={1}
@@ -76,12 +56,18 @@ export default function Page() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
+                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
+                    <Col span={12}>
+                        <Form.Item name="productionMethodId" label="روش تولید">
+                            <Select options={productionMethods} loading={isLoadingProductionMethods}
+                                    fieldNames={fieldNames} size="large"/>
+                        </Form.Item>
+                    </Col>
                 </Row>
-                <Divider />
+                <Divider/>
 
                 <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
@@ -95,7 +81,7 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={ProductExportCountries}
-                                fieldNames={{ label: "name", value: "key" }}
+                                fieldNames={{label: "name", value: "key"}}
                             />
                         </Form.Item>
                     </Col>
@@ -107,7 +93,7 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={OilWaste}
-                                fieldNames={{ label: "name", value: "key" }}
+                                fieldNames={{label: "name", value: "key"}}
                             />
                         </Form.Item>
                     </Col>
@@ -116,7 +102,7 @@ export default function Page() {
                             name="operation-license"
                             label="محل فروش و یا دفن ضایعات"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input size="large" placeholder="وارد کنید"/>
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
@@ -130,25 +116,38 @@ export default function Page() {
                                 placeholder="انتخاب نمایید"
                                 tokenSeparators={[","]}
                                 options={LaboratoryEquipment}
-                                fieldNames={{ label: "name", value: "key" }}
+                                fieldNames={{label: "name", value: "key"}}
                             />
                         </Form.Item>
                     </Col>
                 </Row>
 
-                <Divider />
+                <Divider/>
 
-                <div className="flex gap-6">
-                    <Button
-                        loading={isMutating}
-                        className="w-full management-info-form-submit btn-filter"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        ذخیره و ادامه
-                    </Button>
-                </div>
+                <Row gutter={[12, 12]}>
+                    <Col span={12}>
+                        <Button
+                            disabled={true}
+                            className="w-full bg-gray-100"
+                            size="large"
+                            type="dashed"
+                        >
+                            مرحله قبلی
+                        </Button>
+                    </Col>
+                    <Col span={12}>
+                        <Button
+                            loading={processControl.isMutating}
+                            disabled={processControl.isMutating}
+                            className="w-full management-info-form-submit btn-filter"
+                            size="large"
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            ذخیره و ادامه
+                        </Button>
+                    </Col>
+                </Row>
             </Form>
         </>
     );
@@ -159,8 +158,9 @@ export type RequestMaster = {
     fileName: string;
 };
 
-type RequestMasterForm = {
+export type RequestMasterForm = {
     processDescription: string;
+    productionMethodId: number;
     fileName: { file: { name: string } };
 };
 

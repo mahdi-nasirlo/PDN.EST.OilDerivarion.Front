@@ -9,7 +9,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
 
-export default function Page() {
+export default function ContactInfo() {
 
     const [form] = useForm();
     const router = useRouter()
@@ -37,12 +37,12 @@ export default function Page() {
 
     const handleFactoryProvinceChange = (value: any) => {
         SetProvinceCity(value);
-        form.setFieldValue("factoryCityName", null)
+        form.setFieldValue("factoryCityId", null)
     };
 
     const handleCentralOfficeProvinceChange = (value: any) => {
         SetProvinceCity(value);
-        form.setFieldValue("centralOfficeCityName", null)
+        form.setFieldValue("centralOfficeCityId", null)
     };
 
     const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
@@ -64,7 +64,7 @@ export default function Page() {
                 <Row gutter={[16, 1]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="factoryStateName"
+                            name="factoryStateId"
                             label="استان"
                             rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >
@@ -80,7 +80,7 @@ export default function Page() {
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="factoryCityName"
+                            name="factoryCityId"
                             label="شهرستان"
                             rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >
@@ -120,7 +120,7 @@ export default function Page() {
                 <Row gutter={[16, 1]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="centralOfficeStateName"
+                            name="centralOfficeStateId"
                             label="استان"
                             rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >
@@ -136,7 +136,7 @@ export default function Page() {
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="centralOfficeCityName"
+                            name="centralOfficeCityId"
                             label="شهرستان"
                             rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >

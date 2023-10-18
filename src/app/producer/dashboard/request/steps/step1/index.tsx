@@ -125,17 +125,7 @@ export default function Step1() {
                 <Divider/>
 
                 <Row gutter={[12, 12]}>
-                    <Col span={12}>
-                        <Button
-                            disabled={true}
-                            className="w-full bg-gray-100"
-                            size="large"
-                            type="dashed"
-                        >
-                            مرحله قبلی
-                        </Button>
-                    </Col>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Button
                             loading={processControl.isMutating}
                             disabled={processControl.isMutating}

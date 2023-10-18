@@ -32,8 +32,14 @@ const Index = () => {
                 محصول تولیدی
             </Typography>
 
-            <Form onFinish={handleOnFinish}>
+            <Form disabled={requestDetailProduct.create.isLoading || processController.isMutating}
+                  onFinish={handleOnFinish}>
                 <SelectProductForm/>
+                <div className="flex justify-end">
+                    <Button loading={requestDetailProduct.create.isLoading} htmlType="submit">
+                        ذخیره
+                    </Button>
+                </div>
             </Form>
 
             <Divider/>
@@ -51,6 +57,7 @@ const Index = () => {
                 </Button>
 
                 <Button
+                    loading={requestDetailProduct.create.isLoading || processController.isMutating}
                     className="w-full management-info-form-submit btn-filter"
                     size="large"
                     type="primary"

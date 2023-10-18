@@ -1,20 +1,20 @@
 "use client";
 
 import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { SetBase } from "../../../../../interfaces/Base-info";
 import useSWRMutation from "swr/mutation";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { useRouter } from "next/navigation";
+import StepContext from "../stete-manager/step-context";
 
 
-export default function NewRequest() {
+export default function CreatorProduction() {
 
+    const processController = useContext(StepContext)
     const [form] = useForm();
-    const router = useRouter()
 
 
     const { trigger, isMutating } = useSWRMutation("/Producer/SetBase", mutationFetcher)
@@ -24,8 +24,7 @@ export default function NewRequest() {
         const res = await trigger(values)
 
         if (res) {
-            form.resetFields();
-            router.push("/producer/activate/management-info")
+            processController.dispatch({ type: "NEXT", stepNumber: 5 })
         }
 
 

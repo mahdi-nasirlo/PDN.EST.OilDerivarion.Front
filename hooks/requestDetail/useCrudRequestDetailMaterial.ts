@@ -1,13 +1,12 @@
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../lib/server/mutationFetcher";
-import {MaterialRequest} from "@/app/producer/dashboard/request/formulacion/components/primary-product-form";
 import {mutate} from "swr";
 import {listFetcher} from "../../lib/server/listFetcher";
 
 interface RequestDetailMaterialType {
     create: {
         isLoading: boolean,
-        trigger: (arg: MaterialRequest, notify?: true) => any
+        trigger: (arg: any, notify?: true) => any
     },
     update: {
         isLoading: boolean
@@ -61,7 +60,7 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
 
     return {
         create: {
-            isLoading: isMutatingCreate,
+            isLoading: isMutatingCreate || isMutatingCreateWithNotify,
             trigger: handleCreate
         },
         update: {

@@ -87,16 +87,23 @@ const useControlProcess = (): ControllerProcessType => {
 
     const getNextStep = async () => {
 
-        console.log("lfskajl")
-
         const res = await requestNextStep.trigger({uid: requestMaster.requestMasterUid})
 
         if (res)
-            dispatch({type: "GET_STEP", stepNumber, step: 2})
+            dispatch({type: "GET_STEP", stepNumber, step: 1})
 
     }
 
-    return {step, isMutating, requestMaster, dispatch, getStep2, getStep3, getStep4, getNextStep}
+    return {
+        step,
+        isMutating: isMutating || confirmStep2.isMutating || confirmStep3.isMutating || requestNextStep.isMutating,
+        requestMaster,
+        dispatch,
+        getStep2,
+        getStep3,
+        getStep4,
+        getNextStep
+    }
 
 }
 

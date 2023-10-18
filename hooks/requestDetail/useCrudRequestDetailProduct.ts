@@ -53,7 +53,7 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
 
     return {
         create: {
-            isLoading: isLDCreateProduct,
+            isLoading: isLDCreateProduct || isLdCreateProductWithNotify,
             trigger: handleCreate
         },
         update: {

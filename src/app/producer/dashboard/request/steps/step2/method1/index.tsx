@@ -3,7 +3,6 @@ import {Button, Col, Divider, Form, Row, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import {MaterialRequest} from "@/app/producer/dashboard/request/formulacion/components/primary-product-form";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
 import {SvgIcon} from "@/components/layout/sidebar";
 
@@ -15,7 +14,7 @@ function Index() {
 
     const crudMaterialRequestDetail = useCrudRequestDetailMaterial()
 
-    const handleSubmit = async (value: MaterialRequest) => {
+    const handleSubmit = async (value: any) => {
 
         value.requestMasterUid = processControl.requestMaster.requestMasterUid;
 
@@ -38,7 +37,7 @@ function Index() {
             <Divider/>
             <Form
                 form={form}
-                disabled={crudMaterialRequestDetail.create.isLoading}
+                disabled={crudMaterialRequestDetail.create.isLoading || processControl.isMutating}
                 name="form_item_path"
                 layout="vertical"
                 onFinish={handleSubmit}
@@ -46,21 +45,11 @@ function Index() {
                 <FormulationFrom/>
                 <Divider/>
                 <Row gutter={[12, 12]}>
-                    <Col span={12}>
-                        <Button
-                            disabled={true}
-                            className="w-full bg-gray-100"
-                            size="large"
-                            type="dashed"
-                        >
-                            مرحله قبلی
-                        </Button>
-                    </Col>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Button
                             className="w-full"
                             icon={<SvgIcon src="/static/save.svg"/>}
-                            // loading={requestDetailMaterial.create.isLoading}
+                            loading={crudMaterialRequestDetail.create.isLoading || processControl.isMutating}
                             size="large"
                             type="primary"
                             htmlType="submit"

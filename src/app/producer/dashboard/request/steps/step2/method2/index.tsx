@@ -6,7 +6,6 @@ import StepContext from "@/app/producer/dashboard/request/state-managment/step-c
 import MaterialRequestDetailTable
     from "@/app/producer/dashboard/request/steps/step2/method2/material-request-detail-table";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
-import {MaterialRequest} from "@/app/producer/dashboard/request/formulacion/components/primary-product-form";
 import {mutate} from "swr";
 import {SvgIcon} from "@/components/layout/sidebar";
 
@@ -18,7 +17,7 @@ function Index() {
 
     const requestDetailMaterial = useCrudRequestDetailMaterial()
 
-    const handleOnFinish = async (value: MaterialRequest) => {
+    const handleOnFinish = async (value: any) => {
 
         value.requestMasterUid = processControl.requestMaster.requestMasterUid
 
@@ -40,6 +39,7 @@ function Index() {
 
             <Divider/>
             <Form
+                disabled={requestDetailMaterial.create.isLoading}
                 form={form}
                 name="form_item_path"
                 layout="vertical"
@@ -47,7 +47,7 @@ function Index() {
             >
                 <FormulationFrom/>
                 <div className="flex justify-end">
-                    <Button htmlType="submit">
+                    <Button loading={requestDetailMaterial.create.isLoading} htmlType="submit">
                         ذخیره
                     </Button>
                 </div>
@@ -57,18 +57,9 @@ function Index() {
 
             <div className="flex gap-3 mt-5">
                 <Button
-                    disabled={true}
-                    className="w-full bg-gray-100"
-                    size="large"
-                    type="dashed"
-                >
-                    مرحله قبلی
-                </Button>
-
-                <Button
                     className="w-full"
                     icon={<SvgIcon src="/static/save.svg"/>}
-                    // loading={requestDetailMaterial.create.isLoading}
+                    loading={processControl.isMutating}
                     size="large"
                     type="primary"
                     onClick={processControl.getStep3}

@@ -92,9 +92,9 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <MakeRequest />,
-        "/producer/dashboard/request/production-process",
-        <PencilIcon width={16} height={16} />
+          <MakeRequest/>,
+          "/producer/dashboard/request",
+          <PencilIcon width={16} height={16}/>
       ),
       getMenuItem(
         <RequestList />,

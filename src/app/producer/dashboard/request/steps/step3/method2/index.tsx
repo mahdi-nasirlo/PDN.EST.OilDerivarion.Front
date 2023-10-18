@@ -30,7 +30,7 @@ const Index = () => {
                 محصول تولیدی
             </Typography>
 
-            <Form onFinish={handleOnFinish}>
+            <Form disabled={processController.isMutating} onFinish={handleOnFinish}>
                 <SelectProductForm/>
                 <Divider/>
                 <div className="flex gap-3">
@@ -41,6 +41,7 @@ const Index = () => {
                     </Button>
 
                     <Button
+                        loading={processController.isMutating}
                         className="w-full management-info-form-submit btn-filter"
                         size="large"
                         type="primary"

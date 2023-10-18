@@ -17,7 +17,8 @@ export type StepAction = Previous | Next | GetStep
 
 
 const stepReducer = (value: number, action: StepAction) => {
-    
+
+
     if (action.type === "NEXT" && value < action.stepNumber)
         return value + 1
 

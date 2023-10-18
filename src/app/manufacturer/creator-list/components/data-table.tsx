@@ -2,26 +2,19 @@ import { Space, Table, Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import Link from 'next/link';
 import React from 'react'
-import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { GetPage_ExeManager, Person } from "../../../../../interfaces/producer";
+import { ProducerRecords } from '../../../../../interfaces/producer';
 
 
-export default function DataTable() {
-
-    const {
-        data,
-        isLoading,
-    } = useSWR<GetPage_ExeManager>("/Producer/GetPage_ExeManager", (url) => listFetcher(url, {
-        arg: {
-            "fromRecord": 0,
-            "selectRecord": 100000
-        }
-    }))
+export default function DataTable({ ldProducerList, ProducerList, mutate }: {
+    ldProducerList: boolean,
+    mutate: () => void,
+    ProducerList: ProducerRecords[] | undefined;
+}) {
 
 
-    const columns: ColumnsType<Person & { Row: number }> = [
+
+    const columns: ColumnsType<ProducerRecords> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -38,26 +31,21 @@ export default function DataTable() {
             key: "3",
         },
         {
-            title: "نام مدیرعامل   ",
-            dataIndex: "ceoName",
+            title: "نوع مالکیت",
+            dataIndex: "companyOwnershipTypeName",
             key: "4",
         },
         {
-            title: "نوع مالکیت",
-            dataIndex: "companyOwnershipTypeName",
-            key: "5",
-        },
-        {
             title: " وضعیت حساب کاربری ",
-            dataIndex: "status",
-            key: "6",
+            dataIndex: "companyStatusName",
+            key: "5",
             render: (_, record: any) => {
 
                 let color = "";
 
-                if (record.status === "غیرفعال") {
+                if (record.companyStatusName === "غیرفعال") {
                     color = "red";
-                } else if (record.status === "فعال") {
+                } else if (record.companyStatusName === "فعال") {
                     color = "green";
                 } else {
                     color = "yellow";
@@ -66,7 +54,7 @@ export default function DataTable() {
                 return (
                     <>
                         <Tag color={color}>
-                            {record.status}
+                            {record.companyStatusName}
                         </Tag>
                     </>
                 );
@@ -93,10 +81,10 @@ export default function DataTable() {
         <div className="box-border w-full p-6 mt-8">
             <Typography className="text-right text-[16px] font-normal">لیست تولید کننده ها</Typography>
             <Table
-                loading={isLoading}
+                loading={ldProducerList}
                 className="mt-8"
                 columns={columns}
-                dataSource={addIndexToData(data?.records)}
+                dataSource={addIndexToData(ProducerList)}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: true,

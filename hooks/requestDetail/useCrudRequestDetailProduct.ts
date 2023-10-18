@@ -39,9 +39,9 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
 
 
         if (notify)
-            return await createProduct(value)
-        else
             return await createProductWithNotify(value)
+        else
+            return await createProduct(value)
 
     }
 
@@ -53,7 +53,7 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
 
     return {
         create: {
-            isLoading: isLDCreateProduct,
+            isLoading: isLDCreateProduct || isLdCreateProductWithNotify,
             trigger: handleCreate
         },
         update: {

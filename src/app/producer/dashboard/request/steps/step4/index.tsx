@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import ReviewDataTable from "@/app/producer/dashboard/request/steps/step4/review-data-table";
-import { Button, Card, Checkbox, Col, Divider, Form, Row, Spin } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { useForm } from "antd/es/form/Form";
+import {Button, Checkbox, Col, Divider, Form, Row, Spin} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {useForm} from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
 import ReviewDataModalAcceptAgreement
     from "@/app/producer/dashboard/request/steps/step4/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit from "@/app/producer/dashboard/request/steps/step4/review-data-modal-final-submit";
@@ -61,23 +61,17 @@ const Index = () => {
                     </Form.Item>
                     <Divider />
                     <Row gutter={[10, 0]}>
-                        <Col span={8}>
-                            <Button type="dashed" className="bg-gray-100 w-full"
-                                onClick={() => processController.dispatch({ type: "PREVIOUS" })}>
-                                مرحله قبل
-                            </Button>
-                        </Col>
-                        <Col span={8}>
+                        <Col span={12}>
                             <Button
                                 onClick={processController.getNextStep}
                                 className="w-full bg-gray-50 flex items-center justify-center"
                                 size="large"
-                                icon={<PlusIcon width={24} height={24} />}
+                                icon={<PlusIcon width={24} height={24}/>}
                             >
                                 افزودن مواد اولیه و محصول جدید
                             </Button>
                         </Col>
-                        <Col span={8}>
+                        <Col span={12}>
                             <Button
                                 className="w-full management-info-form-submit btn-filter"
                                 size="large"
@@ -98,38 +92,10 @@ const Index = () => {
                 modalVisibleFinalSubmit={modalVisibleFinalSubmit}
                 setModalVisibleFinalSubmit={setModalVisibleFinalSubmit}
             />
-            <div className='flex gap-1'>
-                {applicants.map((data) => {
-                    return (
-                        <Card
-                            key={data.id}
-                            className='w-1/3'
-                            title="Default size card"
-                            extra={
-                                <button
-                                    className='text-red-500 font-bold'
-                                    onClick={() => console.log(data.id)}
-                                >
-                                    حذف
-                                </button>
-                            }
-                        >
-                            <p>{data.name}</p>
-                            <p>{data.family}</p>
-                        </Card>
-                    );
-                })}
-            </div>
 
         </>
     );
 };
 
-
-const applicants = [
-    { id: '0', name: 'Joe', family: "opts" },
-    { id: '1', name: 'janet', family: "consectetur" },
-    { id: '2', name: 'ante', family: "Expedia" },
-];
 
 export default Index;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SmileOutlined } from "@ant-design/icons";
+import { EditFilled, LogoutOutlined } from "@ant-design/icons";
 import { Dropdown, MenuProps, Modal, theme, Typography } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -25,18 +25,6 @@ export default function HeaderDropdown() {
 
   const items: MenuProps["items"] = [
     {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-    {
       key: "2",
       label: (
         <a
@@ -44,23 +32,10 @@ export default function HeaderDropdown() {
           rel="noopener noreferrer"
           href="https://www.aliyun.com"
         >
-          2nd menu item (disabled)
+          ویرایش اطلاعات کاربری
         </a>
       ),
-      icon: <SmileOutlined />,
-      disabled: true,
-    },
-    {
-      key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item (disabled)
-        </a>
-      ),
+      icon: <EditFilled />,
       disabled: true,
     },
     {
@@ -70,6 +45,7 @@ export default function HeaderDropdown() {
       onClick: () => {
         showModal();
       },
+      icon: <LogoutOutlined />,
       theme: "dark",
     },
   ];

@@ -19,7 +19,7 @@ const Index = () => {
 
     const [form] = useForm()
 
-    const {trigger, isMutating} = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
 
     const onFinish = async () => {
         const data = await trigger({
@@ -33,9 +33,9 @@ const Index = () => {
 
     return (
         <>
-            <ReviewDataTable/>
+            <ReviewDataTable />
 
-            <Divider/>
+            <Divider />
             <Spin spinning={processController.isMutating}>
                 <Form
                     form={form}
@@ -55,19 +55,13 @@ const Index = () => {
                     >
                         <Checkbox>
                             شرایط و <span className="text-primary-500 p-0"
-                                          onClick={() => setModalVisibleConfirmation(true)}>قوانین</span> را
+                                onClick={() => setModalVisibleConfirmation(true)}>قوانین</span> را
                             خوانده و می پذیرم!
                         </Checkbox>
                     </Form.Item>
-                    <Divider/>
+                    <Divider />
                     <Row gutter={[10, 0]}>
-                        <Col span={8}>
-                            <Button type="dashed" className="bg-gray-100 w-full"
-                                    onClick={() => processController.dispatch({type: "PREVIOUS"})}>
-                                مرحله قبل
-                            </Button>
-                        </Col>
-                        <Col span={8}>
+                        <Col span={12}>
                             <Button
                                 onClick={processController.getNextStep}
                                 className="w-full bg-gray-50 flex items-center justify-center"
@@ -77,7 +71,7 @@ const Index = () => {
                                 افزودن مواد اولیه و محصول جدید
                             </Button>
                         </Col>
-                        <Col span={8}>
+                        <Col span={12}>
                             <Button
                                 className="w-full management-info-form-submit btn-filter"
                                 size="large"
@@ -98,8 +92,10 @@ const Index = () => {
                 modalVisibleFinalSubmit={modalVisibleFinalSubmit}
                 setModalVisibleFinalSubmit={setModalVisibleFinalSubmit}
             />
+
         </>
     );
 };
+
 
 export default Index;

@@ -1,10 +1,16 @@
 import React from 'react';
 import {Col, Divider, Form, Input, InputNumber, Row, Select, Typography} from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
+import {useGetAllPersonType} from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
+import useGetAllSupplyMethod from "../../../../../../../../hooks/baseInfo/useGetAllSupplyMethod";
 
 const FormulationFrom = () => {
 
     const materialsData = useGetAllMaterial()
+
+    const personType = useGetAllPersonType()
+
+    const supplyMethod = useGetAllSupplyMethod()
 
     return (
         <>
@@ -91,17 +97,18 @@ const FormulationFrom = () => {
                     <Form.Item
                         name="materialSupplyMethodId"
                         label="نحوه تامین"
-                        //   rules={[
-                        //     { required: true, message: "نحوه تامین اجبار است" },
-                        //     { type: "number" },
-                        //   ]}
+                        rules={[
+                            {required: true, message: "نحوه تامین اجبار است"},
+                            {type: "number"},
+                        ]}
                     >
                         <Select
-                            fieldNames={{value: "Uid", label: "Name"}}
+                            fieldNames={supplyMethod.fieldNames}
                             size="large"
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
-                            // options={HowToSupply}
+                            loading={supplyMethod.isLoadingSupplyMethod}
+                            options={supplyMethod.supplyMethods}
                         />
                     </Form.Item>
                 </Col>
@@ -189,17 +196,18 @@ const FormulationFrom = () => {
                     <Form.Item
                         name="materialSupplyPersonTypeId"
                         label="شخصیت"
-                        //   rules={[
-                        //     { required: true, message: "شخصیت اجباری است" },
-                        //     { type: "number" },
-                        //   ]}
+                        rules={[
+                            {required: true, message: "شخصیت اجباری است"},
+                            {type: "number"},
+                        ]}
                     >
                         <Select
-                            fieldNames={{value: "Uid", label: "Name"}}
+                            fieldNames={personType.fieldNames}
                             size="large"
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
-                            // options={Character}
+                            loading={personType.isLoadingPersonType}
+                            options={personType.personType}
                         />
                     </Form.Item>
                 </Col>

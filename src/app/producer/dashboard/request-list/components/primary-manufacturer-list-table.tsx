@@ -1,118 +1,104 @@
-import { Space, Table, Typography } from 'antd'
-import Link from 'next/link';
-import React from 'react'
-import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { GetPage_ExeManager } from "../../../../../../interfaces/producer";
-import { ColumnsType } from 'antd/es/table';
+import { Button, Space, Switch, Table, Typography } from "antd";
+import Link from "next/link";
+import React from "react";
+import { ColumnsType } from "antd/es/table";
+import { RequestList } from "../../../../../../interfaces/requestDetail";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import { useRouter } from "next/navigation";
 
-export default function PrimaryManufacturerListTable() {
+export default function PrimaryManufacturerListTable({
+  request,
+  isLoading,
+}: {
+  request: any;
+  isLoading: any;
+}) {
+  const router = useRouter();
 
-    const {
-        data,
-        isLoading,
-    } = useSWR<GetPage_ExeManager>("/Producer/GetPage_ExeManager", (url) => listFetcher(url, {
-        arg: {
-            fromRecord: 0,
-            selectRecord: 100000
-        }
-    }))
+  const columns: ColumnsType<RequestList> = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      key: "1",
+    },
+    {
+      title: "نام فرآیند",
+      dataIndex: "ProcessDescription",
+      key: "2",
+    },
+    {
+      title: "تاریخ درخواست",
+      dataIndex: "CreateDate",
+      key: "3",
+    },
+    {
+      title: "نام شرکت",
+      dataIndex: "CompanyName",
+      key: "4",
+    },
+    {
+      title: "روش تولید",
+      dataIndex: "ProductionMethodName",
+      key: "5",
+    },
+    {
+      title: "وضعیت فرآیند",
+      dataIndex: "IsReqDetailCompleted",
+      key: "6",
+      render: (e, record) => (
+        <Switch defaultChecked={record.IsReqDetailCompleted} />
+      ),
+    },
 
-    const columns: ColumnsType<any> = [
-        {
-            title: "ردیف",
-            dataIndex: "Row",
-            key: "1",
-        },
-        {
-            title: "نام محصول",
-            dataIndex: "ProductName",
-            key: "2",
-        },
-        {
-            title: "کد رهگیری",
-            dataIndex: "TrackingCode",
-            key: "3",
-        },
-        {
-            title: "کد درخواست تایید شده",
-            dataIndex: "ConfirmedRequestCode",
-            key: "4",
-        },
-        {
-            title: "تاریخ ثبت",
-            dataIndex: "DateRegistration",
-            key: "5",
-        },
-        {
-            title: "وضعیت فعالیت",
-            dataIndex: "ActivityStatus",
-            key: "6",
-            // render: (_, {ActivityStatus}) => (
-            //     <>
-            //         {ActivityStatus.map((activityStatus) => {
-            //             let color;
-            //             switch (activityStatus) {
-            //                 case 'دریافت استاندارد':
-            //                     color = 'green';
-            //                     break;
-            //                 case 'عدم دریافت استاندارد':
-            //                     color = 'red';
-            //                     break;
-            //                 case 'در حال آزمایش':
-            //                     color = 'yellow';
-            //                     break;
-            //                 case 'loser':
-            //                     color = 'volcano';
-            //                     break;
-            //                 default:
-            //                     color = 'geekblue'; // Default color if none of the conditions match
-            //                     break;
-            //             }
-            //
-            //             return (
-            //                 <Tag color={color} key={activityStatus}>
-            //                     {activityStatus.toUpperCase()}
-            //                 </Tag>
-            //             );
-            //         })}
-            //
-            //     </>
-            // ),
-        },
+    {
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: 150,
+      render: (_, record) => (
+        <Space size="small">
+          <Link href={""} className="action-btn-delete">
+            حذف
+          </Link>
+          <Button
+            type="link"
+            className={"text-secondary-500 font-bold"}
+            onClick={() => {
+              router.push(`/producer/dashboard/request-detail/${record.Uid}`);
+              console.log(record.Uid);
+            }}
+          >
+            مشاهده اطلاعات
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
-        {
-            title: "عملیات",
-            key: "عملیات",
-            align: "center",
-            fixed: 'right',
-            width: 150,
-            render: () => (
-                <Space size="small">
-                    <Link href={""} className="action-btn-delete">
-                        حذف
-                    </Link>
-                </Space>
-            ),
-        },
-    ];
-
-    return (
-        <div className="box-border w-full p-6 mt-8">
-            <Typography className="text-right text-[16px] font-normal">لیست درخواست ها</Typography>
-            <Table
-                className='mt-8'
-                loading={isLoading}
-                columns={columns}
-                dataSource={[]}
-                pagination={{
-                    defaultPageSize: 10,
-                    showSizeChanger: true,
-                    pageSizeOptions: ['10', '20', '50'],
-                    defaultCurrent: 1,
-                    style: { display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "16px 0", },
-                }}
-            />
-        </div>
-    )
+  return (
+    <div className="box-border w-full p-6 mt-8">
+      <Typography className="text-right text-[16px] font-normal">
+        لیست درخواست ها
+      </Typography>
+      <Table
+        className="mt-8"
+        loading={isLoading}
+        columns={columns}
+        dataSource={addIndexToData(request?.records)}
+        pagination={{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ["10", "20", "50"],
+          defaultCurrent: 1,
+          style: {
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            margin: "16px 0",
+          },
+        }}
+      />
+    </div>
+  );
 }

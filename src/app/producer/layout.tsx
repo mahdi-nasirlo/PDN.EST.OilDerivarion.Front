@@ -92,9 +92,9 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-          <MakeRequest/>,
-          "/producer/dashboard/request",
-          <PencilIcon width={16} height={16}/>
+        <MakeRequest />,
+        "/producer/dashboard/request",
+        <PencilIcon width={16} height={16} />
       ),
       getMenuItem(
         <RequestList />,
@@ -150,24 +150,24 @@ const items: MenuProps["items"] = [
     "group"
   ),
 
-  { type: "divider" },
+  // { type: "divider" },
 
-  getMenuItem(
-    "مدیریت",
-    "management",
-    null,
-    [
-      getMenuItem(
-        "تنظیمات حساب کاربری",
-        "profile-setting",
-        <Cog6ToothIcon width={16} height={16} />
-      ),
-      getMenuItem(
-        "ارتباط با پشتیبان",
-        "connect-support",
-        <ChatBubbleLeftEllipsisIcon width={16} height={16} />
-      ),
-    ],
-    "group"
-  ),
+  // getMenuItem(
+  //   "مدیریت",
+  //   "management",
+  //   null,
+  //   [
+  //     getMenuItem(
+  //       "تنظیمات حساب کاربری",
+  //       "profile-setting",
+  //       <Cog6ToothIcon width={16} height={16} />
+  //     ),
+  //     getMenuItem(
+  //       "ارتباط با پشتیبان",
+  //       "connect-support",
+  //       <ChatBubbleLeftEllipsisIcon width={16} height={16} />
+  //     ),
+  //   ],
+  //   "group"
+  // ),
 ];

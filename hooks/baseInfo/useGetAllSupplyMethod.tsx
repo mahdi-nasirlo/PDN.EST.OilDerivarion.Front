@@ -8,7 +8,7 @@ const UseGetAllSupplyMethod = () => {
     const {
         data: supplyMethods,
         isLoading: isLoadingSupplyMethod
-    } = useSWR<any[]>("/BaseInfo/PersonTypeGetAll", listFetcher)
+    } = useSWR<any[]>("/BaseInfo/SupplyMethodGetAll", listFetcher)
 
     return {supplyMethods, isLoadingSupplyMethod, fieldNames: {label: "Name", value: "Id"}}
 

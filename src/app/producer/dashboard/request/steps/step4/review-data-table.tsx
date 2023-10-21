@@ -1,4 +1,4 @@
-import {Button, Card, Collapse, Empty, Spin, Table, Typography} from 'antd'
+import {Button, Collapse, Empty, Spin, Table, Typography} from 'antd'
 import {ColumnsType} from 'antd/es/table';
 import React, {useContext} from 'react'
 import {Product} from "../../../../../../../interfaces/requestDetail";
@@ -40,26 +40,22 @@ export default function ReviewDataTable() {
                             <>
                                 <Collapse
                                     size="large"
+                                    expandIconPosition="right"
                                     items={[{
-                                        label: <div className="text-right">
-                                            <div className="flex justify-start items-center">
-                                                {`مرحله شماره ${item.stepNumber}`}
-                                            </div>
-                                        </div>
-                                        ,
+                                        label: "مرحله شماره " + item.stepNumber,
+                                        extra: <Button
+                                            type="text"
+                                            size="small"
+                                            style={{padding: "8px !important"}}
+                                            className='text-red-500 font-bold'
+                                            onClick={() => deleteStep.trigger({
+                                                stepNumber: item.stepNumber,
+                                                requestMasterUid: processController.requestMaster.requestMasterUid
+                                            })}
+                                        >
+                                            حذف
+                                        </Button>,
                                         children: <>
-                                            <div className="flex justify-start">
-                                                <Button
-                                                    type="text"
-                                                    className='text-red-500 font-bold ml-3'
-                                                    onClick={() => deleteStep.trigger({
-                                                        stepNumber: item.stepNumber,
-                                                        requestMasterUid: processController.requestMaster.requestMasterUid
-                                                    })}
-                                                >
-                                                    حذف
-                                                </Button>
-                                            </div>
                                             <Typography className="text-right font-medium text-lg mb-2">
                                                 لیست مواد اولیه
                                             </Typography>
@@ -81,13 +77,6 @@ export default function ReviewDataTable() {
                                         </>
                                     }]}
                                 />
-                                <Card
-                                    key={item.stepNumber}
-                                    className='w-full shadow'
-                                    title
-                                >
-
-                                </Card>
                             </>
                         );
                     })}

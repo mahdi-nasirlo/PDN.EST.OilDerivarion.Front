@@ -57,6 +57,12 @@ function Index() {
 
             <div className="flex gap-3 mt-5">
                 <Button
+                    onClick={() => processControl.dispatch({type: "GET_STEP", stepNumber: 4, step: 3})}
+                    type="dashed"
+                    className="bg-gray-100 w-full">
+                    بازبینی نهایی
+                </Button>
+                <Button
                     className="w-full"
                     icon={<SvgIcon src="/static/save.svg"/>}
                     loading={processControl.isMutating}

@@ -1,19 +1,19 @@
 "use client";
 
-import {Button, Col, Modal, Row, Typography} from "antd";
-import {useForm} from "antd/es/form/Form";
-import React, {useCallback, useState} from "react";
+import { Button, Col, Modal, Row, Typography } from "antd";
+import { useForm } from "antd/es/form/Form";
+import React, { useCallback, useState } from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import Step1 from "@/app/admin-panel/laboratory/components/forms/step1";
 import Step2 from "@/app/admin-panel/laboratory/components/forms/step2";
 import Step3 from "@/app/admin-panel/laboratory/components/forms/step3";
 
 export default function CreateModal({
-                                        modalVisible,
-                                        setModalVisible,
-                                        mutate,
-                                    }: {
+    modalVisible,
+    setModalVisible,
+    mutate,
+}: {
     modalVisible: any;
     setModalVisible: any;
     mutate: () => void;
@@ -60,7 +60,7 @@ export default function CreateModal({
         [step]
     );
 
-    const {trigger: createLab, isMutating: ldCreateLab} = useSWRMutation("/Lab/Create", mutationFetcher)
+    const { trigger: createLab, isMutating: ldCreateLab } = useSWRMutation("/Lab/Create", mutationFetcher)
 
     const handleCreateLab = async (values: LabCreate) => {
 
@@ -92,7 +92,7 @@ export default function CreateModal({
 
         await mutate
 
-        if (res === null) {
+        if (res === true) {
 
             handleNextStep()
 
@@ -113,7 +113,7 @@ export default function CreateModal({
 
         await mutate
 
-        if (res === null) {
+        if (res === true) {
 
             setModalVisible(false)
         }
@@ -172,10 +172,21 @@ export default function CreateModal({
             ]}
         >
             <div>
-                {step === 1 && <Step1 loading={ldCreateLab} handleSubmit={handleCreateLab} form={form}/>}
-                {step === 2 &&
-                    <Step2 isLoading={ldSaveForm} handleSubmit={handleCreateSaveFormResponsible} form={form}/>}
-                {step === 3 && <Step3 isLoading={ldSaveForm} handleSubmit={handleSubmitFormManager} form={form}/>}
+                {step === 1 && <Step1
+                    loading={ldCreateLab}
+                    handleSubmit={handleCreateLab}
+                    form={form} />
+                }
+                {step === 2 && <Step2
+                    isLoading={ldSaveForm}
+                    handleSubmit={handleCreateSaveFormResponsible}
+                    form={form} />
+                }
+                {step === 3 && <Step3
+                    isLoading={ldSaveFormManager}
+                    handleSubmit={handleSubmitFormManager}
+                    form={form} />
+                }
             </div>
         </Modal>
     );

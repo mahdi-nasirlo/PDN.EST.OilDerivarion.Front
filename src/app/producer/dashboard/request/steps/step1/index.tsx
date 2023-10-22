@@ -69,60 +69,60 @@ export default function Step1() {
                 </Row>
                 <Divider/>
 
-                <Row gutter={[16, 0]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="company-registratuon-num"
-                            label="کشورهای مقصد صادراتی محصول"
-                        >
-                            <Select
-                                size="large"
-                                mode="tags"
-                                placeholder="انتخاب نمایید"
-                                tokenSeparators={[","]}
-                                options={ProductExportCountries}
-                                fieldNames={{label: "name", value: "key"}}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item name="license-establish" label="ضایعات">
-                            <Select
-                                size="large"
-                                mode="tags"
-                                placeholder="انتخاب نمایید"
-                                tokenSeparators={[","]}
-                                options={OilWaste}
-                                fieldNames={{label: "name", value: "key"}}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="operation-license"
-                            label="محل فروش و یا دفن ضایعات"
-                        >
-                            <Input size="large" placeholder="وارد کنید"/>
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label=" تجهیزات آزمایشگاه"
-                        >
-                            <Select
-                                size="large"
-                                mode="tags"
-                                placeholder="انتخاب نمایید"
-                                tokenSeparators={[","]}
-                                options={LaboratoryEquipment}
-                                fieldNames={{label: "name", value: "key"}}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
+                {/*<Row gutter={[16, 0]}>*/}
+                {/*    <Col xs={24} md={12}>*/}
+                {/*        <Form.Item*/}
+                {/*            name="company-registratuon-num"*/}
+                {/*            label="کشورهای مقصد صادراتی محصول"*/}
+                {/*        >*/}
+                {/*            <Select*/}
+                {/*                size="large"*/}
+                {/*                mode="tags"*/}
+                {/*                placeholder="انتخاب نمایید"*/}
+                {/*                tokenSeparators={[","]}*/}
+                {/*                options={ProductExportCountries}*/}
+                {/*                fieldNames={{label: "name", value: "key"}}*/}
+                {/*            />*/}
+                {/*        </Form.Item>*/}
+                {/*    </Col>*/}
+                {/*    <Col xs={24} md={12}>*/}
+                {/*        <Form.Item name="license-establish" label="ضایعات">*/}
+                {/*            <Select*/}
+                {/*                size="large"*/}
+                {/*                mode="tags"*/}
+                {/*                placeholder="انتخاب نمایید"*/}
+                {/*                tokenSeparators={[","]}*/}
+                {/*                options={OilWaste}*/}
+                {/*                fieldNames={{label: "name", value: "key"}}*/}
+                {/*            />*/}
+                {/*        </Form.Item>*/}
+                {/*    </Col>*/}
+                {/*    <Col xs={24} md={12}>*/}
+                {/*        <Form.Item*/}
+                {/*            name="operation-license"*/}
+                {/*            label="محل فروش و یا دفن ضایعات"*/}
+                {/*        >*/}
+                {/*            <Input size="large" placeholder="وارد کنید"/>*/}
+                {/*        </Form.Item>*/}
+                {/*    </Col>*/}
+                {/*    <Col xs={24} md={12}>*/}
+                {/*        <Form.Item*/}
+                {/*            name="year-establishment"*/}
+                {/*            label=" تجهیزات آزمایشگاه"*/}
+                {/*        >*/}
+                {/*            <Select*/}
+                {/*                size="large"*/}
+                {/*                mode="tags"*/}
+                {/*                placeholder="انتخاب نمایید"*/}
+                {/*                tokenSeparators={[","]}*/}
+                {/*                options={LaboratoryEquipment}*/}
+                {/*                fieldNames={{label: "name", value: "key"}}*/}
+                {/*            />*/}
+                {/*        </Form.Item>*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
 
-                <Divider/>
+                {/*<Divider/>*/}
 
                 <Row gutter={[12, 12]}>
                     <Col span={24}>

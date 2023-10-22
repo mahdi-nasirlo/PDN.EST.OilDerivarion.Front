@@ -45,7 +45,15 @@ function Index() {
                 <FormulationFrom/>
                 <Divider/>
                 <Row gutter={[12, 12]}>
-                    <Col span={24}>
+                    <Col span={12}>
+                        <Button
+                            onClick={() => processControl.dispatch({type: "GET_STEP", stepNumber: 4, step: 3})}
+                            type="dashed"
+                            className="bg-gray-100 w-full">
+                            بازبینی نهایی
+                        </Button>
+                    </Col>
+                    <Col span={12}>
                         <Button
                             className="w-full"
                             icon={<SvgIcon src="/static/save.svg"/>}

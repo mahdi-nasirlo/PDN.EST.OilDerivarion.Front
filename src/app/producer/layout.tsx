@@ -57,34 +57,6 @@ const items: MenuProps["items"] = [
   { type: "divider" },
 
   getMenuItem(
-    <Link href={"/state-general-management/process/StateOrgManager/list"}>
-      کارشناس استان
-    </Link>,
-    "/state-general-management/process/StateOrgManager/list"
-  ),
-  getMenuItem(
-    <Link href={"/state-general-management/process/ExeManager/list"}>
-      رئیس اجرایی
-    </Link>,
-    "/state-general-management/process/ExeManager/list"
-  ),
-
-  getMenuItem(
-    <Link href={"/state-general-management/process/Rejected/list"}>
-      رد شده ها
-    </Link>,
-    "/state-general-management/process/Rejected/list"
-  ),
-  getMenuItem(
-    <Link href={"/state-general-management/process/End/list"}>
-      تایید شده ها
-    </Link>,
-    "/state-general-management/process/End/list"
-  ),
-
-  { type: "divider" },
-
-  getMenuItem(
     "پیشخوان",
     "dashboard",
     null,
@@ -117,33 +89,33 @@ const items: MenuProps["items"] = [
     "management",
     null,
     [
-      getMenuItem(
-        <Link href="/producer/base-info/creator-production">
-          اطلاعات واحد تولیدی
-        </Link>,
-        "/producer/base-info/creator-production",
-        <WrenchScrewdriverIcon width={16} height={16} />
-      ),
-      getMenuItem(
-        <Link href="/producer/base-info/management-info">اطلاعات مدیریتی</Link>,
-        "/producer/base-info/management-info",
-        <UserCircleIcon width={16} height={16} />
-      ),
-      getMenuItem(
-        <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
-        "/producer/base-info/personnel-info",
-        <UsersIcon width={16} height={16} />
-      ),
-      getMenuItem(
-        <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
-        "/producer/base-info/license-info",
-        <DocumentDuplicateIcon width={16} height={16} />
-      ),
-      getMenuItem(
-        <Link href="/producer/base-info/contact-info">اطلاعات تماس</Link>,
-        "/producer/base-info/contact-info",
-        <PhoneIcon width={16} height={16} />
-      ),
+        getMenuItem(
+            <Link href="/producer/base-info/management-info">اطلاعات مدیریتی</Link>,
+            "/producer/base-info/management-info",
+            <UserCircleIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/creator-production">
+                اطلاعات واحد تولیدی
+            </Link>,
+            "/producer/base-info/creator-production",
+            <WrenchScrewdriverIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
+            "/producer/base-info/license-info",
+            <DocumentDuplicateIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
+            "/producer/base-info/personnel-info",
+            <UsersIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/contact-info">اطلاعات تماس</Link>,
+            "/producer/base-info/contact-info",
+            <PhoneIcon width={16} height={16}/>
+        ),
     ],
     "group"
   ),

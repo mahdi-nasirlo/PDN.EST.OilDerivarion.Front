@@ -26,7 +26,9 @@ const ChangeStatus = (props: PropsType) => {
       isActive: props.isActive,
     });
 
-    setValue(e);
+    if (res) {
+      setValue(e);
+    }
 
     if (!res) {
       setValue(!e);

@@ -18,14 +18,18 @@ const ChangeStatus = (props: PropsType) => {
     const [value, setValue] = useState(props.isActive)
 
     const handleChange = async (e: boolean) => {
-        
+
         const res = await trigger({
             uid: props.uid,
             isActive: props.isActive
         })
 
-        if (res) {
-            setValue(e)
+        setValue(e)
+
+        if (!res) {
+
+            setValue(!e)
+
         }
 
     }

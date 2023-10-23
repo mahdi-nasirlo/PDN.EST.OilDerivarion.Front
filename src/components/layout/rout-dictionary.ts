@@ -9,6 +9,9 @@ export const routDictionary: Items = {
   dashboard: {
     title: "پیشخوان",
   },
+  "request-detail": {
+    title: "جزئیات درخواست"
+  },
 
   activate: {
     title: "فعال سازی",

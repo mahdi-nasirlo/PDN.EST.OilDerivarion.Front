@@ -1,16 +1,24 @@
-import React from 'react';
-import {Col, Divider, Form, Input, InputNumber, Row, Select, Typography} from "antd";
+import React, {useContext, useReducer} from 'react';
+import {Col, Divider, Form, FormInstance, Input, InputNumber, Row, Select, Typography} from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
 import {useGetAllPersonType} from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
 import useGetAllSupplyMethod from "../../../../../../../../hooks/baseInfo/useGetAllSupplyMethod";
+import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import percentReducer from "../../../../../../../../reducers/PercentageAction";
 
-const FormulationFrom = () => {
+const FormulationFrom = (props: { form?: FormInstance }) => {
+
+    const processController = useContext(StepContext)
 
     const materialsData = useGetAllMaterial()
 
     const personType = useGetAllPersonType()
 
     const supplyMethod = useGetAllSupplyMethod()
+
+    const initialState = {percentOne: 0, percentTwo: 100};
+
+    const [state, dispatch] = useReducer(percentReducer, initialState);
 
     return (
         <>
@@ -55,30 +63,34 @@ const FormulationFrom = () => {
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        name={"materialUsagePercentage"}
-                        label={"درصد استفاده"}
-                        rules={[
-                            {required: true, message: " درصد استفاده اجباری است"},
-                            {
-                                type: "number",
-                                min: 0,
-                                max: 100,
-                                message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                            },
-                        ]}
-                    >
-                        <InputNumber
-                            className="w-full rounded-lg"
-                            size="large"
-                            min={0}
-                            max={100}
-                            formatter={(value) => `${value}%`}
-                            placeholder="وارد کنید"
-                        />
-                    </Form.Item>
-                </Col>
+                {
+                    processController.requestMaster.productionMethodId === 2
+                    &&
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name={"materialUsagePercentage"}
+                            label={"درصد استفاده"}
+                            rules={[
+                                {required: true, message: " درصد استفاده اجباری است"},
+                                {
+                                    type: "number",
+                                    min: 0,
+                                    max: 100,
+                                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                                },
+                            ]}
+                        >
+                            <InputNumber
+                                className="w-full rounded-lg"
+                                size="large"
+                                min={0}
+                                max={100}
+                                formatter={(value) => `${value}%`}
+                                placeholder="وارد کنید"
+                            />
+                        </Form.Item>
+                    </Col>
+                }
                 <Col xs={24} md={12}>
                     <Form.Item
                         name={"materialTotalConsumption"}
@@ -91,8 +103,6 @@ const FormulationFrom = () => {
                         <Input size="large" type={"number"} placeholder="وارد کنید"/>
                     </Form.Item>
                 </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
                     <Form.Item
                         name="materialSupplyMethodId"
@@ -135,42 +145,62 @@ const FormulationFrom = () => {
                 منابع عمده تامین
             </Typography>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+            </Row>
+            <Row gutter={[16, 16]}>
+                <Col xs={12}>
                     <Form.Item
                         name="materialInternalSupplyPercentage"
                         label="درصد تامین داخلی"
-                        rules={[
-                            {required: true, message: "درصد تامین داخلی اجباری است"},
-                            {type: "number", min: 0, max: 100, message: "بین 0 تا 100"},
-                        ]}
+                        rules={[{required: true, message: "درصد تامین داخلی اجباری است"}]}
                     >
                         <InputNumber
                             className="w-full rounded-lg"
-                            size="large"
+                            size='large'
                             min={0}
                             max={100}
-                            formatter={(value) => `${value}%`}
-                            placeholder="وارد کنید"
+                            onChange={(value) => {
+                                if (props?.form)
+                                    dispatch({
+                                        type: 'one',
+                                        value,
+                                        form: props.form,
+                                        inputNames: {
+                                            percentOne: "materialInternalSupplyPercentage",
+                                            percentTwo: "materialForeignSupplyPercentage"
+                                        }
+                                    });
+                            }}
+                            value={state.percentOne}
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={12}>
                     <Form.Item
                         name="materialForeignSupplyPercentage"
                         label="درصد تامین خارجی"
-                        rules={[
-                            {required: true, message: "درصد تامین خارجی اجباری است"},
-                            {type: "number", min: 0, max: 100},
-                        ]}
+                        rules={[{
+                            required: true,
+                            message: "درصد تامین خارجی اجباری است"
+                        }]}
                     >
                         <InputNumber
                             className="w-full rounded-lg"
-                            size="large"
+                            size='large'
                             min={0}
                             max={100}
-                            formatter={(value) => `${value}%`}
-                            placeholder="وارد کنید"
-                            // onChange={onChange}
+                            onChange={(value) => {
+                                if (props?.form)
+                                    dispatch({
+                                        type: 'two',
+                                        value,
+                                        form: props.form,
+                                        inputNames: {
+                                            percentOne: "materialInternalSupplyPercentage",
+                                            percentTwo: "materialForeignSupplyPercentage"
+                                        }
+                                    });
+                            }}
+                            value={0}
                         />
                     </Form.Item>
                 </Col>

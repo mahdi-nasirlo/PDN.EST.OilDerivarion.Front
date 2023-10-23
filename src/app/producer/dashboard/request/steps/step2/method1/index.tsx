@@ -18,9 +18,10 @@ function Index() {
 
         value.requestMasterUid = processControl.requestMaster.requestMasterUid;
 
-        await crudMaterialRequestDetail.create.trigger(value)
+        const res = await crudMaterialRequestDetail.create.trigger(value)
 
-        await processControl.getStep3()
+        if (res)
+            await processControl.getStep3()
 
     }
 
@@ -42,7 +43,7 @@ function Index() {
                 layout="vertical"
                 onFinish={handleSubmit}
             >
-                <FormulationFrom/>
+                <FormulationFrom form={form}/>
                 <Divider/>
                 <Row gutter={[12, 12]}>
                     <Col span={12}>

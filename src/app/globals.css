@@ -490,3 +490,11 @@ margin-right: 24px !important;
 /*.ant-switch {*/
 /*    @apply bg-gray-200 !important*/
 /*}*/
+/* switch */
+.ant-switch{
+    background:#71717a !important;
+ }
+
+ .ant-switch-checked{
+    background:theme("backgroundColor.primary.500")!important;
+ }

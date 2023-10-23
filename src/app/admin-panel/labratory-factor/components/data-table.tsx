@@ -30,9 +30,11 @@ const columns: ColumnsType<Labratory> = [
 ];
 
 const DataTable = ({
+  isValidating,
   Labratory,
   ldProduct,
 }: {
+  isValidating: any;
   Labratory: Labratory[];
   ldProduct: boolean;
 }) => {
@@ -43,7 +45,7 @@ const DataTable = ({
       className="mt-6"
       columns={columns}
       rowKey={"Uid"}
-      loading={ldProduct}
+      loading={ldProduct || isValidating}
       expandable={{
         expandedRowKeys: activeExpRow,
         onExpand: (expanded, record: Labratory) => {
@@ -61,7 +63,7 @@ const DataTable = ({
           setActiveExpRow(keys);
         },
         expandedRowRender: (record: Labratory) => (
-          <ExpandedRowRender Labratory={record} />
+          <ExpandedRowRender isValidating={isValidating} Labratory={record} />
         ),
       }}
       dataSource={Labratory}
@@ -81,7 +83,13 @@ const DataTable = ({
   );
 };
 
-const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
+const ExpandedRowRender = ({
+  Labratory,
+  isValidating,
+}: {
+  Labratory: Labratory;
+  isValidating: any;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState<
@@ -150,7 +158,7 @@ const ExpandedRowRender = ({ Labratory }: { Labratory: Labratory }) => {
       <Table
         columns={expandColumns}
         dataSource={addIndexToData(data)}
-        loading={isLoading || isMutating}
+        loading={isLoading || isMutating || isValidating}
         pagination={false}
       />
       <ConfirmDeleteModal

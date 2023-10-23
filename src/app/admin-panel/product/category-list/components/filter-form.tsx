@@ -6,16 +6,16 @@ import { ProductGet } from "../../../../../../interfaces/product";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 
-export default function FilterForm({ filter, unsetFilter }: {
-  filter: (arg: ProductGet) => void,
-  unsetFilter: () => void,
+export default function FilterForm({
+  filter,
+  unsetFilter,
+}: {
+  filter: (arg: ProductGet) => void;
+  unsetFilter: () => void;
 }) {
-
   const { data: GetAllDensityType, isLoading: ldGetAllDensityType } = useSWR(
-
-    ["/BaseInfo/GetAllDensityType", { name: null, isActive: null, },],
+    ["/BaseInfo/GetAllDensityType", { name: null, isActive: null }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
-
   );
   return (
     // <div className="box-border w-full p-6 ">

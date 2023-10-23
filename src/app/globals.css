@@ -476,3 +476,17 @@ margin-right: 24px !important;
 .ant-input-group > .ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child {
     @apply rounded-e-none !important
 }
+
+/* start collapse style */
+
+.ant-collapse-header {
+    @apply flex items-center !important
+}
+
+/* end collapse style */
+
+/* start switch style */
+
+/*.ant-switch {*/
+/*    @apply bg-gray-200 !important*/
+/*}*/

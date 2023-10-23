@@ -24,6 +24,7 @@ export default function Home() {
     data: License,
     isLoading: ldLicense,
     mutate,
+    isValidating,
   } = useSWR<{
     records: GerPagePresonLicence[];
     count: number;
@@ -56,6 +57,7 @@ export default function Home() {
       </div>
       <Divider />
       <DataTable
+        isValidating={isValidating}
         mutate={mutate}
         MainMember={addIndexToData(License?.records)}
         ldMainMember={ldLicense}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, } from "antd";
+import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
@@ -9,24 +9,22 @@ import { CategoryProduct } from "../../../../../../interfaces/category-product";
 import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
 
 export default function CreateModal({
-  setModalVisible, modalVisible, mutate
+  setModalVisible,
+  modalVisible,
+  mutate,
 }: {
   setModalVisible: any;
   modalVisible: any;
-  mutate: () => void
+  mutate: () => void;
 }) {
-
-
   const { isMutating, trigger } = useSWRMutation(
     "/ProductCategory/Create",
     mutationFetcher
   );
 
-
   const [form] = useForm();
 
   const handleFormSubmit = async (values: CategoryProduct) => {
-
     await trigger(values);
 
     await mutate();
@@ -34,7 +32,6 @@ export default function CreateModal({
     setModalVisible(false);
 
     form.resetFields();
-
   };
 
   const closeModal = () => {
@@ -89,7 +86,7 @@ export default function CreateModal({
         form={form}
         layout="vertical"
       >
-        <CategoryForm />
+        <CategoryForm form={form} />
       </Form>
     </Modal>
   );

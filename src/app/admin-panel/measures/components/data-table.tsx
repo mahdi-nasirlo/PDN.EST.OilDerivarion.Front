@@ -13,20 +13,22 @@ import { Measure } from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
 
 export default function DataTable({
+  isValidating,
   setModalVisible,
   ldMeasure,
   measure,
   mutate,
 }: {
+  isValidating: any;
   setModalVisible: any;
   ldMeasure: boolean;
   mutate: () => void;
   measure:
-  | {
-    records: Measure[];
-    count: number;
-  }
-  | undefined;
+    | {
+        records: Measure[];
+        count: number;
+      }
+    | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
@@ -75,16 +77,10 @@ export default function DataTable({
       render: (e, record) => <Switch defaultChecked={record.IsActive} />,
     },
     {
-      title: "حذف شده",
-      dataIndex: "IsDeleted",
-      key: "4",
-      render: (e, record) => <Switch defaultChecked={record.IsDeleted} />,
-    },
-    {
       title: "عملیات",
       key: "عملیات",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record) => (
         <Space size="small">
@@ -128,7 +124,7 @@ export default function DataTable({
         <Table
           className="mt-6"
           columns={columns}
-          loading={ldMeasure || isMutating}
+          loading={ldMeasure || isMutating || isValidating}
           dataSource={addIndexToData(measure?.records)}
           pagination={{
             defaultPageSize: 10,

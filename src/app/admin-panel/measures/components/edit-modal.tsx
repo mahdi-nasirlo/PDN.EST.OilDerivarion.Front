@@ -22,7 +22,7 @@ function EditModal({
 }) {
   const [form] = useForm();
 
-  const { data, isLoading } = useSWR(
+  const { data, isLoading, isValidating } = useSWR(
     ["/Measure/Get", { uid: editRecords?.Uid }],
     ([url, arg]) => listFetcher(url, { arg })
   );
@@ -78,7 +78,7 @@ function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating}
+                loading={isLoading || isMutating || isValidating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={() => setEditRecord(undefined)}

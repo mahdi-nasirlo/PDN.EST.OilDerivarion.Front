@@ -11,13 +11,13 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import StepContext from "../stete-manager/step-context";
 
 export default function LicenseInfo() {
-
-  const processController = useContext(StepContext)
+  const processController = useContext(StepContext);
 
   const {
     data: License,
     isLoading: ldLicense,
     mutate,
+    isValidating,
   } = useSWR<{
     records: GerPagePresonLicence[];
     count: number;
@@ -35,6 +35,7 @@ export default function LicenseInfo() {
     <>
       <CreateForm mutate={mutate} />
       <DataTable
+        isValidating={isValidating}
         MainMember={addIndexToData(License?.records)}
         ldMainMember={ldLicense}
         mutate={mutate}
@@ -58,7 +59,9 @@ export default function LicenseInfo() {
             size="large"
             type="primary"
             htmlType="submit"
-            onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 5 })}
+            onClick={() =>
+              processController.dispatch({ type: "NEXT", stepNumber: 5 })
+            }
           >
             مرحله بعد
           </Button>

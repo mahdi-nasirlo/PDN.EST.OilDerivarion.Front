@@ -21,8 +21,8 @@ function Index() {
 
         value.requestMasterUid = processControl.requestMaster.requestMasterUid
 
-        await requestDetailMaterial.create.trigger(value, true)
-
+        const res = await requestDetailMaterial.create.trigger(value, true)
+        
         await mutate("/RequestDetail/GetPageMaterial")
 
     }
@@ -56,6 +56,12 @@ function Index() {
             <MaterialRequestDetailTable/>
 
             <div className="flex gap-3 mt-5">
+                <Button
+                    onClick={() => processControl.dispatch({type: "GET_STEP", stepNumber: 4, step: 3})}
+                    type="dashed"
+                    className="bg-gray-100 w-full">
+                    بازبینی نهایی
+                </Button>
                 <Button
                     className="w-full"
                     icon={<SvgIcon src="/static/save.svg"/>}

@@ -12,10 +12,12 @@ import useSWRMutation from "swr/mutation";
 import EditModal from "./edit-modal";
 
 export default function DataTable({
+  isValidating,
   MainMember,
   ldMainMember,
   mutate,
 }: {
+  isValidating: any;
   MainMember: any;
   ldMainMember: any;
   mutate: () => void;
@@ -131,7 +133,7 @@ export default function DataTable({
         className="mt-6"
         columns={columns}
         dataSource={MainMember || ldDeleteLicense}
-        loading={ldMainMember}
+        loading={ldMainMember || isValidating}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,

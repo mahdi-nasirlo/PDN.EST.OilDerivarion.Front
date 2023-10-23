@@ -3,7 +3,7 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Button, Space, Switch, Table, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Category } from "../../../../../../interfaces/category";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
@@ -12,19 +12,18 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
 
 export default function DataTable({
+  isValidating,
   setModalVisible,
   category,
   ldCategory,
   mutate,
 }: {
+  isValidating: any;
   setModalVisible: any;
   category: Category[] | undefined;
   mutate: () => void;
   ldCategory: boolean;
 }) {
-  const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
-  const [recordToEdit, setRecordToEdit] = useState<Category | null>(null);
-
   //حذف
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -53,6 +52,9 @@ export default function DataTable({
     setModalVisible(true);
   };
 
+  const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
+  const [recordToEdit, setRecordToEdit] = useState<Category | null>(null);
+
   const columns: ColumnsType<Category> = [
     {
       title: "ردیف",
@@ -79,9 +81,12 @@ export default function DataTable({
         if (record.HasDensity === false) {
           color = "red";
           name = "ندارد";
-        } else { color = "green"; name = "دارد"; }
+        } else {
+          color = "green";
+          name = "دارد";
+        }
 
-        return (<Tag color={color}>{name}</Tag>);
+        return <Tag color={color}>{name}</Tag>;
       },
     },
     {
@@ -153,7 +158,7 @@ export default function DataTable({
         <Table
           className="mt-6"
           columns={columns}
-          loading={ldCategory || ldDelete}
+          loading={ldCategory || ldDelete || isValidating}
           dataSource={addIndexToData(category)}
           pagination={{
             defaultPageSize: 10,

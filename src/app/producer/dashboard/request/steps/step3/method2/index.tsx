@@ -35,6 +35,13 @@ const Index = () => {
                 <Divider/>
                 <div className="flex gap-3">
 
+                    <Button
+                        onClick={() => processController.dispatch({type: "GET_STEP", stepNumber: 4, step: 3})}
+                        type="dashed"
+                        className="bg-gray-100 w-full">
+                        بازبینی نهایی
+                    </Button>
+
                     <Button onClick={() => processController.dispatch({type: "PREVIOUS"})} type="dashed"
                             className="bg-gray-100 w-full">
                         مرحله قبلی

@@ -59,7 +59,7 @@ export default function DataTable({
     setRecordToEdit(null); // Clear the recordToEdit
   };
 
-  const { data, isLoading } = useSWR<GetPage_ExeManager>(
+  const { data, isLoading, isValidating } = useSWR<GetPage_ExeManager>(
     "/Producer/GetPage_ExeManager",
     (url) =>
       listFetcher(url, {
@@ -111,7 +111,7 @@ export default function DataTable({
       dataIndex: "عملیات",
       key: "8",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record) => (
         <Space size="small">
@@ -154,7 +154,7 @@ export default function DataTable({
         </Button>
       </div>
       <Table
-        loading={isLoading}
+        loading={isLoading || isValidating}
         className="mt-6"
         columns={columns}
         dataSource={addIndexToData(data?.records)}

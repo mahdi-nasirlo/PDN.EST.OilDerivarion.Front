@@ -1,13 +1,13 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
-import React, { useContext } from "react";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { SetBase } from "../../../../../interfaces/Base-info";
+import {Button, Col, Divider, Form, Input, Row, Select, Typography,} from "antd";
+import React, {useContext} from "react";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {SetBase} from "../../../../../interfaces/Base-info";
 import useSWRMutation from "swr/mutation";
-import { useForm } from "antd/es/form/Form";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
 import StepContext from "../stete-manager/step-context";
 
 
@@ -139,7 +139,7 @@ export default function CreatorProduction() {
                     type="primary"
                     htmlType="submit"
                 >
-                    <span className="flex gap-2 justify-center "> ثبت</span>
+                     ثبت
                 </Button>
             </Form>
         </>

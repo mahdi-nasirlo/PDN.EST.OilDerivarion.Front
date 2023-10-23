@@ -10,6 +10,7 @@ import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
 
 export default function DataTable({
   setModalVisible,
@@ -21,11 +22,11 @@ export default function DataTable({
   ldTestItem: boolean;
   mutate: () => void;
   TestItem:
-  | {
-    records: TestItem[];
-    count: number;
-  }
-  | undefined;
+    | {
+        records: TestItem[];
+        count: number;
+      }
+    | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
 
@@ -91,13 +92,19 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "Is_Active",
       key: "4",
-      render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+      render: (e, record) => (
+        <ChangeStatus
+          isActive={record.Is_Active}
+          uid={record.Uid}
+          url={"/TestItem/ChangeStatus"}
+        />
+      ),
     },
     {
       title: "جزئیات",
       key: "جزئیات",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record) => (
         <Space size="small">

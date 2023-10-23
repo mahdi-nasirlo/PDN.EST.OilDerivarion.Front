@@ -11,6 +11,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { Measure } from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
+import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
 
 export default function DataTable({
   isValidating,
@@ -74,7 +75,13 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "3",
-      render: (e, record) => <Switch defaultChecked={record.IsActive} />,
+      render: (e, record) => (
+        <ChangeStatus
+          isActive={record.IsActive}
+          uid={record.Uid}
+          url={"/Measure/ChangeStatus"}
+        />
+      ),
     },
     {
       title: "عملیات",

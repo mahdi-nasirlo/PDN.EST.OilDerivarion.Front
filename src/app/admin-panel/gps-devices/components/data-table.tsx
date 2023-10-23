@@ -10,6 +10,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
+import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
 
 interface DataType {
   key: string;
@@ -84,7 +85,13 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => <Switch checked={record.IsActive} />,
+      render: (e, record) => (
+        <ChangeStatus
+          isActive={record.IsActive}
+          uid={record.Uid}
+          url={"/GpsDevice/ChangeStatus"}
+        />
+      ),
     },
     {
       title: "مکان یابی",

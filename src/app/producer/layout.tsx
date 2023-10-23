@@ -2,21 +2,19 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  ChatBubbleLeftEllipsisIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    DocumentDuplicateIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -60,7 +58,7 @@ const items: MenuProps["items"] = [
 
   getMenuItem(
     <Link href={"/state-general-management/process/StateOrgManager/list"}>
-      اداره کل استان
+      کارشناس استان
     </Link>,
     "/state-general-management/process/StateOrgManager/list"
   ),

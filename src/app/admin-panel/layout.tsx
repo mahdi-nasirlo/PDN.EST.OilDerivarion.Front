@@ -2,16 +2,10 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {getMenuItem} from "@/components/layout/sidebar";
 import Link from "next/link";
-import { MenuProps } from "antd";
-import {
-  Bars3Icon,
-  FolderPlusIcon,
-  HomeIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/24/outline";
-import { QrCodeIcon } from "@heroicons/react/20/solid";
+import {MenuProps} from "antd";
+import {Bars3Icon, FolderPlusIcon, HomeIcon, RectangleStackIcon,} from "@heroicons/react/24/outline";
 
 export default function RootLayout({
   children,
@@ -173,10 +167,5 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
     "/admin-panel/measures"
-  ),
-  getMenuItem(
-    <Link href={"/admin-panel/barcode"}>بارکد</Link>,
-    "/admin-panel/barcode",
-    <QrCodeIcon width={16} height={16} />
   ),
 ];

@@ -1,5 +1,5 @@
 import type {MenuProps} from "antd";
-import {Button, Divider, Grid, Space} from "antd";
+import {Divider, Grid, Space} from "antd";
 import Layout, {Content} from "antd/es/layout/layout";
 import React, {useEffect, useState} from "react";
 import LayoutHeader from "./header";
@@ -97,9 +97,9 @@ export default function AppLayout({
                                     <div className="flex justify-between items-center">
                                         <LayoutBreadcrumb/>
 
-                                        <Button type="default" size="large" onClick={() => router.back()}>
-                                            بازگشت
-                                        </Button>
+                                        {/*<Button type="default" size="large" onClick={() => router.back()}>*/}
+                                        {/*    بازگشت*/}
+                                        {/*</Button>*/}
                                     </div>
                                     <Divider className="my-8"/>
                                     {children}

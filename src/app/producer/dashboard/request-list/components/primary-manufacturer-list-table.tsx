@@ -1,4 +1,4 @@
-import {Button, Space, Switch, Table, Typography} from "antd";
+import {Button, Space, Table, Typography} from "antd";
 import React from "react";
 import {ColumnsType} from "antd/es/table";
 import {RequestList} from "../../../../../../interfaces/requestDetail";
@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import useSWR from "swr";
 import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import getPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
+import ChangeStatus from "../../../../../../components/inputs/ChangeStatus";
 
 export default function PrimaryManufacturerListTable() {
     const router = useRouter();
@@ -42,7 +43,8 @@ export default function PrimaryManufacturerListTable() {
             dataIndex: "IsReqDetailCompleted",
             key: "6",
             render: (e, record) => (
-                <Switch defaultChecked={record.IsReqDetailCompleted}/>
+                <ChangeStatus isActive={record.IsReqDetailCompleted} uid={record.Uid}
+                              url={"/RequestMaster/ChangeStatus"}/>
             ),
         },
 

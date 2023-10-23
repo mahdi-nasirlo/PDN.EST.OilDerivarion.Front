@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Collapse } from "antd";
-import { Measure, MeasureGetPage } from "../../../../interfaces/measures";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import {Collapse} from "antd";
+import {Measure} from "../../../../interfaces/measures";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 
@@ -30,9 +30,9 @@ export default function Page() {
     count: number;
     records: Measure[];
   }>(["/Measure/GetPage", filter], ([url, arg]: [string, any]) =>
-    listFetcher(url, { arg })
+      listFetcher(url, {arg})
   );
-  const setFilterTable = async (values: MeasureGetPage) => {
+  const setFilterTable = async (values: any) => {
     // @ts-ignore
     setFilter({
       Name: values.Name,

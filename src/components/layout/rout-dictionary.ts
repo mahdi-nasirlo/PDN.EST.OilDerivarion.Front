@@ -12,6 +12,9 @@ export const routDictionary: Items = {
   "request-detail": {
     title: "جزئیات درخواست"
   },
+  "barcode": {
+    title: "بارکد"
+  },
 
   activate: {
     title: "فعال سازی",

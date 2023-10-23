@@ -1,7 +1,16 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Typography } from "antd";
+import {
+  Button,
+  Col,
+  Modal,
+  Row,
+  Space,
+  Switch,
+  Table,
+  Typography,
+} from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
@@ -11,13 +20,11 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
 
 export default function DataTable({
-  isValidating,
   setModalVisible,
   ldMaterial,
   labratory,
   mutate,
 }: {
-  isValidating: any;
   setModalVisible: any;
   ldMaterial: boolean;
   mutate: () => void;
@@ -74,6 +81,18 @@ export default function DataTable({
     setIsEditModalVisible(true);
   };
 
+  // GPS
+
+  const [isGPSModalVisible, setIsGPSEditModalVisible] = useState(false);
+
+  const handleGPS = () => {
+    setIsGPSEditModalVisible(true);
+  };
+
+  const handleCancelGPS = () => {
+    setIsGPSEditModalVisible(false);
+  };
+
   const columns: ColumnsType<Labratory> = [
     {
       title: "ردیف",
@@ -88,50 +107,55 @@ export default function DataTable({
     {
       title: "شماره ثابت",
       dataIndex: "Tel",
-      key: "6",
+      key: "3",
     },
     {
-      title: "فکس",
-      dataIndex: "Fax",
-      key: "3",
+      title: "فعال/غیر فعال",
+      dataIndex: "Is_Active",
+      key: "4",
+      render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+    },
+    {
+      title: "استان",
+      dataIndex: "StateName",
+      key: "5",
     },
     {
       title: "آدرس",
       dataIndex: "Address",
-      key: "8",
+      key: "6",
     },
     {
-      title: "نام خانوادگی مسئول",
-      dataIndex: "License_No",
-      key: "4",
-    },
-    {
-      title: "کد ملی مسئول",
-      dataIndex: "code",
-      key: "5",
-    },
-    {
-      title: "نام مدیر",
-      dataIndex: "fax",
+      title: "موقعیت جغرافیایی",
+      dataIndex: "Test",
       key: "7",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-primary-500 font-bold"
+            onClick={() => handleGPS()}
+          >
+            مشاهده موقعیت
+          </Button>
+        </Space>
+      ),
     },
-
     {
-      title: "نام خانوادگی مدیر",
-      dataIndex: "Address",
+      title: "شماره مجوز",
+      dataIndex: "License_No",
       key: "8",
     },
     {
-      title: "کد ملی مدیر",
-      dataIndex: "Address",
-      key: "8",
+      title: "تاریخ انقضاء",
+      dataIndex: "License_Expire_Date",
+      key: "9",
     },
     {
-      title: "فاکتور آزمون",
-      dataIndex: "Address",
-      key: "8",
+      title: "فکس",
+      dataIndex: "Fax",
+      key: "10",
     },
-
     {
       title: "عملیات",
       key: "عملیات",
@@ -178,7 +202,7 @@ export default function DataTable({
           </Button>
         </div>
         <Table
-          loading={ldMaterial || isMutating || isValidating}
+          loading={ldMaterial || isMutating}
           dataSource={addIndexToData(labratory?.records)}
           className="mt-6"
           columns={columns}
@@ -212,6 +236,27 @@ export default function DataTable({
         isEditModalVisible={isVisibleEditModal}
         setRecordToEdit={setRecordToEdit}
       />
+      {/* مشاهده موقعیت */}
+      <Modal
+        title="مشاهده موقعیت"
+        open={isGPSModalVisible}
+        onCancel={handleCancelGPS}
+        width={800}
+        footer={[
+          <Row key={"box"} gutter={[16, 16]} className="my-2">
+            <Col xs={24} md={24}>
+              <Button
+                size="large"
+                className="w-full bg-gray-100 text-warmGray-500"
+                onClick={handleCancelGPS}
+                key={"cancel"}
+              >
+                برگشت
+              </Button>
+            </Col>
+          </Row>,
+        ]}
+      ></Modal>
     </>
   );
 }

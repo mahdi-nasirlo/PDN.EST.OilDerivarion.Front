@@ -21,8 +21,8 @@ export default function CreateModal({
     const [form] = useForm()
 
     const defaultValue = {
-        "name": "",
-        "is_Active": null
+        name: null,
+        is_Active: null
     }
 
     const {
@@ -103,14 +103,12 @@ export default function CreateModal({
                         <Form.Item
                             name="materialUid"
                             label="نام ماده اولیه"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "",
-                                },
-                            ]}
+                            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         >
-                            <Select options={material} loading={ldMaterial} fieldNames={{ value: "Uid", label: "Name" }}
+                            <Select
+                                options={material}
+                                loading={ldMaterial}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                                 size="large"
                                 placeholder="انتخاب کنید" />
                         </Form.Item>
@@ -119,12 +117,7 @@ export default function CreateModal({
                         <Form.Item
                             name="testItemUid"
                             label="نام فاکتور"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "",
-                                },
-                            ]}
+                            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         >
                             <Select
                                 options={TestItem}

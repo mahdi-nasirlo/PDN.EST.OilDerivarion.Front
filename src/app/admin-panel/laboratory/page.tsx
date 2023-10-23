@@ -10,7 +10,7 @@ import { Collapse } from "antd";
 
 export default function Page() {
   const defaultValueTable = {
-    Name: null,
+    name: null,
     is_Active: null,
     fromRecord: 0,
     selectRecord: 10000,
@@ -36,8 +36,7 @@ export default function Page() {
 
   const setFilterTable = async (values: LaboratoryGet) => {
     setFilter({
-      // @ts-ignore
-      Name: values.Name,
+      name: values.name,
       // @ts-ignore
       is_Active: values.is_Active,
       fromRecord: 0,

@@ -1,7 +1,7 @@
 "use client";
 
-import { PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Space, Switch, Table, Typography } from 'antd'
+import { CheckCircleIcon, PlusIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { Button, Space, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import { Product } from '../../../../../../interfaces/product';
@@ -68,7 +68,13 @@ export default function DataTable({ setModalVisible, ldProduct, product, mutate 
             title: "فعال/غیر فعال ",
             dataIndex: "Is_Active",
             key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+            render: (e, record) => {
+                if (record.Is_Active) {
+                    return <CheckCircleIcon width={30} height={30} />;
+                } else {
+                    return <XCircleIcon width={30} height={30} />;
+                }
+            }
         },
         {
             title: "فاکتورهای آزمون",

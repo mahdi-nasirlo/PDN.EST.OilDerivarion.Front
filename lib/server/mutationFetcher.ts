@@ -27,9 +27,14 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
 
         return res.data?.data
 
-    } catch (error) {
+    } catch (error: any) {
 
         console.error("Error:", error);
+
+        notification.open({
+            type: "error",
+            message: error.message
+        })
 
         return undefined
     }

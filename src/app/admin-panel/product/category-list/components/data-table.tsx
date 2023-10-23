@@ -10,6 +10,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
+import ChangeStatus from "../../../../../../components/inputs/ChangeStatus";
 
 export default function DataTable({
   isValidating,
@@ -103,7 +104,13 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "ConfirmedRequestCode",
       key: "7",
-      render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+      render: (e, record) => (
+        <ChangeStatus
+          isActive={record.Is_Active}
+          uid={record.Uid}
+          url={"/ProductCategory/ChangeStatus"}
+        />
+      ),
     },
     {
       title: "عملیات",

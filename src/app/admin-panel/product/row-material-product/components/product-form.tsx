@@ -1,18 +1,23 @@
 import React from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
-  const { data, isLoading } = useSWR(
-    [
-      "/ProductCategory/GetAll",
-      {
-        name: null,
-        is_Active: true,
-      },
-    ],
+  const { data: Product, isLoading: ldProduct } = useSWR(
+    ["/Product/GetAll", {
+      name: null,
+      is_Active: null,
+    },],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+
+  const { data: Material, isLoading: ldMaterial } = useSWR(
+    ["/Material/GetAll", {
+      name: null,
+      is_Active: null,
+    },],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -22,25 +27,34 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="name"
-            label="نام"
+            name="productUid"
+            label="نام محصول"
           >
-            <Input size="large" placeholder="وارد کنید" />
+            <Select
+              showSearch
+              fieldNames={{ label: "Name", value: "Uid" }}
+              // @ts-ignore
+              filterOption={filterOption}
+              loading={ldProduct}
+              options={Product}
+              size="large"
+              placeholder="انتخاب کنید"
+            />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="productCategory_Id"
-            label="دسته بندی محصول"
+            name="materialUid"
+            label="نام ماده اولیه"
           >
             <Select
               showSearch
-              fieldNames={{ label: "Name", value: "Id" }}
+              fieldNames={{ label: "Name", value: "Uid" }}
               // @ts-ignore
               filterOption={filterOption}
-              loading={isLoading}
-              options={data}
+              loading={ldMaterial}
+              options={Material}
               size="large"
               placeholder="انتخاب کنید"
             />

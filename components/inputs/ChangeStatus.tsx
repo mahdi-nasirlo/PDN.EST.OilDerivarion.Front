@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Switch } from "antd";
+import { Spin, Switch } from "antd";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../lib/server/mutationFetcher";
 import { mutate } from "swr";
@@ -21,21 +21,27 @@ const ChangeStatus = (props: PropsType) => {
   const [value, setValue] = useState(props.isActive);
 
   const handleChange = async (e: boolean) => {
+    setValue(e);
+
     const res = await trigger({
       uid: props.uid,
-      isActive: props.isActive,
+      isActive: e,
     });
-
-    if (res) {
-      setValue(e);
-    }
 
     if (!res) {
       setValue(!e);
     }
   };
 
-  return <Switch checked={value} onChange={handleChange} />;
+  return (
+    <div className="flex justify-center">
+      {isMutating ? (
+        <Spin spinning={true} />
+      ) : (
+        <Switch checked={value} onChange={handleChange} />
+      )}
+    </div>
+  );
 };
 
 export default ChangeStatus;

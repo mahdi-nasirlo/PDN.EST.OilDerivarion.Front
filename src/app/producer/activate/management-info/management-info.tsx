@@ -11,13 +11,13 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import StepContext from "../stete-manager/step-context";
 
 export default function ManagementInfo() {
-
-  const processController = useContext(StepContext)
+  const processController = useContext(StepContext);
 
   const {
     data: MainMember,
     isLoading: ldMainMember,
     mutate,
+    isValidating,
   } = useSWR<{
     records: SetMainMember[];
     count: number;
@@ -34,6 +34,7 @@ export default function ManagementInfo() {
     <>
       <CreateForm mutate={mutate} />
       <DataTable
+      isValidating={isValidating}
         MainMember={addIndexToData(MainMember?.records)}
         ldMainMember={ldMainMember}
         mutate={mutate}
@@ -57,7 +58,9 @@ export default function ManagementInfo() {
             size="large"
             type="primary"
             htmlType="submit"
-            onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 5 })}
+            onClick={() =>
+              processController.dispatch({ type: "NEXT", stepNumber: 5 })
+            }
           >
             مرحله بعد
           </Button>

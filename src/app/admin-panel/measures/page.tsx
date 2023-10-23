@@ -25,6 +25,7 @@ export default function Page() {
     isLoading: ldMeasure,
     data: Measure,
     mutate,
+    isValidating,
   } = useSWR<{
     count: number;
     records: Measure[];
@@ -33,7 +34,12 @@ export default function Page() {
   );
   const setFilterTable = async (values: MeasureGetPage) => {
     // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000, });
+    setFilter({
+      Name: values.Name,
+      IsActive: values.IsActive,
+      fromRecord: 0,
+      selectRecord: 1000,
+    });
 
     await mutate();
   };
@@ -59,6 +65,7 @@ export default function Page() {
         ]}
       />
       <DataTable
+        isValidating={isValidating}
         mutate={mutate}
         ldMeasure={ldMeasure}
         measure={Measure}

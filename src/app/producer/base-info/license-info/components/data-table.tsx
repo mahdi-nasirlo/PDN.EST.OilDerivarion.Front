@@ -11,10 +11,12 @@ import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function DataTable({
+  isValidating,
   MainMember,
   ldMainMember,
   mutate,
 }: {
+  isValidating: any;
   MainMember: any;
   ldMainMember: any;
   mutate: () => void;
@@ -126,7 +128,7 @@ export default function DataTable({
   return (
     <>
       <Table
-        loading={ldMainMember || ldDeleteLicense}
+        loading={ldMainMember || ldDeleteLicense || isValidating}
         className="mt-6"
         columns={columns}
         dataSource={MainMember}

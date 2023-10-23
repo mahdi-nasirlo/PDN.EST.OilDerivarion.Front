@@ -103,7 +103,7 @@ export default function DataTable({
       title: "عملیات",
       key: "عملیات",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record) => (
         <Space size="small">

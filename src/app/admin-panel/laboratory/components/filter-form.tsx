@@ -14,35 +14,23 @@ export default function FilterForm({ filter, unsetFilter }: {
         <Form onFinish={filter} name="form_item_path" layout="vertical">
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
-                    <Form.Item name="Name" label="نام آزمایشگاه ">
-                        <Input size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item name="lastName" label="شماره ثابت">
-                        <Select size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item name="lastName" label="کد ملی">
-                        <Select size="large" placeholder="وارد کنید" />
+                    <Form.Item name="name" label="نام آزمایشگاه ">
+                        <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="year-establishment"
-                        label="فعال/غیر فعال"
+                        name="is_Active"
+                        label="فعال / غیر فعال"
                     >
-                        <Select size="large" placeholder="انتخاب کنید" />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item name="Test" label="فاکتور آزمون">
-                        <Select size="large" placeholder="وارد کنید" />
+                        <Select
+                            options={[
+                                { value: true, label: "فعال" },
+                                { value: false, label: "غیر فعال" }
+                            ]}
+                            size="large"
+                            placeholder="انتخاب کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>

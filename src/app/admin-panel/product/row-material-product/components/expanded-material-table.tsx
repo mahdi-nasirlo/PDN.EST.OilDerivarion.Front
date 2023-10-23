@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { TableColumnsType } from "antd/lib";
-import { Button, Space, Table } from "antd";
+import { Button, Space, Switch, Table } from "antd";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
@@ -44,9 +44,23 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
 
     }
 
-    const expandColumns: TableColumnsType = [
-        { title: "#", dataIndex: "Row", key: "1" },
-        { title: "نام ماده اولیه", dataIndex: "MaterialName", key: "2" },
+    const expandColumns: TableColumnsType<any> = [
+        {
+            title: "#",
+            dataIndex: "Row",
+            key: "1"
+        },
+        {
+            title: "نام ماده اولیه",
+            dataIndex: "MaterialName",
+            key: "2"
+        },
+        {
+            title: "فعال/غیر فعال",
+            dataIndex: "Is_Active",
+            key: "3",
+            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
+        },
         {
             title: "عملیات",
             dataIndex: "2",
@@ -61,7 +75,6 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
                         className="text-red-500 font-bold"
                         onClick={() => {
                             setOpen(true);
-                            // @ts-ignore
                             setRecordToDelete(record)
                         }}
                     >
@@ -73,9 +86,17 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
     ];
 
     return <>
-        {/*@ts-ignore*/}
-        <Table columns={expandColumns} dataSource={addIndexToData(data)} loading={isLoading}
-            pagination={false} />
-        <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={handleDelete} title={"فاکتور محصول"} />
+        <Table
+            columns={expandColumns}
+            dataSource={addIndexToData(data)}
+            loading={isLoading || isMutating}
+            pagination={false}
+        />
+        <ConfirmDeleteModal
+            open={open}
+            setOpen={setOpen}
+            handleDelete={handleDelete}
+            title={"فاکتور محصول"}
+        />
     </>
 }

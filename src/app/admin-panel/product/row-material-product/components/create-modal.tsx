@@ -28,7 +28,6 @@ export default function CreateModal({
     materialUid: string;
     is_Active: boolean;
   }) => {
-    values.is_Active = true;
 
     await trigger(values);
 
@@ -44,7 +43,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن محصول جدید</div>
+          <div className="text-base mb-2">افزودن ماده اولیه محصول جدید</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

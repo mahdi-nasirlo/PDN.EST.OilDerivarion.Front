@@ -12,7 +12,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 
 
-export default function DataTable({setModalVisible, ldProduct, product, mutate}: {
+export default function DataTable({ setModalVisible, ldProduct, product, mutate }: {
     setModalVisible: any,
     ldProduct: boolean,
     mutate: () => void,
@@ -66,31 +66,36 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
         },
         {
             title: "فعال/غیر فعال ",
-            dataIndex: "vIs_Active",
+            dataIndex: "Is_Active",
             key: "4",
             render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
         },
         {
-            title: "کد محصول",
-            dataIndex: "ConfirmedRequestCode",
-            key: "5",
-        },
-        {
             title: "فاکتورهای آزمون",
             dataIndex: "TestItems",
-            key: "6",
+            key: "5",
         },
         {
             title: "مواد اولیه",
             dataIndex: "Materials",
-            key: "7"
+            key: "6"
         },
         {
             title: "عملیات",
             key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: 150,
             render: (_, record) => (
-                <Button type="link" className={"text-red-500 font-bold"}
-                        onClick={() => handleDelete(record)}>حذف</Button>
+                <Space size='small'>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => handleDelete(record)}
+                    >
+                        حذف
+                    </Button>
+                </Space>
             ),
         },
     ];
@@ -101,8 +106,9 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-between items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
-                        محصولات</Typography>
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                        لیست ماده اولیه محصول
+                    </Typography>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
@@ -111,7 +117,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                         onClick={() => setModalVisible(true)}
                     >
                         <PlusIcon width={24} height={24} />
-                        <span className="flex gap-2">افزودن محصول جدید</span>
+                        <span className="flex gap-2">افزودن ماده اولیه محصول</span>
                     </Button>
                 </div>
                 <Table
@@ -160,7 +166,7 @@ export default function DataTable({setModalVisible, ldProduct, product, mutate}:
                 open={isDeleteModalVisible}
                 setOpen={setIsDeleteModalVisible}
                 handleDelete={handleConfirmDelete}
-                title="مواد اولیه"
+                title="ماده اولیه محصول"
             />
         </>
     )

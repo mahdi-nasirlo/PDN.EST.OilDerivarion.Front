@@ -48,12 +48,16 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
         value.materialSupplyPersonTypeId = 1;
         value.materialSupplyMethodId = 1;
 
+        let res
+
         if (notify)
-            await createWithNotify(value)
+            res = await createWithNotify(value)
         else
-            await create(value)
+            res = await create(value)
 
         await mutate("/RequestDetail/GetAllMaterial")
+
+        return res
 
     }
 

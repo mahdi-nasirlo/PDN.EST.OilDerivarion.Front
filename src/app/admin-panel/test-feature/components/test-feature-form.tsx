@@ -1,4 +1,4 @@
-import { Col, Form, Input, Row, Select } from 'antd'
+import {Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
 import TestItemSelect from './test-item-select'
 
@@ -21,11 +21,10 @@ export default function TestFeatureForm() {
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="is_Active"
+                        name="isActive"
                         label="فعال / غیر فعال"
                     >
                         <Select size="large"
-                            defaultValue={true}
                             options={[
                                 { label: "فعال", value: true },
                                 { label: "غیر فعال", value: false }

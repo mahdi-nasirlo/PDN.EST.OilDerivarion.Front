@@ -119,11 +119,6 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-  getMenuItem(
-    <Link href={"/admin-panel/province"}>استان</Link>,
-    "/admin-panel/provinc"
-    // <FolderPlusIcon width={16} height={16} />
-  ),
 
   getMenuItem(
     <Link href={"/admin-panel/producer/production-unit"}>تولید کننده</Link>,
@@ -151,12 +146,6 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
     "/admin-panel/test-result"
-    // <FolderPlusIcon width={16} height={16}/>
-  ),
-
-  getMenuItem(
-    <Link href={"/admin-panel/test-result-record"}>ثبت نتیجه آزمون</Link>,
-    "/admin-panel/test-result-record"
     // <FolderPlusIcon width={16} height={16}/>
   ),
 

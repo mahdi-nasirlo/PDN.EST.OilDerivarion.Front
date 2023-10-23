@@ -7,7 +7,6 @@ import {useRouter} from "next/navigation";
 import useSWR from "swr";
 import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import getPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
-import ChangeStatus from "../../../../../../components/inputs/ChangeStatus";
 
 export default function PrimaryManufacturerListTable() {
     const router = useRouter();
@@ -38,16 +37,6 @@ export default function PrimaryManufacturerListTable() {
             dataIndex: "ProductionMethodName",
             key: "5",
         },
-        {
-            title: "وضعیت فرآیند",
-            dataIndex: "IsReqDetailCompleted",
-            key: "6",
-            render: (e, record) => (
-                <ChangeStatus isActive={record.IsReqDetailCompleted} uid={record.Uid}
-                              url={"/RequestMaster/ChangeStatus"}/>
-            ),
-        },
-
         {
             title: "عملیات",
             key: "عملیات",

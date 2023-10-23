@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
+import React, {useEffect} from "react";
+import {Button, Col, Form, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
+import useSWR, {mutate} from "swr";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import TestFeatureForm from "./test-feature-form";
-import { CreateTestItemDetail } from "../../../../../interfaces/TestItem";
+import {CreateTestItemDetail} from "../../../../../interfaces/TestItem";
 
 export default function EditModal({
-  recordToEdit,
-  setRecordToEdit,
-  setIsEditModalVisible,
-  isEditModalVisible,
-  mutate,
-}: {
-  setIsEditModalVisible: (arg: boolean) => void;
-  isEditModalVisible: boolean;
-  recordToEdit: CreateTestItemDetail | null;
-  setRecordToEdit: (arg: CreateTestItemDetail | null) => void;
-  mutate: () => void;
+                                      recordToEdit,
+                                      setRecordToEdit,
+                                      setIsEditModalVisible,
+                                      isEditModalVisible,
+                                      // mutate,
+                                  }: {
+    setIsEditModalVisible: (arg: boolean) => void;
+    isEditModalVisible: boolean;
+    recordToEdit: CreateTestItemDetail | null;
+    setRecordToEdit: (arg: CreateTestItemDetail | null) => void;
+    mutate: () => void;
 }) {
   const [form] = useForm();
 
@@ -30,17 +30,18 @@ export default function EditModal({
   );
 
   const handleSubmit = async (values: CreateTestItemDetail) => {
-    values.Uid = data?.Uid;
+      values.Uid = data?.Uid;
 
-    await trigger(values);
+      await trigger(values);
 
-    await mutate();
+      console.log("kdjfalksjd")
+      await mutate("/TestItemDetail/GetPage");
 
-    form.resetFields();
+      form.resetFields();
 
-    setIsEditModalVisible(false);
+      setIsEditModalVisible(false);
 
-    setRecordToEdit(null);
+      setRecordToEdit(null);
   };
 
   const { data, isLoading } = useSWR(

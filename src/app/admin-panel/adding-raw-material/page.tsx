@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Collapse } from "antd";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import {Collapse} from "antd";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,8 +33,7 @@ export default function Page() {
     listFetcher(url, { arg })
   );
 
-  const setFilterTable = async (values: MaterialGet) => {
-    //@ts-ignore
+  const setFilterTable = async (values: any) => {
     setFilter({
       name: values.name,
       is_Active: values.is_Active,

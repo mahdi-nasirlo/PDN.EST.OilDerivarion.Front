@@ -21,9 +21,9 @@ export type CreateTestItem = {
 export interface TestItemDetail {
   Uid: string | null;
   TestItem_Id: number;
-  Title: string | null;
+  title: string | null;
   ReferenceCode: string | null;
-  IsActive: boolean | null;
+  is_Active: boolean | null | undefined;
   TestItemName: string | null;
 }
 

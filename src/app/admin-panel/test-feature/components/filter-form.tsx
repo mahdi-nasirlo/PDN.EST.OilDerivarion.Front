@@ -1,9 +1,8 @@
 "use client"
 
-import { Button, Col, Form, Input, Row, Select } from 'antd'
+import {Button, Col, Form, Input, Row, Select} from 'antd'
 import React from 'react'
-import { TestItemDetail } from '../../../../../interfaces/TestItem'
-import TestItemSelect from './test-item-select'
+import {TestItemDetail} from '../../../../../interfaces/TestItem'
 
 
 export default function FilterForm({ filter, unsetFilter }: {
@@ -16,16 +15,8 @@ export default function FilterForm({ filter, unsetFilter }: {
         <Form onFinish={filter} name="form_item_path" layout="vertical">
             <Row gutter={[16, 0]}>
                 <Col xs={24} md={12}>
-                    <Form.Item name="Title" label="عنوان فاکتور">
-                        <Input size="large" placeholder="وارد کنید" />
-                    </Form.Item>
-                </Col>
-                <TestItemSelect name={"testItemUid"} />
-            </Row>
-            <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
-                    <Form.Item name="lastName" label="مرجع">
-                        <Select size="large" placeholder="وارد کنید" />
+                    <Form.Item name="Title" label="عنوان استاندارد">
+                        <Input size="large" placeholder="وارد کنید"/>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -34,7 +25,6 @@ export default function FilterForm({ filter, unsetFilter }: {
                         label="فعال / غیر فعال"
                     >
                         <Select size="large"
-                            defaultValue={true}
                             options={[
                                 { label: "فعال", value: true },
                                 { label: "غیر فعال", value: false }

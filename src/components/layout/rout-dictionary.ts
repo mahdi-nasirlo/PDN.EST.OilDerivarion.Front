@@ -218,5 +218,8 @@ export const routDictionary: Items = {
   "gps-devices": {
     title: "دستگاه های GPS",
   },
+  "measures": {
+    title: "واحد اندازه گیری",
+  },
   // end admin panel
 };

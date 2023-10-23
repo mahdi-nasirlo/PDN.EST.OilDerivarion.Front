@@ -5,7 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
+import ProductForm from "./product-form";
 
 export default function CreateModal({
   modalVisible,

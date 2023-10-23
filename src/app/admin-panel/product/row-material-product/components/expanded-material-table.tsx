@@ -56,12 +56,6 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
             key: "2"
         },
         {
-            title: "فعال/غیر فعال",
-            dataIndex: "Is_Active",
-            key: "3",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
-        },
-        {
             title: "عملیات",
             dataIndex: "2",
             key: "upgradeNum",

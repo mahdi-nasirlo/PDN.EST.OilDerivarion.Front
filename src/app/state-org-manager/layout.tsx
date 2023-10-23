@@ -1,25 +1,22 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import { getMenuItem } from "@/components/layout/sidebar";
-import {
-  Bars3Icon,
-  DocumentChartBarIcon,
-  DocumentMinusIcon,
-  HomeIcon,
-} from "@heroicons/react/24/outline";
-import { MenuProps } from "antd";
+import {getMenuItem} from "@/components/layout/sidebar";
+import {Bars3Icon, DocumentChartBarIcon, DocumentMinusIcon, HomeIcon,} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
 import Link from "next/link";
+import {QrCodeIcon} from "@heroicons/react/20/solid";
+import React from "react";
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <AppLayout sidebarItems={items}>{children}</AppLayout>
-    </>
+      <>
+        <AppLayout sidebarItems={items}>{children}</AppLayout>
+      </>
   );
 }
 
@@ -95,14 +92,19 @@ const items: MenuProps["items"] = [
     <Link href="/state-org-manager/laboratory-results-list">
       نتایج آزمایشگاه
     </Link>,
-    "/state-org-manager/laboratory-results-list",
-    <DocumentChartBarIcon width={16} height={16} />
+      "/state-org-manager/laboratory-results-list",
+      <DocumentChartBarIcon width={16} height={16}/>
   ),
   getMenuItem(
-    <Link href="/state-org-manager/lab-results-details">
-      جزئیات نتایج آزمایشگاه
-    </Link>,
-    "/state-org-manager/lab-results-details"
-    // <HomeIcon width={16} height={16} />
+      <Link href="/state-org-manager/lab-results-details">
+        جزئیات نتایج آزمایشگاه
+      </Link>,
+      "/state-org-manager/lab-results-details"
+      // <HomeIcon width={16} height={16} />
+  ),
+  getMenuItem(
+      <Link href={"/state-org-manager/barcode"}>بارکد</Link>,
+      "/state-org-manager/barcode",
+      <QrCodeIcon width={16} height={16}/>
   ),
 ];

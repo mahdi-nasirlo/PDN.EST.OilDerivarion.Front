@@ -1,14 +1,9 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import { getMenuItem } from "@/components/layout/sidebar";
-import {
-  Bars3Icon,
-  ChatBubbleLeftEllipsisIcon,
-  ClockIcon,
-  HomeIcon,
-} from "@heroicons/react/24/outline";
-import { MenuProps } from "antd";
+import {getMenuItem} from "@/components/layout/sidebar";
+import {Bars3Icon, ChatBubbleLeftEllipsisIcon, ClockIcon, HomeIcon,} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -68,7 +63,7 @@ const items: MenuProps["items"] = [
 
   getMenuItem(
     <Link href={"/state-general-management/process/StateOrgManager/list"}>
-      اداره کل استان
+      کارشناس استان
     </Link>,
     "/state-general-management/process/StateOrgManager/list"
   ),

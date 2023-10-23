@@ -77,7 +77,7 @@ export const routDictionary: Items = {
 
   // start state-general-management panel
   "state-general-management": {
-    title: "سامانه اداره کل استان",
+    title: "سامانه کارشناس استان",
     href: "/state-general-management",
   },
   "delays-list": {
@@ -90,7 +90,7 @@ export const routDictionary: Items = {
 
   // start state-org-manager panel
   "state-org-manager": {
-    title: "پنل اداره کل استان",
+    title: "پنل کارشناس استان",
   },
   "producer-list": {
     title: "لیست تولید کنندگان",

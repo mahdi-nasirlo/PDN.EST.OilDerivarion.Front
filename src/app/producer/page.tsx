@@ -1,12 +1,12 @@
 "use client";
 
-import { Alert, Space, Table, Tooltip, Typography } from "antd";
+import {Alert, Space, Table, Tooltip, Typography} from "antd";
 import useSWR from "swr";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
-import { listFetcher } from "../../../lib/server/listFetcher";
-import { TestGetPage } from "../../../interfaces/test&verify";
-import { addIndexToData } from "../../../lib/addIndexToData";
+import {ColumnsType} from "antd/es/table";
+import {listFetcher} from "../../../lib/server/listFetcher";
+import {TestGetPage} from "../../../interfaces/test&verify";
+import {addIndexToData} from "../../../lib/addIndexToData";
 
 export default function Home() {
   const {
@@ -93,7 +93,7 @@ export default function Home() {
                 className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
                 href="/state-org-manager"
               >
-                پنل اداره کل استان
+                پنل کارشناس استان
               </Link>
             </Typography>
           </div>

@@ -21,8 +21,8 @@ function Index() {
 
         value.requestMasterUid = processControl.requestMaster.requestMasterUid
 
-        await requestDetailMaterial.create.trigger(value, true)
-
+        const res = await requestDetailMaterial.create.trigger(value, true)
+        
         await mutate("/RequestDetail/GetPageMaterial")
 
     }

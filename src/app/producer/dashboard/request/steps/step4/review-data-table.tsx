@@ -35,14 +35,14 @@ export default function ReviewDataTable() {
 
             <Spin spinning={deleteStep.isMutating}>
                 <div className='grid grid-cols-1 gap-5'>
-                    {finalPage?.data?.map((item) => {
+                    {finalPage?.data?.map((item, index) => {
                         return (
                             <>
                                 <Collapse
                                     size="large"
                                     expandIconPosition="right"
                                     items={[{
-                                        label: "مرحله شماره " + item.stepNumber,
+                                        label: "درخواست شماره " + (index + 1),
                                         extra: <Button
                                             type="text"
                                             size="small"

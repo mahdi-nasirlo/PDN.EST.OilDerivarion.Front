@@ -15,7 +15,7 @@ export default function Page() {
 
   const defaultValueTable = {
     Name: null,
-    is_Active: null,
+    IsActive: null,
     fromRecord: 0,
     selectRecord: 100000,
   };
@@ -38,7 +38,7 @@ export default function Page() {
     setFilter({
       // @ts-ignore
       Name: `${values.Name}`,
-      is_Active: null,
+      IsActive: null,
       fromRecord: 0,
       selectRecord: 1000,
     });

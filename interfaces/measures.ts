@@ -8,7 +8,7 @@ export type Measure = {
 
 export type CreateMeasure = {
   name: string;
-  isActive: boolean;
+  IsActive: boolean;
 };
 export type MeasureGetPage = {
   Name: string | null;

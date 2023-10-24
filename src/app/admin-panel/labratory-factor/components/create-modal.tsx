@@ -27,13 +27,13 @@ export default function CreateModal({
   );
   const defaultValueTable = {
     Name: "",
-    is_Active: null,
+    IsActive: null,
     fromRecord: 0,
     selectRecord: 100000,
   };
 
   const handleFormSubmit = async (values: any) => {
-    values.is_Active = true;
+    values.IsActive = true;
     // @ts-ignore
     // form.resetFields();
     trigger(values);
@@ -51,7 +51,7 @@ export default function CreateModal({
       "/TestItem/GetAll",
       {
         name: "",
-        is_Active: null,
+        IsActive: null,
       },
     ],
 

@@ -4,12 +4,12 @@ export type Product = {
   Name: string;
   ProductCategoryName: string;
   ProductCategory_Id: number;
-  Is_Active: boolean;
+  IsActive: boolean;
 };
 
 export interface ProductGet {
   Name: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
   densityTypeId: number | null;
   fromRecord: number;
   selectRecord: number;
@@ -17,7 +17,7 @@ export interface ProductGet {
 
 export interface ProductCategoryGet {
   Name: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
   ProductCategoryName: string | null;
   // productCategoryUid;
   fromRecord: number;
@@ -26,12 +26,12 @@ export interface ProductCategoryGet {
 export interface ProductCreate {
   name: "string";
   productCategory_Id: number;
-  is_Active: boolean;
+  IsActive: boolean;
 }
 
 export interface ProductTestItem {
   Uid: string;
-  Is_Active: boolean;
+  IsActive: boolean;
   ProductUid: string;
   TestItemUid: string;
   ProductName: string;

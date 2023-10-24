@@ -77,7 +77,7 @@ export default function DataTable({
       key: "3",
       render: (e, record) => (
         <ChangeStatus
-          isActive={record.IsActive}
+          IsActive={record.IsActive}
           uid={record.Uid}
           url={"/Measure/ChangeStatus"}
         />

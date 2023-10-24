@@ -16,10 +16,9 @@ function MeasureForm() {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        {/* <Col xs={24} md={12}>
           <Form.Item name="isActive" label="فعال/غیرفعال">
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },
@@ -28,7 +27,7 @@ function MeasureForm() {
               placeholder="انتخاب کنید"
             />
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
     </>
   );

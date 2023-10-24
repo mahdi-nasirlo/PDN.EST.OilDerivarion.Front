@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Space, Table, } from "antd";
+import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
 import React, { useState } from "react";
@@ -11,15 +11,19 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 
-
-export default function DataTable({ material, ldMaterial }: {
-  ldMaterial: boolean, material: {
-    count: number,
-    records: Material[]
-  } | undefined
+export default function DataTable({
+  material,
+  ldMaterial,
+}: {
+  ldMaterial: boolean;
+  material:
+    | {
+        count: number;
+        records: Material[];
+      }
+    | undefined;
 }) {
-
-  const [activeExpRow, setActiveExpRow] = useState<string[]>()
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   const columns: ColumnsType<Material> = [
     {
@@ -44,7 +48,6 @@ export default function DataTable({ material, ldMaterial }: {
         expandable={{
           expandedRowKeys: activeExpRow,
           onExpand: (expanded, record: Material) => {
-
             const keys: string[] = [];
 
             if (expanded && record.Uid) {
@@ -53,13 +56,14 @@ export default function DataTable({ material, ldMaterial }: {
             }
 
             if (!expanded) {
-              keys.pop()
+              keys.pop();
             }
 
             setActiveExpRow(keys);
-
           },
-          expandedRowRender: (record: Material) => <ExpandedRowRender material={record} />,
+          expandedRowRender: (record: Material) => (
+            <ExpandedRowRender material={record} />
+          ),
         }}
         dataSource={addIndexToData(material?.records)}
         pagination={{
@@ -76,7 +80,6 @@ export default function DataTable({ material, ldMaterial }: {
         }}
       />
       {/*<CreateModal setModalVisible={setModalVisible} modalVisible={is}*/}
-
     </>
   );
 }
@@ -89,35 +92,34 @@ interface ExpandedDataType {
 }
 
 const ExpandedRowRender = ({ material }: { material: Material }) => {
-
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState();
 
   const defaultValue = {
-    "productUid": material.Uid,
-    "testItemUid": null,
-    "is_Active": true
-  }
+    productUid: material.Uid,
+    testItemUid: null,
+    IsActive: true,
+  };
 
-  const {
-    data,
-    isLoading,
-    mutate
-  } = useSWR(["/MaterialTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
+  const { data, isLoading, mutate } = useSWR(
+    ["/MaterialTestItem/GetAll", defaultValue],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+  );
 
-  const { trigger, isMutating } = useSWRMutation("/MaterialTestItem/Delete", mutationFetcher)
+  const { trigger, isMutating } = useSWRMutation(
+    "/MaterialTestItem/Delete",
+    mutationFetcher
+  );
 
   const deleteProductFactor = async () => {
-
-    setOpen(false)
+    setOpen(false);
 
     // @ts-ignore
-    await trigger({ uid: recordToDelete?.Uid })
+    await trigger({ uid: recordToDelete?.Uid });
 
-    await mutate()
-
-  }
+    await mutate();
+  };
 
   const expandColumns: TableColumnsType<any> = [
     { title: "#", dataIndex: "Row", key: "1" },
@@ -127,7 +129,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
       dataIndex: "2",
       key: "upgradeNum",
       align: "center",
-      fixed: 'right',
+      fixed: "right",
       width: 150,
       render: (_, record) => (
         <Space size="small">
@@ -137,7 +139,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
             onClick={() => {
               setOpen(true);
               // @ts-ignore
-              setRecordToDelete(record)
+              setRecordToDelete(record);
             }}
           >
             حذف
@@ -147,19 +149,21 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
     },
   ];
 
-  return <>
-    {/*@ts-ignore*/}
-    <Table
-      columns={expandColumns}
-      dataSource={addIndexToData(data)}
-      loading={isLoading || isMutating}
-      pagination={false}
-    />
-    <ConfirmDeleteModal
-      open={open}
-      setOpen={setOpen}
-      handleDelete={deleteProductFactor}
-      title={"فاکتور محصول"}
-    />
-  </>
-}
+  return (
+    <>
+      {/*@ts-ignore*/}
+      <Table
+        columns={expandColumns}
+        dataSource={addIndexToData(data)}
+        loading={isLoading || isMutating}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        open={open}
+        setOpen={setOpen}
+        handleDelete={deleteProductFactor}
+        title={"فاکتور محصول"}
+      />
+    </>
+  );
+};

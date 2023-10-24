@@ -7,7 +7,7 @@ export type Category =
         HasDensity: boolean,
         DensityUpperLimit: number,
         DensityLowerLimit: number,
-        Is_Active: boolean,
+        IsActive: boolean,
         DensityTypeId: number,
         TestMethodId: number,
         IsDeleted: boolean

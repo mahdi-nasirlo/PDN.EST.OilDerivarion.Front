@@ -93,7 +93,7 @@ export default function DataTable({
       key: "4",
       render: (e, record) => (
         <ChangeStatus
-          isActive={record.IsActive}
+          IsActive={record.IsActive}
           uid={record.Uid}
           url={"/TestItemDetail/ChangeStatus"}
         />

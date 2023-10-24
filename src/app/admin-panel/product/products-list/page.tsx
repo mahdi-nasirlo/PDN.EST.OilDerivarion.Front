@@ -35,13 +35,7 @@ export default function Page() {
 
   const setFilterTable = async (values: ProductCategoryGet) => {
     // @ts-ignore
-    setFilter({
-      Name: values.Name,
-      IsActive: values.IsActive,
-      productCategoryUid: values.productCategoryUid,
-      fromRecord: 0,
-      selectRecord: 100,
-    });
+    setFilter({ Name: values.Name, IsActive: values.IsActive, productCategoryUid: values.productCategoryUid, fromRecord: 0, selectRecord: 100, });
 
     await mutate();
   };

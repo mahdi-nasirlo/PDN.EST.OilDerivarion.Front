@@ -5,7 +5,7 @@ import {
   PlusIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Typography } from "antd";
+import { Button, Space, Table, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Product } from "../../../../../../interfaces/product";
@@ -25,11 +25,11 @@ export default function DataTable({
   ldProduct: boolean;
   mutate: () => void;
   product:
-    | {
-        records: Product[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: Product[];
+    count: number;
+  }
+  | undefined;
 }) {
   //حذف
 
@@ -56,7 +56,7 @@ export default function DataTable({
     await mutate();
   };
 
-  const columns: ColumnsType<Product> = [
+  const columns: ColumnsType<any> = [
     {
       title: "ردیف",
       dataIndex: "Row",
@@ -84,15 +84,39 @@ export default function DataTable({
         }
       },
     },
-    {
-      title: "فاکتورهای آزمون",
-      dataIndex: "TestItems",
-      key: "5",
-    },
+
     {
       title: "مواد اولیه",
       dataIndex: "Materials",
+      key: "5",
+      render: (_, record) => (
+        <Typography.Text
+          className=" max-w-[200px]"
+          ellipsis={true}
+          style={{ width: "40px !important" }}
+        >
+          {record.Materials}
+        </Typography.Text>
+      ),
+    },
+    {
+      title: "فاکتورهای آزمون",
+      dataIndex: "TestItems",
       key: "6",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.TestItems}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.TestItems}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "عملیات",

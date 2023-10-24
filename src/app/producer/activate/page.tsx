@@ -9,6 +9,7 @@ import ManagementInfo from './management-info/management-info';
 import PersonnelInfo from './personnel-info/personnel-info';
 import LicenseInfo from './license-info/license-info';
 import ContactInfo from './contact-info/contact-info';
+import LaboratoryEquipments from './laboratory-equipments/laboratory-equipments';
 
 
 function Page() {
@@ -24,15 +25,18 @@ function Page() {
             CurrentStep = <CreatorProduction />
             break;
         case 1:
-            CurrentStep = <ManagementInfo />
+            CurrentStep = <LaboratoryEquipments />
             break;
         case 2:
-            CurrentStep = <PersonnelInfo />
+            CurrentStep = <ManagementInfo />
             break;
         case 3:
-            CurrentStep = <LicenseInfo />
+            CurrentStep = <PersonnelInfo />
             break;
         case 4:
+            CurrentStep = <LicenseInfo />
+            break;
+        case 5:
             CurrentStep = <ContactInfo />
             break;
         default:
@@ -47,6 +51,9 @@ function Page() {
                 items={[
                     {
                         title: "اطلاعات واحد تولیدی",
+                    },
+                    {
+                        title: "تجهیزات آزمایشگاهی",
                     },
                     {
                         title: "اطلاعات مدیریتی",

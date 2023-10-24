@@ -24,12 +24,12 @@ export default function Page({ params }: { params: { uid: any } }) {
 
   return (
     <>
-      <Collapse
+      {/* <Collapse
         size="large"
         items={[
           { label: "فیلتر جدول", children: <PrimaryManufacturerListForm /> },
         ]}
-      />
+      /> */}
       <PrimaryManufacturerListTable isLoading={isLoading} request={request} />
     </>
   );

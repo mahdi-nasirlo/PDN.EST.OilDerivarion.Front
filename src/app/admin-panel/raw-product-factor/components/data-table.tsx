@@ -162,7 +162,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور محصول"}
+        title={"فاکتور ماده اولیه"}
       />
     </>
   );

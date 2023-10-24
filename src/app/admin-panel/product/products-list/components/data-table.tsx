@@ -175,7 +175,7 @@ export default function DataTable({
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
+        title="محصول"
       />
       {/* ویرایش */}
       <EditModal

@@ -54,7 +54,7 @@ function CategoryForm({
               },
             ]}
           >
-            <Input size="large" placeholder="انتخاب کنید" />
+            <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
@@ -125,6 +125,7 @@ function CategoryForm({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
+                { required: true },
                 {
                   validator(rule, value, callback) {
                     if (value > form.getFieldValue("densityUpperLimit"))
@@ -137,7 +138,7 @@ function CategoryForm({
               name="densityLowerLimit"
               label="حداقل بازه"
             >
-              <Input size="large" placeholder="انتخاب کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
@@ -149,11 +150,12 @@ function CategoryForm({
                       callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
                   },
                 },
+                { required: true },
               ]}
               name="densityUpperLimit"
               label="حداکثر بازه"
             >
-              <Input size="large" placeholder="انتخاب کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>

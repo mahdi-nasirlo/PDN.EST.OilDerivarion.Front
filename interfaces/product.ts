@@ -8,7 +8,7 @@ export type Product = {
 };
 
 export interface ProductGet {
-  Name: string | null;
+  name: string | null;
   IsActive: boolean | null;
   densityTypeId: number | null;
   fromRecord: number;

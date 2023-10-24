@@ -19,7 +19,6 @@ function MeasureForm() {
         <Col xs={24} md={12}>
           <Form.Item name="isActive" label="فعال/غیرفعال">
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },

@@ -9,7 +9,7 @@ function TestFactorForm() {
       "/Measure/GetAll",
       {
         name: null,
-        isActive: null,
+        IsActive: null,
       },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
@@ -85,7 +85,7 @@ function TestFactorForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="is_Active"
+            name="isActive"
             label="فعال/غیر فعال"
           >
             <Select

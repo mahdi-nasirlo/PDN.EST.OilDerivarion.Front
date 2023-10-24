@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { Rule } from "antd/es/form";
-import { FormInstance } from "antd/lib";
 
 function CategoryForm({
   form,
@@ -45,16 +43,11 @@ function CategoryForm({
             name="name"
             label="نام دسته بندی"
             rules={[
-              {
-                required: true,
-                message: ".لطفا نام را وارد کنید",
-              },
-              {
-                type: "string",
-              },
+              { required: true, message: ".لطفا نام را وارد کنید" },
+              { type: "string" },
             ]}
           >
-            <Input size="large" placeholder="انتخاب کنید" />
+            <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
@@ -78,7 +71,7 @@ function CategoryForm({
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="is_Active"
+            name="isActive"
             label="فعال/غیر فعال"
             rules={[
               {
@@ -124,36 +117,36 @@ function CategoryForm({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[
-                {
-                  validator(rule, value, callback) {
-                    if (value > form.getFieldValue("densityUpperLimit"))
-                      callback(
-                        "حداقل بازه نمی تواند از حداکثر بازه بیشتر باشد"
-                      );
-                  },
-                },
-              ]}
+              // rules={[
+              //   {
+              //     validator(rule, value, callback) {
+              //       if (value > form.getFieldValue("densityUpperLimit"))
+              //         callback(
+              //           "حداقل بازه نمی تواند از حداکثر بازه بیشتر باشد"
+              //         );
+              //     },
+              //   },
+              // ]}
               name="densityLowerLimit"
               label="حداقل بازه"
             >
-              <Input size="large" placeholder="انتخاب کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[
-                {
-                  validator(rule, value, callback) {
-                    if (value < form.getFieldValue("densityLowerLimit"))
-                      callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
-                  },
-                },
-              ]}
+              // rules={[
+              //   {
+              //     validator(rule, value, callback) {
+              //       if (value < form.getFieldValue("densityLowerLimit"))
+              //         callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
+              //     },
+              //   },
+              // ]}
               name="densityUpperLimit"
               label="حداکثر بازه"
             >
-              <Input size="large" placeholder="انتخاب کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>

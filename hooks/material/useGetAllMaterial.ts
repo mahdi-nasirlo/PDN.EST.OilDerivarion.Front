@@ -6,7 +6,7 @@ const UseGetAllMaterial = () => {
     const {
         data: materials,
         isLoading: isLoadingMaterial
-    } = useSWR("/Material/GetAll", url => listFetcher(url, {arg: {name: null, is_active: true}}));
+    } = useSWR("/Material/GetAll", url => listFetcher(url, {arg: {name: null, IsActive: true}}));
 
     return {materials, isLoadingMaterial, fieldNames: {value: "Uid", label: "Name"}}
 

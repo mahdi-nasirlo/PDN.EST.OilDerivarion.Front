@@ -5,13 +5,12 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
-
   const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
     [
       "/ProductCategory/GetAll",
       {
         name: null,
-        is_Active: null,
+        IsActive: null,
       },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
@@ -56,15 +55,17 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="Is_Active"
+            name="IsActive"
             label="فعال/غیر فعال"
           >
             <Select
               options={[
                 { label: "فعال", value: true },
-                { label: "غیر فعال", value: false }
+                { label: "غیر فعال", value: false },
               ]}
-              size="large" placeholder="انتخاب کنید" />
+              size="large"
+              placeholder="انتخاب کنید"
+            />
           </Form.Item>
         </Col>
       </Row>

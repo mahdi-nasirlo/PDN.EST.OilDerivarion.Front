@@ -12,8 +12,8 @@ import { Collapse } from "antd";
 
 export default function Page() {
   const defaultValueTable = {
-    Name: null,
-    is_Active: null,
+    name: null,
+    IsActive: null,
     densityTypeId: null,
     fromRecord: 0,
     selectRecord: 100000,
@@ -42,8 +42,8 @@ export default function Page() {
   const setFilterTable = async (values: ProductGet) => {
     // @ts-ignore
     setFilter({
-      Name: values.Name,
-      is_Active: values.is_Active,
+      name: values.name,
+      IsActive: values.IsActive,
       densityTypeId: values.densityTypeId,
       fromRecord: 0,
       selectRecord: 1000,

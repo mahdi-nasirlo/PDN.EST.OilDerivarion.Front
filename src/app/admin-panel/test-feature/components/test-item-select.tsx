@@ -8,10 +8,9 @@ export default function TestItemSelect({ name }: { name: string }) {
     listFetcher(url, {
       arg: {
         name: null,
-        is_Active: null,
+        IsActive: null,
       },
     })
-
   );
 
   return (

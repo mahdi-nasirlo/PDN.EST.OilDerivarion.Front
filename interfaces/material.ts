@@ -1,13 +1,13 @@
 interface Material {
   Uid: string | null | undefined;
   Name: string;
-  Is_Active: boolean;
+  IsActive: boolean;
   MeasureUid: string | null;
 }
 
 interface MaterialGet {
   name: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
   MeasureUid: string | null;
   fromRecord: number;
   selectRecord: number;
@@ -15,7 +15,7 @@ interface MaterialGet {
 
 interface MaterialTestItem {
   Uid: string;
-  Is_Active: boolean;
+  IsActive: boolean;
   MaterialUid: string;
   TestItemUid: string;
   MaterialName: string;

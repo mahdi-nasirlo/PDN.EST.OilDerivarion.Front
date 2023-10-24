@@ -6,30 +6,29 @@ import { useForm } from "antd/lib/form/Form";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 
-
-export default function FilterForm({ filter, unsetFilter }: {
-  filter: (arg: MaterialGet) => void,
-  unsetFilter: () => void,
+export default function FilterForm({
+  filter,
+  unsetFilter,
+}: {
+  filter: (arg: MaterialGet) => void;
+  unsetFilter: () => void;
 }) {
-
-  const [form] = useForm()
+  const [form] = useForm();
 
   const resetForm = () => {
+    unsetFilter();
 
-    unsetFilter()
-
-    form.resetFields
-  }
+    form.resetFields;
+  };
 
   // const { data: MaterialTestItem, isLoading: ldMaterialTestItem } = useSWR("/MaterialTestItem/GetAll", (url) =>
-  //   listFetcher(url, { arg: { name: null, is_Active: null, }, })
+  //   listFetcher(url, { arg: { name: null, IsActive: null, }, })
   // );
 
-
-  const { data: Measure, isLoading: ldMeasure } = useSWR("/Measure/GetAll", (url) =>
-    listFetcher(url, { arg: { name: null, is_Active: null, }, })
+  const { data: Measure, isLoading: ldMeasure } = useSWR(
+    "/Measure/GetAll",
+    (url) => listFetcher(url, { arg: { name: null, IsActive: null } })
   );
-
 
   return (
     // <div className="box-border w-full p-6">
@@ -41,7 +40,7 @@ export default function FilterForm({ filter, unsetFilter }: {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="is_Active" label="فعال / غیر فعال">
+          <Form.Item name="IsActive" label="فعال / غیر فعال">
             <Select
               size="large"
               options={[

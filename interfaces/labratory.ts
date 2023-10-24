@@ -1,6 +1,6 @@
 interface LaboratoryGet {
   name: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
   fromRecord: number;
   selectRecord: number;
 }
@@ -14,20 +14,20 @@ interface Labratory {
   Tel: string | null;
   Fax: string | null;
   Address: string | null;
-  Is_Active: boolean | undefined;
+  IsActive: boolean | undefined;
   Uid: string | null;
 }
 
 interface LaboratoryTestItemGet {
   labUid: string | null;
   testItemUid: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
 }
 
 interface LabCreate {
   address: string;
   fax: string;
-  is_Active: true;
+  IsActive: true;
   license_Expire_Date: string;
   license_No: string;
   name: string;

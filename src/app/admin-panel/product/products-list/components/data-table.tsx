@@ -86,11 +86,11 @@ export default function DataTable({
     },
     {
       title: "فعال/غیر فعال ",
-      dataIndex: "Is_Active",
+      dataIndex: "IsActive",
       key: "4",
       render: (e, record) => (
         <ChangeStatus
-          isActive={record.Is_Active}
+          IsActive={record.IsActive}
           uid={record.Uid}
           url={"/Product/ChangeStatus"}
         />
@@ -175,7 +175,7 @@ export default function DataTable({
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
+        title="محصول"
       />
       {/* ویرایش */}
       <EditModal

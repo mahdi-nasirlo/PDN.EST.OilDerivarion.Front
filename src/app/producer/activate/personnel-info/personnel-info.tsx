@@ -59,7 +59,7 @@ export default function PersonnelInfo() {
             type="primary"
             htmlType="submit"
             onClick={() =>
-              processController.dispatch({ type: "NEXT", stepNumber: 5 })
+              processController.dispatch({ type: "NEXT", stepNumber: 6 })
             }
           >
             مرحله بعد

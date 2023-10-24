@@ -5,7 +5,7 @@ export type TestItem = {
   ReNewabillity_Value: number;
   TestMethod: string;
   Name: string;
-  Is_Active: boolean;
+  IsActive: boolean;
   MeasureName: string;
 };
 
@@ -15,7 +15,7 @@ export type CreateTestItem = {
   reNewabillity: number;
   reNewabillity_Value: number;
   testMethod: string;
-  is_Active: boolean;
+  IsActive: boolean;
 };
 
 export interface TestItemDetail {
@@ -23,7 +23,7 @@ export interface TestItemDetail {
   TestItem_Id: number;
   title: string | null;
   ReferenceCode: string | null;
-  is_Active: boolean | null | undefined;
+  IsActive: boolean | null | undefined;
   TestItemName: string | null;
 }
 
@@ -33,5 +33,5 @@ export type CreateTestItemDetail = {
   testItem_Id: number;
   title: string | null;
   referenceCode: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
 };

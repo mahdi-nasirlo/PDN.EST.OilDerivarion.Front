@@ -23,10 +23,6 @@ const columns: ColumnsType<Labratory> = [
   { title: "مجوز ها", dataIndex: "License_No", key: "2" },
 
   { title: "تاریخ اعتبار مجوز", dataIndex: "License_Expire_Date", key: "2" },
-  { title: "شماره ثابت", dataIndex: "Tel", key: "2" },
-
-  { title: "فکس", dataIndex: "Fax", key: "2" },
-  { title: "آدرس", dataIndex: "Address", key: "2" },
 ];
 
 const DataTable = ({
@@ -99,7 +95,7 @@ const ExpandedRowRender = ({
   const defaultValue = {
     productUid: Labratory.Uid,
     testItemUid: null,
-    is_Active: true,
+    IsActive: true,
   };
 
   const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(

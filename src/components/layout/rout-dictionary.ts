@@ -10,10 +10,10 @@ export const routDictionary: Items = {
     title: "پیشخوان",
   },
   "request-detail": {
-    title: "جزئیات درخواست"
+    title: "جزئیات درخواست",
   },
-  "barcode": {
-    title: "بارکد"
+  barcode: {
+    title: "بارکد",
   },
 
   activate: {
@@ -44,6 +44,9 @@ export const routDictionary: Items = {
   },
   "base-info": {
     title: "اطلاعات اولیه",
+  },
+  "laboratory-equipments": {
+    title: "تجهیزات آزمایشگاهی",
   },
   "creator-production": {
     title: "اطلاعات واحد تولیدی",
@@ -218,7 +221,7 @@ export const routDictionary: Items = {
   "gps-devices": {
     title: "دستگاه های GPS",
   },
-  "measures": {
+  measures: {
     title: "واحد اندازه گیری",
   },
   // end admin panel

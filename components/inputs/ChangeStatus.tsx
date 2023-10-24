@@ -7,7 +7,7 @@ import { mutationFetcher } from "../../lib/server/mutationFetcher";
 import { mutate } from "swr";
 
 interface PropsType {
-  isActive: boolean | undefined;
+  IsActive: boolean | undefined;
   uid: string | undefined | null;
   url: string;
 }
@@ -18,14 +18,14 @@ const ChangeStatus = (props: PropsType) => {
     mutationFetcher
   );
 
-  const [value, setValue] = useState(props.isActive);
+  const [value, setValue] = useState(props.IsActive);
 
   const handleChange = async (e: boolean) => {
     setValue(e);
 
     const res = await trigger({
       uid: props.uid,
-      isActive: e,
+      IsActive: e,
     });
 
     if (!res) {

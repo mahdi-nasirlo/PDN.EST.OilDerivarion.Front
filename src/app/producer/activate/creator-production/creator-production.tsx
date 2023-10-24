@@ -1,13 +1,13 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Select, Typography,} from "antd";
-import React, {useContext} from "react";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {SetBase} from "../../../../../interfaces/Base-info";
+import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
+import React, { useContext } from "react";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { SetBase } from "../../../../../interfaces/Base-info";
 import useSWRMutation from "swr/mutation";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import StepContext from "../stete-manager/step-context";
 
 
@@ -24,7 +24,7 @@ export default function CreatorProduction() {
         const res = await trigger(values)
 
         if (res) {
-            processController.dispatch({ type: "NEXT", stepNumber: 5 })
+            processController.dispatch({ type: "NEXT", stepNumber: 6 })
         }
 
 
@@ -49,12 +49,7 @@ export default function CreatorProduction() {
                         <Form.Item
                             name="currentCEOName"
                             label="نام مدیر عامل"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است",
-                                },
-                            ]}
+                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -63,12 +58,7 @@ export default function CreatorProduction() {
                         <Form.Item
                             name="currentCEOLastName"
                             label="نام خانوادگی مدیر عامل"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است",
-                                },
-                            ]}
+                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -139,7 +129,7 @@ export default function CreatorProduction() {
                     type="primary"
                     htmlType="submit"
                 >
-                     ثبت
+                    ثبت
                 </Button>
             </Form>
         </>

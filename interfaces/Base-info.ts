@@ -7,24 +7,24 @@ export interface SetBase {
 }
 
 export interface GerPagePresonLicence {
-  Uid: string,
-        Name: string,
-        LicenseTypeId: number,
-        Number: string,
-        Exporter: string,
-        Code: string,
-        IssueDate: string
-        ExpirationDate: string
-        IsCurrent: boolean
-        LicenseTypeName: string
+  Uid: string;
+  Name: string;
+  LicenseTypeId: number;
+  Number: string;
+  Exporter: string;
+  Code: string;
+  IssueDate: string;
+  ExpirationDate: string;
+  IsCurrent: boolean;
+  LicenseTypeName: string;
 }
 export interface CreatePresonLicence {
-  name: string,
-  licenseTypeId: number,
-  number: string,
-  exporter: string,
-  issueDate: string
-  expirationDate: string
+  name: string;
+  licenseTypeId: number;
+  number: string;
+  exporter: string;
+  issueDate: string;
+  expirationDate: string;
 }
 
 export interface SetMainMember {
@@ -35,7 +35,6 @@ export interface SetMainMember {
   companyRoleId: string;
   currentMobile: string;
 }
-
 
 export interface GetPageMainMember {
   key: string | null;
@@ -64,4 +63,25 @@ export interface GetPageEmployee {
   birthDate: string | null;
   currentMobile: string | null;
   companyRoleName: string | null;
+}
+
+export interface SetProducerLab {
+  producerExportDestinationCountryId: number;
+  producerHasWaste: boolean;
+  producerWastePlace: string | null;
+  producerLab_HasAtmosphericDistillation: boolean;
+  producerLab_HasVacuumDistillation: boolean;
+  producerLab_HasPourPoint: boolean;
+  producerLab_HasFlashPoint: boolean;
+  producerLab_HasViscometer: boolean;
+  producerLab_HasMetalCorrosion: boolean;
+  producerLab_HasColorMeter: boolean;
+  producerLab_HasTBN: boolean;
+  producerLab_HasTAN: boolean;
+  producerLab_HasVoltmeter: boolean;
+  producerLab_HasMeasureMocaptan: boolean;
+  producerLab_HasMeasureSulfur: boolean;
+  producerLab_HasDensiometer: boolean;
+  producerLab_HasMeasureColor: boolean;
+  producerLab_HasMeasureMethodGC: boolean;
 }

@@ -34,7 +34,7 @@ export default function ManagementInfo() {
     <>
       <CreateForm mutate={mutate} />
       <DataTable
-      isValidating={isValidating}
+        isValidating={isValidating}
         MainMember={addIndexToData(MainMember?.records)}
         ldMainMember={ldMainMember}
         mutate={mutate}
@@ -59,7 +59,7 @@ export default function ManagementInfo() {
             type="primary"
             htmlType="submit"
             onClick={() =>
-              processController.dispatch({ type: "NEXT", stepNumber: 5 })
+              processController.dispatch({ type: "NEXT", stepNumber: 6 })
             }
           >
             مرحله بعد

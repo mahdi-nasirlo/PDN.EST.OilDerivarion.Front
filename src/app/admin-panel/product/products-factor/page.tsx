@@ -69,7 +69,7 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور محصول
+            لیست فاکتور آزمون محصول
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

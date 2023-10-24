@@ -1,4 +1,4 @@
-import { Button, Space, Table } from "antd";
+import { Button, Space, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -10,7 +10,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 
-const columns: ColumnsType<Product> = [
+const columns: ColumnsType<any> = [
   {
     title: "ردیف",
     dataIndex: "Row",
@@ -25,6 +25,15 @@ const columns: ColumnsType<Product> = [
     title: "فاکتور های آزمون",
     dataIndex: "TestItems",
     key: "3",
+    render: (_, record) => (
+      <Typography.Text
+        className=" max-w-[300px]"
+        ellipsis={true}
+        style={{ width: "40px !important" }}
+      >
+        {record.TestItems}
+      </Typography.Text>
+    ),
   },
 ];
 

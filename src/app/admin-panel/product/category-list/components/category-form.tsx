@@ -78,7 +78,7 @@ function CategoryForm({
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="is_Active"
+            name="isActive"
             label="فعال/غیر فعال"
             rules={[
               {

@@ -6,18 +6,24 @@ import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
   const { data: Product, isLoading: ldProduct } = useSWR(
-    ["/Product/GetAll", {
-      name: null,
-      is_Active: null,
-    },],
+    [
+      "/Product/GetAll",
+      {
+        name: null,
+        IsActive: null,
+      },
+    ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
   const { data: Material, isLoading: ldMaterial } = useSWR(
-    ["/Material/GetAll", {
-      name: null,
-      is_Active: null,
-    },],
+    [
+      "/Material/GetAll",
+      {
+        name: null,
+        IsActive: null,
+      },
+    ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -65,7 +71,7 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="is_Active"
+            name="IsActive"
             label="فعال/غیر فعال"
           >
             <Select

@@ -10,87 +10,88 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
 export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-    const [open, setOpen] = useState<boolean>(false);
+  const [recordToDelete, setRecordToDelete] = useState<Product>();
 
-    const [recordToDelete, setRecordToDelete] = useState<Product>();
+  const defaultValue = {
+    productUid: product.Uid,
+    materialUid: null,
+    IsActive: null,
+  };
 
-    const defaultValue = {
-        productUid: product.Uid,
-        materialUid: null,
-        is_Active: null
+  const { data, isLoading, mutate } = useSWR("/ProductMaterial/GetAll", (url) =>
+    listFetcher(url, { arg: defaultValue })
+  );
+
+  useEffect(() => {
+    if (!isLoading) {
+      mutate();
     }
+  }, [product]);
 
-    const { data, isLoading, mutate } = useSWR("/ProductMaterial/GetAll", (url) => listFetcher(url, { arg: defaultValue }))
+  const { trigger, isMutating } = useSWRMutation(
+    "/ProductMaterial/Delete",
+    mutationFetcher
+  );
 
-    useEffect(() => {
+  const handleDelete = async () => {
+    setOpen(false);
 
-        if (!isLoading) {
-            mutate()
-        }
+    await trigger({ Uid: recordToDelete?.Uid });
 
-    }, [product])
+    await mutate();
+  };
 
+  const expandColumns: TableColumnsType<any> = [
+    {
+      title: "#",
+      dataIndex: "Row",
+      key: "1",
+    },
+    {
+      title: "نام ماده اولیه",
+      dataIndex: "MaterialName",
+      key: "2",
+    },
+    {
+      title: "عملیات",
+      dataIndex: "2",
+      key: "upgradeNum",
+      align: "center",
+      fixed: "right",
+      width: 150,
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-red-500 font-bold"
+            onClick={() => {
+              setOpen(true);
+              setRecordToDelete(record);
+            }}
+          >
+            حذف
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
-    const { trigger, isMutating } = useSWRMutation("/ProductMaterial/Delete", mutationFetcher)
-
-    const handleDelete = async () => {
-
-        setOpen(false)
-
-        await trigger({ Uid: recordToDelete?.Uid })
-
-        await mutate()
-
-    }
-
-    const expandColumns: TableColumnsType<any> = [
-        {
-            title: "#",
-            dataIndex: "Row",
-            key: "1"
-        },
-        {
-            title: "نام ماده اولیه",
-            dataIndex: "MaterialName",
-            key: "2"
-        },
-        {
-            title: "عملیات",
-            dataIndex: "2",
-            key: "upgradeNum",
-            align: "center",
-            fixed: 'right',
-            width: 150,
-            render: (_, record) => (
-                <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => {
-                            setOpen(true);
-                            setRecordToDelete(record)
-                        }}
-                    >
-                        حذف
-                    </Button>
-                </Space>
-            ),
-        },
-    ];
-
-    return <>
-        <Table
-            columns={expandColumns}
-            dataSource={addIndexToData(data)}
-            loading={isLoading || isMutating}
-            pagination={false}
-        />
-        <ConfirmDeleteModal
-            open={open}
-            setOpen={setOpen}
-            handleDelete={handleDelete}
-            title={"فاکتور محصول"}
-        />
+  return (
+    <>
+      <Table
+        columns={expandColumns}
+        dataSource={addIndexToData(data)}
+        loading={isLoading || isMutating}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        open={open}
+        setOpen={setOpen}
+        handleDelete={handleDelete}
+        title={"فاکتور محصول"}
+      />
     </>
-}
+  );
+};

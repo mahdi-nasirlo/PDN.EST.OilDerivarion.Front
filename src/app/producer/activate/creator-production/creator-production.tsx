@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
+import {
+    Button,
+    Col,
+    Divider,
+    Form,
+    Input,
+    Row,
+    Select,
+    Typography,
+} from "antd";
 import React, { useContext } from "react";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { SetBase } from "../../../../../interfaces/Base-info";
@@ -10,18 +19,17 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import StepContext from "../stete-manager/step-context";
 
-
 export default function CreatorProduction() {
-
-    const processController = useContext(StepContext)
+    const processController = useContext(StepContext);
     const [form] = useForm();
 
-
-    const { trigger, isMutating } = useSWRMutation("/Producer/SetBase", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation(
+        "/Producer/SetBase",
+        mutationFetcher
+    );
 
     const onFinish = async (values: SetBase) => {
-
-        const res = await trigger(values)
+        const res = await trigger(values);
 
         if (res) {
             processController.dispatch({ type: "NEXT", stepNumber: 6 })
@@ -30,12 +38,17 @@ export default function CreatorProduction() {
 
     };
 
-    const { data: CompanyOwnershipTypeGetAll, isLoading: ldCompanyOwnership } = useSWR(
-        ["/BaseInfo/CompanyOwnershipTypeGetAll", {
-            name: null,
-            isActive: null
-        }],
-        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+    const { data: CompanyOwnershipTypeGetAll, isLoading: ldCompanyOwnership } =
+        useSWR(
+            [
+                "/BaseInfo/CompanyOwnershipTypeGetAll",
+                {
+                    name: null,
+                    IsActive: null,
+                },
+            ],
+            ([url, arg]: [string, any]) => listFetcher(url, { arg })
+        );
 
     return (
         <>
@@ -49,7 +62,12 @@ export default function CreatorProduction() {
                         <Form.Item
                             name="currentCEOName"
                             label="نام مدیر عامل"
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "این فیلد اجباری است",
+                                },
+                            ]}
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
@@ -58,7 +76,12 @@ export default function CreatorProduction() {
                         <Form.Item
                             name="currentCEOLastName"
                             label="نام خانوادگی مدیر عامل"
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "این فیلد اجباری است",
+                                },
+                            ]}
                         >
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>

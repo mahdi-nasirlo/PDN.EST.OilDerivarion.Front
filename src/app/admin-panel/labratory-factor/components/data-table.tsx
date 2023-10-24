@@ -99,7 +99,7 @@ const ExpandedRowRender = ({
   const defaultValue = {
     productUid: Labratory.Uid,
     testItemUid: null,
-    is_Active: true,
+    IsActive: true,
   };
 
   const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(

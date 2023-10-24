@@ -1,76 +1,93 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import React from 'react'
+import { Button, Col, Form, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
+import React from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import GpsForm from "@/app/admin-panel/gps-devices/components/gps-form";
 
-
-export default function CreateModal({modalVisible, setModalVisible, mutate}: {
-    modalVisible: any,
-    setModalVisible: any,
-    mutate: () => void
+export default function CreateModal({
+  modalVisible,
+  setModalVisible,
+  mutate,
+}: {
+  modalVisible: any;
+  setModalVisible: any;
+  mutate: () => void;
 }) {
+  const [form] = useForm();
 
-    const [form] = useForm()
+  const { trigger, isMutating } = useSWRMutation(
+    "/GpsDevice/Create",
+    mutationFetcher
+  );
 
-    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Create", mutationFetcher)
+  const handleSubmit = async (values: {
+    code: string;
+    IsActive: boolean;
+    stateID: number;
+  }) => {
+    const res = await trigger(values);
 
-    const handleSubmit = async (values: { code: string, isActive: boolean, stateID: number }) => {
+    if (res) {
+      await mutate();
 
-        const res = await trigger(values)
+      setModalVisible(false);
 
-        if (res) {
-
-            await mutate()
-
-            setModalVisible(false)
-
-            form.resetFields()
-        }
-
+      form.resetFields();
     }
+  };
 
-    return (
-        <Modal
-            width={800}
-            title={<div>
-                <div className="text-base mb-2">افزودن جعبه</div>
-                <div className="font-normal text-sm">لطفا اطلاعات را وارد نمایید.</div>
-            </div>}
-            open={modalVisible}
-            onCancel={() => setModalVisible(false)}
-            footer={[
-                <Row key={"box"} gutter={[16, 16]} className="my-2">
-                    <Col xs={24} md={12}>
-                        <Button
-                            loading={isMutating}
-                            size="large"
-                            className="w-full"
-                            type="primary"
-                            onClick={() => form.submit()}
-                            key={"submit"}>
-                            ثبت
-                        </Button>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Button
-                            loading={isMutating}
-                            size="large"
-                            className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={() => setModalVisible(false)}
-                            key={"cancel"}>
-                            انصراف
-                        </Button>
-                    </Col>
-                </Row>
-            ]}
-        >
-            <Form disabled={isMutating} form={form} onFinish={handleSubmit} layout="vertical">
-                <GpsForm/>
-            </Form>
-        </Modal>
-    )
+  return (
+    <Modal
+      width={800}
+      title={
+        <div>
+          <div className="text-base mb-2">افزودن جعبه</div>
+          <div className="font-normal text-sm">
+            لطفا اطلاعات را وارد نمایید.
+          </div>
+        </div>
+      }
+      open={modalVisible}
+      onCancel={() => setModalVisible(false)}
+      footer={[
+        <Row key={"box"} gutter={[16, 16]} className="my-2">
+          <Col xs={24} md={12}>
+            <Button
+              loading={isMutating}
+              size="large"
+              className="w-full"
+              type="primary"
+              onClick={() => form.submit()}
+              key={"submit"}
+            >
+              ثبت
+            </Button>
+          </Col>
+          <Col xs={24} md={12}>
+            <Button
+              loading={isMutating}
+              size="large"
+              className="w-full bg-gray-100 text-warmGray-500"
+              onClick={() => setModalVisible(false)}
+              key={"cancel"}
+            >
+              انصراف
+            </Button>
+          </Col>
+        </Row>,
+      ]}
+    >
+      <Form
+        disabled={isMutating}
+        form={form}
+        onFinish={handleSubmit}
+        layout="vertical"
+      >
+        <GpsForm />
+      </Form>
+    </Modal>
+  );
 }

@@ -22,7 +22,7 @@ export default function CreateModal({
 
   const defaultValue = {
     name: null,
-    is_Active: null,
+    IsActive: null,
   };
 
   const { data: product, isLoading: ldProduct } = useSWR<Product[]>(
@@ -44,7 +44,7 @@ export default function CreateModal({
     productUid: string;
     testItemUid: string;
   }) => {
-    await trigger({ ...values, is_Active: true });
+    await trigger({ ...values, IsActive: true });
 
     await mutate();
 

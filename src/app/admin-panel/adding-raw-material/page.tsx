@@ -1,19 +1,19 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {listFetcher} from "../../../../lib/server/listFetcher";
-import {Collapse} from "antd";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import { Collapse } from "antd";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValueTable = {
     name: null,
-    is_Active: null,
+    IsActive: null,
     MeasureUid: null,
     fromRecord: 0,
     selectRecord: 10000,
@@ -36,7 +36,7 @@ export default function Page() {
   const setFilterTable = async (values: any) => {
     setFilter({
       name: values.name,
-      is_Active: values.is_Active,
+      IsActive: values.IsActive,
       MeasureUid: values.MeasureUid,
       fromRecord: 0,
       selectRecord: 1000,

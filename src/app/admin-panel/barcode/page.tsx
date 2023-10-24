@@ -1,15 +1,15 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {Button, Collapse, Typography} from "antd";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {listFetcher} from "../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../lib/addIndexToData";
-import {RequestMaster} from "../../../../interfaces/requestMaster";
+import { Button, Collapse, Typography } from "antd";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../lib/addIndexToData";
+import { RequestMaster } from "../../../../interfaces/requestMaster";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -40,7 +40,7 @@ export default function Page() {
   const setFilterTable = async (values: any) => {
     setFilter({
       name: values.name,
-      is_Active: null,
+      IsActive: null,
       fromRecord: 0,
       selectRecord: 1000,
     });

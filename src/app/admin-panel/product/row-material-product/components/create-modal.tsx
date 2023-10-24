@@ -26,9 +26,8 @@ export default function CreateModal({
   const createProduct = async (values: {
     productUid: string;
     materialUid: string;
-    is_Active: boolean;
+    IsActive: boolean;
   }) => {
-
     await trigger(values);
 
     await mutate();

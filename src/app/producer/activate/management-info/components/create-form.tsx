@@ -31,9 +31,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
 
     values.currentMobile = values.currentMobile.toString();
 
-    await trigger(values);
+    const res = await trigger(values);
 
     await mutate();
+    if (res) {
+      form.resetFields();
+    }
   };
 
   const { data: CompanyRoleGetAll, isLoading: ldCompanyRoleGetAll } = useSWR(

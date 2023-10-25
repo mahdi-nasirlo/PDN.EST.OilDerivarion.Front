@@ -22,7 +22,6 @@ export default function ContactInfo() {
         const res = await trigger(values)
 
         if (res) {
-            form.resetFields();
             router.push("/producer")
         }
 

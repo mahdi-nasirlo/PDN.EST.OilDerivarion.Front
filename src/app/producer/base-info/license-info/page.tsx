@@ -5,10 +5,7 @@ import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import {
-  GerPagePresonLicence,
-  SetMainMember,
-} from "../../../../../interfaces/Base-info";
+import { GerPagePresonLicence } from "../../../../../interfaces/Base-info";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { addIndexToData } from "../../../../../lib/addIndexToData";

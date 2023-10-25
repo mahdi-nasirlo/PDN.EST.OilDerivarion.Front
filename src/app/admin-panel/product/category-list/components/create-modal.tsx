@@ -36,6 +36,7 @@ export default function CreateModal({
 
   const closeModal = () => {
     setModalVisible(false);
+    form.resetFields();
   };
 
   return (

@@ -33,8 +33,8 @@ export default function EditModal(
     const onFinish = async (values: any) => {
 
         const res = await trigger(values);
+        await mutate();
         if (res) {
-            await mutate()
             setIsEditModalVisible(false);
         }
 

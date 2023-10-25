@@ -49,11 +49,13 @@ export default function Page() {
 
     const onSubmitFinish = async (values: SetProducerLab) => {
 
-        await trigger(values);
+        const res = await trigger(values);
 
         await mutate();
+        if (res) {
 
-        setIsEditVisible(true);
+            setIsEditVisible(true);
+        }
     };
 
 

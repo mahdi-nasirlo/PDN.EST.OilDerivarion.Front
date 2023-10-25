@@ -34,13 +34,15 @@ export default function EditModal({
   const handleConfirmEdit = async (values: any) => {
     values.Uid = recordToEdit?.Uid;
 
-    await UpdateLicense(values);
+    const res = await UpdateLicense(values);
 
     await mutate();
+    if (res) {
 
-    setIsEditModalVisible(false);
+      setIsEditModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const handleCancelEdit = () => {
@@ -147,7 +149,7 @@ export default function EditModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <Input size="large" />
+                <Input size="large" placeholder="13**/**/**" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

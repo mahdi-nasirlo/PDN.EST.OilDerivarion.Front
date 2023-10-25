@@ -1,22 +1,9 @@
 import { useForm } from "antd/es/form/Form";
-import {
-  Button,
-  Col,
-  DatePicker,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Select,
-  Typography,
-} from "antd";
+import { Button, Col, DatePicker, Divider, Form, Input, Row, Select, Typography, } from "antd";
 import React from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import {
-  CreatePresonLicence,
-  SetMainMember,
-} from "../../../../../../interfaces/Base-info";
+import { CreatePresonLicence } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
@@ -25,9 +12,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
 
   const onFinish = async (values: CreatePresonLicence) => {
-    await trigger(values);
+    const res = await trigger(values);
 
     await mutate();
+    if (res) {
+      form.resetFields();
+    }
   };
 
   const { trigger, isMutating } = useSWRMutation(
@@ -77,7 +67,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
                 options={LicenseTypeGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
-                placeholder="وارد کنید"
+                placeholder="انتخاب کنید"
               />
             </Form.Item>
           </Col>

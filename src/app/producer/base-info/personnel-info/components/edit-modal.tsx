@@ -31,13 +31,15 @@ export default function EditModal(
 
         values.uid = recordToEdit?.uid
 
-        await UpdateSetEmployeeMember(values)
+        const res = await UpdateSetEmployeeMember(values)
 
         await mutate();
+        if (res) {
 
-        setIsEditModalVisible(false);
+            setIsEditModalVisible(false);
 
-        form.resetFields();
+            form.resetFields();
+        }
     }
 
     const handleCancelEdit = () => {
@@ -121,7 +123,7 @@ export default function EditModal(
                         </Col>
                         <Col xs={24} md={12}>
                             <Form.Item name="birthDate" label="تاریخ تولد">
-                                <Input />
+                                <Input size='large' placeholder="13**/**/**" />
                                 {/* <DatePicker
                                     className="w-full"
                                     placeholder="13**//**"

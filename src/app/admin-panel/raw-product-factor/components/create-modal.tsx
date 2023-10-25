@@ -52,6 +52,11 @@ export default function CreateModal({
     form.resetFields();
   };
 
+  const CloseModal = () => {
+    setModalVisible(false);
+    form.resetFields();
+  };
+
   return (
     <Modal
       width={800}
@@ -85,7 +90,7 @@ export default function CreateModal({
             <Button
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
-              onClick={() => setModalVisible(false)}
+              onClick={CloseModal}
               key={"cancel"}
             >
               انصراف

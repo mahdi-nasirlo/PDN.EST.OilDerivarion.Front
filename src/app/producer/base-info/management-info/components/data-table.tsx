@@ -33,15 +33,17 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await DeleteMember({
+    const res = await DeleteMember({
       uid: recordToDelete?.uid,
     });
 
     await mutate();
+    if (res) {
 
-    setIsDeleteModalVisible(false);
+      setIsDeleteModalVisible(false);
 
-    setRecordToDelete(null);
+      setRecordToDelete(null);
+    }
   };
 
   //ادیت
@@ -148,7 +150,7 @@ export default function DataTable({
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
-        title="عضو شرکت"
+        title="مدیر شرکت"
       />
       {/* ویرایش */}
       <EditModal

@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 import { SetEmployeeMember } from '../../../../../../interfaces/Base-info';
@@ -16,13 +16,15 @@ export default function CreateModal({ isEditModalVisible, setIsEditModalVisible,
 
     const onFinish = async (values: SetEmployeeMember) => {
 
-        await trigger(values);
+        const res = await trigger(values);
 
         await mutate();
+        if (res) {
 
-        setIsEditModalVisible(false);
+            setIsEditModalVisible(false);
 
-        form.resetFields();
+            form.resetFields();
+        }
     };
 
     const handleCancelEdit = () => {

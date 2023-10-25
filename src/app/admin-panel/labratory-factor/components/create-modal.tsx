@@ -60,6 +60,7 @@ export default function CreateModal({
 
   const closeModal = () => {
     setModalVisible(false);
+    form.resetFields();
   };
 
   const { data: Lab, isLoading: ldProduct } = useSWR<{ records: Labratory[] }>(

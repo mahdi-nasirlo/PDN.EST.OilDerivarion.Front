@@ -221,6 +221,9 @@ export const routDictionary: Items = {
   "gps-devices": {
     title: "دستگاه های GPS",
   },
+  "gps-tracking": {
+    title: "رهگیری GPS"
+  },
   measures: {
     title: "واحد اندازه گیری",
   },

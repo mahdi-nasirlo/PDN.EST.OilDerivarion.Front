@@ -11,18 +11,18 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 
-export default function DataTable({
+const DataTable = ({
   material,
   ldMaterial,
 }: {
   ldMaterial: boolean;
   material:
-    | {
-        count: number;
-        records: Material[];
-      }
-    | undefined;
-}) {
+  | {
+    count: number;
+    records: Material[];
+  }
+  | undefined;
+}) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   const columns: ColumnsType<Material> = [
@@ -84,14 +84,10 @@ export default function DataTable({
   );
 }
 
-interface ExpandedDataType {
-  key: React.Key;
-  date: string;
-  name: string;
-  upgradeNum: any;
-}
-
 const ExpandedRowRender = ({ material }: { material: Material }) => {
+
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState();
@@ -102,7 +98,8 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
     IsActive: true,
   };
 
-  const { data, isLoading, mutate } = useSWR(
+
+  const { data, isLoading, mutate, isValidating } = useSWR<any[]>(
     ["/MaterialTestItem/GetAll", defaultValue],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
@@ -113,12 +110,12 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   );
 
   const deleteProductFactor = async () => {
-    setOpen(false);
-
     // @ts-ignore
     await trigger({ uid: recordToDelete?.Uid });
 
     await mutate();
+
+    setOpen(false);
   };
 
   const expandColumns: TableColumnsType<any> = [
@@ -138,7 +135,6 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
             className="text-red-500 font-bold"
             onClick={() => {
               setOpen(true);
-              // @ts-ignore
               setRecordToDelete(record);
             }}
           >
@@ -151,11 +147,13 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
   return (
     <>
-      {/*@ts-ignore*/}
       <Table
         columns={expandColumns}
         dataSource={addIndexToData(data)}
-        loading={isLoading || isMutating}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+        }}
+        loading={isLoading || isMutating || isValidating}
         pagination={false}
       />
       <ConfirmDeleteModal
@@ -167,3 +165,5 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
     </>
   );
 };
+
+export default DataTable;

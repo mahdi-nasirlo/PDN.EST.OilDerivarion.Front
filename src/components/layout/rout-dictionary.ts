@@ -201,7 +201,7 @@ export const routDictionary: Items = {
     title: "استان",
   },
   "raw-product-factor": {
-    title: "مواد اولیه محصول",
+    title: "فاکتور ماده اولیه",
   },
   "test-factors": {
     title: "فاکتور های آمون",
@@ -222,7 +222,7 @@ export const routDictionary: Items = {
     title: "دستگاه های GPS",
   },
   "gps-tracking": {
-    title: "رهگیری GPS"
+    title: "رهگیری GPS",
   },
   measures: {
     title: "واحد اندازه گیری",

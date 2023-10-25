@@ -43,13 +43,15 @@ export default function CreateModal({
     materialUid: string;
     testItemUid: string;
   }) => {
-    setModalVisible(false);
 
-    await trigger({ ...values, IsActive: true });
+    const res = await trigger({ ...values, IsActive: true });
 
     await mutate();
+    if (res) {
+      setModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const CloseModal = () => {

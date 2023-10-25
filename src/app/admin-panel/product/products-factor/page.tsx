@@ -36,12 +36,7 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({
-      name: values.name,
-      IsActive: null,
-      fromRecord: 0,
-      selectRecord: 1000,
-    });
+    setFilter({ name: values.name, IsActive: null, fromRecord: 0, selectRecord: 1000 });
 
     await mutate();
   };

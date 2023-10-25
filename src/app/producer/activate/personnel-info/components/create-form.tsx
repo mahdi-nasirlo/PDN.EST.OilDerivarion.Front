@@ -19,9 +19,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
 
         // values.mobileNumber = values.mobileNumber.toString();
 
-        await trigger(values);
+        const res = await trigger(values);
 
         await mutate();
+        if (res) {
+            form.resetFields();
+        }
     };
 
 

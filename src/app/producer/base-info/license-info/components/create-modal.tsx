@@ -1,10 +1,7 @@
 import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import {
-  CreatePresonLicence,
-  SetMainMember,
-} from "../../../../../../interfaces/Base-info";
+import { CreatePresonLicence } from "../../../../../../interfaces/Base-info";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
@@ -27,13 +24,15 @@ export default function CreateModal({
   );
 
   const onFinish = async (values: CreatePresonLicence) => {
-    await trigger(values);
+    const res = await trigger(values);
 
     await mutate();
+    if (res) {
 
-    setIsEditModalVisible(false);
+      setIsEditModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const handleCancelEdit = () => {
@@ -112,7 +111,7 @@ export default function CreateModal({
                   options={LicenseTypeGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
-                  placeholder="وارد کنید"
+                  placeholder="انتخاب کنید"
                 />
               </Form.Item>
             </Col>

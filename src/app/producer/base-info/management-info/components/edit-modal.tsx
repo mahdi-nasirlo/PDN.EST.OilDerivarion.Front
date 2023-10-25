@@ -42,13 +42,15 @@ export default function EditModal({
     values.currentMobile = values.currentMobile.toString();
     values.uid = recordToEdit?.uid;
 
-    await UpdateSetMainMember(values);
+    const res = await UpdateSetMainMember(values);
 
     await mutate();
 
-    setIsEditModalVisible(false);
+    if (res) {
+      setIsEditModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const handleCancelEdit = () => {
@@ -64,7 +66,7 @@ export default function EditModal({
     <>
       <Modal
         width={800}
-        title="ویرایش عضو شرکت"
+        title="ویرایش مدیر شرکت"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}

@@ -2,10 +2,7 @@ import { Button, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { Table } from "antd/lib";
 import React, { useState } from "react";
-import {
-  GerPagePresonLicence,
-  GetPageMainMember,
-} from "../../../../../../interfaces/Base-info";
+import { GerPagePresonLicence } from "../../../../../../interfaces/Base-info";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
@@ -37,15 +34,17 @@ export default function DataTable({
     useSWRMutation("/ProfilePersonLicense/Delete", mutationFetcher);
 
   const handleConfirmDelete = async () => {
-    await DeleteLicense({
+    const res = await DeleteLicense({
       uid: recordToDelete?.Uid,
     });
 
     await mutate();
 
-    setIsDeleteModalVisible(false);
+    if (res) {
+      setIsDeleteModalVisible(false);
 
-    setRecordToDelete(null);
+      setRecordToDelete(null);
+    }
   };
 
   //ادیت

@@ -28,13 +28,15 @@ export default function CreateModal({
 
     values.currentMobile = values.currentMobile.toString();
 
-    await trigger(values);
+    const res = await trigger(values);
 
     await mutate();
+    if (res) {
 
-    setIsEditModalVisible(false);
+      setIsEditModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const handleCancelEdit = () => {

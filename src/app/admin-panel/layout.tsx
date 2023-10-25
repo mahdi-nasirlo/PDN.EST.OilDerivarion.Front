@@ -144,17 +144,22 @@ const items: MenuProps["items"] = [
   ),
 
   getMenuItem(
-    <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
-    "/admin-panel/test-result"
-    // <FolderPlusIcon width={16} height={16}/>
+      <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
+      "/admin-panel/test-result"
+      // <FolderPlusIcon width={16} height={16}/>
   ),
 
   getMenuItem(
-    <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
-    "/admin-panel/gps-devices"
+      <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
+      "/admin-panel/gps-devices"
   ),
   getMenuItem(
-    <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
-    "/admin-panel/measures"
+      <Link href="/admin-panel/gps-tracking">رهگیری GPS</Link>,
+      "/admin-panel/gps-tracking"
+  ),
+
+  getMenuItem(
+      <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
+      "/admin-panel/measures"
   ),
 ];

@@ -1,65 +1,31 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, Form, Select, Row, Input } from "antd";
 import React from "react";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { TestItem } from "../../../../../interfaces/TestItem";
-import useSWR from "swr";
 
 export default function FilterForm({
-  isMutating,
   filter,
   unsetFilter,
 }: {
-  isMutating: any;
   filter: (arg: LaboratoryGet) => void;
   unsetFilter: () => void;
 }) {
-  const { data: test, isLoading } = useSWR<TestItem[]>(
-    [
-      "/TestItem/GetAll",
-      {
-        name: "",
-        IsActive: null,
-      },
-    ],
-
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-
-  const defaultValueTable = {
-    Name: "",
-    IsActive: null,
-    fromRecord: 0,
-    selectRecord: 100000,
-  };
-  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: Labratory[] }>(
-    ["/Lab/GetPage", defaultValueTable],
-
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-
   return (
     // <div className="box-border w-full p-6">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="labUid" label="نام آزمایشگاه">
-            <Select
-              fieldNames={{ label: "Name", value: "Uid" }}
-              options={Lab?.records}
-              loading={ldProduct}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
+          <Form.Item name="name" label="نام آزمایشگاه ">
+            <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="testItemUid" label="نام فاکتور">
+          <Form.Item name="IsActive" label="فعال / غیر فعال">
             <Select
-              fieldNames={{ label: "Name", value: "Uid" }}
-              options={test}
-              loading={isLoading || isMutating}
+              options={[
+                { value: true, label: "فعال" },
+                { value: false, label: "غیر فعال" },
+              ]}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -82,7 +48,7 @@ export default function FilterForm({
               size="large"
               type="primary"
               htmlType="reset"
-              onClick={() => unsetFilter()}
+              onClick={unsetFilter}
             >
               حذف فیلتر
             </Button>

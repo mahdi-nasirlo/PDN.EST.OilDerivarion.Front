@@ -498,3 +498,12 @@ margin-right: 24px !important;
  .ant-switch-checked{
     background:theme("backgroundColor.primary.500")!important;
  }
+ .ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon {
+    
+    border: 2px solid theme("colors.primary.500");
+
+ 
+  }
+  .ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon:hover {
+    border-color:#4ade80;
+  }

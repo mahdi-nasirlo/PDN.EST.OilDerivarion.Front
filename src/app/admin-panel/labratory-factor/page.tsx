@@ -61,11 +61,7 @@ export default function Page() {
           {
             label: "فیلتر جدول",
             children: (
-              <FilterForm
-                isMutating={isValidating}
-                unsetFilter={unsetFilter}
-                filter={setFilterTable}
-              />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
             ),
           },
         ]}

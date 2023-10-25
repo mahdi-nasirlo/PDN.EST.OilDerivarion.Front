@@ -1,12 +1,12 @@
 "use client";
 
-import {Alert, Space, Table, Tooltip, Typography} from "antd";
+import { Alert, Space, Table, Tag, Tooltip, Typography } from "antd";
 import useSWR from "swr";
 import Link from "next/link";
-import {ColumnsType} from "antd/es/table";
-import {listFetcher} from "../../../lib/server/listFetcher";
-import {TestGetPage} from "../../../interfaces/test&verify";
-import {addIndexToData} from "../../../lib/addIndexToData";
+import { ColumnsType } from "antd/es/table";
+import { listFetcher } from "../../../lib/server/listFetcher";
+import { TestGetPage } from "../../../interfaces/test&verify";
+import { addIndexToData } from "../../../lib/addIndexToData";
 
 export default function Home() {
   const {
@@ -171,6 +171,22 @@ const columns: ColumnsType<any> = [
     title: "وضعیت تایید از نظر تستر",
     dataIndex: "Test_Success",
     key: "4",
+    render: (_, record: any) => {
+      let color = "";
+      let name = "";
+      if (record.Test_Success === 2) {
+        color = "green";
+        name = "تایید شده";
+      } else if (record.Test_Success === 1) {
+        color = "red";
+        name = "عدم تایید";
+      } else {
+        color = "yellow";
+        name: "در حال بررسی";
+      }
+
+      return <Tag color={color}>{name}</Tag>;
+    },
   },
   {
     title: "توضیحات تستر",

@@ -35,13 +35,8 @@ export default function Page() {
   );
 
   const setFilterTable = async (values: LaboratoryGet) => {
-    setFilter({
-      name: values.name,
-      // @ts-ignore
-      IsActive: values.IsActive,
-      fromRecord: 0,
-      selectRecord: 1000,
-    });
+    // @ts-ignore
+    setFilter({ name: values.name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000 });
 
     await mutate();
   };

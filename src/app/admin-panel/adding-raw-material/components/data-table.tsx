@@ -10,6 +10,7 @@ import {
   Space,
   Switch,
   Table,
+  Tag,
   Typography,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
@@ -21,6 +22,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
 import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   isValidating,
@@ -119,13 +121,22 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/Material/ChangeStatus"}
-        />
-      ),
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
+        }
+
+        return <Tag icon={icon} color={color}>{name}</Tag>;
+      },
     },
     {
       title: "عملیات",
@@ -193,6 +204,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={ldDeleteMaterial}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

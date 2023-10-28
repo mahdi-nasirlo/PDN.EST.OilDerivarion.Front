@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 function Step1({
   form,
@@ -74,9 +75,12 @@ function Step1({
               label="استان"
             >
               <Select
+                showSearch
+                fieldNames={{ label: "Name", value: "Id" }}
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={isLoading}
                 options={data}
-                fieldNames={{ label: "Name", value: "Id" }}
                 size="large"
                 placeholder="انتخاب کنید"
               />

@@ -16,6 +16,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
 
     return (
         <Table
+            {...props}
             loading={props.isLoading}
             dataSource={addIndexToData(props.data?.records)}
             className="mt-6"

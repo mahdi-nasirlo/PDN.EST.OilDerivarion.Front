@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
+import { filterOption } from "../../../../../lib/filterOption";
 
 function MaterialForm() {
   const { data: Measure, isLoading: ldMeasure } = useSWR(
@@ -14,9 +15,7 @@ function MaterialForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[
-              { required: true, message: "لطفا نام مواد اولیه را وارد کنید" },
-            ]}
+            rules={[{ required: true, message: "لطفا نام مواد اولیه را وارد کنید" }]}
             name="Name"
             label="نام ماده اولیه"
           >
@@ -40,9 +39,12 @@ function MaterialForm() {
         <Col xs={24} md={12}>
           <Form.Item name="MeasureUid" label="واحد اندازه گیری">
             <Select
+              showSearch
+              fieldNames={{ label: "Name", value: "Uid" }}
+              // @ts-ignore
+              filterOption={filterOption}
               options={Measure}
               loading={ldMeasure}
-              fieldNames={{ value: "Uid", label: "Name" }}
               size="large"
               placeholder="انتخاب کنید"
             />

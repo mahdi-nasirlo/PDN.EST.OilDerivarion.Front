@@ -21,23 +21,6 @@ export default function CreateModal({
 
     const [form] = useForm();
 
-    const { isMutating, trigger } = useSWRMutation(
-        "/Lab/Create",
-        mutationFetcher
-    );
-
-    const CreateLaboratory = async (values: Labratory) => {
-
-        await trigger(values)
-
-        await mutate();
-
-        setModalVisible(false);
-
-        form.resetFields();
-
-    };
-
     const [step, setStep] = useState(1);
 
     const [labUid, setLabUid] = useState<string | undefined>()
@@ -111,11 +94,13 @@ export default function CreateModal({
 
         const res = await saveFormManager(values)
 
-        await mutate
+        await mutate();
 
         if (res === true) {
 
-            setModalVisible(false)
+            setModalVisible(false);
+
+            form.resetFields();
         }
 
     }
@@ -144,6 +129,7 @@ export default function CreateModal({
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
+                            loading={ldCreateLab || ldSaveForm || ldSaveFormManager}
                             size="large"
                             className="w-full"
                             type="primary"
@@ -155,7 +141,6 @@ export default function CreateModal({
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
-                            loading={isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={() => {

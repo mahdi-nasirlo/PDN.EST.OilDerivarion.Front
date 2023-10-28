@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { Button, Collapse, Typography } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {Button, Collapse, Typography} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +16,7 @@ export default function Page() {
   const defaultValue = {
     Name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValue);
@@ -58,19 +58,20 @@ export default function Page() {
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
             لیست فاکتور های ماده اولیه
+            {JSON.stringify(filter)}
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            onClick={() => setModalVisible(true)}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex ">افزودن فاکتور ماده اولیه</span>
           </Button>
         </div>
 
-        <DataTable ldMaterial={isLoading || isValidating} material={data} />
+        <DataTable setFilter={setFilter} ldMaterial={isLoading || isValidating} material={data}/>
       </div>
       <CreateModal
         mutate={mutate}

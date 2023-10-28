@@ -1,27 +1,31 @@
 "use client";
 
-import { Button, Space, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { TableColumnsType } from "antd/lib";
-import React, { useEffect, useState } from "react";
+import {Button, Space, Table} from "antd";
+import {ColumnsType} from "antd/es/table";
+import {TableColumnsType} from "antd/lib";
+import React, {useEffect, useState} from "react";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import CustomeTable from "../../../../../components/CustomeTable";
+import {filter} from "minimatch";
 
 const DataTable = ({
-  material,
-  ldMaterial,
-}: {
-  ldMaterial: boolean;
-  material:
-  | {
-    count: number;
-    records: Material[];
-  }
-  | undefined;
+                       material,
+                       ldMaterial,
+                       setFilter
+                   }: {
+    setFilter: (arg: any) => void;
+    ldMaterial: boolean;
+    material:
+        | {
+        count: number;
+        records: Material[];
+    }
+        | undefined;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
@@ -39,36 +43,37 @@ const DataTable = ({
   ];
 
   return (
-    <>
-      <Table
-        className="mt-6"
-        columns={columns}
-        loading={ldMaterial}
-        rowKey={"Uid"}
-        expandable={{
-          expandedRowKeys: activeExpRow,
-          onExpand: (expanded, record: Material) => {
-            const keys: string[] = [];
+      <>
+          <CustomeTable
+              columns={columns}
+              setInitialData={(e) => {
+                  setFilter({...filter, ...e})
+              }}
+              isLoading={ldMaterial}
+              data={material}
+              rowKey={"Uid"}
+              expandable={{
+                  expandedRowKeys: activeExpRow,
+                  onExpand: (expanded, record: Material) => {
+                      const keys: string[] = [];
 
-            if (expanded && record.Uid) {
-              // @ts-ignore
-              keys.push(record.Uid);
-            }
+                      if (expanded && record.Uid) {
+                          // @ts-ignore
+                          keys.push(record.Uid);
+                      }
 
-            if (!expanded) {
-              keys.pop();
-            }
+                      if (!expanded) {
+                          keys.pop();
+                      }
 
-            setActiveExpRow(keys);
-          },
-          expandedRowRender: (record: Material) => (
-            <ExpandedRowRender material={record} />
-          ),
-        }}
-        dataSource={material?.records}
-      />
-      {/*<CreateModal setModalVisible={setModalVisible} modalVisible={is}*/}
-    </>
+                      setActiveExpRow(keys);
+                  },
+                  expandedRowRender: (record: Material) => (
+                      <ExpandedRowRender material={record}/>
+                  ),
+              }}
+          />
+      </>
   );
 }
 

@@ -59,7 +59,7 @@ const DataTable = ({
           setActiveExpRow(keys);
         },
         expandedRowRender: (record: Labratory) => (
-          <ExpandedRowRender isValidating={isValidating} Labratory={record} />
+          <ExpandedRowRender Labratory={record} />
         ),
       }}
       dataSource={Labratory}
@@ -81,10 +81,8 @@ const DataTable = ({
 
 const ExpandedRowRender = ({
   Labratory,
-  isValidating,
 }: {
   Labratory: Labratory;
-  isValidating: any;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -154,10 +152,11 @@ const ExpandedRowRender = ({
       <Table
         columns={expandColumns}
         dataSource={addIndexToData(data)}
-        loading={isLoading || isMutating || isValidating}
+        loading={isLoading || isMutating}
         pagination={false}
       />
       <ConfirmDeleteModal
+        loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}

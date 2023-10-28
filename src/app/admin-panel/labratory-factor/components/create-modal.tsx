@@ -7,8 +7,7 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { CategoryProduct } from "../../../../../interfaces/category-product";
-import { TestItem } from "../../../../../interfaces/TestItem";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function CreateModal({
   setModalVisible,
@@ -19,55 +18,52 @@ export default function CreateModal({
   modalVisible: any;
   mutate: () => void;
 }) {
+
   const [form] = useForm();
 
-  const { isMutating, trigger } = useSWRMutation(
-    "/LabTestItem/Create",
-    mutationFetcher
-  );
   const defaultValueTable = {
-    Name: "",
+    Name: null,
     IsActive: null,
     fromRecord: 0,
     selectRecord: 100000,
   };
 
-  const handleFormSubmit = async (values: any) => {
-    values.IsActive = true;
-    // @ts-ignore
-    // form.resetFields();
-    trigger(values);
-    mutate();
-    form.resetFields();
-    setModalVisible(false);
-  };
-
-  // const { data: test, isLoading } = useSWR(
-  //   "/BaseInfo/GetAllTestMethod",
-  //   listFetcher
-  // );
-  const { data: test, isLoading } = useSWR<TestItem[]>(
-    [
-      "/TestItem/GetAll",
-      {
-        name: "",
-        IsActive: null,
-      },
-    ],
-
+  const { data: test, isLoading } = useSWR<any[]>(
+    ["/TestItem/GetAll", { name: null, IsActive: null }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
+
+  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: any[] }>(
+    ["/Lab/GetPage", defaultValueTable],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+
 
   const closeModal = () => {
     setModalVisible(false);
     form.resetFields();
   };
 
-  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: Labratory[] }>(
-    ["/Lab/GetPage", defaultValueTable],
 
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  const { isMutating, trigger } = useSWRMutation(
+    "/LabTestItem/Create",
+    mutationFetcher
   );
+
+
+  const handleFormSubmit = async (values: any) => {
+
+    values.IsActive = true;
+
+    await trigger(values);
+
+    await mutate();
+
+    setModalVisible(false);
+
+    form.resetFields();
+  };
+
 
   return (
     <Modal
@@ -100,6 +96,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              loading={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={closeModal}
@@ -122,15 +119,13 @@ export default function CreateModal({
             <Form.Item
               name="labUid"
               label="نام آزمایشگاه"
-              rules={[
-                {
-                  required: true,
-                  message: ".لطفا نام آزمایشگاه را وارد کنید",
-                },
-              ]}
+              rules={[{ required: true, message: ".لطفا نام آزمایشگاه را وارد کنید" }]}
             >
               <Select
+                showSearch
                 fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
                 options={Lab?.records}
                 loading={ldProduct}
                 size="large"
@@ -142,15 +137,13 @@ export default function CreateModal({
             <Form.Item
               name="testItemUid"
               label="نام فاکتور"
-              rules={[
-                {
-                  required: true,
-                  message: ".لطفا نام فاکتور را وارد کنید",
-                },
-              ]}
+              rules={[{ required: true, message: ".لطفا نام فاکتور را وارد کنید" }]}
             >
               <Select
+                showSearch
                 fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
                 options={test}
                 loading={isLoading || isMutating}
                 size="large"

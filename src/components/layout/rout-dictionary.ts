@@ -201,7 +201,7 @@ export const routDictionary: Items = {
     title: "استان",
   },
   "raw-product-factor": {
-    title: "فاکتور ماده اولیه",
+    title: "فاکتور های ماده اولیه",
   },
   "test-factors": {
     title: "فاکتور های آمون",

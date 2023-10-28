@@ -30,7 +30,7 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 10000 });
+    setFilter({ Name: values.Name, IsActive: true, fromRecord: 0, selectRecord: 10000 });
 
     await mutate();
   };
@@ -43,7 +43,6 @@ export default function Page() {
 
   return (
     <>
-      {/*@ts-ignore*/}
       <Collapse
         size="large"
         items={[

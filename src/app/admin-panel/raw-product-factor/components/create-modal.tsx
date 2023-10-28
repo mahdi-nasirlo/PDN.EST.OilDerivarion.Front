@@ -7,6 +7,7 @@ import { useForm } from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function CreateModal({
   setModalVisible,
@@ -24,7 +25,7 @@ export default function CreateModal({
     IsActive: null,
   };
 
-  const { data: material, isLoading: ldMaterial } = useSWR<Material[]>(
+  const { data: material, isLoading: ldMaterial } = useSWR<any[]>(
     ["/Material/GetAll", defaultValue],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
@@ -45,6 +46,8 @@ export default function CreateModal({
   }) => {
 
     const res = await trigger({ ...values, IsActive: true });
+
+    console.log(values);
 
     await mutate();
     if (res) {
@@ -115,9 +118,12 @@ export default function CreateModal({
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Select
+                showSearch
+                fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
                 options={material}
                 loading={ldMaterial}
-                fieldNames={{ value: "Uid", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
               />
@@ -130,11 +136,14 @@ export default function CreateModal({
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Select
+                showSearch
+                fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
                 options={TestItem}
                 loading={ldTestMaterial}
                 size="large"
                 placeholder="انتخاب کنید"
-                fieldNames={{ value: "Uid", label: "Name" }}
               />
             </Form.Item>
           </Col>

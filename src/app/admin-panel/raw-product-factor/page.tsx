@@ -58,7 +58,6 @@ export default function Page() {
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
             لیست فاکتور های ماده اولیه
-            {JSON.stringify(filter)}
           </Typography>
           <Button
               className="max-md:w-full flex justify-center items-center gap-2"

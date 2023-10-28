@@ -1,5 +1,5 @@
 interface LaboratoryGet {
-  name: string | null;
+  Name: string | null;
   IsActive: boolean | null;
   fromRecord: number;
   selectRecord: number;

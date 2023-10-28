@@ -15,11 +15,11 @@ export default function FilterForm({
     <Form onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="name" label="نام آزمایشگاه ">
+          <Form.Item name="Name" label="نام آزمایشگاه ">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        {/* <Col xs={24} md={12}>
           <Form.Item name="IsActive" label="فعال / غیر فعال">
             <Select
               options={[
@@ -30,7 +30,7 @@ export default function FilterForm({
               placeholder="انتخاب کنید"
             />
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
       <Row dir="ltr">
         <Col xs={10} md={3} lg={2}>

@@ -13,15 +13,15 @@ export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValue = {
-    name: null,
+    Name: null,
     IsActive: null,
     fromRecord: 0,
-    selectRecord: 1000,
+    selectRecord: 10000,
   };
 
   const [filter, setFilter] = useState(defaultValue);
 
-  const { data, isLoading, mutate } = useSWR<{
+  const { data, isLoading, mutate, isValidating } = useSWR<{
     count: number;
     records: Material[];
   }>(["/Material/GetPage", filter], ([url, arg]: [url: string, arg: any]) =>
@@ -30,7 +30,7 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000 });
+    setFilter({ Name: values.Name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 10000 });
 
     await mutate();
   };
@@ -71,7 +71,7 @@ export default function Page() {
           </Button>
         </div>
 
-        <DataTable ldMaterial={isLoading} material={data} />
+        <DataTable ldMaterial={isLoading || isValidating} material={data} />
       </div>
       <CreateModal
         mutate={mutate}

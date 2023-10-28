@@ -6,7 +6,7 @@ interface Material {
 }
 
 interface MaterialGet {
-  name: string | null;
+  Name: string | null;
   IsActive: boolean | null;
   MeasureUid: string | null;
   fromRecord: number;

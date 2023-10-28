@@ -3,7 +3,7 @@
 import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
@@ -65,19 +65,7 @@ const DataTable = ({
             <ExpandedRowRender material={record} />
           ),
         }}
-        dataSource={addIndexToData(material?.records)}
-        pagination={{
-          defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
-          defaultCurrent: 1,
-          style: {
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            margin: "16px 0",
-          },
-        }}
+        dataSource={material?.records}
       />
       {/*<CreateModal setModalVisible={setModalVisible} modalVisible={is}*/}
     </>
@@ -85,21 +73,21 @@ const DataTable = ({
 }
 
 const ExpandedRowRender = ({ material }: { material: Material }) => {
-
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
 
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState();
 
   const defaultValue = {
-    productUid: material.Uid,
+    materialUid: material.Uid,
     testItemUid: null,
     IsActive: true,
   };
 
 
-  const { data, isLoading, mutate, isValidating } = useSWR<any[]>(
+  const { data, isLoading, mutate } = useSWR<any[]>(
     ["/MaterialTestItem/GetAll", defaultValue],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
@@ -117,6 +105,12 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      mutate();
+    }
+  }, [material]);
 
   const expandColumns: TableColumnsType<any> = [
     { title: "#", dataIndex: "Row", key: "1" },
@@ -150,13 +144,14 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
       <Table
         columns={expandColumns}
         dataSource={addIndexToData(data)}
+        loading={isLoading || isMutating}
         expandable={{
           expandedRowKeys: activeExpRow,
         }}
-        loading={isLoading || isMutating || isValidating}
         pagination={false}
       />
       <ConfirmDeleteModal
+        loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}

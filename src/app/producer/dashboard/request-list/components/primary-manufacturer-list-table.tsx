@@ -1,12 +1,12 @@
-import {Button, Space, Table, Typography} from "antd";
-import React from "react";
+import {Button, Space, Typography} from "antd";
+import React, {useState} from "react";
 import {ColumnsType} from "antd/es/table";
 import {RequestList} from "../../../../../../interfaces/requestDetail";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
 import {useRouter} from "next/navigation";
 import useSWR from "swr";
 import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import getPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
+import CustomeTable from "../../../../../../components/CustomeTable";
 
 export default function PrimaryManufacturerListTable() {
     const router = useRouter();
@@ -60,11 +60,13 @@ export default function PrimaryManufacturerListTable() {
         },
     ];
 
+    const [data, setData] = useState(getPageRecordNumber())
+
     const {data: request, isLoading, mutate, isValidating} = useSWR<{ records: RequestList[], count: number }>(
-        "/RequestMaster/GetPage_Producer",
-        (url) =>
+        ["/RequestMaster/GetPage_Producer", data],
+        ([url, arg]: [url: string, arg: any]) =>
             listFetcher(url, {
-                arg: getPageRecordNumber(),
+                arg,
             })
     );
 
@@ -73,27 +75,11 @@ export default function PrimaryManufacturerListTable() {
             <Typography className="text-right text-[16px] font-normal">
                 لیست درخواست ها
             </Typography>
-            <Table
-                className="mt-8"
-                loading={isLoading || isValidating}
+            <CustomeTable
                 columns={columns}
-                dataSource={addIndexToData(request?.records)}
-                pagination={{
-                    onChange: async (e) => {
-                        await mutate(getPageRecordNumber(e))
-                    },
-                    pageSize: 10,
-                    total: request?.count,
-                    showSizeChanger: true,
-                    pageSizeOptions: ["10", "20", "50"],
-                    defaultCurrent: 1,
-                    style: {
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "flex-start",
-                        margin: "16px 0",
-                    },
-                }}
+                setInitialData={setData}
+                isLoading={isLoading || isValidating}
+                data={request}
             />
         </div>
     );

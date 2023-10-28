@@ -4,8 +4,7 @@ import {addIndexToData} from "../../lib/addIndexToData";
 import getPageRecordNumber from "../../lib/getPageRecordNumber";
 
 interface RecordeValue {
-    mutate: (arg: any) => void,
-    fetcherValue: { fromRecord: number, selectRecord: number } & any,
+    setInitialData: (arg: any) => void,
     isLoading: boolean,
     data: {
         records: any[];
@@ -24,7 +23,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
             pagination={{
                 total: props.data?.count,
                 onChange: async (e) => {
-                    await props.mutate({...props.fetcherValue, ...getPageRecordNumber(e)})
+                    await props.setInitialData(getPageRecordNumber(e))
                 },
                 defaultPageSize: 5,
                 showSizeChanger: false,

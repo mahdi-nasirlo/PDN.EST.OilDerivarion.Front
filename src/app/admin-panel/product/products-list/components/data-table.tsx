@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Typography } from "antd";
+import { Button, Space, Table, Tag, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
-import ChangeStatus from "../../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   setModalVisible,
@@ -88,23 +88,27 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/Product/ChangeStatus"}
-        />
-      ),
-    },
-    {
-      title: "کد محصول",
-      dataIndex: "ConfirmedRequestCode",
-      key: "5",
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
+        }
+
+        return <Tag icon={icon} color={color}>{name}</Tag>;
+      },
     },
     {
       title: "فاکتور آزمون",
-      dataIndex: "ConfirmedRequestCode",
-      key: "6",
+      dataIndex: "TestItems",
+      key: "5",
     },
     {
       title: "عملیات",
@@ -172,6 +176,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={ldDelete}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

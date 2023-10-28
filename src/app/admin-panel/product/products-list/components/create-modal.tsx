@@ -25,13 +25,16 @@ export default function CreateModal({
   );
 
   const createProduct = async (values: ProductCreate) => {
-    await trigger(values);
+    const res = await trigger(values);
 
     await mutate();
 
-    setModalVisible(false);
+    if (res) {
 
-    form.resetFields();
+      setModalVisible(false);
+
+      form.resetFields();
+    }
   };
 
   const CloseModal = () => {
@@ -56,7 +59,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
-              disabled={isMutating}
+              loading={isMutating}
               size="large"
               className="w-full"
               type="primary"
@@ -68,7 +71,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              disabled={isMutating}
+              loading={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

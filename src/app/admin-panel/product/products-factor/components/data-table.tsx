@@ -1,14 +1,15 @@
-import { Button, Space, Table, Typography } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import React, { useEffect, useState } from "react";
+import {Button, Space, Table, Typography} from "antd";
+import type {ColumnsType} from "antd/es/table";
+import React, {useEffect, useState} from "react";
 import useSWR from "swr";
-import { TableColumnsType } from "antd/lib";
+import {TableColumnsType} from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { Product, ProductTestItem } from "../../../../../../interfaces/product";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {Product, ProductTestItem} from "../../../../../../interfaces/product";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import {addAlphabetToData} from "../../../../../../lib/addAlphabetToData";
 
 const columns: ColumnsType<any> = [
   {
@@ -38,56 +39,48 @@ const columns: ColumnsType<any> = [
 ];
 
 const DataTable = ({
-  product,
-  ldProduct,
-  mutate: TableMutate
-}: {
-  product: Product[];
+                     setFilter,
+                     product,
+                     ldProduct,
+                     mutate: TableMutate
+                   }: {
+  setFilter: (arg: any) => void,
+  product: { records: Product[], count: number };
   ldProduct: boolean;
   mutate: () => void;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   return (
-    <Table
-      className="mt-6"
-      columns={columns}
-      rowKey={"Uid"}
-      loading={ldProduct}
-      expandable={{
-        expandedRowKeys: activeExpRow,
-        onExpand: (expanded, record: Product) => {
-          const keys: string[] = [];
+      <>
+        <CustomeTable
+            rowKey={"Uid"}
+            expandable={{
+              expandedRowKeys: activeExpRow,
+              onExpand: (expanded, record: Product) => {
+                const keys: string[] = [];
 
-          if (expanded && record.Uid) {
-            // @ts-ignore
-            keys.push(record.Uid);
-          }
+                if (expanded && record.Uid) {
+                  // @ts-ignore
+                  keys.push(record.Uid);
+                }
 
-          if (!expanded) {
-            keys.pop();
-          }
+                if (!expanded) {
+                  keys.pop();
+                }
 
-          setActiveExpRow(keys);
-        },
-        expandedRowRender: (record: Product) => (
-          <ExpandedRowRender product={record} TableMutate={TableMutate} />
-        ),
-      }}
-      dataSource={product}
-      pagination={{
-        defaultPageSize: 10,
-        showSizeChanger: true,
-        pageSizeOptions: ["10", "20", "50"],
-        defaultCurrent: 1,
-        style: {
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          margin: "16px 0",
-        },
-      }}
-    />
+                setActiveExpRow(keys);
+              },
+              expandedRowRender: (record: Product) => (
+                  <ExpandedRowRender product={record} TableMutate={TableMutate}/>
+              ),
+            }}
+            setInitialData={setFilter}
+            isLoading={ldProduct}
+            data={product}
+            columns={columns}
+        />
+      </>
   );
 };
 
@@ -160,13 +153,13 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   return (
     <>
       <Table
-        columns={expandColumns}
-        dataSource={addIndexToData(data)}
-        expandable={{
-          expandedRowKeys: activeExpRow,
-        }}
-        loading={isLoading || isMutating}
-        pagination={false}
+          columns={expandColumns}
+          dataSource={addAlphabetToData(data)}
+          expandable={{
+            expandedRowKeys: activeExpRow,
+          }}
+          loading={isLoading || isMutating}
+          pagination={false}
       />
       <ConfirmDeleteModal
         loading={isMutating}

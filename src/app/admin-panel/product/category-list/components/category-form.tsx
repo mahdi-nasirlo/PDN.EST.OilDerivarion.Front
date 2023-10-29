@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Col, Form, FormInstance, Input, Row, Select } from "antd";
+import React, {useEffect, useState} from "react";
+import {Col, Form, FormInstance, Input, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 
 function CategoryForm({
-  form,
-  defaultSelectedDensity,
-}: {
-  form: FormInstance;
-  defaultSelectedDensity?: boolean;
+                          form,
+                          defaultSelectedDensity,
+                      }: {
+    form: FormInstance;
+    defaultSelectedDensity?: boolean;
 }) {
   const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
 
@@ -116,35 +116,41 @@ function CategoryForm({
       {hasDensity && (
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              // rules={[
-              //   {
-              //     validator(rule, value, callback) {
-              //       if (value > form.getFieldValue("densityUpperLimit"))
-              //         callback(
-              //           "حداقل بازه نمی تواند از حداکثر بازه بیشتر باشد"
-              //         );
-              //     },
-              //   },
-              // ]}
-              name="densityLowerLimit"
-              label="حداقل بازه"
-            >
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
+              <Form.Item
+                  rules={[
+                      {required: true, message: "لطفا مقدار را وارد کنید"}
+                  ]}
+                  // rules={[
+                  //   {
+                  //     validator(rule, value, callback) {
+                  //       if (value > form.getFieldValue("densityUpperLimit"))
+                  //         callback(
+                  //           "حداقل بازه نمی تواند از حداکثر بازه بیشتر باشد"
+                  //         );
+                  //     },
+                  //   },
+                  // ]}
+                  name="densityLowerLimit"
+                  label="حداقل بازه"
+              >
+                  <Input size="large" placeholder="وارد کنید"/>
+              </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              // rules={[
-              //   {
-              //     validator(rule, value, callback) {
-              //       if (value < form.getFieldValue("densityLowerLimit"))
-              //         callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
-              //     },
-              //   },
-              // ]}
-              name="densityUpperLimit"
-              label="حداکثر بازه"
+              <Form.Item
+                  rules={[
+                      {required: true, message: "لطفا مقدار را وارد کنید"}
+                  ]}
+                  // rules={[
+                  //   {
+                  //     validator(rule, value, callback) {
+                  //       if (value < form.getFieldValue("densityLowerLimit"))
+                  //         callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
+                  //     },
+                  //   },
+                  // ]}
+                  name="densityUpperLimit"
+                  label="حداکثر بازه"
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>

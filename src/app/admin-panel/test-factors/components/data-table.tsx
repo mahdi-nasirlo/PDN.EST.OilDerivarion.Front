@@ -1,32 +1,34 @@
 "use client";
 
 import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Table, Typography} from "antd";
+import {Button, Space, Typography} from "antd";
 import {ColumnsType} from "antd/es/table";
 import React, {useState} from "react";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
 import {TestItem} from "../../../../../interfaces/TestItem";
 import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
   setModalVisible,
   ldTestItem,
   TestItem,
   mutate,
+                                    setFilter
 }: {
+  setFilter: (arg: any) => void;
   setModalVisible: any;
   ldTestItem: boolean;
   mutate: () => void;
   TestItem:
-    | {
-        records: TestItem[];
-        count: number;
-      }
-    | undefined;
+      | {
+    records: TestItem[];
+    count: number;
+  }
+      | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
 
@@ -128,46 +130,34 @@ export default function DataTable({
             لیست فاکتورهای آزمون
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={showModal}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex  ">افزودن فاکتور آزمون</span>
           </Button>
         </div>
-        <Table
-          className="mt-6"
-          columns={columns}
-          loading={ldTestItem || IsDeleteTestFactor}
-          dataSource={addIndexToData(TestItem?.records)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+        <CustomeTable
+            setInitialData={setFilter}
+            isLoading={ldTestItem || IsDeleteTestFactor}
+            data={TestItem}
+            columns={columns}
         />
         <EditModal
-          mutate={mutate}
-          editRecord={openEdit}
-          setEditRecord={setOpenEdit}
+            mutate={mutate}
+            editRecord={openEdit}
+            setEditRecord={setOpenEdit}
         />
       </div>
       <ConfirmDeleteModal
-        open={isDeleteModalVisible}
-        setOpen={setIsDeleteModalVisible}
-        handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
-        loading={IsDeleteTestFactor}
+          open={isDeleteModalVisible}
+          setOpen={setIsDeleteModalVisible}
+          handleDelete={handleConfirmDelete}
+          title="مواد اولیه"
+          loading={IsDeleteTestFactor}
       />
     </>
   );

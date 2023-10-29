@@ -1,15 +1,15 @@
-import { Product } from "../../../../../../interfaces/product";
-import React, { useEffect, useState } from "react";
+import {Product} from "../../../../../../interfaces/product";
+import React, {useEffect, useState} from "react";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { TableColumnsType } from "antd/lib";
-import { Button, Space, Table } from "antd";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {TableColumnsType} from "antd/lib";
+import {Button, Space, Table} from "antd";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {addAlphabetToData} from "../../../../../../lib/addAlphabetToData";
 
-export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { product: Product, mutate: any }) => {
+export const ExpandedMaterialTable = ({product, mutate: mutateTable}: { product: Product, mutate: any }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState<Product>();
@@ -81,21 +81,22 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
     },
   ];
 
+
   return (
-    <>
-      <Table
-        columns={expandColumns}
-        dataSource={addIndexToData(data)}
-        loading={isLoading || isMutating}
-        pagination={false}
-      />
-      <ConfirmDeleteModal
-        loading={isMutating}
-        open={open}
-        setOpen={setOpen}
-        handleDelete={handleDelete}
-        title={"فاکتور محصول"}
-      />
-    </>
+      <>
+        <Table
+            columns={expandColumns}
+            dataSource={addAlphabetToData(data)}
+            loading={isLoading || isMutating}
+            pagination={false}
+        />
+        <ConfirmDeleteModal
+            loading={isMutating}
+            open={open}
+            setOpen={setOpen}
+            handleDelete={handleDelete}
+            title={"فاکتور محصول"}
+        />
+      </>
   );
 };

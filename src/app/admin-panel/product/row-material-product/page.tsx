@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { Product } from "../../../../../interfaces/product";
-import { Collapse } from "antd";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {Product} from "../../../../../interfaces/product";
+import {Collapse} from "antd";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -59,10 +59,11 @@ export default function Page() {
         ]}
       />
       <DataTable
-        mutate={mutate}
-        product={product}
-        ldProduct={ldProduct}
-        setModalVisible={setModalVisible}
+          setFilter={setFilter}
+          mutate={mutate}
+          product={product}
+          ldProduct={ldProduct}
+          setModalVisible={setModalVisible}
       />
       <CreateModal
         mutate={mutate}

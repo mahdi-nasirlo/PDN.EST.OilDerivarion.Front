@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Button, Divider, Form, Typography } from "antd";
+import React, {useContext} from "react";
+import {Button, Divider, Form, Typography} from "antd";
 import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
@@ -33,11 +33,7 @@ const Index = () => {
         <div className="flex gap-3">
           <Button
             onClick={() =>
-              processController.dispatch({
-                type: "GET_STEP",
-                stepNumber: 6,
-                step: 6,
-              })
+              processController.getLastStep()
             }
             type="dashed"
             className="bg-gray-100 w-full"

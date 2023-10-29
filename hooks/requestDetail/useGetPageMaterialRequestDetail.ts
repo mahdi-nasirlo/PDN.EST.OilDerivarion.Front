@@ -14,7 +14,8 @@ const UseGetPageMaterialRequestDetail = (uid: string): DataType => {
 
     const {
         data,
-        isLoading
+        isLoading,
+        isValidating
     } =
         useSWR("/RequestDetail/GetPageMaterial", (url) => listFetcher(url, {
             arg: {
@@ -24,7 +25,7 @@ const UseGetPageMaterialRequestDetail = (uid: string): DataType => {
             }
         }))
 
-    return {data, isLoading}
+    return {data, isLoading: isLoading || isValidating}
 
 };
 

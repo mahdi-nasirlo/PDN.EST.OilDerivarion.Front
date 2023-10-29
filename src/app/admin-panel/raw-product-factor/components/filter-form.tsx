@@ -16,16 +16,14 @@ export default function FilterForm({
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="name"
+            name="Name"
             label="نام ماده اولیه"
           >
             <Input size="large" placeholder="انتخاب کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        {/* <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="IsActive"
             label="فعال / غیر فعال"
           >
@@ -38,7 +36,7 @@ export default function FilterForm({
               placeholder="انتخاب کنید"
             />
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
       <Row dir="ltr">
         <Col xs={10} md={3} lg={2}>

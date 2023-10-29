@@ -1,16 +1,16 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Tag, Typography } from "antd";
+import { Button, Space, Table, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { Category } from "../../../../../../interfaces/category";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
-import ChangeStatus from "../../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   isValidating,
@@ -36,7 +36,6 @@ export default function DataTable({
   );
 
   const handleDelete = async () => {
-    console.log(recordToDelete?.Uid);
 
     await deleteCategory({
       uid: recordToDelete?.Uid,
@@ -80,10 +79,10 @@ export default function DataTable({
         let color = "";
         let name = "";
         if (record.HasDensity === false) {
-          color = "red";
+          color = "orange";
           name = "ندارد";
         } else {
-          color = "green";
+          color = "blue";
           name = "دارد";
         }
 
@@ -94,23 +93,46 @@ export default function DataTable({
       title: "حداقل بازه دانسیته",
       dataIndex: "DensityLowerLimit",
       key: "5",
+      render: (_, record: any) => {
+        if (record.DensityLowerLimit === null) {
+          return <Typography>_</Typography>;
+        }
+
+        return <Typography>{record.DensityLowerLimit}</Typography>;
+      },
     },
     {
       title: "حداکثر بازه دانسیته",
       dataIndex: "DensityUpperLimit",
       key: "6",
+      render: (_, record: any) => {
+        if (record.DensityUpperLimit === null) {
+          return <Typography>_</Typography>;
+        }
+
+        return <Typography>{record.DensityUpperLimit}</Typography>;
+      },
     },
     {
       title: "فعال/غیر فعال ",
       dataIndex: "ConfirmedRequestCode",
       key: "7",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/ProductCategory/ChangeStatus"}
-        />
-      ),
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
+        }
+
+        return <Tag icon={icon} color={color}>{name}</Tag>;
+      },
     },
     {
       title: "عملیات",
@@ -183,6 +205,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={ldDelete}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleDelete}

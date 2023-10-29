@@ -1,11 +1,12 @@
 import React from 'react';
 import {Button, Col, Modal, Row} from "antd";
 
-function ConfirmDeleteModal({open, setOpen, handleDelete, title}: {
+function ConfirmDeleteModal({open, setOpen, handleDelete, title, loading = false}: {
     open: boolean,
     setOpen: (arg: boolean) => void,
     handleDelete: () => void,
-    title: string
+    title: string,
+    loading?: boolean
 }) {
     return (
         <Modal
@@ -14,6 +15,7 @@ function ConfirmDeleteModal({open, setOpen, handleDelete, title}: {
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
+                            loading={loading}
                             size="large"
                             className="w-full"
                             type="primary"

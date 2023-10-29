@@ -1,27 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { Button, Collapse, Typography } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {Button, Collapse, Typography} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValue = {
-    name: null,
+    Name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 1000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValue);
 
-  const { data, isLoading, mutate } = useSWR<{
+  const { data, isLoading, mutate, isValidating } = useSWR<{
     count: number;
     records: Material[];
   }>(["/Material/GetPage", filter], ([url, arg]: [url: string, arg: any]) =>
@@ -30,7 +30,7 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000 });
+    setFilter({ Name: values.Name, IsActive: true, fromRecord: 0, selectRecord: 10000 });
 
     await mutate();
   };
@@ -43,7 +43,6 @@ export default function Page() {
 
   return (
     <>
-      {/*@ts-ignore*/}
       <Collapse
         size="large"
         items={[
@@ -61,17 +60,17 @@ export default function Page() {
             لیست فاکتور های ماده اولیه
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            onClick={() => setModalVisible(true)}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex ">افزودن فاکتور ماده اولیه</span>
           </Button>
         </div>
 
-        <DataTable ldMaterial={isLoading} material={data} />
+        <DataTable setFilter={setFilter} ldMaterial={isLoading || isValidating} material={data}/>
       </div>
       <CreateModal
         mutate={mutate}

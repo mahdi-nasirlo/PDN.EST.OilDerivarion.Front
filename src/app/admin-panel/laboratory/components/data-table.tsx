@@ -9,6 +9,7 @@ import {
   Space,
   Switch,
   Table,
+  Tag,
   Typography,
 } from "antd";
 import { ColumnsType } from "antd/es/table";
@@ -19,6 +20,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
 import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   setModalVisible,
@@ -30,11 +32,11 @@ export default function DataTable({
   ldMaterial: boolean;
   mutate: () => void;
   labratory:
-    | {
-        records: LaboratoryGet[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: LaboratoryGet[];
+    count: number;
+  }
+  | undefined;
 }) {
   // //حذف
 
@@ -46,7 +48,7 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger: deleteLab, isMutating } = useSWRMutation(
+  const { trigger: deleteLab, isMutating: ldDeleteLab } = useSWRMutation(
     "/Lab/Delete",
     mutationFetcher
   );
@@ -114,13 +116,22 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/Lab/ChangeStatus"}
-        />
-      ),
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
+        }
+
+        return <Tag icon={icon} color={color}>{name}</Tag>;
+      },
     },
     {
       title: "استان",
@@ -209,7 +220,7 @@ export default function DataTable({
           </Button>
         </div>
         <Table
-          loading={ldMaterial || isMutating}
+          loading={ldMaterial || ldDeleteLab}
           dataSource={addIndexToData(labratory?.records)}
           className="mt-6"
           columns={columns}
@@ -229,6 +240,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={ldDeleteLab}
         title="حذف آزمایشگاه"
         open={isDeleteModalVisible}
         setOpen={handleCancelDelete}

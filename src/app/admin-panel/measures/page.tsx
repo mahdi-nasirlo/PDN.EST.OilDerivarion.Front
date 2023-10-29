@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Collapse } from "antd";
-import { Measure } from "../../../../interfaces/measures";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import {Collapse} from "antd";
+import {Measure} from "../../../../interfaces/measures";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
+import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +16,7 @@ export default function Page() {
   const defaultValueTable = {
     Name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
@@ -37,8 +37,7 @@ export default function Page() {
     setFilter({
       Name: values.Name,
       IsActive: values.IsActive,
-      fromRecord: 0,
-      selectRecord: 1000,
+      ...getPageRecordNumber()
     });
 
     await mutate();
@@ -54,27 +53,28 @@ export default function Page() {
     <>
       {/*// @ts-ignore*/}
       <Collapse
-        size="large"
-        items={[
-          {
-            label: "فیلتر جدول",
-            children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
-            ),
-          },
-        ]}
+          size="large"
+          items={[
+            {
+              label: "فیلتر جدول",
+              children: (
+                  <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
+              ),
+            },
+          ]}
       />
       <DataTable
-        isValidating={isValidating}
-        mutate={mutate}
-        ldMeasure={ldMeasure}
-        measure={Measure}
-        setModalVisible={setModalVisible}
+          setFilter={setFilter}
+          isValidating={isValidating}
+          mutate={mutate}
+          ldMeasure={ldMeasure}
+          measure={Measure}
+          setModalVisible={setModalVisible}
       />
       <CreateModal
-        mutate={mutate}
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
+          mutate={mutate}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
       />
     </>
   );

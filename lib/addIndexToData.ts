@@ -4,6 +4,6 @@ export const addIndexToData = (data: any[] | undefined, keyName: string = "Row",
 
     return data.map((item: any, index: number) => ({
         ...item,
-        [keyName]: index + startFrom + 1, // Auto-incrementing index starting from 1
+        [keyName]: index + startFrom, // Auto-incrementing index starting from 1
     }));
 };

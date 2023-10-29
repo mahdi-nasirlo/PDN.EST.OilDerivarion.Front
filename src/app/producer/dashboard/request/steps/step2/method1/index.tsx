@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Button, Col, Divider, Form, Row, Typography } from "antd";
-import { useForm } from "antd/es/form/Form";
+import React, {useContext} from "react";
+import {Button, Col, Divider, Form, Row, Typography} from "antd";
+import {useForm} from "antd/es/form/Form";
 import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
-import { SvgIcon } from "@/components/layout/sidebar";
+import {SvgIcon} from "@/components/layout/sidebar";
 
 function Index() {
   const [form] = useForm();
@@ -48,11 +48,7 @@ function Index() {
           <Col span={12}>
             <Button
               onClick={() =>
-                processControl.dispatch({
-                  type: "GET_STEP",
-                  stepNumber: 6,
-                  step: 6,
-                })
+                processControl.getLastStep()
               }
               type="dashed"
               className="bg-gray-100 w-full"

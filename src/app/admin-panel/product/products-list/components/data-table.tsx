@@ -1,28 +1,30 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Tag, Typography } from "antd";
-import { useForm } from "antd/es/form/Form";
-import { ColumnsType } from "antd/es/table";
-import React, { useEffect, useState } from "react";
-import { Product } from "../../../../../../interfaces/product";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Tag, Typography} from "antd";
+import {useForm} from "antd/es/form/Form";
+import {ColumnsType} from "antd/es/table";
+import React, {useEffect, useState} from "react";
+import {Product} from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../../components/CustomeTable";
 
 export default function DataTable({
-  setModalVisible,
-  ldProduct,
-  product,
-  mutate,
-}: {
+                                    setFilter,
+                                    setModalVisible,
+                                    ldProduct,
+                                    product,
+                                    mutate,
+                                  }: {
+  setFilter: (arg: any) => void;
   setModalVisible: any;
   ldProduct: boolean;
   mutate: () => void;
-  product: Product[] | undefined;
+  product: { records: Product[], count: number } | undefined;
 }) {
   //حذف
 
@@ -145,34 +147,17 @@ export default function DataTable({
             لیست محصولات
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={showModal}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex gap-2">افزودن محصول جدید</span>
           </Button>
         </div>
-        <Table
-          loading={ldProduct || ldDelete}
-          className="mt-6"
-          columns={columns}
-          dataSource={addIndexToData(product)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
-        />
+        <CustomeTable setInitialData={setFilter} isLoading={ldProduct || ldDelete} data={product} columns={columns}/>
       </div>
       {/* جذف */}
       <ConfirmDeleteModal

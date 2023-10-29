@@ -89,9 +89,11 @@ const useControlProcess = (): ControllerProcessType => {
     const getNextStep = async () => {
 
         const res = await requestNextStep.trigger({uid: requestMaster.requestMasterUid})
-
-        if (res)
+        
+        if (res) {
+            console.log(res)
             dispatch({type: "GET_STEP", stepNumber, step: 1})
+        }
 
     }
 

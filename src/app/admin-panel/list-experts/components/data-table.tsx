@@ -1,23 +1,12 @@
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  Modal,
-  Row,
-  Select,
-  Space,
-  Table,
-  Typography,
-} from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {Button, Col, Form, Input, Modal, Row, Select, Space, Table, Typography,} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { GetPage_ExeManager, Person } from "../../../../../interfaces/producer";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { useForm } from "antd/es/form/Form";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {GetPage_ExeManager, Person} from "../../../../../interfaces/producer";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {useForm} from "antd/es/form/Form";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function DataTable({
@@ -173,10 +162,11 @@ export default function DataTable({
       />
       {/* جذف */}
       <ConfirmDeleteModal
-        open={isDeleteModalVisible}
-        setOpen={setIsDeleteModalVisible}
-        handleDelete={handleConfirmDelete}
-        title="حذف کارشناس"
+          open={isDeleteModalVisible}
+          setOpen={setIsDeleteModalVisible}
+          handleDelete={handleConfirmDelete}
+          title="حذف کارشناس"
+          loading={false}
       />
       {/* ویرایش */}
       <Modal

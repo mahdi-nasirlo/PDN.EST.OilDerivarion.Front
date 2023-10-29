@@ -23,8 +23,12 @@ const Index = (props: TableProps<any> & RecordeValue) => {
             columns={props.columns}
             pagination={{
                 total: props.data?.count,
-                onChange: async (e) => {
-                    await props.setInitialData(getPageRecordNumber(e))
+                onChange: async (e: any) => {
+                    await props.setInitialData((prev: any) => {
+                        delete prev.fromRecord
+                        delete prev.selectRecord
+                        return {...getPageRecordNumber(e), ...prev}
+                    })
                 },
                 defaultPageSize: 5,
                 showSizeChanger: false,

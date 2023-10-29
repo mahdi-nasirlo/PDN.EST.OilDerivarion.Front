@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Col, Modal, Row } from "antd";
+import {Button, Col, Modal, Row} from "antd";
 
-function ConfirmDeleteModal({ open, setOpen, handleDelete, title, loading }: {
+function ConfirmDeleteModal({open, setOpen, handleDelete, title, loading = false}: {
     open: boolean,
     setOpen: (arg: boolean) => void,
     handleDelete: () => void,
     title: string,
-    loading: boolean
+    loading?: boolean
 }) {
     return (
         <Modal

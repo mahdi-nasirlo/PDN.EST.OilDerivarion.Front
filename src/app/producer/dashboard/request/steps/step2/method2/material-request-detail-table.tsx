@@ -29,6 +29,11 @@ const MaterialRequestDetailTable = () => {
             dataIndex: "ProductOrMaterialName"
         },
         {
+            title: "درصد استفاده",
+            dataIndex: "MaterialUsagePercentage",
+            render: value => <>{value}%</>
+        },
+        {
             title: "عملیات",
             render: (value, record) => <Typography className="text-red-500 cursor-pointer" onClick={() => {
                 setDeleteVisible(true);

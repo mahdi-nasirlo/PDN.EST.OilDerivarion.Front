@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { TableColumnsType } from "antd/lib";
-import { Button, Space, Switch, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
-export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
+export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { product: Product, mutate: any }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState<Product>();
@@ -20,8 +20,9 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
     IsActive: null,
   };
 
-  const { data, isLoading, mutate } = useSWR("/ProductMaterial/GetAll", (url) =>
-    listFetcher(url, { arg: defaultValue })
+  const { data, isLoading, mutate } = useSWR<any[]>(
+    ["/ProductMaterial/GetAll", defaultValue],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
   useEffect(() => {
@@ -36,11 +37,13 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
   );
 
   const handleDelete = async () => {
-    setOpen(false);
 
     await trigger({ Uid: recordToDelete?.Uid });
 
     await mutate();
+    await mutateTable();
+
+    setOpen(false);
   };
 
   const expandColumns: TableColumnsType<any> = [
@@ -87,6 +90,7 @@ export const ExpandedMaterialTable = ({ product }: { product: Product }) => {
         pagination={false}
       />
       <ConfirmDeleteModal
+        loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={handleDelete}

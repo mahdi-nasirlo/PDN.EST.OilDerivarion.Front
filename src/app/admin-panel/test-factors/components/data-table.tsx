@@ -1,16 +1,16 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { TestItem } from "../../../../../interfaces/TestItem";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Table, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
+import {TestItem} from "../../../../../interfaces/TestItem";
 import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   setModalVisible,
@@ -91,13 +91,7 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/TestItem/ChangeStatus"}
-        />
-      ),
+      render: (e, record) => <StatusColumn record={record}/>
     },
     {
       title: "جزئیات",

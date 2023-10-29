@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Space, Tag, Typography} from "antd";
+import {Button, Space, Typography} from "antd";
 import {PlusIcon} from "@heroicons/react/24/outline";
 import {ColumnsType} from "antd/es/table";
 import React, {useState} from "react";
@@ -9,8 +9,8 @@ import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import {CreateTestItemDetail, TestItemDetail,} from "../../../../../interfaces/TestItem";
 import EditModal from "./edit-modal";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
                                     setModalVisible,
@@ -94,26 +94,7 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (_, record: any) => {
-        let color = "";
-        let name = "";
-        let icon = <></>;
-        if (record.IsActive === false) {
-          color = "red";
-          name = "غیرفعال";
-          icon = <CloseCircleOutlined />;
-        } else {
-          color = "success";
-          name = "فعال";
-          icon = <CheckCircleOutlined />;
-        }
-
-        return (
-          <Tag icon={icon} color={color}>
-            {name}
-          </Tag>
-        );
-      },
+      render: (_, record: any) => <StatusColumn record={record}/>
     },
     {
       title: "عملیات",

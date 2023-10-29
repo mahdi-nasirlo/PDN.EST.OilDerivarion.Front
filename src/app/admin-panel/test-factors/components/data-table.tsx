@@ -1,15 +1,15 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Table, Typography} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {TestItem} from "../../../../../interfaces/TestItem";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Table, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { TestItem } from "../../../../../interfaces/TestItem";
 import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
 
 export default function DataTable({
@@ -38,19 +38,18 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger, isMutating: IsDeleteTestFactor } = useSWRMutation(
     "/TestItem/Delete",
     mutationFetcher
   );
 
   const handleConfirmDelete = async () => {
-    setIsDeleteModalVisible(false);
-
     await trigger({
       uid: recordToDelete?.Uid,
     });
 
     await mutate();
+    setIsDeleteModalVisible(false);
   };
 
   const showModal = () => {
@@ -148,7 +147,7 @@ export default function DataTable({
         <Table
           className="mt-6"
           columns={columns}
-          loading={ldTestItem || isMutating}
+          loading={ldTestItem || IsDeleteTestFactor}
           dataSource={addIndexToData(TestItem?.records)}
           pagination={{
             defaultPageSize: 10,
@@ -170,11 +169,11 @@ export default function DataTable({
         />
       </div>
       <ConfirmDeleteModal
-          open={isDeleteModalVisible}
-          setOpen={setIsDeleteModalVisible}
-          handleDelete={handleConfirmDelete}
-          title="مواد اولیه"
-          loading={isMutating}
+        open={isDeleteModalVisible}
+        setOpen={setIsDeleteModalVisible}
+        handleDelete={handleConfirmDelete}
+        title="مواد اولیه"
+        loading={IsDeleteTestFactor}
       />
     </>
   );

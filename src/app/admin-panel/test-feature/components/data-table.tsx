@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Space, Table, Typography } from "antd";
+import { Button, Space, Table, Tag, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
@@ -12,7 +12,7 @@ import {
   TestItemDetail,
 } from "../../../../../interfaces/TestItem";
 import EditModal from "./edit-modal";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   setModalVisible,
@@ -37,7 +37,7 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger: deleteLab, isMutating } = useSWRMutation(
+  const { trigger: deleteLab, isMutating: IsDeleteTF } = useSWRMutation(
     "/TestItemDetail/Delete",
     mutationFetcher
   );
@@ -88,16 +88,29 @@ export default function DataTable({
       key: "4",
     },
     {
-      title: "وضعیت",
+      title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/TestItemDetail/ChangeStatus"}
-        />
-      ),
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />;
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />;
+        }
+
+        return (
+          <Tag icon={icon} color={color}>
+            {name}
+          </Tag>
+        );
+      },
     },
     {
       title: "عملیات",
@@ -146,7 +159,7 @@ export default function DataTable({
         </div>
         <Table
           className="mt-6"
-          loading={ldTestItemDetail || isMutating}
+          loading={ldTestItemDetail || IsDeleteTF}
           columns={columns}
           dataSource={testItemDetail}
           pagination={{
@@ -165,6 +178,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={IsDeleteTF}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

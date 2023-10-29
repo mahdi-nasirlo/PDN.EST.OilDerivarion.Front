@@ -36,8 +36,15 @@ export default function Page() {
   );
 
   const setFilterTable = async (values: TestItemDetail) => {
-    // @ts-ignore
-    setFilter({ title: values.title, IsActive: values.IsActive, fromRecord: 0, selectRecord: 10000 });
+    setFilter({
+      // @ts-ignore
+      title: values.title,
+      // @ts-ignore
+      IsActive: values.IsActive,
+      fromRecord: 0,
+      selectRecord: 10000,
+    });
+    console.log(values);
 
     await mutate();
   };

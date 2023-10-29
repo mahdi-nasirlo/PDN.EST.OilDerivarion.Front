@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import { Button, Col, Form, Modal, Row } from "antd";
 import React from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
@@ -19,7 +19,7 @@ export default function CreateModal({
 }) {
   const [form] = useForm();
 
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger, isMutating: TestFeature } = useSWRMutation(
     "/TestItemDetail/Create",
     mutationFetcher
   );
@@ -56,6 +56,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
+              loading={TestFeature}
               size="large"
               className="w-full"
               type="primary"
@@ -80,7 +81,7 @@ export default function CreateModal({
     >
       <Form
         onFinish={createTestFactor}
-        disabled={isMutating}
+        disabled={TestFeature}
         form={form}
         layout="vertical"
       >

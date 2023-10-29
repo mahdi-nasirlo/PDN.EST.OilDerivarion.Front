@@ -1,17 +1,16 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Typography } from "antd";
+import { Button, Space, Table, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { TestItem } from "../../../../../interfaces/TestItem";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { Measure } from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   isValidating,
@@ -41,19 +40,18 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger, isMutating: IsDeleteMeasure } = useSWRMutation(
     "/Measure/Delete",
     mutationFetcher
   );
 
   const handleConfirmDelete = async () => {
-    setIsDeleteModalVisible(false);
-
     await trigger({
       uid: recordToDelete?.Uid,
     });
 
     await mutate();
+    setIsDeleteModalVisible(false);
   };
 
   const showModal = () => {
@@ -72,16 +70,29 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "فعال/غیر فعال ",
+      title: "فعال/غیر فعال",
       dataIndex: "IsActive",
-      key: "3",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/Measure/ChangeStatus"}
-        />
-      ),
+      key: "4",
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />;
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />;
+        }
+
+        return (
+          <Tag icon={icon} color={color}>
+            {name}
+          </Tag>
+        );
+      },
     },
     {
       title: "عملیات",
@@ -131,7 +142,7 @@ export default function DataTable({
         <Table
           className="mt-6"
           columns={columns}
-          loading={ldMeasure || isMutating || isValidating}
+          loading={ldMeasure || IsDeleteMeasure || isValidating}
           dataSource={addIndexToData(measure?.records)}
           pagination={{
             defaultPageSize: 10,
@@ -153,6 +164,7 @@ export default function DataTable({
         />
       </div>
       <ConfirmDeleteModal
+        loading={IsDeleteMeasure}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

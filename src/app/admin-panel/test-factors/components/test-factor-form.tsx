@@ -29,13 +29,13 @@ function TestFactorForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            name="measure_Id"
+            name="measureUid"
             label="مقیاس آزمون"
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Select
               options={Measure}
-              fieldNames={{ value: "Id", label: "Name" }}
+              fieldNames={{ value: "Uid", label: "Name" }}
               size="large"
               placeholder="وارد کنید"
             />

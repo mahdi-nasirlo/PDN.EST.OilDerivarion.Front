@@ -28,12 +28,25 @@ export default function ReviewDataTable() {
         },
     ];
 
+    const columns2: ColumnsType<Product & { Row: number }> = [
+        {
+            title: "ردیف",
+            dataIndex: "Row",
+            key: "1",
+        },
+        {
+            title: "نام مواد اولیه",
+            dataIndex: "name",
+            key: "2",
+        },
+    ];
+
 
     return (
         <>
 
 
-            <Spin spinning={deleteStep.isMutating}>
+            <Spin spinning={deleteStep.isMutating || finalPage.isLoading}>
                 <div className='grid grid-cols-1 gap-5'>
                     {finalPage?.data?.map((item, index) => {
                         return (
@@ -57,7 +70,7 @@ export default function ReviewDataTable() {
                                         </Button>,
                                         children: <>
                                             <Typography className="text-right font-medium text-lg mb-2">
-                                                لیست مواد اولیه
+                                                لیست محصولات
                                             </Typography>
                                             <Table
                                                 loading={finalPage.isLoading}
@@ -66,11 +79,11 @@ export default function ReviewDataTable() {
                                                 pagination={false}
                                             />
                                             <Typography className="text-right font-medium text-lg mb-2 mt-12">
-                                                لیست محصولات
+                                                لیست مواد اولیه
                                             </Typography>
                                             <Table
                                                 loading={finalPage.isLoading}
-                                                columns={columns}
+                                                columns={columns2}
                                                 dataSource={addIndexToData(item.materials)}
                                                 pagination={false}
                                             />

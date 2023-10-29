@@ -15,7 +15,8 @@ export interface ControllerProcessType {
     getStep2: (arg: RequestMasterForm) => void
     getStep3: () => void,
     getStep4: () => void,
-    getNextStep: () => void
+    getNextStep: () => void,
+    getLastStep: () => void
 }
 
 interface ProcessRequestMaster {
@@ -23,7 +24,7 @@ interface ProcessRequestMaster {
     productionMethodId: number
 }
 
-const stepNumber = 4
+const stepNumber = 5
 
 const useControlProcess = (): ControllerProcessType => {
 
@@ -94,6 +95,12 @@ const useControlProcess = (): ControllerProcessType => {
 
     }
 
+    const getLastStep = () => {
+
+        dispatch({type: "GET_STEP", stepNumber, step: stepNumber})
+
+    }
+
     return {
         step,
         isMutating: isMutating || confirmStep2.isMutating || confirmStep3.isMutating || requestNextStep.isMutating,
@@ -102,7 +109,8 @@ const useControlProcess = (): ControllerProcessType => {
         getStep2,
         getStep3,
         getStep4,
-        getNextStep
+        getNextStep,
+        getLastStep
     }
 
 }

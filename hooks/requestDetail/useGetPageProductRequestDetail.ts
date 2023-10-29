@@ -39,7 +39,7 @@ export interface DataItemType {
 
 const UseGetPageProductRequestDetail = (uid: string): PropType => {
 
-    const {data, isLoading, mutate} = useSWR("/RequestDetail/GetPageProduct", (url) => listFetcher(url, {
+    const {data, isLoading, mutate, isValidating} = useSWR("/RequestDetail/GetPageProduct", (url) => listFetcher(url, {
         arg: {
             requestMasterUid: uid,
             fromRecord: 0,
@@ -47,7 +47,7 @@ const UseGetPageProductRequestDetail = (uid: string): PropType => {
         }
     }))
 
-    return {data, isLoading, mutate}
+    return {data, isLoading: isLoading || isValidating, mutate}
 };
 
 export default UseGetPageProductRequestDetail;

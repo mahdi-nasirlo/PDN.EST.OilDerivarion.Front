@@ -462,11 +462,13 @@ body {
     @apply flex
 
 }
-
+.ant-menu-submenu-title{
+    padding: 14px !important;
+}
 .ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
 .ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline{
 background-color:theme("backgroundColor.white") !important;
-margin-right: 24px !important;
+margin-right: 16px !important;
 }
 
 /*.cahrt-btn {*/

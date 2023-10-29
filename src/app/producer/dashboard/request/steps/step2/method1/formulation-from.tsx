@@ -1,10 +1,11 @@
-import React, {useContext, useReducer, useState} from 'react';
-import {Col, Divider, Form, FormInstance, Input, InputNumber, Row, Select, Typography} from "antd";
+import React, { useContext, useReducer, useState } from 'react';
+import { Col, Divider, Form, FormInstance, Input, InputNumber, Row, Select, Typography } from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
-import {useGetAllPersonType} from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
+import { useGetAllPersonType } from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
 import useGetAllSupplyMethod from "../../../../../../../../hooks/baseInfo/useGetAllSupplyMethod";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import percentReducer from "../../../../../../../../reducers/PercentageAction";
+import { filterOption } from '../../../../../../../../lib/filterOption';
 
 const FormulationFrom = (props: { form?: FormInstance }) => {
 
@@ -16,13 +17,21 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
 
     const supplyMethod = useGetAllSupplyMethod()
 
-    const initialState = {percentOne: 0, percentTwo: 100};
+    const initialState = { percentOne: 0, percentTwo: 100 };
 
     const [state, dispatch] = useReducer(percentReducer, initialState);
 
     const [supplyMethodStatus, setSupplyMethod] = useState()
 
     const [personTypeStatus, setPersonType] = useState()
+
+    const [SupplyNational, SetSupplyNational] = useState<any>(null)
+
+    const handleFactoryProvinceChange = (value: any, e: any) => {
+        setPersonType(e);
+        SetSupplyNational(value);
+        props.form?.setFieldValue("materialSupplyNationalCode", null)
+    };
 
     return (
         <>
@@ -32,17 +41,17 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialUid"
                         label="نام مواد اولیه"
                         rules={[
-                            {required: true, message: "نام مواد اولیه اجباری است"},
-                            {type: "string"},
+                            { required: true, message: "نام مواد اولیه اجباری است" },
+                            { type: "string" },
                         ]}
                     >
                         <Select
                             showSearch
                             //@ts-ignore
-                            filterOption={materialsData.fieldNames}
+                            filterOption={filterOption}
                             loading={materialsData.isLoadingMaterial}
                             options={materialsData.materials}
-                            fieldNames={{value: "Uid", label: "Name"}}
+                            fieldNames={{ value: "Uid", label: "Name" }}
                             size="large"
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
@@ -58,11 +67,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                                 required: true,
                                 message: "میزان مصرف برای تولید یک واحد اجباری است",
                             },
-                            {type: "string"},
+                            { type: "string" },
                         ]}
                     >
-                        <Input size="large" type={"number"}
-                               placeholder={"وارد نمایید"}/>
+                        <Input size="large" type="number" placeholder="وارد نمایید" />
                     </Form.Item>
                 </Col>
             </Row>
@@ -75,7 +83,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             name={"materialUsagePercentage"}
                             label={"درصد استفاده"}
                             rules={[
-                                {required: true, message: " درصد استفاده اجباری است"},
+                                { required: true, message: " درصد استفاده اجباری است" },
                                 {
                                     type: "number",
                                     min: 0,
@@ -100,11 +108,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name={"materialTotalConsumption"}
                         label={"میزان مصرف کل"}
                         rules={[
-                            {required: true, message: "میزان مصرف کل اجباری است"},
-                            {type: "string"},
+                            { required: true, message: "میزان مصرف کل اجباری است" },
+                            { type: "string" },
                         ]}
                     >
-                        <Input size="large" type={"number"} placeholder="وارد کنید"/>
+                        <Input size="large" type="number" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -112,8 +120,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyMethodId"
                         label="نحوه تامین"
                         rules={[
-                            {required: true, message: "نحوه تامین اجبار است"},
-                            {type: "number"},
+                            { required: true, message: "نحوه تامین اجبار است" },
+                            { type: "number" },
                         ]}
                     >
                         <Select
@@ -140,15 +148,12 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                                 },
                             ]}
                         >
-                            <Input
-                                className="w-full rounded-lg"
-                                size="large"
-                                placeholder="وارد کنید"/>
+                            <Input className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>
                 }
             </Row>
-            <Divider/>
+            <Divider />
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                 منابع عمده تامین
             </Typography>
@@ -159,9 +164,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                     <Form.Item
                         name="materialInternalSupplyPercentage"
                         label="درصد تامین داخلی"
-                        rules={[{required: true, message: "درصد تامین داخلی اجباری است"}]}
+                        rules={[{ required: true, message: "درصد تامین داخلی اجباری است" }]}
                     >
                         <InputNumber
+                            placeholder="وارد کنید"
                             className="w-full rounded-lg"
                             size='large'
                             min={0}
@@ -193,6 +199,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         }]}
                     >
                         <InputNumber
+                            placeholder="وارد کنید"
                             className="w-full rounded-lg"
                             size='large'
                             min={0}
@@ -215,7 +222,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                     </Form.Item>
                 </Col>
             </Row>
-            <Divider/>
+            <Divider />
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                 مشخصات تامین کننده مواد اولیه
             </Typography>
@@ -225,11 +232,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyName"
                         label="نام"
                         rules={[
-                            {required: true, message: "نام اجباری است"},
-                            {type: "string"},
+                            { required: true, message: "نام اجباری است" },
+                            { type: "string" },
                         ]}
                     >
-                        <Input size="large" placeholder="وارد نمایید"/>
+                        <Input size="large" placeholder="وارد نمایید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
@@ -237,8 +244,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyPersonTypeId"
                         label="شخصیت"
                         rules={[
-                            {required: true, message: "شخصیت اجباری است"},
-                            {type: "number"},
+                            { required: true, message: "شخصیت اجباری است" },
+                            { type: "number" },
                         ]}
                     >
                         <Select
@@ -247,7 +254,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
                             value={personTypeStatus}
-                            onChange={(e) => setPersonType(e)}
+                            onChange={(e, value) => {
+                                handleFactoryProvinceChange(value, e)
+                            }
+                            }
                             loading={personType.isLoadingPersonType}
                             options={personType.personType}
                         />
@@ -285,7 +295,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             },
                         ]}
                     >
-                        <Input size="large" type={"number"} placeholder="انتخاب نمایید"/>
+                        <Input value={SupplyNational} size="large" placeholder="وارد نمایید" />
                     </Form.Item>
                 </Col>
             </Row>
@@ -295,14 +305,14 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyIranCode"
                         label="ایرانکد"
                         rules={[
-                            {required: true, message: "ایرانکد اجباری است"},
+                            { required: true, message: "ایرانکد اجباری است" },
                         ]}
                     >
                         <Input
                             className="w-full rounded-lg"
                             size="large"
-                            type={"number"}
-                            placeholder="انتخاب نمایید"
+                            type="number"
+                            placeholder="وارد نمایید"
                         />
                     </Form.Item>
                 </Col>
@@ -311,11 +321,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyAddress"
                         label="آدرس"
                         rules={[
-                            {required: true, message: "آدرس اجباری است"},
-                            {type: "string"},
+                            { required: true, message: "آدرس اجباری است" },
+                            { type: "string" },
                         ]}
                     >
-                        <Input size="large" placeholder="انتخاب نمایید"/>
+                        <Input size="large" placeholder="وارد نمایید" />
                     </Form.Item>
                 </Col>
             </Row>

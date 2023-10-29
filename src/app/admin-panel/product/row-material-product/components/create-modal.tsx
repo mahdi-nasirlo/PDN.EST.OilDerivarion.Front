@@ -58,7 +58,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
-              disabled={isMutating}
+              loading={isMutating}
               size="large"
               className="w-full"
               type="primary"

@@ -47,7 +47,6 @@ export default function Page() {
 
   return (
     <>
-      {/*// @ts-ignore*/}
       <Collapse
         size="large"
         items={[

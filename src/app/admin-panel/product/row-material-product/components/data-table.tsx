@@ -1,11 +1,7 @@
 "use client";
 
-import {
-  CheckCircleIcon,
-  PlusIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
-import { Button, Space, Table, Tooltip, Typography } from "antd";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Table, Tag, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Product } from "../../../../../../interfaces/product";
@@ -14,6 +10,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 export default function DataTable({
   setModalVisible,
@@ -50,10 +47,10 @@ export default function DataTable({
     await deleteProduct({
       uid: recordToDelete?.Uid,
     });
+    await mutate();
 
     setIsDeleteModalVisible(false);
 
-    await mutate();
   };
 
   const columns: ColumnsType<any> = [
@@ -76,12 +73,21 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => {
-        if (record.IsActive) {
-          return <CheckCircleIcon width={30} height={30} />;
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
         } else {
-          return <XCircleIcon width={30} height={30} />;
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
         }
+
+        return <Tag icon={icon} color={color}>{name}</Tag>;
       },
     },
 
@@ -180,7 +186,7 @@ export default function DataTable({
               setActiveExpRow(keys);
             },
             expandedRowRender: (record: Product) => (
-              <ExpandedMaterialTable product={record} />
+              <ExpandedMaterialTable product={record} mutate={mutate} />
             ),
           }}
           dataSource={addIndexToData(product?.records)}
@@ -200,6 +206,7 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={ldDelete}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

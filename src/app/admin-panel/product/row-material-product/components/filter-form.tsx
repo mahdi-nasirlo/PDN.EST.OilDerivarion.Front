@@ -27,10 +27,7 @@ export default function FilterForm({
             <Select
               options={[
                 { label: "فعال", value: true },
-                {
-                  label: "غیر فعال",
-                  value: false,
-                },
+                { label: "غیر فعال", value: false },
               ]}
               size="large"
               placeholder="انتخاب کنید"

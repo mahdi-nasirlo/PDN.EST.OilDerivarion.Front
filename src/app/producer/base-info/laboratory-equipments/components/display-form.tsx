@@ -12,22 +12,22 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
     useEffect(() => {
         if (data) {
             const newData = { ...data };
-            newData.producerLab_HasAtmosphericDistillation = renderValue(data.producerLab_HasAtmosphericDistillation);
-            newData.producerLab_HasVacuumDistillation = renderValue(data.producerLab_HasVacuumDistillation);
-            newData.producerLab_HasPourPoint = renderValue(data.producerLab_HasPourPoint);
-            newData.producerLab_HasFlashPoint = renderValue(data.producerLab_HasFlashPoint);
-            newData.producerLab_HasViscometer = renderValue(data.producerLab_HasViscometer);
-            newData.producerLab_HasMetalCorrosion = renderValue(data.producerLab_HasMetalCorrosion);
-            newData.producerLab_HasColorMeter = renderValue(data.producerLab_HasColorMeter);
-            newData.producerLab_HasTBN = renderValue(data.producerLab_HasTBN);
-            newData.producerLab_HasTAN = renderValue(data.producerLab_HasTAN);
-            newData.producerLab_HasVoltmeter = renderValue(data.producerLab_HasVoltmeter);
-            newData.producerLab_HasMeasureMocaptan = renderValue(data.producerLab_HasMeasureMocaptan);
-            newData.producerLab_HasMeasureSulfur = renderValue(data.producerLab_HasMeasureSulfur);
-            newData.producerLab_HasDensiometer = renderValue(data.producerLab_HasDensiometer);
-            newData.producerLab_HasMeasureColor = renderValue(data.producerLab_HasMeasureColor);
-            newData.producerLab_HasMeasureMethodGC = renderValue(data.producerLab_HasMeasureMethodGC);
-            newData.producerHasWaste = renderValue(data.producerHasWaste);
+            newData.lab_HasAtmosphericDistillation = renderValue(data.lab_HasAtmosphericDistillation);
+            newData.lab_HasVacuumDistillation = renderValue(data.lab_HasVacuumDistillation);
+            newData.lab_HasPourPoint = renderValue(data.lab_HasPourPoint);
+            newData.lab_HasFlashPoint = renderValue(data.lab_HasFlashPoint);
+            newData.lab_HasViscometer = renderValue(data.lab_HasViscometer);
+            newData.lab_HasMetalCorrosion = renderValue(data.lab_HasMetalCorrosion);
+            newData.lab_HasColorMeter = renderValue(data.lab_HasColorMeter);
+            newData.lab_HasTBN = renderValue(data.lab_HasTBN);
+            newData.lab_HasTAN = renderValue(data.lab_HasTAN);
+            newData.lab_HasVoltmeter = renderValue(data.lab_HasVoltmeter);
+            newData.lab_HasMeasureMocaptan = renderValue(data.lab_HasMeasureMocaptan);
+            newData.lab_HasMeasureSulfur = renderValue(data.lab_HasMeasureSulfur);
+            newData.lab_HasDensiometer = renderValue(data.lab_HasDensiometer);
+            newData.lab_HasMeasureColor = renderValue(data.lab_HasMeasureColor);
+            newData.lab_HasMeasureMethodGC = renderValue(data.lab_HasMeasureMethodGC);
+            newData.hasWaste = renderValue(data.hasWaste);
 
             form.setFieldsValue(newData);
         }
@@ -40,7 +40,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasAtmosphericDistillation"
+                            name="lab_HasAtmosphericDistillation"
                             label="تقطیر اتمسفریک"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -48,7 +48,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasVacuumDistillation"
+                            name="lab_HasVacuumDistillation"
                             label="تقطیر در خلاء"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -56,7 +56,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasPourPoint"
+                            name="lab_HasPourPoint"
                             label="نقطه ریزش"
                         >
                             <Input size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
@@ -66,7 +66,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasFlashPoint"
+                            name="lab_HasFlashPoint"
                             label="نقطه اشتعال"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -74,7 +74,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasViscometer"
+                            name="lab_HasViscometer"
                             label="ویسکومتر"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -82,7 +82,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasMetalCorrosion"
+                            name="lab_HasMetalCorrosion"
                             label="خوردگی فلز"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -92,7 +92,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasColorMeter"
+                            name="lab_HasColorMeter"
                             label="رنگ سنج"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -100,7 +100,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasTBN"
+                            name="lab_HasTBN"
                             label="TBN (تست قلیایی)"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -108,7 +108,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasTAN"
+                            name="lab_HasTAN"
                             label="TAN (تست اسیدی)"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -118,7 +118,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasVoltmeter"
+                            name="lab_HasVoltmeter"
                             label="ولت متر (اندازی گیری ولتاژ روغن)"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -126,7 +126,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasMeasureMocaptan"
+                            name="lab_HasMeasureMocaptan"
                             label="اندازه گیری مقدار مرکاپتان"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -134,7 +134,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasMeasureSulfur"
+                            name="lab_HasMeasureSulfur"
                             label="اندازه گیری مقدار گوگرد"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -144,7 +144,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasDensiometer"
+                            name="lab_HasDensiometer"
                             label="دانسیومتر"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -152,7 +152,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasMeasureColor"
+                            name="lab_HasMeasureColor"
                             label="اندازه گیری رنگ"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -160,7 +160,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerLab_HasMeasureMethodGC"
+                            name="lab_HasMeasureMethodGC"
                             label="درصد آروماتیک و بنزن به روش GC"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -170,7 +170,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerExportDestinationCountryName"
+                            name="exportDestinationCountryName"
                             label="کشورهای مقصد صادراتی محصول"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -178,7 +178,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerHasWaste"
+                            name="hasWaste"
                             label="ضایعات"
                         >
                             <Input size="large" placeholder="وارد کنید" />
@@ -186,7 +186,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerWastePlace"
+                            name="wastePlace"
                             label="محل های فروش یا دفن ضایعات ( درصورت وجود )"
                         >
                             <Input size="large" placeholder="وارد کنید" />

@@ -15,7 +15,8 @@ export interface ControllerProcessType {
     getStep2: (arg: RequestMasterForm) => void
     getStep3: () => void,
     getStep4: () => void,
-    getNextStep: () => void
+    getNextStep: () => void,
+    getLastStep: () => void
 }
 
 interface ProcessRequestMaster {
@@ -23,7 +24,7 @@ interface ProcessRequestMaster {
     productionMethodId: number
 }
 
-const stepNumber = 4
+const stepNumber = 5
 
 const useControlProcess = (): ControllerProcessType => {
 
@@ -88,9 +89,17 @@ const useControlProcess = (): ControllerProcessType => {
     const getNextStep = async () => {
 
         const res = await requestNextStep.trigger({uid: requestMaster.requestMasterUid})
-
-        if (res)
+        
+        if (res) {
+            console.log(res)
             dispatch({type: "GET_STEP", stepNumber, step: 1})
+        }
+
+    }
+
+    const getLastStep = () => {
+
+        dispatch({type: "GET_STEP", stepNumber, step: stepNumber})
 
     }
 
@@ -102,7 +111,8 @@ const useControlProcess = (): ControllerProcessType => {
         getStep2,
         getStep3,
         getStep4,
-        getNextStep
+        getNextStep,
+        getLastStep
     }
 
 }

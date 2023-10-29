@@ -1,4 +1,4 @@
-import React, {useContext, useReducer} from 'react';
+import React, {useContext, useReducer, useState} from 'react';
 import {Col, Divider, Form, FormInstance, Input, InputNumber, Row, Select, Typography} from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
 import {useGetAllPersonType} from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
@@ -19,6 +19,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
     const initialState = {percentOne: 0, percentTwo: 100};
 
     const [state, dispatch] = useReducer(percentReducer, initialState);
+
+    const [supplyMethodStatus, setSupplyMethod] = useState()
+
+    const [personTypeStatus, setPersonType] = useState()
 
     return (
         <>
@@ -117,28 +121,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             size="large"
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
+                            value={supplyMethodStatus}
+                            onChange={(e) => setSupplyMethod(e)}
                             loading={supplyMethod.isLoadingSupplyMethod}
                             options={supplyMethod.supplyMethods}
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        name={"materialImportDeclarationNumber"}
-                        label="شماره اظهارنامه واردات"
-                        rules={[
-                            {
-                                required: true,
-                                message: "شماره اظهارنامه واردات اجباری است",
-                            },
-                        ]}
-                    >
-                        <Input
-                            className="w-full rounded-lg"
-                            size="large"
-                            placeholder="وارد کنید"/>
-                    </Form.Item>
-                </Col>
+                {
+                    supplyMethodStatus === 2 && <Col xs={24} md={12}>
+                        <Form.Item
+                            name={"materialImportDeclarationNumber"}
+                            label="شماره اظهارنامه واردات"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "شماره اظهارنامه واردات اجباری است",
+                                },
+                            ]}
+                        >
+                            <Input
+                                className="w-full rounded-lg"
+                                size="large"
+                                placeholder="وارد کنید"/>
+                        </Form.Item>
+                    </Col>
+                }
             </Row>
             <Divider/>
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
@@ -158,6 +166,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             size='large'
                             min={0}
                             max={100}
+                            formatter={(value) => `${value}%`}
                             onChange={(value) => {
                                 if (props?.form)
                                     dispatch({
@@ -188,6 +197,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             size='large'
                             min={0}
                             max={100}
+                            formatter={(value) => `${value}%`}
                             onChange={(value) => {
                                 if (props?.form)
                                     dispatch({
@@ -236,6 +246,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             size="large"
                             placeholder="انتخاب نمایید"
                             tokenSeparators={[","]}
+                            value={personTypeStatus}
+                            onChange={(e) => setPersonType(e)}
                             loading={personType.isLoadingPersonType}
                             options={personType.personType}
                         />
@@ -244,15 +256,31 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 <Col xs={24} md={8}>
                     <Form.Item
                         name="materialSupplyNationalCode"
-                        label="کد ملی / شناسه ملی"
+                        label={personTypeStatus === null ? "کد ملی / شناسه ملی" : (personTypeStatus === 2) ? "شناسه ملی" : "کد ملی"}
                         rules={[
-                            {required: true, message: "کد ملی اجباری است"},
                             {
                                 validator: (_, value) => {
-                                    if (!value || value.length === 10) {
+
+                                    if (value && personTypeStatus === 2 && value.length === 11) {
                                         return Promise.resolve();
                                     }
-                                    return Promise.reject("کد ملی باید ۱۰ رقم باشد");
+
+                                    if (value && personTypeStatus === 1 && value.length === 10) {
+                                        return Promise.resolve();
+                                    }
+
+                                    if (!value) {
+                                        return Promise.reject("کد 'ملی / شناسه ملی' اجباری است")
+                                    }
+
+                                    if (value && personTypeStatus === 1) {
+                                        return Promise.reject("کد ملی باید 10 رقم باشد")
+                                    }
+
+                                    if (value && personTypeStatus === 2) {
+                                        return Promise.reject("شناسه ملی باید 11 رقم باشد")
+                                    }
+
                                 },
                             },
                         ]}

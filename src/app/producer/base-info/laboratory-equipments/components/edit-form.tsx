@@ -20,7 +20,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasAtmosphericDistillation"
+                        name="lab_HasAtmosphericDistillation"
                         label="تقطیر اتمسفریک"
                     >
                         <Select
@@ -35,7 +35,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasVacuumDistillation"
+                        name="lab_HasVacuumDistillation"
                         label="تقطیر در خلاء"
                     >
                         <Select
@@ -50,7 +50,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasPourPoint"
+                        name="lab_HasPourPoint"
                         label="نقطه ریزش"
                     >
                         <Select
@@ -68,7 +68,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasFlashPoint"
+                        name="lab_HasFlashPoint"
                         label="نقطه اشتعال"
                     >
                         <Select
@@ -83,7 +83,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasViscometer"
+                        name="lab_HasViscometer"
                         label="ویسکومتر"
                     >
                         <Select
@@ -98,7 +98,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasMetalCorrosion"
+                        name="lab_HasMetalCorrosion"
                         label="خوردگی فلز"
                     >
                         <Select
@@ -115,7 +115,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasColorMeter"
+                        name="lab_HasColorMeter"
                         label="رنگ سنج"
                     >
                         <Select
@@ -130,7 +130,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasTBN"
+                        name="lab_HasTBN"
                         label="TBN (تست قلیایی)"
                     >
                         <Select
@@ -145,7 +145,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasTAN"
+                        name="lab_HasTAN"
                         label="TAN (تست اسیدی)"
                     >
                         <Select
@@ -162,7 +162,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasVoltmeter"
+                        name="lab_HasVoltmeter"
                         label="ولت متر (اندازی گیری ولتاژ روغن)"
                     >
                         <Select
@@ -177,7 +177,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasMeasureMocaptan"
+                        name="lab_HasMeasureMocaptan"
                         label="اندازه گیری مقدار مرکاپتان"
                     >
                         <Select
@@ -192,7 +192,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasMeasureSulfur"
+                        name="lab_HasMeasureSulfur"
                         label="اندازه گیری مقدار گوگرد"
                     >
                         <Select
@@ -209,7 +209,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasDensiometer"
+                        name="lab_HasDensiometer"
                         label="دانسیومتر"
                     >
                         <Select
@@ -224,7 +224,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasMeasureColor"
+                        name="lab_HasMeasureColor"
                         label="اندازه گیری رنگ"
                     >
                         <Select
@@ -239,7 +239,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerLab_HasMeasureMethodGC"
+                        name="lab_HasMeasureMethodGC"
                         label="درصد آروماتیک و بنزن به روش GC"
                     >
                         <Select
@@ -256,7 +256,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerExportDestinationCountryId"
+                        name="exportDestinationCountryId"
                         label="کشورهای مقصد صادراتی محصول"
                     >
                         <Select
@@ -270,7 +270,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerHasWaste"
+                        name="hasWaste"
                         label="ضایعات"
                     >
                         <Select
@@ -285,7 +285,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item
-                        name="producerWastePlace"
+                        name="wastePlace"
                         label="محل های فروش یا دفن ضایعات (درصورت وجود)"
                     >
                         <Input size="large" className="w-full" placeholder="وارد کنید" />

@@ -6,12 +6,8 @@ import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
   const { data: Product, isLoading: ldProduct } = useSWR(
-    [
-      "/Product/GetAll",
-      {
-        name: null,
-        IsActive: null,
-      },
+    ["/Product/GetAll",
+      { name: null, IsActive: null },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
@@ -19,10 +15,7 @@ function ProductForm() {
   const { data: Material, isLoading: ldMaterial } = useSWR(
     [
       "/Material/GetAll",
-      {
-        name: null,
-        IsActive: null,
-      },
+      { name: null, IsActive: null },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );

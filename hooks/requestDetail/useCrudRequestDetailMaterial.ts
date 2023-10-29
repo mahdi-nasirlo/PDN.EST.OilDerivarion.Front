@@ -40,8 +40,11 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
 
     const handleCreate = async (value: any, notify: boolean = false) => {
 
-        value.materialImportDeclarationNumber =
-            value.materialImportDeclarationNumber.toString();
+        if (value?.materialImportDeclarationNumber) {
+            value.materialImportDeclarationNumber =
+                value?.materialImportDeclarationNumber.toString();
+        }
+
         value.materialSupplyIranCode = value.materialSupplyIranCode.toString();
         value.materialSupplyNationalCode =
             value.materialSupplyNationalCode.toString();

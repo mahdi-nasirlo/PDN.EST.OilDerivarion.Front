@@ -40,9 +40,11 @@ const columns: ColumnsType<any> = [
 const DataTable = ({
   product,
   ldProduct,
+  mutate: TableMutate
 }: {
   product: Product[];
   ldProduct: boolean;
+  mutate: () => void;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
@@ -69,7 +71,7 @@ const DataTable = ({
           setActiveExpRow(keys);
         },
         expandedRowRender: (record: Product) => (
-          <ExpandedRowRender product={record} />
+          <ExpandedRowRender product={record} TableMutate={TableMutate} />
         ),
       }}
       dataSource={product}
@@ -89,7 +91,7 @@ const DataTable = ({
   );
 };
 
-const ExpandedRowRender = ({ product }: { product: Product }) => {
+const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMutate: () => void }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -116,7 +118,7 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
 
   const deleteProductFactor = async () => {
     await trigger({ uid: recordToDelete?.Uid });
-
+    await TableMutate();
     await mutate();
 
     setOpen(false);
@@ -167,6 +169,7 @@ const ExpandedRowRender = ({ product }: { product: Product }) => {
         pagination={false}
       />
       <ConfirmDeleteModal
+        loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}

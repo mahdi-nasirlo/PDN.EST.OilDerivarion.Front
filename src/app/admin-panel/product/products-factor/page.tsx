@@ -77,6 +77,7 @@ export default function Page() {
           </Button>
         </div>
         <DataTable
+          mutate={mutate}
           product={addIndexToData(product?.records)}
           ldProduct={ldProduct}
         />

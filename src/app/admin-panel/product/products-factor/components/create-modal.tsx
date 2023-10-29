@@ -8,6 +8,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import { Product } from "../../../../../../interfaces/product";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
   setModalVisible,
@@ -25,7 +26,7 @@ export default function CreateModal({
     IsActive: null,
   };
 
-  const { data: product, isLoading: ldProduct } = useSWR<Product[]>(
+  const { data: product, isLoading: ldProduct } = useSWR<any[]>(
     ["/Product/GetAll", defaultValue],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
@@ -119,6 +120,8 @@ export default function CreateModal({
             >
               <Select
                 showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 fieldNames={{ value: "Uid", label: "FullName" }}
                 loading={ldProduct}
                 options={product}
@@ -139,6 +142,9 @@ export default function CreateModal({
               ]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 options={TestItem}
                 loading={ldTestProduct}
                 fieldNames={{ value: "Uid", label: "Name" }}

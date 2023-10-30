@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
-import {useForm} from "antd/es/form/Form";
+import React, { useEffect } from 'react';
+import { useForm } from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {Button, Col, Form, Modal, Row} from "antd";
-import {Gps} from "../../../../../interfaces/gps";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { Button, Col, Form, Modal, Row } from "antd";
+import { Gps } from "../../../../../interfaces/gps";
 import GpsForm from "@/app/admin-panel/gps-devices/components/gps-form";
 
-function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
+function EditModal({ modalVisible, setModalVisible, mutate, recordeToEdit }: {
     modalVisible: boolean,
     setModalVisible: any,
     mutate: () => void,
@@ -16,29 +16,28 @@ function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
     const [form] = useForm()
 
 
-    const {trigger, isMutating} = useSWRMutation("/GpsDevice/Update", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/GpsDevice/Update", mutationFetcher)
 
     const handleSubmit = async (values: Gps) => {
 
-        values.Uid = recordeToEdit?.Uid
+        values.Uid = recordeToEdit?.Uid;
 
-        const res = await trigger(values)
+        const res = await trigger(values);
 
         if (res) {
 
-            setModalVisible(false)
+            await mutate();
 
-            await mutate()
+            setModalVisible(false);
 
-            form.resetFields()
-
+            form.resetFields();
         }
 
     }
 
     useEffect(() => {
 
-        form.setFieldsValue(recordeToEdit)
+        form.setFieldsValue(recordeToEdit);
 
     }, [recordeToEdit])
 
@@ -65,7 +64,7 @@ function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                disabled={isMutating}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={() => setModalVisible(false)}
@@ -77,7 +76,7 @@ function EditModal({modalVisible, setModalVisible, mutate, recordeToEdit}: {
                 ]}
             >
                 <Form disabled={isMutating} form={form} onFinish={handleSubmit} layout="vertical">
-                    <GpsForm/>
+                    <GpsForm />
                 </Form>
             </Modal>
         </>

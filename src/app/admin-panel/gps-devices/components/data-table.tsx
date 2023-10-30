@@ -1,16 +1,17 @@
 "use client";
 
-import {Button, Col, Modal, Row, Space} from "antd";
-import {ColumnsType} from "antd/es/table";
-import {Table} from "antd/lib";
-import React, {useState} from "react";
-import {Gps} from "../../../../../interfaces/gps";
+import { Button, Col, Modal, Row, Space } from "antd";
+import { ColumnsType } from "antd/es/table";
+import { Table } from "antd/lib";
+import React, { useState } from "react";
+import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 interface DataType {
   key: string;
@@ -76,27 +77,21 @@ export default function DataTable({
       dataIndex: "Code",
       key: "2",
     },
-    {
-      title: "استان",
-      dataIndex: "TrackingCode",
-      key: "3",
-    },
+    // {
+    //       title: "استان",
+    //       dataIndex: "TrackingCode",
+    //       key: "3",
+    // },
     {
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
-      key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/GpsDevice/ChangeStatus"}
-        />
-      ),
+      key: "3",
+      render: (e, record) => <StatusColumn record={record} />
     },
     {
       title: "مکان یابی",
       dataIndex: "ConfirmedRequest",
-      key: "5",
+      key: "4",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -163,11 +158,11 @@ export default function DataTable({
       />
       {/* جذف */}
       <ConfirmDeleteModal
-          open={isDeleteModalVisible}
-          setOpen={setIsDeleteModalVisible}
-          handleDelete={handleDeleteSubmit}
-          title={"حذف جعبه"}
-          loading={isMutating}
+        open={isDeleteModalVisible}
+        setOpen={setIsDeleteModalVisible}
+        handleDelete={handleDeleteSubmit}
+        title={"حذف جعبه"}
+        loading={isMutating}
       />
       {/* ویرایش */}
       <EditModal

@@ -1,12 +1,12 @@
 "use client";
 
 
-import {Button, Col, Form, Modal, Row} from 'antd';
-import {useRouter} from 'next/navigation';
+import { Button, Col, Form, Modal, Row } from 'antd';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 export default function ReviewDataModalFinalSubmit(
-    {modalVisibleFinalSubmit, setModalVisibleFinalSubmit}:
+    { modalVisibleFinalSubmit, setModalVisibleFinalSubmit }:
         { modalVisibleFinalSubmit: any, setModalVisibleFinalSubmit: any }
 ) {
 
@@ -17,7 +17,8 @@ export default function ReviewDataModalFinalSubmit(
     };
 
     const handleFormSubmit = () => {
-        router.push("/producer/dashboard/request-list")
+        router.push("/producer/dashboard/request-list");
+        setModalVisibleFinalSubmit(false);
     };
 
 
@@ -25,7 +26,7 @@ export default function ReviewDataModalFinalSubmit(
         <>
             <Modal
                 width={600}
-                title={<div className="text-base">اعلان</div>}
+                title={<div className="text-base"> اعلان ثبت درخواست</div>}
                 open={modalVisibleFinalSubmit}
                 closeIcon={false}
                 footer={[
@@ -48,8 +49,8 @@ export default function ReviewDataModalFinalSubmit(
                         <Col xs={24} md={24}>
                             <Form.Item>
                                 <div className='flex flex-col'>
-                                    <p>نتیجه بررسی از طریق پیام کوتاه به شما اطلاع داده می شود.</p>
-                                    <p>تا زمان تایید شما دسترسی لازم به پنل خود را نخواهید داشت. لطفا صبور باشید.</p>
+                                    <p>درخواست شما با موفقیت ثبت شد . نتیجه بررسی از طریق پیام کوتاه به شما اطلاع داده می شود.</p>
+                                    <p>از طریق بخش لیست درخواست ها می توانید از پیشرفت درخواست خود مطلع شوید .</p>
                                 </div>
                             </Form.Item>
                         </Col>

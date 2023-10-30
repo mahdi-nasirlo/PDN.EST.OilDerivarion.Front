@@ -36,11 +36,7 @@ export default function Step1() {
                         <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
                             name="processDescription" label="شرح فرآیند تولید">
                             <Input.TextArea
-                                maxLength={100}
-                                style={{
-                                    height: 120,
-                                    resize: "none",
-                                }}
+                                style={{ height: 120, resize: "none" }}
                                 placeholder="وارد کنید"
                             />
                         </Form.Item>

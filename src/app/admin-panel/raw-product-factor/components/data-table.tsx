@@ -11,7 +11,6 @@ import {addIndexToData} from "../../../../../lib/addIndexToData";
 import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import {listFetcher} from "../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../components/CustomeTable";
-import {filter} from "minimatch";
 
 const DataTable = ({
                        material,
@@ -46,9 +45,7 @@ const DataTable = ({
       <>
           <CustomeTable
               columns={columns}
-              setInitialData={(e) => {
-                  setFilter({...filter, ...e})
-              }}
+              setInitialData={setFilter}
               isLoading={ldMaterial}
               data={material}
               rowKey={"Uid"}

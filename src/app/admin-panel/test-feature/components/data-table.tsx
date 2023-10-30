@@ -86,7 +86,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "مرجع",
+      title: "شناسه استاندارد",
       dataIndex: "ReferenceCode",
       key: "4",
     },

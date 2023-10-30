@@ -1,18 +1,18 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row } from "antd";
+import {Button, Col, Form, Modal, Row} from "antd";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { CreateTestItemDetail } from "../../../../../interfaces/TestItem";
-import { useForm } from "antd/es/form/Form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {CreateTestItemDetail} from "../../../../../interfaces/TestItem";
+import {useForm} from "antd/es/form/Form";
 import TestFeatureForm from "./test-feature-form";
 
 export default function CreateModal({
-  setModalVisible,
-  modalVisible,
-  mutate,
-}: {
+                                      setModalVisible,
+                                      modalVisible,
+                                      mutate,
+                                    }: {
   setModalVisible: any;
   modalVisible: any;
   mutate: () => void;
@@ -25,13 +25,15 @@ export default function CreateModal({
   );
 
   const createTestFactor = async (values: CreateTestItemDetail) => {
-    await trigger(values);
 
+    const res = await trigger(values);
     await mutate();
+    if (res) {
 
-    setModalVisible(false);
+      setModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   const CloseModal = () => {

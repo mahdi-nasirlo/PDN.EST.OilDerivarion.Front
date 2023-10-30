@@ -11,7 +11,7 @@ const UseGetAllGpsDeviceTracker = () => {
             }
         }),
         {
-            refreshInterval: 3000
+            refreshInterval: 30000
         }
     )
 

@@ -1,80 +1,95 @@
 "use client";
 
-import { Button, Space, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { TableColumnsType } from "antd/lib";
-import React, { useEffect, useState } from "react";
+import {Button, Space, Table} from "antd";
+import {ColumnsType} from "antd/es/table";
+import {TableColumnsType} from "antd/lib";
+import React, {useEffect, useState} from "react";
 import useSWR from "swr";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
+import {addIndexToData} from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ProductTestItem } from "../../../../../interfaces/product";
+import {ProductTestItem} from "../../../../../interfaces/product";
+import CustomeTable from "../../../../../components/CustomeTable";
 
 const columns: ColumnsType<Labratory> = [
-  {
-    title: "ردیف",
-    dataIndex: "Row",
-    key: "1",
-  },
-  { title: "آزمایشگاه", dataIndex: "Name", key: "2" },
-  { title: "استان", dataIndex: "StateName", key: "3" },
-  { title: "مجوز ها", dataIndex: "License_No", key: "2" },
+    {
+        title: "ردیف",
+        dataIndex: "Row",
+        key: "1",
+    },
+    {title: "آزمایشگاه", dataIndex: "Name", key: "2"},
+    {title: "استان", dataIndex: "StateName", key: "3"},
+    {title: "مجوز ها", dataIndex: "License_No", key: "2"},
 
-  { title: "تاریخ اعتبار مجوز", dataIndex: "License_Expire_Date", key: "2" },
+    {title: "تاریخ اعتبار مجوز", dataIndex: "License_Expire_Date", key: "2"},
 ];
 
 const DataTable = ({
-  isValidating,
-  Labratory,
-  ldProduct,
-}: {
-  isValidating: any;
-  Labratory: Labratory[];
-  ldProduct: boolean;
+                       setFilter,
+                       isValidating,
+                       Labratory,
+                       ldProduct,
+                   }: {
+    setFilter: (arg: any) => void,
+    isValidating: any;
+    Labratory: { records: Labratory[], count: number } | undefined;
+    ldProduct: boolean;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   return (
-    <Table
-      className="mt-6"
-      columns={columns}
-      rowKey={"Uid"}
-      loading={ldProduct || isValidating}
-      expandable={{
-        expandedRowKeys: activeExpRow,
-        onExpand: (expanded, record: Labratory) => {
-          const keys: string[] = [];
+      // <CustomeTable
+      //     data={Labratory}
+      //     className="mt-6"
+      //     columns={columns}
+      //     rowKey={"Uid"}
+      //     loading={false}
+      //     expandable={{
+      //         expandedRowKeys: activeExpRow,
+      //         onExpand: (expanded, record: Labratory) => {
+      //             const keys: string[] = [];
+      //
+      //             if (expanded && record.Uid) {
+      //                 // @ts-ignore
+      //                 keys.push(record.Uid);
+      //             }
+      //
+      //             if (!expanded) {
+      //                 keys.pop();
+      //             }
+      //
+      //             setActiveExpRow(keys);
+      //         },
+      //         expandedRowRender: (record: Labratory) => (
+      //             <ExpandedRowRender Labratory={record}/>
+      //         ),
+      //     }}
+      //     setInitialData={setFilter}
+      // />
+      <CustomeTable rowKey={"Uid"} setInitialData={setFilter} isLoading={ldProduct || isValidating} data={Labratory}
+                    columns={columns}
+                    expandable={{
+                        expandedRowKeys: activeExpRow,
+                        onExpand: (expanded, record: Labratory) => {
+                            const keys: string[] = [];
 
-          if (expanded && record.Uid) {
-            // @ts-ignore
-            keys.push(record.Uid);
-          }
+                            if (expanded && record.Uid) {
+                                // @ts-ignore
+                                keys.push(record.Uid);
+                            }
 
-          if (!expanded) {
-            keys.pop();
-          }
+                            if (!expanded) {
+                                keys.pop();
+                            }
 
-          setActiveExpRow(keys);
-        },
-        expandedRowRender: (record: Labratory) => (
-          <ExpandedRowRender Labratory={record} />
-        ),
-      }}
-      dataSource={Labratory}
-      pagination={{
-        defaultPageSize: 10,
-        showSizeChanger: true,
-        pageSizeOptions: ["10", "20", "50"],
-        defaultCurrent: 1,
-        style: {
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          margin: "16px 0",
-        },
-      }}
+                            setActiveExpRow(keys);
+                        },
+                        expandedRowRender: (record: Labratory) => (
+                            <ExpandedRowRender Labratory={record}/>
+                        ),
+                    }}
     />
   );
 };

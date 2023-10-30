@@ -41,7 +41,7 @@ function Index() {
         layout="vertical"
         onFinish={handleOnFinish}
       >
-        <FormulationFrom />
+        <FormulationFrom form={form} />
         <div className="flex justify-end">
           <Button
             loading={requestDetailMaterial.create.isLoading}
@@ -57,11 +57,7 @@ function Index() {
       <div className="flex gap-3 mt-5">
         <Button
           onClick={() =>
-            processControl.dispatch({
-              type: "GET_STEP",
-              stepNumber: 6,
-              step: 6,
-            })
+            processControl.getLastStep()
           }
           type="dashed"
           className="bg-gray-100 w-full"

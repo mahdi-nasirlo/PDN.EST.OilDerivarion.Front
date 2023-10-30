@@ -2,10 +2,10 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
-import {MenuProps} from "antd";
-import {Bars3Icon, FolderPlusIcon, HomeIcon, RectangleStackIcon,} from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
+import { Bars3Icon, ClipboardDocumentListIcon, FolderPlusIcon, HomeIcon, PencilSquareIcon, RectangleStackIcon, UserGroupIcon, UsersIcon, } from "@heroicons/react/24/outline";
 
 export default function RootLayout({
   children,
@@ -87,7 +87,6 @@ const items: MenuProps["items"] = [
       "/admin-panel/laboratory",
       <Bars3Icon width={16} height={16} />
     ),
-
     getMenuItem(
       <Link href={"/admin-panel/labratory-factor"} className="text-sm">
         فاکتور آزمایشگاه
@@ -96,28 +95,34 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-  getMenuItem("مدیریت کاربران", "management-user", null, [
+  getMenuItem("مدیریت کاربران", "management-users", null, [
     getMenuItem(
-      <Link href={"/admin-panel/management-user"} className="text-sm">
+      <Link href={"/admin-panel/management-users/management-user"} className="text-sm">
         لیست کاربران
       </Link>,
-      "/admin-panel/management-user",
-      <Bars3Icon width={16} height={16} />
+      "/admin-panel/management-users/management-user",
+      <UsersIcon width={16} height={16} />
     ),
     getMenuItem(
-      <Link href={"/admin-panel/confirm-changes"} className="text-sm">
+      <Link href={"/admin-panel/management-users/confirm-changes"} className="text-sm">
         ثبت تغییرات
       </Link>,
-      "/admin-panel/confirm-changes",
+      "/admin-panel/management-users/confirm-changes",
+      <PencilSquareIcon width={16} height={16} />
+    ),
+    getMenuItem(
+      <Link href={"/admin-panel/management-users/management-user-role"} className="text-sm">
+        نقش کاربران
+      </Link>,
+      "/admin-panel/management-users/management-user-role",
       <FolderPlusIcon width={16} height={16} />
     ),
     getMenuItem(
-      <Link href={"/admin-panel/management-user-role"} className="text-sm">
-        نقش کاربران
-      </Link>,
-      "/admin-panel/management-user-role",
-      <FolderPlusIcon width={16} height={16} />
+      <Link href={"/admin-panel/management-users/list-experts"} className="text-sm">لیست کارشناسان</Link>,
+      "/admin-panel/management-users/list-experts",
+      <ClipboardDocumentListIcon width={16} height={16} />
     ),
+
   ]),
 
   getMenuItem(
@@ -138,28 +143,22 @@ const items: MenuProps["items"] = [
   ),
 
   getMenuItem(
-    <Link href={"/admin-panel/list-experts"}>لیست کارشناسان</Link>,
-    "/admin-panel/list-experts",
-    <Bars3Icon width={16} height={16} />
+    <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
+    "/admin-panel/test-result"
+    // <FolderPlusIcon width={16} height={16}/>
   ),
 
   getMenuItem(
-      <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
-      "/admin-panel/test-result"
-      // <FolderPlusIcon width={16} height={16}/>
+    <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
+    "/admin-panel/gps-devices"
+  ),
+  getMenuItem(
+    <Link href="/admin-panel/gps-tracking">رهگیری GPS</Link>,
+    "/admin-panel/gps-tracking"
   ),
 
   getMenuItem(
-      <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
-      "/admin-panel/gps-devices"
-  ),
-  getMenuItem(
-      <Link href="/admin-panel/gps-tracking">رهگیری GPS</Link>,
-      "/admin-panel/gps-tracking"
-  ),
-
-  getMenuItem(
-      <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
-      "/admin-panel/measures"
+    <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
+    "/admin-panel/measures"
   ),
 ];

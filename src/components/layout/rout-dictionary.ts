@@ -176,6 +176,9 @@ export const routDictionary: Items = {
   "category-list": {
     title: "لیست دسته بندی",
   },
+  "management-users": {
+    title: "مدیریت کاربران",
+  },
   "confirm-changes": {
     title: "ثبت تغییرات",
   },
@@ -186,7 +189,7 @@ export const routDictionary: Items = {
     title: "لیست کارشناسان",
   },
   "management-user": {
-    title: "مدیریت کاربران",
+    title: "لیست کاربران",
   },
   "management-user-role": {
     title: "نقش کاربران",

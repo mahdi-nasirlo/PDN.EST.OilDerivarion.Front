@@ -44,10 +44,10 @@ const DataTable = ({
                      ldProduct,
                      mutate: TableMutate
                    }: {
-  setFilter: (arg: any) => void,
-  product: { records: Product[], count: number };
-  ldProduct: boolean;
-  mutate: () => void;
+    setFilter: (arg: any) => void,
+    product: { records: Product[], count: number } | undefined;
+    ldProduct: boolean;
+    mutate: () => void;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 

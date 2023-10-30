@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { Product, ProductCategoryGet } from "../../../../../interfaces/product";
-import { Collapse } from "antd";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {Product, ProductCategoryGet} from "../../../../../interfaces/product";
+import {Collapse} from "antd";
+import getPageRecordNumber from "../../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,11 +17,10 @@ export default function Page() {
     Name: null,
     IsActive: null,
     productCategoryUid: null,
-    fromRecord: 0,
-    selectRecord: 1000,
+    ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState(defaultValueTable);
+  const [filter, setFilter] = useState<any>(defaultValueTable);
 
   const {
     data: product,
@@ -34,8 +34,13 @@ export default function Page() {
   );
 
   const setFilterTable = async (values: ProductCategoryGet) => {
-    // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: values.IsActive, productCategoryUid: values.productCategoryUid, fromRecord: 0, selectRecord: 100, });
+    
+    setFilter({
+      Name: values.Name,
+      IsActive: values.IsActive,
+      productCategoryUid: values.productCategoryUid,
+      ...getPageRecordNumber(),
+    });
 
     await mutate();
   };
@@ -50,26 +55,27 @@ export default function Page() {
     <>
       {/*// @ts-ignore*/}
       <Collapse
-        size="large"
-        items={[
-          {
-            label: "فیلتر جدول",
-            children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
-            ),
-          },
-        ]}
+          size="large"
+          items={[
+            {
+              label: "فیلتر جدول",
+              children: (
+                  <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
+              ),
+            },
+          ]}
       />
       <DataTable
-        mutate={mutate}
-        product={product?.records}
-        ldProduct={ldProduct}
-        setModalVisible={setModalVisible}
+          setFilter={setFilter}
+          mutate={mutate}
+          product={product}
+          ldProduct={ldProduct}
+          setModalVisible={setModalVisible}
       />
       <CreateModal
-        mutate={mutate}
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
+          mutate={mutate}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
       />
     </>
   );

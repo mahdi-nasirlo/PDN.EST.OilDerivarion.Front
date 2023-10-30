@@ -1,35 +1,36 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Switch, Table, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { TestItem } from "../../../../../interfaces/TestItem";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Tag, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Measure } from "../../../../../interfaces/measures";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {Measure} from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
-  isValidating,
-  setModalVisible,
-  ldMeasure,
-  measure,
-  mutate,
-}: {
+                                    setFilter,
+                                    isValidating,
+                                    setModalVisible,
+                                    ldMeasure,
+                                    measure,
+                                    mutate,
+                                  }: {
+  setFilter: (arg: any) => void,
   isValidating: any;
   setModalVisible: any;
   ldMeasure: boolean;
   mutate: () => void;
   measure:
-    | {
-        records: Measure[];
-        count: number;
-      }
-    | undefined;
+      | {
+    records: Measure[];
+    count: number;
+  }
+      | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
@@ -41,19 +42,18 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger, isMutating } = useSWRMutation(
+  const { trigger, isMutating: IsDeleteMeasure } = useSWRMutation(
     "/Measure/Delete",
     mutationFetcher
   );
 
   const handleConfirmDelete = async () => {
-    setIsDeleteModalVisible(false);
-
     await trigger({
       uid: recordToDelete?.Uid,
     });
 
     await mutate();
+    setIsDeleteModalVisible(false);
   };
 
   const showModal = () => {
@@ -72,16 +72,29 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "فعال/غیر فعال ",
+      title: "فعال/غیر فعال",
       dataIndex: "IsActive",
-      key: "3",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/Measure/ChangeStatus"}
-        />
-      ),
+      key: "4",
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />;
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />;
+        }
+
+        return (
+          <Tag icon={icon} color={color}>
+            {name}
+          </Tag>
+        );
+      },
     },
     {
       title: "عملیات",
@@ -118,42 +131,31 @@ export default function DataTable({
             لیست واحد های اندازه گیری
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={showModal}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex  ">افزودن واحد اندازه گیری</span>
           </Button>
         </div>
-        <Table
-          className="mt-6"
-          columns={columns}
-          loading={ldMeasure || isMutating || isValidating}
-          dataSource={addIndexToData(measure?.records)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+        <CustomeTable
+            setInitialData={setFilter}
+            isLoading={ldMeasure || IsDeleteMeasure || isValidating}
+            data={measure}
+            columns={columns}
         />
         <EditModal
-          mutate={mutate}
-          editRecords={openEdit}
-          setEditRecord={setOpenEdit}
+            mutate={mutate}
+            editRecords={openEdit}
+            setEditRecord={setOpenEdit}
         />
       </div>
       <ConfirmDeleteModal
-        open={isDeleteModalVisible}
+          loading={IsDeleteMeasure}
+          open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
         title="واحد اندازه گیری"

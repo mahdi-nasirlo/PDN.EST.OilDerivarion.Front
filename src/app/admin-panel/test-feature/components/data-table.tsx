@@ -1,27 +1,30 @@
 "use client";
 
-import { Button, Space, Table, Typography } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {Button, Space, Typography} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import {
-  CreateTestItemDetail,
-  TestItemDetail,
-} from "../../../../../interfaces/TestItem";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {CreateTestItemDetail, TestItemDetail,} from "../../../../../interfaces/TestItem";
 import EditModal from "./edit-modal";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
+import CustomeTable from "../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
-  setModalVisible,
-  testItemDetail,
-  ldTestItemDetail,
-  mutate,
-}: {
+                                    setModalVisible,
+                                    testItemDetail,
+                                    ldTestItemDetail,
+                                    setFilter,
+                                    mutate,
+                                  }: {
+  setFilter: (e: any) => void,
   setModalVisible: any;
-  testItemDetail: any[] | undefined;
+  testItemDetail: {
+    records: any[];
+    count: number;
+  } | undefined;
   ldTestItemDetail: boolean;
   mutate: () => void;
 }) {
@@ -37,7 +40,7 @@ export default function DataTable({
     setIsDeleteModalVisible(true);
   };
 
-  const { trigger: deleteLab, isMutating } = useSWRMutation(
+  const { trigger: deleteLab, isMutating: IsDeleteTF } = useSWRMutation(
     "/TestItemDetail/Delete",
     mutationFetcher
   );
@@ -88,16 +91,10 @@ export default function DataTable({
       key: "4",
     },
     {
-      title: "وضعیت",
+      title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (e, record) => (
-        <ChangeStatus
-          IsActive={record.IsActive}
-          uid={record.Uid}
-          url={"/TestItemDetail/ChangeStatus"}
-        />
-      ),
+      render: (_, record: any) => <StatusColumn record={record}/>
     },
     {
       title: "عملیات",
@@ -134,37 +131,26 @@ export default function DataTable({
             لیست استانداردهای آزمون
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={() => setModalVisible(true)}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex">افزودن استاندارد آزمون</span>
           </Button>
         </div>
-        <Table
-          className="mt-6"
-          loading={ldTestItemDetail || isMutating}
-          columns={columns}
-          dataSource={testItemDetail}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+        <CustomeTable
+            columns={columns}
+            setInitialData={setFilter}
+            isLoading={ldTestItemDetail || IsDeleteTF}
+            data={testItemDetail}
         />
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
+        loading={IsDeleteTF}
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}

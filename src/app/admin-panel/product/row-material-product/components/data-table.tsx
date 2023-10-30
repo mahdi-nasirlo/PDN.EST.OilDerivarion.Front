@@ -1,32 +1,34 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Tag, Tooltip, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { Product } from "../../../../../../interfaces/product";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Tag, Tooltip, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
+import {Product} from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import {ExpandedMaterialTable} from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 
 export default function DataTable({
-  setModalVisible,
-  ldProduct,
-  product,
-  mutate,
-}: {
+                                    setFilter,
+                                    setModalVisible,
+                                    ldProduct,
+                                    product,
+                                    mutate,
+                                  }: {
+  setFilter: (arg: any) => void;
   setModalVisible: any;
   ldProduct: boolean;
   mutate: () => void;
   product:
-  | {
+      | {
     records: Product[];
     count: number;
   }
-  | undefined;
+      | undefined;
 }) {
   //حذف
 
@@ -154,54 +156,42 @@ export default function DataTable({
             لیست ماده اولیه محصول
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={() => setModalVisible(true)}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex gap-2">افزودن ماده اولیه محصول</span>
           </Button>
         </div>
-        <Table
-          loading={ldProduct || ldDelete}
-          className="mt-6"
-          columns={columns}
-          rowKey={"Uid"}
-          expandable={{
-            expandedRowKeys: activeExpRow,
-            onExpand: (expanded, record: Product) => {
-              const keys: string[] = [];
+        <CustomeTable
+            setInitialData={setFilter}
+            isLoading={ldProduct || ldDelete}
+            data={product}
+            columns={columns}
+            rowKey={"Uid"}
+            expandable={{
+              expandedRowKeys: activeExpRow,
+              onExpand: (expanded, record: Product) => {
+                const keys: string[] = [];
 
-              if (expanded && record.Uid) {
-                // @ts-ignore
-                keys.push(record.Uid);
-              }
+                if (expanded && record.Uid) {
+                  // @ts-ignore
+                  keys.push(record.Uid);
+                }
 
-              if (!expanded) {
-                keys.pop();
-              }
+                if (!expanded) {
+                  keys.pop();
+                }
 
-              setActiveExpRow(keys);
-            },
-            expandedRowRender: (record: Product) => (
-              <ExpandedMaterialTable product={record} mutate={mutate} />
-            ),
-          }}
-          dataSource={addIndexToData(product?.records)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+                setActiveExpRow(keys);
+              },
+              expandedRowRender: (record: Product) => (
+                  <ExpandedMaterialTable product={record} mutate={mutate}/>
+              ),
+            }}
         />
       </div>
       {/* جذف */}

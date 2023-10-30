@@ -1,27 +1,29 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Table, Tag, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { Category } from "../../../../../../interfaces/category";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Tag, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
+import {Category} from "../../../../../../interfaces/category";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../../components/CustomeTable";
 
 export default function DataTable({
-  isValidating,
-  setModalVisible,
-  category,
-  ldCategory,
-  mutate,
-}: {
+                                    setFilter,
+                                    isValidating,
+                                    setModalVisible,
+                                    category,
+                                    ldCategory,
+                                    mutate,
+                                  }: {
+  setFilter: (arg: any) => void,
   isValidating: any;
   setModalVisible: any;
-  category: Category[] | undefined;
+  category: { records: Category[], count: number } | undefined;
   mutate: () => void;
   ldCategory: boolean;
 }) {
@@ -175,32 +177,20 @@ export default function DataTable({
             لیست دسته بندی محصولات
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            onClick={showModal}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              onClick={showModal}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex ">افزودن دسته بندی</span>
           </Button>
         </div>
-        <Table
-          className="mt-6"
-          columns={columns}
-          loading={ldCategory || ldDelete || isValidating}
-          dataSource={addIndexToData(category)}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+        <CustomeTable
+            setInitialData={setFilter}
+            isLoading={ldCategory || ldDelete || isValidating}
+            data={category}
+            columns={columns}
         />
       </div>
       {/* جذف */}

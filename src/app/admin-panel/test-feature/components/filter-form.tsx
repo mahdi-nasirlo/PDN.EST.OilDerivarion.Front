@@ -16,7 +16,7 @@ export default function FilterForm({
     <Form onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="Title" label="عنوان استاندارد">
+          <Form.Item name="title" label="عنوان استاندارد">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>

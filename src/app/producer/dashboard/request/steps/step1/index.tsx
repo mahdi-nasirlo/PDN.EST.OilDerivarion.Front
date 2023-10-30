@@ -1,18 +1,18 @@
 "use client";
 
-import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload} from "antd";
-import React, {useContext} from "react";
-import {UploadOutlined} from "@ant-design/icons";
+import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload } from "antd";
+import React, { useContext } from "react";
+import { UploadOutlined } from "@ant-design/icons";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import staticMessages from "../../../../../../../lib/staticMessages";
-import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
+import { useGetAllProductionMethod } from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
 
 
 export default function Step1() {
 
     const processControl = useContext(StepContext)
 
-    const {isLoadingProductionMethods, productionMethods, fieldNames} = useGetAllProductionMethod()
+    const { isLoadingProductionMethods, productionMethods, fieldNames } = useGetAllProductionMethod()
 
     return (
         <>
@@ -24,17 +24,17 @@ export default function Step1() {
             <Typography className="text-right font-medium text-base">
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
-            <Divider/>
+            <Divider />
             <Form
                 disabled={processControl.isMutating}
                 onFinish={processControl.getStep2}
                 name="form_item_path"
                 layout="vertical"
             >
-                <Row gutter={32}>
-                    <Col span={24}>
-                        <Form.Item rules={[{required: true, message: "لطفا فیلد را وارد نمایید"}]}
-                                   name="processDescription" label="شرح فرآیند تولید">
+                <Row gutter={[16, 1]}>
+                    <Col xs={24} md={24}>
+                        <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
+                            name="processDescription" label="شرح فرآیند تولید">
                             <Input.TextArea
                                 maxLength={100}
                                 style={{
@@ -46,9 +46,19 @@ export default function Step1() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row className="mt-3" gutter={32}>
-                    <Col span={12}>
-                        <Form.Item name="fileNameass" label="نمودار شماتیک فرآیند">
+                <Row gutter={[16, 1]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item name="productionMethodId" label="روش تولید">
+                            <Select options={productionMethods} loading={isLoadingProductionMethods}
+                                fieldNames={fieldNames} size="large" />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            name="fileNameass"
+                            label="نمودار شماتیک فرآیند"
+                            tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}
+                        >
                             <Upload
                                 multiple={false}
                                 maxCount={1}
@@ -56,18 +66,12 @@ export default function Step1() {
                                 listType="picture"
                                 className="w-full"
                             >
-                                <Button icon={<UploadOutlined/>}>بارگزاری نمایید</Button>
+                                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
                             </Upload>
                         </Form.Item>
                     </Col>
-                    <Col span={12}>
-                        <Form.Item name="productionMethodId" label="روش تولید">
-                            <Select options={productionMethods} loading={isLoadingProductionMethods}
-                                    fieldNames={fieldNames} size="large"/>
-                        </Form.Item>
-                    </Col>
                 </Row>
-                <Divider/>
+                <Divider />
 
                 {/*<Row gutter={[16, 0]}>*/}
                 {/*    <Col xs={24} md={12}>*/}
@@ -125,7 +129,7 @@ export default function Step1() {
                 {/*<Divider/>*/}
 
                 <Row gutter={[12, 12]}>
-                    <Col span={24}>
+                    <Col xs={24} md={24}>
                         <Button
                             loading={processControl.isMutating}
                             disabled={processControl.isMutating}
@@ -138,7 +142,7 @@ export default function Step1() {
                         </Button>
                     </Col>
                 </Row>
-            </Form>
+            </Form >
         </>
     );
 }
@@ -153,129 +157,3 @@ export type RequestMasterForm = {
     productionMethodId: number;
     fileName: { file: { name: string } };
 };
-
-
-const ProductExportCountries = [
-    {
-        key: "1",
-        name: "امارات",
-    },
-    {
-        key: "2",
-        name: "چین",
-    },
-    {
-        key: "3",
-        name: "عراق",
-    },
-    {
-        key: "4",
-        name: "روسیه",
-    },
-    {
-        key: "5",
-        name: "هند",
-    },
-    {
-        key: "6",
-        name: "روسیه",
-    },
-    {
-        key: "7",
-        name: "پاکستان",
-    },
-    {
-        key: "8",
-        name: "کویت",
-    },
-    {
-        key: "9",
-        name: "لبنان",
-    },
-    {
-        key: "10",
-        name: "ترکیه",
-    },
-    {
-        key: "11",
-        name: "لبنان",
-    },
-];
-
-///////////////////////////////////////////////
-///////////////////////////////////////////////
-///////////////////////////////////////////////
-
-const LaboratoryEquipment = [
-    {
-        key: "1",
-        name: "دستگاه تقطیر",
-    },
-    {
-        key: "2",
-        name: "دستگاه نقطه ریزش",
-    },
-    {
-        key: "3",
-        name: "گام تستر",
-    },
-    {
-        key: "4",
-        name: "ویسکومتر",
-    },
-    {
-        key: "5",
-        name: "مادون قرمز FITR",
-    },
-    {
-        key: "6",
-        name: "حمام سیرکلاسیون",
-    },
-    {
-        key: "7",
-        name: "اکسیژن متر",
-    },
-    {
-        key: "8",
-        name: "چگالی سنج",
-    },
-    {
-        key: "9",
-        name: "دستگاه آنالیز H2S",
-    },
-];
-
-///////////////////////////////////////////////
-///////////////////////////////////////////////
-///////////////////////////////////////////////
-
-const OilWaste = [
-    {
-        key: "1",
-        name: "گوگرد",
-    },
-    {
-        key: "2",
-        name: "نمونه بنزین",
-    },
-    {
-        key: "3",
-        name: "نمونه نفت چراغ",
-    },
-    {
-        key: "4",
-        name: "آسفالت",
-    },
-    {
-        key: "5",
-        name: "روغن موتور",
-    },
-    {
-        key: "6",
-        name: "نمونه سوخت دیزل(گازوئیل)",
-    },
-    {
-        key: "7",
-        name: "ال‌پی‌جی در سیلندر گاز",
-    },
-];

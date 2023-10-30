@@ -6,13 +6,17 @@ function GpsForm() {
     <>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item rules={[{ required: true }]} name="Code" label="کد">
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="Code"
+            label="کد"
+          >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="IsActive"
             label="فعال/غیر فعال"
           >

@@ -66,22 +66,23 @@ export interface GetPageEmployee {
 }
 
 export interface SetProducerLab {
-  producerExportDestinationCountryId: number;
-  producerHasWaste: boolean;
-  producerWastePlace: string | null;
-  producerLab_HasAtmosphericDistillation: boolean;
-  producerLab_HasVacuumDistillation: boolean;
-  producerLab_HasPourPoint: boolean;
-  producerLab_HasFlashPoint: boolean;
-  producerLab_HasViscometer: boolean;
-  producerLab_HasMetalCorrosion: boolean;
-  producerLab_HasColorMeter: boolean;
-  producerLab_HasTBN: boolean;
-  producerLab_HasTAN: boolean;
-  producerLab_HasVoltmeter: boolean;
-  producerLab_HasMeasureMocaptan: boolean;
-  producerLab_HasMeasureSulfur: boolean;
-  producerLab_HasDensiometer: boolean;
-  producerLab_HasMeasureColor: boolean;
-  producerLab_HasMeasureMethodGC: boolean;
+  exportDestinationCountryId: number;
+  exportDestinationCountryName: string | null;
+  hasWaste: boolean;
+  wastePlace: string | null;
+  lab_HasAtmosphericDistillation: boolean;
+  lab_HasVacuumDistillation: boolean;
+  lab_HasPourPoint: boolean;
+  lab_HasFlashPoint: boolean;
+  lab_HasViscometer: boolean;
+  lab_HasMetalCorrosion: boolean;
+  lab_HasColorMeter: boolean;
+  lab_HasTBN: boolean;
+  lab_HasTAN: boolean;
+  lab_HasVoltmeter: boolean;
+  lab_HasMeasureMocaptan: boolean;
+  lab_HasMeasureSulfur: boolean;
+  lab_HasDensiometer: boolean;
+  lab_HasMeasureColor: boolean;
+  lab_HasMeasureMethodGC: boolean;
 }

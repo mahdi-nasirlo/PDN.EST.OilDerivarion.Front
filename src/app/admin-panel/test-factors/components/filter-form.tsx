@@ -1,20 +1,20 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import {Button, Col, Form, Input, Row, Select} from "antd";
 import React from "react";
-import { useForm } from "antd/es/form/Form";
-import { ProductGet } from "../../../../../interfaces/product";
+import {useForm} from "antd/es/form/Form";
+import {ProductGet} from "../../../../../interfaces/product";
 
 export default function FilterForm({
-  filter,
-  unsetFilter,
-}: {
-  filter: (arg: ProductGet) => void;
-  unsetFilter: () => void;
+                                       filter,
+                                       unsetFilter,
+                                   }: {
+    filter: (arg: ProductGet) => void;
+    unsetFilter: () => void;
 }) {
-  const [form] = useForm();
+    const [form] = useForm();
 
-  return (
+    return (
     // <div className="box-border w-full p-6">
     <Form onFinish={(values) => filter(values)} form={form} layout="vertical">
       <Row gutter={[16, 0]}>
@@ -25,14 +25,14 @@ export default function FilterForm({
         </Col>
         <Col xs={24} md={12}>
           <Form.Item name="IsActive" label="فعال/غیر فعال">
-            <Select
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
+              <Select
+                  options={[
+                      {label: "فعال", value: true},
+                      {label: "غیر فعال", value: false},
+                  ]}
+                  size="large"
+                  placeholder="انتخاب کنید"
+              />
           </Form.Item>
         </Col>
         {/* <Col xs={24} md={12}>

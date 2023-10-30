@@ -18,7 +18,7 @@ export default function Page() {
     const [isEditVisible, setIsEditVisible] = useState(true)
 
     const { data: ProducerLab, isLoading: ldProducerLab, mutate } = useSWR(
-        ["/Company/GetProducerLab"],
+        ["/Producer/GetLab"],
         ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
 
@@ -45,7 +45,7 @@ export default function Page() {
     }, [ProducerLab])
 
 
-    const { trigger, isMutating } = useSWRMutation("/Company/SetProducerLab", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetLab", mutationFetcher)
 
     const onSubmitFinish = async (values: SetProducerLab) => {
 

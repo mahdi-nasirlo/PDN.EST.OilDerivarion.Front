@@ -1,42 +1,33 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import {
-  Button,
-  Col,
-  Modal,
-  Row,
-  Space,
-  Switch,
-  Table,
-  Tag,
-  Typography,
-} from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Col, Modal, Row, Space, Tag, Typography,} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
-import ChangeStatus from "../../../../../components/inputs/ChangeStatus";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
-  setModalVisible,
-  ldMaterial,
-  labratory,
-  mutate,
-}: {
+                                    setFilter,
+                                    setModalVisible,
+                                    ldMaterial,
+                                    labratory,
+                                    mutate,
+                                  }: {
+  setFilter: (arg: any) => void
   setModalVisible: any;
   ldMaterial: boolean;
   mutate: () => void;
   labratory:
-  | {
+      | {
     records: LaboratoryGet[];
     count: number;
   }
-  | undefined;
+      | undefined;
 }) {
   // //حذف
 
@@ -209,34 +200,19 @@ export default function DataTable({
             لیست آزمایشگاه ها
           </Typography>
           <Button
-            className="max-md:w-full flex items-center gap-2 justify-center"
-            size="large"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
+              className="max-md:w-full flex items-center gap-2 justify-center"
+              size="large"
+              type="primary"
+              htmlType="submit"
+              onClick={showModal}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex">افزودن آزمایشگاه</span>
           </Button>
         </div>
-        <Table
-          loading={ldMaterial || ldDeleteLab}
-          dataSource={addIndexToData(labratory?.records)}
-          className="mt-6"
-          columns={columns}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
-        />
+
+        <CustomeTable setInitialData={setFilter} isLoading={ldMaterial || ldDeleteLab} data={labratory}
+                      columns={columns}/>
       </div>
       {/* جذف */}
       <ConfirmDeleteModal

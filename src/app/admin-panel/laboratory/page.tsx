@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
-import { Collapse } from "antd";
+import {Collapse} from "antd";
 
 export default function Page() {
   const defaultValueTable = {
@@ -61,10 +61,11 @@ export default function Page() {
         ]}
       />
       <DataTable
-        mutate={mutate}
-        labratory={labratory}
-        ldMaterial={ldMaterial || isValidating}
-        setModalVisible={setModalVisible}
+          setFilter={setFilter}
+          mutate={mutate}
+          labratory={labratory}
+          ldMaterial={ldMaterial || isValidating}
+          setModalVisible={setModalVisible}
       />
       <CreateModal
         mutate={mutate}

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import { Collapse } from "antd";
+import {listFetcher} from "../../../../lib/server/listFetcher";
+import {Collapse} from "antd";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,27 +54,28 @@ export default function Page() {
   return (
     <>
       <Collapse
-        size="large"
-        items={[
-          {
-            label: "فیلتر جدول",
-            children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
-            ),
-          },
-        ]}
+          size="large"
+          items={[
+            {
+              label: "فیلتر جدول",
+              children: (
+                  <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
+              ),
+            },
+          ]}
       />
       <DataTable
-        isValidating={isValidating}
-        mutate={mutate}
-        material={material?.records}
-        ldMaterial={ldMaterial}
-        setModalVisible={setModalVisible}
+          setFilter={setFilter}
+          isValidating={isValidating}
+          mutate={mutate}
+          material={material}
+          ldMaterial={ldMaterial}
+          setModalVisible={setModalVisible}
       />
       <CreateModal
-        mutate={mutate}
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
+          mutate={mutate}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
       />
     </>
   );

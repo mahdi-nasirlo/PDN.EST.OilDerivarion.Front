@@ -57,7 +57,6 @@ export default function DataTable({
     setRecordToDelete(null);
   };
 
-  //ادیت
 
   const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
   const [recordToEdit, setRecordToEdit] = useState<CreateTestItemDetail | null>(

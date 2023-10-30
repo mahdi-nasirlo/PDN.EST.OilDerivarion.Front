@@ -57,7 +57,6 @@ export default function DataTable({
     setRecordToDelete(null);
   };
 
-  //ادیت
 
   const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
   const [recordToEdit, setRecordToEdit] = useState<CreateTestItemDetail | null>(
@@ -86,7 +85,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "مرجع",
+      title: "شناسه استاندارد",
       dataIndex: "ReferenceCode",
       key: "4",
     },

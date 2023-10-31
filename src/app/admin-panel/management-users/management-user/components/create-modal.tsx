@@ -1,31 +1,39 @@
-"use client";
-
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
-import { useForm } from "antd/es/form/Form";
 import React from "react";
+import { Button, Col, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
+import useSWRMutation from "swr/mutation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import ManagementUserForm from "./management-user-form";
 
 export default function CreateModal({
   modalVisible,
   setModalVisible,
+  mutate
 }: {
+  mutate: () => void;
   modalVisible: any;
   setModalVisible: any;
 }) {
+
   const [form] = useForm();
 
-  const closeModal = () => {
-    setModalVisible(false);
-  };
+  const { trigger, isMutating } = useSWRMutation("/User/Create", mutationFetcher);
 
-  const handleFormSubmit = async () => {
-    try {
-      const values = await form.validateFields();
-      console.log("Form values:", values); // Log the form values to the console
-      closeModal();
-    } catch (error) {
-      console.error("Form validation failed:", error);
+  const handleFormSubmit = async (values: any) => {
+
+    const res = await trigger(values);
+    await mutate();
+    if (res) {
+      setModalVisible(false);
+      form.resetFields();
     }
   };
+
+  const CloseModal = () => {
+    setModalVisible(false);
+    form.resetFields();
+  };
+
 
   return (
     <Modal
@@ -39,7 +47,7 @@ export default function CreateModal({
         </div>
       }
       visible={modalVisible}
-      onCancel={closeModal}
+      onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
@@ -47,17 +55,19 @@ export default function CreateModal({
               size="large"
               className="w-full"
               type="primary"
-              onClick={handleFormSubmit}
+              onClick={() => form.submit()}
               key={"submit"}
+              loading={isMutating}
             >
               ثبت
             </Button>
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
-              onClick={closeModal}
+              onClick={CloseModal}
               key={"cancel"}
             >
               انصراف
@@ -66,63 +76,11 @@ export default function CreateModal({
         </Row>,
       ]}
     >
-      <Form form={form} layout="vertical">
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="نام">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="نام خانوادگی">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="کد ملی">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="شناسه کاربری">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="شماره تماس">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="استان">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="شهر">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="فعال/غیر فعال">
-              <Select size="large" placeholder="انتخاب کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="نقش">
-              <Select size="large" placeholder="انتخاب کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
+      <ManagementUserForm
+        form={form}
+        handleConfirmEdit={handleFormSubmit}
+        isMutating={isMutating}
+      />
     </Modal>
   );
 }

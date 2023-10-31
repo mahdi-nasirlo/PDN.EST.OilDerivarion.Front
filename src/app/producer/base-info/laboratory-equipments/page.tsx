@@ -1,16 +1,17 @@
 'use client'
 
-import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import { Button, Divider, Form, Spin, Typography } from 'antd'
-import EditForm from './components/edit-form'
+import EditForm from './components/edit-form/edit-form'
 import { listFetcher } from '../../../../../lib/server/listFetcher'
 import useSWR from "swr";
 import { useEffect, useState } from 'react'
-import DisplayForm from './components/display-form'
-import { useForm } from 'antd/es/form/Form'
-import { SetProducerLab } from '../../../../../interfaces/Base-info'
-import { mutationFetcher } from '../../../../../lib/server/mutationFetcher'
+import DisplayForm from './components/display/display-form'
+import ButtonDisplay from './components/display/Button-display'
+import { useForm } from 'antd/es/form/Form';
+import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
+import { SetProducerLab } from '../../../../../interfaces/Base-info';
 import useSWRMutation from "swr/mutation";
+import ButtonEdit from './components/edit-form/button-edit';
 
 
 export default function Page() {
@@ -22,19 +23,8 @@ export default function Page() {
         ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
 
-    const showEdit = () => {
-        mutate()
-        setIsEditVisible(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-
-    const notDisplayForm = () => {
-        mutate()
-        setIsEditVisible(true);
-    };
-
     // ادیت
+
 
     const [form] = useForm();
 
@@ -59,8 +49,6 @@ export default function Page() {
     };
 
 
-
-
     return (
         <>
             <div className="flex justify-between items-center">
@@ -68,42 +56,15 @@ export default function Page() {
                     تجهیزات آزمایشگاهی
                 </Typography>
                 <div className='max-md:w-full'>
-                    {isEditVisible &&
-                        <Button
-                            className="max-md:w-full flex justify-center items-center gap-2"
-                            size="large"
-                            type="primary"
-                            htmlType="submit"
-                            onClick={showEdit}
-                        >
-                            <PencilSquareIcon width={24} height={24} />
-                            <span className="flex">
-                                ویرایش
-                            </span>
-                        </Button>
-                    }
+                    {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible} mutate={mutate} />}
+
                     {!isEditVisible &&
-                        <div className='flex gap-3'>
-                            <Button
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                size="large"
-                                htmlType="submit"
-                                onClick={notDisplayForm}
-                                loading={isMutating}
-                            >
-                                انصراف
-                            </Button>
-                            <Button
-                                className="max-md:w-full"
-                                size="large"
-                                type="primary"
-                                htmlType="submit"
-                                onClick={() => form.submit()}
-                                loading={isMutating}
-                            >
-                                ثبت
-                            </Button>
-                        </div>
+                        <ButtonEdit
+                            form={form}
+                            mutate={mutate}
+                            isMutating={isMutating}
+                            setIsEditVisible={setIsEditVisible}
+                        />
                     }
                 </div>
             </div>
@@ -116,10 +77,10 @@ export default function Page() {
             }
             {!isEditVisible &&
                 <Spin spinning={isMutating || ldProducerLab}>
-                    <Form layout="vertical" form={form} onFinish={onSubmitFinish}>
+                    <Form layout="vertical" form={form} onFinish={onSubmitFinish} >
                         <EditForm form={form} data={ProducerLab} />
                     </Form>
-                </Spin>
+                </Spin >
             }
         </>
     )

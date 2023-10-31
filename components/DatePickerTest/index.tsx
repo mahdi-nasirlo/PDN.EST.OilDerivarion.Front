@@ -10,7 +10,7 @@ interface DateProps {
 }
 
 export default function Index(props: InputProps) {
-    const [selectedDay, setSelectedDay] = useState<DateProps | null>(
+    const [selectedDay, setSelectedDay] = useState<string | null>(
         props.defaultValue as any
     );
 
@@ -19,16 +19,16 @@ export default function Index(props: InputProps) {
             {...props}
             readOnly
             ref={ref}
-            value={dateToString(selectedDay as DateProps) || ""}
+            value={selectedDay as string}
         />
     );
 
     useEffect(() => {
-        change(selectedDay);
+        change(stringToDate(selectedDay as string));
     }, [selectedDay]);
 
     const change = (n: DateProps | null) => {
-        setSelectedDay(n);
+        setSelectedDay(dateToString(n as DateProps));
         if (typeof props.onChange === "function") {
             props.onChange(selectedDay as any);
         }
@@ -41,7 +41,7 @@ export default function Index(props: InputProps) {
             </Typography>
             <DatePicker
                 locale="fa"
-                value={selectedDay as DayValue}
+                value={stringToDate(selectedDay as string) as DayValue}
                 onChange={change as any}
                 inputPlaceholder="Select a date"
                 shouldHighlightWeekends
@@ -67,6 +67,10 @@ type MonthType = number;
 type DayType = number;
 
 function stringToDate(dateString: string): DateProps | null {
+
+    if (!dateString)
+        return null
+
     const parts = dateString.split('/');
     if (parts.length === 3) {
         const [year, month, day] = parts.map(Number);

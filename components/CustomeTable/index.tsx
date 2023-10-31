@@ -27,7 +27,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
                 pagination={{
                     total: props.data?.count,
                     onChange: async (e: any) => {
-                        setStartRow(getPageRecordNumber(e).fromRecord)
+                        setStartRow(getPageRecordNumber(e).fromRecord + 1)
                         await props.setInitialData((prev: any) => {
                             delete prev.fromRecord
                             delete prev.selectRecord

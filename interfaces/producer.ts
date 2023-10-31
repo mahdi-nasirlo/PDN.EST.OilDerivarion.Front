@@ -44,3 +44,14 @@ export type ProducerRecords = {
   name: string | null;
   nationalCode: string | null;
 };
+
+
+export type Producer ={
+  Uid: string,
+  NationalCode: string,
+  Name: string,
+  StateId:number,
+  ProducerStatusId: number,
+  ProducerStatusName:string,
+  StateName: string
+}

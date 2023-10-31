@@ -66,8 +66,7 @@ export interface GetPageEmployee {
 }
 
 export interface SetProducerLab {
-  exportDestinationCountryId: number;
-  exportDestinationCountryName: string | null;
+  exportDestinationCountryId: number | null;
   hasWaste: boolean;
   wastePlace: string | null;
   lab_HasAtmosphericDistillation: boolean;

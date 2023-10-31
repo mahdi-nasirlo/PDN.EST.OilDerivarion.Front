@@ -139,8 +139,16 @@ export default function EditModal(
                             <Form.Item
                                 name="factoryPhone"
                                 label="شماره تماس"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
+                                rules={[
+                                    { required: true, message: "این فیلد اجباری است" },
+                                    {
+                                        validator: async (rule, value) => {
+                                            if (!/^\d+$/.test(value)) {
+                                                throw new Error("لطفا عدد وارد کنید");
+                                            }
+                                        },
+                                    },
+                                ]}                            >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
@@ -195,8 +203,16 @@ export default function EditModal(
                             <Form.Item
                                 name="centralOfficePhone"
                                 label="شماره تماس"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
+                                rules={[
+                                    { required: true, message: "این فیلد اجباری است" },
+                                    {
+                                        validator: async (rule, value) => {
+                                            if (!/^\d+$/.test(value)) {
+                                                throw new Error("لطفا عدد وارد کنید");
+                                            }
+                                        },
+                                    },
+                                ]}                            >
                                 <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>

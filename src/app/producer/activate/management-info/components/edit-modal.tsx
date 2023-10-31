@@ -134,8 +134,16 @@ export default function EditModal({
               <Form.Item
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
-                rules={[{ required: true, message: "کد ملی اجباری است" }]}
-              >
+                rules={[
+                  { required: true, message: "این فیلد اجباری است" },
+                  {
+                    validator: async (rule, value) => {
+                      if (!/^\d+$/.test(value)) {
+                        throw new Error("لطفا عدد وارد کنید");
+                      }
+                    },
+                  },
+                ]}              >
                 <Input
                   size="large"
                   className="w-full rounded-lg"
@@ -153,12 +161,6 @@ export default function EditModal({
                   placeholder="وارد کنید"
                   size="large"
                 />
-                {/* <DatePicker
-                                    className="w-full"
-                                    placeholder="13**/
-                /**"
-                                    size="large"
-                                /> */}
               </Form.Item>
             </Col>
           </Row>
@@ -182,8 +184,16 @@ export default function EditModal({
               <Form.Item
                 name="currentMobile"
                 label="شماره تماس"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-              >
+                rules={[
+                  { required: true, message: "این فیلد اجباری است" },
+                  {
+                    validator: async (rule, value) => {
+                      if (!/^\d+$/.test(value)) {
+                        throw new Error("لطفا عدد وارد کنید");
+                      }
+                    },
+                  },
+                ]}              >
                 <Input
                   className="w-full rounded-lg"
                   size="large"

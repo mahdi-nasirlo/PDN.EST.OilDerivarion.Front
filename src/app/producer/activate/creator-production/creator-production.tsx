@@ -96,12 +96,15 @@ export default function CreatorProduction() {
                                 { required: true, message: "کد ملی اجباری است" },
                                 {
                                     validator: (_, value) => {
+                                        if (!/^\d+$/.test(value)) {
+                                            throw new Error("لطفا عدد وارد کنید");
+                                        }
                                         if (!value || value.length === 10) {
                                             return Promise.resolve();
                                         }
                                         return Promise.reject("کد ملی باید ۱۰ رقم باشد");
                                     },
-                                },
+                                }
                             ]}
                         >
                             <Input size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
@@ -154,7 +157,7 @@ export default function CreatorProduction() {
                 >
                     ثبت
                 </Button>
-            </Form>
+            </Form >
         </>
     );
 }

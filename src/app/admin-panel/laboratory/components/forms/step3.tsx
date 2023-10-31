@@ -48,7 +48,7 @@ function Step3({
                 { min: 10, max: 10, message: "کد ملی باید ده رقمی باشد" },
               ]}
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <Input type="number" size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

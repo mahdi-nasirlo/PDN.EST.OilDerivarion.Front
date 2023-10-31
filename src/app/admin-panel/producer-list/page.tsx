@@ -14,7 +14,7 @@ export default function Page() {
 
   const defaultValueTable = {
     name: null,
-    producerStatusId: 2,
+    producerStatusId: 1,
     fromRecord: 0,
     selectRecord: 100000,
   };

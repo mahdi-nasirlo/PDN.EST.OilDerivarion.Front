@@ -12,6 +12,7 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../components/CustomeTable";
 import { Producer } from "../../../../../interfaces/producer";
+import { useRouter } from "next/navigation";
 
 export default function DataTable({
   setModalVisible,
@@ -40,6 +41,7 @@ export default function DataTable({
     setRecordToDelete(record);
     setIsDeleteModalVisible(true);
   };
+  const router = useRouter();
 
   const { trigger, isMutating: IsDeleteTestFactor } = useSWRMutation(
     "/TestItem/Delete",
@@ -95,7 +97,13 @@ export default function DataTable({
       width: 150,
       render: (_, record) => (
         <Space size="small">
-          <Button type="link" className="text-secondary-500 font-bold">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => {
+              router.push("/admin-panel/producer-info");
+            }}
+          >
             مشاهده اطلاعات
           </Button>
         </Space>

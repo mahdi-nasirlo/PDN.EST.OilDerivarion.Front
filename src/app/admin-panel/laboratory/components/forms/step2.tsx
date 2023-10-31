@@ -48,7 +48,7 @@ function Step2({
               name="responsibleNationalCode"
               label="کد ملی"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <Input type="number" size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

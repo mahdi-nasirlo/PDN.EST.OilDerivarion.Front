@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import DatePicker, {DayValue} from "@hassanmojab/react-modern-calendar-datepicker";
 import {Input, Typography} from "antd";
 import {InputProps} from "antd/lib";
+import {jalaliToGregorian} from "shamsi-date-converter";
 
 interface DateProps {
     year?: MonthType;
@@ -51,16 +52,16 @@ export default function Index(props: InputProps) {
     );
 }
 
-// export function formatDateToString(date: DateProps | null): string {
-//
-//     if (!date?.day && !date?.month && !date?.year)
-//         return ""
-//
-//     const formattedMonth = date?.month.toString().padStart(2, '0');
-//     const formattedDay = date?.day.toString().padStart(2, '0');
-//
-//     return `${date?.year}/${formattedMonth}/${formattedDay}`;
-// }
+export function formatDateToString(date: [year: number, month: number, day: number] | null): string {
+
+    if (!date)
+        return ""
+
+    // const formattedMonth = date?.toString().padStart(2, '0');
+    // const formattedDay = date?.day.toString().padStart(2, '0');
+
+    return `${date[0]}/${date[1]}/${date[2]}`;
+}
 
 
 type MonthType = number;
@@ -87,5 +88,11 @@ function dateToString(date: DateProps): string {
         return ""
 
     const {year, month, day} = date;
+
+    const gregorian = jalaliToGregorian(year as number, month as any, day as any)
+
+    // console.log(formatDateToString(gregorian as any))
+
+    // return formatDateToString(gregorian as any)
     return `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`;
 }

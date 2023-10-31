@@ -120,7 +120,11 @@ export default function EditModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="LicenseTypeId" label="نوع مجوز">
+              <Form.Item
+                name="LicenseTypeId"
+                label="نوع مجوز"
+                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              >
                 <Select
                   loading={ldLicenseTypeGetAll}
                   options={LicenseTypeGetAll}
@@ -131,7 +135,11 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="IssueDate" label="تاریخ صدور">
+              <Form.Item
+                name="IssueDate"
+                label="تاریخ صدور"
+                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              >
                 <Input size="large" placeholder="13**/**/**" />
                 {/* <DatePicker
                                     className="w-full"

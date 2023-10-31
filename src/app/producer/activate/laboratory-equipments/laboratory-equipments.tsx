@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import StepContext from '../stete-manager/step-context'
-import { Button, Col, Divider, Form, Input, Row, Select, Typography } from 'antd'
+import { Button, Col, Divider, Form, Input, Radio, Row, Select, Typography } from 'antd'
 import { listFetcher } from '../../../../../lib/server/listFetcher'
 import useSWR from "swr";
 import { useForm } from 'antd/es/form/Form';
@@ -17,7 +17,7 @@ export default function LaboratoryEquipments() {
     const [form] = useForm();
 
 
-    const { trigger, isMutating } = useSWRMutation("/Company/SetProducerLab", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetLab", mutationFetcher)
 
     const onSubmitFinish = async (values: SetProducerLab) => {
 
@@ -29,9 +29,34 @@ export default function LaboratoryEquipments() {
 
     };
 
-
-
     const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
+
+    function CustomRadioGroup(
+        { label, value, options, onChange, name }:
+            { label: string, value: any, options: any, onChange: any, name: string }) {
+        return (
+            <Form.Item
+                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                label={label}
+                name={name}
+            >
+                <Radio.Group
+                    size='large'
+                    className='w-full my-1'
+                    defaultValue={false}
+                    value={value}
+                    buttonStyle="solid"
+                    onChange={onChange}
+                >
+                    {options.map((option: any) => (
+                        <Radio.Button className='w-1/2' key={option.value} value={option.value}>
+                            {option.label}
+                        </Radio.Button>
+                    ))}
+                </Radio.Group>
+            </Form.Item>
+        );
+    }
 
     return (
         <>
@@ -39,263 +64,223 @@ export default function LaboratoryEquipments() {
                 لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
             </Typography>
             <Divider />
-            <Form layout="vertical" form={form} onFinish={onSubmitFinish}>
+            <Form
+                layout="vertical"
+                form={form}
+                onFinish={onSubmitFinish}
+                initialValues={{
+                    lab_HasAtmosphericDistillation: false,
+                    lab_HasVacuumDistillation: false,
+                    lab_HasPourPoint: false,
+                    lab_HasFlashPoint: false,
+                    lab_HasViscometer: false,
+                    lab_HasMetalCorrosion: false,
+                    lab_HasColorMeter: false,
+                    lab_HasTBN: false,
+                    lab_HasTAN: false,
+                    lab_HasVoltmeter: false,
+                    lab_HasMeasureMocaptan: false,
+                    lab_HasMeasureSulfur: false,
+                    lab_HasDensiometer: false,
+                    lab_HasMeasureColor: false,
+                    lab_HasMeasureMethodGC: false,
+                    hasWaste: false
+                }}>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasAtmosphericDistillation"
+                        <CustomRadioGroup
                             label="تقطیر اتمسفریک"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            name={'lab_HasAtmosphericDistillation'}
+                            value={form.getFieldValue("lab_HasAtmosphericDistillation")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasAtmosphericDistillation: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasVacuumDistillation"
+                        <CustomRadioGroup
+                            name="lab_HasVacuumDistillation"
                             label="تقطیر در خلاء"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasVacuumDistillation")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasVacuumDistillation: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasPourPoint"
+                        <CustomRadioGroup
+                            name="lab_HasPourPoint"
                             label="نقطه ریزش"
-                        >
-                            <Select
-
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasPourPoint")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasPourPoint: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasFlashPoint"
+                        <CustomRadioGroup
+                            name="lab_HasFlashPoint"
                             label="نقطه اشتعال"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasFlashPoint")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasFlashPoint: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasViscometer"
+                        <CustomRadioGroup
+                            name="lab_HasViscometer"
                             label="ویسکومتر"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasViscometer")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasViscometer: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasMetalCorrosion"
+                        <CustomRadioGroup
+                            name="lab_HasMetalCorrosion"
                             label="خوردگی فلز"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasMetalCorrosion")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasMetalCorrosion: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasColorMeter"
+                        <CustomRadioGroup
+                            name="lab_HasColorMeter"
                             label="رنگ سنج"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasColorMeter")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasColorMeter: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasTBN"
+                        <CustomRadioGroup
+                            name="lab_HasTBN"
                             label="TBN (تست قلیایی)"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasTBN")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasTBN: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasTAN"
+                        <CustomRadioGroup
+                            name="lab_HasTAN"
                             label="TAN (تست اسیدی)"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasTAN")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasTAN: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasVoltmeter"
-                            label="ولت متر (اندازی گیری ولتاژ روغن)"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                        <CustomRadioGroup
+                            name="lab_HasVoltmeter"
+                            label="ولت متر (اندازی گیری ولتاژروغن)"
+                            value={form.getFieldValue("lab_HasVoltmeter")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasVoltmeter: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasMeasureMocaptan"
+                        <CustomRadioGroup
+                            name="lab_HasMeasureMocaptan"
                             label="اندازه گیری مقدار مرکاپتان"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasMeasureMocaptan")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasMeasureMocaptan: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasMeasureSulfur"
+                        <CustomRadioGroup
+                            name="lab_HasMeasureSulfur"
                             label="اندازه گیری مقدار گوگرد"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasMeasureSulfur")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasMeasureSulfur: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasDensiometer"
+                        <CustomRadioGroup
+                            name="lab_HasDensiometer"
                             label="دانسیومتر"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasDensiometer")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasDensiometer: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasMeasureColor"
+                        <CustomRadioGroup
+                            name="lab_HasMeasureColor"
                             label="اندازه گیری رنگ"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasMeasureColor")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasMeasureColor: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerLab_HasMeasureMethodGC"
+                        <CustomRadioGroup
+                            name="lab_HasMeasureMethodGC"
                             label="درصد آروماتیک و بنزن به روش GC"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("lab_HasMeasureMethodGC")}
+                            onChange={(e: any) => form.setFieldsValue({ lab_HasMeasureMethodGC: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item
                             rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerExportDestinationCountryId"
+                            name="exportDestinationCountryId"
                             label="کشورهای مقصد صادراتی محصول"
                         >
                             <Select
@@ -308,27 +293,23 @@ export default function LaboratoryEquipments() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="producerHasWaste"
+                        <CustomRadioGroup
+                            name="hasWaste"
                             label="ضایعات"
-                        >
-                            <Select
-                                options={[
-                                    { label: "دارد", value: true },
-                                    { label: "ندارد", value: false },
-                                ]}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
+                            value={form.getFieldValue("producerHasWaste")}
+                            onChange={(e: any) => form.setFieldsValue({ producerHasWaste: e.target.value })}
+                            options={[
+                                { label: 'دارد', value: true },
+                                { label: 'ندارد', value: false },
+                            ]}
+                        />
                     </Col>
                     <Col xs={24} md={8}>
                         <Form.Item
-                            name="producerWastePlace"
-                            label="محل های فروش یا دفن ضایعات (درصورت وجود)"
+                            name="wastePlace"
+                            label="محل های فروش یا دفن ضایعات"
                         >
-                            <Input size="large" className="w-full" placeholder="وارد کنید" />
+                            <Input size="large" className="w-full" placeholder="(در صورت موجود) وارد کنید" />
                         </Form.Item>
                     </Col>
                 </Row>

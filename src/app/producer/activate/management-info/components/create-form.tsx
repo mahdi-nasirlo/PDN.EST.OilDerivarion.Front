@@ -19,6 +19,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
+
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
@@ -98,7 +99,11 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item name="birthDate" label="تاریخ تولد">
+            <Form.Item
+              name="birthDate"
+              label="تاریخ تولد"
+              rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
+            >
               <DatePicker
                 className="w-full"
                 placeholder="13**/**/**"

@@ -59,6 +59,7 @@ function ProductForm() {
             label="فعال/غیر فعال"
           >
             <Select
+              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیر فعال", value: false },

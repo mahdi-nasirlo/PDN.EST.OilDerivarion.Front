@@ -39,7 +39,7 @@ function Step1({
               name="tel"
               label="شماره ثابت"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <Input type="number" size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>
@@ -93,6 +93,7 @@ function Step1({
               label="فعال / غیر فعال"
             >
               <Select
+                defaultValue={"فعال"}
                 options={[
                   { label: "فعال", value: true },
                   { label: "غیر فعال", value: false },

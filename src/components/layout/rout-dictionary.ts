@@ -230,5 +230,8 @@ export const routDictionary: Items = {
   measures: {
     title: "واحد اندازه گیری",
   },
+  "producer-info": {
+    title: "اطلاعات تولید کننده",
+  },
   // end admin panel
 };

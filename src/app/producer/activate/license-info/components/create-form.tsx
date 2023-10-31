@@ -61,7 +61,11 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
         </Row>
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
-            <Form.Item name="licenseTypeId" label="نوع مجوز">
+            <Form.Item
+              name="licenseTypeId"
+              label="نوع مجوز"
+              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+            >
               <Select
                 loading={ldLicenseTypeGetAll}
                 options={LicenseTypeGetAll}
@@ -72,7 +76,11 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item name="exporter" label="صادر کننده">
+            <Form.Item
+              name="exporter"
+              label="صادر کننده"
+              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+            >
               <Input
                 className="w-full rounded-lg"
                 size="large"

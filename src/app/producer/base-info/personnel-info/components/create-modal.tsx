@@ -103,7 +103,11 @@ export default function CreateModal({ isEditModalVisible, setIsEditModalVisible,
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={12}>
-                            <Form.Item name="birthDate" label="تاریخ تولد">
+                            <Form.Item
+                                name="birthDate"
+                                label="تاریخ تولد"
+                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                            >
                                 <DatePicker
                                     className="w-full"
                                     placeholder="13**/**/**"

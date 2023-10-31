@@ -30,6 +30,8 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
             newData.hasWaste = renderValue(data.hasWaste);
 
             form.setFieldsValue(newData);
+            console.log(newData);
+
         }
     }, [data]);
 

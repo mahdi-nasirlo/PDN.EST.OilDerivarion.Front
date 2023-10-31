@@ -144,8 +144,15 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="birthDate" label="تاریخ تولد">
-                <Input />
+              <Form.Item
+                name="birthDate"
+                label="تاریخ تولد"
+                rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
+              >
+                <Input
+                  placeholder="وارد کنید"
+                  size="large"
+                />
                 {/* <DatePicker
                                     className="w-full"
                                     placeholder="13**/

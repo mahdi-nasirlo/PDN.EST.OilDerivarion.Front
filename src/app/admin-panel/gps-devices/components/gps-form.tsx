@@ -21,6 +21,7 @@ function GpsForm() {
             label="فعال/غیر فعال"
           >
             <Select
+              defaultValue={"فعال"}
               options={[
                 { value: true, label: "فعال" },
                 { value: false, label: "غیر فعال" },

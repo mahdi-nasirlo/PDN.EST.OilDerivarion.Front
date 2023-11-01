@@ -134,16 +134,7 @@ export default function EditModal({
               <Form.Item
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
-                rules={[
-                  { required: true, message: "این فیلد اجباری است" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
-                  },
-                ]}
+                rules={[{ required: true, message: "کد ملی اجباری است" }]}
               >
                 <Input
                   size="large"

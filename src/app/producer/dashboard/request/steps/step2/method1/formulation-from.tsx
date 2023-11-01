@@ -67,10 +67,16 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                                 required: true,
                                 message: "میزان مصرف برای تولید یک واحد اجباری است",
                             },
-                            { type: "string" },
+                            {
+                                validator: async (rule, value) => {
+                                    if (!/^\d+$/.test(value)) {
+                                        throw new Error("لطفا عدد وارد کنید");
+                                    }
+                                },
+                            },
                         ]}
                     >
-                        <Input size="large" type="number" placeholder="وارد نمایید" />
+                        <Input size="large" placeholder="وارد نمایید" />
                     </Form.Item>
                 </Col>
             </Row>
@@ -93,6 +99,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                             ]}
                         >
                             <InputNumber
+                                controls={false}
                                 className="w-full rounded-lg"
                                 size="large"
                                 min={0}
@@ -109,10 +116,19 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         label={"میزان مصرف کل"}
                         rules={[
                             { required: true, message: "میزان مصرف کل اجباری است" },
-                            { type: "string" },
+                            {
+                                validator: async (rule, value) => {
+                                    if (!/^\d+$/.test(value)) {
+                                        throw new Error("لطفا عدد وارد کنید");
+                                    }
+                                    if (value > 100 || value < 0) {
+                                        throw new Error("لطفا عدد بین 0 تا 100 وارد کنید");
+                                    }
+                                },
+                            },
                         ]}
                     >
-                        <Input size="large" type="number" placeholder="وارد کنید" />
+                        <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -120,7 +136,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         name="materialSupplyMethodId"
                         label="نحوه تامین"
                         rules={[
-                            { required: true, message: "نحوه تامین اجبار است" },
+                            { required: true, message: "نحوه تامین اجباری است" },
                             { type: "number" },
                         ]}
                     >
@@ -306,12 +322,18 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         label="ایرانکد"
                         rules={[
                             { required: true, message: "ایرانکد اجباری است" },
+                            {
+                                validator: async (rule, value) => {
+                                    if (!/^\d+$/.test(value)) {
+                                        throw new Error("لطفا عدد وارد کنید");
+                                    }
+                                },
+                            },
                         ]}
                     >
                         <Input
                             className="w-full rounded-lg"
                             size="large"
-                            type="number"
                             placeholder="وارد نمایید"
                         />
                     </Form.Item>

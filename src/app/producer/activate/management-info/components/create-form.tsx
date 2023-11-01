@@ -89,7 +89,16 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="nationalCode"
               label="کد ملی / کد اتباع"
-              rules={[{ required: true, message: "کد ملی اجباری است" }]}
+              rules={[
+                { required: true, message: "این فیلد اجباری است" },
+                {
+                  validator: async (rule, value) => {
+                    if (!/^\d+$/.test(value)) {
+                      throw new Error("لطفا عدد وارد کنید");
+                    }
+                  },
+                },
+              ]}
             >
               <Input
                 size="large"

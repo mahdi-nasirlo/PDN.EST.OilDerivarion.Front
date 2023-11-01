@@ -32,7 +32,6 @@ export default function CreateModal({
 
     await mutate();
     if (res) {
-
       setIsEditModalVisible(false);
 
       form.resetFields();
@@ -124,13 +123,11 @@ export default function CreateModal({
                 rules={[
                   { required: true, message: "این فیلد اجباری است" },
                   {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
+                    pattern: /^[0-9]{10}$/,
+                    message: "کد ملی نامتعبر است",
                   },
-                ]}              >
+                ]}
+              >
                 <Input
                   size="large"
                   className="w-full rounded-lg"
@@ -181,7 +178,8 @@ export default function CreateModal({
                       }
                     },
                   },
-                ]}              >
+                ]}
+              >
                 <Input
                   className="w-full rounded-lg"
                   size="large"

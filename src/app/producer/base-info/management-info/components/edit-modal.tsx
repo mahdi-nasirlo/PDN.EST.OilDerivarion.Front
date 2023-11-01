@@ -135,15 +135,13 @@ export default function EditModal({
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true },
                   {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
+                    pattern: /^[0-9]{10}$/,
+                    message: "کد ملی نامتعبر است",
                   },
-                ]}              >
+                ]}
+              >
                 <Input
                   size="large"
                   className="w-full rounded-lg"
@@ -190,7 +188,8 @@ export default function EditModal({
                       }
                     },
                   },
-                ]}              >
+                ]}
+              >
                 <Input
                   className="w-full rounded-lg"
                   size="large"

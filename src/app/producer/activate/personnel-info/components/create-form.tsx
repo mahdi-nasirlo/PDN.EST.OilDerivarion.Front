@@ -76,13 +76,10 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               name="nationalCode"
               label="کد ملی / کد اتباع"
               rules={[
-                { required: true, message: "این فیلد اجباری است" },
+                { required: true },
                 {
-                  validator: async (rule, value) => {
-                    if (!/^\d+$/.test(value)) {
-                      throw new Error("لطفا عدد وارد کنید");
-                    }
-                  },
+                  pattern: /^[0-9]{10}$/,
+                  message: "کد ملی نامتعبر است",
                 },
               ]}
             >

@@ -134,7 +134,13 @@ export default function EditModal({
               <Form.Item
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
-                rules={[{ required: true, message: "کد ملی اجباری است" }]}
+                rules={[
+                  { required: true },
+                  {
+                    pattern: /^[0-9]{10}$/,
+                    message: "کد ملی نامتعبر است",
+                  },
+                ]}
               >
                 <Input
                   size="large"

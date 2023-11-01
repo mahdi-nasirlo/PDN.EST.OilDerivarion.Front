@@ -44,12 +44,15 @@ function Step2({
             <Form.Item
               rules={[
                 { required: true },
-                { min: 10, max: 10, message: "کد ملی باید ده رقمی باشد" },
+                {
+                  pattern: /^[0-9]{10}$/,
+                  message: "کد ملی نامتعبر است",
+                },
               ]}
               name="responsibleNationalCode"
               label="کد ملی"
             >
-              <Input type="number" size="large" placeholder="وارد کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

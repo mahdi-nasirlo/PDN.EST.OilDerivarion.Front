@@ -10,7 +10,7 @@ const columns: ColumnsType<RequestMaster> = [
     key: "1",
   },
   {
-    title: "نام محصول",
+    title: "نوع نمونه",
     dataIndex: "SampleTypeName",
     key: "2",
   },

@@ -5,6 +5,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function EditModal({
   mutate,
@@ -38,7 +39,6 @@ export default function EditModal({
 
     await mutate();
     if (res) {
-
       setIsEditModalVisible(false);
 
       form.resetFields();
@@ -140,7 +140,7 @@ export default function EditModal({
                 label="تاریخ صدور"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <Input size="large" placeholder="13**/**/**" />
+                <CustomeDatePicker />{" "}
                 {/* <DatePicker
                                     className="w-full"
                                     placeholder="13**/

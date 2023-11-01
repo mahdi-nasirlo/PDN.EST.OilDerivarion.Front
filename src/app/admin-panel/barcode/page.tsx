@@ -80,7 +80,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور محصول</span>
+            <span className="flex ">افزودن بارکد</span>
           </Button>
         </div>
         <DataTable
@@ -90,6 +90,7 @@ export default function Page() {
         />
       </div>
       <CreateModal
+        setFilter={setFilter}
         mutate={mutate}
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}

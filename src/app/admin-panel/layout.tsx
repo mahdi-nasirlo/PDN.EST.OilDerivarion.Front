@@ -185,4 +185,9 @@ const items: MenuProps["items"] = [
     <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
     "/admin-panel/measures"
   ),
+
+  getMenuItem(
+    <Link href="/admin-panel/barcode">بارکد</Link>,
+    "/admin-panel/barcode"
+  ),
 ];

@@ -510,9 +510,11 @@ margin-right: 16px !important;
   }
   .ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon:hover {
     border-color:#4ade80;
-  }
+}
 
-
+.DatePicker {
+    @apply w-full !important
+}
 
   
   

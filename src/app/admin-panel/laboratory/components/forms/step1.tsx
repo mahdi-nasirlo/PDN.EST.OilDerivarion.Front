@@ -3,6 +3,7 @@ import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 function Step1({
   form,
@@ -59,11 +60,7 @@ function Step1({
               name="license_Expire_Date"
               label="تاریخ"
             >
-              <Input
-                className="w-full"
-                size="large"
-                placeholder="انتخاب کنید"
-              />
+              <CustomeDatePicker />
             </Form.Item>
           </Col>
         </Row>

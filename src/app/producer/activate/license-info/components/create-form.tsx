@@ -1,5 +1,15 @@
 import { useForm } from "antd/es/form/Form";
-import { Button, Col, DatePicker, Divider, Form, Input, Row, Select, Typography, } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Select,
+  Typography,
+} from "antd";
 import React from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
@@ -7,6 +17,7 @@ import { CreatePresonLicence } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
@@ -109,11 +120,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               label="تاریخ انقضاء"
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
-              <DatePicker
-                className="w-full"
-                placeholder="13**/**/**"
-                size="large"
-              />
+              <CustomeDatePicker />
             </Form.Item>
           </Col>
         </Row>

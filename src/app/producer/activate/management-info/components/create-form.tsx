@@ -17,9 +17,9 @@ import { SetMainMember } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import ContactInputs from "../../../../../../components/inputs/Contact";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
-
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
@@ -129,17 +129,13 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="currentMobile"
-              label="شماره تماس"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
-            >
+            <ContactInputs label="شماره تماس" name="currentMobile">
               <Input
                 className="w-full rounded-lg"
                 size="large"
                 placeholder="وارد کنید"
               />
-            </Form.Item>
+            </ContactInputs>
           </Col>
         </Row>
         <Row dir="ltr">

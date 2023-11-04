@@ -150,8 +150,8 @@ const items: MenuProps["items"] = [
   ]),
 
   getMenuItem(
-    <Link href={"/admin-panel/producer"}>تولید کننده</Link>,
-    "/admin-panel/producer"
+    <Link href={"/admin-panel/producer-list"}>تولید کننده</Link>,
+    "/admin-panel/producer-list"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
@@ -184,5 +184,10 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
     "/admin-panel/measures"
+  ),
+
+  getMenuItem(
+    <Link href="/admin-panel/barcode">بارکد</Link>,
+    "/admin-panel/barcode"
   ),
 ];

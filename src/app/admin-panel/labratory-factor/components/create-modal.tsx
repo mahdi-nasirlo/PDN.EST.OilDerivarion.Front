@@ -18,7 +18,6 @@ export default function CreateModal({
   modalVisible: any;
   mutate: () => void;
 }) {
-
   const [form] = useForm();
 
   const defaultValueTable = {
@@ -38,21 +37,17 @@ export default function CreateModal({
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-
   const closeModal = () => {
     setModalVisible(false);
     form.resetFields();
   };
-
 
   const { isMutating, trigger } = useSWRMutation(
     "/LabTestItem/Create",
     mutationFetcher
   );
 
-
   const handleFormSubmit = async (values: any) => {
-
     values.IsActive = true;
 
     await trigger(values);
@@ -63,7 +58,6 @@ export default function CreateModal({
 
     form.resetFields();
   };
-
 
   return (
     <Modal
@@ -119,7 +113,7 @@ export default function CreateModal({
             <Form.Item
               name="labUid"
               label="نام آزمایشگاه"
-              rules={[{ required: true, message: ".لطفا نام آزمایشگاه را وارد کنید" }]}
+              rules={[{ required: true }]}
             >
               <Select
                 showSearch
@@ -137,7 +131,7 @@ export default function CreateModal({
             <Form.Item
               name="testItemUid"
               label="نام فاکتور"
-              rules={[{ required: true, message: ".لطفا نام فاکتور را وارد کنید" }]}
+              rules={[{ required: true }]}
             >
               <Select
                 showSearch

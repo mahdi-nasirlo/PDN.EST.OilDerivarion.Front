@@ -37,7 +37,6 @@ function BarcodeForm(props: {
           rules={[
             {
               required: true,
-              message: "لطفا مقدار را وارد کنید",
             },
           ]}
         >
@@ -91,7 +90,6 @@ function BarcodeForm(props: {
           rules={[
             {
               required: true,
-              message: "لطفا مقدار را وارد کنید",
             },
           ]}
         >

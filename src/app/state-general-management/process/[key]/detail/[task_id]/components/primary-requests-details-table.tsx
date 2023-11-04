@@ -38,6 +38,7 @@ export default function PrimaryRequestsDetailsTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "فاکتور آزمون",
@@ -49,7 +50,7 @@ export default function PrimaryRequestsDetailsTable() {
             key: "عملیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
                     <Button
@@ -73,27 +74,47 @@ export default function PrimaryRequestsDetailsTable() {
 
     const expandedRowRender = () => {
         const columns: TableColumnsType<ExpandedDataType> = [
-            { title: '#', dataIndex: '1', key: 'date' },
+            { title: '#', dataIndex: '1', key: 'date', width: "5%" },
             { title: 'نام ماده اولیه', dataIndex: '1', key: 'name' },
             {
-                title: 'عملیات', dataIndex: '2', key: 'upgradeNum',
+                title: 'عملیات',
+                dataIndex: '2',
+                key: 'upgradeNum',
+                align: "center",
+                fixed: 'right',
+                width: "10%",
                 render: (_, record) => (
                     <Space size="middle">
-                        <Button type="link" className="text-red-500 font-bold"
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        <Button
+                            type="link"
+                            className="text-red-500 font-bold"
+                            onClick={() => handleDelete(record)}
+                        >
+                            حذف
+                        </Button>
                     </Space>
                 ),
             },
         ];
         const column: TableColumnsType<ExpandedDataType> = [
-            { title: '#', dataIndex: '1', key: 'date' },
+            { title: '#', dataIndex: '1', key: 'date', width: "5%" },
             { title: 'نام محصول', dataIndex: '1', key: 'name' },
             {
-                title: 'عملیات', dataIndex: '2', key: 'upgradeNum',
+                title: 'عملیات',
+                dataIndex: '2',
+                key: 'upgradeNum',
+                align: "center",
+                fixed: 'right',
+                width: "10%",
                 render: (_, record) => (
                     <Space size="middle">
-                        <Button type="link" className="text-red-500 font-bold"
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        <Button
+                            type="link"
+                            className="text-red-500 font-bold"
+                            onClick={() => handleDelete(record)}
+                        >
+                            حذف
+                        </Button>
                     </Space>
                 ),
             },

@@ -1,10 +1,10 @@
-import {Button, Collapse, Empty, Spin, Table, Typography} from 'antd'
-import {ColumnsType} from 'antd/es/table';
-import React, {useContext} from 'react'
-import {Product} from "../../../../../../../interfaces/requestDetail";
+import { Button, Collapse, Empty, Spin, Table, Typography } from 'antd'
+import { ColumnsType } from 'antd/es/table';
+import React, { useContext } from 'react'
+import { Product } from "../../../../../../../interfaces/requestDetail";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useGetFinalPage from "../../../../../../../hooks/requestDetail/useGetFinalPage";
-import {addIndexToData} from "../../../../../../../lib/addIndexToData";
+import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 import useDeleteStep from "../../../../../../../hooks/requestDetail/useDeleteStep";
 
 export default function ReviewDataTable() {
@@ -20,11 +20,13 @@ export default function ReviewDataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام محصول",
             dataIndex: "name",
             key: "2",
+            width: "95%"
         },
     ];
 
@@ -33,11 +35,13 @@ export default function ReviewDataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام مواد اولیه",
             dataIndex: "name",
             key: "2",
+            width: "95%"
         },
     ];
 
@@ -59,7 +63,7 @@ export default function ReviewDataTable() {
                                         extra: <Button
                                             type="text"
                                             size="small"
-                                            style={{padding: "8px !important"}}
+                                            style={{ padding: "8px !important" }}
                                             className='text-red-500 font-bold'
                                             onClick={() => deleteStep.trigger({
                                                 stepNumber: item.stepNumber,
@@ -94,7 +98,7 @@ export default function ReviewDataTable() {
                         );
                     })}
 
-                    {finalPage?.data?.length === 0 && <Empty/>}
+                    {finalPage?.data?.length === 0 && <Empty />}
                 </div>
             </Spin>
 

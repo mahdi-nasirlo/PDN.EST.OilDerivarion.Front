@@ -1,36 +1,36 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Tag, Typography} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Tag, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {Measure} from "../../../../../interfaces/measures";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { Measure } from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
-                                    setFilter,
-                                    isValidating,
-                                    setModalVisible,
-                                    ldMeasure,
-                                    measure,
-                                    mutate,
-                                  }: {
+  setFilter,
+  isValidating,
+  setModalVisible,
+  ldMeasure,
+  measure,
+  mutate,
+}: {
   setFilter: (arg: any) => void,
   isValidating: any;
   setModalVisible: any;
   ldMeasure: boolean;
   mutate: () => void;
   measure:
-      | {
+  | {
     records: Measure[];
     count: number;
   }
-      | undefined;
+  | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
@@ -65,6 +65,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "واحد اندازه گیری",
@@ -101,7 +102,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -131,31 +132,31 @@ export default function DataTable({
             لیست واحد های اندازه گیری
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              htmlType="submit"
-              onClick={showModal}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            htmlType="submit"
+            onClick={showModal}
           >
-            <PlusIcon width={24} height={24}/>
+            <PlusIcon width={24} height={24} />
             <span className="flex  ">افزودن واحد اندازه گیری</span>
           </Button>
         </div>
         <CustomeTable
-            setInitialData={setFilter}
-            isLoading={ldMeasure || IsDeleteMeasure || isValidating}
-            data={measure}
-            columns={columns}
+          setInitialData={setFilter}
+          isLoading={ldMeasure || IsDeleteMeasure || isValidating}
+          data={measure}
+          columns={columns}
         />
         <EditModal
-            mutate={mutate}
-            editRecords={openEdit}
-            setEditRecord={setOpenEdit}
+          mutate={mutate}
+          editRecords={openEdit}
+          setEditRecord={setOpenEdit}
         />
       </div>
       <ConfirmDeleteModal
-          loading={IsDeleteMeasure}
-          open={isDeleteModalVisible}
+        loading={IsDeleteMeasure}
+        open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
         title="واحد اندازه گیری"

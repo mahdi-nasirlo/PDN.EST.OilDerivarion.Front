@@ -1,36 +1,36 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Col, Form, Modal, Row, Space, Tag, Typography,} from "antd";
-import {useForm} from "antd/es/form/Form";
-import {ColumnsType} from "antd/es/table";
-import React, {useEffect, useState} from "react";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Col, Form, Modal, Row, Space, Tag, Typography, } from "antd";
+import { useForm } from "antd/es/form/Form";
+import { ColumnsType } from "antd/es/table";
+import React, { useEffect, useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
-                                    setFilter,
-                                    isValidating,
-                                    setModalVisible,
-                                    ldMaterial,
-                                    material,
-                                    mutate,
-                                  }: {
+  setFilter,
+  isValidating,
+  setModalVisible,
+  ldMaterial,
+  material,
+  mutate,
+}: {
   setFilter: (arg: any) => void
   isValidating: any;
   setModalVisible: any;
   ldMaterial: boolean;
   mutate: () => void;
   material:
-      | {
+  | {
     count: number;
     records: Material[];
   }
-      | undefined;
+  | undefined;
 }) {
   //حذف
 
@@ -101,6 +101,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام ماده اولیه",
@@ -138,7 +139,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -168,13 +169,13 @@ export default function DataTable({
             لیست مواد اولیه
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              htmlType="submit"
-              onClick={showModal}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            htmlType="submit"
+            onClick={showModal}
           >
-            <PlusIcon width={24} height={24}/>
+            <PlusIcon width={24} height={24} />
             <span className="flex">افزودن ماده اولیه</span>
           </Button>
         </div>
@@ -187,8 +188,8 @@ export default function DataTable({
         {/*   */}
         {/*/>*/}
         <CustomeTable setInitialData={setFilter} isLoading={ldMaterial || ldDeleteMaterial || isValidating}
-                     
-                      data={material} columns={columns}/>
+
+          data={material} columns={columns} />
       </div>
       {/* جذف */}
       <ConfirmDeleteModal

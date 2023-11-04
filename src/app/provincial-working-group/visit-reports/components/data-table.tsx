@@ -22,6 +22,7 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام محصول تولیدی",

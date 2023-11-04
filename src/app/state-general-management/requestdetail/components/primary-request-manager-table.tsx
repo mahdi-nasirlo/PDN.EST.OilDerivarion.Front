@@ -1,8 +1,8 @@
 "use client";
 
 
-import {Table, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
+import { Table, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 
 
@@ -24,6 +24,7 @@ export default function PrimaryRequestsManagerTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام و نام خانوادگی",
@@ -53,6 +54,9 @@ export default function PrimaryRequestsManagerTable() {
         // {
         //     title: "عملیات",
         //     key: "جزئیات",
+        //     align: "center",
+        //     fixed: 'right',
+        //     width: "10%",
         //     render: (_, record) => (
         //         <Space size="middle">
         //             <Link href={""} className="action-btn-info">

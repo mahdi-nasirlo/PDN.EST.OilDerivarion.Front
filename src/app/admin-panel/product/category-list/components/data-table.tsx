@@ -1,25 +1,25 @@
 "use client";
 
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Space, Tag, Typography} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {Category} from "../../../../../../interfaces/category";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Space, Tag, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { Category } from "../../../../../../interfaces/category";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../../components/CustomeTable";
 
 export default function DataTable({
-                                    setFilter,
-                                    isValidating,
-                                    setModalVisible,
-                                    category,
-                                    ldCategory,
-                                    mutate,
-                                  }: {
+  setFilter,
+  isValidating,
+  setModalVisible,
+  category,
+  ldCategory,
+  mutate,
+}: {
   setFilter: (arg: any) => void,
   isValidating: any;
   setModalVisible: any;
@@ -62,6 +62,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام دسته بندی",
@@ -141,7 +142,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -177,20 +178,20 @@ export default function DataTable({
             لیست دسته بندی محصولات
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              onClick={showModal}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            onClick={showModal}
           >
-            <PlusIcon width={24} height={24}/>
+            <PlusIcon width={24} height={24} />
             <span className="flex ">افزودن دسته بندی</span>
           </Button>
         </div>
         <CustomeTable
-            setInitialData={setFilter}
-            isLoading={ldCategory || ldDelete || isValidating}
-            data={category}
-            columns={columns}
+          setInitialData={setFilter}
+          isLoading={ldCategory || ldDelete || isValidating}
+          data={category}
+          columns={columns}
         />
       </div>
       {/* جذف */}

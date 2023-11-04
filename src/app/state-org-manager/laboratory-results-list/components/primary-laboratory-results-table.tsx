@@ -25,6 +25,7 @@ export default function PrimaryLaboratoryResultsTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "شناسه درخواست",
@@ -56,10 +57,16 @@ export default function PrimaryLaboratoryResultsTable() {
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => { console.log(record); }}>مشاهده اطلاعات</Button>
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => { console.log(record); }}
+                    >
+                        مشاهده اطلاعات
+                    </Button>
                 </Space>
             ),
         },

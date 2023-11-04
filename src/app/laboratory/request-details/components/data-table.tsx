@@ -20,11 +20,13 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام فاکتور آزمون",
             dataIndex: "name",
             key: "2",
+            width: "95%"
         },
     ];
 

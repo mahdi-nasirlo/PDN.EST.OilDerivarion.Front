@@ -1,30 +1,30 @@
 "use client";
 
-import {Button, Space, Table} from "antd";
-import {ColumnsType} from "antd/es/table";
-import {TableColumnsType} from "antd/lib";
-import React, {useEffect, useState} from "react";
+import { Button, Space, Table } from "antd";
+import { ColumnsType } from "antd/es/table";
+import { TableColumnsType } from "antd/lib";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {addIndexToData} from "../../../../../lib/addIndexToData";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { addIndexToData } from "../../../../../lib/addIndexToData";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 const DataTable = ({
-                       material,
-                       ldMaterial,
-                       setFilter
-                   }: {
-    setFilter: (arg: any) => void;
-    ldMaterial: boolean;
-    material:
-        | {
-        count: number;
-        records: Material[];
-    }
-        | undefined;
+  material,
+  ldMaterial,
+  setFilter
+}: {
+  setFilter: (arg: any) => void;
+  ldMaterial: boolean;
+  material:
+  | {
+    count: number;
+    records: Material[];
+  }
+  | undefined;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
@@ -33,6 +33,7 @@ const DataTable = ({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام ماده اولیه",
@@ -42,35 +43,35 @@ const DataTable = ({
   ];
 
   return (
-      <>
-          <CustomeTable
-              columns={columns}
-              setInitialData={setFilter}
-              isLoading={ldMaterial}
-              data={material}
-              rowKey={"Uid"}
-              expandable={{
-                  expandedRowKeys: activeExpRow,
-                  onExpand: (expanded, record: Material) => {
-                      const keys: string[] = [];
+    <>
+      <CustomeTable
+        columns={columns}
+        setInitialData={setFilter}
+        isLoading={ldMaterial}
+        data={material}
+        rowKey={"Uid"}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+          onExpand: (expanded, record: Material) => {
+            const keys: string[] = [];
 
-                      if (expanded && record.Uid) {
-                          // @ts-ignore
-                          keys.push(record.Uid);
-                      }
+            if (expanded && record.Uid) {
+              // @ts-ignore
+              keys.push(record.Uid);
+            }
 
-                      if (!expanded) {
-                          keys.pop();
-                      }
+            if (!expanded) {
+              keys.pop();
+            }
 
-                      setActiveExpRow(keys);
-                  },
-                  expandedRowRender: (record: Material) => (
-                      <ExpandedRowRender material={record}/>
-                  ),
-              }}
-          />
-      </>
+            setActiveExpRow(keys);
+          },
+          expandedRowRender: (record: Material) => (
+            <ExpandedRowRender material={record} />
+          ),
+        }}
+      />
+    </>
   );
 }
 
@@ -115,7 +116,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   }, [material]);
 
   const expandColumns: TableColumnsType<any> = [
-    { title: "#", dataIndex: "Row", key: "1" },
+    { title: "#", dataIndex: "Row", key: "1", width: "5%" },
     { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
@@ -123,7 +124,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
       key: "upgradeNum",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button

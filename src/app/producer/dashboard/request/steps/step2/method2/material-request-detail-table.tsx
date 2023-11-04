@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react';
-import {Divider, Table, Typography} from "antd";
+import React, { useContext, useState } from 'react';
+import { Divider, Table, Typography } from "antd";
 import useGetPageMaterialRequestDetail
     from "../../../../../../../../hooks/requestDetail/useGetPageMaterialRequestDetail";
-import {ColumnsType} from "antd/es/table";
+import { ColumnsType } from "antd/es/table";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import {addIndexToData} from "../../../../../../../../lib/addIndexToData";
+import { addIndexToData } from "../../../../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {DataItemType} from "../../../../../../../../hooks/requestDetail/useGetPageProductRequestDetail";
+import { DataItemType } from "../../../../../../../../hooks/requestDetail/useGetPageProductRequestDetail";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
-import {mutate} from "swr";
+import { mutate } from "swr";
 
 const MaterialRequestDetailTable = () => {
 
@@ -22,7 +22,8 @@ const MaterialRequestDetailTable = () => {
     const columns: ColumnsType<DataItemType> = [
         {
             title: "ردیف",
-            dataIndex: "Row"
+            dataIndex: "Row",
+            width: "5%"
         },
         {
             title: "عنوان",
@@ -35,10 +36,18 @@ const MaterialRequestDetailTable = () => {
         },
         {
             title: "عملیات",
-            render: (value, record) => <Typography className="text-red-500 cursor-pointer" onClick={() => {
-                setDeleteVisible(true);
-                setRecordToDelete(record.Uid)
-            }}>حذف</Typography>
+            align: "center",
+            fixed: 'right',
+            width: "10%",
+            render: (value, record) => <Typography
+                className="text-red-500 cursor-pointer"
+                onClick={() => {
+                    setDeleteVisible(true);
+                    setRecordToDelete(record.Uid)
+                }}
+            >
+                حذف
+            </Typography>
         }
     ]
 
@@ -48,7 +57,7 @@ const MaterialRequestDetailTable = () => {
 
         setDeleteVisible(false)
 
-        await crudRequestDetailMaterial.delete.trigger({uid: recordeToDelete})
+        await crudRequestDetailMaterial.delete.trigger({ uid: recordeToDelete })
 
         await mutate("/RequestDetail/GetPageMaterial")
 
@@ -56,7 +65,7 @@ const MaterialRequestDetailTable = () => {
 
     return (
         <>
-            <Divider/>
+            <Divider />
 
             <Table
                 className="mt-3"
@@ -65,7 +74,7 @@ const MaterialRequestDetailTable = () => {
                 dataSource={addIndexToData(requestDetailMaterial.data?.records)}
             />
             <ConfirmDeleteModal open={deleteVisible} setOpen={setDeleteVisible} handleDelete={handleDelete}
-                                title={"حذف ماده اولیه"}/>
+                title={"حذف ماده اولیه"} />
         </>
     );
 };

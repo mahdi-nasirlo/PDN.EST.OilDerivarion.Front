@@ -23,6 +23,7 @@ export default function CEOInfoTable({ params }: { params: { nationalCode: strin
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "  نام و نام خانوادگی",

@@ -6,6 +6,7 @@ import StepContext from "@/app/producer/dashboard/request/state-managment/step-c
 import useGetFinalPage from "../../../../../../../hooks/requestDetail/useGetFinalPage";
 import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 import useDeleteStep from "../../../../../../../hooks/requestDetail/useDeleteStep";
+import { addAlphabetToData } from '../../../../../../../lib/addAlphabetToData';
 
 export default function ReviewDataTable() {
 
@@ -88,7 +89,7 @@ export default function ReviewDataTable() {
                                             <Table
                                                 loading={finalPage.isLoading}
                                                 columns={columns2}
-                                                dataSource={addIndexToData(item.materials)}
+                                                dataSource={addAlphabetToData(item.materials)}
                                                 pagination={false}
                                             />
                                         </>

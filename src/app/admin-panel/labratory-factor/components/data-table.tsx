@@ -8,10 +8,10 @@ import useSWR from "swr";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { ProductTestItem } from "../../../../../interfaces/product";
 import CustomeTable from "../../../../../components/CustomeTable";
+import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
 
 const columns: ColumnsType<Labratory> = [
   { title: "ردیف", dataIndex: "Row", key: "1", width: "5%" },
@@ -162,7 +162,7 @@ const ExpandedRowRender = ({
     <>
       <Table
         columns={expandColumns}
-        dataSource={addIndexToData(data)}
+        dataSource={addAlphabetToData(data)}
         loading={isLoading || isMutating}
         pagination={false}
       />

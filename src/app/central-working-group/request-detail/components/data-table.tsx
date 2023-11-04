@@ -13,6 +13,7 @@ import {
 import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
 import React, { useState } from "react";
+import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
 
 interface DataType {
   key: string;
@@ -133,8 +134,8 @@ export default function PrimaryExpiredRequestsDetailsTable() {
     }
     return (
       <>
-        <Table columns={columns} dataSource={[]} pagination={false} />
-        <Table columns={column} dataSource={[]} pagination={false} />
+        <Table columns={columns} dataSource={addAlphabetToData([])} pagination={false} />
+        <Table columns={column} dataSource={addAlphabetToData([])} pagination={false} />
       </>
     );
   };

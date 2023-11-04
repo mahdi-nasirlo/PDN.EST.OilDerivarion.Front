@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {customRequest} from "../customRequest";
 import {notification} from "antd";
+import handleError from "./handleError";
 
 
 export async function mutationFetcher(url: string, {arg}: { arg: any }) {
@@ -35,6 +36,8 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
             type: "error",
             message: error.message
         })
+
+        handleError(error)
 
         return undefined
     }

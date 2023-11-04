@@ -15,27 +15,27 @@ export default async function middleware(request: NextRequest) {
     }
 
     if (pathname.startsWith('/auth') && hasApiToken) {
-        console.log('/dashboard')
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
     if (pathname === '/') {
-        console.log("/")
         return NextResponse.redirect(new URL('/login', request.url));
     }
 
     if (request.nextUrl.searchParams.has('code')) {
 
+        console.log(request.nextUrl.searchParams.get("code"))
+
         const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
 
         if (token) {
 
-            const response = NextResponse.redirect(new URL('/dashboard', request.url));
+            const response = NextResponse.redirect(new URL(pathname, request.url));
 
             response.cookies.set("accessToken", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== "development",
-                sameSite: "strict",
+                httpOnly: false,
+                secure: false,
+                sameSite: "none",
                 maxAge: 60 * 60,
             });
 
@@ -53,10 +53,6 @@ export default async function middleware(request: NextRequest) {
     }
 }
 
-export const config = {
-    matcher: ['/auth/:path*', '/dashboard/:path*', '/'],
-}
-
 async function getToken(request: NextRequest, code: string, redirectUrl: string) {
 
     let data = {
@@ -64,9 +60,7 @@ async function getToken(request: NextRequest, code: string, redirectUrl: string)
         "RedirectUri": redirectUrl
     }
 
-    // console.log(data)
-
-    const response = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/security/getToken`, {
+    const response = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/api/V1/Sso/GetToken`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

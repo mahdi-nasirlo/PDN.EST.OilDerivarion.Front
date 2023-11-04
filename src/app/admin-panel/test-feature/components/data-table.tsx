@@ -1,24 +1,24 @@
 "use client";
 
-import {Button, Space, Typography} from "antd";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
+import { Button, Space, Typography } from "antd";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {CreateTestItemDetail, TestItemDetail,} from "../../../../../interfaces/TestItem";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { CreateTestItemDetail, TestItemDetail, } from "../../../../../interfaces/TestItem";
 import EditModal from "./edit-modal";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
-                                    setModalVisible,
-                                    testItemDetail,
-                                    ldTestItemDetail,
-                                    setFilter,
-                                    mutate,
-                                  }: {
+  setModalVisible,
+  testItemDetail,
+  ldTestItemDetail,
+  setFilter,
+  mutate,
+}: {
   setFilter: (e: any) => void,
   setModalVisible: any;
   testItemDetail: {
@@ -73,6 +73,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "عنوان",
@@ -93,14 +94,14 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (_, record: any) => <StatusColumn record={record}/>
+      render: (_, record: any) => <StatusColumn record={record} />
     },
     {
       title: "عملیات",
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record: any) => (
         <Space size="small">
           <Button
@@ -130,21 +131,21 @@ export default function DataTable({
             لیست استانداردهای آزمون
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              htmlType="submit"
-              onClick={() => setModalVisible(true)}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            htmlType="submit"
+            onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24}/>
+            <PlusIcon width={24} height={24} />
             <span className="flex">افزودن استاندارد آزمون</span>
           </Button>
         </div>
         <CustomeTable
-            columns={columns}
-            setInitialData={setFilter}
-            isLoading={ldTestItemDetail || IsDeleteTF}
-            data={testItemDetail}
+          columns={columns}
+          setInitialData={setFilter}
+          isLoading={ldTestItemDetail || IsDeleteTF}
+          data={testItemDetail}
         />
       </div>
       {/* جذف */}

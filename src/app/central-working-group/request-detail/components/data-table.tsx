@@ -13,6 +13,7 @@ import {
 import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
 import React, { useState } from "react";
+import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
 
 interface DataType {
   key: string;
@@ -44,6 +45,7 @@ export default function PrimaryExpiredRequestsDetailsTable() {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "فاکتور آزمون",
@@ -53,6 +55,9 @@ export default function PrimaryExpiredRequestsDetailsTable() {
     {
       title: "عملیات",
       key: "عملیات",
+      align: "center",
+      fixed: 'right',
+      width: "10%",
       render: (_, record) => (
         <Space size="middle">
           <Button
@@ -76,13 +81,15 @@ export default function PrimaryExpiredRequestsDetailsTable() {
 
   const expandedRowRender = () => {
     const columns: TableColumnsType<ExpandedDataType> = [
-      { title: "#", dataIndex: "1", key: "date" },
+      { title: "#", dataIndex: "1", key: "date", width: "5%" },
       { title: "نام ماده اولیه", dataIndex: "1", key: "name" },
       {
         title: "عملیات",
         dataIndex: "2",
         key: "upgradeNum",
-        render: (_, record) => (
+        align: "center",
+        fixed: 'right',
+        width: "10%", render: (_, record) => (
           <Space size="middle">
             <Button
               type="link"
@@ -127,8 +134,8 @@ export default function PrimaryExpiredRequestsDetailsTable() {
     }
     return (
       <>
-        <Table columns={columns} dataSource={[]} pagination={false} />
-        <Table columns={column} dataSource={[]} pagination={false} />
+        <Table columns={columns} dataSource={addAlphabetToData([])} pagination={false} />
+        <Table columns={column} dataSource={addAlphabetToData([])} pagination={false} />
       </>
     );
   };

@@ -1,9 +1,11 @@
 import {AxiosResponse} from "axios";
 import {customRequest} from "../customRequest";
+import handleError from "./handleError";
 
 
 export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undefined}) {
 
+    console.log(document.cookie)
 
     try {
 
@@ -21,13 +23,14 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
 
         return res.data?.data
 
-    } catch (error) {
+    } catch (error: any) {
 
-        console.error("Error:", error);
+        handleError(error)
 
         return []
     }
 
 }
+
 
 type dataType = { message: string, success: boolean, data: any }

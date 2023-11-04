@@ -26,11 +26,11 @@ export default function DataTable({
   ldTestItem: boolean;
   mutate: () => void;
   Producer:
-    | {
-        records: Producer[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: Producer[];
+    count: number;
+  }
+  | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
 
@@ -66,6 +66,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام تواید کننده",
@@ -94,7 +95,7 @@ export default function DataTable({
       key: "جزئیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button

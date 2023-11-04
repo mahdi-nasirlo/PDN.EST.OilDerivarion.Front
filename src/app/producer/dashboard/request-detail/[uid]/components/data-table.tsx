@@ -20,6 +20,7 @@ export default function PrimaryManufacturerListTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام ماده اولیه یا محصول",
@@ -55,7 +56,7 @@ export default function PrimaryManufacturerListTable({
     //   key: "عملیات",
     //   align: "center",
     //   fixed: "right",
-    //   width: 150,
+    //   width: "10%",
     //   render: () => (
     //     <Space size="middle">
     //       <Link href={""} className="action-btn-delete">

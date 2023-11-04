@@ -34,6 +34,7 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "ویژگی شرح آزمون",
@@ -75,7 +76,7 @@ export default function DataTable() {
             key: "عملیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record: any) => (
                 <Space size="small">
                     <Button

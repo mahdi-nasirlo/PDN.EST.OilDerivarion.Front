@@ -10,7 +10,7 @@ import CustomeTable from "../../../../../components/CustomeTable";
 
 function BarcodeFormLockup(props: {
   form: FormInstance;
-  setFilter: any;
+  setFilter?: any;
   open: boolean;
   setOpen: (arg: boolean) => void;
   setUid: (arg: string) => void;
@@ -34,23 +34,6 @@ function BarcodeFormLockup(props: {
       <Typography className="mb-4 font-medium">
         درخواست خود را از لیست پایین انتخاب نمایید
       </Typography>
-      {/* <Table
-        columns={columns}
-        loading={isLoading}
-        rowKey={"Uid"}
-        dataSource={addIndexToData(data?.records)}
-        pagination={{
-          pageSize: 5,
-        }}
-        rowSelection={{
-          type: "radio",
-          onSelect: (value) => {
-            props.setOpen(false);
-            props.setUid(value.Uid);
-            props.form.setFieldValue("requestMasterUid", value.Uid);
-          },
-        }}
-      /> */}
 
       <CustomeTable
         setInitialData={props.setFilter}

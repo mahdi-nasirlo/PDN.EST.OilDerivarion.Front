@@ -1,7 +1,7 @@
 "use client";
 
 
-import {Divider, Table, Typography} from 'antd';
+import { Divider, Table, Typography } from 'antd';
 import React from 'react'
 
 
@@ -21,13 +21,12 @@ export default function PrimaryRequestsFromulacionTable() {
     const columns: any = [
         {
             title: 'ردیف',
-            width: 100,
             dataIndex: 'Index',
             key: 'Index',
+            width: "5%"
         },
         {
             title: 'نام مواد',
-            width: 100,
             dataIndex: 'MaterialName',
             key: 'MaterialName',
         },
@@ -35,19 +34,16 @@ export default function PrimaryRequestsFromulacionTable() {
             title: 'میزان مصرف برای یک واحد',
             dataIndex: 'MaterialUnitConsumption',
             key: 'MaterialUnitConsumption',
-            width: 150,
         },
         {
             title: 'درصد',
             dataIndex: 'MaterialUsagePercentage',
             key: 'MaterialUsagePercentage',
-            width: 150,
         },
         {
             title: 'میزان مصرف',
             dataIndex: 'MaterialTotalConsumption',
             key: 'MaterialTotalConsumption',
-            width: 150,
         },
         {
             title: "منابع عمده تامین",
@@ -71,7 +67,7 @@ export default function PrimaryRequestsFromulacionTable() {
 
     return (
         <>
-            <Divider/>
+            <Divider />
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                 فرمولاسیون مواد اولیه
             </Typography>

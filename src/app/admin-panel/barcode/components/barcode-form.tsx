@@ -6,7 +6,7 @@ import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode
 
 function BarcodeForm(props: {
   form: undefined | FormInstance;
-  setFilter: any;
+  setFilter?: any;
 }) {
   const [containerType, setContainerType] = useState<{
     Id: number;
@@ -37,7 +37,6 @@ function BarcodeForm(props: {
           rules={[
             {
               required: true,
-              message: "لطفا مقدار را وارد کنید",
             },
           ]}
         >
@@ -91,7 +90,6 @@ function BarcodeForm(props: {
           rules={[
             {
               required: true,
-              message: "لطفا مقدار را وارد کنید",
             },
           ]}
         >

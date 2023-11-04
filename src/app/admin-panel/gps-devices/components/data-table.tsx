@@ -1,39 +1,39 @@
 "use client";
 
-import {Button, Col, Modal, Row, Space} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {Gps} from "../../../../../interfaces/gps";
+import { Button, Col, Modal, Row, Space } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 interface DataType {
-    key: string;
-    Row: number;
-    ProductName: string;
-    TrackingCode: string;
-    ConfirmedRequestCode: string;
+  key: string;
+  Row: number;
+  ProductName: string;
+  TrackingCode: string;
+  ConfirmedRequestCode: string;
 }
 
 export default function DataTable({
-                                      setFilter,
-                                      isValidating,
-                                      isLoading,
-                                      boxesData,
-                                      mutate,
-                                  }: {
-    setFilter: (arg: any) => void
-    isValidating: any;
-    isLoading: boolean;
-    boxesData: | {
-        records: any
-        count: number
-    } | undefined;
-    mutate: () => void;
+  setFilter,
+  isValidating,
+  isLoading,
+  boxesData,
+  mutate,
+}: {
+  setFilter: (arg: any) => void
+  isValidating: any;
+  isLoading: boolean;
+  boxesData: | {
+    records: any
+    count: number
+  } | undefined;
+  mutate: () => void;
 }) {
   //حذف
 
@@ -74,6 +74,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "کد",
@@ -112,7 +113,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -140,40 +141,40 @@ export default function DataTable({
     },
   ];
   return (
-      <>
+    <>
 
-          <CustomeTable setInitialData={setFilter} isLoading={isLoading || isMutating || isValidating}
-                        data={boxesData} columns={columns}/>
-          {/* جذف */}
-          <ConfirmDeleteModal
-              open={isDeleteModalVisible}
-              setOpen={setIsDeleteModalVisible}
-              handleDelete={handleDeleteSubmit}
-              title={"حذف جعبه"}
-              loading={isMutating}
-          />
-          {/* ویرایش */}
-          <EditModal
-              recordeToEdit={recordToEdit}
-              setModalVisible={setIsEditModalVisible}
-              modalVisible={isEditModalVisible}
-              mutate={mutate}
-          />
-          {/* مشاهده موقعیت */}
-          <Modal
-              title="مشاهده موقعیت"
-              visible={isGPSModalVisible}
-              onCancel={handleCancelGPS}
-              width={800}
-              footer={[
-                  <Row key={"box"} gutter={[16, 16]} className="my-2">
-                      <Col xs={24} md={24}>
-                          <Button
-                              size="large"
-                              className="w-full bg-gray-100 text-warmGray-500"
-                              onClick={handleCancelGPS}
-                              key={"cancel"}
-                          >
+      <CustomeTable setInitialData={setFilter} isLoading={isLoading || isMutating || isValidating}
+        data={boxesData} columns={columns} />
+      {/* جذف */}
+      <ConfirmDeleteModal
+        open={isDeleteModalVisible}
+        setOpen={setIsDeleteModalVisible}
+        handleDelete={handleDeleteSubmit}
+        title={"حذف جعبه"}
+        loading={isMutating}
+      />
+      {/* ویرایش */}
+      <EditModal
+        recordeToEdit={recordToEdit}
+        setModalVisible={setIsEditModalVisible}
+        modalVisible={isEditModalVisible}
+        mutate={mutate}
+      />
+      {/* مشاهده موقعیت */}
+      <Modal
+        title="مشاهده موقعیت"
+        visible={isGPSModalVisible}
+        onCancel={handleCancelGPS}
+        width={800}
+        footer={[
+          <Row key={"box"} gutter={[16, 16]} className="my-2">
+            <Col xs={24} md={24}>
+              <Button
+                size="large"
+                className="w-full bg-gray-100 text-warmGray-500"
+                onClick={handleCancelGPS}
+                key={"cancel"}
+              >
                 برگشت
               </Button>
             </Col>

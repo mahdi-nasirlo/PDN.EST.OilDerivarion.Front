@@ -68,12 +68,8 @@ async function getToken(request: NextRequest, code: string, redirectUrl: string)
         body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-        throw new Error(`API request failed with status: ${response.status}`);
-    }
-
     const responseData = await response.json();
 
-    console.log(responseData.data?.access_token)
-    return responseData.data?.access_token
+    console.log(responseData?.data?.access_token)
+    return responseData?.data?.access_token
 }

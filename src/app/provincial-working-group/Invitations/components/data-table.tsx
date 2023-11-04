@@ -39,6 +39,7 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",
@@ -65,7 +66,7 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: () => (
                 <Space size="small">
                     <Button type="link" onClick={() => showModal()} className="text-primary-500 font-bold">

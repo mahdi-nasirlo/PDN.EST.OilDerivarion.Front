@@ -5,6 +5,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
+import ContactInputs from "../../../../../../components/inputs/Contact";
 
 export default function EditModal({
   mutate,
@@ -46,7 +47,6 @@ export default function EditModal({
 
     await mutate();
     if (res) {
-
       setIsEditModalVisible(false);
 
       form.resetFields();
@@ -134,7 +134,13 @@ export default function EditModal({
               <Form.Item
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
-                rules={[{ required: true, message: "کد ملی اجباری است" }]}
+                rules={[
+                  { required: true },
+                  {
+                    pattern: /^[0-9]{10}$/,
+                    message: "کد ملی نامتعبر است",
+                  },
+                ]}
               >
                 <Input
                   size="large"
@@ -149,10 +155,7 @@ export default function EditModal({
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
               >
-                <Input
-                  placeholder="وارد کنید"
-                  size="large"
-                />
+                <Input placeholder="وارد کنید" size="large" />
                 {/* <DatePicker
                                     className="w-full"
                                     placeholder="13**/
@@ -179,17 +182,13 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="currentMobile"
-                label="شماره تماس"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-              >
+              <ContactInputs label="شماره تماس" name="currentMobile">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </Form.Item>
+              </ContactInputs>
             </Col>
           </Row>
         </Form>

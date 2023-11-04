@@ -25,6 +25,7 @@ export default function PersonnelInfoTable({ params }: { params: { nationalCode:
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "  نام و نام خانوادگی",

@@ -25,6 +25,7 @@ export default function PrimaryDelaysListTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",

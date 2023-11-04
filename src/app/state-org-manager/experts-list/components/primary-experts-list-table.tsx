@@ -27,6 +27,7 @@ export default function PrimaryExpertsListTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام کارشناس",
@@ -63,10 +64,16 @@ export default function PrimaryExpertsListTable() {
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => { console.log(record); }}>مشاهده اطلاعات</Button>
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                        onClick={() => { console.log(record); }}
+                    >
+                        مشاهده اطلاعات
+                    </Button>
                 </Space>
             ),
         },

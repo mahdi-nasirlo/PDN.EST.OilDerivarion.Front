@@ -127,12 +127,8 @@ export default function EditModal({
                 rules={[
                   { required: true, message: "کد ملی اجباری است" },
                   {
-                    validator: (_, value) => {
-                      if (!value || value.length === 10) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject("کد ملی باید ۱۰ رقم باشد");
-                    },
+                    pattern: /^[0-9]{10}$/,
+                    message: "کد ملی نامتعبر است",
                   },
                 ]}
               >

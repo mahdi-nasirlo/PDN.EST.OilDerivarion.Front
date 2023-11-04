@@ -20,17 +20,18 @@ export default function DataTable({
   ldTestResult: boolean;
   mutate: () => void;
   TestResult:
-    | {
-        records: any[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: any[];
+    count: number;
+  }
+  | undefined;
 }) {
   const columns: ColumnsType<DataType> = [
     {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "بار کد",
@@ -77,7 +78,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record: any) => (
         <Space size="small">
           <Link

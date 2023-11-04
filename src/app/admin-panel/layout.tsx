@@ -117,26 +117,26 @@ const items: MenuProps["items"] = [
       "/admin-panel/management-users/management-user",
       <UsersIcon width={16} height={16} />
     ),
-    getMenuItem(
-      <Link
-        href={"/admin-panel/management-users/confirm-changes"}
-        className="text-sm"
-      >
-        ثبت تغییرات
-      </Link>,
-      "/admin-panel/management-users/confirm-changes",
-      <PencilSquareIcon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link
-        href={"/admin-panel/management-users/management-user-role"}
-        className="text-sm"
-      >
-        نقش کاربران
-      </Link>,
-      "/admin-panel/management-users/management-user-role",
-      <FolderPlusIcon width={16} height={16} />
-    ),
+    // getMenuItem(
+    //   <Link
+    //     href={"/admin-panel/management-users/confirm-changes"}
+    //     className="text-sm"
+    //   >
+    //     ثبت تغییرات
+    //   </Link>,
+    //   "/admin-panel/management-users/confirm-changes",
+    //   <PencilSquareIcon width={16} height={16} />
+    // ),
+    // getMenuItem(
+    //   <Link
+    //     href={"/admin-panel/management-users/management-user-role"}
+    //     className="text-sm"
+    //   >
+    //     نقش کاربران
+    //   </Link>,
+    //   "/admin-panel/management-users/management-user-role",
+    //   <FolderPlusIcon width={16} height={16} />
+    // ),
     getMenuItem(
       <Link
         href={"/admin-panel/management-users/list-experts"}
@@ -184,5 +184,10 @@ const items: MenuProps["items"] = [
   getMenuItem(
     <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
     "/admin-panel/measures"
+  ),
+
+  getMenuItem(
+    <Link href="/admin-panel/barcode">بارکد</Link>,
+    "/admin-panel/barcode"
   ),
 ];

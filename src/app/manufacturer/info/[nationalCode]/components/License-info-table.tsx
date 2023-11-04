@@ -20,6 +20,7 @@ export default function LicenseInfoTable({ params }: { params: { nationalCode: s
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "  نام مجوز   ",

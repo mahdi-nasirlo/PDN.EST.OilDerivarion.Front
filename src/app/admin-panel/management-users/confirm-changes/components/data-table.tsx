@@ -1,13 +1,13 @@
 "use client";
 
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {UploadOutlined} from "@ant-design/icons";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {Button, Col, Form, Modal, Row, Select, Space, Table, Typography, Upload,} from "antd";
-import {useForm} from "antd/es/form/Form";
-import {ColumnsType} from "antd/es/table";
+import { UploadOutlined } from "@ant-design/icons";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Col, Form, Modal, Row, Select, Space, Table, Typography, Upload, } from "antd";
+import { useForm } from "antd/es/form/Form";
+import { ColumnsType } from "antd/es/table";
 import TextArea from "antd/lib/input/TextArea";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 interface DataType {
   key: string;
@@ -67,6 +67,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام",
@@ -93,7 +94,7 @@ export default function DataTable({
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button
@@ -153,11 +154,11 @@ export default function DataTable({
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
-          loading={false}
-          open={isDeleteModalVisible}
-          setOpen={setIsDeleteModalVisible}
-          handleDelete={handleConfirmDelete}
-          title="حذف کاربر"
+        loading={false}
+        open={isDeleteModalVisible}
+        setOpen={setIsDeleteModalVisible}
+        handleDelete={handleConfirmDelete}
+        title="حذف کاربر"
       />
       {/* ویرایش */}
       <Modal

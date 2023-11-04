@@ -25,6 +25,7 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام محصول تولیدی",
@@ -61,7 +62,7 @@ export default function DataTable() {
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
                     <Button

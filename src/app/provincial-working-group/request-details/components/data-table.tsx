@@ -5,6 +5,7 @@ import { Button, Divider, Space, Table, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import { TableColumnsType } from "antd/lib";
 import React, { useState } from 'react'
+import { addAlphabetToData } from '../../../../../lib/addAlphabetToData';
 
 interface DataType {
     key: string;
@@ -31,6 +32,7 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "فاکتور آزمون",
@@ -42,7 +44,7 @@ export default function DataTable() {
             key: "عملیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
                     <Button
@@ -66,27 +68,47 @@ export default function DataTable() {
 
     const expandedRowRender = () => {
         const columns: TableColumnsType<ExpandedDataType> = [
-            { title: '#', dataIndex: '1', key: 'date' },
+            { title: '#', dataIndex: '1', key: 'date', width: "5%" },
             { title: 'نام ماده اولیه', dataIndex: '1', key: 'name' },
             {
-                title: 'عملیات', dataIndex: '2', key: 'upgradeNum',
+                title: 'عملیات',
+                dataIndex: '2',
+                key: 'upgradeNum',
+                align: "center",
+                fixed: 'right',
+                width: "10%",
                 render: (_, record) => (
                     <Space size="middle">
-                        <Button type="link" className="text-red-500 font-bold"
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        <Button
+                            type="link"
+                            className="text-red-500 font-bold"
+                            onClick={() => handleDelete(record)}
+                        >
+                            حذف
+                        </Button>
                     </Space>
                 ),
             },
         ];
         const column: TableColumnsType<ExpandedDataType> = [
-            { title: '#', dataIndex: '1', key: 'date' },
+            { title: '#', dataIndex: '1', key: 'date', width: "5%" },
             { title: 'نام محصول', dataIndex: '1', key: 'name' },
             {
-                title: 'عملیات', dataIndex: '2', key: 'upgradeNum',
+                title: 'عملیات',
+                dataIndex: '2',
+                key: 'upgradeNum',
+                align: "center",
+                fixed: 'right',
+                width: "10%",
                 render: (_, record) => (
                     <Space size="middle">
-                        <Button type="link" className="text-red-500 font-bold"
-                            onClick={() => handleDelete(record)}>حذف</Button>
+                        <Button
+                            type="link"
+                            className="text-red-500 font-bold"
+                            onClick={() => handleDelete(record)}
+                        >
+                            حذف
+                        </Button>
                     </Space>
                 ),
             },
@@ -103,8 +125,8 @@ export default function DataTable() {
         }
         return (
             <>
-                <Table columns={columns} dataSource={[]} pagination={false} />
-                <Table columns={column} dataSource={[]} pagination={false} />
+                <Table columns={columns} dataSource={addAlphabetToData([])} pagination={false} />
+                <Table columns={column} dataSource={addAlphabetToData([])} pagination={false} />
             </>
         );
     };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Form, FormInstance, Input, Row } from "antd";
+import ContactInputs from "../../../../../../components/inputs/Contact";
 
 function Step2({
   form,
@@ -43,22 +44,21 @@ function Step2({
             <Form.Item
               rules={[
                 { required: true },
-                { min: 10, max: 10, message: "کد ملی باید ده رقمی باشد" },
+                {
+                  pattern: /^[0-9]{10}$/,
+                  message: "کد ملی نامتعبر است",
+                },
               ]}
               name="responsibleNationalCode"
               label="کد ملی"
             >
-              <Input type="number" size="large" placeholder="وارد کنید" />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              rules={[{ required: true }]}
-              name="responsibleMobile"
-              label="شماره موبایل"
-            >
-              <Input type="number" size="large" placeholder="وارد کنید" />
-            </Form.Item>
+            <ContactInputs label="شماره موبایل" name="responsibleMobile">
+              <Input size="large" placeholder="وارد کنید" />
+            </ContactInputs>
           </Col>
         </Row>
       </Form>

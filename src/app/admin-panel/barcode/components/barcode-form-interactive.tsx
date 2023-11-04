@@ -9,6 +9,7 @@ function BarcodeFormInteractive(props: {
   ID: number | undefined;
   name: string | undefined;
   form: FormInstance;
+  setFilter?: any;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -45,7 +46,7 @@ function BarcodeFormInteractive(props: {
       })
   );
 
-  useEffect(() => {}, [props.ID]);
+  useEffect(() => { }, [props.ID]);
 
   const [requestMasterUid, setRequestMasterUid] = useState<string>("");
 
@@ -92,7 +93,6 @@ function BarcodeFormInteractive(props: {
             rules={[
               {
                 required: true,
-                message: "لطفا مقدار را وارد کنید",
               },
             ]}
           >
@@ -107,6 +107,7 @@ function BarcodeFormInteractive(props: {
           </Form.Item>
         </Col>
         <BarcodeFormLockup
+          setFilter={props.setFilter}
           form={props.form}
           setUid={setRequestMasterUid}
           open={open}
@@ -154,7 +155,6 @@ function BarcodeFormInteractive(props: {
             rules={[
               {
                 required: true,
-                message: "لطفا مقدار را وارد کنید",
               },
             ]}
           >

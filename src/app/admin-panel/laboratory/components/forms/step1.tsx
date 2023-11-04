@@ -27,7 +27,7 @@ function Step1({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="name"
               label="نام آزمایشگاه"
             >
@@ -36,7 +36,7 @@ function Step1({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="tel"
               label="شماره ثابت"
             >
@@ -47,7 +47,7 @@ function Step1({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="license_No"
               label="مشخصه یکتای جواز"
             >
@@ -56,7 +56,7 @@ function Step1({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="license_Expire_Date"
               label="تاریخ"
             >
@@ -67,7 +67,7 @@ function Step1({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="stateId"
               label="استان"
             >
@@ -85,7 +85,7 @@ function Step1({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[{ required: true }]}
               name="isActive"
               label="فعال / غیر فعال"
             >
@@ -103,11 +103,7 @@ function Step1({
         </Row>
         <Row gutter={[32, 1]}>
           <Col xs={24} md={24}>
-            <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              name="address"
-              label="آدرس"
-            >
+            <Form.Item rules={[{ required: true }]} name="address" label="آدرس">
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>

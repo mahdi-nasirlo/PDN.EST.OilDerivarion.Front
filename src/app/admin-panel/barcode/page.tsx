@@ -84,8 +84,9 @@ export default function Page() {
           </Button>
         </div>
         <DataTable
+          setFilter={setFilter}
           isValidating={isValidating}
-          requestMaster={addIndexToData(requestMaster?.records)}
+          requestMaster={requestMaster}
           ldRequestMaster={ldRequestMaster}
         />
       </div>

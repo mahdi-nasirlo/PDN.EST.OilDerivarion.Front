@@ -1,12 +1,12 @@
 "use client";
 
-import { Alert, Space, Table, Tag, Tooltip, Typography } from "antd";
+import {Alert, Space, Table, Tag, Tooltip, Typography} from "antd";
 import useSWR from "swr";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
-import { listFetcher } from "../../../lib/server/listFetcher";
-import { TestGetPage } from "../../../interfaces/test&verify";
-import { addIndexToData } from "../../../lib/addIndexToData";
+import {ColumnsType} from "antd/es/table";
+import {listFetcher} from "../../../lib/server/listFetcher";
+import {TestGetPage} from "../../../interfaces/test&verify";
+import {addIndexToData} from "../../../lib/addIndexToData";
 
 export default function Home() {
   const {
@@ -14,40 +14,40 @@ export default function Home() {
     data: tests,
     mutate,
   } = useSWR<{ records: TestGetPage[] }>("/TestAndVerify/GetPage", (url) =>
-    listFetcher(url, {
-      arg: { page: "", fromRecord: 0, selectRecord: 1000 },
-    })
+      listFetcher(url, {
+        arg: {page: "", fromRecord: 0, selectRecord: 1000},
+      })
   );
 
   return (
     <>
       <div className="box-border w-full lg:mt-8 lg:p-6 p-2 mt-3">
         <Alert
-          message="توجه !"
-          description="اطلاعات موجود در پنل ادمین، اطلاعات پایه و اصلی است. لطفا از تغییر آن خودداری فرمایید."
-          type="warning"
-          showIcon
-          className="text-right mb-12"
+            message="توجه !"
+            description="اطلاعات موجود در پنل ادمین، اطلاعات پایه و اصلی است. لطفا از تغییر آن خودداری فرمایید."
+            type="warning"
+            showIcon
+            className="text-right mb-12"
         />
         <Typography className="mb-5 text-gray-901 font-medium text-xl text-right">
           صفحات آماده برای تست
         </Typography>
         <Table
-          loading={isLoading}
-          dataSource={addIndexToData(tests?.records)}
-          columns={columns}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
-            defaultCurrent: 1,
-            style: {
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              margin: "16px 0",
-            },
-          }}
+            loading={isLoading}
+            dataSource={addIndexToData(tests?.records)}
+            columns={columns}
+            pagination={{
+              defaultPageSize: 10,
+              showSizeChanger: true,
+              pageSizeOptions: ["10", "20", "50"],
+              defaultCurrent: 1,
+              style: {
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                margin: "16px 0",
+              },
+            }}
         />
         <div className="mt-8">
           <Typography className="mb-4 text-right">
@@ -57,8 +57,8 @@ export default function Home() {
             <Typography className="text-1xl">ورود به پنل</Typography>
             <Typography>
               <Link
-                className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
-                href="/manufacturer"
+                  className="mx-2 underline-offset-2 text-primary-500 text-1xl font-extrabold"
+                  href="/manufacturer"
               >
                 رییس اجرایی
               </Link>

@@ -22,32 +22,33 @@ export default async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL('/login', request.url));
     }
 
-    if (request.nextUrl.searchParams.has('code')) {
+    if (request.nextUrl.searchParams.has('code') && pathname !== "/getToken") {
 
-        try {
-            console.log(request.nextUrl.searchParams.get("code"))
-
-            const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
-
-            if (token) {
-
-                const response = NextResponse.redirect(new URL(pathname, request.url));
-
-                response.cookies.set("accessToken", token, {
-                    httpOnly: false,
-                    secure: false,
-                    sameSite: "none",
-                    maxAge: 60 * 60,
-                });
-
-                return response;
-            }
-
-        } catch (e) {
-
-            return NextResponse.redirect(new URL("/login", request.url))
-
-        }
+        return NextResponse.redirect(new URL("/getToken?code=" + request.nextUrl.searchParams.get("code"), request.url))
+        // try {
+        //     console.log(request.nextUrl.searchParams.get("code"))
+        //
+        //     const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
+        //
+        //     if (token) {
+        //
+        //         const response = NextResponse.redirect(new URL(pathname, request.url));
+        //
+        //         response.cookies.set("accessToken", token, {
+        //             httpOnly: false,
+        //             secure: false,
+        //             sameSite: "none",
+        //             maxAge: 60 * 60,
+        //         });
+        //
+        //         return response;
+        //     }
+        //
+        // } catch (e) {
+        //
+        //     return NextResponse.redirect(new URL("/login", request.url))
+        //
+        // }
 
     }
 

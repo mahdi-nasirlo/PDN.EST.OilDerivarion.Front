@@ -24,22 +24,29 @@ export default async function middleware(request: NextRequest) {
 
     if (request.nextUrl.searchParams.has('code')) {
 
-        console.log(request.nextUrl.searchParams.get("code"))
+        try {
+            console.log(request.nextUrl.searchParams.get("code"))
 
-        const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
+            const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
 
-        if (token) {
+            if (token) {
 
-            const response = NextResponse.redirect(new URL(pathname, request.url));
+                const response = NextResponse.redirect(new URL(pathname, request.url));
 
-            response.cookies.set("accessToken", token, {
-                httpOnly: false,
-                secure: false,
-                sameSite: "none",
-                maxAge: 60 * 60,
-            });
+                response.cookies.set("accessToken", token, {
+                    httpOnly: false,
+                    secure: false,
+                    sameSite: "none",
+                    maxAge: 60 * 60,
+                });
 
-            return response;
+                return response;
+            }
+
+        } catch (e) {
+
+            return NextResponse.redirect(new URL("/login", request.url))
+
         }
 
     }

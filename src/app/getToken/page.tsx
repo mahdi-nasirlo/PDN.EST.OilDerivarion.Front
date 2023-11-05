@@ -25,7 +25,7 @@ const Page = () => {
 
             setCookie("accessToken", data?.access_token)
 
-            window.location.href = "/login"
+            window.location.href = "/producer"
 
         }
 

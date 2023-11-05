@@ -102,24 +102,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
         </Row>
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="issueDate"
-              label="زمان صدور"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
-            >
-              <DatePicker
-                className="w-full"
-                placeholder="13**/**/**"
-                size="large"
-              />
+            <Form.Item name="issueDatePersian" label="زمان صدور">
+              <CustomeDatePicker />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="expirationDate"
-              label="تاریخ انقضاء"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
-            >
+            <Form.Item name="expirationDatePersian" label="تاریخ انقضاء">
               <CustomeDatePicker />
             </Form.Item>
           </Col>

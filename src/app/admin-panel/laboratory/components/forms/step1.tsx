@@ -57,7 +57,7 @@ function Step1({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
-              name="license_Expire_Date"
+              name="licenseExpireDatePersian"
               label="تاریخ"
             >
               <CustomeDatePicker />

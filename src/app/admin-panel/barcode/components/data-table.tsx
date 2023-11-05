@@ -9,6 +9,7 @@ const columns: ColumnsType<RequestMaster> = [
     title: "ردیف",
     dataIndex: "Row",
     key: "1",
+    width: "5%"
   },
   {
     title: "نوع نمونه",

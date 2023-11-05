@@ -22,6 +22,7 @@ export default function PrimaryProducerDetailsLicenseTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام مجوز",

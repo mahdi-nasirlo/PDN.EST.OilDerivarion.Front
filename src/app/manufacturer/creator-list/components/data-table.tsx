@@ -19,6 +19,7 @@ export default function DataTable({ ldProducerList, ProducerList, mutate }: {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",
@@ -66,7 +67,7 @@ export default function DataTable({ ldProducerList, ProducerList, mutate }: {
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
                     <Link href={`/manufacturer/info/${record.nationalCode}`} className="action-btn-info">

@@ -16,6 +16,7 @@ export default function PrimaryManufacturerListTable() {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
+      width: "5%"
     },
     {
       title: "نام فرآیند",
@@ -42,7 +43,7 @@ export default function PrimaryManufacturerListTable() {
       key: "عملیات",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: "10%",
       render: (_, record) => (
         <Space size="small">
           <Button

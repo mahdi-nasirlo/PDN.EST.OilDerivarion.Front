@@ -6,7 +6,7 @@ import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode
 
 function BarcodeForm(props: {
   form: undefined | FormInstance;
-  setFilter: any;
+  setFilter?: any;
 }) {
   const [containerType, setContainerType] = useState<{
     Id: number;

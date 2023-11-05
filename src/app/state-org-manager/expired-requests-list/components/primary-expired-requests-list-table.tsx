@@ -24,6 +24,7 @@ export default function PrimaryExpiredRequestsListTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",
@@ -50,7 +51,7 @@ export default function PrimaryExpiredRequestsListTable() {
             key: "جزئیات",
             align: "center",
             fixed: 'right',
-            width: 150,
+            width: "10%",
             render: (_, record) => (
                 <Space size="small">
                     <Button type="link" className="text-primary-500 font-bold" onClick={() => { console.log(record); }}>مشاهده اطلاعات</Button>

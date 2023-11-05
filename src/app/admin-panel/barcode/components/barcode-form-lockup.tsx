@@ -10,7 +10,7 @@ import CustomeTable from "../../../../../components/CustomeTable";
 
 function BarcodeFormLockup(props: {
   form: FormInstance;
-  setFilter: any;
+  setFilter?: any;
   open: boolean;
   setOpen: (arg: boolean) => void;
   setUid: (arg: string) => void;

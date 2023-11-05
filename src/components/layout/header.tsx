@@ -50,12 +50,12 @@ export default function LayoutHeader({
                         />
                         <HeaderDropdown />
                     </span>
-                    <Input
+                    {/* <Input
                         className="hidden lg:block"
                         style={{ width: "704px" }}
                         size="large"
                         placeholder="جستوجو ..."
-                    />
+                    /> */}
                     {/*  color='primary' type='primary' size='large' placeholder='جستوجو ...' suffix={<SearchOutlined />} */}
                     <Image
                         src="/static/logo.svg"

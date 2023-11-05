@@ -26,6 +26,7 @@ export default function PrimaryRequestsOtherOptionTableForm() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
 
         },
         {

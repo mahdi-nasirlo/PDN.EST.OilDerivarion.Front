@@ -15,32 +15,40 @@ export default async function middleware(request: NextRequest) {
     }
 
     if (pathname.startsWith('/auth') && hasApiToken) {
-        console.log('/dashboard')
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
     if (pathname === '/') {
-        console.log("/")
         return NextResponse.redirect(new URL('/login', request.url));
     }
 
-    if (request.nextUrl.searchParams.has('code')) {
+    if (request.nextUrl.searchParams.has('code') && pathname !== "/getToken") {
 
-        const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
-
-        if (token) {
-
-            const response = NextResponse.redirect(new URL('/dashboard', request.url));
-
-            response.cookies.set("accessToken", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV !== "development",
-                sameSite: "strict",
-                maxAge: 60 * 60,
-            });
-
-            return response;
-        }
+        return NextResponse.redirect(new URL("/getToken?code=" + request.nextUrl.searchParams.get("code"), request.url))
+        // try {
+        //     console.log(request.nextUrl.searchParams.get("code"))
+        //
+        //     const token = await getToken(request, params.get('code') || '', request.nextUrl.origin + request.nextUrl.pathname);
+        //
+        //     if (token) {
+        //
+        //         const response = NextResponse.redirect(new URL(pathname, request.url));
+        //
+        //         response.cookies.set("accessToken", token, {
+        //             httpOnly: false,
+        //             secure: false,
+        //             sameSite: "none",
+        //             maxAge: 60 * 60,
+        //         });
+        //
+        //         return response;
+        //     }
+        //
+        // } catch (e) {
+        //
+        //     return NextResponse.redirect(new URL("/login", request.url))
+        //
+        // }
 
     }
 
@@ -53,10 +61,6 @@ export default async function middleware(request: NextRequest) {
     }
 }
 
-export const config = {
-    matcher: ['/auth/:path*', '/dashboard/:path*', '/'],
-}
-
 async function getToken(request: NextRequest, code: string, redirectUrl: string) {
 
     let data = {
@@ -64,9 +68,7 @@ async function getToken(request: NextRequest, code: string, redirectUrl: string)
         "RedirectUri": redirectUrl
     }
 
-    // console.log(data)
-
-    const response = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/security/getToken`, {
+    const response = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/api/V1/Sso/GetToken`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -74,12 +76,8 @@ async function getToken(request: NextRequest, code: string, redirectUrl: string)
         body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-        throw new Error(`API request failed with status: ${response.status}`);
-    }
-
     const responseData = await response.json();
 
-    console.log(responseData.data?.access_token)
-    return responseData.data?.access_token
+    console.log(responseData?.data?.access_token)
+    return responseData?.data?.access_token
 }

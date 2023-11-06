@@ -80,7 +80,7 @@ export const routDictionary: Items = {
 
   // start state-general-management panel
   "state-general-management": {
-    title: "سامانه کارشناس استان",
+    title: "پنل مدیر کل استان",
     href: "/state-general-management",
   },
   "delays-list": {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import StepContext from '../stete-manager/step-context'
 import { Button, Col, Divider, Form, Input, Radio, Row, Select, Typography } from 'antd'
 import { listFetcher } from '../../../../../lib/server/listFetcher'
@@ -14,8 +14,8 @@ import { SetProducerLab } from '../../../../../interfaces/Base-info';
 export default function LaboratoryEquipments() {
 
     const processController = useContext(StepContext)
-    const [form] = useForm();
 
+    const [form] = useForm();
 
     const { trigger, isMutating } = useSWRMutation("/Producer/SetLab", mutationFetcher)
 
@@ -30,6 +30,9 @@ export default function LaboratoryEquipments() {
     };
 
     const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
+
+
+    const [wastePlaceForm, SetWastePlace] = useState(false)
 
     function CustomRadioGroup(
         { label, value, options, onChange, name }:
@@ -297,7 +300,15 @@ export default function LaboratoryEquipments() {
                             name="hasWaste"
                             label="ضایعات"
                             value={form.getFieldValue("producerHasWaste")}
-                            onChange={(e: any) => form.setFieldsValue({ producerHasWaste: e.target.value })}
+                            onChange={(e: any) => {
+                                if (e.target.value == true) {
+                                    SetWastePlace(false);
+                                } else {
+                                    SetWastePlace(true);
+                                    form.setFieldValue("wastePlace", null);
+                                }
+                                form.setFieldsValue({ producerHasWaste: e.target.value });
+                            }}
                             options={[
                                 { label: 'دارد', value: true },
                                 { label: 'ندارد', value: false },
@@ -309,7 +320,12 @@ export default function LaboratoryEquipments() {
                             name="wastePlace"
                             label="محل های فروش یا دفن ضایعات"
                         >
-                            <Input size="large" className="w-full" placeholder="(در صورت موجود) وارد کنید" />
+                            <Input
+                                size="large"
+                                className="w-full"
+                                disabled={wastePlaceForm}
+                                placeholder="(در صورت موجود) وارد کنید"
+                            />
                         </Form.Item>
                     </Col>
                 </Row>

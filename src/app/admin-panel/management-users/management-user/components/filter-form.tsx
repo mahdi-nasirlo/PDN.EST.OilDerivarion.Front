@@ -37,7 +37,6 @@ export default function FilterForm({
             name="NationalCode"
             label="کد ملی"
             rules={[
-              { required: true },
               {
                 pattern: /^[0-9]{10}$/,
                 message: "کد ملی نامتعبر است",

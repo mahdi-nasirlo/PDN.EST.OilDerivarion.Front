@@ -1,10 +1,11 @@
 import { Col, Form, Input, Radio, Row, Select } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 import useSWR from "swr";
 
 export default function EditForm({ data, form }: { data: any, form: any }) {
 
+    const [wastePlaceForm, SetWastePlace] = useState(true)
 
     const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
 
@@ -248,7 +249,15 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                         name="hasWaste"
                         label="ضایعات"
                         value={form.getFieldValue("hasWaste")}
-                        onChange={(e: any) => form.setFieldsValue({ hasWaste: e.target.value })}
+                        onChange={(e: any) => {
+                            if (e.target.value == true) {
+                                SetWastePlace(false);
+                            } else {
+                                SetWastePlace(true);
+                                form.setFieldValue("wastePlace", null);
+                            }
+                            form.setFieldsValue({ producerHasWaste: e.target.value });
+                        }}
                         options={[
                             { label: 'دارد', value: true },
                             { label: 'ندارد', value: false },
@@ -260,7 +269,12 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                         name="wastePlace"
                         label="محل های فروش یا دفن ضایعات"
                     >
-                        <Input size="large" className="w-full" placeholder="(در صورت موجود) وارد کنید" />
+                        <Input
+                            size="large"
+                            className="w-full"
+                            disabled={wastePlaceForm}
+                            placeholder="(در صورت موجود) وارد کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>

@@ -10,7 +10,7 @@ function ProductForm() {
       "/ProductCategory/GetAll",
       {
         name: null,
-        IsActive: null,
+        IsActive: true,
       },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })

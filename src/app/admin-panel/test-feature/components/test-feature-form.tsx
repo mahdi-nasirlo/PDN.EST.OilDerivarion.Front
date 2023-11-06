@@ -32,9 +32,9 @@ export default function TestFeatureForm() {
             name="isActive"
             label="فعال / غیر فعال"
             rules={[{ required: true }]}
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               size="large"
               options={[
                 { label: "فعال", value: true },

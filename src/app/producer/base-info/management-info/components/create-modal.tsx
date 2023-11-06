@@ -6,6 +6,8 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import ContactInputs from "../../../../../../components/inputs/Contact";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -121,7 +123,7 @@ export default function CreateModal({
                 name="nationalCode"
                 label="کد ملی / کد اتباع"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
                     message: "کد ملی نامتعبر است",
@@ -137,15 +139,11 @@ export default function CreateModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="birthDate"
+                name="birthDatePersian"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <DatePicker
-                  className="w-full"
-                  placeholder="13**/**/**"
-                  size="large"
-                />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>
@@ -166,26 +164,13 @@ export default function CreateModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="currentMobile"
-                label="شماره تماس"
-                rules={[
-                  { required: true, message: "این فیلد اجباری است" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
-                  },
-                ]}
-              >
+              <ContactInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </Form.Item>
+              </ContactInputs>
             </Col>
           </Row>
         </Form>

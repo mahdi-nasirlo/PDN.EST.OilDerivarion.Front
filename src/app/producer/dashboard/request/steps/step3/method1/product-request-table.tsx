@@ -66,6 +66,17 @@ const ProductRequestTable = () => {
                 loading={isLoading}
                 className="mt-3"
                 columns={tableColumns}
+                pagination={{
+                    defaultPageSize: 5,
+                    showSizeChanger: false,
+                    defaultCurrent: 1,
+                    style: {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-start",
+                        margin: "16px 0",
+                    },
+                }}
             />
             <ConfirmDeleteModal
                 title="حذف آزمایشگاه"

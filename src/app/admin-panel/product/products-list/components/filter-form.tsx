@@ -18,7 +18,7 @@ export default function FilterForm({
   const [form] = useForm();
 
   const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
-    ["/ProductCategory/GetAll", { name: null, IsActive: null }],
+    ["/ProductCategory/GetAll", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 

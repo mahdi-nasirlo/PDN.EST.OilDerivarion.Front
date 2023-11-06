@@ -7,7 +7,7 @@ export interface SetBase {
 }
 
 export interface GerPagePresonLicence {
-  Uid: string;
+  uid: string;
   Name: string;
   LicenseTypeId: number;
   Number: string;

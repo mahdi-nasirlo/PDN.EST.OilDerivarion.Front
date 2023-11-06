@@ -43,7 +43,6 @@ export default function DataTable({
 
     await mutate();
     if (res) {
-
       setIsDeleteModalVisible(false);
 
       setRecordToDelete(null);
@@ -67,7 +66,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "نام",
@@ -86,7 +85,7 @@ export default function DataTable({
     },
     {
       title: "تاریخ تولد",
-      dataIndex: "birthDate",
+      dataIndex: "birthDatePersian",
       key: "5",
     },
     {

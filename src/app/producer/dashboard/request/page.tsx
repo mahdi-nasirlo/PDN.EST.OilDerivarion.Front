@@ -1,46 +1,46 @@
 "use client";
 
 import React from "react";
-import {Steps} from "antd";
+import { Steps } from "antd";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useControlProcess from "@/app/producer/dashboard/request/state-managment/useControlProcess";
-import Step1 from "@/app/producer/dashboard/request/steps/step1";
-import Step2 from "@/app/producer/dashboard/request/steps/step2";
-import Step3 from "@/app/producer/dashboard/request/steps/step3";
+import Step1 from "./steps/step1";
+import Step2 from "./steps/step2";
+import Step3 from "./steps/step3";
 import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
-import Step6 from "@/app/producer/dashboard/request/steps/step6";
+import Step6 from "./steps/step6";
 
 function Page() {
-    const processController = useControlProcess();
+  const processController = useControlProcess();
 
-    let CurrentStep;
+  let CurrentStep;
 
-    switch (processController.step) {
-        case 0:
-            CurrentStep = <Step1/>;
-            break;
-        case 1:
-            CurrentStep = <Step2/>;
-            break;
-        case 2:
-            CurrentStep = <Step3/>;
-            break;
-        case 3:
-            CurrentStep = <Step4/>;
-            break;
+  switch (processController.step) {
+    case 0:
+      CurrentStep = <Step1 />;
+      break;
+    case 1:
+      CurrentStep = <Step2 />;
+      break;
+    case 2:
+      CurrentStep = <Step3 />;
+      break;
+    case 3:
+      CurrentStep = <Step4 />;
+      break;
 
-        case 4:
-            CurrentStep = <Step5/>;
-            break;
+    case 4:
+      CurrentStep = <Step5 />;
+      break;
 
-        case 5:
-            CurrentStep = <Step6/>;
-            break;
+    case 5:
+      CurrentStep = <Step6 />;
+      break;
 
-        default:
-            CurrentStep = <></>;
-    }
+    default:
+      CurrentStep = <></>;
+  }
 
   return (
     <>
@@ -71,8 +71,8 @@ function Page() {
             description: "اطلاعات تجهیزات آزمایشگاهی",
           },
           {
-            title: "بازبینی",
-            description: "بازبینی نهایی",
+            title: "سبد درخواست",
+            description: "سبد درخواست نهایی",
           },
         ]}
       />

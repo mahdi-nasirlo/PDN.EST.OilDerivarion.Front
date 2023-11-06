@@ -88,9 +88,9 @@ function Step1({
               rules={[{ required: true }]}
               name="isActive"
               label="فعال / غیر فعال"
+              initialValue={true}
             >
               <Select
-                defaultValue={"فعال"}
                 options={[
                   { label: "فعال", value: true },
                   { label: "غیر فعال", value: false },

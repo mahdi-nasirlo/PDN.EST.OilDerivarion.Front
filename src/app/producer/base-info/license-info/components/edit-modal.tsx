@@ -5,6 +5,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function EditModal({
   mutate,
@@ -38,7 +39,6 @@ export default function EditModal({
 
     await mutate();
     if (res) {
-
       setIsEditModalVisible(false);
 
       form.resetFields();
@@ -98,7 +98,7 @@ export default function EditModal({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Name"
+                name="name"
                 label="نام سند"
                 rules={[
                   { required: true, message: "این فیلد اجباری است" },
@@ -110,7 +110,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Number"
+                name="number"
                 label="شماره سند"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
@@ -120,7 +120,7 @@ export default function EditModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="LicenseTypeId" label="نوع مجوز">
+              <Form.Item name="licenseTypeName" label="نوع مجوز">
                 <Select
                   loading={ldLicenseTypeGetAll}
                   options={LicenseTypeGetAll}
@@ -132,33 +132,27 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="IssueDate"
+                name="issueDatePersian"
                 label="تاریخ صدور"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <Input size="large" />
-                {/* <DatePicker
-                                    className="w-full"
-                                    placeholder="13**/
-                /**"
-                                    size="large"
-                                /> */}
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="ExpirationDate"
+                name="expirationDatePersian"
                 label="تاریخ انقضاء"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <Input size="large" placeholder="13**/**/**" />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Exporter"
+                name="exporter"
                 label="صادرکننده"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >

@@ -23,7 +23,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
 
     const [supplyMethodStatus, setSupplyMethod] = useState()
 
-    const [personTypeStatus, setPersonType] = useState()
+    const [personTypeStatus, setPersonType] = useState(null)
 
     const [SupplyNational, SetSupplyNational] = useState<any>(null)
 
@@ -299,8 +299,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                                         return Promise.reject("کد 'ملی / شناسه ملی' اجباری است")
                                     }
 
-                                    if (value && personTypeStatus === 1) {
-                                        return Promise.reject("کد ملی باید 10 رقم باشد")
+                                    if (/^[0-9]{10}$/) {
+                                        return Promise.reject("کد ملی نامتعبر است")
                                     }
 
                                     if (value && personTypeStatus === 2) {

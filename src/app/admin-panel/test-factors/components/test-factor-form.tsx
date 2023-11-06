@@ -91,9 +91,9 @@ function TestFactorForm() {
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="isActive"
             label="فعال/غیر فعال"
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },

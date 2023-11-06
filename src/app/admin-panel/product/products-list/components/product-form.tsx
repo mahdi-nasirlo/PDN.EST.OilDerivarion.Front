@@ -57,9 +57,9 @@ function ProductForm() {
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="IsActive"
             label="فعال/غیر فعال"
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیر فعال", value: false },

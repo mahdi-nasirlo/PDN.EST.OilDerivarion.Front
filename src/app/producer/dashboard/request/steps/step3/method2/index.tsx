@@ -1,5 +1,5 @@
-import React, {useContext} from "react";
-import {Button, Divider, Form, Typography} from "antd";
+import React, { useContext } from "react";
+import { Alert, Button, Divider, Form, Typography } from "antd";
 import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
@@ -19,9 +19,11 @@ const Index = () => {
 
   return (
     <>
-      <Typography className="text-right font-medium text-base">
-        لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
-      </Typography>
+      <Alert
+        className="border-none w-full text-right text-base font-medium text-blue-500"
+        message={"ابتدا محصول خود را انتخاب کرده و بعد آن را ذخیره کنید تا بتوانید به مرحله بعد بروید"}
+        type="info"
+      />
       <Divider />
       <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary mb-10">
         محصول تولیدی

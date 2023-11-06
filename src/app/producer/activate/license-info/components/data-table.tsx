@@ -64,36 +64,36 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "نام سند",
-      dataIndex: "Name",
+      dataIndex: "name",
       key: "2",
     },
     {
       title: "شماره سند",
-      dataIndex: "Number",
+      dataIndex: "number",
       key: "7",
     },
     {
       title: "نوع مجوز",
-      dataIndex: "LicenseTypeName",
+      dataIndex: "licenseTypeName",
       key: "3",
     },
     {
       title: "صادر کننده",
-      dataIndex: "Exporter",
+      dataIndex: "exporter",
       key: "4",
     },
     {
       title: "تاریخ صدور",
-      dataIndex: "IssueDate",
+      dataIndex: "issueDatePersian",
       key: "5",
     },
     {
       title: "تاریخ انقضاء",
-      dataIndex: "ExpirationDate",
+      dataIndex: "expirationDatePersian",
       key: "6",
     },
     {

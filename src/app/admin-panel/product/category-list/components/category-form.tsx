@@ -79,9 +79,9 @@ function CategoryForm({
                 message: ".لطفا وضغیت فعال/غیرفعال بودن را انتخاب نمایید",
               },
             ]}
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },

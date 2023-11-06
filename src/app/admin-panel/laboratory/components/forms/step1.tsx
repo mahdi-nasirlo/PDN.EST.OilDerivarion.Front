@@ -57,7 +57,7 @@ function Step1({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
-              name="license_Expire_Date"
+              name="licenseExpireDatePersian"
               label="تاریخ"
             >
               <CustomeDatePicker />
@@ -88,9 +88,9 @@ function Step1({
               rules={[{ required: true }]}
               name="isActive"
               label="فعال / غیر فعال"
+              initialValue={true}
             >
               <Select
-                defaultValue={"فعال"}
                 options={[
                   { label: "فعال", value: true },
                   { label: "غیر فعال", value: false },

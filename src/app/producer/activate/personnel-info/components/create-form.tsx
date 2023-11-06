@@ -15,6 +15,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
@@ -92,40 +93,23 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              name="birthDate"
+              name="birthDatePersian"
               label="تاریخ تولد"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true }]}
             >
-              <DatePicker
-                className="w-full"
-                placeholder="13**/**/**"
-                size="large"
-              />
+              <CustomeDatePicker />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="currentMobile"
-              label="شماره تماس"
-              rules={[
-                { required: true, message: "این فیلد اجباری است" },
-                {
-                  validator: async (rule, value) => {
-                    if (!/^\d+$/.test(value)) {
-                      throw new Error("لطفا عدد وارد کنید");
-                    }
-                  },
-                },
-              ]}
-            >
+            <ContactInputs label="شماره تماس" name="currentMobile">
               <Input
                 className="w-full rounded-lg"
                 size="large"
                 placeholder="وارد کنید"
               />
-            </Form.Item>
+            </ContactInputs>
           </Col>
         </Row>
         <Row dir="ltr">

@@ -18,6 +18,7 @@ import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
@@ -106,15 +107,11 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              name="birthDate"
+              name="birthDatePersian"
               label="تاریخ تولد"
-              rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
+              rules={[{ required: true }]}
             >
-              <DatePicker
-                className="w-full"
-                placeholder="13**/**/**"
-                size="large"
-              />
+              <CustomeDatePicker />
             </Form.Item>
           </Col>
         </Row>

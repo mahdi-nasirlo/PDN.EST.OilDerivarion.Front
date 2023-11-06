@@ -19,9 +19,9 @@ function GpsForm() {
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="IsActive"
             label="فعال/غیر فعال"
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { value: true, label: "فعال" },
                 { value: false, label: "غیر فعال" },

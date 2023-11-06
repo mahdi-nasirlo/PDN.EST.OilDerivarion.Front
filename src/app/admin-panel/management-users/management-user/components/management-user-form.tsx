@@ -156,6 +156,7 @@ export default function ManagementUserForm({
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="IsActive"
             label="فعال/غیر فعال"
+            initialValue={true}
           >
             <Select
               options={[

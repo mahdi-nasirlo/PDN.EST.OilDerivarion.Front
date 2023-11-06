@@ -19,9 +19,9 @@ function MeasureForm() {
             name="isActive"
             label="فعال/غیرفعال"
             rules={[{ required: true }]}
+            initialValue={true}
           >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیرفعال", value: false },

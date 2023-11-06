@@ -3,20 +3,20 @@
 import { Button, Col, Form, Input, Row } from "antd";
 import React from "react";
 
-export default function FilterForm({ filter, unsetFilter }: {
-  filter: (arg: MaterialGet) => void,
-  unsetFilter: () => void,
+export default function FilterForm({
+  filter,
+  unsetFilter,
+}: {
+  filter: (arg: MaterialGet) => void;
+  unsetFilter: () => void;
 }) {
-
-
   return (
     // <div className="box-border w-full p-6">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="name" label="نام محصول">
-            <Input size="large"
-              placeholder="انتخاب کنید" />
+          <Form.Item name="name" label="کد">
+            <Input size="large" placeholder="انتخاب کنید" />
           </Form.Item>
         </Col>
       </Row>

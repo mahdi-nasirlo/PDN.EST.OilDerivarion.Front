@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Col, Modal, Row, Space } from "antd";
+import { Button, Col, Modal, Row, Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
@@ -26,15 +26,35 @@ export default function DataTable({
   boxesData,
   mutate,
 }: {
-  setFilter: (arg: any) => void
+  setFilter: (arg: any) => void;
   isValidating: any;
   isLoading: boolean;
-  boxesData: | {
-    records: any
-    count: number
-  } | undefined;
+  boxesData:
+    | {
+        records: any;
+        count: number;
+      }
+    | undefined;
   mutate: () => void;
 }) {
+  const iframeRef = useRef(null);
+
+  // Function to refresh the iframe
+  const refreshIframe = () => {
+    if (iframeRef.current) {
+      (iframeRef.current as HTMLIFrameElement).src = (
+        iframeRef.current as HTMLIFrameElement
+      ).src;
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(refreshIframe, 30000); // 10 seconds in milliseconds
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+
   //حذف
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -48,8 +68,9 @@ export default function DataTable({
 
   const [isGPSModalVisible, setIsGPSEditModalVisible] = useState(false);
 
-  const handleGPS = () => {
+  const handleGPS = (record: any) => {
     setIsGPSEditModalVisible(true);
+    setRecordToEdit(record.Uid);
   };
 
   const handleCancelGPS = () => {
@@ -74,7 +95,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "کد",
@@ -90,7 +111,7 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "3",
-      render: (e, record) => <StatusColumn record={record} />
+      render: (e, record) => <StatusColumn record={record} />,
     },
     {
       title: "مکان یابی",
@@ -101,7 +122,7 @@ export default function DataTable({
           <Button
             type="link"
             className="text-primary-500 font-bold"
-            onClick={() => handleGPS()}
+            onClick={() => handleGPS(record)}
           >
             مشاهده موقعیت
           </Button>
@@ -142,9 +163,12 @@ export default function DataTable({
   ];
   return (
     <>
-
-      <CustomeTable setInitialData={setFilter} isLoading={isLoading || isMutating || isValidating}
-        data={boxesData} columns={columns} />
+      <CustomeTable
+        setInitialData={setFilter}
+        isLoading={isLoading || isMutating || isValidating}
+        data={boxesData}
+        columns={columns}
+      />
       {/* جذف */}
       <ConfirmDeleteModal
         open={isDeleteModalVisible}
@@ -180,7 +204,13 @@ export default function DataTable({
             </Col>
           </Row>,
         ]}
-      ></Modal>
+      >
+        <iframe
+          ref={iframeRef}
+          className="w-full h-[480px] border-solid"
+          src={`https://map-test.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
+        ></iframe>
+      </Modal>
     </>
   );
 }

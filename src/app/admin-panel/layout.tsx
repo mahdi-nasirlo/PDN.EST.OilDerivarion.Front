@@ -105,6 +105,10 @@ const items: MenuProps["items"] = [
       "/admin-panel/labratory-factor",
       <FolderPlusIcon width={16} height={16} />
     ),
+    getMenuItem(
+      <Link href="/admin-panel/map-gps"> نقشه آزمایشگاه ها</Link>,
+      "/admin-panel/map-gps"
+    ),
   ]),
   getMenuItem("مدیریت کاربران", "management-users", null, [
     getMenuItem(

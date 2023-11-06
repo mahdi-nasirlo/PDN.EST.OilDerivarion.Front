@@ -34,7 +34,7 @@ export default function DataTable({
     console.log(recordToDelete);
 
     const res = await DeleteLicense({
-      uid: recordToDelete?.Uid,
+      uid: recordToDelete?.uid,
     });
 
     await mutate();

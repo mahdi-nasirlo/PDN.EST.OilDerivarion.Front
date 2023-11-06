@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
-import {Button, Col, Modal, Row} from "antd";
-import {useForm} from "antd/es/form/Form";
+import React, { useEffect } from "react";
+import { Button, Col, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import Step1 from "@/app/admin-panel/laboratory/components/forms/step1";
 
 
 export default function EditModal(
-    {recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate}: {
+    { recordToEdit, setRecordToEdit, setIsEditModalVisible, isEditModalVisible, mutate }: {
         setIsEditModalVisible: (arg: boolean) => void;
         isEditModalVisible: boolean;
         recordToEdit: Labratory | null;
@@ -23,8 +23,8 @@ export default function EditModal(
     const { isMutating, trigger } = useSWRMutation("/Lab/Update", mutationFetcher)
 
     const handleSubmit = async (values: Labratory) => {
-
-        values.Uid = data?.Uid
+        //@ts-ignore
+        values.Uid = recordToEdit?.Uid
 
         await trigger(values)
 
@@ -90,7 +90,7 @@ export default function EditModal(
                     </Row>,
                 ]}
             >
-                <Step1 form={form} handleSubmit={handleSubmit} loading={false}/>
+                <Step1 form={form} handleSubmit={handleSubmit} loading={false} />
             </Modal>
         </>
     );

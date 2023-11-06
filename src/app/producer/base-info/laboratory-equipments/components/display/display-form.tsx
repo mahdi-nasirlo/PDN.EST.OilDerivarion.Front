@@ -189,9 +189,9 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                     <Col xs={24} md={8}>
                         <Form.Item
                             name="wastePlace"
-                            label="محل های فروش یا دفن ضایعات ( درصورت وجود )"
+                            label="محل های فروش یا دفن ضایعات"
                         >
-                            <Input size="large" placeholder="وارد کنید" />
+                            <Input size="large" placeholder="ندارد" />
                         </Form.Item>
                     </Col>
                 </Row>

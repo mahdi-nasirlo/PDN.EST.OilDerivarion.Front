@@ -516,5 +516,7 @@ margin-right: 16px !important;
     @apply w-full !important
 }
 
-  
-  
+.ant-tooltip-inner{
+    background-color: white !important;
+    color: black !important;
+}

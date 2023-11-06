@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {customRequest} from "../customRequest";
+import {customRequest} from "./customRequest";
 import handleError from "./handleError";
 
 

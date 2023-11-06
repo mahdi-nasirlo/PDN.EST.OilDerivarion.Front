@@ -7,6 +7,7 @@ import {ColumnsType} from "antd/es/table";
 import {listFetcher} from "../../../lib/server/listFetcher";
 import {TestGetPage} from "../../../interfaces/test&verify";
 import {addIndexToData} from "../../../lib/addIndexToData";
+import React from "react";
 
 export default function Home() {
   const {

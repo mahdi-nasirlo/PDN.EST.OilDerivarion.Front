@@ -171,11 +171,6 @@ export default function DataTable({
       key: "9",
     },
     {
-      title: "فکس",
-      dataIndex: "Fax",
-      key: "10",
-    },
-    {
       title: "عملیات",
       key: "عملیات",
       align: "center",

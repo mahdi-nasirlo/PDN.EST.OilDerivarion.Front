@@ -1,79 +1,83 @@
 import Image from "next/image";
-import { EditFilled, LogoutOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps, Modal, theme, Typography } from "antd";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import {EditFilled, LogoutOutlined} from "@ant-design/icons";
+import {Dropdown, MenuProps, Modal, theme, Typography} from "antd";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+import {signOut, useSession} from "next-auth/react";
 
 export default function HeaderDropdown() {
-  const { token } = theme.useToken();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    const {token} = theme.useToken();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const router = useRouter();
+    const router = useRouter();
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
 
-  const handleOk = () => {
-    router.push("/login");
-    setIsModalOpen(false);
-  };
+    const handleOk = async () => {
+        const res = await signOut()
+        console.log(res)
+        setIsModalOpen(false);
+    };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
-  const items: MenuProps["items"] = [
-    {
-      key: "2",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          ویرایش اطلاعات کاربری
-        </a>
-      ),
-      icon: <EditFilled />,
-      disabled: true,
-    },
-    {
-      key: "4",
-      danger: true,
-      label: "خروج",
-      onClick: () => {
-        showModal();
-      },
-      icon: <LogoutOutlined />,
-      theme: "dark",
-    },
-  ];
+    const session = useSession()
 
-  return (
-    <>
-      <Dropdown
-        className="flex flex-wrap items-center cursor: pointer"
-        menu={{ items }}
-      >
+    const items: MenuProps["items"] = [
+        {
+            key: "2",
+            label: (
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.aliyun.com"
+                >
+                    ویرایش اطلاعات کاربری
+                </a>
+            ),
+            icon: <EditFilled/>,
+            disabled: true,
+        },
+        {
+            key: "4",
+            danger: true,
+            label: "خروج",
+            onClick: () => {
+                showModal();
+            },
+            icon: <LogoutOutlined/>,
+            theme: "dark",
+        },
+    ];
+
+    return (
+        <>
+            <Dropdown
+                className="flex flex-wrap items-center cursor: pointer"
+                menu={{items}}
+            >
         <span>
           <Image
-            className="ml-4"
-            height={40}
-            width={40}
-            alt="person-circle icon"
-            src="/static/person-circle.svg"
+              className="ml-4"
+              height={40}
+              width={40}
+              alt="person-circle icon"
+              src="/static/person-circle.svg"
           />
           <span>
             <Typography
-              style={{
-                fontSize: "16px",
-                fontWeight: 400,
-                color: token.colorTextBase,
-              }}
-              className="text-lg hidden lg:block"
+                style={{
+                    fontSize: "16px",
+                    fontWeight: 400,
+                    color: token.colorTextBase,
+                }}
+                className="text-lg hidden lg:block"
             >
-              نام کاربری
+              {session?.data?.user?.name}
             </Typography>
             <Typography
               style={{

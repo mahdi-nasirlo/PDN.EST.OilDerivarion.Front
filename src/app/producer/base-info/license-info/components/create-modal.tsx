@@ -6,6 +6,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -28,7 +29,6 @@ export default function CreateModal({
 
     await mutate();
     if (res) {
-
       setIsEditModalVisible(false);
 
       form.resetFields();
@@ -123,7 +123,7 @@ export default function CreateModal({
               <Form.Item
                 name="exporter"
                 label="صادر کننده"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
                 <Input
                   className="w-full rounded-lg"
@@ -136,28 +136,20 @@ export default function CreateModal({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="issueDate"
+                name="issueDatePersian"
                 label="زمان صدور"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <DatePicker
-                  className="w-full"
-                  placeholder="13**/**/**"
-                  size="large"
-                />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="expirationDate"
+                name="expirationDatePersian"
                 label="تاریخ انقضاء"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <DatePicker
-                  className="w-full"
-                  placeholder="13**/**/**"
-                  size="large"
-                />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>

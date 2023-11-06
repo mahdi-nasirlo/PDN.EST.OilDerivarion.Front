@@ -23,9 +23,13 @@ function MaterialForm() {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="وضعیت" rules={[{ required: true }]}>
+          <Form.Item
+            name="IsActive"
+            label="وضعیت"
+            rules={[{ required: true }]}
+            initialValue={true}
+          >
             <Select
-              defaultValue={"فعال"}
               options={[
                 { label: "فعال", value: true },
                 { label: "غیر فعال", value: false },

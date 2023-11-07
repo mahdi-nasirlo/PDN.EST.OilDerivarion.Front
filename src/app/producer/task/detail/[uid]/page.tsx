@@ -6,6 +6,7 @@ import WorkflowDataViewer from "../../../../../../components/WorkflowDataViewer"
 import WorkflowRequestBtn from "../../../../../../components/WorkflowRequestBtn";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import { Divider } from "antd";
+import { useRouter } from "next/navigation";
 
 interface PropType {
   params: { uid: string };
@@ -34,6 +35,8 @@ export default function Home(props: PropType) {
         },
       })
   );
+
+  const router = useRouter();
 
   return (
     <>

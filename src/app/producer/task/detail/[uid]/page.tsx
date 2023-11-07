@@ -19,7 +19,7 @@ export default function Home(props: PropType) {
     return (
         <>
             <div className="box-border w-full p-6">
-                <WorkflowDataViewer/>
+                <WorkflowDataViewer data={data}/>
             </div>
         </>
     );

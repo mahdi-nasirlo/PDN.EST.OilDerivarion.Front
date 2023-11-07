@@ -138,6 +138,21 @@ const items: MenuProps["items"] = [
         "/producer/task",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
+      getMenuItem(
+        <Link href="/producer/task">وارد کردن زمان کارشناس نفت</Link>,
+        "/producer/task",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/task">وارد کردن زمان کارشناس صمت</Link>,
+        "/producer/task",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/task">برنامه ریزی و زمانبندی بازدید</Link>,
+        "/producer/task",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
     ],
     "group"
   ),

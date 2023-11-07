@@ -14,7 +14,9 @@ interface DataType {
     MaterialName: string[];
 }
 
-export default function DataTable({ setModalVisible }: { setModalVisible: any }) {
+export default function DataTable(
+    { setModalVisible, setVisitTimeModalVisible }:
+        { setModalVisible: any, setVisitTimeModalVisible: any }) {
 
 
     //   const { data, isLoading } = useSWR<GetPage_ExeManager>(
@@ -30,8 +32,12 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
 
     // : ColumnsType<DataType>
 
-    const showModal = () => {
+    const showInvitationModal = () => {
         setModalVisible(true);
+    };
+
+    const showVisitTimeModal = () => {
+        setVisitTimeModalVisible(true);
     };
 
     const columns: ColumnsType<DataType> = [
@@ -52,14 +58,24 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
             key: "3",
         },
         {
-            title: "زمان بازدید",
-            dataIndex: "MaterialName",
+            title: "زمان باقی مانده بازدید",
+            dataIndex: "DateRegistration",
             key: "4",
         },
         {
-            title: "زمان باقی مانده بازدید",
-            dataIndex: "DateRegistration",
+            title: "زمان بازدید",
+            dataIndex: "MaterialName",
             key: "5",
+            align: "center",
+            fixed: 'right',
+            width: "10%",
+            render: () => (
+                <Space size="small">
+                    <Button type="link" onClick={() => showVisitTimeModal()} className="text-primary-500 font-bold">
+                        تعیین زمان بازدید
+                    </Button>
+                </Space>
+            ),
         },
         {
             title: "جزئیات",
@@ -69,7 +85,7 @@ export default function DataTable({ setModalVisible }: { setModalVisible: any })
             width: "10%",
             render: () => (
                 <Space size="small">
-                    <Button type="link" onClick={() => showModal()} className="text-primary-500 font-bold">
+                    <Button type="link" onClick={() => showInvitationModal()} className="text-primary-500 font-bold">
                         مشاهده دعوت نامه
                     </Button>
                 </Space>

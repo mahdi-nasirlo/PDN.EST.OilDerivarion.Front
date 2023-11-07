@@ -25,6 +25,7 @@ export default function CustomeDatePicker(props: InputProps) {
       readOnly
       ref={ref}
       value={selectedDay as string}
+      placeholder="انتخاب کنید"
     />
   );
 

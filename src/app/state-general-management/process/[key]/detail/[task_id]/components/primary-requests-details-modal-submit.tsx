@@ -14,17 +14,19 @@ import {
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 
-export default function PrimaryRequestsDetailsModalSubmit({
-  modalVisible,
-  setModalVisible,
-}: {
-  modalVisible: any;
-  setModalVisible: any;
-}) {
+export default function PrimaryRequestsDetailsModalSubmit(
+  {
+    modalVisible,
+    setModalVisible,
+  }: {
+    modalVisible: any;
+    setModalVisible: any;
+  }
+) {
   const [form] = useForm();
 
   const closeModal = () => {
-    setModalVisible(false);
+    // setModalVisible(false);
   };
 
   const handleFormSubmit = async () => {
@@ -43,13 +45,14 @@ export default function PrimaryRequestsDetailsModalSubmit({
         width={800}
         title={
           <div>
-            <div className="text-base mb-2">تعیین زمان تاریخ بازدید</div>
+            <div className="text-base mb-2">تعیین کارشناسان</div>
             <div className="font-normal text-sm">
-              لطفا زمان بازدید و کارشناسان را انتخاب نموده و تایید نمایید.
+              لطفا کارشناسان را انتخاب نموده و تایید نمایید.
             </div>
           </div>
         }
-        visible={modalVisible}
+        visible={true}
+        // visible={modalVisible}
         onCancel={closeModal}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -78,44 +81,24 @@ export default function PrimaryRequestsDetailsModalSubmit({
         ]}
       >
         <Form form={form} layout="vertical">
-          <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
-            تعیین تاریخ و ساعت بازدید
-          </Typography>
-          <Row gutter={[32, 1]}>
-            <Col xs={24} md={12}>
-              <Form.Item name="year" label="تاریخ بازدید">
-                <DatePicker
-                  size="large"
-                  placeholder="13**/**/**"
-                  className="w-full"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-              <Form.Item name="establishment" label="ساعت بازدید">
-                <Select size="large" placeholder="انتخاب کنید" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Divider />
-          <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
+          <Typography className="mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             تعیین کارگروه
           </Typography>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده استاندارد استان">
                 <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده صمت استان">
                 <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده نفت استان">
                 <Select size="large" placeholder="انتخاب کنید" />
@@ -123,7 +106,7 @@ export default function PrimaryRequestsDetailsModalSubmit({
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </Modal >
     </>
   );
 }

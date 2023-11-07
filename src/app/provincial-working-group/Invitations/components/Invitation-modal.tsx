@@ -6,7 +6,7 @@ import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 
 
-export default function CreateModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
+export default function InvitationModal({ modalVisible, setModalVisible }: { modalVisible: any, setModalVisible: any }) {
 
     const [form] = useForm()
 

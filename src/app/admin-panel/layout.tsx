@@ -10,6 +10,7 @@ import {
   ClipboardDocumentListIcon,
   FolderPlusIcon,
   HomeIcon,
+  MapIcon,
   PencilSquareIcon,
   RectangleStackIcon,
   UserGroupIcon,
@@ -106,8 +107,11 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
     getMenuItem(
-      <Link href="/admin-panel/map-gps"> نقشه آزمایشگاه ها</Link>,
-      "/admin-panel/map-gps"
+      <Link href="/admin-panel/map-gps" className="text-sm">
+        نقشه آزمایشگاه ها
+      </Link>,
+      "/admin-panel/map-gps",
+      <MapIcon width={16} height={16} />
     ),
   ]),
   getMenuItem("مدیریت کاربران", "management-users", null, [

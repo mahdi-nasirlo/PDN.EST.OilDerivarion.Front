@@ -8,7 +8,7 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 
 export default function Home() {
   const { data, isLoading, mutate, isValidating } = useSWR<any>(
-    ["/WorkFlowRequest/GetAllStep02"],
+    ["/WorkFlowRequest/GetAllStep03"],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url)
   );
 

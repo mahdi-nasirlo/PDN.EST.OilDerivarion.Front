@@ -52,7 +52,7 @@ export default function DataTable({
             type="link"
             className="text-secondary-500 font-bold "
             onClick={() => {
-              router.push("/producer/task/detail/" + record.taskId);
+              router.push("/producer/expert-naft/detail/" + record.taskId);
             }}
           >
             مشاهده اطلاعات

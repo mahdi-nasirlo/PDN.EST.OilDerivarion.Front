@@ -2,30 +2,30 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {Badge, MenuProps} from "antd";
+import { Badge, MenuProps } from "antd";
 import Link from "next/link";
 import {
-    BeakerIcon,
-    DocumentDuplicateIcon,
-    HomeIcon,
-    PencilIcon,
-    PhoneIcon,
-    UserCircleIcon,
-    UsersIcon,
-    WrenchScrewdriverIcon,
+  BeakerIcon,
+  DocumentDuplicateIcon,
+  HomeIcon,
+  PencilIcon,
+  PhoneIcon,
+  UserCircleIcon,
+  UsersIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import {ListBulletIcon} from "@heroicons/react/24/solid";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { ListBulletIcon } from "@heroicons/react/24/solid";
+import { getMenuItem } from "@/components/layout/sidebar";
 
 export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <AppLayout sidebarItems={items}>{children}</AppLayout>
-        </>
+  return (
+    <>
+      <AppLayout sidebarItems={items}>{children}</AppLayout>
+    </>
   );
 }
 
@@ -134,25 +134,25 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-          <Link href="/producer/task/list">لیست وظیفه</Link>,
-          "/producer/task/list",
-          <DocumentDuplicateIcon width={16} height={16}/>
-      ),
-      getMenuItem(
-        <Link href="/producer/task">وارد کردن زمان کارشناس نفت</Link>,
-        "/producer/task",
+        <Link href="/producer/task/list">لیست وظیفه</Link>,
+        "/producer/task/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/task">وارد کردن زمان کارشناس صمت</Link>,
-        "/producer/task",
+        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
+        "/producer/expert-naft/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
-      getMenuItem(
-        <Link href="/producer/task">برنامه ریزی و زمانبندی بازدید</Link>,
-        "/producer/task",
-        <DocumentDuplicateIcon width={16} height={16} />
-      ),
+      // getMenuItem(
+      //   <Link href="/producer/task"> زمان کارشناس صمت</Link>,
+      //   "/producer/task",
+      //   <DocumentDuplicateIcon width={16} height={16} />
+      // ),
+      // getMenuItem(
+      //   <Link href="/producer/task"> زمانبندی بازدید</Link>,
+      //   "/producer/task",
+      //   <DocumentDuplicateIcon width={16} height={16} />
+      // ),
     ],
     "group"
   ),

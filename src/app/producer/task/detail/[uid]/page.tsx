@@ -6,6 +6,7 @@ import WorkflowDataViewer from "../../../../../../components/WorkflowDataViewer"
 import WorkflowRequestBtn from "../../../../../../components/WorkflowRequestBtn";
 import {Choice} from "../../../../../../interfaces/requestDetail";
 import {Divider} from "antd";
+import {useRouter} from "next/navigation";
 
 interface PropType {
     params: { uid: string }
@@ -32,12 +33,15 @@ export default function Home(props: PropType) {
         }
     }))
 
+    const router = useRouter()
+
     return (
         <>
             <div className="box-border w-full p-6">
                 <WorkflowDataViewer data={data}/>
                 <Divider/>
-                <WorkflowRequestBtn choices={data?.choices} nextStepUrl={"/WorkFlowRequest/SetStep02"}
+                <WorkflowRequestBtn onClick={() => router.push("/producer/task/list")} choices={data?.choices}
+                                    nextStepUrl={"/WorkFlowRequest/SetStep02"}
                                     taskId={data?.task.stepId}/>
             </div>
         </>

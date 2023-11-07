@@ -243,5 +243,11 @@ export const routDictionary: Items = {
   },
   detail: {
     title: "جزئیات"
+  },
+  "expert-naft":{
+    title:"کارشناس نفت"
+  },
+  "expert-samt":{
+    title:"کارشناس نفت"
   }
 };

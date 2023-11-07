@@ -1,8 +1,8 @@
 import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
-import { GetTask } from "../../../../../../interfaces/task";
 import { useRouter } from "next/navigation";
+import { GetTask } from "../../../../../../interfaces/task";
 
 export default function DataTable({
   isValidating,

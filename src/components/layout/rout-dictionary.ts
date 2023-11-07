@@ -43,7 +43,7 @@ export const routDictionary: Items = {
     title: "مرحله چهارم",
   },
   "base-info": {
-    title: "اطلاعات اولیه",
+    title: "اطلاعات پایه",
   },
   "laboratory-equipments": {
     title: "تجهیزات آزمایشگاهی",
@@ -226,6 +226,9 @@ export const routDictionary: Items = {
   },
   "gps-tracking": {
     title: "رهگیری GPS",
+  },
+  "map-gps": {
+    title: "نقشه آزمایشگاه ها",
   },
   measures: {
     title: "واحد اندازه گیری",

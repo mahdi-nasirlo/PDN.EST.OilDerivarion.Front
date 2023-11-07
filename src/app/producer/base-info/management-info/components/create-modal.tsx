@@ -8,6 +8,7 @@ import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -155,6 +156,9 @@ export default function CreateModal({
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
                 <Select
+                  showSearch
+                  //@ts-ignore
+                  filterOption={filterOption}
                   loading={ldCompanyRoleGetAll}
                   options={CompanyRoleGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}

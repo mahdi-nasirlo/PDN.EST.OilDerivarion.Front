@@ -6,6 +6,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function EditModal({
   isEditModalVisible,
@@ -123,12 +124,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="currentCEONationalCode"
-                label="شناسه ملی"
+                label="کد ملی(مدیرعامل)"
                 rules={[
-                  { required: true, message: "کد ملی اجباری است" },
+                  { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: "کد ملی نامتعبر است",
+                    message: " کد ملی نامتعبر است",
                   },
                 ]}
               >
@@ -167,6 +168,9 @@ export default function EditModal({
                 ]}
               >
                 <Select
+                  showSearch
+                  //@ts-ignore
+                  filterOption={filterOption}
                   loading={ldCompanyOwnership}
                   options={CompanyOwnershipTypeGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}

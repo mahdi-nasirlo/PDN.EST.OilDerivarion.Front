@@ -4,6 +4,8 @@ import React from "react";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import ContactInputs from "../../../../../../components/inputs/Contact";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -120,40 +122,23 @@ export default function CreateModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="birthDate"
+                name="birthDatePersian"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <DatePicker
-                  className="w-full"
-                  placeholder="13**/**/**"
-                  size="large"
-                />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="currentMobile"
-                label="شماره تماس"
-                rules={[
-                  { required: true, message: "این فیلد اجباری است" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
-                  },
-                ]}
-              >
+              <ContactInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </Form.Item>
+              </ContactInputs>
             </Col>
           </Row>
         </Form>

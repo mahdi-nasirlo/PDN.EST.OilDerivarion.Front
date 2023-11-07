@@ -237,4 +237,11 @@ export const routDictionary: Items = {
     title: "اطلاعات تولید کننده",
   },
   // end admin panel
+
+  "task": {
+    title: "وظایف"
+  },
+  detail: {
+    title: "جزئیات"
+  }
 };

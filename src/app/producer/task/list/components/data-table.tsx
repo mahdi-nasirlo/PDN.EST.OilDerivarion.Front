@@ -1,19 +1,19 @@
-import { Button, Space, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { GetTask } from "../../../../../interfaces/task";
-import { useRouter } from "next/navigation";
+import {Button, Space, Table} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React from "react";
+import {GetTask} from "../../../../../../interfaces/task";
+import {useRouter} from "next/navigation";
 
 export default function DataTable({
-  isValidating,
-  task,
-  isLoading,
-  mutate,
-}: {
-  isValidating: any;
-  task: any;
-  isLoading: any;
-  mutate: () => void;
+                                      isValidating,
+                                      task,
+                                      isLoading,
+                                      mutate,
+                                  }: {
+    isValidating: any;
+    task: any;
+    isLoading: any;
+    mutate: () => void;
 }) {
   const router = useRouter();
 
@@ -52,7 +52,7 @@ export default function DataTable({
             type="link"
             className="text-secondary-500 font-bold "
             onClick={() => {
-              router.push("/producer/task-detail");
+                router.push("/producer/task/detail/" + record.taskId);
             }}
           >
             مشاهده اطلاعات

@@ -2,30 +2,30 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  BeakerIcon,
-  DocumentDuplicateIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    BeakerIcon,
+    DocumentDuplicateIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
+                                       children,
+                                   }: {
+    children: React.ReactNode;
 }) {
-  return (
-    <>
-      <AppLayout sidebarItems={items}>{children}</AppLayout>
-    </>
+    return (
+        <>
+            <AppLayout sidebarItems={items}>{children}</AppLayout>
+        </>
   );
 }
 
@@ -134,9 +134,9 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href="/producer/task">لیست وظیفه</Link>,
-        "/producer/task",
-        <DocumentDuplicateIcon width={16} height={16} />
+          <Link href="/producer/task/list">لیست وظیفه</Link>,
+          "/producer/task/list",
+          <DocumentDuplicateIcon width={16} height={16}/>
       ),
     ],
     "group"

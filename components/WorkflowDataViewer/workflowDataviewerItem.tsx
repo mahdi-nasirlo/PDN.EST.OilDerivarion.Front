@@ -1,5 +1,5 @@
 import React from 'react';
-import {Spin, Table, Typography} from "antd";
+import {Descriptions, Spin, Table, Typography} from "antd";
 import {ColumnsType} from "antd/es/table";
 
 interface PropsType {
@@ -64,9 +64,11 @@ interface ModelPropsType {
 const RenderModel = (props: { item: ModelPropsType[] }) => {
 
     return <>
-        <Typography>
-            {JSON.stringify(props.item)}
-        </Typography>
+        <Descriptions>
+            {props.item?.map((item, index) => <Descriptions.Item key={index} label={item.key}>
+                {item.value}
+            </Descriptions.Item>)}
+        </Descriptions>
     </>
 }
 

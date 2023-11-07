@@ -36,7 +36,7 @@ const Index = (props: { data: WorkFlowDataViewerItemType[] }) => {
 
     return (
         <>
-            {addItemBetween(renderItems(), <Divider/>)}
+            {addItemBetween(renderItems(), <Divider className="mb-10"/>)}
         </>
     );
 };

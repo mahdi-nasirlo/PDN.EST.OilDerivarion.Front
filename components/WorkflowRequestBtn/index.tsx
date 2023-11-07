@@ -9,6 +9,7 @@ interface PropsType {
     choices: Choice[],
     nextStepUrl: string,
     taskId: string,
+    onClick?: () => any
 }
 
 const Index = (props: PropsType) => {
@@ -30,6 +31,16 @@ const Index = (props: PropsType) => {
         return {gridTemplateColumns: `repeat(${repeat}, minmax(0, 1fr))`, gridTemplateRows: "auto"}
     }
 
+    const handleOnClick = async (choice_key: string) => {
+
+        const res = await getNextStep.trigger(choice_key, "")
+
+        if (res && typeof props.onClick === "function") {
+            props.onClick()
+        }
+
+    }
+
     return (
         <>
             {props.hasDescription && <Input.TextArea className="mt-2 mb-4"/>}
@@ -41,7 +52,7 @@ const Index = (props: PropsType) => {
                         className="flex justify-center"
                         key={index}
                     >
-                        <Button onClick={() => getNextStep.trigger(btn.choice_Key, "")} className="w-full"
+                        <Button onClick={() => handleOnClick(btn.choice_Key)} className="w-full"
                                 type="primary">
                             {btn.label}
                         </Button>
@@ -61,7 +72,7 @@ interface HookType {
 interface HookReturn {
     isMutating: boolean,
     data: any,
-    trigger: (choiceKey: string, description: string) => void
+    trigger: (choiceKey: string, description: string) => any
 }
 
 const useClickWorkFlowBtn = ({apiUrl, taskId}: HookType): HookReturn => {
@@ -70,11 +81,13 @@ const useClickWorkFlowBtn = ({apiUrl, taskId}: HookType): HookReturn => {
 
     const handleTrigger = async (choiceKey: string, description?: string) => {
 
-        await trigger({
+        const res = await trigger({
             "taskId": taskId,
             "choiceKey": choiceKey,
             "description": description
         })
+
+        return res
 
     }
 

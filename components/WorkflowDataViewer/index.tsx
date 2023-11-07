@@ -10,7 +10,6 @@ const Index = (props: { data: WorkFlowDataViewerItemType[] }) => {
             if (props.data.hasOwnProperty(key)) {
                 const item = props.data[key];
                 if (item?.title || item?.model || item?.table) {
-                    console.log(item)
                     renderedItems.push(<WorkflowDataviewerItem key={key} data={item}/>);
                 }
             }

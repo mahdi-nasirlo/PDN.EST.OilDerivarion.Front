@@ -1,7 +1,5 @@
 export const addIndexToData = (data: any[] | undefined, keyName: string = "Row", startFrom: number = 1) => {
 
-    console.log(data);
-    
     if (data && data?.length) {
         return data?.map((item: any, index: number) => ({
             ...item,

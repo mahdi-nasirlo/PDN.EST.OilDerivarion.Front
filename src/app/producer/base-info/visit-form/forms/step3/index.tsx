@@ -18,7 +18,7 @@ export default function Index() {
     return (
         <>
             <div className='flex justify-between'>
-                <div className='flex gap-3'>
+                <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
                         مشخصات راکتور ( 3 از 8 )

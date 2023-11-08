@@ -1,13 +1,13 @@
-import { Button, Space, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { GetTask } from "../../../../../../interfaces/task";
-import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import {Button, Descriptions, Space} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
+import {useRouter} from "next/navigation";
+import {GetTask} from "../../../../../../interfaces/task";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import GetPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
 import CustomTable from "../../../../../../components/CustomeTable";
+import {Steps} from "../../../../../../interfaces/steps";
 
 export default function DataTable() {
   const [initialData, setInitialData] = useState<any>(GetPageRecordNumber());
@@ -56,11 +56,11 @@ export default function DataTable() {
       render: (_, record) => (
         <Space size="small">
           <Button
-            type="link"
-            className="text-secondary-500 font-bold "
-            onClick={() => {
-              router.push("/producer/expert-naft/detail/" + record.taskId);
-            }}
+              type="link"
+              className="text-secondary-500 font-bold "
+              onClick={() => {
+                router.push("/producer/expert-naft/detail/" + record.taskId);
+              }}
           >
             مشاهده اطلاعات
           </Button>
@@ -68,16 +68,41 @@ export default function DataTable() {
       ),
     },
   ];
-  {
+
+  const renderDes = () => {
+
+    try {
+      const step: Steps | undefined = naft?.step ? naft?.step[0] : null
+
+      return <>
+        <Descriptions className="text-right" title={step?.Name}>
+          <Descriptions.Item span={2} label="مرحله">
+            {step?.Step_Name}
+          </Descriptions.Item>
+          <Descriptions.Item span={2} label="نقش">
+            {step?.Roles_of_authorized_approvers}
+          </Descriptions.Item>
+          <Descriptions.Item span={5} label="متن کمکی">
+            {step?.Help_Text}
+          </Descriptions.Item>
+        </Descriptions>
+      </>
+
+    } catch (e) {
+      return <></>
+    }
+
   }
+
   return (
-    <>
-      <CustomTable
-        setInitialData={setInitialData}
-        data={{ records: naft, count: naft?.length || 0 }}
-        columns={columns}
-        loading={isLoading || isValidating}
-      />
-    </>
+      <>
+        {renderDes()}
+        <CustomTable
+            setInitialData={setInitialData}
+            data={{records: naft?.tasks, count: naft?.length || 0}}
+            columns={columns}
+            isLoading={isLoading || isValidating}
+        />
+      </>
   );
 }

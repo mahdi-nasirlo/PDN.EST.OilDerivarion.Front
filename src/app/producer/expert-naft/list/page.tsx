@@ -7,7 +7,12 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
 
 export default function Home() {
-  const { data, isLoading, mutate, isValidating } = useSWR<any>(
+  const {
+    data: naft,
+    isLoading,
+    mutate,
+    isValidating,
+  } = useSWR<any>(
     ["/WorkFlowRequest/GetAllStep03"],
     ([url, arg]: [url: string, arg: any]) => listFetcher(url)
   );
@@ -18,7 +23,7 @@ export default function Home() {
         <DataTable
           isValidating={isValidating}
           mutate={mutate}
-          task={addIndexToData(data)}
+          task={addIndexToData(naft)}
           isLoading={isLoading}
         />
       </div>

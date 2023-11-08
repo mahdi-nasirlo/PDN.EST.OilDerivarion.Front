@@ -10,6 +10,7 @@ import PersonnelInfo from './personnel-info/personnel-info';
 import LicenseInfo from './license-info/license-info';
 import ContactInfo from './contact-info/contact-info';
 import LaboratoryEquipments from './laboratory-equipments/laboratory-equipments';
+import VisitForm from './visit-form/page';
 
 
 function Page() {
@@ -28,15 +29,18 @@ function Page() {
             CurrentStep = <LaboratoryEquipments />
             break;
         case 2:
-            CurrentStep = <ManagementInfo />
+            CurrentStep = <VisitForm />
             break;
         case 3:
-            CurrentStep = <PersonnelInfo />
+            CurrentStep = <ManagementInfo />
             break;
         case 4:
-            CurrentStep = <LicenseInfo />
+            CurrentStep = <PersonnelInfo />
             break;
         case 5:
+            CurrentStep = <LicenseInfo />
+            break;
+        case 6:
             CurrentStep = <ContactInfo />
             break;
         default:
@@ -50,22 +54,25 @@ function Page() {
                 className="pb-0 lg:pb-4"
                 items={[
                     {
-                        title: "اطلاعات واحد تولیدی",
+                        title: "واحد تولیدی",
                     },
                     {
                         title: "تجهیزات آزمایشگاهی",
                     },
                     {
-                        title: "اطلاعات مدیریتی",
+                        title: "فرم بازدید",
                     },
                     {
-                        title: "اطلاعات پرسنلی",
+                        title: "مدیریتی",
                     },
                     {
-                        title: "اطلاعات مجوز",
+                        title: "پرسنلی",
                     },
                     {
-                        title: "اطلاعات تماس",
+                        title: "مجوز",
+                    },
+                    {
+                        title: "تماس",
                     },
                 ]}
             />

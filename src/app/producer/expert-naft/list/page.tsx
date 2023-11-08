@@ -23,7 +23,7 @@ export default function Home() {
         <DataTable
           isValidating={isValidating}
           mutate={mutate}
-          task={addIndexToData(naft)}
+          naft={addIndexToData(naft)}
           isLoading={isLoading}
         />
       </div>

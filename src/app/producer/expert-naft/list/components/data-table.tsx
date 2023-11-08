@@ -6,12 +6,12 @@ import { GetTask } from "../../../../../../interfaces/task";
 
 export default function DataTable({
   isValidating,
-  task,
+  naft,
   isLoading,
   mutate,
 }: {
   isValidating: any;
-  task: any;
+  naft: any;
   isLoading: any;
   mutate: () => void;
 }) {
@@ -69,7 +69,7 @@ export default function DataTable({
         loading={isLoading || isValidating}
         className="mt-6"
         columns={columns}
-        dataSource={task}
+        dataSource={naft}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: false,

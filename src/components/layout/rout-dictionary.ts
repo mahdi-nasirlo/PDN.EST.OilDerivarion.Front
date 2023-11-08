@@ -63,6 +63,9 @@ export const routDictionary: Items = {
   "contact-info": {
     title: "اطلاعات تماس",
   },
+  "visit-form": {
+    title: "اطلاعات فرم بازدید",
+  },
   // end producer panel
 
   // start manufacturer panel

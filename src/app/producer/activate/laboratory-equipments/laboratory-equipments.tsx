@@ -24,7 +24,7 @@ export default function LaboratoryEquipments() {
         const res = await trigger(values)
 
         if (res) {
-            processController.dispatch({ type: "NEXT", stepNumber: 6 })
+            processController.dispatch({ type: "NEXT", stepNumber: 7 })
         }
 
     };

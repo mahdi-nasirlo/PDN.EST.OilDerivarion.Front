@@ -60,7 +60,7 @@ export default function LicenseInfo() {
             type="primary"
             htmlType="submit"
             onClick={() =>
-              processController.dispatch({ type: "NEXT", stepNumber: 6 })
+              processController.dispatch({ type: "NEXT", stepNumber: 7 })
             }
           >
             مرحله بعد

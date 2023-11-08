@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import { Collapse } from "antd";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
-import CreateModal from "./components/create-modal";
+import InvitationModal from "./components/Invitation-modal";
+import VisitTimeModal from "./components/visit-time-modal";
 
 export default function Page() {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [VisitTimeModalVisible, setVisitTimeModalVisible] = useState(false);
+
 
   return (
     <>
@@ -18,8 +21,18 @@ export default function Page() {
           label: 'فیلتر جدول', children: <FilterForm />
         }]}
       />
-      <DataTable setModalVisible={setModalVisible} />
-      <CreateModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <DataTable
+        setModalVisible={setModalVisible}
+        setVisitTimeModalVisible={setVisitTimeModalVisible}
+      />
+      <InvitationModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
+      <VisitTimeModal
+        VisitTimeModalVisible={VisitTimeModalVisible}
+        setVisitTimeModalVisible={setVisitTimeModalVisible}
+      />
     </>
   );
 }

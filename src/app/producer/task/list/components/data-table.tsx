@@ -1,21 +1,20 @@
 import { Button, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React from "react";
+import React, { useState } from "react";
 import { GetTask } from "../../../../../../interfaces/task";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import GetPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
+import CustomTable from "../../../../../../components/CustomeTable";
 
-export default function DataTable({
-  isValidating,
-  task,
-  isLoading,
-  mutate,
-}: {
-  isValidating: any;
-  task: any;
-  isLoading: any;
-  mutate: () => void;
-}) {
+export default function DataTable() {
   const router = useRouter();
+  const { data, isLoading, mutate, isValidating } = useSWR<any>(
+    ["/WorkFlowRequest/GetAllStep02"],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url)
+  );
+  const [initialData, setInitialData] = useState<any>(GetPageRecordNumber());
 
   const columns: ColumnsType<GetTask> = [
     {
@@ -64,11 +63,17 @@ export default function DataTable({
 
   return (
     <>
-      <Table
+      <CustomTable
+        setInitialData={setInitialData}
+        data={{ records: data, count: data?.length || 0 }}
+        columns={columns}
+        loading={isLoading || isValidating}
+      />
+      {/* <Table
         loading={isLoading || isValidating}
         className="mt-6"
         columns={columns}
-        dataSource={task}
+        dataSource={data}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: false,
@@ -81,7 +86,7 @@ export default function DataTable({
             margin: "16px 0",
           },
         }}
-      />
+      /> */}
     </>
   );
 }

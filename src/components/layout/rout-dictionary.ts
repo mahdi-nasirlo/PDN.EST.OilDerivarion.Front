@@ -240,4 +240,17 @@ export const routDictionary: Items = {
     title: "اطلاعات تولید کننده",
   },
   // end admin panel
+
+  "task": {
+    title: "وظایف"
+  },
+  detail: {
+    title: "جزئیات"
+  },
+  "expert-naft":{
+    title:"کارشناس نفت"
+  },
+  "expert-samt":{
+    title:"کارشناس نفت"
+  }
 };

@@ -33,9 +33,7 @@ export default function RootLayout({
 const MakeRequest = () => (
   <>
     <div className="flex justify-between items-center">
-      <Link href="/producer/dashboard/request">
-        ثبت درخواست
-      </Link>
+      <Link href="/producer/dashboard/request">ثبت درخواست</Link>
     </div>
   </>
 );
@@ -99,7 +97,9 @@ const items: MenuProps["items"] = [
         <WrenchScrewdriverIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/base-info/laboratory-equipments">تجهیزات آزمایشگاهی</Link>,
+        <Link href="/producer/base-info/laboratory-equipments">
+          تجهیزات آزمایشگاهی
+        </Link>,
         "/producer/base-info/laboratory-equipments",
         <BeakerIcon width={16} height={16} />
       ),
@@ -128,6 +128,37 @@ const items: MenuProps["items"] = [
         "/producer/base-info/contact-info",
         <PhoneIcon width={16} height={16} />
       ),
+    ],
+
+    "group"
+  ),
+  { type: "divider" },
+
+  getMenuItem(
+    "گردش کار",
+    "workflow",
+    null,
+    [
+      getMenuItem(
+        <Link href="/producer/task/list">لیست وظیفه</Link>,
+        "/producer/task/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
+        "/producer/expert-naft/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      // getMenuItem(
+      //   <Link href="/producer/expert-samt/list"> زمان کارشناس صمت</Link>,
+      //   "/producer/expert-samt/list",
+      //   <DocumentDuplicateIcon width={16} height={16} />
+      // ),
+      // getMenuItem(
+      //   <Link href="/producer/task"> زمانبندی بازدید</Link>,
+      //   "/producer/task",
+      //   <DocumentDuplicateIcon width={16} height={16} />
+      // ),
     ],
     "group"
   ),

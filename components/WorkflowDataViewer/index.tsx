@@ -1,6 +1,6 @@
 import React from 'react';
 import WorkflowDataviewerItem, {WorkFlowDataViewerItemType} from "./workflowDataviewerItem";
-import {Divider, Spin} from "antd";
+import {Divider, Empty, Spin} from "antd";
 
 const Index = (props: { data: WorkFlowDataViewerItemType[], loading?: boolean }) => {
 
@@ -9,7 +9,7 @@ const Index = (props: { data: WorkFlowDataViewerItemType[], loading?: boolean })
     }
 
     const renderItems = () => {
-        const renderedItems = [];
+        const renderedItems: any[] = [];
         for (const key in props.data) {
             if (props.data.hasOwnProperty(key)) {
                 const item = props.data[key];
@@ -23,22 +23,30 @@ const Index = (props: { data: WorkFlowDataViewerItemType[], loading?: boolean })
     }
 
     function addItemBetween(array: any[], itemToAdd: any) {
-        const newArray = [];
+        const newArray: any[] = [];
         const lastIndex = array.length - 1;
 
-        for (let i = 0; i < lastIndex; i++) {
-            newArray.push(array[i]);
-            newArray.push(itemToAdd);
+        if (array && array.length > 0) {
+            for (let i = 0; i < lastIndex; i++) {
+                newArray.push(array[i]);
+                newArray.push(itemToAdd);
+            }
+
+            newArray.push(array[lastIndex]); // Add the last item of the original array
         }
 
-        newArray.push(array[lastIndex]); // Add the last item of the original array
+        if (!array || array.length === 0) {
+            newArray.push(<Empty/>)
+        }
 
         return newArray;
     }
 
+    const renderView = addItemBetween(renderItems(), <Divider className="mb-10"/>)
+
     return (
         <>
-            {addItemBetween(renderItems(), <Divider className="mb-10"/>)}
+            {renderView}
         </>
     );
 };

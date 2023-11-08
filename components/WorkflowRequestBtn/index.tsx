@@ -1,5 +1,5 @@
 import {Choice} from "../../interfaces/requestDetail";
-import {Button, Empty, Input, Spin} from "antd";
+import {Button, Input, Spin} from "antd";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../lib/server/mutationFetcher";
 
@@ -21,7 +21,7 @@ const Index = (props: PropsType) => {
     }
 
     if (!props?.choices && !props?.choices?.length) {
-        return <Empty/>
+        return <></>
     }
 
     const containerStyle = () => {

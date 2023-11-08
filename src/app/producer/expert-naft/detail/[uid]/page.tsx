@@ -2,11 +2,13 @@
 
 import useSWR from "swr";
 
-import { Divider } from "antd";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { Choice } from "../../../../../interfaces/requestDetail";
-import WorkflowDataViewer from "../../../../../components/WorkflowDataViewer";
-import WorkflowRequestBtn from "../../../../../components/WorkflowRequestBtn";
+import {Divider} from "antd";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {Choice} from "../../../../../../interfaces/requestDetail";
+import WorkflowDataViewer from "../../../../../../components/WorkflowDataViewer"
+import WorkflowRequestBtn from "../../../../../../components/WorkflowRequestBtn"
+import {addIndexToData} from "../../../../../../lib/addIndexToData";
+
 
 interface PropType {
   params: { uid: string };
@@ -39,12 +41,12 @@ export default function Home(props: PropType) {
   return (
     <>
       <div className="box-border w-full p-6">
-        <WorkflowDataViewer data={data as any} />
-        <Divider />
+        <WorkflowDataViewer loading={isLoading} data={data as any}/>
+        {data && <Divider/>}
         <WorkflowRequestBtn
-          choices={data?.choices as Choice[]}
-          nextStepUrl={"/WorkFlowRequest/SetStep03"}
-          taskId={data?.task.stepId as string}
+            choices={addIndexToData(data?.choices) as any}
+            nextStepUrl={"/WorkFlowRequest/SetStep03"}
+            taskId={data?.task.stepId as string}
         />
       </div>
     </>

@@ -7,6 +7,7 @@ import Link from "next/link";
 import {
   BeakerIcon,
   DocumentDuplicateIcon,
+  DocumentMagnifyingGlassIcon,
   HomeIcon,
   PencilIcon,
   PhoneIcon,
@@ -101,6 +102,11 @@ const items: MenuProps["items"] = [
         <Link href="/producer/base-info/laboratory-equipments">تجهیزات آزمایشگاهی</Link>,
         "/producer/base-info/laboratory-equipments",
         <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
+        "/producer/base-info/visit-form",
+        <DocumentMagnifyingGlassIcon width={16} height={16} />
       ),
       getMenuItem(
         <Link href="/producer/base-info/management-info">اطلاعات مدیریتی</Link>,

@@ -1,8 +1,10 @@
-import { Button, Divider, Typography } from 'antd'
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
+import { Button, Divider, Form, Typography } from 'antd'
 import React, { useContext } from 'react'
 import StepContext from '../../stete-manager/step-context';
-import DataTable from './components/data-table';
+import { useForm } from 'antd/es/form/Form';
 import CreateForm from './components/create-form';
+import DataTable from './components/data-table';
 
 export default function Index() {
 
@@ -14,7 +16,7 @@ export default function Index() {
                 <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
-                        اطلاعات مخازن محصول ( 2 از 8 )
+                        خط تولید برش گیری ( 4 از 8 )
                     </Typography>
                 </div>
             </div >

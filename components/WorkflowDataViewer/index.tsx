@@ -1,8 +1,12 @@
 import React from 'react';
 import WorkflowDataviewerItem, {WorkFlowDataViewerItemType} from "./workflowDataviewerItem";
-import {Divider} from "antd";
+import {Divider, Spin} from "antd";
 
-const Index = (props: { data: WorkFlowDataViewerItemType[] }) => {
+const Index = (props: { data: WorkFlowDataViewerItemType[], loading?: boolean }) => {
+
+    if (props.loading) {
+        return <Spin/>
+    }
 
     const renderItems = () => {
         const renderedItems = [];
@@ -18,7 +22,7 @@ const Index = (props: { data: WorkFlowDataViewerItemType[] }) => {
         return renderedItems;
     }
 
-    function addItemBetween(array, itemToAdd) {
+    function addItemBetween(array: any[], itemToAdd: any) {
         const newArray = [];
         const lastIndex = array.length - 1;
 
@@ -31,7 +35,6 @@ const Index = (props: { data: WorkFlowDataViewerItemType[] }) => {
 
         return newArray;
     }
-
 
     return (
         <>

@@ -52,7 +52,8 @@ const Index = (props: PropsType) => {
                         className="flex justify-center"
                         key={index}
                     >
-                        <Button onClick={() => handleOnClick(btn.choice_Key)} className="w-full"
+                        <Button loading={getNextStep.isMutating} onClick={() => handleOnClick(btn.choice_Key)}
+                                className="w-full"
                                 type="primary">
                             {btn.label}
                         </Button>

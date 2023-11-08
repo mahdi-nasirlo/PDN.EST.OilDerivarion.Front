@@ -38,11 +38,12 @@ export default function Home(props: PropType) {
     return (
         <>
             <div className="box-border w-full p-6">
-                <WorkflowDataViewer data={data}/>
-                <Divider/>
-                <WorkflowRequestBtn onClick={() => router.push("/producer/task/list")} choices={data?.choices}
+                <WorkflowDataViewer data={data as any} loading={isLoading}/>
+                {data && <Divider/>}
+                <WorkflowRequestBtn onClick={() => router.push("/producer/task/list")}
+                                    choices={data?.choices as Choice[]}
                                     nextStepUrl={"/WorkFlowRequest/SetStep02"}
-                                    taskId={data?.task.stepId}/>
+                                    taskId={props.params.uid}/>
             </div>
         </>
     );

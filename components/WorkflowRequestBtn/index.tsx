@@ -9,7 +9,7 @@ interface PropsType {
     choices: Choice[],
     nextStepUrl: string,
     taskId: string,
-    onClick?: () => any
+    onClick?: (key: string) => any
 }
 
 const Index = (props: PropsType) => {
@@ -33,11 +33,11 @@ const Index = (props: PropsType) => {
 
     const handleOnClick = async (choice_key: string) => {
 
-        const res = await getNextStep.trigger(choice_key, "")
 
-        if (res && typeof props.onClick === "function") {
-            props.onClick()
-        }
+        if (typeof props.onClick === "function") {
+            props.onClick(choice_key)
+        } else
+            await getNextStep.trigger(choice_key, "")
 
     }
 

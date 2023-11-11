@@ -19,6 +19,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import ContactInputs from "../../../../../../components/inputs/Contact";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
@@ -132,13 +133,13 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <ContactInputs label="شماره تماس" name="currentMobile">
+            <PhoneInputs label="شماره تماس" name="currentMobile">
               <Input
                 className="w-full rounded-lg"
                 size="large"
                 placeholder="وارد کنید"
               />
-            </ContactInputs>
+            </PhoneInputs>
           </Col>
         </Row>
         <Row dir="ltr">

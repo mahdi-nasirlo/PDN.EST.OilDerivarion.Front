@@ -1,21 +1,21 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Typography, } from "antd";
+import { Button, Col, Form, Input, Row, Typography } from "antd";
 import Image from "next/image";
 import React from "react";
 import ThemeProvider from "../../../provider/theme-provider";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
       <ThemeProvider>
         <div
           dir="rtl"
-          className="bg-slate-100 flex justify-center items-center h-screen rounded-lg">
+          className="bg-slate-100 flex justify-center items-center h-screen rounded-lg"
+        >
           <div className="bg-white p-8 rounded-3xl shadow-lg w-[550px] h-[630px] m-6">
             <div className="flex justify-center">
               <Image
@@ -35,12 +35,16 @@ export default function Home() {
               <div className="flex justify-between flex-col mt-6">
                 <Row gutter={[32, 32]}>
                   <Col xs={24} md={24}>
-                    <Form.Item rules={[
-                      {
-                        required: true,
-                        message: "این فیلد اجباری است",
-                      },
-                    ]} name="currentCEOName" label="نام کاربری (کدملی)">
+                    <Form.Item
+                      rules={[
+                        {
+                          required: true,
+                          message: "این فیلد اجباری است",
+                        },
+                      ]}
+                      name="currentCEOName"
+                      label="نام کاربری (کدملی)"
+                    >
                       <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                   </Col>
@@ -72,8 +76,8 @@ export default function Home() {
               </div>
             </Form>
           </div>
-        </div >
-      </ThemeProvider >
+        </div>
+      </ThemeProvider>
     </>
   );
 }

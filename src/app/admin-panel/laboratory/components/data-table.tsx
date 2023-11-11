@@ -1,33 +1,33 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Modal, Row, Space, Tag, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Col, Modal, Row, Space, Tag, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
-  setFilter,
-  setModalVisible,
-  ldMaterial,
-  labratory,
-  mutate,
-}: {
+                                    setFilter,
+                                    setModalVisible,
+                                    ldMaterial,
+                                    labratory,
+                                    mutate,
+                                  }: {
   setFilter: (arg: any) => void;
   setModalVisible: any;
   ldMaterial: boolean;
   mutate: () => void;
   labratory:
-  | {
+      | {
     records: LaboratoryGet[];
     count: number;
   }
-  | undefined;
+      | undefined;
 }) {
   // //حذف
 
@@ -255,10 +255,10 @@ export default function DataTable({
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={24} md={24}>
               <Button
-                size="large"
-                className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelGPS}
-                key={"cancel"}
+                  size="large"
+                  className="w-full bg-gray-100 text-warmGray-500"
+                  onClick={handleCancelGPS}
+                  key={"cancel"}
               >
                 برگشت
               </Button>
@@ -266,14 +266,12 @@ export default function DataTable({
           </Row>,
         ]}
       >
-        {" "}
         <Row gutter={[32, 1]}>
           <Col xs={24} md={24}>
             <iframe
-              // src={`https://map-test.pdnsoftware.ir/${selectedLabUid}`}
-              src={`https://map-test.pdnsoftware.ir/`}
-              aria-hidden="false"
-              className="w-full h-[480px] border-solid"
+                src={`https://map-test.pdnsoftware.ir/oil/lab?code=${selectedLabUid}`}
+                aria-hidden="false"
+                className="w-full h-[480px] border-solid"
             ></iframe>
           </Col>
         </Row>

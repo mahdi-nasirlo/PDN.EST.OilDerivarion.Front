@@ -11,6 +11,7 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 
 interface PropType {
   params: { uid: string };
@@ -69,30 +70,18 @@ export default function Home(props: PropType) {
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
         <DateOfVisitForm form={form} onFinish={onFinish} />
-        <Divider />
-        {
-          data?.choices &&
-          !isLoading &&
-          data?.choices.map((value, index) => <>
-            <div
-              style={{ height: "fit-content" }}
-              className="flex justify-center"
-              key={index}
-            >
-              <Button
-                loading={isMutating}
-                onClick={() => {
-                  setChoice(value.choice_Key);
-                  form.submit()
-                }}
-                className="w-full"
-                type="primary"
-              >
-                {value.label}
-              </Button>
-            </div>
-          </>)
-        }
+        {data && <Divider />}
+        <WorkflowRequestBtn
+          loading={isMutating}
+          choices={data?.choices as any}
+          onClick={(choiceKey) => {
+            setChoice(choiceKey)
+            form.submit()
+          }}
+          trigger={() => true}
+          nextStepUrl={apiData.create.url}
+          taskId={props.params.uid}
+        />
       </div>
     </>
   );

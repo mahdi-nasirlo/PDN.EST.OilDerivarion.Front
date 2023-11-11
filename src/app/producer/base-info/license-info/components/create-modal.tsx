@@ -149,7 +149,7 @@ export default function CreateModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomeDatePicker required />
               </Form.Item>
             </Col>
           </Row>

@@ -17,7 +17,7 @@ export const routDictionary: Items = {
   },
 
   activate: {
-    title: "فعال سازی",
+    title: "ثبت اطلاعات پایه",
   },
   // start producer panel
   producer: {

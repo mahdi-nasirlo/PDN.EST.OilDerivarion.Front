@@ -1,12 +1,16 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 import { Button, Divider, Form, Typography } from 'antd'
-import React, { useContext } from 'react'
-import StepContext from '../../stete-manager/step-context';
+import React, { useState } from 'react'
 import { useForm } from 'antd/es/form/Form';
+import ButtonDisplay from './components/display-form/button-display';
+import ButtonEdit from './components/edit-form/button-edit';
+import FormDisplay from './components/display-form/form-display';
+import EditForm from './components/edit-form/edit-form';
+
 
 export default function Index() {
 
-    const processController = useContext(StepContext);
+    const [isEditVisible, setIsEditVisible] = useState(true);
+
     const [form] = useForm();
 
     return (
@@ -18,44 +22,30 @@ export default function Index() {
                         راکتور سولفور زدایی ( 6 از 8 )
                     </Typography>
                 </div>
-                <div className='flex gap-3 justify-end'>
-                    <Button
-                        className="flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        icon={<PencilSquareIcon width={24} height={24} />}
-                    // onClick={showModal}
-                    >
-                        ویرایش
-                    </Button>
-                    <Button
-                        className="bg-gray-50 flex items-center justify-center"
-                        size="large"
-                        type="default"
-                        htmlType="submit"
-                        icon={<ChevronDoubleRightIcon width={24} height={24} />}
-                        onClick={() => processController.dispatch({ type: "PREVIOUS" })}
-                    >
-                        صفحه قبل
-                    </Button>
-                    <Button
-                        className="bg-gray-50 flex items-center justify-center"
-                        size="large"
-                        type="default"
-                        htmlType="submit"
-                        onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 7 })}
-                    >
-                        <span className="flex">
-                            صفحه بعد
-                        </span>
-                        <ChevronDoubleLeftIcon width={24} height={24} />
-                    </Button>
-                </div>
+                {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible} />}
+                {!isEditVisible &&
+                    <ButtonEdit
+                        form={form}
+                        // mutate={mutate}
+                        // isMutating={isMutating}
+                        setIsEditVisible={setIsEditVisible}
+                    />
+                }
             </div >
             <Divider />
-            <Form form={form}>
-                مرحله 6
-            </Form>        </>
+            {isEditVisible &&
+                <Form form={form} layout='vertical' disabled>
+                    <FormDisplay />
+                </Form>}
+            {!isEditVisible &&
+                // <Spin spinning={isMutating || ldProducerLab}>
+                <Form layout="vertical" form={form}
+                // onFinish={onSubmitFinish}
+                >
+                    <EditForm />
+                </Form>
+                // </Spin >
+            }
+        </>
     )
 }

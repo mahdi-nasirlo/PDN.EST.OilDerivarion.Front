@@ -32,7 +32,7 @@ export default function LaboratoryEquipments() {
     const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
 
 
-    const [wastePlaceForm, SetWastePlace] = useState(false)
+    const [wastePlaceForm, SetWastePlace] = useState(true)
 
     function CustomRadioGroup(
         { label, value, options, onChange, name }:

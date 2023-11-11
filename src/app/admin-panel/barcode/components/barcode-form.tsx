@@ -3,6 +3,7 @@ import { Col, Form, FormInstance, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
+import { filterOption } from "../../../../../lib/filterOption";
 
 function BarcodeForm(props: {
   form: undefined | FormInstance;
@@ -47,6 +48,8 @@ function BarcodeForm(props: {
             }
             showSearch
             fieldNames={{ value: "Id", label: "Name" }}
+            // @ts-ignore
+            filterOption={filterOption}
             loading={ldContainer}
             options={containers}
             size="large"
@@ -76,6 +79,8 @@ function BarcodeForm(props: {
           <Select
             showSearch
             fieldNames={{ value: "Id", label: "Name" }}
+            //@ts-ignore
+            filterOption={filterOption}
             loading={ldUsePlaceType}
             options={usePlaceType}
             size="large"
@@ -95,6 +100,8 @@ function BarcodeForm(props: {
         >
           <Select
             showSearch
+            // @ts-ignore
+            filterOption={filterOption}
             fieldNames={{ value: "Id", label: "Name" }}
             loading={ldSampleType}
             options={sampleTypes}

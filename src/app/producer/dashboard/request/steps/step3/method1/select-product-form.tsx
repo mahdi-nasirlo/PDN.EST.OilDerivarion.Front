@@ -1,8 +1,9 @@
-import React, {useContext, useState} from 'react';
-import {Col, Form, Row, Select} from "antd";
+import React, { useContext, useState } from 'react';
+import { Col, Form, Row, Select } from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import { filterOption } from '../../../../../../../../lib/filterOption';
 
 const SelectProductForm = () => {
 
@@ -33,8 +34,8 @@ const SelectProductForm = () => {
                     <Form.Item
                         name="densityTypeId"
                         label="دانسیته محصول "
-                        labelCol={{span: 24}}
-                        rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                        labelCol={{ span: 24 }}
+                        rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                     >
 
                         <Select
@@ -49,14 +50,17 @@ const SelectProductForm = () => {
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        labelCol={{span: 24}}
+                        labelCol={{ span: 24 }}
                         name="productUid"
                         label="نام محصول"
-                        // rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                    // rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
                     >
                         <Select
+                            showSearch
+                            // @ts-ignore
+                            filterOption={filterOption}
                             loading={productSelectableData.isLDSelectable}
-                            fieldNames={{value: "uid", label: "name"}}
+                            fieldNames={{ value: "uid", label: "name" }}
                             size="large"
                             placeholder="انتخاب نمایید"
                             disabled={typeof density !== "number"}

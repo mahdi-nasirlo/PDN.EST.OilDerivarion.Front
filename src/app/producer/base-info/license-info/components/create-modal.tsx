@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Form, Input, Modal, Row, Select } from "antd";
+import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { CreatePresonLicence } from "../../../../../../interfaces/Base-info";
@@ -7,6 +7,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -111,6 +112,9 @@ export default function CreateModal({
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
                 <Select
+                  showSearch
+                  // @ts-ignore
+                  filterOption={filterOption}
                   loading={ldLicenseTypeGetAll}
                   options={LicenseTypeGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}
@@ -149,7 +153,7 @@ export default function CreateModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomeDatePicker required />
               </Form.Item>
             </Col>
           </Row>

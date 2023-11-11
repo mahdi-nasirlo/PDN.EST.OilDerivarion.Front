@@ -2,7 +2,6 @@ import { useForm } from "antd/es/form/Form";
 import {
   Button,
   Col,
-  DatePicker,
   Divider,
   Form,
   Input,
@@ -18,6 +17,7 @@ import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
@@ -78,6 +78,9 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldLicenseTypeGetAll}
                 options={LicenseTypeGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}

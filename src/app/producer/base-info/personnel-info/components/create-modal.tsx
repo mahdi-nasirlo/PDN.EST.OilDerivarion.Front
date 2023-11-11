@@ -6,6 +6,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -43,7 +44,7 @@ export default function CreateModal({
       <Modal
         width={800}
         title="افزودن اطلاعات پرسنلی"
-        visible={isEditModalVisible}
+        open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}
         footer={[
@@ -132,13 +133,13 @@ export default function CreateModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <ContactInputs name="currentMobile" label="شماره تماس">
+              <PhoneInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
         </Form>

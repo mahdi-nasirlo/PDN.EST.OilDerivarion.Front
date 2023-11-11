@@ -1,7 +1,9 @@
-import { Col, Form, Input, Radio, Row, Select } from 'antd'
+import { Col, Form, Input, Row, Select } from 'antd'
 import React, { useState } from 'react'
 import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 import useSWR from "swr";
+import { filterOption } from '../../../../../../../lib/filterOption';
+import CustomRadioGroup from '../../../../../../../components/CustomeRadioGroup';
 
 export default function EditForm({ data, form }: { data: any, form: any }) {
 
@@ -9,38 +11,12 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
 
     const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
 
-    function CustomRadioGroup(
-        { label, value, options, onChange, name }:
-            { label: string, value: any, options: any, onChange: any, name: string }) {
-        return (
-            <Form.Item
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                label={label}
-                name={name}
-            >
-                <Radio.Group
-                    size='large'
-                    className='w-full my-1'
-                    defaultValue={data}
-                    value={value}
-                    buttonStyle="solid"
-                    onChange={onChange}
-                >
-                    {options.map((option: any) => (
-                        <Radio.Button className='w-1/2' key={option.value} value={option.value}>
-                            {option.label}
-                        </Radio.Button>
-                    ))}
-                </Radio.Group>
-            </Form.Item>
-        );
-    }
-
     return (
         <>
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         label="تقطیر اتمسفریک"
                         name={'lab_HasAtmosphericDistillation'}
                         value={form.getFieldValue("lab_HasAtmosphericDistillation")}
@@ -53,6 +29,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasVacuumDistillation"
                         label="تقطیر در خلاء"
                         value={form.getFieldValue("lab_HasVacuumDistillation")}
@@ -65,6 +42,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasPourPoint"
                         label="نقطه ریزش"
                         value={form.getFieldValue("lab_HasPourPoint")}
@@ -79,6 +57,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasFlashPoint"
                         label="نقطه اشتعال"
                         value={form.getFieldValue("lab_HasFlashPoint")}
@@ -91,6 +70,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasViscometer"
                         label="ویسکومتر"
                         value={form.getFieldValue("lab_HasViscometer")}
@@ -103,6 +83,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasMetalCorrosion"
                         label="خوردگی فلز"
                         value={form.getFieldValue("lab_HasMetalCorrosion")}
@@ -117,6 +98,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasColorMeter"
                         label="رنگ سنج"
                         value={form.getFieldValue("lab_HasColorMeter")}
@@ -129,6 +111,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasTBN"
                         label="TBN (تست قلیایی)"
                         value={form.getFieldValue("lab_HasTBN")}
@@ -141,6 +124,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasTAN"
                         label="TAN (تست اسیدی)"
                         value={form.getFieldValue("lab_HasTAN")}
@@ -155,6 +139,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasVoltmeter"
                         label="ولت متر (اندازی گیری ولتاژروغن)"
                         value={form.getFieldValue("lab_HasVoltmeter")}
@@ -167,6 +152,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasMeasureMocaptan"
                         label="اندازه گیری مقدار مرکاپتان"
                         value={form.getFieldValue("lab_HasMeasureMocaptan")}
@@ -179,6 +165,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasMeasureSulfur"
                         label="اندازه گیری مقدار گوگرد"
                         value={form.getFieldValue("lab_HasMeasureSulfur")}
@@ -193,6 +180,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasDensiometer"
                         label="دانسیومتر"
                         value={form.getFieldValue("lab_HasDensiometer")}
@@ -205,6 +193,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasMeasureColor"
                         label="اندازه گیری رنگ"
                         value={form.getFieldValue("lab_HasMeasureColor")}
@@ -217,6 +206,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8}>
                     <CustomRadioGroup
+                        data={data}
                         name="lab_HasMeasureMethodGC"
                         label="درصد آروماتیک و بنزن به روش GC"
                         value={form.getFieldValue("lab_HasMeasureMethodGC")}
@@ -236,6 +226,9 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                         label="کشورهای مقصد صادراتی محصول"
                     >
                         <Select
+                            showSearch
+                            // @ts-ignore
+                            filterOption={filterOption}
                             fieldNames={{ value: "Id", label: "Name" }}
                             loading={ldCountry}
                             options={Country}
@@ -246,6 +239,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                 </Col>
                 <Col xs={24} md={8} >
                     <CustomRadioGroup
+                        data={data}
                         name="hasWaste"
                         label="ضایعات"
                         value={form.getFieldValue("hasWaste")}

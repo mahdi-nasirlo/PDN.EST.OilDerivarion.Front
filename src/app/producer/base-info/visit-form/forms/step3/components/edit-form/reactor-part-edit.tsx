@@ -1,37 +1,11 @@
 import React from 'react'
-import { Col, Form, Radio, Row, Typography } from 'antd'
+import { Col, Form, Row, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
+import CustomRadioGroup from '../../../../../../../../../components/CustomeRadioGroup';
 
 
 export default function ReactorPartEdit() {
     const [form] = useForm();
-
-    function CustomRadioGroup(
-        { label, value, options, onChange, name }:
-            { label: string, value: any, options: any, onChange: any, name: string }) {
-        return (
-            <Form.Item
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                label={label}
-                name={name}
-            >
-                <Radio.Group
-                    size='large'
-                    className='w-full my-1'
-                    defaultValue={false}
-                    value={value}
-                    buttonStyle="solid"
-                    onChange={onChange}
-                >
-                    {options.map((option: any) => (
-                        <Radio.Button className='w-1/2' key={option.value} value={option.value}>
-                            {option.label}
-                        </Radio.Button>
-                    ))}
-                </Radio.Group>
-            </Form.Item>
-        );
-    }
 
     return (
         <>

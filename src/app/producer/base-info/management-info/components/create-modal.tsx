@@ -9,6 +9,7 @@ import useSWR from "swr";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
 import { filterOption } from "../../../../../../lib/filterOption";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function CreateModal({
   isEditModalVisible,
@@ -42,6 +43,7 @@ export default function CreateModal({
   };
 
   const handleCancelEdit = () => {
+    form.resetFields();
     setIsEditModalVisible(false);
   };
 
@@ -61,7 +63,7 @@ export default function CreateModal({
       <Modal
         width={800}
         title="افزودن اطلاعات مدیریتی"
-        visible={isEditModalVisible}
+        open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}
         footer={[
@@ -168,13 +170,13 @@ export default function CreateModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <ContactInputs name="currentMobile" label="شماره تماس">
+              <PhoneInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
         </Form>

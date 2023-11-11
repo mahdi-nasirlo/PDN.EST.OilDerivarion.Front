@@ -6,6 +6,7 @@ import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function EditModal({
   mutate,
@@ -122,6 +123,9 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item name="licenseTypeName" label="نوع مجوز">
                 <Select
+                  showSearch
+                  // @ts-ignore
+                  filterOption={filterOption}
                   loading={ldLicenseTypeGetAll}
                   options={LicenseTypeGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}

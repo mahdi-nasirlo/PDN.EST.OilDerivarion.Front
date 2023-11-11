@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import BarcodeFormLockup from "@/app/admin-panel/barcode/components/barcode-form-lockup";
+import { filterOption } from "../../../../../lib/filterOption";
 
 function BarcodeFormInteractive(props: {
   ID: number | undefined;
@@ -45,7 +46,7 @@ function BarcodeFormInteractive(props: {
       })
   );
 
-  useEffect(() => {}, [props.ID]);
+  useEffect(() => { }, [props.ID]);
 
   const [requestMasterUid, setRequestMasterUid] = useState<string>("");
 
@@ -98,6 +99,8 @@ function BarcodeFormInteractive(props: {
           >
             <Select
               showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               fieldNames={{ value: "Uid", label: "Code" }}
               loading={isLdGps}
               options={GPS}
@@ -132,6 +135,8 @@ function BarcodeFormInteractive(props: {
           >
             <Select
               showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               fieldNames={{ value: "Uid", label: "MaterialName" }}
               loading={isLdMaterial}
               options={materials}
@@ -160,6 +165,8 @@ function BarcodeFormInteractive(props: {
           >
             <Select
               showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               fieldNames={{ value: "Uid", label: "ProductName" }}
               loading={isLdProduct}
               options={products}

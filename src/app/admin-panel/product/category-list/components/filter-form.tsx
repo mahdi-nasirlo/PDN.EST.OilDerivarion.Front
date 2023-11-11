@@ -5,6 +5,7 @@ import React from "react";
 import { ProductGet } from "../../../../../../interfaces/product";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function FilterForm({
   filter,
@@ -43,6 +44,9 @@ export default function FilterForm({
         <Col xs={24} md={12}>
           <Form.Item name="densityTypeId" label="دانسیته">
             <Select
+              showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               loading={ldGetAllDensityType}
               options={GetAllDensityType}
               fieldNames={{ value: "Id", label: "Name" }}

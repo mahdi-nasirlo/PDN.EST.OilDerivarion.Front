@@ -17,7 +17,8 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
-import ContactInputs from "../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../components/inputs/Phone";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function ContactInfo() {
   const [form] = useForm();
@@ -76,6 +77,9 @@ export default function ContactInfo() {
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldStateGetAll}
                 options={StateGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}
@@ -92,6 +96,9 @@ export default function ContactInfo() {
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldCityGetAll}
                 options={CityGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}
@@ -101,9 +108,9 @@ export default function ContactInfo() {
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
-            <ContactInputs name="factoryPhone" label="شماره تماس">
+            <PhoneInputs name="factoryPhone" label="شماره تماس">
               <Input size="large" placeholder="وارد کنید" />
-            </ContactInputs>
+            </PhoneInputs>
           </Col>
         </Row>
         <Row>
@@ -128,6 +135,9 @@ export default function ContactInfo() {
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldStateGetAll}
                 options={StateGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}
@@ -144,6 +154,9 @@ export default function ContactInfo() {
               rules={[{ required: true, message: "این فیلد اجباری است" }]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldCityGetAll}
                 options={CityGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}
@@ -153,9 +166,9 @@ export default function ContactInfo() {
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
-            <ContactInputs name="centralOfficePhone" label="شماره تماس">
-              <Input size="large" placeholder="وارد کنید" />
-            </ContactInputs>
+            <PhoneInputs name="centralOfficePhone" label="شماره تماس">
+              <Input max={9} size="large" placeholder="وارد کنید" />
+            </PhoneInputs>
           </Col>
         </Row>
         <Row>

@@ -1,12 +1,12 @@
 "use client";
 
-import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import WorkflowDataViewer from "../../../../../../components/WorkflowDataViewer";
-import WorkflowRequestBtn from "../../../../../../components/WorkflowRequestBtn";
+import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
+import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import {Choice} from "../../../../../../interfaces/requestDetail";
 import {Divider} from "antd";
 import {useRouter} from "next/navigation";
+import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
 
 interface PropType {
     params: { uid: string }
@@ -27,11 +27,7 @@ interface DataFetchType {
 
 export default function Home(props: PropType) {
 
-    const {isLoading, data, mutate} = useSWR<DataFetchType>("/WorkFlowRequest/GetStep02", (url) => listFetcher(url, {
-        arg: {
-            taskId: props.params.uid
-        }
-    }))
+    const {isLoading, data} = useGetStep({taskId: props.params.uid, apiUrl: apiUrl.WorkFlowRequest.step02.get.url})
 
     const router = useRouter()
 

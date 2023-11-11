@@ -5,6 +5,7 @@ import React from "react";
 import { useForm } from "antd/lib/form/Form";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function FilterForm({
   filter,
@@ -56,6 +57,9 @@ export default function FilterForm({
         <Col xs={24} md={12}>
           <Form.Item name="MeasureUid" label="واحد اندازه گیری">
             <Select
+              showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               options={Measure}
               loading={ldMeasure}
               fieldNames={{ value: "Uid", label: "Name" }}

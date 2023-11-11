@@ -1,7 +1,7 @@
-import {Choice} from "../../interfaces/requestDetail";
+import {Choice} from "../../../interfaces/requestDetail";
 import {Button, Input, Spin} from "antd";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../lib/server/mutationFetcher";
 
 interface PropsType {
   hasDescription?: boolean;
@@ -43,9 +43,9 @@ const Index = (props: PropsType) => {
     if (typeof props.onClick === "function") {
       props.onClick(choice_key);
     } else {
+      await getNextStep.trigger(choice_key, "");
     }
 
-    await getNextStep.trigger(choice_key, "");
   };
 
   return (

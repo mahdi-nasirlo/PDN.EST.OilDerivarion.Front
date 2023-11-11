@@ -1,5 +1,5 @@
 import {Choice} from "../../../interfaces/requestDetail";
-import {Button, Input, Spin} from "antd";
+import {Button, Input} from "antd";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../lib/server/mutationFetcher";
 
@@ -10,6 +10,7 @@ interface PropsType {
   nextStepUrl: string;
   taskId: string;
   onClick?: (key: string) => any;
+  trigger?: (arg?: any) => any
 }
 
 const Index = (props: PropsType) => {
@@ -18,13 +19,13 @@ const Index = (props: PropsType) => {
     taskId: props.taskId,
   });
 
-  if (props.loading) {
-    return (
-      <div className="w-full">
-        <Spin />
-      </div>
-    );
-  }
+  // if (props.loading) {
+  //   return (
+  //     <div className="w-full">
+  //       <Spin />
+  //     </div>
+  //   );
+  // }
 
   if (!props?.choices && !props?.choices?.length) {
     return <></>;
@@ -40,12 +41,15 @@ const Index = (props: PropsType) => {
   };
 
   const handleOnClick = async (choice_key: string) => {
-    if (typeof props.onClick === "function") {
-      props.onClick(choice_key);
-    } else {
-      await getNextStep.trigger(choice_key, "");
-    }
 
+    let res;
+    if (typeof props.trigger === "function") {
+      res = await props.trigger()
+    } else
+      res = await getNextStep.trigger(choice_key, "");
+
+    if (typeof props.onClick === "function" && res)
+      props.onClick(choice_key)
   };
 
   return (
@@ -59,10 +63,10 @@ const Index = (props: PropsType) => {
             key={index}
           >
             <Button
-              loading={getNextStep.isMutating}
-              onClick={() => handleOnClick(btn.choice_Key)}
-              className="w-full"
-              type="primary"
+                loading={getNextStep.isMutating || props.loading}
+                onClick={() => handleOnClick(btn.choice_Key)}
+                className="w-full"
+                type="primary"
             >
               {btn.label}
             </Button>

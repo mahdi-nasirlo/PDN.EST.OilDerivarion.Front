@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, Divider} from "antd";
+import {Divider} from "antd";
 import {Choice} from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import useSWRMutation from "swr/mutation";
@@ -11,6 +11,7 @@ import {useForm} from "antd/es/form/Form";
 import {useState} from "react";
 import {apiUrl} from "../../../../../../Constants/apiUrl";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
+import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 
 interface PropType {
     params: { uid: string };
@@ -76,29 +77,17 @@ export default function Home(props: PropType) {
                 <DateOfVisitForm form={form} onFinish={onFinish}/>
                 <WorkflowDataViewer loading={isLoading} data={data as any}/>
                 {data && <Divider/>}
-                {
-                    data?.choices &&
-                    !isLoading &&
-                    data?.choices.map((value, index) => <>
-                        <div
-                            style={{height: "fit-content"}}
-                            className="flex justify-center"
-                            key={index}
-                        >
-                            <Button
-                                loading={isMutating}
-                                onClick={() => {
-                                    setChoice(value.choice_Key);
-                                    form.submit()
-                                }}
-                                className="w-full"
-                                type="primary"
-                            >
-                                {value.label}
-                            </Button>
-                        </div>
-                    </>)
-                }
+                <WorkflowRequestBtn
+                    loading={isMutating}
+                    choices={data?.choices as any}
+                    onClick={(choiceKey) => {
+                        setChoice(choiceKey)
+                        form.submit()
+                    }}
+                    trigger={() => true}
+                    nextStepUrl={apiData.create.url}
+                    taskId={props.params.uid}
+                />
             </div>
         </>
     );

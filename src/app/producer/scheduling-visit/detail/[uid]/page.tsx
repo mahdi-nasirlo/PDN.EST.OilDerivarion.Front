@@ -32,7 +32,7 @@ const Page = (props: { params: { uid: string } }) => {
 
     }
 
-    const {trigger} = useSWRMutation(apiData.create.url, mutationFetcher)
+    const {trigger, isMutating} = useSWRMutation(apiData.create.url, mutationFetcher)
 
     const handleOnFinish = async (values: any) => {
 
@@ -54,8 +54,17 @@ const Page = (props: { params: { uid: string } }) => {
             <DateOfVisitForm onFinish={handleOnFinish} form={form}/>
             <WorkflowDataViewer loading={isLoading} data={data as any}/>
             {data && <Divider/>}
-            <WorkflowRequestBtn onClick={handleOnClick} choices={data?.choices as any} nextStepUrl={""}
-                                taskId={props.params.uid}/>
+            <WorkflowRequestBtn
+                loading={isMutating}
+                choices={data?.choices as any}
+                onClick={(choiceKey) => {
+                    setChoice(choiceKey)
+                    form.submit()
+                }}
+                trigger={() => true}
+                nextStepUrl={apiData.create.url}
+                taskId={props.params.uid}
+            />
         </div>
     );
 };

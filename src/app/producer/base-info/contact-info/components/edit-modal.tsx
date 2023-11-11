@@ -6,6 +6,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function EditModal({
   isEditModalVisible,
@@ -135,9 +136,9 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={8}>
-              <ContactInputs label="شماره تماس" name="factoryPhone">
+              <PhoneInputs label="شماره تماس" name="factoryPhone">
                 <Input size="large" placeholder="وارد کنید" />
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
           <Row>
@@ -187,15 +188,9 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={8}>
-              <ContactInputs name="centralOfficePhone">
-                {/* <Form.Item
-                                name="centralOfficePhone"
-                                label="شماره تماس"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            > */}
+              <PhoneInputs name="centralOfficePhone" label="شماره تماس">
                 <Input size="large" placeholder="وارد کنید" />
-                {/* </Form.Item> */}
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
           <Row>

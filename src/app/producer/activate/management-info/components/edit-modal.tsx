@@ -6,6 +6,8 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function EditModal({
   mutate,
@@ -155,13 +157,7 @@ export default function EditModal({
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
               >
-                <Input placeholder="وارد کنید" size="large" />
-                {/* <DatePicker
-                                    className="w-full"
-                                    placeholder="13**/
-                /**"
-                                    size="large"
-                                /> */}
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>
@@ -182,13 +178,13 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <ContactInputs label="شماره تماس" name="currentMobile">
+              <PhoneInputs label="شماره تماس" name="currentMobile">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
         </Form>

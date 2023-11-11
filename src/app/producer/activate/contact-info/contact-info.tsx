@@ -18,6 +18,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
 import ContactInputs from "../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../components/inputs/Phone";
 
 export default function ContactInfo() {
   const [form] = useForm();
@@ -101,9 +102,9 @@ export default function ContactInfo() {
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
-            <ContactInputs name="factoryPhone" label="شماره تماس">
+            <PhoneInputs name="factoryPhone" label="شماره تماس">
               <Input size="large" placeholder="وارد کنید" />
-            </ContactInputs>
+            </PhoneInputs>
           </Col>
         </Row>
         <Row>
@@ -153,9 +154,9 @@ export default function ContactInfo() {
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
-            <ContactInputs name="centralOfficePhone" label="شماره تماس">
+            <PhoneInputs name="centralOfficePhone" label="شماره تماس">
               <Input size="large" placeholder="وارد کنید" />
-            </ContactInputs>
+            </PhoneInputs>
           </Col>
         </Row>
         <Row>

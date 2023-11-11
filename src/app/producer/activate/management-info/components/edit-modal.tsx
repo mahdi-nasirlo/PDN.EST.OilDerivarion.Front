@@ -5,9 +5,9 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import ContactInputs from "../../../../../../components/inputs/Contact";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function EditModal({
   mutate,
@@ -169,6 +169,9 @@ export default function EditModal({
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
                 <Select
+                  showSearch
+                  // @ts-ignore
+                  filterOption={filterOption}
                   loading={ldCompanyRoleGetAll}
                   options={CompanyRoleGetAll}
                   fieldNames={{ value: "Id", label: "Name" }}

@@ -7,6 +7,7 @@ import { useForm } from 'antd/es/form/Form';
 import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 import useSWRMutation from "swr/mutation";
 import { SetProducerLab } from '../../../../../interfaces/Base-info';
+import { filterOption } from '../../../../../lib/filterOption';
 
 
 
@@ -287,6 +288,9 @@ export default function LaboratoryEquipments() {
                             label="کشورهای مقصد صادراتی محصول"
                         >
                             <Select
+                                showSearch
+                                // @ts-ignore
+                                filterOption={filterOption}
                                 fieldNames={{ value: "Id", label: "Name" }}
                                 loading={ldCountry}
                                 options={Country}

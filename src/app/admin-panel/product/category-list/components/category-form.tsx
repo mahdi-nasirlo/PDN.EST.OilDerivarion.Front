@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 function CategoryForm({
   form,
@@ -59,6 +60,9 @@ function CategoryForm({
             ]}
           >
             <Select
+              showSearch
+              // @ts-ignore
+              filterOption={filterOption}
               loading={isLoading}
               options={data}
               fieldNames={{ label: "Name", value: "Id" }}

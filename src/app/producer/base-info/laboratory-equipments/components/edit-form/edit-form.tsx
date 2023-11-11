@@ -2,6 +2,7 @@ import { Col, Form, Input, Radio, Row, Select } from 'antd'
 import React, { useState } from 'react'
 import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 import useSWR from "swr";
+import { filterOption } from '../../../../../../../lib/filterOption';
 
 export default function EditForm({ data, form }: { data: any, form: any }) {
 
@@ -236,6 +237,9 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                         label="کشورهای مقصد صادراتی محصول"
                     >
                         <Select
+                            showSearch
+                            // @ts-ignore
+                            filterOption={filterOption}
                             fieldNames={{ value: "Id", label: "Name" }}
                             loading={ldCountry}
                             options={Country}

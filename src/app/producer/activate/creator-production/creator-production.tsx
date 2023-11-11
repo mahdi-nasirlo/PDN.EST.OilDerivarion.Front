@@ -18,6 +18,7 @@ import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import StepContext from "../stete-manager/step-context";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function CreatorProduction() {
   const processController = useContext(StepContext);
@@ -133,6 +134,9 @@ export default function CreatorProduction() {
               ]}
             >
               <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
                 loading={ldCompanyOwnership}
                 options={CompanyOwnershipTypeGetAll}
                 fieldNames={{ value: "Id", label: "Name" }}

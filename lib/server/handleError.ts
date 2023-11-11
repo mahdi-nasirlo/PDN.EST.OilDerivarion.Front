@@ -1,9 +1,13 @@
 import {notification} from "antd";
 
 interface UnAuthorizeType {
-    clientId: number,
-    redirectUri: string,
-    ssoUrl: string
+    data: {
+        clientId: number,
+        redirectUri: string,
+        ssoUrl: string
+    },
+    message: string,
+    success: boolean,
 }
 
 
@@ -15,9 +19,9 @@ export const HandleError = (error: any) => {
 
         const {data}: { data: UnAuthorizeType } = response
 
-        console.log(`${data.ssoUrl}?clientId=${data.clientId}&redirectUri=${window.location.href}`)
+        console.log(`${data.data.ssoUrl}?clientId=${data.data.clientId}&redirectUri=${window.location.href}`)
 
-        window.location.href = `${data.ssoUrl}?clientId=${data.clientId}&redirectUri=${window.location.href}`
+        window.location.href = `${data.data.ssoUrl}?clientId=${data.data.clientId}&redirectUri=${window.location.href}`
 
     }
 

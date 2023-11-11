@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import StepContext from '../stete-manager/step-context'
-import { Button, Col, Divider, Form, Input, Radio, Row, Select, Typography } from 'antd'
+import { Button, Col, Divider, Form, Input, Row, Select, Typography } from 'antd'
 import { listFetcher } from '../../../../../lib/server/listFetcher'
 import useSWR from "swr";
 import { useForm } from 'antd/es/form/Form';
@@ -8,6 +8,7 @@ import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 import useSWRMutation from "swr/mutation";
 import { SetProducerLab } from '../../../../../interfaces/Base-info';
 import { filterOption } from '../../../../../lib/filterOption';
+import CustomRadioGroup from '../../../../../components/CustomeRadioGroup';
 
 
 
@@ -34,33 +35,6 @@ export default function LaboratoryEquipments() {
 
 
     const [wastePlaceForm, SetWastePlace] = useState(true)
-
-    function CustomRadioGroup(
-        { label, value, options, onChange, name }:
-            { label: string, value: any, options: any, onChange: any, name: string }) {
-        return (
-            <Form.Item
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                label={label}
-                name={name}
-            >
-                <Radio.Group
-                    size='large'
-                    className='w-full my-1'
-                    defaultValue={false}
-                    value={value}
-                    buttonStyle="solid"
-                    onChange={onChange}
-                >
-                    {options.map((option: any) => (
-                        <Radio.Button className='w-1/2' key={option.value} value={option.value}>
-                            {option.label}
-                        </Radio.Button>
-                    ))}
-                </Radio.Group>
-            </Form.Item>
-        );
-    }
 
     return (
         <>

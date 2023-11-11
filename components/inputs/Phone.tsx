@@ -6,7 +6,7 @@ const PhoneInputs = (props: FormItemProps) => {
   const validateIranianLandline = (rule: any, value: any) => {
     const landlineRegex = /^0[0-9]{2,}[0-9]{7,}$/;
     if (value && !landlineRegex.test(value)) {
-      return Promise.reject("شماره تلفن ثابت با پیش شماره نامعتبر است");
+      return Promise.reject("شماره تلفن ثابت نامعتبر است");
     }
     return Promise.resolve();
   };

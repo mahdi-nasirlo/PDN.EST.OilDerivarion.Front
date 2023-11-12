@@ -29,7 +29,6 @@ const Page = (props: { params: { uid: string } }) => {
 
   const handleOnClick = (choice: string) => {
     setChoice(choice);
-
     form.submit();
   };
 
@@ -60,7 +59,7 @@ const Page = (props: { params: { uid: string } }) => {
               wrapperCol={{ span: 24 }}
               labelCol={{ span: 24 }}
               rules={[{ required: true }]}
-              name="datePersian1"
+              name="datePersian"
               label="تاریخ بازدید نهایی"
             >
               <CustomeDatePicker />
@@ -73,6 +72,7 @@ const Page = (props: { params: { uid: string } }) => {
               wrapperCol={{ span: 24 }}
               labelCol={{ span: 24 }}
               name="description"
+              rules={[{ required: true }]}
               label="توضیحات"
             >
               <Input.TextArea
@@ -88,7 +88,7 @@ const Page = (props: { params: { uid: string } }) => {
       <WorkflowRequestBtn
         onClick={handleOnClick}
         choices={data?.choices as any}
-        nextStepUrl={""}
+        nextStepUrl={apiData.create.url}
         taskId={props.params.uid}
         loading={isMutating}
       />

@@ -1,16 +1,15 @@
 import {env} from "../../../../../../lib/env";
-import elasticClient from "../../../../../../lib/logger/elasticClient";
 
 export async function GET() {
 
     try {
-        const res = await elasticClient.index({
-            index: env.ELASTIC_INDEX_NAME,
-            id: env.ELASTIC_DOCUMENT_ID,
-            document: {}
-        })
+        // const res = await elasticClient.index({
+        //     index: env.ELASTIC_INDEX_NAME,
+        //     id: env.ELASTIC_DOCUMENT_ID,
+        //     document: {}
+        // })
         //
-        return new Response(JSON.stringify(res))
+        return new Response(JSON.stringify(env))
 
     } catch (e: any) {
 

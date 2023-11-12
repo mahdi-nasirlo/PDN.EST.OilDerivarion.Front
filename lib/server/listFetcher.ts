@@ -1,6 +1,6 @@
 import {AxiosResponse} from "axios";
-import {customRequest} from "../customRequest";
 import handleError from "./handleError";
+import {customRequest} from "../customRequest";
 
 
 export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undefined}) {

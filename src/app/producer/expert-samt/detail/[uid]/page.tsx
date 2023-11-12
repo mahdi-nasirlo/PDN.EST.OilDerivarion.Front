@@ -1,16 +1,16 @@
 "use client";
 
-import {Divider} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Button, Divider } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
 import DateOfVisitForm from "@/app/producer/expert-naft/detail/[uid]/components/date-of-visit-form";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 
 interface PropType {
@@ -40,14 +40,14 @@ export default function Home(props: PropType) {
 
   const router = useRouter()
 
-  const {isLoading, data, mutate} = useGetStep({
+  const { isLoading, data, mutate } = useGetStep({
     taskId: props.params.uid,
     apiUrl: apiData.get.url
   })
 
-  const {isMutating, trigger} = useSWRMutation(
-      apiData.create.url,
-      mutationFetcher
+  const { isMutating, trigger } = useSWRMutation(
+    apiData.create.url,
+    mutationFetcher
   );
 
   const onFinish = async (values: any) => {
@@ -66,23 +66,23 @@ export default function Home(props: PropType) {
   }
 
   return (
-      <>
-        <div className="box-border w-full p-6">
-          <DateOfVisitForm form={form} onFinish={onFinish}/>
-          <WorkflowDataViewer loading={isLoading} data={data as any}/>
-          {data && <Divider/>}
-          <WorkflowRequestBtn
-              loading={isMutating}
-              choices={data?.choices as any}
-              onClick={(choiceKey) => {
-                setChoice(choiceKey)
-                form.submit()
-              }}
-              trigger={() => true}
-              nextStepUrl={apiData.create.url}
-              taskId={props.params.uid}
-          />
-        </div>
-      </>
+    <>
+      <div className="box-border w-full p-6">
+        <WorkflowDataViewer loading={isLoading} data={data as any} />
+        <DateOfVisitForm form={form} onFinish={onFinish} />
+        {data && <Divider />}
+        <WorkflowRequestBtn
+          loading={isMutating}
+          choices={data?.choices as any}
+          onClick={(choiceKey) => {
+            setChoice(choiceKey)
+            form.submit()
+          }}
+          trigger={() => true}
+          nextStepUrl={apiData.create.url}
+          taskId={props.params.uid}
+        />
+      </div>
+    </>
   );
 }

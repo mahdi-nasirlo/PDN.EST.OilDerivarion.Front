@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
-import {customRequest} from "../customRequest";
 import handleError from "./handleError";
+import {customRequest} from "../customRequest";
+import reportLog from "../logger/reportLog";
 
 
 export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undefined}) {
@@ -18,8 +19,14 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
         }
 
         if (!res.data?.data && data.success) {
+
             return true
         }
+        
+        const report = reportLog({
+            type: "fetchSuccess",
+            cause: res.data
+        })
 
         return res.data?.data
 

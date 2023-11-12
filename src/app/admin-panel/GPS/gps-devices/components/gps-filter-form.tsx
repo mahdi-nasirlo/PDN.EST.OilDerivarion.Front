@@ -2,8 +2,8 @@
 
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import React from "react";
-import { Gps } from "../../../../../interfaces/gps";
 import { useForm } from "antd/es/form/Form";
+import { Gps } from "../../../../../../interfaces/gps";
 
 export default function GpsFilterForm({
   filter,

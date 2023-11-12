@@ -9,8 +9,8 @@ export async function GET() {
             id: env.ELASTIC_DOCUMENT_ID,
             document: {}
         })
-        //
-        return new Response(JSON.stringify(res))
+
+        return new Response(JSON.stringify(env))
 
     } catch (e: any) {
 

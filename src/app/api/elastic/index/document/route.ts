@@ -10,7 +10,7 @@ export async function GET() {
         // })
         // //
         // return new Response(JSON.stringify(res))
-        return new Response(JSON.stringify({}))
+        return new Response(JSON.stringify(env))
     } catch (e: any) {
 
         const data = env.NODE_ENV === "production" ? {

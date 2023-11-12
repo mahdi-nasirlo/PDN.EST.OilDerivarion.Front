@@ -32,6 +32,7 @@ const Index = (props: PropsType) => {
   }
 
   const containerStyle = () => {
+
     const repeat = props.choices.length >= 4 ? props.choices.length : 2;
 
     return {

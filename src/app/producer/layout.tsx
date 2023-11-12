@@ -2,32 +2,32 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {Badge, MenuProps} from "antd";
+import { Badge, MenuProps } from "antd";
 import Link from "next/link";
 import {
-    BeakerIcon,
-    DocumentDuplicateIcon,
-    DocumentMagnifyingGlassIcon,
-    HomeIcon,
-    PencilIcon,
-    PhoneIcon,
-    UserCircleIcon,
-    UsersIcon,
-    WrenchScrewdriverIcon,
+  BeakerIcon,
+  DocumentDuplicateIcon,
+  DocumentMagnifyingGlassIcon,
+  HomeIcon,
+  PencilIcon,
+  PhoneIcon,
+  UserCircleIcon,
+  UsersIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import {ListBulletIcon} from "@heroicons/react/24/solid";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { ListBulletIcon } from "@heroicons/react/24/solid";
+import { getMenuItem } from "@/components/layout/sidebar";
 
 export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <AppLayout sidebarItems={items}>{children}</AppLayout>
-        </>
-    );
+  return (
+    <>
+      <AppLayout sidebarItems={items}>{children}</AppLayout>
+    </>
+  );
 }
 
 const MakeRequest = () => (
@@ -48,75 +48,84 @@ const RequestList = () => (
 );
 
 const items: MenuProps["items"] = [
-    getMenuItem(
-        <Link href="/producer">خانه</Link>,
-        "/producer",
-        <HomeIcon width={16} height={16}/>
-    ),
+  getMenuItem(
+    <Link href="/producer">خانه</Link>,
+    "/producer",
+    <HomeIcon width={16} height={16} />
+  ),
 
-    {type: "divider"},
+  { type: "divider" },
 
-    getMenuItem(
-        "گردش کار",
-        "workflow",
-        null,
-        [
-            getMenuItem(
-                <Link href="/producer/task/list">پرسشنامه پیوست شماره 1</Link>,
-                "/producer/task/list",
-                <DocumentDuplicateIcon width={16} height={16}/>
-            ),
-            getMenuItem(
-                <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
-                "/producer/expert-naft/list",
-                <DocumentDuplicateIcon width={16} height={16}/>
-            ),
-            getMenuItem(
-                <Link href={"/producer/expert-samt/list"}>زمان کارشناس صمت</Link>,
-                "/producer/expert-samt/list"
-            ),
-            getMenuItem(
-                <Link href={"/producer/scheduling-visit/list"}>برنامه ریزی و زمان بندی بازدید</Link>,
-                "/producer/scheduling-visit/list"
-            ),
-            getMenuItem(
-                <Link href={"/producer/viewing-notices-and-paying-fee/list"}>رویت اعلان ها توسط متقاضی و پرداخت
-                    هزینه</Link>,
-                "/producer/viewing-notices-and-paying-fee/list"
-            )
-        ],
-        "group"
-    ),
+  getMenuItem(
+    "گردش کار",
+    "workflow",
+    null,
+    [
+      getMenuItem(
+        <Link href="/producer/task/list">پرسشنامه پیوست شماره 1</Link>,
+        "/producer/task/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
+        "/producer/expert-naft/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href={"/producer/expert-samt/list"}>زمان کارشناس صمت</Link>,
+        "/producer/expert-samt/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/scheduling-visit/list"}>
+          برنامه ریزی و زمان بندی بازدید
+        </Link>,
+        "/producer/scheduling-visit/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/viewing-notices-and-paying-fee/list"}>
+          رویت اعلان ها توسط متقاضی و پرداخت هزینه
+        </Link>,
+        "/producer/viewing-notices-and-paying-fee/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/produce-QR-code/list"}>
+          تولید QR کد و امکان چاپ
+        </Link>,
+        "/producer/produce-QR-code/list"
+      ),
+    ],
+    "group"
+  ),
 
-    {type: "divider"},
+  { type: "divider" },
 
-    getMenuItem(
-        "پیشخوان",
-        "dashboard",
-        null,
-        [
-            getMenuItem(
-                <MakeRequest/>,
-                "/producer/dashboard/request",
-                <PencilIcon width={16} height={16}/>
-            ),
-            getMenuItem(
-                <RequestList/>,
-                "/producer/dashboard/request-list",
-                <ListBulletIcon width={16} height={16}/>
-            ),
-        ],
-        "group"
-    ),
-    {type: "divider"},
+  getMenuItem(
+    "پیشخوان",
+    "dashboard",
+    null,
+    [
+      getMenuItem(
+        <MakeRequest />,
+        "/producer/dashboard/request",
+        <PencilIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <RequestList />,
+        "/producer/dashboard/request-list",
+        <ListBulletIcon width={16} height={16} />
+      ),
+    ],
+    "group"
+  ),
+  { type: "divider" },
 
-    getMenuItem(
-        <Link href="/producer/activate">ثبت اطلاعات پایه</Link>,
-        "/producer/activate"
-        // <HomeIcon width={16} height={16} />
-    ),
+  getMenuItem(
+    <Link href="/producer/activate">ثبت اطلاعات پایه</Link>,
+    "/producer/activate"
+    // <HomeIcon width={16} height={16} />
+  ),
 
-    {type: "divider"},
+  { type: "divider" },
 
   getMenuItem(
     "اطلاعات پایه",
@@ -167,8 +176,7 @@ const items: MenuProps["items"] = [
     "group"
   ),
 
-
-    // { type: "divider" },
+  // { type: "divider" },
 
   // getMenuItem(
   //   "مدیریت",

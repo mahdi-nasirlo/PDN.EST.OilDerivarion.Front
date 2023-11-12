@@ -64,6 +64,19 @@ export const apiUrl = {
             create: {
                 url: "/WorkFlowRequest/SetStep06"
             }
+        },
+        step07: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep07",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep07",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep07"
+            }
         }
     }
 }

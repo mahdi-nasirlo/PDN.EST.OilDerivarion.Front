@@ -1,9 +1,4 @@
-import {env} from "../../../../../../lib/env";
-import elasticClient from "../../../../../../lib/logger/elasticClient";
-import { NextRequest } from 'next/server';
-
-
-export async function GET(request: NextRequest) {
+// export async function GET(request: NextRequest) {
 
     // const testDocument = {test: "test"}
 
@@ -26,4 +21,4 @@ export async function GET(request: NextRequest) {
     //     return new Response(JSON.stringify(data))
     // }
 
-}
+// }

@@ -1,9 +1,9 @@
-import {NextApiRequest} from 'next';
 import {env} from "../../../../../../lib/env";
 import elasticClient from "../../../../../../lib/logger/elasticClient";
+import { NextRequest } from 'next/server';
 
 
-export async function GET(request: NextApiRequest) {
+export async function GET(request: NextRequest) {
 
     try {
         const res = await elasticClient.indices.create({index: env.ELASTIC_INDEX_NAME})

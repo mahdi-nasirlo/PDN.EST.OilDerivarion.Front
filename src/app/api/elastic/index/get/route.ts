@@ -1,11 +1,9 @@
-import {NextApiRequest} from 'next';
+import { NextRequest, NextResponse } from "next/server";
 import {env} from "../../../../../../lib/env";
 import elasticClient from "../../../../../../lib/logger/elasticClient";
 
 
-export async function GET(request: NextApiRequest) {
-
-    const testDocument = {test: "test"}
+export async function GET(request: NextRequest) {
 
     try {
         const res = await elasticClient.get({

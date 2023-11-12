@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Divider } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
@@ -30,7 +30,7 @@ interface DataFetchType {
   };
 }
 
-const apiData = apiUrl.WorkFlowRequest.step04;
+const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
   const [form] = useForm();
@@ -65,7 +65,24 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
-        <DateOfVisitForm form={form} onFinish={onFinish} />
+        <Form onFinish={onFinish} form={form}>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} md={24}>
+              <Form.Item
+                wrapperCol={{ span: 24 }}
+                labelCol={{ span: 24 }}
+                name="description"
+                label="توضیحات"
+              >
+                <Input.TextArea
+                  style={{ height: 100, resize: "none" }}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+        {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn
           loading={isMutating}

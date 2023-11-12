@@ -48,7 +48,9 @@ export default function Home() {
               type="link"
               className="text-secondary-500 font-bold "
               onClick={() => {
-                router.push("/producer/expert-naft/detail/" + record.taskId);
+                router.push(
+                  "/producer/produce-QR-code/detail/" + record.taskId
+                );
               }}
             >
               مشاهده اطلاعات

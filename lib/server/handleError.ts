@@ -1,4 +1,5 @@
 import {notification} from "antd";
+import reportLog from "../logger/reportLog";
 
 interface UnAuthorizeType {
     data: {
@@ -14,6 +15,15 @@ interface UnAuthorizeType {
 export const HandleError = (error: any) => {
 
     const {response} = error
+
+    const errorData = {
+        message: error.message,
+        type: "fetchError",
+        cause: error.response,
+        statusCode: response.status
+    }
+
+    const report = reportLog(errorData)
 
     if (response.status === 401) {
 

@@ -181,8 +181,8 @@ const items: MenuProps["items"] = [
   ),
 
   getMenuItem(
-    <Link href="/admin-panel/gps-devices">دستگاه های GPS</Link>,
-    "/admin-panel/gps-devices"
+    <Link href="/admin-panel/GPS/gps-devices">دستگاه های GPS</Link>,
+    "/admin-panel/GPS/gps-devices"
   ),
   getMenuItem(
     <Link href="/admin-panel/gps-tracking">رهگیری GPS</Link>,

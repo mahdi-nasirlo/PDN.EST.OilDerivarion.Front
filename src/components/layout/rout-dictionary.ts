@@ -233,6 +233,9 @@ export const routDictionary: Items = {
   "map-gps": {
     title: "نقشه آزمایشگاه ها",
   },
+  "location-gps-device": {
+    title: "موقعیت GPS",
+  },
   measures: {
     title: "واحد اندازه گیری",
   },

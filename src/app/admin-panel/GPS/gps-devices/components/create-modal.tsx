@@ -4,8 +4,8 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import GpsForm from "@/app/admin-panel/gps-devices/components/gps-form";
+import GpsForm from "./gps-form";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
 export default function CreateModal({
   modalVisible,

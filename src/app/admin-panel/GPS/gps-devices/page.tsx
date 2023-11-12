@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import GpsFilterForm from "./components/gps-filter-form";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import DataTable from "@/app/admin-panel/gps-devices/components/data-table";
 import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import DataTable from "./components/data-table";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);

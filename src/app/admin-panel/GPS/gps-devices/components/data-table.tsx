@@ -3,13 +3,15 @@
 import { Button, Col, Modal, Row, Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useRef, useState } from "react";
-import { Gps } from "../../../../../interfaces/gps";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import EditModal from "@/app/admin-panel/gps-devices/components/edit-modal";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
-import CustomeTable from "../../../../../components/CustomeTable";
+import EditModal from "@/app/admin-panel/GPS/gps-devices/components/edit-modal";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { Gps } from "../../../../../../interfaces/gps";
+import MapViewer from "../../../../../../components/MapViewer";
+import { useRouter } from "next/navigation";
 
 interface DataType {
   key: string;
@@ -37,24 +39,6 @@ export default function DataTable({
     | undefined;
   mutate: () => void;
 }) {
-  const iframeRef = useRef(null);
-
-  // Function to refresh the iframe
-  const refreshIframe = () => {
-    if (iframeRef.current) {
-      (iframeRef.current as HTMLIFrameElement).src = (
-        iframeRef.current as HTMLIFrameElement
-      ).src;
-    }
-  };
-
-  useEffect(() => {
-    const intervalId = setInterval(refreshIframe, 30000); // 10 seconds in milliseconds
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []);
-
   //حذف
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -90,6 +74,8 @@ export default function DataTable({
     await mutate();
   };
 
+  const router = useRouter();
+
   const columns: ColumnsType<Gps> = [
     {
       title: "ردیف",
@@ -122,7 +108,9 @@ export default function DataTable({
           <Button
             type="link"
             className="text-primary-500 font-bold"
-            onClick={() => handleGPS(record)}
+            onClick={() => {
+              router.push("/admin-panel/GPS/gps-devices/location-gps-device");
+            }}
           >
             مشاهده موقعیت
           </Button>
@@ -184,33 +172,6 @@ export default function DataTable({
         modalVisible={isEditModalVisible}
         mutate={mutate}
       />
-      {/* مشاهده موقعیت */}
-      <Modal
-        title="مشاهده موقعیت"
-        visible={isGPSModalVisible}
-        onCancel={handleCancelGPS}
-        width={800}
-        footer={[
-          <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={24}>
-              <Button
-                size="large"
-                className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelGPS}
-                key={"cancel"}
-              >
-                برگشت
-              </Button>
-            </Col>
-          </Row>,
-        ]}
-      >
-        <iframe
-          ref={iframeRef}
-          className="w-full h-[480px] border-solid"
-          src={`https://map-test.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
-        ></iframe>
-      </Modal>
     </>
   );
 }

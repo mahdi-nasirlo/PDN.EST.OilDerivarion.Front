@@ -78,5 +78,10 @@ export const apiUrl = {
                 url: "/WorkFlowRequest/SetStep07"
             }
         }
+    },
+    MapViewer: {
+        boxOpen: {
+            url: "https://map-test.pdnsoftware.ir/Oil/boxOpen?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA"
+        }
     }
 }

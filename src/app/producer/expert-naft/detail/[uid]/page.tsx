@@ -14,93 +14,92 @@ import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 
 interface PropType {
-    params: { uid: string };
+  params: { uid: string };
 }
 
 interface DataFetchType {
-    choices: Choice[];
-    task: {
-        processId: string;
-        stepId: string;
-        reference_ID: string;
-        group_ID: string;
-        step_Name: string;
-        counting_position: string;
-        userId: number;
-    };
+  choices: Choice[];
+  task: {
+    processId: string;
+    stepId: string;
+    reference_ID: string;
+    group_ID: string;
+    step_Name: string;
+    counting_position: string;
+    userId: number;
+  };
 }
 
 interface SetStep3Type {
-    taskId: string,
-    choiceKey: string,
-    description: string,
-    datePersian1: string,
-    datePersian2: string,
-    datePersian3: string
+  taskId: string;
+  choiceKey: string;
+  description: string;
+  datePersian1: string;
+  datePersian2: string;
+  datePersian3: string;
 }
 
-const apiData = apiUrl.WorkFlowRequest.step03
+const apiData = apiUrl.WorkFlowRequest.step03;
 
 export default function Home(props: PropType) {
+  const [form] = useForm();
 
-    const [form] = useForm()
+  const { isLoading, data } = useGetStep({
+    apiUrl: apiData.get.url,
+    taskId: props.params.uid,
+  });
 
-    const { isLoading, data } = useGetStep({ apiUrl: apiData.get.url, taskId: props.params.uid })
+  const { isMutating, trigger } = useSWRMutation(
+    apiData.create.url,
+    mutationFetcher
+  );
 
-    const { isMutating, trigger } = useSWRMutation(
-        apiData.create.url,
-        mutationFetcher
-    );
+  const router = useRouter();
 
-    const router = useRouter();
+  const [choice, setChoice] = useState<string>("");
 
-    const [choice, setChoice] = useState<string>("");
+  const onFinish = async (values: SetStep3Type) => {
+    const data = {
+      ...values,
+      taskId: props.params.uid,
+      choiceKey: choice,
+    };
 
-    const onFinish = async (values: SetStep3Type) => {
+    const res = await trigger(data);
 
-        const data = {
-            ...values,
-            taskId: props.params.uid,
-            choiceKey: choice,
-        }
+    if (res) router.push("/producer/expert-naft/list");
+  };
 
-        const res = await trigger(data)
-
-        if (res)
-            router.push("/producer/expert-naft/list")
-
-    }
-
-    return (
-        <>
-            <div className="box-border w-full p-6">
-                <WorkflowDataViewer loading={isLoading} data={data as any} />
-                <DateOfVisitForm form={form} onFinish={onFinish} />
-                {data && <Divider />}
-                {
-                    data?.choices &&
-                    !isLoading &&
-                    data?.choices.map((value, index) => <>
-                        <div
-                            style={{ height: "fit-content" }}
-                            className="flex justify-center"
-                            key={index}
-                        >
-                            <Button
-                                loading={isMutating}
-                                onClick={() => {
-                                    setChoice(value.choice_Key);
-                                    form.submit()
-                                }}
-                                className="w-full"
-                                type="primary"
-                            >
-                                {value.label}
-                            </Button>
-                        </div>
-                    </>)
-                }
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="box-border w-full p-6">
+        <WorkflowDataViewer loading={isLoading} data={data as any} />
+        <DateOfVisitForm form={form} onFinish={onFinish} />
+        {data && <Divider />}
+        {data?.choices &&
+          !isLoading &&
+          data?.choices.map((value, index) => (
+            <>
+              <div
+                style={{ height: "fit-content" }}
+                className="flex justify-center"
+                key={index}
+              >
+                <Button
+                  loading={isMutating}
+                  onClick={() => {
+                    setChoice(value.choice_Key);
+                    form.submit();
+                  }}
+                  className="w-full"
+                  type="primary"
+                >
+                  {value.label}
+                </Button>
+              </div>
+            </>
+          ))}
+      </div>
+    </>
+  );
 }

@@ -1,65 +1,77 @@
-import React from 'react';
-import {Col, Form, Row, Select} from "antd";
+import React from "react";
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {filterOption} from "../../../../../../lib/filterOption";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
+  const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
+    [
+      "/ProductCategory/GetAll",
+      {
+        name: null,
+        IsActive: true,
+      },
+    ],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
-    const {data: products, isLoading: ldProducts} = useSWR(["/Product/GetAll", {
-        "name": null,
-        "is_Active": null
-    }], ([url, arg]: [string, any]) => listFetcher(url, {arg}))
-
-    const {data: material, isLoading: ldMaterial} = useSWR(["/Material/GetAll", {
-        "name": null,
-        "is_Active": null
-    }], ([url, arg]: [string, any]) => listFetcher(url, {arg}))
-
-    return (
-        <>
-            <Row gutter={[32, 1]}>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
-                        labelCol={{span: 24}}
-                        wrapperCol={{span: 24}}
-                        name="productUid"
-                        label="نام محصول"
-                    >
-                        <Select
-                            showSearch
-                            fieldNames={{label: "Name", value: "Uid"}}
-                            // @ts-ignore
-                            filterOption={filterOption}
-                            loading={ldProducts}
-                            options={products}
-                            size="large"
-                            placeholder="انتخاب کنید"/>
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
-                        labelCol={{span: 24}}
-                        wrapperCol={{span: 24}}
-                        name="materialUid"
-                        label="مواد اولیه"
-                    >
-                        <Select
-                            showSearch
-                            fieldNames={{label: "Name", value: "Uid"}}
-                            // @ts-ignore
-                            filterOption={filterOption}
-                            loading={ldMaterial}
-                            options={material}
-                            size="large"
-                            placeholder="انتخاب کنید"/>
-                    </Form.Item>
-                </Col>
-            </Row>
-        </>
-    )
+  return (
+    <>
+      <Row gutter={[32, 1]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="Name"
+            label="نام محصول"
+          >
+            <Input
+              // @ts-ignore
+              size="large"
+              placeholder="وارد کنید"
+            />
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={12}>
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="ProductCategoryUid"
+            label="نام دسته بندی"
+          >
+            <Select
+              showSearch
+              fieldNames={{ label: "Name", value: "Uid" }}
+              // @ts-ignore
+              filterOption={filterOption}
+              loading={ldProductCategory}
+              options={ProductCategory}
+              size="large"
+              placeholder="انتخاب کنید"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[32, 1]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="IsActive"
+            label="فعال/غیر فعال"
+            initialValue={true}
+          >
+            <Select
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false },
+              ]}
+              size="large"
+              placeholder="انتخاب کنید"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+    </>
+  );
 }
 
 export default ProductForm;

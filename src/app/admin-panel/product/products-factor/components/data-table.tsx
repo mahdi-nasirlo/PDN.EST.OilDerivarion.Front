@@ -1,156 +1,176 @@
-import {Button, Space, Table} from 'antd';
-import type {ColumnsType} from 'antd/es/table';
-import React, {useState} from "react";
+import { Button, Space, Table, Typography } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import {TableColumnsType} from "antd/lib";
+import { TableColumnsType } from "antd/lib";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {Product, ProductTestItem} from "../../../../../../interfaces/product";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import { Product, ProductTestItem } from "../../../../../../interfaces/product";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
 
-
-const columns: ColumnsType<Product> = [
-    {
-        title: "ردیف",
-        dataIndex: "Row",
-        key: "1",
-    },
-    {
-        title: 'نام محصول',
-        dataIndex: 'Name',
-        key: '2',
-    },
+const columns: ColumnsType<any> = [
+  {
+    title: "ردیف",
+    dataIndex: "Row",
+    key: "1",
+    width: "5%"
+  },
+  {
+    title: "نام محصول",
+    dataIndex: "Name",
+    key: "2",
+  },
+  {
+    title: "فاکتور های آزمون",
+    dataIndex: "TestItems",
+    key: "3",
+    render: (_, record) => (
+      <Typography.Text
+        className=" max-w-[300px]"
+        ellipsis={true}
+        style={{ width: "40px !important" }}
+      >
+        {record.TestItems}
+      </Typography.Text>
+    ),
+  },
 ];
 
+const DataTable = ({
+  setFilter,
+  product,
+  ldProduct,
+  mutate: TableMutate
+}: {
+  setFilter: (arg: any) => void,
+  product: { records: Product[], count: number } | undefined;
+  ldProduct: boolean;
+  mutate: () => void;
+}) => {
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
-const DataTable = ({ product, ldProduct }: { product: Product[], ldProduct: boolean }) => {
+  return (
+    <>
+      <CustomeTable
+        rowKey={"Uid"}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+          onExpand: (expanded, record: Product) => {
+            const keys: string[] = [];
 
-    const [activeExpRow, setActiveExpRow] = useState<string[]>()
+            if (expanded && record.Uid) {
+              // @ts-ignore
+              keys.push(record.Uid);
+            }
 
-    return (
-        <Table
-            className="mt-6"
-            columns={columns}
-            rowKey={"Uid"}
-            loading={ldProduct}
-            expandable={{
-                expandedRowKeys: activeExpRow,
-                onExpand: (expanded, record: Product) => {
+            if (!expanded) {
+              keys.pop();
+            }
 
-                    const keys: string[] = [];
-
-                    if (expanded && record.Uid) {
-                        // @ts-ignore
-                        keys.push(record.Uid);
-                    }
-
-                    if (!expanded) {
-                        keys.pop()
-                    }
-
-                    setActiveExpRow(keys);
-
-                },
-                expandedRowRender: (record: Product) => <ExpandedRowRender product={record} />,
-            }}
-            dataSource={product}
-        />
-    )
+            setActiveExpRow(keys);
+          },
+          expandedRowRender: (record: Product) => (
+            <ExpandedRowRender product={record} TableMutate={TableMutate} />
+          ),
+        }}
+        setInitialData={setFilter}
+        isLoading={ldProduct}
+        data={product}
+        columns={columns}
+      />
+    </>
+  );
 };
 
+const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMutate: () => void }) => {
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
-const ExpandedRowRender = ({ product }: { product: Product }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-    const [activeExpRow, setActiveExpRow] = useState<string[]>()
+  const [recordToDelete, setRecordToDelete] = useState<
+    ProductTestItem | undefined
+  >();
 
-    const [open, setOpen] = useState<boolean>(false);
+  const defaultValue = {
+    productUid: product.Uid,
+    testItemUid: null,
+    IsActive: true,
+  };
 
-    const [recordToDelete, setRecordToDelete] = useState<ProductTestItem | undefined>();
+  const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(
+    ["/ProductTestItem/GetAll", defaultValue],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+  );
 
-    const defaultValue = {
-        "productUid": product.Uid,
-        "testItemUid": null,
-        "is_Active": true
+  const { trigger, isMutating } = useSWRMutation(
+    "/ProductTestItem/Delete",
+    mutationFetcher
+  );
+
+  const deleteProductFactor = async () => {
+    await trigger({ uid: recordToDelete?.Uid });
+    await TableMutate();
+    await mutate();
+
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isLoading) {
+      mutate();
     }
+  }, [product]);
 
-    const {
-        data,
-        isLoading,
-        mutate
-    } = useSWR<ProductTestItem[]>(["/ProductTestItem/GetAll", defaultValue], ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg }))
-
-    const { trigger } = useSWRMutation("/ProductTestItem/Delete", mutationFetcher)
-
-    const deleteProductFactor = async () => {
-
-        await trigger({ uid: recordToDelete?.Uid });
-
-        await mutate();
-
-        setOpen(false)
-
-    }
-
-    const expandColumns: TableColumnsType<ProductTestItem> = [
-        { title: "#", dataIndex: "Row", key: "1" },
-        { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
-        {
-            title: "عملیات",
-            dataIndex: "2",
-            key: "upgradeNum",
-            render: (_, record: ProductTestItem) => (
-                <Space size="middle">
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => {
-                            setOpen(true);
-                            setRecordToDelete(record)
-                        }}
-                    >
-                        حذف
-                    </Button>
-                </Space>
-            ),
-        },
-    ];
-
-    return <>
-        <Table
-            columns={expandColumns}
-            dataSource={addIndexToData(data)}
-            expandable={{
-                expandedRowKeys: activeExpRow,
-                // onExpand: (expanded, record: Material) => {
-                //
-                //     const keys: string[] = [];
-                //
-                //     if (expanded && record.Uid) {
-                //         // @ts-ignore
-                //         keys.push(record.Uid);
-                //     }
-                //
-                //     if (!expanded) {
-                //         keys.pop()
-                //     }
-                //
-                //     setActiveExpRow(keys);
-                //
-                // },
-                // expandedRowRender: (record: Material) => <ExpandedRowRender material={record}/>,
+  const expandColumns: TableColumnsType<ProductTestItem> = [
+    { title: "#", dataIndex: "Row", key: "1", width: "5%" },
+    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    {
+      title: "عملیات",
+      dataIndex: "2",
+      key: "upgradeNum",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record: ProductTestItem) => (
+        <Space size="middle">
+          <Button
+            type="link"
+            className="text-red-500 font-bold"
+            onClick={() => {
+              setOpen(true);
+              setRecordToDelete(record);
             }}
-            loading={isLoading}
-            pagination={false}
-        />
-        <ConfirmDeleteModal
-            open={open}
-            setOpen={setOpen}
-            handleDelete={deleteProductFactor}
-            title={"فاکتور محصول"}
-        />
+          >
+            حذف
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <Table
+        columns={expandColumns}
+        dataSource={addAlphabetToData(data)}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+        }}
+        loading={isLoading || isMutating}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        loading={isMutating}
+        open={open}
+        setOpen={setOpen}
+        handleDelete={deleteProductFactor}
+        title={"فاکتور محصول"}
+      />
     </>
-}
+  );
+};
 
 export default DataTable;

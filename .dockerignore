@@ -1,0 +1,50 @@
+# Ignore general files
+node_modules
+.next
+out
+.env
+.DS_Store
+
+# Ignore development-related files
+*.log
+npm-debug.log*
+
+# Ignore editor-specific files
+.vscode
+.idea
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.swp
+
+# Ignore testing-related files
+coverage
+__tests__
+test
+
+# Ignore version control files
+.git
+.gitignore
+
+# Only include necessary source code and configuration files
+!package.json
+!package-lock.json
+!next.config.js
+!pages
+!public
+!styles
+!components
+!utils
+!api
+
+# Exclude development dependencies
+**/node_modules
+**/.npm
+**/.yarn
+
+# Exclude build and cache directories
+.cache
+.build
+.npm
+.yarn

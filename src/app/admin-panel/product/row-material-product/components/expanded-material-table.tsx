@@ -1,78 +1,103 @@
-import {Product} from "../../../../../../interfaces/product";
-import React, {useEffect, useState} from "react";
+import { Product } from "../../../../../../interfaces/product";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {TableColumnsType} from "antd/lib";
-import {Button, Space, Table} from "antd";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { TableColumnsType } from "antd/lib";
+import { Button, Space, Table } from "antd";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
 
-export const ExpandedMaterialTable = ({product}: { product: Product }) => {
+export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { product: Product, mutate: any }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-    const [open, setOpen] = useState<boolean>(false);
+  const [recordToDelete, setRecordToDelete] = useState<Product>();
 
-    const [recordToDelete, setRecordToDelete] = useState<Product>();
+  const defaultValue = {
+    productUid: product.Uid,
+    materialUid: null,
+    IsActive: null,
+  };
 
-    const defaultValue = {
-        productUid: product.Uid,
-        materialUid: null,
-        is_Active: null
+  const { data, isLoading, mutate } = useSWR<any[]>(
+    ["/ProductMaterial/GetAll", defaultValue],
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+  );
+
+  useEffect(() => {
+    if (!isLoading) {
+      mutate();
     }
+  }, [product]);
 
-    const {data, isLoading, mutate} = useSWR("/ProductMaterial/GetAll", (url) => listFetcher(url, {arg: defaultValue}))
+  const { trigger, isMutating } = useSWRMutation(
+    "/ProductMaterial/Delete",
+    mutationFetcher
+  );
 
-    useEffect(() => {
+  const handleDelete = async () => {
 
-        if (!isLoading) {
-            mutate()
-        }
+    await trigger({ Uid: recordToDelete?.Uid });
 
-    }, [product])
+    await mutate();
+    await mutateTable();
+
+    setOpen(false);
+  };
+
+  const expandColumns: TableColumnsType<any> = [
+    {
+      title: "#",
+      dataIndex: "Row",
+      key: "1",
+      width: "5%"
+    },
+    {
+      title: "نام ماده اولیه",
+      dataIndex: "MaterialName",
+      key: "2",
+    },
+    {
+      title: "عملیات",
+      dataIndex: "2",
+      key: "upgradeNum",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-red-500 font-bold"
+            onClick={() => {
+              setOpen(true);
+              setRecordToDelete(record);
+            }}
+          >
+            حذف
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
 
-    const {trigger, isMutating} = useSWRMutation("/ProductMaterial/Delete", mutationFetcher)
-
-    const handleDelete = async () => {
-
-        setOpen(false)
-
-        await trigger({Uid: recordToDelete?.Uid})
-
-        await mutate()
-        
-    }
-
-    const expandColumns: TableColumnsType = [
-        {title: "#", dataIndex: "Row", key: "1"},
-        {title: "نام ماده اولیه", dataIndex: "MaterialName", key: "2"},
-        {
-            title: "عملیات",
-            dataIndex: "2",
-            key: "upgradeNum",
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => {
-                            setOpen(true);
-                            // @ts-ignore
-                            setRecordToDelete(record)
-                        }}
-                    >
-                        حذف
-                    </Button>
-                </Space>
-            ),
-        },
-    ];
-
-    return <>
-        {/*@ts-ignore*/}
-        <Table columns={expandColumns} dataSource={addIndexToData(data)} loading={isLoading}
-               pagination={false}/>
-        <ConfirmDeleteModal open={open} setOpen={setOpen} handleDelete={handleDelete} title={"فاکتور محصول"}/>
+  return (
+    <>
+      <Table
+        columns={expandColumns}
+        dataSource={addAlphabetToData(data)}
+        loading={isLoading || isMutating}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        loading={isMutating}
+        open={open}
+        setOpen={setOpen}
+        handleDelete={handleDelete}
+        title={"فاکتور محصول"}
+      />
     </>
-}
+  );
+};

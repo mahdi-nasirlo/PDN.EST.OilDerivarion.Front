@@ -1,61 +1,63 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { Button, Collapse, Typography } from "antd";
-import { addIndexToData } from "../../../../lib/addIndexToData";
+import {Button, Collapse, Typography} from "antd";
 import useSWR from "swr";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {listFetcher} from "../../../../lib/server/listFetcher";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValueTable = {
     Name: null,
-    is_Active: null,
+    IsActive: null,
     fromRecord: 0,
-    selectRecord: 100000
-  }
+    selectRecord: 100000,
+  };
 
-  const [filter, setFilter] = useState(defaultValueTable)
+  const [filter, setFilter] = useState(defaultValueTable);
 
-  const { data: Labratory, isLoading: ldProduct, mutate } = useSWR<{
+  const {
+    data: Labratory,
+    isLoading: ldProduct,
+    mutate,
+    isValidating,
+  } = useSWR<{
     records: Labratory[];
     count: number;
-  }>(
-    ["/Lab/GetPage", filter],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  }>(["/Lab/GetPage", filter], ([url, arg]: [string, any]) =>
+    listFetcher(url, { arg })
   );
 
   const setFilterTable = async (values: LaboratoryGet) => {
-
     // @ts-ignore
-    setFilter({ Name: values.Name, is_Active: null, fromRecord: 0, selectRecord: 1000 })
+    setFilter({ Name: values.Name, IsActive: true, fromRecord: 0, selectRecord: 10000 });
 
-    await mutate()
-
-  }
+    await mutate();
+  };
 
   const unsetFilter = async () => {
+    setFilter(defaultValueTable);
 
-    setFilter(defaultValueTable)
-
-    await mutate()
-
-  }
+    await mutate();
+  };
 
   return (
     <>
-      {/*// @ts-ignore*/}
       <Collapse
         size="large"
-        items={[{
-          label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
-        }]}
+        items={[
+          {
+            label: "فیلتر جدول",
+            children: (
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+            ),
+          },
+        ]}
       />
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
@@ -63,16 +65,21 @@ export default function Page() {
             لیست فاکتور های آزمایشگاه
           </Typography>
           <Button
-            className="max-md:w-full flex justify-center items-center gap-2"
-            size="large"
-            type="primary"
-            onClick={() => setModalVisible(true)}
+              className="max-md:w-full flex justify-center items-center gap-2"
+              size="large"
+              type="primary"
+              onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24} />
+            <PlusIcon width={24} height={24}/>
             <span className="flex ">افزودن فاکتور آزمایشگاه</span>
           </Button>
         </div>
-        <DataTable Labratory={addIndexToData(Labratory?.records)} ldProduct={ldProduct} />
+        <DataTable
+            setFilter={setFilter}
+            isValidating={isValidating}
+            Labratory={Labratory}
+            ldProduct={ldProduct}
+        />
       </div>
       <CreateModal
         mutate={mutate}

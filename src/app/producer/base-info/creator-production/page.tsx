@@ -1,127 +1,58 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, InputNumber, Row, Typography, } from "antd";
-import React from "react";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Button, Divider, Typography, } from "antd";
+import React, { useState } from "react";
+import DisplayForm from "./components/display-form";
+import EditModal from "./components/edit-modal";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+
 
 export default function NewRequest() {
+
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsEditModalVisible(true);
+    };
+
+    const { data, isLoading, mutate } = useSWR(
+        ["/Producer/GetBase"],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
+
+
     return (
         <>
-            <Typography className="text-right font-medium text-base">
-                لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
-            </Typography>
-            <Divider />
-            <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="lastName"
-                            label="مدیرعامل"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "این فیلد اجباری است",
-                                },
-                                {
-                                    type: "string",
-                                },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="national-code"
-                            label="شناسه ملی"
-                            rules={[
-                                { required: true, message: "کد ملی اجباری است" },
-                                {
-                                    validator: (_, value) => {
-                                        if (!value || value.length === 10) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject("کد ملی باید ۱۰ رقم باشد");
-                                    },
-                                },
-                            ]}
-                        >
-                            <InputNumber size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="lastName"
-                            label="نام واحد تولیدی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="lastName"
-                            label="نوع مالکیت"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Divider />
-
+            <div className="flex justify-between items-center">
+                <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                    اطلاعات واحد تولیدی
+                </Typography>
                 <Button
-                    className="w-full management-info-form-submit btn-filter"
+                    className="max-md:w-full flex justify-center items-center gap-2"
                     size="large"
                     type="primary"
                     htmlType="submit"
+                    onClick={showModal}
                 >
-                    <span className="flex gap-2 justify-center "> ثبت</span>
+                    <PencilSquareIcon width={24} height={24} />
+                    <span className="flex">
+                        ویرایش
+                    </span>
                 </Button>
-            </Form>
+            </div>
+            <Divider />
+            <DisplayForm
+                data={data}
+                isLoading={isLoading}
+            />
+            <EditModal
+                mutate={mutate}
+                data={data}
+                isEditModalVisible={isEditModalVisible}
+                setIsEditModalVisible={setIsEditModalVisible}
+            />
         </>
     );
 }
-
-// const MyFormItemContext = React.createContext<(string | number)[]>([]);
-
-// interface MyFormItemGroupProps {
-//   prefix: string | number | (string | number)[];
-//   children: React.ReactNode;
-// }
-
-// function toArr(
-//   str: string | number | (string | number)[]
-// ): (string | number)[] {
-//   return Array.isArray(str) ? str : [str];
-// }
-
-// const MyFormItemGroup = ({ prefix, children }: MyFormItemGroupProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatPath = React.useMemo(
-//     () => [...prefixPath, ...toArr(prefix)],
-//     [prefixPath, prefix]
-//   );
-
-//   return (
-//     <MyFormItemContext.Provider value={concatPath}>
-//       {children}
-//     </MyFormItemContext.Provider>
-//   );
-// };
-
-// const MyFormItem = ({ name, ...props }: FormItemProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatName =
-//     name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-
-//   return <Form.Item name={concatName} {...props} />;
-// };

@@ -5,155 +5,195 @@ import React from "react";
 import { Badge, MenuProps } from "antd";
 import Link from "next/link";
 import {
-    ChatBubbleLeftEllipsisIcon,
-    Cog6ToothIcon,
-    DocumentDuplicateIcon,
-    HomeIcon,
-    PencilIcon,
-    PhoneIcon,
-    UserCircleIcon,
-    UsersIcon,
-    WrenchScrewdriverIcon,
+  BeakerIcon,
+  DocumentDuplicateIcon,
+  DocumentMagnifyingGlassIcon,
+  HomeIcon,
+  PencilIcon,
+  PhoneIcon,
+  UserCircleIcon,
+  UsersIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 import { ListBulletIcon } from "@heroicons/react/24/solid";
 import { getMenuItem } from "@/components/layout/sidebar";
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-            <AppLayout sidebarItems={items}>{children}</AppLayout>
-        </>
-    );
+  return (
+    <>
+      <AppLayout sidebarItems={items}>{children}</AppLayout>
+    </>
+  );
 }
 
 const MakeRequest = () => (
-    <>
-        <div className="flex justify-between items-center">
-            <Link href="/producer/dashboard/request/production-process">ثبت درخواست</Link>
-        </div>
-    </>
+  <>
+    <div className="flex justify-between items-center">
+      <Link href="/producer/dashboard/request">ثبت درخواست</Link>
+    </div>
+  </>
 );
 
 const RequestList = () => (
-    <>
-        <div className="flex justify-between items-center">
-            <Link href="/producer/dashboard/request-list">لیست درخواست</Link>
-            <Badge style={{ marginLeft: "1px", boxShadow: "none" }} count={5} />
-        </div>
-    </>
+  <>
+    <div className="flex justify-between items-center">
+      <Link href="/producer/dashboard/request-list">لیست درخواست</Link>
+      <Badge style={{ marginLeft: "1px", boxShadow: "none" }} count={5} />
+    </div>
+  </>
 );
 
 const items: MenuProps["items"] = [
-    getMenuItem(
-        <Link href="/producer">خانه</Link>,
-        "/dashboard",
-        <HomeIcon width={16} height={16} />
-    ),
+  getMenuItem(
+    <Link href="/producer">خانه</Link>,
+    "/producer",
+    <HomeIcon width={16} height={16} />
+  ),
 
-    { type: "divider" },
+  { type: "divider" },
 
+  getMenuItem(
+    "گردش کار",
+    "workflow",
+    null,
+    [
+      getMenuItem(
+        <Link href="/producer/task/list">پرسشنامه پیوست شماره 1</Link>,
+        "/producer/task/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
+        "/producer/expert-naft/list",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href={"/producer/expert-samt/list"}>زمان کارشناس صمت</Link>,
+        "/producer/expert-samt/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/scheduling-visit/list"}>
+          برنامه ریزی و زمان بندی بازدید
+        </Link>,
+        "/producer/scheduling-visit/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/viewing-notices-and-paying-fee/list"}>
+          رویت اعلان ها توسط متقاضی و پرداخت هزینه
+        </Link>,
+        "/producer/viewing-notices-and-paying-fee/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/produce-QR-code/list"}>
+          تولید QR کد و امکان چاپ
+        </Link>,
+        "/producer/produce-QR-code/list"
+      ),
+    ],
+    "group"
+  ),
 
-    getMenuItem(
-        <a href={"/state-general-management/process/StateOrgManager/list"}>اداره کل استان</a>,
-        "StateOrgManager",
-    ),
-    getMenuItem(
-        <a href={"/state-general-management/process/ExeManager/list"}>رئیس اجرایی</a>,
-        "ExeManager",
-    ),
+  { type: "divider" },
 
-    getMenuItem(
-        <a href={"/state-general-management/process/Rejected/list"}>رد شده ها</a>,
-        "Rejected",
-    ),
-    getMenuItem(
-        <a href={"/state-general-management/process/End/list"}>تایید شده ها</a>,
-        "End",
-    ),
+  getMenuItem(
+    "پیشخوان",
+    "dashboard",
+    null,
+    [
+      getMenuItem(
+        <MakeRequest />,
+        "/producer/dashboard/request",
+        <PencilIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <RequestList />,
+        "/producer/dashboard/request-list",
+        <ListBulletIcon width={16} height={16} />
+      ),
+    ],
+    "group"
+  ),
+  { type: "divider" },
 
-    { type: "divider" },
+  getMenuItem(
+    <Link href="/producer/activate">ثبت اطلاعات پایه</Link>,
+    "/producer/activate"
+    // <HomeIcon width={16} height={16} />
+  ),
 
-    getMenuItem(
-        "پیشخوان",
-        "dashboard",
-        null,
-        [
-            getMenuItem(
-                <MakeRequest />,
-                "/producer/dashboard/request/production-process",
-                <PencilIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                <RequestList />,
-                "/producer/dashboard/request/request-list",
-                <ListBulletIcon width={16} height={16} />
-            ),
-        ],
-        "group"
-    ),
-    { type: "divider" },
+  { type: "divider" },
 
-    getMenuItem(
-        "اطلاعات پایه",
-        "management",
-        null,
-        [
-            getMenuItem(
-                <Link href="/producer/base-info/creator-production">
-                    اطلاعات واحد تولیدی
-                </Link>,
-                "/creator-peoduction",
-                <WrenchScrewdriverIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                <Link href="/producer/base-info/management-info">
-                    اطلاعات مدیریتی
-                </Link>,
-                "/management-info",
-                <UserCircleIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
-                "/personnel-info",
-                <UsersIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
-                "/license-info",
-                <DocumentDuplicateIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                <Link href="/producer/base-info/contact-info">اطلاعات تماس</Link>,
-                "/contact-info",
-                <PhoneIcon width={16} height={16} />
-            ),
-        ],
-        "group"
-    ),
+  getMenuItem(
+    "اطلاعات پایه",
+    "management",
+    null,
+    [
+      getMenuItem(
+        <Link href="/producer/base-info/creator-production">
+          اطلاعات واحد تولیدی
+        </Link>,
+        "/producer/base-info/creator-production",
+        <WrenchScrewdriverIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/laboratory-equipments">
+          تجهیزات آزمایشگاهی
+        </Link>,
+        "/producer/base-info/laboratory-equipments",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
+        "/producer/base-info/visit-form",
+        <DocumentMagnifyingGlassIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/management-info">اطلاعات مدیریتی</Link>,
+        "/producer/base-info/management-info",
+        <UserCircleIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
+        "/producer/base-info/license-info",
+        <DocumentDuplicateIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
+        "/producer/base-info/personnel-info",
+        <UsersIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/contact-info">اطلاعات تماس</Link>,
+        "/producer/base-info/contact-info",
+        <PhoneIcon width={16} height={16} />
+      ),
+    ],
 
-    { type: "divider" },
+    "group"
+  ),
 
-    getMenuItem(
-        "مدیریت",
-        "management",
-        null,
-        [
-            getMenuItem(
-                "تنظیمات حساب کاربری",
-                "profile-setting",
-                <Cog6ToothIcon width={16} height={16} />
-            ),
-            getMenuItem(
-                "ارتباط با پشتیبان",
-                "connect-support",
-                <ChatBubbleLeftEllipsisIcon width={16} height={16} />
-            ),
-        ],
-        "group"
-    ),
+  // { type: "divider" },
 
+  // getMenuItem(
+  //   "مدیریت",
+  //   "management",
+  //   null,
+  //   [
+  //     getMenuItem(
+  //       "تنظیمات حساب کاربری",
+  //       "profile-setting",
+  //       <Cog6ToothIcon width={16} height={16} />
+  //     ),
+  //     getMenuItem(
+  //       "ارتباط با پشتیبان",
+  //       "connect-support",
+  //       <ChatBubbleLeftEllipsisIcon width={16} height={16} />
+  //     ),
+  //   ],
+  //   "group"
+  // ),
 ];

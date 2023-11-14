@@ -1,181 +1,62 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, InputNumber, Row, Select, Typography, } from "antd";
-import React from "react";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { Button, Divider, Typography, } from "antd";
+import React, { useState } from "react";
+import DisplayForm from "./components/display-form";
+import EditModal from "./components/edit-modal";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+
 
 export default function Page() {
+
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsEditModalVisible(true);
+    };
+
+    const { data, isLoading, mutate } = useSWR(
+        ["/ProfilePersonContact/Get"],
+        ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+
+
+
+
     return (
         <>
-            <Typography className="text-right font-medium text-base">
-                لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
-            </Typography>
-            <Divider />
-            <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="year-establishment"
-                            label="استان "
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string" },
-                            ]}
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="lastName"
-                            label="شهرستان"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string" },
-                            ]}
-                        >
-                            <Select size="large" placeholder="انتخاب کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="company-registratuon-num"
-                            label="شهرک"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="license-establish"
-                            label="خیابان اصلی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="operation-license"
-                            label="خیابان فرعی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name={"phone_number"}
-                            label="کوچه"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={24}>
-                        <Form.Item
-                            name="operation-license"
-                            label="نشانی دفتر مرکزی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "string", message: "باید به صورت متن باشد" },
-                            ]}
-                        >
-                            <Input size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name="operation-license"
-                            label="تلفن دفتر مرکزی"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "number", message: "باید به صورت عدد باشد" },
-                            ]}
-                        >
-                            <InputNumber className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                        <Form.Item
-                            name={"phone_number"}
-                            label="تلفن تماس کارخانه"
-                            rules={[
-                                { required: true, message: "این فیلد اجباری است" },
-                                { type: "number", message: "باید به صورت عدد باشد" },
-                            ]}
-                        >
-                            <InputNumber className="w-full rounded-lg" size="large" placeholder="وارد کنید" />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Divider />
-                <div className="flex gap-6">
+            <>
+                <div className="flex justify-between items-center">
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                        اطلاعات تماس
+                    </Typography>
                     <Button
-                        className="w-full management-info-form-submit btn-filter"
+                        className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"
                         type="primary"
                         htmlType="submit"
+                        onClick={showModal}
                     >
-                        <span className="flex gap-3 justify-center "> ثبت</span>
+                        <PencilSquareIcon width={24} height={24} />
+                        <span className="flex">
+                            ویرایش
+                        </span>
                     </Button>
                 </div>
-            </Form>
+                <Divider />
+                <DisplayForm
+                    data={data}
+                    isLoading={isLoading}
+                />
+                <EditModal
+                    mutate={mutate}
+                    data={data}
+                    isEditModalVisible={isEditModalVisible}
+                    setIsEditModalVisible={setIsEditModalVisible}
+                />
+            </>
+
         </>
     );
 }
-
-// const MyFormItemContext = React.createContext<(string | number)[]>([]);
-
-// interface MyFormItemGroupProps {
-//   prefix: string | number | (string | number)[];
-//   children: React.ReactNode;
-// }
-
-// function toArr(
-//   str: string | number | (string | number)[]
-// ): (string | number)[] {
-//   return Array.isArray(str) ? str : [str];
-// }
-
-// const MyFormItemGroup = ({ prefix, children }: MyFormItemGroupProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatPath = React.useMemo(
-//     () => [...prefixPath, ...toArr(prefix)],
-//     [prefixPath, prefix]
-//   );
-
-//   return (
-//     <MyFormItemContext.Provider value={concatPath}>
-//       {children}
-//     </MyFormItemContext.Provider>
-//   );
-// };
-
-// const MyFormItem = ({ name, ...props }: FormItemProps) => {
-//   const prefixPath = React.useContext(MyFormItemContext);
-//   const concatName =
-//     name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
-
-//   return <Form.Item name={concatName} {...props} />;
-// };

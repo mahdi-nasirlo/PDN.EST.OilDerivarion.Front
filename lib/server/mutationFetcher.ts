@@ -1,6 +1,8 @@
 import {AxiosResponse} from "axios";
-import {customRequest} from "../customRequest";
 import {notification} from "antd";
+import handleError from "./handleError";
+import {customRequest} from "../customRequest";
+import reportLog from "../logger/reportLog";
 
 
 export async function mutationFetcher(url: string, {arg}: { arg: any }) {
@@ -18,18 +20,33 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
         })
 
         if (!res.data?.data && !data.success) {
+
             return false
         }
 
         if (!res.data?.data && data.success) {
+            
             return true
         }
 
+        const report = reportLog({
+            type: "fetchSuccess",
+            cause: res.data
+        })
+
+
         return res.data?.data
 
-    } catch (error) {
+    } catch (error: any) {
 
         console.error("Error:", error);
+
+        notification.open({
+            type: "error",
+            message: error.message
+        })
+
+        handleError(error)
 
         return undefined
     }

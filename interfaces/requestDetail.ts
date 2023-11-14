@@ -2,6 +2,7 @@ export interface RequestDetail {
     Id: number,
     Uid: string,
     RequestMasterId: number,
+    requestMasterUid: string,
     ProductOrMaterialId: number,
     IsProduct: boolean,
     UniqueCode: null | string,
@@ -73,4 +74,17 @@ export interface Choice {
 export interface selectableProduct {
     uid: string
     densityType: boolean
+}
+
+export interface RequestList{
+    Uid: string
+    ProcessDescription: string,
+    FileName: null,
+    IsReqDetailCompleted: boolean,
+    CompanyId: number,
+    ProductionMethodId: number,
+    CreateDate: string,
+    CompanyUid: string
+    CompanyName:string
+    ProductionMethodName:string
 }

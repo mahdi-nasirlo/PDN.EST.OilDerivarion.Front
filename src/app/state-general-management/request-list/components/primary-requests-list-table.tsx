@@ -25,6 +25,7 @@ export default function PrimaryRequestsListTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",
@@ -52,10 +53,13 @@ export default function PrimaryRequestsListTable() {
             key: "6",
         },
         {
-            title: "عملیات",
+            title: "جزئیات",
             key: "جزئیات",
+            align: "center",
+            fixed: 'right',
+            width: "10%",
             render: (_, record) => (
-                <Space size="middle">
+                <Space size="small">
                     <Link href={""} className="action-btn-info">
                         مشاهده
                     </Link>

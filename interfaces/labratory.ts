@@ -1,52 +1,52 @@
 interface LaboratoryGet {
   Name: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
   fromRecord: number;
   selectRecord: number;
 }
 
 interface Labratory {
-  name: string | null;
-  ranking: number | null;
-  stateId: number;
-  license_No: string | null;
-  license_Expire_Date: string | null;
-  tel: string | null;
-  fax: string | null;
-  address: string | null;
-  is_Active: boolean | null;
+  Name: string | null;
+  Ranking: number | null;
+  StateId: number;
+  License_No: string | null;
+  License_Expire_Date: string | null;
+  Tel: string | null;
+  Fax: string | null;
+  Address: string | null;
+  IsActive: boolean | undefined;
   Uid: string | null;
 }
 
 interface LaboratoryTestItemGet {
   labUid: string | null;
   testItemUid: string | null;
-  is_Active: boolean | null;
+  IsActive: boolean | null;
 }
 
 interface LabCreate {
-  address: string,
-  fax: string,
-  is_Active: true,
-  license_Expire_Date: "2023-09-30T12:15:03.950Z",
-  license_No: string,
-  name: string,
-  stateId: 0,
-  tel: string
+  address: string;
+  fax: string;
+  IsActive: true;
+  license_Expire_Date: string;
+  license_No: string;
+  name: string;
+  stateId: number;
+  tel: string;
 }
 
 interface SaveFormResponsible {
-  uid: string | undefined,
-  responsibleFirstName: string,
-  responsibleLastName: string,
-  responsibleNationalCode: string,
-  responsibleMobile: string
+  uid: string | undefined;
+  responsibleFirstName: string;
+  responsibleLastName: string;
+  responsibleNationalCode: string;
+  responsibleMobile: string;
 }
 
 interface SaveFormManager {
-  uid: string | undefined,
-  managerFirstName: string,
-  managerLastName: string,
-  managerNationalCode: string,
-  managerMobile: string
+  uid: string | undefined;
+  managerFirstName: string;
+  managerLastName: string;
+  managerNationalCode: string;
+  managerMobile: string;
 }

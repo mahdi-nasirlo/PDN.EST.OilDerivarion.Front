@@ -1,8 +1,8 @@
 "use client";
 
 
-import {Divider, Table, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
+import { Divider, Table, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 
 
@@ -24,6 +24,7 @@ export default function PrimaryRequestsLaboratoryEquipmentTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام دستگاه",
@@ -41,7 +42,7 @@ export default function PrimaryRequestsLaboratoryEquipmentTable() {
 
     return (
         <>
-            <Divider/>
+            <Divider />
             <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                 تجهیزات آزمایشگاه
             </Typography>

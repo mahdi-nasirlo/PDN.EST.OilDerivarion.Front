@@ -25,6 +25,7 @@ export default function PrimaryDelaysListTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "نام واحد تولیدی",
@@ -57,8 +58,7 @@ export default function PrimaryDelaysListTable() {
     return (
         <>
             <Table
-                scroll={{ x: 1500, y: 300 }}
-                dataSource={data || []}
+                dataSource={data}
                 className="mt-8"
                 columns={columns}
                 pagination={{

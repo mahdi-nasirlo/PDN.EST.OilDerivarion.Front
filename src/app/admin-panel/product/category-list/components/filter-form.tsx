@@ -1,16 +1,23 @@
 "use client";
 
-import {Button, Col, Form, Input, Row, Select} from "antd";
-import React, {useState} from "react";
-import {ProductGet} from "../../../../../../interfaces/product";
+import { Button, Col, Form, Input, Row, Select } from "antd";
+import React from "react";
+import { ProductGet } from "../../../../../../interfaces/product";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
-export default function FilterForm({ filter, unsetFilter }: {
-  filter: (arg: ProductGet) => void,
-  unsetFilter: () => void,
+export default function FilterForm({
+  filter,
+  unsetFilter,
+}: {
+  filter: (arg: ProductGet) => void;
+  unsetFilter: () => void;
 }) {
-
-  const [hasDensityLimit, setHasDensityLimit] = useState(false);
-
+  const { data: GetAllDensityType, isLoading: ldGetAllDensityType } = useSWR(
+    ["/BaseInfo/GetAllDensityType", { name: null, IsActive: null }],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
   return (
     // <div className="box-border w-full p-6 ">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
@@ -21,7 +28,7 @@ export default function FilterForm({ filter, unsetFilter }: {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="is_Active" label="فعال/غیر فعال">
+          <Form.Item name="IsActive" label="فعال/غیر فعال">
             <Select
               size="large"
               placeholder="انتخاب کنید"
@@ -35,26 +42,17 @@ export default function FilterForm({ filter, unsetFilter }: {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="HasDensity" label="دانسیته">
+          <Form.Item name="densityTypeId" label="دانسیته">
             <Select
+              showSearch
+              // @ts-ignore
+              filterOption={filterOption}
+              loading={ldGetAllDensityType}
+              options={GetAllDensityType}
+              fieldNames={{ value: "Id", label: "Name" }}
               size="large"
               placeholder="انتخاب کنید"
-              options={[
-                { label: "دارد", value: true },
-                { label: "ندارد", value: false },
-              ]}
-              onChange={(value) => setHasDensityLimit(value)}
             />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={6}>
-          <Form.Item name="densityLowerLimit" label="حداقل بازه" >
-            <Input size="large" placeholder="انتخاب کنید" disabled={!hasDensityLimit} />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={6}>
-          <Form.Item name="densityUpperLimit" label="حداکثر بازه">
-            <Input size="large" placeholder="انتخاب کنید" disabled={!hasDensityLimit} />
           </Form.Item>
         </Col>
       </Row>

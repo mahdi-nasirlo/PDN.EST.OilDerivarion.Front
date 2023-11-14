@@ -1,13 +1,10 @@
 import type {MenuProps} from "antd";
-import {Button, ConfigProvider, Divider, Grid, Space} from "antd";
+import {Divider, Grid, Space} from "antd";
 import Layout, {Content} from "antd/es/layout/layout";
 import React, {useEffect, useState} from "react";
 import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
-import StyledComponentsRegistry from "../../../lib/AntdRegistry";
-import theme from "../../../theme/themeConfig";
-import fa_IR from "antd/locale/fa_IR";
 import {
     AppstoreOutlined,
     BarChartOutlined,
@@ -20,6 +17,7 @@ import {
 } from "@ant-design/icons";
 import {useRouter} from "next/navigation";
 import LayoutBreadcrumb from "@/components/layout/breadcrumb";
+import ThemeProvider from "../../../provider/theme-provider";
 
 const {useBreakpoint} = Grid;
 
@@ -80,38 +78,37 @@ export default function AppLayout({
             <ProgressBar
                 height="3px"
                 color="#18948a"
-                options={{ showSpinner: false }}
+                options={{showSpinner: false}}
                 shallowRouting={false}
             />
-            <StyledComponentsRegistry>
-                <ConfigProvider direction="rtl" theme={theme} locale={fa_IR}>
-                    <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
-                        <Layout style={{ minHeight: "100vh" }}>
-                            <LayoutHeader
-                                isLgSize={isLgSize}
-                                showDrawer={showDrawer}
-                            />
-                            <Layout className="bg-gray-50" hasSider>
-                                <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} isLgSize={isLgSize} />
-                                <Content
-                                    style={contentStyle}>
-                                    <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-                                        <div className="flex justify-between items-center">
-                                            <LayoutBreadcrumb />
 
-                                            <Button type="default" size="large" onClick={() => router.back()}>
-                                                بازگشت
-                                            </Button>
-                                        </div>
-                                        <Divider className="my-8" />
-                                        {children}
-                                    </Layout>
-                                </Content>
-                            </Layout>
+            <ThemeProvider>
+                <Space direction="vertical" style={{width: "100%"}} size={[0, 48]}>
+                    <Layout style={{minHeight: "100vh"}}>
+                        <LayoutHeader
+                            isLgSize={isLgSize}
+                            showDrawer={showDrawer}
+                        />
+                        <Layout className="bg-gray-50" hasSider>
+                            <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} isLgSize={isLgSize}/>
+                            <Content
+                                style={contentStyle}>
+                                <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
+                                    <div className="flex justify-between items-center">
+                                        <LayoutBreadcrumb/>
+
+                                        {/*<Button type="default" size="large" onClick={() => router.back()}>*/}
+                                        {/*    بازگشت*/}
+                                        {/*</Button>*/}
+                                    </div>
+                                    <Divider className="my-8"/>
+                                    {children}
+                                </Layout>
+                            </Content>
                         </Layout>
-                    </Space>
-                </ConfigProvider>
-            </StyledComponentsRegistry>
+                    </Layout>
+                </Space>
+            </ThemeProvider>
         </>
     );
 }

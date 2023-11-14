@@ -1,9 +1,9 @@
 "use client";
 
-import {Button, Space, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {Table} from 'antd/lib';
-import React, {useState} from 'react'
+import { Button, Space, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { Table } from 'antd/lib';
+import React, { useState } from 'react'
 import ActiveCodeModal from "@/app/laboratory/gps-confirmations/components/active-code-modal";
 
 
@@ -29,6 +29,7 @@ export default function DataTable() {
             title: "ردیف",
             dataIndex: "Row",
             key: "1",
+            width: "5%"
         },
         {
             title: "کد شناسایی جعبه",
@@ -47,11 +48,18 @@ export default function DataTable() {
             render: (_, record) => (<Typography>فعال</Typography>)
         },
         {
-            title: "جزئیات",
-            key: "جزئیات",
+            title: "عملیات",
+            key: "عملیات",
+            align: "center",
+            fixed: 'right',
+            width: "10%",
             render: (_, record) => (
-                <Space size="middle">
-                    <Button onClick={() => setIsModalOpen(true)} type="link" className="text-primary-500 font-bold">
+                <Space size="small">
+                    <Button
+                        onClick={() => setIsModalOpen(true)}
+                        type="link"
+                        className="text-primary-500 font-bold"
+                    >
                         دریافت رمز
                     </Button>
                 </Space>
@@ -84,7 +92,7 @@ export default function DataTable() {
                         },
                     }}
                 />
-                <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+                <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             </div>
         </>
     )

@@ -1,9 +1,11 @@
-export const addIndexToData = (data: any[] | undefined, keyName: string = "Row") => {
-    if (!data) return [];
+export const addIndexToData = (data: any[] | undefined, keyName: string = "Row", startFrom: number = 1) => {
 
-    // Use `map` to add an index to each item in the data array
-    return data.map((item: any, index: number) => ({
-        ...item,
-        [keyName]: index + 1, // Auto-incrementing index starting from 1
-    }));
+    if (data && data?.length) {
+        return data?.map((item: any, index: number) => ({
+            ...item,
+            [keyName]: index + startFrom, // Auto-incrementing index starting from 1
+        }))
+    }
+    
+    return [];
 };

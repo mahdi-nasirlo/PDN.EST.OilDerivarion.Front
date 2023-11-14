@@ -160,7 +160,7 @@ body {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 /* Track */
@@ -180,6 +180,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: theme("backgroundColor.green.500");
 }
+/* scrollbar style */
 
 .text-secondary {
     color: theme('textColor.secondary.500') !important;
@@ -201,9 +202,15 @@ body {
     text-align: right !important;
 }
 
-.ant-input {
+.ant-input,
+.ant-picker{
     @apply lg:py-[10px] !important
 }
+
+.ant-input-number{
+    @apply lg:py-[5px] !important
+}
+
 
 .ant-btn-dangerous {
     @apply bg-red-500 text-white !important
@@ -299,6 +306,10 @@ body {
 
 /* table styles */
 
+.ant-table-content {
+    @apply overflow-auto overflow-y-hidden rounded-xl whitespace-nowrap !important
+}
+
 .ant-table-thead .ant-table-cell {
     background: theme("backgroundColor.primary.500") !important;
     color: theme("colors.white") !important;
@@ -360,6 +371,7 @@ body {
 
 .ant-pagination
 .ant-pagination-item-active {
+        @apply h-full lg:py-[4.2px] !important;
     background-color: theme("colors.primary.500") !important;
     border-color: theme("colors.gray.900") !important;
 }
@@ -372,16 +384,19 @@ body {
 .ant-pagination
 .ant-pagination-next
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination
 .ant-pagination-prev
 .ant-pagination-item-link {
+        @apply h-full lg:py-[4.2px] lg:h-10 !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
 
 .ant-pagination-item {
+        @apply h-full lg:py-[4.2px] !important;
     color: theme("colors.primary.500") !important;
     background-color: theme("backgroundColor.gray.50") !important;
 }
@@ -447,14 +462,61 @@ body {
     @apply flex
 
 }
-
+.ant-menu-submenu-title{
+    padding: 14px !important;
+}
 .ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
 .ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline{
 background-color:theme("backgroundColor.white") !important;
-margin-right: 24px !important;
+margin-right: 16px !important;
 }
 
 /*.cahrt-btn {*/
 /*    background-color: theme("colors.orange.500");*/
 /*}*/
 
+.ant-input-group > .ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child {
+    @apply rounded-e-none !important
+}
+
+/* start collapse style */
+
+.ant-collapse-header {
+    @apply flex items-center !important
+}
+
+/* end collapse style */
+
+/* start switch style */
+
+/*.ant-switch {*/
+/*    @apply bg-gray-200 !important*/
+/*}*/
+/* switch */
+.ant-switch{
+    background:#71717a !important;
+ }
+
+ .ant-switch-checked{
+    background:theme("backgroundColor.primary.500")!important;
+ }
+ .ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon {
+    
+    border: 2px solid theme("colors.primary.500");
+    height: 20px;
+    width: 20px;
+
+ 
+  }
+  .ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon:hover {
+    border-color:#4ade80;
+}
+
+.DatePicker {
+    @apply w-full !important
+}
+
+.ant-tooltip-inner{
+    background-color: white !important;
+    color: black !important;
+}

@@ -1,232 +1,248 @@
 "use client";
 
-import {PlusIcon} from '@heroicons/react/24/outline'
-import {Button, Col, Form, Modal, Row, Space, Switch, Table, Typography} from 'antd'
-import {useForm} from 'antd/es/form/Form';
-import {ColumnsType} from 'antd/es/table';
-import React, {useEffect, useState} from 'react'
-import {addIndexToData} from "../../../../../lib/addIndexToData";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { Button, Col, Form, Modal, Row, Space, Tag, Typography, } from "antd";
+import { useForm } from "antd/es/form/Form";
+import { ColumnsType } from "antd/es/table";
+import React, { useEffect, useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import CustomeTable from "../../../../../components/CustomeTable";
 
-interface DataType {
-    key: string;
-    Row: number;
-    NameRawMaterial: string;
-    UnitMeasurement: string;
-    ConfirmedRequestCode: string;
-    MaterialCode: string;
-    TestInvoice: string;
-}
-
-export default function DataTable({ setModalVisible, ldMaterial, material, mutate }: {
-    setModalVisible: any,
-    ldMaterial: boolean,
-    mutate: () => void,
-    material: {
-        records: Material[],
-        count: number
-    } | undefined
+export default function DataTable({
+  setFilter,
+  isValidating,
+  setModalVisible,
+  ldMaterial,
+  material,
+  mutate,
+}: {
+  setFilter: (arg: any) => void
+  isValidating: any;
+  setModalVisible: any;
+  ldMaterial: boolean;
+  mutate: () => void;
+  material:
+  | {
+    count: number;
+    records: Material[];
+  }
+  | undefined;
 }) {
+  //حذف
 
-    //حذف
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [recordToDelete, setRecordToDelete] = useState<Material | null>(null);
 
-    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<Material | null>(null);
+  const handleDelete = (record: Material) => {
+    setRecordToDelete(record);
+    setIsDeleteModalVisible(true);
+  };
 
-    const handleDelete = (record: Material) => {
-        setRecordToDelete(record);
-        setIsDeleteModalVisible(true);
-    };
+  const { trigger: deleteMaterial, isMutating: ldDeleteMaterial } =
+    useSWRMutation("/Material/Delete", mutationFetcher);
 
-    const { trigger: deleteMaterial, isMutating: ldDeleteMaterial } = useSWRMutation("/Material/Delete", mutationFetcher)
+  const handleConfirmDelete = async () => {
+    await deleteMaterial({
+      uid: recordToDelete?.Uid,
+    });
 
-    const handleConfirmDelete = async () => {
+    await mutate();
 
-        await deleteMaterial({
-            "uid": recordToDelete?.Uid
-        })
+    setIsDeleteModalVisible(false);
 
-        await mutate()
+    setRecordToDelete(null);
+  };
 
-        setIsDeleteModalVisible(false);
+  const showModal = () => {
+    setModalVisible(true);
+  };
 
-        setRecordToDelete(null);
+  //ادیت
 
-    };
+  const [form] = useForm();
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [recordToEdit, setRecordToEdit] = useState<Material | null>(null);
 
-    const showModal = () => {
-        setModalVisible(true);
-    };
+  const handleEdit = (record: Material) => {
+    setRecordToEdit(record);
+    setIsEditModalVisible(true);
+  };
 
-    //ادیت
+  const { trigger: UpdateMaterial, isMutating: ldUpdateMaterial } =
+    useSWRMutation("/Material/Update", mutationFetcher);
 
-    const [form] = useForm()
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<Material | null>(null);
+  const sendEditRequest = async (values: Material) => {
+    values.Uid = recordToEdit?.Uid;
 
-    const handleEdit = (record: Material) => {
-        setRecordToEdit(record);
-        setIsEditModalVisible(true);
-    };
+    await UpdateMaterial(values);
 
-    const sendEditRequest = async (values: Material) => {
+    await mutate();
 
-        values.Uid = recordToEdit?.Uid
+    setIsEditModalVisible(false);
 
-        await trigger(values)
+    setRecordToEdit(null);
+  };
 
-        await mutate()
+  const handleCancelEdit = () => {
+    setIsEditModalVisible(false);
+    setRecordToEdit(null);
+  };
 
-        setIsEditModalVisible(false)
+  useEffect(() => {
+    form.setFieldsValue(recordToEdit);
+  }, [recordToEdit]);
 
-        setRecordToEdit(null)
-    }
+  const columns: ColumnsType<Material> = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      key: "1",
+      width: "5%"
+    },
+    {
+      title: "نام ماده اولیه",
+      dataIndex: "Name",
+      key: "2",
+    },
+    {
+      title: "واحد اندازه گیری",
+      dataIndex: "MeasureName",
+      key: "3",
+    },
+    {
+      title: "فعال/غیر فعال",
+      dataIndex: "IsActive",
+      key: "4",
+      render: (_, record: any) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.IsActive === false) {
+          color = "red";
+          name = "غیرفعال";
+          icon = <CloseCircleOutlined />
+        } else {
+          color = "success";
+          name = "فعال";
+          icon = <CheckCircleOutlined />
+        }
 
-    const handleCancelEdit = () => {
-        setIsEditModalVisible(false);
-        setRecordToEdit(null);
-    };
+        return <Tag icon={icon} color={color}>{name}</Tag>;
+      },
+    },
+    {
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => handleEdit(record)}
+          >
+            ویرایش
+          </Button>
+          <Button
+            type="link"
+            className="text-red-500 font-bold"
+            onClick={() => handleDelete(record)}
+          >
+            حذف
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
-    const { trigger, isMutating, data } = useSWRMutation("/Material/Update", mutationFetcher)
+  return (
+    <>
+      <div className="box-border w-full mt-8 p-6">
+        <div className="flex justify-between items-center">
+          <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
+            لیست مواد اولیه
+          </Typography>
+          <Button
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            htmlType="submit"
+            onClick={showModal}
+          >
+            <PlusIcon width={24} height={24} />
+            <span className="flex">افزودن ماده اولیه</span>
+          </Button>
+        </div>
+        {/*<CustomeTable*/}
+        {/*    setInitialData={setFilter}*/}
+        {/*    className="mt-6"*/}
+        {/*    loading={ldMaterial || ldDeleteMaterial || isValidating}*/}
+        {/*    columns={columns}*/}
+        {/*    data={material}*/}
+        {/*   */}
+        {/*/>*/}
+        <CustomeTable setInitialData={setFilter} isLoading={ldMaterial || ldDeleteMaterial || isValidating}
 
-
-    useEffect(() => {
-        form.setFieldsValue(recordToEdit)
-    }, [recordToEdit])
-
-
-    const columns: ColumnsType<Material> = [
-        {
-            title: "ردیف",
-            dataIndex: "Row",
-            key: "1",
-        },
-        {
-            title: "نام ماده اولیه",
-            dataIndex: "Name",
-            key: "2",
-        },
-        {
-            title: "واحد اندازه گیری",
-            dataIndex: "UnitMeasurement",
-            key: "3",
-        },
-        {
-            title: "فعال/غیر فعال",
-            dataIndex: "ConfirmedRequestCode",
-            key: "4",
-            render: (e, record) => <Switch defaultChecked={record.Is_Active} />,
-        },
-        {
-            title: "کد ماده",
-            dataIndex: "MaterialCode",
-            key: "5",
-        },
-        {
-            title: "فاکتور آزمون",
-            dataIndex: "TestInvoice",
-            key: "6",
-        },
-        {
-            title: "عملیات",
-            key: "عملیات",
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button type="link" className="text-secondary-500 font-bold"
-                        onClick={() => handleEdit(record)}>ویرایش</Button>
-                    <Button type="link" className="text-red-500 font-bold"
-                        onClick={() => handleDelete(record)}>حذف</Button>
-                </Space>
-            ),
-        },
-    ];
-
-
-    return (
-        <>
-            <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-between items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
-                        مواد اولیه</Typography>
-                    <Button
-                        className="max-md:w-full flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        onClick={showModal}
-                    >
-                        <PlusIcon width={24} height={24} />
-                        <span className="flex">
-                            افزودن ماده اولیه
-                        </span>
-                    </Button>
-                </div>
-                <Table
-                    className="mt-6"
-                    loading={ldMaterial}
-                    columns={columns}
-                    dataSource={addIndexToData(material?.records)}
-                    pagination={{
-                        defaultPageSize: 10,
-                        showSizeChanger: true,
-                        pageSizeOptions: ["10", "20", "50"],
-                        defaultCurrent: 1,
-                        style: {
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            margin: "16px 0",
-                        },
-                    }}
-                />
-            </div>
-            {/* جذف */}
-            <ConfirmDeleteModal
-                open={isDeleteModalVisible}
-                setOpen={setIsDeleteModalVisible}
-                handleDelete={handleConfirmDelete}
-                title="مواد اولیه"
-            />
-            {/* ویرایش */}
-            <Modal
-                width={800}
-                title="ویرایش ماده اولیه"
-                open={isEditModalVisible}
-                onOk={() => form.submit()}
-                onCancel={handleCancelEdit}
-                footer={[
-                    <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
-                            <Button
-                                loading={isMutating}
-                                size="large"
-                                className="w-full"
-                                type="primary"
-                                onClick={() => form.submit()}
-                                key={"submit"} >
-                                ثبت
-                            </Button >
-                        </Col>
-                        <Col xs={24} md={12}>
-                            <Button
-                                loading={isMutating}
-                                size="large"
-                                className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleCancelEdit}
-                                key={"cancel"}>
-                                انصراف
-                            </Button>
-                        </Col>
-                    </Row>
-                ]}
-            >
-                <Form onFinish={sendEditRequest} disabled={isMutating} form={form} layout='vertical'>
-                    <MaterialForm />
-                </Form>
-            </Modal>
-        </>
-    )
+          data={material} columns={columns} />
+      </div>
+      {/* جذف */}
+      <ConfirmDeleteModal
+        loading={ldDeleteMaterial}
+        open={isDeleteModalVisible}
+        setOpen={setIsDeleteModalVisible}
+        handleDelete={handleConfirmDelete}
+        title="مواد اولیه"
+      />
+      {/* ویرایش */}
+      <Modal
+        width={800}
+        title="ویرایش ماده اولیه"
+        open={isEditModalVisible}
+        onOk={() => form.submit()}
+        onCancel={handleCancelEdit}
+        footer={[
+          <Row key={"box"} gutter={[16, 16]} className="my-2">
+            <Col xs={24} md={12}>
+              <Button
+                loading={ldUpdateMaterial}
+                size="large"
+                className="w-full"
+                type="primary"
+                onClick={() => form.submit()}
+                key={"submit"}
+              >
+                ثبت
+              </Button>
+            </Col>
+            <Col xs={24} md={12}>
+              <Button
+                loading={ldUpdateMaterial}
+                size="large"
+                className="w-full bg-gray-100 text-warmGray-500"
+                onClick={handleCancelEdit}
+                key={"cancel"}
+              >
+                انصراف
+              </Button>
+            </Col>
+          </Row>,
+        ]}
+      >
+        <Form
+          onFinish={sendEditRequest}
+          disabled={ldUpdateMaterial}
+          form={form}
+          layout="vertical"
+        >
+          <MaterialForm />
+        </Form>
+      </Modal>
+    </>
+  );
 }

@@ -1,47 +1,62 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Select, } from "antd";
+import { Button, Col, Form, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
-import React, { useState } from "react";
+import React from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { CategoryProduct } from "../../../../../interfaces/category-product";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function CreateModal({
   setModalVisible,
   modalVisible,
-  mutate
+  mutate,
 }: {
   setModalVisible: any;
   modalVisible: any;
   mutate: () => void;
 }) {
-  const [selectedDensity, setSelectedDensity] = useState<boolean>(false);
+  const [form] = useForm();
 
-  const handleDensityChange = (value: any) => {
-    setSelectedDensity(value);
+  const defaultValueTable = {
+    Name: null,
+    IsActive: null,
+    fromRecord: 0,
+    selectRecord: 100000,
   };
 
-  const { isMutating, trigger } = useSWRMutation(
-    "/ProductCategory/Create",
-    mutationFetcher
+  const { data: test, isLoading } = useSWR<any[]>(
+    ["/TestItem/GetAll", { name: null, IsActive: null }],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
 
-  const [form] = useForm();
+  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: any[] }>(
+    ["/Lab/GetPage", defaultValueTable],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
 
   const closeModal = () => {
     setModalVisible(false);
+    form.resetFields();
   };
 
-  const handleFormSubmit = async (values: CategoryProduct) => {
-    // @ts-ignore
-    form.resetFields();
-    trigger(values);
-    mutate;
+  const { isMutating, trigger } = useSWRMutation(
+    "/LabTestItem/Create",
+    mutationFetcher
+  );
+
+  const handleFormSubmit = async (values: any) => {
+    values.IsActive = true;
+
+    await trigger(values);
+
+    await mutate();
+
     setModalVisible(false);
+
+    form.resetFields();
   };
 
   return (
@@ -75,6 +90,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              loading={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={closeModal}
@@ -95,33 +111,35 @@ export default function CreateModal({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              name="is_Active"
+              name="labUid"
               label="نام آزمایشگاه"
-              rules={[
-                {
-                  required: true,
-                  message: "",
-                },
-              ]}
+              rules={[{ required: true }]}
             >
-              <Select options={[]} size="large" placeholder="انتخاب کنید" />
+              <Select
+                showSearch
+                fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
+                options={Lab?.records}
+                loading={ldProduct}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              name="hasDensity"
+              name="testItemUid"
               label="نام فاکتور"
-              rules={[
-                {
-                  required: true,
-                  message: "",
-                },
-              ]}
+              rules={[{ required: true }]}
             >
               <Select
-                options={[]}
-                value={selectedDensity}
-                onChange={(value) => setSelectedDensity(value)}
+                showSearch
+                fieldNames={{ label: "Name", value: "Uid" }}
+                // @ts-ignore
+                filterOption={filterOption}
+                options={test}
+                loading={isLoading || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"
               />

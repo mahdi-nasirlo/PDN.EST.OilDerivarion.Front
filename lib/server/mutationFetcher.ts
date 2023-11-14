@@ -3,6 +3,7 @@ import {notification} from "antd";
 import handleError from "./handleError";
 import {customRequest} from "../customRequest";
 import reportLog from "../logger/reportLog";
+import {reportLogEnum} from "../logger/reportLogEnum";
 
 
 export async function mutationFetcher(url: string, {arg}: { arg: any }) {
@@ -21,6 +22,12 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
 
         if (!res.data?.data && !data.success) {
 
+            const report = reportLog({
+                type: reportLogEnum.api_unsuccessful,
+                status: res.status,
+                data: data,
+            })
+
             return false
         }
 
@@ -28,12 +35,6 @@ export async function mutationFetcher(url: string, {arg}: { arg: any }) {
             
             return true
         }
-
-        const report = reportLog({
-            type: "fetchSuccess",
-            cause: res.data
-        })
-
 
         return res.data?.data
 

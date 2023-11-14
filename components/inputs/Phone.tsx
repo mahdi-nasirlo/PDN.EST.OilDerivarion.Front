@@ -1,6 +1,7 @@
 import React from "react";
 import { Form } from "antd";
 import { FormItemProps } from "antd/lib";
+import { resolve } from "node:path/win32";
 
 const PhoneInputs = (props: FormItemProps) => {
   const validateIranianLandline = (rule: any, value: any) => {
@@ -10,7 +11,6 @@ const PhoneInputs = (props: FormItemProps) => {
     }
     return Promise.resolve();
   };
-
   return (
     <Form.Item
       {...props}
@@ -19,6 +19,8 @@ const PhoneInputs = (props: FormItemProps) => {
       rules={[
         { required: true, message: "این فیلد اجباری است" },
         { validator: validateIranianLandline },
+        { max: 11, message: "شماره تلفن ثابت نامعتبر است" },
+        {},
       ]}
     >
       {props.children}

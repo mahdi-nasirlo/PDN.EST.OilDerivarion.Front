@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 function Step1({
   form,
@@ -35,13 +36,14 @@ function Step1({
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              rules={[{ required: true }]}
-              name="tel"
-              label="شماره ثابت"
-            >
-              <Input type="number" size="large" placeholder="وارد کنید" />
-            </Form.Item>
+            <PhoneInputs name="tel" label="شماره ثابت">
+              <Input
+                max={11}
+                type="number"
+                size="large"
+                placeholder="وارد کنید"
+              />
+            </PhoneInputs>
           </Col>
         </Row>
         <Row gutter={[32, 1]}>

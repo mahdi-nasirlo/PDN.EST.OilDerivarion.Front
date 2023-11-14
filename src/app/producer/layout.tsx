@@ -62,36 +62,36 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href="/producer/task/list">پرسشنامه پیوست شماره 1</Link>,
-        "/producer/task/list",
+        <Link href="/producer/step02/list">پرسشنامه پیوست شماره 1</Link>,
+        "/producer/step02/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
-        "/producer/expert-naft/list",
+        <Link href="/producer/step03/list">زمان کارشناس نفت</Link>,
+        "/producer/step03/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href={"/producer/expert-samt/list"}>زمان کارشناس صمت</Link>,
-        "/producer/expert-samt/list"
+        <Link href={"/producer/step04/list"}>زمان کارشناس صمت</Link>,
+        "/producer/step04/list"
       ),
       getMenuItem(
-        <Link href={"/producer/scheduling-visit/list"}>
+        <Link href={"/producer/step05/list"}>
           برنامه ریزی و زمان بندی بازدید
         </Link>,
-        "/producer/scheduling-visit/list"
+        "/producer/step05/list"
       ),
       getMenuItem(
-        <Link href={"/producer/viewing-notices-and-paying-fee/list"}>
+        <Link href={"/producer/step06/list"}>
           رویت اعلان ها توسط متقاضی و پرداخت هزینه
         </Link>,
-        "/producer/viewing-notices-and-paying-fee/list"
+        "/producer/step06/list"
       ),
       getMenuItem(
-        <Link href={"/producer/produce-QR-code/list"}>
+        <Link href={"/producer/step07/list"}>
           تولید QR کد و امکان چاپ
         </Link>,
-        "/producer/produce-QR-code/list"
+        "/producer/step07/list"
       ),
     ],
     "group"

@@ -5,7 +5,7 @@ import moment from "jalali-moment";
 import elasticClient from "./elasticClient";
 
 const reportLog = async (error: any, type: string | null = null) => {
-
+    
     const date = moment().locale("fa").format("YYYY/M/D *** H:m:s")
 
     const data = {
@@ -14,12 +14,17 @@ const reportLog = async (error: any, type: string | null = null) => {
         app_env: env.NODE_ENV
     }
 
+    const currentDate = new Date()
+
     try {
 
         const request = await elasticClient.index({
             index: "oil-front",
             id: "oil-front-log_" + date,
-            document: data,
+            document: {
+                ...data,
+                "@timestamp": currentDate.toISOString()
+            },
         })
 
         console.log(request)

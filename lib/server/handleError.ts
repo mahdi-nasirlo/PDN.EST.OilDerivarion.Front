@@ -1,5 +1,6 @@
 import {notification} from "antd";
 import reportLog from "../logger/reportLog";
+import {reportLogEnum} from "../logger/reportLogEnum";
 
 interface UnAuthorizeType {
     data: {
@@ -17,10 +18,10 @@ export const HandleError = (error: any) => {
     const {response} = error
 
     const errorData = {
-        message: error.message,
-        type: "fetchError",
-        cause: error.response,
-        statusCode: response.status
+        message: error?.message,
+        type: reportLogEnum.ui_error,
+        cause: error?.response,
+        statusCode: error.statusCode
     }
 
     const report = reportLog(errorData)
@@ -39,7 +40,7 @@ export const HandleError = (error: any) => {
         type: "error",
         message: "خطا در برقراری ارتباط"
     })
-    
+
 };
 
 export default HandleError;

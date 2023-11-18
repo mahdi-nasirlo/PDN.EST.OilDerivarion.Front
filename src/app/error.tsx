@@ -3,6 +3,7 @@
 import reportLog from "../../lib/logger/reportLog";
 import deleteLog from "../../lib/logger/deleteLog";
 import {Button} from "antd";
+import {reportLogEnum} from "../../lib/logger/reportLogEnum";
 
 interface PropsType {
     error: Error & { digest?: string },
@@ -13,7 +14,7 @@ export default function GlobalError(props: PropsType) {
 
     const data = {
         message: props.error.message,
-        type: props.error.name,
+        type: reportLogEnum.ui_error,
         cause: props.error.stack
     }
 

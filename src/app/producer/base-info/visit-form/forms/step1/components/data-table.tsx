@@ -1,46 +1,55 @@
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { Button, Space, Table, Tag } from "antd";
+import { Button, Space, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import EditModal from "./edit-modal";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import CustomeTable from "../../../../../../../../components/CustomeTable";
+import useSWRMutation from "swr/mutation";
+import { mutationFetcher } from "../../../../../../../../lib/server/mutationFetcher";
 
 
-export default function DataTable() {
+export default function DataTable({
+    data,
+    mutate,
+    isLoading,
+    isValidating,
+}: {
+    data: { records: any[], count: number } | undefined;
+    mutate: () => void;
+    isLoading: boolean;
+    isValidating: any;
+}) {
 
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] =
-        useState<any | null>(null);
+    const [recordToDelete, setRecordToDelete] = useState<any | null>(null);
 
     const handleDelete = (record: any) => {
         setRecordToDelete(record);
         setIsDeleteModalVisible(true);
     };
 
-    // const { trigger: DeleteLicense, isMutating: ldDeleteLicense } =
-    //     useSWRMutation("/ProfilePersonLicense/Delete", mutationFetcher);
+    const { trigger: Delete, isMutating: ldDelete } =
+        useSWRMutation("/ProducerMixTank/Delete", mutationFetcher);
 
     const handleConfirmDelete = async () => {
-        console.log(recordToDelete);
 
-        //     const res = await DeleteLicense({
-        //         uid: recordToDelete?.Uid,
-        //     });
+        const res = await Delete({
+            uid: recordToDelete?.Uid,
+        });
 
-        //     await mutate();
-        //     if (res) {
-        //         setIsDeleteModalVisible(false);
+        await mutate();
+        if (res) {
+            setIsDeleteModalVisible(false);
 
-        //         setRecordToDelete(null);
-        //     }
+            setRecordToDelete(null);
+        }
     };
 
     //ادیت
 
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-    const [recordToEdit, setRecordToEdit] = useState<any | null>(
-        null
-    );
+    const [recordToEdit, setRecordToEdit] = useState<any | null>(null);
 
     const handleEdit = (record: any) => {
         setRecordToEdit(record);
@@ -56,47 +65,47 @@ export default function DataTable() {
         },
         {
             title: "شکل مخزن",
-            dataIndex: "name",
+            dataIndex: "Shape",
             key: "2",
         },
         {
             title: "ارتفاع",
-            dataIndex: "number",
+            dataIndex: "Height",
             key: "7",
         },
         {
             title: "محیط",
-            dataIndex: "licenseTypeName",
+            dataIndex: "Environment",
             key: "3",
         },
         {
             title: "حجم",
-            dataIndex: "exporter",
+            dataIndex: "Volume",
             key: "4",
         },
         {
             title: "لوله خروجی مخزن",
-            dataIndex: "issueDatePersian",
+            dataIndex: "OutletPipe",
             key: "5",
         },
         {
             title: "الکترو پمپ لوله خروجی",
-            dataIndex: "expirationDatePersian",
+            dataIndex: "OutletPipeElectroPump",
             key: "6",
         },
         {
             title: "دبی ورودی",
-            dataIndex: "expiration",
+            dataIndex: "InletFlowRate",
             key: "7",
         },
         {
             title: "دبی خروجی",
-            dataIndex: "Persian",
+            dataIndex: "OutputFlowRate",
             key: "8",
         },
         {
             title: "کارگروه استاندارد سازی",
-            dataIndex: "expirationDate",
+            dataIndex: "HasConfirmation",
             key: "9",
             render: (_, record: any) => {
                 let color = "";
@@ -151,25 +160,15 @@ export default function DataTable() {
 
     return (
         <>
-            <Table
-                // loading={ldMainMember || ldDeleteLicense || isValidating}
-                className="mt-6"
+            <CustomeTable
+                setInitialData={() => { }}
+                isLoading={isValidating || isLoading}
+                data={data}
                 columns={columns}
-                dataSource={data}
-                pagination={{
-                    defaultPageSize: 10,
-                    showSizeChanger: false,
-                    defaultCurrent: 1,
-                    style: {
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "flex-start",
-                        margin: "16px 0",
-                    },
-                }}
             />
             {/* جذف */}
             <ConfirmDeleteModal
+                loading={ldDelete}
                 open={isDeleteModalVisible}
                 setOpen={setIsDeleteModalVisible}
                 handleDelete={handleConfirmDelete}
@@ -177,28 +176,12 @@ export default function DataTable() {
             />
             {/* ویرایش */}
             <EditModal
-                // mutate={mutate}
+                mutate={mutate}
                 recordToEdit={recordToEdit}
                 setRecordToEdit={setRecordToEdit}
-                setIsEditModalVisible={setIsEditModalVisible}
                 isEditModalVisible={isEditModalVisible}
+                setIsEditModalVisible={setIsEditModalVisible}
             />
         </>
     );
 }
-
-
-const data = [{
-    Row: "1",
-    name: "test",
-    number: "25",
-    licenseTypeName: "23",
-    exporter: "45",
-    issueDatePersian: "213",
-    expirationDatePersian: "32",
-    expiration: "98",
-    Persian: "783",
-    expirationDate: "3783"
-
-
-}]

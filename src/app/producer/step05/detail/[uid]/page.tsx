@@ -68,7 +68,7 @@ const Page = (props: { params: { uid: string } }) => {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[16, 16]}>
+        <Row  gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <Form.Item
                 rules={[{required: true}]}

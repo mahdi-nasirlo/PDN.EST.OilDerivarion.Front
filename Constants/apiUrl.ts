@@ -77,6 +77,188 @@ export const apiUrl = {
             create: {
                 url: "/WorkFlowRequest/SetStep07"
             }
+        },
+        step08: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep08",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep08",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep08"
+            }
+        },
+        step09: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep09",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep09",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep09"
+            }
+        },
+        step10: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep10",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep10",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep10"
+            }
+        },
+        step11: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep11",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep11",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep11"
+            }
+        },
+        step12: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep12",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep12",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep12"
+            }
+        },
+        step13: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep13",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep13",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep13"
+            }
+        },
+        step14: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep14",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep14",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep14"
+            }
+        },
+        step15: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep15",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep15",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep15"
+            }
+        },
+        step16: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep16",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep16",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep16"
+            }
+        },
+        step17: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep17",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep17",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep17"
+            }
+        },
+        step18: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep18",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep18",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep18"
+            }
+        },
+        step19: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep19",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep19",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep19"
+            }
+        },
+        step20: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep20",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep20",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep20"
+            }
+        },
+        step21: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep21",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep21",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep21"
+            }
         }
     },
     MapViewer: {

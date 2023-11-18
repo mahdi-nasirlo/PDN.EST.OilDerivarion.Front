@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import handleError from "./handleError";
 import {customRequest} from "../customRequest";
+import {reportLogEnum} from "../logger/reportLogEnum";
 import reportLog from "../logger/reportLog";
 
 
@@ -15,6 +16,13 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
         const data: dataType = res.data
 
         if (!res.data?.data && !data.success) {
+
+            const report = reportLog({
+                type: reportLogEnum.api_unsuccessful,
+                status: res.status,
+                data: data,
+            })
+
             return false
         }
 
@@ -22,11 +30,6 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
 
             return true
         }
-        
-        const report = reportLog({
-            type: "fetchSuccess",
-            cause: res.data
-        })
 
         return res.data?.data
 

@@ -1,19 +1,40 @@
 import { Button, Col, Form, Input, Modal, Radio, Row, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
+import useSWRMutation from 'swr/mutation';
+import { mutationFetcher } from '../../../../../../../../lib/server/mutationFetcher';
 
 export default function CreateModal({
-    setIsEditModalVisible,
-    isEditModalVisible,
+    mutate,
+    setIsModalVisible,
+    isModalVisible,
 }: {
-    isEditModalVisible: any;
-    setIsEditModalVisible: any;
+    isModalVisible: any;
+    setIsModalVisible: any;
+    mutate: () => void;
 }) {
+
+    const { isMutating, trigger } = useSWRMutation(
+        "/ProducerMixTank/Create_Producer",
+        mutationFetcher
+    );
 
     const [form] = useForm();
 
-    const handleCancelEdit = () => {
-        setIsEditModalVisible(false);
+    const handleFormSubmit = async (values: any) => {
+        await trigger(values);
+
+        await mutate();
+
+        setIsModalVisible(false);
+
+        form.resetFields();
+    };
+
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        form.resetFields();
     };
 
     return (
@@ -21,14 +42,14 @@ export default function CreateModal({
             <Modal
                 width={800}
                 title="افزودن مخزن"
-                open={isEditModalVisible}
+                open={isModalVisible}
                 onOk={() => form.submit()}
-                onCancel={handleCancelEdit}
+                onCancel={handleCancel}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
-                                // loading={isMutating}
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -42,7 +63,7 @@ export default function CreateModal({
                             <Button
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
-                                onClick={handleCancelEdit}
+                                onClick={handleCancel}
                                 key={"cancel"}
                             >
                                 انصراف
@@ -55,26 +76,23 @@ export default function CreateModal({
                     form={form}
                     layout="vertical"
                     initialValues={{ licenseType: false }}
+                    onFinish={handleFormSubmit}
+                    disabled={isMutating}
                 >
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="exporter"
+                                name="shape"
                                 label="شکل مخزن"
                                 rules={[{ required: true }]}
                             >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
+                                <Input size="large" placeholder="وارد کنید" />
+
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="issueDatePersian"
+                                name="height"
                                 label="ارتفاع (متر)"
                                 rules={[{ required: true }]}
                             >
@@ -87,7 +105,7 @@ export default function CreateModal({
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="expirationDatePersian"
+                                name="environment"
                                 label="محیط (متر)"
                                 rules={[{ required: true }]}
                             >
@@ -102,25 +120,19 @@ export default function CreateModal({
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="name"
+                                name="volume"
                                 label="حجم (متر مکعب)"
                                 rules={[
                                     { required: true, message: "این فیلد اجباری است" },
                                     { type: "string", message: "باید به صورت متن باشد" },
                                 ]}
                             >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="number"
+                                name="outletPipe"
                                 label="لوله خروجی مخزن (اینچ)"
                                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
@@ -129,7 +141,7 @@ export default function CreateModal({
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="licenseTypeId"
+                                name="outletPipeElectroPump"
                                 label="الکترو پمپ لوله خروجی(اسب بخار)"
                                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
@@ -140,25 +152,19 @@ export default function CreateModal({
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="name"
+                                name="inletFlowRate"
                                 label="دبی ورودی"
                                 rules={[
                                     { required: true, message: "این فیلد اجباری است" },
                                     { type: "string", message: "باید به صورت متن باشد" },
                                 ]}
                             >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
+                                <Input size="large" placeholder="وارد کنید" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
                             <Form.Item
-                                name="number"
+                                name="outputFlowRate"
                                 label="دبی خروجی"
                                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
                             >
@@ -169,7 +175,7 @@ export default function CreateModal({
                             <Form.Item
                                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
                                 label="تاییدیه کارگروه استاندارد سازی"
-                                name="licenseType"
+                                name="hasConfirmation"
                             >
                                 <Radio.Group
                                     size='large'

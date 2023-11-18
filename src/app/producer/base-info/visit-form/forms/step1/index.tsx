@@ -1,20 +1,34 @@
 import { ChevronDoubleLeftIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Form, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import React, { useContext, useState } from 'react'
 import StepContext from '../../stete-manager/step-context';
-import { useForm } from 'antd/es/form/Form';
 import DataTable from './components/data-table';
 import CreateModal from './components/create-modal';
+import getPageRecordNumber from "../../../../../../../lib/getPageRecordNumber";
+import useSWR from 'swr';
+import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 
 export default function Index() {
 
     const processController = useContext(StepContext);
 
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
-        setIsEditModalVisible(true);
+        setIsModalVisible(true);
     };
+
+    const defaultValueTable = {
+        ...getPageRecordNumber()
+    };
+
+    const { data, isLoading, mutate, isValidating } = useSWR<{
+        records: any[];
+        count: number;
+    }>(
+        ["/ProducerMixTank/GetPage_Producer", defaultValueTable],
+        ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+    );
 
     return (
         <>
@@ -51,10 +65,16 @@ export default function Index() {
                 </div>
             </div >
             <Divider />
-            <DataTable />
+            <DataTable
+                isValidating={isValidating}
+                mutate={mutate}
+                data={data}
+                isLoading={isLoading}
+            />
             <CreateModal
-                isEditModalVisible={isEditModalVisible}
-                setIsEditModalVisible={setIsEditModalVisible}
+                mutate={mutate}
+                isModalVisible={isModalVisible}
+                setIsModalVisible={setIsModalVisible}
             />
         </>
     )

@@ -33,15 +33,38 @@ interface PropsType {
     Forms: FormType[]
 }
 
+interface ComponentProps {
+    items: PropsType[],
+    loading?: boolean,
+    title?: boolean
 
-const Index = ({items, loading = false}: { items: PropsType[], loading?: boolean }) => {
+}
+
+const Index = ({items, loading = false, title = false}: ComponentProps) => {
 
     if (loading) {
         return <Spin spinning={true}/>
     }
 
     return (
-        items?.map((value, index) => <><RenderForm item={value}/></>)
+        <>
+            <div>
+                <div>
+                    {title && <>
+                        <Typography.Title level={5} className="text-gray-901 text-right">
+                            {items[0].Title}
+                        </Typography.Title>
+                        <div className="w-full text-right text-sm text-gray-300">
+                            {items[0].Description}
+                        </div>
+                    </>}
+                    <div>
+                        {items?.map((value, index) => <><RenderForm item={value}/></>)}
+                    </div>
+                </div>
+            </div>
+
+        </>
     );
 };
 
@@ -56,25 +79,13 @@ const RenderForm = (props: { item: PropsType }) => {
 
         if (data.Forms.length > 1) formType = <FormTabType data={data}/>
 
-        if (data.Forms.length === 1) formType = <FormSimpleType data={data.Forms[0]}/>
+        if (data.Forms.length === 1) formType = <FormSimpleType data={data.Forms[0]} title={!(data.Forms.length > 1)}/>
 
         return formType
     }
 
     return <>
-        <div>
-            <div>
-                <Typography.Title level={5} className="text-gray-901 text-right">
-                    {data.Title}
-                </Typography.Title>
-                <div className="w-full text-right text-sm text-gray-300">
-                    {data.Description}
-                </div>
-                <div>
-                    {renderFormType()}
-                </div>
-            </div>
-        </div>
+        {renderFormType()}
     </>
 }
 
@@ -88,7 +99,16 @@ const FormTabType = ({data}: { data: PropsType }) => (<Tabs
     }))}
 />)
 
-const FormSimpleType = ({data}: { data: FormType }) => (<RenderInputs item={data.FormFields}/>)
+const FormSimpleType = ({data, title}: { data: FormType, title?: boolean }) => (<>
+    {/*{*/}
+    {/*    title && <div>*/}
+    {/*        <Typography className='text-secondary-500 text-right mb-2'>*/}
+    {/*            {data.Title}*/}
+    {/*        </Typography>*/}
+    {/*    </div>*/}
+    {/*}*/}
+    <RenderInputs item={data.FormFields}/>
+</>)
 
 const RenderInputs = (props: { item: FormBuilderInputType[] }) => {
 
@@ -111,8 +131,6 @@ const RenderInputs = (props: { item: FormBuilderInputType[] }) => {
 const RenderInput = ({item}: { item: FormBuilderInputType }) => {
 
     let currentInput
-
-    console.log(item)
 
     switch (item.FieldType) {
         case "textInput":

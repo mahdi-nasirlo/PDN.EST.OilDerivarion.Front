@@ -74,7 +74,7 @@ export default function LayoutSidebar({
         {isLgSize ? (
           <CommonMenu
             style={{
-              width: "270px",
+              width: "300px",
               padding: "0 16px",
               paddingTop: "30px",
               paddingBottom: "30px",

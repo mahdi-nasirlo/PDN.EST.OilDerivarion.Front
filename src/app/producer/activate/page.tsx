@@ -23,13 +23,13 @@ function Page() {
 
     switch (processController.step) {
         case 0:
-            CurrentStep = <VisitForm />
+            CurrentStep = <CreatorProduction />
             break;
         case 1:
             CurrentStep = <LaboratoryEquipments />
             break;
         case 2:
-            CurrentStep = <CreatorProduction />
+            CurrentStep = <VisitForm />
             break;
         case 3:
             CurrentStep = <ManagementInfo />

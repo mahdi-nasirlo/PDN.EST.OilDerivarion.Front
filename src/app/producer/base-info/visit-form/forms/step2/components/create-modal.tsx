@@ -1,6 +1,10 @@
-import { Button, Col, Form, Input, Modal, Radio, Row, Select } from 'antd';
+import { Button, Col, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
+import useSWR from 'swr';
+import FormBuilderFetcher from '../../../../../../../../lib/server/formBuilderFetcher';
+import FormBuilder from '../../../../../../../../components/FormBuilder';
+
 
 export default function CreateModal({
     setIsEditModalVisible,
@@ -16,6 +20,17 @@ export default function CreateModal({
         setIsEditModalVisible(false);
     };
 
+
+    const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData",
+        (url: string) => FormBuilderFetcher(url, {
+            arg: {
+                group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
+                groupKey: null,
+                category_ID: "b491a1a1-443e-4a65-8d6d-c1d8ce259b6e",
+                category_Key: null
+            }
+        })
+    )
     return (
         <>
             <Modal
@@ -27,7 +42,7 @@ export default function CreateModal({
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
-                            <Button
+                            {/* <Button
                                 // loading={isMutating}
                                 size="large"
                                 className="w-full"
@@ -36,7 +51,7 @@ export default function CreateModal({
                                 key={"submit"}
                             >
                                 ثبت
-                            </Button>
+                            </Button> */}
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
@@ -51,142 +66,11 @@ export default function CreateModal({
                     </Row>,
                 ]}
             >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    initialValues={{ licenseType: false }}
-                >
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="exporter"
-                                label="شکل مخزن"
-                                rules={[{ required: true }]}
-                            >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="issueDatePersian"
-                                label="ارتفاع (متر)"
-                                rules={[{ required: true }]}
-                            >
-                                <Input
-                                    className="w-full rounded-lg"
-                                    size="large"
-                                    placeholder="وارد کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="expirationDatePersian"
-                                label="محیط (متر)"
-                                rules={[{ required: true }]}
-                            >
-                                <Input
-                                    className="w-full rounded-lg"
-                                    size="large"
-                                    placeholder="وارد کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="name"
-                                label="حجم (متر مکعب)"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="number"
-                                label="لوله خروجی مخزن (اینچ)"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="licenseTypeId"
-                                label="الکترو پمپ لوله خروجی(اسب بخار)"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="name"
-                                label="دبی ورودی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Select
-                                    // loading={ldLicenseTypeGetAll}
-                                    // options={LicenseTypeGetAll}
-                                    // fieldNames={{ value: "Id", label: "Name" }}
-                                    size="large"
-                                    placeholder="انتخاب کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="number"
-                                label="دبی خروجی"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                                label="تاییدیه کارگروه استاندارد سازی"
-                                name="licenseType"
-                            >
-                                <Radio.Group
-                                    size='large'
-                                    defaultValue={false}
-                                    className='w-full my-1 text-center'
-                                    value={form.getFieldValue("licenseType")}
-                                    buttonStyle="solid"
-                                    onChange={(e: any) => form.setFieldsValue({ licenseType: e.target.value })}
-                                >
-                                    <Radio.Button value={true} className='w-1/2'>دارد</Radio.Button>
-                                    <Radio.Button value={false} className='w-1/2'>ندارد</Radio.Button>
-                                </Radio.Group>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Form>
+                <FormBuilder items={data as any} loading={loadingForm} />
             </Modal >
         </>
     )
 }
+
+
+

@@ -43,4 +43,4 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
 }
 
 
-type dataType = { message: string, success: boolean, data: any }
+export type dataType = { message: string, success: boolean, data: any }

@@ -1,8 +1,9 @@
-import { Button, Col, Form, Input, Modal, Radio, Row, Select } from 'antd';
+import { Button, Col, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
-import useSWRMutation from 'swr/mutation';
-import { mutationFetcher } from '../../../../../../../../lib/server/mutationFetcher';
+import useSWR from 'swr';
+import FormBuilderFetcher from '../../../../../../../../lib/server/formBuilderFetcher';
+import FormBuilder from '../../../../../../../../components/FormBuilder';
 
 export default function CreateModal({
     mutate,
@@ -13,24 +14,18 @@ export default function CreateModal({
     setIsModalVisible: any;
     mutate: () => void;
 }) {
-
-    const { isMutating, trigger } = useSWRMutation(
-        "/ProducerMixTank/Create_Producer",
-        mutationFetcher
-    );
-
     const [form] = useForm();
 
-    const handleFormSubmit = async (values: any) => {
-        await trigger(values);
-
-        await mutate();
-
-        setIsModalVisible(false);
-
-        form.resetFields();
-    };
-
+    const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData",
+        (url: string) => FormBuilderFetcher(url, {
+            arg: {
+                group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
+                groupKey: null,
+                category_ID: "43ed033a-e22d-4ad8-975a-2978db10b6db",
+                category_Key: null
+            }
+        })
+    )
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -47,9 +42,9 @@ export default function CreateModal({
                 onCancel={handleCancel}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
+                        {/* <Col xs={24} md={12}>
                             <Button
-                                loading={isMutating}
+                                // loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -58,7 +53,7 @@ export default function CreateModal({
                             >
                                 ثبت
                             </Button>
-                        </Col>
+                        </Col> */}
                         <Col xs={24} md={12}>
                             <Button
                                 size="large"
@@ -72,126 +67,7 @@ export default function CreateModal({
                     </Row>,
                 ]}
             >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    initialValues={{ licenseType: false }}
-                    onFinish={handleFormSubmit}
-                    disabled={isMutating}
-                >
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="shape"
-                                label="شکل مخزن"
-                                rules={[{ required: true }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="height"
-                                label="ارتفاع (متر)"
-                                rules={[{ required: true }]}
-                            >
-                                <Input
-                                    className="w-full rounded-lg"
-                                    size="large"
-                                    placeholder="وارد کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="environment"
-                                label="محیط (متر)"
-                                rules={[{ required: true }]}
-                            >
-                                <Input
-                                    className="w-full rounded-lg"
-                                    size="large"
-                                    placeholder="وارد کنید"
-                                />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="volume"
-                                label="حجم (متر مکعب)"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="outletPipe"
-                                label="لوله خروجی مخزن (اینچ)"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="outletPipeElectroPump"
-                                label="الکترو پمپ لوله خروجی(اسب بخار)"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row gutter={[16, 16]}>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="inletFlowRate"
-                                label="دبی ورودی"
-                                rules={[
-                                    { required: true, message: "این فیلد اجباری است" },
-                                    { type: "string", message: "باید به صورت متن باشد" },
-                                ]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                name="outputFlowRate"
-                                label="دبی خروجی"
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            >
-                                <Input size="large" placeholder="وارد کنید" />
-                            </Form.Item>
-                        </Col>
-                        <Col xs={24} md={8}>
-                            <Form.Item
-                                rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                                label="تاییدیه کارگروه استاندارد سازی"
-                                name="hasConfirmation"
-                            >
-                                <Radio.Group
-                                    size='large'
-                                    defaultValue={false}
-                                    className='w-full my-1 text-center'
-                                    value={form.getFieldValue("licenseType")}
-                                    buttonStyle="solid"
-                                    onChange={(e: any) => form.setFieldsValue({ licenseType: e.target.value })}
-                                >
-                                    <Radio.Button value={true} className='w-1/2'>دارد</Radio.Button>
-                                    <Radio.Button value={false} className='w-1/2'>ندارد</Radio.Button>
-                                </Radio.Group>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Form>
+                <FormBuilder items={data as any} loading={loadingForm} />
             </Modal >
         </>
     )

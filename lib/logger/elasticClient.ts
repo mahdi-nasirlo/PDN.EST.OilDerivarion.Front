@@ -1,14 +1,15 @@
-import {env} from "../env";
+"use client";
 
-const {Client} = require('@elastic/elasticsearch')
+import { env } from "../env";
+
+const { Client } = require("@elastic/elasticsearch");
 
 const elasticClient = new Client({
-    node: process.env.ELASTIC_URL,
-    auth: {
-        username: env.ELASTIC_USERNAME,
-        password: env.ELASTIC_PASSWORD
-    }
-})
+  node: process.env.ELASTIC_URL,
+  auth: {
+    username: env.ELASTIC_USERNAME,
+    password: env.ELASTIC_PASSWORD,
+  },
+});
 
-
-export default elasticClient
+export default elasticClient;

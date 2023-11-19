@@ -4,6 +4,7 @@ import React from 'react';
 import {Button, Col, Form, Row, Spin, Tabs, Typography} from "antd";
 import TextInput from "./inputs/TextInput";
 import {useForm} from "antd/es/form/Form";
+import InputNumber from "./inputs/InputNumber";
 
 export interface FormBuilderInputType {
     Form_Field_ID: string,
@@ -40,15 +41,12 @@ interface ComponentProps {
 
 }
 
-const Index = ({items, loading = false, title = false}: ComponentProps) => {
+const Index = ({items, loading = true, title = false}: ComponentProps) => {
 
     if (loading) {
         return <Spin spinning={true}/>
     }
 
-    if (!items) {
-        return <></>
-    }
 
     return (
         <>
@@ -138,7 +136,10 @@ const RenderInput = ({item}: { item: FormBuilderInputType }) => {
 
     switch (item.FieldType) {
         case "textInput":
-            currentInput = <TextInput data={item} placeholder={item?.Placeholder || "وارد کنید"}/>
+            currentInput = <TextInput data={item} placeholder={item?.Placeholder || "وارد کنید"}/>;
+            break
+        case "inputNubmer":
+            currentInput = <InputNumber data={item}/>
     }
 
     if (!currentInput) {

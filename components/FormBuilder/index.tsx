@@ -46,6 +46,10 @@ const Index = ({items, loading = false, title = false}: ComponentProps) => {
         return <Spin spinning={true}/>
     }
 
+    if (!items) {
+        return <></>
+    }
+
     return (
         <>
             <div>

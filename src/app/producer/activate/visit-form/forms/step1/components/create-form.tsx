@@ -1,14 +1,33 @@
+"use client"
+
 import { SvgIcon } from '@/components/layout/sidebar';
 import { Button, Col, Form, Input, Radio, Row, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
+import FormBuilder from '../../../../../../../../components/FormBuilder';
+import useSWR from 'swr';
+import { listFetcher } from '../../../../../../../../lib/server/listFetcher';
+import FormBuilderFetcher from '../../../../../../../../lib/server/formBuilderFetcher';
 
 export default function CreateModal() {
 
-    const [form] = useForm();
+
+    const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData",
+
+        ([url, arg]: [string, any]) => FormBuilderFetcher(url, {
+            arg: {
+                group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
+                groupKey: null,
+                category_ID: "43ed033a-e22d-4ad8-975a-2978db10b6db",
+                category_Key: null
+            }
+        })
+    )
+
     return (
         <>
-            <Form
+            <FormBuilder items={data?.data as any} loading={loadingForm} />
+            {/* <Form
                 form={form}
                 layout="vertical"
                 initialValues={{ licenseType: false }}
@@ -161,7 +180,7 @@ export default function CreateModal() {
                         </Button>
                     </Col>
                 </Row>
-            </Form>
+            </Form> */}
         </>
     )
 }

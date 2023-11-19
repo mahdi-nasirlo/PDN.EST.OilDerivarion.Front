@@ -62,36 +62,120 @@ const items: MenuProps["items"] = [
     null,
     [
       getMenuItem(
-        <Link href="/producer/task/list">پرسشنامه پیوست شماره 1</Link>,
-        "/producer/task/list",
+        <Link href="/producer/step02/list">پرسشنامه پیوست شماره 1</Link>,
+        "/producer/step02/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/expert-naft/list">زمان کارشناس نفت</Link>,
-        "/producer/expert-naft/list",
+        <Link href="/producer/step03/list">زمان کارشناس نفت</Link>,
+        "/producer/step03/list",
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href={"/producer/expert-samt/list"}>زمان کارشناس صمت</Link>,
-        "/producer/expert-samt/list"
+        <Link href={"/producer/step04/list"}>زمان کارشناس صمت</Link>,
+        "/producer/step04/list"
       ),
       getMenuItem(
-        <Link href={"/producer/scheduling-visit/list"}>
+        <Link href={"/producer/step05/list"}>
           برنامه ریزی و زمان بندی بازدید
         </Link>,
-        "/producer/scheduling-visit/list"
+        "/producer/step05/list"
       ),
       getMenuItem(
-        <Link href={"/producer/viewing-notices-and-paying-fee/list"}>
+        <Link href={"/producer/step06/list"}>
           رویت اعلان ها توسط متقاضی و پرداخت هزینه
         </Link>,
-        "/producer/viewing-notices-and-paying-fee/list"
+        "/producer/step06/list"
       ),
       getMenuItem(
-        <Link href={"/producer/produce-QR-code/list"}>
+        <Link href={"/producer/step07/list"}>
           تولید QR کد و امکان چاپ
         </Link>,
-        "/producer/produce-QR-code/list"
+        "/producer/step07/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step08/list"}>
+          ثبت اطلاعات محل بازدید
+        </Link>,
+        "/producer/step08/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step09/list"}>
+          تکمیل صورت جلسه در اپلیکیشن
+        </Link>,
+        "/producer/step09/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step10/list"}>
+          بارگذاری فیلم و تصاویر کارگروه
+        </Link>,
+        "/producer/step10/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step11/list"}>
+          نتایج بازدید
+        </Link>,
+        "/producer/step11/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step12/list"}>
+          بررسی نمونه برداری انجام شده1
+        </Link>,
+        "/producer/step12/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step13/list"}>
+          بررسی نمونه برداری انجام شده2
+        </Link>,
+        "/producer/step13/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step14/list"}>
+          بررسی نمونه برداری انجام شده3
+        </Link>,
+        "/producer/step14/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step15/list"}>
+          انتخاب تصادفی آزمایشگاه و ارائه کد پستی
+        </Link>,
+        "/producer/step15/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step16/list"}>
+          پرداخت هزینه آزمایشگاه
+        </Link>,
+        "/producer/step16/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step17/list"}>
+          بررسی فاکتور های آزمون
+        </Link>,
+        "/producer/step17/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step18/list"}>
+          بررسی مکان جغرافیایی و اجازه گشودن جعبه
+        </Link>,
+        "/producer/step18/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step19/list"}>
+          اقدام آزمایش
+        </Link>,
+        "/producer/step19/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step20/list"}>
+          بررسی پلمپ نمونه اصلی
+        </Link>,
+        "/producer/step20/list"
+      ),
+      getMenuItem(
+        <Link href={"/producer/step21/list"}>
+          بررسی نتایج آزمایشگاه توسط کارشناس
+        </Link>,
+        "/producer/step21/list"
       ),
     ],
     "group"

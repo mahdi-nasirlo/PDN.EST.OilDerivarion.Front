@@ -21,6 +21,7 @@ const fetcher = async () => {
 
     return json
 
+
 }
 
 export default UseBoxOpen;

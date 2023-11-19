@@ -155,7 +155,7 @@ export default function DataTable() {
                 // loading={ldMainMember || ldDeleteLicense || isValidating}
                 className="mt-6"
                 columns={columns}
-                dataSource={data}
+                // dataSource={data}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: false,
@@ -186,19 +186,3 @@ export default function DataTable() {
         </>
     );
 }
-
-
-const data = [{
-    Row: "1",
-    name: "test",
-    number: "25",
-    licenseTypeName: "23",
-    exporter: "45",
-    issueDatePersian: "213",
-    expirationDatePersian: "32",
-    expiration: "98",
-    Persian: "783",
-    expirationDate: "3783"
-
-
-}]

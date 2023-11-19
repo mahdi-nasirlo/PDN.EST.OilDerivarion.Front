@@ -155,7 +155,7 @@ export default function DataTable() {
                 // loading={ldMainMember || ldDeleteLicense || isValidating}
                 className="mt-6"
                 columns={columns}
-                dataSource={data}
+                // dataSource={data}
                 pagination={{
                     defaultPageSize: 10,
                     showSizeChanger: false,

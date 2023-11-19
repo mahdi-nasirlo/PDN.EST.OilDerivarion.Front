@@ -163,7 +163,7 @@ export default function DataTable({
             <CustomeTable
                 setInitialData={() => { }}
                 isLoading={isValidating || isLoading}
-                data={data}
+                data={undefined}
                 columns={columns}
             />
             {/* جذف */}

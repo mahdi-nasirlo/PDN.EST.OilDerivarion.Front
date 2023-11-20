@@ -65,7 +65,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2"> افزودن فاکتور محصول</div>
+          <div className="text-base mb-2"> افزودن فاکتور ماده اولیه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

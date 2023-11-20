@@ -10,7 +10,6 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
-import { readSync } from "fs";
 
 const columns: ColumnsType<any> = [
   {
@@ -56,7 +55,11 @@ const DataTable = ({
   return (
     <>
       <CustomeTable
+        setInitialData={setFilter}
+        isLoading={ldProduct}
+        data={product}
         rowKey={"Uid"}
+        columns={columns}
         expandable={{
           expandedRowKeys: activeExpRow,
           onExpand: (expanded, record: Product) => {
@@ -77,10 +80,6 @@ const DataTable = ({
             <ExpandedRowRender product={record} TableMutate={TableMutate} />
           ),
         }}
-        setInitialData={setFilter}
-        isLoading={ldProduct}
-        data={product}
-        columns={columns}
       />
     </>
   );

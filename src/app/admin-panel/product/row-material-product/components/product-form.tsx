@@ -55,25 +55,6 @@ function ProductForm() {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
-        <Col xs={24} md={12}>
-          <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="IsActive"
-            label="فعال/غیر فعال"
-            initialValue={true}
-          >
-            <Select
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیرفعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-      </Row>
     </>
   );
 }

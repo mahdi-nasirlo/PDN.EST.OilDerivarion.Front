@@ -10,6 +10,7 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   setFilter,
@@ -112,26 +113,7 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "IsActive",
       key: "4",
-      render: (_, record: any) => {
-        let color = "";
-        let name = "";
-        let icon = <></>;
-        if (record.IsActive === false) {
-          color = "red";
-          name = "غیرفعال";
-          icon = <CloseCircleOutlined />;
-        } else {
-          color = "success";
-          name = "فعال";
-          icon = <CheckCircleOutlined />;
-        }
-
-        return (
-          <Tag icon={icon} color={color}>
-            {name}
-          </Tag>
-        );
-      },
+      render: (_, record: any) => <StatusColumn record={record} />
     },
     {
       title: "استان",

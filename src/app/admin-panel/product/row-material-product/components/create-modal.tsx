@@ -28,7 +28,10 @@ export default function CreateModal({
     materialUid: string;
     IsActive: boolean;
   }) => {
-    const res = await trigger(values);
+
+    const modifiedValues = { ...values, IsActive: true };
+
+    const res = await trigger(modifiedValues);
     if (res) {
       await mutate();
 

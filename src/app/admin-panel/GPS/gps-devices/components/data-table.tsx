@@ -13,14 +13,6 @@ import { Gps } from "../../../../../../interfaces/gps";
 import { useRouter } from "next/navigation";
 import useBoxOpen from "../../../../../../hooks/requestGps/useBoxOpen";
 
-interface DataType {
-  key: string;
-  Row: number;
-  ProductName: string;
-  TrackingCode: string;
-  ConfirmedRequestCode: string;
-}
-
 export default function DataTable({
   setFilter,
   isValidating,

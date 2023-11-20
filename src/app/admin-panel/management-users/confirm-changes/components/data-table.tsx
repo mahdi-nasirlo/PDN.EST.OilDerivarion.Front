@@ -8,6 +8,7 @@ import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 interface DataType {
   key: string;
@@ -88,6 +89,7 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "Status",
       key: "5",
+      render: (_, record) => <StatusColumn record={record} />
     },
     {
       title: "عملیات",

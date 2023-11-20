@@ -28,12 +28,15 @@ export default function CreateModal({
     materialUid: string;
     IsActive: boolean;
   }) => {
-    await trigger(values);
 
-    await mutate();
+    const modifiedValues = { ...values, IsActive: true };
 
-    setModalVisible(false);
+    const res = await trigger(modifiedValues);
+    if (res) {
+      await mutate();
 
+      setModalVisible(false);
+    }
     form.resetFields();
   };
   const CloseModal = () => {

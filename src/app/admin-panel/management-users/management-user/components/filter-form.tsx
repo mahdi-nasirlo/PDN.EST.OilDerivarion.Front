@@ -1,28 +1,26 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { filterOption } from "../../../../../../lib/filterOption";
 import { useForm } from "antd/es/form/Form";
-import test from "node:test";
+import ButtonFilter from "../../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   filter,
   unsetFilter,
+  isLoading
 }: {
   filter: (arg: any) => void;
   unsetFilter: () => void;
+  isLoading: boolean;
 }) {
-  const { data, isLoading } = useSWR("/BaseInfo/UserTypeGetAll", listFetcher);
+  const { data: dataUserType, isLoading: ldUserType } = useSWR("/BaseInfo/UserTypeGetAll", listFetcher);
 
   const [form] = useForm();
 
-  const CancelFilter = () => {
-    unsetFilter();
-    form.resetFields();
-  };
   return (
     // <div className="box-border w-full p-6">
     <Form name="form_item_path" form={form} onFinish={filter} layout="vertical">
@@ -55,8 +53,8 @@ export default function FilterForm({
               fieldNames={{ label: "Name", value: "Id" }}
               // @ts-ignore
               filterOption={filterOption}
-              loading={isLoading}
-              options={data}
+              loading={ldUserType}
+              options={dataUserType}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -75,29 +73,10 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row dir="ltr">
-        <Col xs={10} md={3} lg={2}>
-          <div className="flex gap-4">
-            <Button
-              className="btn-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              اعمال فیلتر
-            </Button>
-            <Button
-              className="btn-delete-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-              onClick={CancelFilter}
-            >
-              حذف فیلتر
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

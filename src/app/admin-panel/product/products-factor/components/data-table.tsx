@@ -55,7 +55,11 @@ const DataTable = ({
   return (
     <>
       <CustomeTable
+        setInitialData={setFilter}
+        isLoading={ldProduct}
+        data={product}
         rowKey={"Uid"}
+        columns={columns}
         expandable={{
           expandedRowKeys: activeExpRow,
           onExpand: (expanded, record: Product) => {
@@ -76,10 +80,6 @@ const DataTable = ({
             <ExpandedRowRender product={record} TableMutate={TableMutate} />
           ),
         }}
-        setInitialData={setFilter}
-        isLoading={ldProduct}
-        data={product}
-        columns={columns}
       />
     </>
   );
@@ -111,11 +111,13 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   );
 
   const deleteProductFactor = async () => {
-    await trigger({ uid: recordToDelete?.Uid });
-    await TableMutate();
-    await mutate();
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await TableMutate();
 
-    setOpen(false);
+      await mutate();
+      setOpen(false);
+    }
   };
 
   useEffect(() => {

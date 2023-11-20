@@ -34,9 +34,8 @@ export default function CreateModal({
       await mutate();
 
       setModalVisible(false);
-
-      form.resetFields();
     }
+    form.resetFields();
   };
 
   const CloseModal = () => {

@@ -8,6 +8,7 @@ import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import DataTable from "./components/data-table";
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +16,7 @@ export default function Page() {
   const defaultValue = {
     Code: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValue);
@@ -33,8 +33,7 @@ export default function Page() {
     setFilter({
       Code: values.Code,
       IsActive: values.IsActive,
-      fromRecord: 0,
-      selectRecord: 100,
+      ...getPageRecordNumber()
     });
     console.log(values);
 
@@ -58,6 +57,7 @@ export default function Page() {
               <GpsFilterForm
                 unsetFilter={unsetFilter}
                 filter={setFilterTable}
+                isLoading={isLoading}
               />
             ),
           },

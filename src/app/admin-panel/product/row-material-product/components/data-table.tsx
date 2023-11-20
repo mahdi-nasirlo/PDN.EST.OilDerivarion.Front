@@ -1,16 +1,16 @@
 "use client";
 
+import { Button, Space, Tooltip, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Product } from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   setFilter,
@@ -46,13 +46,13 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await deleteProduct({
-      uid: recordToDelete?.Uid,
-    });
-    await mutate();
+    const res = await deleteProduct({ uid: recordToDelete?.Uid });
 
-    setIsDeleteModalVisible(false);
+    if (res) {
+      await mutate();
 
+      setIsDeleteModalVisible(false);
+    }
   };
 
   const columns: ColumnsType<any> = [
@@ -76,22 +76,7 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
       key: "4",
-      render: (_, record: any) => {
-        let color = "";
-        let name = "";
-        let icon = <></>;
-        if (record.IsActive === false) {
-          color = "red";
-          name = "غیرفعال";
-          icon = <CloseCircleOutlined />
-        } else {
-          color = "success";
-          name = "فعال";
-          icon = <CheckCircleOutlined />
-        }
-
-        return <Tag icon={icon} color={color}>{name}</Tag>;
-      },
+      render: (_, record: any) => <StatusColumn record={record} />
     },
 
     {
@@ -135,13 +120,12 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          <Button
-            type="link"
-            className="text-red-500 font-bold"
+          <button
+            className="text-red-500 font-bold py-1 px-5"
             onClick={() => handleDelete(record)}
           >
             حذف
-          </Button>
+          </button>
         </Space>
       ),
     },
@@ -171,8 +155,8 @@ export default function DataTable({
           setInitialData={setFilter}
           isLoading={ldProduct || ldDelete}
           data={product}
-          columns={columns}
           rowKey={"Uid"}
+          columns={columns}
           expandable={{
             expandedRowKeys: activeExpRow,
             onExpand: (expanded, record: Product) => {

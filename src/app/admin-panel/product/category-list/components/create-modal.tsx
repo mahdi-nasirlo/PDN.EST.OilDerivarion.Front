@@ -25,12 +25,13 @@ export default function CreateModal({
   const [form] = useForm();
 
   const handleFormSubmit = async (values: CategoryProduct) => {
-    await trigger(values);
+    const res = await trigger(values);
 
-    await mutate();
+    if (res) {
+      await mutate();
 
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
 
@@ -70,6 +71,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              loading={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={closeModal}

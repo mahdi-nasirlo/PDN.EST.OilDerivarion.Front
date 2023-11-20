@@ -26,7 +26,7 @@ export default function FilterForm() {
                 <Col xs={24} md={12}>
                     <Form.Item
                         name="year-establishment"
-                        label="وضعیت     "
+                        label="فعال / غیر فعال     "
                     >
                         <Input disabled size="large" placeholder="وارد کنید" />
                     </Form.Item>

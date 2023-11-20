@@ -42,11 +42,11 @@ const DataTable = ({
   setFilter: any;
   isValidating: any;
   requestMaster:
-    | {
-        records: RequestMaster[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: RequestMaster[];
+    count: number;
+  }
+  | undefined;
   ldRequestMaster: boolean;
 }) => {
   return (

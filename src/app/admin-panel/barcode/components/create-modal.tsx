@@ -27,12 +27,12 @@ export default function CreateModal({
   );
 
   const handleFormSubmit = async (values: any) => {
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
 
@@ -71,6 +71,7 @@ export default function CreateModal({
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={() => setModalVisible(false)}
               key={"cancel"}
+              disabled={isMutating}
             >
               انصراف
             </Button>

@@ -47,8 +47,6 @@ export default function CreateModal({
 
     const res = await trigger({ ...values, IsActive: true });
 
-    console.log(values);
-
     await mutate();
     if (res) {
       setModalVisible(false);
@@ -67,7 +65,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2"> افزودن فاکتور محصول</div>
+          <div className="text-base mb-2"> افزودن فاکتور ماده اولیه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -93,6 +91,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

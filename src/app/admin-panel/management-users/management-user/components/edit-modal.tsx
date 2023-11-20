@@ -26,11 +26,11 @@ export default function EditModal(
             uid: recordToEdit?.Uid,
             ...values,
         });
-        await mutate();
         if (res) {
+            await mutate();
             setIsEditModalVisible(false);
-            form.resetFields();
         }
+        form.resetFields();
     };
 
     const handleCancelEdit = () => {

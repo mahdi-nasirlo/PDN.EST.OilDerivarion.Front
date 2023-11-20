@@ -25,7 +25,7 @@ function MaterialForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="IsActive"
-            label="وضعیت"
+            label="فعال / غیر فعال"
             rules={[{ required: true }]}
             initialValue={true}
           >

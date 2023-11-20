@@ -26,16 +26,15 @@ export default function EditModal(
         //@ts-ignore
         values.Uid = recordToEdit?.Uid
 
-        await trigger(values)
+        const res = await trigger(values)
+        if (res) {
+            await mutate();
 
-        await mutate();
+            form.resetFields();
 
-        form.resetFields();
-
-        setIsEditModalVisible(false);
-
+            setIsEditModalVisible(false);
+        }
         setRecordToEdit(null);
-
     };
 
     const {
@@ -79,6 +78,7 @@ export default function EditModal(
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
+                                disabled={isLoading || isMutating}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={handleCancelEdit}

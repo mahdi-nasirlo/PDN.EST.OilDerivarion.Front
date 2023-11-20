@@ -46,14 +46,12 @@ export default function DataTable({
     useSWRMutation("/Material/Delete", mutationFetcher);
 
   const handleConfirmDelete = async () => {
-    await deleteMaterial({
-      uid: recordToDelete?.Uid,
-    });
+    const res = await deleteMaterial({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setIsDeleteModalVisible(false);
-
+      setIsDeleteModalVisible(false);
+    }
     setRecordToDelete(null);
   };
 
@@ -78,12 +76,12 @@ export default function DataTable({
   const sendEditRequest = async (values: Material) => {
     values.Uid = recordToEdit?.Uid;
 
-    await UpdateMaterial(values);
+    const res = await UpdateMaterial(values);
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setIsEditModalVisible(false);
-
+      setIsEditModalVisible(false);
+    }
     setRecordToEdit(null);
   };
 
@@ -179,17 +177,12 @@ export default function DataTable({
             <span className="flex">افزودن ماده اولیه</span>
           </Button>
         </div>
-        {/*<CustomeTable*/}
-        {/*    setInitialData={setFilter}*/}
-        {/*    className="mt-6"*/}
-        {/*    loading={ldMaterial || ldDeleteMaterial || isValidating}*/}
-        {/*    columns={columns}*/}
-        {/*    data={material}*/}
-        {/*   */}
-        {/*/>*/}
-        <CustomeTable setInitialData={setFilter} isLoading={ldMaterial || ldDeleteMaterial || isValidating}
-
-          data={material} columns={columns} />
+        <CustomeTable
+          setInitialData={setFilter}
+          isLoading={ldMaterial || ldDeleteMaterial || isValidating}
+          data={material}
+          columns={columns}
+        />
       </div>
       {/* جذف */}
       <ConfirmDeleteModal
@@ -222,7 +215,7 @@ export default function DataTable({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                loading={ldUpdateMaterial}
+                disabled={ldUpdateMaterial}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={handleCancelEdit}

@@ -1,26 +1,23 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import { useForm } from "antd/lib/form/Form";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { filterOption } from "../../../../../lib/filterOption";
+import ButtonFilter from "../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   filter,
   unsetFilter,
+  isLoading
 }: {
   filter: (arg: MaterialGet) => void;
   unsetFilter: () => void;
+  isLoading: boolean
 }) {
   const [form] = useForm();
-
-  const resetForm = () => {
-    unsetFilter();
-
-    form.resetFields;
-  };
 
   // const { data: MaterialTestItem, isLoading: ldMaterialTestItem } = useSWR("/MaterialTestItem/GetAll", (url) =>
   //   listFetcher(url, { arg: { name: null, IsActive: null, }, })
@@ -33,7 +30,7 @@ export default function FilterForm({
 
   return (
     // <div className="box-border w-full p-6">
-    <Form onFinish={filter} name="form_item_path" layout="vertical">
+    <Form onFinish={filter} form={form} layout="vertical">
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام ماده اولیه">
@@ -80,29 +77,10 @@ export default function FilterForm({
           </Form.Item>
         </Col> */}
       </Row>
-      <Row dir="ltr">
-        <Col xs={10} md={3} lg={2}>
-          <div className="flex gap-4">
-            <Button
-              className="btn-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              اعمال فیلتر
-            </Button>
-            <Button
-              onClick={resetForm}
-              className="btn-delete-filter"
-              size="large"
-              type="primary"
-              htmlType="reset"
-            >
-              حذف فیلتر
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

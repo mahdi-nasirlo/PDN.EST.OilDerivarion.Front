@@ -44,11 +44,10 @@ export default function CreateModal({
   const handleCreateLab = async (values: LabCreate) => {
     const res = await createLab(values);
 
-    await mutate;
-
     if (res?.Uid) {
-      setLabUid(res.Uid);
+      await mutate();
 
+      setLabUid(res.Uid);
       handleNextStep();
     }
   };
@@ -62,10 +61,9 @@ export default function CreateModal({
     values.uid = labUid;
 
     const res = await saveFromResponsible(values);
-
-    await mutate;
-
     if (res === true) {
+      await mutate();
+
       handleNextStep();
     }
   };
@@ -78,14 +76,14 @@ export default function CreateModal({
 
     const res = await saveFormManager(values);
 
-    await mutate();
-
     if (res === true) {
       setModalVisible(false);
 
-      form.resetFields();
+      await mutate();
+
       setStep(1);
     }
+    form.resetFields();
   };
 
   return (
@@ -124,6 +122,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={ldCreateLab || ldSaveForm || ldSaveFormManager}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={() => {

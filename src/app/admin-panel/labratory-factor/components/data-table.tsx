@@ -118,11 +118,12 @@ const ExpandedRowRender = ({
   );
 
   const deleteProductFactor = async () => {
-    await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setOpen(false);
+      setOpen(false);
+    }
   };
 
   useEffect(() => {

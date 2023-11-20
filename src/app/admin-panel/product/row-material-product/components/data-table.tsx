@@ -46,13 +46,13 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await deleteProduct({
-      uid: recordToDelete?.Uid,
-    });
-    await mutate();
+    const res = await deleteProduct({ uid: recordToDelete?.Uid });
 
-    setIsDeleteModalVisible(false);
+    if (res) {
+      await mutate();
 
+      setIsDeleteModalVisible(false);
+    }
   };
 
   const columns: ColumnsType<any> = [

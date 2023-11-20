@@ -1,16 +1,19 @@
-import { Button, Col, Form, Row, Select } from "antd";
+import { Col, Form, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { filterOption } from "../../../../../lib/filterOption";
+import ButtonFilter from "../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   TestResult,
   filter,
   unsetFilter,
+  isLoading
 }: {
   TestResult: any;
   filter: (arg: any) => void;
   unsetFilter: () => void;
+  isLoading: boolean;
 }) {
   const [form] = useForm();
 
@@ -41,33 +44,14 @@ export default function FilterForm({
               options={TestResult}
               size="large"
               placeholder="انتخاب کنید"
-            />{" "}
+            />
           </Form.Item>
         </Col>
       </Row>
-      <Row dir="ltr">
-        <Col xs={10} md={3} lg={2}>
-          <div className="flex gap-4">
-            <Button
-              className="btn-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              اعمال فیلتر
-            </Button>
-            <Button
-              onClick={unsetFilter}
-              className="btn-delete-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              حذف فیلتر
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

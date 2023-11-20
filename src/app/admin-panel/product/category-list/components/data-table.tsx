@@ -39,14 +39,14 @@ export default function DataTable({
 
   const handleDelete = async () => {
 
-    await deleteCategory({
-      uid: recordToDelete?.Uid,
-    });
+    const res = await deleteCategory({ uid: recordToDelete?.Uid });
 
-    await mutate();
+    if (res) {
 
-    setIsDeleteModalVisible(false);
+      await mutate();
 
+      setIsDeleteModalVisible(false);
+    }
     setRecordToDelete(null);
   };
 

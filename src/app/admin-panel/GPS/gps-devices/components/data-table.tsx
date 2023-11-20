@@ -1,24 +1,24 @@
 "use client";
 
-import {Button, Space} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
+import { Button, Space } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import EditModal from "@/app/admin-panel/GPS/gps-devices/components/edit-modal";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../../components/CustomeTable";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {Gps} from "../../../../../../interfaces/gps";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { Gps } from "../../../../../../interfaces/gps";
+import { useRouter } from "next/navigation";
 import useBoxOpen from "../../../../../../hooks/requestGps/useBoxOpen";
 
 interface DataType {
-    key: string;
-    Row: number;
-    ProductName: string;
-    TrackingCode: string;
-    ConfirmedRequestCode: string;
+  key: string;
+  Row: number;
+  ProductName: string;
+  TrackingCode: string;
+  ConfirmedRequestCode: string;
 }
 
 export default function DataTable({
@@ -32,37 +32,38 @@ export default function DataTable({
   isValidating: any;
   isLoading: boolean;
   boxesData:
-    | {
-        records: any;
-        count: number;
-      }
-    | undefined;
+  | {
+    records: any;
+    count: number;
+  }
+  | undefined;
   mutate: () => void;
 }) {
 
-    const openBox = useBoxOpen()
+  const openBox = useBoxOpen()
 
-    //حذف
+  //حذف
 
-    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-    const [recordToDelete, setRecordToDelete] = useState<Gps | null>(null);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [recordToDelete, setRecordToDelete] = useState<Gps | null>(null);
 
-    //ادیت
-    const [recordToEdit, setRecordToEdit] = useState<Gps>();
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  //ادیت
+  const [recordToEdit, setRecordToEdit] = useState<Gps>();
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
 
-    const {trigger, isMutating} = useSWRMutation(
-        "/GpsDevice/Delete",
-        mutationFetcher
-    );
+  const { trigger, isMutating } = useSWRMutation(
+    "/GpsDevice/Delete",
+    mutationFetcher
+  );
 
-    const handleDeleteSubmit = async () => {
-        await trigger({uid: recordToDelete?.Uid});
+  const handleDeleteSubmit = async () => {
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-        setIsDeleteModalVisible(false);
-
-    await mutate();
+      setIsDeleteModalVisible(false);
+    }
   };
 
   const router = useRouter();
@@ -110,51 +111,51 @@ export default function DataTable({
       fixed: "right",
       width: "10%",
       render: (_, record) => (
-          <Space size="small">
-              <Button
-                  type="link"
-                  className="text-primary-500 font-bold"
-                  loading={openBox.isMutating}
-                  onClick={() => openBox.trigger()}
-              >
-                  بازکردن درب جعبه
-              </Button>
-              <Button
-                  type="link"
-                  className="text-secondary-500 font-bold"
-                  onClick={() => {
-                      setIsEditModalVisible(true);
-                      setRecordToEdit(record);
-                  }}
-              >
-                  ویرایش
-              </Button>
-              <Button
-                  type="link"
-                  className="text-red-500 font-bold"
-                  onClick={() => {
-                      setIsDeleteModalVisible(true);
-                      setRecordToDelete(record);
-                  }}
-              >
-                  حذف
-              </Button>
-          </Space>
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-primary-500 font-bold"
+            loading={openBox.isMutating}
+            onClick={() => openBox.trigger()}
+          >
+            بازکردن درب جعبه
+          </Button>
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => {
+              setIsEditModalVisible(true);
+              setRecordToEdit(record);
+            }}
+          >
+            ویرایش
+          </Button>
+          <Button
+            type="link"
+            className="text-red-500 font-bold"
+            onClick={() => {
+              setIsDeleteModalVisible(true);
+              setRecordToDelete(record);
+            }}
+          >
+            حذف
+          </Button>
+        </Space>
       ),
     },
   ];
 
-    return (
-        <>
-            <CustomeTable
-                setInitialData={setFilter}
-                isLoading={isLoading || isMutating || isValidating}
-                data={boxesData}
-                columns={columns}
-            />
-            {/* جذف */}
-            <ConfirmDeleteModal
-                open={isDeleteModalVisible}
+  return (
+    <>
+      <CustomeTable
+        setInitialData={setFilter}
+        isLoading={isLoading || isMutating || isValidating}
+        data={boxesData}
+        columns={columns}
+      />
+      {/* جذف */}
+      <ConfirmDeleteModal
+        open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleDeleteSubmit}
         title={"حذف جعبه"}

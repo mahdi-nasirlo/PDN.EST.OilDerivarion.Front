@@ -35,12 +35,12 @@ function EditModal({
   const handleSubmit = async (values: Measure) => {
     values.Uid = editRecords?.Uid;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
+      await mutate();
 
-    setEditRecord(undefined);
-
-    await mutate();
-
+      setEditRecord(undefined);
+    }
     form.resetFields();
   };
 
@@ -78,7 +78,7 @@ function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating || isValidating}
+                disabled={isLoading || isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={() => setEditRecord(undefined)}

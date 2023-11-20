@@ -10,6 +10,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
+import { readSync } from "fs";
 
 const columns: ColumnsType<any> = [
   {
@@ -111,11 +112,13 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   );
 
   const deleteProductFactor = async () => {
-    await trigger({ uid: recordToDelete?.Uid });
-    await TableMutate();
-    await mutate();
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await TableMutate();
 
-    setOpen(false);
+      await mutate();
+      setOpen(false);
+    }
   };
 
   useEffect(() => {

@@ -27,9 +27,8 @@ export default function CreateModal({
   const createProduct = async (values: ProductCreate) => {
     const res = await trigger(values);
 
-    await mutate();
-
     if (res) {
+      await mutate();
 
       setModalVisible(false);
 
@@ -71,7 +70,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

@@ -1,14 +1,14 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {TestItemDetail} from "../../../../interfaces/TestItem";
-import {Collapse} from "antd";
+import { TestItemDetail } from "../../../../interfaces/TestItem";
+import { Collapse } from "antd";
 import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
-import {listFetcher} from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../lib/server/listFetcher";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,7 +31,7 @@ export default function Page() {
     count: number;
   }>(
     ["/TestItemDetail/GetPage", filter],
-      ([url, arg]: [url: string, arg: any]) => listFetcher(url, {arg})
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
   const setFilterTable = async (values: TestItemDetail) => {
@@ -56,27 +56,27 @@ export default function Page() {
     <>
       {/*@ts-ignore*/}
       <Collapse
-          size="large"
-          items={[
-            {
-              label: "فیلتر جدول",
-              children: (
-                  <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
-              ),
-            },
-          ]}
+        size="large"
+        items={[
+          {
+            label: "فیلتر جدول",
+            children: (
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldTestItemDetail} />
+            ),
+          },
+        ]}
       />
       <DataTable
-          setFilter={setFilter}
-          ldTestItemDetail={ldTestItemDetail || isValidating}
-          testItemDetail={testItemDetail}
-          setModalVisible={setModalVisible}
-          mutate={mutate}
+        setFilter={setFilter}
+        ldTestItemDetail={ldTestItemDetail || isValidating}
+        testItemDetail={testItemDetail}
+        setModalVisible={setModalVisible}
+        mutate={mutate}
       />
       <CreateModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-          mutate={mutate}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        mutate={mutate}
       />
     </>
   );

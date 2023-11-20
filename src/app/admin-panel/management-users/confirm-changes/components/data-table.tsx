@@ -206,7 +206,7 @@ export default function DataTable({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="year-establishment" label="وضعیت">
+              <Form.Item name="year-establishment" label="فعال / غیر فعال">
                 <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>

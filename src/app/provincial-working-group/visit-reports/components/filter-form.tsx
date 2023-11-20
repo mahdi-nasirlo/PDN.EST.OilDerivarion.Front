@@ -24,7 +24,7 @@ export default function FilterForm() {
                 </Row>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
-                        <Form.Item name="year-estale" label="وضعیت">
+                        <Form.Item name="year-estale" label="فعال / غیر فعال">
                             <Select size="large" placeholder="انتخاب کنید" />
                         </Form.Item>
                     </Col>

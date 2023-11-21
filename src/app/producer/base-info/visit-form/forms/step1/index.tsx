@@ -1,34 +1,16 @@
-import { ChevronDoubleLeftIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Typography } from 'antd'
-import React, { useContext, useState } from 'react'
+import React, {useContext} from 'react'
 import StepContext from '../../stete-manager/step-context';
-import DataTable from './components/data-table';
-import CreateModal from './components/create-modal';
-import getPageRecordNumber from "../../../../../../../lib/getPageRecordNumber";
-import useSWR from 'swr';
-import { listFetcher } from '../../../../../../../lib/server/listFetcher';
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {Typography} from "antd/lib";
+import {Button, Divider} from "antd";
+import {ChevronLeftIcon, PlusIcon} from "@heroicons/react/24/outline";
+import {formsUid} from "../../../../../../../Constants/formsUid";
 
 export default function Index() {
 
     const processController = useContext(StepContext);
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const defaultValueTable = {
-        ...getPageRecordNumber()
-    };
-
-    const { data, isLoading, mutate, isValidating } = useSWR<{
-        records: any[];
-        count: number;
-    }>(
-        ["/ProducerMixTank/GetPage_Producer", defaultValueTable],
-        ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
-    );
+    const formData = useGetForm(formsUid.mix_blending_tank_information)
 
     return (
         <>
@@ -46,7 +28,7 @@ export default function Index() {
                         type="primary"
                         htmlType="submit"
                         icon={<PlusIcon width={24} height={24} />}
-                        onClick={showModal}
+                        // onClick={showModal}
                     >
                         افزودن مخزن
                     </Button>
@@ -55,27 +37,27 @@ export default function Index() {
                         size="large"
                         type="default"
                         htmlType="submit"
-                        onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 7 })}
+                        onClick={() => processController.dispatch({type: "NEXT", stepNumber: 7})}
                     >
                         <span className="flex">
                             صفحه بعد
                         </span>
-                        <ChevronDoubleLeftIcon width={24} height={24} />
+                        <ChevronLeftIcon width={24} height={24}/>
                     </Button>
                 </div>
-            </div >
-            <Divider />
-            <DataTable
-                isValidating={isValidating}
-                mutate={mutate}
-                data={data}
-                isLoading={isLoading}
-            />
-            <CreateModal
-                mutate={mutate}
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}
-            />
+            </div>
+            <Divider/>
+            {/*<DataTable*/}
+            {/*    isValidating={isValidating}*/}
+            {/*    mutate={mutate}*/}
+            {/*    data={data}*/}
+            {/*    isLoading={isLoading}*/}
+            {/*/>*/}
+            {/*<CreateModal*/}
+            {/*    mutate={mutate}*/}
+            {/*    isModalVisible={isModalVisible}*/}
+            {/*    setIsModalVisible={setIsModalVisible}*/}
+            {/*/>*/}
         </>
     )
 }

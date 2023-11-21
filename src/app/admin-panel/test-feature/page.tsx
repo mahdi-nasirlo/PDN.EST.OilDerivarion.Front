@@ -13,13 +13,13 @@ import { listFetcher } from "../../../../lib/server/listFetcher";
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const defaultValue = {
+  const defaultValueTable = {
     title: null,
     IsActive: null,
     ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState<{ title: any, IsActive: any }>(defaultValue);
+  const [filter, setFilter] = useState<{ title: any, IsActive: any }>(defaultValueTable);
 
   const {
     data: testItemDetail,
@@ -47,7 +47,7 @@ export default function Page() {
   };
 
   const unsetFilter = async () => {
-    setFilter(defaultValue);
+    setFilter(defaultValueTable);
 
     await mutate();
   };

@@ -86,7 +86,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   const defaultValue = {
     materialUid: material.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
 

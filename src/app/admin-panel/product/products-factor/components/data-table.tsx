@@ -97,7 +97,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   const defaultValue = {
     productUid: product.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
   const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(

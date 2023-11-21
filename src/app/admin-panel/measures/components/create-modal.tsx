@@ -27,12 +27,13 @@ export default function CreateModal({
   );
 
   const createTestFactor = async (values: CreateMeasure) => {
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
 
-    await mutate();
+      await mutate();
 
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
 
@@ -70,7 +71,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

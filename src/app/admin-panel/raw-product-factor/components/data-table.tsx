@@ -86,7 +86,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   const defaultValue = {
     materialUid: material.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
 
@@ -102,11 +102,12 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
   const deleteProductFactor = async () => {
     // @ts-ignore
-    await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setOpen(false);
+      setOpen(false);
+    }
   };
 
   useEffect(() => {

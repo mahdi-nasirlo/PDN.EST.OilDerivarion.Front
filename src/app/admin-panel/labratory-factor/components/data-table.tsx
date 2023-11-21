@@ -36,35 +36,11 @@ const DataTable = ({
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   return (
-    // <CustomeTable
-    //     data={Labratory}
-    //     className="mt-6"
-    //     columns={columns}
-    //     rowKey={"Uid"}
-    //     loading={false}
-    //     expandable={{
-    //         expandedRowKeys: activeExpRow,
-    //         onExpand: (expanded, record: Labratory) => {
-    //             const keys: string[] = [];
-    //
-    //             if (expanded && record.Uid) {
-    //                 // @ts-ignore
-    //                 keys.push(record.Uid);
-    //             }
-    //
-    //             if (!expanded) {
-    //                 keys.pop();
-    //             }
-    //
-    //             setActiveExpRow(keys);
-    //         },
-    //         expandedRowRender: (record: Labratory) => (
-    //             <ExpandedRowRender Labratory={record}/>
-    //         ),
-    //     }}
-    //     setInitialData={setFilter}
-    // />
-    <CustomeTable rowKey={"Uid"} setInitialData={setFilter} isLoading={ldProduct || isValidating} data={Labratory}
+    <CustomeTable
+      setInitialData={setFilter}
+      isLoading={ldProduct || isValidating}
+      data={Labratory}
+      rowKey={"Uid"}
       columns={columns}
       expandable={{
         expandedRowKeys: activeExpRow,
@@ -95,6 +71,8 @@ const ExpandedRowRender = ({
 }: {
   Labratory: Labratory;
 }) => {
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState<
@@ -104,7 +82,7 @@ const ExpandedRowRender = ({
   const defaultValue = {
     productUid: Labratory.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
   const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(
@@ -118,11 +96,12 @@ const ExpandedRowRender = ({
   );
 
   const deleteProductFactor = async () => {
-    await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setOpen(false);
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -165,6 +144,9 @@ const ExpandedRowRender = ({
         dataSource={addAlphabetToData(data)}
         loading={isLoading || isMutating}
         pagination={false}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+        }}
       />
       <ConfirmDeleteModal
         loading={isMutating}

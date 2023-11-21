@@ -1,14 +1,17 @@
 "use client";
 
-import { Button, Col, Form, Select, Row, Input } from "antd";
+import { Col, Form, Select, Row, Input } from "antd";
 import React from "react";
+import ButtonFilter from "../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   filter,
   unsetFilter,
+  isLoading
 }: {
   filter: (arg: LaboratoryGet) => void;
   unsetFilter: () => void;
+  isLoading: boolean
 }) {
   return (
     // <div className="box-border w-full p-6">
@@ -32,29 +35,10 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row dir="ltr">
-        <Col xs={10} md={3} lg={2}>
-          <div className="flex gap-4">
-            <Button
-              className="btn-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              اعمال فیلتر
-            </Button>
-            <Button
-              className="btn-delete-filter"
-              size="large"
-              type="primary"
-              htmlType="reset"
-              onClick={unsetFilter}
-            >
-              حذف فیلتر
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

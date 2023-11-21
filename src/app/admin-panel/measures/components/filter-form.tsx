@@ -1,16 +1,19 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import { useForm } from "antd/es/form/Form";
 import { MeasureGetPage } from "../../../../../interfaces/measures";
+import ButtonFilter from "../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   filter,
   unsetFilter,
+  isLoading
 }: {
   filter: (arg: MeasureGetPage) => void;
   unsetFilter: () => void;
+  isLoading: boolean;
 }) {
   const [form] = useForm();
 
@@ -36,30 +39,10 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-
-      <Row dir="ltr">
-        <Col xs={10} md={3} lg={2}>
-          <div className="flex gap-4">
-            <Button
-              className="btn-filter"
-              size="large"
-              type="primary"
-              htmlType="submit"
-            >
-              اعمال فیلتر
-            </Button>
-            <Button
-              className="btn-delete-filter"
-              size="large"
-              type="primary"
-              onClick={unsetFilter}
-              htmlType="reset"
-            >
-              حذف فیلتر
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

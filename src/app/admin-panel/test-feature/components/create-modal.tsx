@@ -1,18 +1,18 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from "antd";
+import { Button, Col, Form, Modal, Row } from "antd";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {CreateTestItemDetail} from "../../../../../interfaces/TestItem";
-import {useForm} from "antd/es/form/Form";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { CreateTestItemDetail } from "../../../../../interfaces/TestItem";
+import { useForm } from "antd/es/form/Form";
 import TestFeatureForm from "./test-feature-form";
 
 export default function CreateModal({
-                                      setModalVisible,
-                                      modalVisible,
-                                      mutate,
-                                    }: {
+  setModalVisible,
+  modalVisible,
+  mutate,
+}: {
   setModalVisible: any;
   modalVisible: any;
   mutate: () => void;
@@ -70,6 +70,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={TestFeature}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

@@ -5,7 +5,6 @@ import { useForm } from "antd/es/form/Form";
 import { Product } from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 
 function EditModal({
   isEditModalVisible,
@@ -28,13 +27,15 @@ function EditModal({
   const updateProduct = async (values: Product) => {
     values.Uid = recordToEdit?.Uid;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
 
-    await mutate();
+      await mutate();
 
-    setIsEditModalVisible(false);
+      setIsEditModalVisible(false);
 
-    form.resetFields();
+      form.resetFields();
+    }
   };
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function EditModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={() => setIsEditModalVisible(false)}

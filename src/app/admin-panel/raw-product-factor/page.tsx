@@ -1,25 +1,25 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import {Button, Collapse, Typography} from "antd";
-import {PlusIcon} from "@heroicons/react/24/outline";
+import { Button, Collapse, Typography } from "antd";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import {listFetcher} from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../lib/server/listFetcher";
 import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const defaultValue = {
+  const defaultValueTable = {
     Name: null,
     IsActive: null,
     ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState(defaultValue);
+  const [filter, setFilter] = useState(defaultValueTable);
 
   const { data, isLoading, mutate, isValidating } = useSWR<{
     count: number;
@@ -30,13 +30,13 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: true, fromRecord: 0, selectRecord: 10000 });
+    setFilter({ Name: values.Name, IsActive: true, ...getPageRecordNumber() });
 
     await mutate();
   };
 
   const unsetFilter = async () => {
-    setFilter(defaultValue);
+    setFilter(defaultValueTable);
 
     await mutate();
   };
@@ -49,7 +49,7 @@ export default function Page() {
           {
             label: "فیلتر جدول",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={isLoading} />
             ),
           },
         ]}
@@ -60,17 +60,17 @@ export default function Page() {
             لیست فاکتور های ماده اولیه
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              onClick={() => setModalVisible(true)}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24}/>
+            <PlusIcon width={24} height={24} />
             <span className="flex ">افزودن فاکتور ماده اولیه</span>
           </Button>
         </div>
 
-        <DataTable setFilter={setFilter} ldMaterial={isLoading || isValidating} material={data}/>
+        <DataTable setFilter={setFilter} ldMaterial={isLoading || isValidating} material={data} />
       </div>
       <CreateModal
         mutate={mutate}

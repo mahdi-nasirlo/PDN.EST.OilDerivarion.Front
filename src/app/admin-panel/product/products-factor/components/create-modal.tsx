@@ -23,7 +23,7 @@ export default function CreateModal({
 
   const defaultValue = {
     name: null,
-    IsActive: null,
+    IsActive: true,
   };
 
   const { data: product, isLoading: ldProduct } = useSWR<any[]>(
@@ -45,12 +45,12 @@ export default function CreateModal({
     productUid: string;
     testItemUid: string;
   }) => {
-    await trigger({ ...values, IsActive: true });
+    const res = await trigger({ ...values, IsActive: true });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
   const CloseModal = () => {
@@ -89,6 +89,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

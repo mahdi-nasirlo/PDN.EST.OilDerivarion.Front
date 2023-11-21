@@ -26,10 +26,10 @@ function Page() {
             CurrentStep = <CreatorProduction />
             break;
         case 1:
-            CurrentStep = <VisitForm />
+            CurrentStep = <LaboratoryEquipments />
             break;
         case 2:
-            CurrentStep = <LaboratoryEquipments />
+            CurrentStep = <VisitForm />
             break;
         case 3:
             CurrentStep = <ManagementInfo />

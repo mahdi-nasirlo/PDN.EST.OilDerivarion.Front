@@ -6,13 +6,13 @@ import { filterOption } from "../../../../../../lib/filterOption";
 
 function ProductForm() {
   const { data: Product, isLoading: ldProduct } = useSWR(
-    ["/Product/GetAll", { name: null, IsActive: true }],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+    "/Product/GetAll",
+    (url: string) => listFetcher(url, { arg: { name: null, IsActive: true } })
   );
 
   const { data: Material, isLoading: ldMaterial } = useSWR(
-    ["/Material/GetAll", { name: null, IsActive: true }],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+    "/Material/GetAll",
+    (url: string) => listFetcher(url, { arg: { name: null, IsActive: true } })
   );
 
   return (

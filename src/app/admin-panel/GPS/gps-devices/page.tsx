@@ -13,13 +13,13 @@ import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const defaultValue = {
+  const defaultValueTable = {
     Code: null,
     IsActive: null,
     ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState(defaultValue);
+  const [filter, setFilter] = useState(defaultValueTable);
 
   const { data, mutate, isLoading, isValidating } = useSWR<{
     count: number;
@@ -41,7 +41,7 @@ export default function Page() {
   };
 
   const unsetFilter = async () => {
-    setFilter(defaultValue);
+    setFilter(defaultValueTable);
 
     await mutate();
   };

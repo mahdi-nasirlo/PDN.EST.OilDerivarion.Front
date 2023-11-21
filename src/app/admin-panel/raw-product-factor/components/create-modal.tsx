@@ -22,7 +22,7 @@ export default function CreateModal({
 
   const defaultValue = {
     name: null,
-    IsActive: null,
+    IsActive: true,
   };
 
   const { data: material, isLoading: ldMaterial } = useSWR<any[]>(

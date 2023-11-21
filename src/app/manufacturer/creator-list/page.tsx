@@ -7,6 +7,7 @@ import DataTable from "./components/data-table";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { GetPageProducer, ProducerRecords } from "../../../../interfaces/producer";
+import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 
 export default function Page() {
@@ -14,8 +15,7 @@ export default function Page() {
     const defaultValueTable = {
         name: null,
         companyStatusId: null,
-        fromRecord: 0,
-        selectRecord: 10000
+        ...getPageRecordNumber()
     }
 
     const [filter, setFilter] = useState(defaultValueTable)
@@ -30,7 +30,7 @@ export default function Page() {
 
     const setFilterTable = async (values: GetPageProducer) => {
         //@ts-ignore
-        setFilter({ name: values.name, companyStatusId: values.companyStatusId, fromRecord: 0, selectRecord: 1000 })
+        setFilter({ name: values.name, companyStatusId: values.companyStatusId, ...getPageRecordNumber() })
 
         await mutate()
     }

@@ -10,6 +10,8 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
 
 export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { product: Product, mutate: any }) => {
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
   const [open, setOpen] = useState<boolean>(false);
 
   const [recordToDelete, setRecordToDelete] = useState<Product>();
@@ -25,11 +27,6 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
-  useEffect(() => {
-    if (!isLoading) {
-      mutate();
-    }
-  }, [product]);
 
   const { trigger, isMutating } = useSWRMutation(
     "/ProductMaterial/Delete",
@@ -37,7 +34,6 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
   );
 
   const handleDelete = async () => {
-
     await trigger({ Uid: recordToDelete?.Uid });
 
     await mutate();
@@ -45,6 +41,12 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
 
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      mutate();
+    }
+  }, [product]);
 
   const expandColumns: TableColumnsType<any> = [
     {
@@ -90,6 +92,9 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
         dataSource={addAlphabetToData(data)}
         loading={isLoading || isMutating}
         pagination={false}
+        expandable={{
+          expandedRowKeys: activeExpRow,
+        }}
       />
       <ConfirmDeleteModal
         loading={isMutating}

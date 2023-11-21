@@ -1,19 +1,20 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Typography } from 'antd'
-import React, { useContext, useState } from 'react'
+import {ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from '@heroicons/react/24/outline'
+import {Button, Divider, Typography} from 'antd'
+import React, {useContext} from 'react'
 import StepContext from '../../stete-manager/step-context';
 import DataTable from './components/data-table';
-import CreateModal from './components/create-modal';
+import Resource from "../../../../../../../components/Resource";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../../../Constants/formsUid";
 
 export default function Index() {
 
     const processController = useContext(StepContext);
 
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const setForm = useSetForm(formsUid.cutting_production_line)
 
-    const showModal = () => {
-        setIsEditModalVisible(true);
-    };
+    const getForm = useGetForm(formsUid.cutting_production_line)
 
     return (
         <>
@@ -25,16 +26,6 @@ export default function Index() {
                     </Typography>
                 </div>
                 <div className='flex gap-3 justify-end'>
-                    <Button
-                        className="flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        icon={<PlusIcon width={24} height={24} />}
-                        onClick={showModal}
-                    >
-                        افزودن خط تولید برش گیری
-                    </Button>
                     <Button
                         className="bg-gray-50 flex items-center justify-center"
                         size="large"
@@ -50,22 +41,18 @@ export default function Index() {
                         size="large"
                         type="default"
                         htmlType="submit"
-                        onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 7 })}
+                        onClick={() => processController.dispatch({type: "NEXT", stepNumber: 7})}
                     >
                         <span className="flex">
                             صفحه بعد
                         </span>
-                        <ChevronDoubleLeftIcon width={24} height={24} />
+                        <ChevronDoubleLeftIcon width={24} height={24}/>
                     </Button>
                 </div>
-            </div >
-            <Divider />
-            <Divider />
-            <DataTable />
-            <CreateModal
-                isEditModalVisible={isEditModalVisible}
-                setIsEditModalVisible={setIsEditModalVisible}
-            />
+            </div>
+            <Divider/>
+            <Resource items={getForm.data} onSet={setForm.onSet} loading={getForm.isLoading}/>
+            <DataTable/>
         </>
     )
 }

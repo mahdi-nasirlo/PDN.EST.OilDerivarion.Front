@@ -3,14 +3,18 @@ import StepContext from '../../stete-manager/step-context';
 import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
 import {Typography} from "antd/lib";
 import {Button, Divider} from "antd";
-import {ChevronLeftIcon, PlusIcon} from "@heroicons/react/24/outline";
+import {ChevronLeftIcon} from "@heroicons/react/24/outline";
 import {formsUid} from "../../../../../../../Constants/formsUid";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
     const processController = useContext(StepContext);
 
     const formData = useGetForm(formsUid.mix_blending_tank_information)
+
+    const setForm = useSetForm(formsUid.mix_blending_tank_information)
 
     return (
         <>
@@ -22,16 +26,6 @@ export default function Index() {
                     </Typography>
                 </div>
                 <div className='flex gap-3 justify-end'>
-                    <Button
-                        className="flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        icon={<PlusIcon width={24} height={24} />}
-                        // onClick={showModal}
-                    >
-                        افزودن مخزن
-                    </Button>
                     <Button
                         className="bg-gray-50 flex items-center justify-center"
                         size="large"
@@ -47,17 +41,7 @@ export default function Index() {
                 </div>
             </div>
             <Divider/>
-            {/*<DataTable*/}
-            {/*    isValidating={isValidating}*/}
-            {/*    mutate={mutate}*/}
-            {/*    data={data}*/}
-            {/*    isLoading={isLoading}*/}
-            {/*/>*/}
-            {/*<CreateModal*/}
-            {/*    mutate={mutate}*/}
-            {/*    isModalVisible={isModalVisible}*/}
-            {/*    setIsModalVisible={setIsModalVisible}*/}
-            {/*/>*/}
+            <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>
         </>
     )
 }

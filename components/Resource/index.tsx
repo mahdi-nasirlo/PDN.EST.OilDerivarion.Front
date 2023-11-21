@@ -37,7 +37,7 @@ const Index = ({loading = false, items, type = "single", onSet}: PropsType) => {
         return (
             <>
                 <FormBuilderProvider onSubmit={onSet} initialValues={records}>
-                    <FormBuilder items={schema} loading={loading} title={true}/>
+                    <FormBuilder items={schema} loading={loading} title={false}/>
                 </FormBuilderProvider>
             </>
         );

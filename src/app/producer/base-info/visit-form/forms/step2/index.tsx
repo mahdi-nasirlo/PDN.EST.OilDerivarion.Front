@@ -1,20 +1,21 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Form, Typography } from 'antd'
-import React, { useContext, useState } from 'react'
+import {ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from '@heroicons/react/24/outline'
+import {Button, Divider, Typography} from 'antd'
+import React, {useContext} from 'react'
 import StepContext from '../../stete-manager/step-context';
-import { useForm } from 'antd/es/form/Form';
 import DataTable from './components/data-table';
-import CreateModal from './components/create-modal';
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../../../Constants/formsUid";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
     const processController = useContext(StepContext);
 
-    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const formData = useGetForm(formsUid.repository_information)
 
-    const showModal = () => {
-        setIsEditModalVisible(true);
-    };
+    const setForm = useSetForm(formsUid.repository_information)
+
     return (
         <>
             <div className='flex justify-between'>
@@ -25,16 +26,6 @@ export default function Index() {
                     </Typography>
                 </div>
                 <div className='flex gap-3 justify-end'>
-                    <Button
-                        className="flex justify-center items-center gap-2"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                        icon={<PlusIcon width={24} height={24} />}
-                        onClick={showModal}
-                    >
-                        افزودن مخزن
-                    </Button>
                     <Button
                         className="bg-gray-50 flex items-center justify-center"
                         size="large"
@@ -59,12 +50,9 @@ export default function Index() {
                     </Button>
                 </div>
             </div >
-            <Divider />
-            <DataTable />
-            <CreateModal
-                isEditModalVisible={isEditModalVisible}
-                setIsEditModalVisible={setIsEditModalVisible}
-            />
+            <Divider/>
+            <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>
+            <DataTable/>
         </>
     )
 }

@@ -1,19 +1,18 @@
-import { Button, Divider, Form, Spin, Typography } from 'antd'
-import React, { useState } from 'react'
-import { useForm } from 'antd/es/form/Form';
-import ReactorSpecifications from './components/display-form/reactor-specifications';
-import ReactorPart from './components/display-form/reactor-part';
+import {Divider, Typography} from 'antd'
+import React, {useState} from 'react'
 import ButtonDisplay from './components/display-form/button-display';
-import ButtonEdit from './components/edit-form/button-edit';
-import ReactorPartEdit from './components/edit-form/reactor-part-edit';
-import ReactorSpecificationsEdit from './components/edit-form/reactor-specifications-edit';
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../../../Constants/formsUid";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
-    const [form] = useForm();
-
     const [isEditVisible, setIsEditVisible] = useState(true)
 
+    const formData = useGetForm(formsUid.reactor_specifications)
+
+    const setForm = useSetForm(formsUid.reactor_specifications)
 
     return (
         <>
@@ -25,35 +24,11 @@ export default function Index() {
                     </Typography>
                 </div>
                 <div className='max-md:w-full'>
-                    {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible} />}
-                    {!isEditVisible &&
-                        <ButtonEdit
-                            form={form}
-                            // mutate={mutate}
-                            // isMutating={isMutating}
-                            setIsEditVisible={setIsEditVisible}
-                        />
-                    }
+                    {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible}/>}
                 </div>
-            </div >
-            <Divider />
-            {isEditVisible &&
-                <Form form={form} layout='vertical' disabled>
-                    <ReactorSpecifications />
-                    <Divider />
-                    <ReactorPart />
-                </Form>}
-            {!isEditVisible &&
-                // <Spin spinning={isMutating || ldProducerLab}>
-                <Form layout="vertical" form={form}
-                // onFinish={onSubmitFinish}
-                >
-                    <ReactorSpecificationsEdit />
-                    <Divider />
-                    <ReactorPartEdit />
-                </Form>
-                // </Spin >
-            }
+            </div>
+            <Divider/>
+            <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>
         </>
     )
 }

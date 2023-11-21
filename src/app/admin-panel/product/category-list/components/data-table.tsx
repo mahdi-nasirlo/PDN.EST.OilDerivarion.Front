@@ -9,7 +9,6 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
@@ -161,7 +160,7 @@ export default function DataTable({
       <div className="box-border w-full mt-8 p-6">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست دسته بندی محصولات
+            لیست دسته بندی ها
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

@@ -148,7 +148,7 @@ export default function DataTable() {
                 open={isDeleteModalVisible}
                 setOpen={setIsDeleteModalVisible}
                 handleDelete={handleConfirmDelete}
-                title="حذف فاکتور"
+                title="حذف فاکتور آزمون"
             />
         </>
     )

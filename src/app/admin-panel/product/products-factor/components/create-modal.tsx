@@ -7,7 +7,6 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import { Product } from "../../../../../../interfaces/product";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
@@ -63,7 +62,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2"> افزودن فاکتور محصول</div>
+          <div className="text-base mb-2"> افزودن فاکتور آزمون محصول</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -134,7 +133,7 @@ export default function CreateModal({
           <Col xs={24} md={12}>
             <Form.Item
               name="testItemUid"
-              label="نام فاکتور"
+              label="نام فاکتور آزمون"
               rules={[
                 {
                   required: true,

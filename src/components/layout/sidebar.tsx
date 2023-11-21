@@ -5,7 +5,6 @@ import type { MenuProps } from "antd";
 import { Drawer, Menu } from "antd";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 export default function LayoutSidebar({
   menu,
@@ -74,7 +73,7 @@ export default function LayoutSidebar({
         {isLgSize ? (
           <CommonMenu
             style={{
-              width: "300px",
+              width: "270px",
               padding: "0 16px",
               paddingTop: "30px",
               paddingBottom: "30px",

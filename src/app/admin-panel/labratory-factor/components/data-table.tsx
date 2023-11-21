@@ -80,7 +80,7 @@ const ExpandedRowRender = ({
   >();
 
   const defaultValue = {
-    productUid: Labratory.Uid,
+    labUid: Labratory.Uid,
     testItemUid: null,
     IsActive: null,
   };
@@ -112,7 +112,7 @@ const ExpandedRowRender = ({
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
-    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
       dataIndex: "2",
@@ -153,7 +153,7 @@ const ExpandedRowRender = ({
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور آزمایشگاه"}
+        title="فاکتور آزمون آزمایشگاه"
       />
     </>
   );

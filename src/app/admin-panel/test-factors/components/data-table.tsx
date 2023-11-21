@@ -65,7 +65,7 @@ export default function DataTable({
       width: "5%"
     },
     {
-      title: "نام فاکتور",
+      title: "نام فاکتور آزمون",
       dataIndex: "Name",
       key: "2",
     },

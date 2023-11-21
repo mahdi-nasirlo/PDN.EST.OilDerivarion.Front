@@ -11,7 +11,7 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryExpertsListForm />
+                    label: 'فیلتر جستجو ', children: <PrimaryExpertsListForm />
                 }]}
             />
             <PrimaryExpertsListTable />

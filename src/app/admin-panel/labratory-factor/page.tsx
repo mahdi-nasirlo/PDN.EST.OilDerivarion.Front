@@ -52,7 +52,7 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
               <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldProduct} />
             ),

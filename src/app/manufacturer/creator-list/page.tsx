@@ -46,7 +46,7 @@ export default function Page() {
         <>
             <Collapse
                 size="large"
-                items={[{ label: 'فیلتر جدول', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} /> }]}
+                items={[{ label: 'فیلتر جستجو ', children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} /> }]}
             />
             <DataTable
                 mutate={mutate}

@@ -80,7 +80,7 @@ const ExpandedRowRender = ({
   >();
 
   const defaultValue = {
-    productUid: Labratory.Uid,
+    labUid: Labratory.Uid,
     testItemUid: null,
     IsActive: null,
   };

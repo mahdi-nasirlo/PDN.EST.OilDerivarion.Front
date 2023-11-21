@@ -11,7 +11,7 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryLaboratoryResultsForm />
+                    label: 'فیلتر جستجو ', children: <PrimaryLaboratoryResultsForm />
                 }]}
             />
             <PrimaryLaboratoryResultsTable />

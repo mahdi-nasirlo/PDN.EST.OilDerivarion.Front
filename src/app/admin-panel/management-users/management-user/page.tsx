@@ -51,7 +51,7 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول',
+                    label: 'فیلتر جستجو ',
                     children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldUser} />
                 }]}
             />

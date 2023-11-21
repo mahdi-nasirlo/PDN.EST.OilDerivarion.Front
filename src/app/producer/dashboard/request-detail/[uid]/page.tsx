@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { uid: any } }) {
       {/* <Collapse
         size="large"
         items={[
-          { label: "فیلتر جدول", children: <PrimaryManufacturerListForm /> },
+          { label: "فیلتر جستجو ", children: <PrimaryManufacturerListForm /> },
         ]}
       /> */}
       <PrimaryManufacturerListTable isLoading={isLoading} request={request} />

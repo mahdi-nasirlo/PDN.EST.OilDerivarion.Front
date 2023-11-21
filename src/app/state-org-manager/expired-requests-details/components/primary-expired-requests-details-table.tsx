@@ -188,7 +188,7 @@ export default function PrimaryExpiredRequestsDetailsTable() {
                         </Col>
                     </Row>
                 ]}
-                title="حذف فاکتور"
+                title="حذف فاکتور آزمون"
                 visible={isDeleteModalVisible}
                 onCancel={handleCancelDelete}
             >

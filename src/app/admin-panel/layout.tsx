@@ -11,9 +11,7 @@ import {
   FolderPlusIcon,
   HomeIcon,
   MapIcon,
-  PencilSquareIcon,
   RectangleStackIcon,
-  UserGroupIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 
@@ -40,15 +38,7 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getMenuItem("محصول", "management", null, [
-    getMenuItem(
-      <Link href={"/admin-panel/product/category-list"} className="text-sm">
-        لیست دسته بندی
-      </Link>,
-      "/admin-panel/product/category-list",
-      <RectangleStackIcon width={16} height={16} />
-    ),
-
+  getMenuItem("محصولات", "product", null, [
     getMenuItem(
       <Link href={"/admin-panel/product/products-list"} className="text-sm">
         لیست محصولات
@@ -57,27 +47,34 @@ const items: MenuProps["items"] = [
       <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
-      <Link href={"/admin-panel/product/products-factor"} className="text-sm">
-        فاکتور های آزمون محصول
+      <Link href={"/admin-panel/product/category-list"} className="text-sm">
+        لیست دسته بندی ها
       </Link>,
-      "/admin-panel/product/products-factor",
-      <FolderPlusIcon width={16} height={16} />
+      "/admin-panel/product/category-list",
+      <RectangleStackIcon width={16} height={16} />
     ),
     getMenuItem(
       <Link
         href={"/admin-panel/product/row-material-product"}
         className="text-sm"
       >
-        مواد اولیه محصول
+        مواد اولیه محصولات
       </Link>,
       "/admin-panel/product/row-material-product",
       <Bars3Icon width={16} height={16} />
     ),
+    getMenuItem(
+      <Link href={"/admin-panel/product/products-factor"} className="text-sm">
+        فاکتور های آزمون محصولات
+      </Link>,
+      "/admin-panel/product/products-factor",
+      <FolderPlusIcon width={16} height={16} />
+    ),
   ]),
-  getMenuItem("ماده اولیه", "initail", null, [
+  getMenuItem("مواد اولیه", "initail", null, [
     getMenuItem(
       <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
-        لیست ماده اولیه
+        لیست مواد اولیه
       </Link>,
       "/admin-panel/adding-raw-material",
       <Bars3Icon width={16} height={16} />
@@ -85,23 +82,23 @@ const items: MenuProps["items"] = [
 
     getMenuItem(
       <Link href={"/admin-panel/raw-product-factor"} className="text-sm">
-        فاکتور ماده اولیه
+        فاکتور های آزمون مواد اولیه
       </Link>,
       "/admin-panel/raw-product-factor",
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-  getMenuItem("آزمایشگاه", "labratory", null, [
+  getMenuItem("آزمایشگاه ها", "labratory", null, [
     getMenuItem(
       <Link href={"/admin-panel/laboratory"} className="text-sm">
-        لیست آزمایشگاه
+        لیست آزمایشگاه ها
       </Link>,
       "/admin-panel/laboratory",
       <Bars3Icon width={16} height={16} />
     ),
     getMenuItem(
       <Link href={"/admin-panel/labratory-factor"} className="text-sm">
-        فاکتور آزمایشگاه
+        فاکتور های آزمون آزمایشگاه
       </Link>,
       "/admin-panel/labratory-factor",
       <FolderPlusIcon width={16} height={16} />
@@ -157,45 +154,61 @@ const items: MenuProps["items"] = [
     ),
   ]),
 
+  getMenuItem("لیست GPS ها", "GPS", null, [
+    getMenuItem(
+      <Link
+        href="/admin-panel/GPS/gps-devices"
+        className="text-sm"
+      >
+        دستگاه های GPS
+      </Link>,
+      "/admin-panel/GPS/gps-devices",
+      <Bars3Icon width={16} height={16} />
+    ),
+    getMenuItem(
+      <Link
+        href="/admin-panel/gps-tracking"
+        className="text-sm"
+      >
+        رهگیری GPS
+      </Link>,
+      "/admin-panel/gps-tracking",
+      <FolderPlusIcon width={16} height={16} />
+    ),
+  ]),
+
   getMenuItem(
-    <Link href={"/admin-panel/producer-list"}>تولید کننده</Link>,
+    <Link href="/admin-panel/barcode">لیست بارکد ها</Link>,
+    "/admin-panel/barcode"
+  ),
+
+  getMenuItem(
+    <Link href={"/admin-panel/producer-list"}>لیست تولید کننده ها</Link>,
     "/admin-panel/producer-list"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
-    <Link href={"/admin-panel/test-factors"}>فاکتورهای آزمون</Link>,
+    <Link href={"/admin-panel/test-factors"}>لیست فاکتورهای آزمون</Link>,
     "/admin-panel/test-factors"
     // <FolderPlusIcon width={16} height={16} />
   ),
   getMenuItem(
-    <Link href={"/admin-panel/test-feature"}>استاندارد های آزمون</Link>,
+    <Link href={"/admin-panel/test-feature"}>لیست استاندارد های آزمون</Link>,
     "/admin-panel/test-feature"
     // <FolderPlusIcon width={16} height={16} />
   ),
 
   getMenuItem(
-    <Link href={"/admin-panel/test-result"}>نتیجه آزمون</Link>,
+    <Link href={"/admin-panel/test-result"}>لیست نتایج آزمون ها</Link>,
     "/admin-panel/test-result"
     // <FolderPlusIcon width={16} height={16}/>
   ),
 
   getMenuItem(
-    <Link href="/admin-panel/GPS/gps-devices">دستگاه های GPS</Link>,
-    "/admin-panel/GPS/gps-devices"
-  ),
-  getMenuItem(
-    <Link href="/admin-panel/gps-tracking">رهگیری GPS</Link>,
-    "/admin-panel/gps-tracking"
-  ),
-
-  getMenuItem(
-    <Link href="/admin-panel/measures">واحد اندازه گیری</Link>,
+    <Link href="/admin-panel/measures">لیست واحد های اندازه گیری</Link>,
     "/admin-panel/measures"
   ),
 
-  getMenuItem(
-    <Link href="/admin-panel/barcode">بارکد</Link>,
-    "/admin-panel/barcode"
-  ),
+
 ];

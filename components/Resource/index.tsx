@@ -1,6 +1,7 @@
 import React from 'react';
 import {Spin, Typography} from "antd";
 import FormBuilder, {FormSchemaType} from "../FormBuilder";
+import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
 
 
 interface PropsType {
@@ -12,10 +13,11 @@ interface PropsType {
         records?: any
     } | undefined | null
     loading?: boolean,
-    type?: "many" | "single"
+    type?: "many" | "single",
+    onSet: (data: any) => void,
 }
 
-const Index = ({loading = false, items, type = "single"}: PropsType) => {
+const Index = ({loading = false, items, type = "single", onSet}: PropsType) => {
 
     if (loading) {
         return <Spin/>
@@ -30,9 +32,13 @@ const Index = ({loading = false, items, type = "single"}: PropsType) => {
 
         if (!schema[0]) return <Typography>form maker error</Typography>
 
+        const records = JSON.parse(items.records)
+
         return (
             <>
-                <FormBuilder items={schema} loading={loading} title={true}/>
+                <FormBuilderProvider onSubmit={onSet} initialValues={records}>
+                    <FormBuilder items={schema} loading={loading} title={true}/>
+                </FormBuilderProvider>
             </>
         );
     } catch (e) {

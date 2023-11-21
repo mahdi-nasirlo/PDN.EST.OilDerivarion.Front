@@ -1,11 +1,12 @@
 "use client"
 
 import React from 'react';
-import {Button, Col, Form, Row, Spin, Tabs, Typography} from "antd";
+import {Button, Col, Divider, Form, Row, Spin, Tabs, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
+import useControlFormBuilder from "./hooks/useControleFormBuilder";
 
 export interface FormBuilderInputType {
     Form_Field_ID: string,
@@ -53,8 +54,6 @@ const Index = ({items, loading = false, title = false}: ComponentProps) => {
     if (loading) {
         return <Spin spinning={true}/>
     }
-
-    console.log(items)
 
     try {
 
@@ -158,13 +157,17 @@ const RenderInputs = (props: { item: FormBuilderInputType[] }) => {
 
     const [form] = useForm()
 
+    const formProvider = useControlFormBuilder()
+
+
     return <>
-        <Form form={form} className="mt-4">
+        <Form form={form} onFinish={formProvider.onSubmit} initialValues={formProvider.initialValues} className="mt-4">
             <Row gutter={[16, 10]}>
                 {props?.item?.map((value, index) => <RenderInput key={index} item={value}/>)}
             </Row>
-            {props.item.length > 0 && <div className="flex justify-end py-3">
-                <Button htmlType="submit" type="primary">
+            {props.item.length > 0 && <div className="flex flex-col justify-end mt-5">
+                <Divider/>
+                <Button htmlType="submit" type="primary" className="w-full">
                     ذخیره
                 </Button>
             </div>}

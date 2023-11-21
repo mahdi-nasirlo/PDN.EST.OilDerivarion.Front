@@ -187,11 +187,11 @@ export default function PrimaryRequestsDetailsTable() {
                         </Col>
                     </Row>
                 ]}
-                title="حذف فاکتور"
+                title="حذف فاکتور آزمون"
                 visible={isDeleteModalVisible}
                 onCancel={handleCancelDelete}
             >
-                <p>آیا از حذف این فاکتور مطمئن هستید؟</p>
+                <p>آیا از حذف این فاکتور آزمون مطمئن هستید؟</p>
             </Modal>
         </>
     )

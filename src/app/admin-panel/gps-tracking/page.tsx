@@ -1,8 +1,8 @@
 "use client"
 
 import React from 'react';
-import {Table, Typography} from "antd";
-import {ColumnsType} from "antd/es/table";
+import { Table, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
 import useGetAllGpsDeviceTracker from "../../../../hooks/requestGps/useGetAllGpsDeviceTracker";
 
 const Page = () => {
@@ -32,7 +32,7 @@ const Page = () => {
         <div className="box-border p-6">
             <div className="flex justify-between items-center mb-3">
                 <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-                    لیست GPS
+                    رهگیری GPS
                 </Typography>
             </div>
             <Table

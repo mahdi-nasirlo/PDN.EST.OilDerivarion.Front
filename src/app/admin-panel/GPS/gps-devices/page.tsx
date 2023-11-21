@@ -66,7 +66,7 @@ export default function Page() {
       <div className="box-border w-full mt-8 p-6">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست GPS
+            لیست دستگاه های GPS
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

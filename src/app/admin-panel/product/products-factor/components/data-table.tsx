@@ -128,7 +128,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
-    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
       dataIndex: "2",
@@ -169,7 +169,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور محصول"}
+        title="فاکتور آزمون محصول"
       />
     </>
   );

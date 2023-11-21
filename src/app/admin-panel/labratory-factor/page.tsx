@@ -62,7 +62,7 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور های آزمایشگاه
+            لیست فاکتور های آزمون آزمایشگاه
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"
@@ -71,7 +71,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور آزمایشگاه</span>
+            <span className="flex ">افزودن فاکتور آزمون آزمایشگاه</span>
           </Button>
         </div>
         <DataTable

@@ -30,7 +30,7 @@ export default function Page() {
 
   const setFilterTable = async (values: MaterialGet) => {
     // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: true, ...getPageRecordNumber() });
+    setFilter({ Name: values.Name, IsActive: null, ...getPageRecordNumber() });
 
     await mutate();
   };
@@ -57,7 +57,7 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور های ماده اولیه
+            لیست فاکتور های آزمون مواد اولیه
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"
@@ -66,7 +66,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور ماده اولیه</span>
+            <span className="flex ">افزودن فاکتور آزمون ماده اولیه</span>
           </Button>
         </div>
 

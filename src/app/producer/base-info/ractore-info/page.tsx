@@ -1,14 +1,13 @@
 "use client";
 
 import {Divider, Typography} from 'antd'
-import React, {useState} from 'react'
+import React from 'react'
 import {formsUid} from "../../../../../Constants/formsUid";
 import Resource from "../../../../../components/Resource";
 
 export default function Page() {
 
-    const [isEditVisible, setIsEditVisible] = useState(true)
-
+  
     return (
         <>
             <div className='flex justify-between'>

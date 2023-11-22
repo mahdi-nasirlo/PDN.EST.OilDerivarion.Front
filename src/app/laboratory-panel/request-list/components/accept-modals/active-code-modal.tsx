@@ -3,13 +3,20 @@ import { Button, Col, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import ReceivePasswordForm from './receive-password-form';
 import SmsCodeForm from './sms-code-form';
+import { useRouter } from 'next/navigation';
 
-function ActiveCodeModal({ isModalOpen, setIsModalOpen }: {
-    isModalOpen: boolean,
-    setIsModalOpen: (arg: boolean) => void
-}) {
+function ActiveCodeModal(
+    {
+        isModalOpen,
+        setIsModalOpen,
+    }: {
+        isModalOpen: boolean;
+        setIsModalOpen: (arg: boolean) => void;
+    }
+) {
 
     const [form] = useForm();
+    const router = useRouter();
 
     const [openBox, setOpenBox] = useState(false);
 
@@ -19,17 +26,16 @@ function ActiveCodeModal({ isModalOpen, setIsModalOpen }: {
     }
 
     const handelReceivePassword = (values: any) => {
-        console.log(values);
         setOpenBox(true);
         form.resetFields();
     }
 
 
     const handelSmsCode = (values: any) => {
-        console.log(values);
         setOpenBox(false);
         setIsModalOpen(false);
         form.resetFields();
+        router.push(`/laboratory-panel/test-result-lab`);
     }
 
     return (

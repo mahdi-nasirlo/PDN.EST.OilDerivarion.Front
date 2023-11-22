@@ -1,8 +1,8 @@
 "use client";
 
 
-import {Alert, Button, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
+import { Alert, Button, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../components/CustomeTable";
 
@@ -48,16 +48,13 @@ export default function DataTable() {
 
                 if (record.pdn === 0) {
                     color = "red";
-                    name = "بررسی نشده";
+                    name = "ثبت نشده";
                 } else if (record.pdn === 1) {
                     color = "success";
-                    name = "بررسی شده";
-                } else if (record.pdn === 2) {
-                    color = "processing";
-                    name = "در حال آزمایش";
+                    name = "ثبت شده";
                 } else {
                     color = "warning";
-                    name = "درخواست اصلاح";
+                    name = "_";
                 }
 
                 return (
@@ -78,7 +75,7 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                        // onClick={}
+                    // onClick={}
                     >
                         ثبت نتیجه
                     </Button>
@@ -93,14 +90,15 @@ export default function DataTable() {
         <>
             <div className="box-border w-full mt-8 p-6">
                 <Alert
-                    style={{height: 60}}
+                    style={{ height: 60 }}
                     message="کد درخواست: 25648"
                     type="info"
                     className="text-right mb-12"
                 />
 
-                <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
-                    لیست آزمایش ها </Typography>
+                <Typography className="mt-3 mb-6 text-right font-medium text-base">
+                    لیست آزمایش ها
+                </Typography>
                 <CustomeTable
                     setInitialData={() => {
                     }}
@@ -130,7 +128,6 @@ const data: any = {
             Row: 2,
             name: "235648",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-
             pdn: 1,
         },
         {
@@ -138,16 +135,14 @@ const data: any = {
             Row: 3,
             name: "235648",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-
-
-            pdn: 2,
+            pdn: 0,
         },
         {
             key: "4",
             Row: 4,
             name: "235648 ",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 3,
+            pdn: 1,
         },
     ],
     count: 4

@@ -2,21 +2,21 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  BeakerIcon,
-  DocumentDuplicateIcon,
-  DocumentMagnifyingGlassIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    BeakerIcon,
+    DocumentDuplicateIcon,
+    DocumentMagnifyingGlassIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -230,6 +230,27 @@ const items: MenuProps["items"] = [
         "/producer/base-info/laboratory-equipments",
         <BeakerIcon width={16} height={16} />
       ),
+        getMenuItem(
+            <Link href="/producer/base-info/container-info">
+                اطلاعات مخازن میکس یا بلندینگ
+            </Link>,
+            "/producer/base-info/container-info",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/container-product">
+                اطلاعات مخازن محصول
+            </Link>,
+            "/producer/base-info/container-product",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/ractore-info">
+                مشخصات راکتور
+            </Link>,
+            "/producer/base-info/ractore-info",
+            <BeakerIcon width={16} height={16}/>
+        ),
       getMenuItem(
         <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
         "/producer/base-info/visit-form",

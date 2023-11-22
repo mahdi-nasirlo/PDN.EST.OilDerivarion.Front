@@ -1,10 +1,10 @@
-import { Button, Col, Form, Input, Modal, Radio, Row } from 'antd';
-import { useForm } from 'antd/es/form/Form';
-import React, { useEffect } from 'react';
+import {Button, Col, Form, Input, Modal, Radio, Row} from 'antd';
+import {useForm} from 'antd/es/form/Form';
+import React, {useEffect} from 'react';
 import useSWRMutation from 'swr/mutation';
-import { mutationFetcher } from '../../../../../../../../lib/server/mutationFetcher';
+import {mutationFetcher} from '../../../../../../lib/server/mutationFetcher';
 import useSWR from 'swr';
-import { listFetcher } from '../../../../../../../../lib/server/listFetcher';
+import {listFetcher} from '../../../../../../lib/server/listFetcher';
 
 export default function EditModal({
     mutate,

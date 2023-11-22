@@ -1,12 +1,13 @@
+"use client";
+
 import {Divider, Typography} from 'antd'
 import React, {useState} from 'react'
-import ButtonDisplay from './components/display-form/button-display';
-import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
-import {formsUid} from "../../../../../../../Constants/formsUid";
-import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
-import Resource from "../../../../../../../components/Resource";
+import useGetForm from "../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../Constants/formsUid";
+import useSetForm from "../../../../../components/FormBuilder/hooks/useSetForm";
+import Resource from "../../../../../components/Resource";
 
-export default function Index() {
+export default function Page() {
 
     const [isEditVisible, setIsEditVisible] = useState(true)
 
@@ -20,12 +21,10 @@ export default function Index() {
                 <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
-                        مشخصات راکتور ( 3 از 8 )
+                        مشخصات راکتور
                     </Typography>
                 </div>
-                <div className='max-md:w-full'>
-                    {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible}/>}
-                </div>
+
             </div>
             <Divider/>
             <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>

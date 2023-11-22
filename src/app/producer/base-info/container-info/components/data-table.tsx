@@ -1,12 +1,12 @@
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { Button, Space, Tag } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {Button, Space, Tag} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import EditModal from "./edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import CustomeTable from "../../../../../../../../components/CustomeTable";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import CustomeTable from "../../../../../../components/CustomeTable";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 
 
 export default function DataTable({

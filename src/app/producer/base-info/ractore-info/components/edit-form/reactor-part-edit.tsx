@@ -1,7 +1,7 @@
 import React from 'react'
-import { Col, Form, Row, Typography } from 'antd'
-import { useForm } from 'antd/es/form/Form';
-import CustomRadioGroup from '../../../../../../../../../components/CustomeRadioGroup';
+import {Col, Form, Row, Typography} from 'antd'
+import {useForm} from 'antd/es/form/Form';
+import CustomRadioGroup from '../../../../../../../components/CustomeRadioGroup';
 
 
 export default function ReactorPartEdit() {

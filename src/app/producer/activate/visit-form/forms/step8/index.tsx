@@ -1,8 +1,7 @@
-import { Button, Divider, Typography } from 'antd'
-import React, { useContext } from 'react'
+import {Button, Divider, Typography} from 'antd'
+import React, {useContext} from 'react'
 import StepContext from '../../stete-manager/step-context';
 import StepContextActivate from '../../../stete-manager/step-context';
-import CreatedForm from './components/created-form';
 
 export default function Index() {
 
@@ -20,7 +19,7 @@ export default function Index() {
                 </div>
             </div >
             <Divider />
-            <CreatedForm />
+            {/*<CreatedForm />*/}
             <Divider />
             <div className='flex gap-3'>
                 <Button

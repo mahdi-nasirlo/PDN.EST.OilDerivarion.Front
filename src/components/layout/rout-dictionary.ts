@@ -153,6 +153,10 @@ export const routDictionary: Items = {
   "gps-confirmations": {
     title: "تاییدیه های GPS",
   },
+
+  "test-result-lab": {
+    title: "لیست آزمایش ها",
+  },
   // end laboratory panel
 
   // start admin panel

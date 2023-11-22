@@ -1,19 +1,12 @@
 "use client";
 
 import {Divider, Typography} from 'antd'
-import React, {useState} from 'react'
-import useGetForm from "../../../../../components/FormBuilder/hooks/useGetForm";
+import React from 'react'
 import {formsUid} from "../../../../../Constants/formsUid";
-import useSetForm from "../../../../../components/FormBuilder/hooks/useSetForm";
 import Resource from "../../../../../components/Resource";
 
 export default function Page() {
 
-    const [isEditVisible, setIsEditVisible] = useState(true)
-
-    const getForm = useGetForm(formsUid.distillation)
-
-    const setForm = useSetForm(formsUid.distillation)
 
     return (
         <>
@@ -26,7 +19,7 @@ export default function Page() {
                 </div>
             </div >
             <Divider/>
-            <Resource items={getForm.data} onSet={setForm.onSet} loading={getForm.isLoading}/>
+            <Resource categoryID={formsUid.distillation}/>
         </>
     )
 }

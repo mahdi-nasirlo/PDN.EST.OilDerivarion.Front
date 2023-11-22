@@ -1,8 +1,7 @@
-import { useForm } from 'antd/es/form/Form';
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
 import useSWR from 'swr';
 import FormBuilderFetcher from '../../../../../../../../lib/server/formBuilderFetcher';
-import FormBuilder from '../../../../../../../../components/FormBuilder';
 
 
 export default function CreateForm() {
@@ -22,7 +21,7 @@ export default function CreateForm() {
 
     return (
         <>
-            <FormBuilder items={data as any} loading={loadingForm} />
+            {/*<FormBuilder items={data as any} loading={loadingForm} />*/}
         </>
     )
 }

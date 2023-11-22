@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, FormInstance, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 function CategoryForm({
-  form,
   defaultSelectedDensity,
 }: {
-  form: FormInstance;
   defaultSelectedDensity?: boolean;
 }) {
   const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
@@ -19,22 +17,6 @@ function CategoryForm({
     setHasDensity(defaultSelectedDensity);
   }, [defaultSelectedDensity]);
 
-  //   const validateDensityLowerLimit = (
-  //     rule: Rule,
-  //     value: any,
-  //     callback: CallableFunction
-  //   ) => {
-  //     const densityUpperLimit = form.getFieldValue("densityUpperLimit");
-  //     if (
-  //       densityUpperLimit !== undefined &&
-  //       value !== undefined &&
-  //       value < densityUpperLimit
-  //     ) {
-  //       callback("حداکثر بازه نمی‌تواند کمتر از حداقل بازه باشد.");
-  //     } else {
-  //       callback();
-  //     }
-  //   };
 
   return (
     <>
@@ -44,7 +26,7 @@ function CategoryForm({
             name="name"
             label="نام دسته بندی"
             rules={[
-              { required: true, message: ".لطفا نام را وارد کنید" },
+              { required: true },
               { type: "string" },
             ]}
           >
@@ -56,7 +38,7 @@ function CategoryForm({
             name="testMethodId"
             label="روش تولید"
             rules={[
-              { required: true, message: ".لظفا روش تولید را انتخاب نمایید" },
+              { required: true },
             ]}
           >
             <Select
@@ -77,12 +59,7 @@ function CategoryForm({
           <Form.Item
             name="isActive"
             label="فعال/غیر فعال"
-            rules={[
-              {
-                required: true,
-                message: ".لطفا وضغیت فعال/غیرفعال بودن را انتخاب نمایید",
-              },
-            ]}
+            rules={[{ required: true }]}
             initialValue={true}
           >
             <Select
@@ -99,12 +76,7 @@ function CategoryForm({
           <Form.Item
             name="hasDensity"
             label="دانسیته"
-            rules={[
-              {
-                required: true,
-                message: ".لطفا دانسیته را انتخاب نمایید ",
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Select
               options={[
@@ -122,17 +94,18 @@ function CategoryForm({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              // rules={[
-              //   {
-              //     validator(rule, value, callback) {
-              //       if (value > form.getFieldValue("densityUpperLimit"))
-              //         callback(
-              //           "حداقل بازه نمی تواند از حداکثر بازه بیشتر باشد"
-              //         );
-              //     },
-              //   },
-              // ]}
+              rules={[
+                { required: true },
+                {
+                  validator(_, value) {
+                    if (isNaN(value)) {
+                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
+                    }
+                    parseFloat(value);
+                    return Promise.resolve();
+                  },
+                },
+              ]}
               name="densityLowerLimit"
               label="حداقل بازه"
             >
@@ -141,15 +114,22 @@ function CategoryForm({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              // rules={[
-              //   {
-              //     validator(rule, value, callback) {
-              //       if (value < form.getFieldValue("densityLowerLimit"))
-              //         callback("حداکثر بازه نمی توانداز حداقل بازه کمتر باشد");
-              //     },
-              //   },
-              // ]}
+              rules={[
+                { required: true },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (isNaN(value)) {
+                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
+                    }
+                    if (value > getFieldValue("densityLowerLimit")) {
+                      parseFloat(value);
+                      return Promise.resolve();
+                    } else {
+                      return Promise.reject(new Error("حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"));
+                    }
+                  },
+                })
+              ]}
               name="densityUpperLimit"
               label="حداکثر بازه"
             >

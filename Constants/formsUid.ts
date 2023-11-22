@@ -5,5 +5,6 @@ export const formsUid = {
     "distillation": "993dcce0-9076-457c-a79e-f47f08ac8c45",
     "cutting_production_line": "4F4C8868-379A-417B-B5C7-2C8C68B19872",
     "reactor_specifications": "D5801EDA-240F-4F95-B176-504F93E4676C",
-    "repository_information": "B491A1A1-443E-4A65-8D6D-C1D8CE259B6E"
+    "repository_information": "B491A1A1-443E-4A65-8D6D-C1D8CE259B6E",
+    "control_room_equipment": "820A9FC3-4834-42D2-ADA0-53F1979E4CD5"
 }

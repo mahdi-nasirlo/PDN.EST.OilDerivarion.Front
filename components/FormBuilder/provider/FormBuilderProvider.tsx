@@ -1,23 +1,27 @@
 import React from 'react';
+import {ReturnedTypeFormRequest} from "../hooks/useFormRequest";
 
 export interface FormBuilderType {
-    onSubmit: (arg: any) => void,
-    initialValues: any
+    initialValues: any,
+    type: "one" | "many",
+    formData: ReturnedTypeFormRequest
 }
 
 export const FormBuilderContext = React.createContext<FormBuilderType>({} as FormBuilderType)
 
 interface FormBuilderProvider {
     children: React.ReactNode,
-    onSubmit: (arg: any) => void,
-    initialValues: any
+    initialValues: any,
+    type: "one" | "many",
+    formData: ReturnedTypeFormRequest
 }
 
 export const FormBuilderProvider = (props: FormBuilderProvider) => {
     return (
         <FormBuilderContext.Provider value={{
-            onSubmit: props.onSubmit,
-            initialValues: props.initialValues
+            initialValues: props.initialValues,
+            type: props.type,
+            formData: props.formData
         }}>
             {props.children}
         </FormBuilderContext.Provider>

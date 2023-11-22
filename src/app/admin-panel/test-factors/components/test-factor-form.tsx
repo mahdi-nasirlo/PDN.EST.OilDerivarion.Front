@@ -22,7 +22,7 @@ function TestFactorForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
-            label="نام فاکتور"
+            label="نام فاکتور آزمون"
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
@@ -35,6 +35,7 @@ function TestFactorForm() {
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Select
+              loading={ldMeasure}
               showSearch
               // @ts-ignore
               filterOption={filterOption}

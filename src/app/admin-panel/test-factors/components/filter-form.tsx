@@ -22,7 +22,7 @@ export default function FilterForm({
     <Form onFinish={(values) => filter(values)} form={form} layout="vertical">
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="name" label="نام فاکتور">
+          <Form.Item name="name" label="نام فاکتور آزمون">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>

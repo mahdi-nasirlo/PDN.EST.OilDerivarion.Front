@@ -14,15 +14,6 @@ export default function ButtonFilter({
                 <div className="flex gap-4">
                     <Button
                         loading={isLoading}
-                        className="btn-filter"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        اعمال فیلتر
-                    </Button>
-                    <Button
-                        loading={isLoading}
                         onClick={unsetFilter}
                         className="btn-delete-filter"
                         size="large"
@@ -30,6 +21,15 @@ export default function ButtonFilter({
                         htmlType="reset"
                     >
                         حذف فیلتر
+                    </Button>
+                    <Button
+                        loading={isLoading}
+                        className="btn-filter"
+                        size="large"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        اعمال فیلتر
                     </Button>
                 </div>
             </Col>

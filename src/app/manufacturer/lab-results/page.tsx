@@ -15,34 +15,34 @@ export default function Page() {
                 <Form name="form_item_path" layout="vertical">
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-establishment" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="lastName" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="lastName" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-establishment" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="lastName" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="lastName" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" disabled defaultValue="mysite" />
                             </Form.Item>
                         </Col>

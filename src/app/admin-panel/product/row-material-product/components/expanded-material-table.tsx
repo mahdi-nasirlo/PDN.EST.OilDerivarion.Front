@@ -101,7 +101,7 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
         open={open}
         setOpen={setOpen}
         handleDelete={handleDelete}
-        title={"فاکتور محصول"}
+        title="فاکتور آزمون محصول"
       />
     </>
   );

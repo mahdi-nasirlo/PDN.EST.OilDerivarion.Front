@@ -118,7 +118,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
   const expandColumns: TableColumnsType<any> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
-    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
       dataIndex: "2",
@@ -159,7 +159,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور ماده اولیه"}
+        title={"فاکتور آزمون ماده اولیه"}
       />
     </>
   );

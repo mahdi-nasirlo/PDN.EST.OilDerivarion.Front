@@ -53,7 +53,7 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
               <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldProduct} />
             ),
@@ -63,7 +63,7 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور آزمون محصول
+            لیست فاکتور های آزمون محصولات
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

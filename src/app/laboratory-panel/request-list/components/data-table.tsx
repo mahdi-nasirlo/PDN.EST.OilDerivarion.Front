@@ -1,8 +1,8 @@
 "use client";
 
-import {Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
@@ -122,16 +122,16 @@ export default function DataTable({
                     setInitialData={setFilter}
                     isLoading={isLoading || isValidating}
                     data={data}
-                    rowKey={"Uid"}
+                    rowKey={"uid"}
                     columns={columns}
                     expandable={{
                         expandedRowKeys: activeExpRow,
                         onExpand: (expanded, record: any) => {
                             const keys: string[] = [];
 
-                            if (expanded && record.Uid) {
+                            if (expanded && record.uid) {
                                 // @ts-ignore
-                                keys.push(record.Uid);
+                                keys.push(record.uid);
                             }
 
                             if (!expanded) {

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Col, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
-import ReceivePasswordForm from './receive-password-form';
-import SmsCodeForm from './sms-code-form';
-import { useRouter } from 'next/navigation';
+import React, {useState} from 'react';
+import {Button, Col, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
+import {useRouter} from 'next/navigation';
+import SmsCodeForm from "./sms-code-form"
+import ReceivePasswordForm from "./receive-password-form"
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 
 function ActiveCodeModal(
     {
@@ -27,20 +29,51 @@ function ActiveCodeModal(
         setIsModalOpen(false);
     }
 
-    const handelReceivePassword = (values: any) => {
-        setOpenBox(true);
-        form.resetFields();
-    }
+    const {trigger, isMutating} = useSWRMutation(
+        "/RequestMaster/UpdateLabOpinion",
+        mutationFetcher
+    );
+
+    const handleFormSubmit = async (values: any) => {
+        values.uid = recordUid
+
+        const res = await trigger({
+            uid: recordUid,
+            labIsAccepted: true
+        });
+
+        if (res) {
+            setOpenBox(true);
+        }
+
+    };
+    const {trigger: code, isMutating: pass} = useSWRMutation(
+        "/RequestMaster/OpenBox",
+        mutationFetcher
+    );
+
+    const handleFormSubmitCode = async (values: any) => {
+        values.uid = recordUid
+
+        const res = await code({
+            uid: recordUid,
+            code: "1234"
+        });
+
+        if (res) {
+            setIsModalOpen(false);
+        }
+
+    };
 
 
     const handelSmsCode = (values: any) => {
-        console.log(recordUid);
-
         setOpenBox(false);
         setIsModalOpen(false);
         form.resetFields();
         router.push(`/laboratory-panel/request-list/test-result-lab/${recordUid}`);
     }
+
 
     return (
         <Modal
@@ -60,7 +93,7 @@ function ActiveCodeModal(
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24}>
                             <Button
-                                onClick={() => form.submit()}
+                                onClick={handleFormSubmitCode}
                                 className="w-full"
                                 type="primary"
                             >
@@ -70,30 +103,36 @@ function ActiveCodeModal(
                     </Row>
                     :
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24}>
+                        <Col xs={12}>
                             <Button
-                                onClick={() => form.submit()}
+                                loading={isMutating}
+                                onClick={handleFormSubmit}
                                 className="w-full"
                                 type="primary"
                             >
-                                یافتن رمز عبور
+                                تایید
+                            </Button>
+                        </Col>
+                        <Col xs={12}>
+                            <Button
+                                onClick={() => setIsModalOpen(false)}
+                                className="w-full bg-gray-50"
+                            >
+                                انصراف
                             </Button>
                         </Col>
                     </Row>
             ]}
         >
+
             {openBox ?
                 <SmsCodeForm
                     form={form}
-                    onFinish={handelSmsCode}
+                    onFinish={handleFormSubmitCode}
                 />
                 :
-                <ReceivePasswordForm
-                    form={form}
-                    onFinish={handelReceivePassword}
-                />
+                <ReceivePasswordForm/>
             }
-
         </Modal >
     );
 }

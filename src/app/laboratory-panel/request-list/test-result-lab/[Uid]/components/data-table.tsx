@@ -1,29 +1,21 @@
 "use client";
 
 
-import { Alert, Button, Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import {Alert, Button, Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../../../components/CustomeTable";
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 
 
-interface DataType {
-    key: string;
-    Row: number;
-    userDescription: string;
-    Tracking: string;
-    name: string
-    status: string;
-    pdn: number;
-}
-
-
-export default function DataTable() {
+export default function DataTable({labresult, ldlabresult}: {
+    ldlabresult: any
+    labresult: any
+}) {
 
     const router = useRouter();
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<any> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -32,14 +24,14 @@ export default function DataTable() {
         },
         {
             title: "بار کد",
-            dataIndex: "name",
+            dataIndex: "Uid",
             key: "2",
             width: "25%"
         },
         {
             title: "فاکتورهای آزمون",
             dataIndex: "Tracking",
-            key: "2",
+            key: "3",
         },
         {
             title: "وضعیت",
@@ -105,8 +97,8 @@ export default function DataTable() {
                 <CustomeTable
                     setInitialData={() => {
                     }}
-                    isLoading={false}
-                    data={data}
+                    isLoading={ldlabresult}
+                    data={{count: labresult?.length, records: labresult}}
                     rowKey={"Row"}
                     columns={columns}
 
@@ -117,36 +109,36 @@ export default function DataTable() {
 }
 
 
-const data: any = {
-    records: [
-        {
-            key: "1",
-            Row: 1,
-            name: "235648",
-            Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 0,
-        },
-        {
-            key: "2",
-            Row: 2,
-            name: "235648",
-            Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 1,
-        },
-        {
-            key: "3",
-            Row: 3,
-            name: "235648",
-            Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 0,
-        },
-        {
-            key: "4",
-            Row: 4,
-            name: "235648 ",
-            Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 1,
-        },
-    ],
-    count: 4
-}
+// const data: any = {
+//     records: [
+//         {
+//             key: "1",
+//             Row: 1,
+//             name: "235648",
+//             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
+//             pdn: 0,
+//         },
+//         {
+//             key: "2",
+//             Row: 2,
+//             name: "235648",
+//             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
+//             pdn: 1,
+//         },
+//         {
+//             key: "3",
+//             Row: 3,
+//             name: "235648",
+//             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
+//             pdn: 0,
+//         },
+//         {
+//             key: "4",
+//             Row: 4,
+//             name: "235648 ",
+//             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
+//             pdn: 1,
+//         },
+//     ],
+//     count: 4
+// }

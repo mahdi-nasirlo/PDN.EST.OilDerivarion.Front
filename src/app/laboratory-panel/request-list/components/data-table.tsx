@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {Button, Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
@@ -98,7 +98,7 @@ export default function DataTable({
                         type="link"
                         className="text-primary-500 font-bold"
                         onClick={() => {
-                            setRecordUid(record.Uid);
+                            setRecordUid(record.uid);
                             setIsModalOpen(true);
                         }}
                     >
@@ -108,8 +108,8 @@ export default function DataTable({
                         type="link"
                         className="text-red-500 font-bold"
                         onClick={() => {
+                            setRecordUid(record.uid);
                             setIsModalOpenTest(true);
-                            setRecordUid(record.Uid);
                         }}
                     >
                         عدم پذیرش

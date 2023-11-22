@@ -1,7 +1,20 @@
 import useGetForm from "./useGetForm";
 import useSetForm from "./useSetForm";
 
-const useFormRequest = (uid: string) => {
+export interface ReturnedTypeFormRequest {
+    data: {
+        schema: {
+            jsonVersion: number,
+            json: string
+        },
+        records?: any
+    } | undefined | null,
+    isLoading: boolean,
+    mutate: () => void,
+    onSet: (data: any) => any
+}
+
+const useFormRequest = (uid: string): ReturnedTypeFormRequest => {
 
     const getForm = useGetForm(uid)
 

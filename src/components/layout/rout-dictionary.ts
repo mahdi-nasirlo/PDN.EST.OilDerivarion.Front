@@ -138,9 +138,8 @@ export const routDictionary: Items = {
   // start provincial-working-group panel
 
   // start laboratory panel
-  laboratory: {
-    title: "لیست آزمایشگاه ها",
-    href: "/laboratory",
+  "laboratory-panel": {
+    title: "پنل آزمایشگاه",
   },
   "accepted-requests": {
     title: "درخواست های پذیرفته شده",
@@ -181,6 +180,10 @@ export const routDictionary: Items = {
   },
   "confirm-changes": {
     title: "ثبت تغییرات",
+  },
+  laboratory: {
+    title: "لیست آزمایشگاه ها",
+    href: "/laboratory",
   },
   "labratory-factor": {
     title: "فاکتور های آزمون آزمایشگاه",

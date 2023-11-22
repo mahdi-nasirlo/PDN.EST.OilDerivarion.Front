@@ -26,8 +26,8 @@ export default function RootLayout({
 
 const items: MenuProps["items"] = [
   getMenuItem(
-    <Link href="/laboratory">خانه</Link>,
-    "/laboratory",
+    <Link href="/laboratory-panel">خانه</Link>,
+    "/laboratory-panel",
     <HomeIcon width={16} height={16} />
   ),
 
@@ -35,38 +35,38 @@ const items: MenuProps["items"] = [
 
   getMenuItem("درخواست ها", "management", null, [
     getMenuItem(
-      <Link href={"/laboratory/request-list"} className="text-sm">
+      <Link href={"/laboratory-panel/request-list"} className="text-sm">
         لیست درخواست ها
       </Link>,
-      "/laboratory/request-list",
+      "/laboratory-panel/request-list",
       <Bars3Icon width={16} height={16} />
     ),
 
     getMenuItem(
-      <Link href={"/laboratory/accepted-requests/list"} className="text-sm">
+      <Link href={"/laboratory-panel/accepted-requests/list"} className="text-sm">
         درخواست های پذیرش شده
       </Link>,
-      "/laboratory/accepted-requests/list",
+      "/laboratory-panel/accepted-requests/list",
       <DocumentCheckIcon width={16} height={16} />
     ),
 
     getMenuItem(
-      <Link href={"/laboratory/producer-list"} className="text-sm">
+      <Link href={"/laboratory-panel/producer-list"} className="text-sm">
         درخواست های منقضی شده
       </Link>,
-      "/laboratory/producer-list",
+      "/laboratory-panel/producer-list",
       <DocumentMinusIcon width={16} height={16} />
     ),
   ]),
 
   getMenuItem(
-    <Link href="/laboratory/gps-confirmations">تاییدیه های GPS</Link>,
-    "/laboratory/gps-confirmations",
+    <Link href="/laboratory-panel/gps-confirmations">تاییدیه های GPS</Link>,
+    "/laboratory-panel/gps-confirmations",
     <MapPinIcon width={16} height={16} />
   ),
 
   getMenuItem(
-    <Link href={"/laboratory/request-details"}>جزئیات درخواست</Link>,
-    "/laboratory/request-details"
+    <Link href={"/laboratory-panel/request-details"}>جزئیات درخواست</Link>,
+    "/laboratory-panel/request-details"
   ),
 ];

@@ -1,12 +1,16 @@
 import { Button, Col, Form, Input, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
+import useSWRMutation from 'swr/mutation';
+import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 
 export default function RejectionModal(
     {
+        recordUid,
         modalVisible,
         setModalVisible
     }: {
+        recordUid: any;
         modalVisible: any,
         setModalVisible: any
     }
@@ -18,18 +22,18 @@ export default function RejectionModal(
         form.resetFields();
     };
 
+    const { trigger, isMutating } = useSWRMutation(
+        "/RequestMaster/UpdateLabOpinion",
+        mutationFetcher
+    );
 
-    const handleFormSubmit = async () => {
-        try {
-            const values = await form.validateFields();
-            console.log("Form values:", values); // Log the form values to the console
+    const handleFormSubmit = async (values: any) => {
+        values.uid = recordUid
+        const res = await trigger({ ...values, labIsAccepted: true });
+        if (res) {
             setModalVisible(false);
-            form.resetFields();
-        } catch (error) {
-            console.error("Form validation failed:", error);
-            setModalVisible(false);
-            form.resetFields();
         }
+        form.resetFields();
     };
 
     return (
@@ -46,6 +50,7 @@ export default function RejectionModal(
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={12}>
                             <Button
+                                loading={isMutating}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -56,6 +61,7 @@ export default function RejectionModal(
                         </Col>
                         <Col xs={24} md={12}>
                             <Button
+                                disabled={isMutating}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={closeModal}
@@ -70,7 +76,7 @@ export default function RejectionModal(
                     <Row gutter={[32, 1]} >
                         <Col xs={24}>
                             <Form.Item
-                                name="test"
+                                name="labRejectionDescription"
                                 label='توضیحات'
                             >
                                 <Input.TextArea

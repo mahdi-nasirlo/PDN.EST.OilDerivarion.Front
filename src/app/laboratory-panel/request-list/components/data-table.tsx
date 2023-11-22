@@ -107,7 +107,10 @@ export default function DataTable({
                     <Button
                         type="link"
                         className="text-red-500 font-bold"
-                        onClick={() => { setIsModalOpenTest(true); }}
+                        onClick={() => {
+                            setIsModalOpenTest(true);
+                            setRecordUid(record.Uid);
+                        }}
                     >
                         عدم پذیرش
                     </Button>
@@ -130,16 +133,16 @@ export default function DataTable({
                     setInitialData={setFilter}
                     isLoading={isLoading || isValidating}
                     data={data}
-                    rowKey={"Row"}
+                    rowKey={"Uid"}
                     columns={columns}
                     expandable={{
                         expandedRowKeys: activeExpRow,
                         onExpand: (expanded, record: any) => {
                             const keys: string[] = [];
 
-                            if (expanded && record.Row) {
+                            if (expanded && record.Uid) {
                                 // @ts-ignore
-                                keys.push(record.Row);
+                                keys.push(record.Uid);
                             }
 
                             if (!expanded) {
@@ -149,16 +152,21 @@ export default function DataTable({
                             setActiveExpRow(keys);
                         },
                         expandedRowRender: (record: any) => (
-                            <ExpandedDetailsTable
-                                product={record}
-                            // mutate={mutate}
-                            />
+                            <ExpandedDetailsTable data={record} />
                         ),
                     }}
                 />
             </div>
-            <RejectionModal modalVisible={isModalOpenTest} setModalVisible={setIsModalOpenTest} />
-            <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} recordUid={recordUid} />
+            <RejectionModal
+                modalVisible={isModalOpenTest}
+                setModalVisible={setIsModalOpenTest}
+                recordUid={recordUid}
+            />
+            <ActiveCodeModal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                recordUid={recordUid}
+            />
         </>
     )
 }

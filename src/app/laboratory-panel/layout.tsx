@@ -42,7 +42,13 @@ const items: MenuProps["items"] = [
         "/laboratory-panel/test-result-lab",
         <Bars3Icon width={16} height={16}/>
     ),
-
+    getMenuItem(
+        <Link href={"/laboratory-panel/submit-test-result"} className="text-sm">
+          ثبت نتیجه
+        </Link>,
+        "/laboratory-panel/submit-test-result",
+        <Bars3Icon width={16} height={16}/>
+    ),
     getMenuItem(
       <Link href={"/laboratory-panel/accepted-requests/list"} className="text-sm">
         درخواست های پذیرش شده

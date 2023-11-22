@@ -157,6 +157,9 @@ export const routDictionary: Items = {
   "test-result-lab": {
     title: "لیست آزمایش ها",
   },
+  "submit-test-result": {
+    title: "ثبت نتیجه",
+  },
   // end laboratory panel
 
   // start admin panel

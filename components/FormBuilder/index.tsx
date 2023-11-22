@@ -6,6 +6,7 @@ import {useForm} from "antd/es/form/Form";
 import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
+import RadioBtn from "./inputs/RadioBtn";
 
 export interface FormBuilderInputType {
     Name: string,
@@ -151,7 +152,7 @@ const RenderInputs = (props: {
     formID: string,
     initialValues?: any
 }) => {
-    
+
     const [form] = useForm()
 
 
@@ -190,6 +191,9 @@ const RenderInput = ({item}: { item: FormBuilderInputType }) => {
             break
         case "select":
             currentInput = <Select data={item}/>
+            break
+        case "radioBtn":
+            currentInput = <RadioBtn data={item}/>
             break
         default:
             currentInput = <Typography>فیلد مورد نظر پشتیبانی نمی شود</Typography>

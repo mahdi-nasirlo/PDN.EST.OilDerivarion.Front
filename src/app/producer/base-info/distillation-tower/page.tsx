@@ -2,12 +2,18 @@
 
 import {Divider, Typography} from 'antd'
 import React, {useState} from 'react'
+import useGetForm from "../../../../../components/FormBuilder/hooks/useGetForm";
 import {formsUid} from "../../../../../Constants/formsUid";
+import useSetForm from "../../../../../components/FormBuilder/hooks/useSetForm";
 import Resource from "../../../../../components/Resource";
 
 export default function Page() {
 
     const [isEditVisible, setIsEditVisible] = useState(true)
+
+    const getForm = useGetForm(formsUid.distillation)
+
+    const setForm = useSetForm(formsUid.distillation)
 
     return (
         <>
@@ -15,15 +21,12 @@ export default function Page() {
                 <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
-                        مشخصات راکتور
+                        مشخصات برج تقطیر
                     </Typography>
                 </div>
-                <div className='max-md:w-full'>
-                    {/*{isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible}/>}*/}
-                </div>
-            </div>
+            </div >
             <Divider/>
-            <Resource categoryID={formsUid.reactor_specifications}/>
+            <Resource items={getForm.data} onSet={setForm.onSet} loading={getForm.isLoading}/>
         </>
     )
 }

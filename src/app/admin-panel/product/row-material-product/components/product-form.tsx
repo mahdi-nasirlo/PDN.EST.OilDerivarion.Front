@@ -55,6 +55,20 @@ function ProductForm() {
           </Form.Item>
         </Col>
       </Row>
+      <Row gutter={[32, 1]}>
+        <Col xs={24} md={12}>
+          <Form.Item name="IsActive" label="فعال / غیر فعال">
+            <Select
+              size="large"
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false },
+              ]}
+              placeholder="انتخاب کنید"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
     </>
   );
 }

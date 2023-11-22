@@ -1,6 +1,6 @@
 "use client";
 
-import {Col, Divider, Form, Input, Row} from "antd";
+import {Button, Col, Divider, Form, Input, notification, Row} from "antd";
 import {Choice} from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import {apiUrl} from "../../../../../../Constants/apiUrl";
@@ -16,7 +16,6 @@ import {listFetcher} from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
-  base64String: any
 }
 
 interface DataFetchType {
@@ -43,15 +42,37 @@ export default function Home(props: PropType) {
     isLoading: ldCategory,
 
 
-  } = useSWR<{}>(
-      "/RequestBarcode/FactoryBarcode",
-      (url: string) =>
-          listFetcher(url, {
-            arg: {
-              taskUid: props.params.uid
-            }
-          })
+  } = useSWR<string>(
+    "/RequestBarcode/FactoryBarcode",
+    (url: string) =>
+      listFetcher(url, {
+        arg: {
+          taskUid: props.params.uid
+        }
+      })
   );
+  const downloadPdf = () => {
+    if (!barcode) {
+      notification.error({message: "فایلی وجود ندارد"});
+      return;
+    }
+
+    const binaryPdf = atob(barcode);
+
+    const arrayBuffer = new ArrayBuffer(binaryPdf.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < binaryPdf.length; i++) {
+      uint8Array[i] = binaryPdf.charCodeAt(i);
+    }
+
+    const blob = new Blob([uint8Array], {type: 'application/pdf'});
+
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'downloaded.pdf';
+
+    link.click();
+  };
 
   const [form] = useForm();
 
@@ -85,9 +106,7 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
-        {/*<Button type="primary" onClick={() => {*/}
-        {/*  console.log(barcode)*/}
-        {/*}}>sdfjsdkfj</Button>*/}
+        <Button type="primary" onClick={downloadPdf}>دانلود بارکد</Button>
 
 
         <Form onFinish={onFinish} form={form}>

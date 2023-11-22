@@ -44,7 +44,7 @@ export default function CreateModal({
     productUid: string;
     testItemUid: string;
   }) => {
-    const res = await trigger({ ...values, IsActive: true });
+    const res = await trigger(values);
     if (res) {
       await mutate();
 
@@ -149,6 +149,20 @@ export default function CreateModal({
                 loading={ldTestProduct}
                 fieldNames={{ value: "Uid", label: "Name" }}
                 size="large"
+                placeholder="انتخاب کنید"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[32, 1]}>
+          <Col xs={24} md={12}>
+            <Form.Item name="IsActive" label="فعال / غیر فعال">
+              <Select
+                size="large"
+                options={[
+                  { label: "فعال", value: true },
+                  { label: "غیر فعال", value: false },
+                ]}
                 placeholder="انتخاب کنید"
               />
             </Form.Item>

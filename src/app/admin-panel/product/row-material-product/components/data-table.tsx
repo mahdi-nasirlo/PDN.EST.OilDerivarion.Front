@@ -112,23 +112,23 @@ export default function DataTable({
         </Tooltip>
       ),
     },
-    {
-      title: "عملیات",
-      key: "عملیات",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <button
-            className="text-red-500 font-bold py-1 px-5"
-            onClick={() => handleDelete(record)}
-          >
-            حذف
-          </button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "عملیات",
+    //   key: "عملیات",
+    //   align: "center",
+    //   fixed: "right",
+    //   width: "10%",
+    //   render: (_, record) => (
+    //     <Space size="small">
+    //       <button
+    //         className="text-red-500 font-bold py-1 px-5"
+    //         onClick={() => handleDelete(record)}
+    //       >
+    //         حذف
+    //       </button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   const [activeExpRow, setActiveExpRow] = useState<string[]>([]);

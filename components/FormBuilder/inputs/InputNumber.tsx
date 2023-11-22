@@ -23,20 +23,18 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
 
     const prepareRule = () => {
 
-        // if (data?.Max_Value)
-        //     rules.push({max: data?.Max_Value})
-        //
-        // if (data?.Min_Value)
-        //     rules.push({min: data?.Min_Value})
-        //
-        // console.log(rules)
+        if (data?.Max_Value)
+            rules.push({max: data?.Max_Value})
 
+        if (data?.Min_Value)
+            rules.push({min: data?.Min_Value})
+        
         return rules
     }
 
     return (
         <FormItem
-            name={data.Form_Field_ID}
+            name={data.Name}
             label={data?.Title_Style}
             rules={prepareRule()}
         >

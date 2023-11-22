@@ -3,14 +3,14 @@
 import React from "react";
 import useControlSteps from "./stete-manager/useControlSteps";
 import StepContext from "./stete-manager/step-context";
-import Step1 from "./forms/step1";
-import Step2 from "./forms/step2";
-import Step3 from "./forms/step3";
-import Step4 from "./forms/step4";
-import Step5 from "./forms/step5";
-import Step6 from './forms/step6';
-import Step7 from './forms/step7';
-import Step8 from './forms/step8';
+import Step1 from "../container-info/page";
+import Step2 from "../container-product/page";
+import Step3 from "../ractore-info/page";
+import Step4 from "../slice-produce/page";
+import Step5 from "../distillation-tower/page";
+import Step6 from '../ractore-prompter/page';
+import Step7 from '../sweetening/page';
+import Step8 from '../facility-control-room/page';
 
 function Page() {
   const processController = useControlSteps();

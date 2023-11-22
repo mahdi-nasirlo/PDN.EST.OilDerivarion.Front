@@ -34,6 +34,7 @@ const Index = ({loading = false, items, type = "single", onSet}: PropsType) => {
 
         const records = JSON.parse(items.records)
 
+        console.log(records)
         return (
             <>
                 <FormBuilderProvider onSubmit={onSet} initialValues={records}>

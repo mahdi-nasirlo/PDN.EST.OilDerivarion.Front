@@ -10,6 +10,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 const columns: ColumnsType<any> = [
   {
@@ -24,9 +25,26 @@ const columns: ColumnsType<any> = [
     key: "2",
   },
   {
+    title: "فعال/غیر فعال",
+    dataIndex: "IsActive",
+    key: "3",
+    render: (_, record) => <StatusColumn record={record} />
+  },
+  {
+    title: "دسته بندی",
+    dataIndex: "ProductCategoryName",
+    key: "4",
+  },
+  {
+    title: "مواد اولیه",
+    dataIndex: "Materials",
+    key: "5",
+  },
+  {
     title: "فاکتور های آزمون",
     dataIndex: "TestItems",
-    key: "3",
+    key: "6",
+    width: "40%",
     render: (_, record) => (
       <Typography.Text
         className=" max-w-[300px]"
@@ -105,20 +123,20 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
-  const { trigger, isMutating } = useSWRMutation(
-    "/ProductTestItem/Delete",
-    mutationFetcher
-  );
+  // const { trigger, isMutating } = useSWRMutation(
+  //   "/ProductTestItem/Delete",
+  //   mutationFetcher
+  // );
 
-  const deleteProductFactor = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
-    if (res) {
-      await TableMutate();
+  // const deleteProductFactor = async () => {
+  //   const res = await trigger({ uid: recordToDelete?.Uid });
+  //   if (res) {
+  //     await TableMutate();
 
-      await mutate();
-      setOpen(false);
-    }
-  };
+  //     await mutate();
+  //     setOpen(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (!isLoading) {
@@ -130,27 +148,33 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
     { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
-      title: "عملیات",
-      dataIndex: "2",
-      key: "upgradeNum",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record: ProductTestItem) => (
-        <Space size="middle">
-          <Button
-            type="link"
-            className="text-red-500 font-bold"
-            onClick={() => {
-              setOpen(true);
-              setRecordToDelete(record);
-            }}
-          >
-            حذف
-          </Button>
-        </Space>
-      ),
+      title: "فعال/غیر فعال",
+      dataIndex: "IsActive",
+      key: "3",
+      render: (_, record) => <StatusColumn record={record} />
     },
+    // {
+    //   title: "عملیات",
+    //   dataIndex: "2",
+    //   key: "upgradeNum",
+    //   align: "center",
+    //   fixed: "right",
+    //   width: "10%",
+    //   render: (_, record: ProductTestItem) => (
+    //     <Space size="middle">
+    //       <Button
+    //         type="link"
+    //         className="text-red-500 font-bold"
+    //         onClick={() => {
+    //           setOpen(true);
+    //           setRecordToDelete(record);
+    //         }}
+    //       >
+    //         حذف
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (
@@ -161,16 +185,19 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
         expandable={{
           expandedRowKeys: activeExpRow,
         }}
-        loading={isLoading || isMutating}
+        loading={
+          isLoading
+          // || isMutating
+        }
         pagination={false}
       />
-      <ConfirmDeleteModal
+      {/* <ConfirmDeleteModal
         loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
         title="فاکتور آزمون محصول"
-      />
+      /> */}
     </>
   );
 };

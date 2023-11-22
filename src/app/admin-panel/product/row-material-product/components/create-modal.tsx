@@ -29,9 +29,7 @@ export default function CreateModal({
     IsActive: boolean;
   }) => {
 
-    const modifiedValues = { ...values, IsActive: true };
-
-    const res = await trigger(modifiedValues);
+    const res = await trigger(values);
     if (res) {
       await mutate();
 

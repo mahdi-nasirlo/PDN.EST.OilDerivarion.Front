@@ -4,7 +4,7 @@
 import { Alert, Button, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
-import CustomeTable from "../../../../../components/CustomeTable";
+import CustomeTable from "../../../../../../components/CustomeTable";
 import { useRouter } from 'next/navigation';
 
 
@@ -78,7 +78,7 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                        onClick={() => { router.push(`/laboratory-panel/request-list/submit-test-result`) }}
+                        onClick={() => { router.push(`/laboratory-panel/request-list/test-result-lab/submit-test-result`) }}
                     >
                         ثبت نتیجه
                     </Button>

@@ -1,12 +1,12 @@
 "use client";
 
 
-import {Button, Divider, Space, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import CustomeTable from "../../../../../components/CustomeTable";
-import ResultModal from "@/app/laboratory-panel/submit-test-result/components/result-modal";
-import DateForm from "@/app/laboratory-panel/submit-test-result/components/date-form";
+import { Button, Divider, Space, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
+import CustomeTable from "../../../../../../../components/CustomeTable";
+import DateForm from './date-form';
+import ResultModal from './result-modal';
 
 
 interface DataType {
@@ -102,11 +102,11 @@ export default function DataTable() {
 
                 <Typography className="mt-3 mb-6 text-right font-medium text-base">
                     لطفا اطلاعات خواسته شده را با دقت وارد نمایید.</Typography>
-                <Divider/>
+                <Divider />
 
 
-                <DateForm/>
-                <Divider/>
+                <DateForm />
+                <Divider />
                 <Typography className="mt-3 mb-6 text-right font-medium text-base">
                     نتیجه آزمون
                 </Typography>
@@ -129,7 +129,7 @@ export default function DataTable() {
                 >
                     ثبت
                 </Button>
-                <ResultModal setModalVisible={setModalVisible} modalVisible={modalVisible}/>
+                <ResultModal setModalVisible={setModalVisible} modalVisible={modalVisible} />
             </div>
         </>
     )

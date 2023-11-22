@@ -16,6 +16,7 @@
     "@heroicons/react": "^2.0.18",
     "@neshan-maps-platform/react-openlayers": "^2.0.16",
     "@next/font": "^13.4.12",
+    "@remotion/zod-types": "^4.0.72",
     "@types/node": "20.4.5",
     "@types/ol": "^5.3.8",
     "@types/react": "18.2.18",
@@ -44,6 +45,7 @@
     "shamsi-date-converter": "^1.0.5",
     "swr": "^2.2.1",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "zod": "^3.22.4"
   }
 }

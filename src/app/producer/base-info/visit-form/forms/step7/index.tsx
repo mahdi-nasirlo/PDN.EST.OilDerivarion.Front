@@ -1,15 +1,18 @@
-import { Button, Divider, Form, Typography } from 'antd'
-import React, { useState } from 'react'
-import DisplayButton from './components/display-form/display-button';
-import EditButton from './components/edit-form/edit-button';
-import { useForm } from 'antd/es/form/Form';
-import DisplayForm from './components/display-form/display-form';
-import EditForm from './components/edit-form/edit-form';
+import {Divider, Typography} from 'antd'
+import React, {useState} from 'react'
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
+import DisplayButton from "@/app/producer/base-info/visit-form/forms/step7/components/display-form/display-button";
 
 export default function Index() {
 
     const [isEditVisible, setIsEditVisible] = useState(true);
-    const [form] = useForm();
+
+    const formData = useGetForm(formsUid.sweetening)
+
+    const setForm = useSetForm(formsUid.sweetening)
 
     return (
         <>
@@ -20,30 +23,10 @@ export default function Index() {
                         شیرین سازی ( 7 از 8 )
                     </Typography>
                 </div>
-                {isEditVisible && <DisplayButton setIsEditVisible={setIsEditVisible} />}
-                {!isEditVisible &&
-                    <EditButton
-                        form={form}
-                        // mutate={mutate}
-                        // isMutating={isMutating}
-                        setIsEditVisible={setIsEditVisible}
-                    />
-                }
-            </div >
-            <Divider />
-            {isEditVisible &&
-                <Form form={form} layout='vertical' disabled>
-                    <DisplayForm />
-                </Form>}
-            {!isEditVisible &&
-                // <Spin spinning={isMutating || ldProducerLab}>
-                <Form layout="vertical" form={form}
-                // onFinish={onSubmitFinish}
-                >
-                    <EditForm />
-                </Form>
-                // </Spin >
-            }
+                {isEditVisible && <DisplayButton setIsEditVisible={setIsEditVisible}/>}
+            </div>
+            <Divider/>
+            <Resource items={formData.data as any} loading={formData.isLoading} onSet={setForm.onSet}/>
         </>
     )
 }

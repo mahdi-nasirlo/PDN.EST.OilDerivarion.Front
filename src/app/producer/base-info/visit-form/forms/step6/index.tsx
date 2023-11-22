@@ -1,17 +1,19 @@
-import { Button, Divider, Form, Typography } from 'antd'
-import React, { useState } from 'react'
-import { useForm } from 'antd/es/form/Form';
+import {Divider, Typography} from 'antd'
+import React, {useState} from 'react'
 import ButtonDisplay from './components/display-form/button-display';
-import ButtonEdit from './components/edit-form/button-edit';
-import FormDisplay from './components/display-form/form-display';
-import EditForm from './components/edit-form/edit-form';
+import useGetForm from "../../../../../../../components/FormBuilder/hooks/useGetForm";
+import {formsUid} from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
+import useSetForm from "../../../../../../../components/FormBuilder/hooks/useSetForm";
 
 
 export default function Index() {
 
     const [isEditVisible, setIsEditVisible] = useState(true);
 
-    const [form] = useForm();
+    const getForm = useGetForm(formsUid.desulfation)
+
+    const setForm = useSetForm(formsUid.desulfation)
 
     return (
         <>
@@ -23,29 +25,9 @@ export default function Index() {
                     </Typography>
                 </div>
                 {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible} />}
-                {!isEditVisible &&
-                    <ButtonEdit
-                        form={form}
-                        // mutate={mutate}
-                        // isMutating={isMutating}
-                        setIsEditVisible={setIsEditVisible}
-                    />
-                }
             </div >
-            <Divider />
-            {isEditVisible &&
-                <Form form={form} layout='vertical' disabled>
-                    <FormDisplay />
-                </Form>}
-            {!isEditVisible &&
-                // <Spin spinning={isMutating || ldProducerLab}>
-                <Form layout="vertical" form={form}
-                // onFinish={onSubmitFinish}
-                >
-                    <EditForm />
-                </Form>
-                // </Spin >
-            }
+            <Divider/>
+            <Resource items={getForm.data} onSet={setForm.onSet} loading={getForm.isLoading}/>
         </>
     )
 }

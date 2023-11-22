@@ -1,9 +1,6 @@
-import { Button, Col, Modal, Row } from 'antd';
-import { useForm } from 'antd/es/form/Form';
+import {Button, Col, Modal, Row} from 'antd';
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
-import useSWR from 'swr';
-import FormBuilderFetcher from '../../../../../../../../lib/server/formBuilderFetcher';
-import FormBuilder from '../../../../../../../../components/FormBuilder';
 
 
 export default function CreateModal({
@@ -21,16 +18,16 @@ export default function CreateModal({
     };
 
 
-    const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData",
-        (url: string) => FormBuilderFetcher(url, {
-            arg: {
-                group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
-                groupKey: null,
-                category_ID: "b491a1a1-443e-4a65-8d6d-c1d8ce259b6e",
-                category_Key: null
-            }
-        })
-    )
+    // const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData",
+    //     (url: string) => FormBuilderFetcher(url, {
+    //         arg: {
+    //             group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
+    //             groupKey: null,
+    //             category_ID: "b491a1a1-443e-4a65-8d6d-c1d8ce259b6e",
+    //             category_Key: null
+    //         }
+    //     })
+    // )
     return (
         <>
             <Modal
@@ -66,7 +63,7 @@ export default function CreateModal({
                     </Row>,
                 ]}
             >
-                <FormBuilder items={data as any} loading={loadingForm} />
+                {/*<FormBuilder items={data as any} loading={loadingForm} />*/}
             </Modal >
         </>
     )

@@ -5,6 +5,7 @@ import { Alert, Button, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../components/CustomeTable";
+import { useRouter } from 'next/navigation';
 
 
 interface DataType {
@@ -19,6 +20,8 @@ interface DataType {
 
 
 export default function DataTable() {
+
+    const router = useRouter();
 
     const columns: ColumnsType<DataType> = [
         {
@@ -75,12 +78,12 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                    // onClick={}
+                        onClick={() => { router.push(`/laboratory-panel/request-list/submit-test-result`) }}
                     >
                         ثبت نتیجه
                     </Button>
 
-                </Space>
+                </Space >
             ),
         },
     ];

@@ -7,9 +7,11 @@ import { useRouter } from 'next/navigation';
 
 function ActiveCodeModal(
     {
+        recordUid,
         isModalOpen,
         setIsModalOpen,
     }: {
+        recordUid: any;
         isModalOpen: boolean;
         setIsModalOpen: (arg: boolean) => void;
     }
@@ -32,10 +34,12 @@ function ActiveCodeModal(
 
 
     const handelSmsCode = (values: any) => {
+        console.log(recordUid);
+
         setOpenBox(false);
         setIsModalOpen(false);
         form.resetFields();
-        router.push(`/laboratory-panel/request-list/test-result-lab`);
+        router.push(`/laboratory-panel/request-list/test-result-lab/${recordUid}`);
     }
 
     return (

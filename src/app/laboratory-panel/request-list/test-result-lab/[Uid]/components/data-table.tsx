@@ -4,7 +4,7 @@
 import { Alert, Button, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
-import CustomeTable from "../../../../../../components/CustomeTable";
+import CustomeTable from "../../../../../../../components/CustomeTable";
 import { useRouter } from 'next/navigation';
 
 

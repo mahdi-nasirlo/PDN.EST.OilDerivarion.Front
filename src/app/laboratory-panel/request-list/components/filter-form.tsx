@@ -3,8 +3,17 @@
 import { Button, Col, Form, Row, Select } from "antd";
 import React from "react";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
+import ButtonFilter from "../../../../../components/ButtonFilter";
 
-export default function FilterForm() {
+export default function FilterForm({
+  filter,
+  unsetFilter,
+  isLoading
+}: {
+  filter: (arg: MaterialGet) => void;
+  unsetFilter: () => void;
+  isLoading: boolean
+}) {
   return (
     <>
       <Form name="form_item_path" layout="vertical">
@@ -20,29 +29,10 @@ export default function FilterForm() {
             </Form.Item>
           </Col>
         </Row>
-
-        <Row dir="ltr">
-          <Col xs={10} md={3} lg={2}>
-            <div className="flex gap-4">
-              <Button
-                className="btn-filter"
-                size="large"
-                type="primary"
-                htmlType="submit"
-              >
-                اعمال فیلتر
-              </Button>
-              <Button
-                className="btn-delete-filter"
-                size="large"
-                type="primary"
-                htmlType="submit"
-              >
-                حذف فیلتر
-              </Button>
-            </div>
-          </Col>
-        </Row>
+        <ButtonFilter
+          unsetFilter={unsetFilter}
+          isLoading={isLoading}
+        />
       </Form>
     </>
   );

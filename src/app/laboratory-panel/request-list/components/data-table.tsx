@@ -9,24 +9,33 @@ import RejectionModal from './rejection-modal';
 import ActiveCodeModal from './accept-modals/active-code-modal';
 
 
-interface DataType {
-    key: string;
-    Row: number;
-    userDescription: string;
-    Tracking: string;
-    ConfirmedCode: string;
-    status: string;
-    pdn: number;
-}
+export default function DataTable({
+    setFilter,
+    isValidating,
+    setModalVisible,
+    isLoading,
+    data,
+    mutate,
+}: {
+    setFilter: (arg: any) => void
+    isValidating: any;
+    setModalVisible: any;
+    isLoading: boolean;
+    mutate: () => void;
+    data:
+    | {
+        count: number;
+        records: Material[];
+    }
+    | undefined;
+}) {
+    const [isModalOpenTest, setIsModalOpenTest] = useState(false);
 
-
-export default function DataTable() {
-
-    const [modalVisible, setModalVisible] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const [recordUid, setRecordUid] = useState<any>(null);
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<any> = [
         {
             title: "ردیف",
             dataIndex: "Row",
@@ -35,12 +44,12 @@ export default function DataTable() {
         },
         {
             title: "شناسه جعبه",
-            dataIndex: "Tracking",
+            dataIndex: "Uid",
             key: "2",
         },
         {
             title: "تاریخ درخواست",
-            dataIndex: "ConfirmedCode",
+            dataIndex: "CreateDate",
             key: "3",
         },
         {
@@ -88,14 +97,17 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-primary-500 font-bold"
-                        onClick={() => { setIsModalOpen(true); }}
+                        onClick={() => {
+                            setRecordUid(record.Uid);
+                            setIsModalOpen(true);
+                        }}
                     >
                         پذیرش
                     </Button>
                     <Button
                         type="link"
                         className="text-red-500 font-bold"
-                        onClick={() => { setModalVisible(true); }}
+                        onClick={() => { setIsModalOpenTest(true); }}
                     >
                         عدم پذیرش
                     </Button>
@@ -110,12 +122,13 @@ export default function DataTable() {
         <>
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-start items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
-                        درخواست ها</Typography>
+                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                        لیست درخواست ها
+                    </Typography>
                 </div>
                 <CustomeTable
-                    setInitialData={() => { }}
-                    isLoading={false}
+                    setInitialData={setFilter}
+                    isLoading={isLoading || isValidating}
                     data={data}
                     rowKey={"Row"}
                     columns={columns}
@@ -144,51 +157,8 @@ export default function DataTable() {
                     }}
                 />
             </div>
-            <RejectionModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
-            <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            <RejectionModal modalVisible={isModalOpenTest} setModalVisible={setIsModalOpenTest} />
+            <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} recordUid={recordUid} />
         </>
     )
-}
-
-
-const data: any = {
-    records: [
-        {
-            key: "1",
-            Row: 1,
-            userDescription: "نام شرکت تولیدی تست",
-            Tracking: "354",
-            ConfirmedCode: "1401/10/10",
-            status: "8 روز",
-            pdn: 0,
-        },
-        {
-            key: "2",
-            Row: 2,
-            userDescription: "نام شرکت تولیدی تست",
-            Tracking: "449",
-            ConfirmedCode: "1402/05/10",
-            status: "8 روز",
-            pdn: 1,
-        },
-        {
-            key: "3",
-            Row: 3,
-            userDescription: "امیر احمدی",
-            Tracking: "449",
-            ConfirmedCode: "1401/08/08",
-            status: "8 روز",
-            pdn: 2,
-        },
-        {
-            key: "4",
-            Row: 4,
-            userDescription: "امیر ",
-            Tracking: "987889",
-            ConfirmedCode: "1401/08/12",
-            status: "5 روز",
-            pdn: 3,
-        },
-    ],
-    count: 4
 }

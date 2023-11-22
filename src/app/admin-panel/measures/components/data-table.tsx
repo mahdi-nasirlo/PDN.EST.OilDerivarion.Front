@@ -1,15 +1,15 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tag, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Tag, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Measure } from "../../../../../interfaces/measures";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {Measure} from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 
 export default function DataTable({
@@ -49,6 +49,7 @@ export default function DataTable({
 
   const handleConfirmDelete = async () => {
     await trigger({
+
       uid: recordToDelete?.Uid,
     });
 

@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
-import ActiveCodeModal from './active-code-modal';
+import ActiveCodeModal from './accept-modals/active-code-modal';
 
 
 interface DataType {

@@ -2,18 +2,12 @@
 
 import {Divider, Typography} from 'antd'
 import React, {useState} from 'react'
-import useGetForm from "../../../../../components/FormBuilder/hooks/useGetForm";
 import {formsUid} from "../../../../../Constants/formsUid";
-import useSetForm from "../../../../../components/FormBuilder/hooks/useSetForm";
 import Resource from "../../../../../components/Resource";
 
 export default function Page() {
 
     const [isEditVisible, setIsEditVisible] = useState(true)
-
-    const formData = useGetForm(formsUid.reactor_specifications)
-
-    const setForm = useSetForm(formsUid.reactor_specifications)
 
     return (
         <>
@@ -29,7 +23,7 @@ export default function Page() {
                 </div>
             </div>
             <Divider/>
-            <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>
+            <Resource categoryID={formsUid.reactor_specifications}/>
         </>
     )
 }

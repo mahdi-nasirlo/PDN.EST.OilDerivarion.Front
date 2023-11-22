@@ -101,6 +101,7 @@ function CategoryForm({
                     if (isNaN(value)) {
                       return Promise.reject(new Error("لطفاً عدد وارد کنید"));
                     }
+                    parseFloat(value);
                     return Promise.resolve();
                   },
                 },
@@ -121,6 +122,7 @@ function CategoryForm({
                       return Promise.reject(new Error("لطفاً عدد وارد کنید"));
                     }
                     if (value > getFieldValue("densityLowerLimit")) {
+                      parseFloat(value);
                       return Promise.resolve();
                     } else {
                       return Promise.reject(new Error("حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"));

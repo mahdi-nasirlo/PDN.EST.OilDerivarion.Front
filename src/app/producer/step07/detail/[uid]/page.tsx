@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row } from "antd";
+import { Col, Divider, Form, Input, Row } from "antd";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
@@ -11,6 +11,8 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
+import useSWR from "swr";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
@@ -29,9 +31,27 @@ interface DataFetchType {
   };
 }
 
+
 const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
+
+
+  const {
+    data: barcode,
+    isLoading: ldCategory,
+
+
+  } = useSWR<{}>(
+    "/RequestBarcode/FactoryBarcode",
+    (url: string) =>
+      listFetcher(url, {
+        arg: {
+          taskUid: props.params.uid
+        }
+      })
+  );
+
   const [form] = useForm();
 
   const [choice, setChoice] = useState<string>();
@@ -64,6 +84,11 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
+        {/*<Button type="primary" onClick={() => {*/}
+        {/*  console.log(barcode)*/}
+        {/*}}>sdfjsdkfj</Button>*/}
+
+
         <Form onFinish={onFinish} form={form}>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>

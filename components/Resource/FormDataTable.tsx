@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FormType} from "../FormBuilder";
 import {TableColumnsType} from "antd/lib";
 import {Button, Table} from "antd";
@@ -11,6 +11,9 @@ interface PropType {
 
 const FormDataTable = (props: PropType) => {
 
+    const [state, setState] = useState<any[]>([])
+
+    // try {
     const formProvider = useControlFormBuilder()
 
     let columns: TableColumnsType<any>
@@ -31,13 +34,11 @@ const FormDataTable = (props: PropType) => {
         </Button>
     })
 
-    let dataSource: any[] = []
-
-    if (props.records[props.schema.Form_Key]) {
-        dataSource = props?.records[props?.schema?.Form_Key]
-    }
-
-    const [state, setState] = useState<any[]>(dataSource)
+    useEffect(() => {
+        if (Array.isArray(props?.records[props?.schema?.Form_Key])) {
+            setState(props?.records[props?.schema?.Form_Key])
+        }
+    }, [])
 
 
     return (
@@ -48,6 +49,13 @@ const FormDataTable = (props: PropType) => {
             />
         </>
     );
+    // } catch (e) {
+    //
+    //     return <Typography>
+    //         error in data table form
+    //     </Typography>
+    //
+    // }
 };
 
 export default FormDataTable;

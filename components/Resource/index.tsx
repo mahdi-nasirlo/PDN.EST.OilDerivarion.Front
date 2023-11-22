@@ -1,10 +1,10 @@
 import React from 'react';
-import {Spin, Typography} from "antd";
+import {Divider, Spin, Typography} from "antd";
 import FormBuilder, {FormSchemaType} from "../FormBuilder";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
-import FormDataTable from "./FormDataTable";
 import useFormRequest from "../FormBuilder/hooks/useFormRequest";
 import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
+import FormDataTable from "./FormDataTable";
 
 
 const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many" | "single", }) => {
@@ -54,26 +54,44 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
 
     const formProvider = useControlFormBuilder()
 
-    if (type === "single") {
+    return schema?.Forms?.map((value, index) => {
 
-        return
-
-    }
-
-    if (type === "many") {
-
-
-        return schema?.Forms?.map((value, index) => {
-            console.log(records)
+        if (value?.Mode === 0) {
             return <>
                 <FormBuilder key={index} item={value} title={true}
                              onSet={formProvider.onSetMany}/>
                 <div className="mt-8">
                     <FormDataTable schema={value} records={records}/>
                 </div>
+                {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
+                    <Divider style={{margin: "50px 0"}}/>}
             </>
-        })
-    }
+        }
+
+        if (value.Mode === 1) {
+
+            let initialValues
+
+            if (value.Form_Key in records) {
+                initialValues = records[value.Form_Key]
+            }
+
+
+            return <>
+                <FormBuilder
+                    key={index}
+                    item={value}
+                    title={true}
+                    onSet={formProvider.onSetOne}
+                    initialValues={initialValues}
+                />
+                {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
+                    <Divider style={{margin: "30px 0"}}/>}
+            </>
+        }
+
+        return <Typography key={index}>form mode is not detected</Typography>
+    })
 
 }
 

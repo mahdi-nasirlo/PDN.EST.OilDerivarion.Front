@@ -44,10 +44,19 @@ const useControlFormBuilder = () => {
 
     }
 
+    const onSetOne = (data: any, formKey: string) => {
+
+        oldData[formKey] = data;
+
+        context.formData.onSet(oldData);
+
+    }
+
     return {
         ...context,
         onSetMany,
-        deleteFromMany
+        deleteFromMany,
+        onSetOne
     }
 };
 

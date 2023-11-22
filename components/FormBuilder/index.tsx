@@ -36,7 +36,8 @@ export interface FormType {
     Form_ID: string,
     Form_Key: string,
     Description: string,
-    FormFields: FormBuilderInputType[]
+    FormFields: FormBuilderInputType[],
+    Mode: number
 }
 
 export interface FormSchemaType {

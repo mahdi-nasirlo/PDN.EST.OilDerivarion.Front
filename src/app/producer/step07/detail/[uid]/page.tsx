@@ -1,22 +1,21 @@
 "use client";
 
-import {Col, Divider, Form, Input, Row} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Col, Divider, Form, Input, Row } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useForm} from "antd/es/form/Form";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
-  base64String: any
 }
 
 interface DataFetchType {
@@ -44,13 +43,13 @@ export default function Home(props: PropType) {
 
 
   } = useSWR<{}>(
-      "/RequestBarcode/FactoryBarcode",
-      (url: string) =>
-          listFetcher(url, {
-            arg: {
-              taskUid: props.params.uid
-            }
-          })
+    "/RequestBarcode/FactoryBarcode",
+    (url: string) =>
+      listFetcher(url, {
+        arg: {
+          taskUid: props.params.uid
+        }
+      })
   );
 
   const [form] = useForm();

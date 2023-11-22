@@ -1,11 +1,17 @@
-import {ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from '@heroicons/react/24/outline'
-import {Button} from 'antd'
+import {ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from '@heroicons/react/24/outline';
+import {Button} from 'antd';
 import React, {useContext} from 'react'
-import StepContext from '../../../../stete-manager/step-context';
+import StepContext from '../../../visit-form/stete-manager/step-context';
 
-export default function ButtonDisplay({ setIsEditVisible }: { setIsEditVisible: any }) {
+export default function DisplayButton({ setIsEditVisible }: { setIsEditVisible: any }) {
 
     const processController = useContext(StepContext);
+
+    const showEdit = () => {
+        // mutate()
+        setIsEditVisible(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     return (
         <div className='flex gap-3 justify-end'>

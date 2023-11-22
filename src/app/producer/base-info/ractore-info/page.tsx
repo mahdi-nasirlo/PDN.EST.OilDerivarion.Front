@@ -24,7 +24,9 @@ export default function Page() {
                         مشخصات راکتور
                     </Typography>
                 </div>
-
+                <div className='max-md:w-full'>
+                    {/*{isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible}/>}*/}
+                </div>
             </div>
             <Divider/>
             <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>

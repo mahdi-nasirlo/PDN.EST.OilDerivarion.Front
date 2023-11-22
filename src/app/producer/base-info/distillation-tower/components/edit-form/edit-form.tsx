@@ -1,7 +1,7 @@
-import { Col, Form, Input, Row, Typography } from 'antd';
-import { useForm } from 'antd/es/form/Form';
+import {Col, Form, Input, Row, Typography} from 'antd';
+import {useForm} from 'antd/es/form/Form';
 import React from 'react'
-import CustomRadioGroup from '../../../../../../../../../components/CustomeRadioGroup';
+import CustomRadioGroup from '../../../../../../../components/CustomeRadioGroup';
 
 export default function EditForm() {
     const [form] = useForm();

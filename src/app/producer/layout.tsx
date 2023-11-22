@@ -251,6 +251,36 @@ const items: MenuProps["items"] = [
             "/producer/base-info/ractore-info",
             <BeakerIcon width={16} height={16}/>
         ),
+        getMenuItem(
+            <Link href="/producer/base-info/slice-produce">
+                خط تولید برش گیری </Link>,
+            "/producer/base-info/slice-produce",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/distillation-tower">
+                مشخصات برج تقطیر </Link>,
+            "/producer/base-info/distillation-tower",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/ractore-prompter">
+                راکتور سولفور زدایی </Link>,
+            "/producer/base-info/ractore-prompter",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/sweetening">
+                شیرین سازی</Link>,
+            "/producer/base-info/sweetening",
+            <BeakerIcon width={16} height={16}/>
+        ),
+        getMenuItem(
+            <Link href="/producer/base-info/facility-control-room">
+                تجهیزات اتاق کنترل </Link>,
+            "/producer/base-info/facility-control-rooms",
+            <BeakerIcon width={16} height={16}/>
+        ),
       getMenuItem(
         <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
         "/producer/base-info/visit-form",

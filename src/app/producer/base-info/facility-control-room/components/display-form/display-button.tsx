@@ -1,7 +1,7 @@
-import {ChevronDoubleLeftIcon, ChevronDoubleRightIcon} from '@heroicons/react/24/outline';
+import {ChevronDoubleRightIcon, PencilSquareIcon} from '@heroicons/react/24/outline';
 import {Button} from 'antd';
 import React, {useContext} from 'react'
-import StepContext from '../../../../stete-manager/step-context';
+import StepContext from '../../../visit-form/stete-manager/step-context';
 
 export default function DisplayButton({ setIsEditVisible }: { setIsEditVisible: any }) {
 
@@ -16,6 +16,16 @@ export default function DisplayButton({ setIsEditVisible }: { setIsEditVisible: 
     return (
         <div className='flex gap-3 justify-end'>
             <Button
+                className="flex justify-center items-center gap-2"
+                size="large"
+                type="primary"
+                htmlType="submit"
+                icon={<PencilSquareIcon width={24} height={24} />}
+                onClick={showEdit}
+            >
+                ویرایش
+            </Button>
+            <Button
                 className="bg-gray-50 flex items-center justify-center"
                 size="large"
                 type="default"
@@ -24,18 +34,6 @@ export default function DisplayButton({ setIsEditVisible }: { setIsEditVisible: 
                 onClick={() => processController.dispatch({ type: "PREVIOUS" })}
             >
                 صفحه قبل
-            </Button>
-            <Button
-                className="bg-gray-50 flex items-center justify-center"
-                size="large"
-                type="default"
-                htmlType="submit"
-                onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 7 })}
-            >
-                <span className="flex">
-                    صفحه بعد
-                </span>
-                <ChevronDoubleLeftIcon width={24} height={24} />
             </Button>
         </div>
     )

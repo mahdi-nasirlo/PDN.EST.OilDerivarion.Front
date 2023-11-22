@@ -23,12 +23,12 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
 
     const prepareRule = () => {
 
-        if (data?.Max_Value)
-            rules.push({max: data?.Max_Value})
-
-        if (data?.Min_Value)
-            rules.push({min: data?.Min_Value})
-        
+        // if (data?.Max_Value)
+        //     rules.push({max: data?.Max_Value})
+        //
+        // if (data?.Min_Value)
+        //     rules.push({min: data?.Min_Value})
+        //
         return rules
     }
 
@@ -38,7 +38,8 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
             label={data?.Title_Style}
             rules={prepareRule()}
         >
-            <InputNumberAnt {...props} defaultValue={data?.Default_Value} placeholder={data?.Placeholder || "وارد کنید"}
+            <InputNumberAnt size="large" {...props} defaultValue={data?.Default_Value}
+                            placeholder={data?.Placeholder || "وارد کنید"}
                             className="w-full"/>
         </FormItem>
     );

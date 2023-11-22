@@ -35,8 +35,12 @@ const FormDataTable = (props: PropType) => {
     })
 
     useEffect(() => {
-        if (Array.isArray(props?.records[props?.schema?.Form_Key])) {
-            setState(props?.records[props?.schema?.Form_Key])
+
+        const records = props?.records
+        const formKey = props?.schema?.Form_Key
+
+        if (formKey && records && formKey in records && Array.isArray(records[formKey])) {
+            setState(records[formKey])
         }
     }, [])
 

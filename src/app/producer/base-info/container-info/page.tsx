@@ -1,22 +1,16 @@
 "use client";
 
 
-import React, {useContext} from 'react'
-import StepContext from '../visit-form/stete-manager/step-context';
-import useGetForm from "../../../../../components/FormBuilder/hooks/useGetForm";
+import React from 'react'
 import {Typography} from "antd/lib";
 import {Divider} from "antd";
 import {formsUid} from "../../../../../Constants/formsUid";
-import useSetForm from "../../../../../components/FormBuilder/hooks/useSetForm";
 import Resource from "../../../../../components/Resource";
+import useFormRequest from "../../../../../components/FormBuilder/hooks/useFormRequest";
 
 export default function Page() {
 
-    const processController = useContext(StepContext);
-
-    const formData = useGetForm(formsUid.mix_blending_tank_information)
-
-    const setForm = useSetForm(formsUid.mix_blending_tank_information)
+    const formData = useFormRequest(formsUid.mix_blending_tank_information)
 
     return (
         <>
@@ -30,7 +24,7 @@ export default function Page() {
 
             </div>
             <Divider/>
-            <Resource items={formData.data} onSet={setForm.onSet} loading={formData.isLoading}/>
+            <Resource items={formData.data} onSet={formData.onSet} loading={formData.isLoading}/>
         </>
     )
 }

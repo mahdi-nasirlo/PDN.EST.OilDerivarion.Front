@@ -31,7 +31,7 @@ const Select = (props: InputProps & PropsType) => {
 
     return (
         <FormItem
-            name={data.Form_Field_ID}
+            name={data.Name}
             label={data?.Title_Style}
             rules={rules}
         >

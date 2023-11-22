@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Col, Divider, Form, Row, Spin, Tabs, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import TextInput from "./inputs/TextInput";
@@ -9,6 +9,7 @@ import Select from "./inputs/Select";
 import useControlFormBuilder from "./hooks/useControleFormBuilder";
 
 export interface FormBuilderInputType {
+    Name: string,
     Form_Field_ID: string,
     Form_Id: string,
     FieldType: string,
@@ -159,7 +160,11 @@ const RenderInputs = (props: { item: FormBuilderInputType[] }) => {
 
     const formProvider = useControlFormBuilder()
 
+    useEffect(() => {
+        form.setFieldsValue(formProvider.initialValues)
+    }, [formProvider.initialValues])
 
+    console.log(props.item)
     return <>
         <Form form={form} onFinish={formProvider.onSubmit} initialValues={formProvider.initialValues} className="mt-4">
             <Row gutter={[16, 10]}>

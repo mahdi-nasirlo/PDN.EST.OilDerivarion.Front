@@ -1,9 +1,12 @@
 "use client";
 
-import { Button, Space, Typography } from 'antd';
+import { Button, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { Table } from 'antd/lib';
-import React from 'react'
+import React, { useState } from 'react'
+import ExpandedDetailsTable from './expanded-details-table';
+import CustomeTable from '../../../../../components/CustomeTable';
+import RejectionModal from './rejection-modal';
+import ActiveCodeModal from './active-code-modal';
 
 
 interface DataType {
@@ -13,12 +16,14 @@ interface DataType {
     Tracking: string;
     ConfirmedCode: string;
     status: string;
-    pdn: string;
-    middle: string;
+    pdn: number;
 }
 
 
 export default function DataTable() {
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     const columns: ColumnsType<DataType> = [
@@ -29,31 +34,49 @@ export default function DataTable() {
             width: "5%"
         },
         {
-            title: "شناسه درخواست",
-            dataIndex: "userDescription",
-            key: "2",
-        },
-        {
-            title: "کد ماده",
+            title: "شناسه جعبه",
             dataIndex: "Tracking",
-            key: "3",
+            key: "2",
         },
         {
             title: "تاریخ درخواست",
             dataIndex: "ConfirmedCode",
-            key: "4",
+            key: "3",
         },
         {
             title: "زمان باقی مانده",
             dataIndex: "status",
-            key: "5",
+            key: "4",
         },
         {
             title: "وضعیت",
             dataIndex: "pdn",
-            key: "6",
-        },
+            key: "5",
+            render(_, record) {
+                let color = "";
+                let name = "";
 
+                if (record.pdn === 0) {
+                    color = "red";
+                    name = "بررسی نشده";
+                } else if (record.pdn === 1) {
+                    color = "success";
+                    name = "بررسی شده";
+                } else if (record.pdn === 2) {
+                    color = "processing";
+                    name = "در حال آزمایش";
+                } else {
+                    color = "warning";
+                    name = "درخواست اصلاح";
+                }
+
+                return (
+                    <Tag color={color}>
+                        {name}
+                    </Tag>
+                );
+            }
+        },
         {
             title: "عملیات",
             key: "عملیات",
@@ -65,16 +88,23 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-primary-500 font-bold"
-                        onClick={() => {
-                            console.log(record);
-                        }}
+                        onClick={() => { setIsModalOpen(true); }}
                     >
-                        مشاهده اطلاعات
+                        پذیرش
+                    </Button>
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => { setModalVisible(true); }}
+                    >
+                        عدم پذیرش
                     </Button>
                 </Space>
             ),
         },
     ];
+
+    const [activeExpRow, setActiveExpRow] = useState<string[]>([]);
 
     return (
         <>
@@ -83,59 +113,82 @@ export default function DataTable() {
                     <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
                         درخواست ها</Typography>
                 </div>
-                <Table
-                    className="mt-6"
-                    // loading={isLoading}
+                <CustomeTable
+                    setInitialData={() => { }}
+                    isLoading={false}
+                    data={data}
+                    rowKey={"Row"}
                     columns={columns}
-                    dataSource={data}
-                    pagination={{
-                        defaultPageSize: 10,
-                        showSizeChanger: true,
-                        pageSizeOptions: ["10", "20", "50"],
-                        defaultCurrent: 1,
-                        style: {
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "flex-start",
-                            margin: "16px 0",
+                    expandable={{
+                        expandedRowKeys: activeExpRow,
+                        onExpand: (expanded, record: any) => {
+                            const keys: string[] = [];
+
+                            if (expanded && record.Row) {
+                                // @ts-ignore
+                                keys.push(record.Row);
+                            }
+
+                            if (!expanded) {
+                                keys.pop();
+                            }
+
+                            setActiveExpRow(keys);
                         },
+                        expandedRowRender: (record: any) => (
+                            <ExpandedDetailsTable
+                                product={record}
+                            // mutate={mutate}
+                            />
+                        ),
                     }}
                 />
             </div>
+            <RejectionModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <ActiveCodeModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </>
     )
 }
 
 
-const data: DataType[] = [
-    {
-        key: "1",
-        Row: 1,
-        userDescription: "نام شرکت تولیدی تست",
-        Tracking: "354",
-        ConfirmedCode: "1401/10/10",
-        status: "8 روز",
-        pdn: "بررسی نشده",
-        middle: "8 روز"
-    },
-    {
-        key: "2",
-        Row: 2,
-        userDescription: "نام شرکت تولیدی تست",
-        Tracking: "449",
-        ConfirmedCode: "1402/05/10",
-        status: "8 روز",
-        pdn: "بررسی شده",
-        middle: "8 روز"
-    },
-    {
-        key: "3",
-        Row: 3,
-        userDescription: "امیر احمدی",
-        Tracking: "449",
-        ConfirmedCode: "1401/08/08",
-        status: "8 روز",
-        pdn: "در حال بررسی",
-        middle: "8 روز"
-    },
-];
+const data: any = {
+    records: [
+        {
+            key: "1",
+            Row: 1,
+            userDescription: "نام شرکت تولیدی تست",
+            Tracking: "354",
+            ConfirmedCode: "1401/10/10",
+            status: "8 روز",
+            pdn: 0,
+        },
+        {
+            key: "2",
+            Row: 2,
+            userDescription: "نام شرکت تولیدی تست",
+            Tracking: "449",
+            ConfirmedCode: "1402/05/10",
+            status: "8 روز",
+            pdn: 1,
+        },
+        {
+            key: "3",
+            Row: 3,
+            userDescription: "امیر احمدی",
+            Tracking: "449",
+            ConfirmedCode: "1401/08/08",
+            status: "8 روز",
+            pdn: 2,
+        },
+        {
+            key: "4",
+            Row: 4,
+            userDescription: "امیر ",
+            Tracking: "987889",
+            ConfirmedCode: "1401/08/12",
+            status: "5 روز",
+            pdn: 3,
+        },
+    ],
+    count: 4
+}

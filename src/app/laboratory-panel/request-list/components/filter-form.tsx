@@ -1,35 +1,22 @@
 "use client";
 
-import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
+import { Button, Col, Form, Row, Select } from "antd";
 import React from "react";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
 
 export default function FilterForm() {
   return (
     <>
-      {/* <div className="box-border w-full p-6"> */}
       <Form name="form_item_path" layout="vertical">
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="کد ماده">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="شناسه درخواست">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="year-estale" label="فعال / غیر فعال">
-              <Select size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
             <Form.Item name="year" label="تاریخ درخواست">
-              <CustomeDatePicker />{" "}
+              <CustomeDatePicker />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item name="year-estale" label="وضعیت">
+              <Select size="large" placeholder="انتخاب کنید" />
             </Form.Item>
           </Col>
         </Row>
@@ -57,7 +44,6 @@ export default function FilterForm() {
           </Col>
         </Row>
       </Form>
-      {/* </div> */}
     </>
   );
 }

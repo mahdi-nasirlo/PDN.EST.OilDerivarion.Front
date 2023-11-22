@@ -4,7 +4,7 @@ import { Button, Space, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { Table } from 'antd/lib';
 import React, { useState } from 'react'
-import ActiveCodeModal from "@/app/laboratory/gps-confirmations/components/active-code-modal";
+import ActiveCodeModal from './active-code-modal';
 
 
 interface DataType {

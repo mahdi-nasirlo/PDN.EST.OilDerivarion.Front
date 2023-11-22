@@ -151,12 +151,16 @@ const RenderInputs = (props: {
     formID: string,
     initialValues?: any
 }) => {
-
+    
     const [form] = useForm()
 
+
     useEffect(() => {
-        form.setFieldsValue(props.initialValues)
-    }, [props.initialValues])
+        if (props.initialValues) {
+
+            form.setFieldsValue(props.initialValues)
+        }
+    }, [])
 
     return <>
         <Form form={form} onFinish={values => props.onSet(values, props.formID)}

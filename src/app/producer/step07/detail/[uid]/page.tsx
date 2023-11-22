@@ -1,18 +1,18 @@
 "use client";
 
-import { Col, Divider, Form, Input, Row } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
+import {Button, Col, Divider, Form, Input, notification, Row} from "antd";
+import {Choice} from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
-import { useForm } from "antd/es/form/Form";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
+import {useForm} from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
@@ -42,7 +42,7 @@ export default function Home(props: PropType) {
     isLoading: ldCategory,
 
 
-  } = useSWR<{}>(
+  } = useSWR<string>(
     "/RequestBarcode/FactoryBarcode",
     (url: string) =>
       listFetcher(url, {
@@ -51,6 +51,28 @@ export default function Home(props: PropType) {
         }
       })
   );
+  const downloadPdf = () => {
+    if (!barcode) {
+      notification.error({message: "فایلی وجود ندارد"});
+      return;
+    }
+
+    const binaryPdf = atob(barcode);
+
+    const arrayBuffer = new ArrayBuffer(binaryPdf.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < binaryPdf.length; i++) {
+      uint8Array[i] = binaryPdf.charCodeAt(i);
+    }
+
+    const blob = new Blob([uint8Array], {type: 'application/pdf'});
+
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'downloaded.pdf';
+
+    link.click();
+  };
 
   const [form] = useForm();
 
@@ -84,9 +106,7 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
-        {/*<Button type="primary" onClick={() => {*/}
-        {/*  console.log(barcode)*/}
-        {/*}}>sdfjsdkfj</Button>*/}
+        <Button type="primary" onClick={downloadPdf}>دانلود بارکد</Button>
 
 
         <Form onFinish={onFinish} form={form}>

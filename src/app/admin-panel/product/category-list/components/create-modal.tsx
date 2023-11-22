@@ -89,7 +89,7 @@ export default function CreateModal({
         form={form}
         layout="vertical"
       >
-        <CategoryForm form={form} />
+        <CategoryForm />
       </Form>
     </Modal>
   );

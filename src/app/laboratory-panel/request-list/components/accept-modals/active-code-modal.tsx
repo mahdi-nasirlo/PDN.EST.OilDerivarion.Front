@@ -35,7 +35,7 @@ function ActiveCodeModal(
         setOpenBox(false);
         setIsModalOpen(false);
         form.resetFields();
-        router.push(`/laboratory-panel/test-result-lab`);
+        router.push(`/laboratory-panel/request-list/test-result-lab`);
     }
 
     return (

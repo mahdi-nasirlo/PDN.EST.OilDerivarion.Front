@@ -1,12 +1,11 @@
 "use client";
 
 
-import {Button, Divider, Space, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import CustomeTable from "../../../../../components/CustomeTable";
-import ResultModal from "@/app/laboratory-panel/submit-test-result/components/result-modal";
-import DateForm from "@/app/laboratory-panel/submit-test-result/components/date-form";
+import { Alert, Button, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import React from 'react'
+import CustomeTable from "../../../../../../components/CustomeTable";
+import { useRouter } from 'next/navigation';
 
 
 interface DataType {
@@ -21,8 +20,8 @@ interface DataType {
 
 
 export default function DataTable() {
-    const [modalVisible, setModalVisible] = useState(false);
 
+    const router = useRouter();
 
     const columns: ColumnsType<DataType> = [
         {
@@ -32,45 +31,41 @@ export default function DataTable() {
             width: "5%"
         },
         {
-            title: "فاکتور آزمون",
+            title: "بار کد",
             dataIndex: "name",
             key: "2",
             width: "25%"
         },
         {
-            title: "روش آزمون",
+            title: "فاکتورهای آزمون",
             dataIndex: "Tracking",
             key: "2",
         },
         {
-            title: "مرجع",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "نتیجه آزمون",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "حدود قابل قبول",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "واحد اندازه گیری",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "تجدید پذیری",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "واحد تجدید پذیری",
-            dataIndex: "Tracking",
-            key: "2",
+            title: "وضعیت",
+            dataIndex: "pdn",
+            key: "5",
+            render(_, record) {
+                let color = "";
+                let name = "";
+
+                if (record.pdn === 0) {
+                    color = "red";
+                    name = "ثبت نشده";
+                } else if (record.pdn === 1) {
+                    color = "success";
+                    name = "ثبت شده";
+                } else {
+                    color = "warning";
+                    name = "_";
+                }
+
+                return (
+                    <Tag color={color}>
+                        {name}
+                    </Tag>
+                );
+            }
         },
         {
             title: "عملیات",
@@ -83,14 +78,12 @@ export default function DataTable() {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                        onClick={() => {
-                            setModalVisible(true)
-                        }}
+                        onClick={() => { router.push(`/laboratory-panel/request-list/test-result-lab/submit-test-result`) }}
                     >
                         ثبت نتیجه
                     </Button>
 
-                </Space>
+                </Space >
             ),
         },
     ];
@@ -99,16 +92,15 @@ export default function DataTable() {
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
+                <Alert
+                    style={{ height: 60 }}
+                    message="کد درخواست: 25648"
+                    type="info"
+                    className="text-right mb-12"
+                />
 
                 <Typography className="mt-3 mb-6 text-right font-medium text-base">
-                    لطفا اطلاعات خواسته شده را با دقت وارد نمایید.</Typography>
-                <Divider/>
-
-
-                <DateForm/>
-                <Divider/>
-                <Typography className="mt-3 mb-6 text-right font-medium text-base">
-                    نتیجه آزمون
+                    لیست آزمایش ها
                 </Typography>
                 <CustomeTable
                     setInitialData={() => {
@@ -119,17 +111,6 @@ export default function DataTable() {
                     columns={columns}
 
                 />
-                <Button
-                    loading={false}
-                    size="large"
-                    className={"w-full"}
-                    type="primary"
-                    // onClick={() => form.submit()}
-                    key={"submit"}
-                >
-                    ثبت
-                </Button>
-                <ResultModal setModalVisible={setModalVisible} modalVisible={modalVisible}/>
             </div>
         </>
     )
@@ -150,7 +131,6 @@ const data: any = {
             Row: 2,
             name: "235648",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-
             pdn: 1,
         },
         {
@@ -158,16 +138,14 @@ const data: any = {
             Row: 3,
             name: "235648",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-
-
-            pdn: 2,
+            pdn: 0,
         },
         {
             key: "4",
             Row: 4,
             name: "235648 ",
             Tracking: "نقطه اشتعال باز - نقطه ریزش - دانسیته",
-            pdn: 3,
+            pdn: 1,
         },
     ],
     count: 4

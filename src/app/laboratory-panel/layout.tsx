@@ -1,9 +1,9 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import {getMenuItem} from "@/components/layout/sidebar";
-import {Bars3Icon, DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon,} from "@heroicons/react/24/outline";
-import {MenuProps} from "antd";
+import { getMenuItem } from "@/components/layout/sidebar";
+import { Bars3Icon, DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon, } from "@heroicons/react/24/outline";
+import { MenuProps } from "antd";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -34,20 +34,6 @@ const items: MenuProps["items"] = [
       </Link>,
       "/laboratory-panel/request-list",
       <Bars3Icon width={16} height={16} />
-    ),
-    getMenuItem(
-        <Link href={"/laboratory-panel/test-result-lab"} className="text-sm">
-          نتیجه تست
-        </Link>,
-        "/laboratory-panel/test-result-lab",
-        <Bars3Icon width={16} height={16}/>
-    ),
-    getMenuItem(
-        <Link href={"/laboratory-panel/submit-test-result"} className="text-sm">
-          ثبت نتیجه
-        </Link>,
-        "/laboratory-panel/submit-test-result",
-        <Bars3Icon width={16} height={16}/>
     ),
     getMenuItem(
       <Link href={"/laboratory-panel/accepted-requests/list"} className="text-sm">

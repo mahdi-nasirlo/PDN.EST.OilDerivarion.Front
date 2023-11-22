@@ -1,21 +1,21 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row, Select} from "antd";
-import {useForm} from "antd/es/form/Form";
+import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import { useForm } from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
 
 export default function ResultModal({
-                                        setModalVisible,
-                                        modalVisible,
-                                    }: {
+    setModalVisible,
+    modalVisible,
+}: {
     setModalVisible: any;
     modalVisible: any;
 }) {
     const [form] = useForm();
 
-    const {trigger, isMutating} = useSWRMutation(
+    const { trigger, isMutating } = useSWRMutation(
         "/TestItem/Create",
         mutationFetcher
     );
@@ -89,7 +89,7 @@ export default function ResultModal({
                         <Form.Item
                             name="name"
                             label="روش آزمون"
-                            rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         >
                             <Select
                                 loading={false}
@@ -97,7 +97,7 @@ export default function ResultModal({
                                 // @ts-ignore
                                 filterOption={false}
                                 // options={false}
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                                 size="large"
                                 placeholder="وارد کنید"
                             />
@@ -108,8 +108,8 @@ export default function ResultModal({
                             name="reNewabillity_Value"
                             label="فاکتور آزمون"
                             rules={[
-                                {required: true, message: "لطفا مقدار را وارد کنید"},
-                                {type: "number", message: "لطفا مقدار عددی وارد کنید"},
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                { type: "number", message: "لطفا مقدار عددی وارد کنید" },
                             ]}
                         >
                             <Input
@@ -124,8 +124,8 @@ export default function ResultModal({
                             name="reNewabillity_Value"
                             label=" نتیجه آزمون"
                             rules={[
-                                {required: true, message: "لطفا مقدار را وارد کنید"},
-                                {type: "number", message: "لطفا مقدار عددی وارد کنید"},
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                { type: "number", message: "لطفا مقدار عددی وارد کنید" },
                             ]}
                         >
                             <Input
@@ -140,7 +140,7 @@ export default function ResultModal({
                         <Form.Item
                             name="measureUid"
                             label="حدود قابل قبول"
-                            rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         >
                             <Select
                                 loading={false}
@@ -148,7 +148,7 @@ export default function ResultModal({
                                 // @ts-ignore
                                 filterOption={false}
                                 // options={false}
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                                 size="large"
                                 placeholder="وارد کنید"
                             />
@@ -159,7 +159,7 @@ export default function ResultModal({
                         <Form.Item
                             name="measureUid"
                             label="واحد اندازه گیری"
-                            rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         >
                             <Select
                                 loading={false}
@@ -167,7 +167,7 @@ export default function ResultModal({
                                 // @ts-ignore
                                 filterOption={false}
                                 // options={false}
-                                fieldNames={{value: "Uid", label: "Name"}}
+                                fieldNames={{ value: "Uid", label: "Name" }}
                                 size="large"
                                 placeholder="وارد کنید"
                             />
@@ -180,8 +180,8 @@ export default function ResultModal({
                             name="reNewabillity_Value"
                             label="تجدید پذیری"
                             rules={[
-                                {required: true, message: "لطفا مقدار را وارد کنید"},
-                                {type: "number", message: "لطفا مقدار عددی وارد کنید"},
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                { type: "number", message: "لطفا مقدار عددی وارد کنید" },
                             ]}
                         >
                             <Input
@@ -196,8 +196,8 @@ export default function ResultModal({
                             name="reNewabillity_Value"
                             label="واحد تجدید پذیری"
                             rules={[
-                                {required: true, message: "لطفا مقدار را وارد کنید"},
-                                {type: "number", message: "لطفا مقدار عددی وارد کنید"},
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                { type: "number", message: "لطفا مقدار عددی وارد کنید" },
                             ]}
                         >
                             <Input

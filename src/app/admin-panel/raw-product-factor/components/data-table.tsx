@@ -40,6 +40,11 @@ const DataTable = ({
       dataIndex: "Name",
       key: "2",
     },
+    {
+      title: "فاکتور های آزمون",
+      dataIndex: "TestItems",
+      key: "3",
+    },
   ];
 
   return (

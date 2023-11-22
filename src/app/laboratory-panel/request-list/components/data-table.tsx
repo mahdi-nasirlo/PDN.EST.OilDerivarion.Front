@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Space, Tag, Typography } from 'antd';
+import { Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
@@ -44,7 +44,7 @@ export default function DataTable({
         },
         {
             title: "شناسه جعبه",
-            dataIndex: "Uid",
+            dataIndex: "uid",
             key: "2",
         },
         {
@@ -59,63 +59,52 @@ export default function DataTable({
         },
         {
             title: "وضعیت",
-            dataIndex: "pdn",
+            dataIndex: "labIsAccepted",
             key: "5",
+            align: "center",
+            fixed: 'right',
+            width: "10%",
             render(_, record) {
                 let color = "";
                 let name = "";
-
-                if (record.pdn === 0) {
+                if (record.labIsAccepted === false) {
                     color = "red";
                     name = "بررسی نشده";
-                } else if (record.pdn === 1) {
+                } else if (record.labIsAccepted === true) {
                     color = "success";
                     name = "بررسی شده";
-                } else if (record.pdn === 2) {
-                    color = "processing";
-                    name = "در حال آزمایش";
                 } else {
-                    color = "warning";
-                    name = "درخواست اصلاح";
+                    return (
+                        <>
+                            <Space size="small">
+                                <button
+                                    className="text-primary-500 font-bold px-2 py-1"
+                                    onClick={() => {
+                                        setRecordUid(record.Uid);
+                                        setIsModalOpen(true);
+                                    }}
+                                >
+                                    پذیرش
+                                </button>
+                                <button
+                                    className="text-red-500 font-bold px-2 py-1"
+                                    onClick={() => {
+                                        setIsModalOpenTest(true);
+                                        setRecordUid(record.Uid);
+                                    }}
+                                >
+                                    عدم پذیرش
+                                </button>
+                            </Space>
+                        </>
+                    )
                 }
-
                 return (
                     <Tag color={color}>
                         {name}
                     </Tag>
                 );
             }
-        },
-        {
-            title: "عملیات",
-            key: "عملیات",
-            align: "center",
-            fixed: 'right',
-            width: "10%",
-            render: (_, record) => (
-                <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-primary-500 font-bold"
-                        onClick={() => {
-                            setRecordUid(record.Uid);
-                            setIsModalOpen(true);
-                        }}
-                    >
-                        پذیرش
-                    </Button>
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => {
-                            setIsModalOpenTest(true);
-                            setRecordUid(record.Uid);
-                        }}
-                    >
-                        عدم پذیرش
-                    </Button>
-                </Space>
-            ),
         },
     ];
 

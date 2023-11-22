@@ -6,10 +6,12 @@ import {mutationFetcher} from '../../../../../lib/server/mutationFetcher';
 
 export default function RejectionModal(
     {
+        mutate,
         recordUid,
         modalVisible,
         setModalVisible
     }: {
+        mutate: () => void
         recordUid: any;
         modalVisible: any,
         setModalVisible: any
@@ -31,6 +33,7 @@ export default function RejectionModal(
         values.uid = recordUid
         const res = await trigger({...values, labIsAccepted: false});
         if (res) {
+            mutate()
             setModalVisible(false);
         }
         form.resetFields();

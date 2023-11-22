@@ -9,10 +9,12 @@ import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 
 function ActiveCodeModal(
     {
+        mutate,
         recordUid,
         isModalOpen,
         setIsModalOpen,
     }: {
+        mutate: () => void
         recordUid: any;
         isModalOpen: boolean;
         setIsModalOpen: (arg: boolean) => void;
@@ -61,7 +63,9 @@ function ActiveCodeModal(
         });
 
         if (res) {
+            mutate();
             setIsModalOpen(false);
+            form.resetFields();
         }
 
     };

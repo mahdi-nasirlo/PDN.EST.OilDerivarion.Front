@@ -1,8 +1,8 @@
 "use client";
 
-import { Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
@@ -80,7 +80,7 @@ export default function DataTable({
                                 <button
                                     className="text-primary-500 font-bold px-2 py-1"
                                     onClick={() => {
-                                        setRecordUid(record.Uid);
+                                        setRecordUid(record.uid);
                                         setIsModalOpen(true);
                                     }}
                                 >
@@ -90,7 +90,7 @@ export default function DataTable({
                                     className="text-red-500 font-bold px-2 py-1"
                                     onClick={() => {
                                         setIsModalOpenTest(true);
-                                        setRecordUid(record.Uid);
+                                        setRecordUid(record.uid);
                                     }}
                                 >
                                     عدم پذیرش
@@ -147,11 +147,13 @@ export default function DataTable({
                 />
             </div>
             <RejectionModal
+                mutate={mutate}
                 modalVisible={isModalOpenTest}
                 setModalVisible={setIsModalOpenTest}
                 recordUid={recordUid}
             />
             <ActiveCodeModal
+                mutate={mutate}
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 recordUid={recordUid}

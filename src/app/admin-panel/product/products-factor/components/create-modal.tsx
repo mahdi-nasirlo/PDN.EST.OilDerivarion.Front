@@ -7,7 +7,6 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import { Product } from "../../../../../../interfaces/product";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
@@ -23,7 +22,7 @@ export default function CreateModal({
 
   const defaultValue = {
     name: null,
-    IsActive: null,
+    IsActive: true,
   };
 
   const { data: product, isLoading: ldProduct } = useSWR<any[]>(
@@ -45,12 +44,12 @@ export default function CreateModal({
     productUid: string;
     testItemUid: string;
   }) => {
-    await trigger({ ...values, IsActive: true });
+    const res = await trigger({ ...values, IsActive: true });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
   const CloseModal = () => {
@@ -63,7 +62,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2"> افزودن فاکتور محصول</div>
+          <div className="text-base mb-2"> افزودن فاکتور آزمون محصول</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -89,6 +88,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}
@@ -133,7 +133,7 @@ export default function CreateModal({
           <Col xs={24} md={12}>
             <Form.Item
               name="testItemUid"
-              label="نام فاکتور"
+              label="نام فاکتور آزمون"
               rules={[
                 {
                   required: true,

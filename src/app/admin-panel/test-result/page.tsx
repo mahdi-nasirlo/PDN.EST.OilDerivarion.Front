@@ -7,13 +7,13 @@ import { listFetcher } from "../../../../lib/server/listFetcher";
 import FilterForm from "./components/filter-form";
 import { Collapse } from "antd";
 import { useForm } from "antd/lib/form/Form";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const defaultValueTable = {
     labUid: null,
     requestBarcodeUid: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
@@ -34,8 +34,7 @@ export default function Page() {
     setFilter({
       labUid: values.LabUid,
       requestBarcodeUid: values.requestBarcodeUid,
-      fromRecord: 0,
-      selectRecord: 1000,
+      ...getPageRecordNumber()
     });
 
     await mutate();
@@ -52,12 +51,13 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
               <FilterForm
                 TestResult={TestResult?.records}
                 unsetFilter={unsetFilter}
                 filter={setFilterTable}
+                isLoading={ldTestResult}
               />
             ),
           },

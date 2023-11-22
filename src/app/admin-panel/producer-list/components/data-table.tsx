@@ -1,12 +1,9 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { Button, Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { TestItem } from "../../../../../interfaces/TestItem";
-import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
@@ -49,12 +46,13 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await trigger({
-      uid: recordToDelete?.Uid,
-    });
+    const res = await trigger({ uid: recordToDelete?.Uid });
 
-    await mutate();
-    setIsDeleteModalVisible(false);
+    if (res) {
+      await mutate();
+
+      setIsDeleteModalVisible(false);
+    }
   };
 
   const showModal = () => {

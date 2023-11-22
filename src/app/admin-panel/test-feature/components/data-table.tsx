@@ -46,22 +46,19 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await deleteLab({
-      Uid: recordToDelete?.Uid,
-    });
+    const res = await deleteLab({ Uid: recordToDelete?.Uid });
 
-    await mutate();
+    if (res) {
+      await mutate();
 
-    setIsDeleteModalVisible(false);
-
+      setIsDeleteModalVisible(false);
+    }
     setRecordToDelete(null);
   };
 
 
   const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
-  const [recordToEdit, setRecordToEdit] = useState<CreateTestItemDetail | null>(
-    null
-  );
+  const [recordToEdit, setRecordToEdit] = useState<CreateTestItemDetail | null>(null);
 
   const handleEdit = (record: CreateTestItemDetail) => {
     setRecordToEdit(record);

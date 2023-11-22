@@ -7,7 +7,7 @@ import DataTable from './components/data-table'
 import CreateModal from './components/create-modal'
 import useSWR from "swr";
 import { listFetcher } from '../../../../../lib/server/listFetcher'
-
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function Page() {
 
@@ -16,8 +16,7 @@ export default function Page() {
         IsActive: null,
         NationalCode: null,
         userTypeId: null,
-        fromRecord: 0,
-        selectRecord: 10000,
+        ...getPageRecordNumber()
     };
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -35,8 +34,7 @@ export default function Page() {
             IsActive: values.IsActive,
             NationalCode: values.NationalCode,
             userTypeId: values.userTypeId,
-            fromRecord: 0,
-            selectRecord: 1000
+            ...getPageRecordNumber()
         });
 
         await mutate();
@@ -53,8 +51,8 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول',
-                    children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+                    label: 'فیلتر جستجو ',
+                    children: <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldUser} />
                 }]}
             />
             <DataTable

@@ -55,7 +55,11 @@ const DataTable = ({
   return (
     <>
       <CustomeTable
+        setInitialData={setFilter}
+        isLoading={ldProduct}
+        data={product}
         rowKey={"Uid"}
+        columns={columns}
         expandable={{
           expandedRowKeys: activeExpRow,
           onExpand: (expanded, record: Product) => {
@@ -76,10 +80,6 @@ const DataTable = ({
             <ExpandedRowRender product={record} TableMutate={TableMutate} />
           ),
         }}
-        setInitialData={setFilter}
-        isLoading={ldProduct}
-        data={product}
-        columns={columns}
       />
     </>
   );
@@ -97,7 +97,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   const defaultValue = {
     productUid: product.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
   const { data, isLoading, mutate } = useSWR<ProductTestItem[]>(
@@ -111,11 +111,13 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   );
 
   const deleteProductFactor = async () => {
-    await trigger({ uid: recordToDelete?.Uid });
-    await TableMutate();
-    await mutate();
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await TableMutate();
 
-    setOpen(false);
+      await mutate();
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -126,7 +128,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
-    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
       dataIndex: "2",
@@ -167,7 +169,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور محصول"}
+        title="فاکتور آزمون محصول"
       />
     </>
   );

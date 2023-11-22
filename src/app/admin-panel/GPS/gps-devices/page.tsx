@@ -8,18 +8,18 @@ import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import DataTable from "./components/data-table";
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const defaultValue = {
+  const defaultValueTable = {
     Code: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState(defaultValue);
+  const [filter, setFilter] = useState(defaultValueTable);
 
   const { data, mutate, isLoading, isValidating } = useSWR<{
     count: number;
@@ -33,8 +33,7 @@ export default function Page() {
     setFilter({
       Code: values.Code,
       IsActive: values.IsActive,
-      fromRecord: 0,
-      selectRecord: 100,
+      ...getPageRecordNumber()
     });
     console.log(values);
 
@@ -42,7 +41,7 @@ export default function Page() {
   };
 
   const unsetFilter = async () => {
-    setFilter(defaultValue);
+    setFilter(defaultValueTable);
 
     await mutate();
   };
@@ -53,11 +52,12 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
               <GpsFilterForm
                 unsetFilter={unsetFilter}
                 filter={setFilterTable}
+                isLoading={isLoading}
               />
             ),
           },
@@ -66,7 +66,7 @@ export default function Page() {
       <div className="box-border w-full mt-8 p-6">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست GPS
+            لیست دستگاه های GPS
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

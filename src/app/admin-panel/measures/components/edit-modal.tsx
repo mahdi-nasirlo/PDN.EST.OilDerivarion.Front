@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { TestItem } from "../../../../../interfaces/TestItem";
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
@@ -35,12 +33,12 @@ function EditModal({
   const handleSubmit = async (values: Measure) => {
     values.Uid = editRecords?.Uid;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
+      await mutate();
 
-    setEditRecord(undefined);
-
-    await mutate();
-
+      setEditRecord(undefined);
+    }
     form.resetFields();
   };
 
@@ -54,7 +52,7 @@ function EditModal({
         width={800}
         title={
           <div>
-            <div className="text-base mb-2">ویرایش فاکتور جدید</div>
+            <div className="text-base mb-2">ویرایش واحد اندازه گیری</div>
             <div className="font-normal text-sm">
               لطفا اطلاعات را وارد نمایید.
             </div>
@@ -78,7 +76,7 @@ function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating || isValidating}
+                disabled={isLoading || isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={() => setEditRecord(undefined)}

@@ -10,6 +10,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { listFetcher } from "../../../../lib/server/listFetcher";
 import { addIndexToData } from "../../../../lib/addIndexToData";
 import { RequestMaster } from "../../../../interfaces/requestMaster";
+import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,8 +19,7 @@ export default function Page() {
     sampleTypeId: null,
     containerTypeId: null,
     barcodeUsePlaceTypeId: null,
-    fromRecord: 0,
-    selectRecord: 1000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState<any>(defaultValueTable);
@@ -41,8 +41,7 @@ export default function Page() {
     setFilter({
       name: values.name,
       IsActive: null,
-      fromRecord: 0,
-      selectRecord: 1000,
+      ...getPageRecordNumber()
     });
 
     await mutate();
@@ -61,7 +60,7 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
               <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
             ),
@@ -80,7 +79,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور محصول</span>
+            <span className="flex ">افزودن فاکتور آزمون محصول</span>
           </Button>
         </div>
         <DataTable

@@ -1,4 +1,4 @@
-import { Space } from "antd";
+import { Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { Table } from "antd/lib";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "نام فاکتور",
+      title: "نام فاکتور آزمون",
       dataIndex: "TestItemName",
       key: "4",
     },
@@ -94,6 +94,9 @@ export default function DataTable({
 
   return (
     <div className="box-border w-full mt-8 p-6">
+      <Typography className="text-right text-[16px] font-normal">
+        لیست نتایج آزمون ها
+      </Typography>
       <Table
         loading={ldTestResult}
         className="mt-6"

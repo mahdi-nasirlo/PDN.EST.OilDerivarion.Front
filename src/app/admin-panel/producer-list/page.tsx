@@ -5,9 +5,10 @@ import DataTable from "./components/data-table";
 import useSWR from "swr";
 import { ProductGet } from "../../../../interfaces/product";
 import { listFetcher } from "../../../../lib/server/listFetcher";
-import { TestItem } from "../../../../interfaces/TestItem";
 import { Collapse } from "antd";
 import { Producer } from "../../../../interfaces/producer";
+import FilterForm from "./components/filter-form";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +16,7 @@ export default function Page() {
   const defaultValueTable = {
     name: null,
     producerStatusId: 1,
-    fromRecord: 0,
-    selectRecord: 100000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
@@ -36,8 +36,7 @@ export default function Page() {
     setFilter({
       name: values.name,
       IsActive: values.IsActive,
-      fromRecord: 0,
-      selectRecord: 1000,
+      ...getPageRecordNumber()
     });
 
     await mutate();
@@ -51,18 +50,17 @@ export default function Page() {
 
   return (
     <>
-      {/*// @ts-ignore*/}
-      {/* <Collapse
+      <Collapse
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldFactor} />
             ),
           },
         ]}
-      /> */}
+      />
       <DataTable
         setFilter={setFilter}
         mutate={mutate}

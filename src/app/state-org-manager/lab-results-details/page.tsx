@@ -39,24 +39,24 @@ export default function Page() {
                 <Form name="form_item_path" layout="vertical">
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-establishment" label="نام فاکتور ">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" placeholder="امیر احمدی" disabled />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="lastName" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" placeholder="مقدار آزمایش" disabled />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-estale" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" placeholder="مقدار آزمایش" disabled />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-estale" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" placeholder="مقدار آزمایش" disabled />
                             </Form.Item>
                         </Col>
@@ -66,7 +66,7 @@ export default function Page() {
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
-                            <Form.Item name="year-estale" label="نام فاکتور">
+                            <Form.Item name="lastName" label="نام فاکتور آزمون">
                                 <Input size="large" placeholder="مقدار آزمایش" disabled />
                             </Form.Item>
                         </Col>
@@ -142,7 +142,7 @@ export default function Page() {
                     <Row gutter={[32, 1]}>
                         <Col>
                             <Checkbox className="py-3">
-                                عدم دریافت فاکتورهای لازم
+                                عدم دریافت فاکتورهای آزمون لازم
                             </Checkbox>
                         </Col>
                     </Row>

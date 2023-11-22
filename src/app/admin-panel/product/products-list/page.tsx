@@ -1,13 +1,13 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
-import {Product, ProductCategoryGet} from "../../../../../interfaces/product";
-import {Collapse} from "antd";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { Product, ProductCategoryGet } from "../../../../../interfaces/product";
+import { Collapse } from "antd";
 import getPageRecordNumber from "../../../../../lib/getPageRecordNumber";
 
 export default function Page() {
@@ -34,7 +34,7 @@ export default function Page() {
   );
 
   const setFilterTable = async (values: ProductCategoryGet) => {
-    
+
     setFilter({
       Name: values.Name,
       IsActive: values.IsActive,
@@ -55,27 +55,27 @@ export default function Page() {
     <>
       {/*// @ts-ignore*/}
       <Collapse
-          size="large"
-          items={[
-            {
-              label: "فیلتر جدول",
-              children: (
-                  <FilterForm unsetFilter={unsetFilter} filter={setFilterTable}/>
-              ),
-            },
-          ]}
+        size="large"
+        items={[
+          {
+            label: "فیلتر جستجو ",
+            children: (
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldProduct} />
+            ),
+          },
+        ]}
       />
       <DataTable
-          setFilter={setFilter}
-          mutate={mutate}
-          product={product}
-          ldProduct={ldProduct}
-          setModalVisible={setModalVisible}
+        setFilter={setFilter}
+        mutate={mutate}
+        product={product}
+        ldProduct={ldProduct}
+        setModalVisible={setModalVisible}
       />
       <CreateModal
-          mutate={mutate}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
+        mutate={mutate}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
       />
     </>
   );

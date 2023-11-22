@@ -12,9 +12,6 @@ export const routDictionary: Items = {
   "request-detail": {
     title: "جزئیات درخواست",
   },
-  barcode: {
-    title: "بارکد",
-  },
 
   activate: {
     title: "ثبت اطلاعات پایه",
@@ -99,7 +96,7 @@ export const routDictionary: Items = {
     title: "پنل کارشناس استان",
   },
   "producer-list": {
-    title: "لیست تولید کنندگان",
+    title: "لیست تولید کننده ها",
   },
   "producer-details": {
     title: "جزئیات تولید کنندگان",
@@ -142,7 +139,7 @@ export const routDictionary: Items = {
 
   // start laboratory panel
   laboratory: {
-    title: "پنل آزمایشگاه",
+    title: "لیست آزمایشگاه ها",
     href: "/laboratory",
   },
   "accepted-requests": {
@@ -165,19 +162,19 @@ export const routDictionary: Items = {
     href: "/admin-panel",
   },
   product: {
-    title: "محصول",
+    title: "محصولات",
   },
   "row-material-product": {
-    title: "مواد اولیه محصول",
+    title: "مواد اولیه محصولات",
   },
   "add-box": {
     title: "افزودن جعبه",
   },
   "adding-raw-material": {
-    title: "مواد اولیه",
+    title: "لیست مواد اولیه",
   },
   "category-list": {
-    title: "لیست دسته بندی",
+    title: "لیست دسته بندی ها",
   },
   "management-users": {
     title: "مدیریت کاربران",
@@ -186,7 +183,7 @@ export const routDictionary: Items = {
     title: "ثبت تغییرات",
   },
   "labratory-factor": {
-    title: "فاکتور های آزمایشگاه",
+    title: "فاکتور های آزمون آزمایشگاه",
   },
   "list-experts": {
     title: "لیست کارشناسان",
@@ -198,7 +195,7 @@ export const routDictionary: Items = {
     title: "نقش کاربران",
   },
   "products-factor": {
-    title: "فاکتور های محصول",
+    title: "فاکتور های آزمون محصولات",
   },
   "products-list": {
     title: "لیست محصولات",
@@ -207,22 +204,25 @@ export const routDictionary: Items = {
     title: "استان",
   },
   "raw-product-factor": {
-    title: "فاکتور های ماده اولیه",
+    title: "فاکتور های آزمون مواد اولیه",
   },
   "test-factors": {
-    title: "فاکتور های آمون",
+    title: "لیست فاکتورهای آزمون",
   },
   "test-feature": {
-    title: "استاندارد های آزمون",
+    title: "لیست استاندارد های آزمون",
   },
   "test-result": {
-    title: "نتایج آزمون",
+    title: "لیست نتایج آزمون ها",
   },
   "test-result-record": {
     title: "ثبت نتایج آزمایشگاه",
   },
   "production-unit": {
     title: "تولید کننده",
+  },
+  GPS: {
+    title: "لیست GPS ها",
   },
   "gps-devices": {
     title: "دستگاه های GPS",
@@ -237,23 +237,26 @@ export const routDictionary: Items = {
     title: "موقعیت GPS",
   },
   measures: {
-    title: "واحد اندازه گیری",
+    title: "لیست واحد های اندازه گیری",
   },
   "producer-info": {
     title: "اطلاعات تولید کننده",
   },
+  barcode: {
+    title: "لیست بارکد ها",
+  },
   // end admin panel
 
-  "task": {
-    title: "وظایف"
+  task: {
+    title: "وظایف",
   },
   detail: {
-    title: "جزئیات"
+    title: "جزئیات",
   },
-  "expert-naft":{
-    title:"کارشناس نفت"
+  "expert-naft": {
+    title: "کارشناس نفت",
   },
-  "expert-samt":{
-    title:"کارشناس نفت"
-  }
+  "expert-samt": {
+    title: "کارشناس نفت",
+  },
 };

@@ -12,7 +12,7 @@ export default function Page() {
             <Collapse
                 size="large"
                 items={[{
-                    label: 'فیلتر جدول', children: <PrimaryRequestsListForm />
+                    label: 'فیلتر جستجو ', children: <PrimaryRequestsListForm />
                 }]}
             />
             <PrimaryRequestsListTable />

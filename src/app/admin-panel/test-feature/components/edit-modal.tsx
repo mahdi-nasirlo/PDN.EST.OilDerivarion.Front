@@ -16,13 +16,13 @@ export default function EditModal({
   setIsEditModalVisible,
   isEditModalVisible,
 }: // mutate,
-{
-  mutate: () => void;
-  setIsEditModalVisible: (arg: boolean) => void;
-  isEditModalVisible: boolean;
-  recordToEdit: CreateTestItemDetail | null;
-  setRecordToEdit: (arg: CreateTestItemDetail | null) => void;
-}) {
+  {
+    mutate: () => void;
+    setIsEditModalVisible: (arg: boolean) => void;
+    isEditModalVisible: boolean;
+    recordToEdit: CreateTestItemDetail | null;
+    setRecordToEdit: (arg: CreateTestItemDetail | null) => void;
+  }) {
   const [form] = useForm();
 
   const { isMutating, trigger } = useSWRMutation(
@@ -33,14 +33,15 @@ export default function EditModal({
   const handleSubmit = async (values: CreateTestItemDetail) => {
     values.Uid = data?.Uid;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
 
-    await mutate();
+      await mutate();
 
-    form.resetFields();
+      form.resetFields();
 
-    setIsEditModalVisible(false);
-
+      setIsEditModalVisible(false);
+    }
     setRecordToEdit(null);
   };
 
@@ -82,6 +83,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
+                disabled={isLoading || isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={handleCancelEdit}

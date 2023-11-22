@@ -9,8 +9,8 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   setFilter,
@@ -39,14 +39,14 @@ export default function DataTable({
 
   const handleDelete = async () => {
 
-    await deleteCategory({
-      uid: recordToDelete?.Uid,
-    });
+    const res = await deleteCategory({ uid: recordToDelete?.Uid });
 
-    await mutate();
+    if (res) {
 
-    setIsDeleteModalVisible(false);
+      await mutate();
 
+      setIsDeleteModalVisible(false);
+    }
     setRecordToDelete(null);
   };
 
@@ -120,22 +120,7 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "ConfirmedRequestCode",
       key: "7",
-      render: (_, record: any) => {
-        let color = "";
-        let name = "";
-        let icon = <></>;
-        if (record.IsActive === false) {
-          color = "red";
-          name = "غیرفعال";
-          icon = <CloseCircleOutlined />
-        } else {
-          color = "success";
-          name = "فعال";
-          icon = <CheckCircleOutlined />
-        }
-
-        return <Tag icon={icon} color={color}>{name}</Tag>;
-      },
+      render: (_, record) => <StatusColumn record={record} />
     },
     {
       title: "عملیات",
@@ -175,7 +160,7 @@ export default function DataTable({
       <div className="box-border w-full mt-8 p-6">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست دسته بندی محصولات
+            لیست دسته بندی ها
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

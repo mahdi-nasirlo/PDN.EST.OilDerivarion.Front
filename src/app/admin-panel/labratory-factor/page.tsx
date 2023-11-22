@@ -1,13 +1,14 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import {Button, Collapse, Typography} from "antd";
+import { Button, Collapse, Typography } from "antd";
 import useSWR from "swr";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {listFetcher} from "../../../../lib/server/listFetcher";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,8 +16,7 @@ export default function Page() {
   const defaultValueTable = {
     Name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 100000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
@@ -35,7 +35,7 @@ export default function Page() {
 
   const setFilterTable = async (values: LaboratoryGet) => {
     // @ts-ignore
-    setFilter({ Name: values.Name, IsActive: true, fromRecord: 0, selectRecord: 10000 });
+    setFilter({ Name: values.Name, IsActive: true, ...getPageRecordNumber() });
 
     await mutate();
   };
@@ -52,9 +52,9 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldProduct} />
             ),
           },
         ]}
@@ -62,23 +62,23 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست فاکتور های آزمایشگاه
+            لیست فاکتور های آزمون آزمایشگاه
           </Typography>
           <Button
-              className="max-md:w-full flex justify-center items-center gap-2"
-              size="large"
-              type="primary"
-              onClick={() => setModalVisible(true)}
+            className="max-md:w-full flex justify-center items-center gap-2"
+            size="large"
+            type="primary"
+            onClick={() => setModalVisible(true)}
           >
-            <PlusIcon width={24} height={24}/>
-            <span className="flex ">افزودن فاکتور آزمایشگاه</span>
+            <PlusIcon width={24} height={24} />
+            <span className="flex ">افزودن فاکتور آزمون آزمایشگاه</span>
           </Button>
         </div>
         <DataTable
-            setFilter={setFilter}
-            isValidating={isValidating}
-            Labratory={Labratory}
-            ldProduct={ldProduct}
+          setFilter={setFilter}
+          isValidating={isValidating}
+          Labratory={Labratory}
+          ldProduct={ldProduct}
         />
       </div>
       <CreateModal

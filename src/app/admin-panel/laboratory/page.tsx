@@ -1,19 +1,20 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import {listFetcher} from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
-import {Collapse} from "antd";
+import { Collapse } from "antd";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
+
 
 export default function Page() {
   const defaultValueTable = {
     name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 10000,
+    ...getPageRecordNumber()
   };
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,7 +37,7 @@ export default function Page() {
 
   const setFilterTable = async (values: LaboratoryGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000 });
+    setFilter({ name: values.name, IsActive: values.IsActive, ...getPageRecordNumber() });
 
     await mutate();
   };
@@ -53,19 +54,19 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldMaterial} />
             ),
           },
         ]}
       />
       <DataTable
-          setFilter={setFilter}
-          mutate={mutate}
-          labratory={labratory}
-          ldMaterial={ldMaterial || isValidating}
-          setModalVisible={setModalVisible}
+        setFilter={setFilter}
+        mutate={mutate}
+        labratory={labratory}
+        ldMaterial={ldMaterial || isValidating}
+        setModalVisible={setModalVisible}
       />
       <CreateModal
         mutate={mutate}

@@ -8,8 +8,8 @@ import useSWR from "swr";
 import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { listFetcher } from "../../../../lib/server/listFetcher";
-import { addIndexToData } from "../../../../lib/addIndexToData";
 import { RequestMaster } from "../../../../interfaces/requestMaster";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,8 +18,7 @@ export default function Page() {
     sampleTypeId: null,
     containerTypeId: null,
     barcodeUsePlaceTypeId: null,
-    fromRecord: 0,
-    selectRecord: 1000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState<any>(defaultValueTable);
@@ -41,8 +40,7 @@ export default function Page() {
     setFilter({
       name: values.name,
       IsActive: null,
-      fromRecord: 0,
-      selectRecord: 1000,
+      ...getPageRecordNumber()
     });
 
     await mutate();
@@ -61,9 +59,9 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldRequestMaster} />
             ),
           },
         ]}
@@ -71,7 +69,7 @@ export default function Page() {
       <div className="box-border w-full p-6 mt-8">
         <div className="flex justify-between items-center">
           <Typography className="max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901">
-            لیست بارکد
+            لیست بارکد ها
           </Typography>
           <Button
             className="max-md:w-full flex justify-center items-center gap-2"

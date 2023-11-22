@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, Col, Modal, Row} from "antd";
+import { Button, Col, Modal, Row } from "antd";
 
-function ConfirmDeleteModal({open, setOpen, handleDelete, title, loading = false}: {
+function ConfirmDeleteModal({ open, setOpen, handleDelete, title, loading }: {
     open: boolean,
     setOpen: (arg: boolean) => void,
     handleDelete: () => void,
@@ -27,6 +27,7 @@ function ConfirmDeleteModal({open, setOpen, handleDelete, title, loading = false
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
+                            disabled={loading}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={() => {

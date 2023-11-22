@@ -86,7 +86,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   const defaultValue = {
     materialUid: material.Uid,
     testItemUid: null,
-    IsActive: true,
+    IsActive: null,
   };
 
 
@@ -102,11 +102,12 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
   const deleteProductFactor = async () => {
     // @ts-ignore
-    await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
 
-    await mutate();
-
-    setOpen(false);
+      setOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
 
   const expandColumns: TableColumnsType<any> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
-    { title: "نام فاکتور", dataIndex: "TestItemName", key: "2" },
+    { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
       title: "عملیات",
       dataIndex: "2",
@@ -158,7 +159,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
-        title={"فاکتور ماده اولیه"}
+        title={"فاکتور آزمون ماده اولیه"}
       />
     </>
   );

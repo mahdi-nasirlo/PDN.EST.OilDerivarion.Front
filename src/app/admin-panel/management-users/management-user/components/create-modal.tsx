@@ -22,11 +22,11 @@ export default function CreateModal({
   const handleFormSubmit = async (values: any) => {
 
     const res = await trigger(values);
-    await mutate();
     if (res) {
+      await mutate();
       setModalVisible(false);
-      form.resetFields();
     }
+    form.resetFields();
   };
 
   const CloseModal = () => {

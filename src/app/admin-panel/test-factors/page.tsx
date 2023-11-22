@@ -1,14 +1,15 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import {ProductGet} from "../../../../interfaces/product";
-import {listFetcher} from "../../../../lib/server/listFetcher";
-import {TestItem} from "../../../../interfaces/TestItem";
-import {Collapse} from "antd";
+import { ProductGet } from "../../../../interfaces/product";
+import { listFetcher } from "../../../../lib/server/listFetcher";
+import { TestItem } from "../../../../interfaces/TestItem";
+import { Collapse } from "antd";
+import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,8 +17,7 @@ export default function Page() {
   const defaultValueTable = {
     name: null,
     IsActive: null,
-    fromRecord: 0,
-    selectRecord: 100000,
+    ...getPageRecordNumber()
   };
 
   const [filter, setFilter] = useState(defaultValueTable);
@@ -34,7 +34,7 @@ export default function Page() {
   );
   const setFilterTable = async (values: ProductGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, IsActive: values.IsActive, fromRecord: 0, selectRecord: 1000, });
+    setFilter({ name: values.name, IsActive: values.IsActive, ...getPageRecordNumber() });
 
     await mutate();
   };
@@ -52,19 +52,19 @@ export default function Page() {
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} />
+              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldFactor} />
             ),
           },
         ]}
       />
       <DataTable
-          setFilter={setFilter}
-          mutate={mutate}
-          ldTestItem={ldFactor}
-          TestItem={factors}
-          setModalVisible={setModalVisible}
+        setFilter={setFilter}
+        mutate={mutate}
+        ldTestItem={ldFactor}
+        TestItem={factors}
+        setModalVisible={setModalVisible}
       />
       <CreateModal
         mutate={mutate}

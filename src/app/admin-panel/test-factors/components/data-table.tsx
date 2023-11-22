@@ -46,12 +46,11 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await trigger({
-      uid: recordToDelete?.Uid,
-    });
-
-    await mutate();
-    setIsDeleteModalVisible(false);
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await mutate();
+      setIsDeleteModalVisible(false);
+    }
   };
 
   const showModal = () => {
@@ -66,7 +65,7 @@ export default function DataTable({
       width: "5%"
     },
     {
-      title: "نام فاکتور",
+      title: "نام فاکتور آزمون",
       dataIndex: "Name",
       key: "2",
     },

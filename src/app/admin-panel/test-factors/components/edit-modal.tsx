@@ -33,12 +33,12 @@ function EditModal({
   const handleSubmit = async (values: TestItem) => {
     values.Uid = editRecord?.Uid;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
+      setEditRecord(undefined);
 
-    setEditRecord(undefined);
-
-    await mutate();
-
+      await mutate();
+    }
     form.resetFields();
   };
 
@@ -52,7 +52,7 @@ function EditModal({
         width={800}
         title={
           <div>
-            <div className="text-base mb-2">ویرایش فاکتور جدید</div>
+            <div className="text-base mb-2">ویرایش فاکتور آزمون</div>
             <div className="font-normal text-sm">
               لطفا اطلاعات را وارد نمایید.
             </div>
@@ -76,7 +76,7 @@ function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating}
+                disabled={isLoading || isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={() => setEditRecord(undefined)}

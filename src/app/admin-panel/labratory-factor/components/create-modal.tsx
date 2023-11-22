@@ -50,12 +50,13 @@ export default function CreateModal({
   const handleFormSubmit = async (values: any) => {
     values.IsActive = true;
 
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
 
-    await mutate();
+      await mutate();
 
-    setModalVisible(false);
-
+      setModalVisible(false);
+    }
     form.resetFields();
   };
 
@@ -64,7 +65,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2"> افزودن فاکتور آزمایشگاه</div>
+          <div className="text-base mb-2"> افزودن فاکتور آزمون آزمایشگاه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -90,7 +91,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={closeModal}
@@ -130,7 +131,7 @@ export default function CreateModal({
           <Col xs={24} md={12}>
             <Form.Item
               name="testItemUid"
-              label="نام فاکتور"
+              label="نام فاکتور آزمون"
               rules={[{ required: true }]}
             >
               <Select

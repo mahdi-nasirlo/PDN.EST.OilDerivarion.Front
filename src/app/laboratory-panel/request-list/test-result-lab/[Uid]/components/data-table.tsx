@@ -70,7 +70,9 @@ export default function DataTable({labresult, ldlabresult}: {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                        onClick={() => { router.push(`/laboratory-panel/request-list/test-result-lab/submit-test-result`) }}
+                        onClick={() => {
+                            router.push(`/laboratory-panel/request-list/test-result-lab/submit-test-result/${record.Uid}`)
+                        }}
                     >
                         ثبت نتیجه
                     </Button>

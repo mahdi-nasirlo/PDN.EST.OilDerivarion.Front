@@ -1,5 +1,7 @@
 import React from 'react';
 import {ReturnedTypeFormRequest} from "../hooks/useFormRequest";
+import {FormSchemaFormsStructure} from "../type";
+import {Alert} from "antd";
 
 export interface FormBuilderType {
     initialValues: any,
@@ -17,15 +19,31 @@ interface FormBuilderProvider {
 }
 
 export const FormBuilderProvider = (props: FormBuilderProvider) => {
-    return (
-        <FormBuilderContext.Provider value={{
-            initialValues: props.initialValues,
-            type: props.type,
-            formData: props.formData
-        }}>
-            {props.children}
-        </FormBuilderContext.Provider>
-    );
+
+    try {
+        const data = JSON.parse(props.formData?.data?.schema?.json as string)
+
+        const isValidSchema = FormSchemaFormsStructure.safeParse(data)
+
+        if (!isValidSchema.success) console.log(isValidSchema.error)
+
+        return (
+            <FormBuilderContext.Provider value={{
+                initialValues: props.initialValues,
+                type: props.type,
+                formData: props.formData
+            }}>
+                {isValidSchema.success && props.children}
+                {!isValidSchema.success &&
+                    <Alert className="text-right" type="warning" message="دیتای وارد شده مقایرت دارد"/>
+                }
+            </FormBuilderContext.Provider>
+        );
+    } catch (e) {
+
+        return <Alert className="text-right" type="error" message="دیتای وارد شده مقایرت دارد"/>
+
+    }
 };
 
 export default FormBuilderProvider;

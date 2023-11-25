@@ -8,6 +8,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function CreateModal({
   setModalVisible,
@@ -20,20 +21,16 @@ export default function CreateModal({
 }) {
   const [form] = useForm();
 
-  const defaultValueTable = {
-    Name: null,
-    IsActive: null,
-    fromRecord: 0,
-    selectRecord: 100000,
-  };
+
+  const defaultValue = { name: null, IsActive: true }
 
   const { data: test, isLoading } = useSWR<any[]>(
-    ["/TestItem/GetAll", { name: null, IsActive: null }],
+    ["/TestItem/GetAll", defaultValue],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-  const { data: Lab, isLoading: ldProduct } = useSWR<{ records: any[] }>(
-    ["/Lab/GetPage", defaultValueTable],
+  const { data: Lab, isLoading: ldLab } = useSWR<any[]>(
+    ["/Lab/GetAll", defaultValue],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -118,11 +115,11 @@ export default function CreateModal({
             >
               <Select
                 showSearch
-                fieldNames={{ label: "Name", value: "Uid" }}
+                fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
-                options={Lab?.records}
-                loading={ldProduct}
+                options={Lab}
+                loading={ldLab}
                 size="large"
                 placeholder="انتخاب کنید"
               />

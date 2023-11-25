@@ -1,14 +1,14 @@
 "use client";
 
-import { Alert, Space, Table, Tag, Tooltip, Typography } from "antd";
+import {Alert, Space, Table, Tag, Tooltip, Typography} from "antd";
 import useSWR from "swr";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
-import { listFetcher } from "../../../lib/server/listFetcher";
-import { TestGetPage } from "../../../interfaces/test&verify";
+import {ColumnsType} from "antd/es/table";
+import {listFetcher} from "../../../lib/server/listFetcher";
+import {TestGetPage} from "../../../interfaces/test&verify";
 import React from "react";
 import axios from "axios";
-import { addIndexToData } from "../../../lib/addIndexToData";
+import {addIndexToData} from "../../../lib/addIndexToData";
 
 
 const fetcher = async () => {
@@ -56,9 +56,9 @@ export default function Home() {
           dataSource={addIndexToData(tests?.records)}
           columns={columns}
           pagination={{
-            defaultPageSize: 10,
+            defaultPageSize: 5,
             showSizeChanger: true,
-            pageSizeOptions: ["10", "20", "50"],
+            pageSizeOptions: ["5", "10", "25"],
             defaultCurrent: 1,
             style: {
               display: "flex",

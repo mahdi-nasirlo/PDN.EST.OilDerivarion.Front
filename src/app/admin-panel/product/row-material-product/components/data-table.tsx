@@ -84,13 +84,18 @@ export default function DataTable({
       dataIndex: "Materials",
       key: "5",
       render: (_, record) => (
-        <Typography.Text
-          className=" max-w-[200px]"
-          ellipsis={true}
-          style={{ width: "40px !important" }}
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.Materials}</Typography>}
         >
-          {record.Materials}
-        </Typography.Text>
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.Materials}
+          </Typography.Text>
+        </Tooltip>
       ),
     },
     {

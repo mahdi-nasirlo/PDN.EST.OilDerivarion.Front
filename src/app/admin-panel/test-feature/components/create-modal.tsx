@@ -46,7 +46,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن ویژگی فاکتور آزمون جدید</div>
+          <div className="text-base mb-2">افزودن استاندارد آزمون</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

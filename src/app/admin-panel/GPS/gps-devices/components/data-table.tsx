@@ -110,7 +110,7 @@ export default function DataTable({
             loading={openBox.isMutating}
             onClick={() => openBox.trigger()}
           >
-            بازکردن درب جعبه
+            بازکردن درب دستگاه
           </Button>
           <Button
             type="link"

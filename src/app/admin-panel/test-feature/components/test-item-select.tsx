@@ -16,7 +16,11 @@ export default function TestItemSelect({ name }: { name: string }) {
 
   return (
     <Col xs={24} md={12}>
-      <Form.Item name={name} label="عنوان استاندارد" rules={[{ required: true }]}>
+      <Form.Item
+        name={name}
+        label="فاکتور آزمون"
+        rules={[{ required: true }]}
+      >
         <Select
           showSearch
           // @ts-ignore

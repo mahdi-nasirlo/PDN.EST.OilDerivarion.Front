@@ -20,7 +20,7 @@ function ProductForm() {
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true }]}
             name="productUid"
             label="نام محصول"
           >
@@ -38,7 +38,7 @@ function ProductForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true }]}
             name="materialUid"
             label="نام ماده اولیه"
           >
@@ -57,7 +57,12 @@ function ProductForm() {
       </Row>
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال / غیر فعال">
+          <Form.Item
+            name="IsActive"
+            label="فعال / غیر فعال"
+            rules={[{ required: true }]}
+            initialValue={true}
+          >
             <Select
               size="large"
               options={[

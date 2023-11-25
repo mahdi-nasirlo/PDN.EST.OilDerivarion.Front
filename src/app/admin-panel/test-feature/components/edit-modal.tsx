@@ -63,7 +63,7 @@ export default function EditModal({
     <>
       <Modal
         width={800}
-        title="استاندارد آزمون"
+        title="ویرایش استاندارد آزمون"
         visible={isEditModalVisible}
         onOk={() => setIsEditModalVisible(true)}
         onCancel={handleCancelEdit}

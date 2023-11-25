@@ -77,14 +77,15 @@ export interface selectableProduct {
 }
 
 export interface RequestList{
-    Uid: string
-    ProcessDescription: string,
-    FileName: null,
-    IsReqDetailCompleted: boolean,
-    CompanyId: number,
-    ProductionMethodId: number,
-    CreateDate: string,
-    CompanyUid: string
-    CompanyName:string
-    ProductionMethodName:string
+    uid: string,
+    processDescription: string,
+    fileName: string,
+    isReqDetailCompleted: boolean,
+    producerId: number,
+    productionMethodId: number,
+    createDate: string,
+    producerUid: string,
+    producerName: string,
+    producerNationalCode: string,
+    productionMethodName: string
 }

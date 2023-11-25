@@ -11,6 +11,7 @@ import { addIndexToData } from "../../../../../lib/addIndexToData";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CustomeTable from "../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
 const DataTable = ({
   material,
@@ -125,27 +126,33 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },
     { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
     {
-      title: "عملیات",
-      dataIndex: "2",
-      key: "upgradeNum",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-red-500 font-bold"
-            onClick={() => {
-              setOpen(true);
-              setRecordToDelete(record);
-            }}
-          >
-            حذف
-          </Button>
-        </Space>
-      ),
+      title: "فعال/غیر فعال",
+      dataIndex: "IsActive",
+      key: "4",
+      render: (_, record: any) => <StatusColumn record={record} />
     },
+    // {
+    //   title: "عملیات",
+    //   dataIndex: "2",
+    //   key: "upgradeNum",
+    //   align: "center",
+    //   fixed: "right",
+    //   width: "10%",
+    //   render: (_, record) => (
+    //     <Space size="small">
+    //       <Button
+    //         type="link"
+    //         className="text-red-500 font-bold"
+    //         onClick={() => {
+    //           setOpen(true);
+    //           setRecordToDelete(record);
+    //         }}
+    //       >
+    //         حذف
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (

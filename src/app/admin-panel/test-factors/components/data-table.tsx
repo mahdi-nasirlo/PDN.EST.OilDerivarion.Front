@@ -85,7 +85,7 @@ export default function DataTable({
       key: "5",
     },
     {
-      title: "مقیاس آزمون",
+      title: "واحد اندازه گیری",
       dataIndex: "MeasureName",
       key: "6",
     },
@@ -110,13 +110,13 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          <Button
+          {/* <Button
             type="link"
             className="text-red-500 font-bold"
             onClick={() => handleDelete(record)}
           >
             حذف
-          </Button>
+          </Button> */}
         </Space>
       ),
     },

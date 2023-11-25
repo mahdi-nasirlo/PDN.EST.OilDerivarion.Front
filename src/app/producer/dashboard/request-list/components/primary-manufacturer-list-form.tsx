@@ -1,55 +1,41 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row } from "antd";
 import React from "react";
+import ButtonFilter from "../../../../../../components/ButtonFilter";
+import { useForm } from "antd/es/form/Form";
 
-export default function PrimaryManufacturerListForm() {
+export default function PrimaryManufacturerListForm({
+  filter,
+  unsetFilter,
+  isLoading
+}: {
+  filter: (arg: any) => void;
+  unsetFilter: () => void;
+  isLoading: boolean;
+}) {
+
+  const [form] = useForm();
+
   return (
     // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
-    <Form name="form_item_path" layout="vertical">
+    <Form onFinish={filter} form={form} layout="vertical">
       <Row gutter={[12, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="year-establishment" label="نام محصول">
+          <Form.Item name="processDescription" label="نام فرآیند">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="lastName" label="نام دسته بندی">
-            <Input size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="year-establishment" label="فعال / غیر فعال">
+          <Form.Item name="productionMethodName" label="روش تولید">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="lastName" label="کد محصول">
-            <Select size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="lastName" label="فاکتور آزمون">
-            <Select size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
       </Row>
-      <Row dir="ltr">
-        <Col xl={3} md={24} sm={24}>
-          <div className="flex gap-4 ">
-            <Button
-              className="w-full btn-delete-filter"
-              size="large"
-              type="primary"
-            >
-              <span className="flex gap-2 justify-center ">حذف فیلتر</span>
-            </Button>
-            <Button className="w-full btn-filter" size="large" type="primary">
-              <span className="flex gap-2 justify-center ">اعمال فیلتر</span>
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <ButtonFilter
+        unsetFilter={unsetFilter}
+        isLoading={isLoading}
+      />
     </Form>
     // </div>
   );

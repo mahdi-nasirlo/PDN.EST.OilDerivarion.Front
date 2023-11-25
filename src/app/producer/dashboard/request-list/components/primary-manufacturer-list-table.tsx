@@ -1,14 +1,22 @@
-import { Button, Space, Typography } from "antd";
-import React, { useState } from "react";
+import { Button, Space, Tag, Typography } from "antd";
+import React from "react";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
 import { useRouter } from "next/navigation";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import getPageRecordNumber from "../../../../../../lib/getPageRecordNumber";
 import CustomeTable from "../../../../../../components/CustomeTable";
 
-export default function PrimaryManufacturerListTable() {
+export default function PrimaryManufacturerListTable(
+  {
+    setFilter,
+    data,
+    isLoading,
+    mutate,
+  }: {
+    setFilter: any;
+    data: any;
+    isLoading: any
+    mutate: any
+  }) {
   const router = useRouter();
 
   const columns: ColumnsType<RequestList> = [
@@ -20,23 +28,46 @@ export default function PrimaryManufacturerListTable() {
     },
     {
       title: "نام فرآیند",
-      dataIndex: "ProcessDescription",
+      dataIndex: "processDescription",
       key: "2",
     },
     {
       title: "تاریخ درخواست",
-      dataIndex: "CreateDate",
+      dataIndex: "createDate",
       key: "3",
     },
     {
-      title: "نام شرکت",
-      dataIndex: "CompanyName",
+      title: "وضعیت",
+      dataIndex: "isReqDetailCompleted",
       key: "4",
+      render(_, record) {
+        let color = "";
+        let name = "";
+        if (record.isReqDetailCompleted === true) {
+          color = "success";
+          name = "تکمیل شده";
+        } else {
+          color = "red";
+          name = "تکمیل نشده";
+        }
+
+        return (
+          <Tag color={color}>
+            {name}
+          </Tag>
+        );
+
+      },
+    },
+    {
+      title: "نام شرکت",
+      dataIndex: "producerName",
+      key: "5",
     },
     {
       title: "روش تولید",
-      dataIndex: "ProductionMethodName",
-      key: "5",
+      dataIndex: "productionMethodName",
+      key: "6",
     },
     {
       title: "عملیات",
@@ -50,7 +81,7 @@ export default function PrimaryManufacturerListTable() {
             type="link"
             className={"text-secondary-500 font-bold"}
             onClick={() => {
-              router.push(`/producer/dashboard/request-detail/${record.Uid}`);
+              router.push(`/producer/dashboard/request-detail/${record.uid}`);
             }}
           >
             مشاهده اطلاعات
@@ -60,20 +91,7 @@ export default function PrimaryManufacturerListTable() {
     },
   ];
 
-  const [data, setData] = useState(getPageRecordNumber());
 
-  const {
-    data: request,
-    isLoading,
-    mutate,
-    isValidating,
-  } = useSWR<{ records: RequestList[]; count: number }>(
-    ["/RequestMaster/GetPage_Producer", data],
-    ([url, arg]: [url: string, arg: any]) =>
-      listFetcher(url, {
-        arg,
-      })
-  );
 
   return (
     <div className="box-border w-full p-6 mt-8">
@@ -82,9 +100,9 @@ export default function PrimaryManufacturerListTable() {
       </Typography>
       <CustomeTable
         columns={columns}
-        setInitialData={setData}
-        isLoading={isLoading || isValidating}
-        data={request}
+        setInitialData={setFilter}
+        isLoading={isLoading}
+        data={data}
       />
     </div>
   );

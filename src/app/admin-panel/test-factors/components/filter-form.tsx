@@ -39,7 +39,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         {/* <Col xs={24} md={12}>
-          <Form.Item name="measure_Id" label="مقیاس آزمون">
+          <Form.Item name="measure_Id" label="واحد اندازه گیری">
             <Select disabled size="large" placeholder="انتخاب کنید" />
           </Form.Item>
         </Col>

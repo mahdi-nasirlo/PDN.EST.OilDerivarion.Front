@@ -67,8 +67,7 @@ export default function DataTable({labresult, ldlabresult, params, mutate}: {
         {
             title: "فاکتور آزمون",
             dataIndex: "Name",
-            key: "2",
-            width: "25%"
+          
         },
         {
             title: "روش آزمون",
@@ -181,7 +180,7 @@ export default function DataTable({labresult, ldlabresult, params, mutate}: {
                     columns={columns}
 
                 />
-     
+
                 <ResultModal handleFormSubmit={handleFormSubmit} setModalVisible={setModalVisible}
                              modalVisible={modalVisible}/>
             </div>

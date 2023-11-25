@@ -156,7 +156,7 @@ export default function DataTable({
         open={isDeleteModalVisible}
         setOpen={setIsDeleteModalVisible}
         handleDelete={handleConfirmDelete}
-        title="مواد اولیه"
+        title="فاکتور آزمون"
         loading={IsDeleteTestFactor}
       />
     </>

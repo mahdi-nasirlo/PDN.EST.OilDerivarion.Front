@@ -72,7 +72,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex ">افزودن فاکتور محصول</span>
+            <span className="flex ">افزودن فاکتور آزمون محصول</span>
           </Button>
         </div>
         <DataTable

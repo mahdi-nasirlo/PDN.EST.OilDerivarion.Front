@@ -1,10 +1,10 @@
 "use client";
 
-import { Button, Col, Form, Row } from "antd";
+import {Button, Col, Form, Row} from "antd";
 import React from "react";
-import { useForm } from "antd/es/form/Form";
-import { SvgIcon } from "@/components/layout/sidebar";
-import CustomeDatePicker from "../../../../../../../components/CustomeDatePicker";
+import {useForm} from "antd/es/form/Form";
+import {SvgIcon} from "@/components/layout/sidebar";
+import CustomeDatePicker from "../../../../../../../../components/CustomeDatePicker";
 
 export default function DateForm() {
     const [form] = useForm();

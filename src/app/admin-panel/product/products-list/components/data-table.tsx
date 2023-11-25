@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tag, Typography } from "antd";
+import { Button, Space, Tag, Tooltip, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -95,9 +95,42 @@ export default function DataTable({
       render: (_, record) => <StatusColumn record={record} />
     },
     {
+      title: "مواد اولیه",
+      dataIndex: "Materials",
+      key: "5",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.Materials}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.Materials}
+          </Typography.Text>
+        </Tooltip>
+      ),
+    },
+    {
       title: "فاکتور آزمون",
       dataIndex: "TestItems",
-      key: "5",
+      key: "6",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.TestItems}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.TestItems}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "عملیات",
@@ -141,7 +174,7 @@ export default function DataTable({
             onClick={showModal}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex gap-2">افزودن محصول جدید</span>
+            <span className="flex gap-2">افزودن محصول</span>
           </Button>
         </div>
         <CustomeTable setInitialData={setFilter} isLoading={ldProduct || ldDelete} data={product} columns={columns} />

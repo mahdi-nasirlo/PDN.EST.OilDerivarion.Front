@@ -2,21 +2,21 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {Badge, MenuProps} from "antd";
+import { Badge, MenuProps } from "antd";
 import Link from "next/link";
 import {
-    BeakerIcon,
-    DocumentDuplicateIcon,
-    DocumentMagnifyingGlassIcon,
-    HomeIcon,
-    PencilIcon,
-    PhoneIcon,
-    UserCircleIcon,
-    UsersIcon,
-    WrenchScrewdriverIcon,
+  BeakerIcon,
+  DocumentDuplicateIcon,
+  DocumentMagnifyingGlassIcon,
+  HomeIcon,
+  PencilIcon,
+  PhoneIcon,
+  UserCircleIcon,
+  UsersIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import {ListBulletIcon} from "@heroicons/react/24/solid";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { ListBulletIcon } from "@heroicons/react/24/solid";
+import { getMenuItem } from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -93,30 +93,30 @@ const items: MenuProps["items"] = [
         </Link>,
         "/producer/step07/list"
       ),
-      getMenuItem(
-        <Link href={"/producer/step08/list"}>
-          ثبت اطلاعات محل بازدید
-        </Link>,
-        "/producer/step08/list"
-      ),
-      getMenuItem(
-        <Link href={"/producer/step09/list"}>
-          تکمیل صورت جلسه در اپلیکیشن
-        </Link>,
-        "/producer/step09/list"
-      ),
-      getMenuItem(
-        <Link href={"/producer/step10/list"}>
-          بارگذاری فیلم و تصاویر کارگروه
-        </Link>,
-        "/producer/step10/list"
-      ),
-      getMenuItem(
-        <Link href={"/producer/step11/list"}>
-          نتایج بازدید
-        </Link>,
-        "/producer/step11/list"
-      ),
+      // getMenuItem(
+      //   <Link href={"/producer/step08/list"}>
+      //     ثبت اطلاعات محل بازدید
+      //   </Link>,
+      //   "/producer/step08/list"
+      // ),
+      // getMenuItem(
+      //   <Link href={"/producer/step09/list"}>
+      //     تکمیل صورت جلسه در اپلیکیشن
+      //   </Link>,
+      //   "/producer/step09/list"
+      // ),
+      // getMenuItem(
+      //   <Link href={"/producer/step10/list"}>
+      //     بارگذاری فیلم و تصاویر کارگروه
+      //   </Link>,
+      //   "/producer/step10/list"
+      // ),
+      // getMenuItem(
+      //   <Link href={"/producer/step11/list"}>
+      //     نتایج بازدید
+      //   </Link>,
+      //   "/producer/step11/list"
+      // ),
       getMenuItem(
         <Link href={"/producer/step12/list"}>
           بررسی نمونه برداری انجام شده1
@@ -230,57 +230,57 @@ const items: MenuProps["items"] = [
         "/producer/base-info/laboratory-equipments",
         <BeakerIcon width={16} height={16} />
       ),
-        getMenuItem(
-            <Link href="/producer/base-info/container-info">
-                اطلاعات مخازن میکس یا بلندینگ
-            </Link>,
-            "/producer/base-info/container-info",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/container-product">
-                اطلاعات مخازن محصول
-            </Link>,
-            "/producer/base-info/container-product",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/ractore-info">
-                مشخصات راکتور
-            </Link>,
-            "/producer/base-info/ractore-info",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/slice-produce">
-                خط تولید برش گیری </Link>,
-            "/producer/base-info/slice-produce",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/distillation-tower">
-                مشخصات برج تقطیر </Link>,
-            "/producer/base-info/distillation-tower",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/ractore-prompter">
-                راکتور سولفور زدایی </Link>,
-            "/producer/base-info/ractore-prompter",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/sweetening">
-                شیرین سازی</Link>,
-            "/producer/base-info/sweetening",
-            <BeakerIcon width={16} height={16}/>
-        ),
-        getMenuItem(
-            <Link href="/producer/base-info/facility-control-room">
-                تجهیزات اتاق کنترل </Link>,
-            "/producer/base-info/facility-control-rooms",
-            <BeakerIcon width={16} height={16}/>
-        ),
+      getMenuItem(
+        <Link href="/producer/base-info/container-info">
+          اطلاعات مخازن میکس یا بلندینگ
+        </Link>,
+        "/producer/base-info/container-info",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/container-product">
+          اطلاعات مخازن محصول
+        </Link>,
+        "/producer/base-info/container-product",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/ractore-info">
+          مشخصات راکتور
+        </Link>,
+        "/producer/base-info/ractore-info",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/slice-produce">
+          خط تولید برش گیری </Link>,
+        "/producer/base-info/slice-produce",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/distillation-tower">
+          مشخصات برج تقطیر </Link>,
+        "/producer/base-info/distillation-tower",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/ractore-prompter">
+          راکتور سولفور زدایی </Link>,
+        "/producer/base-info/ractore-prompter",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/sweetening">
+          شیرین سازی</Link>,
+        "/producer/base-info/sweetening",
+        <BeakerIcon width={16} height={16} />
+      ),
+      getMenuItem(
+        <Link href="/producer/base-info/facility-control-room">
+          تجهیزات اتاق کنترل </Link>,
+        "/producer/base-info/facility-control-rooms",
+        <BeakerIcon width={16} height={16} />
+      ),
       getMenuItem(
         <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
         "/producer/base-info/visit-form",

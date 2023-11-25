@@ -76,7 +76,7 @@ export default function Page() {
             onClick={() => setModalVisible(true)}
           >
             <PlusIcon width={24} height={24} />
-            <span className="flex gap-2">افزودن جعبه</span>
+            <span className="flex gap-2">افزودن دستگاه GPS</span>
           </Button>
         </div>
         <DataTable

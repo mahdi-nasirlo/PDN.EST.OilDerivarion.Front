@@ -512,10 +512,13 @@ margin-right: 16px !important;
     border-color:#4ade80;
 }
 
-.DatePicker {
+.DatePicker{
     @apply w-full !important
 }
 
+.ant-input-status-success{
+        @apply w-full max-lg:py-[6.5px] !important
+}
 .ant-tooltip-inner{
     background-color: white !important;
     color: black !important;

@@ -81,7 +81,7 @@ export default function PrimaryManufacturerListTable(
             type="link"
             className={"text-secondary-500 font-bold"}
             onClick={() => {
-              router.push(`/producer/dashboard/request-detail/${record.Uid}`);
+              router.push(`/producer/dashboard/request-detail/${record.uid}`);
             }}
           >
             مشاهده اطلاعات

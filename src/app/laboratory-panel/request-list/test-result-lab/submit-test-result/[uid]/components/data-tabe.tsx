@@ -181,16 +181,7 @@ export default function DataTable({labresult, ldlabresult, params, mutate}: {
                     columns={columns}
 
                 />
-                <Button
-                    loading={false}
-                    size="large"
-                    className={"w-full"}
-                    type="primary"
-                    // onClick={() => form.submit()}
-                    key={"submit"}
-                >
-                    ثبت
-                </Button>
+     
                 <ResultModal handleFormSubmit={handleFormSubmit} setModalVisible={setModalVisible}
                              modalVisible={modalVisible}/>
             </div>

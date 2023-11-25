@@ -5,6 +5,8 @@ export type Product = {
   ProductCategoryName: string;
   ProductCategory_Id: number;
   IsActive: boolean;
+  Materials: string;
+  TestItems: string;
 };
 
 export interface ProductGet {

@@ -45,7 +45,7 @@ function EditModal({
     <>
       <Modal
         width={800}
-        title="ویرایش جعبه"
+        title="ویرایش دستگاه GPS"
         open={modalVisible}
         onOk={() => setModalVisible(true)}
         onCancel={() => setModalVisible(false)}

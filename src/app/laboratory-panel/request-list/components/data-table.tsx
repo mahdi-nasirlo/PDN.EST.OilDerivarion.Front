@@ -1,12 +1,13 @@
 "use client";
 
-import { Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
+import {Button, Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
 import ActiveCodeModal from './accept-modals/active-code-modal';
+import {useRouter} from "next/navigation";
 
 
 export default function DataTable({
@@ -29,6 +30,9 @@ export default function DataTable({
     }
     | undefined;
 }) {
+
+    const router = useRouter();
+
     const [isModalOpenTest, setIsModalOpenTest] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,9 +74,30 @@ export default function DataTable({
                 if (record.labIsAccepted === false) {
                     color = "red";
                     name = "بررسی نشده";
+                    return (
+                        <Tag color={color}>
+                            {name}
+                        </Tag>
+                    );
                 } else if (record.labIsAccepted === true) {
                     color = "success";
                     name = "بررسی شده";
+                    return (
+                        <Space size="small">
+                            <Tag color={color}>
+                                {name}
+                            </Tag>
+                            <Button
+                                className={'text-secondary-500 font-bold'}
+                                type={"link"}
+                                onClick={
+                                    () => router.push(`/laboratory-panel/request-list/test-result-lab/${record.uid}`)
+                                }
+                            >
+                                مشاهده نتیجه
+                            </Button>
+                        </Space>
+                    )
                 } else {
                     return (
                         <>
@@ -99,11 +124,6 @@ export default function DataTable({
                         </>
                     )
                 }
-                return (
-                    <Tag color={color}>
-                        {name}
-                    </Tag>
-                );
             }
         },
     ];

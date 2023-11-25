@@ -156,8 +156,14 @@ export default function CreateModal({
         </Row>
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
-            <Form.Item name="IsActive" label="فعال / غیر فعال">
+            <Form.Item
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              name="IsActive"
+              label="فعال / غیر فعال"
+              initialValue={true}
+            >
               <Select
+
                 size="large"
                 options={[
                   { label: "فعال", value: true },

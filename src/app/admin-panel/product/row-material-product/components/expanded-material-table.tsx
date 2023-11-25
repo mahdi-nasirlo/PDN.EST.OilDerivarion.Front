@@ -8,6 +8,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { product: Product, mutate: any }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
@@ -61,27 +62,33 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
       key: "2",
     },
     {
-      title: "عملیات",
-      dataIndex: "2",
-      key: "upgradeNum",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-red-500 font-bold"
-            onClick={() => {
-              setOpen(true);
-              setRecordToDelete(record);
-            }}
-          >
-            حذف
-          </Button>
-        </Space>
-      ),
+      title: "فعال/غیر فعال",
+      dataIndex: "IsActive",
+      key: "4",
+      render: (_, record: any) => <StatusColumn record={record} />
     },
+    // {
+    //   title: "عملیات",
+    //   dataIndex: "2",
+    //   key: "upgradeNum",
+    //   align: "center",
+    //   fixed: "right",
+    //   width: "10%",
+    //   render: (_, record) => (
+    //     <Space size="small">
+    //       <Button
+    //         type="link"
+    //         className="text-red-500 font-bold"
+    //         onClick={() => {
+    //           setOpen(true);
+    //           setRecordToDelete(record);
+    //         }}
+    //       >
+    //         حذف
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
   ];
 
 

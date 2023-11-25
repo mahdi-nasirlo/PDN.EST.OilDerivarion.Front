@@ -520,3 +520,7 @@ margin-right: 16px !important;
     background-color: white !important;
     color: black !important;
 }
+
+.ant-radio-group label {
+    @apply h-[50px] leading-[45px] !important;
+}

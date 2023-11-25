@@ -85,7 +85,7 @@ export default function DataTable({
       key: "5",
     },
     {
-      title: "مقیاس آزمون",
+      title: "واحد اندازه گیری",
       dataIndex: "MeasureName",
       key: "6",
     },

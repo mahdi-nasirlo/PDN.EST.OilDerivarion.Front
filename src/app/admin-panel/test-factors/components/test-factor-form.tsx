@@ -10,7 +10,7 @@ function TestFactorForm() {
       "/Measure/GetAll",
       {
         name: null,
-        IsActive: null,
+        IsActive: true,
       },
     ],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
@@ -31,7 +31,7 @@ function TestFactorForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="measureUid"
-            label="مقیاس آزمون"
+            label="واحد اندازه گیری"
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Select

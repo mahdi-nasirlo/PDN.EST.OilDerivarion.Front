@@ -11,6 +11,7 @@ import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
+import DataViewer from "../../../../../../components/FormBuilder/DataViewer";
 
 interface PropType {
   params: { uid: string };
@@ -64,6 +65,7 @@ export default function Home(props: PropType) {
       <>
         <div className="box-border w-full p-6">
           <WorkflowDataViewer loading={isLoading} data={data as any}/>
+          <DataViewer data={data || {}}/>
           <Form onFinish={onFinish} form={form}>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>

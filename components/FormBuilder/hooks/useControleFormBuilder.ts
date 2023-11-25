@@ -6,7 +6,9 @@ const useControlFormBuilder = () => {
     const context = useContext(FormBuilderContext)
 
     // Assuming context.formData.data?.records is an object
-    const oldData = JSON.parse(context.formData.data?.records) || {};
+    let oldData = context.formData?.data?.records ? (JSON?.parse(context.formData?.data?.records || {}) || {}) : {};
+
+    oldData["__schema"] = context.formData?.data?.schema
 
     const onSetMany = (data: any, formKey: string) => {
 
@@ -29,7 +31,7 @@ const useControlFormBuilder = () => {
         const oldDataForm = oldData[formKey];
 
         if (Array.isArray(oldDataForm)) {
-            
+
             if (index >= 0 && index < oldDataForm.length) {
 
                 oldDataForm.splice(index, 1);

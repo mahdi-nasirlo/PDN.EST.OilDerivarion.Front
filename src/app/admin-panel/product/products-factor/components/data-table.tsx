@@ -123,20 +123,20 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
     ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
-  // const { trigger, isMutating } = useSWRMutation(
-  //   "/ProductTestItem/Delete",
-  //   mutationFetcher
-  // );
+  const { trigger, isMutating } = useSWRMutation(
+    "/ProductTestItem/Delete",
+    mutationFetcher
+  );
 
-  // const deleteProductFactor = async () => {
-  //   const res = await trigger({ uid: recordToDelete?.Uid });
-  //   if (res) {
-  //     await TableMutate();
+  const deleteProductFactor = async () => {
+    const res = await trigger({ uid: recordToDelete?.Uid });
+    if (res) {
+      await TableMutate();
 
-  //     await mutate();
-  //     setOpen(false);
-  //   }
-  // };
+      await mutate();
+      setOpen(false);
+    }
+  };
 
   useEffect(() => {
     if (!isLoading) {
@@ -191,13 +191,13 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
         }
         pagination={false}
       />
-      {/* <ConfirmDeleteModal
+      <ConfirmDeleteModal
         loading={isMutating}
         open={open}
         setOpen={setOpen}
         handleDelete={deleteProductFactor}
         title="فاکتور آزمون محصول"
-      /> */}
+      />
     </>
   );
 };

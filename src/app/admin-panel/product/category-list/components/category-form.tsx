@@ -9,7 +9,7 @@ function CategoryForm({
 }: {
   defaultSelectedDensity?: boolean;
 }) {
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllTestMethod", listFetcher);
+  const { data, isLoading } = useSWR("/BaseInfo/GetAllProductionMethod", listFetcher);
 
   const [hasDensity, setHasDensity] = useState(defaultSelectedDensity);
 

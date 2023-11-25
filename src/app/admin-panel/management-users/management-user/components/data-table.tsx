@@ -134,13 +134,13 @@ export default function DataTable({
                     >
                         ویرایش
                     </Button>
-                    <Button
+                    {/* <Button
                         type="link"
                         className="text-red-500 font-bold"
                         onClick={() => handleDelete(record)}
                     >
                         حذف
-                    </Button>
+                    </Button> */}
                 </Space >
             ),
         },

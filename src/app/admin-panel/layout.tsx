@@ -2,9 +2,9 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import {getMenuItem} from "@/components/layout/sidebar";
+import { getMenuItem } from "@/components/layout/sidebar";
 import Link from "next/link";
-import {MenuProps} from "antd";
+import { MenuProps } from "antd";
 import {
   Bars3Icon,
   ClipboardDocumentListIcon,
@@ -199,11 +199,11 @@ const items: MenuProps["items"] = [
     // <FolderPlusIcon width={16} height={16} />
   ),
 
-  getMenuItem(
-      <Link href={"/admin-panel/test-result-lab"}>لیست نتایج آزمون ها</Link>,
-      "/admin-panel/test-result-lab"
-    // <FolderPlusIcon width={16} height={16}/>
-  ),
+  // getMenuItem(
+  //     <Link href={"/admin-panel/test-result-lab"}>لیست نتایج آزمون ها</Link>,
+  //     "/admin-panel/test-result-lab"
+  //   // <FolderPlusIcon width={16} height={16}/>
+  // ),
 
   getMenuItem(
     <Link href="/admin-panel/measures">لیست واحد های اندازه گیری</Link>,

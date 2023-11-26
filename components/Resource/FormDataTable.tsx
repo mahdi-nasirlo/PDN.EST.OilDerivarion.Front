@@ -7,6 +7,7 @@ import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 interface PropType {
     schema: FormType,
     records: { [formId: string]: any[] },
+    delete?: boolean
 }
 
 const FormDataTable = (props: PropType) => {
@@ -18,21 +19,27 @@ const FormDataTable = (props: PropType) => {
 
     let columns: TableColumnsType<any>
 
+
     columns = props.schema.FormFields.map((value, index) => ({
         key: index,
         title: value.Title_Style,
         dataIndex: value.Name
     }))
 
-    columns.push({
-        title: "عملیات", render: (value, record, index) => <Button
-            type="text"
-            className="text-red-500"
-            onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
-        >
-            حذف
-        </Button>
-    })
+
+    if (props?.delete && formProvider.deleteFromMany) {
+
+        columns.push({
+            title: "عملیات", render: (value, record, index) => <Button
+                type="text"
+                className="text-red-500"
+                onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
+            >
+                حذف
+            </Button>
+        })
+
+    }
 
     useEffect(() => {
 

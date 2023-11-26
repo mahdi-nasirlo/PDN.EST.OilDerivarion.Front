@@ -76,7 +76,7 @@ const Index = ({data}: { data: any }) => {
                                             {value.Title}
                                         </Typography>
                                         <div>
-                                            <FormDataTable schema={value1 as any} records={item}/>
+                                            <FormDataTable schema={value1 as any} records={item} delete={false}/>
                                         </div>
                                         {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
                                             <Divider className="my-2"/>}

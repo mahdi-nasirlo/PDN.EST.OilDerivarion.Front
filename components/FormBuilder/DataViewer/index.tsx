@@ -63,8 +63,6 @@ const Index = ({data}: { data: any }) => {
                                             </Descriptions.Item>
                                         </>)}
                                     </Descriptions>
-                                    {/*{index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&*/}
-                                    {/*    <Divider className="py-8"/>}*/}
                                 </>)
 
                                 return
@@ -74,6 +72,9 @@ const Index = ({data}: { data: any }) => {
                             if (value1.Mode === 0) {
                                 view.push(<>
                                     <div className="my-8">
+                                        <Typography className="text-right font-bold text-lg mb-5">
+                                            {value.Title}
+                                        </Typography>
                                         <FormDataTable schema={value1 as any} records={schemaValue}/>
                                         {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
                                             <Divider className="my-2"/>}
@@ -99,8 +100,15 @@ const Index = ({data}: { data: any }) => {
 
     });
 
+    let viewWithDivider = []
+
+    for (let i = 0; i < view.length; i++) {
+        viewWithDivider.push(view[i]);
+        viewWithDivider.push(<Divider/>);
+    }
+
     return <Typography>
-        {view?.map((value, index) => <div key={index}>
+        {viewWithDivider?.map((value, index) => <div key={index}>
             {value}
         </div>)}
     </Typography>

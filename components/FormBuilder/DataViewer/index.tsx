@@ -68,14 +68,16 @@ const Index = ({data}: { data: any }) => {
                                 return
                             }
 
-                            console.log(schemaValue)
+                            // console.log(schemaValue)
                             if (value1.Mode === 0) {
                                 view.push(<>
                                     <div className="my-8">
                                         <Typography className="text-right font-bold text-lg mb-5">
                                             {value.Title}
                                         </Typography>
-                                        <FormDataTable schema={value1 as any} records={schemaValue}/>
+                                        <div>
+                                            <FormDataTable schema={value1 as any} records={item}/>
+                                        </div>
                                         {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
                                             <Divider className="my-2"/>}
                                     </div>

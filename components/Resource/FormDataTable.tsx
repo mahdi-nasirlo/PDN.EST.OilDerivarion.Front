@@ -39,6 +39,10 @@ const FormDataTable = (props: PropType) => {
         const records = props?.records
         const formKey = props?.schema?.Form_Key
 
+        console.log(records)
+        console.log(formKey)
+
+
         if (formKey && records && formKey in records && Array.isArray(records[formKey])) {
             setState(records[formKey])
         }
@@ -50,16 +54,11 @@ const FormDataTable = (props: PropType) => {
             <Table
                 columns={columns}
                 dataSource={state}
+                pagination={false}
             />
         </>
     );
-    // } catch (e) {
-    //
-    //     return <Typography>
-    //         error in data table form
-    //     </Typography>
-    //
-    // }
+
 };
 
 export default FormDataTable;

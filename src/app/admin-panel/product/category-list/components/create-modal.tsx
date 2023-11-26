@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
+import {Button, Col, Form, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { CategoryProduct } from "../../../../../../interfaces/category-product";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {CategoryProduct} from "../../../../../../interfaces/category-product";
 import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
 
 export default function CreateModal({
@@ -45,7 +45,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن دسته بندی جدید</div>
+          <div className="text-base mb-2">افزودن دسته بندی</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

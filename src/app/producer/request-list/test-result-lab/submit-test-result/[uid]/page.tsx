@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import DataTable
-    from "@/app/laboratory-panel/request-list/test-result-lab/submit-test-result/[uid]/components/data-tabe"
 import useSWR from "swr";
 import {listFetcher} from "../../../../../../../lib/server/listFetcher";
+import DataTable from "@/app/producer/step18/test-result-lab/submit-test-result/[uid]/components/data-tabe";
 
 
 export default function Page({

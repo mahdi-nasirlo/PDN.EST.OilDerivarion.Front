@@ -57,7 +57,7 @@ export default function Home(props: PropType) {
 
     const res = await trigger(data);
 
-    if (res) router.push("/producer/step08/list");
+    if (res) router.push("/producer/step18/list");
   };
 
   return (

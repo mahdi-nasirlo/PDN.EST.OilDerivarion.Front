@@ -11,24 +11,24 @@ import {useRouter} from "next/navigation";
 
 
 export default function DataTable({
-    setFilter,
-    isValidating,
-    setModalVisible,
-    isLoading,
-    data,
-    mutate,
-}: {
+                                      setFilter,
+                                      isValidating,
+                                      setModalVisible,
+                                      isLoading,
+                                      data,
+                                      mutate,
+                                  }: {
     setFilter: (arg: any) => void
     isValidating: any;
     setModalVisible: any;
     isLoading: boolean;
     mutate: () => void;
     data:
-    | {
+        | {
         count: number;
         records: Material[];
     }
-    | undefined;
+        | undefined;
 }) {
 
     const router = useRouter();
@@ -91,7 +91,7 @@ export default function DataTable({
                                 className={'text-secondary-500 font-bold'}
                                 type={"link"}
                                 onClick={
-                                    () => router.push(`/laboratory-panel/request-list/test-result-lab/${record.uid}`)
+                                    () => router.push(`/producer/step18/test-result-lab/${record.uid}`)
                                 }
                             >
                                 مشاهده نتیجه
@@ -161,7 +161,7 @@ export default function DataTable({
                             setActiveExpRow(keys);
                         },
                         expandedRowRender: (record: any) => (
-                            <ExpandedDetailsTable data={record} />
+                            <ExpandedDetailsTable data={record}/>
                         ),
                     }}
                 />

@@ -153,8 +153,8 @@ const items: MenuProps["items"] = [
         "/producer/step17/list"
       ),
       getMenuItem(
-        <Link href={"/producer/step18/list"}>
-          بررسی مکان جغرافیایی و اجازه گشودن جعبه
+        <Link href={"/producer/step18"}>
+            بررسی مکان جغرافیایی و اجازه گشودن جعبه
         </Link>,
         "/producer/step18/list"
       ),

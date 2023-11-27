@@ -1,12 +1,17 @@
 "use client";
 
-import {Button, Checkbox, Descriptions, Divider, Form, Typography} from "antd";
+import {Button, Checkbox, Divider, Form} from "antd";
 import React, {useContext} from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import {useForm} from "antd/es/form/Form";
+import DataViewer from "../../../../../../../components/FormBuilder/DataViewer";
+import useGetBaseInfo from "../../../../../../../hooks/producer/useGetBaseInfo";
 
 export default function Step5() {
+
     const processController = useContext(StepContext);
+
+    const getInfo = useGetBaseInfo()
 
     const handleSubmit = () => {
         processController.dispatch({
@@ -19,30 +24,10 @@ export default function Step5() {
     const [form] = useForm();
     return (
         <>
-            <Typography className="text-right font-medium text-base">
-                اطلاعات واحد تولیدی
-            </Typography>
             <Divider/>
             <div className='w-full bg-gray-50 rounded-md p-5'>
-                <Descriptions className="text-right" title="اطلاعات واحد تولید در این بخش قرار خواهد گرفت">
-                    <Descriptions.Item label="نام مدیر عامل">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="نام خانوادگی مدیر عامل">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="شناسه ملی">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="نام واحد تولیدی">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="نوع مالکیت">
-                        <span></span>
-                    </Descriptions.Item>
-                </Descriptions>
+                <DataViewer data={getInfo.data || {}}/>
             </div>
-            <Divider/>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item
                     className=" mr-3 my-6  font-medium"

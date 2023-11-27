@@ -1,83 +1,101 @@
-"use client";
-
-import {Button, Checkbox, Descriptions, Divider, Form, Typography} from "antd";
-import React, {useContext} from "react";
+import React, {useContext, useState} from 'react';
+import ReviewDataTable from "@/app/producer/dashboard/request/steps/step5/review-data-table";
+import {Button, Checkbox, Col, Divider, Form, Row, Spin} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {useForm} from "antd/es/form/Form";
+import useSWRMutation from "swr/mutation";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
+import ReviewDataModalAcceptAgreement
+    from "@/app/producer/dashboard/request/steps/step5/review-data-modal-accept-agreement";
+import ReviewDataModalFinalSubmit from "@/app/producer/dashboard/request/steps/step5/review-data-modal-final-submit";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 
-export default function Step6() {
-    const processController = useContext(StepContext);
+const Index = () => {
 
-    const handleSubmit = () => {
-        processController.dispatch({
-            type: "GET_STEP",
-            stepNumber: 6,
-            step: 5,
-        });
+    const processController = useContext(StepContext)
+
+    const [modalVisibleConfirmation, setModalVisibleConfirmation] = useState(false);
+    const [modalVisibleFinalSubmit, setModalVisibleFinalSubmit] = useState(false);
+
+    const [form] = useForm()
+
+    const {trigger, isMutating} = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
+
+    const onFinish = async () => {
+        const data = await trigger({
+            "uid": processController.requestMaster.requestMasterUid
+        })
+
+        if (data) {
+            setModalVisibleFinalSubmit(true)
+        }
     };
+
     return (
         <>
-            {/* <div className="box-border w-full lg:mt-8 lg:p-6 p-2 mt-3"> */}
-            <Typography className="text-right font-medium text-base">
-                اطلاعات تجهیزات آزمایشگاهی
-            </Typography>
-            <Divider/>
-            <div className='w-full bg-gray-50 rounded-md p-5'>
-                <Descriptions className="text-right" title="اطلاعات تجهیزات آزمایشگاه در این بخش قرار خواهد گرفت">
-                    <Descriptions.Item label="تقطیر اتمسفریک">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="تقطیر در خلاء">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="نقطه ریزش">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="خوردگی فلز">
-                        <span></span>
-                    </Descriptions.Item>
-                    <Descriptions.Item label="TAN (تست اسیدی)">
-                        <span></span>
-                    </Descriptions.Item>
-                </Descriptions>
-            </div>
-            <Divider/>
-            <Form onFinish={handleSubmit}>
-                <Form.Item
-                    className=" mr-3 my-6  font-medium"
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value
-                                    ? Promise.resolve()
-                                    : Promise.reject(
-                                        new Error("پذیرش اطلاعات فوق ضروری می باشد")
-                                    ),
-                        },
-                    ]}
+            <Spin size='large' spinning={processController.isMutating}>
+                <ReviewDataTable/>
+
+                <Divider/>
+                <Form
+                    form={form}
+                    name="register"
+                    onFinish={onFinish}
                 >
-                    <Checkbox>اطلاعات فوق را تایید میکنم.</Checkbox>
-                </Form.Item>
-                <div className="flex gap-3">
-                    <Button
-                        onClick={() => processController.dispatch({type: "PREVIOUS"})}
-                        type="dashed"
-                        className="bg-gray-100 w-full"
+                    <Form.Item
+                        className=" mr-3 my-6  font-medium"
+                        name="agreement"
+                        valuePropName="checked"
+                        rules={[
+                            {
+                                validator: (_, value) =>
+                                    value ? Promise.resolve() : Promise.reject(new Error('پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد')),
+                            },
+                        ]}
                     >
-                        مرحله قبلی
-                    </Button>
-                    <Button
-                        className="w-full management-info-form-submit btn-filter"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        ذخیره و ادامه
-                    </Button>
-                </div>
-            </Form>
-            {/* </div> */}
+                        <Checkbox>
+                            شرایط و <span className="text-primary-500 p-0"
+                                          onClick={() => setModalVisibleConfirmation(true)}>قوانین</span> را
+                            خوانده و می پذیرم!
+                        </Checkbox>
+                    </Form.Item>
+                    <Divider/>
+                    <Row gutter={[10, 0]}>
+                        <Col span={12}>
+                            <Button
+                                onClick={processController.getNextStep}
+                                className="w-full bg-gray-50 flex items-center justify-center"
+                                size="large"
+                                icon={<PlusIcon width={24} height={24}/>}
+                            >
+                                افزودن مواد اولیه و محصول جدید
+                            </Button>
+                        </Col>
+                        <Col span={12}>
+                            <Button
+                                className="w-full management-info-form-submit btn-filter"
+                                size="large"
+                                type="primary"
+                                htmlType="submit"
+                            >
+                                <span className="flex gap-3 justify-center ">ثبت و تایید نهایی</span>
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </Spin>
+            <ReviewDataModalAcceptAgreement
+                modalVisibleConfirmation={modalVisibleConfirmation}
+                setModalVisibleConfirmation={setModalVisibleConfirmation}
+            />
+            <ReviewDataModalFinalSubmit
+                modalVisibleFinalSubmit={modalVisibleFinalSubmit}
+                setModalVisibleFinalSubmit={setModalVisibleFinalSubmit}
+            />
+
         </>
     );
-}
+};
+
+
+export default Index;

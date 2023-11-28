@@ -24,7 +24,7 @@ interface ProcessRequestMaster {
     productionMethodId: number
 }
 
-const stepNumber = 5
+const stepNumber = 4
 
 const useControlProcess = (): ControllerProcessType => {
 

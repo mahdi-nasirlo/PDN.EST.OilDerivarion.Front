@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react';
-import ReviewDataTable from "@/app/producer/dashboard/request/steps/step6/review-data-table";
 import { Button, Checkbox, Col, Divider, Form, Row, Spin } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useForm } from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
-import ReviewDataModalAcceptAgreement
-    from "@/app/producer/dashboard/request/steps/step6/review-data-modal-accept-agreement";
-import ReviewDataModalFinalSubmit from "@/app/producer/dashboard/request/steps/step6/review-data-modal-final-submit";
+import ReviewDataModalAcceptAgreement from './review-data-modal-accept-agreement';
+import ReviewDataModalFinalSubmit from './review-data-modal-final-submit';
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import ReviewDataTable from './review-data-table';
 
 const Index = () => {
 
@@ -22,13 +21,13 @@ const Index = () => {
     const { trigger, isMutating } = useSWRMutation("/RequestMaster/UpdateCompleted", mutationFetcher)
 
     const onFinish = async () => {
-        const data = await trigger({
+        const res = await trigger({
             "uid": processController.requestMaster.requestMasterUid
-        })
+        });
 
-        if (data) {
-            setModalVisibleFinalSubmit(true)
-        }
+        if (res) {
+            setModalVisibleFinalSubmit(true);
+        };
     };
 
     return (
@@ -63,6 +62,7 @@ const Index = () => {
                     <Row gutter={[10, 0]}>
                         <Col span={12}>
                             <Button
+                                loading={isMutating}
                                 onClick={processController.getNextStep}
                                 className="w-full bg-gray-50 flex items-center justify-center"
                                 size="large"
@@ -73,6 +73,7 @@ const Index = () => {
                         </Col>
                         <Col span={12}>
                             <Button
+                                loading={isMutating}
                                 className="w-full management-info-form-submit btn-filter"
                                 size="large"
                                 type="primary"

@@ -1,10 +1,12 @@
 "use client"
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import useSWR from "swr";
-import {mutationFetcher} from "../../../lib/server/mutationFetcher";
-import {useRouter, useSearchParams} from "next/navigation";
-import {setCookie} from "cookies-next";
+import { mutationFetcher } from "../../../lib/server/mutationFetcher";
+import { useRouter, useSearchParams } from "next/navigation";
+import { setCookie } from "cookies-next";
+import { Spin, Typography } from 'antd';
+import ThemeProvider from '../../../provider/theme-provider';
 
 const Page = () => {
 
@@ -13,7 +15,7 @@ const Page = () => {
     const router = useRouter()
 
 
-    const {data, error} = useSWR("/Sso/GetToken", (url) => mutationFetcher(url, {
+    const { data, error, isLoading } = useSWR("/Sso/GetToken", (url) => mutationFetcher(url, {
         arg: {
             code: searchParams.get("code")
         }
@@ -31,7 +33,31 @@ const Page = () => {
 
     }, [data])
 
-    return <>{JSON.stringify(data)}</>
+    return (
+        <>
+            <ThemeProvider>
+                <div className='mt-5'>
+                    <Typography
+                        className='text-center font-bold text-xl'
+                    >
+                        در انتقال به صفحه هستید
+                    </Typography>
+                    <Spin
+                        className='flex justify-center items-center mt-5'
+                        size='large'
+                        spinning={isLoading}
+                    >
+                        <Typography.Text
+                            className='flex w-5/6 justify-center mt-5'
+                            ellipsis={true}
+                        >
+                            {JSON.stringify(data)}
+                        </Typography.Text>
+                    </Spin>
+                </div>
+            </ThemeProvider>
+        </>
+    )
 };
 
 export default Page;

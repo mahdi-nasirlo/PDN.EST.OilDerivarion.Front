@@ -82,8 +82,9 @@ export default function CreateModal({
       await mutate();
 
       setStep(1);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   return (

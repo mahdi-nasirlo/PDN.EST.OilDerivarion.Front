@@ -24,9 +24,11 @@ export default function CreateModal({
     const res = await trigger(values);
     if (res) {
       await mutate();
+
       setModalVisible(false);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   const CloseModal = () => {

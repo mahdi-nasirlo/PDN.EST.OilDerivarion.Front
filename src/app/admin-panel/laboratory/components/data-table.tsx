@@ -1,14 +1,13 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Modal, Row, Space, Tag, Typography } from "antd";
+import { Button, Col, Modal, Row, Space, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
@@ -124,6 +123,20 @@ export default function DataTable({
       title: "آدرس",
       dataIndex: "Address",
       key: "6",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.Address}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[250px]"
+            ellipsis={true}
+            style={{ width: "45px !important" }}
+          >
+            {record.Address}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "موقعیت جغرافیایی",

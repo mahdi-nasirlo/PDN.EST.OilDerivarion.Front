@@ -40,7 +40,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن کاربر جدید</div>
+          <div className="text-base mb-2">افزودن کاربر</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

@@ -1,12 +1,8 @@
-import { Space, Switch, Table, Typography } from "antd";
-import Link from "next/link";
+import { Typography } from "antd";
 import React from "react";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../../../lib/server/listFetcher";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../../interfaces/requestDetail";
-import { addIndexToData } from "../../../../../../../lib/addIndexToData";
-import { Product } from "../../../../../../../interfaces/product";
+import CustomeTable from '../../../../../../../components/CustomeTable';
 
 export default function PrimaryManufacturerListTable({
   request,
@@ -75,23 +71,12 @@ export default function PrimaryManufacturerListTable({
       <Typography className="text-right text-[16px] font-normal">
         جزئیات درخواست ها
       </Typography>
-      <Table
-        className="mt-8"
-        loading={isLoading}
+      <CustomeTable
+        setInitialData={() => { }}
+        isLoading={isLoading}
+        data={request}
         columns={columns}
-        dataSource={addIndexToData(request?.records)}
-        pagination={{
-          defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
-          defaultCurrent: 1,
-          style: {
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            margin: "16px 0",
-          },
-        }}
+        pagination={false}
       />
     </div>
   );

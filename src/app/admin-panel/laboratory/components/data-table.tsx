@@ -155,19 +155,38 @@ export default function DataTable({
       ),
     },
     {
+      title: "فاکتور آزمون",
+      dataIndex: "TestItems",
+      key: "8",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.TestItems}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.TestItems}
+          </Typography.Text>
+        </Tooltip>
+      ),
+    },
+    {
       title: "شماره مجوز",
       dataIndex: "License_No",
-      key: "8",
+      key: "9",
     },
     {
       title: "تاریخ انقضاء",
       dataIndex: "License_Expire_Date",
-      key: "9",
+      key: "10",
     },
     {
       title: "فکس",
       dataIndex: "Fax",
-      key: "10",
+      key: "11",
     },
     {
       title: "عملیات",

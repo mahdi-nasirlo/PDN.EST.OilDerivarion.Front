@@ -14,6 +14,7 @@ interface Labratory {
   Tel: string | null;
   Fax: string | null;
   Address: string | null;
+  TestItems: string | null;
   IsActive: boolean | undefined;
   Uid: string | null;
 }

@@ -1,12 +1,13 @@
 import React from 'react';
-import {Descriptions, Divider, Typography} from "antd";
-import {FormSchemaStructure} from "../type";
-import {z} from "zod";
-import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
+import { Descriptions, Divider, Tabs, Typography } from "antd";
+import { FormSchemaStructure } from "../type";
+import { z } from "zod";
+import { DescriptionsItemProps } from "antd/lib/descriptions/Item";
 import FormDataTable from "../../Resource/FormDataTable";
+import { json } from 'stream/consumers';
 
 
-const Index = ({data}: { data: any }) => {
+const Index = ({ data }: { data: any }) => {
     // try {
 
     let view: any[] = []
@@ -52,7 +53,7 @@ const Index = ({data}: { data: any }) => {
                                 const items: DescriptionsItemProps[] = []
 
                                 value1.FormFields?.map((value2, index3) => {
-                                    items.push({label: value2.Title_Style, children: schemaValue[value2.Name]})
+                                    items.push({ label: value2.Title_Style, children: schemaValue[value2.Name] })
                                 })
 
                                 view.push(<>
@@ -76,10 +77,10 @@ const Index = ({data}: { data: any }) => {
                                             {value.Title}
                                         </Typography>
                                         <div>
-                                            <FormDataTable schema={value1 as any} records={item} delete={false}/>
+                                            <FormDataTable schema={value1 as any} records={item} delete={false} />
                                         </div>
                                         {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
-                                            <Divider className="my-2"/>}
+                                            <Divider className="my-2" />}
                                     </div>
                                 </>)
 
@@ -106,14 +107,25 @@ const Index = ({data}: { data: any }) => {
 
     for (let i = 0; i < view.length; i++) {
         viewWithDivider.push(view[i]);
-        viewWithDivider.push(<Divider/>);
     }
 
-    return <Typography>
-        {viewWithDivider?.map((value, index) => <div key={index}>
-            {value}
-        </div>)}
-    </Typography>
+    return <>
+        <Tabs
+            size="large"
+            type="card"
+        >
+            {viewWithDivider?.map((value, index) =>
+                <Tabs.TabPane tab={index} key={index}>
+                    {value}
+                </Tabs.TabPane>
+            )}
+        </Tabs>
+    </>
+    //  <Typography>
+    //     {viewWithDivider?.map((value, index) => <div key={index}>
+    //         {value}
+    //     </div>)}
+    // </Typography>
 };
 
 export default Index;

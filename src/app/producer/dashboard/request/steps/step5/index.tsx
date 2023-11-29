@@ -56,7 +56,7 @@ const Index = () => {
                         <Checkbox>
                             شرایط و
                             <span
-                                className="text-primary-500 p-0"
+                                className="text-primary-500 p-0 mx-1"
                                 onClick={
                                     () => setModalVisibleConfirmation(true)
                                 }
@@ -87,7 +87,7 @@ const Index = () => {
                                 type="primary"
                                 htmlType="submit"
                             >
-                                <span className="flex gap-3 justify-center ">ثبت و تایید نهایی</span>
+                                ثبت و تایید نهایی
                             </Button>
                         </Col>
                     </Row>

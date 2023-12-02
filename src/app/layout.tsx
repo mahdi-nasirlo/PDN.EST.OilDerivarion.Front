@@ -1,5 +1,6 @@
 import "./globals.css";
 import type {Metadata} from "next";
+import AuthProvider from "../../provider/authProvider";
 
 
 export const metadata: Metadata = {
@@ -15,11 +16,9 @@ export default function RootLayout({
     return (
         <html lang="fa">
         <body>
-        {/*<StyledComponentsRegistry>*/}
-        {/*<ConfigProvider direction="rtl" theme={theme} locale={fa_IR}>*/}
-        {children}
-        {/*</ConfigProvider>*/}
-        {/*</StyledComponentsRegistry>*/}
+        <AuthProvider>
+            {children}
+        </AuthProvider>
         </body>
         </html>
     );

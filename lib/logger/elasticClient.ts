@@ -1,6 +1,4 @@
-"use client";
-
-import { env } from "../env";
+import {env} from "../env";
 
 const { Client } = require("@elastic/elasticsearch");
 

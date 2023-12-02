@@ -3,7 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import {JWT} from "next-auth/jwt";
 import {AdapterUser} from "next-auth/adapters";
 
+
 const authOption: NextAuthOptions = {
+
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -72,7 +74,8 @@ const authOption: NextAuthOptions = {
         },
     },
     pages: {
-        signIn: "/login"
+        signIn: "/login",
+        signOut: "/signout"
     }
 }
 

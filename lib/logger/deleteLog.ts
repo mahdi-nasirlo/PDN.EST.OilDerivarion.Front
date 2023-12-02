@@ -5,20 +5,15 @@ import elasticClient from "./elasticClient";
 
 const deleteLog = async () => {
 
-    try {
+    console.log("test")
 
-        const deleteRequest = await elasticClient.indices.delete({index: "oil-front"})
+    const deleteRequest = await elasticClient.indices.delete({index: "oil-front"})
 
-        const createRequest = await elasticClient.indices.create({index: "oil-front"})
+    const createRequest = await elasticClient.indices.create({index: "oil-front"})
 
-        return true
+    console.log(deleteRequest, createRequest)
 
-    } catch (e: any) {
-
-        return false
-
-    }
-
+    return deleteRequest
 }
 
 export default deleteLog

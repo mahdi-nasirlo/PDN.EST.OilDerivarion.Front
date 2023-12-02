@@ -2,6 +2,7 @@
 
 import {env} from "../env";
 import moment from "jalali-moment";
+import elasticClient from "./elasticClient";
 
 const reportLog = async (error: any, type: string | null = null) => {
     
@@ -17,18 +18,18 @@ const reportLog = async (error: any, type: string | null = null) => {
 
     try {
 
-        // const request = await elasticClient.index({
-        //     index: "oil-front",
-        //     id: "oil-front-log_" + date,
-        //     document: {
-        //         ...data,
-        //         "@timestamp": currentDate.toISOString()
-        //     },
-        // })
-        //
-        // console.log(request)
+        const request = await elasticClient.index({
+            index: "oil-front",
+            id: "oil-front-log  /***/ " + date,
+            document: {
+                ...data,
+                "@timestamp": currentDate.toISOString()
+            },
+        })
 
-        // return request
+        console.log(request)
+
+        return request
 
     } catch (e: any) {
 

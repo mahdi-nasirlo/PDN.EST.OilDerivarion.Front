@@ -14,7 +14,7 @@ export default function Home() {
   const router = useRouter();
 
   const initialValue: WorkflowDataTableContextType = {
-    apiUrl: apiUrl.WorkFlowRequest.step19.getAll.url,
+    apiUrl: apiUrl.WorkFlowRequest.step28.getAll.url,
     columns: [
       {
         title: "ردیف",
@@ -51,7 +51,7 @@ export default function Home() {
                   className="text-secondary-500 font-bold "
                   onClick={() => {
                     router.push(
-                        "/producer/step19/detail/" + record.taskId
+                        "/producer/step28/detail/" + record.taskId
                     );
                   }}
               >

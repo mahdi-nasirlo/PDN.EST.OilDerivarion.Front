@@ -2,21 +2,21 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  BeakerIcon,
-  DocumentDuplicateIcon,
-  DocumentMagnifyingGlassIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    BeakerIcon,
+    DocumentDuplicateIcon,
+    DocumentMagnifyingGlassIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -177,6 +177,41 @@ const items: MenuProps["items"] = [
         </Link>,
         "/producer/step21/list"
       ),
+        getMenuItem(
+            <Link href={"/producer/step22/list"}>
+                بررسی نتایج آزمایشگاه توسط رئیس اجرا </Link>,
+            "/producer/step22/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step23/list"}>
+                بررسی نتایج آزمون کارگروه مرکزی 1 </Link>,
+            "/producer/step23/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step24/list"}>
+                بررسی نتایج آزمون کارگروه مرکزی 2 </Link>,
+            "/producer/step24/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step25/list"}>
+                بررسی نتایج آزمون کارگروه مرکزی 3 </Link>,
+            "/producer/step25/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step26/list"}>
+                تنظیم صورتجلسه </Link>,
+            "/producer/step26/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step27/list"}>
+                تعیین آزمایشگاه و آزمون تکمیلی و پرداخت هزینه </Link>,
+            "/producer/step27/list"
+        ),
+        getMenuItem(
+            <Link href={"/producer/step28/list"}>
+                صدور کد رهگیری </Link>,
+            "/producer/step28/list"
+        ),
     ],
     "group"
   ),

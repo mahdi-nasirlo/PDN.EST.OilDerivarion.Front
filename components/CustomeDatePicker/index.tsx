@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import DatePicker, {
-  DayValue,
-} from "@hassanmojab/react-modern-calendar-datepicker";
+import React, {useEffect, useState} from "react";
+import DatePicker, {DayValue,} from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { Input } from "antd";
-import { InputProps } from "antd/lib";
-import { jalaliToGregorian } from "shamsi-date-converter";
+import {Input} from "antd";
+import {InputProps} from "antd/lib";
+import {jalaliToGregorian} from "shamsi-date-converter";
 
 interface DateProps {
   year?: MonthType;
@@ -25,6 +23,7 @@ export default function CustomeDatePicker(props: InputProps) {
       readOnly
       ref={ref}
       value={selectedDay as string}
+      defaultValue={props.defaultValue as string}
       placeholder="انتخاب کنید"
     />
   );
@@ -43,7 +42,7 @@ export default function CustomeDatePicker(props: InputProps) {
   return (
     <>
       <DatePicker
-        locale="fa"
+          locale="fa"
         value={stringToDate(selectedDay as string) as DayValue}
         onChange={change as any}
         inputPlaceholder="Select a date"

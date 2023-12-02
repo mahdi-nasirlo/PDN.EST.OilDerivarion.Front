@@ -58,7 +58,6 @@ export default function Home(props: PropType) {
     }
 
     const binaryPdf = atob(barcode);
-
     const arrayBuffer = new ArrayBuffer(binaryPdf.length);
     const uint8Array = new Uint8Array(arrayBuffer);
     for (let i = 0; i < binaryPdf.length; i++) {

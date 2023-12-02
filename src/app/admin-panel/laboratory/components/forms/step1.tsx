@@ -1,8 +1,8 @@
 import React from "react";
-import { Col, Form, FormInstance, Input, Row, Select } from "antd";
+import {Col, Form, FormInstance, Input, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { filterOption } from "../../../../../../lib/filterOption";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {filterOption} from "../../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
@@ -47,7 +47,7 @@ function Step1({
           </Col>
         </Row>
         <Row gutter={[32, 1]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} md={12}>0
             <Form.Item
               rules={[{ required: true }]}
               name="license_No"
@@ -58,9 +58,9 @@ function Step1({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              rules={[{ required: true }]}
               name="licenseExpireDatePersian"
               label="تاریخ"
+              rules={[{required: true}]}
             >
               <CustomeDatePicker />
             </Form.Item>

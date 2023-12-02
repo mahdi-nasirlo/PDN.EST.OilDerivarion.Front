@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Button, Col, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
+import React, {useEffect} from "react";
+import {Button, Col, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
+import {convertKeysToLowerCase} from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import Step1 from "@/app/admin-panel/laboratory/components/forms/step1";
 
 
@@ -17,6 +17,7 @@ export default function EditModal(
         setRecordToEdit: (arg: Labratory | null) => void,
         mutate: () => void
     }) {
+
 
     const [form] = useForm()
 

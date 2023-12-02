@@ -2,25 +2,26 @@ import Image from "next/image";
 import { EditFilled, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 export default function HeaderDropdown() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const router = useRouter();
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    router.push("/login");
+  const handleOk = async () => {
+    const res = await signOut()
+    console.log(res)
     setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const session = useSession()
 
   const items: MenuProps["items"] = [
     {
@@ -67,7 +68,7 @@ export default function HeaderDropdown() {
             />
             <div>
               <Typography className="font-normal text-lg hidden lg:block">
-                نام کاربری
+                {session?.data?.user?.name}
               </Typography>
               <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
                 سمت شغلی

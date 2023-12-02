@@ -31,7 +31,7 @@ export const HandleError = async (error: any) => {
 
         const {data}: { data: UnAuthorizeType } = response
 
-        // window.location.href = window.location.origin + "/api/auth/signout"
+        window.location.href = window.location.origin + "/api/auth/signout"
 
     }
 

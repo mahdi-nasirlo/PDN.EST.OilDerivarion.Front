@@ -1,6 +1,7 @@
 import getUrlWithParams from "../../utils/getUrlWithParams";
 import reportLog from "../logger/reportLog";
 import {reportLogEnum} from "../logger/reportLogEnum";
+import getTokenFromSession from "./getToken";
 
 
 type Props = {
@@ -22,7 +23,8 @@ async function customFetch({
                                cache = 'no-store',
                                tokenFromServerSide
                            }: Props) {
-    // const token = tokenFromServerSide ?  tokenFromServerSide  : getToken()
+                            
+                            const token = await getTokenFromSession() || ""
 
     const finalUrl = getUrlWithParams(url.path, params)
 
@@ -36,7 +38,7 @@ async function customFetch({
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                // ...token && {Authorization: `Bearer ${token}`},
+                "Authorization": token,
                 ...headers
             },
             method: method || 'GET',

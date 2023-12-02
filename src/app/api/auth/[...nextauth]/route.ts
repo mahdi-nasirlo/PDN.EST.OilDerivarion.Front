@@ -33,12 +33,13 @@ const authOption: NextAuthOptions = {
                     body: JSON.stringify({code}),
                 });
 
-                const responseData = await response.json();
+                console.log(response.status);
+            
 
-                // if (responseData?.data && responseData?.data?.access_token) {
-                // console.log(responseData.data)
+                const responseData = await response.json();
+                
                 return responseData.data
-                // } else return null
+                
             }
         }),
     ],

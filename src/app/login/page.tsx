@@ -1,35 +1,36 @@
 import React from "react";
 import ClientComponent from "@/app/login/components/clientComponent";
-import {getServerSession} from "next-auth";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import ThemeProvider from "../../../provider/theme-provider";
+import { RedirectInClient } from "./components/redirectInClient";
 
 interface PropsType {
-    searchParams: {
-        callbackUrl?: string,
-        code?: string
-    }
+  searchParams: {
+    callbackUrl?: string;
+    code?: string;
+  };
 }
 
 export default async function Home(props: PropsType) {
+  const session = await getServerSession();
 
-    const session = await getServerSession()
-
-    // if (props.searchParams.code) {
-    //
-    //     return <ClientComponent code={props?.searchParams?.code} callbackUrl={props.searchParams.callbackUrl}/>
-    //
-    // }
-    //
-    // if (!session) {
-    //
-    //     const redirectTo = props.searchParams?.callbackUrl
-    //
-    //     const validate = await validateToken(redirectTo)
-    //
-    // }
-
+  if (session) {
     return (
-        <>
-            <ClientComponent code={props?.searchParams?.code} callbackUrl={props.searchParams.callbackUrl}/>
-        </>
+      <ThemeProvider>
+        <div className="flex justify-center items-center w-full h-[100vh]">
+          <RedirectInClient />
+        </div>
+      </ThemeProvider>
     );
+  }
+
+  return (
+    <>
+      <ClientComponent
+        code={props?.searchParams?.code}
+        callbackUrl={props.searchParams.callbackUrl}
+      />
+    </>
+  );
 }

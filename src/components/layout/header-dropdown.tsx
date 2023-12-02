@@ -3,6 +3,7 @@ import { EditFilled, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
+import deleteLog from "../../../lib/logger/deleteLog";
 
 export default function HeaderDropdown() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +38,14 @@ export default function HeaderDropdown() {
       ),
       icon: <EditFilled />,
       disabled: true,
+    },
+    {
+      key: "3",
+      label:"پاک کردن لاگ",
+      onClick: () => {
+
+        deleteLog()
+      }
     },
     {
       key: "4",

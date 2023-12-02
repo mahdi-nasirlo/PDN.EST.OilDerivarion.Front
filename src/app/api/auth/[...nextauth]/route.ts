@@ -2,6 +2,8 @@ import NextAuth, {NextAuthOptions, Session, User} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import {JWT} from "next-auth/jwt";
 import {AdapterUser} from "next-auth/adapters";
+import reportLog from "../../../../../lib/logger/reportLog";
+import {reportLogEnum} from "../../../../../lib/logger/reportLogEnum";
 
 
 const authOption: NextAuthOptions = {
@@ -34,7 +36,14 @@ const authOption: NextAuthOptions = {
                 });
 
                 console.log(response.status);
-            
+
+                const errorData = {
+                    type: response.ok ? "success" : reportLogEnum.api_error,
+                    statusCode: response.status,
+                    url: response.url
+                }
+
+                reportLog(errorData)
 
                 const responseData = await response.json();
                 

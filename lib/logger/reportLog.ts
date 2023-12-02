@@ -20,7 +20,7 @@ const reportLog = async (error: any, type: string | null = null) => {
 
         const request = await elasticClient.index({
             index: "oil-front",
-            id: "oil-front-log_" + date,
+            id: "oil-front-log  /***/ " + date,
             document: {
                 ...data,
                 "@timestamp": currentDate.toISOString()

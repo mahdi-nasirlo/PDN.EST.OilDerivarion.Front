@@ -1,4 +1,6 @@
 import getUrlWithParams from "../../utils/getUrlWithParams";
+import reportLog from "../logger/reportLog";
+import {reportLogEnum} from "../logger/reportLogEnum";
 
 
 type Props = {
@@ -28,7 +30,7 @@ async function customFetch({
 
     // try {
     const res = await fetch(
-        apiDestination
+        apiDestination + "a"
         ,
         {
             headers: {
@@ -43,16 +45,16 @@ async function customFetch({
         }
     );
 
+    const errorData = {
+        type: res.ok ? "success" : reportLogEnum.api_error,
+        statusCode: res.status,
+        url: res.url
+    }
+
+    const report = reportLog(errorData)
+
     const convertedToJson = await res.json()
 
-    // const errorData = {
-    //     type: convertedToJson?.success ? "success" : reportLogEnum.api_error,
-    //     statusCode: res.status,
-    //     url: res.url
-    // }
-    //
-    // const report = reportLog(errorData)
-    //
     return convertedToJson
 
     // } catch (e: any) {

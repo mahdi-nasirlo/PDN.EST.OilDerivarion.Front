@@ -1,5 +1,6 @@
 import customFetch from "../lib/server/customeFetcher";
-import {notFound, redirect} from "next/navigation";
+import {notFound} from "next/navigation";
+
 
 export const validateToken = async (redirectUri: string | undefined = undefined) => {
 
@@ -12,9 +13,9 @@ export const validateToken = async (redirectUri: string | undefined = undefined)
 
     if (!res.success) {
 
-        const redirectTo = redirectUri ? redirectUri : res.data?.redirectUri
+        const redirectTo = window.location.origin
 
-        return redirect(`${res?.data?.ssoUrl}?redirectUri=${process.env.NEXTAUTH_URL}&clientId=${res.data?.clientId}`)
+        window.location.href = `${res?.data?.ssoUrl}?redirectUri=${redirectTo}/login&clientId=${res.data?.clientId}`
 
     }
 

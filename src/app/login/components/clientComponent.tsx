@@ -5,6 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 import { Spin } from "antd";
 import ThemeProvider from "../../../../provider/theme-provider";
 import { validateToken } from "../../../../request/validateToken";
+import useGetToken from "../../../../hooks/sso/useGetToken";
 
 const ClientComponent = ({
   code,
@@ -15,16 +16,29 @@ const ClientComponent = ({
 }) => {
   const session = useSession();
 
-  const { status, data } = session;
+  const getToken = useGetToken()
+
+  const { status, data, update } = session;
 
   useEffect(() => {
     if (status === "unauthenticated") {
       if (code) {
-        signIn("credentials", {
-          code: code,
-          callbackUrl: "/producer",
-          redirect: true,
-        });
+        // getToken
+
+        getToken.trigger({
+          code
+        }).then((res: {token_type: string, access_token: string}) => {
+
+          console.log(res)
+
+          signIn("credentials", {
+            code: `${res.token_type} ${res.access_token}`,
+            callbackUrl: "/producer",
+            redirect: true,
+          });
+        })
+
+
       } else {
         const validate = validateToken(callbackUrl);
       }

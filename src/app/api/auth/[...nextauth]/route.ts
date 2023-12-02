@@ -27,42 +27,8 @@ const authOption: NextAuthOptions = {
 
                 const {code} = credentials
 
-               try {
+                return { id: "1", name: "J Smith", email: "jsmith@example.com", access_token: code }
 
-                   const response = await fetch(`https://oil-test.pdnsoftware.ir/api/V1/Sso/GetToken`, {
-                       method: "POST",
-                       headers: {
-                           'Content-Type': 'application/json',
-                       },
-                       body: JSON.stringify({code}),
-                   });
-
-                   console.log(response.status);
-
-                   const errorData = {
-                       type: response.ok ? "success" : reportLogEnum.api_error,
-                       statusCode: response.status,
-                       url: response.url
-                   }
-
-                   reportLog(errorData)
-
-                   const responseData = await response.json();
-
-                   return responseData.data
-
-               }catch (e) {
-
-                   const errorData = {
-                       type:  reportLogEnum.api_error,
-                       data: e
-                   }
-
-                   reportLog(errorData)
-
-                   return  null
-               }
-                
             }
         }),
     ],
@@ -74,17 +40,17 @@ const authOption: NextAuthOptions = {
 
             if (user && 'access_token' in user && user.access_token) {
 
-                console.log(user.access_token)
-
                 return {
                     ...token,
-                    access_token: `${user.token_type} ${user.access_token}`
+                    access_token: `${user.access_token}`
                 };
             }
 
             return token;
         },
         session: ({session, token}: { session: Session, token: JWT & { access_token?: string } }) => {
+
+            console.log(session, token)
 
 
             if (token && token.access_token) {

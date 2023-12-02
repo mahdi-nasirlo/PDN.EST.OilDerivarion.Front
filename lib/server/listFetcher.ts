@@ -3,15 +3,20 @@ import handleError from "./handleError";
 import {customRequest} from "../customRequest";
 import {reportLogEnum} from "../logger/reportLogEnum";
 import reportLog from "../logger/reportLog";
+import getTokenFromSession from "./getToken";
 
 
 export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undefined}) {
 
-    console.log(document.cookie)
+    const token = await getTokenFromSession() || ""
 
     try {
 
-        const res: AxiosResponse = await customRequest.post(url, arg)
+        const res: AxiosResponse = await customRequest.post(url, arg, {
+            headers: {
+                "Authorization": token
+            }
+        })
 
         const data: dataType = res.data
 

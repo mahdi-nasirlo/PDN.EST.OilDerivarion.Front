@@ -1,16 +1,25 @@
-import { AxiosResponse } from "axios";
-import { notification } from "antd";
+import {AxiosResponse} from "axios";
+import {notification} from "antd";
 import handleError from "./handleError";
-import { customRequest } from "../customRequest";
+import {customRequest} from "../customRequest";
 import reportLog from "../logger/reportLog";
-import { reportLogEnum } from "../logger/reportLogEnum";
-import { convertObjectToFarsiToEnglish } from "../convertToFarsiToEnglish";
+import {reportLogEnum} from "../logger/reportLogEnum";
+import {convertObjectToFarsiToEnglish} from "../convertToFarsiToEnglish";
+import getTokenFromSession from "./getToken";
 
 export async function mutationFetcher(url: string, { arg }: { arg: any }) {
+
+  const token = await getTokenFromSession() || ""
+
   try {
     const res: AxiosResponse = await customRequest.post(
-      url,
-      convertObjectToFarsiToEnglish(arg)
+        url,
+        convertObjectToFarsiToEnglish(arg),
+        {
+          headers: {
+            "Authorization": token
+          }
+        }
     );
 
     const data: dataType = res.data;

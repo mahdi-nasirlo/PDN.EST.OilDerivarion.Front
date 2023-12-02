@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { EditFilled, LogoutOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps, Modal, theme, Typography } from "antd";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import {EditFilled, LogoutOutlined} from "@ant-design/icons";
+import {Dropdown, MenuProps, Modal, theme, Typography} from "antd";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+import {signOut} from "next-auth/react";
 
 export default function HeaderDropdown() {
   const { token } = theme.useToken();
@@ -15,6 +16,7 @@ export default function HeaderDropdown() {
   };
 
   const handleOk = () => {
+    const res = signOut()
     router.push("/login");
     setIsModalOpen(false);
   };

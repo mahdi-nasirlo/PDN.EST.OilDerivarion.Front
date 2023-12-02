@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { EditFilled, LogoutOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps, Modal, theme, Typography } from "antd";
+import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function HeaderDropdown() {
-  const { token } = theme.useToken();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
@@ -52,59 +51,71 @@ export default function HeaderDropdown() {
 
   return (
     <>
-      <Dropdown
-        className="flex flex-wrap items-center cursor: pointer"
-        menu={{ items }}
-      >
-        <span>
-          <Image
-            className="ml-4"
-            height={40}
-            width={40}
-            alt="person-circle icon"
-            src="/static/person-circle.svg"
-          />
+      <div className="hover:bg-gray-50 rounded-lg p-1">
+        <Dropdown
+          trigger={['click']}
+          className="flex flex-wrap items-center cursor-pointer"
+          menu={{ items }}
+        >
           <span>
-            <Typography
-              style={{
-                fontSize: "16px",
-                fontWeight: 400,
-                color: token.colorTextBase,
-              }}
-              className="text-lg hidden lg:block"
-            >
-              نام کاربری
-            </Typography>
-            <Typography
-              style={{
-                fontSize: "12px",
-                fontWeight: 400,
-                color: token.colorTextDisabled,
-              }}
-              className="font-semibold hidden lg:block"
-            >
-              سمت شغلی
-            </Typography>
+            <Image
+              className="ml-3"
+              height={40}
+              width={40}
+              alt="person-circle icon"
+              src="/static/person-circle.svg"
+            />
+            <div>
+              <Typography className="font-normal text-lg hidden lg:block">
+                نام کاربری
+              </Typography>
+              <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
+                سمت شغلی
+              </Typography>
+            </div>
+            <Image
+              className="mr-6 hidden lg:block"
+              height={16}
+              width={16}
+              src={"/static/chevron-down.svg"}
+              alt="chevron-down.svg"
+            />
           </span>
-          <Image
-            className="mr-8 hidden lg:block"
-            height={16}
-            width={16}
-            src={"/static/chevron-down.svg"}
-            alt="chevron-down.svg"
-          />
-        </span>
-      </Dropdown>
-
+        </Dropdown>
+      </div>
       <Modal
-        okText="بله"
-        cancelText="خیر"
+        width={600}
         title="خروج از حساب کاربری"
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
+        footer={[
+          <Row key={"box"} gutter={[16, 16]} className="my-2">
+            <Col xs={24} md={12}>
+              <Button
+                // loading={loading}
+                size="large"
+                className="w-full"
+                type="primary"
+                onClick={handleOk}
+                danger
+                key={"submit"}>
+                خروج
+              </Button>
+            </Col>
+            <Col xs={24} md={12}>
+              <Button
+                // disabled={loading}
+                size="large"
+                className="w-full bg-gray-100 text-warmGray-500"
+                onClick={handleCancel}
+                key={"cancel"}>
+                انصراف
+              </Button>
+            </Col>
+          </Row>
+        ]}
       >
-        از خروج خود اطمینان دارید؟
+        <p>آیا از خروج خود اطمینان دارید؟</p>
       </Modal>
     </>
   );

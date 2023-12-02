@@ -30,7 +30,7 @@ async function customFetch({
 
     // try {
     const res = await fetch(
-        apiDestination + "a"
+        apiDestination
         ,
         {
             headers: {

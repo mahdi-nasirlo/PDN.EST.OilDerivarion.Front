@@ -27,27 +27,41 @@ const authOption: NextAuthOptions = {
 
                 const {code} = credentials
 
-                const response = await fetch(`https://oil-test.pdnsoftware.ir/api/V1/Sso/GetToken`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({code}),
-                });
+               try {
 
-                console.log(response.status);
+                   const response = await fetch(`https://oil-test.pdnsoftware.ir/api/V1/Sso/GetToken`, {
+                       method: "POST",
+                       headers: {
+                           'Content-Type': 'application/json',
+                       },
+                       body: JSON.stringify({code}),
+                   });
 
-                const errorData = {
-                    type: response.ok ? "success" : reportLogEnum.api_error,
-                    statusCode: response.status,
-                    url: response.url
-                }
+                   console.log(response.status);
 
-                reportLog(errorData)
+                   const errorData = {
+                       type: response.ok ? "success" : reportLogEnum.api_error,
+                       statusCode: response.status,
+                       url: response.url
+                   }
 
-                const responseData = await response.json();
-                
-                return responseData.data
+                   reportLog(errorData)
+
+                   const responseData = await response.json();
+
+                   return responseData.data
+
+               }catch (e) {
+
+                   const errorData = {
+                       type:  reportLogEnum.api_error,
+                       data: e
+                   }
+
+                   reportLog(errorData)
+
+                   return  null
+               }
                 
             }
         }),

@@ -34,8 +34,9 @@ export default function CreateModal({
       await mutate();
 
       setModalVisible(false);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
   const CloseModal = () => {
     setModalVisible(false);
@@ -47,14 +48,14 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن ماده اولیه محصول جدید</div>
+          <div className="text-base mb-2">افزودن ماده اولیه محصول</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
         </div>
       }
       open={modalVisible}
-      onCancel={() => setModalVisible(false)}
+      onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>

@@ -1,15 +1,14 @@
 "use client";
 
 import React from "react";
-import DataTable
-    from "@/app/laboratory-panel/request-list/test-result-lab/submit-test-result/[uid]/components/data-tabe"
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
+import DataTable from "./components/data-tabe";
 
 
 export default function Page({
-                                 params,
-                             }: {
+    params,
+}: {
     params: { uid: any };
 }) {
     const {
@@ -28,8 +27,8 @@ export default function Page({
     return (
         <>
 
-            <DataTable params={params.uid} mutate={mutate} labresult={labresult} ldlabresult={ldlabresult}/>
-            
+            <DataTable params={params.uid} mutate={mutate} labresult={labresult} ldlabresult={ldlabresult} />
+
         </>
     );
 }

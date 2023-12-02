@@ -31,8 +31,9 @@ export default function CreateModal({
       await mutate();
 
       setModalVisible(false);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   const closeModal = () => {
@@ -45,7 +46,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن دسته بندی جدید</div>
+          <div className="text-base mb-2">افزودن دسته بندی</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>

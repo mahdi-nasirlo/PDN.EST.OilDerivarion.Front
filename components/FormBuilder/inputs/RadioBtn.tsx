@@ -16,7 +16,7 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
 
     const rules: Rule[] = [
         {
-            required: data?.Is_Required
+            required: false
         }
     ]
 

@@ -28,8 +28,9 @@ export default function CreateModal({
 
     const res = await trigger(values);
 
-    await mutate();
     if (res) {
+      await mutate();
+
       setModalVisible(false);
 
       form.resetFields();
@@ -46,14 +47,14 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن فاکتور آزمون جدید</div>
+          <div className="text-base mb-2">افزودن فاکتور آزمون</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
         </div>
       }
       open={modalVisible}
-      onCancel={() => setModalVisible(false)}
+      onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>

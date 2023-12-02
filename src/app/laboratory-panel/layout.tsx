@@ -1,9 +1,9 @@
 "use client";
 
 import AppLayout from "@/components/layout/layout";
-import { getMenuItem } from "@/components/layout/sidebar";
-import { Bars3Icon, DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon, } from "@heroicons/react/24/outline";
-import { MenuProps } from "antd";
+import {getMenuItem} from "@/components/layout/sidebar";
+import {DocumentCheckIcon, DocumentMinusIcon, HomeIcon, MapPinIcon,} from "@heroicons/react/24/outline";
+import {MenuProps} from "antd";
 import Link from "next/link";
 
 export default function RootLayout({
@@ -28,13 +28,7 @@ const items: MenuProps["items"] = [
   { type: "divider" },
 
   getMenuItem("درخواست ها", "management", null, [
-    getMenuItem(
-      <Link href={"/laboratory-panel/request-list"} className="text-sm">
-        لیست درخواست ها
-      </Link>,
-      "/laboratory-panel/request-list",
-      <Bars3Icon width={16} height={16} />
-    ),
+   
     getMenuItem(
       <Link href={"/laboratory-panel/accepted-requests/list"} className="text-sm">
         درخواست های پذیرش شده

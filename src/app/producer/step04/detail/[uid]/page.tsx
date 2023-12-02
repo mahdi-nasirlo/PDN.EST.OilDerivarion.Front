@@ -69,6 +69,7 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
+        {data && <Divider />}
         <DateOfVisitForm form={form} onFinish={onFinish} />
         {data && <Divider />}
         <WorkflowRequestBtn

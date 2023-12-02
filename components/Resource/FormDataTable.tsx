@@ -7,6 +7,7 @@ import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 interface PropType {
     schema: FormType,
     records: { [formId: string]: any[] },
+    delete?: boolean
 }
 
 const FormDataTable = (props: PropType) => {
@@ -18,26 +19,36 @@ const FormDataTable = (props: PropType) => {
 
     let columns: TableColumnsType<any>
 
+
     columns = props.schema.FormFields.map((value, index) => ({
         key: index,
         title: value.Title_Style,
         dataIndex: value.Name
     }))
 
-    columns.push({
-        title: "عملیات", render: (value, record, index) => <Button
-            type="text"
-            className="text-red-500"
-            onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
-        >
-            حذف
-        </Button>
-    })
+
+    if (props?.delete && formProvider.deleteFromMany) {
+
+        columns.push({
+            title: "عملیات", render: (value, record, index) => <Button
+                type="text"
+                className="text-red-500"
+                onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
+            >
+                حذف
+            </Button>
+        })
+
+    }
 
     useEffect(() => {
 
         const records = props?.records
         const formKey = props?.schema?.Form_Key
+
+        console.log(records)
+        console.log(formKey)
+
 
         if (formKey && records && formKey in records && Array.isArray(records[formKey])) {
             setState(records[formKey])
@@ -50,16 +61,11 @@ const FormDataTable = (props: PropType) => {
             <Table
                 columns={columns}
                 dataSource={state}
+                pagination={false}
             />
         </>
     );
-    // } catch (e) {
-    //
-    //     return <Typography>
-    //         error in data table form
-    //     </Typography>
-    //
-    // }
+
 };
 
 export default FormDataTable;

@@ -44,16 +44,6 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="reNewabillity" label="تجدید پذیری">
-            <Select disabled size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="reNewabillity_Value" label="مقدار تجدید پذیری">
-            <Input disabled size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
           <Form.Item name="testMethod" label="روش آزمون">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>

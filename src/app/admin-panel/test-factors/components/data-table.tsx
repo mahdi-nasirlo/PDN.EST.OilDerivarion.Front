@@ -75,24 +75,14 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "مقدار تجدید پذیری",
-      dataIndex: "ReNewabillity_Value",
-      key: "4",
-    },
-    {
-      title: "تجدید پذیری",
-      dataIndex: "ReNewabillity",
-      key: "5",
-    },
-    {
       title: "واحد اندازه گیری",
       dataIndex: "MeasureName",
-      key: "6",
+      key: "4",
     },
     {
       title: "فعال/غیر فعال ",
       dataIndex: "IsActive",
-      key: "4",
+      key: "5",
       render: (e, record) => <StatusColumn record={record} />
     },
     {

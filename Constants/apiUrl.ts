@@ -365,5 +365,10 @@ export const apiUrl = {
         set: {
             url: "/FormMaker/Set"
         }
+    },
+    Producer: {
+        getBaseInfo: {
+            url: "/producer/GetBaseInfo"
+        }
     }
 }

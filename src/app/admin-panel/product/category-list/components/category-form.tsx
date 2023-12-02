@@ -35,7 +35,7 @@ function CategoryForm({
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            name="testMethodId"
+            name="productionMethodId"
             label="روش تولید"
             rules={[
               { required: true },

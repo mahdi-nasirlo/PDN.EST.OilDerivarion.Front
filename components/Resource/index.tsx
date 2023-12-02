@@ -61,7 +61,7 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
                 <FormBuilder key={index} item={value} title={true}
                              onSet={formProvider.onSetMany}/>
                 <div className="mt-8">
-                    <FormDataTable schema={value} records={records}/>
+                    <FormDataTable schema={value} records={records} delete={true}/>
                 </div>
                 {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
                     <Divider style={{margin: "50px 0"}}/>}

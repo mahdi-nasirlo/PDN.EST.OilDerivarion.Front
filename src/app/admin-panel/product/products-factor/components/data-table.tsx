@@ -1,4 +1,4 @@
-import { Button, Space, Table, Typography } from "antd";
+import { Table, Tooltip, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -39,6 +39,20 @@ const columns: ColumnsType<any> = [
     title: "مواد اولیه",
     dataIndex: "Materials",
     key: "5",
+    render: (_, record) => (
+      <Tooltip
+        placement="top"
+        title={<Typography>{record.Materials}</Typography>}
+      >
+        <Typography.Text
+          className=" max-w-[200px]"
+          ellipsis={true}
+          style={{ width: "40px !important" }}
+        >
+          {record.Materials}
+        </Typography.Text>
+      </Tooltip>
+    ),
   },
   {
     title: "فاکتور های آزمون",

@@ -192,7 +192,7 @@ const RenderInput = ({item}: { item: FormBuilderInputType }) => {
         case "select":
             currentInput = <Select data={item}/>
             break
-        case "radioBtn":
+        case "Gy&@li56Ti":
             currentInput = <RadioBtn data={item}/>
             break
         default:

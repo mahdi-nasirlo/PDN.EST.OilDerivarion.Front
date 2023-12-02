@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Steps } from "antd";
+import {Steps} from "antd";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useControlProcess from "@/app/producer/dashboard/request/state-managment/useControlProcess";
 import Step1 from "./steps/step1";
@@ -9,7 +9,6 @@ import Step2 from "./steps/step2";
 import Step3 from "./steps/step3";
 import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
-import Step6 from "./steps/step6";
 
 function Page() {
   const processController = useControlProcess();
@@ -25,21 +24,18 @@ function Page() {
       break;
     case 2:
       CurrentStep = <Step3 />;
-      break;
-    case 3:
-      CurrentStep = <Step4 />;
-      break;
+        break;
+      case 3:
+          CurrentStep = <Step4/>;
+          break;
 
-    case 4:
-      CurrentStep = <Step5 />;
-      break;
+      case 4:
+          CurrentStep = <Step5/>;
+          break;
 
-    case 5:
-      CurrentStep = <Step6 />;
-      break;
 
-    default:
-      CurrentStep = <></>;
+      default:
+          CurrentStep = <></>;
   }
 
   return (
@@ -52,28 +48,24 @@ function Page() {
         items={[
           {
             title: "فرآیند تولید",
-            description: "شرح فرایند",
+              description: "شرح فرایند",
           },
-          {
-            title: "فرمولاسیون",
-            description: "تولید محصول",
-          },
-          {
-            title: "محصول نهایی",
-            description: "انتخاب محصول نهایی",
-          },
-          {
-            title: "تایید واحد تولیدی",
-            description: "اطلاعات واحد تولیدی",
-          },
-          {
-            title: "تایید تجهیزات",
-            description: "اطلاعات تجهیزات آزمایشگاهی",
-          },
-          {
-            title: "سبد درخواست",
-            description: "سبد درخواست نهایی",
-          },
+            {
+                title: "فرمولاسیون",
+                description: "تولید محصول",
+            },
+            {
+                title: "محصول نهایی",
+                description: "انتخاب محصول نهایی",
+            },
+            {
+                title: "تایید اطلاعات",
+                description: "اطلاعات تولید کننده",
+            },
+            {
+                title: "سبد درخواست",
+                description: "سبد درخواست نهایی",
+            },
         ]}
       />
 

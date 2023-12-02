@@ -27,7 +27,7 @@ const authOption: NextAuthOptions = {
 
                 const {code} = credentials
 
-                const response = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/api/V1/Sso/GetToken`, {
+                const response = await fetch(`https://oil-test.pdnsoftware.ir/api/V1/Sso/GetToken`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',

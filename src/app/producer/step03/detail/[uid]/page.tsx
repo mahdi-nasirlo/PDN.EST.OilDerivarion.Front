@@ -1,14 +1,14 @@
 "use client";
 
-import {Button, Divider} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Button, Divider } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useRouter} from "next/navigation";
-import {useForm} from "antd/es/form/Form";
-import {useState} from "react";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useRouter } from "next/navigation";
+import { useForm } from "antd/es/form/Form";
+import { useState } from "react";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import DateOfVisitForm from "@/app/producer/step03/detail/[uid]/components/date-of-visit-form";
 
@@ -73,6 +73,7 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
+        {data && <Divider />}
         <DateOfVisitForm form={form} onFinish={onFinish} />
         {data && <Divider />}
         {data?.choices &&

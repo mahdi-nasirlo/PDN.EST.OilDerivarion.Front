@@ -2,12 +2,12 @@
 
 import React from 'react';
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import {Button, Divider} from "antd";
+import { Button, Divider } from "antd";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useRouter} from "next/navigation";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useRouter } from "next/navigation";
 
 interface PropsType {
     params: { uid: string }
@@ -15,7 +15,7 @@ interface PropsType {
 
 const Page = (props: PropsType) => {
 
-    const {data, isLoading} = useGetStep({
+    const { data, isLoading } = useGetStep({
         taskId: props.params.uid,
         apiUrl: apiUrl.WorkFlowRequest.step06.get.url
     })
@@ -42,12 +42,12 @@ const Page = (props: PropsType) => {
 
     return (
         <div className="box-border w-full p-6">
-            <WorkflowDataViewer data={data as any} loading={isLoading}/>
-            {data && <Divider/>}
+            <WorkflowDataViewer data={data as any} loading={isLoading} />
+            {data && <Divider />}
             <div className="grid grid-cols-1 gap-3">
                 <WorkflowRequestBtn
                     onClick={() => router.push("/producer/step06/list")}
-                    choices={...data?.choices as Choice[]}
+                    choices={data?.choices as Choice[]}
                     nextStepUrl={apiUrl.WorkFlowRequest.step06.create.url}
                     taskId={props.params.uid}
                 />

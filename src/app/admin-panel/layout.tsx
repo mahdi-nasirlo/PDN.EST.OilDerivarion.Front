@@ -29,9 +29,7 @@ export default function RootLayout({
 
 const items: MenuProps["items"] = [
   getMenuItem(
-    <Link href={"/admin-panel"} className="text-sm">
-      خانه
-    </Link>,
+    <Link href={"/admin-panel"} >خانه</Link>,
     "/admin-panel",
     <HomeIcon width={16} height={16} />
   ),
@@ -209,6 +207,8 @@ const items: MenuProps["items"] = [
     <Link href="/admin-panel/measures">لیست واحد های اندازه گیری</Link>,
     "/admin-panel/measures"
   ),
-
-
+  getMenuItem(
+    <Link href="/admin-panel/test">تست نمایش فیلم و عکس</Link>,
+    "/admin-panel/test"
+  ),
 ];

@@ -1,18 +1,18 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, notification, Row} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Col, Divider, Form, Input, notification, Row } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useForm} from "antd/es/form/Form";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
@@ -51,9 +51,9 @@ export default function Home(props: PropType) {
         }
       })
   );
-  const downloadPdf = () => {
+  const downloadPdf = (choiceKey: any) => {
     if (!barcode) {
-      notification.error({message: "فایلی وجود ندارد"});
+      notification.error({ message: "فایلی وجود ندارد" });
       return;
     }
 
@@ -65,13 +65,14 @@ export default function Home(props: PropType) {
       uint8Array[i] = binaryPdf.charCodeAt(i);
     }
 
-    const blob = new Blob([uint8Array], {type: 'application/pdf'});
+    const blob = new Blob([uint8Array], { type: 'application/pdf' });
 
     const link = document.createElement('a');
     link.href = window.URL.createObjectURL(blob);
     link.download = 'downloaded.pdf';
-
     link.click();
+    form.submit();
+    setChoice(choiceKey);
   };
 
   const [form] = useForm();
@@ -106,9 +107,7 @@ export default function Home(props: PropType) {
     <>
       <div className="box-border w-full p-6">
         <WorkflowDataViewer loading={isLoading} data={data as any} />
-        <Button type="primary" onClick={downloadPdf}>دانلود بارکد</Button>
-
-
+        {data && <Divider />}
         <Form onFinish={onFinish} form={form}>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
@@ -131,10 +130,7 @@ export default function Home(props: PropType) {
         <WorkflowRequestBtn
           loading={isMutating}
           choices={data?.choices as any}
-          onClick={(choiceKey) => {
-            setChoice(choiceKey);
-            form.submit();
-          }}
+          onClick={(choiceKey) => { downloadPdf(choiceKey) }}
           trigger={() => true}
           nextStepUrl={apiData.create.url}
           taskId={props.params.uid}

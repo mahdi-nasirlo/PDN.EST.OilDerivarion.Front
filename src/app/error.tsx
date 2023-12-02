@@ -13,6 +13,8 @@ interface PropsType {
 
 export default function GlobalError(props: PropsType) {
 
+    console.log(props)
+
     const data = {
         message: props.error.message,
         type: reportLogEnum.ui_error,

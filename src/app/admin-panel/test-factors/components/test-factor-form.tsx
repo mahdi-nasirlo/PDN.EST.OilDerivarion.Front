@@ -1,24 +1,18 @@
 import React from "react";
-import { Col, Form, Input, InputNumber, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
 
 function TestFactorForm() {
   const { data: Measure, isLoading: ldMeasure } = useSWR(
-    [
-      "/Measure/GetAll",
-      {
-        name: null,
-        IsActive: true,
-      },
-    ],
+    ["/Measure/GetAll", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
@@ -46,38 +40,8 @@ function TestFactorForm() {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="reNewabillity_Value"
-            label=" مقدار تجدید پذیری"
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              { type: "number", message: "لطفا مقدار عددی وارد کنید" },
-            ]}
-          >
-            <InputNumber
-              className="w-full"
-              size="large"
-              placeholder="وارد کنید"
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="reNewabillity"
-            label="تجدید پذیری"
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              { type: "number", message: "لطفا مقدار عددی وارد کنید" },
-            ]}
-          >
-            <InputNumber
-              className="w-full"
-              size="large"
-              placeholder="وارد کنید"
-            />
-          </Form.Item>
-        </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="testMethod"

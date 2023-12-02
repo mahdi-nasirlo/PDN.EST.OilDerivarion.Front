@@ -1,5 +1,5 @@
 import React from 'react';
-import {Descriptions, Divider, Typography} from "antd";
+import {Descriptions, Divider, Tabs, Typography} from "antd";
 import {FormSchemaStructure} from "../type";
 import {z} from "zod";
 import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
@@ -45,8 +45,12 @@ const Index = ({data}: { data: any }) => {
 
                         value.Forms.map((value1, index1) => {
 
+                            console.log(value1)
+
                             // @ts-ignore
                             let schemaValue = item[value1.Form_Key] || {}
+
+                            let tabItem
 
                             if (value1.Mode === 1) {
                                 const items: DescriptionsItemProps[] = []
@@ -55,36 +59,35 @@ const Index = ({data}: { data: any }) => {
                                     items.push({label: value2.Title_Style, children: schemaValue[value2.Name]})
                                 })
 
-                                view.push(<>
-                                    <Descriptions className="text-right" title={value1.Title}>
-                                        {items.map((value2, index3) => <>
-                                            <Descriptions.Item label={value2.label}>
-                                                {value2.children}
-                                            </Descriptions.Item>
-                                        </>)}
-                                    </Descriptions>
-                                </>)
-
-                                return
+                                tabItem = <Descriptions className="text-right" title={value1.Title}>
+                                    {items.map((value2, index3) => <>
+                                        <Descriptions.Item label={value2.label}>
+                                            {value2.children}
+                                        </Descriptions.Item>
+                                    </>)}
+                                </Descriptions>
                             }
 
-                            // console.log(schemaValue)
                             if (value1.Mode === 0) {
-                                view.push(<>
-                                    <div className="my-8">
-                                        <Typography className="text-right font-bold text-lg mb-5">
-                                            {value.Title}
-                                        </Typography>
-                                        <div>
-                                            <FormDataTable schema={value1 as any} records={item} delete={false}/>
-                                        </div>
-                                        {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
-                                            <Divider className="my-2"/>}
-                                    </div>
-                                </>)
 
-                                return;
+                                tabItem = <div className="my-8">
+                                    <Typography className="text-right font-bold text-lg mb-5">
+                                        {value.Title}
+                                    </Typography>
+                                    <div>
+                                        <FormDataTable schema={value1 as any} records={item} delete={false}/>
+                                    </div>
+                                    {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
+                                        <Divider className="my-2"/>}
+                                </div>
+
                             }
+
+                            view.push(<>
+                                <Tabs.TabPane tab={value1.Title} key={value1.Form_Key}>
+                                    {tabItem}
+                                </Tabs.TabPane>
+                            </>)
 
                         })
 
@@ -102,18 +105,14 @@ const Index = ({data}: { data: any }) => {
 
     });
 
-    let viewWithDivider = []
-
-    for (let i = 0; i < view.length; i++) {
-        viewWithDivider.push(view[i]);
-        viewWithDivider.push(<Divider/>);
-    }
-
-    return <Typography>
-        {viewWithDivider?.map((value, index) => <div key={index}>
-            {value}
-        </div>)}
-    </Typography>
+    return <>
+        <Tabs
+            size="large"
+            type="card"
+        >
+            {view?.map((value, index) => value)}
+        </Tabs>
+    </>
 };
 
 export default Index;

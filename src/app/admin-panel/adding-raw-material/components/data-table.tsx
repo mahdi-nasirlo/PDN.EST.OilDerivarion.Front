@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Form, Modal, Row, Space, Tag, Typography, } from "antd";
+import { Button, Col, Form, Modal, Row, Space, Tooltip, Typography, } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -9,7 +9,6 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
@@ -117,6 +116,25 @@ export default function DataTable({
       dataIndex: "IsActive",
       key: "4",
       render: (_, record: any) => <StatusColumn record={record} />
+    },
+    {
+      title: "فاکتور های آزمون",
+      dataIndex: "TestItems",
+      key: "5",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.TestItems}</Typography>}
+        >
+          <Typography.Text
+            className=" max-w-[200px]"
+            ellipsis={true}
+            style={{ width: "40px !important" }}
+          >
+            {record.TestItems}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "عملیات",

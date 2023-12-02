@@ -3,6 +3,7 @@ interface Material {
   Name: string;
   IsActive: boolean;
   MeasureUid: string | null;
+  TestItems: string | null;
 }
 
 interface MaterialGet {

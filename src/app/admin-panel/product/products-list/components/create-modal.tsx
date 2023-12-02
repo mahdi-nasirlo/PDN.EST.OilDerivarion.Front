@@ -53,7 +53,7 @@ export default function CreateModal({
         </div>
       }
       open={modalVisible}
-      onCancel={() => setModalVisible(false)}
+      onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>

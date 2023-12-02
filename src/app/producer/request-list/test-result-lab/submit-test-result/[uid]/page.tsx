@@ -2,13 +2,13 @@
 
 import React from "react";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
-import DataTable from "@/app/producer/step18/test-result-lab/submit-test-result/[uid]/components/data-tabe";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
+import DataTable from "./components/data-tabe";
 
 
 export default function Page({
-                                 params,
-                             }: {
+    params,
+}: {
     params: { uid: any };
 }) {
     const {
@@ -27,8 +27,8 @@ export default function Page({
     return (
         <>
 
-            <DataTable params={params.uid} mutate={mutate} labresult={labresult} ldlabresult={ldlabresult}/>
-            
+            <DataTable params={params.uid} mutate={mutate} labresult={labresult} ldlabresult={ldlabresult} />
+
         </>
     );
 }

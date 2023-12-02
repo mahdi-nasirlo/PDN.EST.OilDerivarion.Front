@@ -34,11 +34,6 @@ export default function CreateModal({
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-  const closeModal = () => {
-    setModalVisible(false);
-    form.resetFields();
-  };
-
   const { isMutating, trigger } = useSWRMutation(
     "/LabTestItem/Create",
     mutationFetcher
@@ -53,7 +48,13 @@ export default function CreateModal({
       await mutate();
 
       setModalVisible(false);
+
+      form.resetFields();
     }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
     form.resetFields();
   };
 
@@ -115,7 +116,7 @@ export default function CreateModal({
             >
               <Select
                 showSearch
-                fieldNames={{ label: "name", value: "uid" }}
+                fieldNames={{ label: "name", value: "Uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
                 options={Lab}

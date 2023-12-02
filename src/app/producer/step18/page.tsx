@@ -16,7 +16,7 @@ export default function Page() {
 
     const defaultValueTable = {
         name: null,
-        IsActive: null,
+        labIsAccepted: null,
         ...getPageRecordNumber()
     };
 
@@ -37,7 +37,7 @@ export default function Page() {
     const setFilterTable = async (values: any) => {
         setFilter({
             name: values.name,
-            IsActive: values.IsActive,
+            labIsAccepted: values.labIsAccepted,
             ...getPageRecordNumber()
         });
 

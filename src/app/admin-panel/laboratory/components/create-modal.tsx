@@ -82,8 +82,9 @@ export default function CreateModal({
       await mutate();
 
       setStep(1);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   return (
@@ -93,7 +94,7 @@ export default function CreateModal({
         <div>
           <>
             <div className="text-base mb-2 flex gap-2">
-              افزودن آزمایشگاه جدید
+              افزودن آزمایشگاه
               <h2>{step} از 3</h2>
             </div>
             <div className="text-xs font-normal">

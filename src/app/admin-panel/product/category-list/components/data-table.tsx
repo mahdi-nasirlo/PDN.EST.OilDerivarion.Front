@@ -71,7 +71,7 @@ export default function DataTable({
     },
     {
       title: "روش تولید",
-      dataIndex: "TestMethodName",
+      dataIndex: "ProductionMethodName",
       key: "3",
     },
     {

@@ -27,8 +27,8 @@ export default function CreateModal({
   const createTestFactor = async (values: CreateTestItemDetail) => {
 
     const res = await trigger(values);
-    await mutate();
     if (res) {
+      await mutate();
 
       setModalVisible(false);
 
@@ -53,7 +53,7 @@ export default function CreateModal({
         </div>
       }
       visible={modalVisible}
-      onCancel={() => setModalVisible(false)}
+      onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>

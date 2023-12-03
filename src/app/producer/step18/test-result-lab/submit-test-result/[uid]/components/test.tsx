@@ -113,7 +113,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
-const DataTable = ({ uid }: { uid: string }) => {
+const Test = ({ uid }: { uid: string }) => {
   const {
     isLoading: ldlabresult,
     data: labresult,
@@ -224,7 +224,7 @@ const DataTable = ({ uid }: { uid: string }) => {
     },
     {
       key: "6",
-      title: "نتیجه آزمون",
+      title: "نتیجه",
       dataIndex: "Result",
       editable: true,
     },
@@ -288,6 +288,11 @@ const DataTable = ({ uid }: { uid: string }) => {
             <button
               className="font-bold text-primary-500 py-1 px-2"
               onClick={() => save(record.TestItemUid)}
+
+              // onClick={() => {
+              //   let NewDate = record;
+              //   save(NewDate);
+              // }}
             >
               ذخیره
             </button>
@@ -357,4 +362,4 @@ const DataTable = ({ uid }: { uid: string }) => {
   );
 };
 
-export default DataTable;
+export default Test;

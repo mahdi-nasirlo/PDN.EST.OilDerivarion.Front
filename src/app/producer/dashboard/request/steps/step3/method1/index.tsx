@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import { Alert, Button, Divider, Form, Typography } from "antd";
-import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
-import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import ProductRequestTable from "@/app/producer/dashboard/request/steps/step3/method1/product-request-table";
+import SelectProductForm from "./select-product-form";
+import StepContext from "../../../state-managment/step-context";
+import ProductRequestTable from "./product-request-table";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
 import { mutate } from "swr";
+import { useForm } from "antd/es/form/Form";
 
 const Index = () => {
+
+    const [form] = useForm();
+
     const processController = useContext(StepContext);
 
     const requestDetailProduct = useCrudRequestDetailProduct();
@@ -32,12 +36,13 @@ const Index = () => {
             </Typography>
 
             <Form
+                form={form}
                 disabled={
                     requestDetailProduct.create.isLoading || processController.isMutating
                 }
                 onFinish={handleOnFinish}
             >
-                <SelectProductForm />
+                <SelectProductForm form={form} />
                 <div className="flex justify-end">
                     <Button
                         type="primary"
@@ -57,9 +62,7 @@ const Index = () => {
 
             <div className="flex gap-3">
                 <Button
-                    onClick={() =>
-                        processController.getLastStep()
-                    }
+                    onClick={() => processController.getLastStep()}
                     type="dashed"
                     className="bg-gray-100 w-full"
                 >

@@ -73,12 +73,12 @@ export default function DataTable({
       width: "5%"
     },
     {
-      title: "عنوان",
+      title: "عنوان استاندارد",
       dataIndex: "Title",
       key: "2",
     },
     {
-      title: "عنوان استاندارد",
+      title: "فاکتورهای آزمون",
       dataIndex: "TestItemName",
       key: "3",
     },

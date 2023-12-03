@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Col, Form, Row, Select } from "antd";
+import { Col, Form, FormInstance, Row, Select } from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import { filterOption } from '../../../../../../../../lib/filterOption';
 
-const SelectProductForm = () => {
+const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
 
     const processController = useContext(StepContext)
 
@@ -17,13 +17,14 @@ const SelectProductForm = () => {
 
     const ChangeDensity = async (value: any) => {
 
-        setDensity(value)
+        setDensity(value);
 
         await productSelectableData.getSelectableProduct({
             requestMasterUid: processController.requestMaster.requestMasterUid,
             densityTypeId: value,
-        })
+        });
 
+        form.setFieldValue('productUid', null);
     };
 
 
@@ -33,9 +34,9 @@ const SelectProductForm = () => {
                 <Col xs={24} md={12}>
                     <Form.Item
                         name="densityTypeId"
-                        label="دانسیته محصول "
+                        label="دانسیته محصول"
                         labelCol={{ span: 24 }}
-                        rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                        rules={[{ required: true, message: "لطفا دانسیته محصول را انتخاب کنید" }]}
                     >
 
                         <Select
@@ -53,7 +54,7 @@ const SelectProductForm = () => {
                         labelCol={{ span: 24 }}
                         name="productUid"
                         label="نام محصول"
-                    // rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                        rules={[{ required: true, message: "لطفا محصول را انتخاب کنید" }]}
                     >
                         <Select
                             showSearch

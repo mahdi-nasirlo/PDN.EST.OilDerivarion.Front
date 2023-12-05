@@ -2,8 +2,16 @@ import useSWR from "swr";
 import {listFetcher} from "../../lib/server/listFetcher";
 import {Choice} from "../../interfaces/requestDetail";
 
+export interface ApiTabType {
+    "name": string,
+    "key": string,
+    "url": string,
+    "type": "1" | "2"
+}
+
 interface DataFetchType {
     choices: Choice[],
+    tabs: ApiTabType[],
     task: {
         processId: string,
         stepId: string,

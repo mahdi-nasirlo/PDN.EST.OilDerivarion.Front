@@ -94,16 +94,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   return (
     <td {...restProps}>
       {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
+        <Form.Item name={dataIndex} style={{ margin: 0 }}>
           {inputNode}
         </Form.Item>
       ) : (
@@ -208,12 +199,6 @@ const Test = ({ uid }: { uid: string }) => {
       key: "3",
       title: "واحد اندازه گیری",
       dataIndex: "MeasureName",
-      editable: false,
-    },
-    {
-      key: "4",
-      title: "IsDeleted",
-      dataIndex: "IsDeleted",
       editable: false,
     },
     {

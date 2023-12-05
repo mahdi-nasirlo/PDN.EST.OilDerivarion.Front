@@ -4,21 +4,19 @@ import {
   Divider,
   Form,
   Input,
-  InputNumber,
-  Popconfirm,
   Select,
   Space,
   Table,
+  Tooltip,
   Typography,
 } from "antd";
 import DateForm from "./date-form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../../../lib/server/listFetcher";
-import { ColumnProps } from "antd/lib/table";
-import { TableColumnProps } from "antd/lib";
 import Item from "antd/es/list/Item";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../../../lib/server/mutationFetcher";
+import useGetAllTestItemDetail from "../../../../../../../../hooks/testItemDetail/useGetAllTestItemDetail";
 
 interface Item {
   TestItemUid: string;
@@ -37,7 +35,7 @@ interface Item {
   MinAcceptableResult: string;
   MaxAcceptableResult: string;
   TestItemDetailUid: object | string;
-  TestItemDetailTitlel: string;
+  TestItemDetailTitle: number;
 }
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
@@ -59,61 +57,46 @@ interface TestSelect {
   TestItemName: string;
 }
 
-const EditableCell: React.FC<EditableCellProps> = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const {
-    isLoading: ldTestItemDetailSelect,
-    data: TestItemDetailSelect,
-    mutate,
-  } = useSWR<TestSelect>("/TestItemDetail/GetAll", (url, arg: string, any) =>
-    listFetcher(url, {
-      arg: {
-        testItemUid: record.TestItemUid,
-      },
-    })
-  );
-  const inputNode =
-    dataIndex === "TestItemDetailTitle" ? (
-      <Select
-        options={TestItemDetailSelect || ([] as any)}
-        fieldNames={{ label: "Title", value: "Uid" }}
-        loading={ldTestItemDetailSelect}
-      />
-    ) : (
-      <Input />
-    );
-
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
-
 const DataTable = ({ uid }: { uid: string }) => {
+  const [editingKey, setEditingKey] = useState("");
+
+  const EditableCell: React.FC<EditableCellProps> = ({
+    editing,
+    dataIndex,
+    title,
+    inputType,
+    record,
+    index,
+    children,
+    ...restProps
+  }) => {
+    const testItemDetail = useGetAllTestItemDetail(record?.TestItemUid);
+
+    const inputNode =
+      dataIndex === "TestItemDetailTitle" ? (
+        <Select
+          labelInValue
+          options={testItemDetail.data || ([] as any)}
+          fieldNames={{ label: "Title", value: "Uid" }}
+          loading={testItemDetail.isLoading}
+        />
+      ) : (
+        <Input />
+      );
+
+    return (
+      <td {...restProps}>
+        {editing ? (
+          <Form.Item name={dataIndex} style={{ margin: 0 }}>
+            {inputNode}
+          </Form.Item>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  };
+
   const {
     isLoading: ldlabresult,
     data: labresult,
@@ -137,7 +120,6 @@ const DataTable = ({ uid }: { uid: string }) => {
 
   const [form] = Form.useForm();
   const [data, setData] = useState(labresult);
-  const [editingKey, setEditingKey] = useState("");
 
   const isEditing = (record: Item) => record.TestItemUid === editingKey;
 
@@ -154,8 +136,8 @@ const DataTable = ({ uid }: { uid: string }) => {
     try {
       const row = (await form.validateFields()) as Item;
 
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.TestItemUid);
+      const newData: any = [...data];
+      const index = newData.findIndex((item: any) => key === item.TestItemUid);
 
       if (index > -1) {
         const item = newData[index];
@@ -164,22 +146,25 @@ const DataTable = ({ uid }: { uid: string }) => {
           ...row,
         });
 
-        trigger({ ...newData[index], requestBarcodeUid: uid });
+        newData[index].TestItemDetailUid =
+          newData[index].TestItemDetailTitle?.key;
 
-        setData(newData);
+        newData[index].TestItemDetailTitle =
+          newData[index].TestItemDetailTitle?.label;
 
-        setEditingKey("");
+        const res = await trigger({
+          ...newData[index],
+          requestBarcodeUid: uid,
+        });
+
+        if (res) {
+          mutate();
+
+          setData(newData);
+
+          setEditingKey("");
+        }
       }
-
-      // if (newData[index]) {
-      //   mutate({});
-      //   console.log(index);
-      // }
-      // else {
-      //   newData.push(row);
-      //   setData(newData);
-      //   setEditingKey("");
-      // }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
@@ -200,7 +185,7 @@ const DataTable = ({ uid }: { uid: string }) => {
     // },
     {
       key: "2",
-      title: "روش آژمون",
+      title: "روش آزمون",
       dataIndex: "TestMethod",
       editable: false,
     },
@@ -208,12 +193,6 @@ const DataTable = ({ uid }: { uid: string }) => {
       key: "3",
       title: "واحد اندازه گیری",
       dataIndex: "MeasureName",
-      editable: false,
-    },
-    {
-      key: "4",
-      title: "IsDeleted",
-      dataIndex: "IsDeleted",
       editable: false,
     },
     {
@@ -227,18 +206,44 @@ const DataTable = ({ uid }: { uid: string }) => {
       title: "نتیجه آزمون",
       dataIndex: "Result",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 150 }}>{text}</div>
+      ),
     },
     {
       key: "7",
       title: "محدوده",
       dataIndex: "Range",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 150 }}>{text}</div>
+      ),
     },
     {
       key: "8",
       title: "توضیحات",
       dataIndex: "Description",
       editable: true,
+      render: (text: string, record: Item, editable: boolean) => (
+        <>
+          {editable ? (
+            <div style={{ width: 150 }}>{text}</div>
+          ) : (
+            <Tooltip
+              placement="top"
+              title={<Typography>{record.Description}</Typography>}
+            >
+              <Typography.Text
+                className="max-w-[100px]"
+                ellipsis={true}
+                style={{ width: "40px !important" }}
+              >
+                {record.Description}
+              </Typography.Text>
+            </Tooltip>
+          )}
+        </>
+      ),
     },
 
     {
@@ -246,30 +251,45 @@ const DataTable = ({ uid }: { uid: string }) => {
       title: "حداقل مقدار قابل قبول",
       dataIndex: "MinAcceptableResult",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 100 }}>{text}</div>
+      ),
     },
     {
       key: "10",
       title: "حداکثر مقدار قابل قبول",
       dataIndex: "MaxAcceptableResult",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 100 }}>{text}</div>
+      ),
     },
     {
       key: "11",
       title: "واحد تجدید پذیری",
       dataIndex: "ReNewabillity",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 150 }}>{text}</div>
+      ),
     },
     {
       key: "12",
       title: "تجدید پذیری",
       dataIndex: "ReNewabillityUnit",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 150 }}>{text}</div>
+      ),
     },
     {
       key: "13",
-      title: "TestItemDetailTitle",
+      title: "استانداردهای فاکتور آزمون",
       dataIndex: "TestItemDetailTitle",
       editable: true,
+      render: (text: string, record: Item) => (
+        <div style={{ width: 150 }}>{text}</div>
+      ),
     },
     {
       title: "عملیات",
@@ -346,6 +366,7 @@ const DataTable = ({ uid }: { uid: string }) => {
           }}
           bordered
           dataSource={data || []}
+          //@ts-ignore
           columns={mergedColumns}
           rowClassName="editable-row"
           pagination={{

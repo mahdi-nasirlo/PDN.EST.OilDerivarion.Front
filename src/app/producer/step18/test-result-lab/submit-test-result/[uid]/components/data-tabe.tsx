@@ -75,6 +75,7 @@ const DataTable = ({ uid }: { uid: string }) => {
     const inputNode =
       dataIndex === "TestItemDetailTitle" ? (
         <Select
+          size="large"
           labelInValue
           options={testItemDetail.data || ([] as any)}
           fieldNames={{ label: "Title", value: "Uid" }}

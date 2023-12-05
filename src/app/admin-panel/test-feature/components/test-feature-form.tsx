@@ -9,7 +9,7 @@ export default function TestFeatureForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="title"
-            label="نام استاندارد"
+            label="عنوان استاندارد"
             rules={[{ required: true }]}
           >
             <Input size="large" placeholder="وارد کنید" />

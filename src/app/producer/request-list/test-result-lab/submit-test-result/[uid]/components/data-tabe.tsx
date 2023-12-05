@@ -1,190 +1,231 @@
-"use client";
+import React, { useState } from "react";
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  Select,
+  Space,
+  Table,
+  Typography,
+} from "antd";
+import StatusColumn from "../../../../../../../../components/CustomeTable/StatusColumn";
+import DateForm from "./date-form";
 
-
-import {Button, Divider, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
-import CustomeTable from "../../../../../../../../components/CustomeTable";
-import DateForm from './date-form';
-import ResultModal from './result-modal';
-import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../../../lib/server/mutationFetcher";
-import {useForm} from "antd/es/form/Form";
-
-
-interface Props {
-    Uid: string,
-    Measure_Id: number,
-    ReNewabillity: number,
-    ReNewabillity_Value: number,
-    TestMethod: string,
-    Name: string,
-    IsActive: boolean,
-    MeasureName: string
-
+interface Item {
+  age: number;
+  address: string;
+  Uid: string;
+  Measure_Id: number;
+  ReNewabillity: number;
+  ReNewabillity_Value: number;
+  TestMethod: string;
+  Name: string;
+  IsActive: boolean;
+  MeasureName: string;
 }
 
+interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
+  editing: boolean;
+  dataIndex: any;
+  title: any;
+  inputType: "object" | "string";
+  record: Item;
+  index: number;
+  children: React.ReactNode;
+  width?: string;
+}
 
-export default function DataTable({labresult, ldlabresult, params, mutate}: {
-    mutate: () => void
-    params: any
-    ldlabresult: any
-    labresult: any
+const EditableCell: React.FC<EditableCellProps> = ({
+  editing,
+  dataIndex,
+  title,
+  inputType,
+  record,
+  index,
+  children,
+  ...restProps
+}) => {
+  const inputNode =
+    inputType === "object" ? <Select /> : <Input defaultValue={record?.Name} />;
+
+  const getObjectOptions = (dataIndex: string) => {
+    switch (dataIndex) {
+      case "testItemDetailUid":
+        return <Select />;
+        break;
+
+      default:
+        return <Select /> || <Input />;
+    }
+  };
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item className="m-0" name={dataIndex}>
+          {inputType === "object" ? getObjectOptions(dataIndex) : inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
+
+export default function DataTable({
+  labresult,
+  ldlabresult,
+  params,
+  mutate,
+}: {
+  mutate: () => void;
+  params: any;
+  ldlabresult: any;
+  labresult: any;
 }) {
-    const [modalVisible, setModalVisible] = useState(false);
-    const [recordUid, setRecordUid] = useState<Props>();
+  {
+    const [form] = Form.useForm();
+    const [data, setData] = useState<Item | undefined>();
+    const [editingUid, setEditingUid] = useState<any>();
 
+    const isEditing = (record: Item) => record.Uid === editingUid;
 
-    const {isMutating, trigger} = useSWRMutation(
-        "/TestResult/Create",
-        mutationFetcher
-    );
-
-
-    const [form] = useForm();
-
-    const handleFormSubmit = async (values: any) => {
-        values.testItemUid = recordUid?.Uid
-        values.requestBarcodeUid = params
-        const res = await trigger(values);
-
-        if (res) {
-            await mutate();
-
-            setModalVisible(false);
-        }
-        form.resetFields();
+    const edit = (record: { Uid: string }) => {
+      form.setFieldsValue({ ...record });
+      setEditingUid(record.Uid);
     };
 
+    const cancel = () => {
+      setEditingUid(null);
+    };
 
-    const columns: ColumnsType<any> = [
-        {
-            title: "ردیف",
-            dataIndex: "Row",
-            key: "1",
-            width: "5%"
-        },
-        {
-            title: "فاکتور آزمون",
-            dataIndex: "Name",
-          
-        },
-        {
-            title: "روش آزمون",
-            dataIndex: "TestMethod",
-            key: "2",
-        },
-        {
-            title: "واحد اندازه گیری",
-            dataIndex: "MeasureName",
-            key: "2",
-        },
-        {
-            title: "فعال/غیرفعال",
-            dataIndex: "IsActive",
-            key: "5",
-            render(_, record) {
-                let color = "";
-                let name = "";
+    const save = async (values: any) => {
+      values.Uid = editingUid;
+      await console.log(values);
+      await mutate();
+      form.resetFields();
+      setEditingUid(null);
+    };
 
-                if (record.IsActive === false) {
-                    color = "red";
-                    name = "غیر فعال";
-                } else if (record.IsActive === true) {
-                    color = "success";
-                    name = "فعال";
-                } else {
-                    color = "warning";
-                    name = "_";
+    const columns = [
+      {
+        title: "فاکتور آزمون",
+        dataIndex: "Name",
+        editable: true,
+      },
+      {
+        title: "فعال/غیرفعال",
+        dataIndex: "IsActive",
+        editable: false,
+        render: (record: any) => <StatusColumn record={record} />,
+      },
+      {
+        title: "ReNewabillity",
+        dataIndex: "ReNewabillity",
+        editable: true,
+      },
+      {
+        title: "ReNewabillity_Value",
+        dataIndex: "ReNewabillity_Value",
+        editable: true,
+      },
+      {
+        title: "عملیات",
+        dataIndex: "operation",
+        width: "10%",
+        render: (_: any, record: Item) => {
+          const editable = isEditing(record);
+          return editable ? (
+            <Space size="small">
+              <button
+                className="font-bold text-red-500 py-1 px-2"
+                onClick={cancel}
+              >
+                انصراف
+              </button>
+              <button
+                className="font-bold text-primary-500 py-1 px-2"
+                onClick={() =>
+                  form.validateFields().then((values) => save(values))
                 }
 
-                return (
-                    <Tag color={color}>
-                        {name}
-                    </Tag>
-                );
-            }
+                // onClick={() => {
+                //   let NewDate = record;
+                //   save(NewDate);
+                // }}
+              >
+                ذخیره
+              </button>
+            </Space>
+          ) : (
+            <Button
+              type="link"
+              className="font-bold text-secondary-500"
+              onClick={() => edit({ Uid: record.Uid })}
+            >
+              ثبت نتیجه
+            </Button>
+          );
         },
-
-        {
-            title: "مرجع",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "نتیجه آزمون",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "حدود قابل قبول",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "تجدید پذیری",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "واحد تجدید پذیری",
-            dataIndex: "Tracking",
-            key: "2",
-        },
-        {
-            title: "عملیات",
-            key: "عملیات",
-            align: "center",
-            fixed: "right",
-            width: "10%",
-            render: (_, record) => (
-                <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-secondary-500 font-bold"
-                        onClick={() => {
-                            setModalVisible(true);
-                            setRecordUid(record)
-
-                        }}
-                    >
-                        ثبت نتیجه
-                    </Button>
-
-                </Space>
-            ),
-        },
+      },
     ];
 
+    const mergedColumns = columns.map((col) => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: (record: Item) => {
+          return {
+            record,
+            inputType: tableColInputType[`${col.dataIndex}`],
+            dataIndex: col.dataIndex,
+            title: col.title,
+            width: col.width,
+            editing: isEditing(record),
+            value: record.Name,
+          };
+        },
+      };
+    });
 
     return (
-        <>
-            <div className="box-border w-full mt-8 p-6">
+      <div className="box-border w-full mt-8 p-6">
+        <Typography className="mt-3 mb-6 text-right font-medium text-base">
+          لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
+        </Typography>
+        <Divider />
 
-                <Typography className="mt-3 mb-6 text-right font-medium text-base">
-                    لطفا اطلاعات خواسته شده را با دقت وارد نمایید.</Typography>
-                <Divider />
+        <DateForm />
+        <Divider />
 
-
-                <DateForm />
-                <Divider />
-                <Typography className="mt-3 mb-6 text-right font-medium text-base">
-                    نتیجه آزمون
-                </Typography>
-                <CustomeTable
-                    setInitialData={() => {
-                    }}
-                    isLoading={ldlabresult}
-                    data={{count: labresult?.length, records: labresult}}
-                    rowKey={"Row"}
-                    columns={columns}
-
-                />
-
-                <ResultModal handleFormSubmit={handleFormSubmit} setModalVisible={setModalVisible}
-                             modalVisible={modalVisible}/>
-            </div>
-        </>
-    )
+        <div className="flex justify-between items-center mb-4">
+          <Typography className="text-right text-[16px] font-normal">
+            نتیجه آژمون{" "}
+          </Typography>
+        </div>
+        <Form form={form} onFinish={save} component={false}>
+          <Table
+            components={{
+              body: {
+                cell: EditableCell,
+              },
+            }}
+            bordered
+            dataSource={labresult}
+            columns={mergedColumns}
+            rowClassName="editable-row"
+            pagination={false}
+          />
+        </Form>
+      </div>
+    );
+  }
 }
 
+const tableColInputType = {
+  name: "string",
+  ReNewabillity: "object",
+  ReNewabillity_Value: "object",
+};

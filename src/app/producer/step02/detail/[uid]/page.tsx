@@ -1,12 +1,12 @@
 "use client";
 
-import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import {Choice} from "../../../../../../interfaces/requestDetail";
-import {Divider} from "antd";
+import {Divider, Typography} from "antd";
 import {useRouter} from "next/navigation";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import {apiUrl} from "../../../../../../Constants/apiUrl";
+import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
     params: { uid: string }
@@ -34,7 +34,14 @@ export default function Home(props: PropType) {
     return (
         <>
             <div className="box-border w-full p-6">
-                <WorkflowDataViewer data={data as any} loading={isLoading}/>
+                <div className='flex justify-between flex-col'>
+                    <div className='flex items-center gap-3'>
+                        <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+                    </div>
+                    <Divider/>
+                </div>
+                <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+                {/*<WorkflowDataViewer data={data?.tabs as any} loading={isLoading}/>*/}
                 {data && <Divider/>}
                 <WorkflowRequestBtn onClick={() => router.push("/producer/step02/list")}
                                     choices={data?.choices as Choice[]}

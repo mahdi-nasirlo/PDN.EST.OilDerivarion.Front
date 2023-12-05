@@ -1,16 +1,16 @@
 "use client";
 
-import { Button, Divider } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
-import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
+import {Button, Divider, Typography} from "antd";
+import {Choice} from "../../../../../../interfaces/requestDetail";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useRouter } from "next/navigation";
-import { useForm } from "antd/es/form/Form";
-import { useState } from "react";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {useRouter} from "next/navigation";
+import {useForm} from "antd/es/form/Form";
+import {useState} from "react";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import DateOfVisitForm from "@/app/producer/step03/detail/[uid]/components/date-of-visit-form";
+import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
   params: { uid: string };
@@ -72,27 +72,34 @@ export default function Home(props: PropType) {
   return (
     <>
       <div className="box-border w-full p-6">
-        <WorkflowDataViewer loading={isLoading} data={data as any} />
-        {data && <Divider />}
-        <DateOfVisitForm form={form} onFinish={onFinish} />
-        {data && <Divider />}
+        <div className='flex justify-between flex-col'>
+          <div className='flex items-center gap-3'>
+            <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+          </div>
+          <Divider/>
+        </div>
+        <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
+        {data && <Divider/>}
+        <DateOfVisitForm form={form} onFinish={onFinish}/>
+        {data && <Divider/>}
         {data?.choices &&
-          !isLoading &&
-          data?.choices.map((value, index) => (
-            <>
-              <div
-                style={{ height: "fit-content" }}
-                className="flex justify-center"
-                key={index}
-              >
-                <Button
-                  loading={isMutating}
-                  onClick={() => {
-                    setChoice(value.choice_Key);
-                    form.submit();
-                  }}
-                  className="w-full"
-                  type="primary"
+            !isLoading &&
+            data?.choices.map((value, index) => (
+                <>
+                  <div
+                      style={{height: "fit-content"}}
+                      className="flex justify-center"
+                      key={index}
+                  >
+                    <Button
+                        loading={isMutating}
+                        onClick={() => {
+                          setChoice(value.choice_Key);
+                          form.submit();
+                        }}
+                        className="w-full"
+                        type="primary"
                 >
                   {value.label}
                 </Button>

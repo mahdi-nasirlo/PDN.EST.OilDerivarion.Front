@@ -5,7 +5,7 @@ import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
 import {RenderItemType} from "./RenderItemType";
 
 interface PropsType {
-    data: ApiTabType[],
+    data: ApiTabType[] | undefined,
     loading?: boolean
 }
 
@@ -23,9 +23,9 @@ const Index = (props: PropsType) => {
 };
 
 
-const RenderItems = ({data}: { data: ApiTabType[] }) => {
+const RenderItems = ({data}: { data: ApiTabType[] | undefined }) => {
 
-    return data.map(value => <RenderItemType type={value.type} key={value.key} url={value.url} name={value.name}/>)
+    return data?.map(value => <RenderItemType type={value.type} key={value.key} url={value.url} name={value.name}/>)
 }
 
 export const TabType = z.object({

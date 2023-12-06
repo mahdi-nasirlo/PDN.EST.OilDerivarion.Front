@@ -21,7 +21,9 @@ const Index = () => {
     <>
       <Alert
         className="border-none w-full text-right text-base font-medium text-blue-500"
-        message={"ابتدا محصول خود را انتخاب کرده و بعد آن را ذخیره کنید تا بتوانید به مرحله بعد بروید"}
+        message={
+          "ابتدا محصول خود را انتخاب کرده و بعد آن را ذخیره کنید تا بتوانید به مرحله بعد بروید"
+        }
         type="info"
       />
       <Divider />
@@ -34,9 +36,7 @@ const Index = () => {
         <Divider />
         <div className="flex gap-3">
           <Button
-            onClick={() =>
-              processController.getLastStep()
-            }
+            onClick={() => processController.getLastStep()}
             type="dashed"
             className="bg-gray-100 w-full"
           >

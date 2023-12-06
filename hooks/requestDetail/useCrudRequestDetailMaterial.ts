@@ -45,9 +45,9 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
                 value?.materialImportDeclarationNumber.toString();
         }
 
-        value.materialSupplyIranCode = value.materialSupplyIranCode.toString();
+        value.materialSupplyIranCode = value.materialSupplyIranCode;
         value.materialSupplyNationalCode =
-            value.materialSupplyNationalCode.toString();
+            value.materialSupplyNationalCode;
         value.materialSupplyPersonTypeId = 1;
         value.materialSupplyMethodId = 1;
 

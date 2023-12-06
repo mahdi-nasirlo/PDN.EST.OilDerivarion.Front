@@ -160,6 +160,7 @@ const RenderInputs = (props: {
         if (props.initialValues) {
 
             form.setFieldsValue(props.initialValues)
+
         }
     }, [])
 
@@ -192,7 +193,7 @@ const RenderInput = ({item}: { item: FormBuilderInputType }) => {
         case "select":
             currentInput = <Select data={item}/>
             break
-        case "Gy&@li56Ti":
+        case "radioBtn":
             currentInput = <RadioBtn data={item}/>
             break
         default:

@@ -3,6 +3,7 @@ import { Alert, Button, Divider, Form, Typography } from "antd";
 import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
+import { useForm } from "antd/es/form/Form";
 
 const Index = () => {
   const processController = useContext(StepContext);
@@ -17,6 +18,7 @@ const Index = () => {
     await processController.getStep4();
   };
 
+  const [form] = useForm();
   return (
     <>
       <Alert
@@ -31,8 +33,12 @@ const Index = () => {
         محصول تولیدی
       </Typography>
 
-      <Form disabled={processController.isMutating} onFinish={handleOnFinish}>
-        <SelectProductForm />
+      <Form
+        form={form}
+        disabled={processController.isMutating}
+        onFinish={handleOnFinish}
+      >
+        <SelectProductForm form={form} />
         <Divider />
         <div className="flex gap-3">
           <Button

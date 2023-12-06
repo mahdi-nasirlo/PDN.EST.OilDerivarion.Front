@@ -7,6 +7,7 @@ const getTokenFromSession = async (): Promise<string | null | undefined> => {
     if (session !== null) {
 
         const sessionData: Session & { access_token?: string } = session
+        
         return sessionData.access_token;
     }
 

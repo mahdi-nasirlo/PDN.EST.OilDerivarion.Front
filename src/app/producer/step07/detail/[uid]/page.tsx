@@ -1,18 +1,18 @@
 "use client";
 
-import { Col, Divider, Form, Input, notification, Row } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
-import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
-import { useForm } from "antd/es/form/Form";
+import {Col, Divider, Form, Input, notification, Row, Typography} from "antd";
+import {Choice} from "../../../../../../interfaces/requestDetail";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
+import {useForm} from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
   params: { uid: string };
@@ -105,16 +105,23 @@ export default function Home(props: PropType) {
   return (
     <>
       <div className="box-border w-full p-6">
-        <WorkflowDataViewer loading={isLoading} data={data as any} />
-        {data && <Divider />}
+        <div className='flex justify-between flex-col'>
+          <div className='flex items-center gap-3'>
+            <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+          </div>
+          <Divider/>
+        </div>
+        <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
+        {data && <Divider/>}
         <Form onFinish={onFinish} form={form}>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item
-                wrapperCol={{ span: 24 }}
-                labelCol={{ span: 24 }}
-                name="description"
-                label="توضیحات"
+                  wrapperCol={{span: 24}}
+                  labelCol={{span: 24}}
+                  name="description"
+                  label="توضیحات"
               >
                 <Input.TextArea
                   style={{ height: 100, resize: "none" }}

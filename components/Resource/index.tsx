@@ -54,33 +54,35 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
 
     const formProvider = useControlFormBuilder()
 
-    return schema?.Forms?.map((value, index) => {
+    return schema?.Forms?.map((Form, index) => {
 
-        if (value?.Mode === 0) {
+        const mainRecords = records[`${Form.Form_Key}`]
+
+        if (Form?.Mode === 0) {
             return <>
-                <FormBuilder key={index} item={value} title={true}
+                <FormBuilder key={index} item={Form} title={true}
                              onSet={formProvider.onSetMany}/>
                 <div className="mt-8">
-                    <FormDataTable schema={value} records={records} delete={true}/>
+                    <FormDataTable schema={Form} records={mainRecords} delete={true}/>
                 </div>
                 {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
                     <Divider style={{margin: "50px 0"}}/>}
             </>
         }
 
-        if (value.Mode === 1) {
+        if (Form.Mode === 1) {
 
             let initialValues
 
-            if (value.Form_Key in records) {
-                initialValues = records[value.Form_Key]
+            if (Form.Form_Key in records) {
+                initialValues = records[Form.Form_Key]
             }
 
 
             return <>
                 <FormBuilder
                     key={index}
-                    item={value}
+                    item={Form}
                     title={true}
                     onSet={formProvider.onSetOne}
                     initialValues={initialValues}

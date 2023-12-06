@@ -30,13 +30,15 @@ const Select = (props: InputProps & PropsType) => {
     }))
 
     return (
-        <FormItem
-            name={data.Name}
-            label={data?.Title_Style}
-            rules={rules}
-        >
-            <AntSelect options={options} size="large" {...props as any} />
-        </FormItem>
+        <>
+            <FormItem
+                name={data.Name}
+                label={data?.Title_Style}
+                rules={rules}
+            >
+                <AntSelect options={options} size="large"/>
+            </FormItem>
+        </>
     );
 };
 

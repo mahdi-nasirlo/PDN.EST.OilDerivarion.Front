@@ -8,12 +8,13 @@ interface PropsType {
 }
 
 export interface WorkFlowDataViewerItemType {
-    title: string,
-    model: ModelPropsType[] | undefined,
-    table: TablePropsType | undefined
+    Title: string,
+    Model: ModelPropsType[] | undefined,
+    Table: TablePropsType | undefined
 }
 
 const Index = (props: PropsType) => {
+
 
     if (props.loading) {
         return <Spin spinning={props.loading}/>
@@ -22,11 +23,12 @@ const Index = (props: PropsType) => {
     return (
         <>
             <Typography className="font-medium text-lg text-primary-500 mb-4 text-right">
-                {props?.data?.title}
+                {props?.data?.Title}
             </Typography>
 
-            <RenderTable values={props?.data?.table?.values} header={props?.data?.table?.header}/>
-            <RenderModel item={props.data.model as ModelPropsType[]}/>
+            {/*// @ts-ignore*/}
+            <RenderTable values={props?.data?.Table?.Values} header={props?.data?.Table?.Header}/>
+            <RenderModel item={props?.data?.Model as ModelPropsType[]}/>
         </>
     );
 };
@@ -34,8 +36,8 @@ const Index = (props: PropsType) => {
 
 interface TablePropsType {
     header: {
-        key: string,
-        value: string
+        Key: string,
+        Value: string
     }[] | undefined,
     values: {
         Name: string,
@@ -49,7 +51,7 @@ const RenderTable = (props: TablePropsType) => {
         return <></>
     }
 
-    const columns: ColumnsType<any> = props.header.map(item => ({dataIndex: item.key, title: item.value}))
+    const columns: ColumnsType<any> = props.header.map(item => ({dataIndex: item.Key, title: item.Value}))
 
     return <>
         <Table columns={columns} dataSource={props.values}/>
@@ -57,16 +59,16 @@ const RenderTable = (props: TablePropsType) => {
 }
 
 interface ModelPropsType {
-    key: string,
-    value: string
+    Key: string,
+    Value: string
 }
 
 const RenderModel = (props: { item: ModelPropsType[] }) => {
 
     return <>
         <Descriptions>
-            {props.item?.map((item, index) => <Descriptions.Item key={index} label={item.key}>
-                {item.value}
+            {props.item?.map((item, index) => <Descriptions.Item key={index} label={item.Key}>
+                {item.Value}
             </Descriptions.Item>)}
         </Descriptions>
     </>

@@ -1,8 +1,7 @@
 "use client";
 
-import {Col, Divider, Form, Input, Row} from "antd";
+import {Col, Divider, Form, Input, Row, Typography} from "antd";
 import {Choice} from "../../../../../../interfaces/requestDetail";
-import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
 import {apiUrl} from "../../../../../../Constants/apiUrl";
 import {useForm} from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
@@ -11,6 +10,10 @@ import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
+import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
+import WorkFlowConfirmProductTable from "../../../../../../components/Workflow/WorkFlowConfirmProductTable";
+import useRequestDetailCreateOilExpertOpinion
+  from "../../../../../../hooks/requestDetail/useRequestDetailCreateOilExpertOpinion";
 
 interface PropType {
   params: { uid: string };
@@ -60,10 +63,21 @@ export default function Home(props: PropType) {
     if (res) router.push("/producer/step22/list");
   };
 
+  const confirmRequest = useRequestDetailCreateOilExpertOpinion()
+
   return (
       <>
         <div className="box-border w-full p-6">
-          <WorkflowDataViewer loading={isLoading} data={data as any}/>
+          <div className='flex justify-between flex-col'>
+            <div className='flex items-center gap-3'>
+              <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+            </div>
+            <Divider/>
+          </div>
+          <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+          {data && <Divider/>}
+          <WorkFlowConfirmProductTable uid={props.params.uid} trigger={confirmRequest.handleTrigger}/>
+          {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
           <Form onFinish={onFinish} form={form}>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>

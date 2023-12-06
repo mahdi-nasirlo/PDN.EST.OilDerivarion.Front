@@ -10,6 +10,8 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
 
     const token = await getTokenFromSession() || ""
 
+    // console.log(token)
+
     try {
 
         const res: AxiosResponse = await customRequest.post(url, arg, {

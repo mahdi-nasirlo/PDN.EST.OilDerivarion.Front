@@ -1,13 +1,13 @@
 "use client"
 
 import React from 'react';
-import WorkflowDataViewer from "../../../../../../components/Workflow/WorkflowDataViewer";
-import { Button, Divider } from "antd";
+import {Button, Divider, Typography} from "antd";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import { Choice } from "../../../../../../interfaces/requestDetail";
+import {Choice} from "../../../../../../interfaces/requestDetail";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
-import { useRouter } from "next/navigation";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
+import {useRouter} from "next/navigation";
+import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropsType {
     params: { uid: string }
@@ -42,8 +42,15 @@ const Page = (props: PropsType) => {
 
     return (
         <div className="box-border w-full p-6">
-            <WorkflowDataViewer data={data as any} loading={isLoading} />
-            {data && <Divider />}
+            <div className='flex justify-between flex-col'>
+                <div className='flex items-center gap-3'>
+                    <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+                </div>
+                <Divider/>
+            </div>
+            <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+            {/*<WorkflowDataViewer data={data as any} loading={isLoading} />*/}
+            {data && <Divider/>}
             <div className="grid grid-cols-1 gap-3">
                 <WorkflowRequestBtn
                     onClick={() => router.push("/producer/step06/list")}

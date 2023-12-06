@@ -2,9 +2,10 @@
 
 import React, { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { Spin } from "antd";
+import {Spin, Typography} from "antd";
 import ThemeProvider from "../../../../provider/theme-provider";
 import { validateToken } from "../../../../request/validateToken";
+import useGetToken from "../../../../hooks/sso/useGetToken";
 
 const ClientComponent = ({
   code,
@@ -15,16 +16,29 @@ const ClientComponent = ({
 }) => {
   const session = useSession();
 
-  const { status, data } = session;
+  const getToken = useGetToken()
+
+  const { status, data, update } = session;
 
   useEffect(() => {
     if (status === "unauthenticated") {
       if (code) {
-        signIn("credentials", {
-          code: code,
-          callbackUrl: "/producer",
-          redirect: true,
-        });
+        // getToken
+
+        getToken.trigger({
+          code
+        }).then((res: {token_type: string, access_token: string}) => {
+
+          console.log(res)
+
+          signIn("credentials", {
+            code: `${res.token_type} ${res.access_token}`,
+            callbackUrl: "/producer",
+            redirect: true,
+          });
+        })
+
+
       } else {
         const validate = validateToken(callbackUrl);
       }
@@ -32,14 +46,21 @@ const ClientComponent = ({
   }, [status]);
 
   return (
-    <ThemeProvider>
-      <Spin
-        spinning={status === "loading"}
-        className="flex justify-center items-center w-full h-[100vh]"
-      >
-        <div>{JSON.stringify(session)}</div>
-      </Spin>
-    </ThemeProvider>
+      <ThemeProvider>
+        <div className="flex flex-col justify-center items-center w-full h-[100vh]">
+          <Typography
+              className='text-center font-bold text-xl'
+          >
+            در انتقال به صفحه هستید
+          </Typography>
+          <Spin
+              className='flex justify-center items-center mt-5'
+              size='large'
+          >
+
+          </Spin>
+        </div>
+      </ThemeProvider>
   );
 };
 

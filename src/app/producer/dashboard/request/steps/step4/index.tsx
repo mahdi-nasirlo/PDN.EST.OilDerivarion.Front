@@ -4,8 +4,8 @@ import {Button, Checkbox, Divider, Form} from "antd";
 import React, {useContext} from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import {useForm} from "antd/es/form/Form";
-import DataViewer from "../../../../../../../components/FormBuilder/DataViewer";
 import useGetBaseInfo from "../../../../../../../hooks/producer/useGetBaseInfo";
+import GodOfDataViewer from "../../../../../../../components/GodOfDataViewer";
 
 export default function Step5() {
 
@@ -26,7 +26,7 @@ export default function Step5() {
         <>
             <Divider/>
             <div className='w-full bg-gray-50 rounded-md p-5'>
-                <DataViewer data={getInfo.data || {}}/>
+                <GodOfDataViewer data={getInfo.data || {}}/>
             </div>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item

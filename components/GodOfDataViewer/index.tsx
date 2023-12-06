@@ -1,5 +1,5 @@
 import React from 'react';
-import {Spin} from "antd";
+import {Alert, Spin} from "antd";
 import {z} from "zod";
 import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
 import {RenderItemType} from "./RenderItemType";
@@ -24,6 +24,11 @@ const Index = (props: PropsType) => {
 
 
 const RenderItems = ({data}: { data: ApiTabType[] | undefined }) => {
+
+
+    if (!data || !Array.isArray(data)) {
+        return <Alert message="نوع داده صحیح نمی باشد" type="error" className="text-right border border-red-500"/>
+    }
 
     return data?.map((value, index) => <RenderItemType index={index} type={value.type} key={value.key} url={value.url}
                                                        name={value.name}/>)

@@ -25,10 +25,12 @@ const Index = (props: PropsType) => {
 
 const RenderItems = ({data}: { data: ApiTabType[] | undefined }) => {
 
-    return data?.map(value => <RenderItemType type={value.type} key={value.key} url={value.url} name={value.name}/>)
+    return data?.map((value, index) => <RenderItemType index={index} type={value.type} key={value.key} url={value.url}
+                                                       name={value.name}/>)
 }
 
 export const TabType = z.object({
+    index: z.number(),
     name: z.string(),
     key: z.string().optional(),
     url: z.string(),

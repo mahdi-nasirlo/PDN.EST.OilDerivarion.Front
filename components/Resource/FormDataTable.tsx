@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FormType} from "../FormBuilder";
 import {TableColumnsType} from "antd/lib";
 import {Button, Table} from "antd";
@@ -41,26 +41,13 @@ const FormDataTable = (props: PropType) => {
 
     }
 
-    useEffect(() => {
-
-        const records = props?.records
-        const formKey = props?.schema?.Form_Key
-
-        console.log(records)
-        console.log(formKey)
-
-
-        if (formKey && records && formKey in records && Array.isArray(records[formKey])) {
-            setState(records[formKey])
-        }
-    }, [])
-
 
     return (
         <>
+            {/*<Typography>{}</Typography>*/}
             <Table
                 columns={columns}
-                dataSource={state}
+                dataSource={props?.records as any || []}
                 pagination={false}
             />
         </>

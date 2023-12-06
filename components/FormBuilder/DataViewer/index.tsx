@@ -44,51 +44,52 @@ const Index = ({data}: { data: any }) => {
 
                 const schema = schemaJsonValidate.data
 
-                schema.map((value, index) => {
+                schema.map((categoryForms, index) => {
 
 
-                    value.Forms.map((value1, index1) => {
+                    categoryForms.Forms.map((Form, index1) => {
 
                         // @ts-ignore
-                        let schemaValue = item[value1.Form_Key] || {}
+                        let schemaValue = parsData[`${Form.Form_Key}`] || null
 
                         let tabItem
 
-                        if (value1.Mode === 1) {
-                            const items: DescriptionsItemProps[] = []
+                        if (Form.Mode === 1) {
+                            const descriptionsItems: DescriptionsItemProps[] = []
 
-                            value1.FormFields?.map((value2, index3) => {
-                                items.push({label: value2.Title_Style, children: schemaValue[value2.Name]})
+
+                            Form.FormFields?.map((FormField, index3) => {
+                                descriptionsItems.push({
+                                    label: FormField.Title_Style,
+                                    children: schemaValue[FormField.Name]
+                                })
                             })
 
-                            tabItem = <Descriptions className="text-right" title={value1.Title}>
-                                {items.map((value2, index3) => <>
-                                    <Descriptions.Item label={value2.label}>
-                                        {value2.children}
+                            tabItem = <Descriptions className="text-right" title={Form.Title}>
+                                {descriptionsItems.map((descriptionsItem, index3) => <>
+                                    <Descriptions.Item label={descriptionsItem.label}>
+                                        {descriptionsItem.children}
                                     </Descriptions.Item>
                                 </>)}
                             </Descriptions>
                         }
 
-                        if (value1.Mode === 0) {
-
-                            tabItem = <div className="my-8">
+                        if (Form.Mode === 0) {
+                            tabItem = <div>
                                 <Typography className="text-right font-bold text-lg mb-5">
-                                    {value.Title}
+                                    {categoryForms.Title}
                                 </Typography>
                                 <div>
-                                    <FormDataTable schema={value1 as any} records={item} delete={false}/>
+                                    <FormDataTable schema={Form as any} records={schemaValue} delete={false}/>
                                 </div>
-                                {index1 + 1 !== value.Forms.length && value.Forms.length > 1 &&
+                                {index1 + 1 !== categoryForms.Forms.length && categoryForms.Forms.length > 1 &&
                                     <Divider className="my-2"/>}
                             </div>
 
                         }
 
                         view.push(<>
-                            {/*<Tabs.TabPane tab={value1.Title} key={value1.Form_Key}>*/}
                             {tabItem}
-                            {/*</Tabs.TabPane>*/}
                         </>)
 
                     })

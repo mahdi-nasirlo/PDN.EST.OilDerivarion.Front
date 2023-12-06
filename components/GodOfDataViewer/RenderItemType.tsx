@@ -11,7 +11,7 @@ import DataViewer from "../FormBuilder/DataViewer";
 
 export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
-    const [isFirst, setIsFirst] = useState(false)
+    const [isFirst, setIsFirst] = useState(props.index === 0)
 
     const {data, isLoading} = useSWR(isFirst ? props.url : null, () => fetcher({url: props.url}))
 
@@ -30,6 +30,7 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
     return <>
         <Collapse
+            defaultActiveKey={props.index === 0 ? ["0"] : []}
             onChange={key => {
                 if (key.length > 0) {
                     setIsFirst(true)

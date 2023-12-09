@@ -4,6 +4,7 @@ import {FormBuilderInputType} from "../index";
 import {Rule} from "rc-field-form/es/interface";
 import FormItem from "../FormItem";
 import {Select as AntSelect} from "antd";
+import {Option} from "antd/lib/mentions";
 
 interface PropsType {
     data: FormBuilderInputType
@@ -34,9 +35,16 @@ const Select = (props: InputProps & PropsType) => {
             <FormItem
                 name={data.Name}
                 label={data?.Title_Style}
-                rules={rules}
+                // rules={rules}
             >
-                <AntSelect options={options} size="large"/>
+                <AntSelect
+                    allowClear
+                    size="large"
+                    placeholder={props.data.Placeholder || "لطفا مقدار را وارد کنید"}
+                >
+                    {props.data.FormFieldDetails?.map((value, index) => <Option key={`${index}`}
+                                                                                value={value.Value}>{value.Text}</Option>)}
+                </AntSelect>
             </FormItem>
         </>
     );

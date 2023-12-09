@@ -26,8 +26,8 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
         defaultValue = props?.data?.FormFieldDetails[0].Value
     }
 
-    console.log(props.data.FormFieldDetails)
-
+    const fieldDetailLen = props?.data?.FormFieldDetails?.length
+    const widthPercent = fieldDetailLen ? 100 / fieldDetailLen : 100
 
     return (
         <FormItem
@@ -42,7 +42,7 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
                 buttonStyle="solid"
             >
                 {props.data.FormFieldDetails?.map((value, index) => (<>
-                    <Radio.Button className='w-1/2' key={index} value={value.Value}>
+                    <Radio.Button style={{width: `${widthPercent}%`}} key={index} value={value.Value}>
                         {value.Text}
                     </Radio.Button>
                 </>))}

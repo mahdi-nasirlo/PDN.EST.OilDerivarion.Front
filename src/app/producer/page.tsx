@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="box-border w-full lg:mt-8 lg:p-6 p-2 mt-3">
+      <div className="box-border w-full p-6">
         <Alert
           message="توجه !"
           description="اطلاعات موجود در پنل ادمین، اطلاعات پایه و اصلی است. لطفا از تغییر آن خودداری فرمایید."

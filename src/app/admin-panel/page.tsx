@@ -1,7 +1,6 @@
 "use client"
 
-import { Typography } from "antd";
-import GodOfDataViewer from '../../../components/GodOfDataViewer';
+import {Typography} from "antd";
 
 export default function Manufacturer() {
 
@@ -11,7 +10,7 @@ export default function Manufacturer() {
                 پنل ادمین
             </Typography>
             <div className="mt-10">
-                <GodOfDataViewer />
+
             </div>
         </div>
     );

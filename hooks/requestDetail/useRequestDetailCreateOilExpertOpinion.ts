@@ -10,7 +10,7 @@ const SubmitType = z.object({
 
 const UseRequestDetailCreateOilExpertOpinion = () => {
 
-    const request = useSWRMutation("/RequestDetail/CreateOilExpertOpinion", mutationFetcher)
+    const request = useSWRMutation("/RequestDetail/setOilExpertOpinion", mutationFetcher)
 
     const handleTrigger = (props: z.infer<typeof SubmitType>) => {
         console.log(props)

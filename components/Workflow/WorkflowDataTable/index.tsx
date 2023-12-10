@@ -35,6 +35,8 @@ const Index = () => {
 
     }
 
+    console.log(fetch.data)
+
     return (
         <>
             <div className="box-border w-full mt-8 p-6">

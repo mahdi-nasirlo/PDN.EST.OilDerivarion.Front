@@ -1,7 +1,6 @@
 "use client"
 
 import { Typography } from "antd";
-
 export default function Manufacturer() {
 
     return (

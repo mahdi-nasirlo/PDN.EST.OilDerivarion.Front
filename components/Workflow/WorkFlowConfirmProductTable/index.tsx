@@ -214,7 +214,6 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
                         cell: EditableCell,
                     },
                 }}
-                bordered
                 dataSource={addIndexToData(data as any)}
                 columns={mergedColumns}
                 loading={allProduct.isLoading}

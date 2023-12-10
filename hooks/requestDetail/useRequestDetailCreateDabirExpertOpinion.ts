@@ -11,7 +11,7 @@ const TriggerType = z.object({
 
 const UseRequestDetailCreateStandardExpertOpinion = () => {
 
-    const request = useSWRMutation("/RequestDetail/CreateSamtExpertOpinion", mutationFetcher)
+    const request = useSWRMutation("/RequestDetail/CreateDabirExpertOpinion", mutationFetcher)
 
     const handleTrigger = (props: z.infer<typeof TriggerType>) => {
         return request.trigger(props)

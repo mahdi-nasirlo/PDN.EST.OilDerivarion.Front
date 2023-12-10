@@ -11,6 +11,9 @@ import {useState} from "react";
 import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
+import WorkFlowConfirmProductTable from "../../../../../../components/Workflow/WorkFlowConfirmProductTable";
+import useRequestDetailCreateSamtExpertOpinion
+  from "../../../../../../hooks/requestDetail/useRequestDetailCreateSamtExpertOpinion";
 
 interface PropType {
   params: { uid: string };
@@ -60,6 +63,8 @@ export default function Home(props: PropType) {
     if (res) router.push("/producer/step24/list");
   };
 
+  const confirmRequest = useRequestDetailCreateSamtExpertOpinion()
+
   return (
       <>
         <div className="box-border w-full p-6">
@@ -71,7 +76,7 @@ export default function Home(props: PropType) {
           </div>
           <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
           {data && <Divider/>}
-          {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
+          <WorkFlowConfirmProductTable uid={props.params.uid} trigger={confirmRequest.handleTrigger}/>
           <Form onFinish={onFinish} form={form}>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>

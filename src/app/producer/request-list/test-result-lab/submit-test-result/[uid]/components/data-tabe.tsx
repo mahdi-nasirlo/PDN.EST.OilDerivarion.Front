@@ -1,14 +1,5 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  Select,
-  Space,
-  Table,
-  Typography,
-} from "antd";
+import React, {useState} from "react";
+import {Button, Divider, Form, Input, Select, Space, Table, Typography,} from "antd";
 import StatusColumn from "../../../../../../../../components/CustomeTable/StatusColumn";
 import DateForm from "./date-form";
 
@@ -207,16 +198,16 @@ export default function DataTable({
         </div>
         <Form form={form} onFinish={save} component={false}>
           <Table
-            components={{
-              body: {
-                cell: EditableCell,
-              },
-            }}
-            bordered
-            dataSource={labresult}
-            columns={mergedColumns}
-            rowClassName="editable-row"
-            pagination={false}
+              components={{
+                body: {
+                  cell: EditableCell,
+                },
+              }}
+              bordered
+              dataSource={labresult}
+              columns={mergedColumns}
+              rowClassName="editable-row"
+              pagination={false}
           />
         </Form>
       </div>
@@ -224,7 +215,11 @@ export default function DataTable({
   }
 }
 
-const tableColInputType = {
+interface TableColInputType {
+  [key: string]: string
+}
+
+const tableColInputType: TableColInputType = {
   name: "string",
   ReNewabillity: "object",
   ReNewabillity_Value: "object",

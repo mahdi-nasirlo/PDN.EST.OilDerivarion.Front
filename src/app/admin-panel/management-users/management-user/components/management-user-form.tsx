@@ -35,17 +35,14 @@ export default function ManagementUserForm({
       };
     }
 
-    if (type === "INITIAL_VALUE") {
-      return targetInitial;
-    }
+    if (type === "INITIAL_VALUE") { return targetInitial; }
 
-    if (type === "URL") {
-      return targetUrl;
-    }
+    if (type === "URL") { return targetUrl; }
   };
+
   const { data: test, isLoading: ldTest } = useSWR(
     [userTest("URL"), userTest("INITIAL_VALUE")],
-    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
   const { data: Status, isLoading: ldStatus } = useSWR(
     "/BaseInfo/StateGetAll",
@@ -74,7 +71,13 @@ export default function ManagementUserForm({
         >
           <Select
             showSearch
-            fieldNames={{ label: "Name", value: "Uid" }}
+            fieldNames={
+              userTypeId == 2
+                ?
+                { label: "name", value: "uid" }
+                :
+                { label: "Name", value: "Uid" }
+            }
             //@ts-ignore
             filterOption={filterOption}
             options={test}

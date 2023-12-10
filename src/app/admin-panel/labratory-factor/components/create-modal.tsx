@@ -8,7 +8,6 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
-import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function CreateModal({
   setModalVisible,
@@ -116,11 +115,11 @@ export default function CreateModal({
             >
               <Select
                 showSearch
-                fieldNames={{ label: "name", value: "Uid" }}
+                fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
                 options={Lab}
-                loading={ldLab}
+                loading={ldLab || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"
               />

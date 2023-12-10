@@ -323,7 +323,6 @@ body {
     background-color: theme("backgroundColor.white") !important;
 }
 
-
 .ant-table-cell {
     font-weight: 500;
 }
@@ -331,6 +330,11 @@ body {
 .ant-table-row:last-child {
     border: 2px solid red !important;
     border-radius: theme("borderRadius.xl") !important;
+}
+
+.ant-table-expanded-row, 
+.ant-table-expanded-row-level-1{
+    @apply bg-gray-50 !important
 }
 
 .action-btn-edit {

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
-import {Spin, Typography} from "antd";
+import { Spin, Typography } from "antd";
 import ThemeProvider from "../../../../provider/theme-provider";
 import { validateToken } from "../../../../request/validateToken";
 import useGetToken from "../../../../hooks/sso/useGetToken";
@@ -27,7 +27,7 @@ const ClientComponent = ({
 
         getToken.trigger({
           code
-        }).then((res: {token_type: string, access_token: string}) => {
+        }).then((res: { token_type: string, access_token: string }) => {
 
           console.log(res)
 
@@ -46,21 +46,21 @@ const ClientComponent = ({
   }, [status]);
 
   return (
-      <ThemeProvider>
-        <div className="flex flex-col justify-center items-center w-full h-[100vh]">
-          <Typography
-              className='text-center font-bold text-xl'
-          >
-            در انتقال به صفحه هستید
-          </Typography>
-          <Spin
-              className='flex justify-center items-center mt-5'
-              size='large'
-          >
+    <ThemeProvider>
+      <div className="flex flex-col justify-center items-center w-full h-[100vh]">
+        <Typography
+          className='text-center font-bold text-xl'
+        >
+          در حال انتقال به صفحه هستید
+        </Typography>
+        <Spin
+          className='flex justify-center items-center mt-5'
+          size='large'
+        >
 
-          </Spin>
-        </div>
-      </ThemeProvider>
+        </Spin>
+      </div>
+    </ThemeProvider>
   );
 };
 

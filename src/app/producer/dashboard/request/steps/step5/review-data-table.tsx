@@ -48,8 +48,9 @@ export default function ReviewDataTable() {
     {
       title: "درصد مواد اولیه",
       dataIndex: "usagePercentage",
-      key: "2",
+      key: "3",
       width: "85%",
+      render: (value) => <>{value}%</>,
     },
   ];
 

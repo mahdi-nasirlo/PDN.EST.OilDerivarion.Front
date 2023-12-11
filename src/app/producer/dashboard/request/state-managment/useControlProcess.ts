@@ -28,7 +28,7 @@ const stepNumber = 4
 
 const useControlProcess = (): ControllerProcessType => {
 
-    const [step, dispatch] = useReducer(stepReducer, 0)
+    const [step, dispatch] = useReducer(stepReducer, 3)
 
     const {trigger, isMutating} = useSWRMutation("/RequestMaster/Create", mutationFetcher)
 

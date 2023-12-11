@@ -69,7 +69,7 @@ export default function Home(props: PropType) {
             </div>
             <Divider/>
           </div>
-          <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+          <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
           {data && <Divider/>}
           {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
           <Form onFinish={onFinish} form={form}>

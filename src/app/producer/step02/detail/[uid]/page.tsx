@@ -40,7 +40,7 @@ export default function Home(props: PropType) {
                     </div>
                     <Divider/>
                 </div>
-                <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+                <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
                 {/*<WorkflowDataViewer data={data?.tabs as any} loading={isLoading}/>*/}
                 {data && <Divider/>}
                 <WorkflowRequestBtn onClick={() => router.push("/producer/step02/list")}

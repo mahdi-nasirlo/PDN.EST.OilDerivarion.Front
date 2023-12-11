@@ -26,7 +26,7 @@ export default function Step5() {
         <>
             <Divider/>
             <div className='w-full bg-gray-50 rounded-md p-5'>
-                <GodOfDataViewer data={getInfo.data || {}}/>
+                <GodOfDataViewer uid={""} data={getInfo.data || {}}/>
             </div>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item

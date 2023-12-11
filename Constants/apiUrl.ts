@@ -369,6 +369,9 @@ export const apiUrl = {
     Producer: {
         getBaseInfo: {
             url: "/producer/GetBaseInfo"
+        },
+        preview: {
+            url: "/Producer/Preview"
         }
     }
 }

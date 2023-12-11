@@ -14,6 +14,8 @@ import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 import WorkFlowConfirmProductTable from "../../../../../../components/Workflow/WorkFlowConfirmProductTable";
 import useRequestDetailCreateOilExpertOpinion
   from "../../../../../../hooks/requestDetail/useRequestDetailCreateOilExpertOpinion";
+import useSWR from "swr";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 
 interface PropType {
   params: { uid: string };
@@ -65,6 +67,8 @@ export default function Home(props: PropType) {
 
   const confirmRequest = useRequestDetailCreateOilExpertOpinion()
 
+  const dataConfirmRequest = useSWR("/RequestDetail/GetAllProductAndOilExpertOpinion", (url) => listFetcher(url, {arg: {uid: props.params.uid}}))
+
   return (
       <>
         <div className="box-border w-full p-6">
@@ -76,7 +80,8 @@ export default function Home(props: PropType) {
           </div>
           <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
           {data && <Divider/>}
-          <WorkFlowConfirmProductTable uid={props.params.uid} trigger={confirmRequest.handleTrigger}/>
+          <WorkFlowConfirmProductTable dataSource={dataConfirmRequest.data} isLoading={dataConfirmRequest.isLoading}
+                                       uid={props.params.uid} trigger={confirmRequest.handleTrigger}/>
           <Form onFinish={onFinish} form={form}>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>

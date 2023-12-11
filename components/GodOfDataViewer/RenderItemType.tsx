@@ -13,7 +13,9 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
     const [isFirst, setIsFirst] = useState(props.index === 0)
 
-    const {data, isLoading} = useSWR(isFirst ? props.url : null, () => fetcher({url: props.url}))
+    console.log(props.uid, "test1")
+
+    const {data, isLoading} = useSWR(isFirst ? props.url : null, () => fetcher({url: props.url, uid: props.uid}))
 
     let ItemType
 
@@ -47,7 +49,9 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
     </>
 }
 
-const fetcher = async ({url}: { url: string }) => {
+const fetcher = async ({url, uid}: { url: string, uid: string }) => {
+
+    console.log(uid)
 
     const token = await getTokenFromSession() || ""
 
@@ -56,7 +60,7 @@ const fetcher = async ({url}: { url: string }) => {
         const res = await axios.request({
             url: process.env.NEXT_PUBLIC_API_URL + url,
             method: "post",
-            data: {uid: "488e7f5c-c0f1-443d-a933-363fe99c3292"},
+            data: {uid: uid},
             headers: {
                 "Authorization": token
             },

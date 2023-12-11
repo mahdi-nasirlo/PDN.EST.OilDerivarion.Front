@@ -6,6 +6,7 @@ import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function EditModal({
   mutate,
@@ -152,11 +153,11 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="birthDate"
+                name="birthDatePersian"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true }]}
               >
-                <Input />
+                <CustomeDatePicker />
               </Form.Item>
             </Col>
           </Row>

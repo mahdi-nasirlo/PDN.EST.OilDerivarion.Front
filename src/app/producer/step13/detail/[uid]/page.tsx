@@ -10,7 +10,6 @@ import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import DataViewer from "../../../../../../components/FormBuilder/DataViewer";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
@@ -72,8 +71,6 @@ export default function Home(props: PropType) {
         </div>
         <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {data && <Divider/>}
-        <DataViewer data={data || {}}/>
         {data && <Divider/>}
         <Form onFinish={onFinish} form={form}>
           <Row gutter={[16, 16]}>

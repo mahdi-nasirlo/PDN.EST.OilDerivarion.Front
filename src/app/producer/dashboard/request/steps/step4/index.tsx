@@ -4,9 +4,8 @@ import { Button, Checkbox, Divider, Form } from "antd";
 import React, { useContext } from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import { useForm } from "antd/es/form/Form";
-import useGetBaseInfo from "../../../../../../../hooks/producer/useGetBaseInfo";
 import GodOfDataViewer from "../../../../../../../components/GodOfDataViewer";
-import useGetPreview from "../../../../../../../hooks/producer/useGetPrview";
+import useGetPreview from "../../../../../../../hooks/producer/useGetPreview";
 
 export default function Step5() {
   const processController = useContext(StepContext);

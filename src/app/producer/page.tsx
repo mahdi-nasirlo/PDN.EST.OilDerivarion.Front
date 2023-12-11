@@ -7,24 +7,7 @@ import { ColumnsType } from "antd/es/table";
 import { listFetcher } from "../../../lib/server/listFetcher";
 import { TestGetPage } from "../../../interfaces/test&verify";
 import React from "react";
-import axios from "axios";
 import { addIndexToData } from "../../../lib/addIndexToData";
-
-const fetcher = async () => {
-  const res = await axios.post(
-    "http://192.168.57.52:1012/CategoryForm/GetData",
-    {
-      group_ID: "31aefbf6-0e08-4044-8132-b3226253054f",
-      groupKey: null,
-      category_ID: "43ed033a-e22d-4ad8-975a-2978db10b6db",
-      category_Key: null,
-    }
-  );
-
-  const result = await res.data;
-
-  return result;
-};
 
 export default function Home() {
   const {
@@ -37,10 +20,7 @@ export default function Home() {
     })
   );
 
-  const { data, isLoading: loadingForm } = useSWR(
-    "/CategoryForm/GetData",
-    fetcher
-  );
+  const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData");
 
   return (
     <>

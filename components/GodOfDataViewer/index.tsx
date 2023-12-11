@@ -16,8 +16,6 @@ const Index = (props: PropsType) => {
         return <Spin/>
     }
 
-    console.log(props.uid, "test 2")
-
     return (
         <>
             <RenderItems data={props.data} uid={props.uid}/>

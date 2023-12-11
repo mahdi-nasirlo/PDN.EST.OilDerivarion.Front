@@ -4,14 +4,14 @@ import {Button, Checkbox, Divider, Form} from "antd";
 import React, {useContext} from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import {useForm} from "antd/es/form/Form";
-import useGetBaseInfo from "../../../../../../../hooks/producer/useGetBaseInfo";
 import GodOfDataViewer from "../../../../../../../components/GodOfDataViewer";
+import useGetPreview from "../../../../../../../hooks/producer/useGetPreview";
 
 export default function Step5() {
 
     const processController = useContext(StepContext);
 
-    const getInfo = useGetBaseInfo()
+    const getInfo = useGetPreview()
 
     const handleSubmit = () => {
         processController.dispatch({
@@ -26,7 +26,7 @@ export default function Step5() {
         <>
             <Divider/>
             <div className='w-full bg-gray-50 rounded-md p-5'>
-                <GodOfDataViewer data={getInfo.data || {}}/>
+                <GodOfDataViewer uid={""} data={getInfo.data || {}}/>
             </div>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item

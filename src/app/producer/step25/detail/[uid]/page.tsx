@@ -74,7 +74,7 @@ export default function Home(props: PropType) {
             </div>
             <Divider/>
           </div>
-          <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+          <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
           {data && <Divider/>}
           <WorkFlowConfirmProductTable uid={props.params.uid} trigger={confirmRequest.handleTrigger}/>
           {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}

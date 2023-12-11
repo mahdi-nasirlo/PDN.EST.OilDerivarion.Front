@@ -48,7 +48,7 @@ const Page = (props: PropsType) => {
                 </div>
                 <Divider/>
             </div>
-            <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+            <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
             {/*<WorkflowDataViewer data={data as any} loading={isLoading} />*/}
             {data && <Divider/>}
             <div className="grid grid-cols-1 gap-3">

@@ -59,7 +59,7 @@ const Page = (props: { params: { uid: string } }) => {
           </div>
           <Divider/>
         </div>
-        <GodOfDataViewer data={data?.tabs} loading={isLoading}/>
+        <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
         {data && <Divider/>}
         <Form onFinish={handleOnFinish} form={form}>

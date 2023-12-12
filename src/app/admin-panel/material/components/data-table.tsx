@@ -12,6 +12,7 @@ import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import TestExpandedRowRender from "./test-expandedRowRender";
 import MaterialForm from "./material-form";
+import useUpdateMaterial from "../../../../../hooks/material/useUpdateMaterial";
 
 export default function DataTable({
     setFilter,
@@ -74,13 +75,13 @@ export default function DataTable({
         setIsEditModalVisible(true);
     };
 
-    const { trigger: UpdateMaterial, isMutating: ldUpdateMaterial } =
-        useSWRMutation("/Material/Update", mutationFetcher);
+    const createMaterial = useUpdateMaterial()
+
 
     const sendEditRequest = async (values: Material) => {
         values.uid = recordToEdit?.uid;
 
-        const res = await UpdateMaterial(values);
+        const res = await createMaterial.trigger(values as any);
         if (res) {
             await mutate();
 
@@ -234,7 +235,7 @@ export default function DataTable({
                         <Row key={"box"} gutter={[16, 16]} className="my-2">
                             <Col xs={24} md={12}>
                                 <Button
-                                    loading={ldUpdateMaterial}
+                                    loading={createMaterial.isMutating}
                                     size="large"
                                     className="w-full"
                                     type="primary"
@@ -246,7 +247,7 @@ export default function DataTable({
                             </Col>
                             <Col xs={24} md={12}>
                                 <Button
-                                    disabled={ldUpdateMaterial}
+                                    disabled={createMaterial.isMutating}
                                     size="large"
                                     className="w-full bg-gray-100 text-warmGray-500"
                                     onClick={handleCancelEdit}
@@ -260,7 +261,7 @@ export default function DataTable({
             >
                 <Form
                     onFinish={sendEditRequest}
-                    disabled={ldUpdateMaterial}
+                    disabled={createMaterial.isMutating}
                     form={form}
                     layout="vertical"
                 >

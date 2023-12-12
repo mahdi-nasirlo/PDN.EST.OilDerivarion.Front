@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
-import MultipleSelect from '../../../../../components/MultipleSelect';
 import useSWR from "swr";
+import MultipleSelect from "../../../../../components/MultipleSelect";
 
 function MaterialForm() {
     const defaultValue = { name: null, IsActive: true }
@@ -18,13 +18,15 @@ function MaterialForm() {
         ([url, arg]: [string, any]) => listFetcher(url, { arg })
     );
 
+
+
     return (
         <>
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
                     <Form.Item
                         rules={[{ required: true }]}
-                        name="Name"
+                        name="name"
                         label="نام ماده اولیه"
                     >
                         <Input size="large" placeholder="وارد کنید" />
@@ -32,7 +34,7 @@ function MaterialForm() {
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="IsActive"
+                        name="isActive"
                         label="فعال / غیر فعال"
                         rules={[{ required: true }]}
                         initialValue={true}
@@ -51,7 +53,7 @@ function MaterialForm() {
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
                     <Form.Item
-                        name="MeasureUid"
+                        name="measureUid"
                         label="واحد اندازه گیری"
                         rules={[{ required: true }]}
                     >
@@ -68,12 +70,12 @@ function MaterialForm() {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <MultipleSelect
-                        label="فاکتور های آزمون"
-                        name="testItemUids"
-                        data={Test}
-                        isLoading={ldTest}
-                    />
+                    <Form.Item name="testItems" label="فاکتور های آزمون" rules={[{ required: true }]}>
+                        <MultipleSelect
+                            treeData={Test?.map(item => ({ value: item.Uid, label: item.Name })) || []}
+                            loading={ldTest}
+                        />
+                    </Form.Item>
                 </Col>
             </Row>
         </>

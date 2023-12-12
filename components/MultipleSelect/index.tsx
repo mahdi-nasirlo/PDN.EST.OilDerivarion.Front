@@ -1,70 +1,37 @@
-import React, { useState } from 'react';
-import { Form, TreeSelect } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Select, TreeSelect, Typography } from 'antd';
 import { TreeNode } from 'antd/es/tree-select';
+import { Option } from 'antd/lib/mentions';
+import { TreeSelectProps } from 'antd/lib';
 
 const { SHOW_PARENT } = TreeSelect;
 
-interface IndexProps {
-    name: string;
-    label: string;
-    data: any;
-    isLoading: boolean;
+interface InputProps {
+    value?: string[],
+    onChange?: (value: string[]) => void;
 }
 
-const Index: React.FC<IndexProps> = ({ data, isLoading, name, label }) => {
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
-    const treeNodes = mapDataToTree(data);
+const MultipleSelect: React.FC<InputProps & TreeSelectProps> = (props) => {
+
+    const [selectedItems, setSelectedItems] = useState<string[]>(props.value || []);
+
 
     return (
         <>
-            <Form.Item name={name} label={label} rules={[{ required: true }]}>
-                <TreeSelect
-                    size="large"
-                    className="w-full"
-                    loading={isLoading}
-                    value={selectedItems}
-                    onChange={setSelectedItems}
-                    treeCheckable
-                    showCheckedStrategy={SHOW_PARENT}
-                    placeholder="انتخاب کنید"
-                    treeDefaultExpandAll
-                    allowClear
-                >
-                    {treeNodes}
-                </TreeSelect>
-            </Form.Item>
+
+            <TreeSelect
+                value={selectedItems}
+                size="large"
+                className="w-full"
+                treeCheckable
+                showCheckedStrategy={SHOW_PARENT}
+                treeDefaultExpandAll
+                allowClear
+                {...props}
+            />
         </>
     );
 };
 
-const mapDataToTree = (data: any[]) => {
-    const buildTree = (items: any[] = [], parentValue?: string): React.ReactNode[] =>
-        items
-            .filter((item) => (parentValue ? item.ParentUid === parentValue : !item.ParentUid))
-            .map((item) => {
-                const children = buildTree(items, item.Uid);
 
-                const nodeStyle = {
-                    fontSize: '1rem',
-                    paddingTop: 4,
-                    paddingLeft: 4,
-                    paddingRight: 0,
-                };
-
-                return (
-                    <TreeNode
-                        key={item.Uid}
-                        value={item.Uid}
-                        title={item.Name}
-                        disabled={children.length > 0}
-                        style={nodeStyle}
-                    >
-                        {children}
-                    </TreeNode>
-                );
-            });
-
-    return buildTree(data);
-};
-
-export default Index;
+export default MultipleSelect;

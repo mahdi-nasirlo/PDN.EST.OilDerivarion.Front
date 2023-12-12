@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Form, Modal, Row, Space, Tooltip, Typography, } from "antd";
+import { Button, Col, Form, Modal, Row, Space, Typography, } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ export default function DataTable({
         useSWRMutation("/Material/Delete", mutationFetcher);
 
     const handleConfirmDelete = async () => {
-        const res = await deleteMaterial({ uid: recordToDelete?.Uid });
+        const res = await deleteMaterial({ uid: recordToDelete?.uid });
         if (res) {
             await mutate();
 
@@ -78,7 +78,7 @@ export default function DataTable({
         useSWRMutation("/Material/Update", mutationFetcher);
 
     const sendEditRequest = async (values: Material) => {
-        values.Uid = recordToEdit?.Uid;
+        values.uid = recordToEdit?.uid;
 
         const res = await UpdateMaterial(values);
         if (res) {
@@ -95,7 +95,13 @@ export default function DataTable({
     };
 
     useEffect(() => {
-        form.setFieldsValue(recordToEdit);
+
+        const newData = recordToEdit?.testItems?.map((item) => {
+            return item.uid
+        })
+
+        form.setFieldsValue({ ...recordToEdit, testItems: newData });
+
     }, [recordToEdit]);
 
     const columns: ColumnsType<Material> = [
@@ -107,33 +113,33 @@ export default function DataTable({
         },
         {
             title: "نام ماده اولیه",
-            dataIndex: "Name",
+            dataIndex: "name",
             key: "2",
         },
         {
             title: "واحد اندازه گیری",
-            dataIndex: "MeasureName",
+            dataIndex: "measureName",
             key: "3",
         },
         {
             title: "فعال/غیر فعال",
-            dataIndex: "IsActive",
+            dataIndex: "isActive",
             key: "4",
             render: (_, record: any) => <StatusColumn record={record} />
         },
         {
             title: "فاکتور های آزمون",
-            dataIndex: "TestItems",
+            dataIndex: "testItems",
             key: "5",
-            render: (_, record) => (
-                <Typography.Text
-                    className=" max-w-[180px]"
-                    ellipsis={true}
-                    style={{ width: "35px !important" }}
-                >
-                    {record.TestItems}
-                </Typography.Text>
-            ),
+            render: (_, record: Material) => {
+                let testItemNames = record.testItems?.map(item => item.name).join(', ');
+
+                return (
+                    <Typography className="max-w-[180px]">
+                        {testItemNames}
+                    </Typography>
+                );
+            },
         },
         {
             title: "عملیات",
@@ -185,15 +191,15 @@ export default function DataTable({
                     setInitialData={setFilter}
                     isLoading={ldMaterial || ldDeleteMaterial || isValidating}
                     data={material}
-                    rowKey={"Uid"}
+                    rowKey={"uid"}
                     expandable={{
                         expandedRowKeys: activeExpRow,
                         onExpand: (expanded, record: Material) => {
                             const keys: string[] = [];
 
-                            if (expanded && record.Uid) {
+                            if (expanded && record.uid) {
                                 // @ts-ignore
-                                keys.push(record.Uid);
+                                keys.push(record.uid);
                             }
 
                             if (!expanded) {
@@ -203,7 +209,7 @@ export default function DataTable({
                             setActiveExpRow(keys);
                         },
                         expandedRowRender: (record: Material) => (
-                            <TestExpandedRowRender material={record} />
+                            <TestExpandedRowRender material={record} TableMutate={mutate} />
                         ),
                     }}
                 />

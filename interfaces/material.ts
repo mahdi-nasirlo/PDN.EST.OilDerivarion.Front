@@ -1,15 +1,20 @@
 interface Material {
-  Uid: string | null | undefined;
-  Name: string;
+  uid: string | null | undefined;
+  name: string;
   IsActive: boolean;
-  MeasureUid: string | null;
-  TestItems: string | null;
+  measureUid: string | null;
+  testItems:
+    | {
+        uid: string | null;
+        name: string | null;
+      }[]
+    | null;
 }
 
 interface MaterialGet {
-  Name: string | null;
-  IsActive: boolean | null;
-  MeasureUid: string | null;
+  name: string | null;
+  isActive: boolean | null;
+  measureUid: string | null;
   fromRecord: number;
   selectRecord: number;
 }

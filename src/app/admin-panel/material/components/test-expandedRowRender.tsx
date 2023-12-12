@@ -3,11 +3,12 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Table, TableColumnsType } from "antd";
+import { Button, Space, Table, TableColumnsType } from "antd";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
-const TestExpandedRowRender = ({ material }: { material: Material }) => {
+const TestExpandedRowRender = ({ material, TableMutate }: { material: Material, TableMutate: () => void }) => {
     const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
 
@@ -16,7 +17,7 @@ const TestExpandedRowRender = ({ material }: { material: Material }) => {
     const [recordToDelete, setRecordToDelete] = useState();
 
     const defaultValue = {
-        materialUid: material.Uid,
+        materialUid: material.uid,
         testItemUid: null,
         IsActive: null,
     };
@@ -37,7 +38,7 @@ const TestExpandedRowRender = ({ material }: { material: Material }) => {
         const res = await trigger({ uid: recordToDelete?.Uid });
         if (res) {
             await mutate();
-
+            await TableMutate();
             setOpen(false);
         }
     };
@@ -57,28 +58,28 @@ const TestExpandedRowRender = ({ material }: { material: Material }) => {
             key: "4",
             render: (_, record: any) => <StatusColumn record={record} />
         },
-        // {
-        //   title: "عملیات",
-        //   dataIndex: "2",
-        //   key: "upgradeNum",
-        //   align: "center",
-        //   fixed: "right",
-        //   width: "10%",
-        //   render: (_, record) => (
-        //     <Space size="small">
-        //       <Button
-        //         type="link"
-        //         className="text-red-500 font-bold"
-        //         onClick={() => {
-        //           setOpen(true);
-        //           setRecordToDelete(record);
-        //         }}
-        //       >
-        //         حذف
-        //       </Button>
-        //     </Space>
-        //   ),
-        // },
+        {
+            title: "عملیات",
+            dataIndex: "2",
+            key: "upgradeNum",
+            align: "center",
+            fixed: "right",
+            width: "10%",
+            render: (_, record) => (
+                <Space size="small">
+                    <Button
+                        type="link"
+                        className="text-red-500 font-bold"
+                        onClick={() => {
+                            setOpen(true);
+                            setRecordToDelete(record);
+                        }}
+                    >
+                        حذف
+                    </Button>
+                </Space>
+            ),
+        },
     ];
 
     return (
@@ -92,13 +93,13 @@ const TestExpandedRowRender = ({ material }: { material: Material }) => {
                 }}
                 pagination={false}
             />
-            {/* <ConfirmDeleteModal
+            <ConfirmDeleteModal
                 loading={isMutating}
                 open={open}
                 setOpen={setOpen}
                 handleDelete={deleteProductFactor}
                 title={"فاکتور آزمون ماده اولیه"}
-            /> */}
+            />
         </>
     );
 };

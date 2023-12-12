@@ -3,16 +3,23 @@ import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import MultipleSelect from '../../../../../../components/MultipleSelect';
 
 function ProductForm() {
+  const defaultValue = { name: null, IsActive: true }
+
+  const { data: Material, isLoading: ldMaterial } = useSWR(
+    ["/Material/GetAll", defaultValue],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+
+  const { data: TestItem, isLoading: ldTestItem } = useSWR<any[]>(
+    ["/TestItem/GetAll", defaultValue],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+
   const { data: ProductCategory, isLoading: ldProductCategory } = useSWR(
-    [
-      "/ProductCategory/GetAll",
-      {
-        name: null,
-        IsActive: true,
-      },
-    ],
+    ["/ProductCategory/GetAll", defaultValue],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -22,7 +29,7 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="Name"
+            name="name"
             label="نام محصول"
           >
             <Input
@@ -35,7 +42,7 @@ function ProductForm() {
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="ProductCategoryUid"
+            name="productCategoryUid"
             label="نام دسته بندی"
           >
             <Select
@@ -54,21 +61,44 @@ function ProductForm() {
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="IsActive"
-            label="فعال/غیر فعال"
-            initialValue={true}
+            name="materials"
+            label="مواد اولیه"
           >
-            <Select
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
+            <MultipleSelect
+              treeData={Material?.map((item: any) => ({ value: item.uid, label: item.name })) || []}
+              loading={ldMaterial}
             />
           </Form.Item>
         </Col>
+        <Col xs={24} md={12}>
+          <Form.Item
+            label="فاکتور های آزمون"
+            name="testItems"
+          >
+            <MultipleSelect
+              treeData={TestItem?.map(item => ({ value: item.Uid, label: item.Name })) || []}
+              loading={ldTestItem}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[32, 1]}>  <Col xs={24} md={12}>
+        <Form.Item
+          rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+          name="isActive"
+          label="فعال/غیر فعال"
+          initialValue={true}
+        >
+          <Select
+            options={[
+              { label: "فعال", value: true },
+              { label: "غیر فعال", value: false },
+            ]}
+            size="large"
+            placeholder="انتخاب کنید"
+          />
+        </Form.Item>
+      </Col>
       </Row>
     </>
   );

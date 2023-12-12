@@ -18,7 +18,7 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
   const [recordToDelete, setRecordToDelete] = useState<Product>();
 
   const defaultValue = {
-    productUid: product.Uid,
+    productUid: product.uid,
     materialUid: null,
     IsActive: null,
   };
@@ -35,7 +35,7 @@ export const ExpandedMaterialTable = ({ product, mutate: mutateTable }: { produc
   );
 
   const handleDelete = async () => {
-    await trigger({ Uid: recordToDelete?.Uid });
+    await trigger({ Uid: recordToDelete?.uid });
 
     await mutate();
     await mutateTable();

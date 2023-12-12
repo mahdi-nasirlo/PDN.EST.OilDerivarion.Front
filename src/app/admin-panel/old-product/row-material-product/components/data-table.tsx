@@ -9,8 +9,8 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import CustomeTable from "../../../../../../components/CustomeTable";
-import { ExpandedMaterialTable } from "@/app/admin-panel/product/row-material-product/components/expanded-material-table";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
+import { ExpandedMaterialTable } from "./expanded-material-table";
 
 export default function DataTable({
   setFilter,
@@ -46,7 +46,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await deleteProduct({ uid: recordToDelete?.Uid });
+    const res = await deleteProduct({ uid: recordToDelete?.uid });
 
     if (res) {
       await mutate();
@@ -167,7 +167,7 @@ export default function DataTable({
             onExpand: (expanded, record: Product) => {
               const keys: string[] = [];
 
-              if (expanded && record.Uid) {
+              if (expanded && record.uid) {
                 // @ts-ignore
                 keys.push(record.Uid);
               }

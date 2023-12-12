@@ -14,8 +14,8 @@ export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const defaultValueTable = {
-    Name: null,
-    IsActive: null,
+    name: null,
+    isActive: null,
     productCategoryUid: null,
     ...getPageRecordNumber()
   };
@@ -36,8 +36,8 @@ export default function Page() {
   const setFilterTable = async (values: ProductCategoryGet) => {
 
     setFilter({
-      Name: values.Name,
-      IsActive: values.IsActive,
+      name: values.name,
+      isActive: values.isActive,
       productCategoryUid: values.productCategoryUid,
       ...getPageRecordNumber(),
     });

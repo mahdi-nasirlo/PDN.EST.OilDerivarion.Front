@@ -58,28 +58,28 @@ const TestExpandedRowRender = ({ material, TableMutate }: { material: Material, 
             key: "4",
             render: (_, record: any) => <StatusColumn record={record} />
         },
-        {
-            title: "عملیات",
-            dataIndex: "2",
-            key: "upgradeNum",
-            align: "center",
-            fixed: "right",
-            width: "10%",
-            render: (_, record) => (
-                <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-red-500 font-bold"
-                        onClick={() => {
-                            setOpen(true);
-                            setRecordToDelete(record);
-                        }}
-                    >
-                        حذف
-                    </Button>
-                </Space>
-            ),
-        },
+        // {
+        //     title: "عملیات",
+        //     dataIndex: "2",
+        //     key: "upgradeNum",
+        //     align: "center",
+        //     fixed: "right",
+        //     width: "10%",
+        //     render: (_, record) => (
+        //         <Space size="small">
+        //             <Button
+        //                 type="link"
+        //                 className="text-red-500 font-bold"
+        //                 onClick={() => {
+        //                     setOpen(true);
+        //                     setRecordToDelete(record);
+        //                 }}
+        //             >
+        //                 حذف
+        //             </Button>
+        //         </Space>
+        //     ),
+        // },
     ];
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
@@ -70,7 +70,7 @@ function MaterialForm() {
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item name="testItems" label="فاکتور های آزمون" rules={[{ required: true }]}>
+                    <Form.Item name="testItems" label="فاکتور های آزمون">
                         <MultipleSelect
                             treeData={Test?.map(item => ({ value: item.Uid, label: item.Name })) || []}
                             loading={ldTest}

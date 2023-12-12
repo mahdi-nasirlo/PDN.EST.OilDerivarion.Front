@@ -3,9 +3,9 @@
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import MaterialForm from "./material-form";
 
 export default function CreateModal({
   modalVisible,

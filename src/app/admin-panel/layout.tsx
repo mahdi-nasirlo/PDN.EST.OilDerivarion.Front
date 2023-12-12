@@ -36,39 +36,39 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getMenuItem("محصولات", "product", null, [
-    getMenuItem(
-      <Link href={"/admin-panel/product/products-list"} className="text-sm">
-        لیست محصولات
-      </Link>,
-      "/admin-panel/product/products-list",
-      <Bars3Icon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link href={"/admin-panel/product/category-list"} className="text-sm">
-        لیست دسته بندی ها
-      </Link>,
-      "/admin-panel/product/category-list",
-      <RectangleStackIcon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link
-        href={"/admin-panel/product/row-material-product"}
-        className="text-sm"
-      >
-        مواد اولیه محصولات
-      </Link>,
-      "/admin-panel/product/row-material-product",
-      <Bars3Icon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link href={"/admin-panel/product/products-factor"} className="text-sm">
-        فاکتور های آزمون محصولات
-      </Link>,
-      "/admin-panel/product/products-factor",
-      <FolderPlusIcon width={16} height={16} />
-    ),
-  ]),
+  // getMenuItem("محصولات", "product", null, [
+  getMenuItem(
+    <Link href={"/admin-panel/product/products-list"}>
+      لیست محصولات
+    </Link>,
+    "/admin-panel/product/products-list",
+    <Bars3Icon width={16} height={16} />
+  ),
+  getMenuItem(
+    <Link href={"/admin-panel/product/category-list"}>
+      لیست دسته بندی ها
+    </Link>,
+    "/admin-panel/product/category-list",
+    <RectangleStackIcon width={16} height={16} />
+  ),
+  // getMenuItem(
+  //   <Link
+  //     href={"/admin-panel/product/row-material-product"}
+  //     className="text-sm"
+  //   >
+  //     مواد اولیه محصولات
+  //   </Link>,
+  //   "/admin-panel/product/row-material-product",
+  //   <Bars3Icon width={16} height={16} />
+  // ),
+  // getMenuItem(
+  //   <Link href={"/admin-panel/product/products-factor"} className="text-sm">
+  //     فاکتور های آزمون محصولات
+  //   </Link>,
+  //   "/admin-panel/product/products-factor",
+  //   <FolderPlusIcon width={16} height={16} />
+  // ),
+  // ]),
   // getMenuItem("مواد اولیه", "initail", null, [
   // getMenuItem(
   //   <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
@@ -91,7 +91,7 @@ const items: MenuProps["items"] = [
       لیست مواد اولیه
     </Link>,
     "/admin-panel/material",
-    // <CodeBracketIcon width={16} height={16} />
+    <Bars3Icon width={16} height={16} />
   ),
   // ]),
   getMenuItem("آزمایشگاه ها", "labratory", null, [

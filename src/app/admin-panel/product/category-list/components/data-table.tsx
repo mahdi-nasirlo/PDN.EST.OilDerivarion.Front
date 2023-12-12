@@ -82,10 +82,10 @@ export default function DataTable({
         let color = "";
         let name = "";
         if (record.HasDensity === false) {
-          color = "orange";
+          color = "red";
           name = "ندارد";
         } else {
-          color = "blue";
+          color = "success";
           name = "دارد";
         }
 

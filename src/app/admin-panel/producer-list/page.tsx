@@ -35,7 +35,7 @@ export default function Page() {
     // @ts-ignore
     setFilter({
       name: values.name,
-      IsActive: values.IsActive,
+      IsActive: values.isActive,
       ...getPageRecordNumber()
     });
 

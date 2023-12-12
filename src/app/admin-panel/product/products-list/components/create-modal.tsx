@@ -3,10 +3,8 @@
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import { ProductCreate } from "../../../../../../interfaces/product";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
+import useUpdateProduct from "../../../../../../hooks/product/useCreateProduct";
+import ProductForm from "./product-form";
 
 export default function CreateModal({
   modalVisible,
@@ -19,13 +17,10 @@ export default function CreateModal({
 }) {
   const [form] = useForm();
 
-  const { isMutating, trigger } = useSWRMutation(
-    "/Product/Create",
-    mutationFetcher
-  );
+  const createProductRequest = useUpdateProduct()
 
-  const createProduct = async (values: ProductCreate) => {
-    const res = await trigger(values);
+  const createProduct = async (values: any) => {
+    const res = await createProductRequest.trigger(values);
 
     if (res) {
       await mutate();
@@ -58,7 +53,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              loading={createProductRequest.isMutating}
               size="large"
               className="w-full"
               type="primary"
@@ -70,7 +65,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              disabled={isMutating}
+              disabled={createProductRequest.isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}
@@ -83,7 +78,7 @@ export default function CreateModal({
       ]}
     >
       <Form
-        disabled={isMutating}
+        disabled={createProductRequest.isMutating}
         onFinish={createProduct}
         form={form}
         layout="vertical"

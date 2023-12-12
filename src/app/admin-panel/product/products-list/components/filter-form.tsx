@@ -30,7 +30,7 @@ export default function FilterForm({
     <Form form={form} onFinish={filter} name="form_item_path" layout="vertical">
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
-          <Form.Item name="Name" label="نام محصول">
+          <Form.Item name="name" label="نام محصول">
             <Input
               // @ts-ignore
               size="large"
@@ -55,7 +55,7 @@ export default function FilterForm({
       </Row>
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال/غیر فعال">
+          <Form.Item name="isActive" label="فعال/غیر فعال">
             <Select
               options={[
                 { label: "فعال", value: true },

@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Form, Modal, Row, Space, Typography, } from "antd";
+import { Button, Col, Form, Modal, Row, Space, Tooltip, Typography, } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -75,13 +75,13 @@ export default function DataTable({
         setIsEditModalVisible(true);
     };
 
-    const createMaterial = useUpdateMaterial()
+    const UpdateMaterial = useUpdateMaterial()
 
 
     const sendEditRequest = async (values: Material) => {
         values.uid = recordToEdit?.uid;
 
-        const res = await createMaterial.trigger(values as any);
+        const res = await UpdateMaterial.trigger(values as any);
         if (res) {
             await mutate();
 
@@ -136,9 +136,18 @@ export default function DataTable({
                 let testItemNames = record.testItems?.map(item => item.name).join(', ');
 
                 return (
-                    <Typography className="max-w-[180px]">
-                        {testItemNames}
-                    </Typography>
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{testItemNames}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[180px]"
+                            ellipsis={true}
+                            style={{ width: "40px !important" }}
+                        >
+                            {testItemNames}
+                        </Typography.Text>
+                    </Tooltip>
                 );
             },
         },
@@ -157,13 +166,13 @@ export default function DataTable({
                     >
                         ویرایش
                     </Button>
-                    <Button
+                    {/* <Button
                         type="link"
                         className="text-red-500 font-bold"
                         onClick={() => handleDelete(record)}
                     >
                         حذف
-                    </Button>
+                    </Button> */}
                 </Space>
             ),
         },
@@ -235,7 +244,7 @@ export default function DataTable({
                         <Row key={"box"} gutter={[16, 16]} className="my-2">
                             <Col xs={24} md={12}>
                                 <Button
-                                    loading={createMaterial.isMutating}
+                                    loading={UpdateMaterial.isMutating}
                                     size="large"
                                     className="w-full"
                                     type="primary"
@@ -247,7 +256,7 @@ export default function DataTable({
                             </Col>
                             <Col xs={24} md={12}>
                                 <Button
-                                    disabled={createMaterial.isMutating}
+                                    disabled={UpdateMaterial.isMutating}
                                     size="large"
                                     className="w-full bg-gray-100 text-warmGray-500"
                                     onClick={handleCancelEdit}
@@ -261,7 +270,7 @@ export default function DataTable({
             >
                 <Form
                     onFinish={sendEditRequest}
-                    disabled={createMaterial.isMutating}
+                    disabled={UpdateMaterial.isMutating}
                     form={form}
                     layout="vertical"
                 >

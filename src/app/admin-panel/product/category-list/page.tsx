@@ -14,7 +14,7 @@ import getPageRecordNumber from "../../../../../lib/getPageRecordNumber";
 export default function Page() {
     const defaultValueTable = {
         name: null,
-        IsActive: null,
+        isActive: null,
         densityTypeId: null,
         ...getPageRecordNumber()
     };
@@ -43,7 +43,7 @@ export default function Page() {
         // @ts-ignore
         setFilter({
             name: values.name,
-            IsActive: values.IsActive,
+            isActive: values.isActive,
             densityTypeId: values.densityTypeId,
             ...getPageRecordNumber()
         });

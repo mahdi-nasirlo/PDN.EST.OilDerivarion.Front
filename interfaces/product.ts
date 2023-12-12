@@ -1,41 +1,46 @@
 export type Product = {
   Id: number;
-  Uid?: string;
-  Name: string;
-  ProductCategoryName: string;
-  ProductCategory_Id: number;
-  IsActive: boolean;
-  Materials: string;
-  TestItems: string;
+  uid: string;
+  name: string;
+  productCategoryName: string;
+  productCategory_Id: number;
+  isActive: boolean;
+  materials:
+    | {
+        uid: string | null;
+        name: string | null;
+      }[]
+    | null;
+  testItems:
+    | {
+        uid: string | null;
+        name: string | null;
+      }[]
+    | null;
 };
 
 export interface ProductGet {
   name: string | null;
-  IsActive: boolean | null;
+  isActive: boolean | null;
   densityTypeId: number | null;
   fromRecord: number;
   selectRecord: number;
 }
 
 export interface ProductCategoryGet {
-  Name: string | null;
-  IsActive: boolean | null;
+  name: string | null;
+  isActive: boolean | null;
   productCategoryUid: string | null;
   // productCategoryUid;
   fromRecord: number;
   selectRecord: number;
 }
-export interface ProductCreate {
-  name: "string";
-  productCategory_Id: number;
-  IsActive: boolean;
-}
 
 export interface ProductTestItem {
-  Uid: string;
-  IsActive: boolean;
-  ProductUid: string;
-  TestItemUid: string;
-  ProductName: string;
-  TestItemName: string;
+  uid: string;
+  isActive: boolean;
+  productUid: string;
+  testItemUid: string;
+  productName: string;
+  testItemName: string;
 }

@@ -7,10 +7,11 @@ import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import MaterialForm from "@/app/admin-panel/adding-raw-material/components/material-form";
-import CustomeTable from "../../../../../components/CustomeTable";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
+import MaterialForm from "./material-form";
+import CustomeTable from '../../../../../../components/CustomeTable'
+
 
 export default function DataTable({
   setFilter,
@@ -46,7 +47,7 @@ export default function DataTable({
     useSWRMutation("/Material/Delete", mutationFetcher);
 
   const handleConfirmDelete = async () => {
-    const res = await deleteMaterial({ uid: recordToDelete?.Uid });
+    const res = await deleteMaterial({ uid: recordToDelete?.uid });
     if (res) {
       await mutate();
 
@@ -74,7 +75,7 @@ export default function DataTable({
     useSWRMutation("/Material/Update", mutationFetcher);
 
   const sendEditRequest = async (values: Material) => {
-    values.Uid = recordToEdit?.Uid;
+    values.uid = recordToEdit?.uid;
 
     const res = await UpdateMaterial(values);
     if (res) {
@@ -117,25 +118,25 @@ export default function DataTable({
       key: "4",
       render: (_, record: any) => <StatusColumn record={record} />
     },
-    {
-      title: "فاکتور های آزمون",
-      dataIndex: "TestItems",
-      key: "5",
-      render: (_, record) => (
-        <Tooltip
-          placement="top"
-          title={<Typography>{record.TestItems}</Typography>}
-        >
-          <Typography.Text
-            className=" max-w-[200px]"
-            ellipsis={true}
-            style={{ width: "40px !important" }}
-          >
-            {record.TestItems}
-          </Typography.Text>
-        </Tooltip>
-      ),
-    },
+    // {
+    //   title: "فاکتور های آزمون",
+    //   dataIndex: "TestItems",
+    //   key: "5",
+    //   render: (_, record) => (
+    //     <Tooltip
+    //       placement="top"
+    //       title={<Typography>{record.TestItems}</Typography>}
+    //     >
+    //       <Typography.Text
+    //         className=" max-w-[200px]"
+    //         ellipsis={true}
+    //         style={{ width: "40px !important" }}
+    //       >
+    //         {record.TestItems}
+    //       </Typography.Text>
+    //     </Tooltip>
+    //   ),
+    // },
     {
       title: "عملیات",
       key: "عملیات",

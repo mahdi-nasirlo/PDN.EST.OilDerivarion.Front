@@ -1,7 +1,7 @@
 interface Material {
   uid: string | null | undefined;
   name: string;
-  IsActive: boolean;
+  isActive: boolean;
   measureUid: string | null;
   testItems:
     | {

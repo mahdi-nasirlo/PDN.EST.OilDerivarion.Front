@@ -97,7 +97,7 @@ const ExpandedRowRender = ({
   );
 
   const deleteProductFactor = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.uid });
     if (res) {
       await mutate();
 

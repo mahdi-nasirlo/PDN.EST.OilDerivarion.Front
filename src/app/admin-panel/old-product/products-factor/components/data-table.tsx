@@ -97,7 +97,7 @@ const DataTable = ({
           onExpand: (expanded, record: Product) => {
             const keys: string[] = [];
 
-            if (expanded && record.Uid) {
+            if (expanded && record.uid) {
               // @ts-ignore
               keys.push(record.Uid);
             }
@@ -127,7 +127,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   >();
 
   const defaultValue = {
-    productUid: product.Uid,
+    productUid: product.uid,
     testItemUid: null,
     IsActive: null,
   };
@@ -143,7 +143,7 @@ const ExpandedRowRender = ({ product, TableMutate }: { product: Product, TableMu
   );
 
   const deleteProductFactor = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.uid });
     if (res) {
       await TableMutate();
 

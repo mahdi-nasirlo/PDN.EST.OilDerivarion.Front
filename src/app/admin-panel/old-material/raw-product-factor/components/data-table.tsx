@@ -7,11 +7,11 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { addIndexToData } from "../../../../../lib/addIndexToData";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
-import CustomeTable from "../../../../../components/CustomeTable";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 const DataTable = ({
   material,
@@ -61,7 +61,7 @@ const DataTable = ({
           onExpand: (expanded, record: Material) => {
             const keys: string[] = [];
 
-            if (expanded && record.Uid) {
+            if (expanded && record.uid) {
               // @ts-ignore
               keys.push(record.Uid);
             }
@@ -90,7 +90,7 @@ const ExpandedRowRender = ({ material }: { material: Material }) => {
   const [recordToDelete, setRecordToDelete] = useState();
 
   const defaultValue = {
-    materialUid: material.Uid,
+    materialUid: material.uid,
     testItemUid: null,
     IsActive: null,
   };

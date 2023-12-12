@@ -3,8 +3,7 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
 import { useForm } from "antd/es/form/Form";
 import { Product } from "../../../../../../interfaces/product";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import useUpdateProduct from "../../../../../../hooks/product/useUpdateProduct";
 
 function EditModal({
   isEditModalVisible,
@@ -19,15 +18,12 @@ function EditModal({
 }) {
   const [form] = useForm();
 
-  const { trigger, isMutating } = useSWRMutation(
-    "/Product/Update",
-    mutationFetcher
-  );
+  const UpdateProduct = useUpdateProduct();
 
-  const updateProduct = async (values: Product) => {
-    values.Uid = recordToEdit?.Uid;
+  const updateProduct = async (values: any) => {
+    values.uid = recordToEdit?.uid;
 
-    const res = await trigger(values);
+    const res = await UpdateProduct.trigger(values);
     if (res) {
 
       await mutate();
@@ -39,9 +35,20 @@ function EditModal({
   };
 
   useEffect(() => {
-    console.log(recordToEdit);
+    const newDataTestItems = recordToEdit?.testItems?.map((itemTestItems) => {
+      return itemTestItems.uid
+    })
+    const newDataMaterials = recordToEdit?.materials?.map((itemMaterials) => {
+      return itemMaterials.uid
+    })
 
-    form.setFieldsValue(recordToEdit);
+    form.setFieldsValue(
+      {
+        ...recordToEdit,
+        testItems: newDataTestItems,
+        materials: newDataMaterials
+      }
+    );
   }, [recordToEdit]);
 
   return (
@@ -55,7 +62,7 @@ function EditModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
-              loading={isMutating}
+              loading={UpdateProduct.isMutating}
               size="large"
               className="w-full"
               type="primary"
@@ -67,7 +74,7 @@ function EditModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              disabled={isMutating}
+              disabled={UpdateProduct.isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={() => setIsEditModalVisible(false)}
@@ -80,7 +87,7 @@ function EditModal({
       ]}
     >
       <Form
-        disabled={isMutating}
+        disabled={UpdateProduct.isMutating}
         form={form}
         onFinish={updateProduct}
         layout="vertical"

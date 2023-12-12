@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tag, Tooltip, Typography } from "antd";
+import { Button, Space, Tooltip, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
@@ -10,9 +10,9 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
+import TestExpandedRowRender from "./test-expandedRowRender";
 
 export default function DataTable({
   setFilter,
@@ -43,7 +43,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await deleteProduct({ uid: recordToDelete?.Uid });
+    const res = await deleteProduct({ uid: recordToDelete?.uid });
 
     if (res) {
       setIsDeleteModalVisible(false);
@@ -68,7 +68,22 @@ export default function DataTable({
   };
 
   useEffect(() => {
-    form.setFieldsValue(recordToEdit);
+
+    const newDataTestItems = recordToEdit?.testItems?.map((itemTestItems) => {
+      return itemTestItems.uid
+    })
+    const newDataMaterials = recordToEdit?.materials?.map((itemMaterials) => {
+      return itemMaterials.uid
+    })
+
+    form.setFieldsValue(
+      {
+        ...recordToEdit,
+        testItems: newDataTestItems,
+        materials: newDataMaterials
+      }
+    );
+
   }, [recordToEdit]);
 
   const columns: ColumnsType<Product> = [
@@ -80,58 +95,67 @@ export default function DataTable({
     },
     {
       title: "نام محصول",
-      dataIndex: "Name",
+      dataIndex: "name",
       key: "2",
     },
     {
       title: "نام دسته بندی",
-      dataIndex: "ProductCategoryName",
+      dataIndex: "productCategoryName",
       key: "3",
     },
     {
       title: "فعال/غیر فعال ",
-      dataIndex: "IsActive",
+      dataIndex: "isActive",
       key: "4",
       render: (_, record) => <StatusColumn record={record} />
     },
     {
       title: "مواد اولیه",
-      dataIndex: "Materials",
+      dataIndex: "materials",
       key: "5",
-      render: (_, record) => (
-        <Tooltip
-          placement="top"
-          title={<Typography>{record.Materials}</Typography>}
-        >
-          <Typography.Text
-            className=" max-w-[200px]"
-            ellipsis={true}
-            style={{ width: "40px !important" }}
+      render: (_, record: Product) => {
+        let materialsNames = record.materials?.map((item) => item.name).join(', ');
+
+        return (
+          <Tooltip
+            placement="top"
+            title={<Typography>{materialsNames}</Typography>}
           >
-            {record.Materials}
-          </Typography.Text>
-        </Tooltip>
-      ),
+            <Typography.Text
+              className="max-w-[180px]"
+              ellipsis={true}
+              style={{ width: "40px !important" }}
+            >
+              {materialsNames}
+            </Typography.Text>
+          </Tooltip>
+        );
+      },
     },
     {
-      title: "فاکتور آزمون",
-      dataIndex: "TestItems",
+      title: "فاکتور های آزمون",
+      dataIndex: "testItems",
       key: "6",
-      render: (_, record) => (
-        <Tooltip
-          placement="top"
-          title={<Typography>{record.TestItems}</Typography>}
-        >
-          <Typography.Text
-            className=" max-w-[200px]"
-            ellipsis={true}
-            style={{ width: "40px !important" }}
+      render: (_, record: Product) => {
+        let testItemNames = record.testItems?.map(item => item.name).join(', ');
+
+        return (
+          <Tooltip
+            placement="top"
+            title={<Typography>{testItemNames}</Typography>}
           >
-            {record.TestItems}
-          </Typography.Text>
-        </Tooltip>
-      ),
+            <Typography.Text
+              className="max-w-[180px]"
+              ellipsis={true}
+              style={{ width: "40px !important" }}
+            >
+              {testItemNames}
+            </Typography.Text>
+          </Tooltip>
+        );
+      },
     },
+
     {
       title: "عملیات",
       key: "عملیات",
@@ -147,17 +171,19 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          {/* <Button
+          <Button
             type="link"
             className={"text-red-500 font-bold"}
             onClick={() => handleDelete(record)}
           >
             حذف
-          </Button> */}
+          </Button>
         </Space>
       ),
     },
   ];
+
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   return (
     <>
@@ -177,7 +203,33 @@ export default function DataTable({
             <span className="flex gap-2">افزودن محصول</span>
           </Button>
         </div>
-        <CustomeTable setInitialData={setFilter} isLoading={ldProduct || ldDelete} data={product} columns={columns} />
+        <CustomeTable
+          setInitialData={setFilter}
+          isLoading={ldProduct || ldDelete}
+          data={product}
+          columns={columns}
+          rowKey={"uid"}
+          expandable={{
+            expandedRowKeys: activeExpRow,
+            onExpand: (expanded, record: Product) => {
+              const keys: string[] = [];
+              if (expanded && record.uid) {
+                // @ts-ignore
+                keys.push(record.uid);
+              }
+              if (!expanded) {
+                keys.pop();
+              }
+              setActiveExpRow(keys);
+            },
+            expandedRowRender: (record: Product) => (
+              <TestExpandedRowRender
+                TableMutate={mutate}
+                product={record}
+              />
+            ),
+          }}
+        />
       </div>
       {/* جذف */}
       <ConfirmDeleteModal

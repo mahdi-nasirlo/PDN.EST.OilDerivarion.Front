@@ -7,8 +7,8 @@ import CreateModal from "./components/create-modal";
 import { Button, Collapse, Typography } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import getPageRecordNumber from "../../../../lib/getPageRecordNumber";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import getPageRecordNumber from "../../../../../lib/getPageRecordNumber";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);

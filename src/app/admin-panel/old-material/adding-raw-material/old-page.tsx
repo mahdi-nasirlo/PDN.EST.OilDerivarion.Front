@@ -5,9 +5,9 @@ import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { Collapse } from "antd";
-import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 
 export default function Page() {

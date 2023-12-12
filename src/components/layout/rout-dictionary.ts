@@ -176,9 +176,15 @@ export const routDictionary: Items = {
   "add-box": {
     title: "افزودن جعبه",
   },
-  "adding-raw-material": {
-    title: "لیست مواد اولیه",
+  material: {
+    title: "مواد اولیه",
   },
+  // "adding-raw-material": {
+  //   title: "لیست مواد اولیه",
+  // },
+  // "raw-product-factor": {
+  //   title: "فاکتور های آزمون مواد اولیه",
+  // },
   "category-list": {
     title: "لیست دسته بندی ها",
   },
@@ -212,9 +218,6 @@ export const routDictionary: Items = {
   },
   province: {
     title: "استان",
-  },
-  "raw-product-factor": {
-    title: "فاکتور های آزمون مواد اولیه",
   },
   "test-factors": {
     title: "لیست فاکتورهای آزمون",

@@ -69,23 +69,31 @@ const items: MenuProps["items"] = [
       <FolderPlusIcon width={16} height={16} />
     ),
   ]),
-  getMenuItem("مواد اولیه", "initail", null, [
-    getMenuItem(
-      <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
-        لیست مواد اولیه
-      </Link>,
-      "/admin-panel/adding-raw-material",
-      <Bars3Icon width={16} height={16} />
-    ),
+  // getMenuItem("مواد اولیه", "initail", null, [
+  // getMenuItem(
+  //   <Link href={"/admin-panel/adding-raw-material"} className="text-sm">
+  //     لیست مواد اولیه
+  //   </Link>,
+  //   "/admin-panel/adding-raw-material",
+  //   <Bars3Icon width={16} height={16} />
+  // ),
 
-    getMenuItem(
-      <Link href={"/admin-panel/raw-product-factor"} className="text-sm">
-        فاکتور های آزمون مواد اولیه
-      </Link>,
-      "/admin-panel/raw-product-factor",
-      <FolderPlusIcon width={16} height={16} />
-    ),
-  ]),
+  // getMenuItem(
+  //   <Link href={"/admin-panel/raw-product-factor"} className="text-sm">
+  //     فاکتور های آزمون مواد اولیه
+  //   </Link>,
+  //   "/admin-panel/raw-product-factor",
+  //   <FolderPlusIcon width={16} height={16} />
+  // ),
+
+  getMenuItem(
+    <Link href={"/admin-panel/material"}>
+      لیست مواد اولیه
+    </Link>,
+    "/admin-panel/material",
+    // <CodeBracketIcon width={16} height={16} />
+  ),
+  // ]),
   getMenuItem("آزمایشگاه ها", "labratory", null, [
     getMenuItem(
       <Link href={"/admin-panel/laboratory"} className="text-sm">

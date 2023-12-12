@@ -1,14 +1,18 @@
+"use client"
+
 import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, Popconfirm, Select, Table, Tooltip, Typography} from 'antd';
-import useGetAllProductRequestDetail from "../../../hooks/requestDetail/useGetAllProductRequestDetail";
-import {addIndexToData} from "../../../lib/addIndexToData";
 import useGetExpertOpinionTypeGetAll from "../../../hooks/baseInfo/useGetExpertOpinionTypeGetAll";
+import {addIndexToData} from "../../../lib/addIndexToData";
 
 interface Item {
     Uid: string,
     ProductId: number,
     ProductUid: string,
-    ProductName: string
+    ProductName: string,
+    ExpertOpinionTypeId: number | null,
+    ExpertOpinionTypeName: string | null,
+    Description: string | null,
 }
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
@@ -36,10 +40,10 @@ const EditableCell: React.FC<EditableCellProps> = ({
     const expertOpinionType = useGetExpertOpinionTypeGetAll()
 
     switch (dataIndex) {
-        case "description":
+        case "Description":
             inputNode = <Input.TextArea rows={2}/>
             break;
-        case "ExpertOpinionTypeTitle":
+        case "ExpertOpinionTypeName":
             inputNode = <Select
                 labelInValue
                 fieldNames={{label: "Name", value: "Id"}}
@@ -71,17 +75,21 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
+const Index = ({trigger, dataSource, isLoading}: {
+    uid: string,
+    trigger: (arg: any) => any,
+    dataSource: any,
+    isLoading: boolean
+}) => {
 
-    const allProduct = useGetAllProductRequestDetail(uid)
 
     const [form] = Form.useForm();
-    const [data, setData] = useState<any>(allProduct.data);
+    const [data, setData] = useState<any>(dataSource || []);
     const [editingKey, setEditingKey] = useState('');
 
     useEffect(() => {
-        setData(allProduct.data)
-    }, [allProduct.data])
+        setData(dataSource)
+    }, [dataSource])
 
     const isEditing = (record: Item) => record.Uid === editingKey;
 
@@ -102,6 +110,8 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
 
             const index = newData.findIndex((item) => key === item.Uid);
 
+            console.log(index)
+
             if (index > -1) {
                 const item = newData[index];
                 newData.splice(index, 1, {
@@ -109,14 +119,17 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
                     ...row,
                 });
 
-
                 const res = await trigger({
-                    uid: item.Uid,
-                    expertOpinionTypeId: row.ExpertOpinionTypeTitle.value,
-                    description: row.description
+                    uid: newData[index].Uid,
+                    expertOpinionTypeId: row.ExpertOpinionTypeName.value || newData[index].ExpertOpinionTypeId,
+                    description: row.Description
                 })
 
                 if (res) {
+
+                    newData[index].ExpertOpinionTypeId = newData[index]?.ExpertOpinionTypeName?.value
+                    newData[index].ExpertOpinionTypeName = newData[index].ExpertOpinionTypeName.label
+
                     setData(newData);
                     setEditingKey('');
                 }
@@ -142,7 +155,7 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
         },
         {
             title: 'توضیحات',
-            dataIndex: 'description',
+            dataIndex: 'Description',
             width: '15%',
             editable: true,
             render: (_: string, record: any) => <>
@@ -162,7 +175,7 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
         },
         {
             title: 'وضعیت',
-            dataIndex: 'ExpertOpinionTypeTitle',
+            dataIndex: 'ExpertOpinionTypeName',
             width: '40%',
             editable: true,
         },
@@ -214,9 +227,9 @@ const Index = ({uid, trigger}: { uid: string, trigger: (arg: any) => any }) => {
                         cell: EditableCell,
                     },
                 }}
-                dataSource={addIndexToData(data as any)}
+                dataSource={addIndexToData(data || [] as any)}
                 columns={mergedColumns}
-                loading={allProduct.isLoading}
+                loading={isLoading}
             />
         </Form>
     );

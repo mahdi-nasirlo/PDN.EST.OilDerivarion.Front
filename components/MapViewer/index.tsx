@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 
 interface PropsType {
   secoandReload: number;
@@ -28,7 +28,7 @@ export default function Index(props: PropsType) {
       ref={iframeRef}
       height={"100%"}
       className="w-full h-full border-solid"
-      src={`http://map-test.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
+      src={`https://map-test.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
     ></iframe>
   );
 }

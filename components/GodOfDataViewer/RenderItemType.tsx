@@ -13,7 +13,6 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
     const [isFirst, setIsFirst] = useState(props.index === 0)
 
-    console.log(props.uid, "test1")
 
     const {data, isLoading} = useSWR(isFirst ? props.url : null, () => fetcher({url: props.url, uid: props.uid}))
 

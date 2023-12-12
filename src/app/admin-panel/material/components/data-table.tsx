@@ -1,26 +1,27 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Form, Modal, Row, Space, Tooltip, Typography, } from "antd";
-import { useForm } from "antd/es/form/Form";
-import { ColumnsType } from "antd/es/table";
-import React, { useEffect, useState } from "react";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Col, Form, Modal, Row, Space, Typography,} from "antd";
+import {useForm} from "antd/es/form/Form";
+import {ColumnsType} from "antd/es/table";
+import React, {useEffect, useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import TestExpandedRowRender from "./test-expandedRowRender";
 import MaterialForm from "./material-form";
+import useCreateMaterial from "../../../../../hooks/material/useCreateMaterial";
 
 export default function DataTable({
-    setFilter,
-    isValidating,
-    setModalVisible,
-    ldMaterial,
-    material,
-    mutate,
-}: {
+                                      setFilter,
+                                      isValidating,
+                                      setModalVisible,
+                                      ldMaterial,
+                                      material,
+                                      mutate,
+                                  }: {
     setFilter: (arg: any) => void
     isValidating: any;
     setModalVisible: any;
@@ -74,13 +75,13 @@ export default function DataTable({
         setIsEditModalVisible(true);
     };
 
-    const { trigger: UpdateMaterial, isMutating: ldUpdateMaterial } =
-        useSWRMutation("/Material/Update", mutationFetcher);
+    const createMaterial = useCreateMaterial()
+
 
     const sendEditRequest = async (values: Material) => {
         values.Uid = recordToEdit?.Uid;
 
-        const res = await UpdateMaterial(values);
+        const res = await createMaterial.trigger(values as any);
         if (res) {
             await mutate();
 
@@ -228,7 +229,7 @@ export default function DataTable({
                         <Row key={"box"} gutter={[16, 16]} className="my-2">
                             <Col xs={24} md={12}>
                                 <Button
-                                    loading={ldUpdateMaterial}
+                                    loading={createMaterial.isMutating}
                                     size="large"
                                     className="w-full"
                                     type="primary"
@@ -240,7 +241,7 @@ export default function DataTable({
                             </Col>
                             <Col xs={24} md={12}>
                                 <Button
-                                    disabled={ldUpdateMaterial}
+                                    disabled={createMaterial.isMutating}
                                     size="large"
                                     className="w-full bg-gray-100 text-warmGray-500"
                                     onClick={handleCancelEdit}
@@ -254,7 +255,7 @@ export default function DataTable({
             >
                 <Form
                     onFinish={sendEditRequest}
-                    disabled={ldUpdateMaterial}
+                    disabled={createMaterial.isMutating}
                     form={form}
                     layout="vertical"
                 >

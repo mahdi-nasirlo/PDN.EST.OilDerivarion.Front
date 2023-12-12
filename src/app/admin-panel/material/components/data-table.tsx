@@ -12,7 +12,7 @@ import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import TestExpandedRowRender from "./test-expandedRowRender";
 import MaterialForm from "./material-form";
-import useCreateMaterial from "../../../../../hooks/material/useCreateMaterial";
+import useUpdateMaterial from "../../../../../hooks/material/useUpdateMaterial";
 
 export default function DataTable({
                                       setFilter,
@@ -75,7 +75,7 @@ export default function DataTable({
         setIsEditModalVisible(true);
     };
 
-    const createMaterial = useCreateMaterial()
+    const createMaterial = useUpdateMaterial()
 
 
     const sendEditRequest = async (values: Material) => {

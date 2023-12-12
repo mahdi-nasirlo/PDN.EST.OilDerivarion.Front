@@ -1,11 +1,10 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
+import {Button, Col, Form, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import React from "react";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import useSWRMutation from "swr/mutation";
 import MaterialForm from "./material-form";
+import useCreateMaterial from "../../../../../hooks/material/useCreateMaterial";
 
 export default function CreateModal({
     modalVisible,
@@ -18,14 +17,11 @@ export default function CreateModal({
 }) {
     const [form] = useForm();
 
-    const { isMutating, trigger } = useSWRMutation(
-        "/Material/Create",
-        mutationFetcher
-    );
+    const createMaterialRequest = useCreateMaterial()
 
     const createMaterial = async (values: any) => {
 
-        const res = await trigger(values)
+        const res = await createMaterialRequest.trigger(values)
 
         if (res) {
 
@@ -59,7 +55,7 @@ export default function CreateModal({
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={24} md={12}>
                         <Button
-                            loading={isMutating}
+                            loading={createMaterialRequest.isMutating}
                             size="large"
                             className="w-full"
                             type="primary"
@@ -71,7 +67,7 @@ export default function CreateModal({
                     </Col>
                     <Col xs={24} md={12}>
                         <Button
-                            disabled={isMutating}
+                            disabled={createMaterialRequest.isMutating}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={CloseModal}
@@ -85,7 +81,7 @@ export default function CreateModal({
             ]}
         >
             <Form
-                disabled={isMutating}
+                disabled={createMaterialRequest.isMutating}
                 onFinish={createMaterial}
                 form={form}
                 layout="vertical"

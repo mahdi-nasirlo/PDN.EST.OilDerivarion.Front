@@ -1,19 +1,19 @@
 import React from 'react';
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
-import {Tag} from "antd";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Tag } from "antd";
 
-const StatusColumn = ({record}: { record: any }) => {
+const StatusColumn = ({ record }: { record: any }) => {
     let color = "";
     let name = "";
     let icon = <></>;
-    if (record.IsActive === false) {
+    if (record.isActive === false) {
         color = "red";
         name = "غیرفعال";
-        icon = <CloseCircleOutlined/>;
+        icon = <CloseCircleOutlined />;
     } else {
         color = "success";
         name = "فعال";
-        icon = <CheckCircleOutlined/>;
+        icon = <CheckCircleOutlined />;
     }
 
     return (

@@ -52,7 +52,8 @@ export default function DataTable({
   );
 
   const handleFormSubmitCode = async (values: any) => {
-    await code({
+    const res = await code({
+      uid: recordToEdit,
       code: "1234",
     });
   };
@@ -115,8 +116,8 @@ export default function DataTable({
           <Button
             type="link"
             className="text-primary-500 font-bold"
-            loading={pass}
-            onClick={handleFormSubmitCode}
+            // loading={openBox.isMutating}
+            onClick={() => openBox.trigger({ code: "1234" })}
           >
             بازکردن درب دستگاه
           </Button>

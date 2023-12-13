@@ -7,8 +7,8 @@ import CreateModal from "./components/create-modal";
 import { Button, Collapse, Typography } from "antd";
 import useSWR from "swr";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { listFetcher } from "../../../../lib/server/listFetcher";
-import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
+import { listFetcher } from "../../../../../lib/server/listFetcher";
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,12 +22,12 @@ export default function Page() {
   const [filter, setFilter] = useState(defaultValueTable);
 
   const {
-    data: Labratory,
+    data: Laboratory,
     isLoading: ldProduct,
     mutate,
     isValidating,
   } = useSWR<{
-    records: Labratory[];
+    records: Laboratory[];
     count: number;
   }>(["/Lab/GetPage", filter], ([url, arg]: [string, any]) =>
     listFetcher(url, { arg })
@@ -77,7 +77,7 @@ export default function Page() {
         <DataTable
           setFilter={setFilter}
           isValidating={isValidating}
-          Labratory={Labratory}
+          Laboratory={Laboratory}
           ldProduct={ldProduct}
         />
       </div>

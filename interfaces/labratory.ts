@@ -1,28 +1,33 @@
 interface LaboratoryGet {
-  Name: string | null;
-  IsActive: boolean | null;
+  name: string | null;
+  isActive: boolean | null;
   fromRecord: number;
   selectRecord: number;
 }
 
-interface Labratory {
-  Name: string | null;
-  Ranking: number | null;
-  StateId: number;
-  License_No: string | null;
-  License_Expire_Date: string | null;
-  Tel: string | null;
-  Fax: string | null;
-  Address: string | null;
-  TestItems: string | null;
-  IsActive: boolean | undefined;
-  Uid: string | null;
+interface Laboratory {
+  uid: string | null;
+  name: string | null;
+  isActive: boolean | undefined;
+  ranking: number | null;
+  stateId: number;
+  license_No: string | null;
+  license_Expire_Date: string | null;
+  tel: string | null;
+  fax: string | null;
+  address: string | null;
+  testItems:
+    | {
+        uid: string | null;
+        name: string | null;
+      }[]
+    | null;
 }
 
 interface LaboratoryTestItemGet {
   labUid: string | null;
   testItemUid: string | null;
-  IsActive: boolean | null;
+  isActive: boolean | null;
 }
 
 interface LabCreate {

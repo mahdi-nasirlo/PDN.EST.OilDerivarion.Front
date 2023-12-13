@@ -1,40 +1,12 @@
 import type {MenuProps} from "antd";
-import {Divider, Grid, Space} from "antd";
+import {Divider, Space} from "antd";
 import Layout, {Content} from "antd/es/layout/layout";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
-import {
-    AppstoreOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    ShopOutlined,
-    TeamOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined
-} from "@ant-design/icons";
-import {useRouter} from "next/navigation";
 import LayoutBreadcrumb from "@/components/layout/breadcrumb";
 import ThemeProvider from "../../../provider/theme-provider";
-
-const {useBreakpoint} = Grid;
-
-const items: MenuProps['items'] = [
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    AppstoreOutlined,
-    TeamOutlined,
-    ShopOutlined,
-].map((icon, index) => ({
-    key: String(index + 1),
-    icon: React.createElement(icon),
-    label: `nav ${index + 1}`,
-}));
 
 export default function AppLayout({
     children,
@@ -43,8 +15,6 @@ export default function AppLayout({
     children: React.ReactNode;
     sidebarItems: MenuProps["items"];
 }) {
-
-    const router = useRouter();
 
     const [open, setOpen] = useState(false);
 
@@ -56,13 +26,6 @@ export default function AppLayout({
         setOpen(false);
     };
 
-    const screens = useBreakpoint();
-    const isLgSize = screens.lg;
-    const [isMenuVisible, setIsMenuVisible] = useState(isLgSize);
-
-    useEffect(() => {
-        setIsMenuVisible(isLgSize);
-    }, [isLgSize]);
 
     const contentStyle: React.CSSProperties = {
         position: "inherit",
@@ -86,11 +49,10 @@ export default function AppLayout({
                 <Space direction="vertical" style={{width: "100%"}} size={[0, 48]}>
                     <Layout style={{minHeight: "100vh"}}>
                         <LayoutHeader
-                            isLgSize={isLgSize}
                             showDrawer={showDrawer}
                         />
                         <Layout className="bg-gray-50" hasSider>
-                            <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} isLgSize={isLgSize}/>
+                            <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open}/>
                             <Content
                                 style={contentStyle}>
                                 <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">

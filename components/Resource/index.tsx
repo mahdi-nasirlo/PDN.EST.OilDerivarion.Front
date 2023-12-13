@@ -39,6 +39,7 @@ const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many
         return <Typography>json structure is changed</Typography>
 
     }
+
 };
 
 
@@ -56,14 +57,19 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
 
     return schema?.Forms?.map((Form, index) => {
 
-        const mainRecords = records[`${Form.Form_Key}`]
+        let initialValues
+
+        if (records && Form?.Form_Key && Form.Form_Key in records) {
+            initialValues = records[Form.Form_Key]
+        }
 
         if (Form?.Mode === 0) {
+
             return <>
                 <FormBuilder key={index} item={Form} title={true}
                              onSet={formProvider.onSetMany}/>
                 <div className="mt-8">
-                    <FormDataTable schema={Form} records={mainRecords} delete={true}/>
+                    <FormDataTable schema={Form} records={initialValues} delete={true}/>
                 </div>
                 {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
                     <Divider style={{margin: "50px 0"}}/>}
@@ -71,13 +77,6 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
         }
 
         if (Form.Mode === 1) {
-
-            let initialValues
-
-            if (Form.Form_Key in records) {
-                initialValues = records[Form.Form_Key]
-            }
-
 
             return <>
                 <FormBuilder

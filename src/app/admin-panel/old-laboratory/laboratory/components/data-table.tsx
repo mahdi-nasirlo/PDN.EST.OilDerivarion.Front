@@ -1,17 +1,15 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tooltip, Typography } from "antd";
+import { Button, Col, Modal, Row, Space, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
-import CustomeTable from "../../../../../components/CustomeTable";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
-import TestExpandedRowRender from "./test-expandedRowRender";
-import GpsLabModal from "./gps-lab-modal";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   setFilter,
@@ -31,9 +29,6 @@ export default function DataTable({
   }
   | undefined;
 }) {
-
-  const [activeExpRow, setActiveExpRow] = useState<string[]>();
-
   // //حذف
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -50,7 +45,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await deleteLab({ Uid: recordToDelete?.uid });
+    const res = await deleteLab({ uid: recordToDelete?.uid });
     if (res) {
 
       await mutate();
@@ -81,13 +76,19 @@ export default function DataTable({
 
   // GPS
 
-  const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
+  const [isGPSModalVisible, setIsGPSEditModalVisible] = useState(false);
 
+  // const handleGPS = () => {
+  //   setIsGPSEditModalVisible(true);
+  // };
   const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
 
   const handleGPS = (record: Laboratory) => {
     setSelectedLabUid(record.uid);
-    setIsGPSModalVisible(true);
+    setIsGPSEditModalVisible(true);
+  };
+  const handleCancelGPS = () => {
+    setIsGPSEditModalVisible(false);
   };
 
   const columns: ColumnsType<Laboratory> = [
@@ -153,29 +154,25 @@ export default function DataTable({
         </Space>
       ),
     },
-    {
-      title: "فاکتور های آزمون",
-      dataIndex: "testItems",
-      key: "5",
-      render: (_, record: Laboratory) => {
-        let testItemNames = record.testItems?.map(item => item.name).join(', ');
-
-        return (
-          <Tooltip
-            placement="top"
-            title={<Typography>{testItemNames}</Typography>}
-          >
-            <Typography.Text
-              className="max-w-[180px]"
-              ellipsis={true}
-              style={{ width: "40px !important" }}
-            >
-              {testItemNames}
-            </Typography.Text>
-          </Tooltip>
-        );
-      },
-    },
+    // {
+    //   title: "فاکتور آزمون",
+    //   dataIndex: "testItems",
+    //   key: "8",
+    //   render: (_, record) => (
+    //     <Tooltip
+    //       placement="top"
+    //       title={<Typography>{record.testItems}</Typography>}
+    //     >
+    //       <Typography.Text
+    //         className=" max-w-[200px]"
+    //         ellipsis={true}
+    //         style={{ width: "40px !important" }}
+    //       >
+    //         {record.testItems}
+    //       </Typography.Text>
+    //     </Tooltip>
+    //   ),
+    // },
     {
       title: "شماره مجوز",
       dataIndex: "license_No",
@@ -183,7 +180,7 @@ export default function DataTable({
     },
     {
       title: "تاریخ انقضاء",
-      dataIndex: "licenseExpireDatePersian",
+      dataIndex: "license_Expire_Date",
       key: "10",
     },
     {
@@ -236,32 +233,12 @@ export default function DataTable({
             <span className="flex">افزودن آزمایشگاه</span>
           </Button>
         </div>
+
         <CustomeTable
           setInitialData={setFilter}
-          columns={columns}
           isLoading={ldMaterial || ldDeleteLab}
           data={Laboratory}
-          rowKey={"uid"}
-          expandable={{
-            expandedRowKeys: activeExpRow,
-            onExpand: (expanded, record: Material) => {
-              const keys: string[] = [];
-
-              if (expanded && record.uid) {
-                // @ts-ignore
-                keys.push(record.uid);
-              }
-
-              if (!expanded) {
-                keys.pop();
-              }
-
-              setActiveExpRow(keys);
-            },
-            expandedRowRender: (record: Laboratory) => (
-              <TestExpandedRowRender Laboratory={record} TableMutate={mutate} />
-            ),
-          }}
+          columns={columns}
         />
       </div>
       {/* جذف */}
@@ -272,21 +249,46 @@ export default function DataTable({
         setOpen={handleCancelDelete}
         handleDelete={handleConfirmDelete}
       />
+
       {/* ویرایش */}
       <EditModal
         mutate={mutate}
         recordToEdit={recordToEdit}
-        setRecordToEdit={setRecordToEdit}
-        isEditModalVisible={isVisibleEditModal}
         setIsEditModalVisible={setIsEditModalVisible}
+        isEditModalVisible={isVisibleEditModal}
+        setRecordToEdit={setRecordToEdit}
       />
       {/* مشاهده موقعیت */}
-      <GpsLabModal
-        selectedLabUid={selectedLabUid}
-        setSelectedLabUid={setSelectedLabUid}
-        isGPSModalVisible={isGPSModalVisible}
-        setIsGPSModalVisible={setIsGPSModalVisible}
-      />
+      <Modal
+        title="مشاهده موقعیت"
+        open={isGPSModalVisible}
+        onCancel={handleCancelGPS}
+        width={800}
+        footer={[
+          <Row key={"box"} gutter={[16, 16]} className="my-2">
+            <Col xs={24} md={24}>
+              <Button
+                size="large"
+                className="w-full bg-gray-100 text-warmGray-500"
+                onClick={handleCancelGPS}
+                key={"cancel"}
+              >
+                برگشت
+              </Button>
+            </Col>
+          </Row>,
+        ]}
+      >
+        <Row gutter={[32, 1]}>
+          <Col xs={24} md={24}>
+            <iframe
+              src={`https://map-test.pdnsoftware.ir/oil/lab?code=${selectedLabUid}`}
+              aria-hidden="false"
+              className="w-full h-[480px] border-solid"
+            ></iframe>
+          </Col>
+        </Row>
+      </Modal>
     </>
   );
 }

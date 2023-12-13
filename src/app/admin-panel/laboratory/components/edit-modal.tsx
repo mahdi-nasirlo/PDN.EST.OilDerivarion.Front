@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { Button, Col, Modal, Row } from "antd";
+import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import Step1 from "@/app/admin-panel/laboratory/components/forms/step1";
+import useUpdateLaboratory from "../../../../../hooks/laboratory/useUpdateLaboratory";
+import LaboratoryForm from "./laboratory-form";
 
 export default function EditModal({
   recordToEdit,
@@ -17,22 +15,17 @@ export default function EditModal({
 }: {
   setIsEditModalVisible: (arg: boolean) => void;
   isEditModalVisible: boolean;
-  recordToEdit: Labratory | null;
-  setRecordToEdit: (arg: Labratory | null) => void;
+  recordToEdit: Laboratory | null;
+  setRecordToEdit: (arg: Laboratory | null) => void;
   mutate: () => void;
 }) {
   const [form] = useForm();
+  const UpdateLaboratory = useUpdateLaboratory();
 
-  const { isMutating, trigger } = useSWRMutation(
-    "/Lab/Update",
-    mutationFetcher
-  );
+  const handleSubmit = async (values: any) => {
+    values.uid = recordToEdit?.uid;
 
-  const handleSubmit = async (values: Labratory) => {
-    //@ts-ignore
-    values.Uid = recordToEdit?.Uid;
-
-    const res = await trigger(values);
+    const res = await UpdateLaboratory.trigger(values);
     if (res) {
       await mutate();
 
@@ -43,14 +36,13 @@ export default function EditModal({
     setRecordToEdit(null);
   };
 
-  const { data, isLoading } = useSWR(
-    ["/Lab/Get", { uid: recordToEdit?.Uid }],
-    ([url, arg]) => listFetcher(url, { arg })
-  );
-
   useEffect(() => {
-    form.setFieldsValue(convertKeysToLowerCase(data));
-  }, [data]);
+    const newData = recordToEdit?.testItems?.map((item) => {
+      return item.uid;
+    });
+
+    form.setFieldsValue({ ...recordToEdit, testItems: newData });
+  }, [recordToEdit]);
 
   const handleCancelEdit = () => {
     setIsEditModalVisible(false);
@@ -69,7 +61,7 @@ export default function EditModal({
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating}
+                loading={UpdateLaboratory.isMutating}
                 size="large"
                 className="w-full"
                 type="primary"
@@ -81,7 +73,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                disabled={isLoading || isMutating}
+                disabled={UpdateLaboratory.isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={handleCancelEdit}
@@ -93,7 +85,14 @@ export default function EditModal({
           </Row>,
         ]}
       >
-        <Step1 form={form} handleSubmit={handleSubmit} loading={false} />
+        <Form
+          onFinish={handleSubmit}
+          disabled={UpdateLaboratory.isMutating}
+          form={form}
+          layout="vertical"
+        >
+          <LaboratoryForm />
+        </Form>
       </Modal>
     </>
   );

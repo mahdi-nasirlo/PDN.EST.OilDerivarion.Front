@@ -17,9 +17,6 @@ export default function Page() {
                         مشخصات راکتور
                     </Typography>
                 </div>
-                <div className='max-md:w-full'>
-                    {/*{isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible}/>}*/}
-                </div>
             </div>
             <Divider/>
             <Resource categoryID={formsUid.reactor_specifications}/>

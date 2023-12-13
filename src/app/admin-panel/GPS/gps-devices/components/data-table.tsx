@@ -24,15 +24,14 @@ export default function DataTable({
   isValidating: any;
   isLoading: boolean;
   boxesData:
-  | {
-    records: any;
-    count: number;
-  }
-  | undefined;
+    | {
+        records: any;
+        count: number;
+      }
+    | undefined;
   mutate: () => void;
 }) {
-
-  const openBox = useBoxOpen()
+  const openBox = useBoxOpen();
 
   //حذف
 
@@ -43,11 +42,20 @@ export default function DataTable({
   const [recordToEdit, setRecordToEdit] = useState<Gps>();
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
 
-
   const { trigger, isMutating } = useSWRMutation(
     "/GpsDevice/Delete",
     mutationFetcher
   );
+  const { trigger: code, isMutating: pass } = useSWRMutation(
+    "/RequestMaster/OpenBox",
+    mutationFetcher
+  );
+
+  const handleFormSubmitCode = async (values: any) => {
+    await code({
+      code: "1234",
+    });
+  };
 
   const handleDeleteSubmit = async () => {
     const res = await trigger({ uid: recordToDelete?.Uid });
@@ -107,8 +115,8 @@ export default function DataTable({
           <Button
             type="link"
             className="text-primary-500 font-bold"
-            loading={openBox.isMutating}
-            onClick={() => openBox.trigger()}
+            loading={pass}
+            onClick={handleFormSubmitCode}
           >
             بازکردن درب دستگاه
           </Button>

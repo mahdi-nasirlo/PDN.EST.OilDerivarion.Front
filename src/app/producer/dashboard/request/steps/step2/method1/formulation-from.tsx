@@ -90,7 +90,9 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        {processController.requestMaster.productionMethodId === 2 && (
+        {[2, 3, 4].includes(
+          processController.requestMaster.productionMethodId
+        ) && (
           <Col xs={24} md={12}>
             <Form.Item
               name={"materialUsagePercentage"}

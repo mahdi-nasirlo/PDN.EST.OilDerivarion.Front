@@ -4,10 +4,7 @@ import {DataItemType} from "./useGetPageProductRequestDetail";
 
 interface DataType {
     isLoading: boolean,
-    data: {
-        count: number,
-        records: DataItemType[]
-    } | undefined
+    data: DataItemType[]| undefined
 }
 
 const UseGetPageMaterialRequestDetail = (uid: string): DataType => {
@@ -17,11 +14,10 @@ const UseGetPageMaterialRequestDetail = (uid: string): DataType => {
         isLoading,
         isValidating
     } =
-        useSWR("/RequestDetail/GetPageMaterial", (url) => listFetcher(url, {
+        useSWR("/RequestDetail/GetAllMaterial", (url) => listFetcher(url, {
             arg: {
                 "requestMasterUid": uid,
-                "fromRecord": 0,
-                "selectRecord": 10000
+             
             }
         }))
 

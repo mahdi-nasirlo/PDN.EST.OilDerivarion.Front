@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Col, Form, FormInstance, Row, Select } from "antd";
+import { Col, Form, FormInstance, InputNumber, Row, Select } from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
@@ -69,6 +69,64 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
           </Form.Item>
         </Col>
       </Row>
+      {[1, 3, 4].includes(
+        processController.requestMaster.productionMethodId
+      ) && (
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={12}>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name={"productUsageExploitation"}
+              label={"درصد استحصال"}
+              rules={[
+                { required: true, message: " درصد اسنتحصال اجباری است" },
+                {
+                  type: "number",
+                  min: 0,
+                  max: 100,
+                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item
+              labelCol={{ span: 24 }}
+              name={"productUsageWasted"}
+              label={"درصد هدر رفت"}
+              rules={[
+                { required: true, message: " درصد هدر رفت اجباری است" },
+                {
+                  type: "number",
+                  min: 0,
+                  max: 100,
+                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };

@@ -148,7 +148,7 @@ export default function CreateModal({
                 filterOption={filterOption}
                 options={TestItem}
                 loading={ldTestProduct}
-                fieldNames={{ value: "Uid", label: "Name" }}
+                fieldNames={{ value: "uid", label: "name" }}
                 size="large"
                 placeholder="انتخاب کنید"
               />

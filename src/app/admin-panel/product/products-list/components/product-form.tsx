@@ -76,7 +76,7 @@ function ProductForm() {
             name="testItems"
           >
             <MultipleSelect
-              treeData={TestItem?.map(item => ({ value: item.Uid, label: item.Name }))}
+              treeData={TestItem?.map(item => ({ value: item.uid, label: item.name }))}
               loading={ldTestItem}
             />
           </Form.Item>

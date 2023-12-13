@@ -1,21 +1,23 @@
 export type TestItem = {
-  Uid?: string;
-  Measure_Id: number;
-  ReNewabillity: number;
-  ReNewabillity_Value: number;
-  TestMethod: string;
-  Name: string;
-  IsActive: boolean;
-  MeasureName: string;
+  uid?: string;
+  name: string;
+  isActive: boolean;
+  measure_Id: number;
+  measureName: string;
+  testMethod: string;
+  testItem_Details:
+    | {
+        uid: string | null;
+        title: string | null;
+      }[]
+    | null;
 };
 
 export type CreateTestItem = {
   name: string;
+  isActive: boolean;
   measure_Id: number;
-  reNewabillity: number;
-  reNewabillity_Value: number;
   testMethod: string;
-  IsActive: boolean;
 };
 
 export interface TestItemDetail {

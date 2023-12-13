@@ -4,7 +4,9 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
-import useCreateTestFactors from "../../../../../hooks/test-factors/useCreateTestFactors";
+import useSWRMutation from "swr/mutation";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { CreateTestItem } from "../../../../../interfaces/TestItem";
 
 export default function CreateModal({
   setModalVisible,
@@ -17,11 +19,14 @@ export default function CreateModal({
 }) {
   const [form] = useForm();
 
-  const createTestItemRequest = useCreateTestFactors()
+  const { trigger, isMutating } = useSWRMutation(
+    "/TestItem/Create",
+    mutationFetcher
+  );
 
-  const createTestFactor = async (values: any) => {
+  const createTestFactor = async (values: CreateTestItem) => {
 
-    const res = await createTestItemRequest.trigger(values);
+    const res = await trigger(values);
 
     if (res) {
       await mutate();
@@ -54,7 +59,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24} md={12}>
             <Button
-              loading={createTestItemRequest.isMutating}
+              loading={isMutating}
               size="large"
               className="w-full"
               type="primary"
@@ -66,7 +71,7 @@ export default function CreateModal({
           </Col>
           <Col xs={24} md={12}>
             <Button
-              disabled={createTestItemRequest.isMutating}
+              disabled={isMutating}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}
@@ -79,7 +84,7 @@ export default function CreateModal({
       ]}
     >
       <Form
-        disabled={createTestItemRequest.isMutating}
+        disabled={isMutating}
         onFinish={createTestFactor}
         form={form}
         layout="vertical"

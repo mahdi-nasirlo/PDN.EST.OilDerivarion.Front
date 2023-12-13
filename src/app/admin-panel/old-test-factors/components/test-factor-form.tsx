@@ -3,19 +3,10 @@ import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
-import MultipleSelect from "../../../../../components/MultipleSelect";
 
 function TestFactorForm() {
-
-  const defaultValue = { name: null, IsActive: true }
-
   const { data: Measure, isLoading: ldMeasure } = useSWR(
-    ["/Measure/GetAll", defaultValue],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-
-  const { data: TestItemDetail, isLoading: ldTestItemDetail } = useSWR<any[]>(
-    ["/TestItemDetail/DropDown"],
+    ["/Measure/GetAll", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -53,6 +44,15 @@ function TestFactorForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
+            name="testMethod"
+            label="روش آزمون"
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+          >
+            <Input size="large" placeholder="وارد کنید" />
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={12}>
+          <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="isActive"
             label="فعال/غیر فعال"
@@ -65,17 +65,6 @@ function TestFactorForm() {
               ]}
               size="large"
               placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="testItem_Details"
-            label="استاندارد های آزمون"
-          >
-            <MultipleSelect
-              treeData={TestItemDetail?.map(item => ({ value: item.uid, label: item.title }))}
-              loading={ldTestItemDetail}
             />
           </Form.Item>
         </Col>

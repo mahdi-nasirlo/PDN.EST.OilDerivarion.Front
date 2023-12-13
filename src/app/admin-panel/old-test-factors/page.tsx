@@ -16,7 +16,7 @@ export default function Page() {
 
   const defaultValueTable = {
     name: null,
-    isActive: null,
+    IsActive: null,
     ...getPageRecordNumber()
   };
 
@@ -34,7 +34,7 @@ export default function Page() {
   );
   const setFilterTable = async (values: ProductGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, isActive: values.isActive, ...getPageRecordNumber() });
+    setFilter({ name: values.name, IsActive: values.IsActive, ...getPageRecordNumber() });
 
     await mutate();
   };

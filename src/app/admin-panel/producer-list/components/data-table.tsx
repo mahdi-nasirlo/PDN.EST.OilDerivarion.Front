@@ -46,7 +46,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.uid });
 
     if (res) {
       await mutate();

@@ -69,7 +69,7 @@ function LaboratoryForm() {
             label="فاکتور های آزمون"
           >
             <MultipleSelect
-              treeData={Test?.map(item => ({ value: item.uid, label: item.name })) || []}
+              treeData={Test?.map(item => ({ value: item.uid, label: item.name }))}
               loading={ldTest}
             />
           </Form.Item>

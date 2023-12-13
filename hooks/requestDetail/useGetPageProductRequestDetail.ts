@@ -2,52 +2,31 @@ import useSWR from "swr";
 import {listFetcher} from "../../lib/server/listFetcher";
 
 interface PropType {
-    data: DataType | undefined,
+    data: DataItemType[] | undefined,
     mutate: any,
     isLoading: boolean
 }
 
-interface DataType {
-    records: DataItemType[],
-    count: number
-}
 
 export interface DataItemType {
-    "Uid": string,
-    "RequestMasterId": string,
-    "ProductOrMaterialId": string,
-    "IsProduct": true,
-    "UniqueCode": string,
-    "MaterialSupplyMethodId": string,
-    "CreateDate": string,
-    "MaterialTotalConsumption": string,
-    "MaterialUnitConsumption": string,
-    "MaterialUsagePercentage": string,
-    "MaterialInternalSupplyPercentage": string,
-    "MaterialForeignSupplyPercentage": string,
-    "MaterialImportDeclarationNumber": string,
-    "MaterialSupplyName": string,
-    "MaterialSupplyPersonTypeId": string,
-    "MaterialSupplyNationalCode": string,
-    "MaterialSupplyIranCode": string,
-    "MaterialSupplyAddress": string,
-    "ProductOrMaterialName": string,
-    "ProductDensityTypeId": number,
-    "StepNumber": number,
-    "IsDeleted": boolean
+        Uid: string,
+        ProductId: number,
+        ProductUid: string
+        ProductName:string,
+        ProductDensityTypeId: number,
+        ProductUsageExploitation: number,
+        ProductUsageWasted: number
 }
 
-const UseGetPageProductRequestDetail = (uid: string): PropType => {
+const useGetPageProductRequestDetail = (uid: string): PropType => {
 
-    const {data, isLoading, mutate, isValidating} = useSWR("/RequestDetail/GetPageProduct", (url) => listFetcher(url, {
+    const {data, isLoading, mutate, isValidating} = useSWR("/RequestDetail/GetAllProduct", (url) => listFetcher(url, {
         arg: {
             requestMasterUid: uid,
-            fromRecord: 0,
-            selectRecord: 10000
         }
     }))
 
     return {data, isLoading: isLoading || isValidating, mutate}
 };
 
-export default UseGetPageProductRequestDetail;
+export default useGetPageProductRequestDetail;

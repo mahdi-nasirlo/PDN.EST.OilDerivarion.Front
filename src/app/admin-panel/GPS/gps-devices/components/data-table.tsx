@@ -117,7 +117,7 @@ export default function DataTable({
             type="link"
             className="text-primary-500 font-bold"
             // loading={openBox.isMutating}
-            onClick={() => openBox.trigger({ code: "1234" })}
+            onClick={() => openBox.trigger()}
           >
             بازکردن درب دستگاه
           </Button>

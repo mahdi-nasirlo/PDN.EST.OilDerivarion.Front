@@ -1,20 +1,16 @@
 "use client";
 import Image from "next/image";
-import { SmileOutlined } from "@ant-design/icons";
-import { Button, Input, MenuProps, theme } from "antd";
-import { Header } from "antd/es/layout/layout";
-import { deleteCookie } from "cookies-next";
+import {Button} from "antd";
+import {Header} from "antd/es/layout/layout";
 import HeaderDropdown from "@/components/layout/header-dropdown";
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import {Bars3Icon} from "@heroicons/react/24/outline";
 
 export default function LayoutHeader({
-    isLgSize,
-    showDrawer,
-}: {
-    isLgSize: any;
+                                         showDrawer,
+                                     }: {
     showDrawer: () => void;
 }) {
-    const { token } = theme.useToken();
+
     return (
         <>
             <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
@@ -64,70 +60,17 @@ export default function LayoutHeader({
                         width={200}
                     />
                     <div className="lg:hidden mr-3">
-                        {!isLgSize && (
-                            <div style={{ display: "flex" }}>
-                                <Button
-                                    className="text-primary-500"
-                                    type="link"
-                                    icon={<Bars3Icon width={32} height={32} />}
-                                    onClick={showDrawer}
-                                />
-                            </div>
-                        )}
+                        <div className="flex lg:hidden">
+                            <Button
+                                className="text-primary-500"
+                                type="link"
+                                icon={<Bars3Icon width={32} height={32}/>}
+                                onClick={showDrawer}
+                            />
+                        </div>
                     </div>
                 </Header >
             </div>
         </>
     );
 }
-
-const items: MenuProps["items"] = [
-    {
-        key: "1",
-        label: (
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.antgroup.com"
-            >
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: "2",
-        label: (
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.aliyun.com"
-            >
-                2nd menu item (disabled)
-            </a>
-        ),
-        icon: <SmileOutlined />,
-        disabled: true,
-    },
-    {
-        key: "3",
-        label: (
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.luohanacademy.com"
-            >
-                3rd menu item (disabled)
-            </a>
-        ),
-        disabled: true,
-    },
-    {
-        key: "4",
-        danger: true,
-        label: "خروج",
-        onClick: () => {
-            deleteCookie("accessToken");
-        },
-        theme: "dark",
-    },
-];

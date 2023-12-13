@@ -1,21 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
-import type { MenuProps } from "antd";
-import { Drawer, Menu } from "antd";
+import React, {useState} from "react";
+import type {MenuProps} from "antd";
+import {Drawer, Menu} from "antd";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
 
 export default function LayoutSidebar({
-  menu,
-  onClose,
-  open,
-  isLgSize,
-}: {
-  menu: MenuProps["items"] | any;
-  onClose: any;
-  open: any;
-  isLgSize: any;
+                                          menu,
+                                          onClose,
+                                          open,
+                                      }: {
+    menu: MenuProps["items"] | any;
+    onClose: any;
+    open: any;
 }) {
   const pathname = usePathname();
 
@@ -60,7 +58,6 @@ export default function LayoutSidebar({
   return (
     <>
       <div
-        className="hidden lg:block"
         style={{
           position: "fixed",
           bottom: 0,
@@ -70,28 +67,27 @@ export default function LayoutSidebar({
           zIndex: 99,
         }}
       >
-        {isLgSize ? (
           <CommonMenu
-            style={{
-              width: "270px",
-              padding: "0 16px",
-              paddingTop: "30px",
-              paddingBottom: "30px",
-              height: "100%",
-            }}
-            className="px-4 overflow-auto"
+              style={{
+                  width: "270px",
+                  padding: "0 16px",
+                  paddingTop: "30px",
+                  paddingBottom: "30px",
+                  height: "100%",
+              }}
+              className="px-4 overflow-auto hidden lg:block"
           />
-        ) : (
           <Drawer
-            title="سازمان ملی استاندارد"
-            placement="right"
-            width={300}
-            onClose={onClose}
-            open={open}
+              rootClassName="block lg:hidden"
+              title="سازمان ملی استاندارد"
+              placement="right"
+              width={300}
+              onClose={onClose}
+              open={open}
+              className="boa"
           >
-            <CommonMenu style={{ height: "100%" }} className="" />
+              <CommonMenu style={{height: "100%"}} className=""/>
           </Drawer>
-        )}
       </div>
     </>
   );

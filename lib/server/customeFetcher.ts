@@ -28,6 +28,9 @@ async function customFetch({
 
     const finalUrl = getUrlWithParams(url.path, params)
 
+    console.log(finalUrl, url.path, params);
+    
+
     const apiDestination: string = url.absolute ? url.path : process.env.NEXT_PUBLIC_API_URL + "/api/V1" as string + finalUrl
 
     try {

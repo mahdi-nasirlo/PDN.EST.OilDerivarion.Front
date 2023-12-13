@@ -2,7 +2,7 @@
 
 import { Col, Form, Select, Row, Input } from "antd";
 import React from "react";
-import ButtonFilter from "../../../../../components/ButtonFilter";
+import ButtonFilter from "../../../../../../components/ButtonFilter";
 
 export default function FilterForm({
   filter,
@@ -23,7 +23,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="isActive" label="فعال / غیر فعال">
+          <Form.Item name="IsActive" label="فعال / غیر فعال">
             <Select
               options={[
                 { value: true, label: "فعال" },

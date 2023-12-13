@@ -4,16 +4,16 @@ import React, { useState } from "react";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import useSWR from "swr";
-import { listFetcher } from "../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CreateModal from "./components/create-modal";
 import { Collapse } from "antd";
-import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
+import getPageRecordNumber from '../../../../../lib/getPageRecordNumber'
 
 
 export default function Page() {
   const defaultValueTable = {
     name: null,
-    isActive: null,
+    IsActive: null,
     ...getPageRecordNumber()
   };
 
@@ -37,7 +37,7 @@ export default function Page() {
 
   const setFilterTable = async (values: LaboratoryGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, isActive: values.isActive, ...getPageRecordNumber() });
+    setFilter({ name: values.name, IsActive: values.IsActive, ...getPageRecordNumber() });
 
     await mutate();
   };

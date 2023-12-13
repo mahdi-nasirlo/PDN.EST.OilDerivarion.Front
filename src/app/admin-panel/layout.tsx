@@ -94,29 +94,29 @@ const items: MenuProps["items"] = [
     <Bars3Icon width={16} height={16} />
   ),
   // ]),
-  getMenuItem("آزمایشگاه ها", "labratory", null, [
-    getMenuItem(
-      <Link href={"/admin-panel/laboratory"} className="text-sm">
-        لیست آزمایشگاه ها
-      </Link>,
-      "/admin-panel/laboratory",
-      <Bars3Icon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link href={"/admin-panel/labratory-factor"} className="text-sm">
-        فاکتور های آزمون آزمایشگاه
-      </Link>,
-      "/admin-panel/labratory-factor",
-      <FolderPlusIcon width={16} height={16} />
-    ),
-    getMenuItem(
-      <Link href="/admin-panel/map-gps" className="text-sm">
-        نقشه آزمایشگاه ها
-      </Link>,
-      "/admin-panel/map-gps",
-      <MapIcon width={16} height={16} />
-    ),
-  ]),
+  // getMenuItem("آزمایشگاه ها", "labratory", null, [
+  getMenuItem(
+    <Link href={"/admin-panel/laboratory"}>
+      لیست آزمایشگاه ها
+    </Link>,
+    "/admin-panel/laboratory",
+    <Bars3Icon width={16} height={16} />
+  ),
+  // getMenuItem(
+  //   <Link href={"/admin-panel/labratory-factor"} className="text-sm">
+  //     فاکتور های آزمون آزمایشگاه
+  //   </Link>,
+  //   "/admin-panel/labratory-factor",
+  //   <FolderPlusIcon width={16} height={16} />
+  // ),
+  getMenuItem(
+    <Link href="/admin-panel/map-gps" >
+      نقشه آزمایشگاه ها
+    </Link>,
+    "/admin-panel/map-gps",
+    <MapIcon width={16} height={16} />
+  ),
+  // ]),
   getMenuItem("مدیریت کاربران", "management-users", null, [
     getMenuItem(
       <Link

@@ -60,7 +60,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               filterOption={filterOption}
               loading={materialsData.isLoadingMaterial}
               options={materialsData.materials}
-              fieldNames={{ value: "Uid", label: "Name" }}
+              fieldNames={{ value: "uid", label: "name" }}
               size="large"
               placeholder="انتخاب نمایید"
               tokenSeparators={[","]}

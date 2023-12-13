@@ -25,7 +25,7 @@ export default function DataTable({
   setModalVisible: any;
   ldProduct: boolean;
   mutate: () => void;
-  product: { records: Product[], count: number } | undefined;
+  product: { records: Product[]; count: number } | undefined;
 }) {
   //حذف
 
@@ -68,22 +68,18 @@ export default function DataTable({
   };
 
   useEffect(() => {
-
     const newDataTestItems = recordToEdit?.testItems?.map((itemTestItems) => {
-      return itemTestItems.uid
-    })
+      return itemTestItems.uid;
+    });
     const newDataMaterials = recordToEdit?.materials?.map((itemMaterials) => {
-      return itemMaterials.uid
-    })
+      return itemMaterials.uid;
+    });
 
-    form.setFieldsValue(
-      {
-        ...recordToEdit,
-        testItems: newDataTestItems,
-        materials: newDataMaterials
-      }
-    );
-
+    form.setFieldsValue({
+      ...recordToEdit,
+      testItems: newDataTestItems,
+      materials: newDataMaterials,
+    });
   }, [recordToEdit]);
 
   const columns: ColumnsType<Product> = [
@@ -91,7 +87,7 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "نام محصول",
@@ -107,14 +103,16 @@ export default function DataTable({
       title: "فعال/غیر فعال ",
       dataIndex: "isActive",
       key: "4",
-      render: (_, record) => <StatusColumn record={record} />
+      render: (_, record) => <StatusColumn record={record} />,
     },
     {
       title: "مواد اولیه",
       dataIndex: "materials",
       key: "5",
       render: (_, record: Product) => {
-        let materialsNames = record.materials?.map((item) => item.name).join(', ');
+        let materialsNames = record.materials
+          ?.map((item) => item.name)
+          .join(", ");
 
         return (
           <Tooltip
@@ -137,7 +135,9 @@ export default function DataTable({
       dataIndex: "testItems",
       key: "6",
       render: (_, record: Product) => {
-        let testItemNames = record.testItems?.map(item => item.name).join(', ');
+        let testItemNames = record.testItems
+          ?.map((item) => item.name)
+          .join(", ");
 
         return (
           <Tooltip
@@ -223,10 +223,7 @@ export default function DataTable({
               setActiveExpRow(keys);
             },
             expandedRowRender: (record: Product) => (
-              <TestExpandedRowRender
-                TableMutate={mutate}
-                product={record}
-              />
+              <TestExpandedRowRender TableMutate={mutate} product={record} />
             ),
           }}
         />

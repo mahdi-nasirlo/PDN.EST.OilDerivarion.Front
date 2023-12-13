@@ -133,7 +133,7 @@ export default function CreateModal({
             >
               <Select
                 showSearch
-                fieldNames={{ label: "Name", value: "Uid" }}
+                fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
                 options={test}

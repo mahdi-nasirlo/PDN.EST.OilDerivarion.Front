@@ -28,7 +28,19 @@ export default function ReviewDataTable() {
       title: "نام محصول",
       dataIndex: "name",
       key: "2",
-      width: "95%",
+      width: "10%",
+    },
+    {
+      title: "درصد استحصال",
+      dataIndex: "productUsageExploitation",
+      key: "2",
+      width: "10%",
+    },
+    {
+      title: "درصد هدر رفت",
+      dataIndex: "productUsageWasted",
+      key: "2",
+      width: "75%",
     },
   ];
 

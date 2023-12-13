@@ -11,6 +11,7 @@ const Index = () => {
   const [form] = useForm();
 
   const processController = useContext(StepContext);
+  const method = processController.requestMaster.productionMethodId;
 
   const requestDetailProduct = useCrudRequestDetailProduct();
 

@@ -12,7 +12,7 @@ interface DateProps {
 
 export default function CustomDatePicker({value = {}, onChange}: { value?: any, onChange?: (e: any) => void }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(
-      // props.defaultValue as any
+      value
   );
 
   const renderCustomInput = ({ ref }: any) => (

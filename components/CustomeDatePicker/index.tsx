@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import DatePicker, {DayValue,} from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import {Input} from "antd";
@@ -11,9 +11,7 @@ interface DateProps {
 }
 
 export default function CustomDatePicker({value = {}, onChange}: { value?: any, onChange?: (e: any) => void }) {
-  const [selectedDay, setSelectedDay] = useState<string | null>(
-      value
-  );
+
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
@@ -27,7 +25,6 @@ export default function CustomDatePicker({value = {}, onChange}: { value?: any, 
   );
 
   const change = (n: DateProps | null) => {
-    setSelectedDay(dateToString(n as DateProps));
 
     // @ts-ignore
     onChange(dateToString(n as DateProps))
@@ -38,7 +35,7 @@ export default function CustomDatePicker({value = {}, onChange}: { value?: any, 
     <>
       <DatePicker
           locale="fa"
-        value={stringToDate(selectedDay as string) as DayValue}
+          value={stringToDate(value as string) as DayValue}
         onChange={change as any}
         inputPlaceholder="Select a date"
         shouldHighlightWeekends
@@ -63,7 +60,8 @@ type MonthType = number;
 type DayType = number;
 
 function stringToDate(dateString: string): DateProps | null {
-  if (!dateString) return null;
+  
+  if (!dateString || typeof dateString !== "string") return null;
 
   const parts = dateString.split("/");
   if (parts.length === 3) {

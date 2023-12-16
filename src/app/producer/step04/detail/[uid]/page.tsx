@@ -1,17 +1,18 @@
 "use client";
 
-import {Divider, Typography} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useForm} from "antd/es/form/Form";
+import { Divider, Typography } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import DateOfVisitForm from "@/app/producer/step03/detail/[uid]/components/date-of-visit-form";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
+import CalendarTime from "../../../../../../components/CalendarTime/calendar-time";
 
 interface PropType {
   params: { uid: string };
@@ -72,20 +73,21 @@ export default function Home(props: PropType) {
           <div className='flex items-center gap-3'>
             <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
           </div>
-          <Divider/>
+          <Divider />
         </div>
-        <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
+        <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading} />
+        <CalendarTime data={data?.calendar} />
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {data && <Divider/>}
-        <DateOfVisitForm form={form} onFinish={onFinish}/>
-        {data && <Divider/>}
+        {data && <Divider />}
+        <DateOfVisitForm form={form} onFinish={onFinish} />
+        {data && <Divider />}
         <WorkflowRequestBtn
-            loading={isMutating}
-            choices={data?.choices as any}
-            onClick={(choiceKey) => {
-              setChoice(choiceKey)
-              form.submit()
-            }}
+          loading={isMutating}
+          choices={data?.choices as any}
+          onClick={(choiceKey) => {
+            setChoice(choiceKey)
+            form.submit()
+          }}
           trigger={() => true}
           nextStepUrl={apiData.create.url}
           taskId={props.params.uid}

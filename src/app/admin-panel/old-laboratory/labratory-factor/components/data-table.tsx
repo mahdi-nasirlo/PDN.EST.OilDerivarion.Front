@@ -5,16 +5,16 @@ import { ColumnsType } from "antd/es/table";
 import { TableColumnsType } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ProductTestItem } from "../../../../../interfaces/product";
-import CustomeTable from "../../../../../components/CustomeTable";
-import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import { ProductTestItem } from "../../../../../../interfaces/product";
+import CustomeTable from "../../../../../../components/CustomeTable";
+import { addAlphabetToData } from "../../../../../../lib/addAlphabetToData";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
-const columns: ColumnsType<Labratory> = [
+const columns: ColumnsType<Laboratory> = [
   { title: "ردیف", dataIndex: "Row", key: "1", width: "5%" },
   { title: "آزمایشگاه", dataIndex: "Name", key: "2" },
   { title: "استان", dataIndex: "StateName", key: "3" },
@@ -26,12 +26,12 @@ const columns: ColumnsType<Labratory> = [
 const DataTable = ({
   setFilter,
   isValidating,
-  Labratory,
+  Laboratory,
   ldProduct,
 }: {
   setFilter: (arg: any) => void,
   isValidating: any;
-  Labratory: { records: Labratory[], count: number } | undefined;
+  Laboratory: { records: Laboratory[], count: number } | undefined;
   ldProduct: boolean;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
@@ -40,17 +40,17 @@ const DataTable = ({
     <CustomeTable
       setInitialData={setFilter}
       isLoading={ldProduct || isValidating}
-      data={Labratory}
+      data={Laboratory}
       rowKey={"Uid"}
       columns={columns}
       expandable={{
         expandedRowKeys: activeExpRow,
-        onExpand: (expanded, record: Labratory) => {
+        onExpand: (expanded, record: Laboratory) => {
           const keys: string[] = [];
 
-          if (expanded && record.Uid) {
+          if (expanded && record.uid) {
             // @ts-ignore
-            keys.push(record.Uid);
+            keys.push(record.uid);
           }
 
           if (!expanded) {
@@ -59,8 +59,8 @@ const DataTable = ({
 
           setActiveExpRow(keys);
         },
-        expandedRowRender: (record: Labratory) => (
-          <ExpandedRowRender Labratory={record} />
+        expandedRowRender: (record: Laboratory) => (
+          <ExpandedRowRender Laboratory={record} />
         ),
       }}
     />
@@ -68,9 +68,9 @@ const DataTable = ({
 };
 
 const ExpandedRowRender = ({
-  Labratory,
+  Laboratory,
 }: {
-  Labratory: Labratory;
+  Laboratory: Laboratory;
 }) => {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
@@ -81,7 +81,7 @@ const ExpandedRowRender = ({
   >();
 
   const defaultValue = {
-    labUid: Labratory.Uid,
+    labUid: Laboratory.uid,
     testItemUid: null,
     IsActive: null,
   };
@@ -109,7 +109,7 @@ const ExpandedRowRender = ({
     if (!isLoading) {
       mutate();
     }
-  }, [Labratory]);
+  }, [Laboratory]);
 
   const expandColumns: TableColumnsType<ProductTestItem> = [
     { title: "#", dataIndex: "Row", key: "1", width: "5%" },

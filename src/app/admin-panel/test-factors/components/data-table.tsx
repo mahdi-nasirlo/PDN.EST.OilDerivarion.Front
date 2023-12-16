@@ -1,16 +1,17 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Typography } from "antd";
+import { Button, Space, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { TestItem } from "../../../../../interfaces/TestItem";
-import EditModal from "@/app/admin-panel/test-factors/components/edit-modal";
+import EditModal from "../components/edit-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../components/CustomeTable";
+import TestExpandedRowRender from "./test-expandedRowRender";
 
 export default function DataTable({
   setModalVisible,
@@ -30,6 +31,10 @@ export default function DataTable({
   }
   | undefined;
 }) {
+
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
+  //ادیت
   const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -46,7 +51,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.uid });
     if (res) {
       await mutate();
       setIsDeleteModalVisible(false);
@@ -66,24 +71,42 @@ export default function DataTable({
     },
     {
       title: "نام فاکتور آزمون",
-      dataIndex: "Name",
+      dataIndex: "name",
       key: "2",
     },
     {
-      title: "روش آزمون",
-      dataIndex: "TestMethod",
+      title: "واحد اندازه گیری",
+      dataIndex: "measureName",
       key: "3",
     },
     {
-      title: "واحد اندازه گیری",
-      dataIndex: "MeasureName",
+      title: "فعال/غیر فعال ",
+      dataIndex: "isActive",
       key: "4",
+      render: (e, record) => <StatusColumn record={record} />
     },
     {
-      title: "فعال/غیر فعال ",
-      dataIndex: "IsActive",
+      title: "استاندارد های آزمون",
+      dataIndex: "testItem_Details",
       key: "5",
-      render: (e, record) => <StatusColumn record={record} />
+      render: (_, record: TestItem) => {
+        let testItemTestDetails = record.testItem_Details?.map(item => item.title).join(', ');
+
+        return (
+          <Tooltip
+            placement="top"
+            title={<Typography>{testItemTestDetails}</Typography>}
+          >
+            <Typography.Text
+              className="max-w-[180px]"
+              ellipsis={true}
+              style={{ width: "40px !important" }}
+            >
+              {testItemTestDetails}
+            </Typography.Text>
+          </Tooltip>
+        );
+      },
     },
     {
       title: "جزئیات",
@@ -132,14 +155,34 @@ export default function DataTable({
         </div>
         <CustomeTable
           setInitialData={setFilter}
+          columns={columns}
           isLoading={ldTestItem || IsDeleteTestFactor}
           data={TestItem}
-          columns={columns}
+          rowKey={"uid"}
+          expandable={{
+            expandedRowKeys: activeExpRow,
+            onExpand: (expanded, record: TestItem) => {
+              const keys: string[] = [];
+
+              if (expanded && record.uid) {
+                // @ts-ignore
+                keys.push(record.uid);
+              }
+
+              if (!expanded) {
+                keys.pop();
+              }
+              setActiveExpRow(keys);
+            },
+            expandedRowRender: (record: TestItem) => (
+              <TestExpandedRowRender TestItem={record} TableMutate={mutate} />
+            ),
+          }}
         />
         <EditModal
           mutate={mutate}
-          editRecord={openEdit}
-          setEditRecord={setOpenEdit}
+          recordToEdit={openEdit}
+          setRecordToEdit={setOpenEdit}
         />
       </div>
       <ConfirmDeleteModal

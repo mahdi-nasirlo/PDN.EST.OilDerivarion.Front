@@ -27,7 +27,7 @@ export default function TestItemSelect({ name }: { name: string }) {
           filterOption={filterOption}
           options={data}
           loading={isLoading}
-          fieldNames={{ value: "Uid", label: "Name" }}
+          fieldNames={{ value: "uid", label: "name" }}
           size="large"
           placeholder="وارد کنید"
         />

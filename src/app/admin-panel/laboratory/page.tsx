@@ -13,7 +13,7 @@ import getPageRecordNumber from '../../../../lib/getPageRecordNumber'
 export default function Page() {
   const defaultValueTable = {
     name: null,
-    IsActive: null,
+    isActive: null,
     ...getPageRecordNumber()
   };
 
@@ -22,7 +22,7 @@ export default function Page() {
   const [filter, setFilter] = useState(defaultValueTable);
 
   const {
-    data: labratory,
+    data: Laboratory,
     isLoading: ldMaterial,
     mutate,
     isValidating,
@@ -37,7 +37,7 @@ export default function Page() {
 
   const setFilterTable = async (values: LaboratoryGet) => {
     // @ts-ignore
-    setFilter({ name: values.name, IsActive: values.IsActive, ...getPageRecordNumber() });
+    setFilter({ name: values.name, isActive: values.isActive, ...getPageRecordNumber() });
 
     await mutate();
   };
@@ -64,7 +64,7 @@ export default function Page() {
       <DataTable
         setFilter={setFilter}
         mutate={mutate}
-        labratory={labratory}
+        Laboratory={Laboratory}
         ldMaterial={ldMaterial || isValidating}
         setModalVisible={setModalVisible}
       />

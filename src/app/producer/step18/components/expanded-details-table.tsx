@@ -8,7 +8,7 @@ export default function ExpandedDetailsTable({ data }: { data: any }) {
     const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
     const defaultValue = {
-        requestMasterUid: data.Uid
+        requestMasterUid: data.uid
     };
 
 
@@ -27,12 +27,17 @@ export default function ExpandedDetailsTable({ data }: { data: any }) {
         },
         {
             title: "فاکتور های آزمون",
-            dataIndex: "MaterialName",
+            dataIndex: "Name",
             key: "2",
         },
         {
             title: "روش آزمون",
-            dataIndex: "MaterialName",
+            dataIndex: "TestMethod",
+            key: "3",
+        },
+        {
+            title: "واحد اندازه گیری",
+            dataIndex: "MeasureName",
             key: "3",
         },
     ];

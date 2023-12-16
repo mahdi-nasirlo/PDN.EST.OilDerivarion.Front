@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Input, Select, TreeSelect, Typography } from 'antd';
-import { TreeNode } from 'antd/es/tree-select';
-import { Option } from 'antd/lib/mentions';
+import React, { useState } from 'react';
+import { TreeSelect } from 'antd';
 import { TreeSelectProps } from 'antd/lib';
 
 const { SHOW_PARENT } = TreeSelect;
@@ -20,6 +18,7 @@ const MultipleSelect: React.FC<InputProps & TreeSelectProps> = (props) => {
         <>
 
             <TreeSelect
+                placeholder="انتخاب کنید"
                 value={selectedItems}
                 size="large"
                 className="w-full"

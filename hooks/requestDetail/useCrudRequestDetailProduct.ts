@@ -39,9 +39,10 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
 
 
         if (notify)
-            return await createProductWithNotify(value)
+        return await createProduct(value)
         else
-            return await createProduct(value)
+        return await createProductWithNotify(value)
+           
 
     }
 

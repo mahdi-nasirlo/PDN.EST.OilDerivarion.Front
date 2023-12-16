@@ -72,7 +72,7 @@ function MaterialForm() {
                 <Col xs={24} md={12}>
                     <Form.Item name="testItems" label="فاکتور های آزمون">
                         <MultipleSelect
-                            treeData={Test?.map(item => ({ value: item.Uid, label: item.Name })) || []}
+                            treeData={Test?.map(item => ({ value: item.uid, label: item.name }))}
                             loading={ldTest}
                         />
                     </Form.Item>

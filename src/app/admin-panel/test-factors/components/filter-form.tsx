@@ -27,7 +27,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال/غیر فعال">
+          <Form.Item name="isActive" label="فعال/غیر فعال">
             <Select
               options={[
                 { label: "فعال", value: true },
@@ -38,16 +38,6 @@ export default function FilterForm({
             />
           </Form.Item>
         </Col>
-        {/* <Col xs={24} md={12}>
-          <Form.Item name="measure_Id" label="واحد اندازه گیری">
-            <Select disabled size="large" placeholder="انتخاب کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="testMethod" label="روش آزمون">
-            <Input disabled size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col> */}
       </Row>
       <ButtonFilter
         unsetFilter={unsetFilter}

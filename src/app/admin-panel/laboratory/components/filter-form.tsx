@@ -23,7 +23,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال / غیر فعال">
+          <Form.Item name="isActive" label="فعال / غیر فعال">
             <Select
               options={[
                 { value: true, label: "فعال" },

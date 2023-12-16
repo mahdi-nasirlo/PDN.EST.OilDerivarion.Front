@@ -3,11 +3,11 @@
 import { Button, Col, Form, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { filterOption } from "../../../../../lib/filterOption";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
   setModalVisible,
@@ -133,7 +133,7 @@ export default function CreateModal({
             >
               <Select
                 showSearch
-                fieldNames={{ label: "Name", value: "Uid" }}
+                fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
                 options={test}

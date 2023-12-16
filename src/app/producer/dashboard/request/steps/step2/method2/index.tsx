@@ -20,7 +20,7 @@ function Index() {
 
     const res = await requestDetailMaterial.create.trigger(value, true);
 
-    await mutate("/RequestDetail/GetPageMaterial");
+    await mutate("/RequestDetail/GetAllMaterial");
   };
 
   return (
@@ -56,9 +56,7 @@ function Index() {
 
       <div className="flex gap-3 mt-5">
         <Button
-          onClick={() =>
-            processControl.getLastStep()
-          }
+          onClick={() => processControl.getLastStep()}
           type="dashed"
           className="bg-gray-100 w-full"
         >

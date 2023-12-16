@@ -1,29 +1,29 @@
 import React from "react";
 import { Col, Form, FormInstance, Input, Row } from "antd";
-import ContactInputs from "../../../../../../components/inputs/Contact";
+import ContactInputs from "../../../../../../../components/inputs/Contact";
 
-function Step3({
+function Step2({
   form,
   handleSubmit,
   isLoading,
 }: {
   isLoading: boolean;
   form: FormInstance;
-  handleSubmit: (values: SaveFormManager) => void;
+  handleSubmit: (values: SaveFormResponsible) => void;
 }) {
   return (
     <>
       <Form
-        disabled={isLoading}
         form={form}
         onFinish={handleSubmit}
+        disabled={isLoading}
         layout="vertical"
       >
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
-              name="managerFirstName"
+              name="responsibleFirstName"
               label="نام"
             >
               <Input size="large" placeholder="وارد کنید" />
@@ -31,9 +31,9 @@ function Step3({
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
-              name="managerLastName"
-              label="نام خانوادگی"
               rules={[{ required: true }]}
+              name="responsibleLastName"
+              label="نام خانوادگی"
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -42,8 +42,6 @@ function Step3({
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
-              name="managerNationalCode"
-              label="کد ملی"
               rules={[
                 { required: true },
                 {
@@ -51,12 +49,14 @@ function Step3({
                   message: "کد ملی نامتعبر است",
                 },
               ]}
+              name="responsibleNationalCode"
+              label="کد ملی"
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <ContactInputs label="شماره موبایل" name="managerMobile">
+            <ContactInputs label="شماره موبایل" name="responsibleMobile">
               <Input size="large" placeholder="وارد کنید" />
             </ContactInputs>
           </Col>
@@ -66,4 +66,4 @@ function Step3({
   );
 }
 
-export default Step3;
+export default Step2;

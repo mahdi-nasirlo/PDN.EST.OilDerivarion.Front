@@ -65,7 +65,7 @@ function ProductForm() {
             label="مواد اولیه"
           >
             <MultipleSelect
-              treeData={Material?.map((item: any) => ({ value: item.uid, label: item.name })) || []}
+              treeData={Material?.map((item: any) => ({ value: item.uid, label: item.name }))}
               loading={ldMaterial}
             />
           </Form.Item>
@@ -76,7 +76,7 @@ function ProductForm() {
             name="testItems"
           >
             <MultipleSelect
-              treeData={TestItem?.map(item => ({ value: item.Uid, label: item.Name })) || []}
+              treeData={TestItem?.map(item => ({ value: item.uid, label: item.name }))}
               loading={ldTestItem}
             />
           </Form.Item>

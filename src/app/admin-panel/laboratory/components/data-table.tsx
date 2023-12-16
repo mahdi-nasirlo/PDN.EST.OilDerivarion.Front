@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Modal, Row, Space, Tooltip, Typography } from "antd";
+import { Button, Space, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
@@ -10,31 +10,36 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import EditModal from "./edit-modal";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import TestExpandedRowRender from "./test-expandedRowRender";
+import GpsLabModal from "./gps-lab-modal";
 
 export default function DataTable({
   setFilter,
   setModalVisible,
   ldMaterial,
-  labratory,
+  Laboratory,
   mutate,
 }: {
   setFilter: (arg: any) => void;
   setModalVisible: any;
   ldMaterial: boolean;
   mutate: () => void;
-  labratory:
+  Laboratory:
   | {
     records: LaboratoryGet[];
     count: number;
   }
   | undefined;
 }) {
+
+  const [activeExpRow, setActiveExpRow] = useState<string[]>();
+
   // //حذف
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-  const [recordToDelete, setRecordToDelete] = useState<Labratory | null>(null);
+  const [recordToDelete, setRecordToDelete] = useState<Laboratory | null>(null);
 
-  const handleDelete = (record: Labratory) => {
+  const handleDelete = (record: Laboratory) => {
     setRecordToDelete(record);
     setIsDeleteModalVisible(true);
   };
@@ -45,7 +50,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await deleteLab({ Uid: recordToDelete?.Uid });
+    const res = await deleteLab({ Uid: recordToDelete?.uid });
     if (res) {
 
       await mutate();
@@ -67,31 +72,25 @@ export default function DataTable({
   //ادیت
 
   const [isVisibleEditModal, setIsEditModalVisible] = useState<boolean>(false);
-  const [recordToEdit, setRecordToEdit] = useState<Labratory | null>(null);
+  const [recordToEdit, setRecordToEdit] = useState<Laboratory | null>(null);
 
-  const handleEdit = (record: Labratory) => {
+  const handleEdit = (record: Laboratory) => {
     setRecordToEdit(record);
     setIsEditModalVisible(true);
   };
 
   // GPS
 
-  const [isGPSModalVisible, setIsGPSEditModalVisible] = useState(false);
+  const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
 
-  // const handleGPS = () => {
-  //   setIsGPSEditModalVisible(true);
-  // };
   const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
 
-  const handleGPS = (record: Labratory) => {
-    setSelectedLabUid(record.Uid);
-    setIsGPSEditModalVisible(true);
-  };
-  const handleCancelGPS = () => {
-    setIsGPSEditModalVisible(false);
+  const handleGPS = (record: Laboratory) => {
+    setSelectedLabUid(record.uid);
+    setIsGPSModalVisible(true);
   };
 
-  const columns: ColumnsType<Labratory> = [
+  const columns: ColumnsType<Laboratory> = [
     {
       title: "ردیف",
       dataIndex: "Row",
@@ -100,47 +99,47 @@ export default function DataTable({
     },
     {
       title: "نام آزمایشگاه",
-      dataIndex: "Name",
+      dataIndex: "name",
       key: "2",
     },
     {
       title: "شماره ثابت",
-      dataIndex: "Tel",
+      dataIndex: "tel",
       key: "3",
     },
     {
       title: "فعال/غیر فعال",
-      dataIndex: "IsActive",
+      dataIndex: "isActive",
       key: "4",
       render: (_, record: any) => <StatusColumn record={record} />
     },
     {
       title: "استان",
-      dataIndex: "StateName",
+      dataIndex: "stateName",
       key: "5",
     },
     {
       title: "آدرس",
-      dataIndex: "Address",
+      dataIndex: "address",
       key: "6",
       render: (_, record) => (
         <Tooltip
           placement="top"
-          title={<Typography>{record.Address}</Typography>}
+          title={<Typography>{record.address}</Typography>}
         >
           <Typography.Text
             className=" max-w-[250px]"
             ellipsis={true}
             style={{ width: "45px !important" }}
           >
-            {record.Address}
+            {record.address}
           </Typography.Text>
         </Tooltip>
       ),
     },
     {
       title: "موقعیت جغرافیایی",
-      dataIndex: "Test",
+      dataIndex: "test",
       key: "7",
       render: (_, record) => (
         <Space size="small">
@@ -155,37 +154,41 @@ export default function DataTable({
       ),
     },
     {
-      title: "فاکتور آزمون",
-      dataIndex: "TestItems",
-      key: "8",
-      render: (_, record) => (
-        <Tooltip
-          placement="top"
-          title={<Typography>{record.TestItems}</Typography>}
-        >
-          <Typography.Text
-            className=" max-w-[200px]"
-            ellipsis={true}
-            style={{ width: "40px !important" }}
+      title: "فاکتور های آزمون",
+      dataIndex: "testItems",
+      key: "5",
+      render: (_, record: Laboratory) => {
+        let testItemNames = record.testItems?.map(item => item.name).join(', ');
+
+        return (
+          <Tooltip
+            placement="top"
+            title={<Typography>{testItemNames}</Typography>}
           >
-            {record.TestItems}
-          </Typography.Text>
-        </Tooltip>
-      ),
+            <Typography.Text
+              className="max-w-[180px]"
+              ellipsis={true}
+              style={{ width: "40px !important" }}
+            >
+              {testItemNames}
+            </Typography.Text>
+          </Tooltip>
+        );
+      },
     },
     {
       title: "شماره مجوز",
-      dataIndex: "License_No",
+      dataIndex: "license_No",
       key: "9",
     },
     {
       title: "تاریخ انقضاء",
-      dataIndex: "License_Expire_Date",
+      dataIndex: "licenseExpireDatePersian",
       key: "10",
     },
     {
       title: "فکس",
-      dataIndex: "Fax",
+      dataIndex: "fax",
       key: "11",
     },
     {
@@ -233,12 +236,32 @@ export default function DataTable({
             <span className="flex">افزودن آزمایشگاه</span>
           </Button>
         </div>
-
         <CustomeTable
           setInitialData={setFilter}
-          isLoading={ldMaterial || ldDeleteLab}
-          data={labratory}
           columns={columns}
+          isLoading={ldMaterial || ldDeleteLab}
+          data={Laboratory}
+          rowKey={"uid"}
+          expandable={{
+            expandedRowKeys: activeExpRow,
+            onExpand: (expanded, record: Material) => {
+              const keys: string[] = [];
+
+              if (expanded && record.uid) {
+                // @ts-ignore
+                keys.push(record.uid);
+              }
+
+              if (!expanded) {
+                keys.pop();
+              }
+
+              setActiveExpRow(keys);
+            },
+            expandedRowRender: (record: Laboratory) => (
+              <TestExpandedRowRender Laboratory={record} TableMutate={mutate} />
+            ),
+          }}
         />
       </div>
       {/* جذف */}
@@ -249,46 +272,21 @@ export default function DataTable({
         setOpen={handleCancelDelete}
         handleDelete={handleConfirmDelete}
       />
-
       {/* ویرایش */}
       <EditModal
         mutate={mutate}
         recordToEdit={recordToEdit}
-        setIsEditModalVisible={setIsEditModalVisible}
-        isEditModalVisible={isVisibleEditModal}
         setRecordToEdit={setRecordToEdit}
+        isEditModalVisible={isVisibleEditModal}
+        setIsEditModalVisible={setIsEditModalVisible}
       />
       {/* مشاهده موقعیت */}
-      <Modal
-        title="مشاهده موقعیت"
-        open={isGPSModalVisible}
-        onCancel={handleCancelGPS}
-        width={800}
-        footer={[
-          <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={24}>
-              <Button
-                size="large"
-                className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelGPS}
-                key={"cancel"}
-              >
-                برگشت
-              </Button>
-            </Col>
-          </Row>,
-        ]}
-      >
-        <Row gutter={[32, 1]}>
-          <Col xs={24} md={24}>
-            <iframe
-              src={`https://map-test.pdnsoftware.ir/oil/lab?code=${selectedLabUid}`}
-              aria-hidden="false"
-              className="w-full h-[480px] border-solid"
-            ></iframe>
-          </Col>
-        </Row>
-      </Modal>
+      <GpsLabModal
+        selectedLabUid={selectedLabUid}
+        setSelectedLabUid={setSelectedLabUid}
+        isGPSModalVisible={isGPSModalVisible}
+        setIsGPSModalVisible={setIsGPSModalVisible}
+      />
     </>
   );
 }

@@ -2,49 +2,48 @@ import React, { useEffect } from "react";
 import { TestItem } from "../../../../../interfaces/TestItem";
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import useUpdateTestFactors from "../../../../../hooks/test-factors/useUpdateTestFactors";
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
-import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 
 function EditModal({
-  editRecord,
-  setEditRecord,
+  recordToEdit,
+  setRecordToEdit,
   mutate,
 }: {
-  editRecord: TestItem | undefined;
-  setEditRecord: (arg: undefined) => void;
+  recordToEdit: TestItem | undefined;
+  setRecordToEdit: (arg: undefined) => void;
   mutate: () => void;
 }) {
   const [form] = useForm();
 
-  const { data, isLoading } = useSWR(
-    ["/TestItem/Get", { uid: editRecord?.Uid }],
-    ([url, arg]) => listFetcher(url, { arg })
-  );
+  // const { data, isLoading } = useSWR(["/TestItem/Get", { uid: recordToEdit?.uid }],
+  //   ([url, arg]) => listFetcher(url, { arg })
+  // );
 
-  const { isMutating, trigger } = useSWRMutation(
-    "/TestItem/Update",
-    mutationFetcher
-  );
+  const UpdateTestItem = useUpdateTestFactors()
 
-  const handleSubmit = async (values: TestItem) => {
-    values.Uid = editRecord?.Uid;
+  const handleSubmit = async (values: any) => {
+    values.uid = recordToEdit?.uid;
 
-    const res = await trigger(values);
+    const res = await UpdateTestItem.trigger(values);
     if (res) {
-      setEditRecord(undefined);
-
       await mutate();
+
+      setRecordToEdit(undefined);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   useEffect(() => {
-    form.setFieldsValue(convertKeysToLowerCase(data));
-  }, [data]);
+
+    const newData = recordToEdit?.testItem_Details?.map((item) => {
+      return item.uid
+    })
+
+    form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
+
+  }, [recordToEdit]);
 
   return (
     <>
@@ -58,13 +57,13 @@ function EditModal({
             </div>
           </div>
         }
-        open={editRecord !== undefined}
-        onCancel={() => setEditRecord(undefined)}
+        open={recordToEdit !== undefined}
+        onCancel={() => setRecordToEdit(undefined)}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={24} md={12}>
               <Button
-                loading={isLoading || isMutating}
+                loading={UpdateTestItem.isMutating}
                 size="large"
                 className="w-full"
                 type="primary"
@@ -76,27 +75,28 @@ function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Button
-                disabled={isLoading || isMutating}
+                disabled={UpdateTestItem.isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
-                onClick={() => setEditRecord(undefined)}
+                onClick={() => setRecordToEdit(undefined)}
                 key={"cancel"}
               >
                 انصراف
               </Button>
             </Col>
-          </Row>,
-        ]}
+          </Row >,
+        ]
+        }
       >
         <Form
           onFinish={handleSubmit}
-          disabled={isLoading || isMutating}
+          disabled={UpdateTestItem.isMutating}
           form={form}
           layout="vertical"
         >
           <TestFactorForm />
         </Form>
-      </Modal>
+      </Modal >
     </>
   );
 }

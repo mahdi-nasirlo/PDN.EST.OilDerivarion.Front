@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import DatePicker, {DayValue,} from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import {Input} from "antd";
-import {InputProps} from "antd/lib";
 import {jalaliToGregorian} from "shamsi-date-converter";
 
 interface DateProps {
@@ -11,32 +10,27 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomeDatePicker(props: InputProps) {
+export default function CustomDatePicker({value = {}, onChange}: { value: any, onChange: (e: any) => void }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(
-    props.defaultValue as any
+      // props.defaultValue as any
   );
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
-      className={props.className + " w-full"}
-      {...props}
+        className={" w-full"} // props.className +
       readOnly
       ref={ref}
-      value={selectedDay as string}
-      defaultValue={props.defaultValue as string}
+        value={value}
+        // defaultValue={props.defaultValue as string}
       placeholder="انتخاب کنید"
     />
   );
 
-  useEffect(() => {
-    change(stringToDate(selectedDay as string));
-  }, [selectedDay]);
-
   const change = (n: DateProps | null) => {
     setSelectedDay(dateToString(n as DateProps));
-    if (typeof props.onChange === "function") {
-      props.onChange(selectedDay as any);
-    }
+
+    onChange(dateToString(n as DateProps))
+
   };
 
   return (
@@ -47,7 +41,7 @@ export default function CustomeDatePicker(props: InputProps) {
         onChange={change as any}
         inputPlaceholder="Select a date"
         shouldHighlightWeekends
-        renderInput={renderCustomInput}
+          renderInput={renderCustomInput}
       />
     </>
   );

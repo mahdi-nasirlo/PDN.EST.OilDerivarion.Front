@@ -3,7 +3,7 @@ import { useForm } from "antd/es/form/Form";
 import React, { useEffect } from "react";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
 
 export default function EditModal({
@@ -139,7 +139,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item name="birthDatePersian" label="تاریخ تولد">
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

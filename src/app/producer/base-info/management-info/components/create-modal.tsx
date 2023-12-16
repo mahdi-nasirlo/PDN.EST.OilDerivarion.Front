@@ -6,7 +6,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../../lib/filterOption";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
@@ -145,7 +145,7 @@ export default function CreateModal({
                 label="تاریخ تولد"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

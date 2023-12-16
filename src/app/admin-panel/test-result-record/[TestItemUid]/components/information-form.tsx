@@ -1,6 +1,6 @@
 import { Col, Form, Input, Row } from "antd";
 import React from "react";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function InformationForm() {
   return (
@@ -15,14 +15,14 @@ export default function InformationForm() {
             </Col>
             <Col xs={24} md={12}>
               <Form.Item name="Title" label="تاریخ دریافت نمونه">
-                <CustomeDatePicker />{" "}
+                <CustomDatePicker/>{" "}
               </Form.Item>
             </Col>{" "}
           </Row>
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item name="lastName" label="تاریخ نمونه برداری">
-                <CustomeDatePicker />{" "}
+                <CustomDatePicker/>{" "}
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -34,7 +34,7 @@ export default function InformationForm() {
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item name="lastName" label="تاریخ شروع آزمون">
-                <CustomeDatePicker />{" "}
+                <CustomDatePicker/>{" "}
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

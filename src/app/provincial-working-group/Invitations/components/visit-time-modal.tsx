@@ -4,7 +4,7 @@
 import { Button, Col, Form, Input, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
-import CustomeDatePicker from '../../../../../components/CustomeDatePicker';
+import CustomDatePicker from '../../../../../components/CustomeDatePicker';
 
 
 export default function VisitTimeModal(
@@ -73,7 +73,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی اول'
                             >
-                                <CustomeDatePicker />
+                                <CustomDatePicker/>
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
@@ -82,7 +82,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی دوم'
                             >
-                                <CustomeDatePicker />
+                                <CustomDatePicker/>
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
@@ -91,7 +91,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی سوم'
                             >
-                                <CustomeDatePicker />
+                                <CustomDatePicker/>
                             </Form.Item>
                         </Col>
                     </Row>

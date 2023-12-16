@@ -159,7 +159,12 @@ const RenderInputs = (props: {
     useEffect(() => {
         if (props.initialValues) {
 
-            form.setFieldsValue(props.initialValues)
+            form.setFieldsValue({
+                "name28": "lab_facilities_confirm",
+                "name31": "entery_water_confirm"
+            })
+
+            console.log(props.initialValues)
 
         }
     }, [])

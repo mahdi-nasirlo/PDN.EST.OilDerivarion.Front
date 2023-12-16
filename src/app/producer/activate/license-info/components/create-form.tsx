@@ -16,7 +16,7 @@ import { CreatePresonLicence } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
@@ -106,12 +106,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item name="issueDatePersian" label="زمان صدور">
-              <CustomeDatePicker />
+              <CustomDatePicker/>
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
             <Form.Item name="expirationDatePersian" label="تاریخ انقضاء">
-              <CustomeDatePicker />
+              <CustomDatePicker/>
             </Form.Item>
           </Col>
         </Row>

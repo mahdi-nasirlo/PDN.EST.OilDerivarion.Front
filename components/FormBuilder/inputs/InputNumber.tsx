@@ -16,9 +16,7 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
     const {data} = props
 
     let rules: Rule[] = [
-        {
-            required: data?.Is_Required
-        }
+        {required: true}
     ]
 
     const prepareRule = () => {
@@ -38,7 +36,7 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
             label={data?.Title_Style}
             rules={prepareRule()}
         >
-            <InputNumberAnt size="large" {...props} defaultValue={data?.Default_Value}
+            <InputNumberAnt size="large" {...props} defaultValue={data?.Default_Value as any}
                             placeholder={data?.Placeholder || "وارد کنید"}
                             className="w-full"/>
         </FormItem>

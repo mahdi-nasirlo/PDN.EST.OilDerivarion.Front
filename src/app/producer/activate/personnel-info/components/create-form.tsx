@@ -15,7 +15,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import ContactInputs from "../../../../../../components/inputs/Contact";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function CreateForm({ mutate }: { mutate: () => void }) {
@@ -98,7 +98,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               label="تاریخ تولد"
               rules={[{ required: true }]}
             >
-              <CustomeDatePicker />
+              <CustomDatePicker/>
             </Form.Item>
           </Col>
         </Row>

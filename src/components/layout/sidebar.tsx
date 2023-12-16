@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import type {MenuProps} from "antd";
 import {Drawer, Menu} from "antd";
 import Image from "next/image";
+import {motion} from "framer-motion";
 import {usePathname} from "next/navigation";
 
 export default function LayoutSidebar({
@@ -41,56 +42,78 @@ export default function LayoutSidebar({
     className: string;
   }) => {
     return (
-      <Menu
-        style={style}
-        defaultSelectedKeys={[pathname]}
-        selectedKeys={[pathname]}
-        openKeys={openKeys}
-        onOpenChange={handleMenuOpenChange}
-        className={className}
-        mode="inline"
-        items={menu}
-        onClick={handleMenuItemClick}
-      />
+        <Menu
+            style={style}
+            defaultSelectedKeys={[pathname]}
+            selectedKeys={[pathname]}
+            openKeys={openKeys}
+            onOpenChange={handleMenuOpenChange}
+            className={className}
+            mode="inline"
+            items={menu}
+            onClick={handleMenuItemClick}
+        />
     );
   };
 
-  return (
-    <>
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          top: 97,
-          left: "auto",
-          right: 0,
-          zIndex: 99,
-        }}
-      >
-          <CommonMenu
-              style={{
-                  width: "270px",
-                  padding: "0 16px",
-                  paddingTop: "30px",
-                  paddingBottom: "30px",
-                  height: "100%",
-              }}
-              className="px-4 overflow-auto hidden lg:block"
-          />
-          <Drawer
-              rootClassName="block lg:hidden"
-              title="سازمان ملی استاندارد"
-              placement="right"
-              width={300}
-              onClose={onClose}
-              open={open}
-              className="boa"
-          >
-              <CommonMenu style={{height: "100%"}} className=""/>
-          </Drawer>
-      </div>
-    </>
-  );
+    // const sidebarVariants = {
+    //     hidden: {
+    //         x: '100%', // Start offscreen to the right
+    //         opacity: 0,
+    //     },
+    //     visible: {
+    //         x: 0, // End at the original position
+    //         opacity: 1,
+    //         transition: {
+    //             // type: 'spring',
+    //             // stiffness: 100,
+    //         },
+    //     },
+    // };
+
+    return (
+        <>
+            <div
+                className="bg-white border-e-0 lg:border-e-[1px]"
+                style={{
+                    position: "fixed",
+                    bottom: 0,
+                    top: 97,
+                    left: "auto",
+                    right: 0,
+                    zIndex: 99,
+                }}
+            >
+                {/*<motion.div*/}
+                {/*    initial={{x: "100%", opacity: 0}}*/}
+                {/*    animate={{x: 0, opacity: 1}}*/}
+                {/*    transition={{ease: "easeIn", duration: 0.1}}*/}
+                {/*>*/}
+                    <CommonMenu
+                        style={{
+                            width: "270px",
+                            padding: "0 16px",
+                            paddingTop: "30px",
+                            paddingBottom: "30px",
+                            height: "100%",
+                        }}
+                        className="px-4 overflow-auto hidden lg:block"
+                    />
+                    <Drawer
+                        rootClassName="block lg:hidden"
+                        title="سازمان ملی استاندارد"
+                        placement="right"
+                        width={300}
+                        onClose={onClose}
+                        open={open}
+                        className="boa"
+                    >
+                        <CommonMenu style={{height: "100%"}} className=""/>
+                    </Drawer>
+                {/*</motion.div>*/}
+            </div>
+        </>
+    );
 }
 
 type MenuItem = Required<MenuProps>["items"][number];

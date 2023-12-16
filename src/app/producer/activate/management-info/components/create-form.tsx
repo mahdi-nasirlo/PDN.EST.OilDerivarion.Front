@@ -16,7 +16,7 @@ import { SetMainMember } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../../lib/filterOption";
 
@@ -111,7 +111,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               label="تاریخ تولد"
               rules={[{ required: true }]}
             >
-              <CustomeDatePicker />
+              <CustomDatePicker/>
             </Form.Item>
           </Col>
         </Row>

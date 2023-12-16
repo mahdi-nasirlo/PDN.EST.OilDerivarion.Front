@@ -4,7 +4,7 @@ import React from "react";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
@@ -127,7 +127,7 @@ export default function CreateModal({
                 label="تاریخ تولد"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

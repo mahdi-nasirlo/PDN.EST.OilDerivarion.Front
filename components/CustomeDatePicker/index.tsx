@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import DatePicker, {DayValue,} from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import {Input} from "antd";
-import {InputProps} from "antd/lib";
 import {jalaliToGregorian} from "shamsi-date-converter";
 
 interface DateProps {
@@ -11,43 +10,36 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomeDatePicker(props: InputProps) {
-  const [selectedDay, setSelectedDay] = useState<string | null>(
-    props.defaultValue as any
-  );
+export default function CustomDatePicker({value = {}, onChange}: { value?: any, onChange?: (e: any) => void }) {
+
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
-      className={props.className + " w-full"}
-      {...props}
+        className={" w-full"} // props.className +
       readOnly
       ref={ref}
-      value={selectedDay as string}
-      defaultValue={props.defaultValue as string}
+        value={value}
+        // defaultValue={props.defaultValue as string}
       placeholder="انتخاب کنید"
     />
   );
 
-  useEffect(() => {
-    change(stringToDate(selectedDay as string));
-  }, [selectedDay]);
-
   const change = (n: DateProps | null) => {
-    setSelectedDay(dateToString(n as DateProps));
-    if (typeof props.onChange === "function") {
-      props.onChange(selectedDay as any);
-    }
+
+    // @ts-ignore
+    onChange(dateToString(n as DateProps))
+
   };
 
   return (
     <>
       <DatePicker
           locale="fa"
-        value={stringToDate(selectedDay as string) as DayValue}
+          value={stringToDate(value as string) as DayValue}
         onChange={change as any}
         inputPlaceholder="Select a date"
         shouldHighlightWeekends
-        renderInput={renderCustomInput}
+          renderInput={renderCustomInput}
       />
     </>
   );
@@ -68,7 +60,8 @@ type MonthType = number;
 type DayType = number;
 
 function stringToDate(dateString: string): DateProps | null {
-  if (!dateString) return null;
+  
+  if (!dateString || typeof dateString !== "string") return null;
 
   const parts = dateString.split("/");
   if (parts.length === 3) {

@@ -1,26 +1,26 @@
 "use client";
 
-import { Alert, Space, Table, Tag, Tooltip, Typography } from "antd";
+import {Alert, Space, Table, Tag, Tooltip, Typography} from "antd";
 import useSWR from "swr";
 import Link from "next/link";
-import { ColumnsType } from "antd/es/table";
-import { listFetcher } from "../../../lib/server/listFetcher";
-import { TestGetPage } from "../../../interfaces/test&verify";
+import {ColumnsType} from "antd/es/table";
+import {listFetcher} from "../../../lib/server/listFetcher";
+import {TestGetPage} from "../../../interfaces/test&verify";
 import React from "react";
-import { addIndexToData } from "../../../lib/addIndexToData";
+import {addIndexToData} from "../../../lib/addIndexToData";
+import {useForm} from "antd/lib/form/Form";
 
 export default function Home() {
   const {
     isLoading,
     data: tests,
-    mutate,
   } = useSWR<{ records: TestGetPage[] }>("/TestAndVerify/GetPage", (url) =>
     listFetcher(url, {
       arg: { page: "", fromRecord: 0, selectRecord: 1000 },
     })
   );
 
-  const { data, isLoading: loadingForm } = useSWR("/CategoryForm/GetData");
+  const [form] = useForm()
 
   return (
     <>

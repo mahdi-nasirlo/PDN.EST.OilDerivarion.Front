@@ -245,11 +245,12 @@ body {
     display: none !important;
 }
 
-.ant-collapse-header-text{
+.ant-collapse-header-text {
     text-align: start;
 }
+
 .ant-menu {
-    @apply border-e-0 lg:border-e-[1px] !important
+    @apply border-e-0 lg:border-e-[0px] !important
 }
 
 

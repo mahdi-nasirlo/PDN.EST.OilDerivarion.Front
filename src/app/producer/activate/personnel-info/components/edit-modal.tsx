@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 
 export default function EditModal({
   mutate,
@@ -143,7 +143,7 @@ export default function EditModal({
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

@@ -6,7 +6,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import useSWR from "swr";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function CreateModal({
@@ -144,7 +144,7 @@ export default function CreateModal({
                 label="زمان صدور"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -153,7 +153,7 @@ export default function CreateModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

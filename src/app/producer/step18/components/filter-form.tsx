@@ -2,7 +2,7 @@
 
 import { Col, Form, Row, Select } from "antd";
 import React from "react";
-import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../components/CustomeDatePicker";
 import ButtonFilter from "../../../../../components/ButtonFilter";
 import { useForm } from "antd/es/form/Form";
 
@@ -24,7 +24,7 @@ export default function FilterForm({
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item name="year" label="تاریخ درخواست">
-              <CustomeDatePicker />
+              <CustomDatePicker/>
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

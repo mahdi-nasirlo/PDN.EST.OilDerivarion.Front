@@ -9,7 +9,7 @@ import {useForm} from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
 import {useRouter} from "next/navigation";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 const apiData = apiUrl.WorkFlowRequest.step05;
@@ -72,7 +72,7 @@ const Page = (props: { params: { uid: string } }) => {
                   name="datePersian"
                   label="تاریخ بازدید نهایی"
             >
-              <CustomeDatePicker />
+                <CustomDatePicker/>
             </Form.Item>
           </Col>
         </Row>

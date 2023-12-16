@@ -10,7 +10,7 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomDatePicker({value = {}, onChange}: { value: any, onChange: (e: any) => void }) {
+export default function CustomDatePicker({value = {}, onChange}: { value?: any, onChange?: (e: any) => void }) {
   const [selectedDay, setSelectedDay] = useState<string | null>(
       // props.defaultValue as any
   );
@@ -29,6 +29,7 @@ export default function CustomDatePicker({value = {}, onChange}: { value: any, o
   const change = (n: DateProps | null) => {
     setSelectedDay(dateToString(n as DateProps));
 
+    // @ts-ignore
     onChange(dateToString(n as DateProps))
 
   };

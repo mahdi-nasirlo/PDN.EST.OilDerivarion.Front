@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Form, FormInstance, Input, Row } from "antd";
-import CustomeDatePicker from "../../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../../components/CustomeDatePicker";
 
 interface PropsType {
     onFinish: (arg?: any) => any,
@@ -26,7 +26,7 @@ const DateOfVisitForm = (props: PropsType) => {
                         name="datePersian1"
                         label='تاریخ بازدید احتمالی اول'
                     >
-                        <CustomeDatePicker />
+                        <CustomDatePicker/>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
@@ -35,7 +35,7 @@ const DateOfVisitForm = (props: PropsType) => {
                         rules={[{ required: true }]}
                         label='تاریخ بازدید احتمالی دوم'
                     >
-                        <CustomeDatePicker />
+                        <CustomDatePicker/>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
@@ -44,7 +44,7 @@ const DateOfVisitForm = (props: PropsType) => {
                         name="datePersian3"
                         label='تاریخ بازدید احتمالی سوم'
                     >
-                        <CustomeDatePicker />
+                        <CustomDatePicker/>
                     </Form.Item>
                 </Col>
             </Row>

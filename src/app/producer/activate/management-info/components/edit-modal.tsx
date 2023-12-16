@@ -6,7 +6,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
-import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
+import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../../lib/filterOption";
 
 export default function EditModal({
@@ -157,7 +157,7 @@ export default function EditModal({
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
               >
-                <CustomeDatePicker />
+                <CustomDatePicker/>
               </Form.Item>
             </Col>
           </Row>

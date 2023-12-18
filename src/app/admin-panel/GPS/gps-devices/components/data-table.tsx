@@ -59,7 +59,7 @@ export default function DataTable({
   };
 
   const handleDeleteSubmit = async () => {
-    const res = await trigger({ uid: recordToDelete?.Uid });
+    const res = await trigger({ uid: recordToDelete?.uid });
     if (res) {
       await mutate();
 
@@ -78,18 +78,28 @@ export default function DataTable({
     },
     {
       title: "کد",
-      dataIndex: "Code",
+      dataIndex: "code",
+      key: "2",
+    },
+    {
+      title: "ظرفیت",
+      dataIndex: "capacity",
+      key: "2",
+    },
+    {
+      title: "نام استان",
+      dataIndex: "stateName",
       key: "2",
     },
     {
       title: "فعال/غیر فعال ",
-      dataIndex: "IsActive",
+      dataIndex: "isActive",
       key: "3",
       render: (e, record) => <StatusColumn record={record} />,
     },
     {
       title: "مکان یابی",
-      dataIndex: "ConfirmedRequest",
+      dataIndex: "confirmedRequest",
       key: "4",
       render: (_, record) => (
         <Space size="small">

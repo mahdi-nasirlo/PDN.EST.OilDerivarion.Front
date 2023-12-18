@@ -25,7 +25,7 @@ function EditModal({
   );
 
   const handleSubmit = async (values: Gps) => {
-    values.Uid = recordeToEdit?.Uid;
+    values.uid = recordeToEdit?.uid;
 
     const res = await trigger(values);
 

@@ -1,5 +1,9 @@
 export interface Gps {
-  Uid: string | undefined;
-  Code: string | null;
-  IsActive: boolean;
+  uid: string | undefined;
+  code: string | null;
+  isActive: boolean;
+  stateName:string
+  capacity:number
+  stateId:number
+
 }

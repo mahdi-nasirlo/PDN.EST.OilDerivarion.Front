@@ -2,6 +2,7 @@
 const nextConfig = {
   swcMinify: false,
   reactStrictMode: false,
+  output: "standalone",
   experimental: {
     serverActions: true,
   }

@@ -24,6 +24,7 @@ export async function listFetcher(url: string, {arg}: { arg: any } = {arg: undef
         const logData = {
             status: res.status,
             token: token,
+            url: res?.request?.responseURL,
             data: {
                 success: data?.success,
                 message: data?.message

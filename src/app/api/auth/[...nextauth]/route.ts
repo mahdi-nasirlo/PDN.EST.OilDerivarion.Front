@@ -2,8 +2,6 @@ import NextAuth, {NextAuthOptions, Session, User} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import {JWT} from "next-auth/jwt";
 import {AdapterUser} from "next-auth/adapters";
-import reportLog from "../../../../../lib/logger/reportLog";
-import {reportLogEnum} from "../../../../../lib/logger/reportLogEnum";
 
 
 const authOption: NextAuthOptions = {

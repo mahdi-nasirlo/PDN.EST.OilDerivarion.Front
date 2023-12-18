@@ -1,7 +1,6 @@
 import {notification} from "antd";
-import reportLog from "../logger/reportLog";
+// import reportLog from "../logger/reportLog";
 import {reportLogEnum} from "../logger/reportLogEnum";
-import {getSession} from "next-auth/react";
 
 interface UnAuthorizeType {
     data: {
@@ -25,7 +24,7 @@ export const HandleError = async (error: any) => {
         statusCode: error.statusCode
     }
 
-    const report = reportLog(errorData)
+    // const report = reportLog(errorData)
 
     if (response?.status === 401) {
 

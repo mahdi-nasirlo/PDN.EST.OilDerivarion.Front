@@ -1,5 +1,3 @@
-import reportLog from "../logger/reportLog";
-import {reportLogEnum} from "../logger/reportLogEnum";
 import handleError from "./handleError";
 import axios, {AxiosResponse} from "axios";
 import {dataType} from "./listFetcher";
@@ -18,11 +16,11 @@ const FormBuilderFetcher = async (
     const data: dataType = res.data;
 
     if (!res.data?.data && !data.success) {
-      const report = reportLog({
-        type: reportLogEnum.api_unsuccessful,
-        status: res.status,
-        data: data,
-      });
+        // const report = reportLog({
+        //   type: reportLogEnum.api_unsuccessful,
+        //   status: res.status,
+        //   data: data,
+        // });
 
       return false;
     }

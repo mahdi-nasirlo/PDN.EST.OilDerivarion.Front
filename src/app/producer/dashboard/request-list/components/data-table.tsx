@@ -1,11 +1,13 @@
-import { Button, Space, Tag, Typography } from "antd";
+"use client";
+
 import React from "react";
+import { Button, Space, Tag, Typography } from "antd";
+import { useRouter } from "next/navigation";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
-import { useRouter } from "next/navigation";
 import CustomeTable from "../../../../../../components/CustomeTable";
 
-export default function PrimaryManufacturerListTable(
+export default function DataTable(
   {
     setFilter,
     data,
@@ -17,6 +19,7 @@ export default function PrimaryManufacturerListTable(
     isLoading: any
     mutate: any
   }) {
+
   const router = useRouter();
 
   const columns: ColumnsType<RequestList> = [

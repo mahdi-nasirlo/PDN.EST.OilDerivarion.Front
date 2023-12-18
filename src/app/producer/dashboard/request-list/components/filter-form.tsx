@@ -1,11 +1,12 @@
 "use client";
 
-import { Col, Form, Input, Row } from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import ButtonFilter from "../../../../../../components/ButtonFilter";
 import { useForm } from "antd/es/form/Form";
+import { useGetAllProductionMethod } from "../../../../../../hooks/baseInfo/useGetAllProductionMethod";
 
-export default function PrimaryManufacturerListForm({
+export default function FilterForm({
   filter,
   unsetFilter,
   isLoading
@@ -16,6 +17,7 @@ export default function PrimaryManufacturerListForm({
 }) {
 
   const [form] = useForm();
+  const { isLoadingProductionMethods, productionMethods, fieldNames } = useGetAllProductionMethod()
 
   return (
     // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
@@ -27,8 +29,14 @@ export default function PrimaryManufacturerListForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="productionMethodName" label="روش تولید">
-            <Input size="large" placeholder="وارد کنید" />
+          <Form.Item name="productionMethodId" label="روش تولید">
+            <Select
+              fieldNames={fieldNames}
+              options={productionMethods}
+              loading={isLoadingProductionMethods}
+              placeholder="انتخاب کنید"
+              size="large"
+            />
           </Form.Item>
         </Col>
       </Row>

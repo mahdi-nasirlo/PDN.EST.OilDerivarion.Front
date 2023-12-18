@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Collapse } from "antd";
-import PrimaryManufacturerListForm from "./components/primary-manufacturer-list-form";
-import PrimaryManufacturerListTable from "./components/primary-manufacturer-list-table";
+import FilterForm from "./components/filter-form";
+import DataTable from "./components/data-table";
 import GetPageRecordNumber from "../../../../../lib/getPageRecordNumber";
 import useSWR from "swr";
 import { RequestList } from "../../../../../interfaces/requestDetail";
@@ -13,7 +13,7 @@ export default function Page() {
 
   const defaultValueTable = {
     processDescription: null,
-    productionMethodName: null,
+    productionMethodId: null,
     ...GetPageRecordNumber()
   };
 
@@ -21,8 +21,7 @@ export default function Page() {
 
   const { data, isLoading, mutate, isValidating } = useSWR<{ records: RequestList[]; count: number }>(
     ["/RequestMaster/GetPage_Producer", filter],
-    ([url, arg]: [url: string, arg: any]) =>
-      listFetcher(url, { arg })
+    ([url, arg]: [url: string, arg: any]) => listFetcher(url, { arg })
   );
 
 
@@ -30,7 +29,7 @@ export default function Page() {
   const setFilterTable = async (values: any) => {
     setFilter({
       processDescription: values.processDescription,
-      productionMethodName: values.productionMethodName,
+      productionMethodId: values.productionMethodId,
       ...GetPageRecordNumber()
     });
 
@@ -52,7 +51,7 @@ export default function Page() {
           {
             label: "فیلتر جستجو ",
             children:
-              <PrimaryManufacturerListForm
+              <FilterForm
                 unsetFilter={unsetFilter}
                 filter={setFilterTable}
                 isLoading={isLoading || isValidating}
@@ -60,7 +59,7 @@ export default function Page() {
           },
         ]}
       />
-      <PrimaryManufacturerListTable
+      <DataTable
         setFilter={setFilter}
         data={data}
         isLoading={isLoading || isValidating}

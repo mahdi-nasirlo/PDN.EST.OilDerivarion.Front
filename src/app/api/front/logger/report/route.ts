@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {ElasticsearchClientError} from "@elastic/transport/lib/errors";
 import {elasticClient} from "../../../../../../lib/logger/elasticClient";
 import {env} from "../../../../../../lib/env";
+import moment from "jalali-moment";
 
 export async function POST(request: NextRequest) {
 
@@ -24,6 +25,7 @@ export async function POST(request: NextRequest) {
             id: env.ELASTIC_INDEX_NAME + "/***/" + currentDate,
             document: {
                 type: body.type,
+                jalali_time: moment().locale('fa').format('YYYY/M/D ___ H:m:s'),
                 "@timestamp": currentDate.toISOString(),
                 ...body.data,
             },

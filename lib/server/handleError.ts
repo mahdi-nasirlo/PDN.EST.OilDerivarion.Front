@@ -19,6 +19,7 @@ export const HandleError = async (error: any) => {
     const {response} = error
 
     const errorData = {
+        url: error.url,
         message: error?.message,
         type: reportLogEnum.api_unsuccessful,
         cause: error?.response,

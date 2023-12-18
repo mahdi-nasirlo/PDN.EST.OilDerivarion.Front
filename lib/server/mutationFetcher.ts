@@ -5,6 +5,8 @@ import {customRequest} from "../customRequest";
 // import reportLog from "../logger/reportLog";
 import {convertObjectToFarsiToEnglish} from "../convertToFarsiToEnglish";
 import getTokenFromSession from "./getToken";
+import createLog from "../logger/createLog";
+import {reportLogEnum} from "../logger/reportLogEnum";
 
 export async function mutationFetcher(url: string, { arg }: { arg: any }) {
 
@@ -23,26 +25,36 @@ export async function mutationFetcher(url: string, { arg }: { arg: any }) {
 
     const data: dataType = res.data;
 
+    const logData = {
+      status: res.status,
+      token: token,
+      data: {
+        success: data?.success,
+        message: data?.message
+      },
+    }
+
     notification.open({
       type: data.success ? "success" : "error",
       message: data?.message ? data.message : res.statusText,
     });
 
     if (!res.data?.data && !data.success) {
-      // const report = reportLog({
-      //   type: reportLogEnum.api_unsuccessful,
-      //   status: res.status,
-      //   data: data,
-      // });
+
+      await createLog(reportLogEnum.api_unsuccessful, logData);
 
       return false;
     }
 
     if (!res.data?.data && data.success) {
+
+      await createLog(reportLogEnum.api_successful, logData)
+
       return true;
     }
 
     return res.data?.data;
+
   } catch (error: any) {
     console.error("Error:", error);
 
@@ -51,7 +63,7 @@ export async function mutationFetcher(url: string, { arg }: { arg: any }) {
       message: error.message,
     });
 
-    handleError(error);
+    await handleError(error);
 
     return undefined;
   }

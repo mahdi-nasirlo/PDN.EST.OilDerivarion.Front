@@ -11,7 +11,8 @@ type Props = {
     headers?: HeadersInit;
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
     cache?: RequestCache;
-    tokenFromServerSide?: string
+    tokenFromServerSide?: string,
+    notify?: boolean,
 }
 
 async function customFetch({
@@ -21,15 +22,13 @@ async function customFetch({
                                headers = {},
                                method,
                                cache = 'no-store',
+                               notify = true,
                                tokenFromServerSide
                            }: Props) {
 
     const token = await getTokenFromSession() || ""
 
     const finalUrl = getUrlWithParams(url.path, params)
-
-    console.log(finalUrl, url.path, params);
-    
 
     const apiDestination: string = url.absolute ? url.path : process.env.NEXT_PUBLIC_API_URL + "/api/V1" as string + finalUrl
 
@@ -52,10 +51,12 @@ async function customFetch({
 
         const resBody = await res.json()
 
-        notification.open({
-            type: resBody?.success ? "success" : "error",
-            message: resBody?.message ? resBody?.message : res.statusText,
-        });
+        if (notify) {
+            notification.open({
+                type: resBody?.success ? "success" : "error",
+                message: resBody?.message ? resBody?.message : res.statusText,
+            });
+        }
 
 
         return resBody
@@ -63,12 +64,14 @@ async function customFetch({
 
         console.error("Error:", error);
 
-        notification.open({
-            type: "error",
-            message: error.message,
-        });
+        if (notify) {
+            notification.open({
+                type: "error",
+                message: error.message,
+            });
+        }
 
-        handleError(error);
+        await handleError(error);
 
         return undefined;
 

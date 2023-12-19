@@ -259,7 +259,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                         );
                       }
 
-                      if (/^[0-9]{10}$/) {
+                      if (value && personTypeStatus === 1) {
                         return Promise.reject("کد ملی نامتعبر است");
                       }
 

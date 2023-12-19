@@ -92,10 +92,11 @@ const ProductRequestTable = () => {
         }}
       />
       <ConfirmDeleteModal
-        title="حذف آزمایشگاه"
+        title="محصول"
         open={isDeleteModalVisible}
-        setOpen={() => setIsDeleteModalVisible(true)}
+        setOpen={setIsDeleteModalVisible}
         handleDelete={handleDelete}
+        loading={deleteRequest.delete.isLoading}
       />
     </>
   );

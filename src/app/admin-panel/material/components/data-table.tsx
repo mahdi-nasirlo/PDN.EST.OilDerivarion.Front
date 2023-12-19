@@ -86,8 +86,9 @@ export default function DataTable({
             await mutate();
 
             setIsEditModalVisible(false);
+
+            setRecordToEdit(null);
         }
-        setRecordToEdit(null);
     };
 
     const handleCancelEdit = () => {

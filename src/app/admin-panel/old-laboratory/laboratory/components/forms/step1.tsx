@@ -1,8 +1,8 @@
 import React from "react";
-import {Col, Form, FormInstance, Input, Row, Select} from "antd";
+import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
-import {filterOption} from "../../../../../../../lib/filterOption";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../../components/inputs/Phone";
 
@@ -39,7 +39,6 @@ function Step1({
             <PhoneInputs name="tel" label="شماره ثابت">
               <Input
                 max={11}
-                type="number"
                 size="large"
                 placeholder="وارد کنید"
               />

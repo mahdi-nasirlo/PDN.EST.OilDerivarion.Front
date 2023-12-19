@@ -240,6 +240,7 @@ export default function DataTable({
       <EditModal
         mutate={mutate}
         recordToEdit={recordToEdit}
+        setRecordToEdit={setRecordToEdit}
         isEditModalVisible={isEditModalVisible}
         setIsEditModalVisible={setIsEditModalVisible}
       />

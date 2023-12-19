@@ -37,9 +37,10 @@ function EditModal({
     if (res) {
       await mutate();
 
+      form.resetFields();
+
       setEditRecord(undefined);
     }
-    form.resetFields();
   };
 
   useEffect(() => {

@@ -56,8 +56,9 @@ export default function DataTable({
             await mutate();
 
             setIsDeleteModalVisible(false);
+
+            setRecordToDelete(null);
         }
-        setRecordToDelete(null);
     };
 
     const showModal = () => {

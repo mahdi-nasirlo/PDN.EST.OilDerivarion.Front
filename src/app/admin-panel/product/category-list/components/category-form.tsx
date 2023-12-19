@@ -9,14 +9,16 @@ function CategoryForm({
 }: {
   defaultSelectedDensity?: boolean;
 }) {
-  const { data, isLoading } = useSWR("/BaseInfo/GetAllProductionMethod", listFetcher);
+  const { data, isLoading } = useSWR(
+    "/BaseInfo/GetAllProductionMethod",
+    listFetcher
+  );
 
   const [hasDensity, setHasDensity] = useState(defaultSelectedDensity);
 
   useEffect(() => {
     setHasDensity(defaultSelectedDensity);
   }, [defaultSelectedDensity]);
-
 
   return (
     <>
@@ -25,10 +27,7 @@ function CategoryForm({
           <Form.Item
             name="name"
             label="نام دسته بندی"
-            rules={[
-              { required: true },
-              { type: "string" },
-            ]}
+            rules={[{ required: true }, { type: "string" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -37,9 +36,7 @@ function CategoryForm({
           <Form.Item
             name="productionMethodId"
             label="روش تولید"
-            rules={[
-              { required: true },
-            ]}
+            rules={[{ required: true }]}
           >
             <Select
               showSearch
@@ -125,10 +122,14 @@ function CategoryForm({
                       parseFloat(value);
                       return Promise.resolve();
                     } else {
-                      return Promise.reject(new Error("حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"));
+                      return Promise.reject(
+                        new Error(
+                          "حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"
+                        )
+                      );
                     }
                   },
-                })
+                }),
               ]}
               name="densityUpperLimit"
               label="حداکثر بازه"

@@ -34,16 +34,10 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
         trigger: createProductWithNotify
     } = useSWRMutation("/RequestDetail/CreateProduct", mutationFetcher)
 
+    
 
     const handleCreate = async (value: Create, notify: boolean = false) => {
-
-
-        if (notify)
         return await createProduct(value)
-        else
-        return await createProductWithNotify(value)
-           
-
     }
 
     const {
@@ -56,6 +50,7 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
         create: {
             isLoading: isLDCreateProduct || isLdCreateProductWithNotify,
             trigger: handleCreate
+         
         },
         update: {
             isLoading: false,

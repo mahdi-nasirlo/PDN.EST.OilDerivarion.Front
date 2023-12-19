@@ -142,12 +142,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
+            initialValue={"داخلی"}
             name="materialSupplyMethodId"
             label="نحوه تامین"
-            rules={[
-              { required: true, message: "نحوه تامین اجباری است" },
-              { type: "number" },
-            ]}
+            rules={[{ required: true, message: "نحوه تامین اجباری است" }]}
           >
             <Select
               fieldNames={supplyMethod.fieldNames}
@@ -163,6 +161,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         </Col>
       </Row>
       <Divider />
+
       {supplyMethodStatus === 2 ? (
         <>
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">

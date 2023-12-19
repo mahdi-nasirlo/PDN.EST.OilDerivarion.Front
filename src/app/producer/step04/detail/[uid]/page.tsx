@@ -76,7 +76,7 @@ export default function Home(props: PropType) {
           <Divider />
         </div>
         <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading} />
-        <CalendarTime data={data?.calendar} />
+        <CalendarTime data={data?.calendar as any} />
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
         {data && <Divider />}
         <DateOfVisitForm form={form} onFinish={onFinish} />

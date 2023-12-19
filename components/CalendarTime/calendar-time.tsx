@@ -1,17 +1,15 @@
-import { Descriptions, Spin } from 'antd';
+import {Descriptions, Spin} from 'antd';
 import React from 'react';
 
 interface CalendarData {
-    gregorian_year: number;
-    gregorian_month: number;
-    gregorian_day: number;
+    solar_fulldate: 'string'
 }
 
 interface data {
     data: CalendarData[] | undefined;
 }
 
-const CalendarTime: React.FC<data> = ({ data }) => {
+const CalendarTime: React.FC<data> = ({data}) => {
 
     if (!data) {
         return <Spin />;
@@ -23,9 +21,10 @@ const CalendarTime: React.FC<data> = ({ data }) => {
                 <Descriptions className='text-right text-secondary-500' title="تاریخ های مجاز">
                     {data.map((calendarEntry, index) => (<>
                         <Descriptions.Item label="تاریخ">
-                            {`${calendarEntry.gregorian_year}/${calendarEntry.gregorian_month}/${calendarEntry.gregorian_day}`}
+                            {`${calendarEntry.solar_fulldate}`}
                         </Descriptions.Item>
-                    </>))}
+                        </>)
+                    )}
                 </Descriptions>
             </div>
         </>

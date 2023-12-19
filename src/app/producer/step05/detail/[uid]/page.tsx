@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
+import React, {useState} from "react";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
-import { Col, Divider, Form, Input, Row, Typography } from "antd";
+import {Col, Divider, Form, Input, Row, Typography} from "antd";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import { useForm } from "antd/es/form/Form";
+import {useForm} from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useRouter } from "next/navigation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {useRouter} from "next/navigation";
 import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 import CalendarTime from "../../../../../../components/CalendarTime/calendar-time";
@@ -28,6 +28,12 @@ const Page = (props: { params: { uid: string } }) => {
   const router = useRouter();
 
   const handleOnClick = (choice: string) => {
+
+    if (choice === "Choice2" && !form.getFieldValue("datePersian")) {
+      form.setFieldValue("datePersian", " ")
+    } else {
+      if (form.getFieldValue("datePersian") === " ") form.setFieldValue("datePersian", null)
+    }
 
     setChoice(choice);
 
@@ -61,7 +67,7 @@ const Page = (props: { params: { uid: string } }) => {
         <Divider />
       </div>
       <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading} />
-      <CalendarTime data={data?.calendar} />
+      <CalendarTime data={data?.calendar as any}/>
       {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
       {data && <Divider />}
       <Form onFinish={handleOnFinish} form={form}>

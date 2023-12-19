@@ -92,7 +92,7 @@ const ProductRequestTable = () => {
         }}
       />
       <ConfirmDeleteModal
-        title="حذف آزمایشگاه"
+        title="محصول"
         open={isDeleteModalVisible}
         setOpen={() => setIsDeleteModalVisible(true)}
         handleDelete={handleDelete}

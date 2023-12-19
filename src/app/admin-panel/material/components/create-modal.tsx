@@ -1,7 +1,7 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row} from "antd";
-import {useForm} from "antd/es/form/Form";
+import { Button, Col, Form, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import React from "react";
 import MaterialForm from "./material-form";
 import useCreateMaterial from "../../../../../hooks/material/useCreateMaterial";
@@ -21,16 +21,16 @@ export default function CreateModal({
 
     const createMaterial = async (values: any) => {
 
-        const res = await createMaterialRequest.trigger(values)
+        const res = await createMaterialRequest.trigger(values);
 
-        if (res) {
+        if (res?.success) {
 
             await mutate();
 
-            setModalVisible(false);
+            await setModalVisible(false);
 
             form.resetFields();
-        }
+        };
     };
 
     const CloseModal = () => {
@@ -80,6 +80,7 @@ export default function CreateModal({
                 </Row>,
             ]}
         >
+            gvwervwevwevwvw
             <Form
                 disabled={createMaterialRequest.isMutating}
                 onFinish={createMaterial}

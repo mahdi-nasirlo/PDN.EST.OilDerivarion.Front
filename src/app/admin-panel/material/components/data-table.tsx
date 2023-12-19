@@ -52,7 +52,7 @@ export default function DataTable({
 
     const handleConfirmDelete = async () => {
         const res = await deleteMaterial({ uid: recordToDelete?.uid });
-        if (res) {
+        if (res?.success) {
             await mutate();
 
             setIsDeleteModalVisible(false);

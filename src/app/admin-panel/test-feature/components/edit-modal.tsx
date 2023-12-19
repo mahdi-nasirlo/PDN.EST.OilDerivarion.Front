@@ -41,8 +41,9 @@ export default function EditModal({
       form.resetFields();
 
       setIsEditModalVisible(false);
+
+      setRecordToEdit(null);
     }
-    setRecordToEdit(null);
   };
 
   const { data, isLoading } = useSWR(

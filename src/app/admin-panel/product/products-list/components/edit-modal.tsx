@@ -10,9 +10,11 @@ function EditModal({
   setIsEditModalVisible,
   mutate,
   recordToEdit,
+  setRecordToEdit,
 }: {
   mutate: () => void;
   recordToEdit: Product | null;
+  setRecordToEdit: any;
   isEditModalVisible: boolean;
   setIsEditModalVisible: (arg: boolean) => void;
 }) {
@@ -30,7 +32,7 @@ function EditModal({
 
       setIsEditModalVisible(false);
 
-      form.resetFields();
+      setRecordToEdit(null);
     }
   };
 

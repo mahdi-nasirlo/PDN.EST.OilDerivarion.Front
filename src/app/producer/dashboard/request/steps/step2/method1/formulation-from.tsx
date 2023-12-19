@@ -173,16 +173,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               <Form.Item
                 name="materialImportDeclarationNumber"
                 label="شماره اظهارنامه واردات"
-                rules={[
-                  { required: true, message: "شماره اظهارنامه واردات اجباری است" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
-                  },
-                ]}
+                rules={[{ required: true, message: "شماره اظهارنامه واردات اجباری است" }]}
               >
                 <Input
                   className="w-full rounded-lg"

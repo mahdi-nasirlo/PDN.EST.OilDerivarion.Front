@@ -33,8 +33,9 @@ function EditModal({
       await mutate();
 
       setModalVisible(false);
+
+      form.resetFields();
     }
-    form.resetFields();
   };
 
   useEffect(() => {

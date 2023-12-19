@@ -95,10 +95,11 @@ function CategoryForm({
                 { required: true },
                 {
                   validator(_, value) {
-                    if (isNaN(value)) {
-                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
+                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+                      return Promise.reject(
+                        new Error("لطفاً عدد صحیح وارد کنید")
+                      );
                     }
-                    parseFloat(value);
                     return Promise.resolve();
                   },
                 },
@@ -119,10 +120,12 @@ function CategoryForm({
                 { required: true },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    console.log(value, getFieldValue("densityLowerLimit"));
-
-                    if (value > getFieldValue("densityLowerLimit")) {
-                      // parseFloat(value);
+                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+                      return Promise.reject(
+                        new Error("لطفاً عدد صحیح وارد کنید")
+                      );
+                    }
+                    if (parseInt(value) > getFieldValue("densityLowerLimit")) {
                       return Promise.resolve();
                     } else {
                       return Promise.reject(

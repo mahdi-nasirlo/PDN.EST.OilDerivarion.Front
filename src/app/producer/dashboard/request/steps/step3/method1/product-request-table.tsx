@@ -94,8 +94,9 @@ const ProductRequestTable = () => {
       <ConfirmDeleteModal
         title="محصول"
         open={isDeleteModalVisible}
-        setOpen={() => setIsDeleteModalVisible(true)}
+        setOpen={setIsDeleteModalVisible}
         handleDelete={handleDelete}
+        loading={deleteRequest.delete.isLoading}
       />
     </>
   );

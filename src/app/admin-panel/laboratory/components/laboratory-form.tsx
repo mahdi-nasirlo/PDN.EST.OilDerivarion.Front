@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, InputNumber, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
@@ -8,8 +8,7 @@ import PhoneInputs from "../../../../../components/inputs/Phone";
 import MultipleSelect from "../../../../../components/MultipleSelect";
 
 function LaboratoryForm() {
-
-  const defaultValue = { name: null, IsActive: true }
+  const defaultValue = { name: null, IsActive: true };
 
   const { data, isLoading } = useSWR("/BaseInfo/StateGetAll", listFetcher);
 
@@ -17,7 +16,6 @@ function LaboratoryForm() {
     ["/TestItem/GetAll", defaultValue],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
-
 
   return (
     <>
@@ -34,8 +32,8 @@ function LaboratoryForm() {
         <Col xs={24} md={12}>
           <PhoneInputs name="tel" label="شماره ثابت">
             <Input
-              max={11}
               type="number"
+              max={11}
               size="large"
               placeholder="وارد کنید"
             />
@@ -64,33 +62,25 @@ function LaboratoryForm() {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item
-            name="testItems"
-            label="فاکتور های آزمون"
-          >
+          <Form.Item name="testItems" label="فاکتور های آزمون">
             <MultipleSelect
-              treeData={Test?.map(item => ({ value: item.uid, label: item.name }))}
+              treeData={Test?.map((item) => ({
+                value: item.uid,
+                label: item.name,
+              }))}
               loading={ldTest}
             />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item
-            rules={[{ required: true }]}
-            name="fax"
-            label="فکس"
-          >
+          <Form.Item rules={[{ required: true }]} name="fax" label="فکس">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item
-            rules={[{ required: true }]}
-            name="stateId"
-            label="استان"
-          >
+          <Form.Item rules={[{ required: true }]} name="stateId" label="استان">
             <Select
               showSearch
               fieldNames={{ label: "Name", value: "Id" }}
@@ -123,11 +113,7 @@ function LaboratoryForm() {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
-          <Form.Item
-            rules={[{ required: true }]}
-            name="address"
-            label="آدرس"
-          >
+          <Form.Item rules={[{ required: true }]} name="address" label="آدرس">
             <Input.TextArea
               size="large"
               style={{ height: 70, resize: "none" }}

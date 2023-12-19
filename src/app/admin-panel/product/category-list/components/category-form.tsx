@@ -108,6 +108,7 @@ function CategoryForm({
               label="حداقل بازه"
             >
               <InputNumber
+                max={50000}
                 className="w-full"
                 size="large"
                 placeholder="وارد کنید"
@@ -141,6 +142,7 @@ function CategoryForm({
               label="حداکثر بازه"
             >
               <InputNumber
+                max={50000}
                 className="w-full"
                 size="large"
                 placeholder="وارد کنید"

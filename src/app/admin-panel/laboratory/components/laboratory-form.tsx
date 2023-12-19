@@ -35,7 +35,6 @@ function LaboratoryForm() {
           <PhoneInputs name="tel" label="شماره ثابت">
             <Input
               max={11}
-              type="number"
               size="large"
               placeholder="وارد کنید"
             />

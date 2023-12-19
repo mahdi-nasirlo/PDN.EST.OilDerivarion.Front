@@ -109,7 +109,7 @@ export default function ContactInfo() {
           </Col>
           <Col xs={24} md={8}>
             <PhoneInputs name="factoryPhone" label="شماره تماس">
-              <Input size="large" placeholder="وارد کنید" />
+              <Input max={11} size="large" placeholder="وارد کنید" />
             </PhoneInputs>
           </Col>
         </Row>

@@ -118,7 +118,7 @@ export default function DataTable({
     },
     {
       title: "فعال/غیر فعال ",
-      dataIndex: "ConfirmedRequestCode",
+      dataIndex: "isActive",
       key: "7",
       render: (_, record) => <StatusColumn record={record} />
     },

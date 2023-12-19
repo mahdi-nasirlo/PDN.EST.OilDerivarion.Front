@@ -1,9 +1,9 @@
 import customeFetcher from "../server/customeFetcher";
 
 const createLog = async (type: string, data: any,) => {
-
-    return await customeFetcher({
-        url: {path: "/api/front/logger/report", absolute: true},
+    try {
+        await customeFetcher({
+            url: {path: "/api/front/logger/reporast", absolute: true},
         method: "POST",
         data: {
             type: type,
@@ -11,6 +11,9 @@ const createLog = async (type: string, data: any,) => {
         },
         notify: false,
     })
+    } catch (e) {
+        console.log(e)
+    }
 };
 
 export default createLog;

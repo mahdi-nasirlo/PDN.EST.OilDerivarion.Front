@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         const currentDate = new Date()
 
         const res = await elasticClient.index({
-            index: "oil-front",
+            index: env.ELASTIC_INDEX_NAME,
             id: env.ELASTIC_INDEX_NAME + "/***/" + currentDate,
             document: {
                 type: body.type,

@@ -18,8 +18,7 @@ export default function CustomDatePicker({value = {}, onChange}: { value?: any, 
         className={" w-full"} // props.className +
       readOnly
       ref={ref}
-        value={value}
-        // defaultValue={props.defaultValue as string}
+        value={typeof value == "string" ? value : ""}
       placeholder="انتخاب کنید"
     />
   );

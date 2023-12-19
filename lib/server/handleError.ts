@@ -21,13 +21,12 @@ export const HandleError = async (error: any) => {
     const errorData = {
         url: error.url,
         message: error?.message,
-        type: reportLogEnum.api_unsuccessful,
         cause: error?.response,
         token: response.headers.Authorization,
         statusCode: error.statusCode
     }
 
-    await createLog(reportLogEnum.api_unsuccessful, errorData)
+    await createLog(reportLogEnum.api_error, errorData)
 
     if (response?.status === 401) {
 

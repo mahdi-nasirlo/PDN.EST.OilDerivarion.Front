@@ -18,7 +18,7 @@ export default function FilterForm({
   isLoading: boolean;
 }) {
   const { data: GetAllDensityType, isLoading: ldGetAllDensityType } = useSWR(
-    ["/BaseInfo/GetAllDensityType", { name: null, IsActive: null }],
+    ["/BaseInfo/GetAllDensityType", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
   return (
@@ -31,7 +31,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال/غیر فعال">
+          <Form.Item name="isActive" label="فعال/غیر فعال">
             <Select
               size="large"
               placeholder="انتخاب کنید"

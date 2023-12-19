@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, InputNumber, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
@@ -106,7 +106,11 @@ function CategoryForm({
               name="densityLowerLimit"
               label="حداقل بازه"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <InputNumber
+                className="w-full"
+                size="large"
+                placeholder="وارد کنید"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
@@ -115,11 +119,10 @@ function CategoryForm({
                 { required: true },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (isNaN(value)) {
-                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
-                    }
+                    console.log(value, getFieldValue("densityLowerLimit"));
+
                     if (value > getFieldValue("densityLowerLimit")) {
-                      parseFloat(value);
+                      // parseFloat(value);
                       return Promise.resolve();
                     } else {
                       return Promise.reject(
@@ -134,7 +137,11 @@ function CategoryForm({
               name="densityUpperLimit"
               label="حداکثر بازه"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <InputNumber
+                className="w-full"
+                size="large"
+                placeholder="وارد کنید"
+              />
             </Form.Item>
           </Col>
         </Row>

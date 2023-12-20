@@ -1,9 +1,6 @@
 "use client";
 
 import React from "react";
-import { Table, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import useGetAllGpsDeviceTracker from "../../../../hooks/requestGps/useGetAllGpsDeviceTracker";
 
 const Page = () => {
   return (

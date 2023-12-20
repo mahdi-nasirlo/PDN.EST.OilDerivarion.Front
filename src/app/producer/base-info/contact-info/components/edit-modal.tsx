@@ -7,6 +7,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function EditModal({
   isEditModalVisible,
@@ -115,7 +116,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldStateGetAll}
-                  options={StateGetAll}
+                  options={sortByIndex(StateGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -134,7 +135,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldCityGetAll}
-                  options={CityGetAll}
+                  options={sortByIndex(CityGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -173,7 +174,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldStateGetAll}
-                  options={StateGetAll}
+                  options={sortByIndex(StateGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -192,7 +193,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldCityGetAll}
-                  options={CityGetAll}
+                  options={sortByIndex(CityGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"

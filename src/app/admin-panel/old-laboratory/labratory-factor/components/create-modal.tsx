@@ -8,6 +8,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function CreateModal({
   setModalVisible,
@@ -118,7 +119,7 @@ export default function CreateModal({
                 fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
-                options={Lab}
+                options={sortByIndex(Lab, 'name')}
                 loading={ldLab || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"
@@ -136,7 +137,7 @@ export default function CreateModal({
                 fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
-                options={test}
+                options={sortByIndex(test, 'name')}
                 loading={isLoading || isMutating}
                 size="large"
                 placeholder="انتخاب کنید"

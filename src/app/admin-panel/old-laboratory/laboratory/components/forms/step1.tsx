@@ -5,6 +5,7 @@ import { listFetcher } from "../../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../../components/inputs/Phone";
+import { sortByIndex } from "../../../../../../../lib/sortByIndex";
 
 function Step1({
   form,
@@ -78,7 +79,7 @@ function Step1({
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={isLoading}
-                options={data}
+                options={sortByIndex(data, 'Name')}
                 size="large"
                 placeholder="انتخاب کنید"
               />

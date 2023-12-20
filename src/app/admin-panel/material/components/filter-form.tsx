@@ -7,6 +7,7 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { filterOption } from "../../../../../lib/filterOption";
 import ButtonFilter from "../../../../../components/ButtonFilter";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 export default function FilterForm({
     filter,
@@ -57,7 +58,7 @@ export default function FilterForm({
                             showSearch
                             // @ts-ignore
                             filterOption={filterOption}
-                            options={Measure}
+                            options={sortByIndex(Measure, 'Name')}
                             loading={ldMeasure}
                             fieldNames={{ value: "Uid", label: "Name" }}
                             size="large"

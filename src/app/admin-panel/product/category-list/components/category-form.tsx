@@ -3,6 +3,7 @@ import { Col, Form, Input, InputNumber, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function CategoryForm({
   defaultSelectedDensity,
@@ -43,7 +44,7 @@ function CategoryForm({
               // @ts-ignore
               filterOption={filterOption}
               loading={isLoading}
-              options={data}
+              options={sortByIndex(data, 'Name')}
               fieldNames={{ label: "Name", value: "Id" }}
               size="large"
               placeholder="انتخاب کنید"

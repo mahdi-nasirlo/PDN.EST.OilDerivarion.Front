@@ -2,11 +2,12 @@ import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function GpsForm() {
-  const { data, mutate } = useSWR<any>("/BaseInfo/StateGetAll", (url: string) =>
-    listFetcher(url)
-  );
+
+  const { data, isLoading } = useSWR<any>(
+    "/BaseInfo/StateGetAll", (url: string) => listFetcher(url));
   return (
     <>
       <Row gutter={[16, 16]}>
@@ -50,8 +51,9 @@ function GpsForm() {
             <Select
               size="large"
               placeholder="انتخاب کنید"
-              options={data}
               fieldNames={{ label: "Name", value: "Id" }}
+              options={sortByIndex(data, 'Name')}
+              loading={isLoading}
             />
           </Form.Item>
         </Col>

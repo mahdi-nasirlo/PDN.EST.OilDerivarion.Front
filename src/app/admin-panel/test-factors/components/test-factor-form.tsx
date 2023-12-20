@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
 import MultipleSelect from "../../../../../components/MultipleSelect";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function TestFactorForm() {
 
@@ -42,7 +43,7 @@ function TestFactorForm() {
               showSearch
               // @ts-ignore
               filterOption={filterOption}
-              options={Measure}
+              options={sortByIndex(Measure, "Name")}
               fieldNames={{ value: "Uid", label: "Name" }}
               size="large"
               placeholder="وارد کنید"

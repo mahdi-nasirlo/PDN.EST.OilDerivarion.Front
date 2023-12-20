@@ -8,6 +8,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { ProductCategoryGet } from "../../../../../../interfaces/product";
 import { filterOption } from "../../../../../../lib/filterOption";
 import ButtonFilter from "../../../../../../components/ButtonFilter";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function FilterForm({
   filter,
@@ -46,7 +47,7 @@ export default function FilterForm({
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProductCategory}
-              options={ProductCategory}
+              options={sortByIndex(ProductCategory, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />

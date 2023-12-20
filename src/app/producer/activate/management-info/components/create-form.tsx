@@ -111,7 +111,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               label="تاریخ تولد"
               rules={[{ required: true }]}
             >
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
         </Row>

@@ -19,6 +19,7 @@ import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/navigation";
 import PhoneInputs from "../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 export default function ContactInfo() {
   const [form] = useForm();
@@ -81,7 +82,7 @@ export default function ContactInfo() {
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={ldStateGetAll}
-                options={StateGetAll}
+                options={sortByIndex(StateGetAll, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
@@ -100,7 +101,7 @@ export default function ContactInfo() {
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={ldCityGetAll}
-                options={CityGetAll}
+                options={sortByIndex(CityGetAll, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
@@ -139,7 +140,7 @@ export default function ContactInfo() {
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={ldStateGetAll}
-                options={StateGetAll}
+                options={sortByIndex(StateGetAll, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
@@ -158,7 +159,7 @@ export default function ContactInfo() {
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={ldCityGetAll}
-                options={CityGetAll}
+                options={sortByIndex(CityGetAll, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"

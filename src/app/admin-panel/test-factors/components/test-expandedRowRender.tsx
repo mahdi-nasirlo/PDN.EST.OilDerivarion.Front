@@ -5,8 +5,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Button, Space, Table, TableColumnsType } from "antd";
-import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
+import { Table, TableColumnsType } from "antd";
 import { addAlphabetToData } from "../../../../../lib/addAlphabetToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { TestItem } from "../../../../../interfaces/TestItem";
@@ -52,34 +51,6 @@ const TestExpandedRowRender = ({ TestItem, TableMutate }: { TestItem: TestItem, 
         { title: "#", dataIndex: "Row", key: "1", width: "5%" },
         { title: "استاندارد آزمون", dataIndex: "title", key: "2" },
         { title: "شناسه استاندارد", dataIndex: "referenceCode", key: "3" },
-        {
-            title: "فعال/غیر فعال",
-            dataIndex: "isActive",
-            key: "4",
-            render: (_, record: any) => <StatusColumn record={record} />
-        },
-        // {
-        //     title: "عملیات",
-        //     dataIndex: "2",
-        //     key: "upgradeNum",
-        //     align: "center",
-        //     fixed: "right",
-        //     width: "10%",
-        //     render: (_, record) => (
-        //         <Space size="small">
-        //             <Button
-        //                 type="link"
-        //                 className="text-red-500 font-bold"
-        //                 onClick={() => {
-        //                     setOpen(true);
-        //                     setRecordToDelete(record);
-        //                 }}
-        //             >
-        //                 حذف
-        //             </Button>
-        //         </Space>
-        //     ),
-        // },
     ];
 
     return (

@@ -85,9 +85,10 @@ export default function CreateModal({
                 onFinish={createMaterial}
                 form={form}
                 layout="vertical"
+                initialValues={{ testItems: [] }}
             >
                 <MaterialForm />
             </Form>
-        </Modal>
+        </Modal >
     );
 }

@@ -4,8 +4,7 @@ import useSWR from 'swr';
 import { listFetcher } from '../../../../../../lib/server/listFetcher';
 import useSWRMutation from 'swr/mutation';
 import { mutationFetcher } from '../../../../../../lib/server/mutationFetcher';
-import { Button, Space, Table, TableColumnsType } from 'antd';
-import StatusColumn from '../../../../../../components/CustomeTable/StatusColumn';
+import { Table, TableColumnsType } from 'antd';
 import { addAlphabetToData } from '../../../../../../lib/addAlphabetToData';
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
@@ -57,34 +56,6 @@ const TestExpandedRowRender = ({ product, TableMutate }: { product: Product, Tab
     const expandColumnsProductTestItem: TableColumnsType<ProductTestItem> = [
         { title: "#", dataIndex: "Row", key: "1", width: "5%" },
         { title: "نام فاکتور آزمون", dataIndex: "TestItemName", key: "2" },
-        {
-            title: "فعال/غیر فعال",
-            dataIndex: "IsActive",
-            key: "3",
-            render: (_, record) => <StatusColumn record={record} />
-        },
-        // {
-        //     title: "عملیات",
-        //     dataIndex: "2",
-        //     key: "upgradeNum",
-        //     align: "center",
-        //     fixed: "right",
-        //     width: "10%",
-        //     render: (_, record: ProductTestItem) => (
-        //         <Space size="middle">
-        //             <Button
-        //                 type="link"
-        //                 className="text-red-500 font-bold"
-        //                 onClick={() => {
-        //                     setOpenProductTestItem(true);
-        //                     setRecordToDeleteProductTestItem(record);
-        //                 }}
-        //             >
-        //                 حذف
-        //             </Button>
-        //         </Space>
-        //     ),
-        // },
     ];
 
 
@@ -136,34 +107,6 @@ const TestExpandedRowRender = ({ product, TableMutate }: { product: Product, Tab
             dataIndex: "MaterialName",
             key: "2",
         },
-        {
-            title: "فعال/غیر فعال",
-            dataIndex: "IsActive",
-            key: "4",
-            render: (_, record: any) => <StatusColumn record={record} />
-        },
-        // {
-        //     title: "عملیات",
-        //     dataIndex: "2",
-        //     key: "upgradeNum",
-        //     align: "center",
-        //     fixed: "right",
-        //     width: "10%",
-        //     render: (_, record) => (
-        //         <Space size="small">
-        //             <Button
-        //                 type="link"
-        //                 className="text-red-500 font-bold"
-        //                 onClick={() => {
-        //                     setOpenProductMaterial(true);
-        //                     setRecordToDeleteProductMaterial(record);
-        //                 }}
-        //             >
-        //                 حذف
-        //             </Button>
-        //         </Space>
-        //     ),
-        // },
     ];
 
     return (

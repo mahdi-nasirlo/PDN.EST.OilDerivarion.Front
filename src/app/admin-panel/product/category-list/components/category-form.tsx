@@ -87,6 +87,28 @@ function CategoryForm({
           </Form.Item>
         </Col>
       </Row>
+      <Row gutter={[32, 1]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            name="smallCode"
+            label="کد"
+            rules={[
+              { required: true },
+              {
+                validator(_, value) {
+                  const numericValue = parseFloat(value);
+                  if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
+                    return Promise.reject(new Error("لطفاً عدد صحیح وارد کنید"));
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
+            <Input size="large" placeholder="وارد کنید" />
+          </Form.Item>
+        </Col>
+      </Row>
       {hasDensity && (
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>

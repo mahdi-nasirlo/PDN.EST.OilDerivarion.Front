@@ -20,7 +20,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
 
     useEffect(() => {
 
-        if (props.data?.count && Math.ceil(((props.data?.count || 1) / 5)) <= page) {
+        if (props.data?.count && Math.ceil(((props.data?.count || 1) / 5)) < page) {
             setPage(1)
         }
 

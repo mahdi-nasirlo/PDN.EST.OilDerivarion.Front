@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, Space, Tag, Typography } from "antd";
+import { Button, Popover, Space, Tag, Tooltip, Typography } from "antd";
 import { useRouter } from "next/navigation";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
@@ -31,6 +31,21 @@ export default function DataTable({
       title: "شرح فرآیند",
       dataIndex: "processDescription",
       key: "2",
+      width: "40%",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.processDescription}</Typography>}
+        >
+          <Typography.Text
+            // className="w-full"
+            className=" max-w-xl"
+            ellipsis={true}
+          >
+            {record.processDescription}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "تاریخ درخواست",

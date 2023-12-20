@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TreeSelect } from 'antd';
 import { TreeSelectProps } from 'antd/lib';
-
-const { SHOW_PARENT } = TreeSelect;
 
 interface InputProps {
     value?: string[],
@@ -11,19 +9,15 @@ interface InputProps {
 
 const MultipleSelect: React.FC<InputProps & TreeSelectProps> = (props) => {
 
-    const [selectedItems, setSelectedItems] = useState<string[]>(props.value || []);
-
-
     return (
         <>
-
             <TreeSelect
                 placeholder="انتخاب کنید"
-                value={selectedItems}
                 size="large"
                 className="w-full"
                 treeCheckable
-                showCheckedStrategy={SHOW_PARENT}
+                showSearch
+                filterTreeNode={(input, node) => `${node.label}`.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 treeDefaultExpandAll
                 allowClear
                 {...props}

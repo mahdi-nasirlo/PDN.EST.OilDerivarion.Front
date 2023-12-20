@@ -6,10 +6,12 @@ import useUpdateTestFactors from "../../../../../hooks/test-factors/useUpdateTes
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 
 function EditModal({
+  setModalVisible,
   recordToEdit,
   setRecordToEdit,
   mutate,
 }: {
+  setModalVisible: any
   recordToEdit: TestItem | undefined;
   setRecordToEdit: (arg: undefined) => void;
   mutate: () => void;
@@ -26,11 +28,10 @@ function EditModal({
     values.uid = recordToEdit?.uid;
 
     const res = await UpdateTestItem.trigger(values);
-    if (res == true) {
+    if (res?.success == true) {
       await mutate();
-
+      setModalVisible(false)
       setRecordToEdit(undefined);
-
       form.resetFields();
     }
   };

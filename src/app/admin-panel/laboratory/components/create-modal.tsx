@@ -82,6 +82,7 @@ export default function CreateModal({
         disabled={createLaboratoryRequest.isMutating}
         form={form}
         layout="vertical"
+        initialValues={{ testItems: [] }}
       >
         <LaboratoryForm />
       </Form>

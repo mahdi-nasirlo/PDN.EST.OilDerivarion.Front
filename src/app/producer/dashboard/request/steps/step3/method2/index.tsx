@@ -4,6 +4,7 @@ import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/meth
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
 import { useForm } from "antd/es/form/Form";
+import { log } from "console";
 
 const Index = () => {
   const processController = useContext(StepContext);
@@ -13,9 +14,11 @@ const Index = () => {
   const handleOnFinish = async (value: any) => {
     value.requestMasterUid = processController.requestMaster.requestMasterUid;
 
-    await requestDetailProduct.create.trigger(value, false);
+    const res = await requestDetailProduct.create.trigger(value, false);
 
-    await processController.getStep4();
+    if (res) {
+      await processController.getStep4();
+    }
   };
 
   const [form] = useForm();

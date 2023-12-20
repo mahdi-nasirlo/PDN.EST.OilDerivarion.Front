@@ -83,6 +83,7 @@ export default function CreateModal({
         onFinish={createTestFactor}
         form={form}
         layout="vertical"
+        initialValues={{ testItem_Details: [] }}
       >
         <TestFactorForm />
       </Form>

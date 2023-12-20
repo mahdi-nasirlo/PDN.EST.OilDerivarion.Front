@@ -80,15 +80,15 @@ export default function CreateModal({
                 </Row>,
             ]}
         >
-            gvwervwevwevwvw
             <Form
                 disabled={createMaterialRequest.isMutating}
                 onFinish={createMaterial}
                 form={form}
                 layout="vertical"
+                initialValues={{ testItems: [] }}
             >
                 <MaterialForm />
             </Form>
-        </Modal>
+        </Modal >
     );
 }

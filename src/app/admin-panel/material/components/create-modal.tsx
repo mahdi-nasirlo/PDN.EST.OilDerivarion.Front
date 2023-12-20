@@ -80,7 +80,6 @@ export default function CreateModal({
                 </Row>,
             ]}
         >
-            gvwervwevwevwvw
             <Form
                 disabled={createMaterialRequest.isMutating}
                 onFinish={createMaterial}

@@ -8,6 +8,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function CreateModal({
   setModalVisible,
@@ -125,7 +126,7 @@ export default function CreateModal({
                 filterOption={filterOption}
                 fieldNames={{ value: "Uid", label: "FullName" }}
                 loading={ldProduct}
-                options={product}
+                options={sortByIndex(product, 'FullName')}
                 size="large"
                 placeholder="انتخاب کنید"
               />
@@ -146,7 +147,7 @@ export default function CreateModal({
                 showSearch
                 // @ts-ignore
                 filterOption={filterOption}
-                options={TestItem}
+                options={sortByIndex(TestItem, "name")}
                 loading={ldTestProduct}
                 fieldNames={{ value: "uid", label: "name" }}
                 size="large"

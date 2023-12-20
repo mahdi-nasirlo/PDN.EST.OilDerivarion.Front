@@ -93,32 +93,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[2, 3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-            <Col xs={24} md={12}>
-              <Form.Item
-                name={"materialUsagePercentage"}
-                label={"درصد استفاده"}
-                rules={[
-                  { required: true, message: " درصد استفاده اجباری است" },
-                  {
-                    type: "number",
-                    min: 0,
-                    max: 100,
-                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                  },
-                ]}
-              >
-                <InputNumber
-                  controls={false}
-                  className="w-full rounded-lg"
-                  size="large"
-                  min={0}
-                  max={100}
-                  formatter={(value) => `${value}%`}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          )}
+          <Col xs={24} md={12}>
+            <Form.Item
+              name={"materialUsagePercentage"}
+              label={"درصد استفاده"}
+              rules={[
+                { required: true, message: " درصد استفاده اجباری است" },
+                {
+                  type: "number",
+                  min: 0,
+                  max: 100,
+                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+        )}
         <Col xs={24} md={12}>
           <Form.Item
             name={"materialTotalConsumption"}
@@ -172,7 +172,12 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               <Form.Item
                 name="materialImportDeclarationNumber"
                 label="شماره اظهارنامه واردات"
-                rules={[{ required: true, message: "شماره اظهارنامه واردات اجباری است" }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "شماره اظهارنامه واردات اجباری است",
+                  },
+                ]}
               >
                 <Input
                   className="w-full rounded-lg"
@@ -231,8 +236,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   personTypeStatus === null
                     ? "کد ملی / شناسه ملی"
                     : personTypeStatus === 2
-                      ? "شناسه ملی"
-                      : "کد ملی"
+                    ? "شناسه ملی"
+                    : "کد ملی"
                 }
                 rules={[
                   {

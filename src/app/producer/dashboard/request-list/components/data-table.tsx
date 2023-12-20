@@ -7,19 +7,17 @@ import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
 import CustomeTable from "../../../../../../components/CustomeTable";
 
-export default function DataTable(
-  {
-    setFilter,
-    data,
-    isLoading,
-    mutate,
-  }: {
-    setFilter: any;
-    data: any;
-    isLoading: any
-    mutate: any
-  }) {
-
+export default function DataTable({
+  setFilter,
+  data,
+  isLoading,
+  mutate,
+}: {
+  setFilter: any;
+  data: any;
+  isLoading: any;
+  mutate: any;
+}) {
   const router = useRouter();
 
   const columns: ColumnsType<RequestList> = [
@@ -27,10 +25,10 @@ export default function DataTable(
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
-      title: "نام فرآیند",
+      title: "شرح فرآیند",
       dataIndex: "processDescription",
       key: "2",
     },
@@ -54,12 +52,7 @@ export default function DataTable(
           name = "تکمیل نشده";
         }
 
-        return (
-          <Tag color={color}>
-            {name}
-          </Tag>
-        );
-
+        return <Tag color={color}>{name}</Tag>;
       },
     },
     {
@@ -93,8 +86,6 @@ export default function DataTable(
       ),
     },
   ];
-
-
 
   return (
     <div className="box-border w-full p-6 mt-8">

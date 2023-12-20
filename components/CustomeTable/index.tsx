@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Table, TableProps, Typography} from "antd";
+import {Table, TableProps} from "antd";
 import {addIndexToData} from "../../lib/addIndexToData";
 import getPageRecordNumber from "../../lib/getPageRecordNumber";
 
@@ -19,16 +19,15 @@ const Index = (props: TableProps<any> & RecordeValue) => {
     const [page, setPage] = useState(1)
 
     useEffect(() => {
-        if (((props.data?.count || 1) / 5) < page) {
+
+        if (props.data?.count && Math.ceil(((props.data?.count || 1) / 5)) <= page) {
             setPage(1)
         }
-    }, [props.data?.count])
+
+    }, [props.data?.count, page])
 
     return (
         <>
-            <Typography>
-                {JSON.stringify(page)}
-            </Typography>
             <Table
                 {...props}
                 loading={props.isLoading}

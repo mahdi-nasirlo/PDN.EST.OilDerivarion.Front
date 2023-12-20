@@ -180,6 +180,7 @@ export default function DataTable({
           }}
         />
         <EditModal
+          setModalVisible={setModalVisible}
           mutate={mutate}
           recordToEdit={openEdit}
           setRecordToEdit={setOpenEdit}

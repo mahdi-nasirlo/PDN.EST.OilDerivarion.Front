@@ -37,11 +37,11 @@ export default function DataTable({
   ldMaterial: boolean;
   mutate: () => void;
   material:
-    | {
-        count: number;
-        records: Material[];
-      }
-    | undefined;
+  | {
+    count: number;
+    records: Material[];
+  }
+  | undefined;
 }) {
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
@@ -90,10 +90,12 @@ export default function DataTable({
     values.uid = recordToEdit?.uid;
 
     const res = await UpdateMaterial.trigger(values as any);
-    if (res == true) {
+
+    if (res?.success == true) {
       await mutate();
 
-      setIsEditModalVisible(false);
+      await setIsEditModalVisible(false);
+
 
       setRecordToEdit(null);
     }

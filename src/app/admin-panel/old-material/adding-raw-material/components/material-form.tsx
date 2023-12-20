@@ -3,6 +3,7 @@ import { Col, Form, Input, Row, Select } from "antd";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function MaterialForm() {
   const { data: Measure, isLoading: ldMeasure } = useSWR(
@@ -52,7 +53,7 @@ function MaterialForm() {
               fieldNames={{ label: "Name", value: "Uid" }}
               // @ts-ignore
               filterOption={filterOption}
-              options={Measure}
+              options={sortByIndex(Measure, 'Name')}
               loading={ldMeasure}
               size="large"
               placeholder="انتخاب کنید"

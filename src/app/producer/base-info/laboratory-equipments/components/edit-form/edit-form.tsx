@@ -4,6 +4,7 @@ import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 import useSWR from "swr";
 import { filterOption } from '../../../../../../../lib/filterOption';
 import CustomRadioGroup from '../../../../../../../components/CustomeRadioGroup';
+import { sortByIndex } from '../../../../../../../lib/sortByIndex';
 
 export default function EditForm({ data, form }: { data: any, form: any }) {
 
@@ -231,7 +232,7 @@ export default function EditForm({ data, form }: { data: any, form: any }) {
                             filterOption={filterOption}
                             fieldNames={{ value: "Id", label: "Name" }}
                             loading={ldCountry}
-                            options={Country}
+                            options={sortByIndex(Country, "Name")}
                             size="large"
                             placeholder="انتخاب کنید"
                         />

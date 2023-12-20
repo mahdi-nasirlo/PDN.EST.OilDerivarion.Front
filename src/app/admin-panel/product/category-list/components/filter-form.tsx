@@ -7,6 +7,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import ButtonFilter from "../../../../../../components/ButtonFilter";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function FilterForm({
   filter,
@@ -51,7 +52,7 @@ export default function FilterForm({
               // @ts-ignore
               filterOption={filterOption}
               loading={ldGetAllDensityType}
-              options={GetAllDensityType}
+              options={sortByIndex(GetAllDensityType, "Name")}
               fieldNames={{ value: "Id", label: "Name" }}
               size="large"
               placeholder="انتخاب کنید"

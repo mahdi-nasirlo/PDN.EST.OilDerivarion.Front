@@ -6,6 +6,7 @@ import { filterOption } from "../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../components/inputs/Phone";
 import MultipleSelect from "../../../../../components/MultipleSelect";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function LaboratoryForm() {
   const defaultValue = { name: null, IsActive: true };
@@ -87,7 +88,7 @@ function LaboratoryForm() {
               // @ts-ignore
               filterOption={filterOption}
               loading={isLoading}
-              options={data}
+              options={sortByIndex(data, 'Name')}
               size="large"
               placeholder="انتخاب کنید"
             />

@@ -4,20 +4,20 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
 import useSWR from "swr";
 import MultipleSelect from "../../../../../components/MultipleSelect";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function MaterialForm() {
     const defaultValue = { name: null, IsActive: true }
 
     const { data: Measure, isLoading: ldMeasure } = useSWR(
-        ["/Measure/GetAll", defaultValue],
-        ([url, arg]: [string, any]) => listFetcher(url, { arg })
+        "/Measure/GetAll",
+        (url) => listFetcher(url, { arg: { name: null, IsActive: null } })
     );
 
     const { data: Test, isLoading: ldTest } = useSWR<any[]>(
         ["/TestItem/GetAll", defaultValue],
         ([url, arg]: [string, any]) => listFetcher(url, { arg })
     );
-
 
 
     return (
@@ -62,7 +62,7 @@ function MaterialForm() {
                             fieldNames={{ label: "Name", value: "Uid" }}
                             // @ts-ignore
                             filterOption={filterOption}
-                            options={Measure}
+                            options={sortByIndex(Measure, "Name")}
                             loading={ldMeasure}
                             size="large"
                             placeholder="انتخاب کنید"

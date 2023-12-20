@@ -20,13 +20,13 @@ function EditModal({
   //   ([url, arg]) => listFetcher(url, { arg })
   // );
 
-  const UpdateTestItem = useUpdateTestFactors()
+  const UpdateTestItem = useUpdateTestFactors();
 
   const handleSubmit = async (values: any) => {
     values.uid = recordToEdit?.uid;
 
     const res = await UpdateTestItem.trigger(values);
-    if (res) {
+    if (res == true) {
       await mutate();
 
       setRecordToEdit(undefined);
@@ -36,13 +36,11 @@ function EditModal({
   };
 
   useEffect(() => {
-
     const newData = recordToEdit?.testItem_Details?.map((item) => {
-      return item.uid
-    })
+      return item.uid;
+    });
 
     form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
-
   }, [recordToEdit]);
 
   return (
@@ -84,9 +82,8 @@ function EditModal({
                 انصراف
               </Button>
             </Col>
-          </Row >,
-        ]
-        }
+          </Row>,
+        ]}
       >
         <Form
           onFinish={handleSubmit}
@@ -96,7 +93,7 @@ function EditModal({
         >
           <TestFactorForm />
         </Form>
-      </Modal >
+      </Modal>
     </>
   );
 }

@@ -4,6 +4,7 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
 import { filterOption } from "../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function BarcodeForm(props: {
   form: undefined | FormInstance;
@@ -51,7 +52,7 @@ function BarcodeForm(props: {
             // @ts-ignore
             filterOption={filterOption}
             loading={ldContainer}
-            options={containers}
+            options={sortByIndex(containers, 'Name')}
             size="large"
             placeholder="انتخاب کنید"
           />
@@ -82,7 +83,7 @@ function BarcodeForm(props: {
             //@ts-ignore
             filterOption={filterOption}
             loading={ldUsePlaceType}
-            options={usePlaceType}
+            options={sortByIndex(usePlaceType, 'Name')}
             size="large"
             placeholder="انتخاب کنید"
           />
@@ -104,7 +105,7 @@ function BarcodeForm(props: {
             filterOption={filterOption}
             fieldNames={{ value: "Id", label: "Name" }}
             loading={ldSampleType}
-            options={sampleTypes}
+            options={sortByIndex(sampleTypes, 'Name')}
             size="large"
             placeholder="انتخاب کنید"
           />

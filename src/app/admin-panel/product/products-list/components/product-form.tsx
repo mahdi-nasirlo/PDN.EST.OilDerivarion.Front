@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import MultipleSelect from '../../../../../../components/MultipleSelect';
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function ProductForm() {
   const defaultValue = { name: null, IsActive: true }
@@ -51,7 +52,7 @@ function ProductForm() {
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProductCategory}
-              options={ProductCategory}
+              options={sortByIndex(ProductCategory, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />

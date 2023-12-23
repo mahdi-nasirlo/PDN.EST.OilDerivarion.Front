@@ -29,7 +29,10 @@ export default function Index(props: PropsType) {
       height={"100%"}
       className="w-full h-full border-solid"
       src={
-        process.env.MAP_BOX_URL + `oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
+        `https://map-test.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`
+        // process.env.MAP_BOX_URL +
+        // `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`
+      }
     ></iframe>
   );
 }

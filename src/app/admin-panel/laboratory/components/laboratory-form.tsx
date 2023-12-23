@@ -23,7 +23,7 @@ function LaboratoryForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="name"
             label="نام آزمایشگاه"
           >
@@ -44,7 +44,7 @@ function LaboratoryForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             name="license_No"
             label="مشخصه یکتای جواز"
           >
@@ -55,7 +55,7 @@ function LaboratoryForm() {
           <Form.Item
             name="licenseExpireDatePersian"
             label="تاریخ انقضاء"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
           >
             <CustomeDatePicker />
           </Form.Item>
@@ -74,21 +74,29 @@ function LaboratoryForm() {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item rules={[{ required: true }]} name="fax" label="فکس">
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            name="fax"
+            label="فکس"
+          >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item rules={[{ required: true }]} name="stateId" label="استان">
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            name="stateId"
+            label="استان"
+          >
             <Select
               showSearch
               fieldNames={{ label: "Name", value: "Id" }}
               // @ts-ignore
               filterOption={filterOption}
               loading={isLoading}
-              options={sortByIndex(data, 'Name')}
+              options={sortByIndex(data, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -114,7 +122,11 @@ function LaboratoryForm() {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
-          <Form.Item rules={[{ required: true }]} name="address" label="آدرس">
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            name="address"
+            label="آدرس"
+          >
             <Input.TextArea
               size="large"
               style={{ height: 70, resize: "none" }}

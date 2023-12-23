@@ -10,7 +10,7 @@ export default function TestFeatureForm() {
           <Form.Item
             name="title"
             label="عنوان استاندارد"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -22,7 +22,7 @@ export default function TestFeatureForm() {
           <Form.Item
             name="referenceCode"
             label="شناسه استاندارد"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>

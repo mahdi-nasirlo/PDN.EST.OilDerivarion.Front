@@ -11,7 +11,6 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../components/CustomeTable";
-import TestExpandedRowRender from "./test-expandedRowRender";
 
 export default function DataTable({
   setModalVisible,
@@ -32,7 +31,6 @@ export default function DataTable({
   | undefined;
 }) {
 
-  const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   //ادیت
   const [openEdit, setOpenEdit] = useState<TestItem | undefined>(undefined);
@@ -85,29 +83,27 @@ export default function DataTable({
       key: "4",
       render: (e, record) => <StatusColumn record={record} />
     },
-    {
-      title: "استاندارد های آزمون",
-      dataIndex: "testItem_Details",
-      key: "5",
-      render: (_, record: TestItem) => {
-        let testItemTestDetails = record.testItem_Details?.map(item => item.title).join(', ');
-
-        return (
-          <Tooltip
-            placement="top"
-            title={<Typography>{testItemTestDetails}</Typography>}
-          >
-            <Typography.Text
-              className="max-w-[180px]"
-              ellipsis={true}
-              style={{ width: "40px !important" }}
-            >
-              {testItemTestDetails}
-            </Typography.Text>
-          </Tooltip>
-        );
-      },
-    },
+    // {
+    //   title: "استاندارد های آزمون",
+    //   dataIndex: "testItem_Details",
+    //   key: "5",
+    //   render: (_, record: TestItem) => {
+    //     return (
+    //       <Tooltip
+    //         placement="top"
+    //         title={<Typography>{record.testItem_Details}</Typography>}
+    //       >
+    //         <Typography.Text
+    //           className="max-w-[180px]"
+    //           ellipsis={true}
+    //           style={{ width: "40px !important" }}
+    //         >
+    //           {record.testItem_Details}
+    //         </Typography.Text>
+    //       </Tooltip>
+    //     );
+    //   },
+    // },
     {
       title: "جزئیات",
       key: "جزئیات",
@@ -158,26 +154,6 @@ export default function DataTable({
           columns={columns}
           isLoading={ldTestItem || IsDeleteTestFactor}
           data={TestItem}
-          rowKey={"uid"}
-          expandable={{
-            expandedRowKeys: activeExpRow,
-            onExpand: (expanded, record: TestItem) => {
-              const keys: string[] = [];
-
-              if (expanded && record.uid) {
-                // @ts-ignore
-                keys.push(record.uid);
-              }
-
-              if (!expanded) {
-                keys.pop();
-              }
-              setActiveExpRow(keys);
-            },
-            expandedRowRender: (record: TestItem) => (
-              <TestExpandedRowRender TestItem={record} TableMutate={mutate} />
-            ),
-          }}
         />
         <EditModal
           setModalVisible={setModalVisible}

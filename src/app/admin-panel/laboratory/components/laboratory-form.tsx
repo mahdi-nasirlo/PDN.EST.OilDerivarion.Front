@@ -44,7 +44,7 @@ function LaboratoryForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="license_No"
             label="مشخصه یکتای جواز"
           >
@@ -75,7 +75,7 @@ function LaboratoryForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="fax"
             label="فکس"
           >
@@ -123,7 +123,7 @@ function LaboratoryForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="address"
             label="آدرس"
           >

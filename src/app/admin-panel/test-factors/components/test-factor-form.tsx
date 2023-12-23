@@ -3,7 +3,6 @@ import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../lib/filterOption";
-import MultipleSelect from "../../../../../components/MultipleSelect";
 import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function TestFactorForm() {
@@ -16,7 +15,7 @@ function TestFactorForm() {
   );
 
   const { data: TestItemDetail, isLoading: ldTestItemDetail } = useSWR<any[]>(
-    ["/TestItemDetail/DropDown"],
+    ["/TestItemDetail/GetAll", defaultValue],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -69,17 +68,24 @@ function TestFactorForm() {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        {/* <Col xs={24} md={12}>
           <Form.Item
             name="testItem_Details"
             label="استاندارد های آزمون"
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
-            <MultipleSelect
-              treeData={TestItemDetail?.map(item => ({ value: item.uid, label: item.title }))}
+            <Select
+              showSearch
+              fieldNames={{ value: "uid", label: "title" }}
+              // @ts-ignore
+              filterOption={filterOption}
               loading={ldTestItemDetail}
+              options={sortByIndex(TestItemDetail, 'title')}
+              size="large"
+              placeholder="انتخاب کنید"
             />
           </Form.Item>
-        </Col>
+        </Col> */}
       </Row>
     </>
   );

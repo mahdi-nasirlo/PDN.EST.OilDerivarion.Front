@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
+import {Button, Col, Form, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import React from "react";
 import useUpdateProduct from "../../../../../../hooks/product/useCreateProduct";
 import ProductForm from "./product-form";
@@ -22,12 +22,14 @@ export default function CreateModal({
   const createProduct = async (values: any) => {
     const res = await createProductRequest.trigger(values);
 
-    if (res) {
-      await mutate();
+    if (res?.success) {
+
+      mutate();
 
       setModalVisible(false);
 
       form.resetFields();
+      
     }
   };
 

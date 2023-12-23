@@ -15,11 +15,11 @@ export default function Page() {
 
   const defaultValueTable = {
     title: null,
-    IsActive: null,
+    isActive: null,
     ...getPageRecordNumber()
   };
 
-  const [filter, setFilter] = useState<{ title: any, IsActive: any }>(defaultValueTable);
+  const [filter, setFilter] = useState<{ title: any, isActive: any }>(defaultValueTable);
 
   const {
     data: testItemDetail,
@@ -38,7 +38,7 @@ export default function Page() {
 
     setFilter({
       title: values.title,
-      IsActive: values.IsActive,
+      isActive: values.isActive,
       ...getPageRecordNumber()
     });
 
@@ -61,7 +61,11 @@ export default function Page() {
           {
             label: "فیلتر جستجو ",
             children: (
-              <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldTestItemDetail} />
+              <FilterForm
+                filter={setFilterTable}
+                unsetFilter={unsetFilter}
+                isLoading={ldTestItemDetail}
+              />
             ),
           },
         ]}

@@ -533,9 +533,13 @@ margin-right: 16px !important;
     @apply h-[50px] leading-[45px] !important;
 }
 
+.ant-popconfirm-buttons {
+    @apply justify-start flex-row-reverse !important
+}
 
- 
-
+.ant-popconfirm-buttons button {
+    @apply p-1 px-2 !important;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -547,6 +551,5 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-
 
 

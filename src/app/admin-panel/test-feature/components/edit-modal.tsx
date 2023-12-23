@@ -30,8 +30,13 @@ export default function EditModal({
     mutationFetcher
   );
 
+  const { data, isLoading } = useSWR(
+    ["/TestItemDetail/Get", { uid: recordToEdit?.uid }],
+    ([url, arg]) => listFetcher(url, { arg })
+  );
+
   const handleSubmit = async (values: CreateTestItemDetail) => {
-    values.Uid = data?.Uid;
+    values.uid = data?.Uid;
 
     const res = await trigger(values);
     if (res) {
@@ -46,10 +51,6 @@ export default function EditModal({
     }
   };
 
-  const { data, isLoading } = useSWR(
-    ["/TestItemDetail/Get", { uid: recordToEdit?.Uid }],
-    ([url, arg]) => listFetcher(url, { arg })
-  );
 
   useEffect(() => {
     form.setFieldsValue(convertKeysToLowerCase(data));

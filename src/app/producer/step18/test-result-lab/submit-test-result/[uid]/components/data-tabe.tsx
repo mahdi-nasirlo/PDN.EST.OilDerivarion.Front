@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  Select,
-  Space,
-  Table,
-  Tooltip,
-  Typography,
-} from "antd";
-import DateForm from "./date-form";
+import React, {useEffect, useState} from "react";
+import {Button, Divider, Form, Input, Select, Space, Table, Tooltip, Typography,} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../../../lib/server/listFetcher";
 import Item from "antd/es/list/Item";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../../../lib/server/mutationFetcher";
 import useGetAllTestItemDetail from "../../../../../../../../hooks/testItemDetail/useGetAllTestItemDetail";
 
 interface Item {
@@ -350,8 +339,8 @@ const DataTable = ({ uid }: { uid: string }) => {
       </Typography>
       <Divider />
 
-      <DateForm />
-      <Divider />
+      {/*<DateForm />*/}
+      {/*<Divider />*/}
 
       <div className="flex justify-between items-center mb-4">
         <Typography className="text-right text-[16px] font-normal">

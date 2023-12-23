@@ -14,17 +14,26 @@ interface RecordeValue {
 
 const Index = (props: TableProps<any> & RecordeValue) => {
 
-    const [startRow, setStartRow] = useState(1)
-
     const [page, setPage] = useState(1)
 
     useEffect(() => {
 
         if (props.data?.count && Math.ceil(((props.data?.count || 1) / 5)) < page) {
-            setPage(1)
+            handleChangePage(1)
         }
 
     }, [props.data?.count, page])
+
+    const handleChangePage = (e: number) => {
+
+        setPage(e)
+        props.setInitialData((prev: any) => {
+            delete prev.fromRecord
+            delete prev.selectRecord
+            return {...getPageRecordNumber(e), ...prev}
+        })
+
+    }
 
     return (
         <>
@@ -37,13 +46,8 @@ const Index = (props: TableProps<any> & RecordeValue) => {
                 pagination={{
                     total: props.data?.count,
                     onChange: async (e: any) => {
-                        setPage(e)
-                        props.setInitialData((prev: any) => {
-                            delete prev.fromRecord
-                            delete prev.selectRecord
-                            return {...getPageRecordNumber(e), ...prev}
-                        })
-                        setStartRow(getPageRecordNumber(e).fromRecord + 1)
+                        console.log(e)
+                        handleChangePage(e)
                     },
                     defaultPageSize: 5,
                     showSizeChanger: false,

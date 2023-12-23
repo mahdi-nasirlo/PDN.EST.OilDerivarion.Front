@@ -46,7 +46,7 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    const res = await deleteLab({ Uid: recordToDelete?.Uid });
+    const res = await deleteLab({ Uid: recordToDelete?.uid });
 
     if (res) {
       await mutate();
@@ -75,22 +75,22 @@ export default function DataTable({
     },
     {
       title: "عنوان استاندارد",
-      dataIndex: "Title",
+      dataIndex: "title",
       key: "2",
     },
     {
       title: "فاکتورهای آزمون",
-      dataIndex: "TestItemName",
+      dataIndex: "testItemName",
       key: "3",
     },
     {
       title: "شناسه استاندارد",
-      dataIndex: "ReferenceCode",
+      dataIndex: "referenceCode",
       key: "4",
     },
     {
       title: "فعال/غیر فعال",
-      dataIndex: "IsActive",
+      dataIndex: "isActive",
       key: "4",
       render: (_, record: any) => <StatusColumn record={record} />
     },

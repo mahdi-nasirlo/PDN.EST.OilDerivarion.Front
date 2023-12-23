@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Col, Form, Input, InputNumber, Row, Select } from "antd";
+import React, {useEffect, useState} from "react";
+import {Col, Form, Input, InputNumber, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { filterOption } from "../../../../../../lib/filterOption";
-import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {filterOption} from "../../../../../../lib/filterOption";
+import {sortByIndex} from "../../../../../../lib/sortByIndex";
+import {CategoryProduct} from "../../../../../../interfaces/category-product";
 
 function CategoryForm({
-  defaultSelectedDensity,
+                          row,
 }: {
-  defaultSelectedDensity?: boolean;
+    row: CategoryProduct;
 }) {
   const { data, isLoading } = useSWR(
     "/BaseInfo/GetAllProductionMethod",
     listFetcher
   );
 
-  const [hasDensity, setHasDensity] = useState(defaultSelectedDensity);
 
-  useEffect(() => {
-    setHasDensity(defaultSelectedDensity);
-  }, [defaultSelectedDensity]);
+    const [hasDensity, setHasDensity] = useState(row?.hasDensity)
+
+    useEffect(() => {
+        setHasDensity(row?.hasDensity)
+    }, [row])
 
   return (
     <>
@@ -83,34 +85,13 @@ function CategoryForm({
               ]}
               size="large"
               placeholder="انتخاب کنید"
-              onChange={(value) => setHasDensity(value)}
+              onChange={value => setHasDensity(value)}
+                // onChange={(value) => setHasDensity(value)}
             />
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="smallCode"
-            label="کد"
-            rules={[
-              { required: true },
-              {
-                validator(_, value) {
-                  const numericValue = parseFloat(value);
-                  if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
-                    return Promise.reject(new Error("لطفاً عدد صحیح وارد کنید"));
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Input size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col>
-      </Row>
-      {hasDensity && (
+        {hasDensity && (
         <Row gutter={[32, 1]}>
           <Col xs={24} md={12}>
             <Form.Item
@@ -174,6 +155,29 @@ function CategoryForm({
           </Col>
         </Row>
       )}
+        <Row gutter={[32, 1]}>
+            <Col xs={24} md={12}>
+                <Form.Item
+                    name="smallCode"
+                    label="کد"
+                    rules={[
+                        {required: true},
+                        {len: 2},
+                        {
+                            validator(_, value) {
+                                const numericValue = parseFloat(value);
+                                if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
+                                    return Promise.reject(new Error("لطفاً عدد صحیح وارد کنید"));
+                                }
+                                return Promise.resolve();
+                            },
+                        },
+                    ]}
+                >
+                    <Input size="large" placeholder="وارد کنید"/>
+                </Form.Item>
+            </Col>
+        </Row>
     </>
   );
 }

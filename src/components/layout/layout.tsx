@@ -6,7 +6,7 @@ import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import {AppProgressBar as ProgressBar} from "next-nprogress-bar";
 import LayoutBreadcrumb from "@/components/layout/breadcrumb";
-import ThemeProvider from "../../../provider/theme-provider";
+import {SWRConfig} from "swr";
 
 export default function AppLayout({
     children,
@@ -38,14 +38,13 @@ export default function AppLayout({
 
     return (
         <>
-            <ProgressBar
-                height="3px"
-                color="#18948a"
-                options={{showSpinner: false}}
-                shallowRouting={false}
-            />
-
-            <ThemeProvider>
+            <SWRConfig value={{revalidateOnFocus: false}}>
+                <ProgressBar
+                    height="3px"
+                    color="#18948a"
+                    options={{showSpinner: false}}
+                    shallowRouting={false}
+                />
                 <Space direction="vertical" style={{width: "100%"}} size={[0, 48]}>
                     <Layout style={{minHeight: "100vh"}}>
                         <LayoutHeader
@@ -70,7 +69,7 @@ export default function AppLayout({
                         </Layout>
                     </Layout>
                 </Space>
-            </ThemeProvider>
+            </SWRConfig>
         </>
     );
 }

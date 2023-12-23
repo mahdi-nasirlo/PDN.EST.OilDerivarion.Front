@@ -13,8 +13,12 @@ export default function DateForm() {
         <Form form={form} layout="vertical">
             <Row gutter={[16, 0]}>
                 <Col xs={24} md={12}>
-                    <Form.Item name="name" label="تاریخ شروع آزمایش">
-                        <CustomDatePicker/> </Form.Item>
+                    {/*<Form.Item name="name" label="تاریخ شروع آزمایش">*/}
+                    {/*    <CustomDatePicker/>*/}
+                    {/*</Form.Item>*/}
+                    <Form.Item name="name" label="تاریخ پایان آزمایش">
+                        <CustomDatePicker/>
+                    </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item name="IsActive" label="تاریخ پایان آزمایش">

@@ -22,7 +22,7 @@ export const HandleError = async (error: any) => {
         url: error.url,
         message: error?.message,
         cause: error?.response,
-        token: response.headers.Authorization,
+        token: response?.headers?.Authorization,
         statusCode: error.statusCode
     }
 

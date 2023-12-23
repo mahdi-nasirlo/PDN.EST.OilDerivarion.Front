@@ -35,9 +35,13 @@ export default function ManagementUserForm({
       };
     }
 
-    if (type === "INITIAL_VALUE") { return targetInitial; }
+    if (type === "INITIAL_VALUE") {
+      return targetInitial;
+    }
 
-    if (type === "URL") { return targetUrl; }
+    if (type === "URL") {
+      return targetUrl;
+    }
   };
 
   const { data: test, isLoading: ldTest } = useSWR(
@@ -73,10 +77,8 @@ export default function ManagementUserForm({
             showSearch
             fieldNames={
               userTypeId == 2
-                ?
-                { label: "name", value: "uid" }
-                :
-                { label: "Name", value: "Uid" }
+                ? { label: "name", value: "uid" }
+                : { label: "Name", value: "Uid" }
             }
             //@ts-ignore
             filterOption={filterOption}
@@ -93,7 +95,7 @@ export default function ManagementUserForm({
     userTypeId === 3 || userTypeId >= 4 ? (
       <Col xs={24} md={12}>
         <Form.Item
-          rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+          rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           name="StateId"
           label="استان"
         >
@@ -142,7 +144,7 @@ export default function ManagementUserForm({
         <Col xs={24} md={12}>
           <Form.Item
             rules={[
-              { required: true },
+              { required: true, message: "لطفا مقدار را وارد کنید" },
               {
                 pattern: /^[0-9]{10}$/,
                 message: "کد ملی نامتعبر است",
@@ -156,7 +158,7 @@ export default function ManagementUserForm({
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             name="IsActive"
             label="فعال/غیر فعال"
             initialValue={true}
@@ -175,7 +177,7 @@ export default function ManagementUserForm({
       <Row gutter={[32, 1]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             name="UserTypeId"
             label="نوع کاربر"
           >

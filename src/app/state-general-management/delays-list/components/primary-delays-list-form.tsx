@@ -9,7 +9,7 @@ export default function PrimaryDelaysListForm() {
     return (
         // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
         <Form name="form_item_path" layout="vertical">
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 0]}>
                 <Col xs={24} md={12}>
                     <Form.Item
 
@@ -25,7 +25,7 @@ export default function PrimaryDelaysListForm() {
                     </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 0]}>
                 <Col xs={24} md={12}>
                     <Form.Item name="name" label="نام نماینده استاندارد">
                         <Input size="large" placeholder="وارد کنید" />
@@ -40,7 +40,7 @@ export default function PrimaryDelaysListForm() {
                         />                        </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 0]}>
                 <Col xs={24} md={12}>
                     <Form.Item name="ceoName" label="زمان بازدید">
                         <Input size="large" placeholder="وارد کنید" />

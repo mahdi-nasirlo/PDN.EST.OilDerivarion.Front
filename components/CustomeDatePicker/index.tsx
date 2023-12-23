@@ -26,7 +26,7 @@ export default function CustomDatePicker({value = {}, onChange}: { value?: any, 
   const change = (n: DateProps | null) => {
 
     // @ts-ignore
-    onChange(dateToString(n as DateProps))
+    if (typeof onChange == "function") onChange(dateToString(n as DateProps))
 
   };
 

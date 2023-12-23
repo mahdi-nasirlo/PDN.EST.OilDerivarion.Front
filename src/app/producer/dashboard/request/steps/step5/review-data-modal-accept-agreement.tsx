@@ -41,7 +41,7 @@ export default function ReviewDataModalAcceptAgreement(
                 ]}
             >
                 <Form form={form} >
-                    <Row gutter={[32, 1]}>
+                    <Row gutter={[16, 16]}>
                         <Col>
                             <Typography>
                                 اینجانب امیرحسام خالویی فرزند علی به شماره کد ملی 00123456789 سمت مدیرعامل شرکت / تولیدی نام شرکت تستی به شماره پروانه بهره برداری

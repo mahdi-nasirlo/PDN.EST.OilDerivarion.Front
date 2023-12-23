@@ -99,7 +99,7 @@ export default function EditModal({
           form={form}
           layout="vertical"
         >
-          <CategoryForm defaultSelectedDensity={data?.HasDensity} />
+          <CategoryForm row={convertKeysToLowerCase(data)} />
         </Form>
       </Modal>
     </>

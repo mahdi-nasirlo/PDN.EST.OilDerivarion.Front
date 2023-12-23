@@ -21,10 +21,10 @@ export default function FilterForm({
   return (
     <>
       <Form onFinish={filter} form={form} layout="vertical">
-        <Row gutter={[16, 16]}>
+        <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
             <Form.Item name="year" label="تاریخ درخواست">
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

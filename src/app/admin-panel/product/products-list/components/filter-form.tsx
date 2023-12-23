@@ -29,7 +29,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6">
     <Form form={form} onFinish={filter} name="form_item_path" layout="vertical">
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام محصول">
             <Input
@@ -54,7 +54,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="isActive" label="فعال/غیر فعال">
             <Select

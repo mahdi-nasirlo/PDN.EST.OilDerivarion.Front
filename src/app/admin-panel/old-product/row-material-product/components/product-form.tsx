@@ -18,7 +18,7 @@ function ProductForm() {
 
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true }]}
@@ -56,7 +56,7 @@ function ProductForm() {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="IsActive"

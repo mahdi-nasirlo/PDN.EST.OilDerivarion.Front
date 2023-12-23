@@ -11,7 +11,7 @@ export default function PrimaryProducerDetailsAddressForm() {
                 اطلاعات مجوز
             </Typography>
             <Form name="form_item_path" layout="vertical">
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item name="State" label="استان">
                             <Input size="large" placeholder="تهران" disabled />
@@ -28,7 +28,7 @@ export default function PrimaryProducerDetailsAddressForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <Form.Item name="MainSt" label="خیابان اصلی">
                             <Input size="large" placeholder="خیابان یکم" disabled />
@@ -45,14 +45,14 @@ export default function PrimaryProducerDetailsAddressForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={24}>
                         <Form.Item name="َAddressOffice" label="نشانی دفتر مرکزی">
                             <Input size="large" placeholder="تهران، بزرگراه رسالت، خیابان مدنی پلاک 6" disabled />
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="phoneOffice" label="تلفن دفتر مرکزی">
                             <Input size="large" placeholder="02122334455" disabled />

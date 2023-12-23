@@ -20,7 +20,7 @@ export default function TestItemSelect({ name }: { name: string }) {
       <Form.Item
         name={name}
         label="فاکتور آزمون"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
       >
         <Select
           showSearch

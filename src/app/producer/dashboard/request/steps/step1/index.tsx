@@ -41,10 +41,10 @@ export default function Step1() {
         name="form_item_path"
         layout="vertical"
       >
-        <Row gutter={[16, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               name="processDescription"
               label="شرح فرآیند تولید"
             >
@@ -55,7 +55,7 @@ export default function Step1() {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[16, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               name="productionMethodId"

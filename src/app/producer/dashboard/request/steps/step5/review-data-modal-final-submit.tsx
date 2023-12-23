@@ -30,7 +30,7 @@ export default function ReviewDataModalFinalSubmit(
                 open={modalVisibleFinalSubmit}
                 closeIcon={false}
                 footer={[
-                    <Row key={"box"} gutter={[32, 16]} className="my-2">
+                    <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={24}>
                             <Button
                                 size="large"
@@ -45,7 +45,7 @@ export default function ReviewDataModalFinalSubmit(
                 ]}
             >
                 <Form>
-                    <Row gutter={[32, 1]}>
+                    <Row gutter={[16, 16]}>
                         <Col xs={24} md={24}>
                             <Form.Item>
                                 <div className='flex flex-col'>

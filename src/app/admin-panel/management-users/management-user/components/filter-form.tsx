@@ -24,7 +24,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6">
     <Form name="form_item_path" form={form} onFinish={filter} layout="vertical">
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="lastName" label="نام خانوادگی">
             <Input size="large" placeholder="وارد کنید" />
@@ -45,7 +45,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="userTypeId" label="نوع کاربر">
             <Select

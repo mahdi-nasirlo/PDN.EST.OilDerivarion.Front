@@ -26,7 +26,7 @@ function Step1({
         form={form}
         layout="vertical"
       >
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -46,7 +46,7 @@ function Step1({
             </PhoneInputs>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -66,7 +66,7 @@ function Step1({
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -103,7 +103,7 @@ function Step1({
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <Form.Item rules={[{ required: true }]} name="address" label="آدرس">
               <Input size="large" placeholder="وارد کنید" />

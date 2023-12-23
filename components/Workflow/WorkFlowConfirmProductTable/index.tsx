@@ -62,7 +62,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     rules={[
                         {
                             required: true,
-                            message: `Please Input ${title}!`,
+                            message: "لطفا مقدار را وارد کنید"
                         },
                     ]}
                 >
@@ -186,17 +186,18 @@ const Index = ({trigger, dataSource, isLoading}: {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <Button size="small" type="text">انصراف</Button>
-            </Popconfirm>
-            <Button size="small" type="primary"
-                    onClick={() => save(record.Uid)}
-                    style={{marginRight: 8}}>
-              ذخیره
-            </Button>
-          </span>
+                        <Popconfirm title="مطمئن هستید؟" onConfirm={cancel}>
+                          <Button size="small" type="text">انصراف</Button>
+                        </Popconfirm>
+                        <Button size="small" type="primary"
+                                onClick={() => save(record.Uid)}
+                                style={{marginRight: 8}}>
+                          ذخیره
+                        </Button>
+                    </span>
                 ) : (
-                    <Button type="text" disabled={editingKey !== ''} onClick={() => edit(record)}>
+                    <Button type="text" className="text-secondary-500" disabled={editingKey !== ''}
+                            onClick={() => edit(record)}>
                         ویرایش
                     </Button>
                 );

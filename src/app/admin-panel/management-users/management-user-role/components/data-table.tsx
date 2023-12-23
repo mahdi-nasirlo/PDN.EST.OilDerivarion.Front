@@ -204,7 +204,7 @@ export default function DataTable({
         ]}
       >
         <Form form={form} layout="vertical">
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="years" label="نام و نام خانوادگی">
                 <Input size="large" placeholder="وارد کنید" />

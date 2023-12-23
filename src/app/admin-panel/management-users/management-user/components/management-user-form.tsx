@@ -120,7 +120,7 @@ export default function ManagementUserForm({
       disabled={isMutating}
       layout="vertical"
     >
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -140,7 +140,7 @@ export default function ManagementUserForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[
@@ -174,7 +174,7 @@ export default function ManagementUserForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}

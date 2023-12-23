@@ -1,17 +1,17 @@
 "use client";
 
-import {Col, Divider, Form, Input, notification, Row, Typography} from "antd";
-import {Choice} from "../../../../../../interfaces/requestDetail";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useForm} from "antd/es/form/Form";
+import { Col, Divider, Form, Input, notification, Row, Typography } from "antd";
+import { Choice } from "../../../../../../interfaces/requestDetail";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
@@ -31,24 +31,16 @@ interface DataFetchType {
   };
 }
 
-
 const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
-
-
-  const {
-    data: barcode,
-    isLoading: ldCategory,
-
-
-  } = useSWR<string>(
+  const { data: barcode, isLoading: ldCategory } = useSWR<string>(
     "/RequestBarcode/FactoryBarcode",
     (url: string) =>
       listFetcher(url, {
         arg: {
-          taskUid: props.params.uid
-        }
+          taskUid: props.params.uid,
+        },
       })
   );
   const downloadPdf = (choiceKey: any) => {
@@ -64,11 +56,11 @@ export default function Home(props: PropType) {
       uint8Array[i] = binaryPdf.charCodeAt(i);
     }
 
-    const blob = new Blob([uint8Array], { type: 'application/pdf' });
+    const blob = new Blob([uint8Array], { type: "application/pdf" });
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
-    link.download = 'downloaded.pdf';
+    link.download = "downloaded.pdf";
     link.click();
     form.submit();
     setChoice(choiceKey);
@@ -105,38 +97,50 @@ export default function Home(props: PropType) {
   return (
     <>
       <div className="box-border w-full p-6">
-        <div className='flex justify-between flex-col'>
-          <div className='flex items-center gap-3'>
-            <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+        <div className="flex justify-between flex-col">
+          <div className="flex items-center gap-3">
+            <Typography className="font-bold">
+              داده های تجمیعی درخواست
+            </Typography>
           </div>
-          <Divider/>
+          <Divider />
         </div>
-        <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
+        <GodOfDataViewer
+          uid={props.params.uid}
+          data={data?.tabs}
+          loading={isLoading}
+        />
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {data && <Divider/>}
-        <Form onFinish={onFinish} form={form}>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={24}>
-              <Form.Item
-                  wrapperCol={{span: 24}}
-                  labelCol={{span: 24}}
+        {data && <Divider /> && (
+          <Form onFinish={onFinish} form={form}>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={24}>
+                <Form.Item
+                  rules={[
+                    { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  ]}
+                  wrapperCol={{ span: 24 }}
+                  labelCol={{ span: 24 }}
                   name="description"
                   label="توضیحات"
-              >
-                <Input.TextArea
-                  style={{ height: 100, resize: "none" }}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
+                >
+                  <Input.TextArea
+                    style={{ height: 100, resize: "none" }}
+                    placeholder="وارد کنید"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        )}
         {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn
           loading={isMutating}
           choices={data?.choices as any}
-          onClick={(choiceKey) => { downloadPdf(choiceKey) }}
+          onClick={(choiceKey) => {
+            downloadPdf(choiceKey);
+          }}
           trigger={() => true}
           nextStepUrl={apiData.create.url}
           taskId={props.params.uid}

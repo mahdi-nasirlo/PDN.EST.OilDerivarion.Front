@@ -73,18 +73,28 @@ export default function Home(props: PropType) {
   return (
     <>
       <div className="box-border w-full p-6">
-        <div className='flex justify-between flex-col'>
-          <div className='flex items-center gap-3'>
-            <Typography className='font-bold'>داده های تجمیعی درخواست</Typography>
+        <div className="flex justify-between flex-col">
+          <div className="flex items-center gap-3">
+            <Typography className="font-bold">
+              داده های تجمیعی درخواست
+            </Typography>
           </div>
           <Divider />
         </div>
-        <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading} />
+        <GodOfDataViewer
+          uid={props.params.uid}
+          data={data?.tabs}
+          loading={isLoading}
+        />
         <CalendarTime data={data?.calendar as any} />
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {data && <Divider />}
-        <DateOfVisitForm form={form} onFinish={onFinish} />
-        {data && <Divider />}
+        {data && (
+          <>
+            <Divider />
+            <DateOfVisitForm form={form} onFinish={onFinish} />
+            <Divider />
+          </>
+        )}
         {data?.choices &&
           !isLoading &&
           data?.choices.map((value, index) => (

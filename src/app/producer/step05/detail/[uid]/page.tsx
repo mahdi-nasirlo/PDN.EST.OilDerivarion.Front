@@ -92,9 +92,7 @@ const Page = (props: { params: { uid: string } }) => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item
-                rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                ]}
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                 wrapperCol={{ span: 24 }}
                 labelCol={{ span: 24 }}
                 name="description"

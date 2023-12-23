@@ -2,7 +2,7 @@ import customeFetcher from "../server/customeFetcher";
 
 const createLog = async (type: string, data: any,) => {
     try {
-        await customeFetcher({
+        customeFetcher({
             url: {path: "/api/front/logger/report", absolute: true},
         method: "POST",
         data: {

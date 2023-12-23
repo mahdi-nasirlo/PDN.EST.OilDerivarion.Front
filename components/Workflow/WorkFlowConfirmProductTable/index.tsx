@@ -154,6 +154,12 @@ const Index = ({trigger, dataSource, isLoading}: {
             editable: false,
         },
         {
+            title: "درصد هدر رفت",
+            dataIndex: "ProductUsageWasted",
+            width: "25%",
+            editable: false,
+        },
+        {
             title: 'توضیحات',
             dataIndex: 'Description',
             width: '15%',

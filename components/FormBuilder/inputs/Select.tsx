@@ -34,16 +34,21 @@ const Select = (props: InputProps & PropsType) => {
         <>
             <FormItem
                 name={data.Name}
-                label={data?.Title_Style}
+                // label={data?.Title_Style}
                 // rules={rules}
+                label={data.Name}
             >
                 <AntSelect
                     allowClear
                     size="large"
                     placeholder={props.data.Placeholder || "لطفا مقدار را وارد کنید"}
                 >
-                    {props.data.FormFieldDetails?.map((value, index) => <Option key={`${index}`}
-                                                                                value={value.Value}>{value.Text}</Option>)}
+                    {props.data.FormFieldDetails?.map((value, index) => <Option
+                        key={`${index}`}
+                        value={value.Value}
+                    >
+                        {value.Text} _ {value.Value}
+                    </Option>)}
                 </AntSelect>
             </FormItem>
         </>

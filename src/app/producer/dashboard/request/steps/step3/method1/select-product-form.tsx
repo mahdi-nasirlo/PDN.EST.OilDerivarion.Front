@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Col, Form, FormInstance, InputNumber, Row, Select } from "antd";
+import React, {useContext, useState} from "react";
+import {Col, Form, FormInstance, InputNumber, Row, Select} from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import { filterOption } from "../../../../../../../../lib/filterOption";
+import {filterOption} from "../../../../../../../../lib/filterOption";
 
 const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
   const processController = useContext(StepContext);
@@ -15,9 +15,10 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
   const [density, setDensity] = useState();
 
   const ChangeDensity = async (value: any) => {
+
     setDensity(value);
 
-    await productSelectableData.getSelectableProduct({
+    productSelectableData.getSelectableProduct({
       requestMasterUid: processController.requestMaster.requestMasterUid,
       densityTypeId: value,
     });
@@ -80,9 +81,9 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
                 { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 0,
+                  min: 1,
                   max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
                 },
               ]}
             >

@@ -9,22 +9,22 @@ import { useGetAllProductionMethod } from "../../../../../../hooks/baseInfo/useG
 export default function FilterForm({
   filter,
   unsetFilter,
-  isLoading
+  isLoading,
 }: {
   filter: (arg: any) => void;
   unsetFilter: () => void;
   isLoading: boolean;
 }) {
-
   const [form] = useForm();
-  const { isLoadingProductionMethods, productionMethods, fieldNames } = useGetAllProductionMethod()
+  const { isLoadingProductionMethods, productionMethods, fieldNames } =
+    useGetAllProductionMethod();
 
   return (
     // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
     <Form onFinish={filter} form={form} layout="vertical">
       <Row gutter={[12, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="processDescription" label="نام فرآیند">
+          <Form.Item name="processDescription" label="شرح فرآیند">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
@@ -40,10 +40,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <ButtonFilter
-        unsetFilter={unsetFilter}
-        isLoading={isLoading}
-      />
+      <ButtonFilter unsetFilter={unsetFilter} isLoading={isLoading} />
     </Form>
     // </div>
   );

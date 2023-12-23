@@ -1,12 +1,12 @@
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
-import { useForm } from "antd/es/form/Form";
-import React, { useEffect } from "react";
-import { SetBase } from "../../../../../../interfaces/Base-info";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {Button, Col, Form, Input, Modal, Row, Select} from "antd";
+import {useForm} from "antd/es/form/Form";
+import React, {useEffect} from "react";
+import {SetBase} from "../../../../../../interfaces/Base-info";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { filterOption } from "../../../../../../lib/filterOption";
+import {filterOption} from "../../../../../../lib/filterOption";
 
 export default function EditModal({
   isEditModalVisible,
@@ -124,12 +124,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="currentCEONationalCode"
-                label="کد ملی(مدیرعامل)"
+                label="شناسه ملی"
                 rules={[
                   { required: true },
                   {
-                    pattern: /^[0-9]{10}$/,
-                    message: " کد ملی نامتعبر است",
+                    pattern: /^[0-9]{11}$/,
+                    message: " شناسه ملی ملی نامتعبر است",
                   },
                 ]}
               >

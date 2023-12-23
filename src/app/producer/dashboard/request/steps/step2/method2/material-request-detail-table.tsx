@@ -77,7 +77,7 @@ const MaterialRequestDetailTable = () => {
         open={deleteVisible}
         setOpen={setDeleteVisible}
         handleDelete={handleDelete}
-        title={"حذف ماده اولیه"}
+        title={" ماده اولیه"}
       />
     </>
   );

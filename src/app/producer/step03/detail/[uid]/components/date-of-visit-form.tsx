@@ -29,7 +29,7 @@ const DateOfVisitForm = (props: PropsType) => {
         <Col xs={24} md={8}>
           <Form.Item
             name="datePersian2"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
             label="تاریخ بازدید احتمالی دوم"
           >
             <CustomDatePicker />

@@ -15,6 +15,7 @@ export default function Page() {
     const defaultValueTable = {
         name: null,
         isActive: null,
+        hasDensity: null,
         densityTypeId: null,
         ...getPageRecordNumber()
     };
@@ -44,6 +45,7 @@ export default function Page() {
         setFilter({
             name: values.name,
             isActive: values.isActive,
+            hasDensity: values.hasDensity,
             densityTypeId: values.densityTypeId,
             ...getPageRecordNumber()
         });
@@ -59,14 +61,17 @@ export default function Page() {
 
     return (
         <>
-            {/*// @ts-ignore*/}
             <Collapse
                 size="large"
                 items={[
                     {
                         label: "فیلتر جستجو ",
                         children: (
-                            <FilterForm unsetFilter={unsetFilter} filter={setFilterTable} isLoading={ldCategory} />
+                            <FilterForm
+                                filter={setFilterTable}
+                                unsetFilter={unsetFilter}
+                                isLoading={ldCategory}
+                            />
                         ),
                     },
                 ]}

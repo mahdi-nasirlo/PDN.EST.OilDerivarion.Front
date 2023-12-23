@@ -17,10 +17,10 @@ export default function FilterForm({
   return (
     <>
       <Form name="form_item_path" layout="vertical">
-        <Row gutter={[16, 16]}>
+        <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
             <Form.Item name="year" label="تاریخ درخواست">
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>

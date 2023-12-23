@@ -31,7 +31,7 @@ function BarcodeForm(props: {
   );
 
   return (
-    <Row gutter={[32, 1]}>
+    <Row gutter={[16, 16]}>
       <Col xs={24} md={12}>
         <Form.Item
           name="containerTypeId"

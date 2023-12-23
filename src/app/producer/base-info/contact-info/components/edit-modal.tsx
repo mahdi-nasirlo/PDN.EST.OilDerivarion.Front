@@ -104,7 +104,7 @@ export default function EditModal({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات کارخانه
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item
                 name="factoryStateId"
@@ -148,7 +148,7 @@ export default function EditModal({
               </PhoneInputs>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item
                 name="factoryAddressDetail"
@@ -162,7 +162,7 @@ export default function EditModal({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات دفتر مرکزی
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item
                 name="centralOfficeStateId"
@@ -206,7 +206,7 @@ export default function EditModal({
               </PhoneInputs>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item
                 name="centralOfficeAddressDetail"

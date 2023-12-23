@@ -5,7 +5,7 @@ import TestItemSelect from "./test-item-select";
 export default function TestFeatureForm() {
   return (
     <>
-      <Row gutter={[16, 0]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="title"
@@ -25,7 +25,7 @@ export default function TestFeatureForm() {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[16, 0]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="isActive"

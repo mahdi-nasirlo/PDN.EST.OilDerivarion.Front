@@ -1,7 +1,7 @@
 "use client";
 
 import { Col, Form, Input, Row, Select } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { ProductGet } from "../../../../../../interfaces/product";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
@@ -18,14 +18,16 @@ export default function FilterForm({
   unsetFilter: () => void;
   isLoading: boolean;
 }) {
+
   const { data: GetAllDensityType, isLoading: ldGetAllDensityType } = useSWR(
     ["/BaseInfo/GetAllDensityType", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
+
   return (
     // <div className="box-border w-full p-6 ">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام دسته بندی">
             <Input size="large" placeholder="انتخاب کنید" />
@@ -44,9 +46,21 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="densityTypeId" label="دانسیته">
+          <Form.Item name="hasDensity" label="دانسیته">
+            <Select
+              size="large"
+              placeholder="انتخاب کنید"
+              options={[
+                { label: "دارد", value: true },
+                { label: "ندارد", value: false },
+              ]}
+            />
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={12}>
+          <Form.Item name="densityTypeId" label="بازه دانسیته">
             <Select
               showSearch
               // @ts-ignore

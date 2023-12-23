@@ -12,7 +12,7 @@ export default function FormMaterial() {
             </Typography>
             <Divider />
             <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام فاکتور آزمون">
                             <Input size="large" placeholder="mysite" disabled />

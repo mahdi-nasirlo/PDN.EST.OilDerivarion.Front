@@ -1,8 +1,8 @@
-import {Button, Col, Form, Input, Modal, Row} from 'antd';
-import {useForm} from 'antd/es/form/Form';
+import { Button, Col, Form, Input, Modal, Row } from 'antd';
+import { useForm } from 'antd/es/form/Form';
 import React from 'react'
 import useSWRMutation from 'swr/mutation';
-import {mutationFetcher} from '../../../../../lib/server/mutationFetcher';
+import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 
 export default function RejectionModal(
     {
@@ -31,7 +31,7 @@ export default function RejectionModal(
 
     const handleFormSubmit = async (values: any) => {
         values.uid = recordUid
-        const res = await trigger({...values, labIsAccepted: false});
+        const res = await trigger({ ...values, labIsAccepted: false });
         if (res) {
             mutate()
             setModalVisible(false);
@@ -76,7 +76,7 @@ export default function RejectionModal(
                 ]}
             >
                 <Form form={form} layout='vertical' onFinish={handleFormSubmit}>
-                    <Row gutter={[32, 1]} >
+                    <Row gutter={[16, 16]}>
                         <Col xs={24}>
                             <Form.Item
                                 name="labRejectionDescription"

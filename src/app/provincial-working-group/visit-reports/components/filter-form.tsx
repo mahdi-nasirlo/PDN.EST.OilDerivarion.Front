@@ -10,7 +10,7 @@ export default function FilterForm() {
         <>
             {/* <div className="box-border w-full p-6"> */}
             <Form name="form_item_path" layout="vertical">
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="year-establishment" label="نام محصول تولیدی">
                             <Input size="large" placeholder="وارد کنید" />
@@ -22,7 +22,7 @@ export default function FilterForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="year-estale" label="فعال / غیر فعال">
                             <Select size="large" placeholder="انتخاب کنید" />

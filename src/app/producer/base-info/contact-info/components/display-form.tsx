@@ -22,7 +22,7 @@ export default function DisplayForm({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات کارخانه
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item name="factoryStateName" label="استان">
                 <Input size="large" placeholder="انتخاب کنید" />
@@ -39,7 +39,7 @@ export default function DisplayForm({
               </Form.Item>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item name="factoryAddressDetail" label="جزئیات آدرس">
                 <Input size="large" placeholder="وارد کنید" />
@@ -49,7 +49,7 @@ export default function DisplayForm({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات دفتر مرکزی
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item name="centralOfficeStateName" label="استان">
                 <Input size="large" placeholder="انتخاب کنید" />
@@ -66,7 +66,7 @@ export default function DisplayForm({
               </Form.Item>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item name="centralOfficeAddressDetail" label="جزئیات آدرس">
                 <Input size="large" placeholder="وارد کنید" />

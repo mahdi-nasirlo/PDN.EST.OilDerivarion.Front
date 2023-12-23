@@ -165,15 +165,17 @@ function CategoryForm({
                     rules={[
                         { required: true, message: "لطفا مقدار را وارد کنید" },
                         {
-                            len: 2,
-                        },
-                        {
                             validator(_, value) {
                                 const numericValue = parseFloat(value);
                                 if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
                                     return Promise.reject(
                                         new Error("لطفاً عدد صحیح وارد کنید")
                                     );
+                                }
+                                if (numericValue > 100) {
+                                    return Promise.reject(
+                                        new Error("مقدار حداکثر 2 کارکتر می باشد")
+                                    )
                                 }
                                 return Promise.resolve();
                             },

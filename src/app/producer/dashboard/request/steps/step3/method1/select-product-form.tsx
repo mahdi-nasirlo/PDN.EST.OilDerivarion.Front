@@ -33,9 +33,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
             name="densityTypeId"
             label="دانسیته محصول"
             labelCol={{ span: 24 }}
-            rules={[
-              { required: true, message: "لطفا دانسیته محصول را انتخاب کنید" },
-            ]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               onChange={ChangeDensity}
@@ -52,7 +50,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
             labelCol={{ span: 24 }}
             name="productUid"
             label="نام محصول"
-            rules={[{ required: true, message: "لطفا محصول را انتخاب کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
@@ -79,7 +77,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               name={"productUsageExploitation"}
               label={"درصد استحصال"}
               rules={[
-                { required: true, message: " درصد اسنتحصال اجباری است" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
                   min: 0,
@@ -105,7 +103,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               name={"productUsageWasted"}
               label={"درصد هدر رفت"}
               rules={[
-                { required: true, message: " درصد هدر رفت اجباری است" },
+                { required: true, message: "لطفا مقدار را انتخاب کنید" },
                 {
                   type: "number",
                   min: 0,

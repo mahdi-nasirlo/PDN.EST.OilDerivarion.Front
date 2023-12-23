@@ -50,7 +50,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             name="materialUid"
             label="نام مواد اولیه"
             rules={[
-              { required: true, message: "نام مواد اولیه اجباری است" },
+              { required: true, message: "لطفا مقدار را انتخاب کنید" },
               { type: "string" },
             ]}
           >
@@ -74,7 +74,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             rules={[
               {
                 required: true,
-                message: "میزان مصرف برای تولید یک واحد اجباری است",
+                message: "لطفا مقدار را وارد کنید",
               },
               {
                 validator: async (rule, value) => {
@@ -98,7 +98,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               name={"materialUsagePercentage"}
               label={"درصد استفاده"}
               rules={[
-                { required: true, message: " درصد استفاده اجباری است" },
+                { required: true, message: "لطفا مقدار را انتخاب کنید" },
                 {
                   type: "number",
                   min: 0,
@@ -124,7 +124,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             name={"materialTotalConsumption"}
             label={"میزان مصرف کل"}
             rules={[
-              { required: true, message: "میزان مصرف کل اجباری است" },
+              { required: true, message: "لطفا مقدار را وارد کنید" },
               {
                 validator: async (rule, value) => {
                   if (!/^\d+$/.test(value)) {
@@ -145,7 +145,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             initialValue={"داخلی"}
             name="materialSupplyMethodId"
             label="نحوه تامین"
-            rules={[{ required: true, message: "نحوه تامین اجباری است" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               fieldNames={supplyMethod.fieldNames}
@@ -175,7 +175,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 rules={[
                   {
                     required: true,
-                    message: "شماره اظهارنامه واردات اجباری است",
+                    message: "لطفا مقدار را انتخاب کنید",
                   },
                 ]}
               >
@@ -199,7 +199,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyName"
                 label="نام"
                 rules={[
-                  { required: true, message: "نام اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string" },
                 ]}
               >
@@ -211,7 +211,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyPersonTypeId"
                 label="شخصیت"
                 rules={[
-                  { required: true, message: "شخصیت اجباری است" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   { type: "number" },
                 ]}
               >
@@ -273,6 +273,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
                     },
                   },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                 ]}
               >
                 <Input
@@ -289,7 +290,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyIranCode"
                 label="ایرانکد"
                 rules={[
-                  { required: true, message: "ایرانکد اجباری است" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   {
                     validator: async (rule, value) => {
                       if (!/^\d+$/.test(value)) {
@@ -311,7 +312,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyAddress"
                 label="آدرس"
                 rules={[
-                  { required: true, message: "آدرس اجباری است" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   { type: "string" },
                 ]}
               >

@@ -5,8 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import useCreateTestFactors from "../../../../../hooks/test-factors/useCreateTestFactors";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+
 
 export default function CreateModal({
   setModalVisible,
@@ -24,7 +23,7 @@ export default function CreateModal({
   const createTestFactor = async (values: any) => {
     const res = await createTestItemRequest.trigger(values);
 
-    if (res == true) {
+    if (res?.success) {
       await mutate();
 
       setModalVisible(false);
@@ -84,7 +83,6 @@ export default function CreateModal({
         onFinish={createTestFactor}
         form={form}
         layout="vertical"
-        initialValues={{ testItem_Details: [] }}
       >
         <TestFactorForm />
       </Form>

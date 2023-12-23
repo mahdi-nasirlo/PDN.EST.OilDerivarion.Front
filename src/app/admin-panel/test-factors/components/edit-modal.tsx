@@ -37,11 +37,13 @@ function EditModal({
   };
 
   useEffect(() => {
-    const newData = recordToEdit?.testItem_Details?.map((item) => {
-      return item.uid;
-    });
+    // const newData = recordToEdit?.testItem_Details?.map((item) => {
+    //   return item.uid;
+    // });
 
-    form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
+    // form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
+    form.setFieldsValue(recordToEdit);
+
   }, [recordToEdit]);
 
   return (

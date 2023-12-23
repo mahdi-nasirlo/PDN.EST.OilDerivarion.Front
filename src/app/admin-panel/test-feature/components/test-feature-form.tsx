@@ -15,9 +15,6 @@ export default function TestFeatureForm() {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <TestItemSelect name={"testItemUid"} />
-      </Row>
-      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="referenceCode"
@@ -27,6 +24,8 @@ export default function TestFeatureForm() {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
+      </Row>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="isActive"
@@ -44,6 +43,7 @@ export default function TestFeatureForm() {
             />
           </Form.Item>
         </Col>
+        <TestItemSelect name={"testItemUid"} />
       </Row>
     </>
   );

@@ -30,7 +30,10 @@ function CategoryForm({
           <Form.Item
             name="name"
             label="نام دسته بندی"
-            rules={[{ required: true }, { type: "string" }]}
+            rules={[
+              { required: true, message: "لطفا مقدار را وارد کنید" },
+              { type: "string" },
+            ]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -39,14 +42,14 @@ function CategoryForm({
           <Form.Item
             name="productionMethodId"
             label="روش تولید"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
               // @ts-ignore
               filterOption={filterOption}
               loading={isLoading}
-              options={sortByIndex(data, 'Name')}
+              options={sortByIndex(data, "Name")}
               fieldNames={{ label: "Name", value: "Id" }}
               size="large"
               placeholder="انتخاب کنید"
@@ -59,7 +62,7 @@ function CategoryForm({
           <Form.Item
             name="isActive"
             label="فعال/غیر فعال"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             initialValue={true}
           >
             <Select
@@ -76,7 +79,7 @@ function CategoryForm({
           <Form.Item
             name="hasDensity"
             label="دانسیته"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               options={[
@@ -86,7 +89,6 @@ function CategoryForm({
               size="large"
               placeholder="انتخاب کنید"
               onChange={value => setHasDensity(value)}
-                // onChange={(value) => setHasDensity(value)}
             />
           </Form.Item>
         </Col>
@@ -122,7 +124,7 @@ function CategoryForm({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
@@ -161,13 +163,17 @@ function CategoryForm({
                     name="smallCode"
                     label="کد"
                     rules={[
-                        {required: true},
-                        {len: 2},
+                        { required: true, message: "لطفا مقدار را وارد کنید" },
+                        {
+                            len: 2,
+                        },
                         {
                             validator(_, value) {
                                 const numericValue = parseFloat(value);
                                 if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
-                                    return Promise.reject(new Error("لطفاً عدد صحیح وارد کنید"));
+                                    return Promise.reject(
+                                        new Error("لطفاً عدد صحیح وارد کنید")
+                                    );
                                 }
                                 return Promise.resolve();
                             },

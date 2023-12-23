@@ -9,7 +9,7 @@ function MeasureForm() {
           <Form.Item
             name="name"
             label="واحد اندازه گیری"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>

@@ -9,7 +9,7 @@ import {CategoryProduct} from "../../../../../../interfaces/category-product";
 function CategoryForm({
                           row,
 }: {
-    row: CategoryProduct;
+    row?: CategoryProduct;
 }) {
   const { data, isLoading } = useSWR(
     "/BaseInfo/GetAllProductionMethod",

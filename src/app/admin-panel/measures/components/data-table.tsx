@@ -1,15 +1,14 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tag, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {Button, Space, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React, {useState} from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Measure } from "../../../../../interfaces/measures";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {Measure} from "../../../../../interfaces/measures";
 import EditModal from "../../measures/components/edit-modal";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 
@@ -49,12 +48,17 @@ export default function DataTable({
   );
 
   const handleConfirmDelete = async () => {
-    await trigger({
+    const res = await trigger({
       uid: recordToDelete?.Uid,
     });
 
-    await mutate();
-    setIsDeleteModalVisible(false);
+    console.log(res)
+
+    if (res) {
+      mutate();
+      setIsDeleteModalVisible(false);
+    }
+
   };
 
   const showModal = () => {
@@ -94,13 +98,13 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          {/* <Button
+          <Button
             type="link"
             className={"text-red-500 font-bold"}
             onClick={() => handleDelete(record)}
           >
             حذف
-          </Button> */}
+          </Button>
         </Space>
       ),
     },

@@ -259,13 +259,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(
-                          "کد 'ملی / شناسه ملی' اجباری است"
-                        );
+                        return Promise.reject(" کد ملی / شناسه ملی اجباری است");
                       }
 
                       if (value && personTypeStatus === 1) {
-                        return Promise.reject("کد ملی نامتعبر است");
+                        return Promise.reject("کد ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {
@@ -273,7 +271,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
                     },
                   },
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                 ]}
               >
                 <Input

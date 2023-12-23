@@ -1,17 +1,16 @@
-import {Button, Collapse, Empty, Spin, Table, Typography} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useContext, useState} from "react";
-import {Product} from "../../../../../../../interfaces/requestDetail";
+import { Button, Collapse, Empty, Spin, Table, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useContext, useState } from "react";
+import { Product } from "../../../../../../../interfaces/requestDetail";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useGetFinalPage from "../../../../../../../hooks/requestDetail/useGetFinalPage";
-import {addIndexToData} from "../../../../../../../lib/addIndexToData";
+import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 import useDeleteStep from "../../../../../../../hooks/requestDetail/useDeleteStep";
-import {addAlphabetToData} from "../../../../../../../lib/addAlphabetToData";
+import { addAlphabetToData } from "../../../../../../../lib/addAlphabetToData";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function ReviewDataTable() {
-
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const processController = useContext(StepContext);
 
@@ -71,14 +70,11 @@ export default function ReviewDataTable() {
   ];
 
   const deleteRequest = (stepNumber: number) => {
-
     deleteStep.trigger({
       stepNumber: stepNumber,
-      requestMasterUid:
-      processController.requestMaster
-          .requestMasterUid,
-    })
-  }
+      requestMasterUid: processController.requestMaster.requestMasterUid,
+    });
+  };
 
   return (
     <>
@@ -94,23 +90,23 @@ export default function ReviewDataTable() {
                     {
                       label: "درخواست شماره " + (index + 1),
                       extra: (
-                          <>
-                            <ConfirmDeleteModal
-                                open={open}
-                                setOpen={setOpen}
-                                handleDelete={() => deleteRequest(item.stepNumber)}
-                                title={` حذف درخواست ${index + 1}`}
-                            />
-                            <Button
-                                type="text"
-                                size="small"
-                                style={{padding: "8px !important"}}
-                                className="text-red-500 font-bold"
-                                onClick={() => setOpen(true)}
-                            >
-                              حذف
-                            </Button>
-                          </>
+                        <>
+                          <ConfirmDeleteModal
+                            open={open}
+                            setOpen={setOpen}
+                            handleDelete={() => deleteRequest(item.stepNumber)}
+                            title={`  درخواست ${index + 1}`}
+                          />
+                          <Button
+                            type="text"
+                            size="small"
+                            style={{ padding: "8px !important" }}
+                            className="text-red-500 font-bold"
+                            onClick={() => setOpen(true)}
+                          >
+                            حذف
+                          </Button>
+                        </>
                       ),
                       children: (
                         <>

@@ -5,12 +5,7 @@ export type TestItem = {
   measure_Id: number;
   measureName: string;
   testMethod: string;
-  testItem_Details:
-    | {
-        uid: string | null;
-        title: string | null;
-      }[]
-    | null;
+  testItem_Details: string | null;
 };
 
 export type CreateTestItem = {
@@ -21,19 +16,19 @@ export type CreateTestItem = {
 };
 
 export interface TestItemDetail {
-  Uid: string | null;
-  TestItem_Id: number;
-  title: string | null;
-  ReferenceCode: string | null;
-  IsActive: boolean | null | undefined;
-  TestItemName: string | null;
-}
-
-export type CreateTestItemDetail = {
-  Uid: string | null;
-  TestItemUid: string;
+  uid: string | null;
   testItem_Id: number;
   title: string | null;
   referenceCode: string | null;
-  IsActive: boolean | null;
+  isActive: boolean | null | undefined;
+  testItemName: string | null;
+}
+
+export type CreateTestItemDetail = {
+  uid: string | null;
+  testItemUid: string;
+  testItem_Id: number;
+  title: string | null;
+  referenceCode: string | null;
+  isActive: boolean | null;
 };

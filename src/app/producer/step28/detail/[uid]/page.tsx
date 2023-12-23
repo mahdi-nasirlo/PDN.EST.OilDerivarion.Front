@@ -1,6 +1,6 @@
 "use client";
 
-import { Col, Divider, Form, Input, Row, Typography } from "antd";
+import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
 import { useForm } from "antd/es/form/Form";
@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
+import DataTable from "./dataTable";
 
 interface PropType {
   params: { uid: string };
@@ -38,7 +39,7 @@ export default function Home(props: PropType) {
 
   const router = useRouter();
 
-  const { isLoading, data, mutate } = useGetStep({
+  const { isLoading, data } = useGetStep({
     taskId: props.params.uid,
     apiUrl: apiData.get.url,
   });
@@ -78,9 +79,9 @@ export default function Home(props: PropType) {
         />
         {data && (
           <>
-            <Divider />
-            {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
-            <Form onFinish={onFinish} form={form}>
+            <DataTable uid={props.params.uid} />
+            {/* {data && <Divider />} */}
+            {/* <Form onFinish={onFinish} form={form}>
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item
@@ -99,11 +100,12 @@ export default function Home(props: PropType) {
                   </Form.Item>
                 </Col>
               </Row>
-            </Form>
+            </Form> */}
           </>
         )}
         {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
-        {data && <Divider />}
+
+        {data?.choices && <Divider />}
         <WorkflowRequestBtn
           loading={isMutating}
           choices={data?.choices as any}

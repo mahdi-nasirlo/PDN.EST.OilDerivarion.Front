@@ -7,7 +7,7 @@ export default function InformationForm() {
     <>
       <div className="box-border w-full p-6">
         <Form name="form_item_path" layout="vertical">
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="Title" label="نام واحد تولیدی">
                 <Input disabled size="large" placeholder="mysite" />
@@ -15,14 +15,14 @@ export default function InformationForm() {
             </Col>
             <Col xs={24} md={12}>
               <Form.Item name="Title" label="تاریخ دریافت نمونه">
-                <CustomDatePicker/>{" "}
+                <CustomDatePicker />
               </Form.Item>
-            </Col>{" "}
+            </Col>
           </Row>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="lastName" label="تاریخ نمونه برداری">
-                <CustomDatePicker/>{" "}
+                <CustomDatePicker />{" "}
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -31,10 +31,10 @@ export default function InformationForm() {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="lastName" label="تاریخ شروع آزمون">
-                <CustomDatePicker/>{" "}
+                <CustomDatePicker />{" "}
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

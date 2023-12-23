@@ -22,7 +22,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
     <Form onFinish={filter} form={form} layout="vertical">
-      <Row gutter={[12, 0]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="processDescription" label="شرح فرآیند">
             <Input size="large" placeholder="وارد کنید" />

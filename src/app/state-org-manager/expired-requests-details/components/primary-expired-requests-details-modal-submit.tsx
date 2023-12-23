@@ -81,7 +81,7 @@ export default function PrimaryExpiredRequestsDetailsModalSubmit({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             تعیین تاریخ و ساعت بازدید
           </Typography>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="year" label="تاریخ بازدید">
                 <DatePicker
@@ -101,21 +101,21 @@ export default function PrimaryExpiredRequestsDetailsModalSubmit({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             تعیین کارگروه
           </Typography>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده استاندارد استان">
                 <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده صمت استان">
                 <Select size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item name="establishment" label="نماینده نفت استان">
                 <Select size="large" placeholder="انتخاب کنید" />

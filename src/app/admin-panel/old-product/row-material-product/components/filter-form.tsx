@@ -19,7 +19,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6">
     <Form form={form} onFinish={(values) => filter(values)} layout="vertical">
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام محصول ">
             <Input size="large" placeholder="وارد کنید" />

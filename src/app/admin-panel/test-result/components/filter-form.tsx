@@ -20,7 +20,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6">
     <Form onFinish={filter} name="form_item_path" layout="vertical" form={form}>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="labUid" label="نام آزمایشگاه">
             <Select
@@ -31,7 +31,7 @@ export default function FilterForm({
               options={TestResult}
               size="large"
               placeholder="انتخاب کنید"
-            />{" "}
+            />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>

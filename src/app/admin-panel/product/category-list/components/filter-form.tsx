@@ -27,7 +27,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6 ">
     <Form onFinish={filter} name="form_item_path" layout="vertical">
-      <Row gutter={[24, 0]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام دسته بندی">
             <Input size="large" placeholder="انتخاب کنید" />
@@ -46,7 +46,7 @@ export default function FilterForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[24, 0]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="hasDensity" label="دانسیته">
             <Select

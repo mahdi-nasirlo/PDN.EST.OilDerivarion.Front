@@ -7,7 +7,7 @@ export default function PrimaryExpiredRequestsDetailsForm() {
     return (
         <>
             <div>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={24}>
                         <Form.Item name="lastName" label="نام واحد تولیدی">
                             <Input size="large" placeholder="نام شرکت تولیدی تست" disabled />
@@ -18,7 +18,7 @@ export default function PrimaryExpiredRequestsDetailsForm() {
                 <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                     فرآیند تولید
                 </Typography>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={24}>
                         <Form.Item name="lastName" label="شرح فرآیند تولید">
                             <Input size="large" placeholder="متن تستی" disabled />
@@ -40,7 +40,7 @@ export default function PrimaryExpiredRequestsDetailsForm() {
                 <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
                     تجهیزات آزمایشگاه
                 </Typography>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="تجهیزات آزمایشگاه">
                             <Input size="large" placeholder="780" disabled />
@@ -52,7 +52,7 @@ export default function PrimaryExpiredRequestsDetailsForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="محل فروش و یا دفن ضایعات">
                             <Input size="large" placeholder="780" disabled />

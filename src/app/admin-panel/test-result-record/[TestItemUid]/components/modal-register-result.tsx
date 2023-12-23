@@ -77,7 +77,7 @@ export default function ModalRegisterResult({
         ]}
       >
         <Form layout="vertical" onFinish={handleSubmit} form={form}>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="title" label="ویژگی شرح آزمون">
                 <Input size="large" placeholder="وارد کنید" disabled />
@@ -89,7 +89,7 @@ export default function ModalRegisterResult({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="IsActive" label="نتیجه آزمون">
                 <Input size="large" placeholder="وارد کنید" />
@@ -101,7 +101,7 @@ export default function ModalRegisterResult({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="IsActive" label="واحد اندازه گیری">
                 <Select size="large" placeholder="انتخاب کنید" />
@@ -113,7 +113,7 @@ export default function ModalRegisterResult({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 0]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="referenceCode" label="واحد تجدید پذیری">
                 <Input size="large" placeholder="وارد کنید" />

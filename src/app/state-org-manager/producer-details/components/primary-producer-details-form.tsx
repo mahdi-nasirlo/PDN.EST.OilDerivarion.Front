@@ -8,7 +8,7 @@ export default function PrimaryProducerDetailsForm() {
     return (
         <>
             <Form name="form_item_path" layout="vertical">
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام واحد تولیدی">
                             <Input size="large" placeholder="نام شرکت تولیدی تست" disabled />
@@ -20,7 +20,7 @@ export default function PrimaryProducerDetailsForm() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 0]}>
                     <Col xs={24} md={12}>
                         <Form.Item name="lastName" label="نام مدیر عامل">
                             <Input size="large" placeholder="مدیر عامل" disabled />

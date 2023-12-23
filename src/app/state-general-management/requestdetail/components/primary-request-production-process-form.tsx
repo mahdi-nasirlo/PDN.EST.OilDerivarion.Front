@@ -17,7 +17,7 @@ export default function PrimaryRequestsProductionProcessTable() {
                 name="form_item_path"
                 layout="vertical"
             >
-                <Row gutter={32}>
+                <Row gutter={[16, 16]}>
                     <Col span={24}>
                         <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
                             name="processDescription" label="شرح فرآیند تولید">
@@ -33,7 +33,7 @@ export default function PrimaryRequestsProductionProcessTable() {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row className="mt-3" gutter={32}>
+                <Row className="mt-3" gutter={[16, 16]}>
                     <Col span={24}>
                         <Form.Item name="fileName" label="نمودار شماتیک فرآیند">
                             <Upload

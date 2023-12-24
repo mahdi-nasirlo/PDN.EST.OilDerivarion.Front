@@ -111,7 +111,7 @@ export default function Home(props: PropType) {
           loading={isLoading}
         />
         {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {data && <Divider /> && (
+        {/* {data && <Divider /> && (
           <Form onFinish={onFinish} form={form}>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>
@@ -132,7 +132,7 @@ export default function Home(props: PropType) {
               </Col>
             </Row>
           </Form>
-        )}
+        )} */}
         {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn

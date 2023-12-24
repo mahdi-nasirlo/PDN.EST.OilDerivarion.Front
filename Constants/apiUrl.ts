@@ -351,6 +351,19 @@ export const apiUrl = {
                 url: "/WorkFlowRequest/SetStep28"
             }
         },
+        step29: {
+            getAll: {
+                url: "/WorkFlowRequest/GetAllStep29",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowRequest/GetStep29",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowRequest/SetStep29"
+            }
+        },
 
     },
     MapViewer: {

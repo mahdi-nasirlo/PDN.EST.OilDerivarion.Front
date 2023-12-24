@@ -34,9 +34,8 @@ const Select = (props: InputProps & PropsType) => {
         <>
             <FormItem
                 name={data.Name}
-                // label={data?.Title_Style}
+                label={data?.Title_Style}
                 // rules={rules}
-                label={data.Name}
             >
                 <AntSelect
                     allowClear
@@ -47,7 +46,7 @@ const Select = (props: InputProps & PropsType) => {
                         key={`${index}`}
                         value={value.Value}
                     >
-                        {value.Text} _ {value.Value}
+                        {value.Text}
                     </Option>)}
                 </AntSelect>
             </FormItem>

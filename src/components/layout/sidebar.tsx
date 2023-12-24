@@ -1,11 +1,11 @@
 "use client";
 
 import React, {useState} from "react";
-import type {MenuProps} from "antd";
-import {Drawer, Menu} from "antd";
+import {Drawer, Menu, MenuProps, Skeleton} from "antd";
 import Image from "next/image";
-import {motion} from "framer-motion";
 import {usePathname} from "next/navigation";
+import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
+import Link from "next/link";
 
 export default function LayoutSidebar({
                                           menu,
@@ -34,6 +34,8 @@ export default function LayoutSidebar({
     }
   };
 
+    const menus = useSsoGetAllUserAccess()
+
   const CommonMenu = ({
     style = {},
     className = "",
@@ -50,26 +52,22 @@ export default function LayoutSidebar({
             onOpenChange={handleMenuOpenChange}
             className={className}
             mode="inline"
-            items={menu}
             onClick={handleMenuItemClick}
-        />
+        >
+            {menus.isLoading && Array.from({length: 10}).map((value, index) => (
+                <Skeleton.Input key={index} size="default" className="w-full my-1"/>
+            ))}
+            {menus.data?.map((item) => (
+                <Menu.Item key={item.url}>
+                    <Link href={item.url}>
+                        {item.nameFa}
+                    </Link>
+                </Menu.Item>
+            ))}
+        </Menu>
     );
   };
 
-    // const sidebarVariants = {
-    //     hidden: {
-    //         x: '100%', // Start offscreen to the right
-    //         opacity: 0,
-    //     },
-    //     visible: {
-    //         x: 0, // End at the original position
-    //         opacity: 1,
-    //         transition: {
-    //             // type: 'spring',
-    //             // stiffness: 100,
-    //         },
-    //     },
-    // };
 
     return (
         <>
@@ -149,3 +147,4 @@ export const SvgIcon = ({
 }) => (
   <Image src={src} width={width} height={height} className={className} alt="" />
 );
+

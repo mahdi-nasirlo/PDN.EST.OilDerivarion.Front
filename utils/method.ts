@@ -8,8 +8,7 @@ export const updatedObject = (originalObject: z.infer<typeof originalObjectType>
 
     Object.keys(originalObject).forEach((value, index, array) => {
         const newKey = value?.replace(/_/g, '-');
-
-        console.log(typeof originalObject[value] == "string")
+        
         updatedObject[newKey] = typeof originalObject[value] == "string" ? originalObject[value].replace(/_/g, '-') : ""
     })
 

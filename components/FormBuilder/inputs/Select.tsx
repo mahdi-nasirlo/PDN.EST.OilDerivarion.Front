@@ -42,8 +42,12 @@ const Select = (props: InputProps & PropsType) => {
                     size="large"
                     placeholder={props.data.Placeholder || "لطفا مقدار را وارد کنید"}
                 >
-                    {props.data.FormFieldDetails?.map((value, index) => <Option key={`${index}`}
-                                                                                value={value.Value}>{value.Text}</Option>)}
+                    {props.data.FormFieldDetails?.map((value, index) => <Option
+                        key={`${index}`}
+                        value={value.Value}
+                    >
+                        {value.Text}
+                    </Option>)}
                 </AntSelect>
             </FormItem>
         </>

@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import MultipleSelect from '../../../../../../components/MultipleSelect';
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function ProductForm() {
   const defaultValue = { name: null, IsActive: true }
@@ -25,7 +26,7 @@ function ProductForm() {
 
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -51,14 +52,14 @@ function ProductForm() {
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProductCategory}
-              options={ProductCategory}
+              options={sortByIndex(ProductCategory, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="materials"
@@ -82,23 +83,24 @@ function ProductForm() {
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>  <Col xs={24} md={12}>
-        <Form.Item
-          rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-          name="isActive"
-          label="فعال/غیر فعال"
-          initialValue={true}
-        >
-          <Select
-            options={[
-              { label: "فعال", value: true },
-              { label: "غیر فعال", value: false },
-            ]}
-            size="large"
-            placeholder="انتخاب کنید"
-          />
-        </Form.Item>
-      </Col>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="isActive"
+            label="فعال/غیر فعال"
+            initialValue={true}
+          >
+            <Select
+              options={[
+                { label: "فعال", value: true },
+                { label: "غیر فعال", value: false },
+              ]}
+              size="large"
+              placeholder="انتخاب کنید"
+            />
+          </Form.Item>
+        </Col>
       </Row>
     </>
   );

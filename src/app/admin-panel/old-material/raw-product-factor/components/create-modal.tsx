@@ -8,6 +8,7 @@ import useSWRMutation from "swr/mutation";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function CreateModal({
   setModalVisible,
@@ -109,7 +110,7 @@ export default function CreateModal({
         form={form}
         layout="vertical"
       >
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               name="materialUid"
@@ -121,7 +122,7 @@ export default function CreateModal({
                 fieldNames={{ label: "Name", value: "Uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
-                options={material}
+                options={sortByIndex(material, 'Name')}
                 loading={ldMaterial}
                 size="large"
                 placeholder="انتخاب کنید"
@@ -139,7 +140,7 @@ export default function CreateModal({
                 fieldNames={{ label: "name", value: "uid" }}
                 // @ts-ignore
                 filterOption={filterOption}
-                options={TestItem}
+                options={sortByIndex(TestItem, 'name')}
                 loading={ldTestMaterial}
                 size="large"
                 placeholder="انتخاب کنید"

@@ -5,28 +5,27 @@ import TestItemSelect from "./test-item-select";
 export default function TestFeatureForm() {
   return (
     <>
-      <Row gutter={[16, 0]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="title"
             label="عنوان استاندارد"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <TestItemSelect name={"testItemUid"} />
-      </Row>
-      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="referenceCode"
             label="شناسه استاندارد"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="isActive"
@@ -44,6 +43,7 @@ export default function TestFeatureForm() {
             />
           </Form.Item>
         </Col>
+        <TestItemSelect name={"testItemUid"} />
       </Row>
     </>
   );

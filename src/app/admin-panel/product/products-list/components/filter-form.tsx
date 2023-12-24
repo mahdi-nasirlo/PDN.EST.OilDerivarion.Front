@@ -8,6 +8,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { ProductCategoryGet } from "../../../../../../interfaces/product";
 import { filterOption } from "../../../../../../lib/filterOption";
 import ButtonFilter from "../../../../../../components/ButtonFilter";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function FilterForm({
   filter,
@@ -28,7 +29,7 @@ export default function FilterForm({
   return (
     // <div className="box-border w-full p-6">
     <Form form={form} onFinish={filter} name="form_item_path" layout="vertical">
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="name" label="نام محصول">
             <Input
@@ -46,14 +47,14 @@ export default function FilterForm({
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProductCategory}
-              options={ProductCategory}
+              options={sortByIndex(ProductCategory, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="isActive" label="فعال/غیر فعال">
             <Select

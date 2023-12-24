@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Col, Form, FormInstance, InputNumber, Row, Select } from "antd";
+import React, {useContext, useState} from "react";
+import {Col, Form, FormInstance, InputNumber, Row, Select} from "antd";
 import useGetAllDensityType from "../../../../../../../../hooks/baseInfo/useGetAllDensityType";
 import useGetAllProductSelectable from "../../../../../../../../hooks/requestDetail/useGetAllProductSelectable";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import { filterOption } from "../../../../../../../../lib/filterOption";
+import {filterOption} from "../../../../../../../../lib/filterOption";
 
 const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
   const processController = useContext(StepContext);
@@ -15,9 +15,10 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
   const [density, setDensity] = useState();
 
   const ChangeDensity = async (value: any) => {
+
     setDensity(value);
 
-    await productSelectableData.getSelectableProduct({
+    productSelectableData.getSelectableProduct({
       requestMasterUid: processController.requestMaster.requestMasterUid,
       densityTypeId: value,
     });
@@ -33,9 +34,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
             name="densityTypeId"
             label="دانسیته محصول"
             labelCol={{ span: 24 }}
-            rules={[
-              { required: true, message: "لطفا دانسیته محصول را انتخاب کنید" },
-            ]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               onChange={ChangeDensity}
@@ -52,7 +51,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
             labelCol={{ span: 24 }}
             name="productUid"
             label="نام محصول"
-            rules={[{ required: true, message: "لطفا محصول را انتخاب کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
@@ -79,12 +78,12 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               name={"productUsageExploitation"}
               label={"درصد استحصال"}
               rules={[
-                { required: true, message: " درصد اسنتحصال اجباری است" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 0,
+                  min: 1,
                   max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
                 },
               ]}
             >
@@ -105,7 +104,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               name={"productUsageWasted"}
               label={"درصد هدر رفت"}
               rules={[
-                { required: true, message: " درصد هدر رفت اجباری است" },
+                { required: true, message: "لطفا مقدار را انتخاب کنید" },
                 {
                   type: "number",
                   min: 0,

@@ -50,7 +50,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             name="materialUid"
             label="نام مواد اولیه"
             rules={[
-              { required: true, message: "نام مواد اولیه اجباری است" },
+              { required: true, message: "لطفا مقدار را انتخاب کنید" },
               { type: "string" },
             ]}
           >
@@ -74,7 +74,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             rules={[
               {
                 required: true,
-                message: "میزان مصرف برای تولید یک واحد اجباری است",
+                message: "لطفا مقدار را وارد کنید",
               },
               {
                 validator: async (rule, value) => {
@@ -93,38 +93,38 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[2, 3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-            <Col xs={24} md={12}>
-              <Form.Item
-                name={"materialUsagePercentage"}
-                label={"درصد استفاده"}
-                rules={[
-                  { required: true, message: " درصد استفاده اجباری است" },
-                  {
-                    type: "number",
-                    min: 0,
-                    max: 100,
-                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                  },
-                ]}
-              >
-                <InputNumber
-                  controls={false}
-                  className="w-full rounded-lg"
-                  size="large"
-                  min={0}
-                  max={100}
-                  formatter={(value) => `${value}%`}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          )}
+          <Col xs={24} md={12}>
+            <Form.Item
+              name={"materialUsagePercentage"}
+              label={"درصد استفاده"}
+              rules={[
+                { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                {
+                  type: "number",
+                  min: 0,
+                  max: 100,
+                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+        )}
         <Col xs={24} md={12}>
           <Form.Item
             name={"materialTotalConsumption"}
             label={"میزان مصرف کل"}
             rules={[
-              { required: true, message: "میزان مصرف کل اجباری است" },
+              { required: true, message: "لطفا مقدار را وارد کنید" },
               {
                 validator: async (rule, value) => {
                   if (!/^\d+$/.test(value)) {
@@ -145,7 +145,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             initialValue={"داخلی"}
             name="materialSupplyMethodId"
             label="نحوه تامین"
-            rules={[{ required: true, message: "نحوه تامین اجباری است" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               fieldNames={supplyMethod.fieldNames}
@@ -172,7 +172,12 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               <Form.Item
                 name="materialImportDeclarationNumber"
                 label="شماره اظهارنامه واردات"
-                rules={[{ required: true, message: "شماره اظهارنامه واردات اجباری است" }]}
+                rules={[
+                  {
+                    required: true,
+                    message: "لطفا مقدار را انتخاب کنید",
+                  },
+                ]}
               >
                 <Input
                   className="w-full rounded-lg"
@@ -194,7 +199,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyName"
                 label="نام"
                 rules={[
-                  { required: true, message: "نام اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string" },
                 ]}
               >
@@ -206,7 +211,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyPersonTypeId"
                 label="شخصیت"
                 rules={[
-                  { required: true, message: "شخصیت اجباری است" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   { type: "number" },
                 ]}
               >
@@ -231,8 +236,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   personTypeStatus === null
                     ? "کد ملی / شناسه ملی"
                     : personTypeStatus === 2
-                      ? "شناسه ملی"
-                      : "کد ملی"
+                    ? "شناسه ملی"
+                    : "کد ملی"
                 }
                 rules={[
                   {
@@ -254,13 +259,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(
-                          "کد 'ملی / شناسه ملی' اجباری است"
-                        );
+                        return Promise.reject(" لطفا مقدار را وارد کنید");
                       }
 
-                      if (/^[0-9]{10}$/) {
-                        return Promise.reject("کد ملی نامتعبر است");
+                      if (value && personTypeStatus === 1) {
+                        return Promise.reject("کد ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {
@@ -284,7 +287,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyIranCode"
                 label="ایرانکد"
                 rules={[
-                  { required: true, message: "ایرانکد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator: async (rule, value) => {
                       if (!/^\d+$/.test(value)) {
@@ -306,7 +309,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyAddress"
                 label="آدرس"
                 rules={[
-                  { required: true, message: "آدرس اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string" },
                 ]}
               >

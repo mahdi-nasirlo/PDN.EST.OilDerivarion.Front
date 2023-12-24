@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 
 interface PropsType {
-  secoandReload: number;
+  SecondReload: number;
 }
 export default function Index(props: PropsType) {
   const iframeRef = useRef(null);
@@ -17,7 +17,7 @@ export default function Index(props: PropsType) {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(refreshIframe, props.secoandReload * 1000); // 10 seconds in milliseconds
+    const intervalId = setInterval(refreshIframe, props.SecondReload * 1000); // 10 seconds in milliseconds
 
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -29,8 +29,9 @@ export default function Index(props: PropsType) {
       height={"100%"}
       className="w-full h-full border-solid"
       src={
-        process.env.MAP_BOX_URL +
-        `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`
+        `https://map.pdnsoftware.ir/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`
+        // process.env.MAP_BOX_URL +
+        // `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`
       }
     ></iframe>
   );

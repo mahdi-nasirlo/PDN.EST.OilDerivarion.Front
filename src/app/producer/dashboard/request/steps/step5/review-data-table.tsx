@@ -1,14 +1,17 @@
 import { Button, Collapse, Empty, Spin, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Product } from "../../../../../../../interfaces/requestDetail";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useGetFinalPage from "../../../../../../../hooks/requestDetail/useGetFinalPage";
 import { addIndexToData } from "../../../../../../../lib/addIndexToData";
 import useDeleteStep from "../../../../../../../hooks/requestDetail/useDeleteStep";
 import { addAlphabetToData } from "../../../../../../../lib/addAlphabetToData";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function ReviewDataTable() {
+  const [open, setOpen] = useState(false);
+
   const processController = useContext(StepContext);
 
   const finalPage = useGetFinalPage(
@@ -66,6 +69,13 @@ export default function ReviewDataTable() {
     },
   ];
 
+  const deleteRequest = (stepNumber: number) => {
+    deleteStep.trigger({
+      stepNumber: stepNumber,
+      requestMasterUid: processController.requestMaster.requestMasterUid,
+    });
+  };
+
   return (
     <>
       <Spin spinning={deleteStep.isMutating || finalPage.isLoading}>
@@ -80,22 +90,23 @@ export default function ReviewDataTable() {
                     {
                       label: "درخواست شماره " + (index + 1),
                       extra: (
-                        <Button
-                          type="text"
-                          size="small"
-                          style={{ padding: "8px !important" }}
-                          className="text-red-500 font-bold"
-                          onClick={() =>
-                            deleteStep.trigger({
-                              stepNumber: item.stepNumber,
-                              requestMasterUid:
-                                processController.requestMaster
-                                  .requestMasterUid,
-                            })
-                          }
-                        >
-                          حذف
-                        </Button>
+                        <>
+                          <ConfirmDeleteModal
+                            open={open}
+                            setOpen={setOpen}
+                            handleDelete={() => deleteRequest(item.stepNumber)}
+                            title={`  درخواست ${index + 1}`}
+                          />
+                          <Button
+                            type="text"
+                            size="small"
+                            style={{ padding: "8px !important" }}
+                            className="text-red-500 font-bold"
+                            onClick={() => setOpen(true)}
+                          >
+                            حذف
+                          </Button>
+                        </>
                       ),
                       children: (
                         <>

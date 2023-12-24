@@ -1,10 +1,11 @@
 import React from "react";
-import {Col, Form, FormInstance, Input, Row, Select} from "antd";
+import { Col, Form, FormInstance, Input, Row, Select } from "antd";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../../lib/server/listFetcher";
-import {filterOption} from "../../../../../../../lib/filterOption";
+import { listFetcher } from "../../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../../lib/filterOption";
 import CustomeDatePicker from "../../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../../components/inputs/Phone";
+import { sortByIndex } from "../../../../../../../lib/sortByIndex";
 
 function Step1({
   form,
@@ -25,7 +26,7 @@ function Step1({
         form={form}
         layout="vertical"
       >
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -39,14 +40,13 @@ function Step1({
             <PhoneInputs name="tel" label="شماره ثابت">
               <Input
                 max={11}
-                type="number"
                 size="large"
                 placeholder="وارد کنید"
               />
             </PhoneInputs>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -66,7 +66,7 @@ function Step1({
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[{ required: true }]}
@@ -79,7 +79,7 @@ function Step1({
                 // @ts-ignore
                 filterOption={filterOption}
                 loading={isLoading}
-                options={data}
+                options={sortByIndex(data, 'Name')}
                 size="large"
                 placeholder="انتخاب کنید"
               />
@@ -103,7 +103,7 @@ function Step1({
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <Form.Item rules={[{ required: true }]} name="address" label="آدرس">
               <Input size="large" placeholder="وارد کنید" />

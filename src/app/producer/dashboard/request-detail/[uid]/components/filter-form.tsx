@@ -7,7 +7,7 @@ export default function PrimaryManufacturerListForm() {
   return (
     // <div className="box-border w-full mt-4 max-lg:mt-2 p-6">
     <Form name="form_item_path" layout="vertical">
-      <Row gutter={[12, 0]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item name="year-establishment" label="نام محصول">
             <Input size="large" placeholder="وارد کنید" />

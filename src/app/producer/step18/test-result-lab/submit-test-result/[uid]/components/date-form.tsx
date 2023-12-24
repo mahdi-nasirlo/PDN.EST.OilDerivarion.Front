@@ -1,9 +1,9 @@
 "use client";
 
-import {Button, Col, Form, Row} from "antd";
+import { Button, Col, Form, Row } from "antd";
 import React from "react";
-import {useForm} from "antd/es/form/Form";
-import {SvgIcon} from "@/components/layout/sidebar";
+import { useForm } from "antd/es/form/Form";
+import { SvgIcon } from "@/components/layout/sidebar";
 import CustomDatePicker from "../../../../../../../../components/CustomeDatePicker";
 
 export default function DateForm() {
@@ -11,14 +11,15 @@ export default function DateForm() {
 
     return (
         <Form form={form} layout="vertical">
-            <Row gutter={[16, 0]}>
+            <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
                     <Form.Item name="name" label="تاریخ شروع آزمایش">
-                        <CustomDatePicker/> </Form.Item>
+                        <CustomDatePicker />
+                    </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item name="IsActive" label="تاریخ پایان آزمایش">
-                        <CustomDatePicker/>
+                        <CustomDatePicker />
                     </Form.Item>
                 </Col>
             </Row>

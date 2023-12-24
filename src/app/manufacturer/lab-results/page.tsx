@@ -47,7 +47,7 @@ export default function Page() {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row gutter={[16, 16]}>
                         <Col xs={24}>
                             <Form.Item rules={[{ required: true, message: "لطفا فیلد را وارد نمایید" }]}
                                 name="processDescription" label="شرح">

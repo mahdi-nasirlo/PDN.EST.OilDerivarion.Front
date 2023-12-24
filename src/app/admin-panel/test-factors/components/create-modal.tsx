@@ -6,6 +6,7 @@ import React from "react";
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import useCreateTestFactors from "../../../../../hooks/test-factors/useCreateTestFactors";
 
+
 export default function CreateModal({
   setModalVisible,
   modalVisible,
@@ -17,13 +18,12 @@ export default function CreateModal({
 }) {
   const [form] = useForm();
 
-  const createTestItemRequest = useCreateTestFactors()
+  const createTestItemRequest = useCreateTestFactors();
 
   const createTestFactor = async (values: any) => {
-
     const res = await createTestItemRequest.trigger(values);
 
-    if (res) {
+    if (res?.success) {
       await mutate();
 
       setModalVisible(false);

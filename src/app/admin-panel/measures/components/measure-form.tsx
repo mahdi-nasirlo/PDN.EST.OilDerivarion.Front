@@ -4,12 +4,12 @@ import { Col, Form, Input, Row, Select } from "antd";
 function MeasureForm() {
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
             label="واحد اندازه گیری"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>

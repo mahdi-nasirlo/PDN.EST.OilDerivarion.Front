@@ -1,13 +1,13 @@
-import React, {useEffect} from "react";
-import {Button, Col, Form, Modal, Row} from "antd";
+import React, { useEffect } from "react";
+import { Button, Col, Form, Modal, Row } from "antd";
 import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
-import {useForm} from "antd/es/form/Form";
-import {Category} from "../../../../../../interfaces/category";
+import { useForm } from "antd/es/form/Form";
+import { Category } from "../../../../../../interfaces/category";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {convertKeysToLowerCase} from "../../../../../../lib/convertKeysToLowerCase";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 
 export default function EditModal({
   mutate,
@@ -38,8 +38,9 @@ export default function EditModal({
       await mutate();
 
       setIsEditModalVisible(false);
+
+      setRecordToEdit(null);
     }
-    setRecordToEdit(null);
   };
 
   const { data, isLoading } = useSWR(
@@ -98,7 +99,7 @@ export default function EditModal({
           form={form}
           layout="vertical"
         >
-          <CategoryForm defaultSelectedDensity={data?.HasDensity}/>
+          <CategoryForm row={convertKeysToLowerCase(data)} />
         </Form>
       </Modal>
     </>

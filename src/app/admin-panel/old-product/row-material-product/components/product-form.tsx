@@ -3,6 +3,7 @@ import { Col, Form, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 function ProductForm() {
   const { data: Product, isLoading: ldProduct } = useSWR(
@@ -17,7 +18,7 @@ function ProductForm() {
 
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             rules={[{ required: true }]}
@@ -30,7 +31,7 @@ function ProductForm() {
               // @ts-ignore
               filterOption={filterOption}
               loading={ldProduct}
-              options={Product}
+              options={sortByIndex(Product, 'Name')}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -48,14 +49,14 @@ function ProductForm() {
               // @ts-ignore
               filterOption={filterOption}
               loading={ldMaterial}
-              options={Material}
+              options={sortByIndex(Material, "Name")}
               size="large"
               placeholder="انتخاب کنید"
             />
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="IsActive"

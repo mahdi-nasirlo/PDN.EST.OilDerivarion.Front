@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { Button, Checkbox, Col, Divider, Form, Row, Spin } from "antd";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { useForm } from "antd/es/form/Form";
+import React, {useContext, useState} from 'react';
+import {Button, Checkbox, Col, Divider, Form, Row, Spin} from "antd";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {useForm} from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
+import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
 import StepContext from '../../state-managment/step-context';
 import ReviewDataTable from './review-data-table';
 import ReviewDataModalFinalSubmit from './review-data-modal-final-submit';
@@ -56,12 +56,12 @@ const Index = () => {
                         <Checkbox>
                             شرایط و
                             <span
-                                className="text-primary-500 p-0 mx-1"
+                                className="text-primary-500 p-0"
                                 onClick={
                                     () => setModalVisibleConfirmation(true)
                                 }
                             >
-                                قوانین
+                                {" قوانین "}
                             </span>
                             را خوانده و می پذیرم!
                         </Checkbox>

@@ -37,37 +37,37 @@ export default function LayoutSidebar({
     const menus = useSsoGetAllUserAccess()
 
     const CommonMenu = ({
-                            style = {},
-                            className = "",
-                        }: {
-        style: object;
-        className: string;
+      style = {},
+      className = "",
+    }: {
+      style: object;
+      className: string;
     }) => {
-        return (
-            <Menu
-                style={style}
-                defaultSelectedKeys={[pathname]}
-                selectedKeys={[pathname]}
-                openKeys={openKeys}
-                onOpenChange={handleMenuOpenChange}
-                className={className}
-                mode="inline"
-                onClick={handleMenuItemClick}
-            >
-                {menus.isLoading && Array.from({length: 10}).map((value, index) => (
-                    <Skeleton.Input key={index} size="default" className="w-full my-1"/>
-                ))}
-                {!menus.isLoading && Array.isArray(menus.data) && menus.data?.map((item) => (
-                    <Menu.Item key={item.url}>
-                        <Link href={item.url}>
-                            {item.nameFa}
-                        </Link>
-                    </Menu.Item>
-                ))}
-            </Menu>
-        );
+      return (
+          <Menu
+              style={style}
+              defaultSelectedKeys={[pathname]}
+              selectedKeys={[pathname]}
+              openKeys={openKeys}
+              onOpenChange={handleMenuOpenChange}
+              className={className}
+              mode="inline"
+              onClick={handleMenuItemClick}
+          >
+              {menus.isLoading && Array.from({length: 10}).map(() => (
+                  <Skeleton.Input size="default" className="w-full my-1"/>
+              ))}
+              {menus.data?.map((item) => (
+                  <Menu.Item key={item.url}>
+                      <Link href={item.url}>
+                          {item.nameFa}
+                      </Link>
+                  </Menu.Item>
+              ))}
+          </Menu>
+      );
     };
-
+      };
 
     return (
         <>
@@ -147,4 +147,3 @@ export const SvgIcon = ({
 }) => (
     <Image src={src} width={width} height={height} className={className} alt=""/>
 );
-

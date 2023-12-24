@@ -1,16 +1,18 @@
-import React from 'react';
 import useSWR from "swr";
-import {listFetcher} from "../../lib/server/listFetcher";
+import { listFetcher } from "../../lib/server/listFetcher";
+import { sortByIndex } from '../../lib/sortByIndex';
 
 
 const UseGetAllSupplyMethod = () => {
 
     const {
-        data: supplyMethods,
+        data,
         isLoading: isLoadingSupplyMethod
     } = useSWR<any[]>("/BaseInfo/SupplyMethodGetAll", listFetcher)
 
-    return {supplyMethods, isLoadingSupplyMethod, fieldNames: {label: "Name", value: "Id"}}
+    const supplyMethods = sortByIndex(data, 'Name')
+
+    return { supplyMethods, isLoadingSupplyMethod, fieldNames: { label: "Name", value: "Id" } }
 
 
 };

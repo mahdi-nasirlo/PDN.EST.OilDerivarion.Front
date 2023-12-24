@@ -46,8 +46,9 @@ export default function DataTable({
       await mutate();
 
       setIsDeleteModalVisible(false);
+
+      setRecordToDelete(null);
     }
-    setRecordToDelete(null);
   };
 
   const showModal = () => {
@@ -117,9 +118,14 @@ export default function DataTable({
       },
     },
     {
+      title: "کد",
+      dataIndex: "SmallCode",
+      key: "7",
+    },
+    {
       title: "فعال/غیر فعال ",
       dataIndex: "isActive",
-      key: "7",
+      key: "8",
       render: (_, record) => <StatusColumn record={record} />
     },
     {

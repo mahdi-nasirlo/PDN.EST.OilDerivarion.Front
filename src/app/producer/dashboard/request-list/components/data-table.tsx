@@ -1,25 +1,23 @@
 "use client";
 
 import React from "react";
-import { Button, Space, Tag, Typography } from "antd";
+import { Button, Popover, Space, Tag, Tooltip, Typography } from "antd";
 import { useRouter } from "next/navigation";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
 import CustomeTable from "../../../../../../components/CustomeTable";
 
-export default function DataTable(
-  {
-    setFilter,
-    data,
-    isLoading,
-    mutate,
-  }: {
-    setFilter: any;
-    data: any;
-    isLoading: any
-    mutate: any
-  }) {
-
+export default function DataTable({
+  setFilter,
+  data,
+  isLoading,
+  mutate,
+}: {
+  setFilter: any;
+  data: any;
+  isLoading: any;
+  mutate: any;
+}) {
   const router = useRouter();
 
   const columns: ColumnsType<RequestList> = [
@@ -27,12 +25,27 @@ export default function DataTable(
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
-      title: "نام فرآیند",
+      title: "شرح فرآیند",
       dataIndex: "processDescription",
       key: "2",
+      width: "40%",
+      render: (_, record) => (
+        <Tooltip
+          placement="top"
+          title={<Typography>{record.processDescription}</Typography>}
+        >
+          <Typography.Text
+            // className="w-full"
+            className=" max-w-xl"
+            ellipsis={true}
+          >
+            {record.processDescription}
+          </Typography.Text>
+        </Tooltip>
+      ),
     },
     {
       title: "تاریخ درخواست",
@@ -54,12 +67,7 @@ export default function DataTable(
           name = "تکمیل نشده";
         }
 
-        return (
-          <Tag color={color}>
-            {name}
-          </Tag>
-        );
-
+        return <Tag color={color}>{name}</Tag>;
       },
     },
     {
@@ -93,8 +101,6 @@ export default function DataTable(
       ),
     },
   ];
-
-
 
   return (
     <div className="box-border w-full p-6 mt-8">

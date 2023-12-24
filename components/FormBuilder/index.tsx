@@ -7,6 +7,7 @@ import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
+import {updatedObject} from "../../utils/method";
 
 export interface FormBuilderInputType {
     Name: string,
@@ -47,68 +48,6 @@ export interface FormSchemaType {
     Forms: FormType[]
 }
 
-
-// const Index = ({items, loading = false, title = false}: ComponentProps) => {
-//
-//     if (loading) {
-//         return <Spin spinning={true}/>
-//     }
-//
-//     try {
-//
-//         if (items.length === 1) {
-//
-//             return <>
-//                 <div>
-//                     <div>
-//                         {title && <>
-//                             <Typography.Title level={5} className="text-gray-901 text-right">
-//                                 {items[0].Title}
-//                             </Typography.Title>
-//                             <Typography className="w-full text-right text-sm">
-//                                 {items[0].Description}
-//                             </Typography>
-//                         </>}
-//                         <div>
-//                             {items?.map((value, index) => <><RenderForm item={value}/></>)}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </>
-//
-//         } else {
-//
-//             return <></>
-//
-//         }
-//
-//         // return (
-//         //     <>
-//         //         {}
-//         //         {/*<div>*/}
-//         //         {/*    <div>*/}
-//         //         {/*        {title && <>*/}
-//         //         {/*            <Typography.Title level={5} className="text-gray-901 text-right">*/}
-//         //         {/*                {items[0].Title}*/}
-//         //         {/*            </Typography.Title>*/}
-//         //         {/*            <div className="w-full text-right text-sm text-gray-300">*/}
-//         //         {/*                {items[0].Description}*/}
-//         //         {/*            </div>*/}
-//         //         {/*        </>}*/}
-//         //         {/*        /!*<div>*!/*/}
-//         //         {/*        /!*    {items?.map((value, index) => <><RenderForm item={value}/></>)}*!/*/}
-//         //         {/*        /!*</div>*!/*/}
-//         //         {/*    </div>*/}
-//         //         {/*</div>*/}
-//         //     </>
-//         // );
-//     } catch (e) {
-//         return "Form Maker JSON Is Invalid"
-//     }
-//
-// };
-
-
 const Index = (props: {
     item: FormType,
     initialValues?: any,
@@ -127,24 +66,15 @@ const Index = (props: {
                 {data.Description}
             </Typography>
         </>}
-        <RenderInputs initialValues={props.initialValues} item={data.FormFields} onSet={props.onSet}
-                      formID={data.Form_Key}/>
+        <RenderInputs
+            initialValues={props.initialValues}
+            item={data.FormFields}
+            onSet={props.onSet}
+            formID={data.Form_Key}
+        />
     </>
 }
 
-// const FormTabType = ({data}: { data: FormSchemaType }) => (<Tabs
-//     type="card"
-//     defaultActiveKey="0"
-//     items={data.Forms.map((value, index) => ({
-//         key: `${index}`,
-//         label: value.Title,
-//         children: <RenderInputs item={value.FormFields}/>
-//     }))}
-// />)
-
-// const FormSimpleType = ({data}: { data: FormType }) => (<>
-//     <RenderInputs item={data.FormFields}/>
-// </>)
 
 const RenderInputs = (props: {
     item: FormBuilderInputType[],
@@ -159,12 +89,7 @@ const RenderInputs = (props: {
     useEffect(() => {
         if (props.initialValues) {
 
-            form.setFieldsValue({
-                "name28": "lab_facilities_confirm",
-                "name31": "entery_water_confirm"
-            })
-
-            console.log(props.initialValues)
+            form.setFieldsValue(updatedObject(props.initialValues))
 
         }
     }, [])

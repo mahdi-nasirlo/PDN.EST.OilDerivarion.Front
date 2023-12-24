@@ -56,28 +56,28 @@ export default function RejectRequestModal({ modalVisible, setModalVisible }: { 
             ]}
         >
             <Form form={form} >
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col >
                         <Checkbox className="py-3">
                             نقص در اطلاعات
                         </Checkbox>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col>
                         <Checkbox className="py-3">
                             اتمام اعتبار مجوز
                         </Checkbox>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
                     <Col>
                         <Checkbox className="py-3">
                             سایر موارد
                         </Checkbox>
                     </Col>
                 </Row>
-                <Row gutter={[32, 1]} >
+                <Row gutter={[16, 16]}>
                     <Col xs={24}>
                         <Input.TextArea
                             className="mt-2 bg-gray-50"

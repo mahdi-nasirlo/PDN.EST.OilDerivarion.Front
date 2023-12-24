@@ -5,6 +5,7 @@ import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import BarcodeFormLockup from "@/app/admin-panel/barcode/components/barcode-form-lockup";
 import { filterOption } from "../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 function BarcodeFormInteractive(props: {
   ID: number | undefined;
@@ -103,7 +104,7 @@ function BarcodeFormInteractive(props: {
               // @ts-ignore
               filterOption={filterOption}
               loading={isLdGps}
-              options={GPS}
+              options={sortByIndex(GPS, 'Code')}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -140,7 +141,7 @@ function BarcodeFormInteractive(props: {
               // @ts-ignore
               filterOption={filterOption}
               loading={isLdMaterial}
-              options={materials}
+              options={sortByIndex(materials, 'MaterialName')}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -169,7 +170,7 @@ function BarcodeFormInteractive(props: {
               // @ts-ignore
               filterOption={filterOption}
               loading={isLdProduct}
-              options={products}
+              options={sortByIndex(products, 'ProductName')}
               size="large"
               placeholder="انتخاب کنید"
             />

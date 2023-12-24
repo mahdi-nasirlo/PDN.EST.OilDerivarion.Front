@@ -1,33 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, InputNumber, Row, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import { CategoryProduct } from "../../../../../../interfaces/category-product";
 
 function CategoryForm({
-  defaultSelectedDensity,
+  row,
 }: {
-  defaultSelectedDensity?: boolean;
+  row?: CategoryProduct;
 }) {
   const { data, isLoading } = useSWR(
     "/BaseInfo/GetAllProductionMethod",
     listFetcher
   );
 
-  const [hasDensity, setHasDensity] = useState(defaultSelectedDensity);
+
+  const [hasDensity, setHasDensity] = useState(row?.hasDensity)
 
   useEffect(() => {
-    setHasDensity(defaultSelectedDensity);
-  }, [defaultSelectedDensity]);
+    setHasDensity(row?.hasDensity)
+  }, [row])
 
   return (
     <>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="name"
             label="نام دسته بندی"
-            rules={[{ required: true }, { type: "string" }]}
+            rules={[
+              { required: true, message: "لطفا مقدار را وارد کنید" },
+              { type: "string" },
+            ]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -36,14 +42,14 @@ function CategoryForm({
           <Form.Item
             name="productionMethodId"
             label="روش تولید"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
               // @ts-ignore
               filterOption={filterOption}
               loading={isLoading}
-              options={data}
+              options={sortByIndex(data, "Name")}
               fieldNames={{ label: "Name", value: "Id" }}
               size="large"
               placeholder="انتخاب کنید"
@@ -51,12 +57,12 @@ function CategoryForm({
           </Form.Item>
         </Col>
       </Row>
-      <Row gutter={[32, 1]}>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
             name="isActive"
             label="فعال/غیر فعال"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             initialValue={true}
           >
             <Select
@@ -73,7 +79,7 @@ function CategoryForm({
           <Form.Item
             name="hasDensity"
             label="دانسیته"
-            rules={[{ required: true }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               options={[
@@ -82,23 +88,24 @@ function CategoryForm({
               ]}
               size="large"
               placeholder="انتخاب کنید"
-              onChange={(value) => setHasDensity(value)}
+              onChange={value => setHasDensity(value)}
             />
           </Form.Item>
         </Col>
       </Row>
       {hasDensity && (
-        <Row gutter={[32, 1]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
                 { required: true },
                 {
                   validator(_, value) {
-                    if (isNaN(value)) {
-                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
+                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+                      return Promise.reject(
+                        new Error("لطفاً عدد صحیح وارد کنید")
+                      );
                     }
-                    parseFloat(value);
                     return Promise.resolve();
                   },
                 },
@@ -106,20 +113,26 @@ function CategoryForm({
               name="densityLowerLimit"
               label="حداقل بازه"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <InputNumber
+                max={50000}
+                className="w-full"
+                size="large"
+                placeholder="وارد کنید"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (isNaN(value)) {
-                      return Promise.reject(new Error("لطفاً عدد وارد کنید"));
+                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+                      return Promise.reject(
+                        new Error("لطفاً عدد صحیح وارد کنید")
+                      );
                     }
-                    if (value > getFieldValue("densityLowerLimit")) {
-                      parseFloat(value);
+                    if (parseInt(value) > getFieldValue("densityLowerLimit")) {
                       return Promise.resolve();
                     } else {
                       return Promise.reject(
@@ -134,11 +147,45 @@ function CategoryForm({
               name="densityUpperLimit"
               label="حداکثر بازه"
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <InputNumber
+                max={50000}
+                className="w-full"
+                size="large"
+                placeholder="وارد کنید"
+              />
             </Form.Item>
           </Col>
         </Row>
       )}
+      <Row gutter={[16, 16]}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            name="smallCode"
+            label="کد"
+            rules={[
+              { required: true, message: "لطفا مقدار را وارد کنید" },
+              {
+                validator(_, value) {
+                  const numericValue = parseFloat(value);
+                  if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
+                    return Promise.reject(
+                      new Error("لطفاً عدد صحیح وارد کنید")
+                    );
+                  }
+                  if (numericValue > 100) {
+                    return Promise.reject(
+                      new Error("مقدار حداکثر 2 کارکتر می باشد")
+                    )
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
+            <Input size="large" placeholder="وارد کنید" />
+          </Form.Item>
+        </Col>
+      </Row>
     </>
   );
 }

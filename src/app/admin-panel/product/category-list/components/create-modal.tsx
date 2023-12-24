@@ -25,7 +25,9 @@ export default function CreateModal({
   const [form] = useForm();
 
   const handleFormSubmit = async (values: CategoryProduct) => {
-    const res = await trigger(values);
+    const smallCodeAsNumber = Number(values.smallCode);
+    const updatedValues = { ...values, smallCode: smallCodeAsNumber };
+    const res = await trigger(updatedValues);
 
     if (res) {
       await mutate();

@@ -7,6 +7,7 @@ import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
 export default function EditModal({
   isEditModalVisible,
@@ -103,7 +104,7 @@ export default function EditModal({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات کارخانه
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item
                 name="factoryStateId"
@@ -115,7 +116,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldStateGetAll}
-                  options={StateGetAll}
+                  options={sortByIndex(StateGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -134,7 +135,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldCityGetAll}
-                  options={CityGetAll}
+                  options={sortByIndex(CityGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -147,7 +148,7 @@ export default function EditModal({
               </PhoneInputs>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item
                 name="factoryAddressDetail"
@@ -161,7 +162,7 @@ export default function EditModal({
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات دفتر مرکزی
           </Typography>
-          <Row gutter={[16, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item
                 name="centralOfficeStateId"
@@ -173,7 +174,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldStateGetAll}
-                  options={StateGetAll}
+                  options={sortByIndex(StateGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -192,7 +193,7 @@ export default function EditModal({
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldCityGetAll}
-                  options={CityGetAll}
+                  options={sortByIndex(CityGetAll, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -205,7 +206,7 @@ export default function EditModal({
               </PhoneInputs>
             </Col>
           </Row>
-          <Row>
+          <Row gutter={[16, 16]}>
             <Col span={24}>
               <Form.Item
                 name="centralOfficeAddressDetail"

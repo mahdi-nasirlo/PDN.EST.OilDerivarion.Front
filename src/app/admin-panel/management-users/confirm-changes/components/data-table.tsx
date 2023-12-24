@@ -196,7 +196,7 @@ export default function DataTable({
         ]}
       >
         <Form form={form} layout="vertical">
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item name="year-establishment" label="نام/ نقش کاربر">
                 <Select
@@ -213,7 +213,7 @@ export default function DataTable({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col md={24}>
               <Form.Item name="year-establishment" label="آپلود سند">
                 <Upload
@@ -228,7 +228,7 @@ export default function DataTable({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[32, 1]}>
+          <Row gutter={[16, 16]}>
             <Col md={24}>
               <Form.Item label="آپلود سند" name="establishment">
                 <TextArea

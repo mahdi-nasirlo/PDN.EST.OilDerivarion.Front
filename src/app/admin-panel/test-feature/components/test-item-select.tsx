@@ -3,6 +3,7 @@ import React from "react";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { filterOption } from "../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
 
 export default function TestItemSelect({ name }: { name: string }) {
   const { data, isLoading } = useSWR("/TestItem/GetAll", (url) =>
@@ -19,13 +20,13 @@ export default function TestItemSelect({ name }: { name: string }) {
       <Form.Item
         name={name}
         label="فاکتور آزمون"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
       >
         <Select
           showSearch
           // @ts-ignore
           filterOption={filterOption}
-          options={data}
+          options={sortByIndex(data, "name")}
           loading={isLoading}
           fieldNames={{ value: "uid", label: "name" }}
           size="large"

@@ -1,13 +1,13 @@
 "use client";
 
-import {Button, Col, Form, Input, Modal, Row} from "antd";
-import {useForm} from "antd/es/form/Form";
+import { Button, Col, Form, Input, Modal, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import React from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../../../lib/server/mutationFetcher";
 
 export default function ResultModal({
-                                        handleFormSubmit,
+    handleFormSubmit,
     setModalVisible,
     modalVisible,
 }: {
@@ -87,7 +87,7 @@ export default function ResultModal({
                 form={form}
                 layout="vertical"
             >
-                <Row gutter={[32, 1]}>
+                <Row gutter={[16, 16]}>
 
                     <Col xs={24} md={12}>
                         <Form.Item

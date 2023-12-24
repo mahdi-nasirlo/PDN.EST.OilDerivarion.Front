@@ -6,10 +6,12 @@ import useUpdateTestFactors from "../../../../../hooks/test-factors/useUpdateTes
 import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 
 function EditModal({
+  setModalVisible,
   recordToEdit,
   setRecordToEdit,
   mutate,
 }: {
+  setModalVisible: any
   recordToEdit: TestItem | undefined;
   setRecordToEdit: (arg: undefined) => void;
   mutate: () => void;
@@ -20,28 +22,27 @@ function EditModal({
   //   ([url, arg]) => listFetcher(url, { arg })
   // );
 
-  const UpdateTestItem = useUpdateTestFactors()
+  const UpdateTestItem = useUpdateTestFactors();
 
   const handleSubmit = async (values: any) => {
     values.uid = recordToEdit?.uid;
 
     const res = await UpdateTestItem.trigger(values);
-    if (res) {
+    if (res?.success == true) {
       await mutate();
-
+      setModalVisible(false)
       setRecordToEdit(undefined);
-
       form.resetFields();
     }
   };
 
   useEffect(() => {
+    // const newData = recordToEdit?.testItem_Details?.map((item) => {
+    //   return item.uid;
+    // });
 
-    const newData = recordToEdit?.testItem_Details?.map((item) => {
-      return item.uid
-    })
-
-    form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
+    // form.setFieldsValue({ ...recordToEdit, testItem_Details: newData });
+    form.setFieldsValue(recordToEdit);
 
   }, [recordToEdit]);
 
@@ -84,9 +85,8 @@ function EditModal({
                 انصراف
               </Button>
             </Col>
-          </Row >,
-        ]
-        }
+          </Row>,
+        ]}
       >
         <Form
           onFinish={handleSubmit}
@@ -96,7 +96,7 @@ function EditModal({
         >
           <TestFactorForm />
         </Form>
-      </Modal >
+      </Modal>
     </>
   );
 }

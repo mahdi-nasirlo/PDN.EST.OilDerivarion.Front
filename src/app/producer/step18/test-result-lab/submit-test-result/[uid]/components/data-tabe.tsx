@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Divider,
-  Form,
-  Input,
-  Select,
-  Space,
-  Table,
-  Tooltip,
-  Typography,
-} from "antd";
-import DateForm from "./date-form";
+import { Button, Divider, Form, Input, Select, Space, Table, Tooltip, Typography, } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../../../lib/server/listFetcher";
 import Item from "antd/es/list/Item";
@@ -78,7 +67,7 @@ const DataTable = ({ uid }: { uid: string }) => {
           size="large"
           labelInValue
           options={testItemDetail.data || ([] as any)}
-          fieldNames={{ label: "Title", value: "Uid" }}
+          fieldNames={{ label: "title", value: "uid" }}
           loading={testItemDetail.isLoading}
         />
       ) : (
@@ -350,8 +339,8 @@ const DataTable = ({ uid }: { uid: string }) => {
       </Typography>
       <Divider />
 
-      <DateForm />
-      <Divider />
+      {/*<DateForm />*/}
+      {/*<Divider />*/}
 
       <div className="flex justify-between items-center mb-4">
         <Typography className="text-right text-[16px] font-normal">

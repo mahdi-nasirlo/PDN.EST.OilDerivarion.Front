@@ -1,6 +1,7 @@
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../lib/server/mutationFetcher";
 import {listFetcher} from "../../lib/server/listFetcher";
+import UseRequestDetailCompleteMaterial from "./useRequestDetailCompleteProduct";
 
 interface RequestDetailMaterialType {
     create: {
@@ -34,10 +35,17 @@ const useCrudRequestDetailProduct = (): RequestDetailMaterialType => {
         trigger: createProductWithNotify
     } = useSWRMutation("/RequestDetail/CreateProduct", mutationFetcher)
 
+
     
 
     const handleCreate = async (value: Create, notify: boolean = false) => {
-        return await createProduct(value)
+          
+
+            if (notify) {
+                return await createProduct(value)
+                
+            }else return await createProductWithNotify(value)
+
     }
 
     const {

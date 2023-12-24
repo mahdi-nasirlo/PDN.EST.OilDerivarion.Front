@@ -1,8 +1,10 @@
 import Image from "next/image";
-import {EditFilled, LogoutOutlined} from "@ant-design/icons";
-import {Button, Col, Dropdown, MenuProps, Modal, Row, Typography} from "antd";
-import {useState} from "react";
-import {signOut, useSession} from "next-auth/react";
+import { EditFilled, LogoutOutlined } from "@ant-design/icons";
+import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
+import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import useSWR from "swr";
+import { listFetcher } from "../../../lib/server/listFetcher";
 
 export default function HeaderDropdown() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +24,13 @@ export default function HeaderDropdown() {
   };
 
   const session = useSession()
+
+
+  const { data, isLoading } = useSWR(
+    "/Sso/GetUserInfo",
+    (url) => listFetcher(url)
+  );
+
 
   const items: MenuProps["items"] = [
     {
@@ -68,10 +77,10 @@ export default function HeaderDropdown() {
             />
             <div>
               <Typography className="font-normal text-lg hidden lg:block">
-                {session?.data?.user?.name}
+                {data?.lastName}
               </Typography>
               <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
-                سمت شغلی
+                {data?.firstName}
               </Typography>
             </div>
             <Image

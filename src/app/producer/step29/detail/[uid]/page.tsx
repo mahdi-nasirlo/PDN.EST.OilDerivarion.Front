@@ -93,28 +93,28 @@ export default function Home(props: PropType) {
         />
 
         {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
-        <Divider />
-        <Form onFinish={onFinish} form={form}>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={24}>
-              <Form.Item
-                wrapperCol={{ span: 24 }}
-                labelCol={{ span: 24 }}
-                name="description"
-                label="توضیحات"
-              >
-                <Input.TextArea
-                  style={{ height: 100, resize: "none" }}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
 
-        {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && (
           <>
+            <Divider />
+            <Form onFinish={onFinish} form={form}>
+              <Row gutter={[16, 16]}>
+                <Col xs={24} md={24}>
+                  <Form.Item
+                    wrapperCol={{ span: 24 }}
+                    labelCol={{ span: 24 }}
+                    name="description"
+                    label="توضیحات"
+                  >
+                    <Input.TextArea
+                      style={{ height: 100, resize: "none" }}
+                      placeholder="وارد کنید"
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+
             <Divider />
             <div className="grid grid-cols-1 gap-3">
               <WorkflowRequestBtn

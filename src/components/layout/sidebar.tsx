@@ -54,8 +54,8 @@ export default function LayoutSidebar({
             mode="inline"
             onClick={handleMenuItemClick}
         >
-            {menus.isLoading && Array.from({length: 10}).map(() => (
-                <Skeleton.Input size="default" className="w-full my-1"/>
+            {menus.isLoading && Array.from({length: 10}).map((value, index) => (
+                <Skeleton.Input key={index} size="default" className="w-full my-1"/>
             ))}
             {menus.data?.map((item) => (
                 <Menu.Item key={item.url}>

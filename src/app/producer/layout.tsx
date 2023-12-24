@@ -196,6 +196,10 @@ const items: MenuProps["items"] = [
         "/producer/step26/list"
       ),
       getMenuItem(
+        <Link href={"/producer/step29/list"}>پرداخت توسط متقاضی </Link>,
+        "/producer/step29/list"
+      ),
+      getMenuItem(
         <Link href={"/producer/step27/list"}>
           تعیین آزمایشگاه و آزمون تکمیلی و پرداخت هزینه{" "}
         </Link>,

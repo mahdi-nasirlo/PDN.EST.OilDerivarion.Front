@@ -2,21 +2,20 @@
 
 import AppLayout from "@/components/layout/layout";
 import React from "react";
-import { Badge, MenuProps } from "antd";
+import {Badge, MenuProps} from "antd";
 import Link from "next/link";
 import {
-  BeakerIcon,
-  DocumentDuplicateIcon,
-  DocumentMagnifyingGlassIcon,
-  HomeIcon,
-  PencilIcon,
-  PhoneIcon,
-  UserCircleIcon,
-  UsersIcon,
-  WrenchScrewdriverIcon,
+    BeakerIcon,
+    DocumentDuplicateIcon,
+    HomeIcon,
+    PencilIcon,
+    PhoneIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
-import { getMenuItem } from "@/components/layout/sidebar";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
+import {getMenuItem} from "@/components/layout/sidebar";
 
 export default function RootLayout({
   children,
@@ -292,8 +291,8 @@ const items: MenuProps["items"] = [
         <BeakerIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/base-info/ractore-prompter">
-          راکتور سولفور زدایی{" "}
+          <Link href="/producer/base-info/ractore-prompter" scroll={false}>
+              راکتور سولفور زدایی
         </Link>,
         "/producer/base-info/ractore-prompter",
         <BeakerIcon width={16} height={16} />

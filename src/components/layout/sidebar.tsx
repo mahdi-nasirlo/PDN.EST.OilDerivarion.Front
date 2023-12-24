@@ -1,17 +1,17 @@
 "use client";
 
-import React, {useState} from "react";
-import {Drawer, Menu, MenuProps, Skeleton} from "antd";
+import React, { useState } from "react";
+import { Drawer, Menu, MenuProps, Skeleton } from "antd";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
 import Link from "next/link";
 
 export default function LayoutSidebar({
-                                          menu,
-                                          onClose,
-                                          open,
-                                      }: {
+    menu,
+    onClose,
+    open,
+}: {
     menu: MenuProps["items"] | any;
     onClose: any;
     open: any;
@@ -37,9 +37,9 @@ export default function LayoutSidebar({
     const menus = useSsoGetAllUserAccess()
 
     const CommonMenu = ({
-                            style = {},
-                            className = "",
-                        }: {
+        style = {},
+        className = "",
+    }: {
         style: object;
         className: string;
     }) => {
@@ -54,8 +54,8 @@ export default function LayoutSidebar({
                 mode="inline"
                 onClick={handleMenuItemClick}
             >
-                {menus.isLoading && Array.from({length: 10}).map((value, index) => (
-                    <Skeleton.Input key={index} size="default" className="w-full my-1"/>
+                {menus.isLoading && Array.from({ length: 10 }).map((value, index) => (
+                    <Skeleton.Input key={index} size="default" className="w-full my-1" />
                 ))}
                 {!menus.isLoading && Array.isArray(menus.data) && menus.data?.map((item) => (
                     <Menu.Item key={item.url}>
@@ -106,7 +106,7 @@ export default function LayoutSidebar({
                     open={open}
                     className="boa"
                 >
-                    <CommonMenu style={{height: "100%"}} className=""/>
+                    <CommonMenu style={{ height: "100%" }} className="" />
                 </Drawer>
                 {/*</motion.div>*/}
             </div>
@@ -135,16 +135,16 @@ export function getMenuItem(
 }
 
 export const SvgIcon = ({
-                            src,
-                            width = 16,
-                            height = 16,
-                            className,
-                        }: {
+    src,
+    width = 16,
+    height = 16,
+    className,
+}: {
     src: string;
     width?: number;
     height?: number;
     className?: string;
 }) => (
-    <Image src={src} width={width} height={height} className={className} alt=""/>
+    <Image src={src} width={width} height={height} className={className} alt="" />
 );
 

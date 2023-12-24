@@ -7,6 +7,7 @@ import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
+import {updatedObject} from "../../utils/method";
 
 export interface FormBuilderInputType {
     Name: string,
@@ -159,13 +160,8 @@ const RenderInputs = (props: {
     useEffect(() => {
         if (props.initialValues) {
 
-            form.setFieldsValue({
-                "name28": "lab_facilities_confirm",
-                "name31": "entery_water_confirm"
-            })
-
-            console.log(props.initialValues)
-
+            form.setFieldsValue(updatedObject(props.initialValues))
+            console.log(updatedObject(props.initialValues))
         }
     }, [])
 

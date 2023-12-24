@@ -206,7 +206,7 @@ const items: MenuProps["items"] = [
         "/producer/step27/list"
       ),
       getMenuItem(
-        <Link href={"/producer/step28/list"}>صدور کد رهگیری </Link>,
+        <Link href={"/producer/step28/list"}>نمایش کد رهگیری </Link>,
         "/producer/step28/list"
       ),
     ],

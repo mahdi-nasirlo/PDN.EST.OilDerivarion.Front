@@ -1,14 +1,14 @@
 "use client";
 
 
-import {Alert, Button, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
+import { Alert, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../../../components/CustomeTable";
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
-export default function DataTable({labresult, ldlabresult}: {
+export default function DataTable({ labresult, ldlabresult }: {
     ldlabresult: any
     labresult: any
 }) {
@@ -26,39 +26,38 @@ export default function DataTable({labresult, ldlabresult}: {
             title: "بار کد",
             dataIndex: "Uid",
             key: "2",
-            width: "25%"
         },
-        {
-            title: "فاکتورهای آزمون",
-            dataIndex: "Tracking",
-            key: "3",
-        },
-        {
-            title: "وضعیت",
-            dataIndex: "pdn",
-            key: "5",
-            render(_, record) {
-                let color = "";
-                let name = "";
+        // {
+        //     title: "فاکتورهای آزمون",
+        //     dataIndex: "Tracking",
+        //     key: "3",
+        // },
+        // {
+        //     title: "وضعیت",
+        //     dataIndex: "pdn",
+        //     key: "5",
+        //     render(_, record) {
+        //         let color = "";
+        //         let name = "";
 
-                if (record.pdn === 0) {
-                    color = "red";
-                    name = "ثبت نشده";
-                } else if (record.pdn === 1) {
-                    color = "success";
-                    name = "ثبت شده";
-                } else {
-                    color = "warning";
-                    name = "_";
-                }
+        //         if (record.pdn === 0) {
+        //             color = "red";
+        //             name = "ثبت نشده";
+        //         } else if (record.pdn === 1) {
+        //             color = "success";
+        //             name = "ثبت شده";
+        //         } else {
+        //             color = "warning";
+        //             name = "_";
+        //         }
 
-                return (
-                    <Tag color={color}>
-                        {name}
-                    </Tag>
-                );
-            }
-        },
+        //         return (
+        //             <Tag color={color}>
+        //                 {name}
+        //             </Tag>
+        //         );
+        //     }
+        // },
         {
             title: "عملیات",
             key: "عملیات",
@@ -67,15 +66,14 @@ export default function DataTable({labresult, ldlabresult}: {
             width: "10%",
             render: (_, record) => (
                 <Space size="small">
-                    <Button
-                        type="link"
-                        className="text-secondary-500 font-bold"
+                    <button
+                        className="text-secondary-500 font-bold py-2"
                         onClick={() => {
                             router.push(`/producer/step18/test-result-lab/submit-test-result/${record.Uid}`)
                         }}
                     >
                         ثبت نتیجه
-                    </Button>
+                    </button>
 
                 </Space>
             ),
@@ -85,22 +83,21 @@ export default function DataTable({labresult, ldlabresult}: {
 
     return (
         <>
-            <div className="box-border w-full mt-8 p-6">
+            <div className="box-border w-full p-6">
                 <Alert
-                    style={{height: 60}}
+                    style={{ height: 60 }}
                     message="کد درخواست: 25648"
                     type="info"
-                    className="text-right mb-12"
+                    className="text-right mb-8"
                 />
-
-                <Typography className="mt-3 mb-6 text-right font-medium text-base">
+                <Typography className="mt-3 mb-5 text-right font-medium text-base">
                     لیست آزمایش ها
                 </Typography>
                 <CustomeTable
                     setInitialData={() => {
                     }}
                     isLoading={ldlabresult}
-                    data={{count: labresult?.length, records: labresult}}
+                    data={{ count: labresult?.length, records: labresult }}
                     rowKey={"Row"}
                     columns={columns}
 

@@ -6,6 +6,7 @@ import Image from "next/image";
 import {usePathname} from "next/navigation";
 import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
 import Link from "next/link";
+import {motion} from "framer-motion";
 
 export default function LayoutSidebar({
                                           menu,
@@ -82,11 +83,11 @@ export default function LayoutSidebar({
                     zIndex: 99,
                 }}
             >
-                {/*<motion.div*/}
-                {/*    initial={{x: "100%", opacity: 0}}*/}
-                {/*    animate={{x: 0, opacity: 1}}*/}
-                {/*    transition={{ease: "easeIn", duration: 0.1}}*/}
-                {/*>*/}
+                <motion.div
+                    initial={{x: "100%", opacity: 0}}
+                    animate={{x: 0, opacity: 1}}
+                    transition={{ease: "easeIn", duration: 0.1}}
+                >
                     <CommonMenu
                         style={{
                             width: "270px",
@@ -108,7 +109,7 @@ export default function LayoutSidebar({
                     >
                         <CommonMenu style={{height: "100%"}} className=""/>
                     </Drawer>
-                {/*</motion.div>*/}
+                </motion.div>
             </div>
         </>
     );

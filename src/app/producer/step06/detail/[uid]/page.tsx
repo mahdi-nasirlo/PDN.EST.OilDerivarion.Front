@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { Button, Divider, Typography } from "antd";
+import {Button, Divider, Typography} from "antd";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import { Choice } from "../../../../../../interfaces/requestDetail";
+import {Choice} from "../../../../../../interfaces/requestDetail";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
-import { useRouter } from "next/navigation";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
+import {useRouter} from "next/navigation";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropsType {
@@ -21,24 +21,6 @@ const Page = (props: PropsType) => {
 
   const router = useRouter();
 
-  const testBtn = {
-    choice_Key: "test",
-    choice_id: "",
-    counting_position: "",
-    keyword: "",
-    label: "پرداخت صورت حساب",
-  };
-
-  // useEffect(() => {
-  //
-  //     data?.choices.push(testBtn as Choice)
-  //     console.log(data?.choices.find((item) => {
-  //         item.choice_Key === "test"
-  //     }), data?.choices)
-  //     // if ()
-  //
-  // }, [data?.choices])
-
   return (
     <div className="box-border w-full p-6">
       <div className="flex justify-between flex-col">
@@ -47,7 +29,7 @@ const Page = (props: PropsType) => {
         </div>
         <Divider />
       </div>
-      {/* <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/> */}
+      <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
       {/*<WorkflowDataViewer data={data as any} loading={isLoading} />*/}
       {data && <Divider />}
       <div className="grid grid-cols-1 gap-3">

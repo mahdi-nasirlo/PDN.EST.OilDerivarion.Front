@@ -64,6 +64,7 @@ export default function Home(props: PropType) {
     link.click();
     form.submit();
     setChoice(choiceKey);
+    onFinish();
   };
 
   const [form] = useForm();
@@ -72,7 +73,7 @@ export default function Home(props: PropType) {
 
   const router = useRouter();
 
-  const { isLoading, data, mutate } = useGetStep({
+  const { isLoading, data } = useGetStep({
     taskId: props.params.uid,
     apiUrl: apiData.get.url,
   });
@@ -82,9 +83,8 @@ export default function Home(props: PropType) {
     mutationFetcher
   );
 
-  const onFinish = async (values: any) => {
+  const onFinish = async () => {
     const data = {
-      ...values,
       taskId: props.params.uid,
       choiceKey: choice,
     };

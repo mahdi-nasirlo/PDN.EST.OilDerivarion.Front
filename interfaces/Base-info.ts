@@ -7,16 +7,16 @@ export interface SetBase {
 }
 
 export interface GerPagePresonLicence {
-  Uid: string;
-  Name: string;
-  LicenseTypeId: number;
-  Number: string;
-  Exporter: string;
-  Code: string;
-  IssueDate: string;
-  ExpirationDate: string;
-  IsCurrent: boolean;
-  LicenseTypeName: string;
+  uid: string;
+  name: string;
+  licenseTypeId: number;
+  number: string;
+  exporter: string;
+  code: string;
+  issueDatePersian: string;
+  expirationDatePersian: string;
+  isCurrent: boolean;
+  licenseTypeName: string;
 }
 export interface CreatePresonLicence {
   name: string;

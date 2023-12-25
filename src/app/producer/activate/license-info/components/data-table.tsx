@@ -35,7 +35,7 @@ export default function DataTable({
 
   const handleConfirmDelete = async () => {
     const res = await DeleteLicense({
-      uid: recordToDelete?.Uid,
+      uid: recordToDelete?.uid,
     });
 
     await mutate();

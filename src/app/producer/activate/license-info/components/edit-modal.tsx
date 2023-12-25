@@ -122,7 +122,7 @@ export default function EditModal({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="licenseTypeName"
+                name="licenseTypeId"
                 label="نوع مجوز"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
@@ -144,7 +144,7 @@ export default function EditModal({
                 label="تاریخ صدور"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <CustomDatePicker />{" "}
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>
@@ -155,7 +155,7 @@ export default function EditModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <CustomDatePicker />{" "}
+                <CustomDatePicker />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

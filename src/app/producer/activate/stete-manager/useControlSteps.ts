@@ -9,7 +9,7 @@ export interface ProcessType {
 }
 
 function useControlSteps(): ProcessType {
-  const [step, dispatch] = useReducer(stepReducer, 0);
+  const [step, dispatch] = useReducer(stepReducer, 6);
 
   return { step, dispatch };
 }

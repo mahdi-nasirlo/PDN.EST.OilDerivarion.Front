@@ -6,6 +6,7 @@ import { Table, Typography } from "antd";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
 import { mutate } from "swr";
+import { addIndexToData } from "../../../../../../../../lib/addIndexToData";
 
 const ProductRequestTable = () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -75,7 +76,7 @@ const ProductRequestTable = () => {
   return (
     <>
       <Table
-        dataSource={data}
+        dataSource={addIndexToData(data)}
         loading={isLoading}
         className="mt-3"
         columns={tableColumns}

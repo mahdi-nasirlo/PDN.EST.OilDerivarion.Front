@@ -259,7 +259,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(" لطفا مقدار را وارد کنید");
+                        return Promise.reject(" کد ملی / شناسه ملی اجباری است");
                       }
 
                       if (value && personTypeStatus === 1) {
@@ -271,6 +271,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
                     },
                   },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                 ]}
               >
                 <Input
@@ -287,7 +288,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyIranCode"
                 label="ایرانکد"
                 rules={[
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   {
                     validator: async (rule, value) => {
                       if (!/^\d+$/.test(value)) {
@@ -309,7 +310,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyAddress"
                 label="آدرس"
                 rules={[
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
                   { type: "string" },
                 ]}
               >

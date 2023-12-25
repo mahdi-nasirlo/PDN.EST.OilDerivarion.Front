@@ -1,15 +1,12 @@
-import { Table, TableColumnsType } from 'antd';
-import React, { useEffect, useState } from 'react'
+import { Table, TableColumnsType, Typography } from 'antd';
+import React, { useEffect } from 'react'
 import { addAlphabetToData } from '../../../../../lib/addAlphabetToData';
 import useSWR from 'swr';
 import { listFetcher } from '../../../../../lib/server/listFetcher';
 
 export default function ExpandedDetailsTable({ data }: { data: any }) {
-    const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
-    const defaultValue = {
-        requestMasterUid: data.uid
-    };
+    const defaultValue = { requestMasterUid: data.uid };
 
 
     const { data: dataSource, isLoading, mutate } = useSWR<any[]>(
@@ -27,18 +24,32 @@ export default function ExpandedDetailsTable({ data }: { data: any }) {
         },
         {
             title: "فاکتور های آزمون",
-            dataIndex: "Name",
+            dataIndex: "name",
             key: "2",
         },
         {
             title: "روش آزمون",
-            dataIndex: "TestMethod",
+            dataIndex: "testMethod",
             key: "3",
         },
         {
             title: "واحد اندازه گیری",
-            dataIndex: "MeasureName",
+            dataIndex: "measureName",
             key: "3",
+        },
+        {
+            title: "مدت زمان انجام آزمایش",
+            dataIndex: "testDuration",
+            key: "4",
+            render: (_, record: any) => {
+                return (
+                    <Typography.Text>
+                        {record.testDuration !== undefined && record.testDuration !== null
+                            ? `${record.testDuration} ساعت`
+                            : 'تعریف نشده'}
+                    </Typography.Text>
+                );
+            },
         },
     ];
 
@@ -56,13 +67,7 @@ export default function ExpandedDetailsTable({ data }: { data: any }) {
                 dataSource={addAlphabetToData(dataSource)}
                 loading={isLoading}
                 pagination={false}
-                expandable={{
-                    expandedRowKeys: activeExpRow,
-                }}
             />
         </>
     );
 };
-
-
-const data = [{}]

@@ -42,12 +42,13 @@ const StatusModal = ({data, open = false}: { data: dataProps, open?: boolean }) 
 
     useEffect(() => {
 
-        router.push("/producer")
+        if (data?.producerStatusId === 1)
+            router.push("/producer")
 
-    }, [])
+    }, [data])
 
     return (
-        <Modal footer={false} closable={false} open={open} title={` وضعیت درخواست شما: ${data.producerStatusName}`}>
+        <Modal footer={false} closable={false} open={open} title={` وضعیت درخواست شما: ${data?.producerStatusName}`}>
             <Alert message={message} type="warning"/>
         </Modal>
     );

@@ -21,6 +21,10 @@ export const routDictionary: Items = {
     title: "پنل تولید کننده",
     href: "/producer",
   },
+  "submit-applicant":{
+    title:"ثبت نام اولیه متقاضی"
+
+  },
   "request-list": {
     title: "لیست درخواست ها",
   },

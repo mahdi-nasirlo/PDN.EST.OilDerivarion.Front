@@ -11,7 +11,7 @@ import {
   Typography,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
@@ -55,10 +55,15 @@ export default function ContactInfo() {
     form.setFieldValue("centralOfficeCityId", null);
   };
 
-  const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
-    ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
+  // const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
+  //   ProvinceCity ? "/BaseInfo/CityGetAll" : null,
+  //   (url: string) => listFetcher(url, { arg: { stateId: ProvinceCity } })
+  // );
+  const {
+    trigger: state,
+    isMutating: ldstate,
+    data: statedata,
+  } = useSWRMutation("/BaseInfo/CityGetAll", listFetcher);
 
   return (
     <>
@@ -86,7 +91,8 @@ export default function ContactInfo() {
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
-                onChange={handleFactoryProvinceChange}
+                onChange={(e) => state({ stateId: e })}
+                // onChange={handleFactoryProvinceChange}
               />
             </Form.Item>
           </Col>
@@ -100,11 +106,14 @@ export default function ContactInfo() {
                 showSearch
                 // @ts-ignore
                 filterOption={filterOption}
-                loading={ldCityGetAll}
-                options={sortByIndex(CityGetAll, "Name")}
+                loading={ldstate}
+                options={sortByIndex(statedata, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"
+                onChange={(e) => {
+                  state({ stateId: e.targert.stateId });
+                }}
               />
             </Form.Item>
           </Col>
@@ -158,8 +167,8 @@ export default function ContactInfo() {
                 showSearch
                 // @ts-ignore
                 filterOption={filterOption}
-                loading={ldCityGetAll}
-                options={sortByIndex(CityGetAll, "Name")}
+                loading={ldstate}
+                options={sortByIndex(statedata, "Name")}
                 fieldNames={{ value: "Id", label: "Name" }}
                 size="large"
                 placeholder="انتخاب کنید"

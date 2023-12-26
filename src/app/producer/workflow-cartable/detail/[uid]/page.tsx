@@ -1,13 +1,13 @@
 "use client";
 
-import { Col, Divider, Form, Input, Row, Typography } from "antd";
+import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
 import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
@@ -15,6 +15,7 @@ import WorkFlowConfirmProductTable from "../../../../../../components/Workflow/W
 import useRequestDetailCreateDabirExpertOpinion from "../../../../../../hooks/requestDetail/useRequestDetailCreateDabirExpertOpinion";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import useSWR from "swr";
+import { json } from "stream/consumers";
 
 interface PropType {
   params: { uid: string };
@@ -71,6 +72,10 @@ export default function Home(props: PropType) {
     (url) => listFetcher(url, { arg: { uid: props.params.uid } })
   );
 
+  useEffect(() => {
+    form.setFieldsValue(data?.producer);
+  }, [data?.producer]);
+
   return (
     <>
       <div className="box-border w-full p-6">
@@ -82,21 +87,165 @@ export default function Home(props: PropType) {
           </div>
           <Divider />
         </div>
-        <GodOfDataViewer
+        {/* <GodOfDataViewer
           uid={props.params.uid}
           data={data?.tabs}
           loading={isLoading}
-        />
+        /> */}
+        {data && (
+          <Spin spinning={isLoading}>
+            <Form layout="vertical" form={form} disabled={isMutating}>
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="firstName"
+                    label="نام"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="lastName"
+                    label="نام خانوادگی"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="personNationalCode"
+                    label="کدملی"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                      {
+                        pattern: /^[0-9]{10}$/,
+                        message: " کدملی نامتعبر است",
+                      },
+                    ]}
+                  >
+                    <Input
+                      readOnly
+                      type="number"
+                      size="large"
+                      placeholder="وارد کنید"
+                    />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="companyName"
+                    label="نام شرکت"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="companyNationalCode"
+                    label="شناسه ملی شرکت"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="businessNumber"
+                    label="شناسه کسب و کار"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="operationLicense"
+                    label="اطلاعات پروانه بهره برداری"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={12}>
+                  <Form.Item
+                    name="establishmentPermit"
+                    label="جواز تاسیس"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input readOnly size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={[16, 16]}>
+                <Col xs={24} md={24}>
+                  <Form.Item
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                    name="requestDescription"
+                    label="شرح درخواست"
+                  >
+                    <Input.TextArea
+                      readOnly
+                      style={{ height: 120, resize: "none" }}
+                      placeholder="وارد کنید"
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={[16, 0]}>
+                <Col xs={24} md={24}>
+                  <Form.Item
+                    name="requestImage"
+                    label="فایل پیوست(تصویر نامه درخواست)"
+                    rules={[
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
+                    ]}
+                  >
+                    <Input size="large" placeholder="وارد کنید" />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </Spin>
+        )}
         {data && (
           <>
             {" "}
             <Divider />
-            <WorkFlowConfirmProductTable
+            {/* <WorkFlowConfirmProductTable
               isLoading={dataConfirmRequest.isLoading}
               dataSource={dataConfirmRequest.data}
               uid={props.params.uid}
               trigger={confirmRequest.handleTrigger}
-            />
+            /> */}
             {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
             <Form onFinish={onFinish} form={form}>
               <Row gutter={[16, 16]}>
@@ -120,6 +269,8 @@ export default function Home(props: PropType) {
             </Form>
           </>
         )}
+        {/* <Typography>{JSON.stringify(apiData.create.url)}</Typography> */}
+
         {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn

@@ -57,6 +57,18 @@ export default function LayoutSidebar({
             {menus.isLoading && Array.from({length: 10}).map((value, index) => (
                 <Skeleton.Input key={index} size="default" className="w-full my-1"/>
             ))}
+            {!menus.isLoading && menus?.data && <>
+                <Menu.Item key="/producer">
+                    <Link href="/producer">
+                        خانه
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="/producer/submit-applicate">
+                    <Link href="/producer/submit-applicate">
+                        ثبت نام اولیه متقاضی
+                    </Link>
+                </Menu.Item>
+            </>}
             {!menus.isLoading && Array.isArray(menus.data) && menus.data?.map((item) => (
                 <Menu.Item key={item.url}>
                     <Link href={item.url}>

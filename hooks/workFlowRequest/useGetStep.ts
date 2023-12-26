@@ -27,6 +27,21 @@ interface DataFetchType {
     userId: number;
   };
   calendar?: CalendarData[] | undefined;
+  producer: {
+    firstName: string,
+    lastName: string,
+    personNationalCode: string,
+    producerStatusId: number,
+    producerStatusName:string,
+    requestRejectionDescription: string,
+    companyName: string,
+    companyNationalCode: string,
+    businessNumber: string,
+    operationLicense: string,
+    establishmentPermit: string,
+    requestDescription: string,
+    requestImage: string
+},
 }
 
 const useGetStep = ({ taskId, apiUrl }: { taskId: string; apiUrl: string }) => {

@@ -14,10 +14,6 @@ function TestFactorForm() {
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-  const { data: TestItemDetail, isLoading: ldTestItemDetail } = useSWR<any[]>(
-    ["/TestItemDetail/GetAll", defaultValue],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
 
   return (
     <>
@@ -68,24 +64,27 @@ function TestFactorForm() {
             />
           </Form.Item>
         </Col>
-        {/* <Col xs={24} md={12}>
+        <Col xs={24} md={12}>
           <Form.Item
-            name="testItem_Details"
-            label="استاندارد های آزمون"
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            name="testDuration"
+            label="مدت زمان انجام آزمایش (ساعت)"
+            rules={[
+              { required: true, message: "لطفا مقدار را وارد کنید" },
+              {
+                validator(_, value) {
+                  const isInteger = Number.isInteger(parseFloat(value));
+                  if (isNaN(value) || !isInteger || value < 0) {
+                    const errorMessage = isInteger ? "لطفاً عدد مثبت وارد کنید" : "لطفاً عدد وارد کنید";
+                    return Promise.reject(new Error(errorMessage));
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
           >
-            <Select
-              showSearch
-              fieldNames={{ value: "uid", label: "title" }}
-              // @ts-ignore
-              filterOption={filterOption}
-              loading={ldTestItemDetail}
-              options={sortByIndex(TestItemDetail, 'title')}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
+            <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
-        </Col> */}
+        </Col>
       </Row>
     </>
   );

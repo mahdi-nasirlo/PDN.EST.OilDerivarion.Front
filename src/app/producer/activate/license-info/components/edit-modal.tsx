@@ -99,7 +99,7 @@ export default function EditModal({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Name"
+                name="name"
                 label="نام سند"
                 rules={[
                   { required: true, message: "این فیلد اجباری است" },
@@ -111,7 +111,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Number"
+                name="number"
                 label="شماره سند"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
@@ -122,7 +122,7 @@ export default function EditModal({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="LicenseTypeId"
+                name="licenseTypeId"
                 label="نوع مجوز"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
@@ -140,33 +140,27 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="IssueDate"
+                name="issueDatePersian"
                 label="تاریخ صدور"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <CustomDatePicker/>{" "}
-                {/* <DatePicker
-                                    className="w-full"
-                                    placeholder="13**/
-                /**"
-                                    size="large"
-                                /> */}
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="ExpirationDate"
+                name="expirationDatePersian"
                 label="تاریخ انقضاء"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <Input size="large" placeholder="13**/**/**" />
+                <CustomDatePicker />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="Exporter"
+                name="exporter"
                 label="صادرکننده"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >

@@ -44,7 +44,7 @@ const Select = (props: InputProps & PropsType) => {
                 >
                     {props.data.FormFieldDetails?.map((value, index) => <Option
                         key={`${index}`}
-                        value={value.Value}
+                        value={value.Text}
                     >
                         {value.Text}
                     </Option>)}

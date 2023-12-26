@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter();
 
   const initialValue: WorkflowDataTableContextType = {
-    apiUrl: apiUrl.WorkFlowRequest.step07.getAll.url,
+    apiUrl: apiUrl.WorkFlowRequest.cartable.getAll.url,
     columns: [
       {
         title: "ردیف",
@@ -21,7 +21,7 @@ export default function Home() {
         width: "5%",
       },
       {
-        title: "شناسه ملی شرکت",
+        title: "توضیحات کاربر",
         dataIndex: "userDescription",
         key: "2",
       },
@@ -49,7 +49,7 @@ export default function Home() {
               className="text-secondary-500 font-bold "
               onClick={() => {
                 router.push(
-                  "/producer/produce-QR-code/detail/" + record.taskId
+                  "/producer/workflow-cartable/detail/" + record.taskId
                 );
               }}
             >

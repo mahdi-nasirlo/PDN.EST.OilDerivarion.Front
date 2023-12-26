@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { EditFilled, LogoutOutlined } from "@ant-design/icons";
+import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ export default function HeaderDropdown() {
   const session = useSession()
 
 
-  const { data, isLoading } = useSWR(
+  const { data: GetUserInfo, isLoading: ldGetUserInfo } = useSWR(
     "/Sso/GetUserInfo",
     (url) => listFetcher(url)
   );
@@ -75,14 +75,16 @@ export default function HeaderDropdown() {
               alt="person-circle icon"
               src="/static/person-circle.svg"
             />
-            <div>
-              <Typography className="font-normal text-lg hidden lg:block">
-                {data?.lastName}
-              </Typography>
-              <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
-                {data?.firstName}
-              </Typography>
-            </div>
+            {ldGetUserInfo ?
+              <LoadingOutlined className="text-primary-500 text-lg hidden lg:block" />
+              : <div>
+                <Typography className="font-normal text-lg hidden lg:block">
+                  {GetUserInfo?.lastName}
+                </Typography>
+                <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
+                  {GetUserInfo?.firstName}
+                </Typography>
+              </div>}
             <Image
               className="mr-6 hidden lg:block"
               height={16}

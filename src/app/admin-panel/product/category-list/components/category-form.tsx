@@ -101,10 +101,10 @@ function CategoryForm({
                 { required: true },
                 {
                   validator(_, value) {
-                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
-                      return Promise.reject(
-                        new Error("لطفاً عدد صحیح وارد کنید")
-                      );
+                    const isInteger = Number.isInteger(parseFloat(value));
+                    if (isNaN(value) || !isInteger || value < 0) {
+                      const errorMessage = isInteger ? "لطفاً عدد مثبت وارد کنید" : "لطفاً عدد وارد کنید";
+                      return Promise.reject(new Error(errorMessage));
                     }
                     return Promise.resolve();
                   },

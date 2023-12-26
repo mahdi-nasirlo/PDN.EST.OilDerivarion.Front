@@ -27,6 +27,8 @@ const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many
 
         const records = JSON.parse(formData.data.records)
 
+        console.log(records)
+
         return (
             <>
                 <FormBuilderProvider initialValues={records} type={type} formData={formData}>

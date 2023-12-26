@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Tooltip, Typography } from "antd";
+import { Button, Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { TestItem } from "../../../../../interfaces/TestItem";
@@ -83,27 +83,20 @@ export default function DataTable({
       key: "4",
       render: (e, record) => <StatusColumn record={record} />
     },
-    // {
-    //   title: "استاندارد های آزمون",
-    //   dataIndex: "testItem_Details",
-    //   key: "5",
-    //   render: (_, record: TestItem) => {
-    //     return (
-    //       <Tooltip
-    //         placement="top"
-    //         title={<Typography>{record.testItem_Details}</Typography>}
-    //       >
-    //         <Typography.Text
-    //           className="max-w-[180px]"
-    //           ellipsis={true}
-    //           style={{ width: "40px !important" }}
-    //         >
-    //           {record.testItem_Details}
-    //         </Typography.Text>
-    //       </Tooltip>
-    //     );
-    //   },
-    // },
+    {
+      title: "مدت زمان انجام آزمایش",
+      dataIndex: "testDuration",
+      key: "5",
+      render: (_, record: TestItem) => {
+        return (
+          <Typography.Text>
+            {record.testDuration !== undefined && record.testDuration !== null
+              ? `${record.testDuration} ساعت`
+              : 'تعریف نشده'}
+          </Typography.Text>
+        );
+      },
+    },
     {
       title: "جزئیات",
       key: "جزئیات",

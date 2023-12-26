@@ -5,7 +5,7 @@ export type TestItem = {
   measure_Id: number;
   measureName: string;
   testMethod: string;
-  testItem_Details: string | null;
+  testDuration: number | null;
 };
 
 export type CreateTestItem = {

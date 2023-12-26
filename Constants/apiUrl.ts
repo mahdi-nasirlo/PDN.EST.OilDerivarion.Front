@@ -364,6 +364,19 @@ export const apiUrl = {
                 url: "/WorkFlowRequest/SetStep29"
             }
         },
+        cartable: {
+            getAll: {
+                url: "/WorkFlowCartable/GetAllStep02",
+                type: null
+            },
+            get: {
+                url: "/WorkFlowCartable/GetStep02",
+                type: null
+            },
+            create: {
+                url: "/WorkFlowCartable/SetStep02"
+            }
+        },
 
     },
     MapViewer: {

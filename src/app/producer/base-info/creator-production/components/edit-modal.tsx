@@ -124,12 +124,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="currentCEONationalCode"
-                label="شناسه ملی"
+                label="کد ملی مدیر عامل"
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    pattern: /^[0-9]{11}$/,
-                    message: " شناسه ملی نامتعبر است",
+                    pattern: /^[0-9]{10}$/,
+                    message: " کد ملی نامتعبر است",
                   },
                 ]}
               >

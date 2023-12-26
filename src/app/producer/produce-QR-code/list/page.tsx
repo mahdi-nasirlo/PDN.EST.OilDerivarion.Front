@@ -21,7 +21,7 @@ export default function Home() {
         width: "5%",
       },
       {
-        title: "توضیحات کاربر",
+        title: "شناسه ملی شرکت",
         dataIndex: "userDescription",
         key: "2",
       },

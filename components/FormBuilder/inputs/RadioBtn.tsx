@@ -23,12 +23,12 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
     let defaultValue = null
 
     if (Array.isArray(props?.data?.FormFieldDetails) && props?.data?.FormFieldDetails[0]) {
-        defaultValue = props?.data?.FormFieldDetails[0].Value
+        defaultValue = props?.data?.FormFieldDetails[0].Text
     }
 
     const fieldDetailLen = props?.data?.FormFieldDetails?.length
     const widthPercent = fieldDetailLen ? 100 / fieldDetailLen : 100
-    // console.log(defaultValue)
+
     return (
         <FormItem
             name={data?.Name || "undefined"}
@@ -38,12 +38,12 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
             <Radio.Group
                 size='large'
                 className='w-full'
-                defaultValue={defaultValue}
+                // defaultValue={defaultValue}
                 buttonStyle="solid"
             >
                 {props.data.FormFieldDetails?.map((value, index) => {
                     return (<>
-                        <Radio.Button style={{width: `${widthPercent}%`}} key={index} value={value.Value}>
+                        <Radio.Button style={{width: `${widthPercent}%`}} key={index} value={value.Text}>
                         <span>
                             {value.Text}
                         </span>

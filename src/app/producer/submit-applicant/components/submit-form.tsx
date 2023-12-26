@@ -1,15 +1,19 @@
 "use client";
 
-import { Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import {Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
+import React, {useEffect, useState} from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { useForm } from "antd/es/form/Form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
 import CheckInfoModal from "./checkInfo-modal";
+import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 
 export default function SubmitForm() {
+
+  const [open, setOpen] = useState(false)
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const [form] = useForm();
@@ -30,7 +34,13 @@ export default function SubmitForm() {
   };
 
   useEffect(() => {
+
     form.setFieldsValue(data);
+
+    if (!isLoading) {
+      setOpen(true)
+    }
+
   }, [data]);
 
   return (
@@ -173,6 +183,7 @@ export default function SubmitForm() {
             </Col>
           </Row>
         </Form>
+        <StatusModal data={data} open={open}/>
         <CheckInfoModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}

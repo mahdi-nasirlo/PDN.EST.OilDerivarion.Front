@@ -88,7 +88,7 @@ export default function Home(props: PropType) {
 
         <Alert
           message="پرداخت توسط متقاضی"
-          description="پرداخت توسط متقاضی سپس صدرو کد رهگیری"
+          description="پرداخت توسط متقاضی سپس صدور کد رهگیری"
           type="info"
         />
 

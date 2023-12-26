@@ -19,14 +19,6 @@ const Index = (props: PropsType) => {
     taskId: props.taskId,
   });
 
-  // if (props.loading) {
-  //   return (
-  //     <div className="w-full">
-  //       <Spin />
-  //     </div>
-  //   );
-  // }
-
   if (!props?.choices && !props?.choices?.length) {
     return <></>;
   }

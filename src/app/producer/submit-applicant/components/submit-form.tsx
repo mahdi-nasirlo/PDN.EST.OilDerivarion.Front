@@ -1,6 +1,6 @@
-"use clinet";
+"use client";
 
-import { Button, Col, Form, Input, Row, Spin } from "antd";
+import { Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
@@ -31,8 +31,12 @@ export default function SubmitForm() {
   }, [data]);
 
   return (
-    <div>
+    <div className="box-border w-full mt-8 p-6">
       <Spin spinning={isLoading}>
+        <Typography className="text-right font-bold">
+          ثبت نام اولیه متقاضی
+        </Typography>
+        <Divider />
         <Form
           layout="vertical"
           onFinish={activeCartable}

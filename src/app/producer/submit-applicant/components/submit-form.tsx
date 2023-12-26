@@ -31,7 +31,7 @@ export default function SubmitForm() {
   }, [data]);
 
   return (
-    <div className="box-border w-full mt-8 p-6">
+    <div className="box-border w-full  p-6">
       <Spin spinning={isLoading}>
         <Typography className="text-right font-bold">
           ثبت نام اولیه متقاضی

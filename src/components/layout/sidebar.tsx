@@ -43,7 +43,7 @@ export default function LayoutSidebar({
     style: object;
     className: string;
   }) => {
-    return (
+      return (
         <Menu
             style={style}
             defaultSelectedKeys={[pathname]}
@@ -57,7 +57,8 @@ export default function LayoutSidebar({
             {menus.isLoading && Array.from({length: 10}).map((value, index) => (
                 <Skeleton.Input key={index} size="default" className="w-full my-1"/>
             ))}
-            {!menus.isLoading && menus?.data && <>
+            {/*@ts-ignore*/}
+            {!menus.isLoading && menus?.data == true && <>
                 <Menu.Item key="/producer">
                     <Link href="/producer">
                         خانه

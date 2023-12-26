@@ -72,6 +72,11 @@ export default function LayoutSidebar({
                 ثبت نام اولیه متقاضی
               </Link>
             </Menu.Item>
+            <Menu.Item key="/producer/workflow-cartable/list">
+              <Link href="/producer/workflow-cartable/list">
+                بررسی اطلاعات اولیه
+              </Link>
+            </Menu.Item>
           </>
         )}
         {!menus.isLoading &&

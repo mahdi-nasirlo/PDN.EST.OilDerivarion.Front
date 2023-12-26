@@ -18,7 +18,7 @@ interface dataProps {
     requestImage: string,
 }
 
-const StatusModal = ({data, open = false}: { data: dataProps, open?: boolean }) => {
+const StatusModal = ({data, open = false, setOpen}: { data: dataProps, open?: boolean, setOpen: any }) => {
 
     const router = useRouter()
 
@@ -47,8 +47,10 @@ const StatusModal = ({data, open = false}: { data: dataProps, open?: boolean }) 
 
     }, [data])
 
+
+    const onClose = () => setOpen(false)
     return (
-        <Modal footer={false} closable={false} open={open} title={` وضعیت درخواست شما: ${data?.producerStatusName}`}>
+        <Modal footer={false} onCancel={onClose} open={open} title={` وضعیت درخواست شما: ${data?.producerStatusName}`}>
             <Alert message={message} type="warning"/>
         </Modal>
     );

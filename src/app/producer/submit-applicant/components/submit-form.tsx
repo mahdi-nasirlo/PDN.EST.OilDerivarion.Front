@@ -187,7 +187,7 @@ export default function SubmitForm() {
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
         />
-        {data?.producerStatusId && <StatusModal data={data} open={open}/>}
+        {data?.producerStatusId && <StatusModal data={data} open={open} setOpen={setOpen}/>}
       </Spin>
     </div>
   );

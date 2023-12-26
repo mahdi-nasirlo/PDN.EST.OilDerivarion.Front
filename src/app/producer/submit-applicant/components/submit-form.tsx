@@ -23,7 +23,10 @@ export default function SubmitForm() {
   );
 
   const activeCartable = async (values: any) => {
-    await trigger(values);
+    const res = await trigger(values);
+    if (res) {
+      setModalVisible(true);
+    }
   };
 
   useEffect(() => {
@@ -69,7 +72,13 @@ export default function SubmitForm() {
               <Form.Item
                 name="personNationalCode"
                 label="کدملی"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  {
+                    pattern: /^[0-9]{10}$/,
+                    message: " کدملی نامتعبر است",
+                  },
+                ]}
               >
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
@@ -154,7 +163,6 @@ export default function SubmitForm() {
           <Row gutter={[12, 12]}>
             <Col xs={24} md={24}>
               <Button
-                onClick={() => setModalVisible(true)}
                 className="w-full management-info-form-submit btn-filter"
                 size="large"
                 type="primary"

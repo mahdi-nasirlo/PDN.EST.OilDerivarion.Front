@@ -1,20 +1,20 @@
 "use client";
 
-import React, {useState} from "react";
-import {Drawer, Menu, MenuProps, Skeleton} from "antd";
+import React, { useState } from "react";
+import { Drawer, Menu, MenuProps, Skeleton } from "antd";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
 import Link from "next/link";
 
 export default function LayoutSidebar({
-                                          menu,
-                                          onClose,
-                                          open,
-                                      }: {
-    menu: MenuProps["items"] | any;
-    onClose: any;
-    open: any;
+  menu,
+  onClose,
+  open,
+}: {
+  menu: MenuProps["items"] | any;
+  onClose: any;
+  open: any;
 }) {
   const pathname = usePathname();
 
@@ -34,7 +34,7 @@ export default function LayoutSidebar({
     }
   };
 
-    const menus = useSsoGetAllUserAccess()
+  const menus = useSsoGetAllUserAccess();
 
   const CommonMenu = ({
     style = {},
@@ -81,50 +81,49 @@ export default function LayoutSidebar({
     );
   };
 
-
-    return (
-        <>
-            <div
-                className="bg-white border-e-0 lg:border-e-[1px]"
-                style={{
-                    position: "fixed",
-                    bottom: 0,
-                    top: 97,
-                    left: "auto",
-                    right: 0,
-                    zIndex: 99,
-                }}
-            >
-                {/*<motion.div*/}
-                {/*    initial={{x: "100%", opacity: 0}}*/}
-                {/*    animate={{x: 0, opacity: 1}}*/}
-                {/*    transition={{ease: "easeIn", duration: 0.1}}*/}
-                {/*>*/}
-                    <CommonMenu
-                        style={{
-                            width: "270px",
-                            padding: "0 16px",
-                            paddingTop: "30px",
-                            paddingBottom: "30px",
-                            height: "100%",
-                        }}
-                        className="px-4 overflow-auto hidden lg:block"
-                    />
-                    <Drawer
-                        rootClassName="block lg:hidden"
-                        title="سازمان ملی استاندارد"
-                        placement="right"
-                        width={300}
-                        onClose={onClose}
-                        open={open}
-                        className="boa"
-                    >
-                        <CommonMenu style={{height: "100%"}} className=""/>
-                    </Drawer>
-                {/*</motion.div>*/}
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div
+        className="bg-white border-e-0 lg:border-e-[1px]"
+        style={{
+          position: "fixed",
+          bottom: 0,
+          top: 97,
+          left: "auto",
+          right: 0,
+          zIndex: 99,
+        }}
+      >
+        {/*<motion.div*/}
+        {/*    initial={{x: "100%", opacity: 0}}*/}
+        {/*    animate={{x: 0, opacity: 1}}*/}
+        {/*    transition={{ease: "easeIn", duration: 0.1}}*/}
+        {/*>*/}
+        <CommonMenu
+          style={{
+            width: "270px",
+            padding: "0 16px",
+            paddingTop: "30px",
+            paddingBottom: "30px",
+            height: "100%",
+          }}
+          className="px-4 overflow-auto hidden lg:block"
+        />
+        <Drawer
+          rootClassName="block lg:hidden"
+          title="سازمان ملی استاندارد"
+          placement="right"
+          width={300}
+          onClose={onClose}
+          open={open}
+          className="boa"
+        >
+          <CommonMenu style={{ height: "100%" }} className="" />
+        </Drawer>
+        {/*</motion.div>*/}
+      </div>
+    </>
+  );
 }
 
 type MenuItem = Required<MenuProps>["items"][number];

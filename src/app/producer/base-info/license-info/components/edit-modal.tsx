@@ -34,7 +34,8 @@ export default function EditModal({
     useSWRMutation("/ProfilePersonLicense/Update", mutationFetcher);
 
   const handleConfirmEdit = async (values: any) => {
-    values.Uid = recordToEdit?.Uid;
+
+    values.Uid = recordToEdit?.uid;
 
     const res = await UpdateLicense(values);
 
@@ -121,7 +122,7 @@ export default function EditModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <Form.Item name="licenseTypeName" label="نوع مجوز">
+              <Form.Item name="licenseTypeId" label="نوع مجوز">
                 <Select
                   showSearch
                   // @ts-ignore

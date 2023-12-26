@@ -3,9 +3,9 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Alert, Typography } from "antd";
 import React from "react";
+import SubmitForm from "./submit-applicant/components/submit-form";
 
 export default function Home() {
-
   return (
     <>
       <div className="box-border w-full p-6">
@@ -23,4 +23,4 @@ export default function Home() {
       </div>
     </>
   );
-};
+}

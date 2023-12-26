@@ -64,7 +64,7 @@ export default function Home(props: PropType) {
     link.click();
     form.submit();
     setChoice(choiceKey);
-    onFinish();
+    onFinish(choiceKey);
   };
 
   const [form] = useForm();
@@ -83,10 +83,10 @@ export default function Home(props: PropType) {
     mutationFetcher
   );
 
-  const onFinish = async () => {
+  const onFinish = async (choiceKey: string) => {
     const data = {
       taskId: props.params.uid,
-      choiceKey: choice,
+      choiceKey: choiceKey,
     };
 
     const res = await trigger(data);

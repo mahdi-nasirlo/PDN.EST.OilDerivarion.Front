@@ -43,42 +43,46 @@ export default function LayoutSidebar({
     style: object;
     className: string;
   }) => {
-      return (
-        <Menu
-            style={style}
-            defaultSelectedKeys={[pathname]}
-            selectedKeys={[pathname]}
-            openKeys={openKeys}
-            onOpenChange={handleMenuOpenChange}
-            className={className}
-            mode="inline"
-            onClick={handleMenuItemClick}
-            items={menu}
-        >
-            {menus.isLoading && Array.from({length: 10}).map((value, index) => (
-                <Skeleton.Input key={index} size="default" className="w-full my-1"/>
-            ))}
-            {/*@ts-ignore*/}
-            {!menus.isLoading && menus?.data == true && <>
-                <Menu.Item key="/producer">
-                    <Link href="/producer">
-                        خانه
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="/producer/submit-applicate">
-                    <Link href="/producer/submit-applicate">
-                        ثبت نام اولیه متقاضی
-                    </Link>
-                </Menu.Item>
-            </>}
-            {!menus.isLoading && Array.isArray(menus.data) && menus.data?.map((item) => (
-                <Menu.Item key={item.url}>
-                    <Link href={item.url}>
-                        {item.nameFa}
-                    </Link>
-                </Menu.Item>
-            ))}
-        </Menu>
+    return (
+      <Menu
+        style={style}
+        defaultSelectedKeys={[pathname]}
+        selectedKeys={[pathname]}
+        openKeys={openKeys}
+        onOpenChange={handleMenuOpenChange}
+        className={className}
+        mode="inline"
+        onClick={handleMenuItemClick}
+      >
+        {menus.isLoading &&
+          Array.from({ length: 10 }).map((value, index) => (
+            <Skeleton.Input
+              key={index}
+              size="default"
+              className="w-full my-1"
+            />
+          ))}
+        {/*@ts-ignore*/}
+        {!menus.isLoading && menus?.data == true && (
+          <>
+            <Menu.Item key="/producer">
+              <Link href="/producer">خانه</Link>
+            </Menu.Item>
+            <Menu.Item key="/producer/submit-applicant">
+              <Link href="/producer/submit-applicant">
+                ثبت نام اولیه متقاضی
+              </Link>
+            </Menu.Item>
+          </>
+        )}
+        {!menus.isLoading &&
+          Array.isArray(menus.data) &&
+          menus.data?.map((item) => (
+            <Menu.Item key={item.url}>
+              <Link href={item.url}>{item.nameFa}</Link>
+            </Menu.Item>
+          ))}
+      </Menu>
     );
   };
 

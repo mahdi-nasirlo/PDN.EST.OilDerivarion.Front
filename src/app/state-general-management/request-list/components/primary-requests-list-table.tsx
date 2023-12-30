@@ -75,8 +75,6 @@ export default function PrimaryRequestsListTable() {
             dataSource={data}
             pagination={{
                 defaultPageSize: 10,
-                showSizeChanger: true,
-                pageSizeOptions: ["10", "20", "50"],
                 defaultCurrent: 1,
                 style: {
                     display: "flex",

@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Form, Input, Select, Space, Table, Tooltip, Typography, } from "antd";
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  Select,
+  Space,
+  Table,
+  Tooltip,
+  Typography,
+} from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../../../lib/server/listFetcher";
 import Item from "antd/es/list/Item";
@@ -349,6 +359,7 @@ const DataTable = ({ uid }: { uid: string }) => {
       </div>
       <Form form={form} component={false}>
         <Table
+          loading={ldlabresult}
           components={{
             body: {
               cell: EditableCell,

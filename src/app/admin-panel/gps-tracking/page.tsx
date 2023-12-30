@@ -40,7 +40,6 @@ const Page = () => {
                 loading={gpsTracker.isLoading}
                 pagination={{
                     pageSize: 5,
-                    showSizeChanger: false,
                     style: {
                         display: "flex",
                         flexDirection: "row",

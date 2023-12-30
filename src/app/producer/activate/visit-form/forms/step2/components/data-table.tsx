@@ -158,7 +158,6 @@ export default function DataTable() {
                 // dataSource={data}
                 pagination={{
                     defaultPageSize: 10,
-                    showSizeChanger: false,
                     defaultCurrent: 1,
                     style: {
                         display: "flex",

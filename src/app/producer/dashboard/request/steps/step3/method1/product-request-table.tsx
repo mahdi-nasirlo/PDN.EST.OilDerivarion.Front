@@ -82,7 +82,6 @@ const ProductRequestTable = () => {
         columns={tableColumns}
         pagination={{
           defaultPageSize: 5,
-          showSizeChanger: false,
           defaultCurrent: 1,
           style: {
             display: "flex",

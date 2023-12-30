@@ -13,7 +13,7 @@ export default function Index() {
                 <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
-                        راکتور سولفور زدایی ( 6 از 8 )
+                        تجهیزات شیرین سازی ( 6 از 8 )
                     </Typography>
                 </div>
             </div >

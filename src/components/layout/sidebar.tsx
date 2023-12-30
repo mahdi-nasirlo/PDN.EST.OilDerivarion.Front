@@ -16,23 +16,23 @@ export default function LayoutSidebar({
   onClose: any;
   open: any;
 }) {
-  const pathname = usePathname();
+    const pathname = usePathname();
 
-  const [openKeys, setOpenKeys] = useState<string[]>([]);
+    const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-  const handleMenuOpenChange = (keys: string[]) => {
-    if (keys.length <= 1) {
-      setOpenKeys(keys);
-    } else {
-      setOpenKeys([keys[1]]);
-    }
-  };
+    const handleMenuOpenChange = (keys: string[]) => {
+        if (keys.length <= 1) {
+            setOpenKeys(keys);
+        } else {
+            setOpenKeys([keys[1]]);
+        }
+    };
 
-  const handleMenuItemClick = (item: any) => {
-    if (item.type !== "LgSize") {
-      onClose(); // Close the Drawer
-    }
-  };
+    const handleMenuItemClick = (item: any) => {
+        if (item.type !== "LgSize") {
+            onClose(); // Close the Drawer
+        }
+    };
 
   const menus = useSsoGetAllUserAccess();
 

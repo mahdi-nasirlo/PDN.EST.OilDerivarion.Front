@@ -183,11 +183,11 @@ export default function SubmitForm() {
             </Col>
           </Row>
         </Form>
-        <StatusModal data={data} open={open}/>
         <CheckInfoModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
         />
+        {data?.producerStatusId && <StatusModal data={data} open={open} setOpen={setOpen}/>}
       </Spin>
     </div>
   );

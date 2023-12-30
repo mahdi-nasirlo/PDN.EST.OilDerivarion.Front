@@ -1,18 +1,27 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
-import React, {useEffect, useState} from "react";
+import {
+  Button,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Select,
+  Spin,
+  Typography,
+} from "antd";
+import React, { useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {useForm} from "antd/es/form/Form";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CheckInfoModal from "./checkInfo-modal";
 import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 
 export default function SubmitForm() {
-
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -34,13 +43,11 @@ export default function SubmitForm() {
   };
 
   useEffect(() => {
-
     form.setFieldsValue(data);
 
     if (!isLoading) {
-      setOpen(true)
+      setOpen(true);
     }
-
   }, [data]);
 
   return (
@@ -127,21 +134,41 @@ export default function SubmitForm() {
             <Col xs={24} md={12}>
               <Form.Item
                 name="operationLicense"
-                label="اطلاعات پروانه بهره برداری"
+                label="نوع مجوز"
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
-                <Input size="large" placeholder="وارد کنید" />
+                <Select size="large" placeholder="انتخاب نمایید" />{" "}
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="establishmentPermit"
-                label="جواز تاسیس"
+                name="businessNumber"
+                label="شماره مجوز"
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
                 <Input size="large" placeholder="وارد کنید" />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name="businessNumber"
+                label="تاریخ اعتبار مجوز"
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              >
+                <Input size="large" placeholder="وارد کنید" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name="operationLicense"
+                label="صادر کننده"
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              >
+                <Select size="large" placeholder="انتخاب نمایید" />
               </Form.Item>
             </Col>
           </Row>
@@ -159,17 +186,6 @@ export default function SubmitForm() {
               </Form.Item>
             </Col>
           </Row>
-          {/*<Row gutter={[16, 0]}>*/}
-          {/*  <Col xs={24} md={24}>*/}
-          {/*    <Form.Item*/}
-          {/*      name="requestImage"*/}
-          {/*      label="فایل پیوست(تصویر نامه درخواست)"*/}
-          {/*      rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}*/}
-          {/*    >*/}
-          {/*      <Input size="large" placeholder="وارد کنید" />*/}
-          {/*    </Form.Item>*/}
-          {/*  </Col>*/}
-          {/*</Row>*/}
           <Row gutter={[12, 12]}>
             <Col xs={24} md={24}>
               <Button
@@ -184,10 +200,12 @@ export default function SubmitForm() {
           </Row>
         </Form>
         <CheckInfoModal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
-        {data?.producerStatusId && <StatusModal data={data} open={open} setOpen={setOpen}/>}
+        {data?.producerStatusId && (
+          <StatusModal data={data} open={open} setOpen={setOpen} />
+        )}
       </Spin>
     </div>
   );

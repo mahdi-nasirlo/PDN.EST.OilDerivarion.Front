@@ -1,21 +1,11 @@
-import React, { useContext, useReducer, useState } from "react";
-import {
-  Col,
-  Divider,
-  Form,
-  FormInstance,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Typography,
-} from "antd";
+import React, {useContext, useReducer, useState} from "react";
+import {Col, Divider, Form, FormInstance, Input, InputNumber, Row, Select, Typography,} from "antd";
 import useGetAllMaterial from "../../../../../../../../hooks/material/useGetAllMaterial";
-import { useGetAllPersonType } from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
+import {useGetAllPersonType} from "../../../../../../../../hooks/baseInfo/usePersonTypeGetAll";
 import useGetAllSupplyMethod from "../../../../../../../../hooks/baseInfo/useGetAllSupplyMethod";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import percentReducer from "../../../../../../../../reducers/PercentageAction";
-import { filterOption } from "../../../../../../../../lib/filterOption";
+import {filterOption} from "../../../../../../../../lib/filterOption";
 
 const FormulationFrom = (props: { form?: FormInstance }) => {
   const processController = useContext(StepContext);
@@ -70,7 +60,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         <Col xs={24} md={12}>
           <Form.Item
             name={"materialUnitConsumption"}
-            label="میزان مصرف برای تولید یک واحد"
+            label="میزان مصرف کل برای یک واحد تولیدی(کیلوگرم)"
             rules={[
               {
                 required: true,
@@ -90,7 +80,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        {[2, 3, 4].includes(
+        {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
           <Col xs={24} md={12}>
@@ -119,27 +109,56 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             </Form.Item>
           </Col>
         )}
-        <Col xs={24} md={12}>
-          <Form.Item
-            name={"materialTotalConsumption"}
-            label={"میزان مصرف کل"}
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              {
-                validator: async (rule, value) => {
-                  if (!/^\d+$/.test(value)) {
-                    throw new Error("لطفا عدد وارد کنید");
-                  }
-                  if (value > 100 || value < 0) {
-                    throw new Error("لطفا عدد بین 0 تا 100 وارد کنید");
-                  }
-                },
-              },
-            ]}
-          >
-            <Input size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col>
+        {[2].includes(
+            processController.requestMaster.productionMethodId
+        ) && (
+            <Col xs={24} md={12}>
+              <Form.Item
+                  name={"materialUsagePercentage"}
+                  label={"درصد استفاده"}
+                  rules={[
+                    {required: true, message: "لطفا مقدار را انتخاب کنید"},
+                    {
+                      type: "number",
+                      min: 0,
+                      max: 99,
+                      message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                    },
+                  ]}
+              >
+                <InputNumber
+                    controls={false}
+                    className="w-full rounded-lg"
+                    size="large"
+                    min={0}
+                    max={99}
+                    formatter={(value) => `${value}%`}
+                    placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+        )}
+        {/*<Col xs={24} md={12}>*/}
+        {/*  <Form.Item*/}
+        {/*    name={"materialTotalConsumption"}*/}
+        {/*    label={"میزان مصرف کل"}*/}
+        {/*    rules={[*/}
+        {/*      { required: true, message: "لطفا مقدار را وارد کنید" },*/}
+        {/*      {*/}
+        {/*        validator: async (rule, value) => {*/}
+        {/*          if (!/^\d+$/.test(value)) {*/}
+        {/*            throw new Error("لطفا عدد وارد کنید");*/}
+        {/*          }*/}
+        {/*          if (value > 100 || value < 0) {*/}
+        {/*            throw new Error("لطفا عدد بین 0 تا 100 وارد کنید");*/}
+        {/*          }*/}
+        {/*        },*/}
+        {/*      },*/}
+        {/*    ]}*/}
+        {/*  >*/}
+        {/*    <Input size="large" placeholder="وارد کنید" />*/}
+        {/*  </Form.Item>*/}
+        {/*</Col>*/}
         <Col xs={24} md={12}>
           <Form.Item
             initialValue={"داخلی"}

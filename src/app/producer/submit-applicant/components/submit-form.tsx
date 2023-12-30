@@ -159,17 +159,17 @@ export default function SubmitForm() {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 0]}>
-            <Col xs={24} md={24}>
-              <Form.Item
-                name="requestImage"
-                label="فایل پیوست(تصویر نامه درخواست)"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
-                <Input size="large" placeholder="وارد کنید" />
-              </Form.Item>
-            </Col>
-          </Row>
+          {/*<Row gutter={[16, 0]}>*/}
+          {/*  <Col xs={24} md={24}>*/}
+          {/*    <Form.Item*/}
+          {/*      name="requestImage"*/}
+          {/*      label="فایل پیوست(تصویر نامه درخواست)"*/}
+          {/*      rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}*/}
+          {/*    >*/}
+          {/*      <Input size="large" placeholder="وارد کنید" />*/}
+          {/*    </Form.Item>*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
           <Row gutter={[12, 12]}>
             <Col xs={24} md={24}>
               <Button

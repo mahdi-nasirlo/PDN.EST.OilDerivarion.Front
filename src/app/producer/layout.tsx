@@ -306,13 +306,6 @@ const items: MenuProps["items"] = [
         "/producer/base-info/sweetening",
         <BeakerIcon width={16} height={16} />
       ),
-      getMenuItem(
-        <Link href="/producer/base-info/facility-control-room">
-          تجهیزات اتاق کنترل{" "}
-        </Link>,
-        "/producer/base-info/facility-control-rooms",
-        <BeakerIcon width={16} height={16} />
-      ),
       // getMenuItem(
       //   <Link href="/producer/base-info/visit-form">اطلاعات فرم بازدید</Link>,
       //   "/producer/base-info/visit-form",

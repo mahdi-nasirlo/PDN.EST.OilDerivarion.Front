@@ -46,14 +46,16 @@ export default function AppLayout({
                     shallowRouting={false}
                 />
                 <Space direction="vertical" style={{width: "100%"}} size={[0, 48]}>
-                    <Layout style={{minHeight: "100vh"}}>
+                    <Layout className="custom-layout" style={{minHeight: "100vh"}}>
                         <LayoutHeader
                             showDrawer={showDrawer}
                         />
-                        <Layout className="bg-gray-50" hasSider>
+                        <Layout className="scrollable-content bg-gray-50" hasSider>
                             <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open}/>
                             <Content
-                                style={contentStyle}>
+                                className="custom-content"
+                                style={contentStyle}
+                            >
                                 <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
                                     <div className="flex justify-between items-center">
                                         <LayoutBreadcrumb/>

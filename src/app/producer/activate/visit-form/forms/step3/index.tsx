@@ -1,32 +1,25 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Form, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import React, { useContext } from 'react'
 import StepContext from '../../stete-manager/step-context';
-import { useForm } from 'antd/es/form/Form';
-import ReactorSpecifications from './components/reactor-specifications';
-import ReactorPart from './components/reactor-part';
+import { formsUid } from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
     const processController = useContext(StepContext);
-    const [form] = useForm();
 
     return (
         <>
             <div className='flex justify-between'>
-                <div className='flex gap-3'>
-                    <Typography className='font-bold'>اطلاعات خط تولید</Typography>
+                <div className='flex items-center gap-3'>
+                    <Typography className='font-bold'>اطلاعات خط تولید (3 از 7)</Typography>
                     <Typography className='text-secondary-500'>
-                        مشخصات راکتور ( 3 از 8 )
+                        مشخصات راکتور
                     </Typography>
                 </div>
-            </div >
+            </div>
             <Divider />
-            <Form form={form} layout='vertical'>
-                <ReactorSpecifications />
-                <Divider />
-                <ReactorPart />
-            </Form>
+            <Resource categoryID={formsUid.reactor_specifications} />
             <Divider />
             <div className='flex gap-3'>
                 <Button
@@ -43,9 +36,7 @@ export default function Index() {
                     size="large"
                     type="primary"
                     htmlType="submit"
-                    onClick={() =>
-                        processController.dispatch({ type: "NEXT", stepNumber: 7 })
-                    }
+                    onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 6 })}
                 >
                     مرحله بعد
                 </Button>

@@ -35,6 +35,10 @@ const MaterialRequestDetailTable = () => {
       render: (value) => <>{value}%</>,
     },
     {
+      title: "نام تامین کننده ماده اولیه",
+      dataIndex: "MaterialSupplyName",
+    },
+    {
       title: "عملیات",
       align: "center",
       fixed: "right",

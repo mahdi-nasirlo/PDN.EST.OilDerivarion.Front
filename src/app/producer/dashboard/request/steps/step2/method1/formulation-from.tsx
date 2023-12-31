@@ -177,8 +177,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="materialImportDeclarationNumber"
-                label="شماره اظهارنامه واردات"
+                name="materialSupplyName"
+                label="نام تامین کننده خارجی"
                 rules={[
                   {
                     required: true,
@@ -195,8 +195,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="materialSupplyName"
-                label="نام تامین کننده خارجی"
+                name="materialImportDeclarationNumber"
+                label="شماره اظهارنامه واردات"
                 rules={[
                   {
                     required: true,

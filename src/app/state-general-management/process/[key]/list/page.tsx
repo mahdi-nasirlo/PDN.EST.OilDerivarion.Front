@@ -4,15 +4,15 @@
 import React from 'react'
 import PrimaryListRequestsForm
     from "@/app/state-general-management/process/[key]/list/components/primary-list-requests-form";
-import {Button, Space, Table, Typography} from "antd";
-import {addIndexToData} from "../../../../../../lib/addIndexToData";
-import {useRouter} from "next/navigation";
+import { Button, Space, Table, Typography } from "antd";
+import { addIndexToData } from "../../../../../../lib/addIndexToData";
+import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import {StateOrgManager} from "../../../../../../interfaces/requestMaster";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {ColumnsType} from "antd/es/table";
+import { StateOrgManager } from "../../../../../../interfaces/requestMaster";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { ColumnsType } from "antd/es/table";
 
-export default function Page({params}: { params: { key: string } }) {
+export default function Page({ params }: { params: { key: string } }) {
 
     const router = useRouter()
 
@@ -74,7 +74,7 @@ export default function Page({params}: { params: { key: string } }) {
 
     return (
         <>
-            <PrimaryListRequestsForm/>
+            <PrimaryListRequestsForm />
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-start items-center">
                     <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست
@@ -87,8 +87,6 @@ export default function Page({params}: { params: { key: string } }) {
                     dataSource={addIndexToData(data?.tasks.item3, "Row")}
                     pagination={{
                         defaultPageSize: 10,
-                        showSizeChanger: true,
-                        pageSizeOptions: ["10", "20", "50"],
                         defaultCurrent: 1,
                         style: {
                             display: "flex",

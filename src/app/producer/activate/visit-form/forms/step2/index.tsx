@@ -1,8 +1,8 @@
 import { Button, Divider, Typography } from 'antd'
 import React, { useContext } from 'react'
 import StepContext from '../../stete-manager/step-context';
-import DataTable from './components/data-table';
-import CreateForm from './components/create-form';
+import { formsUid } from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
@@ -12,15 +12,14 @@ export default function Index() {
         <>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>
-                    <Typography className='font-bold'>اطلاعات خط تولید</Typography>
+                    <Typography className='font-bold'>اطلاعات خط تولید (2 از 7)</Typography>
                     <Typography className='text-secondary-500'>
-                        اطلاعات مخازن محصول ( 2 از 8 )
+                        اطلاعات مخازن محصول
                     </Typography>
                 </div>
             </div >
             <Divider />
-            <CreateForm />
-            <DataTable />
+            <Resource categoryID={formsUid.repository_information} />
             <Divider />
             <div className='flex gap-3'>
                 <Button
@@ -37,9 +36,7 @@ export default function Index() {
                     size="large"
                     type="primary"
                     htmlType="submit"
-                    onClick={() =>
-                        processController.dispatch({ type: "NEXT", stepNumber: 7 })
-                    }
+                    onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 6 })}
                 >
                     مرحله بعد
                 </Button>

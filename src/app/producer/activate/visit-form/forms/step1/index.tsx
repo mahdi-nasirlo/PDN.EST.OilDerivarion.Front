@@ -1,10 +1,9 @@
-import { Button, Col, Divider, Row, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import React, { useContext } from 'react'
 import StepContext from '../../stete-manager/step-context';
 import StepContextActivate from '../../../stete-manager/step-context';
-
-import DataTable from './components/data-table';
-import CreateForm from './components/create-form';
+import Resource from "../../../../../../../components/Resource";
+import { formsUid } from "../../../../../../../Constants/formsUid";
 
 export default function Index() {
 
@@ -15,15 +14,14 @@ export default function Index() {
         <>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>
-                    <Typography className='font-bold'>اطلاعات خط تولید</Typography>
+                    <Typography className='font-bold'>اطلاعات خط تولید (1 از 7)</Typography>
                     <Typography className='text-secondary-500'>
-                        اطلاعات مخازن میکس یا بلندینگ ( 1 از 8 )
+                        اطلاعات مخازن مواد اولیه
                     </Typography>
                 </div>
-            </div >
+            </div>
             <Divider />
-            <CreateForm />
-            <DataTable />
+            <Resource categoryID={formsUid.mix_blending_tank_information} />
             <Divider />
             <div className='flex gap-3'>
                 <Button
@@ -40,9 +38,7 @@ export default function Index() {
                     size="large"
                     type="primary"
                     htmlType="submit"
-                    onClick={() =>
-                        processController.dispatch({ type: "NEXT", stepNumber: 7 })
-                    }
+                    onClick={() => processController.dispatch({ type: "NEXT", stepNumber: 6 })}
                 >
                     مرحله بعد
                 </Button>

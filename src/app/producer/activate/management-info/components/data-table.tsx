@@ -79,7 +79,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "کد ملی / اتباع",
+      title: "کد ملی",
       dataIndex: "nationalCode",
       key: "4",
     },
@@ -138,8 +138,6 @@ export default function DataTable({
         loading={ldMainMember || isValidating}
         pagination={{
           defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
           defaultCurrent: 1,
           style: {
             display: "flex",

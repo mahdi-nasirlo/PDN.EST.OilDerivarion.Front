@@ -89,7 +89,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
           <Col xs={24} md={12}>
             <Form.Item
               name="nationalCode"
-              label="کد ملی / کد اتباع"
+              label="کد ملی"
               rules={[
                 { required: true },
                 {

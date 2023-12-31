@@ -1,13 +1,13 @@
 "use client";
 
-import {Button, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import React, {useState} from 'react'
+import { Button, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import React, { useState } from 'react'
 import ExpandedDetailsTable from './expanded-details-table';
 import CustomeTable from '../../../../../components/CustomeTable';
 import RejectionModal from './rejection-modal';
 import ActiveCodeModal from './accept-modals/active-code-modal';
-import {useRouter} from "next/navigation";
+import Link from 'next/link';
 
 
 export default function DataTable({
@@ -31,7 +31,6 @@ export default function DataTable({
     | undefined;
 }) {
 
-    const router = useRouter();
 
     const [isModalOpenTest, setIsModalOpenTest] = useState(false);
 
@@ -90,11 +89,10 @@ export default function DataTable({
                             <Button
                                 className={'text-secondary-500 font-bold'}
                                 type={"link"}
-                                onClick={
-                                    () => router.push(`/producer/step18/test-result-lab/${record.uid}`)
-                                }
                             >
-                                مشاهده نتیجه
+                                <Link href={`/producer/step18/test-result-lab/${record.uid}`}>
+                                    مشاهده نتیجه
+                                </Link>
                             </Button>
                         </Space>
                     )

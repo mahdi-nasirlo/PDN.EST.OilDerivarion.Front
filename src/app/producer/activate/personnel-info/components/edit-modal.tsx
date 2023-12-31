@@ -60,7 +60,7 @@ export default function EditModal({
         onCancel={handleCancelEdit}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 loading={ldUpdateSetEmployeeMember}
                 size="large"
@@ -72,7 +72,7 @@ export default function EditModal({
                 ثبت
               </Button>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
@@ -121,12 +121,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="nationalCode"
-                label="کد ملی / کد اتباع"
+                label="شماره ملی / کد اتباع"
                 rules={[
                   { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: "کد ملی نامتعبر است",
+                    message: "شماره ملی نامتعبر است",
                   },
                 ]}
               >
@@ -143,7 +143,7 @@ export default function EditModal({
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "این فیلد اجباری است" }]}
               >
-                <CustomDatePicker/>
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>

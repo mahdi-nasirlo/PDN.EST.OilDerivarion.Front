@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
-import {Button, Checkbox, Col, Divider, Form, Row, Spin} from "antd";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {useForm} from "antd/es/form/Form";
+import React, { useContext, useState } from 'react';
+import { Button, Checkbox, Col, Divider, Form, Row, Spin } from "antd";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { useForm } from "antd/es/form/Form";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../../../lib/server/mutationFetcher";
+import { mutationFetcher } from "../../../../../../../lib/server/mutationFetcher";
 import StepContext from '../../state-managment/step-context';
 import ReviewDataTable from './review-data-table';
 import ReviewDataModalFinalSubmit from './review-data-modal-final-submit';
@@ -67,19 +67,29 @@ const Index = () => {
                         </Checkbox>
                     </Form.Item>
                     <Divider />
-                    <Row gutter={[10, 0]}>
-                        <Col span={12}>
+                    <Row gutter={[12, 12]}>
+                        <Col xs={24} md={8}>
+                            <Button
+                                size='large'
+                                onClick={() => processController.dispatch({ type: "PREVIOUS" })}
+                                type="dashed"
+                                className="bg-gray-100 w-full"
+                            >
+                                مرحله قبلی
+                            </Button>
+                        </Col>
+                        <Col xs={24} md={8}>
                             <Button
                                 disabled={isMutating}
                                 onClick={processController.getNextStep}
                                 className="w-full bg-gray-50 flex items-center justify-center"
                                 size="large"
-                                icon={<PlusIcon width={24} height={24} />}
+                                icon={<PlusIcon width={16} height={16} />}
                             >
                                 افزودن مواد اولیه و محصول جدید
                             </Button>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} md={8}>
                             <Button
                                 loading={isMutating}
                                 className="w-full management-info-form-submit btn-filter"

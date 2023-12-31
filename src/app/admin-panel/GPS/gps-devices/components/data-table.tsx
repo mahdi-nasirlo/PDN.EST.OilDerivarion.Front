@@ -10,7 +10,7 @@ import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { Gps } from "../../../../../../interfaces/gps";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import useBoxOpen from "../../../../../../hooks/requestGps/useBoxOpen";
 
 export default function DataTable({
@@ -24,11 +24,11 @@ export default function DataTable({
   isValidating: any;
   isLoading: boolean;
   boxesData:
-    | {
-        records: any;
-        count: number;
-      }
-    | undefined;
+  | {
+    records: any;
+    count: number;
+  }
+  | undefined;
   mutate: () => void;
 }) {
   const openBox = useBoxOpen();
@@ -67,7 +67,6 @@ export default function DataTable({
     }
   };
 
-  const router = useRouter();
 
   const columns: ColumnsType<Gps> = [
     {
@@ -106,11 +105,10 @@ export default function DataTable({
           <Button
             type="link"
             className="text-primary-500 font-bold"
-            onClick={() => {
-              router.push("/admin-panel/GPS/gps-devices/location-gps-device");
-            }}
           >
-            مشاهده موقعیت
+            <Link href={"/admin-panel/GPS/gps-devices/location-gps-device"}>
+              مشاهده موقعیت
+            </Link>
           </Button>
         </Space>
       ),

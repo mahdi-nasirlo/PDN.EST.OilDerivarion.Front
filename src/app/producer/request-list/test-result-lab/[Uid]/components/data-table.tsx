@@ -1,19 +1,17 @@
 "use client";
 
 
-import {Alert, Button, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
+import { Alert, Button, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../../../components/CustomeTable";
-import {useRouter} from 'next/navigation';
+import Link from 'next/link';
 
 
-export default function DataTable({labresult, ldlabresult}: {
+export default function DataTable({ labresult, ldlabresult }: {
     ldlabresult: any
     labresult: any
 }) {
-
-    const router = useRouter();
 
     const columns: ColumnsType<any> = [
         {
@@ -70,11 +68,10 @@ export default function DataTable({labresult, ldlabresult}: {
                     <Button
                         type="link"
                         className="text-secondary-500 font-bold"
-                        onClick={() => {
-                            router.push(`/laboratory-panel/request-list/test-result-lab/submit-test-result/${record.Uid}`)
-                        }}
                     >
-                        ثبت نتیجه
+                        <Link href={`/laboratory-panel/request-list/test-result-lab/submit-test-result/${record.Uid}`}>
+                            ثبت نتیجه
+                        </Link>
                     </Button>
 
                 </Space >
@@ -100,7 +97,7 @@ export default function DataTable({labresult, ldlabresult}: {
                     setInitialData={() => {
                     }}
                     isLoading={ldlabresult}
-                    data={{count: labresult?.length, records: labresult}}
+                    data={{ count: labresult?.length, records: labresult }}
                     rowKey={"Row"}
                     columns={columns}
 

@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
-import {Button, Col, Form, Modal, Row} from "antd";
+import React, { useEffect } from "react";
+import { Button, Col, Form, Modal, Row } from "antd";
 import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
-import {useForm} from "antd/es/form/Form";
-import {Product} from "../../../../../../interfaces/product";
+import { useForm } from "antd/es/form/Form";
+import { Product } from "../../../../../../interfaces/product";
 import useUpdateProduct from "../../../../../../hooks/product/useUpdateProduct";
 
 function EditModal({
@@ -63,7 +63,7 @@ function EditModal({
       onCancel={() => setIsEditModalVisible(false)}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               loading={UpdateProduct.isMutating}
               size="large"
@@ -75,7 +75,7 @@ function EditModal({
               ثبت
             </Button>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               disabled={UpdateProduct.isMutating}
               size="large"

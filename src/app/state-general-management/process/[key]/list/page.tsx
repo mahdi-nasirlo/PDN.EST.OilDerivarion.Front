@@ -6,15 +6,13 @@ import PrimaryListRequestsForm
     from "@/app/state-general-management/process/[key]/list/components/primary-list-requests-form";
 import { Button, Space, Table, Typography } from "antd";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
 import useSWR from "swr";
 import { StateOrgManager } from "../../../../../../interfaces/requestMaster";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { ColumnsType } from "antd/es/table";
 
 export default function Page({ params }: { params: { key: string } }) {
-
-    const router = useRouter()
 
     const {
         data,
@@ -63,9 +61,14 @@ export default function Page({ params }: { params: { key: string } }) {
             key: "جزئیات",
             render: (_, record) => (
                 <Space size="middle">
-                    <Button type="link" className="text-primary-500 font-bold" onClick={() => {
-                        router.push(`/state-general-management/process/${params.key}/detail/${record.task_id}`)
-                    }}>مشاهده</Button>
+                    <Button
+                        type="link"
+                        className="text-primary-500 font-bold"
+                    >
+                        <Link href={`/state-general-management/process/${params.key}/detail/${record.task_id}`}>
+                            مشاهده
+                        </Link>
+                    </Button>
                 </Space>
             ),
         },

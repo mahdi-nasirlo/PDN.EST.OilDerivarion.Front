@@ -15,7 +15,7 @@ export default function PrimaryProducerDetailsForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="شناسه ملی">
+                        <Form.Item name="lastName" label="شماره ملی">
                             <Input size="large" placeholder="56181616545" disabled />
                         </Form.Item>
                     </Col>

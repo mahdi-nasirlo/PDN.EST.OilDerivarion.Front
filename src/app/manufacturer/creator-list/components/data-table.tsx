@@ -27,7 +27,7 @@ export default function DataTable({ ldProducerList, ProducerList, mutate }: {
             key: "2",
         },
         {
-            title: " شناسه ملی",
+            title: " شماره ملی",
             dataIndex: "nationalCode",
             key: "3",
         },

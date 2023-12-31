@@ -1,10 +1,9 @@
-import React, {useContext} from "react";
-import {Button, Col, Divider, Form, Row, Typography} from "antd";
-import {useForm} from "antd/es/form/Form";
+import React, { useContext } from "react";
+import { Button, Col, Divider, Form, Row, Typography } from "antd";
+import { useForm } from "antd/es/form/Form";
 import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
-import {SvgIcon} from "@/components/layout/sidebar";
 
 function Index() {
   const [form] = useForm();
@@ -45,21 +44,31 @@ function Index() {
         <FormulationFrom form={form} />
         <Divider />
         <Row gutter={[12, 12]}>
-          <Col span={12}>
+          <Col xs={24} md={8}>
             <Button
+              onClick={() => processControl.dispatch({ type: "PREVIOUS" })}
+              size="large"
+              type="dashed"
+              className="bg-gray-100 w-full"
+            >
+              مرحله قبلی
+            </Button>
+          </Col>
+          <Col xs={24} md={8}>
+            <Button
+              size="large"
               onClick={() =>
                 processControl.getLastStep()
               }
-              type="dashed"
+              type="default"
               className="bg-gray-100 w-full"
             >
               بازبینی نهایی
             </Button>
           </Col>
-          <Col span={12}>
+          <Col xs={24} md={8}>
             <Button
               className="w-full"
-              icon={<SvgIcon src="/static/save.svg" />}
               loading={
                 crudMaterialRequestDetail.create.isLoading ||
                 processControl.isMutating
@@ -68,7 +77,7 @@ function Index() {
               type="primary"
               htmlType="submit"
             >
-              ذخیره
+              ذخیره و ادامه
             </Button>
           </Col>
         </Row>

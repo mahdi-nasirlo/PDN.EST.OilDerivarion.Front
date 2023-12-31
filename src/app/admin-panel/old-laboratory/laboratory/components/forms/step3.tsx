@@ -43,12 +43,12 @@ function Step3({
           <Col xs={24} md={12}>
             <Form.Item
               name="managerNationalCode"
-              label="کد ملی"
+              label="شماره ملی"
               rules={[
                 { required: true },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "کد ملی نامتعبر است",
+                  message: "شماره ملی نامتعبر است",
                 },
               ]}
             >

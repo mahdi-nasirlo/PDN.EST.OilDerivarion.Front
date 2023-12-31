@@ -34,8 +34,7 @@ interface DataFetchType {
 const apiData = apiUrl.WorkFlowRequest.cartable;
 
 export default function Home(props: PropType) {
-
-  const [commentForm] = useForm()
+  const [commentForm] = useForm();
 
   const [form] = useForm();
 
@@ -180,8 +179,32 @@ export default function Home(props: PropType) {
               </Col>
               <Col xs={24} md={12}>
                 <Form.Item
-                  name="operationLicense"
-                  label="اطلاعات پروانه بهره برداری"
+                  name="licenseTypeName"
+                  label="نوع مجوز"
+                  rules={[
+                    { required: true, message: "لطفا مقدار را وارد کنید" },
+                  ]}
+                >
+                  <Input readOnly size="large" placeholder="وارد کنید" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  name="licenseNumber"
+                  label="شماره مجوز"
+                  rules={[
+                    { required: true, message: "لطفا مقدار را وارد کنید" },
+                  ]}
+                >
+                  <Input readOnly size="large" placeholder="وارد کنید" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  name="licenseValidityDate"
+                  label="تاریخ اعتبار مجوز"
                   rules={[
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
@@ -193,8 +216,8 @@ export default function Home(props: PropType) {
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>
                 <Form.Item
-                  name="establishmentPermit"
-                  label="جواز تاسیس"
+                  name="licenseIssuerTypeName"
+                  label="صادر کننده مجوز"
                   rules={[
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
@@ -217,19 +240,6 @@ export default function Home(props: PropType) {
                     style={{ height: 120, resize: "none" }}
                     placeholder="وارد کنید"
                   />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={[16, 0]}>
-              <Col xs={24} md={24}>
-                <Form.Item
-                  name="requestImage"
-                  label="فایل پیوست(تصویر نامه درخواست)"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
-                  <Input size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>

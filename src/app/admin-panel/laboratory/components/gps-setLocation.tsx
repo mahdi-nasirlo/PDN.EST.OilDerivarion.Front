@@ -24,20 +24,7 @@ export default function SetLocation({
         open={isGPSModalVisibleset}
         onCancel={handleCancelGPS}
         width={800}
-        footer={[
-          <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={24}>
-              <Button
-                size="large"
-                className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelGPS}
-                key={"cancel"}
-              >
-                برگشت
-              </Button>
-            </Col>
-          </Row>,
-        ]}
+        footer={null}
       >
         <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>

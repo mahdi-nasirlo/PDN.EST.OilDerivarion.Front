@@ -13,7 +13,7 @@ export default function LayoutHeader({
 
     return (
         <>
-            <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
+            <div style={{position: "fixed", top: 0, left: 0, right: 0, zIndex: 100}}>
                 <Header
                     className="lg:px-10 px-1 gap-0"
                     style={{

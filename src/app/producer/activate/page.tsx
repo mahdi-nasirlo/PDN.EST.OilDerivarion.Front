@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Steps } from "antd";
-import StepContext from "@/app/producer/activate/stete-manager/step-context";
+import StepContext from "./stete-manager/step-context";
 import useControlSteps from './stete-manager/useControlSteps';
 import CreatorProduction from './creator-production/creator-production';
 import ManagementInfo from './management-info/management-info';
@@ -16,8 +16,6 @@ import VisitForm from './visit-form/page';
 function Page() {
 
     const processController = useControlSteps()
-
-
 
     let CurrentStep
 
@@ -60,7 +58,7 @@ function Page() {
                         title: "تجهیزات آزمایشگاهی",
                     },
                     {
-                        title: "فرم بازدید",
+                        title: "تجهیزات خط تولید",
                     },
                     {
                         title: "مدیریتی",

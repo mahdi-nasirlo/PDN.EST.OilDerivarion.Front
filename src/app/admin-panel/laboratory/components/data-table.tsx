@@ -12,6 +12,7 @@ import CustomeTable from "../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import TestExpandedRowRender from "./test-expandedRowRender";
 import GpsLabModal from "./gps-lab-modal";
+import SetLocation from "./gps-setLocation";
 
 export default function DataTable({
   setFilter,
@@ -25,13 +26,12 @@ export default function DataTable({
   ldMaterial: boolean;
   mutate: () => void;
   Laboratory:
-  | {
-    records: LaboratoryGet[];
-    count: number;
-  }
-  | undefined;
+    | {
+        records: LaboratoryGet[];
+        count: number;
+      }
+    | undefined;
 }) {
-
   const [activeExpRow, setActiveExpRow] = useState<string[]>();
 
   // //حذف
@@ -52,7 +52,6 @@ export default function DataTable({
   const handleConfirmDelete = async () => {
     const res = await deleteLab({ Uid: recordToDelete?.uid });
     if (res) {
-
       await mutate();
 
       setIsDeleteModalVisible(false);
@@ -83,6 +82,7 @@ export default function DataTable({
   // GPS
 
   const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
+  const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
 
   const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
 
@@ -90,13 +90,17 @@ export default function DataTable({
     setSelectedLabUid(record.uid);
     setIsGPSModalVisible(true);
   };
+  const handleSetlocation = (record: Laboratory) => {
+    setSelectedLabUid(record.uid);
+    setIsGPSModalVisibleset(true);
+  };
 
   const columns: ColumnsType<Laboratory> = [
     {
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "نام آزمایشگاه",
@@ -112,7 +116,7 @@ export default function DataTable({
       title: "فعال/غیر فعال",
       dataIndex: "isActive",
       key: "4",
-      render: (_, record: any) => <StatusColumn record={record} />
+      render: (_, record: any) => <StatusColumn record={record} />,
     },
     {
       title: "استان",
@@ -159,7 +163,9 @@ export default function DataTable({
       dataIndex: "testItems",
       key: "5",
       render: (_, record: Laboratory) => {
-        let testItemNames = record.testItems?.map(item => item.name).join(', ');
+        let testItemNames = record.testItems
+          ?.map((item) => item.name)
+          .join(", ");
 
         return (
           <Tooltip
@@ -207,13 +213,13 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          {/* <Button
+          <Button
             type="link"
-            className={"text-red-500 font-bold"}
-            onClick={() => handleDelete(record)}
+            className="text-secondary-500 font-bold"
+            onClick={() => handleSetlocation(record)}
           >
-            حذف
-          </Button> */}
+            تعیین موقعیت آزمایشگاه
+          </Button>
         </Space>
       ),
     },
@@ -287,6 +293,12 @@ export default function DataTable({
         setSelectedLabUid={setSelectedLabUid}
         isGPSModalVisible={isGPSModalVisible}
         setIsGPSModalVisible={setIsGPSModalVisible}
+      />
+      <SetLocation
+        selectedLabUid={selectedLabUid}
+        setSelectedLabUid={setSelectedLabUid}
+        isGPSModalVisibleset={isGPSModalVisibleset}
+        setIsGPSModalVisibleset={setIsGPSModalVisibleset}
       />
     </>
   );

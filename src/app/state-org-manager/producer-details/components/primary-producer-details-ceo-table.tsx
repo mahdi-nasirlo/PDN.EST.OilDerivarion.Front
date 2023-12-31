@@ -32,7 +32,7 @@ export default function PrimaryProducerDetailsCeoTable() {
             key: "2",
         },
         {
-            title: "کد ملی / کد اتباع",
+            title: "شماره ملی / کد اتباع",
             dataIndex: "Code",
             key: "3",
         },

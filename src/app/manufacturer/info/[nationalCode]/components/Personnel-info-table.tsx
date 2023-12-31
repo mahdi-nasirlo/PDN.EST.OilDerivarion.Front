@@ -33,7 +33,7 @@ export default function PersonnelInfoTable({ params }: { params: { nationalCode:
             key: "2",
         },
         {
-            title: "  کد ملی / کد اتباع",
+            title: "  شماره ملی / کد اتباع",
             dataIndex: "memberNationalCode",
             key: "3",
         },

@@ -1,10 +1,8 @@
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
-import { Button, Divider, Form, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import React, { useContext } from 'react'
 import StepContext from '../../stete-manager/step-context';
-import { useForm } from 'antd/es/form/Form';
-import CreateForm from './components/create-form';
-import DataTable from './components/data-table';
+import { formsUid } from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
 
 export default function Index() {
 
@@ -14,15 +12,14 @@ export default function Index() {
         <>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>
-                    <Typography className='font-bold'>اطلاعات خط تولید</Typography>
+                    <Typography className='font-bold'>اطلاعات خط تولید (4 از 7)</Typography>
                     <Typography className='text-secondary-500'>
-                        خط تولید برش گیری ( 4 از 8 )
+                        مشخصات برج تقطیر
                     </Typography>
                 </div>
             </div >
             <Divider />
-            <CreateForm />
-            <DataTable />
+            <Resource categoryID={formsUid.distillation} />
             <Divider />
             <div className='flex gap-3'>
                 <Button
@@ -40,7 +37,7 @@ export default function Index() {
                     type="primary"
                     htmlType="submit"
                     onClick={() =>
-                        processController.dispatch({ type: "NEXT", stepNumber: 7 })
+                        processController.dispatch({ type: "NEXT", stepNumber: 6 })
                     }
                 >
                     مرحله بعد

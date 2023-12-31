@@ -33,7 +33,7 @@ export default function PrimaryRequestsListTable() {
             key: "2",
         },
         {
-            title: " شناسه ملی",
+            title: " شماره ملی",
             dataIndex: "TrackingCode",
             key: "3",
         },

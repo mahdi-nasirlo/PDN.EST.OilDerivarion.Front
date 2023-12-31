@@ -80,7 +80,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "کد ملی / اتباع",
+      title: "شماره ملی / اتباع",
       dataIndex: "nationalCode",
       key: "4",
     },

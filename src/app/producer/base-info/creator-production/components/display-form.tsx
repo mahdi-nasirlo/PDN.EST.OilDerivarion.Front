@@ -39,7 +39,7 @@ export default function DisplayForm({ data, isLoading }: { data: any, isLoading:
                         <Col xs={24} md={12}>
                             <Form.Item
                                 name="currentCEONationalCode"
-                                label="شناسه ملی"
+                                label="شماره ملی"
                             >
                                 <Input size="large" className="w-full rounded-lg" placeholder="وارد کنید" />
                             </Form.Item>

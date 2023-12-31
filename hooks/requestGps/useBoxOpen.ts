@@ -1,4 +1,3 @@
-import axios from "axios";
 import {apiUrl} from "../../Constants/apiUrl";
 import useSWRMutation from "swr/mutation";
 import {notification} from "antd";

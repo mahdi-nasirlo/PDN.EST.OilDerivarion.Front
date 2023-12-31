@@ -90,12 +90,12 @@ export default function CreatorProduction() {
           <Col xs={24} md={12}>
             <Form.Item
               name="currentCEONationalCode"
-              label="شناسه ملی"
+              label="شماره ملی"
               rules={[
                 { required: true },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "کد ملی نامتعبر است",
+                  message: "شماره ملی نامتعبر است",
                 },
               ]}
             >

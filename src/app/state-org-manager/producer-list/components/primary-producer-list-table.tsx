@@ -32,7 +32,7 @@ export default function PrimaryProducerListTable() {
             key: "2",
         },
         {
-            title: "شناسه ملی",
+            title: "شماره ملی",
             dataIndex: "Tracking",
             key: "3",
         },

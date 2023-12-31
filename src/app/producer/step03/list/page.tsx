@@ -5,14 +5,12 @@ import WorkflowDataTableProvider from "../../../../../components/Workflow/Workfl
 import {
     WorkflowDataTableContextType
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
-import {Button, Space} from "antd";
-import {useRouter} from "next/navigation";
-import {apiUrl} from "../../../../../Constants/apiUrl";
+import { Button, Space } from "antd";
+import Link from "next/link";
+import { apiUrl } from "../../../../../Constants/apiUrl";
 import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
 
 export default function Home() {
-
-    const router = useRouter()
 
     const initialValue: WorkflowDataTableContextType = {
         apiUrl: apiUrl.WorkFlowRequest.step03.getAll.url,
@@ -49,12 +47,11 @@ export default function Home() {
                     <Space size="small">
                         <Button
                             type="link"
-                            className="text-secondary-500 font-bold "
-                            onClick={() => {
-                                router.push("/producer/step03/detail/" + record.taskId);
-                            }}
+                            className="text-secondary-500 font-bold"
                         >
-                            مشاهده اطلاعات
+                            <Link href={"/producer/step03/detail/" + record.taskId}>
+                                مشاهده اطلاعات
+                            </Link>
                         </Button>
                     </Space>
                 ),
@@ -65,7 +62,7 @@ export default function Home() {
     return (
         <>
             <WorkflowDataTableProvider initialValue={initialValue}>
-                <WorkflowDataTable/>
+                <WorkflowDataTable />
             </WorkflowDataTableProvider>
         </>
     );

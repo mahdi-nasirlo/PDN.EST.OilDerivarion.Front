@@ -26,16 +26,13 @@ export default function DisplayForm({
       newData.lab_HasFlashPoint = renderValue(data.lab_HasFlashPoint);
       newData.lab_HasViscometer = renderValue(data.lab_HasViscometer);
       newData.lab_HasMetalCorrosion = renderValue(data.lab_HasMetalCorrosion);
-      newData.lab_HasColorMeter = renderValue(data.lab_HasColorMeter);
       newData.lab_HasTBN = renderValue(data.lab_HasTBN);
       newData.lab_HasTAN = renderValue(data.lab_HasTAN);
-      newData.lab_HasVoltmeter = renderValue(data.lab_HasVoltmeter);
       newData.lab_HasMeasureMocaptan = renderValue(data.lab_HasMeasureMocaptan);
       newData.lab_HasMeasureSulfur = renderValue(data.lab_HasMeasureSulfur);
       newData.lab_HasDensiometer = renderValue(data.lab_HasDensiometer);
       newData.lab_HasMeasureColor = renderValue(data.lab_HasMeasureColor);
       newData.lab_HasMeasureMethodGC = renderValue(data.lab_HasMeasureMethodGC);
-      newData.hasWaste = renderValue(data.hasWaste);
 
       form.setFieldsValue(newData);
       console.log(newData);
@@ -81,17 +78,12 @@ export default function DisplayForm({
             </Form.Item>
           </Col>
           <Col xs={24} md={8}>
-            <Form.Item name="lab_HasMetalCorrosion" label="خوردگی فلز">
+            <Form.Item name="lab_HasMetalCorrosion" label="خوردگی تیغه مسی">
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={8}>
-            <Form.Item name="lab_HasColorMeter" label="رنگ سنج">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
           <Col xs={24} md={8}>
             <Form.Item name="lab_HasTBN" label="TBN (تست قلیایی)">
               <Input size="large" placeholder="وارد کنید" />
@@ -99,16 +91,6 @@ export default function DisplayForm({
           </Col>
           <Col xs={24} md={8}>
             <Form.Item name="lab_HasTAN" label="TAN (تست اسیدی)">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={8}>
-            <Form.Item
-              name="lab_HasVoltmeter"
-              label="ولت متر (اندازی گیری ولتاژ روغن)"
-            >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
@@ -120,6 +102,8 @@ export default function DisplayForm({
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
+        </Row>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={8}>
             <Form.Item
               name="lab_HasMeasureSulfur"
@@ -128,8 +112,6 @@ export default function DisplayForm({
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
           <Col xs={24} md={8}>
             <Form.Item name="lab_HasDensiometer" label="دانسیومتر">
               <Input size="large" placeholder="وارد کنید" />
@@ -140,32 +122,14 @@ export default function DisplayForm({
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
+        </Row>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={8}>
             <Form.Item
               name="lab_HasMeasureMethodGC"
               label="درصد آروماتیک و بنزن به روش GC"
             >
               <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={8}>
-            <Form.Item
-              name="exportDestinationCountryName"
-              label="کشور مقصد صادراتی محصول"
-            >
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
-            <Form.Item name="hasWaste" label="ضایعات">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={8}>
-            <Form.Item name="wastePlace" label="محل های فروش یا دفن ضایعات">
-              <Input size="large" placeholder="ندارد" />
             </Form.Item>
           </Col>
         </Row>

@@ -1,19 +1,17 @@
 "use client";
 
 
-import { Alert, Space, Tag, Typography } from 'antd';
+import { Alert, Button, Space, Tag, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import CustomeTable from "../../../../../../../components/CustomeTable";
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 export default function DataTable({ labresult, ldlabresult }: {
     ldlabresult: any
     labresult: any
 }) {
-
-    const router = useRouter();
 
     const columns: ColumnsType<any> = [
         {
@@ -66,15 +64,14 @@ export default function DataTable({ labresult, ldlabresult }: {
             width: "10%",
             render: (_, record) => (
                 <Space size="small">
-                    <button
-                        className="text-secondary-500 font-bold py-2"
-                        onClick={() => {
-                            router.push(`/producer/step18/test-result-lab/submit-test-result/${record.Uid}`)
-                        }}
+                    <Button
+                        type='link'
+                        className="text-secondary-500 font-bold"
                     >
-                        ثبت نتیجه
-                    </button>
-
+                        <Link href={`/producer/step18/test-result-lab/submit-test-result/${record.Uid}`}>
+                            ثبت نتیجه
+                        </Link>
+                    </Button>
                 </Space>
             ),
         },

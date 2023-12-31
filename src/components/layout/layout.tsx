@@ -36,33 +36,32 @@ export default function AppLayout({
 
   const router = useRouter();
 
-    return (
-        <>
-            <SWRConfig value={{revalidateOnFocus: false}}>
-                <ProgressBar
-                    height="3px"
-                    color="#18948a"
-                    options={{showSpinner: false}}
-                    shallowRouting={false}
-                />
-                <Space direction="vertical" style={{width: "100%"}} size={[0, 48]}>
-                    <Layout className="custom-layout" style={{minHeight: "100vh"}}>
-                        <LayoutHeader
-                            showDrawer={showDrawer}
-                        />
-                        <Layout className="scrollable-content bg-gray-50" hasSider>
-                            <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open}/>
-                            <Content
-                                className="custom-content"
-                                style={contentStyle}
-                            >
-                                <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-                                    <div className="flex justify-between items-center">
-                                        <LayoutBreadcrumb/>
-
+  return (
+    <>
+      <SWRConfig value={{ revalidateOnFocus: false }}>
+        <ProgressBar
+          height="3px"
+          color="#18948a"
+          options={{ showSpinner: false }}
+          shallowRouting={false}
+        />
+        <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
+          <Layout className="custom-layout" style={{ minHeight: "100vh" }}>
+            <LayoutHeader
+              showDrawer={showDrawer}
+            />
+            <Layout className="scrollable-content bg-gray-50" hasSider>
+              <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} />
+              <Content
+                className="custom-content"
+                style={contentStyle}
+              >
+                <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
+                  <div className="flex justify-between items-center">
+                    <LayoutBreadcrumb />
                     <Button
                       type="default"
-                      size="large"
+                      size="middle"
                       onClick={() => router.back()}
                     >
                       بازگشت

@@ -71,7 +71,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "کدملی",
+      title: "شماره ملی",
       dataIndex: "NationalCode",
       key: "3",
     },

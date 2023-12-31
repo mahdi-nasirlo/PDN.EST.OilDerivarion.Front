@@ -35,7 +35,7 @@ export default function PrimaryExpertsListTable() {
             key: "2",
         },
         {
-            title: "کد ملی",
+            title: "شماره ملی",
             dataIndex: "Tracking",
             key: "3",
         },

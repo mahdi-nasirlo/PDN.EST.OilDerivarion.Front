@@ -94,7 +94,7 @@ export default function DataTable({
             key: "2",
         },
         {
-            title: "کد ملی",
+            title: "شماره ملی",
             dataIndex: "NationalCode",
             key: "3",
         },

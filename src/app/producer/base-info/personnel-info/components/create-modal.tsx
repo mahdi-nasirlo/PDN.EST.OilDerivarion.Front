@@ -1,11 +1,10 @@
-import { Button, Col, DatePicker, Form, Input, Modal, Row } from "antd";
+import { Button, Col, Form, Input, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
-import ContactInputs from "../../../../../../components/inputs/Contact";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function CreateModal({
@@ -105,12 +104,12 @@ export default function CreateModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="nationalCode"
-                label="کد ملی / کد اتباع"
+                label="شماره ملی / کد اتباع"
                 rules={[
                   { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: "کد ملی نامتعبر است",
+                    message: "شماره ملی نامتعبر است",
                   },
                 ]}
               >
@@ -127,7 +126,7 @@ export default function CreateModal({
                 label="تاریخ تولد"
                 rules={[{ required: true }]}
               >
-                <CustomDatePicker/>
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>

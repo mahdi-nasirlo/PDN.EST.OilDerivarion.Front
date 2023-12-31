@@ -46,11 +46,11 @@ function Step2({
                 { required: true },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "کد ملی نامتعبر است",
+                  message: "شماره ملی نامتعبر است",
                 },
               ]}
               name="responsibleNationalCode"
-              label="کد ملی"
+              label="شماره ملی"
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>

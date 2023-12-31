@@ -72,7 +72,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "کد ملی",
+      title: "شماره ملی",
       dataIndex: "name",
       key: "3",
     },
@@ -208,7 +208,7 @@ export default function DataTable({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="year-establishment" label="کد ملی">
+              <Form.Item name="year-establishment" label="شماره ملی">
                 <Input size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>

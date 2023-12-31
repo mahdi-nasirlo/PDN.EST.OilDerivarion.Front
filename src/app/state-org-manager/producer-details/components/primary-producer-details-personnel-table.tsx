@@ -30,7 +30,7 @@ export default function PrimaryProducerDetailsPersonnelTable() {
             key: "2",
         },
         {
-            title: "کد ملی / کد اتباع",
+            title: "شماره ملی / کد اتباع",
             dataIndex: "Code",
             key: "3",
         },

@@ -117,12 +117,12 @@ export default function CreateModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="nationalCode"
-                label="کد ملی"
+                label="شماره ملی"
                 rules={[
                   { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: "کد ملی نامتعبر است",
+                    message: "شماره ملی نامتعبر است",
                   },
                 ]}
               >

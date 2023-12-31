@@ -17,7 +17,7 @@ export default function PrimaryExpertsListForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد ملی">
+                        <Form.Item name="lastName" label="شماره ملی">
                             <Input size="large" placeholder="وارد کنید" />
                         </Form.Item>
                     </Col>

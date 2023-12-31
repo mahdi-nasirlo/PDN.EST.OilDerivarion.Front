@@ -32,7 +32,7 @@ export default function PrimaryRequestsManagerTable() {
             key: "2",
         },
         {
-            title: " کد ملی / کد اتباع",
+            title: " شماره ملی / کد اتباع",
             dataIndex: "TrackingCode",
             key: "3",
         },

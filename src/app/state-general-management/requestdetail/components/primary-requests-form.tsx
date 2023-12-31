@@ -20,7 +20,7 @@ export default function PrimaryRequestsListForm() {
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="lastName" label="کد ملی / کد اتباع">
+                        <Form.Item name="lastName" label="شماره ملی / کد اتباع">
                             <Input disabled size="large" placeholder="mysite" />
                         </Form.Item>
                     </Col>

@@ -121,12 +121,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="nationalCode"
-                label="کد ملی / کد اتباع"
+                label="شماره ملی / کد اتباع"
                 rules={[
                   { required: true },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: "کد ملی نامتعبر است",
+                    message: "شماره ملی نامتعبر است",
                   },
                 ]}
               >
@@ -139,7 +139,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item name="birthDatePersian" label="تاریخ تولد">
-                <CustomDatePicker/>
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>

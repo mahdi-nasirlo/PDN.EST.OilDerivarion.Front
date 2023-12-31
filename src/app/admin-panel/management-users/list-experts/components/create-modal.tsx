@@ -70,7 +70,7 @@ export default function CreateModal({
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item name="year-establishment" label="کد ملی">
+            <Form.Item name="year-establishment" label="شماره ملی">
               <Input size="large" placeholder="انتخاب کنید" />
             </Form.Item>
           </Col>

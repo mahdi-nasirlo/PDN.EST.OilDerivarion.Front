@@ -1,9 +1,9 @@
 "use client";
 
-import {Button, Checkbox, Divider, Form} from "antd";
-import React, {useContext} from "react";
+import { Button, Checkbox, Col, Divider, Form, Row } from "antd";
+import React, { useContext } from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import {useForm} from "antd/es/form/Form";
+import { useForm } from "antd/es/form/Form";
 import GodOfDataViewer from "../../../../../../../components/GodOfDataViewer";
 import useGetPreview from "../../../../../../../hooks/producer/useGetPreview";
 
@@ -24,9 +24,9 @@ export default function Step5() {
     const [form] = useForm();
     return (
         <>
-            <Divider/>
+            <Divider />
             <div className='w-full bg-gray-50 rounded-md p-5'>
-                <GodOfDataViewer uid={""} data={getInfo.data || {}} loading={getInfo.isLoading}/>
+                <GodOfDataViewer uid={""} data={getInfo.data || {}} loading={getInfo.isLoading} />
             </div>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item
@@ -46,23 +46,28 @@ export default function Step5() {
                 >
                     <Checkbox>اطلاعات فوق را تایید میکنم.</Checkbox>
                 </Form.Item>
-                <div className="flex gap-3">
-                    <Button
-                        onClick={() => processController.dispatch({type: "PREVIOUS"})}
-                        type="dashed"
-                        className="bg-gray-100 w-full"
-                    >
-                        مرحله قبلی
-                    </Button>
-                    <Button
-                        className="w-full management-info-form-submit btn-filter"
-                        size="large"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        ذخیره و ادامه
-                    </Button>
-                </div>
+                <Row gutter={[12, 12]}>
+                    <Col xs={24} md={12}>
+                        <Button
+                            size="large"
+                            onClick={() => processController.dispatch({ type: "PREVIOUS" })}
+                            type="dashed"
+                            className="bg-gray-100 w-full"
+                        >
+                            مرحله قبلی
+                        </Button>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Button
+                            className="w-full "
+                            size="large"
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            ذخیره و ادامه
+                        </Button>
+                    </Col>
+                </Row>
             </Form>
         </>
     );

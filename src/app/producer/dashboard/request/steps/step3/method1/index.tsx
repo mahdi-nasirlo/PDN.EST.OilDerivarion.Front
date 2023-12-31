@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Alert, Button, Divider, Form, Typography } from "antd";
+import { Alert, Button, Col, Divider, Form, Row, Typography } from "antd";
 import SelectProductForm from "./select-product-form";
 import StepContext from "../../../state-managment/step-context";
 import ProductRequestTable from "./product-request-table";
@@ -54,44 +54,50 @@ const Index = () => {
             ذخیره
           </Button>
         </div>
+        <Divider />
+
+        <ProductRequestTable />
+
+        <Divider />
+
+        <Row gutter={[12, 12]}>
+          <Col xs={24} md={8}>
+            <Button
+              size="large"
+              onClick={() => processController.dispatch({ type: "PREVIOUS" })}
+              type="dashed"
+              className="bg-gray-100 w-full"
+            >
+              مرحله قبلی
+            </Button>
+          </Col>
+          <Col xs={24} md={8}>
+            <Button
+              size="large"
+              onClick={() => processController.getLastStep()}
+              type="default"
+              className="bg-gray-100 w-full"
+            >
+              بازبینی نهایی
+            </Button>
+          </Col>
+          <Col xs={24} md={8}>
+            <Button
+              loading={
+                requestDetailProduct.create.isLoading ||
+                processController.isMutating
+              }
+              className="w-full"
+              size="large"
+              type="primary"
+              onClick={() => processController.getStep4()}
+            >
+              ذخیره و ادامه
+            </Button>
+          </Col>
+        </Row >
       </Form>
 
-      <Divider />
-
-      <ProductRequestTable />
-
-      <Divider />
-
-      <div className="flex gap-3">
-        <Button
-          onClick={() => processController.getLastStep()}
-          type="dashed"
-          className="bg-gray-100 w-full"
-        >
-          بازبینی نهایی
-        </Button>
-
-        <Button
-          onClick={() => processController.dispatch({ type: "PREVIOUS" })}
-          type="dashed"
-          className="bg-gray-100 w-full"
-        >
-          مرحله قبلی
-        </Button>
-
-        <Button
-          loading={
-            requestDetailProduct.create.isLoading ||
-            processController.isMutating
-          }
-          className="w-full management-info-form-submit btn-filter"
-          size="large"
-          type="primary"
-          onClick={() => processController.getStep4()}
-        >
-          مرحله بعد
-        </Button>
-      </div>
     </>
   );
 };

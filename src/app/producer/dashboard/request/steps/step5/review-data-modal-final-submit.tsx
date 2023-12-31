@@ -12,10 +12,6 @@ export default function ReviewDataModalFinalSubmit(
 
     const router = useRouter()
 
-    const closeModal = () => {
-        setModalVisibleFinalSubmit(false);
-    };
-
     const handleFormSubmit = () => {
         router.push("/producer/dashboard/request-list");
         setModalVisibleFinalSubmit(false);
@@ -37,7 +33,8 @@ export default function ReviewDataModalFinalSubmit(
                                 className="w-full"
                                 type="primary"
                                 onClick={handleFormSubmit}
-                                key={"submit"}>
+                                key={"submit"}
+                            >
                                 ثبت
                             </Button>
                         </Col>

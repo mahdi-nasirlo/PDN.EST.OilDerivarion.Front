@@ -38,7 +38,7 @@ export default function CreateModal({
       onCancel={closeModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               size="large"
               className="w-full"
@@ -49,7 +49,7 @@ export default function CreateModal({
               ثبت
             </Button>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"

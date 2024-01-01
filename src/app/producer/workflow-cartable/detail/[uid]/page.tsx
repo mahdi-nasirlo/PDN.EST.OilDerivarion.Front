@@ -103,7 +103,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
@@ -114,7 +114,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -133,7 +133,7 @@ export default function Home(props: PropType) {
                   ]}
                 >
                   <Input
-                    readOnly
+                    disabled
                     type="number"
                     size="large"
                     placeholder="وارد کنید"
@@ -148,7 +148,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -161,7 +161,18 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item
+                  name="stateId"
+                  label="استان"
+                  rules={[
+                    { required: true, message: "لطفا مقدار را وارد کنید" },
+                  ]}
+                >
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -174,7 +185,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
@@ -185,7 +196,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -198,7 +209,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
@@ -209,7 +220,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -222,7 +233,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                   ]}
                 >
-                  <Input readOnly size="large" placeholder="وارد کنید" />
+                  <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
@@ -236,7 +247,7 @@ export default function Home(props: PropType) {
                   label="شرح درخواست"
                 >
                   <Input.TextArea
-                    readOnly
+                    disabled
                     style={{ height: 120, resize: "none" }}
                     placeholder="وارد کنید"
                   />

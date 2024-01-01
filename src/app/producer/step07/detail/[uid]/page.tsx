@@ -7,7 +7,7 @@ import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import useSWR from "swr";
@@ -34,7 +34,7 @@ interface DataFetchType {
 const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
-  const { data: barcode, isLoading: ldCategory } = useSWR<string>(
+  const { data: barcode, isLoading: ldBarcode } = useSWR<string>(
     "/RequestBarcode/FactoryBarcode",
     (url: string) =>
       listFetcher(url, {

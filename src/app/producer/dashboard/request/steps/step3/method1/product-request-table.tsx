@@ -17,7 +17,6 @@ const ProductRequestTable = () => {
   const { data, isLoading } = useGetPageProductRequestDetail(
     processController.requestMaster.requestMasterUid
   );
-  const method = processController.requestMaster.productionMethodId;
 
   const tableColumns: ColumnsType<any> = [
     {
@@ -55,7 +54,7 @@ const ProductRequestTable = () => {
             setIsDeleteModalVisible(true);
             setRecordToDelete(record.Uid);
           }}
-          className="text-red-500 cursor-pointer"
+          className="text-red-500 cursor-pointer font-bold"
         >
           حذف
         </Typography>
@@ -66,11 +65,11 @@ const ProductRequestTable = () => {
   const deleteRequest = useCrudRequestDetailProduct();
 
   const handleDelete = async () => {
-    setIsDeleteModalVisible(false);
-
     await deleteRequest.delete.trigger({ uid: recordToDelete });
 
     await mutate("/RequestDetail/GetAllProduct");
+
+    setIsDeleteModalVisible(false);
   };
 
   return (
@@ -78,18 +77,9 @@ const ProductRequestTable = () => {
       <Table
         dataSource={addIndexToData(data)}
         loading={isLoading}
-        className="mt-3"
+        className="mt-3 mb-1"
         columns={tableColumns}
-        pagination={{
-          defaultPageSize: 5,
-          defaultCurrent: 1,
-          style: {
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            margin: "16px 0",
-          },
-        }}
+        pagination={false}
       />
       <ConfirmDeleteModal
         title="محصول"

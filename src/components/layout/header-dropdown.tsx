@@ -5,8 +5,12 @@ import { useState } from "react";
 import { signOut } from "next-auth/react";
 import useSWR from "swr";
 import { listFetcher } from "../../../lib/server/listFetcher";
+import useSignOut from "../../../hooks/sso/useSginout";
 
 export default function HeaderDropdown() {
+
+  const serverSignOut = useSignOut()
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -14,6 +18,8 @@ export default function HeaderDropdown() {
   };
 
   const handleOk = async () => {
+    const logout = await serverSignOut.trigger()
+    console.log(logout)
     const res = await signOut()
     setIsModalOpen(false);
   };
@@ -27,6 +33,8 @@ export default function HeaderDropdown() {
     "/Sso/GetUserInfo",
     (url) => listFetcher(url)
   );
+
+  console.log(GetUserInfo);
 
 
   const items: MenuProps["items"] = [
@@ -105,6 +113,7 @@ export default function HeaderDropdown() {
                 size="large"
                 className="w-full"
                 type="primary"
+                loading={serverSignOut.isMutating}
                 onClick={handleOk}
                 danger
                 key={"submit"}>

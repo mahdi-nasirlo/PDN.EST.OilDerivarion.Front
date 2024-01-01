@@ -1,22 +1,12 @@
 "use client";
 
-import {
-  Alert,
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Select,
-  Typography,
-  Upload,
-} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload, } from "antd";
 import React, { useContext } from "react";
-import { UploadOutlined } from "@ant-design/icons";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import staticMessages from "../../../../../../../lib/staticMessages";
 import { useGetAllProductionMethod } from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
+import { UploadOutlined } from "@ant-design/icons";
+// import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 
 export default function Step1() {
   const processControl = useContext(StepContext);
@@ -76,6 +66,7 @@ export default function Step1() {
               label="نمودار شماتیک فرآیند"
               tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}
             >
+              {/* <FileUpload/> */}
               <Upload
                 multiple={false}
                 maxCount={1}
@@ -103,7 +94,7 @@ export default function Step1() {
             </Button>
           </Col>
         </Row>
-      </Form>
+      </Form >
     </>
   );
 }

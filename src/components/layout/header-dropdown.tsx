@@ -1,12 +1,16 @@
 import Image from "next/image";
-import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
-import { useState } from "react";
-import { signOut } from "next-auth/react";
+import {EditFilled, LoadingOutlined, LogoutOutlined} from "@ant-design/icons";
+import {Button, Col, Dropdown, MenuProps, Modal, Row, Typography} from "antd";
+import {useState} from "react";
+import {signOut} from "next-auth/react";
 import useSWR from "swr";
-import { listFetcher } from "../../../lib/server/listFetcher";
+import {listFetcher} from "../../../lib/server/listFetcher";
+import useSignOut from "../../../hooks/sso/useSginout";
 
 export default function HeaderDropdown() {
+
+  const serverSignOut = useSignOut()
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -14,6 +18,8 @@ export default function HeaderDropdown() {
   };
 
   const handleOk = async () => {
+    const logout = await serverSignOut.trigger()
+    console.log(logout)
     const res = await signOut()
     setIsModalOpen(false);
   };
@@ -105,6 +111,7 @@ export default function HeaderDropdown() {
                 size="large"
                 className="w-full"
                 type="primary"
+                loading={serverSignOut.isMutating}
                 onClick={handleOk}
                 danger
                 key={"submit"}>

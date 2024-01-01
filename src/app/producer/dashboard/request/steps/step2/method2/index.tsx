@@ -54,6 +54,7 @@ function Index() {
       <Row gutter={[12, 12]}>
         <Col xs={24} md={8}>
           <Button
+            disabled={processControl.isMutating}
             onClick={() => processControl.dispatch({ type: "PREVIOUS" })}
             type="dashed"
             className="bg-gray-100 w-full"
@@ -63,6 +64,7 @@ function Index() {
         </Col>
         <Col xs={24} md={8}>
           <Button
+            disabled={processControl.isMutating}
             onClick={() => processControl.getLastStep()}
             type="default"
             className="bg-gray-100 w-full"

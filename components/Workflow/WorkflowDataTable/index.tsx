@@ -3,8 +3,8 @@
 import React from "react";
 import CustomTable from "../../CustomeTable";
 import useWorkflow from "./useWorkflow";
-import { Steps } from "../../../interfaces/steps";
-import { Descriptions } from "antd";
+import {Steps} from "../../../interfaces/steps";
+import {Descriptions} from "antd";
 
 const Index = () => {
   const { columns, fetch } = useWorkflow();
@@ -39,7 +39,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="box-border w-full mt-8 p-6">
+      <div className="box-border w-full p-6">
         {renderDes()}
         <CustomTable
           columns={columns}

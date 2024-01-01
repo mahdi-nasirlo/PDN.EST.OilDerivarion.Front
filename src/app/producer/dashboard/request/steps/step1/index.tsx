@@ -1,11 +1,11 @@
 "use client";
 
-import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, Upload, } from "antd";
-import React, { useContext } from "react";
+import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography,} from "antd";
+import React, {useContext} from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import staticMessages from "../../../../../../../lib/staticMessages";
-import { useGetAllProductionMethod } from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
-import { UploadOutlined } from "@ant-design/icons";
+import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
+import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 // import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 
 export default function Step1() {
@@ -66,16 +66,16 @@ export default function Step1() {
               label="نمودار شماتیک فرآیند"
               tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}
             >
-              {/* <FileUpload/> */}
-              <Upload
-                multiple={false}
-                maxCount={1}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                listType="picture"
-                className="w-full"
-              >
-                <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>
-              </Upload>
+              <FileUpload/>
+              {/*<Upload*/}
+              {/*  multiple={false}*/}
+              {/*  maxCount={1}*/}
+              {/*  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"*/}
+              {/*  listType="picture"*/}
+              {/*  className="w-full"*/}
+              {/*>*/}
+              {/*  <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>*/}
+              {/*</Upload>*/}
             </Form.Item>
           </Col>
         </Row>

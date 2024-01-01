@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Divider, Typography } from "antd";
+import { Divider, Typography } from "antd";
+import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
 import { Choice } from "../../../../../../interfaces/requestDetail";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
@@ -15,19 +16,6 @@ import CalendarTime from "../../../../../../components/CalendarTime/calendar-tim
 
 interface PropType {
   params: { uid: string };
-}
-
-interface DataFetchType {
-  choices: Choice[];
-  task: {
-    processId: string;
-    stepId: string;
-    reference_ID: string;
-    group_ID: string;
-    step_Name: string;
-    counting_position: string;
-    userId: number;
-  };
 }
 
 interface SetStep3Type {
@@ -87,7 +75,6 @@ export default function Home(props: PropType) {
           loading={isLoading}
         />
         <CalendarTime data={data?.calendar as any} />
-        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
         {data && (
           <>
             <Divider />
@@ -95,29 +82,16 @@ export default function Home(props: PropType) {
             <Divider />
           </>
         )}
-        {data?.choices &&
-          !isLoading &&
-          data?.choices.map((value, index) => (
-            <>
-              <div
-                style={{ height: "fit-content" }}
-                className="flex justify-center"
-                key={index}
-              >
-                <Button
-                  loading={isMutating}
-                  onClick={() => {
-                    setChoice(value.choice_Key);
-                    form.submit();
-                  }}
-                  className="w-full"
-                  type="primary"
-                >
-                  {value.label}
-                </Button>
-              </div>
-            </>
-          ))}
+        <WorkflowRequestBtn
+          trigger={() => true}
+          onClick={(choice_Key) => {
+            setChoice(choice_Key);
+            form.submit();
+          }}
+          loading={isMutating}
+          choices={data?.choices as Choice[]}
+          nextStepUrl={"/WorkFlowRequest/SetStep03"}
+          taskId={props.params.uid} />
       </div>
     </>
   );

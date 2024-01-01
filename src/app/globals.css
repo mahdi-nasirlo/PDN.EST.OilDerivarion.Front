@@ -553,4 +553,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.ant-input-disabled{
+    cursor: default !important
+}
 

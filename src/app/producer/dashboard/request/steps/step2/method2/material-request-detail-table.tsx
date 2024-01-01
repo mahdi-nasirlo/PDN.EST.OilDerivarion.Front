@@ -45,7 +45,7 @@ const MaterialRequestDetailTable = () => {
       width: "10%",
       render: (value, record) => (
         <Typography
-          className="text-red-500 cursor-pointer"
+          className="text-red-500 cursor-pointer font-bold"
           onClick={() => {
             setDeleteVisible(true);
             setRecordToDelete(record.Uid);
@@ -60,28 +60,29 @@ const MaterialRequestDetailTable = () => {
   const crudRequestDetailMaterial = useCrudRequestDetailMaterial();
 
   const handleDelete = async () => {
-    setDeleteVisible(false);
-
     await crudRequestDetailMaterial.delete.trigger({ uid: recordeToDelete });
 
     await mutate("/RequestDetail/GetAllMaterial");
+
+    setDeleteVisible(false);
   };
 
   return (
     <>
       <Divider />
-
       <Table
-        className="mt-3"
+        className="mt-3 mb-1"
         columns={columns}
         loading={requestDetailMaterial.isLoading}
         dataSource={addIndexToData(requestDetailMaterial.data)}
+        pagination={false}
       />
       <ConfirmDeleteModal
+        loading={crudRequestDetailMaterial.delete.isLoading}
         open={deleteVisible}
         setOpen={setDeleteVisible}
         handleDelete={handleDelete}
-        title={" ماده اولیه"}
+        title={"ماده اولیه"}
       />
     </>
   );

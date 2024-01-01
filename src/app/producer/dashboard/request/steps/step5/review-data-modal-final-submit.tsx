@@ -2,6 +2,7 @@
 
 
 import { Button, Col, Form, Modal, Row } from 'antd';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
@@ -28,15 +29,20 @@ export default function ReviewDataModalFinalSubmit(
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={24}>
-                            <Button
-                                size="large"
-                                className="w-full"
-                                type="primary"
+                            <Link
+                                href={"/producer/dashboard/request-list"}
                                 onClick={handleFormSubmit}
-                                key={"submit"}
                             >
-                                ثبت
-                            </Button>
+                                <Button
+                                    size="large"
+                                    className="w-full"
+                                    type="primary"
+                                    onClick={handleFormSubmit}
+                                    key={"submit"}
+                                >
+                                    ثبت
+                                </Button>
+                            </Link>
                         </Col>
                     </Row>
                 ]}

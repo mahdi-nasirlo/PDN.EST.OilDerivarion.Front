@@ -1,8 +1,9 @@
 "use client";
 
-
-import { Button, Col, Form, Modal, Row, Typography } from 'antd';
+import { Button, Col, Form, Modal, Row, Spin, Typography } from 'antd';
 import React from 'react'
+import useSWR from 'swr';
+import { listFetcher } from '../../../../../../../lib/server/listFetcher';
 
 export default function ReviewDataModalAcceptAgreement(
     { modalVisibleConfirmation, setModalVisibleConfirmation }:
@@ -15,6 +16,7 @@ export default function ReviewDataModalAcceptAgreement(
         setModalVisibleConfirmation(false);
     };
 
+    const { data, isLoading } = useSWR(["/Producer/GetBase"], ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
     return (
         <>
@@ -43,12 +45,19 @@ export default function ReviewDataModalAcceptAgreement(
                 <Form form={form} >
                     <Row gutter={[16, 16]}>
                         <Col>
-                            <Typography>
-                                اینجانب امیرحسام خالویی فرزند علی به شماره شماره ملی 00123456789 سمت مدیرعامل شرکت / تولیدی نام شرکت تستی به شماره پروانه بهره برداری
-                                123456789 شناسه ملی 012346678 تعهد می نمایم نام صحیح عنوان محصول / نام صحیح مواد اولیه مصرفی و منشا تامین آن ها و تصویر صحیح کلیه
-                                مدارک و مستندات بدون هیچ گونه  دخل و تصرفی بارگذاری شده است و هر زمان که عدم صحت مدارک و مستندات ارائه شده و یا هرگونه مغایرت و اشتباه
-                                مشخص گردد، مسئولیت هرگونه عواقب ناشی از آن را عهده دار خواهم بود و اینجانب حق هرگونه اعتراضی را از خود سلب نمایم.
-                            </Typography>
+                            <Spin size='large' spinning={isLoading}>
+                                <Typography>
+                                    {`اینجانب 
+                                    ${data?.currentCEOName} ${data?.currentCEOLastName} به شماره شماره ملی 
+                                    ${data?.currentCEONationalCode} سمت مدیرعامل شرکت / تولیدی ${data?.name} با مالکیت 
+                                    ${data?.companyOwnershipTypeName} تعهد می نمایم
+                                     نام صحیح عنوان محصول / نام صحیح مواد اولیه مصرفی و منشا تامین آن ها و تصویر صحیح کلیه مدارک و مستندات 
+                                     بدون هیچ گونه  دخل و تصرفی بارگذاری شده است و
+                                     هر زمان که عدم صحت مدارک و مستندات ارائه شده و یا هرگونه مغایرت و اشتباه مشخص گردد،
+                                     مسئولیت هرگونه عواقب ناشی از آن را عهده دار خواهم بود و اینجانب حق هرگونه اعتراضی را از خود
+                                سلب نمایم.`}
+                                </Typography>
+                            </Spin>
                         </Col >
                     </Row >
                 </Form >

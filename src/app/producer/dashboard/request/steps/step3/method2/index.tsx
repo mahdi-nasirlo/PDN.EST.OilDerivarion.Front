@@ -45,6 +45,7 @@ const Index = () => {
         <Row gutter={[12, 12]}>
           <Col xs={24} md={8}>
             <Button
+              disabled={processController.isMutating}
               size="large"
               onClick={() => processController.dispatch({ type: "PREVIOUS" })}
               type="dashed"
@@ -55,6 +56,7 @@ const Index = () => {
           </Col>
           <Col xs={24} md={8}>
             <Button
+              disabled={processController.isMutating}
               size="large"
               onClick={() => processController.getLastStep()}
               type="default"

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button, Popover, Space, Tag, Tooltip, Typography } from "antd";
-import { useRouter } from "next/navigation";
+import { Button, Space, Tag, Tooltip, Typography } from "antd";
+import Link from "next/link";
 import { ColumnsType } from "antd/es/table";
 import { RequestList } from "../../../../../../interfaces/requestDetail";
 import CustomeTable from "../../../../../../components/CustomeTable";
@@ -18,7 +18,6 @@ export default function DataTable({
   isLoading: any;
   mutate: any;
 }) {
-  const router = useRouter();
 
   const columns: ColumnsType<RequestList> = [
     {
@@ -91,11 +90,10 @@ export default function DataTable({
           <Button
             type="link"
             className={"text-secondary-500 font-bold"}
-            onClick={() => {
-              router.push(`/producer/dashboard/request-detail/${record.uid}`);
-            }}
           >
-            مشاهده اطلاعات
+            <Link href={`/producer/dashboard/request-detail/${record.uid}`}>
+              مشاهده اطلاعات
+            </Link>
           </Button>
         </Space>
       ),

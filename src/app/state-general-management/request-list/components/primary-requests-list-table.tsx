@@ -33,7 +33,7 @@ export default function PrimaryRequestsListTable() {
             key: "2",
         },
         {
-            title: " شناسه ملی",
+            title: " شماره ملی",
             dataIndex: "TrackingCode",
             key: "3",
         },
@@ -75,8 +75,6 @@ export default function PrimaryRequestsListTable() {
             dataSource={data}
             pagination={{
                 defaultPageSize: 10,
-                showSizeChanger: true,
-                pageSizeOptions: ["10", "20", "50"],
                 defaultCurrent: 1,
                 style: {
                     display: "flex",

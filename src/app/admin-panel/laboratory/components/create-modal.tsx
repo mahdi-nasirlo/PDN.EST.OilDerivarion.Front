@@ -51,7 +51,7 @@ export default function CreateModal({
       onCancel={CloseModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               loading={createLaboratoryRequest.isMutating}
               size="large"
@@ -63,7 +63,7 @@ export default function CreateModal({
               ثبت
             </Button>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={12} md={12}>
             <Button
               disabled={createLaboratoryRequest.isMutating}
               size="large"

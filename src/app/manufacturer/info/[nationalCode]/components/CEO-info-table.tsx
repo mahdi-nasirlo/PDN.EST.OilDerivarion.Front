@@ -31,7 +31,7 @@ export default function CEOInfoTable({ params }: { params: { nationalCode: strin
             key: "2",
         },
         {
-            title: "  کد ملی / کد اتباع",
+            title: "  شماره ملی / کد اتباع",
             dataIndex: "memberNationalCode",
             key: "3",
         },

@@ -1,23 +1,28 @@
 import { Button, Divider, Typography } from "antd";
 import React, { useContext } from "react";
 import StepContext from "../../stete-manager/step-context";
-import CreatedForm from "./components/created-form";
+import { formsUid } from "../../../../../../../Constants/formsUid";
+import Resource from "../../../../../../../components/Resource";
+import StepContextActivate from '../../../stete-manager/step-context';
+
 
 export default function Index() {
+
+  const processControllerActivate = useContext(StepContextActivate);
   const processController = useContext(StepContext);
 
   return (
     <>
-      <div className="flex justify-between">
-        <div className="flex items-center gap-3">
-          <Typography className="font-bold">اطلاعات خط تولید</Typography>
-          <Typography className="text-secondary-500">
-            شیرین سازی ( 7 از 8 )
+      <div className='flex justify-between'>
+        <div className='flex items-center gap-3'>
+          <Typography className='font-bold'>اطلاعات خط تولید (7 از 7)</Typography>
+          <Typography className='text-secondary-500'>
+            تجهیزات شیرین سازی
           </Typography>
         </div>
-      </div>
+      </div >
       <Divider />
-      <CreatedForm />
+      <Resource categoryID={formsUid.desulfation} />
       <Divider />
       <div className="flex gap-3">
         <Button
@@ -34,10 +39,7 @@ export default function Index() {
           size="large"
           type="primary"
           htmlType="submit"
-          onClick={() =>
-            processController.dispatch({ type: "NEXT", stepNumber: 7 })
-          }
-        >
+          onClick={() => processControllerActivate.dispatch({ type: "NEXT", stepNumber: 7 })}        >
           مرحله بعد
         </Button>
       </div>

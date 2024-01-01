@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { Alert, Button, Divider, Form, Typography } from "antd";
+import { Alert, Button, Col, Divider, Form, Row, Typography } from "antd";
 import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
 import { useForm } from "antd/es/form/Form";
-import { log } from "console";
 
 const Index = () => {
   const processController = useContext(StepContext);
@@ -43,34 +42,40 @@ const Index = () => {
       >
         <SelectProductForm form={form} />
         <Divider />
-        <div className="flex gap-3">
-          <Button
-            onClick={() => processController.getLastStep()}
-            type="dashed"
-            className="bg-gray-100 w-full"
-          >
-            بازبینی نهایی
-          </Button>
-
-          <Button
-            onClick={() => processController.dispatch({ type: "PREVIOUS" })}
-            type="dashed"
-            className="bg-gray-100 w-full"
-          >
-            مرحله قبلی
-          </Button>
-
-          <Button
-            loading={processController.isMutating}
-            className="w-full management-info-form-submit btn-filter"
-            size="large"
-            type="primary"
-            htmlType="submit"
-          >
-            ذخیره و ادامه
-          </Button>
-        </div>
-      </Form>
+        <Row gutter={[12, 12]}>
+          <Col xs={24} md={8}>
+            <Button
+              size="large"
+              onClick={() => processController.dispatch({ type: "PREVIOUS" })}
+              type="dashed"
+              className="bg-gray-100 w-full"
+            >
+              مرحله قبلی
+            </Button>
+          </Col>
+          <Col xs={24} md={8}>
+            <Button
+              size="large"
+              onClick={() => processController.getLastStep()}
+              type="default"
+              className="bg-gray-100 w-full"
+            >
+              بازبینی نهایی
+            </Button>
+          </Col>
+          <Col xs={24} md={8}>
+            <Button
+              loading={processController.isMutating}
+              className="w-full management-info-form-submit btn-filter"
+              size="large"
+              type="primary"
+              htmlType="submit"
+            >
+              ذخیره و ادامه
+            </Button>
+          </Col>
+        </Row>
+      </Form >
     </>
   );
 };

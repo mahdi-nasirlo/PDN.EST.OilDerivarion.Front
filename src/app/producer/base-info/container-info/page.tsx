@@ -2,9 +2,9 @@
 
 
 import React from 'react'
-import {Typography} from "antd/lib";
-import {Divider} from "antd";
-import {formsUid} from "../../../../../Constants/formsUid";
+import { Typography } from "antd/lib";
+import { Divider } from "antd";
+import { formsUid } from "../../../../../Constants/formsUid";
 import Resource from "../../../../../components/Resource";
 
 export default function Page() {
@@ -15,12 +15,12 @@ export default function Page() {
                 <div className='flex items-center gap-3'>
                     <Typography className='font-bold'>اطلاعات خط تولید</Typography>
                     <Typography className='text-secondary-500'>
-                        اطلاعات مخازن میکس یا بلندینگ
+                        اطلاعات مخازن مواد اولیه
                     </Typography>
                 </div>
             </div>
-            <Divider/>
-            <Resource categoryID={formsUid.mix_blending_tank_information}/>
+            <Divider />
+            <Resource categoryID={formsUid.mix_blending_tank_information} />
         </>
     )
 }

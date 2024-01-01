@@ -27,7 +27,7 @@ export default function DataTable({ ldProducerList, ProducerList, mutate }: {
             key: "2",
         },
         {
-            title: " شناسه ملی",
+            title: " شماره ملی",
             dataIndex: "nationalCode",
             key: "3",
         },
@@ -88,8 +88,6 @@ export default function DataTable({ ldProducerList, ProducerList, mutate }: {
                 dataSource={addIndexToData(ProducerList)}
                 pagination={{
                     defaultPageSize: 10,
-                    showSizeChanger: true,
-                    pageSizeOptions: ["10", "20", "50"],
                     defaultCurrent: 1,
                     style: {
                         display: "flex",

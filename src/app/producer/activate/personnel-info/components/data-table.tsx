@@ -80,7 +80,7 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "کد ملی / اتباع",
+      title: "شماره ملی / اتباع",
       dataIndex: "nationalCode",
       key: "4",
     },
@@ -88,11 +88,6 @@ export default function DataTable({
       title: "تاریخ تولد",
       dataIndex: "birthDate",
       key: "5",
-    },
-    {
-      title: "سمت",
-      dataIndex: "companyRoleName",
-      key: "6",
     },
     {
       title: "شماره تماس",
@@ -139,8 +134,6 @@ export default function DataTable({
         loading={ldMainMember || isValidating}
         pagination={{
           defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
           defaultCurrent: 1,
           style: {
             display: "flex",

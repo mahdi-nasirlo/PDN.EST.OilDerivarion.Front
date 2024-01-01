@@ -3,14 +3,17 @@
 import React, {useEffect} from 'react';
 import ThemeProvider from "../../../provider/theme-provider";
 import {Spin} from "antd";
-import {signOut} from "next-auth/react";
+import {signOut as authSignOut} from "next-auth/react";
+import useSignOut from "../../../hooks/sso/useSginout";
 
 const Page = () => {
 
+    useSignOut()
+
     useEffect(() => {
 
-        signOut({callbackUrl: "/login"})
-        
+        authSignOut({callbackUrl: "/login"})
+
     }, [])
 
     return (

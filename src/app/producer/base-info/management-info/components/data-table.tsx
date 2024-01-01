@@ -76,13 +76,13 @@ export default function DataTable({
       key: "3",
     },
     {
-      title: "کد ملی / اتباع",
+      title: "شماره ملی",
       dataIndex: "nationalCode",
       key: "4",
     },
     {
       title: "تاریخ تولد",
-      dataIndex: "birthDate",
+      dataIndex: "birthDatePersian",
       key: "5",
     },
     {
@@ -135,8 +135,6 @@ export default function DataTable({
         dataSource={MainMember}
         pagination={{
           defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
           defaultCurrent: 1,
           style: {
             display: "flex",

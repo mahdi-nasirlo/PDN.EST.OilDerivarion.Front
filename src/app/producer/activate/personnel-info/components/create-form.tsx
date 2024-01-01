@@ -2,7 +2,6 @@ import { useForm } from "antd/es/form/Form";
 import {
   Button,
   Col,
-  DatePicker,
   Divider,
   Form,
   Input,
@@ -14,7 +13,6 @@ import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
 import { SvgIcon } from "@/components/layout/sidebar";
-import ContactInputs from "../../../../../../components/inputs/Contact";
 import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 
@@ -76,12 +74,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
           <Col xs={24} md={12}>
             <Form.Item
               name="nationalCode"
-              label="کد ملی / کد اتباع"
+              label="شماره ملی / کد اتباع"
               rules={[
                 { required: true },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "کد ملی نامتعبر است",
+                  message: "شماره ملی نامتعبر است",
                 },
               ]}
             >
@@ -98,7 +96,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               label="تاریخ تولد"
               rules={[{ required: true }]}
             >
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
         </Row>

@@ -1,5 +1,10 @@
 export const apiUrl = {
     WorkFlowRequest: {
+        setad: {
+            naft: {
+                url: "/WorkFlowRequest/GetAllStep02"
+            }
+        },
         step02: {
             getAll: {
                 url: "/WorkFlowRequest/GetAllStep02",

@@ -3,17 +3,16 @@
 import React from "react";
 import WorkflowDataTableProvider from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableProvider";
 import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
-import {useRouter} from "next/navigation";
+import Link from "next/link";
 import {
   WorkflowDataTableContextType
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
-import {Button, Space} from "antd";
-import {apiUrl} from "../../../../../Constants/apiUrl";
+import { Button, Space } from "antd";
+import { apiUrl } from "../../../../../Constants/apiUrl";
 
 const getDetailPageUrl = "/producer/step06/detail/";
 
 const Page = () => {
-  const router = useRouter();
 
   const workflowInitialValue: WorkflowDataTableContextType = {
     apiUrl: apiUrl.WorkFlowRequest.step06.getAll.url,
@@ -49,12 +48,11 @@ const Page = () => {
           <Space size="small">
             <Button
               type="link"
-              className="text-secondary-500 font-bold "
-              onClick={() => {
-                router.push(getDetailPageUrl + record.taskId);
-              }}
+              className="text-secondary-500 font-bold"
             >
-              مشاهده اطلاعات
+              <Link href={getDetailPageUrl + record.taskId}>
+                مشاهده اطلاعات
+              </Link>
             </Button>
           </Space>
         ),

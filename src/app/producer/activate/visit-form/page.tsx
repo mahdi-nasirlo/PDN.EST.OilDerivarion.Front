@@ -10,7 +10,6 @@ import Step4 from "./forms/step4";
 import Step5 from "./forms/step5";
 import Step6 from './forms/step6';
 import Step7 from './forms/step7';
-import Step8 from './forms/step8';
 
 function Page() {
   const processController = useControlSteps();
@@ -39,20 +38,15 @@ function Page() {
     case 6:
       CurrentStep = <Step7 />
       break;
-    case 7:
-      CurrentStep = <Step8 />
-      break;
     default:
       CurrentStep = <></>;
   }
 
   return (
     <>
-      {/* <div className="box-border w-full mt-4 p-6"> */}
       <StepContext.Provider value={processController}>
         {CurrentStep}
       </StepContext.Provider>
-      {/* </div> */}
     </>
   );
 }

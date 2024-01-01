@@ -70,7 +70,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         <Col xs={24} md={12}>
           <Form.Item
             name={"materialUnitConsumption"}
-            label="میزان مصرف برای تولید یک واحد"
+            label="میزان مصرف کل برای یک واحد تولیدی(کیلوگرم)"
             rules={[
               {
                 required: true,
@@ -90,9 +90,36 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        {[2, 3, 4].includes(
+        {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
+            <Col xs={24} md={12}>
+              <Form.Item
+                name={"materialUsagePercentage"}
+                label={"درصد استفاده"}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  {
+                    type: "number",
+                    min: 0,
+                    max: 100,
+                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  },
+                ]}
+              >
+                <InputNumber
+                  controls={false}
+                  className="w-full rounded-lg"
+                  size="large"
+                  min={0}
+                  max={100}
+                  formatter={(value) => `${value}%`}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+          )}
+        {[2].includes(processController.requestMaster.productionMethodId) && (
           <Col xs={24} md={12}>
             <Form.Item
               name={"materialUsagePercentage"}
@@ -102,8 +129,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 {
                   type: "number",
                   min: 0,
-                  max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  max: 99,
+                  message: "لطفاً مقداری بین 0 تا 99 وارد کنید",
                 },
               ]}
             >
@@ -112,34 +139,14 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 className="w-full rounded-lg"
                 size="large"
                 min={0}
-                max={100}
+                max={99}
                 formatter={(value) => `${value}%`}
                 placeholder="وارد کنید"
               />
             </Form.Item>
           </Col>
         )}
-        <Col xs={24} md={12}>
-          <Form.Item
-            name={"materialTotalConsumption"}
-            label={"میزان مصرف کل"}
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              {
-                validator: async (rule, value) => {
-                  if (!/^\d+$/.test(value)) {
-                    throw new Error("لطفا عدد وارد کنید");
-                  }
-                  if (value > 100 || value < 0) {
-                    throw new Error("لطفا عدد بین 0 تا 100 وارد کنید");
-                  }
-                },
-              },
-            ]}
-          >
-            <Input size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col>
+
         <Col xs={24} md={12}>
           <Form.Item
             initialValue={"داخلی"}
@@ -168,6 +175,24 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             مشخصات تامین کننده مواد اولیه
           </Typography>
           <Row gutter={[16, 16]}>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name="materialSupplyName"
+                label="نام تامین کننده خارجی"
+                rules={[
+                  {
+                    required: true,
+                    message: "لطفا مقدار را انتخاب کنید",
+                  },
+                ]}
+              >
+                <Input
+                  className="w-full rounded-lg"
+                  size="large"
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
             <Col xs={24} md={12}>
               <Form.Item
                 name="materialImportDeclarationNumber"
@@ -234,10 +259,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyNationalCode"
                 label={
                   personTypeStatus === null
-                    ? "کد ملی / شناسه ملی"
+                    ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
-                    ? "شناسه ملی"
-                    : "کد ملی"
+                      ? "شناسه ملی"
+                      : "شماره ملی"
                 }
                 rules={[
                   {
@@ -259,11 +284,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(" کد ملی / شناسه ملی اجباری است");
+                        return Promise.reject(" شماره ملی / شناسه ملی اجباری است");
                       }
 
                       if (value && personTypeStatus === 1) {
-                        return Promise.reject("کد ملی نامعتبر است");
+                        return Promise.reject("شماره ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {

@@ -32,7 +32,7 @@ export default function PrimaryRequestsManagerTable() {
             key: "2",
         },
         {
-            title: " کد ملی / کد اتباع",
+            title: " شماره ملی / کد اتباع",
             dataIndex: "TrackingCode",
             key: "3",
         },
@@ -78,8 +78,6 @@ export default function PrimaryRequestsManagerTable() {
                 dataSource={data}
                 pagination={{
                     defaultPageSize: 10,
-                    showSizeChanger: true,
-                    pageSizeOptions: ["10", "20", "50"],
                     defaultCurrent: 1,
                     style: {
                         display: "flex",

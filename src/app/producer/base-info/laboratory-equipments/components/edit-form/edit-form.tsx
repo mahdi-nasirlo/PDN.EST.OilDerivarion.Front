@@ -1,18 +1,8 @@
-import { Col, Form, Input, Row, Select } from "antd";
-import React, { useState } from "react";
-import { listFetcher } from "../../../../../../../lib/server/listFetcher";
-import useSWR from "swr";
-import { filterOption } from "../../../../../../../lib/filterOption";
+import { Col, Row } from "antd";
+import React from "react";
 import CustomRadioGroup from "../../../../../../../components/CustomeRadioGroup";
-import { sortByIndex } from "../../../../../../../lib/sortByIndex";
 
 export default function EditForm({ data, form }: { data: any; form: any }) {
-  const [wastePlaceForm, SetWastePlace] = useState(true);
-
-  const { isLoading: ldCountry, data: Country } = useSWR(
-    "/BaseInfo/CountryGetAll",
-    listFetcher
-  );
 
   return (
     <>
@@ -100,7 +90,7 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
           <CustomRadioGroup
             data={data}
             name="lab_HasMetalCorrosion"
-            label="خوردگی فلز"
+            label="خوردگی تیغه مسی"
             value={form.getFieldValue("lab_HasMetalCorrosion")}
             onChange={(e: any) =>
               form.setFieldsValue({ lab_HasMetalCorrosion: e.target.value })
@@ -113,21 +103,6 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={8}>
-          <CustomRadioGroup
-            data={data}
-            name="lab_HasColorMeter"
-            label="رنگ سنج"
-            value={form.getFieldValue("lab_HasColorMeter")}
-            onChange={(e: any) =>
-              form.setFieldsValue({ lab_HasColorMeter: e.target.value })
-            }
-            options={[
-              { label: "دارد", value: true },
-              { label: "ندارد", value: false },
-            ]}
-          />
-        </Col>
         <Col xs={24} md={8}>
           <CustomRadioGroup
             data={data}
@@ -158,23 +133,6 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
             ]}
           />
         </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={8}>
-          <CustomRadioGroup
-            data={data}
-            name="lab_HasVoltmeter"
-            label="ولت متر (اندازی گیری ولتاژروغن)"
-            value={form.getFieldValue("lab_HasVoltmeter")}
-            onChange={(e: any) =>
-              form.setFieldsValue({ lab_HasVoltmeter: e.target.value })
-            }
-            options={[
-              { label: "دارد", value: true },
-              { label: "ندارد", value: false },
-            ]}
-          />
-        </Col>
         <Col xs={24} md={8}>
           <CustomRadioGroup
             data={data}
@@ -190,6 +148,8 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
             ]}
           />
         </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <CustomRadioGroup
             data={data}
@@ -205,8 +165,6 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
             ]}
           />
         </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <CustomRadioGroup
             data={data}
@@ -237,6 +195,8 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
             ]}
           />
         </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <CustomRadioGroup
             data={data}
@@ -251,57 +211,6 @@ export default function EditForm({ data, form }: { data: any; form: any }) {
               { label: "ندارد", value: false },
             ]}
           />
-        </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={8}>
-          <Form.Item
-            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-            name="exportDestinationCountryId"
-            label="کشور مقصد صادراتی محصول"
-          >
-            <Select
-              showSearch
-              // @ts-ignore
-              filterOption={filterOption}
-              fieldNames={{ value: "Id", label: "Name" }}
-              loading={ldCountry}
-              options={sortByIndex(Country, "Name")}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={8}>
-          <CustomRadioGroup
-            data={data}
-            name="hasWaste"
-            label="ضایعات"
-            value={form.getFieldValue("hasWaste")}
-            onChange={(e: any) => {
-              if (e.target.value == true) {
-                SetWastePlace(false);
-              } else {
-                SetWastePlace(true);
-                form.setFieldValue("wastePlace", null);
-              }
-              form.setFieldsValue({ producerHasWaste: e.target.value });
-            }}
-            options={[
-              { label: "دارد", value: true },
-              { label: "ندارد", value: false },
-            ]}
-          />
-        </Col>
-        <Col xs={24} md={8}>
-          <Form.Item name="wastePlace" label="محل های فروش یا دفن ضایعات">
-            <Input
-              size="large"
-              className="w-full"
-              disabled={wastePlaceForm}
-              placeholder="(در صورت موجود) وارد کنید"
-            />
-          </Form.Item>
         </Col>
       </Row>
     </>

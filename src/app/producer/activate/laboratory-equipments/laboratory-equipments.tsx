@@ -1,25 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import StepContext from '../stete-manager/step-context'
-import { Button, Col, Divider, Form, Input, Row, Select, Typography } from 'antd'
-import { listFetcher } from '../../../../../lib/server/listFetcher'
-import useSWR from "swr";
+import { Button, Col, Divider, Form, Row, Typography } from 'antd'
 import { useForm } from 'antd/es/form/Form';
 import { mutationFetcher } from '../../../../../lib/server/mutationFetcher';
 import useSWRMutation from "swr/mutation";
 import { SetProducerLab } from '../../../../../interfaces/Base-info';
-import { filterOption } from '../../../../../lib/filterOption';
 import CustomRadioGroup from '../../../../../components/CustomeRadioGroup';
-
-
-
 
 export default function LaboratoryEquipments() {
 
-    const processController = useContext(StepContext)
+    const processController = useContext(StepContext);
 
     const [form] = useForm();
 
-    const { trigger, isMutating } = useSWRMutation("/Producer/SetLab", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/Producer/SetLab", mutationFetcher);
 
     const onSubmitFinish = async (values: SetProducerLab) => {
 
@@ -27,14 +21,9 @@ export default function LaboratoryEquipments() {
 
         if (res) {
             processController.dispatch({ type: "NEXT", stepNumber: 7 })
-        }
-
+        };
     };
 
-    const { isLoading: ldCountry, data: Country } = useSWR("/BaseInfo/CountryGetAll", listFetcher)
-
-
-    const [wastePlaceForm, SetWastePlace] = useState(true)
 
     return (
         <>
@@ -53,16 +42,13 @@ export default function LaboratoryEquipments() {
                     lab_HasFlashPoint: false,
                     lab_HasViscometer: false,
                     lab_HasMetalCorrosion: false,
-                    lab_HasColorMeter: false,
                     lab_HasTBN: false,
                     lab_HasTAN: false,
-                    lab_HasVoltmeter: false,
                     lab_HasMeasureMocaptan: false,
                     lab_HasMeasureSulfur: false,
                     lab_HasDensiometer: false,
                     lab_HasMeasureColor: false,
                     lab_HasMeasureMethodGC: false,
-                    hasWaste: false
                 }}>
                 <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
@@ -130,7 +116,7 @@ export default function LaboratoryEquipments() {
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasMetalCorrosion"
-                            label="خوردگی فلز"
+                            label="خوردگی تیغه مسی"
                             value={form.getFieldValue("lab_HasMetalCorrosion")}
                             onChange={(e: any) => form.setFieldsValue({ lab_HasMetalCorrosion: e.target.value })}
                             options={[
@@ -141,18 +127,6 @@ export default function LaboratoryEquipments() {
                     </Col>
                 </Row>
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} md={8}>
-                        <CustomRadioGroup
-                            name="lab_HasColorMeter"
-                            label="رنگ سنج"
-                            value={form.getFieldValue("lab_HasColorMeter")}
-                            onChange={(e: any) => form.setFieldsValue({ lab_HasColorMeter: e.target.value })}
-                            options={[
-                                { label: 'دارد', value: true },
-                                { label: 'ندارد', value: false },
-                            ]}
-                        />
-                    </Col>
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasTBN"
@@ -177,20 +151,6 @@ export default function LaboratoryEquipments() {
                             ]}
                         />
                     </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={8}>
-                        <CustomRadioGroup
-                            name="lab_HasVoltmeter"
-                            label="ولت متر (اندازی گیری ولتاژروغن)"
-                            value={form.getFieldValue("lab_HasVoltmeter")}
-                            onChange={(e: any) => form.setFieldsValue({ lab_HasVoltmeter: e.target.value })}
-                            options={[
-                                { label: 'دارد', value: true },
-                                { label: 'ندارد', value: false },
-                            ]}
-                        />
-                    </Col>
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasMeasureMocaptan"
@@ -203,6 +163,8 @@ export default function LaboratoryEquipments() {
                             ]}
                         />
                     </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasMeasureSulfur"
@@ -215,8 +177,6 @@ export default function LaboratoryEquipments() {
                             ]}
                         />
                     </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasDensiometer"
@@ -241,6 +201,8 @@ export default function LaboratoryEquipments() {
                             ]}
                         />
                     </Col>
+                </Row>
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={8}>
                         <CustomRadioGroup
                             name="lab_HasMeasureMethodGC"
@@ -252,59 +214,6 @@ export default function LaboratoryEquipments() {
                                 { label: 'ندارد', value: false },
                             ]}
                         />
-                    </Col>
-                </Row>
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={8}>
-                        <Form.Item
-                            rules={[{ required: true, message: "این فیلد اجباری است" }]}
-                            name="exportDestinationCountryId"
-                            label="کشورهای مقصد صادراتی محصول"
-                        >
-                            <Select
-                                showSearch
-                                // @ts-ignore
-                                filterOption={filterOption}
-                                fieldNames={{ value: "Id", label: "Name" }}
-                                loading={ldCountry}
-                                options={Country}
-                                size="large"
-                                placeholder="انتخاب کنید"
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} md={8}>
-                        <CustomRadioGroup
-                            name="hasWaste"
-                            label="ضایعات"
-                            value={form.getFieldValue("producerHasWaste")}
-                            onChange={(e: any) => {
-                                if (e.target.value == true) {
-                                    SetWastePlace(false);
-                                } else {
-                                    SetWastePlace(true);
-                                    form.setFieldValue("wastePlace", null);
-                                }
-                                form.setFieldsValue({ producerHasWaste: e.target.value });
-                            }}
-                            options={[
-                                { label: 'دارد', value: true },
-                                { label: 'ندارد', value: false },
-                            ]}
-                        />
-                    </Col>
-                    <Col xs={24} md={8}>
-                        <Form.Item
-                            name="wastePlace"
-                            label="محل های فروش یا دفن ضایعات"
-                        >
-                            <Input
-                                size="large"
-                                className="w-full"
-                                disabled={wastePlaceForm}
-                                placeholder="(در صورت موجود) وارد کنید"
-                            />
-                        </Form.Item>
                     </Col>
                 </Row>
                 <Divider />

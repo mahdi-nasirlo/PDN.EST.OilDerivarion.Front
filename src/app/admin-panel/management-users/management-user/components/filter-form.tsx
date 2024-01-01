@@ -33,11 +33,11 @@ export default function FilterForm({
         <Col xs={24} md={12}>
           <Form.Item
             name="NationalCode"
-            label="کد ملی"
+            label="شماره ملی"
             rules={[
               {
                 pattern: /^[0-9]{10}$/,
-                message: "کد ملی نامتعبر است",
+                message: "شماره ملی نامتعبر است",
               },
             ]}
           >

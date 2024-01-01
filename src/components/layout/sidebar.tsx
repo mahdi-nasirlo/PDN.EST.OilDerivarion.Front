@@ -16,23 +16,23 @@ export default function LayoutSidebar({
   onClose: any;
   open: any;
 }) {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-    const handleMenuOpenChange = (keys: string[]) => {
-        if (keys.length <= 1) {
-            setOpenKeys(keys);
-        } else {
-            setOpenKeys([keys[1]]);
-        }
-    };
+  const handleMenuOpenChange = (keys: string[]) => {
+    if (keys.length <= 1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys([keys[1]]);
+    }
+  };
 
-    const handleMenuItemClick = (item: any) => {
-        if (item.type !== "LgSize") {
-            onClose(); // Close the Drawer
-        }
-    };
+  const handleMenuItemClick = (item: any) => {
+    if (item.type !== "LgSize") {
+      onClose(); // Close the Drawer
+    }
+  };
 
   const menus = useSsoGetAllUserAccess();
 
@@ -53,7 +53,7 @@ export default function LayoutSidebar({
         className={className}
         mode="inline"
         onClick={handleMenuItemClick}
-        // items={menu}
+      // items={menu}
       >
         {menus.isLoading &&
           Array.from({ length: 10 }).map((value, index) => (
@@ -107,7 +107,7 @@ export default function LayoutSidebar({
         {/*>*/}
         <CommonMenu
           style={{
-            width: "270px",
+            width: "275px",
             padding: "0 16px",
             paddingTop: "30px",
             paddingBottom: "30px",

@@ -64,6 +64,9 @@ export const routDictionary: Items = {
   "contact-info": {
     title: "اطلاعات تماس",
   },
+  "workflow-cartable":{
+    title:"کارتابل"
+  },
   "visit-form": {
     title: "اطلاعات فرم بازدید",
   },
@@ -262,6 +265,7 @@ export const routDictionary: Items = {
   barcode: {
     title: "لیست بارکد ها",
   },
+
   // end admin panel
 
   task: {

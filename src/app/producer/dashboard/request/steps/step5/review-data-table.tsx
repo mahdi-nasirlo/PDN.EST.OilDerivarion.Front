@@ -69,11 +69,12 @@ export default function ReviewDataTable() {
     },
   ];
 
-  const deleteRequest = (stepNumber: number) => {
-    deleteStep.trigger({
+  const deleteRequest = async (stepNumber: number) => {
+    await deleteStep.trigger({
       stepNumber: stepNumber,
       requestMasterUid: processController.requestMaster.requestMasterUid,
     });
+    setOpen(false);
   };
 
   return (
@@ -92,6 +93,7 @@ export default function ReviewDataTable() {
                       extra: (
                         <>
                           <ConfirmDeleteModal
+                            loading={deleteStep.isMutating}
                             open={open}
                             setOpen={setOpen}
                             handleDelete={() => deleteRequest(item.stepNumber)}

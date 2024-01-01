@@ -2,11 +2,15 @@ import Image from "next/image";
 import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import useSWR from "swr";
 import { listFetcher } from "../../../lib/server/listFetcher";
+import useSignOut from "../../../hooks/sso/useSginout";
 
 export default function HeaderDropdown() {
+
+  const serverSignOut = useSignOut()
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -14,8 +18,9 @@ export default function HeaderDropdown() {
   };
 
   const handleOk = async () => {
+    const logout = await serverSignOut.trigger()
+    console.log(logout)
     const res = await signOut()
-    console.log(res)
     setIsModalOpen(false);
   };
 
@@ -23,13 +28,13 @@ export default function HeaderDropdown() {
     setIsModalOpen(false);
   };
 
-  const session = useSession()
-
 
   const { data: GetUserInfo, isLoading: ldGetUserInfo } = useSWR(
     "/Sso/GetUserInfo",
     (url) => listFetcher(url)
   );
+
+  console.log(GetUserInfo);
 
 
   const items: MenuProps["items"] = [
@@ -102,19 +107,20 @@ export default function HeaderDropdown() {
         onCancel={handleCancel}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 // loading={loading}
                 size="large"
                 className="w-full"
                 type="primary"
+                loading={serverSignOut.isMutating}
                 onClick={handleOk}
                 danger
                 key={"submit"}>
                 خروج
               </Button>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 // disabled={loading}
                 size="large"

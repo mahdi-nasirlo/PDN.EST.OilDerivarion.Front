@@ -72,7 +72,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "کد ملی",
+      title: "شماره ملی",
       dataIndex: "name",
       key: "3",
     },
@@ -150,8 +150,6 @@ export default function DataTable({
         dataSource={addIndexToData(data?.records)}
         pagination={{
           defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50"],
           defaultCurrent: 1,
           style: {
             display: "flex",
@@ -178,7 +176,7 @@ export default function DataTable({
         onCancel={handleCancelEdit}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 size="large"
                 className="w-full"
@@ -189,7 +187,7 @@ export default function DataTable({
                 ثبت
               </Button>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
@@ -210,7 +208,7 @@ export default function DataTable({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="year-establishment" label="کد ملی">
+              <Form.Item name="year-establishment" label="شماره ملی">
                 <Input size="large" placeholder="انتخاب کنید" />
               </Form.Item>
             </Col>

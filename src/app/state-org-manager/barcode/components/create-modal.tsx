@@ -1,17 +1,17 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row,} from "antd";
+import { Button, Col, Form, Modal, Row, } from "antd";
 import React from "react";
-import {useForm} from "antd/es/form/Form";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import { useForm } from "antd/es/form/Form";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import BarcodeForm from "@/app/admin-panel/barcode/components/barcode-form";
 
 export default function CreateModal({
-                                        setModalVisible,
-                                        modalVisible,
-                                        mutate
-                                    }: {
+    setModalVisible,
+    modalVisible,
+    mutate
+}: {
     setModalVisible: any;
     modalVisible: any;
     mutate: () => void
@@ -19,7 +19,7 @@ export default function CreateModal({
 
     const [form] = useForm()
 
-    const {trigger, isMutating} = useSWRMutation("/RequestBarcode/Create", mutationFetcher)
+    const { trigger, isMutating } = useSWRMutation("/RequestBarcode/Create", mutationFetcher)
 
     const handleFormSubmit = async (values: any) => {
 
@@ -47,7 +47,7 @@ export default function CreateModal({
             onCancel={() => setModalVisible(false)}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
-                    <Col xs={24} md={12}>
+                    <Col xs={12} md={12}>
                         <Button
                             onClick={() => {
                                 form.submit();
@@ -61,7 +61,7 @@ export default function CreateModal({
                             ثبت
                         </Button>
                     </Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={12} md={12}>
                         <Button
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
@@ -80,7 +80,7 @@ export default function CreateModal({
                 form={form}
                 layout="vertical"
             >
-                <BarcodeForm form={form}/>
+                <BarcodeForm form={form} />
             </Form>
         </Modal>
     );

@@ -93,32 +93,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-          <Col xs={24} md={12}>
-            <Form.Item
-              name={"materialUsagePercentage"}
-              label={"درصد استفاده"}
-              rules={[
-                { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                {
-                  type: "number",
-                  min: 0,
-                  max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                },
-              ]}
-            >
-              <InputNumber
-                controls={false}
-                className="w-full rounded-lg"
-                size="large"
-                min={0}
-                max={100}
-                formatter={(value) => `${value}%`}
-                placeholder="وارد کنید"
-              />
-            </Form.Item>
-          </Col>
-        )}
+            <Col xs={24} md={12}>
+              <Form.Item
+                name={"materialUsagePercentage"}
+                label={"درصد استفاده"}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  {
+                    type: "number",
+                    min: 0,
+                    max: 100,
+                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  },
+                ]}
+              >
+                <InputNumber
+                  controls={false}
+                  className="w-full rounded-lg"
+                  size="large"
+                  min={0}
+                  max={100}
+                  formatter={(value) => `${value}%`}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+          )}
         {[2].includes(processController.requestMaster.productionMethodId) && (
           <Col xs={24} md={12}>
             <Form.Item
@@ -177,8 +177,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="materialImportDeclarationNumber"
-                label="شماره اظهارنامه واردات"
+                name="materialSupplyName"
+                label="نام تامین کننده خارجی"
                 rules={[
                   {
                     required: true,
@@ -195,8 +195,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="materialSupplyName"
-                label="نام تامین کننده خارجی"
+                name="materialImportDeclarationNumber"
+                label="شماره اظهارنامه واردات"
                 rules={[
                   {
                     required: true,
@@ -259,10 +259,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyNationalCode"
                 label={
                   personTypeStatus === null
-                    ? "کد ملی / شناسه ملی"
+                    ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
-                    ? "شناسه ملی"
-                    : "کد ملی"
+                      ? "شناسه ملی"
+                      : "شماره ملی"
                 }
                 rules={[
                   {
@@ -284,11 +284,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(" کد ملی / شناسه ملی اجباری است");
+                        return Promise.reject(" شماره ملی / شناسه ملی اجباری است");
                       }
 
                       if (value && personTypeStatus === 1) {
-                        return Promise.reject("کد ملی نامعتبر است");
+                        return Promise.reject("شماره ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {

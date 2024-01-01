@@ -40,7 +40,7 @@ export default function CreateModal({
     setIsEditModalVisible(false);
   };
 
-  const { data: LicenseTypeGetAll, isLoading: ldLicenseTypeGetAll } = useSWR(
+  const { data: LicenseType, isLoading: ldLicenseType } = useSWR(
     ["/BaseInfo/LicenseTypeGetAll"],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
@@ -55,7 +55,7 @@ export default function CreateModal({
         onCancel={handleCancelEdit}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 loading={isMutating}
                 size="large"
@@ -67,7 +67,7 @@ export default function CreateModal({
                 ثبت
               </Button>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={12} md={12}>
               <Button
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
@@ -115,8 +115,8 @@ export default function CreateModal({
                   showSearch
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldLicenseTypeGetAll}
-                  options={LicenseTypeGetAll}
+                  loading={ldLicenseType}
+                  options={LicenseType}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -144,7 +144,7 @@ export default function CreateModal({
                 label="زمان صدور"
                 rules={[{ required: true }]}
               >
-                <CustomDatePicker/>
+                <CustomDatePicker />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -153,7 +153,7 @@ export default function CreateModal({
                 label="تاریخ انقضاء"
                 rules={[{ required: true }]}
               >
-                <CustomDatePicker/>
+                <CustomDatePicker />
               </Form.Item>
             </Col>
           </Row>

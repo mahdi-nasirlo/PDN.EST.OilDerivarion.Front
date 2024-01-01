@@ -38,7 +38,7 @@ export default function VisitTimeModal(
                 onCancel={closeModal}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
-                        <Col xs={24} md={12}>
+                        <Col xs={12} md={12}>
                             <Button
                                 size="large"
                                 className="w-full"
@@ -49,7 +49,7 @@ export default function VisitTimeModal(
                                 ثبت
                             </Button>
                         </Col>
-                        <Col xs={24} md={12}>
+                        <Col xs={12} md={12}>
                             <Button
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
@@ -73,7 +73,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی اول'
                             >
-                                <CustomDatePicker/>
+                                <CustomDatePicker />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
@@ -82,7 +82,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی دوم'
                             >
-                                <CustomDatePicker/>
+                                <CustomDatePicker />
                             </Form.Item>
                         </Col>
                         <Col xs={24} md={8}>
@@ -91,7 +91,7 @@ export default function VisitTimeModal(
                                 rules={[{ required: true }]}
                                 label='زمان بازدید احتمالی سوم'
                             >
-                                <CustomDatePicker/>
+                                <CustomDatePicker />
                             </Form.Item>
                         </Col>
                     </Row>

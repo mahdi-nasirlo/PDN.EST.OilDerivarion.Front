@@ -84,7 +84,7 @@ export default function Step1() {
             <Button
               loading={processControl.isMutating}
               disabled={processControl.isMutating}
-              className="w-full management-info-form-submit btn-filter"
+              className="w-full"
               size="large"
               type="primary"
               htmlType="submit"

@@ -9,7 +9,7 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import StatusColumn from "../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../components/CustomeTable";
 import { Producer } from "../../../../../interfaces/producer";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function DataTable({
   setModalVisible,
@@ -38,7 +38,6 @@ export default function DataTable({
     setRecordToDelete(record);
     setIsDeleteModalVisible(true);
   };
-  const router = useRouter();
 
   const { trigger, isMutating: IsDeleteTestFactor } = useSWRMutation(
     "/TestItem/Delete",
@@ -72,7 +71,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "کدملی",
+      title: "شماره ملی",
       dataIndex: "NationalCode",
       key: "3",
     },
@@ -99,13 +98,12 @@ export default function DataTable({
           <Button
             type="link"
             className="text-secondary-500 font-bold"
-            onClick={() => {
-              router.push("/admin-panel/producer-info");
-            }}
           >
-            مشاهده اطلاعات
+            <Link href={"/admin-panel/producer-info"}>
+              مشاهده اطلاعات
+            </Link>
           </Button>
-        </Space>
+        </Space >
       ),
     },
   ];

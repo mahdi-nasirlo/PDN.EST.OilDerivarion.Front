@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { Button, Divider, Form, Typography } from "antd";
+import { Button, Col, Divider, Form, Row, Typography } from "antd";
 import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import { useForm } from "antd/es/form/Form";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import MaterialRequestDetailTable from "@/app/producer/dashboard/request/steps/step2/method2/material-request-detail-table";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
 import { mutate } from "swr";
-import { SvgIcon } from "@/components/layout/sidebar";
 
 function Index() {
   const [form] = useForm();
@@ -51,28 +50,38 @@ function Index() {
           </Button>
         </div>
       </Form>
-
       <MaterialRequestDetailTable />
-
-      <div className="flex gap-3 mt-5">
-        <Button
-          onClick={() => processControl.getLastStep()}
-          type="dashed"
-          className="bg-gray-100 w-full"
-        >
-          بازبینی نهایی
-        </Button>
-        <Button
-          className="w-full"
-          icon={<SvgIcon src="/static/save.svg" />}
-          loading={processControl.isMutating}
-          size="large"
-          type="primary"
-          onClick={processControl.getStep3}
-        >
-          ذخیره و ادامه
-        </Button>
-      </div>
+      <Row gutter={[12, 12]}>
+        <Col xs={24} md={8}>
+          <Button
+            onClick={() => processControl.dispatch({ type: "PREVIOUS" })}
+            type="dashed"
+            className="bg-gray-100 w-full"
+          >
+            مرحله قبلی
+          </Button>
+        </Col>
+        <Col xs={24} md={8}>
+          <Button
+            onClick={() => processControl.getLastStep()}
+            type="default"
+            className="bg-gray-100 w-full"
+          >
+            بازبینی نهایی
+          </Button>
+        </Col>
+        <Col xs={24} md={8}>
+          <Button
+            className="w-full"
+            loading={processControl.isMutating}
+            size="large"
+            type="primary"
+            onClick={processControl.getStep3}
+          >
+            ذخیره و ادامه
+          </Button>
+        </Col>
+      </Row>
     </>
   );
 }

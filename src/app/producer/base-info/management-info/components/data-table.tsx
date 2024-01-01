@@ -82,7 +82,7 @@ export default function DataTable({
     },
     {
       title: "تاریخ تولد",
-      dataIndex: "birthDate",
+      dataIndex: "birthDatePersian",
       key: "5",
     },
     {

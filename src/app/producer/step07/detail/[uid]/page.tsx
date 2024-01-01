@@ -1,16 +1,13 @@
 "use client";
 
-import { Col, Divider, Form, Input, notification, Row, Typography } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
+import { Divider, notification, Typography } from "antd";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
 import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
@@ -18,23 +15,10 @@ interface PropType {
   params: { uid: string };
 }
 
-interface DataFetchType {
-  choices: Choice[];
-  task: {
-    processId: string;
-    stepId: string;
-    reference_ID: string;
-    group_ID: string;
-    step_Name: string;
-    counting_position: string;
-    userId: number;
-  };
-}
-
 const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
-  const { data: barcode, isLoading: ldBarcode } = useSWR<string>(
+  const barcodeRequest = useSWRMutation<string>(
     "/RequestBarcode/FactoryBarcode",
     (url: string) =>
       listFetcher(url, {
@@ -43,13 +27,15 @@ export default function Home(props: PropType) {
         },
       })
   );
-  const downloadPdf = (choiceKey: any) => {
-    if (!barcode) {
+  const downloadPdf = async (choiceKey: any) => {
+    await barcodeRequest.trigger();
+
+    if (!barcodeRequest.data) {
       notification.error({ message: "فایلی وجود ندارد" });
       return;
     }
 
-    const binaryPdf = atob(barcode);
+    const binaryPdf = atob(barcodeRequest.data);
     const arrayBuffer = new ArrayBuffer(binaryPdf.length);
     const uint8Array = new Uint8Array(arrayBuffer);
     for (let i = 0; i < binaryPdf.length; i++) {
@@ -63,13 +49,10 @@ export default function Home(props: PropType) {
     link.download = "downloaded.pdf";
     link.click();
     form.submit();
-    setChoice(choiceKey);
     onFinish(choiceKey);
   };
 
   const [form] = useForm();
-
-  const [choice, setChoice] = useState<string>();
 
   const router = useRouter();
 
@@ -110,33 +93,9 @@ export default function Home(props: PropType) {
           data={data?.tabs}
           loading={isLoading}
         />
-        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
-        {/* {data && <Divider /> && (
-          <Form onFinish={onFinish} form={form}>
-            <Row gutter={[16, 16]}>
-              <Col xs={24} md={24}>
-                <Form.Item
-                  rules={[
-                    { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                  ]}
-                  wrapperCol={{ span: 24 }}
-                  labelCol={{ span: 24 }}
-                  name="description"
-                  label="توضیحات"
-                >
-                  <Input.TextArea
-                    style={{ height: 100, resize: "none" }}
-                    placeholder="وارد کنید"
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        )} */}
-        {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn
-          loading={isMutating}
+          loading={isMutating || barcodeRequest.isMutating}
           choices={data?.choices as any}
           onClick={(choiceKey) => {
             downloadPdf(choiceKey);

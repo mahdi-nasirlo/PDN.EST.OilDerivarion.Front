@@ -11,14 +11,13 @@ const Index = () => {
   const [form] = useForm();
 
   const processController = useContext(StepContext);
-  const method = processController.requestMaster.productionMethodId;
 
   const requestDetailProduct = useCrudRequestDetailProduct();
 
   const handleOnFinish = async (value: any) => {
     value.requestMasterUid = processController.requestMaster.requestMasterUid;
 
-    await requestDetailProduct.create.trigger(value, true);
+    await requestDetailProduct.create.trigger(value, false);
 
     await mutate("/RequestDetail/GetAllProduct");
   };

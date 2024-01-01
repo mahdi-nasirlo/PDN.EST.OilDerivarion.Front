@@ -30,6 +30,7 @@ const StatusModal = ({
   const router = useRouter();
 
   let message;
+  let message1;
 
   if (data?.producerStatusId === 1) {
     message = "پنل شما با موفقیت فعال شد در حال انتقال هستید ...";
@@ -48,6 +49,9 @@ const StatusModal = ({
   if (data?.producerStatusId === 3) {
     message = "در حال برسی ...  لطفا منتظر بمانید";
   }
+  if (data?.requestRejectionDescription === null) {
+    message1 = "در حال برسی ...  لطفا منتظر بمانید";
+  }
 
   useEffect(() => {
     if (data?.producerStatusId === 1) router.push("/producer");
@@ -55,14 +59,26 @@ const StatusModal = ({
 
   const onClose = () => setOpen(false);
   return (
-    <Modal
-      footer={false}
-      onCancel={onClose}
-      open={open}
-      title={` وضعیت درخواست شما: ${data?.producerStatusName}`}
-    >
-      <Alert message={message} type="warning" />
-    </Modal>
+    <>
+      <Modal
+        footer={false}
+        onCancel={onClose}
+        open={open}
+        title={` وضعیت درخواست شما: ${data?.producerStatusName}`}
+      >
+        <Alert message={message} type="warning" />
+      </Modal>
+      {data?.requestRejectionDescription === null && (
+        <Modal
+          footer={false}
+          onCancel={onClose}
+          open={open}
+          title={` وضعیت درخواست شما: درحال بررسی`}
+        >
+          <Alert message={message1} type="warning" />
+        </Modal>
+      )}
+    </>
   );
 };
 

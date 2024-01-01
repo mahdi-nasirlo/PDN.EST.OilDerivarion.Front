@@ -89,11 +89,6 @@ export default function DataTable({
       key: "5",
     },
     {
-      title: "سمت",
-      dataIndex: "companyRoleName",
-      key: "6",
-    },
-    {
       title: "شماره تماس",
       dataIndex: "currentMobile",
       key: "7",

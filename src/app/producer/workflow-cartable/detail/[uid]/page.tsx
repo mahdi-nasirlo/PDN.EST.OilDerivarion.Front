@@ -271,7 +271,7 @@ export default function Home(props: PropType) {
                 <Col xs={24} md={24}>
                   <Form.Item
                     rules={[
-                      { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
                     ]}
                     wrapperCol={{ span: 24 }}
                     labelCol={{ span: 24 }}

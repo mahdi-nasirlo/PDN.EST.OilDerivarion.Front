@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect} from 'react';
-import {Button, Col, Form, Row, Typography} from "antd";
+import {Button, Col, Divider, Form, Row, Typography} from "antd";
 import {useForm} from "antd/es/form/Form";
 import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
@@ -100,6 +100,7 @@ const RenderInputs = (props: {
             <Row gutter={[16, 10]}>
                 {props?.item?.map((value, index) => <RenderInput key={index} item={value}/>)}
             </Row>
+            <Divider/>
             {props.item.length > 0 && <div className="flex justify-end mt-5">
                 <Button htmlType="submit" type="primary">
                     ذخیره

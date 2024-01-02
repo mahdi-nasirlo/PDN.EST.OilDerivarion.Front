@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import {Button, Divider, Typography} from "antd";
+import { Button, Divider, Typography } from "antd";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import {Choice} from "../../../../../../interfaces/requestDetail";
+import { Choice } from "../../../../../../interfaces/requestDetail";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
-import {apiUrl} from "../../../../../../Constants/apiUrl";
-import {useRouter} from "next/navigation";
+import { apiUrl } from "../../../../../../Constants/apiUrl";
+import { useRouter } from "next/navigation";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropsType {
@@ -29,8 +29,16 @@ const Page = (props: PropsType) => {
         </div>
         <Divider />
       </div>
-      <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading}/>
-      {/*<WorkflowDataViewer data={data as any} loading={isLoading} />*/}
+      <GodOfDataViewer uid={props.params.uid} data={data?.tabs} loading={isLoading} />
+      {data && <Divider />}
+      {data && (
+        <>
+          <div className="space-y-3">
+            <Typography className="font-bold">{`زمان بازدید از واحد تولیدی شما توسط کارشناسان مربوطه در تاریخ ...... می باشد.`}</Typography>
+            <Typography>{`بدیهی است در صورت پرداخت نشدن هزینه بازدید توسط متقاضی تا قبل از تاریخ اعلام شده ، منجر به لغو شدن درخواست می شود.`}</Typography>
+          </div>
+        </>
+      )}
       {data && <Divider />}
       <div className="grid grid-cols-1 gap-3">
         <WorkflowRequestBtn

@@ -11,10 +11,6 @@ const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many
 
     const formData = useFormRequest(categoryID)
 
-    if (formData.isLoading) {
-        return <Spin/>
-    }
-
     try {
 
         if (formData.data === undefined || formData.data === null || formData.data.schema === null) return <Typography>دیتایی
@@ -32,7 +28,9 @@ const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many
         return (
             <>
                 <FormBuilderProvider initialValues={records} type={type} formData={formData}>
-                    <RenderForms schema={schema[0]} records={records} type="many"/>
+                    <Spin spinning={formData.isLoading}>
+                        <RenderForms schema={schema[0]} records={records} type="many"/>
+                    </Spin>
                 </FormBuilderProvider>
             </>
         );

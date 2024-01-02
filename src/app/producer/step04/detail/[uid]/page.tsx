@@ -1,7 +1,6 @@
 "use client";
 
 import { Divider, Typography } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
 import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
@@ -18,18 +17,6 @@ interface PropType {
   params: { uid: string };
 }
 
-interface DataFetchType {
-  choices: Choice[];
-  task: {
-    processId: string;
-    stepId: string;
-    reference_ID: string;
-    group_ID: string;
-    step_Name: string;
-    counting_position: string;
-    userId: number;
-  };
-}
 
 const apiData = apiUrl.WorkFlowRequest.step04;
 
@@ -79,7 +66,6 @@ export default function Home(props: PropType) {
           loading={isLoading}
         />
         <CalendarTime data={data?.calendar as any} />
-        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
         {data && (
           <>
             <Divider />

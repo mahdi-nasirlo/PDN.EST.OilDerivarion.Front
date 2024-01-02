@@ -7,8 +7,9 @@ import {
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
 import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
 import { apiUrl } from "../../../../../Constants/apiUrl";
-import { Button, Space } from "antd";
+import { Button, Space, Tooltip, Typography } from "antd";
 import Link from "next/link";
+import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
 
 export default function Home() {
 
@@ -22,21 +23,45 @@ export default function Home() {
         width: "5%",
       },
       {
-        title: "توضیحات کاربر",
+        title: "نام متقاضی",
         dataIndex: "userDescription",
         key: "2",
       },
       {
-        title: "تاریخ شروع",
-        dataIndex: "startTimePersian",
-        key: "7",
+        title: "نام محصولات",
+        dataIndex: "productsName",
+        key: "3",
+        render: (_, record) => (
+          <Tooltip
+            placement="top"
+            title={<Typography>{record.productsName}</Typography>}
+          >
+            <Typography.Text
+              className=" max-w-[250px]"
+              ellipsis={true}
+              style={{ width: "45px !important" }}
+            >
+              {record.productsName}
+            </Typography.Text>
+          </Tooltip>
+        ),
+      },
+      // {
+      //   title: "روش تولید",
+      //   dataIndex: "productionMethodName",
+      //   key: "4",
+      // },
+      {
+        title: "وضعیت",
+        dataIndex: "status",
+        key: "5",
+        render(_, record) { return <WorkFlowStatusColumn record={record} /> }
       },
       {
-        title: "تاریخ پایان",
-        dataIndex: "currentStepStartTimePersian",
-        key: "3",
+        title: "تاریخ ثبت درخواست",
+        dataIndex: "startTimePersian",
+        key: "5",
       },
-
       {
         title: "عملیات",
         key: "عملیات",

@@ -79,13 +79,12 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               {
                 validator: async (rule, value) => {
                   if (!/^\d+$/.test(value)) {
-                    throw new Error("لطفا عدد وارد کنید");
                   }
                 },
               },
             ]}
           >
-            <Input size="large" placeholder="وارد نمایید" />
+            <Input type="number" size="large" placeholder="وارد نمایید" />
           </Form.Item>
         </Col>
       </Row>
@@ -93,39 +92,39 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-            <Col xs={24} md={12}>
-              <Form.Item
-                name={"materialUsagePercentage"}
-                label={"درصد استفاده"}
-                rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                  {
-                    type: "number",
-                    min: 0,
-                    max: 100,
-                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                  },
-                ]}
-              >
-                <InputNumber
-                  controls={false}
-                  className="w-full rounded-lg"
-                  size="large"
-                  min={0}
-                  max={100}
-                  formatter={(value) => `${value}%`}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          )}
+          <Col xs={24} md={12}>
+            <Form.Item
+              name={"materialUsagePercentage"}
+              label={"درصد استفاده"}
+              rules={[
+                { required: true, message: "لطفا مقدار را وارد کنید" },
+                {
+                  type: "number",
+                  min: 0,
+                  max: 100,
+                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+        )}
         {[2].includes(processController.requestMaster.productionMethodId) && (
           <Col xs={24} md={12}>
             <Form.Item
               name={"materialUsagePercentage"}
               label={"درصد استفاده"}
               rules={[
-                { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
                   min: 0,
@@ -182,7 +181,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 rules={[
                   {
                     required: true,
-                    message: "لطفا مقدار را انتخاب کنید",
+                    message: "لطفا مقدار را وارد کنید",
                   },
                 ]}
               >
@@ -200,7 +199,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 rules={[
                   {
                     required: true,
-                    message: "لطفا مقدار را انتخاب کنید",
+                    message: "لطفا مقدار را وارد کنید",
                   },
                 ]}
               >
@@ -261,8 +260,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   personTypeStatus === null
                     ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
-                      ? "شناسه ملی"
-                      : "شماره ملی"
+                    ? "شناسه ملی"
+                    : "شماره ملی"
                 }
                 rules={[
                   {
@@ -284,7 +283,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (!value) {
-                        return Promise.reject(" شماره ملی / شناسه ملی اجباری است");
+                        return Promise.reject();
                       }
 
                       if (value && personTypeStatus === 1) {
@@ -303,6 +302,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   value={SupplyNational}
                   size="large"
                   placeholder="وارد نمایید"
+                  type="number"
                 />
               </Form.Item>
             </Col>
@@ -313,17 +313,17 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyIranCode"
                 label="ایرانکد"
                 rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator: async (rule, value) => {
                       if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
                       }
                     },
                   },
                 ]}
               >
                 <Input
+                  type="number"
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد نمایید"
@@ -335,7 +335,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyAddress"
                 label="آدرس"
                 rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string" },
                 ]}
               >

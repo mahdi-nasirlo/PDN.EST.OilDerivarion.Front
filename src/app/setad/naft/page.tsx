@@ -7,6 +7,8 @@ import {apiUrl} from "../../../../Constants/apiUrl";
 import {Button, Space} from "antd";
 import WorkflowDataTableProvider from "../../../../components/Workflow/WorkflowDataTable/workflowDataTableProvider";
 import WorkflowDataTable from "../../../../components/Workflow/WorkflowDataTable";
+import WorkFlowStatusColumn from "../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
+import VisitInfo from "../../../../components/Workflow/VisitInfo/visit-info";
 
 export default function Page() {
     const router = useRouter();
@@ -15,25 +17,10 @@ export default function Page() {
         apiUrl: apiUrl.WorkFlowRequest.setad.naft.url,
         columns: [
             {
-                title: "ردیف",
-                dataIndex: "Row",
-                key: "1",
-                width: "5%",
-            },
-            {
-                title: "توضیحات کاربر",
-                dataIndex: "userDescription",
-                key: "2",
-            },
-            {
-                title: "تاریخ شروع",
-                dataIndex: "startTimePersian",
-                key: "7",
-            },
-            {
-                title: "تاریخ پایان",
-                dataIndex: "currentStepStartTimePersian",
-                key: "3",
+                title: "وضعیت",
+                dataIndex: "status",
+                key: "5",
+                render(_, record) { return <WorkFlowStatusColumn record={record} /> }
             },
 
             {
@@ -44,17 +31,8 @@ export default function Page() {
                 width: "10%",
                 render: (_, record) => (
                     <Space size="small">
-                        <Button
-                            type="link"
-                            className="text-secondary-500 font-bold "
-                            onClick={() => {
-                                router.push(
-                                    "/producer/step17/detail/" + record.taskId
-                                );
-                            }}
-                        >
-                            مشاهده اطلاعات
-                        </Button>
+                        <VisitInfo CanEdit={record.CanEdit} href={"/producer/step17/detail/" + record.TaskId}>                            مشاهده اطلاعات
+                        </VisitInfo>
                     </Space>
                 ),
             },

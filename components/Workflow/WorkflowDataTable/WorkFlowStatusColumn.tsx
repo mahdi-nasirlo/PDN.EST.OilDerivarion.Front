@@ -1,22 +1,28 @@
 import React from 'react';
-import { CheckCircleOutlined, ClockCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import {CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import { Tag } from "antd";
+import {convertKeysToLowerCase} from "../../../lib/convertKeysToLowerCase";
 
 const WorkFlowStatusColumn = ({ record }: { record: any }) => {
+
     let color = "";
     let name = "";
     let icon = <></>;
-    if (record.status === 0) {
+    if (record.Status === 0) {
         color = "red";
         name = "بررسی نشده";
-        icon = <InfoCircleOutlined />;
-    } else if (record.status === 1) {
-        color = "warning";
-        name = "در حال بررسی";
-        icon = <ClockCircleOutlined />;
-    } else {
+        icon = <CloseCircleOutlined />;
+    } else if (record.Status === 1) {
         color = "success";
-        name = "بررسی شده";
+        name = "انجام شده";
+        icon = <CheckCircleOutlined />;
+    } else if (record.Status === 2) {
+        color = "orange";
+        name = "درحال بررسی";
+        icon = <CheckCircleOutlined />;
+    } else if (record.Status === 3) {
+        color = "red";
+        name = "خطا";
         icon = <CheckCircleOutlined />;
     }
 

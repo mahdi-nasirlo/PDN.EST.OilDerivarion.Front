@@ -41,7 +41,7 @@ const Index = () => {
     try{
 
 
-      return <WorkflowDataViewer data={fetch.data?.tasks} loading={fetch.isLoading}/>
+      return <WorkflowDataViewer columns={columns} data={fetch.data?.tasks} loading={fetch.isLoading}/>
 
     }catch (e) {
 

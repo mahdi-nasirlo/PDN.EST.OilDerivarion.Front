@@ -9,6 +9,8 @@ import { Button, Space } from "antd";
 import Link from "next/link";
 import { apiUrl } from "../../../../../Constants/apiUrl";
 import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
+import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
+import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 
 export default function Home() {
 
@@ -16,26 +18,12 @@ export default function Home() {
     apiUrl: apiUrl.WorkFlowRequest.step16.getAll.url,
     columns: [
       {
-        title: "ردیف",
-        dataIndex: "Row",
-        key: "1",
-        width: "5%",
+        title: "وضعیت",
+        dataIndex: "status",
+        key: "5",
+        render(_, record) { return <WorkFlowStatusColumn record={record} /> }
       },
-      {
-        title: "توضیحات کاربر",
-        dataIndex: "userDescription",
-        key: "2",
-      },
-      {
-        title: "تاریخ شروع",
-        dataIndex: "startTimePersian",
-        key: "7",
-      },
-      {
-        title: "تاریخ پایان",
-        dataIndex: "currentStepStartTimePersian",
-        key: "3",
-      },
+
 
       {
         title: "عملیات",
@@ -45,14 +33,8 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <Button
-              type="link"
-              className="text-secondary-500 font-bold"
-            >
-              <Link href={"/producer/step16/detail/" + record.taskId}>
-                مشاهده اطلاعات
-              </Link>
-            </Button>
+            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step16/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            </VisitInfo>
           </Space>
         ),
       },

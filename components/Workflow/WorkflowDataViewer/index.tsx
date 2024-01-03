@@ -1,8 +1,11 @@
 import React from 'react';
 import WorkflowDataviewerItem, {WorkFlowDataViewerItemType} from "./workflowDataviewerItem";
 import {Spin} from "antd";
+import {ColumnType} from "antd/lib/table";
+import {ColumnGroupType} from "rc-table/lib/interface";
 
-const Index = (props: { data: string, loading?: boolean }) => {
+
+const Index = (props: { data: string, loading?: boolean, columns: (ColumnGroupType<any> | ColumnType<any>)[] }) => {
 
     if (props.loading) {
         return <Spin/>
@@ -18,7 +21,7 @@ const Index = (props: { data: string, loading?: boolean }) => {
 
     return (
         <>
-            <WorkflowDataviewerItem data={data}/>
+            <WorkflowDataviewerItem data={data} columns={props.columns}/>
         </>
     );
 };

@@ -1,10 +1,10 @@
 import React from 'react';
-import {InputProps, SelectProps} from "antd/lib";
-import {FormBuilderInputType} from "../index";
-import {Rule} from "rc-field-form/es/interface";
+import { InputProps, SelectProps } from "antd/lib";
+import { FormBuilderInputType } from "../index";
+import { Rule } from "rc-field-form/es/interface";
 import FormItem from "../FormItem";
-import {Select as AntSelect} from "antd";
-import {Option} from "antd/lib/mentions";
+import { Select as AntSelect } from "antd";
+import { Option } from "antd/lib/mentions";
 
 interface PropsType {
     data: FormBuilderInputType
@@ -15,7 +15,7 @@ const Select = (props: InputProps & PropsType) => {
 
     if (!props.data) return "select no data"
 
-    const {data} = props
+    const { data } = props
 
     let Is_Required = data?.Is_Required ? data.Is_Required : false
 
@@ -35,7 +35,7 @@ const Select = (props: InputProps & PropsType) => {
             <FormItem
                 name={data.Name}
                 label={data?.Title_Style}
-                // rules={rules}
+                rules={rules}
             >
                 <AntSelect
                     allowClear

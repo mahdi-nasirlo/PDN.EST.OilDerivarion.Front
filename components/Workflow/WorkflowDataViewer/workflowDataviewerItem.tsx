@@ -1,9 +1,11 @@
 import React from 'react';
 import {Descriptions, Spin, Table, Typography} from "antd";
 import {ColumnsType} from "antd/es/table";
+import {ColumnProps} from "antd/lib/table";
 
 interface PropsType {
     loading?: boolean,
+    columns?: ColumnsType<any>
     data: WorkFlowDataViewerItemType
 }
 
@@ -27,7 +29,7 @@ const Index = (props: PropsType) => {
             </Typography>
 
             {/*// @ts-ignore*/}
-            <RenderTable values={props?.data?.Table?.Values} header={props?.data?.Table?.Header}/>
+            <RenderTable extraColumns={props.columns} values={props?.data?.Table?.Values} header={props?.data?.Table?.Header}/>
             <RenderModel item={props?.data?.Model as ModelPropsType[]}/>
         </>
     );
@@ -35,13 +37,15 @@ const Index = (props: PropsType) => {
 
 
 interface TablePropsType {
+    extraColumns: ColumnsType<any>
     header: {
         Key: string,
-        Value: string
+        Value: string,
+        Hidden?: boolean
     }[] | undefined,
     values: {
         Name: string,
-        Type: string
+        Type: string,
     }[] | undefined
 }
 
@@ -51,7 +55,11 @@ const RenderTable = (props: TablePropsType) => {
         return <></>
     }
 
-    const columns: ColumnsType<any> = props.header.map(item => ({dataIndex: item.Key, title: item.Value}))
+    const columns: ColumnsType<any> = props.header
+        .filter(item => !item.Hidden)
+        .map(item => ({dataIndex: item.Key, title: item.Value}))
+
+    columns.push(...props.extraColumns)
 
     return <>
         <Table columns={columns} dataSource={props.values}/>

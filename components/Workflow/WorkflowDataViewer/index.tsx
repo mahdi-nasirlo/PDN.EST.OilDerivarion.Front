@@ -5,7 +5,7 @@ import {ColumnType} from "antd/lib/table";
 import {ColumnGroupType} from "rc-table/lib/interface";
 
 
-const Index = (props: { data: string, loading?: boolean, columns: (ColumnGroupType<any> | ColumnType<any>)[] }) => {
+const Index = (props: { data: string, loading?: boolean, columns?: (ColumnGroupType<any> | ColumnType<any>)[] }) => {
 
     if (props.loading) {
         return <Spin/>

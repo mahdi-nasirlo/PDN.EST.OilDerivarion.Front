@@ -16,7 +16,11 @@ const InputNumber = (props: InputProps & PropsType) => {
     const { data } = props
 
     let rules: Rule[] = [
-        { required: true }
+        { required: true },
+        {
+            pattern: /^(?!-)\d+(\.\d+)?$/,
+            message: 'لطفا عدد وارد کنید',
+        }
     ]
 
     const prepareRule = () => {
@@ -36,9 +40,14 @@ const InputNumber = (props: InputProps & PropsType) => {
             label={data?.Title_Style}
             rules={prepareRule()}
         >
-            <Input min={0} type="number" size="large" {...props} defaultValue={data?.Default_Value as any}
+            <Input
+                className="w-full"
+                size="large"
+                type="text"
+                defaultValue={data?.Default_Value as any}
                 placeholder={data?.Placeholder || "وارد کنید"}
-                className="w-full" />
+                {...props}
+            />
         </FormItem>
     );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import { InputProps} from "antd/lib";
-import {FormBuilderInputType} from "../index";
-import {Rule} from "rc-field-form/es/interface";
+import { InputProps } from "antd/lib";
+import { FormBuilderInputType } from "../index";
+import { Rule } from "rc-field-form/es/interface";
 import FormItem from "../FormItem";
-import {Input} from "antd";
+import { Input } from "antd";
 
 
 interface PropsType {
@@ -13,10 +13,10 @@ interface PropsType {
 
 const InputNumber = (props: InputProps & PropsType) => {
 
-    const {data} = props
+    const { data } = props
 
     let rules: Rule[] = [
-        {required: true}
+        { required: true }
     ]
 
     const prepareRule = () => {
@@ -36,9 +36,9 @@ const InputNumber = (props: InputProps & PropsType) => {
             label={data?.Title_Style}
             rules={prepareRule()}
         >
-            <Input type="number" size="large" {...props} defaultValue={data?.Default_Value as any}
-                            placeholder={data?.Placeholder || "وارد کنید"}
-                            className="w-full"/>
+            <Input min={0} type="number" size="large" {...props} defaultValue={data?.Default_Value as any}
+                placeholder={data?.Placeholder || "وارد کنید"}
+                className="w-full" />
         </FormItem>
     );
 };

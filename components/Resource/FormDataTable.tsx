@@ -1,9 +1,10 @@
-import React from 'react';
-import { FormType } from "../FormBuilder";
-import { TableColumnsType } from "antd/lib";
-import { Button, Table } from "antd";
+import React, {useState} from 'react';
+import {FormType} from "../FormBuilder";
+import {TableColumnsType} from "antd/lib";
+import {Button, Table} from "antd";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
-import { addIndexToData } from '../../lib/addIndexToData';
+import {addIndexToData} from '../../lib/addIndexToData';
+import EditModal from "./EditModal";
 
 interface PropType {
     schema: FormType,
@@ -12,6 +13,8 @@ interface PropType {
 }
 
 const FormDataTable = (props: PropType) => {
+
+    const [open, setOpen] = useState()
 
     const formProvider = useControlFormBuilder()
 
@@ -40,16 +43,24 @@ const FormDataTable = (props: PropType) => {
                 fixed: "right",
                 width: "10%",
                 title: "عملیات",
-                render: (value, record, index) => <Button
-                    type="text"
-                    className="text-red-500 font-bold"
-                    onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
-                >
-                    حذف
-                </Button>
+                render: (value, record, index) => <>
+                    <Button onClick={() => setOpen(record)} type="text" className="text-secondary-500 font-bold">
+                        ویرایش
+                    </Button>
+                    <Button
+                        type="text"
+                        className="text-red-500 font-bold"
+                        onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
+                    >
+                        حذف
+                    </Button>
+                </>
             }
         )
+
     }
+
+    console.log(props)
 
 
     return (
@@ -59,6 +70,7 @@ const FormDataTable = (props: PropType) => {
                 dataSource={addIndexToData(props?.records as any || [])}
                 pagination={false}
             />
+            <EditModal setRecord={setOpen} record={open} schema={props.schema}/>
         </>
     );
 

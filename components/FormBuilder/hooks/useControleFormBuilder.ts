@@ -44,6 +44,14 @@ const useControlFormBuilder = () => {
 
     }
 
+    const onUpdateMany = (data: any, formKey: string, row: number) => {
+
+        oldData[formKey][row - 1] = data
+
+        context.formData.onSet(validateValue(data) ? oldData : undefined);
+
+    }
+
     const deleteFromMany = (index: number, formKey: string) => {
 
         const oldDataForm = oldData[formKey];
@@ -76,7 +84,8 @@ const useControlFormBuilder = () => {
         ...context,
         onSetMany,
         deleteFromMany,
-        onSetOne
+        onSetOne,
+        onUpdateMany
     }
 };
 

@@ -249,7 +249,7 @@ export default function SubmitForm() {
               type="primary"
               htmlType="submit"
             >
-              ارسال درخواست
+              ثبت
             </Button>
           </Col>
         </Row>

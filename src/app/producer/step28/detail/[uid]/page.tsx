@@ -81,15 +81,13 @@ export default function Home(props: PropType) {
           <>
             <DataTable uid={props.params.uid} />
             {/* {data && <Divider />} */}
-            {/* <Form onFinish={onFinish} form={form}>
+            {/* <Form onFinish={onFinish} form={form} layout="vertical">
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item
                     rules={[
                       { required: true, message: "لطفا مقدار را انتخاب کنید" },
                     ]}
-                    wrapperCol={{ span: 24 }}
-                    labelCol={{ span: 24 }}
                     name="description"
                     label="توضیحات"
                   >

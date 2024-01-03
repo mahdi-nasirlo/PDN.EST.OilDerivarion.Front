@@ -83,6 +83,9 @@ export const routDictionary: Items = {
   "lab-results-list": {
     title: "نتایج آزمایشگاه",
   },
+  "main-info-producer":{
+    title:"اطلاعات اصلی تولید کننده"
+  },
   // end manufacturer panel
 
   // start state-general-management panel

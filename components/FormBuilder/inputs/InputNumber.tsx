@@ -16,7 +16,10 @@ const InputNumber = (props: InputProps & PropsType) => {
     const { data } = props
 
     let rules: Rule[] = [
-        { required: true },
+        {
+            required: true,
+            message: 'لطفا مقدار را وارد کنید'
+        },
         {
             pattern: /^(?!-)\d+(\.\d+)?$/,
             message: 'لطفا عدد وارد کنید',

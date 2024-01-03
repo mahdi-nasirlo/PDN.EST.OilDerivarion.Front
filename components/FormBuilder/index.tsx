@@ -92,7 +92,7 @@ const RenderInputs = (props: {
             form.setFieldsValue(updatedObject(props.initialValues))
 
         }
-    }, [])
+    }, [props.initialValues])
 
 
     return <>

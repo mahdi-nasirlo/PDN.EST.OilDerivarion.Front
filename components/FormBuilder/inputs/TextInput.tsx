@@ -1,9 +1,9 @@
 import React from 'react';
-import {InputProps} from "antd/lib";
-import {FormBuilderInputType} from "../index";
-import {Input} from "antd";
+import { InputProps } from "antd/lib";
+import { FormBuilderInputType } from "../index";
+import { Input } from "antd";
 import FormItem from "../FormItem";
-import {Rule} from "rc-field-form/es/interface";
+import { Rule } from "rc-field-form/es/interface";
 
 
 interface PropsType {
@@ -12,11 +12,12 @@ interface PropsType {
 
 const TextInput = (props: InputProps & PropsType) => {
 
-    const {data} = props
+    const { data } = props
 
     const rules: Rule[] = [
         {
-            required: data.Is_Required
+            required: data.Is_Required,
+            message: 'لطفا مقدار را وارد کنید'
         }
     ]
 
@@ -26,7 +27,7 @@ const TextInput = (props: InputProps & PropsType) => {
             label={data?.Title_Style}
             rules={rules}
         >
-            <Input {...props} defaultValue={data?.Default_Value}/>
+            <Input {...props} defaultValue={data?.Default_Value} />
         </FormItem>
     );
 };

@@ -21,7 +21,8 @@ const Select = (props: InputProps & PropsType) => {
 
     const rules: Rule[] = [
         {
-            required: Is_Required
+            required: Is_Required,
+            message: 'لطفا مقدار را انتخاب کنید'
         }
     ]
 
@@ -40,7 +41,7 @@ const Select = (props: InputProps & PropsType) => {
                 <AntSelect
                     allowClear
                     size="large"
-                    placeholder={props.data.Placeholder || "لطفا مقدار را وارد کنید"}
+                    placeholder={props.data.Placeholder || "انتخاب کنید"}
                 >
                     {props.data.FormFieldDetails?.map((value, index) => <Option
                         key={`${index}`}

@@ -266,15 +266,13 @@ export default function Home(props: PropType) {
               trigger={confirmRequest.handleTrigger}
             /> */}
             {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
-            <Form onFinish={onFinish} form={commentForm}>
+            <Form onFinish={onFinish} form={commentForm} layout="vertical">
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item
                     rules={[
                       { required: true, message: "لطفا مقدار را وارد کنید" },
                     ]}
-                    wrapperCol={{ span: 24 }}
-                    labelCol={{ span: 24 }}
                     name="description"
                     label="توضیحات"
                   >

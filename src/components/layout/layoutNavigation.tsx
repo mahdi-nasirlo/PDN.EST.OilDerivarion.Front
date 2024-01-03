@@ -1,15 +1,15 @@
 "use client"
 
-import { Button, Divider } from 'antd'
+import {Button, Divider} from 'antd'
 import BreadcrumbItem from 'antd/es/breadcrumb/BreadcrumbItem';
-import { Breadcrumb } from 'antd/lib';
+import {Breadcrumb} from 'antd/lib';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import React from 'react'
 
 interface propType {
     pages: Array<{
-        path: string;
+        path?: string;
         label: string;
     }>;
     currentPage: string;
@@ -27,9 +27,9 @@ export default function LayoutNavigation(props: propType) {
                 <Breadcrumb >
                     {props.pages.map((value) => (<>
                         <BreadcrumbItem>
-                            <Link href={value.path}>
+                            {value.path ? <Link href={value.path}>
                                 {value.label}
-                            </Link>
+                            </Link> : value.label}
                         </BreadcrumbItem>
                     </>))}
                     <BreadcrumbItem>

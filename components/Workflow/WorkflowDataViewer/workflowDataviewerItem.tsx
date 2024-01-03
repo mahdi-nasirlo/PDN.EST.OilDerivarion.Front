@@ -37,11 +37,12 @@ const Index = (props: PropsType) => {
 interface TablePropsType {
     header: {
         Key: string,
-        Value: string
+        Value: string,
+        Hidden?: boolean
     }[] | undefined,
     values: {
         Name: string,
-        Type: string
+        Type: string,
     }[] | undefined
 }
 
@@ -51,7 +52,9 @@ const RenderTable = (props: TablePropsType) => {
         return <></>
     }
 
-    const columns: ColumnsType<any> = props.header.map(item => ({dataIndex: item.Key, title: item.Value}))
+    const columns: ColumnsType<any> = props.header
+        .filter(item => !item.Hidden)
+        .map(item => ({dataIndex: item.Key, title: item.Value}))
 
     return <>
         <Table columns={columns} dataSource={props.values}/>

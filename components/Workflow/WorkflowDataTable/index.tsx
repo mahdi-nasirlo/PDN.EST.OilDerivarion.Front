@@ -4,7 +4,8 @@ import React from "react";
 import CustomTable from "../../CustomeTable";
 import useWorkflow from "./useWorkflow";
 import {Steps} from "../../../interfaces/steps";
-import {Descriptions} from "antd";
+import {Descriptions, Typography} from "antd";
+import WorkflowDataViewer from "../WorkflowDataViewer";
 
 const Index = () => {
   const { columns, fetch } = useWorkflow();
@@ -35,18 +36,26 @@ const Index = () => {
     }
   };
 
-  console.log(fetch.data);
+  const dataTable = () => {
+
+    try{
+
+
+      return <WorkflowDataViewer data={fetch.data?.tasks} loading={fetch.isLoading}/>
+
+    }catch (e) {
+
+      console.log(e)
+
+    }
+
+  }
 
   return (
     <>
       <div className="box-border w-full p-6">
         {renderDes()}
-        <CustomTable
-          columns={columns}
-          setInitialData={fetch.setInitialData}
-          data={{ records: fetch.data?.tasks, count: fetch.data?.length || 0 }}
-          isLoading={fetch.isLoading}
-        />
+        {dataTable()}
       </div>
     </>
   );

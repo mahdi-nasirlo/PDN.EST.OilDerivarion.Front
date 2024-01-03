@@ -34,7 +34,10 @@ export default function SubmitForm() {
     "/WorkFlowCartable/SetStep01",
     mutationFetcher
   );
-  const { data, isLoading } = useSWR("/WorkFlowCartable/GetStep01");
+  const { data, isLoading } = useSWR(
+    "/WorkFlowCartable/GetStep01",
+    listFetcher
+  );
   const { data: licensce, isLoading: ldlicensce } = useSWR(
     "/BaseInfo/LicenseTypeGetAll",
     listFetcher
@@ -79,20 +82,12 @@ export default function SubmitForm() {
       >
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="firstName"
-              label="نام"
-              //   rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
+            <Form.Item name="firstName" label="نام">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="lastName"
-              label="نام خانوادگی"
-              //   rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
+            <Form.Item name="lastName" label="نام خانوادگی">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
@@ -100,17 +95,7 @@ export default function SubmitForm() {
 
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="personNationalCode"
-              label="کدملی"
-              //   rules={[
-              //     { required: true, message: "لطفا مقدار را وارد کنید" },
-              //     {
-              //       pattern: /^[0-9]{10}$/,
-              //       message: " کدملی نامعتبر است",
-              //     },
-              //   ]}
-            >
+            <Form.Item name="personNationalCode" label="کدملی">
               <Input
                 disabled
                 type="number"
@@ -120,22 +105,14 @@ export default function SubmitForm() {
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="companyName"
-              label="نام شرکت"
-              //   rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
+            <Form.Item name="companyName" label="نام شرکت">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
-            <Form.Item
-              name="companyNationalCode"
-              label="شناسه ملی شرکت"
-              //   rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
+            <Form.Item name="companyNationalCode" label="شناسه ملی شرکت">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
@@ -249,15 +226,11 @@ export default function SubmitForm() {
               type="primary"
               htmlType="submit"
             >
-              ارسال درخواست
+              ثبت
             </Button>
           </Col>
         </Row>
       </Form>
-
-      {data?.producerStatusId && (
-        <StatusModal data={data} open={open} setOpen={setOpen} />
-      )}
     </Spin>
   );
 }

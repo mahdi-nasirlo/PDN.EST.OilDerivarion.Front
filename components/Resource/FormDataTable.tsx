@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {FormType} from "../FormBuilder";
-import {TableColumnsType} from "antd/lib";
-import {Button, Table} from "antd";
+import React, { useState } from 'react';
+import { FormType } from "../FormBuilder";
+import { TableColumnsType } from "antd/lib";
+import { Button, Table } from "antd";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
-import {addIndexToData} from '../../lib/addIndexToData';
+import { addIndexToData } from '../../lib/addIndexToData';
 import EditModal from "./EditModal";
 
 interface PropType {
@@ -60,9 +60,6 @@ const FormDataTable = (props: PropType) => {
 
     }
 
-    console.log(props)
-
-
     return (
         <>
             <Table
@@ -70,7 +67,7 @@ const FormDataTable = (props: PropType) => {
                 dataSource={addIndexToData(props?.records as any || [])}
                 pagination={false}
             />
-            <EditModal setRecord={setOpen} record={open} schema={props.schema}/>
+            <EditModal setOpen={setOpen} open={open} schema={props.schema} />
         </>
     );
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Modal} from "antd";
-import FormBuilder, {FormType} from "../FormBuilder";
+import { Modal } from "antd";
+import FormBuilder, { FormType } from "../FormBuilder";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 
-const EditModal = ({record, setRecord, schema}: {
-    record?: any,
+const EditModal = ({ open, setOpen, schema }: {
+    open?: any,
     schema: FormType,
-    setRecord: (arg: any) => void
+    setOpen: (arg: any) => void
 }) => {
 
     const formProvider = useControlFormBuilder()
@@ -14,19 +14,19 @@ const EditModal = ({record, setRecord, schema}: {
     return (
         <Modal
             width={800}
-            onCancel={() => setRecord(undefined)}
+            onCancel={() => setOpen(undefined)}
             title="ویرایش اطلاعات"
-            open={record !== undefined}
+            open={open !== undefined}
             footer={false}
         >
             <FormBuilder
                 key={1}
                 item={schema}
-                initialValues={record}
+                initialValues={open}
                 title={false}
                 onSet={(data, formID) => {
-                    formProvider.onUpdateMany(data, formID, record?.Row);
-                    setRecord(undefined)
+                    formProvider.onUpdateMany(data, formID, open?.Row);
+                    setOpen(undefined)
                 }}
             />
         </Modal>

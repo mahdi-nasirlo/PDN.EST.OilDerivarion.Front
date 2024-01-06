@@ -258,44 +258,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyNationalCode"
                 label={
                   personTypeStatus === null
-                    ? "کد ملی / شناسه ملی"
+                    ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
                     ? "شناسه ملی"
-                    : "کد ملی"
+                    : "شماره ملی"
                 }
                 rules={[
                   {
-                    validator: (_, value) => {
-                      if (
-                        value &&
-                        personTypeStatus === 2 &&
-                        value.length === 11
-                      ) {
-                        return Promise.resolve();
-                      }
-
-                      if (
-                        value &&
-                        personTypeStatus === 1 &&
-                        value.length === 10
-                      ) {
-                        return Promise.resolve();
-                      }
-
+                    validator: async (_, value) => {
                       if (!value) {
-                        return Promise.reject();
+                        return Promise.reject(
+                          new Error("لطفا مقدار را وارد کنید")
+                        );
                       }
-
-                      if (value && personTypeStatus === 1) {
-                        return Promise.reject("کد ملی نامعتبر است");
+                      if (personTypeStatus === 1 && value.length !== 10) {
+                        return Promise.reject(
+                          new Error("شماره ملی باید 10 رقم باشد")
+                        );
                       }
-
-                      if (value && personTypeStatus === 2) {
-                        return Promise.reject("شناسه ملی باید 11 رقم باشد");
+                      if (personTypeStatus === 2 && value.length !== 11) {
+                        return Promise.reject(
+                          new Error("شناسه ملی باید 11 رقم باشد")
+                        );
                       }
+                      return Promise.resolve();
                     },
                   },
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
                 ]}
               >
                 <Input

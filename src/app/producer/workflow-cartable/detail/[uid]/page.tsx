@@ -128,7 +128,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                     {
                       pattern: /^[0-9]{10}$/,
-                      message: " کدملی نامتعبر است",
+                      message: " کدملی نامعتبر است",
                     },
                   ]}
                 >

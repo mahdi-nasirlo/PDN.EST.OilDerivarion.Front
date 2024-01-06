@@ -92,7 +92,7 @@ export default function CreatorProduction() {
               name="currentCEONationalCode"
               label="شماره ملی"
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   pattern: /^[0-9]{10}$/,
                   message: "شماره ملی نامعتبر است",

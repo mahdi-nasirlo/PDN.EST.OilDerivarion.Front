@@ -18,12 +18,11 @@ export const routDictionary: Items = {
   },
   // start producer panel
   producer: {
-    title: "پنل تولید کننده",
+    title: "خانه",
     href: "/producer",
   },
-  "submit-applicant":{
-    title:"ثبت نام اولیه متقاضی"
-
+  "submit-applicant": {
+    title: "ثبت نام اولیه متقاضی",
   },
   "request-list": {
     title: "لیست درخواست ها",
@@ -64,11 +63,29 @@ export const routDictionary: Items = {
   "contact-info": {
     title: "اطلاعات تماس",
   },
-  "workflow-cartable":{
-    title:"کارتابل"
+  "workflow-cartable": {
+    title: "کارتابل",
   },
-  "visit-form": {
-    title: "اطلاعات فرم بازدید",
+  "container-product": {
+    title: "اطلاعات مخازن محصول",
+  },
+  "container-info": {
+    title: "اطلاعات مخازن مواد اولیه",
+  },
+  "ractore-info": {
+    title: "مشخصات راکتور",
+  },
+  "slice-produce": {
+    title: "خط تولید برش گیری",
+  },
+  "distillation-tower": {
+    title: "مشخصات برج تقطیر",
+  },
+  sweetening: {
+    title: "روش شیرین سازی",
+  },
+  "ractore-prompter": {
+    title: "تجهیزات شیرین سازی",
   },
   // end producer panel
 
@@ -83,8 +100,8 @@ export const routDictionary: Items = {
   "lab-results-list": {
     title: "نتایج آزمایشگاه",
   },
-  "main-info-producer":{
-    title:"اطلاعات اصلی تولید کننده"
+  "main-info-producer": {
+    title: "اطلاعات اصلی تولید کننده",
   },
   // end manufacturer panel
 

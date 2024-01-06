@@ -98,7 +98,7 @@ function CategoryForm({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   validator(_, value) {
                     const isInteger = Number.isInteger(parseFloat(value));

@@ -106,10 +106,23 @@ export default function CreateModal({
                 name="nationalCode"
                 label="شماره ملی / کد اتباع"
                 rules={[
-                  { required: true },
+                  { required: true, message: "لطفاً مقدار را وارد کنید" },
                   {
-                    pattern: /^[0-9]{10}$/,
-                    message: "شماره ملی نامعتبر است",
+                    validator(_, value) {
+                      const inputValue = value.replace(/[^0-9]/g, '');
+                      const len = inputValue.length
+                      const NationalCode = /^(?!(\d)\1{9})\d{10}$/.test(inputValue);
+                      const CitizenCode = /^[0-9]{12}$/.test(inputValue);
+
+                      if (len === 10 && !NationalCode) {
+                        return Promise.reject("شناسه ملی نامعتبر است");
+                      } else if (len === 12 && !CitizenCode) {
+                        return Promise.reject("کد اتباع 12 رقمی است");
+                      } else if (len !== 10 && len !== 12) {
+                        return Promise.reject("لطفاً شناسه ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید");
+                      }
+                      return Promise.resolve();
+                    },
                   },
                 ]}
               >
@@ -120,6 +133,8 @@ export default function CreateModal({
                 />
               </Form.Item>
             </Col>
+
+
             <Col xs={24} md={12}>
               <Form.Item
                 name="birthDatePersian"
@@ -142,7 +157,7 @@ export default function CreateModal({
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </Modal >
     </>
   );
 }

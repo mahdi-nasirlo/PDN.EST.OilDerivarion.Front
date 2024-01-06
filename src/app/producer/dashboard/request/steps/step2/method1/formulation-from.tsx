@@ -100,9 +100,9 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 0,
+                  min: 1,
                   max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
                 },
               ]}
             >
@@ -127,9 +127,9 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 0,
+                  min: 1,
                   max: 99,
-                  message: "لطفاً مقداری بین 0 تا 99 وارد کنید",
+                  message: "لطفاً مقداری بین 1 تا 99 وارد کنید",
                 },
               ]}
             >
@@ -258,10 +258,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyNationalCode"
                 label={
                   personTypeStatus === null
-                    ? "شماره ملی / شناسه ملی"
+                    ? "کد ملی / شناسه ملی"
                     : personTypeStatus === 2
                     ? "شناسه ملی"
-                    : "شماره ملی"
+                    : "کد ملی"
                 }
                 rules={[
                   {
@@ -287,7 +287,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (value && personTypeStatus === 1) {
-                        return Promise.reject("شماره ملی نامعتبر است");
+                        return Promise.reject("کد ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {

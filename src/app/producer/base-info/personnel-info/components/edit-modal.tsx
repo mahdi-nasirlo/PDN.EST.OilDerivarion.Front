@@ -97,7 +97,7 @@ export default function EditModal({
                 name="name"
                 label="نام"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -109,7 +109,7 @@ export default function EditModal({
                 name="lastName"
                 label="نام خانوادگی"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -123,7 +123,7 @@ export default function EditModal({
                 name="nationalCode"
                 label="شماره ملی / کد اتباع"
                 rules={[
-                  { required: true },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     pattern: /^[0-9]{10}$/,
                     message: "شماره ملی نامعتبر است",
@@ -138,7 +138,11 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item name="birthDatePersian" label="تاریخ تولد">
+              <Form.Item
+                name="birthDatePersian"
+                label="تاریخ تولد"
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
+              >
                 <CustomDatePicker />
               </Form.Item>
             </Col>

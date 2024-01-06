@@ -103,7 +103,7 @@ export default function EditModal({
                 name="name"
                 label="نام سند"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -114,7 +114,7 @@ export default function EditModal({
               <Form.Item
                 name="number"
                 label="شماره سند"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
@@ -139,7 +139,7 @@ export default function EditModal({
               <Form.Item
                 name="issueDatePersian"
                 label="تاریخ صدور"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -150,7 +150,7 @@ export default function EditModal({
               <Form.Item
                 name="expirationDatePersian"
                 label="تاریخ انقضاء"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -159,7 +159,7 @@ export default function EditModal({
               <Form.Item
                 name="exporter"
                 label="صادرکننده"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
                 <Input
                   className="w-full rounded-lg"

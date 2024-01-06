@@ -87,7 +87,7 @@ export default function CreateModal({
                 name="name"
                 label="نام سند"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -98,7 +98,7 @@ export default function CreateModal({
               <Form.Item
                 name="number"
                 label="شماره سند"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
@@ -109,7 +109,7 @@ export default function CreateModal({
               <Form.Item
                 name="licenseTypeId"
                 label="نوع مجوز"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
               >
                 <Select
                   showSearch
@@ -142,7 +142,7 @@ export default function CreateModal({
               <Form.Item
                 name="issueDatePersian"
                 label="زمان صدور"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -151,7 +151,7 @@ export default function CreateModal({
               <Form.Item
                 name="expirationDatePersian"
                 label="تاریخ انقضاء"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >
                 <CustomDatePicker />
               </Form.Item>

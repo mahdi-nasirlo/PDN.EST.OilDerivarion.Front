@@ -70,7 +70,7 @@ export default function VisitTimeModal(
                         <Col xs={24} md={8}>
                             <Form.Item
                                 name='test1'
-                                rules={[{ required: true }]}
+                                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
                                 label='زمان بازدید احتمالی اول'
                             >
                                 <CustomDatePicker />
@@ -79,7 +79,7 @@ export default function VisitTimeModal(
                         <Col xs={24} md={8}>
                             <Form.Item
                                 name='test2'
-                                rules={[{ required: true }]}
+                                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
                                 label='زمان بازدید احتمالی دوم'
                             >
                                 <CustomDatePicker />
@@ -88,7 +88,7 @@ export default function VisitTimeModal(
                         <Col xs={24} md={8}>
                             <Form.Item
                                 name='test3'
-                                rules={[{ required: true }]}
+                                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
                                 label='زمان بازدید احتمالی سوم'
                             >
                                 <CustomDatePicker />

@@ -6,7 +6,7 @@ function CustomRadioGroup(
         { label: string, value: any, options: any, onChange: any, name: string, data?: any }) {
     return (
         <Form.Item
-            rules={[{ required: true, message: "این فیلد اجباری است" }]}
+            rules={[{ required: true, message: "لطفا انتخاب کنید" }]}
             label={label}
             name={name}
         >

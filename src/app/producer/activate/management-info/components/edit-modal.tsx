@@ -111,7 +111,7 @@ export default function EditModal({
                 name="name"
                 label="نام"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -123,7 +123,7 @@ export default function EditModal({
                 name="lastName"
                 label="نام خانوادگی"
                 rules={[
-                  { required: true, message: "این فیلد اجباری است" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   { type: "string", message: "باید به صورت متن باشد" },
                 ]}
               >
@@ -155,7 +155,7 @@ export default function EditModal({
               <Form.Item
                 name="birthDate"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "تاریخ تولد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -166,7 +166,7 @@ export default function EditModal({
               <Form.Item
                 name="companyRoleId"
                 label="سمت"
-                rules={[{ required: true, message: "این فیلد اجباری است" }]}
+                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
               >
                 <Select
                   showSearch

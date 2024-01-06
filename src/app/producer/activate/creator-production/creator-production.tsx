@@ -64,7 +64,7 @@ export default function CreatorProduction() {
               rules={[
                 {
                   required: true,
-                  message: "این فیلد اجباری است",
+                  message: "لطفا مقدار را وارد کنید"
                 },
               ]}
             >
@@ -78,7 +78,7 @@ export default function CreatorProduction() {
               rules={[
                 {
                   required: true,
-                  message: "این فیلد اجباری است",
+                  message: "لطفا مقدار را وارد کنید"
                 },
               ]}
             >
@@ -113,7 +113,7 @@ export default function CreatorProduction() {
               rules={[
                 {
                   required: true,
-                  message: "این فیلد اجباری است",
+                  message: "لطفا مقدار را وارد کنید"
                 },
               ]}
             >
@@ -129,7 +129,7 @@ export default function CreatorProduction() {
               rules={[
                 {
                   required: true,
-                  message: "این فیلد اجباری است",
+                  message: "لطفا مقدار را انتخاب کنید"
                 },
               ]}
             >

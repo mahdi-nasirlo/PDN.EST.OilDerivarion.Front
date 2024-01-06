@@ -80,7 +80,7 @@ export default function ContactInfo() {
             <Form.Item
               name="factoryStateId"
               label="استان"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch
@@ -92,7 +92,7 @@ export default function ContactInfo() {
                 size="large"
                 placeholder="انتخاب کنید"
                 onChange={(e) => state({ stateId: e })}
-                // onChange={handleFactoryProvinceChange}
+              // onChange={handleFactoryProvinceChange}
               />
             </Form.Item>
           </Col>
@@ -100,7 +100,7 @@ export default function ContactInfo() {
             <Form.Item
               name="factoryCityId"
               label="شهرستان"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch
@@ -128,7 +128,7 @@ export default function ContactInfo() {
             <Form.Item
               name="factoryAddressDetail"
               label="جزئیات آدرس"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -142,7 +142,7 @@ export default function ContactInfo() {
             <Form.Item
               name="centralOfficeStateId"
               label="استان"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch
@@ -161,7 +161,7 @@ export default function ContactInfo() {
             <Form.Item
               name="centralOfficeCityId"
               label="شهرستان"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch
@@ -186,7 +186,7 @@ export default function ContactInfo() {
             <Form.Item
               name="centralOfficeAddressDetail"
               label="جزئیات آدرس"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>

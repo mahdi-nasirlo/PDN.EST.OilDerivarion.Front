@@ -1,8 +1,8 @@
 import React from "react";
-import DatePicker, {DayValue,} from "@hassanmojab/react-modern-calendar-datepicker";
+import DatePicker, { DayValue, } from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import {Input} from "antd";
-import {jalaliToGregorian} from "shamsi-date-converter";
+import { Input } from "antd";
+import { jalaliToGregorian } from "shamsi-date-converter";
 
 interface DateProps {
   year?: MonthType;
@@ -10,15 +10,15 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomDatePicker({value = {}, onChange}: { value?: any, onChange?: (e: any) => void }) {
+export default function CustomDatePicker({ value = {}, onChange }: { value?: any, onChange?: (e: any) => void }) {
 
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
-        className={" w-full"} // props.className +
+      className={" w-full"} // props.className +
       readOnly
       ref={ref}
-        value={typeof value == "string" ? value : ""}
+      value={typeof value == "string" ? value : ""}
       placeholder="انتخاب کنید"
     />
   );
@@ -33,12 +33,12 @@ export default function CustomDatePicker({value = {}, onChange}: { value?: any, 
   return (
     <>
       <DatePicker
-          locale="fa"
-          value={stringToDate(value as string) as DayValue}
+        locale="fa"
+        value={stringToDate(value as string) as DayValue}
         onChange={change as any}
-        inputPlaceholder="Select a date"
+        inputPlaceholder="انتخاب کنید"
         shouldHighlightWeekends
-          renderInput={renderCustomInput}
+        renderInput={renderCustomInput}
       />
     </>
   );
@@ -59,7 +59,7 @@ type MonthType = number;
 type DayType = number;
 
 function stringToDate(dateString: string): DateProps | null {
-  
+
   if (!dateString || typeof dateString !== "string") return null;
 
   const parts = dateString.split("/");

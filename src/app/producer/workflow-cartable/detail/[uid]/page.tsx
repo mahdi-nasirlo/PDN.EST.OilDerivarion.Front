@@ -128,7 +128,7 @@ export default function Home(props: PropType) {
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                     {
                       pattern: /^[0-9]{10}$/,
-                      message: " کدملی نامتعبر است",
+                      message: " کدملی نامعتبر است",
                     },
                   ]}
                 >
@@ -166,7 +166,7 @@ export default function Home(props: PropType) {
               </Col>
               <Col xs={24} md={12}>
                 <Form.Item
-                  name="stateId"
+                  name="stateName"
                   label="استان"
                   rules={[
                     { required: true, message: "لطفا مقدار را وارد کنید" },
@@ -214,7 +214,7 @@ export default function Home(props: PropType) {
               </Col>
               <Col xs={24} md={12}>
                 <Form.Item
-                  name="licenseValidityDate"
+                  name="licenseValidityDatePersin"
                   label="تاریخ اعتبار مجوز"
                   rules={[
                     { required: true, message: "لطفا مقدار را وارد کنید" },
@@ -266,15 +266,13 @@ export default function Home(props: PropType) {
               trigger={confirmRequest.handleTrigger}
             /> */}
             {/*<WorkflowDataViewer loading={isLoading} data={data as any}/>*/}
-            <Form onFinish={onFinish} form={commentForm}>
+            <Form onFinish={onFinish} form={commentForm} layout="vertical">
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item
                     rules={[
-                      { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                      { required: true, message: "لطفا مقدار را وارد کنید" },
                     ]}
-                    wrapperCol={{ span: 24 }}
-                    labelCol={{ span: 24 }}
                     name="description"
                     label="توضیحات"
                   >

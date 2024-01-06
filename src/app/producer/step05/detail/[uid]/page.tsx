@@ -73,12 +73,10 @@ const Page = (props: { params: { uid: string } }) => {
       <CalendarTime data={data?.calendar as any} />
       {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
       {data && <Divider /> && (
-        <Form onFinish={handleOnFinish} form={form}>
+        <Form onFinish={handleOnFinish} form={form} layout="vertical">
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                wrapperCol={{ span: 24 }}
-                labelCol={{ span: 24 }}
                 rules={[
                   { required: true, message: "لطفا تاریخ را انتخاب کنید" },
                 ]}
@@ -93,8 +91,6 @@ const Page = (props: { params: { uid: string } }) => {
             <Col xs={24} md={24}>
               <Form.Item
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                wrapperCol={{ span: 24 }}
-                labelCol={{ span: 24 }}
                 name="description"
                 label="توضیحات"
               >

@@ -116,19 +116,19 @@ const items: MenuProps["items"] = [
       // ),
       getMenuItem(
         <Link href={"/producer/step12/list"}>
-          بررسی نمونه برداری انجام شده1
+          بررسی گزارش بازدید-کارشناس نفت استان
         </Link>,
         "/producer/step12/list"
       ),
       getMenuItem(
         <Link href={"/producer/step13/list"}>
-          بررسی نمونه برداری انجام شده2
+          بررسی گزارش بازدید-کارشناس صمت استان
         </Link>,
         "/producer/step13/list"
       ),
       getMenuItem(
         <Link href={"/producer/step14/list"}>
-          بررسی نمونه برداری انجام شده3
+          بررسی گزارش بازدید-کارشناس استاندارد استان
         </Link>,
         "/producer/step14/list"
       ),

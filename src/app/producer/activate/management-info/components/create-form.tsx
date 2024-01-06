@@ -65,7 +65,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               name="name"
               label="نام"
               rules={[
-                { required: true, message: "این فیلد اجباری است" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 { type: "string", message: "باید به صورت متن باشد" },
               ]}
             >
@@ -77,7 +77,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               name="lastName"
               label="نام خانوادگی"
               rules={[
-                { required: true, message: "این فیلد اجباری است" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 { type: "string", message: "باید به صورت متن باشد" },
               ]}
             >
@@ -91,10 +91,10 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               name="nationalCode"
               label="شماره ملی"
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "شماره ملی نامتعبر است",
+                  message: "شماره ملی نامعتبر است",
                 },
               ]}
             >
@@ -109,7 +109,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="birthDatePersian"
               label="تاریخ تولد"
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
             >
               <CustomDatePicker />
             </Form.Item>
@@ -120,7 +120,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="companyRoleId"
               label="سمت"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch

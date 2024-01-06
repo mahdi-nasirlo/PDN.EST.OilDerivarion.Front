@@ -37,6 +37,7 @@ const Index = () => {
       </Typography>
 
       <Form
+        layout="vertical"
         form={form}
         disabled={
           requestDetailProduct.create.isLoading || processController.isMutating

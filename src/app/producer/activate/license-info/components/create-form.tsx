@@ -53,7 +53,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
               name="name"
               label="نام سند"
               rules={[
-                { required: true, message: "این فیلد اجباری است" },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 { type: "string", message: "باید به صورت متن باشد" },
               ]}
             >
@@ -64,7 +64,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="number"
               label="شماره سند"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -75,7 +75,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="licenseTypeId"
               label="نوع مجوز"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
                 showSearch
@@ -93,7 +93,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
             <Form.Item
               name="exporter"
               label="صادر کننده"
-              rules={[{ required: true, message: "این فیلد اجباری است" }]}
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
               <Input
                 className="w-full rounded-lg"
@@ -106,12 +106,12 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item name="issueDatePersian" label="زمان صدور">
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
             <Form.Item name="expirationDatePersian" label="تاریخ انقضاء">
-              <CustomDatePicker/>
+              <CustomDatePicker />
             </Form.Item>
           </Col>
         </Row>

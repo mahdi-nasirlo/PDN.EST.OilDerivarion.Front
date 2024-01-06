@@ -107,7 +107,7 @@ export default function SubmitForm() {
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     pattern: /^[0-9]{10}$/,
-                    message: " کدملی نامتعبر است",
+                    message: " کدملی نامعتبر است",
                   },
                 ]}
               >
@@ -235,6 +235,7 @@ export default function SubmitForm() {
                 label="شرح درخواست"
               >
                 <Input.TextArea
+                  maxLength={255}
                   style={{ height: 120, resize: "none" }}
                   placeholder="وارد کنید"
                 />

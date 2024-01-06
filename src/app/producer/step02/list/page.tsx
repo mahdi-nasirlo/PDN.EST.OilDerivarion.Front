@@ -10,6 +10,7 @@ import { apiUrl } from "../../../../../Constants/apiUrl";
 import { Button, Space, Tooltip, Typography } from "antd";
 import Link from "next/link";
 import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
+import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 
 export default function Home() {
 
@@ -17,50 +18,10 @@ export default function Home() {
     apiUrl: apiUrl.WorkFlowRequest.step02.getAll.url,
     columns: [
       {
-        title: "ردیف",
-        dataIndex: "Row",
-        key: "1",
-        width: "5%",
-      },
-      {
-        title: "نام متقاضی",
-        dataIndex: "userDescription",
-        key: "2",
-      },
-      {
-        title: "نام محصولات",
-        dataIndex: "productsName",
-        key: "3",
-        render: (_, record) => (
-          <Tooltip
-            placement="top"
-            title={<Typography>{record.productsName}</Typography>}
-          >
-            <Typography.Text
-              className=" max-w-[250px]"
-              ellipsis={true}
-              style={{ width: "45px !important" }}
-            >
-              {record.productsName}
-            </Typography.Text>
-          </Tooltip>
-        ),
-      },
-      // {
-      //   title: "روش تولید",
-      //   dataIndex: "productionMethodName",
-      //   key: "4",
-      // },
-      {
         title: "وضعیت",
         dataIndex: "status",
         key: "5",
         render(_, record) { return <WorkFlowStatusColumn record={record} /> }
-      },
-      {
-        title: "تاریخ ثبت درخواست",
-        dataIndex: "startTimePersian",
-        key: "5",
       },
       {
         title: "عملیات",
@@ -70,11 +31,8 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <Button type="link" className="text-secondary-500 font-bold">
-              <Link href={"/producer/step02/detail/" + record.taskId}>
-                مشاهده اطلاعات
-              </Link>
-            </Button>
+            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step02/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            </VisitInfo>
           </Space>
         ),
       },

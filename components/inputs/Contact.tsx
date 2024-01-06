@@ -1,5 +1,5 @@
-import React, { Children } from "react";
-import { Form, Select } from "antd";
+import React from "react";
+import { Form } from "antd";
 import { FormItemProps } from "antd/lib";
 
 const ContactInputs = (props: FormItemProps) => {
@@ -16,7 +16,9 @@ const ContactInputs = (props: FormItemProps) => {
       name={props.name}
       label={props.label}
       rules={[
-        { required: true, message: "این فیلد اجباری است" },
+        {
+          required: true, message: "لطفا مقدار را وارد کنید"
+        },
         { validator: validateIranianMobile },
       ]}
     >

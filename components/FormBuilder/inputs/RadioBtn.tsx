@@ -1,9 +1,9 @@
 import React from 'react';
-import {FormBuilderInputType} from "../index";
-import {RadioButtonProps} from "antd/lib/radio/radioButton";
+import { FormBuilderInputType } from "../index";
+import { RadioButtonProps } from "antd/lib/radio/radioButton";
 import FormItem from "../FormItem";
-import {Radio} from "antd";
-import {Rule} from "rc-field-form/es/interface";
+import { Radio } from "antd";
+import { Rule } from "rc-field-form/es/interface";
 
 interface PropsType {
     data: FormBuilderInputType
@@ -16,7 +16,8 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
 
     const rules: Rule[] = [
         {
-            required: false
+            required: true,
+            message: 'لطفا انتخاب کنید'
         }
     ]
 
@@ -43,10 +44,10 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
             >
                 {props.data.FormFieldDetails?.map((value, index) => {
                     return (<>
-                        <Radio.Button style={{width: `${widthPercent}%`}} key={index} value={value.Text}>
-                        <span>
-                            {value.Text}
-                        </span>
+                        <Radio.Button style={{ width: `${widthPercent}%` }} key={index} value={value.Text}>
+                            <span>
+                                {value.Text}
+                            </span>
                         </Radio.Button>
                     </>)
                 })}

@@ -5,7 +5,7 @@ import React from "react";
 
 export interface WorkflowDataTableContextType {
     apiUrl: string,
-    columns: ColumnsType<any>
+    columns: ColumnsType<{CanEdit: boolean, Status: boolean, TaskId: string}>
 
 }
 

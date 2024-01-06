@@ -1,25 +1,25 @@
 import React from 'react';
-import {Divider, Spin, Typography} from "antd";
-import FormBuilder, {FormSchemaType} from "../FormBuilder";
+import { Divider, Spin, Typography } from "antd";
+import FormBuilder, { FormSchemaType } from "../FormBuilder";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 import useFormRequest from "../FormBuilder/hooks/useFormRequest";
 import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
 import FormDataTable from "./FormDataTable";
 
 
-const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many" | "single", }) => {
+const Index = ({ categoryID, type = "single" }: { categoryID: string, type?: "many" | "single", }) => {
 
     const formData = useFormRequest(categoryID)
 
-    if (formData.isLoading) {
-        return <Spin/>
-    }
-
     try {
 
-        if (formData.data === undefined || formData.data === null || formData.data.schema === null) return <Typography>دیتایی
-            وجود
-            ندارد</Typography>
+        if (formData.isLoading) return <Spin spinning={formData.isLoading} />
+
+        if (
+            formData.data === undefined ||
+            formData.data === null ||
+            formData.data.schema === null
+        ) return <Typography>دیتایی وجود ندارد</Typography>
 
         let schema: FormSchemaType[] = JSON.parse(formData.data.schema.json)
 
@@ -27,12 +27,12 @@ const Index = ({categoryID, type = "single"}: { categoryID: string, type?: "many
 
         const records = JSON.parse(formData.data.records)
 
-        console.log(records)
-
         return (
             <>
                 <FormBuilderProvider initialValues={records} type={type} formData={formData}>
-                    <RenderForms schema={schema[0]} records={records} type="many"/>
+                    <Spin spinning={formData.isLoading}>
+                        <RenderForms schema={schema[0]} records={records} type="many" />
+                    </Spin>
                 </FormBuilderProvider>
             </>
         );
@@ -53,7 +53,7 @@ interface ComponentProps {
     type?: "single" | "many"
 }
 
-const RenderForms = ({schema, records, type = "single", loading = false, title = false}: ComponentProps) => {
+const RenderForms = ({ schema, records, type = "single", loading = false, title = false }: ComponentProps) => {
 
     const formProvider = useControlFormBuilder()
 
@@ -69,12 +69,12 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
 
             return <>
                 <FormBuilder key={index} item={Form} title={true}
-                             onSet={formProvider.onSetMany}/>
+                    onSet={formProvider.onSetMany} />
                 <div className="mt-8">
-                    <FormDataTable schema={Form} records={initialValues} delete={true}/>
+                    <FormDataTable schema={Form} records={initialValues} delete={true} />
                 </div>
                 {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
-                    <Divider style={{margin: "50px 0"}}/>}
+                    <Divider style={{ margin: "50px 0" }} />}
             </>
         }
 
@@ -89,7 +89,7 @@ const RenderForms = ({schema, records, type = "single", loading = false, title =
                     initialValues={initialValues}
                 />
                 {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
-                    <Divider style={{margin: "30px 0"}}/>}
+                    <Divider style={{ margin: "30px 0" }} />}
             </>
         }
 

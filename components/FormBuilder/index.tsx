@@ -1,13 +1,13 @@
 "use client"
 
-import React, {useEffect} from 'react';
-import {Button, Col, Form, Row, Typography} from "antd";
-import {useForm} from "antd/es/form/Form";
+import React, { useEffect } from 'react';
+import { Button, Col, Divider, Form, Row, Typography } from "antd";
+import { useForm } from "antd/es/form/Form";
 import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
-import {updatedObject} from "../../utils/method";
+import { updatedObject } from "../../utils/method";
 
 export interface FormBuilderInputType {
     Name: string,
@@ -92,14 +92,20 @@ const RenderInputs = (props: {
             form.setFieldsValue(updatedObject(props.initialValues))
 
         }
-    }, [])
+    }, [props.initialValues])
+
 
     return <>
         <Form form={form} onFinish={values => props.onSet(values, props.formID)}
-              className="mt-4">
+            className="mt-4">
             <Row gutter={[16, 10]}>
-                {props?.item?.map((value, index) => <RenderInput key={index} item={value}/>)}
+                {props?.item
+                    ?.sort((a, b) => a.Counting_Position - b.Counting_Position)
+                    .map((value) => (
+                        <RenderInput key={value.Counting_Position} item={value} />
+                    ))}
             </Row>
+            <Divider />
             {props.item.length > 0 && <div className="flex justify-end mt-5">
                 <Button htmlType="submit" type="primary">
                     ذخیره
@@ -109,22 +115,22 @@ const RenderInputs = (props: {
     </>
 }
 
-const RenderInput = ({item}: { item: FormBuilderInputType }) => {
+const RenderInput = ({ item }: { item: FormBuilderInputType }) => {
 
     let currentInput
 
     switch (item.FieldType) {
         case "textInput":
-            currentInput = <TextInput data={item} placeholder={item?.Placeholder || "وارد کنید"}/>;
+            currentInput = <TextInput data={item} placeholder={item?.Placeholder || "وارد کنید"} />;
             break
         case "inputNubmer":
-            currentInput = <InputNumber data={item}/>
+            currentInput = <InputNumber data={item} />
             break
         case "select":
-            currentInput = <Select data={item}/>
+            currentInput = <Select data={item} />
             break
         case "radioBtn":
-            currentInput = <RadioBtn data={item}/>
+            currentInput = <RadioBtn data={item} />
             break
         default:
             currentInput = <Typography>فیلد مورد نظر پشتیبانی نمی شود</Typography>

@@ -127,7 +127,7 @@ export default function CreateModal({
               <Form.Item
                 name="exporter"
                 label="صادر کننده"
-                rules={[{ required: true }]}
+                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
                 <Input
                   className="w-full rounded-lg"

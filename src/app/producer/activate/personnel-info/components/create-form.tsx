@@ -79,7 +79,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
                 { required: true },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "شماره ملی نامتعبر است",
+                  message: "شماره ملی نامعتبر است",
                 },
               ]}
             >

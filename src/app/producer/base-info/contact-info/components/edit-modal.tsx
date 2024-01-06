@@ -45,9 +45,10 @@ export default function EditModal({
   );
 
   const [ProvinceCity, SetProvinceCity] = useState();
+  const [ProvinceCity1, SetProvinceCity1] = useState();
 
   const handleFactoryProvinceChange = (value: any) => {
-    SetProvinceCity(value);
+    SetProvinceCity1(value);
     form.setFieldValue("factoryCityId", null);
   };
 
@@ -58,6 +59,10 @@ export default function EditModal({
 
   const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
     ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+  const { data: City, isLoading: ldCity } = useSWR(
+    ["/BaseInfo/CityGetAll", { stateId: ProvinceCity1 }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -109,7 +114,9 @@ export default function EditModal({
               <Form.Item
                 name="factoryStateId"
                 label="استان"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch
@@ -128,14 +135,16 @@ export default function EditModal({
               <Form.Item
                 name="factoryCityId"
                 label="شهرستان"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldCityGetAll}
-                  options={sortByIndex(CityGetAll, "Name")}
+                  loading={ldCity}
+                  options={sortByIndex(City, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
@@ -167,7 +176,9 @@ export default function EditModal({
               <Form.Item
                 name="centralOfficeStateId"
                 label="استان"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch
@@ -186,7 +197,9 @@ export default function EditModal({
               <Form.Item
                 name="centralOfficeCityId"
                 label="شهرستان"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch

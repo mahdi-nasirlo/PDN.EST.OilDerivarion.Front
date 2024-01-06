@@ -258,10 +258,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 name="materialSupplyNationalCode"
                 label={
                   personTypeStatus === null
-                    ? "شماره ملی / شناسه ملی"
+                    ? "کد ملی / شناسه ملی"
                     : personTypeStatus === 2
                     ? "شناسه ملی"
-                    : "شماره ملی"
+                    : "کد ملی"
                 }
                 rules={[
                   {
@@ -287,7 +287,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       }
 
                       if (value && personTypeStatus === 1) {
-                        return Promise.reject("شماره ملی نامعتبر است");
+                        return Promise.reject("کد ملی نامعتبر است");
                       }
 
                       if (value && personTypeStatus === 2) {

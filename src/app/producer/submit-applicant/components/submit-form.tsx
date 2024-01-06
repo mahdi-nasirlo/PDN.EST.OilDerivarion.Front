@@ -235,6 +235,7 @@ export default function SubmitForm() {
                 label="شرح درخواست"
               >
                 <Input.TextArea
+                  maxLength={255}
                   style={{ height: 120, resize: "none" }}
                   placeholder="وارد کنید"
                 />

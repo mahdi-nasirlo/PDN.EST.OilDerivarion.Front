@@ -1,8 +1,13 @@
 import React from 'react';
-import {Alert, Spin} from "antd";
-import {z} from "zod";
-import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
-import {RenderItemType} from "./RenderItemType";
+import { Alert, Button, Col, Divider, Row, Space, Spin, Typography } from "antd";
+import { z } from "zod";
+import { ApiTabType } from "../../hooks/workFlowRequest/useGetStep";
+import { RenderItemType } from "./RenderItemType";
+import useGetAllHistory from '../../hooks/workFlowRequest/useGetAllHistory';
+import { Steps } from 'antd/lib';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import WorkFlowSteps from './WorkFlowSteps';
 
 interface PropsType {
     uid: string,
@@ -12,28 +17,32 @@ interface PropsType {
 
 const Index = (props: PropsType) => {
 
-    if (props.loading) {
-        return <Spin/>
+    const logs = useGetAllHistory(props.uid)
+
+    if (props.loading && logs.isLoading) {
+        return <Spin />
     }
 
     return (
         <>
-            <RenderItems data={props.data} uid={props.uid}/>
+            <WorkFlowSteps logs={logs.data || []} />
+
+            <RenderItems data={props.data} uid={props.uid} />
         </>
     );
 };
 
 
-const RenderItems = ({data, uid}: { data: ApiTabType[] | undefined, uid: string }) => {
+const RenderItems = ({ data, uid }: { data: ApiTabType[] | undefined, uid: string }) => {
 
 
     if (!data || !Array.isArray(data)) {
-        return <Alert message="نوع داده صحیح نمی باشد" type="error" className="text-right border border-red-500"/>
+        return <Alert message="نوع داده صحیح نمی باشد" type="error" className="text-right border border-red-500" />
     }
 
     return data?.map((value, index) => <RenderItemType uid={uid} index={index} type={value.type} key={value.key}
-                                                       url={value.url}
-                                                       name={value.name}/>)
+        url={value.url}
+        name={value.name} />)
 }
 
 export const TabType = z.object({

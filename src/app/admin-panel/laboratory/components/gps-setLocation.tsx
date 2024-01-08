@@ -15,6 +15,7 @@ export default function SetLocation({
   const handleCancelGPS = () => {
     setIsGPSModalVisibleset(false);
     setSelectedLabUid(null);
+    window.location.reload();
   };
 
   return (

@@ -26,7 +26,7 @@ export default function EditModal({
   const {
     trigger: UpdateSetEmployeeMember,
     isMutating: ldUpdateSetEmployeeMember,
-  } = useSWRMutation("/Producer/SetEmployeeMember", mutationFetcher);
+  } = useSWRMutation("/ProducerUser/SetEmployeeMember", mutationFetcher);
 
   const handleConfirmEdit = async (values: any) => {
     values.uid = recordToEdit?.uid;

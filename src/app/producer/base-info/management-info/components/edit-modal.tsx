@@ -22,13 +22,7 @@ export default function EditModal({
   setIsEditModalVisible: any;
 }) {
   const { data: CompanyRoleGetAll, isLoading: ldCompanyRoleGetAll } = useSWR(
-    [
-      "/BaseInfo/CompanyRoleGetAll",
-      {
-        name: null,
-        IsActive: null,
-      },
-    ],
+    ["/BaseInfo/CompanyRoleGetAll", { name: null, IsActive: true }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
@@ -37,7 +31,7 @@ export default function EditModal({
   const [form] = useForm();
 
   const { trigger: UpdateSetMainMember, isMutating: ldUpdateSetMainMember } =
-    useSWRMutation("/Producer/SetMainMember", mutationFetcher);
+    useSWRMutation("/ProducerUser/SetMainMember", mutationFetcher);
 
   const handleConfirmEdit = async (values: any) => {
     values.nationalCode = values.nationalCode.toString();

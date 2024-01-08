@@ -19,7 +19,7 @@ export default function CreateModal({
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
-    "/Producer/SetEmployeeMember",
+    "/ProducerUser/SetEmployeeMember",
     mutationFetcher
   );
 
@@ -42,7 +42,7 @@ export default function CreateModal({
     <>
       <Modal
         width={800}
-        title="افزودن اطلاعات پرسنلی"
+        title="افزودن مدیران تولید"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}

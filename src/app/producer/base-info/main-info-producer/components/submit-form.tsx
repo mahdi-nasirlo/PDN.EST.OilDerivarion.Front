@@ -31,23 +31,16 @@ export default function SubmitForm() {
 
   const [form] = useForm();
   const { trigger, isMutating } = useSWRMutation(
-    "/WorkFlowCartable/SetStep01",
+    "/Producer/SetBase",
     mutationFetcher
   );
-  const { data, isLoading } = useSWR(
-    "/WorkFlowCartable/GetStep01",
-    listFetcher
-  );
+  const { data, isLoading } = useSWR("/Producer/GetBase", listFetcher);
   const { data: licensce, isLoading: ldlicensce } = useSWR(
     "/BaseInfo/LicenseTypeGetAll",
     listFetcher
   );
   const { data: exporter, isLoading: ldexporter } = useSWR(
     "/BaseInfo/LicenseIssuerTypeGetAll",
-    listFetcher
-  );
-  const { data: state, isLoading: ldstate } = useSWR(
-    "/BaseInfo/StateGetAll",
     listFetcher
   );
 
@@ -82,69 +75,17 @@ export default function SubmitForm() {
       >
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
-            <Form.Item name="firstName" label="نام">
-              <Input disabled size="large" placeholder="وارد کنید" />
+            <Form.Item name="name" label="نام شرکت">
+              <Input disabled size="large" />
             </Form.Item>
           </Col>
           <Col xs={24} md={12}>
-            <Form.Item name="lastName" label="نام خانوادگی">
-              <Input disabled size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="personNationalCode" label="کدملی">
-              <Input
-                disabled
-                type="number"
-                size="large"
-                placeholder="وارد کنید"
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item name="companyName" label="نام شرکت">
-              <Input disabled size="large" placeholder="وارد کنید" />
+            <Form.Item name="nationalCode" label="شناسه ملی شرکت">
+              <Input disabled size="large" />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
-            <Form.Item name="companyNationalCode" label="شناسه ملی شرکت">
-              <Input disabled size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="stateId"
-              label="استان"
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
-              <Select
-                showSearch
-                fieldNames={{ label: "Name", value: "Id" }}
-                // @ts-ignore
-                filterOption={filterOption}
-                loading={ldstate}
-                options={sortByIndex(state, "Name")}
-                size="large"
-                placeholder="انتخاب کنید"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="businessNumber"
-              label="شناسه کسب و کار"
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
           <Col xs={24} md={12}>
             <Form.Item
               name="licenseTypeId"
@@ -158,6 +99,24 @@ export default function SubmitForm() {
                 filterOption={filterOption}
                 loading={ldlicensce}
                 options={sortByIndex(licensce, "Name")}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item
+              name="licenseIssuerTypeId"
+              label="صادر کننده"
+              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            >
+              <Select
+                showSearch
+                fieldNames={{ label: "Name", value: "Id" }}
+                // @ts-ignore
+                filterOption={filterOption}
+                loading={ldexporter}
+                options={sortByIndex(exporter, "Name")}
                 size="large"
                 placeholder="انتخاب کنید"
               />
@@ -184,37 +143,14 @@ export default function SubmitForm() {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[16, 16]}>
+        <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
             <Form.Item
-              name="licenseIssuerTypeId"
-              label="صادر کننده"
+              name="businessNumber"
+              label="شناسه کسب و کار"
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             >
-              <Select
-                showSearch
-                fieldNames={{ label: "Name", value: "Id" }}
-                // @ts-ignore
-                filterOption={filterOption}
-                loading={ldexporter}
-                options={sortByIndex(exporter, "Name")}
-                size="large"
-                placeholder="انتخاب کنید"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={24}>
-            <Form.Item
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              name="requestDescription"
-              label="شرح درخواست"
-            >
-              <Input.TextArea
-                style={{ height: 120, resize: "none" }}
-                placeholder="وارد کنید"
-              />
+              <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>

@@ -4,7 +4,6 @@ import { Button, Col, Divider, Row } from "antd";
 import React, { useContext } from "react";
 import CreateForm from "./components/create-form";
 import useSWR from "swr";
-import { SetEmployeeMember } from "../../../../../interfaces/Base-info";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import DataTable from "./components/data-table";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
@@ -18,24 +17,15 @@ export default function PersonnelInfo() {
     isLoading: ldEmployeeMember,
     mutate,
     isValidating,
-  } = useSWR<{
-    records: SetEmployeeMember[];
-    count: number;
-  }>(["/Producer/GetPageEmployee"], ([url, arg]: [url: string, arg: any]) =>
-    listFetcher(url, {
-      arg: {
-        fromRecord: 0,
-        selectRecord: 10000,
-      },
-    })
-  );
+  } = useSWR(["/ProducerUser/GetAllEmployee"], ([url, arg]: [url: string, arg: any]) =>
+    listFetcher(url, { arg: { fromRecord: 0, selectRecord: 10000 } }));
 
   return (
     <>
       <CreateForm mutate={mutate} />
       <DataTable
         isValidating={isValidating}
-        MainMember={addIndexToData(EmployeeMember?.records)}
+        MainMember={addIndexToData(EmployeeMember)}
         ldMainMember={ldEmployeeMember}
         mutate={mutate}
       />

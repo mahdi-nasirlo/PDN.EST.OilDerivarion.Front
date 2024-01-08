@@ -16,7 +16,7 @@ export default function ReviewDataModalAcceptAgreement(
         setModalVisibleConfirmation(false);
     };
 
-    const { data, isLoading } = useSWR(["/Producer/GetBase"], ([url, arg]: [string, any]) => listFetcher(url, { arg }))
+    const { data, isLoading } = useSWR(["/User/GetCurrentUser"], ([url, arg]: [string, any]) => listFetcher(url, { arg }))
 
     return (
         <>
@@ -48,9 +48,9 @@ export default function ReviewDataModalAcceptAgreement(
                             <Spin size='large' spinning={isLoading}>
                                 <Typography>
                                     {`اینجانب 
-                                    ${data?.currentCEOName} ${data?.currentCEOLastName} به شماره شماره ملی 
-                                    ${data?.currentCEONationalCode} سمت مدیرعامل شرکت / تولیدی ${data?.name} با مالکیت 
-                                    ${data?.companyOwnershipTypeName} تعهد می نمایم
+                                    ${data?.firstName} ${data?.lastName} به شماره شماره ملی 
+                                    ${data?.nationalCode} ، سمت مدیرعامل ، شرکت ${data?.producerName} با شناسه 
+                                    ${data?.producerNationalCode} تعهد می نمایم
                                      نام صحیح عنوان محصول / نام صحیح مواد اولیه مصرفی و منشا تامین آن ها و تصویر صحیح کلیه مدارک و مستندات 
                                      بدون هیچ گونه  دخل و تصرفی بارگذاری شده است و
                                      هر زمان که عدم صحت مدارک و مستندات ارائه شده و یا هرگونه مغایرت و اشتباه مشخص گردد،

@@ -139,24 +139,6 @@ export default function SubmitForm() {
                 <Input disabled size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
-            <Col xs={24} md={12}>
-              <Form.Item
-                name="stateId"
-                label="استان"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
-                <Select
-                  showSearch
-                  fieldNames={{ label: "Name", value: "Id" }}
-                  // @ts-ignore
-                  filterOption={filterOption}
-                  loading={ldstate}
-                  options={sortByIndex(state, "Name")}
-                  size="large"
-                  placeholder="انتخاب کنید"
-                />
-              </Form.Item>
-            </Col>
           </Row>
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>

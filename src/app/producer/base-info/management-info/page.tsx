@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
-import { SetMainMember } from "../../../../../interfaces/Base-info";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
@@ -22,17 +21,8 @@ export default function Home() {
     isLoading: ldMainMember,
     mutate,
     isValidating,
-  } = useSWR<{
-    records: SetMainMember[];
-    count: number;
-  }>(["/Producer/GetPageMainMember"], ([url, arg]: [url: string, arg: any]) =>
-    listFetcher(url, {
-      arg: {
-        fromRecord: 0,
-        selectRecord: 10000,
-      },
-    })
-  );
+  } = useSWR(["/ProducerUser/GetAllMainMember"], ([url, arg]: [url: string, arg: any]) =>
+    listFetcher(url, { arg: { fromRecord: 0, selectRecord: 10000 } }));
 
   return (
     <>
@@ -55,7 +45,7 @@ export default function Home() {
       <DataTable
         isValidating={isValidating}
         mutate={mutate}
-        MainMember={addIndexToData(MainMember?.records)}
+        MainMember={addIndexToData(MainMember)}
         ldMainMember={ldMainMember}
       />
       <CreateModal

@@ -20,7 +20,7 @@ export default function CreateForm({ mutate }: { mutate: () => void }) {
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
-    "/Producer/SetEmployeeMember",
+    "/ProducerUser/SetEmployeeMember",
     mutationFetcher
   );
 

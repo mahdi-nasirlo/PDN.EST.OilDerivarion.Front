@@ -32,7 +32,7 @@ const ClientComponent = ({
           console.log(res)
 
           signIn("credentials", {
-            code: `${res.token_type} ${res.access_token}`,
+            code: `${res?.token_type} ${res?.access_token}`,
             callbackUrl: "/producer",
             redirect: true,
           });

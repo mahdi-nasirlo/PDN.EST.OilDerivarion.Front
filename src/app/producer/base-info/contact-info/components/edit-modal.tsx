@@ -8,6 +8,7 @@ import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../../lib/filterOption";
 import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import { url } from "inspector";
 
 export default function EditModal({
   isEditModalVisible,
@@ -26,10 +27,10 @@ export default function EditModal({
 
     form.setFieldsValue(data);
 
-    SetProvinceCity1(data?.factoryStateId)
+    SetProvinceCity1(data?.factoryStateId || 1)
     form.setFieldValue("factoryCityId", data?.factoryCityId)
 
-    SetProvinceCity(data?.centralOfficeStateId)
+    SetProvinceCity(data?.centralOfficeStateId || 1)
     form.setFieldValue("centralOfficeCityId", data?.centralOfficeCityId)
 
   }, [data]);
@@ -63,8 +64,8 @@ export default function EditModal({
     form.setFieldValue("centralOfficeCityId", null);
   };
 
-  const [ProvinceCity, SetProvinceCity] = useState();
-  const [ProvinceCity1, SetProvinceCity1] = useState();
+  const [ProvinceCity, SetProvinceCity] = useState(1);
+  const [ProvinceCity1, SetProvinceCity1] = useState(1);
 
   const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
     ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
@@ -125,11 +126,10 @@ export default function EditModal({
               <Form.Item
                 name="factoryStateId"
                 label="استان"
-              // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
               >
                 <Select
                   showSearch
-                  disabled
                   // @ts-ignore
                   filterOption={filterOption}
                   loading={ldStateGetAll}

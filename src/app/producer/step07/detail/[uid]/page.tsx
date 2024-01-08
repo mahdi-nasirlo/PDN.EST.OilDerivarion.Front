@@ -1,23 +1,28 @@
 "use client";
 
-import { Divider, notification, Typography } from "antd";
-import { apiUrl } from "../../../../../../Constants/apiUrl";
-import { useForm } from "antd/es/form/Form";
+import {Divider, notification, Typography} from "antd";
+import {apiUrl} from "../../../../../../Constants/apiUrl";
+import {useForm} from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import { useRouter } from "next/navigation";
+import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
+import {useRouter} from "next/navigation";
 import WorkflowRequestBtn from "../../../../../../components/Workflow/WorkflowRequestBtn";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
 import GodOfDataViewer from "../../../../../../components/GodOfDataViewer";
 
 interface PropType {
   params: { uid: string };
 }
 
+const colors = require('tailwindcss/colors');
+
 const apiData = apiUrl.WorkFlowRequest.step07;
 
 export default function Home(props: PropType) {
+
+  console.log(colors.red)
+
   const barcodeRequest = useSWRMutation<string>(
     "/RequestBarcode/FactoryBarcode",
     (url: string) =>

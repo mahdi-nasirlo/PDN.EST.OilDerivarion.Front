@@ -166,7 +166,7 @@ export default function EditModal({
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                name="birthDate"
+                name="birthDatePersian"
                 label="تاریخ تولد"
                 rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
               >

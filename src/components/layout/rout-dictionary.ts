@@ -55,7 +55,7 @@ export const routDictionary: Items = {
     title: "اطلاعات مدیریتی",
   },
   "personnel-info": {
-    title: "اطلاعات پرسنلی",
+    title: "مدیران تولید",
   },
   "license-info": {
     title: "اطلاعات مجوز",

@@ -322,7 +322,7 @@ const items: MenuProps["items"] = [
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
+        <Link href="/producer/base-info/personnel-info">مدیران تولید</Link>,
         "/producer/base-info/personnel-info",
         <UsersIcon width={16} height={16} />
       ),

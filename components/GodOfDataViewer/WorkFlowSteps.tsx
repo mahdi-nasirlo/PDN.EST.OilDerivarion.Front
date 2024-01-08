@@ -8,7 +8,7 @@ export default function WorkFlowSteps({ logs }: { logs: LogHistory[] }) {
 
     return (
         <Row gutter={[16, 16]}>
-            <Col className='workflow-request-item flex justify-start flex-col relative' span={6}>
+            {logs && <Col className='workflow-request-item flex justify-start flex-col relative' span={6}>
                 <Divider className="workflow-request-divider workflow-request-divider-process" />
                 <div className='flex'>
                     <Typography
@@ -24,7 +24,7 @@ export default function WorkFlowSteps({ logs }: { logs: LogHistory[] }) {
                         </Typography>
                     </div>
                 </div>
-            </Col>
+            </Col>}
             {logs?.map((log, index) => <Col
                 className='workflow-request-item flex justify-start flex-col relative'
                 span={6}

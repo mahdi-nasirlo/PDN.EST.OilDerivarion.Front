@@ -1,30 +1,36 @@
 import React from 'react';
-import {Alert, Spin} from "antd";
-import {z} from "zod";
-import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
-import {RenderItemType} from "./RenderItemType";
+import { Alert, Spin } from "antd";
+import { z } from "zod";
+import { ApiTabType } from "../../hooks/workFlowRequest/useGetStep";
+import { RenderItemType } from "./RenderItemType";
 import useGetAllHistory from '../../hooks/workFlowRequest/useGetAllHistory';
 import WorkFlowSteps from './WorkFlowSteps';
 
 interface PropsType {
     uid: string,
     data: ApiTabType[] | undefined,
-    loading?: boolean
+    loading?: boolean,
+    steps?: boolean
 }
 
-const Index = (props: PropsType) => {
+const Index = ({
+    uid,
+    data,
+    loading,
+    steps = true
+}: PropsType) => {
 
-    const logs = useGetAllHistory(props.uid)
+    const logs = useGetAllHistory(uid)
 
-    if (props.loading && logs.isLoading) {
+    if (loading && logs.isLoading) {
         return <Spin />
     }
 
     return (
         <>
-            <WorkFlowSteps logs={logs.data || []} />
+            {steps && <WorkFlowSteps logs={logs.data || []} />}
 
-            <RenderItems data={props.data} uid={props.uid} />
+            <RenderItems data={data} uid={uid} />
         </>
     );
 };

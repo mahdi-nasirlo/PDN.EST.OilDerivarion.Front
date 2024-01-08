@@ -49,7 +49,7 @@ export default function ReviewDataModalAcceptAgreement(
                                 <Typography>
                                     {`اینجانب 
                                     ${data?.firstName} ${data?.lastName} به شماره شماره ملی 
-                                    ${data?.nationalCode} سمت مدیرعامل شرکت / تولیدی ${data?.producerName} با مالکیت 
+                                    ${data?.nationalCode} ، سمت مدیرعامل ، شرکت ${data?.producerName} با شناسه 
                                     ${data?.producerNationalCode} تعهد می نمایم
                                      نام صحیح عنوان محصول / نام صحیح مواد اولیه مصرفی و منشا تامین آن ها و تصویر صحیح کلیه مدارک و مستندات 
                                      بدون هیچ گونه  دخل و تصرفی بارگذاری شده است و

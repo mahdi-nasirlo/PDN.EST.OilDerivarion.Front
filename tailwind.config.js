@@ -27,9 +27,23 @@ module.exports = {
                 secondary: {
                     500: "#FFA133",
                 },
+                red: {
+                    ...colors.red,
+                    500: "#F43F5E",
+                },
             },
             backgroundColor: {
                 ...colors,
+                gray: {
+                    ...colors.gray,
+                    200: "#E2E8F0",
+                    100: "#F3F4F6",
+                    50: "#F9FAFB",
+                },
+                orange: {
+                    ...colors.orange,
+                    500: "#FA8C16",
+                },
                 primary: {
                     500: "#18948A",
                 },

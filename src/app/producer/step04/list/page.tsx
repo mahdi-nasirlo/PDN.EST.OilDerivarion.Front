@@ -7,8 +7,7 @@ import {
   WorkflowDataTableContextType
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
 import { apiUrl } from "../../../../../Constants/apiUrl";
-import { Button, Space, Tooltip, Typography } from "antd";
-import Link from "next/link";
+import { Space } from "antd";
 import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
 import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 
@@ -31,7 +30,7 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step12/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step04/detail/" + record.TaskId}>                            مشاهده اطلاعات
             </VisitInfo>
           </Space>
         ),

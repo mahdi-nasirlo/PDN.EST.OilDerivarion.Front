@@ -1,12 +1,9 @@
 import React from 'react';
-import { Alert, Button, Col, Divider, Row, Space, Spin, Typography } from "antd";
-import { z } from "zod";
-import { ApiTabType } from "../../hooks/workFlowRequest/useGetStep";
-import { RenderItemType } from "./RenderItemType";
+import {Alert, Spin} from "antd";
+import {z} from "zod";
+import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
+import {RenderItemType} from "./RenderItemType";
 import useGetAllHistory from '../../hooks/workFlowRequest/useGetAllHistory';
-import { Steps } from 'antd/lib';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import WorkFlowSteps from './WorkFlowSteps';
 
 interface PropsType {
@@ -51,7 +48,7 @@ export const TabType = z.object({
     name: z.string(),
     key: z.string().optional(),
     url: z.string(),
-    type: z.enum(["1", "2"])
+    type: z.enum(["1", "2", "3"])
 })
 
 

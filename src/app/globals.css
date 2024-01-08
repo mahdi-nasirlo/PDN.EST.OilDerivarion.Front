@@ -156,6 +156,14 @@ body {
     }
 }
 
+.ant-tooltip-inner {
+    width: fit-content;
+}
+
+.ant-pagination .ant-pagination-item-active {
+
+}
+
 /* scrollbar style */
 
 ::-webkit-scrollbar {
@@ -379,7 +387,7 @@ body {
 .ant-pagination-item-active {
         @apply h-full lg:py-[4.2px] !important;
     background-color: theme("colors.primary.500") !important;
-    border-color: theme("colors.gray.900") !important;
+    border-color: theme("colors.gray.200") !important;
 }
 
 .ant-pagination

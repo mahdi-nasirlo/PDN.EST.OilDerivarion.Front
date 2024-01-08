@@ -1,8 +1,8 @@
-import { CheckOutlined, CloseOutlined, LoadingOutlined } from '@ant-design/icons'
-import { Col, Descriptions, Divider, Tooltip, Typography } from 'antd'
-import { Row } from 'antd/lib'
+import {CheckOutlined, CloseOutlined, LoadingOutlined} from '@ant-design/icons'
+import {Col, Descriptions, Divider, Tooltip, Typography} from 'antd'
+import {Row} from 'antd/lib'
 import React from 'react'
-import { LogHistory } from '../../hooks/workFlowRequest/useGetAllHistory'
+import {LogHistory} from '../../hooks/workFlowRequest/useGetAllHistory'
 
 export default function WorkFlowSteps({ logs }: { logs: LogHistory[] }) {
 
@@ -25,14 +25,39 @@ export default function WorkFlowSteps({ logs }: { logs: LogHistory[] }) {
                     </div>
                 </div>
             </Col>
-            {logs?.map((log, indx) => <Col
+            {logs?.map((log, index) => <Col
                 className='workflow-request-item flex justify-start flex-col relative'
                 span={6}
-                key={indx}
+                key={index}
             >
-                <Tooltip title={<>
-                    <Descriptions>
-                    </Descriptions>
+                <Tooltip
+                    title={<>
+                        <Descriptions
+                            style={{minWidth: "300px"}}
+                            title={<Typography className="text-sm">{log.Current_Step_Name}</Typography>}
+                        >
+                            
+                            <Descriptions.Item span={12} className="text-xs" label="نام فرایند">
+                                {log.Process_name}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item span={12} label="گزینه انتخاب شده">
+                                {log.Label}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item span={12} className="text-xs" label="توضیحات">
+                                {log.Description_text}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item span={12} className="text-xs" label="تاریخ شروع">
+                                {log.Start_Time}
+                            </Descriptions.Item>
+
+                            <Descriptions.Item span={12} className="text-xs" label="تاریخ پایان">
+                                {log.End_Time}
+                            </Descriptions.Item>
+
+                        </Descriptions>
                 </>}>
                     {{
                         0: <>
@@ -41,7 +66,7 @@ export default function WorkFlowSteps({ logs }: { logs: LogHistory[] }) {
                                 <Typography
                                     className="workflow-request-icon"
                                 >
-                                    {indx + 1}
+                                    {index + 1}
                                 </Typography>
                             </div>
                         </>,

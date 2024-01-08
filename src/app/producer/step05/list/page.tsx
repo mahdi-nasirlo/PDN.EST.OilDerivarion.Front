@@ -7,12 +7,10 @@ import Link from 'next/link';
 import {
     WorkflowDataTableContextType
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
-import { Button, Space, Tooltip, Typography } from "antd";
+import { Space } from "antd";
 import { apiUrl } from "../../../../../Constants/apiUrl";
 import WorkFlowStatusColumn from '../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn';
 import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
-
-const getDetailPageUrl = "/producer/step05/detail/"
 
 const Page = () => {
 
@@ -33,7 +31,7 @@ const Page = () => {
                 width: "10%",
                 render: (_, record) => (
                     <Space size="small">
-                        <VisitInfo CanEdit={record.CanEdit} href={"/producer/step12/detail/" + record.TaskId}>                            مشاهده اطلاعات
+                        <VisitInfo CanEdit={record.CanEdit} href={"/producer/step05/detail/" + record.TaskId}>                            مشاهده اطلاعات
                         </VisitInfo>
                     </Space>
                 ),

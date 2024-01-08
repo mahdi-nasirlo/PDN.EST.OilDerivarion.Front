@@ -1,8 +1,8 @@
 import React from 'react';
-import { Alert, Spin } from "antd";
-import { z } from "zod";
-import { ApiTabType } from "../../hooks/workFlowRequest/useGetStep";
-import { RenderItemType } from "./RenderItemType";
+import {Alert, Spin} from "antd";
+import {z} from "zod";
+import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
+import {RenderItemType} from "./RenderItemType";
 import useGetAllHistory from '../../hooks/workFlowRequest/useGetAllHistory';
 import WorkFlowSteps from './WorkFlowSteps';
 
@@ -20,7 +20,7 @@ const Index = ({
     steps = true
 }: PropsType) => {
 
-    const logs = useGetAllHistory(uid)
+    const logs = useGetAllHistory(steps ? uid : null)
 
     if (loading && logs.isLoading) {
         return <Spin />

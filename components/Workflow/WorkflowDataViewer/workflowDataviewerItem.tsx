@@ -1,7 +1,6 @@
 import React from 'react';
 import {Descriptions, Spin, Table, Typography} from "antd";
 import {ColumnsType} from "antd/es/table";
-import {ColumnProps} from "antd/lib/table";
 
 interface PropsType {
     loading?: boolean,
@@ -59,7 +58,8 @@ const RenderTable = (props: TablePropsType) => {
         .filter(item => !item.Hidden)
         .map(item => ({dataIndex: item.Key, title: item.Value}))
 
-    columns.push(...props.extraColumns)
+    if (props.extraColumns)
+        columns.push(...props?.extraColumns)
 
     return <>
         <Table columns={columns} dataSource={props.values}/>

@@ -53,7 +53,7 @@ export default function LayoutSidebar({
         className={className}
         mode="inline"
         onClick={handleMenuItemClick}
-      // items={menu}
+        items={menu}
       >
         {menus.isLoading &&
           Array.from({ length: 10 }).map((value, index) => (
@@ -165,4 +165,3 @@ export const SvgIcon = ({
 }) => (
   <Image src={src} width={width} height={height} className={className} alt="" />
 );
-

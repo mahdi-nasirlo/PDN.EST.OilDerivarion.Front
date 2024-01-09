@@ -59,7 +59,7 @@ const RenderTable = (props: TablePropsType) => {
         .filter(item => !item.Hidden)
         .map(item => ({dataIndex: item.Key, title: item.Value}))
 
-    columns.push(...props.extraColumns)
+    columns.push(...props.extraColumns || [])
 
     return <>
         <Table columns={columns} dataSource={props.values}/>

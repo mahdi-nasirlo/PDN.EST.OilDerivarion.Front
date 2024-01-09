@@ -1,27 +1,29 @@
 "use client";
 
-import React from "react";
-import WorkflowDataTableProvider from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableProvider";
-import {
-  WorkflowDataTableContextType
-} from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
-import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
+import { useRouter } from "next/navigation";
+import { WorkflowDataTableContextType } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
 import { apiUrl } from "../../../../../Constants/apiUrl";
-import { Space } from "antd";
+import { Button, Space } from "antd";
+import WorkflowDataTableProvider from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableProvider";
+import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
 import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
 import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 
-export default function Home() {
+export default function Page() {
+  const router = useRouter();
 
   const initialValue: WorkflowDataTableContextType = {
-    apiUrl: apiUrl.WorkFlowRequest.step02.getAll.url,
+    apiUrl: apiUrl.WorkFlowRequest.setad.naft.url,
     columns: [
       {
         title: "وضعیت",
         dataIndex: "status",
         key: "5",
-        render(_, record) { return <WorkFlowStatusColumn record={record} /> }
+        render(_, record) {
+          return <WorkFlowStatusColumn record={record} />;
+        },
       },
+
       {
         title: "عملیات",
         key: "عملیات",
@@ -30,13 +32,18 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step02/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            <VisitInfo
+              CanEdit={record.CanEdit}
+              href={"/producer/step17/detail/" + record.TaskId}
+            >
+              {" "}
+              مشاهده اطلاعات
             </VisitInfo>
           </Space>
         ),
       },
-    ]
-  }
+    ],
+  };
 
   return (
     <>

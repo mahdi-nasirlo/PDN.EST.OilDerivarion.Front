@@ -8,6 +8,7 @@ import useSWRMutation from "swr/mutation";
 import PhoneInputs from "../../../../../../components/inputs/Phone";
 import { filterOption } from "../../../../../../lib/filterOption";
 import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import { url } from "inspector";
 
 export default function EditModal({
   isEditModalVisible,
@@ -23,7 +24,15 @@ export default function EditModal({
   const [form] = useForm();
 
   useEffect(() => {
+
     form.setFieldsValue(data);
+
+    SetProvinceCity1(data?.factoryStateId || 1)
+    form.setFieldValue("factoryCityId", data?.factoryCityId)
+
+    SetProvinceCity(data?.centralOfficeStateId || 1)
+    form.setFieldValue("centralOfficeCityId", data?.centralOfficeCityId)
+
   }, [data]);
 
   const { trigger, isMutating } = useSWRMutation(
@@ -44,8 +53,6 @@ export default function EditModal({
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-  const [ProvinceCity, SetProvinceCity] = useState();
-  const [ProvinceCity1, SetProvinceCity1] = useState();
 
   const handleFactoryProvinceChange = (value: any) => {
     SetProvinceCity1(value);
@@ -57,6 +64,9 @@ export default function EditModal({
     form.setFieldValue("centralOfficeCityId", null);
   };
 
+  const [ProvinceCity, SetProvinceCity] = useState(1);
+  const [ProvinceCity1, SetProvinceCity1] = useState(1);
+
   const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
     ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
@@ -66,9 +76,6 @@ export default function EditModal({
     ([url, arg]: [string, any]) => listFetcher(url, { arg })
   );
 
-  const handleCancelEdit = () => {
-    setIsEditModalVisible(false);
-  };
 
   return (
     <>
@@ -77,7 +84,7 @@ export default function EditModal({
         title="ویرایش اطلاعات تماس"
         visible={isEditModalVisible}
         onOk={() => form.submit()}
-        onCancel={handleCancelEdit}
+        onCancel={() => setIsEditModalVisible(false)}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={12} md={12}>
@@ -94,9 +101,10 @@ export default function EditModal({
             </Col>
             <Col xs={12} md={12}>
               <Button
+                disabled={isMutating}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelEdit}
+                onClick={() => setIsEditModalVisible(false)}
                 key={"cancel"}
               >
                 انصراف
@@ -105,7 +113,11 @@ export default function EditModal({
           </Row>,
         ]}
       >
-        <Form form={form} layout="vertical" onFinish={onFinish}>
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onFinish}
+        >
           <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
             اطلاعات کارخانه
           </Typography>
@@ -114,9 +126,7 @@ export default function EditModal({
               <Form.Item
                 name="factoryStateId"
                 label="استان"
-                rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                ]}
+                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
               >
                 <Select
                   showSearch

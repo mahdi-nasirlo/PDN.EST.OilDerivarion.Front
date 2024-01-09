@@ -11,7 +11,7 @@ export default function DisplayForm({
 }) {
   const [form] = useForm();
 
-  const renderValue = (value: any) => (value ? "دارد" : "ندارد");
+  const renderValue = (value: boolean | null) => (value ? "دارد" : (value === null) ? 'وارد کنید' : 'ندارد');
 
   useEffect(() => {
     if (data) {

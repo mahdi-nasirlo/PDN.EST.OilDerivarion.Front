@@ -8,6 +8,7 @@ import useSWR from "swr";
 import handleError from "../../lib/server/handleError";
 import WorkflowDataViewer from "../Workflow/WorkflowDataViewer";
 import DataViewer from "../FormBuilder/DataViewer";
+import MediaTypeItems from "../Workflow/WorkflowDataViewer/MediaTypeItems";
 
 export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
@@ -24,6 +25,9 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
             break;
         case "2":
             ItemType = <DataViewer data={data}/>
+            break;
+        case "3":
+            ItemType = <MediaTypeItems data={data}/>
             break;
         default:
             ItemType = <Typography>نوع دیتا پشتیبانی نمیشود</Typography>

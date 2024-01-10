@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Spin} from "antd";
+import {Alert, Divider, Spin} from "antd";
 import {z} from "zod";
 import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
 import {RenderItemType} from "./RenderItemType";
@@ -28,16 +28,22 @@ const Index = ({
 
     return (
         <>
-            {steps && <WorkFlowSteps logs={logs.data || []} />}
+            {steps && <>
+                <WorkFlowSteps logs={logs.data || []}/>
+                <Divider/>
+            </>}
 
-            <RenderItems data={data} uid={uid} />
+            <RenderItems data={data} uid={uid} loading={logs.isLoading || loading}/>
         </>
     );
 };
 
 
-const RenderItems = ({ data, uid }: { data: ApiTabType[] | undefined, uid: string }) => {
+const RenderItems = ({data, uid, loading}: { data: ApiTabType[] | undefined, uid: string, loading?: boolean }) => {
 
+    if (loading) {
+        return <Spin/>
+    }
 
     if (!data || !Array.isArray(data)) {
         return <Alert message="نوع داده صحیح نمی باشد" type="error" className="text-right border border-red-500" />

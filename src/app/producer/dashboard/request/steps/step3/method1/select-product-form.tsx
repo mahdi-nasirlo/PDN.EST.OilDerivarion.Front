@@ -105,7 +105,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
                 name={"productUsageWasted"}
                 label={"درصد هدر رفت"}
                 rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator: (_, value) =>
                       Number.isFinite(value)

@@ -29,26 +29,18 @@ export default function SubmitForm() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [form] = useForm();
+
   const { trigger, isMutating } = useSWRMutation(
     "/WorkFlowCartable/SetStep01",
     mutationFetcher
   );
-  const { data, isLoading } = useSWR(
-    "/WorkFlowCartable/GetStep01",
-    listFetcher
-  );
-  const { data: licensce, isLoading: ldlicensce } = useSWR(
-    "/BaseInfo/LicenseTypeGetAll",
-    listFetcher
-  );
-  const { data: exporter, isLoading: ldexporter } = useSWR(
-    "/BaseInfo/LicenseIssuerTypeGetAll",
-    listFetcher
-  );
-  const { data: state, isLoading: ldstate } = useSWR(
-    "/BaseInfo/StateGetAll",
-    listFetcher
-  );
+
+  const { data, isLoading } = useSWR("/WorkFlowCartable/GetStep01", listFetcher);
+
+  const { data: License, isLoading: ldLicense } = useSWR("/BaseInfo/LicenseTypeGetAll", listFetcher);
+
+  const { data: exporter, isLoading: ldExporter } = useSWR("/BaseInfo/LicenseIssuerTypeGetAll", listFetcher);
+
   const activeCartable = async (values: any) => {
     const res = await trigger(values);
     if (res) {
@@ -135,8 +127,8 @@ export default function SubmitForm() {
                   fieldNames={{ label: "Name", value: "Id" }}
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldlicensce}
-                  options={sortByIndex(licensce, "Name")}
+                  loading={ldLicense}
+                  options={sortByIndex(License, "Name")}
                   size="large"
                   placeholder="انتخاب کنید"
                 />
@@ -175,7 +167,7 @@ export default function SubmitForm() {
                   fieldNames={{ label: "Name", value: "Id" }}
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldexporter}
+                  loading={ldExporter}
                   options={sortByIndex(exporter, "Name")}
                   size="large"
                   placeholder="انتخاب کنید"

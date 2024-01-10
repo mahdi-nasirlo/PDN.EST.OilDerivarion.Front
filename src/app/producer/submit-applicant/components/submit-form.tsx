@@ -1,27 +1,17 @@
 "use client";
 
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Select,
-  Spin,
-  Typography,
-} from "antd";
-import React, { useEffect, useState } from "react";
+import {Button, Col, Divider, Form, Input, Row, Select, Spin, Typography,} from "antd";
+import React, {useEffect, useState} from "react";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { useForm } from "antd/es/form/Form";
+import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
+import {useForm} from "antd/es/form/Form";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import {listFetcher} from "../../../../../lib/server/listFetcher";
 import CheckInfoModal from "./checkInfo-modal";
 import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
-import { sortByIndex } from "../../../../../lib/sortByIndex";
-import { filterOption } from "../../../../../lib/filterOption";
+import {sortByIndex} from "../../../../../lib/sortByIndex";
+import {filterOption} from "../../../../../lib/filterOption";
 
 export default function SubmitForm() {
   const [open, setOpen] = useState(false);
@@ -128,7 +118,10 @@ export default function SubmitForm() {
               <Form.Item
                 name="licenseTypeId"
                 label="نوع مجوز"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  {required: true, message: "لطفا مقدار را وارد کنید"},
+                  {pattern: /^\d+$/, message: "لطفا عدد وارد کنید"}
+                ]}
               >
                 <Select
                   showSearch
@@ -148,9 +141,15 @@ export default function SubmitForm() {
               <Form.Item
                 name="licenseNumber"
                 label="شماره مجوز"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  {required: true, message: "لطفا مقدار را وارد کنید"},
+                  {
+                    pattern: /^\d+$/,
+                    message: "لطفا فقط عدد وارد کنید",
+                  },
+                ]}
               >
-                <Input type="number" size="large" placeholder="وارد کنید" />
+                <Input size="large" placeholder="وارد کنید"/>
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

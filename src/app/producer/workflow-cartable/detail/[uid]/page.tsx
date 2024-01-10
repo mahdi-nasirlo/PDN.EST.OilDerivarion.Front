@@ -164,17 +164,6 @@ export default function Home(props: PropType) {
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
-              <Col xs={24} md={12}>
-                <Form.Item
-                  name="stateName"
-                  label="استان"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
-                  <Input disabled size="large" placeholder="وارد کنید" />
-                </Form.Item>
-              </Col>
             </Row>
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>

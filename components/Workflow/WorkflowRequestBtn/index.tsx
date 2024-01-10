@@ -1,8 +1,8 @@
-import { Choice } from "../../../interfaces/requestDetail";
-import { Button, Input } from "antd";
+import {Choice} from "../../../interfaces/requestDetail";
+import {Button, Input} from "antd";
 import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../lib/server/mutationFetcher";
-import { useRouter } from "next/navigation";
+import {mutationFetcher} from "../../../lib/server/mutationFetcher";
+import {useRouter} from "next/navigation";
 
 interface PropsType {
   hasDescription?: boolean;
@@ -55,19 +55,19 @@ const Index = (props: PropsType) => {
     <>
       {props.hasDescription && <Input.TextArea className="mt-2 mb-4" />}
       <div style={containerStyle()} className="grid grid-cols-4 gap-2 ">
-        <div
-          style={{ height: "fit-content" }}
-          className="flex justify-center"
-        >
-          <Button
-            loading={getNextStep.isMutating || props.loading}
-            type="default"
-            className="w-full bg-gray-100 text-warmGray-500"
-            onClick={() => router.back()}
-          >
-            بازگشت
-          </Button>
-        </div>
+        {/*<div*/}
+        {/*  style={{ height: "fit-content" }}*/}
+        {/*  className="flex justify-center"*/}
+        {/*>*/}
+        {/*  <Button*/}
+        {/*    loading={getNextStep.isMutating || props.loading}*/}
+        {/*    type="default"*/}
+        {/*    className="w-full bg-gray-100 text-warmGray-500"*/}
+        {/*    onClick={() => router.back()}*/}
+        {/*  >*/}
+        {/*    بازگشت*/}
+        {/*  </Button>*/}
+        {/*</div>*/}
         {props.choices.map((btn, index) => {
 
           return (

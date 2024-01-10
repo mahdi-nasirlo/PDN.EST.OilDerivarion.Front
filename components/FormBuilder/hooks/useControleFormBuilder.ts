@@ -26,7 +26,7 @@ const useControlFormBuilder = () => {
     // Assuming context.formData.data?.records is an object
     let oldData = context.formData?.data?.records ? (JSON?.parse(context.formData?.data?.records || {}) || {}) : {};
 
-    oldData["__schema"] = context.formData?.data?.schema
+    // oldData["__schema"] = context.formData?.data?.schema
 
     const onSetMany = (data: any, formKey: string) => {
 
@@ -61,6 +61,10 @@ const useControlFormBuilder = () => {
             if (index >= 0 && index < oldDataForm.length) {
 
                 oldDataForm.splice(index, 1);
+
+                if (Array.isArray(oldDataForm) && oldDataForm.length === 0) {
+                    return context.formData.onSet(null)
+                }
 
                 context.formData.onSet({...oldData});
             } else {

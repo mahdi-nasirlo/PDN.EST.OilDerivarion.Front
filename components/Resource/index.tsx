@@ -1,10 +1,10 @@
 import React from 'react';
-import { Divider, Spin, Typography } from "antd";
-import FormBuilder, { FormSchemaType } from "../FormBuilder";
+import {Divider, Spin, Typography} from "antd";
+import FormBuilder, {FormSchemaType} from "../FormBuilder";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 import useFormRequest from "../FormBuilder/hooks/useFormRequest";
-import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
 import FormDataTable from "./FormDataTable";
+import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
 
 
 const Index = ({ categoryID, type = "single" }: { categoryID: string, type?: "many" | "single", }) => {
@@ -31,7 +31,7 @@ const Index = ({ categoryID, type = "single" }: { categoryID: string, type?: "ma
             <>
                 <FormBuilderProvider initialValues={records} type={type} formData={formData}>
                     <Spin spinning={formData.isLoading}>
-                        <RenderForms schema={schema[0]} records={records} type="many" />
+                        <RenderForms schema={schema[0]} records={records} type="many"/>
                     </Spin>
                 </FormBuilderProvider>
             </>

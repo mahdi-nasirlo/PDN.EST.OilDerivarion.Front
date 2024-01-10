@@ -75,14 +75,12 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               label={"درصد استحصال"}
               rules={[
                 { required: true, message: "لطفا مقدار را وارد کنید" },
-                // {
-                //   validator: (_, value) =>
-                //     Number.isFinite(value)
-                //       ? Promise.resolve()
-                //       : Promise.reject(
-                //           new Error("لطفاً یک عدد صحیح وارد کنید")
-                //         ),
-                // },
+                {
+                  validator: (_, value) =>
+                    Number.isFinite(value)
+                      ? Promise.resolve()
+                      : Promise.reject(new Error("لطفا عدد وارد کنید")),
+                },
                 {
                   type: "number",
                   min: 1,
@@ -108,14 +106,12 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
               label={"درصد هدر رفت"}
               rules={[
                 { required: true, message: "لطفا مقدار را وارد کنید" },
-                // {
-                //   validator: (_, value) =>
-                //     Number.isFinite(value)
-                //       ? Promise.resolve()
-                //       : Promise.reject(
-                //           new Error("لطفاً یک عدد صحیح وارد کنید")
-                //         ),
-                // },
+                {
+                  validator: (_, value) =>
+                    Number.isFinite(value)
+                      ? Promise.resolve()
+                      : Promise.reject(new Error("لطفا عدد وارد کنید")),
+                },
                 {
                   type: "number",
                   min: 0,

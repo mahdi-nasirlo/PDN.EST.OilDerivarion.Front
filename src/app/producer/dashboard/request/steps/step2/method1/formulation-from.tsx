@@ -76,12 +76,6 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 required: true,
                 message: "لطفا مقدار را وارد کنید",
               },
-              {
-                validator: async (rule, value) => {
-                  if (!/^\d+$/.test(value)) {
-                  }
-                },
-              },
             ]}
           >
             <Input type="number" size="large" placeholder="وارد نمایید" />
@@ -92,32 +86,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-            <Col xs={24} md={12}>
-              <Form.Item
-                name={"materialUsagePercentage"}
-                label={"درصد استفاده"}
-                rules={[
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
-                  {
-                    type: "number",
-                    min: 1,
-                    max: 100,
-                    message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
-                  },
-                ]}
-              >
-                <InputNumber
-                  controls={false}
-                  className="w-full rounded-lg"
-                  size="large"
-                  min={0}
-                  max={100}
-                  formatter={(value) => `${value}%`}
-                  placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-          )}
+          <Col xs={24} md={12}>
+            <Form.Item
+              name={"materialUsagePercentage"}
+              label={"درصد استفاده"}
+              rules={[
+                { required: true, message: "لطفا مقدار را وارد کنید" },
+                {
+                  type: "number",
+                  min: 1,
+                  max: 100,
+                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
+                },
+              ]}
+            >
+              <InputNumber
+                controls={false}
+                className="w-full rounded-lg"
+                size="large"
+                min={0}
+                max={100}
+                formatter={(value) => `${value}%`}
+                placeholder="وارد کنید"
+              />
+            </Form.Item>
+          </Col>
+        )}
         {[2].includes(processController.requestMaster.productionMethodId) && (
           <Col xs={24} md={12}>
             <Form.Item
@@ -260,14 +254,16 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   personTypeStatus === null
                     ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
-                      ? "شناسه ملی"
-                      : "شماره ملی"
+                    ? "شناسه ملی"
+                    : "شماره ملی"
                 }
                 rules={[
                   {
                     validator: async (_, value) => {
                       if (!value) {
-                        return Promise.reject(new Error("لطفا مقدار را وارد کنید"));
+                        return Promise.reject(
+                          new Error("لطفا مقدار را وارد کنید")
+                        );
                       }
                       if (isNaN(value)) {
                         return Promise.reject(new Error("لطفا عدد وارد کنید"));
@@ -275,14 +271,20 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       if (personTypeStatus === 1) {
                         const nationalIdRegex = /^(?!(\d)\1{9})\d{10}$/;
                         if (!nationalIdRegex.test(value)) {
-                          return Promise.reject(new Error("شناسه ملی نامعتبر است"));
+                          return Promise.reject(
+                            new Error("شناسه ملی نامعتبر است")
+                          );
                         }
                       }
                       if (personTypeStatus === 1 && value.length !== 10) {
-                        return Promise.reject(new Error("شماره ملی باید 10 رقم باشد"));
+                        return Promise.reject(
+                          new Error("شماره ملی باید 10 رقم باشد")
+                        );
                       }
                       if (personTypeStatus === 2 && value.length !== 11) {
-                        return Promise.reject(new Error("شناسه ملی باید 11 رقم باشد"));
+                        return Promise.reject(
+                          new Error("شناسه ملی باید 11 رقم باشد")
+                        );
                       }
                       return Promise.resolve();
                     },

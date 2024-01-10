@@ -1,10 +1,10 @@
 import React from "react";
-import { Descriptions, Spin, Table, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
+import {Descriptions, Spin, Table, Typography} from "antd";
+import {ColumnsType} from "antd/es/table";
 
 interface PropsType {
   loading?: boolean;
-  columns?: ColumnsType<any>;
+    columns?: ColumnsType<any>
   data: WorkFlowDataViewerItemType;
 }
 
@@ -28,8 +28,8 @@ const Index = (props: PropsType) => {
       {/*// @ts-ignore*/}
       <RenderTable
         extraColumns={props.columns}
-        values={props?.data?.Table?.Values}
-        header={props?.data?.Table?.Header}
+        Values={props?.data?.Table?.Values}
+        Header={props?.data?.Table?.Header}
       />
       <RenderModel item={props?.data?.Model as ModelPropsType[]} />
     </>
@@ -37,15 +37,15 @@ const Index = (props: PropsType) => {
 };
 
 interface TablePropsType {
-  extraColumns: ColumnsType<any>;
-  header:
+    extraColumns?: ColumnsType<any>;
+    Header:
     | {
         Key: string;
         Value: string;
         Hidden?: boolean;
       }[]
     | undefined;
-  values:
+    Values:
     | {
         Name: string;
         Type: string;
@@ -54,11 +54,11 @@ interface TablePropsType {
 }
 
 const RenderTable = (props: TablePropsType) => {
-  if (!props.header) {
+    if (!props.Header) {
     return <></>;
   }
 
-  const columns: ColumnsType<any> = props.header
+    const columns: ColumnsType<any> = props.Header
     .filter((item) => !item.Hidden)
     .map((item) => ({ dataIndex: item.Key, title: item.Value }));
 
@@ -66,7 +66,7 @@ const RenderTable = (props: TablePropsType) => {
 
   return (
     <>
-      <Table columns={columns} dataSource={props.values} />
+        <Table columns={columns} dataSource={props.Values}/>
     </>
   );
 };

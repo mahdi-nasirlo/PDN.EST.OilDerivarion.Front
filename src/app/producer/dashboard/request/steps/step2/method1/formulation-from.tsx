@@ -275,7 +275,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                       if (personTypeStatus === 1) {
                         const nationalIdRegex = /^(?!(\d)\1{9})\d{10}$/;
                         if (!nationalIdRegex.test(value)) {
-                          return Promise.reject(new Error("فرمت شماره ملی صحیح نمی‌باشد"));
+                          return Promise.reject(new Error("شناسه ملی نامعتبر است"));
                         }
                       }
                       if (personTypeStatus === 1 && value.length !== 10) {

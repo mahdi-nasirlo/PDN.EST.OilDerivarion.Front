@@ -1,9 +1,9 @@
 "use client";
 
-import React, {useState} from "react";
-import {Drawer, Menu, MenuProps, Skeleton} from "antd";
+import React, { useState } from "react";
+import { Drawer, Menu, MenuProps, Skeleton } from "antd";
 import Image from "next/image";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
 import Link from "next/link";
 
@@ -165,4 +165,3 @@ export const SvgIcon = ({
 }) => (
   <Image src={src} width={width} height={height} className={className} alt="" />
 );
-

@@ -6,7 +6,7 @@ const ContactInputs = (props: FormItemProps) => {
   const validateIranianMobile = (rule: any, value: any) => {
     const mobileRegex = /^(\+98|0|0098)?9\d{9}$/;
     if (value && !mobileRegex.test(value)) {
-      return Promise.reject("این شماره تماس نامتبر است");
+      return Promise.reject("این شماره تماس نامعتبر است");
     }
     return Promise.resolve();
   };

@@ -26,7 +26,7 @@ const useControlFormBuilder = () => {
     // Assuming context.formData.data?.records is an object
     let oldData = context.formData?.data?.records ? (JSON?.parse(context.formData?.data?.records || {}) || {}) : {};
 
-    oldData["__schema"] = context.formData?.data?.schema
+    // oldData["__schema"] = context.formData?.data?.schema
 
     const onSetMany = (data: any, formKey: string) => {
 

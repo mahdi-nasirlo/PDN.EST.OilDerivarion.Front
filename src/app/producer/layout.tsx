@@ -263,7 +263,7 @@ const items: MenuProps["items"] = [
       ),
       getMenuItem(
         <Link href="/producer/base-info/container-info">
-          اطلاعات مخازن میکس یا بلندینگ
+          اطلاعات مخازن مواد اولیه
         </Link>,
         "/producer/base-info/container-info",
         <BeakerIcon width={16} height={16} />
@@ -322,7 +322,7 @@ const items: MenuProps["items"] = [
         <DocumentDuplicateIcon width={16} height={16} />
       ),
       getMenuItem(
-        <Link href="/producer/base-info/personnel-info">مدیران تولید</Link>,
+        <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
         "/producer/base-info/personnel-info",
         <UsersIcon width={16} height={16} />
       ),

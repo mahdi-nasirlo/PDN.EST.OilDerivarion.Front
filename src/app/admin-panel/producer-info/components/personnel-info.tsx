@@ -9,7 +9,7 @@ export default function PersonnelInfo() {
   return (
     <>
       <Typography className="flex text-secondary-500 mb-6 font-medium">
-        مدیران تولید
+        اطلاعات پرسنلی
       </Typography>
       <Divider />
       <ContactInfo />

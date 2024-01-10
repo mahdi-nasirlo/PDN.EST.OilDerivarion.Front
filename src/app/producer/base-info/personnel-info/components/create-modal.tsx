@@ -42,7 +42,7 @@ export default function CreateModal({
     <>
       <Modal
         width={800}
-        title="افزودن مدیران تولید"
+        title="افزودن اطلاعات پرسنلی"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}

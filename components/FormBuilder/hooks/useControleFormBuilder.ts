@@ -62,6 +62,10 @@ const useControlFormBuilder = () => {
 
                 oldDataForm.splice(index, 1);
 
+                if (Array.isArray(oldDataForm) && oldDataForm.length === 0) {
+                    return context.formData.onSet(null)
+                }
+
                 context.formData.onSet({...oldData});
             } else {
                 console.error("Index out of bounds");

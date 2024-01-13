@@ -33,10 +33,10 @@ const Page = (props: PropsType) => {
       {data && <Divider />}
       {data && (
         <>
-          <div className="space-y-3">
+          {/* <div className="space-y-3">
             <Typography className="font-bold">{`زمان بازدید از واحد تولیدی شما توسط کارشناسان مربوطه در تاریخ ...... می باشد.`}</Typography>
             <Typography>{`بدیهی است در صورت پرداخت نشدن هزینه بازدید توسط متقاضی تا قبل از تاریخ اعلام شده ، منجر به لغو شدن درخواست می شود.`}</Typography>
-          </div>
+          </div> */}
         </>
       )}
       {data && <Divider />}

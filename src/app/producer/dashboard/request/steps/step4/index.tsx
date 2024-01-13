@@ -24,10 +24,8 @@ export default function Step5() {
     const [form] = useForm();
     return (
         <>
+            <GodOfDataViewer steps={false} uid={""} data={getInfo.data || {}} loading={getInfo.isLoading} />
             <Divider />
-            <div className='w-full bg-gray-50 rounded-md p-5'>
-                <GodOfDataViewer uid={""} data={getInfo.data || {}} loading={getInfo.isLoading} />
-            </div>
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item
                     className=" mr-3 my-6  font-medium"

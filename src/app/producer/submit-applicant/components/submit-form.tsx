@@ -29,26 +29,18 @@ export default function SubmitForm() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [form] = useForm();
+
   const { trigger, isMutating } = useSWRMutation(
     "/WorkFlowCartable/SetStep01",
     mutationFetcher
   );
-  const { data, isLoading } = useSWR(
-    "/WorkFlowCartable/GetStep01",
-    listFetcher
-  );
-  const { data: licensce, isLoading: ldlicensce } = useSWR(
-    "/BaseInfo/LicenseTypeGetAll",
-    listFetcher
-  );
-  const { data: exporter, isLoading: ldexporter } = useSWR(
-    "/BaseInfo/LicenseIssuerTypeGetAll",
-    listFetcher
-  );
-  const { data: state, isLoading: ldstate } = useSWR(
-    "/BaseInfo/StateGetAll",
-    listFetcher
-  );
+
+  const { data, isLoading } = useSWR("/WorkFlowCartable/GetStep01", listFetcher);
+
+  const { data: License, isLoading: ldLicense } = useSWR("/BaseInfo/LicenseTypeGetAll", listFetcher);
+
+  const { data: exporter, isLoading: ldExporter } = useSWR("/BaseInfo/LicenseIssuerTypeGetAll", listFetcher);
+
   const activeCartable = async (values: any) => {
     const res = await trigger(values);
     if (res) {
@@ -79,20 +71,12 @@ export default function SubmitForm() {
         >
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="firstName"
-                label="نام"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
+              <Form.Item name="firstName" label="نام">
                 <Input disabled size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="lastName"
-                label="نام خانوادگی"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
+              <Form.Item name="lastName" label="نام خانوادگی">
                 <Input disabled size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
@@ -100,17 +84,7 @@ export default function SubmitForm() {
 
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="personNationalCode"
-                label="کدملی"
-                rules={[
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
-                  {
-                    pattern: /^[0-9]{10}$/,
-                    message: " کدملی نامعتبر است",
-                  },
-                ]}
-              >
+              <Form.Item name="personNationalCode" label="کدملی">
                 <Input
                   disabled
                   type="number"
@@ -120,41 +94,15 @@ export default function SubmitForm() {
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="companyName"
-                label="نام شرکت"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
+              <Form.Item name="companyName" label="نام شرکت">
                 <Input disabled size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="companyNationalCode"
-                label="شناسه ملی شرکت"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
+              <Form.Item name="companyNationalCode" label="شناسه ملی شرکت">
                 <Input disabled size="large" placeholder="وارد کنید" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={12}>
-              <Form.Item
-                name="stateId"
-                label="استان"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
-                <Select
-                  showSearch
-                  fieldNames={{ label: "Name", value: "Id" }}
-                  // @ts-ignore
-                  filterOption={filterOption}
-                  loading={ldstate}
-                  options={sortByIndex(state, "Name")}
-                  size="large"
-                  placeholder="انتخاب کنید"
-                />
               </Form.Item>
             </Col>
           </Row>
@@ -179,8 +127,8 @@ export default function SubmitForm() {
                   fieldNames={{ label: "Name", value: "Id" }}
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldlicensce}
-                  options={sortByIndex(licensce, "Name")}
+                  loading={ldLicense}
+                  options={sortByIndex(License, "Name")}
                   size="large"
                   placeholder="انتخاب کنید"
                 />
@@ -194,7 +142,7 @@ export default function SubmitForm() {
                 label="شماره مجوز"
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
               >
-                <Input size="large" placeholder="وارد کنید" />
+                <Input type="number" size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -219,7 +167,7 @@ export default function SubmitForm() {
                   fieldNames={{ label: "Name", value: "Id" }}
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldexporter}
+                  loading={ldExporter}
                   options={sortByIndex(exporter, "Name")}
                   size="large"
                   placeholder="انتخاب کنید"

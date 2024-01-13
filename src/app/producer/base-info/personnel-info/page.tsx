@@ -3,7 +3,6 @@
 import { Button, Divider, Typography } from "antd";
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { SetEmployeeMember } from "../../../../../interfaces/Base-info";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
 import { addIndexToData } from "../../../../../lib/addIndexToData";
@@ -18,17 +17,8 @@ export default function Page() {
     isLoading: ldEmployeeMember,
     mutate,
     isValidating,
-  } = useSWR<{
-    records: SetEmployeeMember[];
-    count: number;
-  }>(["/Producer/GetPageEmployee"], ([url, arg]: [url: string, arg: any]) =>
-    listFetcher(url, {
-      arg: {
-        fromRecord: 0,
-        selectRecord: 10000,
-      },
-    })
-  );
+  } = useSWR(["/ProducerUser/GetAllEmployee"], ([url, arg]: [url: string, arg: any]) =>
+    listFetcher(url, { arg: { fromRecord: 0, selectRecord: 10000 } }));
 
   const showModal = () => {
     setIsEditModalVisible(true);
@@ -55,7 +45,7 @@ export default function Page() {
       <DataTable
         isValidating={isValidating}
         mutate={mutate}
-        MainMember={addIndexToData(EmployeeMember?.records)}
+        MainMember={addIndexToData(EmployeeMember)}
         ldMainMember={ldEmployeeMember}
       />
       <CreateModal

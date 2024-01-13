@@ -22,7 +22,7 @@ export default function CreateModal({
   const [form] = useForm();
 
   const { trigger, isMutating } = useSWRMutation(
-    "/Producer/SetMainMember",
+    "/ProducerUser/SetMainMember",
     mutationFetcher
   );
 

@@ -1,40 +1,49 @@
 import React from 'react';
-import { Alert, Button, Col, Divider, Row, Space, Spin, Typography } from "antd";
-import { z } from "zod";
-import { ApiTabType } from "../../hooks/workFlowRequest/useGetStep";
-import { RenderItemType } from "./RenderItemType";
+import {Alert, Divider, Spin} from "antd";
+import {z} from "zod";
+import {ApiTabType} from "../../hooks/workFlowRequest/useGetStep";
+import {RenderItemType} from "./RenderItemType";
 import useGetAllHistory from '../../hooks/workFlowRequest/useGetAllHistory';
-import { Steps } from 'antd/lib';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import WorkFlowSteps from './WorkFlowSteps';
 
 interface PropsType {
     uid: string,
     data: ApiTabType[] | undefined,
-    loading?: boolean
+    loading?: boolean,
+    steps?: boolean
 }
 
-const Index = (props: PropsType) => {
+const Index = ({
+    uid,
+    data,
+    loading,
+    steps = true
+}: PropsType) => {
 
-    const logs = useGetAllHistory(props.uid)
+    const logs = useGetAllHistory(steps ? uid : null)
 
-    if (props.loading && logs.isLoading) {
+    if (loading && logs.isLoading) {
         return <Spin />
     }
 
     return (
         <>
-            <WorkFlowSteps logs={logs.data || []} />
+            {steps && <>
+                <WorkFlowSteps logs={logs.data || []}/>
+                <Divider/>
+            </>}
 
-            <RenderItems data={props.data} uid={props.uid} />
+            <RenderItems data={data} uid={uid} loading={logs.isLoading || loading}/>
         </>
     );
 };
 
 
-const RenderItems = ({ data, uid }: { data: ApiTabType[] | undefined, uid: string }) => {
+const RenderItems = ({data, uid, loading}: { data: ApiTabType[] | undefined, uid: string, loading?: boolean }) => {
 
+    if (loading) {
+        return <Spin/>
+    }
 
     if (!data || !Array.isArray(data)) {
         return <Alert message="نوع داده صحیح نمی باشد" type="error" className="text-right border border-red-500" />
@@ -51,7 +60,7 @@ export const TabType = z.object({
     name: z.string(),
     key: z.string().optional(),
     url: z.string(),
-    type: z.enum(["1", "2"])
+    type: z.enum(["1", "2", "3"])
 })
 
 

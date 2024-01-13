@@ -39,6 +39,7 @@ const Index = () => {
         form={form}
         disabled={processController.isMutating}
         onFinish={handleOnFinish}
+        layout="vertical"
       >
         <SelectProductForm form={form} />
         <Divider />

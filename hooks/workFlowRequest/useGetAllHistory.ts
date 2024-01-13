@@ -22,10 +22,10 @@ export type LogHistory = {
     "End_Time": string
 }
 
-const useGetAllHistory = (uid: string) => {
+const useGetAllHistory = (uid: string | null | undefined) => {
 
     const request = useSWR<LogHistory[]>(
-        `/WorkFlowRequest/GetAllHistory`,
+        uid ? `/WorkFlowRequest/GetAllHistory` : null,
         (url) => listFetcher(url, {
             arg: {
                 "taskId": uid

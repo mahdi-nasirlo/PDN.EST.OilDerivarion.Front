@@ -3,16 +3,13 @@
 import React from "react";
 import WorkflowDataTableProvider from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableProvider";
 import WorkflowDataTable from "../../../../../components/Workflow/WorkflowDataTable";
-import Link from "next/link";
 import {
   WorkflowDataTableContextType
 } from "../../../../../components/Workflow/WorkflowDataTable/workflowDataTableContext";
-import { Button, Space } from "antd";
+import { Space } from "antd";
 import { apiUrl } from "../../../../../Constants/apiUrl";
 import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDataTable/WorkFlowStatusColumn";
-
-const getDetailPageUrl = "/producer/step06/detail/";
 
 const Page = () => {
 

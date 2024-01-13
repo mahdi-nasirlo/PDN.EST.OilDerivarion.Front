@@ -247,13 +247,13 @@ const items: MenuProps["items"] = [
     "management",
     null,
     [
-      getMenuItem(
-        <Link href="/producer/base-info/creator-production">
-          اطلاعات واحد تولیدی
-        </Link>,
-        "/producer/base-info/creator-production",
-        <WrenchScrewdriverIcon width={16} height={16} />
-      ),
+      // getMenuItem(
+      //   <Link href="/producer/base-info/creator-production">
+      //     اطلاعات واحد تولیدی
+      //   </Link>,
+      //   "/producer/base-info/creator-production",
+      //   <WrenchScrewdriverIcon width={16} height={16} />
+      // ),
       getMenuItem(
         <Link href="/producer/base-info/laboratory-equipments">
           تجهیزات آزمایشگاهی
@@ -263,7 +263,7 @@ const items: MenuProps["items"] = [
       ),
       getMenuItem(
         <Link href="/producer/base-info/container-info">
-          اطلاعات مخازن میکس یا بلندینگ
+          اطلاعات مخازن مواد اولیه
         </Link>,
         "/producer/base-info/container-info",
         <BeakerIcon width={16} height={16} />
@@ -316,11 +316,11 @@ const items: MenuProps["items"] = [
         "/producer/base-info/management-info",
         <UserCircleIcon width={16} height={16} />
       ),
-      getMenuItem(
-        <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
-        "/producer/base-info/license-info",
-        <DocumentDuplicateIcon width={16} height={16} />
-      ),
+      // getMenuItem(
+      //   <Link href="/producer/base-info/license-info">اطلاعات مجوز</Link>,
+      //   "/producer/base-info/license-info",
+      //   <DocumentDuplicateIcon width={16} height={16} />
+      // ),
       getMenuItem(
         <Link href="/producer/base-info/personnel-info">اطلاعات پرسنلی</Link>,
         "/producer/base-info/personnel-info",

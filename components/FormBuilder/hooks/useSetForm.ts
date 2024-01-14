@@ -12,6 +12,8 @@ const useSetForm = (uid: string) => {
 
     const onSet = async (data: any) => {
 
+        console.log(data)
+
         const res = await trigger({...requestBody, records: JSON.stringify(data)})
 
         return res

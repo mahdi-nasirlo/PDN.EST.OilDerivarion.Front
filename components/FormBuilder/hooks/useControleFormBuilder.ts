@@ -26,11 +26,20 @@ const useControlFormBuilder = () => {
     // Assuming context.formData.data?.records is an object
     let oldData = context.formData?.data?.records ? (JSON?.parse(context.formData?.data?.records || {}) || {}) : {};
 
-    // oldData["__schema"] = context.formData?.data?.schema
+    const addSchema = () => oldData["__schema"] = context.formData?.data?.schema
+
+    const deleteSchema = () => oldData.delete["__schema"]
+
+    const handleSchema = (data: any) => {
+        if (data) addSchema()
+        else deleteSchema()
+    }
 
     const onSetMany = (data: any, formKey: string) => {
 
         const oldDataForm = oldData[formKey];
+
+        handleSchema(data)
 
         if (Array.isArray(oldDataForm)) {
 
@@ -45,6 +54,8 @@ const useControlFormBuilder = () => {
     }
 
     const onUpdateMany = (data: any, formKey: string, row: number) => {
+
+        handleSchema(data)
 
         oldData[formKey][row - 1] = data
 
@@ -62,6 +73,10 @@ const useControlFormBuilder = () => {
 
                 oldDataForm.splice(index, 1);
 
+                if (Array.isArray(oldDataForm) && oldDataForm.length === 0) {
+                    return context.formData.onSet(null)
+                }
+
                 context.formData.onSet({...oldData});
             } else {
                 console.error("Index out of bounds");
@@ -73,6 +88,8 @@ const useControlFormBuilder = () => {
     }
 
     const onSetOne = (data: any, formKey: string) => {
+
+        handleSchema(data)
 
         oldData[formKey] = data;
 

@@ -27,9 +27,14 @@ export default function DataTable({
       width: "5%",
     },
     {
+      title: "شماره درخواست",
+      dataIndex: "requestNumber",
+      key: "2",
+    },
+    {
       title: "شرح فرآیند",
       dataIndex: "processDescription",
-      key: "2",
+      key: "3",
       width: "40%",
       render: (_, record) => (
         <Tooltip
@@ -49,7 +54,7 @@ export default function DataTable({
     {
       title: "تاریخ درخواست",
       dataIndex: "createDate",
-      key: "3",
+      key: "4",
     },
     // {
     //   title: "وضعیت",
@@ -77,23 +82,19 @@ export default function DataTable({
     {
       title: "وضعیت ",
       dataIndex: "requestMasterStatusName",
-      key: "4",
+      key: "5",
     },
     {
       title: "محصولات ",
       dataIndex: "products",
-      key: "5",
+      key: "6",
     },
     {
       title: "روش تولید",
       dataIndex: "productionMethodName",
-      key: "6",
-    },
-    {
-      title: "شماره درخواست",
-      dataIndex: "requestNumber",
       key: "7",
     },
+
     
     {
       title: "عملیات",

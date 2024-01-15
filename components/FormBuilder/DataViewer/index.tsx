@@ -14,6 +14,7 @@ const Index = ({data}: { data: any }) => {
     } catch (e) {
         parsData = {}
     }
+console.log("parsData",parsData);
 
 
     let view: any[] = []

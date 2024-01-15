@@ -32,7 +32,7 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <VisitInfo CanEdit={record.CanEdit} href={"/producer/step15/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            <VisitInfo CanEdit={true} href={"/producer/step15/detail/" + record.TaskId}>                            مشاهده اطلاعات
             </VisitInfo>
           </Space>
         ),

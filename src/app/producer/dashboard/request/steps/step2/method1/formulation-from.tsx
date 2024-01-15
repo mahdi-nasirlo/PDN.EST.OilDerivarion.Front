@@ -76,12 +76,6 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 required: true,
                 message: "لطفا مقدار را وارد کنید",
               },
-              {
-                validator: async (rule, value) => {
-                  if (!/^\d+$/.test(value)) {
-                  }
-                },
-              },
             ]}
           >
             <Input type="number" size="large" placeholder="وارد نمایید" />
@@ -271,6 +265,17 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                           new Error("لطفا مقدار را وارد کنید")
                         );
                       }
+                      if (isNaN(value)) {
+                        return Promise.reject(new Error("لطفا عدد وارد کنید"));
+                      }
+                      if (personTypeStatus === 1) {
+                        const nationalIdRegex = /^(?!(\d)\1{9})\d{10}$/;
+                        if (!nationalIdRegex.test(value)) {
+                          return Promise.reject(
+                            new Error("شناسه ملی نامعتبر است")
+                          );
+                        }
+                      }
                       if (personTypeStatus === 1 && value.length !== 10) {
                         return Promise.reject(
                           new Error("شماره ملی باید 10 رقم باشد")
@@ -290,7 +295,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   value={SupplyNational}
                   size="large"
                   placeholder="وارد نمایید"
-                  type="number"
+                  type="text"
                 />
               </Form.Item>
             </Col>

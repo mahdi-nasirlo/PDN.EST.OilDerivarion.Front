@@ -2,7 +2,6 @@
 
 import React, {useEffect} from "react";
 import ClientComponent from "@/app/login/components/clientComponent";
-import customeFetcher from "../../../lib/server/customeFetcher";
 
 import {signOut, useSession} from "next-auth/react";
 
@@ -19,16 +18,18 @@ export default function Home(props: PropsType) {
 
     useEffect(() => {
 
-        if (session.status == "authenticated")
-            customeFetcher({
-                url: {path: "/Sso/Logout"},
-                method: "GET"
-            }).then((res) => {
-
-                console.log(res)
-                signOut().then()
-
-            })
+        if (session.status == "authenticated") {
+            signOut().then()
+        }
+        // customeFetcher({
+        //     url: {path: "/Sso/Logout"},
+        //     method: "GET"
+        // }).then((res) => {
+        //
+        //     console.log(res)
+        //     signOut().then()
+        //
+        // })
 
     }, []);
 

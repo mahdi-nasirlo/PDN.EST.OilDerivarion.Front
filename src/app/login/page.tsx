@@ -2,6 +2,7 @@
 
 import React, {useEffect} from "react";
 import ClientComponent from "@/app/login/components/clientComponent";
+import customeFetcher from "../../../lib/server/customeFetcher";
 
 import {signOut, useSession} from "next-auth/react";
 

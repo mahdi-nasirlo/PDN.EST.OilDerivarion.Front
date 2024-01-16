@@ -17,8 +17,11 @@ const fetcher = async (url: string, arg: {arg: any}) => {
     const json = await res.data
 
     console.log(json)
-
-    notification.success({message: "دستور باز شدن درب ارسال شد"})
+{
+    if (res.success == true) {
+        notification.success({message: "دستور باز شدن درب ارسال شد"})
+    }
+}
 
     return json
 

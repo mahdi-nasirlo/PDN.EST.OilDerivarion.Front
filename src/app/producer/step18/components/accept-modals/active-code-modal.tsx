@@ -63,9 +63,7 @@ function ActiveCodeModal({
       setIsModalOpen(false);
       setOpenBox(false);
       form.resetFields();
-      router.push(
-        `/laboratory-panel/request-list/test-result-lab/${recordUid}`
-      );
+      router.push(`/producer/step18/test-result-lab/${recordUid}`);
     }
   };
 

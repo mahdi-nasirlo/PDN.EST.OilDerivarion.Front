@@ -7,8 +7,8 @@ import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
-import PercentInput from './inputs/percent-Input';
 import { updatedObject } from "../../utils/method";
+import PercentInput from './inputs/percent-Input';
 
 export interface FormBuilderInputType {
     Name: string,

@@ -40,7 +40,9 @@ const StatusModal = ({
     message = (
       <div>
         <span>
-          {`درخواست شما توسط مسئول مربوطه به دلیل ${data?.requestRejectionDescription} رد شد`}
+          {/* {`درخواست شما توسط مسئول مربوطه به دلیل ${data?.requestRejectionDescription} رد شد`} */}
+          {`درخواست شما رد شد.
+توضیحات مسئول مربوطه :${data?.requestRejectionDescription}`}
         </span>
       </div>
     );

@@ -204,7 +204,7 @@ export const routDictionary: Items = {
     title: "افزودن جعبه",
   },
   material: {
-    title: "مواد اولیه",
+    title: "مواد اولیه ها",
   },
   // "adding-raw-material": {
   //   title: "لیست مواد اولیه",
@@ -213,7 +213,7 @@ export const routDictionary: Items = {
   //   title: "فاکتور های آزمون مواد اولیه",
   // },
   "category-list": {
-    title: "لیست دسته بندی ها",
+    title: "دسته بندی محصولات",
   },
   "management-users": {
     title: "مدیریت کاربران",
@@ -222,7 +222,7 @@ export const routDictionary: Items = {
     title: "ثبت تغییرات",
   },
   laboratory: {
-    title: "لیست آزمایشگاه ها",
+    title: " آزمایشگاه ها",
     href: "/laboratory",
   },
   "labratory-factor": {
@@ -247,10 +247,10 @@ export const routDictionary: Items = {
     title: "استان",
   },
   "test-factors": {
-    title: "لیست فاکتورهای آزمون",
+    title: "فاکتورهای آزمون",
   },
   "test-feature": {
-    title: "لیست استاندارد های آزمون",
+    title: "استاندارد های آزمون",
   },
   "test-result": {
     title: "لیست نتایج آزمون ها",
@@ -271,13 +271,13 @@ export const routDictionary: Items = {
     title: "رهگیری GPS",
   },
   "map-gps": {
-    title: "نقشه آزمایشگاه ها",
+    title: "موقعیت جغرافیایی آزمایشگاه ها",
   },
   "location-gps-device": {
     title: "موقعیت GPS",
   },
   measures: {
-    title: "لیست واحد های اندازه گیری",
+    title: "واحد های اندازه گیری",
   },
   "producer-info": {
     title: "اطلاعات تولید کننده",

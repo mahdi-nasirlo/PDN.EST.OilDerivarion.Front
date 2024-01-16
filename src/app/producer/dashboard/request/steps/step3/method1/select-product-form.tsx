@@ -68,71 +68,71 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
       {[1, 3, 4].includes(
         processController.requestMaster.productionMethodId
       ) && (
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name={"productUsageExploitation"}
-              label={"درصد استحصال"}
-              rules={[
-                { required: true, message: "لطفا مقدار را وارد کنید" },
-                {
-                  validator: (_, value) =>
-                    Number.isFinite(value)
-                      ? Promise.resolve()
-                      : Promise.reject(new Error("لطفا عدد وارد کنید")),
-                },
-                {
-                  type: "number",
-                  min: 1,
-                  max: 100,
-                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
-                },
-              ]}
-            >
-              <InputNumber
-                controls={false}
-                className="w-full rounded-lg"
-                size="large"
-                min={0}
-                max={100}
-                formatter={(value) => `${value}%`}
-                placeholder="وارد کنید"
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name={"productUsageWasted"}
-              label={"درصد هدر رفت"}
-              rules={[
-                { required: true, message: "لطفا مقدار را وارد کنید" },
-                {
-                  validator: (_, value) =>
-                    Number.isFinite(value)
-                      ? Promise.resolve()
-                      : Promise.reject(new Error("لطفا عدد وارد کنید")),
-                },
-                {
-                  type: "number",
-                  min: 0,
-                  max: 100,
-                  message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-                },
-              ]}
-            >
-              <InputNumber
-                controls={false}
-                className="w-full rounded-lg"
-                size="large"
-                min={0}
-                max={100}
-                formatter={(value) => `${value}%`}
-                placeholder="وارد کنید"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-      )}
+          <Row gutter={[16, 16]}>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name={"productUsageExploitation"}
+                label={"درصد استحصال"}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  {
+                    validator: (_, value) =>
+                      Number.isFinite(value)
+                        ? Promise.resolve()
+                        : Promise.reject(new Error("لطفا عدد وارد کنید")),
+                  },
+                  {
+                    type: "number",
+                    min: 1,
+                    max: 100,
+                    message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
+                  },
+                ]}
+              >
+                <InputNumber
+                  controls={false}
+                  className="w-full rounded-lg"
+                  size="large"
+                  min={0}
+                  max={100}
+                  formatter={(value) => `%${value}`}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name={"productUsageWasted"}
+                label={"درصد هدر رفت"}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  {
+                    validator: (_, value) =>
+                      Number.isFinite(value)
+                        ? Promise.resolve()
+                        : Promise.reject(new Error("لطفا عدد وارد کنید")),
+                  },
+                  {
+                    type: "number",
+                    min: 0,
+                    max: 100,
+                    message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
+                  },
+                ]}
+              >
+                <InputNumber
+                  controls={false}
+                  className="w-full rounded-lg"
+                  size="large"
+                  min={0}
+                  max={100}
+                  formatter={(value) => `%${value}`}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        )}
     </>
   );
 };

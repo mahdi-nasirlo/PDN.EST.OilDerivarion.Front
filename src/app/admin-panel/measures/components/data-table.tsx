@@ -20,17 +20,17 @@ export default function DataTable({
   measure,
   mutate,
 }: {
-  setFilter: (arg: any) => void,
+  setFilter: (arg: any) => void;
   isValidating: any;
   setModalVisible: any;
   ldMeasure: boolean;
   mutate: () => void;
   measure:
-  | {
-    records: Measure[];
-    count: number;
-  }
-  | undefined;
+    | {
+        records: Measure[];
+        count: number;
+      }
+    | undefined;
 }) {
   const [openEdit, setOpenEdit] = useState<Measure | undefined>(undefined);
 
@@ -49,16 +49,15 @@ export default function DataTable({
 
   const handleConfirmDelete = async () => {
     const res = await trigger({
-      uid: recordToDelete?.Uid,
+      uid: recordToDelete?.uid,
     });
 
-    console.log(res)
+    console.log(res);
 
     if (res) {
       mutate();
       setIsDeleteModalVisible(false);
     }
-
   };
 
   const showModal = () => {
@@ -70,18 +69,18 @@ export default function DataTable({
       title: "ردیف",
       dataIndex: "Row",
       key: "1",
-      width: "5%"
+      width: "5%",
     },
     {
       title: "واحد اندازه گیری",
-      dataIndex: "Name",
+      dataIndex: "name",
       key: "2",
     },
     {
       title: "فعال/غیر فعال",
-      dataIndex: "IsActive",
+      dataIndex: "isActive",
       key: "4",
-      render: (_, record: any) => <StatusColumn record={record} />
+      render: (_, record: any) => <StatusColumn record={record} />,
     },
     {
       title: "عملیات",

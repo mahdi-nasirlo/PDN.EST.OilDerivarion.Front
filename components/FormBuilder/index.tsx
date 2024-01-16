@@ -7,6 +7,7 @@ import TextInput from "./inputs/TextInput";
 import InputNumber from "./inputs/InputNumber";
 import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
+import PercentInput from './inputs/percent-Input';
 import { updatedObject } from "../../utils/method";
 
 export interface FormBuilderInputType {
@@ -66,6 +67,7 @@ const Index = (props: {
                 {data.Description}
             </Typography>
         </>}
+        <Divider />
         <RenderInputs
             initialValues={props.initialValues}
             item={data.FormFields}
@@ -131,6 +133,9 @@ const RenderInput = ({ item }: { item: FormBuilderInputType }) => {
             break
         case "radioBtn":
             currentInput = <RadioBtn data={item} />
+            break
+        case "percentInput":
+            currentInput = <PercentInput data={item} />
             break
         default:
             currentInput = <Typography>فیلد مورد نظر پشتیبانی نمی شود</Typography>

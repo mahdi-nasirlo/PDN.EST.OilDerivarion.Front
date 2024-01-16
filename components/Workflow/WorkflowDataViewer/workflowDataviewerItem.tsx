@@ -1,5 +1,5 @@
 import React from "react";
-import {Descriptions, Spin, Table, Typography} from "antd";
+import {Descriptions, Spin, Table} from "antd";
 import {ColumnsType} from "antd/es/table";
 
 interface PropsType {
@@ -21,9 +21,9 @@ const Index = (props: PropsType) => {
 
   return (
     <>
-      <Typography className="font-medium text-lg text-primary-500 mb-4 text-right">
-        {props?.data?.Title}
-      </Typography>
+      {/*<Typography className="font-medium text-lg text-primary-500 mb-4 text-right">*/}
+      {/*  {props?.data?.Title}*/}
+      {/*</Typography>*/}
 
       {/*// @ts-ignore*/}
       <RenderTable

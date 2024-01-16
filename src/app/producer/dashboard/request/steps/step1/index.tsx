@@ -5,7 +5,6 @@ import React, {useContext} from "react";
 import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import staticMessages from "../../../../../../../lib/staticMessages";
 import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
-import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 // import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 
 export default function Step1() {
@@ -32,6 +31,20 @@ export default function Step1() {
         layout="vertical"
       >
         <Row gutter={[16, 16]}>
+          <Col xs={24} md={12}>
+            <Form.Item
+                name="productionMethodId"
+                label="روش تولید"
+                rules={[{required: true, message: "لطفا مقدار را انتخاب کنید"}]}
+            >
+              <Select
+                  options={productionMethods}
+                  loading={isLoadingProductionMethods}
+                  fieldNames={fieldNames}
+                  size="large"
+              />
+            </Form.Item>
+          </Col>
           <Col xs={24} md={24}>
             <Form.Item
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -44,40 +57,25 @@ export default function Step1() {
               />
             </Form.Item>
           </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="productionMethodId"
-              label="روش تولید"
-              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
-            >
-              <Select
-                options={productionMethods}
-                loading={isLoadingProductionMethods}
-                fieldNames={fieldNames}
-                size="large"
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="fileNameass"
-              label="نمودار شماتیک فرآیند"
-              tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}
-            >
-              <FileUpload/>
-              {/*<Upload*/}
-              {/*  multiple={false}*/}
-              {/*  maxCount={1}*/}
-              {/*  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"*/}
-              {/*  listType="picture"*/}
-              {/*  className="w-full"*/}
-              {/*>*/}
-              {/*  <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>*/}
-              {/*</Upload>*/}
-            </Form.Item>
-          </Col>
+
+          {/*<Col xs={24} md={12}>*/}
+          {/*  <Form.Item*/}
+          {/*    name="fileNameass"*/}
+          {/*    label="نمودار شماتیک فرآیند"*/}
+          {/*    tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}*/}
+          {/*  >*/}
+          {/*    <FileUpload/>*/}
+          {/*    /!*<Upload*!/*/}
+          {/*    /!*  multiple={false}*!/*/}
+          {/*    /!*  maxCount={1}*!/*/}
+          {/*    /!*  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"*!/*/}
+          {/*    /!*  listType="picture"*!/*/}
+          {/*    /!*  className="w-full"*!/*/}
+          {/*    /!*>*!/*/}
+          {/*    /!*  <Button icon={<UploadOutlined />}>بارگزاری نمایید</Button>*!/*/}
+          {/*    /!*</Upload>*!/*/}
+          {/*  </Form.Item>*/}
+          {/*</Col>*/}
         </Row>
         <Divider />
         <Row gutter={[12, 12]}>

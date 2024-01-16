@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../lib/server/listFetcher";
+import React, {useEffect} from "react";
+import {Button, Col, Form, Modal, Row} from "antd";
+import {useForm} from "antd/es/form/Form";
 import useUpdateLaboratory from "../../../../../hooks/laboratory/useUpdateLaboratory";
 import LaboratoryForm from "./laboratory-form";
 
@@ -26,8 +24,8 @@ export default function EditModal({
     values.uid = recordToEdit?.uid;
 
     const res = await UpdateLaboratory.trigger(values);
-    if (res) {
-      await mutate();
+    if (res?.success) {
+      mutate();
 
       form.resetFields();
 

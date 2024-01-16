@@ -106,7 +106,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 size="large"
                 min={0}
                 max={100}
-                formatter={(value) => `${value}%`}
+                formatter={(value) => `%${value}`}
                 placeholder="وارد کنید"
               />
             </Form.Item>
@@ -133,7 +133,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 size="large"
                 min={0}
                 max={99}
-                formatter={(value) => `${value}%`}
+                formatter={(value) => `%${value}`}
                 placeholder="وارد کنید"
               />
             </Form.Item>
@@ -295,7 +295,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   value={SupplyNational}
                   size="large"
                   placeholder="وارد نمایید"
-                  type="text"
+                  type="number"
                 />
               </Form.Item>
             </Col>

@@ -1,15 +1,17 @@
-import { Typography } from "antd";
+import {Typography} from "antd";
 import React from "react";
-import { ColumnsType } from "antd/es/table";
-import { RequestList } from "../../../../../../../interfaces/requestDetail";
+import {ColumnsType} from "antd/es/table";
+import {RequestList} from "../../../../../../../interfaces/requestDetail";
 import CustomeTable from '../../../../../../../components/CustomeTable';
 
 export default function PrimaryManufacturerListTable({
   request,
   isLoading,
+                                                       setFilter
 }: {
   request: any;
   isLoading: any;
+  setFilter: (arg: any) => void
 }) {
   const columns: ColumnsType<RequestList> = [
     {
@@ -72,11 +74,11 @@ export default function PrimaryManufacturerListTable({
         جزئیات درخواست ها
       </Typography>
       <CustomeTable
-        setInitialData={() => { }}
-        isLoading={isLoading}
-        data={request}
-        columns={columns}
-        pagination={false}
+          setInitialData={setFilter}
+          isLoading={isLoading}
+          data={request}
+          columns={columns}
+          pagination={false}
       />
     </div>
   );

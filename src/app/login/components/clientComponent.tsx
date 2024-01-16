@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { signIn, useSession } from "next-auth/react";
-import { Spin, Typography } from "antd";
+import React, {useEffect} from "react";
+import {signIn, useSession} from "next-auth/react";
+import {Spin, Typography} from "antd";
 import ThemeProvider from "../../../../provider/theme-provider";
-import { validateToken } from "../../../../request/validateToken";
+import {validateToken} from "../../../../request/validateToken";
 import useGetToken from "../../../../hooks/sso/useGetToken";
+import {useRouter} from "next/navigation";
 
 const ClientComponent = ({
   code,
@@ -14,6 +15,9 @@ const ClientComponent = ({
   code: string | undefined;
   callbackUrl: string | undefined;
 }) => {
+
+  const router = useRouter()
+
   const session = useSession();
 
   const getToken = useGetToken()
@@ -27,15 +31,20 @@ const ClientComponent = ({
 
         getToken.trigger({
           code
-        }).then((res: { token_type: string, access_token: string }) => {
+        }).then(async (res: { token_type: string, access_token: string }) => {
 
           console.log(res)
 
-          signIn("credentials", {
-            code: `${res?.token_type} ${res?.access_token}`,
-            callbackUrl: "/producer",
-            redirect: true,
-          });
+          if (res.access_token) {
+            await signIn("credentials", {
+              code: `${res?.token_type} ${res?.access_token}`,
+              callbackUrl: "/producer",
+              redirect: true,
+            })
+          } else {
+            router.push("/login")
+          }
+
         })
 
 

@@ -24,7 +24,7 @@ export default function Step5() {
     const [form] = useForm();
     return (
         <>
-            <GodOfDataViewer steps={false} uid={""} data={getInfo.data || {}} loading={getInfo.isLoading} />
+            <GodOfDataViewer steps={false} uid={null as any} data={getInfo.data || {}} loading={getInfo.isLoading} />
             <Divider />
             <Form form={form} onFinish={handleSubmit}>
                 <Form.Item

@@ -8,30 +8,19 @@ import getTokenFromSession from "./getToken";
 import createLog from "../logger/createLog";
 import {reportLogEnum} from "../logger/reportLogEnum";
 
-export async function mutationFetcher(url: string, { arg }: { arg: any }) {
+export async function mutationFetcherGetForLogout(url: string, { arg }: { arg: any }) {
 
   const token = await getTokenFromSession() || ""
 
   try {
-    console.log({dataBOdy: convertObjectToFarsiToEnglish(arg)})
-    // const res: AxiosResponse = await customRequest.post(
-    //     url,
-    //     convertObjectToFarsiToEnglish(arg),
-    //     {
-    //       headers: {
-    //         "Authorization": token
-    //       }
-    //     }
-    // );
-    const bodyData = convertObjectToFarsiToEnglish(arg)
-    const res: AxiosResponse = await customRequest.request({
-      url,
-      method: 'POST',
-      ...bodyData ? {data: bodyData} : {},
-      headers: {
-        "Authorization": token
-      }
-    });
+    const res: AxiosResponse = await customRequest.get(
+        url,
+        {
+          headers: {
+            "Authorization": token
+          }
+        }
+    );
 
     const data: dataType = res.data;
 

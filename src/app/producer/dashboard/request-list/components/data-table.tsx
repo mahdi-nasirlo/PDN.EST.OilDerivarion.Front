@@ -27,9 +27,14 @@ export default function DataTable({
       width: "5%",
     },
     {
+      title: "شماره درخواست",
+      dataIndex: "requestNumber",
+      key: "2",
+    },
+    {
       title: "شرح فرآیند",
       dataIndex: "processDescription",
-      key: "2",
+      key: "3",
       width: "40%",
       render: (_, record) => (
         <Tooltip
@@ -49,36 +54,48 @@ export default function DataTable({
     {
       title: "تاریخ درخواست",
       dataIndex: "createDate",
-      key: "3",
-    },
-    {
-      title: "وضعیت",
-      dataIndex: "isReqDetailCompleted",
       key: "4",
-      render(_, record) {
-        let color = "";
-        let name = "";
-        if (record.isReqDetailCompleted === true) {
-          color = "success";
-          name = "تکمیل شده";
-        } else {
-          color = "red";
-          name = "تکمیل نشده";
-        }
+    },
+    // {
+    //   title: "وضعیت",
+    //   dataIndex: "isReqDetailCompleted",
+    //   key: "4",
+    //   render(_, record) {
+    //     let color = "";
+    //     let name = "";
+    //     if (record.isReqDetailCompleted === true) {
+    //       color = "success";
+    //       name = "تکمیل شده";
+    //     } else {
+    //       color = "red";
+    //       name = "تکمیل نشده";
+    //     }
 
-        return <Tag color={color}>{name}</Tag>;
-      },
+    //     return <Tag color={color}>{name}</Tag>;
+    //   },
+    // },
+    // {
+    //   title: "نام شرکت",
+    //   dataIndex: "producerName",
+    //   key: "5",
+    // },
+    {
+      title: "وضعیت ",
+      dataIndex: "requestMasterStatusName",
+      key: "5",
     },
     {
-      title: "نام شرکت",
-      dataIndex: "producerName",
-      key: "5",
+      title: "محصولات ",
+      dataIndex: "products",
+      key: "6",
     },
     {
       title: "روش تولید",
       dataIndex: "productionMethodName",
-      key: "6",
+      key: "7",
     },
+
+    
     {
       title: "عملیات",
       key: "عملیات",

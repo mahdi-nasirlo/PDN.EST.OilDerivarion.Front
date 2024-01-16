@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import ClientComponent from "@/app/login/components/clientComponent";
 import customeFetcher from "../../../lib/server/customeFetcher";
 
-import {signOut, useSession} from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 interface PropsType {
   searchParams: {
@@ -14,23 +14,16 @@ interface PropsType {
 }
 
 export default function Home(props: PropsType) {
+  const session = useSession();
 
-    const session = useSession()
-
-    useEffect(() => {
-
-        if (session.status == "authenticated")
-            customeFetcher({
-                url: {path: "/Sso/Logout"},
-                method: "GET"
-            }).then((res) => {
-
-                console.log(res)
-                signOut().then()
-
-            })
-
-    }, []);
+  useEffect(() => {
+    if (session.status == "authenticated")
+      customeFetcher({
+        url: { path: "/Sso/Logout" },
+        method: "GET",
+      }).then();
+    signOut().then();
+  }, []);
 
   return (
     <>

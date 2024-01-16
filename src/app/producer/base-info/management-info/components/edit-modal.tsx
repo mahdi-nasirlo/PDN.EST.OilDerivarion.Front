@@ -129,25 +129,12 @@ export default function EditModal({
             <Col xs={24} md={12}>
               <Form.Item
                 name="nationalCode"
-                label="شماره ملی / کد اتباع"
+                label="شماره ملی"
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    validator(_, value) {
-                      const inputValue = value.replace(/[^0-9]/g, '');
-                      const len = inputValue.length
-                      const NationalCode = /^(?!(\d)\1{9})\d{10}$/.test(inputValue);
-                      const CitizenCode = /^[0-9]{12}$/.test(inputValue);
-
-                      if (len === 10 && !NationalCode) {
-                        return Promise.reject("شناسه ملی نامعتبر است");
-                      } else if (len === 12 && !CitizenCode) {
-                        return Promise.reject("کد اتباع 12 رقمی است");
-                      } else if (len !== 10 && len !== 12) {
-                        return Promise.reject("لطفاً شناسه ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید");
-                      }
-                      return Promise.resolve();
-                    },
+                    pattern: /^(?!(\d)\1{9})\d{10}$/,
+                    message: "شماره ملی نامعتبر است",
                   },
                 ]}
               >
@@ -211,7 +198,7 @@ export default function EditModal({
             </Col>
           </Row>
         </Form>
-      </Modal>
+      </Modal >
     </>
   );
 }

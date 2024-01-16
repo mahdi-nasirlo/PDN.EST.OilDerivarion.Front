@@ -28,9 +28,9 @@ export default function Page() {
         <>
             <>
                 <div className="flex justify-between items-center">
-                    <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                    <Typography.Title level={5} className="text-gray-901 text-right">
                         اطلاعات تماس
-                    </Typography>
+                    </Typography.Title>
                     <Button
                         className="max-md:w-full flex justify-center items-center gap-2"
                         size="large"

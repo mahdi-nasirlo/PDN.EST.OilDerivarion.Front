@@ -52,9 +52,9 @@ export default function Page() {
     return (
         <>
             <div className="flex justify-between items-center">
-                <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>
+                <Typography.Title level={5} className="text-gray-901 text-right">
                     تجهیزات آزمایشگاهی
-                </Typography>
+                </Typography.Title>
                 <div className='max-md:w-full'>
                     {isEditVisible && <ButtonDisplay setIsEditVisible={setIsEditVisible} mutate={mutate} />}
 

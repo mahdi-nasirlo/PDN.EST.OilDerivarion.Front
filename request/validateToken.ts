@@ -12,6 +12,8 @@ export const validateToken = async (redirectUri: string | undefined = undefined)
         
         notFound()
     }
+
+    console.log(res)
     
     if (!res.success) {
         
@@ -20,13 +22,10 @@ export const validateToken = async (redirectUri: string | undefined = undefined)
         window.location.href = `${res?.data?.ssoUrl}?redirectUri=${redirectTo}/login&clientId=${res.data?.clientId}`
         
     }
-    
-    console.log(res.success);
 
-    // if(res?.success)
-    // {
-    //    window.location.href = window.location.origin
-    // }
+    if (res?.success) {
+        window.location.href = window.location.origin
+    }
 
     return res
 }

@@ -146,7 +146,7 @@ export default function ManagementUserForm({
             rules={[
               { required: true, message: "لطفا مقدار را وارد کنید" },
               {
-                pattern: /^[0-9]{10}$/,
+                pattern: /^(?!(\d)\1{9})\d{10}$/,
                 message: "شماره ملی نامعتبر است",
               },
             ]}

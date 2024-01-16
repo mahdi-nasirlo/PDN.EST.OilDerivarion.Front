@@ -86,32 +86,32 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
         {[3, 4].includes(
           processController.requestMaster.productionMethodId
         ) && (
-          <Col xs={24} md={12}>
-            <Form.Item
-              name={"materialUsagePercentage"}
-              label={"درصد استفاده"}
-              rules={[
-                { required: true, message: "لطفا مقدار را وارد کنید" },
-                {
-                  type: "number",
-                  min: 1,
-                  max: 100,
-                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
-                },
-              ]}
-            >
-              <InputNumber
-                controls={false}
-                className="w-full rounded-lg"
-                size="large"
-                min={0}
-                max={100}
-                formatter={(value) => `${value}%`}
-                placeholder="وارد کنید"
-              />
-            </Form.Item>
-          </Col>
-        )}
+            <Col xs={24} md={12}>
+              <Form.Item
+                name={"materialUsagePercentage"}
+                label={"درصد استفاده"}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  {
+                    type: "number",
+                    min: 1,
+                    max: 100,
+                    message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
+                  },
+                ]}
+              >
+                <InputNumber
+                  controls={false}
+                  className="w-full rounded-lg"
+                  size="large"
+                  min={0}
+                  max={100}
+                  formatter={(value) => `%${value}`}
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+          )}
         {[2].includes(processController.requestMaster.productionMethodId) && (
           <Col xs={24} md={12}>
             <Form.Item
@@ -133,7 +133,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 size="large"
                 min={0}
                 max={99}
-                formatter={(value) => `${value}%`}
+                formatter={(value) => `%${value}`}
                 placeholder="وارد کنید"
               />
             </Form.Item>
@@ -254,8 +254,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   personTypeStatus === null
                     ? "شماره ملی / شناسه ملی"
                     : personTypeStatus === 2
-                    ? "شناسه ملی"
-                    : "شماره ملی"
+                      ? "شناسه ملی"
+                      : "شماره ملی"
                 }
                 rules={[
                   {

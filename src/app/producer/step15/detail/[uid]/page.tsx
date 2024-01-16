@@ -1,7 +1,6 @@
 "use client";
 
 import { Col, Divider, Form, Input, Row, Typography } from "antd";
-import { Choice } from "../../../../../../interfaces/requestDetail";
 import { apiUrl } from "../../../../../../Constants/apiUrl";
 import { useForm } from "antd/es/form/Form";
 import useGetStep from "../../../../../../hooks/workFlowRequest/useGetStep";
@@ -16,19 +15,6 @@ interface PropType {
   params: { uid: string };
 }
 
-interface DataFetchType {
-  choices: Choice[];
-  task: {
-    processId: string;
-    stepId: string;
-    reference_ID: string;
-    group_ID: string;
-    step_Name: string;
-    counting_position: string;
-    userId: number;
-  };
-}
-
 const apiData = apiUrl.WorkFlowRequest.step15;
 
 export default function Home(props: PropType) {
@@ -38,7 +24,7 @@ export default function Home(props: PropType) {
 
   const router = useRouter();
 
-  const { isLoading, data, mutate } = useGetStep({
+  const { isLoading, data } = useGetStep({
     taskId: props.params.uid,
     apiUrl: apiData.get.url,
   });
@@ -76,7 +62,6 @@ export default function Home(props: PropType) {
           data={data?.tabs}
           loading={isLoading}
         />
-        {/*<WorkflowDataViewer loading={isLoading} data={data as any} />*/}
         {data && (
           <>
             <Divider />
@@ -97,7 +82,6 @@ export default function Home(props: PropType) {
             </Form>
           </>
         )}
-        {/* <DateOfVisitForm form={form} onFinish={onFinish} /> */}
         {data && <Divider />}
         <WorkflowRequestBtn
           loading={isMutating}

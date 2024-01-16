@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Col, Form, Input, InputNumber, Row, Select } from "antd";
+import React, {useEffect, useState} from "react";
+import {Col, Form, Input, InputNumber, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { filterOption } from "../../../../../../lib/filterOption";
-import { sortByIndex } from "../../../../../../lib/sortByIndex";
-import { CategoryProduct } from "../../../../../../interfaces/category-product";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {filterOption} from "../../../../../../lib/filterOption";
+import {sortByIndex} from "../../../../../../lib/sortByIndex";
+import {CategoryProduct} from "../../../../../../interfaces/category-product";
 
 function CategoryForm({
   row,
@@ -174,7 +174,7 @@ function CategoryForm({
                   }
                   if (numericValue > 100) {
                     return Promise.reject(
-                      new Error("مقدار حداکثر 2 کارکتر می باشد")
+                        new Error("حداکثر تعداد مجاز دو کاراکتر است")
                     )
                   }
                   return Promise.resolve();

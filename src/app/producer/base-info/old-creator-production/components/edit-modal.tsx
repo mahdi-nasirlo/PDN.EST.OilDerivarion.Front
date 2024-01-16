@@ -128,8 +128,8 @@ export default function EditModal({
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    pattern: /^[0-9]{10}$/,
-                    message: " شماره ملی نامعتبر است",
+                    pattern: /^(?!(\d)\1{9})\d{10}$/,
+                    message: "شماره ملی نامعتبر است",
                   },
                 ]}
               >

@@ -43,9 +43,9 @@ function Step2({
           <Col xs={24} md={12}>
             <Form.Item
               rules={[
-                { required: true },
+                { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
-                  pattern: /^[0-9]{10}$/,
+                  pattern: /^(?!(\d)\1{9})\d{10}$/,
                   message: "شماره ملی نامعتبر است",
                 },
               ]}

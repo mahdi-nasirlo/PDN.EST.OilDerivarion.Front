@@ -127,8 +127,8 @@ export default function Home(props: PropType) {
                   rules={[
                     { required: true, message: "لطفا مقدار را وارد کنید" },
                     {
-                      pattern: /^[0-9]{10}$/,
-                      message: " کدملی نامعتبر است",
+                      pattern: /^(?!(\d)\1{9})\d{10}$/,
+                      message: "شماره ملی نامعتبر است",
                     },
                   ]}
                 >

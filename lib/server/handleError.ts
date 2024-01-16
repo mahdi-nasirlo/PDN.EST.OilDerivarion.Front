@@ -1,7 +1,6 @@
 import {notification} from "antd";
+
 // import reportLog from "../logger/reportLog";
-import {reportLogEnum} from "../logger/reportLogEnum";
-import createLog from "../logger/createLog";
 
 interface UnAuthorizeType {
     data: {
@@ -26,13 +25,13 @@ export const HandleError = async (error: any) => {
         statusCode: error.statusCode
     }
 
-    await createLog(reportLogEnum.api_error, errorData)
+    // await createLog(reportLogEnum.api_error, errorData)
 
     if (response?.status === 401) {
 
         const {data}: { data: UnAuthorizeType } = response
 
-        window.location.href = window.location.origin + "/api/auth/signout"
+        window.location.href = "/login"
 
     }
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { Col, Form, Input, Row, Select } from "antd";
+import {Col, Form, Input, Row, Select} from "antd";
 import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import {listFetcher} from "../../../../../../lib/server/listFetcher";
+import {sortByIndex} from "../../../../../../lib/sortByIndex";
 
 function GpsForm() {
 
@@ -47,7 +47,11 @@ function GpsForm() {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="stateId" label="استان">
+          <Form.Item
+              rules={[{required: true, message: "لطفا مقدار را انتخاب کنید"}]}
+              name="stateId"
+              label="استان"
+          >
             <Select
               size="large"
               placeholder="انتخاب کنید"

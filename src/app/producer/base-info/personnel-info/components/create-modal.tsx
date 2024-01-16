@@ -115,11 +115,11 @@ export default function CreateModal({
                       const CitizenCode = /^[0-9]{12}$/.test(inputValue);
 
                       if (len === 10 && !NationalCode) {
-                        return Promise.reject("شناسه ملی نامعتبر است");
+                        return Promise.reject("شماره ملی نامعتبر است");
                       } else if (len === 12 && !CitizenCode) {
                         return Promise.reject("کد اتباع 12 رقمی است");
                       } else if (len !== 10 && len !== 12) {
-                        return Promise.reject("لطفاً شناسه ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید");
+                        return Promise.reject("لطفاً شماره ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید");
                       }
                       return Promise.resolve();
                     },

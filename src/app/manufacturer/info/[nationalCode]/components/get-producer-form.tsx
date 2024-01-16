@@ -30,7 +30,7 @@ export default function GetProducerForm({ params }: { params: { nationalCode: st
                         </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                        <Form.Item name="nationalCode" label="شناسه ملی">
+                        <Form.Item name="nationalCode" label="شماره ملی">
                             <Input disabled size="large" />
                         </Form.Item>
                     </Col>

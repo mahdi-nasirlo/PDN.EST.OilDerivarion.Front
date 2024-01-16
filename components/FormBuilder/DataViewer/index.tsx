@@ -1,5 +1,5 @@
 import React from 'react';
-import {Descriptions, Divider, Typography} from "antd";
+import {Descriptions, Divider} from "antd";
 import {z} from "zod";
 import {FormSchemaStructure} from "../type";
 import FormDataTable from "../../Resource/FormDataTable";
@@ -66,7 +66,7 @@ console.log("parsData",parsData);
                                 })
                             })
 
-                            tabItem = <Descriptions className="text-right" title={Form.Title}>
+                            tabItem = <Descriptions className="text-right">
                                 {descriptionsItems.map((descriptionsItem, index3) => <>
                                     <Descriptions.Item label={descriptionsItem.label}>
                                         {descriptionsItem.children}
@@ -77,9 +77,9 @@ console.log("parsData",parsData);
 
                         if (Form.Mode === 0) {
                             tabItem = <div>
-                                <Typography className="text-right font-bold text-lg mb-5">
-                                    {categoryForms.Title}
-                                </Typography>
+                                {/*<Typography className="text-right font-bold text-lg mb-5">*/}
+                                {/*    {categoryForms.Title}*/}
+                                {/*</Typography>*/}
                                 <div>
                                     <FormDataTable schema={Form as any} records={schemaValue} delete={false}/>
                                 </div>

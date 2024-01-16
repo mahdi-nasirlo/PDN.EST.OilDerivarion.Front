@@ -13,8 +13,8 @@ const fetcher = async (url: string, arg: {arg: any}) => {
     
     const res = await customFetch({url: {absolute: true, path: getUrlWithParams(apiUrl.MapViewer.boxOpen.url,  {code: 1234, device: "C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA"}) }})
 
-    return await res.data
-
+    
+    return await res?.success
 
 }
 

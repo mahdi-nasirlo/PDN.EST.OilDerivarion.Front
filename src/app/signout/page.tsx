@@ -14,8 +14,10 @@ const Page = () => {
 
         const res = await serverSignOut.trigger()
 
-        if (res.success)
+        if (res?.success)
+
             await authSignOut({callbackUrl: "/login"})
+
     }
 
     useEffect(() => {

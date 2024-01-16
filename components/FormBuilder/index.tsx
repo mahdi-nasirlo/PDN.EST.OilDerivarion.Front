@@ -67,6 +67,7 @@ const Index = (props: {
                 {data.Description}
             </Typography>
         </>}
+        <Divider />
         <RenderInputs
             initialValues={props.initialValues}
             item={data.FormFields}

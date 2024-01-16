@@ -8,11 +8,19 @@ import useSignOut from "../../../hooks/sso/useSginout";
 
 const Page = () => {
 
-    useSignOut()
+    const serverSignOut = useSignOut()
+
+    const logOut = async () => {
+
+        const res = await serverSignOut.trigger()
+
+        if (res.success)
+            await authSignOut({callbackUrl: "/login"})
+    }
 
     useEffect(() => {
 
-        authSignOut({callbackUrl: "/login"})
+        const result = logOut()
 
     }, [])
 

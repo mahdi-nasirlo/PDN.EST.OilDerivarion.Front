@@ -1,5 +1,5 @@
-import {mutationFetcher} from "../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
+import customeFetcher from "../../lib/server/customeFetcher";
 
 
 const useSignOut = () => useSWRMutation("/Sso/Logout", () => customeFetcher({

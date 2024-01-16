@@ -21,7 +21,7 @@ function EditModal({
   const [form] = useForm();
 
   const { data, isLoading, isValidating } = useSWR(
-    ["/Measure/Get", { uid: editRecords?.Uid }],
+    ["/Measure/Get", { uid: editRecords?.uid }],
     ([url, arg]) => listFetcher(url, { arg })
   );
 
@@ -31,7 +31,7 @@ function EditModal({
   );
 
   const handleSubmit = async (values: Measure) => {
-    values.Uid = editRecords?.Uid;
+    values.uid = editRecords?.uid;
 
     const res = await trigger(values);
     if (res) {

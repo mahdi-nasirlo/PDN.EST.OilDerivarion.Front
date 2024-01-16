@@ -1,9 +1,9 @@
 export type Measure = {
   Id: number;
-  Uid?: string;
-  Name: string;
-  IsActive: boolean;
-  IsDeleted: boolean;
+  uid?: string;
+  name: string;
+  isActive: boolean;
+  isDeleted: boolean;
 };
 
 export type CreateMeasure = {

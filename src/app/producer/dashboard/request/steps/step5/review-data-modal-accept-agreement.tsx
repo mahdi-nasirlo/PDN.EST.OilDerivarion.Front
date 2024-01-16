@@ -51,7 +51,7 @@ export default function ReviewDataModalAcceptAgreement(
                                     <b style={{ fontWeight: 'bold' }}>
                                         {`${data?.firstName} ${data?.lastName}`}
                                     </b>
-                                    {` به شماره شماره ملی `}
+                                    {` به شماره ملی `}
                                     <b style={{ fontWeight: 'bold' }}>
                                         {data?.nationalCode}
                                     </b>

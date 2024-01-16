@@ -22,11 +22,11 @@ const WorkFlowStatusColumn = ({ record }: { record: any }) => {
   } else if (record.Status === 2) {
     color = "orange";
     name = "درحال بررسی";
-    icon = <CheckCircleOutlined />;
+    icon = <ClockCircleOutlined />;
   } else if (record.Status === 3) {
     color = "red";
     name = "خطا";
-    icon = <CheckCircleOutlined />;
+    icon = <InfoCircleOutlined />;
   }
 
   return (

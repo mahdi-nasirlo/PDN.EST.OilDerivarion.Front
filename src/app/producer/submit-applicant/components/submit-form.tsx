@@ -6,7 +6,6 @@ import {
   Divider,
   Form,
   Input,
-  InputNumber,
   Row,
   Select,
   Spin,
@@ -25,7 +24,6 @@ import { sortByIndex } from "../../../../../lib/sortByIndex";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useGetAllState } from "../../../../../hooks/baseInfo/useGetAllState";
 import { useGetAllCity } from "../../../../../hooks/baseInfo/useGetAllCity";
-import { number } from "zod";
 
 export default function SubmitForm() {
   const [form] = useForm();
@@ -134,19 +132,11 @@ export default function SubmitForm() {
                 label="شناسه کسب و کار"
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  {
-                    type: "number",
-                    message: "لطفاً 12 رقم وارد کنید",
-                    len: 12,
-                  },
+                  { pattern: /^\d{12}$/, message: "لطفاً 12 رقم وارد کنید" },
+                  { pattern: /^\d*$/, message: "لطفاً فقط عدد وارد کنید" },
                 ]}
               >
-                <InputNumber
-                  controls={false}
-                  className="w-full"
-                  size="large"
-                  placeholder="وارد کنید"
-                />
+                <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -155,7 +145,7 @@ export default function SubmitForm() {
                 label="نوع مجوز"
                 rules={[
                   { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                  { type: "number", message: "لطفا عدد وارد کنید" },
+                  { pattern: /^\d+$/, message: "لطفا عدد وارد کنید" },
                 ]}
               >
                 <Select
@@ -179,7 +169,7 @@ export default function SubmitForm() {
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    type: "number",
+                    pattern: /^\d+$/,
                     message: "لطفا فقط عدد وارد کنید",
                   },
                 ]}
@@ -215,7 +205,7 @@ export default function SubmitForm() {
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
-                // onChange={handleCentralOfficeProvinceChange}
+                  // onChange={handleCentralOfficeProvinceChange}
                 />
               </Form.Item>
             </Col>
@@ -276,6 +266,6 @@ export default function SubmitForm() {
           <StatusModal data={data} open={open} setOpen={setOpen} />
         )}
       </Spin>
-    </div >
+    </div>
   );
 }

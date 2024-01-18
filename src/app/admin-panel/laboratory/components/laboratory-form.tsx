@@ -63,7 +63,11 @@ function LaboratoryForm() {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item name="testItems" label="فاکتور های آزمون">
+          <Form.Item
+            name="testItems"
+            label="فاکتور های آزمون"
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+          >
             <MultipleSelect
               treeData={Test?.map((item) => ({
                 value: item.uid,

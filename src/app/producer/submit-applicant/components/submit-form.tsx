@@ -130,7 +130,11 @@ export default function SubmitForm() {
               <Form.Item
                 name="businessNumber"
                 label="شناسه کسب و کار"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { pattern: /^\d{12}$/, message: "لطفاً 12 رقم وارد کنید" },
+                  { pattern: /^\d*$/, message: "لطفاً فقط عدد وارد کنید" },
+                ]}
               >
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>

@@ -16,11 +16,10 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
             message: 'لطفاً مقدار را وارد کنید',
         },
         {
-            pattern: /^(?!-)\d+(\.\d+)?$/,
+            type: "number",
             message: 'لطفاً عدد وارد کنید',
         },
         {
-            type: "number",
             min: 0,
             max: 100,
             message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",

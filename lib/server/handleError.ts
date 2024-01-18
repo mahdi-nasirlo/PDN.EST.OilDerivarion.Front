@@ -27,11 +27,11 @@ export const HandleError = async (error: any) => {
 
     // await createLog(reportLogEnum.api_error, errorData)
 
-    if (response?.status === 401) {
+      if (response?.status === 401) {
 
         const {data}: { data: UnAuthorizeType } = response
 
-        window.location.href = "/login"
+        window.location.href = window.location.origin + "/api/auth/signout"
 
     }
 

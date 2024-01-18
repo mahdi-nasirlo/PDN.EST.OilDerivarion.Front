@@ -1,10 +1,9 @@
-"use client"
-
-import React, {useEffect} from "react";
+import React from "react";
 import ClientComponent from "@/app/login/components/clientComponent";
-import customeFetcher from "../../../lib/server/customeFetcher";
-
-import {signOut, useSession} from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import ThemeProvider from "../../../provider/theme-provider";
+import { RedirectInClient } from "./components/redirectInClient";
 
 interface PropsType {
   searchParams: {
@@ -13,24 +12,18 @@ interface PropsType {
   };
 }
 
-export default function Home(props: PropsType) {
+export default async function Home(props: PropsType) {
+  const session = await getServerSession();
 
-    const session = useSession()
-
-    useEffect(() => {
-
-        if (session.status == "authenticated")
-            customeFetcher({
-                url: {path: "/Sso/Logout"},
-                method: "GET"
-            }).then((res) => {
-
-                console.log(res)
-                signOut().then()
-
-            })
-
-    }, []);
+  if (session) {
+    return (
+      <ThemeProvider>
+        <div className="flex justify-center items-center w-full h-[100vh]">
+          <RedirectInClient />
+        </div>
+      </ThemeProvider>
+    );
+  }
 
   return (
     <>

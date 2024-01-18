@@ -18,8 +18,8 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
             message: 'لطفاً مقدار را وارد کنید',
         },
         {
-            pattern: /^(?!-)\d+(\.\d+)?$/,
-            message: 'لطفاً عدد وارد کنید',
+            pattern: /^(?!-)(0|[1-9]\d*)(\.\d+)?$/,
+            message: 'لطفاً عدد صحیح وارد کنید',
         },
         {
             min: 0,

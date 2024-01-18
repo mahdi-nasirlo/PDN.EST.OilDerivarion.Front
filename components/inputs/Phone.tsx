@@ -4,12 +4,13 @@ import { FormItemProps } from "antd/lib";
 
 const PhoneInputs = (props: FormItemProps) => {
   const validateIranianLandline = (rule: any, value: any) => {
-    const landlineRegex = /^0[0-9]{2,}[0-9]{8,}$/;
+    const landlineRegex = /^0\d{10}$/; // Updated regex for exactly 11 digits
     if (value && !landlineRegex.test(value)) {
       return Promise.reject("شماره تماس نامعتبر است");
     }
     return Promise.resolve();
   };
+
   return (
     <Form.Item
       {...props}
@@ -18,7 +19,6 @@ const PhoneInputs = (props: FormItemProps) => {
       rules={[
         { required: true, message: "لطفا مقدار را وارد کنید" },
         { validator: validateIranianLandline },
-        { max: 11, message: "شماره تماس نامعتبر است" },
       ]}
     >
       {props.children}

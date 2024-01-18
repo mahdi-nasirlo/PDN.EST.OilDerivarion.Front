@@ -141,7 +141,7 @@ export default function SubmitForm() {
                 label="نوع مجوز"
                 rules={[
                   { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                  { pattern: /^\d+$/, message: "لطفا عدد وارد کنید" },
+                  { type: "number", message: "لطفا عدد وارد کنید" },
                 ]}
               >
                 <Select
@@ -165,7 +165,7 @@ export default function SubmitForm() {
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    pattern: /^\d+$/,
+                    type: "number",
                     message: "لطفا فقط عدد وارد کنید",
                   },
                 ]}
@@ -201,7 +201,7 @@ export default function SubmitForm() {
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
-                  // onChange={handleCentralOfficeProvinceChange}
+                // onChange={handleCentralOfficeProvinceChange}
                 />
               </Form.Item>
             </Col>
@@ -262,6 +262,6 @@ export default function SubmitForm() {
           <StatusModal data={data} open={open} setOpen={setOpen} />
         )}
       </Spin>
-    </div>
+    </div >
   );
 }

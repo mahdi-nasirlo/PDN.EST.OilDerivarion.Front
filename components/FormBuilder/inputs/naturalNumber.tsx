@@ -18,9 +18,13 @@ const NaturalNumber: React.FC<InputProps & PropsType> = ({ data, ...props }) => 
             message: 'لطفاً مقدار را وارد کنید',
         },
         {
-            pattern: /^(?!-)\d+$/,
-            message: 'لطفاً عدد وارد کنید',
+            pattern: /^(?!-)(0|[1-9]\d*)?$/,
+            message: 'لطفاً عدد صحیح وارد کنید',
         },
+        // {
+        //     pattern: /^(?!-)\d+$/,
+        //     message: 'لطفاً عدد صحیح وارد کنید',
+        // },
     ];
 
 

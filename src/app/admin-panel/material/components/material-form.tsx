@@ -11,7 +11,7 @@ function MaterialForm() {
 
   const { data: Measure, isLoading: ldMeasure } = useSWR(
     "/Measure/GetAll",
-    (url) => listFetcher(url, { arg: { name: null, IsActive: null } })
+    (url) => listFetcher(url, { arg: { name: null, IsActive: true } })
   );
 
   const { data: Test, isLoading: ldTest } = useSWR<any[]>(

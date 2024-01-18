@@ -5,6 +5,7 @@ import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
 import ContactInputs from "../../../../../../components/inputs/Contact";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function EditModal({
   mutate,
@@ -126,9 +127,11 @@ export default function EditModal({
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator(_, value) {
-                      const inputValue = value.replace(/[^0-9]/g, '');
-                      const len = inputValue.length
-                      const NationalCode = /^(?!(\d)\1{9})\d{10}$/.test(inputValue);
+                      const inputValue = value.replace(/[^0-9]/g, "");
+                      const len = inputValue.length;
+                      const NationalCode = /^(?!(\d)\1{9})\d{10}$/.test(
+                        inputValue
+                      );
                       const CitizenCode = /^[0-9]{12}$/.test(inputValue);
 
                       if (len === 10 && !NationalCode) {
@@ -136,7 +139,9 @@ export default function EditModal({
                       } else if (len === 12 && !CitizenCode) {
                         return Promise.reject("کد اتباع 12 رقمی است");
                       } else if (len !== 10 && len !== 12) {
-                        return Promise.reject("لطفاً شماره ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید");
+                        return Promise.reject(
+                          "لطفاً شماره ملی (10 رقمی) یا کد اتباع (12 رقمی) وارد کنید"
+                        );
                       }
                       return Promise.resolve();
                     },
@@ -154,7 +159,9 @@ export default function EditModal({
               <Form.Item
                 name="birthDatePersian"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا تاریخ را انتخاب کنید" },
+                ]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -162,13 +169,13 @@ export default function EditModal({
           </Row>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
-              <ContactInputs name="currentMobile" label="شماره تماس">
+              <PhoneInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </ContactInputs>
+              </PhoneInputs>
             </Col>
           </Row>
         </Form>

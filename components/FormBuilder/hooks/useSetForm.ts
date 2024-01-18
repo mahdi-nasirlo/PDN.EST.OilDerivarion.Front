@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 import {apiUrl} from "../../../Constants/apiUrl";
-import {mutationFetcher} from "../../../lib/server/mutationFetcher";
+import customFetch from "../../../lib/server/customeFetcher";
 
 const useSetForm = (uid: string) => {
 
@@ -8,13 +8,17 @@ const useSetForm = (uid: string) => {
         categoryID: uid,
     }
 
-    const {data, error, trigger, reset, isMutating} = useSWRMutation(apiUrl.FormMaker.set.url, mutationFetcher)
+    const {data, error, trigger, reset, isMutating} = useSWRMutation(
+        apiUrl.FormMaker.set.url, 
+        (url, arg) => customFetch({url: {path: url}, data: arg.arg, method: "POST"})
+        )
 
     const onSet = async (data: any) => {
 
-        console.log(data)
+        const newData = {...requestBody, records: data ? JSON.stringify(data) : null}
 
-        const res = await trigger({...requestBody, records: JSON.stringify(data)})
+        // @ts-ignore
+        const res = await trigger(newData)
 
         return res
     }

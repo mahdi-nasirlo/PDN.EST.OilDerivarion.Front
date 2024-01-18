@@ -6,7 +6,7 @@ const PhoneInputs = (props: FormItemProps) => {
   const validateIranianLandline = (rule: any, value: any) => {
     const landlineRegex = /^0[0-9]{2,}[0-9]{7,}$/;
     if (value && !landlineRegex.test(value)) {
-      return Promise.reject();
+      return Promise.reject("شماره تماس نامعتبر است");
     }
     return Promise.resolve();
   };
@@ -18,8 +18,7 @@ const PhoneInputs = (props: FormItemProps) => {
       rules={[
         { required: true, message: "لطفا مقدار را وارد کنید" },
         { validator: validateIranianLandline },
-        { max: 11, min: 11, message: "شماره تلفن ثابت نامعتبر است" },
-        {},
+        { max: 11, message: "شماره تماس نامعتبر است" },
       ]}
     >
       {props.children}

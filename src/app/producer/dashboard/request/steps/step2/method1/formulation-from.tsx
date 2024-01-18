@@ -309,8 +309,8 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator: async (rule, value) => {
-                      if (!/^\d{15}$/.test(value)) {
-                        throw new Error("ایرانکد 15 رقمی است");
+                      if (!/^\d{16}$/.test(value)) {
+                        throw new Error("ایرانکد 16 رقمی است");
                       }
                     },
                   },

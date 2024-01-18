@@ -35,10 +35,12 @@ export const HandleError = async (error: any) => {
 
     }
 
-    notification.open({
-        type: "error",
-        message: "خطا در برقراری ارتباط"
-    })
+   if (response?.status !== 401) {
+        notification.open({
+            type: "error",
+            message: "خطا در برقراری ارتباط"
+        })
+   }
 
 };
 

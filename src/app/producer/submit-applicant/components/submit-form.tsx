@@ -1,17 +1,27 @@
 "use client";
 
-import {Button, Col, Divider, Form, Input, Row, Select, Spin, Typography,} from "antd";
-import React, {useEffect, useState} from "react";
+import {
+  Button,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Select,
+  Spin,
+  Typography,
+} from "antd";
+import React, { useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../../../lib/server/mutationFetcher";
-import {useForm} from "antd/es/form/Form";
+import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../lib/server/listFetcher";
+import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CheckInfoModal from "./checkInfo-modal";
 import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
-import {sortByIndex} from "../../../../../lib/sortByIndex";
-import {filterOption} from "../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../lib/sortByIndex";
+import { filterOption } from "../../../../../lib/filterOption";
 
 export default function SubmitForm() {
   const [open, setOpen] = useState(false);
@@ -25,11 +35,31 @@ export default function SubmitForm() {
     mutationFetcher
   );
 
-  const { data, isLoading } = useSWR("/WorkFlowCartable/GetStep01", listFetcher);
+  const { data, isLoading } = useSWR(
+    "/WorkFlowCartable/GetStep01",
+    listFetcher
+  );
 
-  const { data: License, isLoading: ldLicense } = useSWR("/BaseInfo/LicenseTypeGetAll", listFetcher);
+  const { data: License, isLoading: ldLicense } = useSWR(
+    "/BaseInfo/LicenseTypeGetAll2",
+    listFetcher
+  );
 
-  const { data: exporter, isLoading: ldExporter } = useSWR("/BaseInfo/LicenseIssuerTypeGetAll", listFetcher);
+  const [ProvinceCity, SetProvinceCity] = useState(null);
+
+  const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
+    ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+
+  const { data: StateGetAll, isLoading: ldStateGetAll } = useSWR(
+    ["/BaseInfo/StateGetAll"],
+    ([url, arg]: [string, any]) => listFetcher(url, { arg })
+  );
+  const handleCentralOfficeProvinceChange = (value: any) => {
+    SetProvinceCity(value);
+    form.setFieldValue("factoryCityId", null);
+  };
 
   const activeCartable = async (values: any) => {
     const res = await trigger(values);
@@ -111,8 +141,8 @@ export default function SubmitForm() {
                 name="licenseTypeId"
                 label="نوع مجوز"
                 rules={[
-                  {required: true, message: "لطفا مقدار را وارد کنید"},
-                  {pattern: /^\d+$/, message: "لطفا عدد وارد کنید"}
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                  { pattern: /^\d+$/, message: "لطفا عدد وارد کنید" },
                 ]}
               >
                 <Select
@@ -134,14 +164,14 @@ export default function SubmitForm() {
                 name="licenseNumber"
                 label="شماره مجوز"
                 rules={[
-                  {required: true, message: "لطفا مقدار را وارد کنید"},
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     pattern: /^\d+$/,
                     message: "لطفا فقط عدد وارد کنید",
                   },
                 ]}
               >
-                <Input size="large" placeholder="وارد کنید"/>
+                <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -157,17 +187,40 @@ export default function SubmitForm() {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-                name="licenseIssuerTypeId"
-                label="صادر کننده"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                name="factoryStateId"
+                label="استان"
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch
-                  fieldNames={{ label: "Name", value: "Id" }}
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldExporter}
-                  options={sortByIndex(exporter, "Name")}
+                  loading={ldStateGetAll}
+                  options={sortByIndex(StateGetAll, "Name")}
+                  fieldNames={{ value: "Id", label: "Name" }}
+                  size="large"
+                  placeholder="انتخاب کنید"
+                  onChange={handleCentralOfficeProvinceChange}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={12}>
+              <Form.Item
+                name="factoryCityId"
+                label="شهرستان"
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
+              >
+                <Select
+                  showSearch
+                  // @ts-ignore
+                  filterOption={filterOption}
+                  loading={ldCityGetAll}
+                  options={sortByIndex(CityGetAll, "Name")}
+                  fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
                 />

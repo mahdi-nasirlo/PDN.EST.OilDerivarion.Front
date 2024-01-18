@@ -9,6 +9,7 @@ import Select from "./inputs/Select";
 import RadioBtn from "./inputs/RadioBtn";
 import { updatedObject } from "../../utils/method";
 import PercentInput from './inputs/percent-Input';
+import NaturalNumber from './inputs/naturalNumber';
 
 export interface FormBuilderInputType {
     Name: string,
@@ -136,6 +137,9 @@ const RenderInput = ({ item }: { item: FormBuilderInputType }) => {
             break
         case "percentInput":
             currentInput = <PercentInput data={item} />
+            break
+        case "naturalNumber":
+            currentInput = <NaturalNumber data={item} />
             break
         default:
             currentInput = <Typography>فیلد مورد نظر پشتیبانی نمی شود</Typography>

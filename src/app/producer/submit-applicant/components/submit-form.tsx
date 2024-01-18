@@ -32,9 +32,11 @@ export default function SubmitForm() {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [stateId, setStateId] = useState<number | string>();
+
   const states = useGetAllState();
 
-  const cities = useGetAllCity(form.getFieldValue("factoryStateId"));
+  const cities = useGetAllCity(stateId);
 
   const { data, isLoading } = useSWR(
     "/WorkFlowCartable/GetStep01",
@@ -55,6 +57,7 @@ export default function SubmitForm() {
     console.log(data);
 
     form.setFieldsValue(data);
+    setStateId(data?.factoryStateId);
 
     if (!isLoading) {
       setOpen(true);
@@ -67,6 +70,10 @@ export default function SubmitForm() {
     // SetProvinceCity(data?.factoryCityId);
     // form.setFieldValue("factoryCityId", data?.factoryCityId);
   }, [data]);
+  const handleCentralOfficeProvinceChange = (value: any) => {
+    setStateId(value);
+    form.setFieldValue("centralOfficeCityId", null);
+  };
 
   const activeCartable = async (values: any) => {
     const res = await trigger(values);
@@ -130,7 +137,11 @@ export default function SubmitForm() {
               <Form.Item
                 name="businessNumber"
                 label="شناسه کسب و کار"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { pattern: /^\d{12}$/, message: "لطفاً 12 رقم وارد کنید" },
+                  { pattern: /^\d*$/, message: "لطفاً فقط عدد وارد کنید" },
+                ]}
               >
                 <Input size="large" placeholder="وارد کنید" />
               </Form.Item>
@@ -201,7 +212,7 @@ export default function SubmitForm() {
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
-                  // onChange={handleCentralOfficeProvinceChange}
+                  onChange={handleCentralOfficeProvinceChange}
                 />
               </Form.Item>
             </Col>

@@ -1,12 +1,11 @@
-"use client";
+"use client"
 
-import React, {useEffect} from "react";
-import {signIn, useSession} from "next-auth/react";
-import {Spin, Typography} from "antd";
+import { Spin } from "antd";
 import ThemeProvider from "../../../../provider/theme-provider";
-import {validateToken} from "../../../../request/validateToken";
+import { validateToken } from "../../../../request/validateToken";
 import useGetToken from "../../../../hooks/sso/useGetToken";
-import {useRouter} from "next/navigation";
+import { useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
 
 const ClientComponent = ({
   code,
@@ -15,9 +14,6 @@ const ClientComponent = ({
   code: string | undefined;
   callbackUrl: string | undefined;
 }) => {
-
-  const router = useRouter()
-
   const session = useSession();
 
   const getToken = useGetToken()
@@ -25,26 +21,22 @@ const ClientComponent = ({
   const { status, data, update } = session;
 
   useEffect(() => {
+
     if (status === "unauthenticated") {
       if (code) {
         // getToken
 
         getToken.trigger({
           code
-        }).then(async (res: { token_type: string, access_token: string }) => {
+        }).then((res: { token_type: string, access_token: string }) => {
 
           console.log(res)
 
-          if (res.access_token) {
-            await signIn("credentials", {
-              code: `${res?.token_type} ${res?.access_token}`,
-              callbackUrl: "/producer",
-              redirect: true,
-            })
-          } else {
-            router.push("/login")
-          }
-
+          signIn("credentials", {
+            code: `${res.token_type} ${res.access_token}`,
+            callbackUrl: "/producer",
+            redirect: true,
+          });
         })
 
 
@@ -56,19 +48,12 @@ const ClientComponent = ({
 
   return (
     <ThemeProvider>
-      <div className="flex flex-col justify-center items-center w-full h-[100vh]">
-        <Typography
-          className='text-center font-bold text-xl'
-        >
-          در حال انتقال به صفحه هستید
-        </Typography>
-        <Spin
-          className='flex justify-center items-center mt-5'
-          size='large'
-        >
-
-        </Spin>
-      </div>
+      <Spin
+        spinning={status === "loading"}
+        className="flex justify-center items-center w-full h-[100vh]"
+      >
+        <div>{JSON.stringify(session)}</div>
+      </Spin>
     </ThemeProvider>
   );
 };

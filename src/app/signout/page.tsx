@@ -1,9 +1,9 @@
 "use client"
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import ThemeProvider from "../../../provider/theme-provider";
-import {Spin} from "antd";
-import {signOut as authSignOut} from "next-auth/react";
+import { Spin } from "antd";
+import { signOut as authSignOut } from "next-auth/react";
 import useSignOut from "../../../hooks/sso/useSginout";
 
 const Page = () => {
@@ -12,11 +12,9 @@ const Page = () => {
 
     const logOut = async () => {
 
+        await authSignOut({ callbackUrl: "/login" })
+
         const res = await serverSignOut.trigger()
-
-        if (res?.success)
-
-            await authSignOut({callbackUrl: "/login"})
 
     }
 

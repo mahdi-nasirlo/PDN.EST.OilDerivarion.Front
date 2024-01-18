@@ -52,7 +52,6 @@ const ClientComponent = ({
         spinning={status === "loading"}
         className="flex justify-center items-center w-full h-[100vh]"
       >
-        <div>{JSON.stringify(session)}</div>
       </Spin>
     </ThemeProvider>
   );

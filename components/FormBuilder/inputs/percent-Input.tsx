@@ -1,8 +1,9 @@
 import React from 'react';
-import { InputNumber, InputNumberProps } from 'antd';
+import { Input, InputNumber, InputNumberProps } from 'antd';
 import { FormBuilderInputType } from '../index';
 import { Rule } from 'rc-field-form/es/interface';
 import FormItem from '../FormItem';
+import { InputProps } from 'antd/lib';
 
 interface PropsType {
     data: FormBuilderInputType;
@@ -21,11 +22,6 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
             pattern: /^(?!-)\d+(\.\d+)?$/,
             message: 'لطفاً عدد وارد کنید',
         },
-        {
-            min: 0,
-            max: 100,
-            message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
-        },
     ];
 
     return (
@@ -35,11 +31,11 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
             rules={rules}
         >
             <InputNumber
-                min={0}
                 max={100}
+                controls={false}
                 className="w-full"
                 size="large"
-                formatter={(value) => `%${value}`}
+                formatter={(value) => `${value}%`}
                 placeholder='وارد کنید'
                 defaultValue={data?.Default_Value as any}
                 {...props}

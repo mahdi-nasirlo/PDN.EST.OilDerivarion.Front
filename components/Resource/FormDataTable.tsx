@@ -5,6 +5,7 @@ import { Button, Table } from "antd";
 import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 import { addIndexToData } from '../../lib/addIndexToData';
 import EditModal from "./EditModal";
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
 interface PropType {
     schema: FormType,
@@ -15,6 +16,8 @@ interface PropType {
 const FormDataTable = (props: PropType) => {
 
     const [open, setOpen] = useState()
+
+    const [delOpen, setDelOpen] = useState<number | boolean>()
 
     const formProvider = useControlFormBuilder()
 
@@ -35,6 +38,7 @@ const FormDataTable = (props: PropType) => {
         },
     )
 
+    // @ts-ignore
     if (props?.delete && formProvider.deleteFromMany) {
 
         columns.push(
@@ -50,7 +54,7 @@ const FormDataTable = (props: PropType) => {
                     <Button
                         type="text"
                         className="text-red-500 font-bold"
-                        onClick={() => formProvider.deleteFromMany(index, props.schema.Form_Key)}
+                        onClick={() => setDelOpen(index)}
                     >
                         حذف
                     </Button>
@@ -67,6 +71,11 @@ const FormDataTable = (props: PropType) => {
                 dataSource={addIndexToData(props?.records as any || [])}
                 pagination={false}
             />
+            <ConfirmDeleteModal
+                title='اطلاعات پایه'
+                open={typeof delOpen === "number"}
+                setOpen={setDelOpen}
+                handleDelete={() => { if (typeof delOpen === "number") formProvider.deleteFromMany(delOpen as number, props.schema.Form_Key) }} />
             <EditModal setOpen={setOpen} open={open} schema={props.schema} />
         </>
     );

@@ -43,10 +43,9 @@ export default function Page() {
       </div>
       <Divider />
       <DataTable
-        isValidating={isValidating}
         mutate={mutate}
         MainMember={addIndexToData(EmployeeMember)}
-        ldMainMember={ldEmployeeMember}
+        ldMainMember={ldEmployeeMember || isValidating}
       />
       <CreateModal
         mutate={mutate}

@@ -9,12 +9,10 @@ import useSWRMutation from "swr/mutation";
 import EditModal from "./edit-modal";
 
 export default function DataTable({
-  isValidating,
   MainMember,
   ldMainMember,
   mutate,
 }: {
-  isValidating: any;
   MainMember: any;
   ldMainMember: any;
   mutate: () => void;
@@ -110,7 +108,7 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          <Button
+          {/* <Button
             type="link"
             className="text-red-500 font-bold"
             onClick={() => {
@@ -118,7 +116,7 @@ export default function DataTable({
             }}
           >
             حذف
-          </Button>
+          </Button> */}
         </Space>
       ),
     },
@@ -129,7 +127,7 @@ export default function DataTable({
       <Table
         className="mt-6"
         columns={columns}
-        dataSource={MainMember || ldDeleteMember || isValidating}
+        dataSource={MainMember || ldDeleteMember}
         loading={ldMainMember}
         pagination={{
           defaultPageSize: 10,

@@ -8,12 +8,10 @@ import useSWRMutation from "swr/mutation";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 export default function DataTable({
-  isValidating,
   MainMember,
   ldMainMember,
   mutate,
 }: {
-  isValidating: any;
   MainMember: any;
   ldMainMember: any;
   mutate: () => void;
@@ -112,7 +110,7 @@ export default function DataTable({
           >
             ویرایش
           </Button>
-          <Button
+          {/* <Button
             type="link"
             className="text-red-500 font-bold"
             onClick={() => {
@@ -120,7 +118,7 @@ export default function DataTable({
             }}
           >
             حذف
-          </Button>
+          </Button> */}
         </Space>
       ),
     },
@@ -129,7 +127,7 @@ export default function DataTable({
   return (
     <>
       <Table
-        loading={ldMainMember || ldDeleteMember || isValidating}
+        loading={ldMainMember || ldDeleteMember}
         className="mt-6"
         columns={columns}
         dataSource={MainMember}

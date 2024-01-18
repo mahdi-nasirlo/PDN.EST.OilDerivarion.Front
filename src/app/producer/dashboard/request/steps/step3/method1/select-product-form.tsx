@@ -95,7 +95,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
                   size="large"
                   min={0}
                   max={100}
-                  formatter={(value) => `%${value}`}
+                  formatter={(value) => `${value}%`}
                   placeholder="وارد کنید"
                 />
               </Form.Item>
@@ -126,7 +126,7 @@ const SelectProductForm = ({ form }: { form: FormInstance<any> }) => {
                   size="large"
                   min={0}
                   max={100}
-                  formatter={(value) => `%${value}`}
+                  formatter={(value) => `${value}%`}
                   placeholder="وارد کنید"
                 />
               </Form.Item>

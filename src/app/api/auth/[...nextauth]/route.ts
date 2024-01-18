@@ -48,9 +48,6 @@ const authOption: NextAuthOptions = {
         },
         session: ({session, token}: { session: Session, token: JWT & { access_token?: string } }) => {
 
-            console.log(session, token)
-
-
             if (token && token.access_token) {
                 return {
                     access_token: token.access_token,

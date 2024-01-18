@@ -72,7 +72,7 @@ export default function SubmitForm() {
   }, [data]);
   const handleCentralOfficeProvinceChange = (value: any) => {
     setStateId(value);
-    form.setFieldValue("centralOfficeCityId", null);
+    form.setFieldValue("factoryCityId", null);
   };
 
   const activeCartable = async (values: any) => {
@@ -150,7 +150,9 @@ export default function SubmitForm() {
               <Form.Item
                 name="licenseTypeId"
                 label="نوع مجوز"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch

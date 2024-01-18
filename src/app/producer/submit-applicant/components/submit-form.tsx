@@ -150,10 +150,7 @@ export default function SubmitForm() {
               <Form.Item
                 name="licenseTypeId"
                 label="نوع مجوز"
-                rules={[
-                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
-                  { pattern: /^\d+$/, message: "لطفا عدد وارد کنید" },
-                ]}
+                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
               >
                 <Select
                   showSearch
@@ -176,8 +173,8 @@ export default function SubmitForm() {
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
-                    pattern: /^\d+$/,
-                    message: "لطفا فقط عدد وارد کنید",
+                    pattern: /^(?!-)\d{12}(\.\d{12})?$/,
+                    message: "شماره مجوز 12 رقمی است",
                   },
                 ]}
               >

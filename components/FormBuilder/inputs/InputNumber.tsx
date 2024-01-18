@@ -16,12 +16,14 @@ const InputNumber = (props: InputProps & PropsType) => {
     const { data } = props
 
     let rules: Rule[] = [
+
+        //فقط اعداد اعشاری و مثبت
         {
             required: true,
             message: 'لطفا مقدار را وارد کنید'
         },
         {
-            type: "number",
+            pattern: /^(?!-)\d+(\.\d+)?$/,
             message: 'لطفا عدد وارد کنید',
         }
     ]

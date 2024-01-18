@@ -8,11 +8,11 @@ interface PropsType {
     data: FormBuilderInputType;
 }
 
-const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }) => {
+const NaturalNumber: React.FC<InputNumberProps & PropsType> = ({ data, ...props }) => {
 
     const rules: Rule[] = [
 
-        //فقط اعداد اعشاری و مثبت بین 0 تا 100
+        // فقط اعداد صحیح و مثبت
         {
             required: true,
             message: 'لطفاً مقدار را وارد کنید',
@@ -22,11 +22,13 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
             message: 'لطفاً عدد وارد کنید',
         },
         {
+            type: "integer",
             min: 0,
             max: 100,
             message: "لطفاً مقداری بین 0 تا ۱۰۰ وارد کنید",
         },
     ];
+
 
     return (
         <FormItem
@@ -39,7 +41,6 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
                 max={100}
                 className="w-full"
                 size="large"
-                formatter={(value) => `%${value}`}
                 placeholder='وارد کنید'
                 defaultValue={data?.Default_Value as any}
                 {...props}
@@ -48,4 +49,4 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
     );
 };
 
-export default PercentInput;
+export default NaturalNumber;

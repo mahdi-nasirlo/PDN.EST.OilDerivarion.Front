@@ -6,6 +6,7 @@ import {
   Divider,
   Form,
   Input,
+  InputNumber,
   Row,
   Select,
   Spin,
@@ -24,6 +25,7 @@ import { sortByIndex } from "../../../../../lib/sortByIndex";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useGetAllState } from "../../../../../hooks/baseInfo/useGetAllState";
 import { useGetAllCity } from "../../../../../hooks/baseInfo/useGetAllCity";
+import { number } from "zod";
 
 export default function SubmitForm() {
   const [form] = useForm();
@@ -130,9 +132,21 @@ export default function SubmitForm() {
               <Form.Item
                 name="businessNumber"
                 label="شناسه کسب و کار"
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  {
+                    type: "number",
+                    message: "لطفاً 12 رقم وارد کنید",
+                    len: 12,
+                  },
+                ]}
               >
-                <Input size="large" placeholder="وارد کنید" />
+                <InputNumber
+                  controls={false}
+                  className="w-full"
+                  size="large"
+                  placeholder="وارد کنید"
+                />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>

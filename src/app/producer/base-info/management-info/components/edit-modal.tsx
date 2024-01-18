@@ -7,6 +7,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import CustomDatePicker from "../../../../../../components/CustomeDatePicker";
+import PhoneInputs from "../../../../../../components/inputs/Phone";
 
 export default function EditModal({
   mutate,
@@ -149,7 +150,9 @@ export default function EditModal({
               <Form.Item
                 name="birthDatePersian"
                 label="تاریخ تولد"
-                rules={[{ required: true, message: "لطفا تاریخ را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا تاریخ را انتخاب کنید" },
+                ]}
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -160,7 +163,9 @@ export default function EditModal({
               <Form.Item
                 name="companyRoleId"
                 label="سمت"
-                rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را انتخاب کنید" },
+                ]}
               >
                 <Select
                   showSearch
@@ -175,30 +180,17 @@ export default function EditModal({
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
-              <Form.Item
-                name="currentMobile"
-                label="شماره تماس"
-                rules={[
-                  { required: true, message: "لطفا مقدار را وارد کنید" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d+$/.test(value)) {
-                        throw new Error("لطفا عدد وارد کنید");
-                      }
-                    },
-                  },
-                ]}
-              >
+              <PhoneInputs name="currentMobile" label="شماره تماس">
                 <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
                 />
-              </Form.Item>
+              </PhoneInputs>
             </Col>
           </Row>
         </Form>
-      </Modal >
+      </Modal>
     </>
   );
 }

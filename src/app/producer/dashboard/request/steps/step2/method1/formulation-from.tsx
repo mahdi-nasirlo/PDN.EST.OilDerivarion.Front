@@ -76,12 +76,14 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 required: true,
                 message: "لطفا مقدار را وارد کنید",
               },
+              {
+                pattern: /^(?!-)\d+(\.\d+)?$/,
+                message: 'لطفاً عدد وارد کنید',
+              },
             ]}
           >
-            <InputNumber
-              controls={false}
+            <Input
               className="w-full"
-              type="number"
               size="large"
               placeholder="وارد نمایید"
             />
@@ -202,14 +204,12 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                     message: "لطفا مقدار را وارد کنید",
                   },
                   {
-                    type: "number",
-                    len: 8,
+                    pattern: /^\d{8}$/,
                     message: "شماره اظهارنامه 8 رقمی است",
                   },
                 ]}
               >
-                <InputNumber
-                  controls={false}
+                <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"

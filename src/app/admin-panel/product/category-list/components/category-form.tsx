@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {Col, Form, Input, InputNumber, Row, Select} from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Form, Input, InputNumber, Row, Select } from "antd";
 import useSWR from "swr";
-import {listFetcher} from "../../../../../../lib/server/listFetcher";
-import {filterOption} from "../../../../../../lib/filterOption";
-import {sortByIndex} from "../../../../../../lib/sortByIndex";
-import {CategoryProduct} from "../../../../../../interfaces/category-product";
+import { listFetcher } from "../../../../../../lib/server/listFetcher";
+import { filterOption } from "../../../../../../lib/filterOption";
+import { sortByIndex } from "../../../../../../lib/sortByIndex";
+import { CategoryProduct } from "../../../../../../interfaces/category-product";
 
 function CategoryForm({
   row,
@@ -129,7 +129,7 @@ function CategoryForm({
                   validator(_, value) {
                     if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
                       return Promise.reject(
-                        new Error("لطفاً عدد صحیح وارد کنید")
+                        new Error("لطفاً عدد مثبت وارد کنید")
                       );
                     }
                     if (parseInt(value) > getFieldValue("densityLowerLimit")) {
@@ -169,12 +169,12 @@ function CategoryForm({
                   const numericValue = parseFloat(value);
                   if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
                     return Promise.reject(
-                      new Error("لطفاً عدد صحیح وارد کنید")
+                      new Error("لطفاً عدد مثبت وارد کنید")
                     );
                   }
                   if (numericValue > 100) {
                     return Promise.reject(
-                        new Error("حداکثر تعداد مجاز دو کاراکتر است")
+                      new Error("حداکثر تعداد مجاز دو کاراکتر است")
                     )
                   }
                   return Promise.resolve();

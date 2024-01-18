@@ -78,7 +78,13 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               },
             ]}
           >
-            <Input type="number" size="large" placeholder="وارد نمایید" />
+            <InputNumber
+              controls={false}
+              className="w-full"
+              type="number"
+              size="large"
+              placeholder="وارد نمایید"
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -94,9 +100,9 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 1,
+                  min: 0.0001,
                   max: 100,
-                  message: "لطفاً مقداری بین 1 تا ۱۰۰ وارد کنید",
+                  message: "لطفاً مقداری بین 0.0001 تا ۱۰۰ وارد کنید",
                 },
               ]}
             >
@@ -121,9 +127,9 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 { required: true, message: "لطفا مقدار را وارد کنید" },
                 {
                   type: "number",
-                  min: 1,
+                  min: 0.0001,
                   max: 99,
-                  message: "لطفاً مقداری بین 1 تا 99 وارد کنید",
+                  message: "لطفاً مقداری بین 0.0001 تا 99 وارد کنید",
                 },
               ]}
             >
@@ -195,9 +201,15 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                     required: true,
                     message: "لطفا مقدار را وارد کنید",
                   },
+                  {
+                    type: "number",
+                    len: 8,
+                    message: "شماره اظهارنامه 8 رقمی است",
+                  },
                 ]}
               >
-                <Input
+                <InputNumber
+                  controls={false}
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد کنید"
@@ -309,14 +321,15 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                   { required: true, message: "لطفا مقدار را وارد کنید" },
                   {
                     validator: async (rule, value) => {
-                      if (!/^\d{15}$/.test(value)) {
-                        throw new Error("ایرانکد 15 رقمی است");
+                      if (!/^\d{16}$/.test(value)) {
+                        throw new Error("ایرانکد 16 رقمی است");
                       }
                     },
                   },
                 ]}
               >
-                <Input
+                <InputNumber
+                  controls={false}
                   type="number"
                   className="w-full rounded-lg"
                   size="large"

@@ -15,7 +15,7 @@ function Index() {
   const handleSubmit = async (value: any) => {
     value.requestMasterUid = processControl.requestMaster.requestMasterUid;
 
-    const res = await crudMaterialRequestDetail.create.trigger(value);
+    const res = await crudMaterialRequestDetail.create.trigger(value, true);
 
     if (res) await processControl.getStep3();
   };

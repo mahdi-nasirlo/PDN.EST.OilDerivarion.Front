@@ -4,7 +4,7 @@ import { FormItemProps } from "antd/lib";
 
 const PhoneInputs = (props: FormItemProps) => {
   const validateIranianLandline = (rule: any, value: any) => {
-    const landlineRegex = /^0[0-9]{2,}[0-9]{7,}$/;
+    const landlineRegex = /^0[0-9]{2,}[0-9]{8,}$/;
     if (value && !landlineRegex.test(value)) {
       return Promise.reject("شماره تماس نامعتبر است");
     }

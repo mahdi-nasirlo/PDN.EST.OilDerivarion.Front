@@ -36,7 +36,7 @@ export default function FilterForm({
             label="شماره ملی"
             rules={[
               {
-                pattern: /^[0-9]{10}$/,
+                pattern: /^(?!(\d)\1{9})\d{10}$/,
                 message: "شماره ملی نامعتبر است",
               },
             ]}

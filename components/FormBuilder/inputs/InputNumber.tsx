@@ -21,7 +21,7 @@ const InputNumber = (props: InputProps & PropsType) => {
             message: 'لطفا مقدار را وارد کنید'
         },
         {
-            pattern: /^(?!-)\d+(\.\d+)?$/,
+            type: "number",
             message: 'لطفا عدد وارد کنید',
         }
     ]

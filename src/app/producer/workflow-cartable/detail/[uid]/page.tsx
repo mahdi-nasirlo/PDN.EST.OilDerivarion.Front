@@ -96,24 +96,12 @@ export default function Home(props: PropType) {
           <Form layout="vertical" form={form} disabled={isMutating}>
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="firstName"
-                  label="نام"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="firstName" label="نام">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="lastName"
-                  label="نام خانوادگی"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="lastName" label="نام خانوادگی">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
@@ -125,7 +113,6 @@ export default function Home(props: PropType) {
                   name="personNationalCode"
                   label="کدملی"
                   rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
                     {
                       pattern: /^(?!(\d)\1{9})\d{10}$/,
                       message: "شماره ملی نامعتبر است",
@@ -141,63 +128,33 @@ export default function Home(props: PropType) {
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="companyName"
-                  label="نام شرکت"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="companyName" label="نام شرکت">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="companyNationalCode"
-                  label="شناسه ملی شرکت"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="companyNationalCode" label="شناسه ملی شرکت">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="businessNumber"
-                  label="شناسه کسب و کار"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="businessNumber" label="شناسه کسب و کار">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="licenseTypeName"
-                  label="نوع مجوز"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="licenseTypeName" label="نوع مجوز">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="licenseNumber"
-                  label="شماره مجوز"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="licenseNumber" label="شماره مجوز">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
@@ -205,9 +162,6 @@ export default function Home(props: PropType) {
                 <Form.Item
                   name="licenseValidityDatePersin"
                   label="تاریخ اعتبار مجوز"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
                 >
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
@@ -215,26 +169,19 @@ export default function Home(props: PropType) {
             </Row>
             <Row gutter={[16, 0]}>
               <Col xs={24} md={12}>
-                <Form.Item
-                  name="licenseIssuerTypeName"
-                  label="صادر کننده مجوز"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                >
+                <Form.Item name="stateName" label="استان">
+                  <Input disabled size="large" placeholder="وارد کنید" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={12}>
+                <Form.Item name="cityName" label="شهرستان">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 16]}>
               <Col xs={24} md={24}>
-                <Form.Item
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                  ]}
-                  name="requestDescription"
-                  label="شرح درخواست"
-                >
+                <Form.Item name="requestDescription" label="شرح درخواست">
                   <Input.TextArea
                     disabled
                     style={{ height: 120, resize: "none" }}

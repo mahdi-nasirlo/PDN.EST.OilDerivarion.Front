@@ -22,22 +22,28 @@ import StatusModal from "@/app/producer/submit-applicant/components/statusModal"
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
 import { sortByIndex } from "../../../../../lib/sortByIndex";
 import { filterOption } from "../../../../../lib/filterOption";
+import { useGetAllState } from "../../../../../hooks/baseInfo/useGetAllState";
+import { useGetAllCity } from "../../../../../hooks/baseInfo/useGetAllCity";
 
 export default function SubmitForm() {
+  const [form] = useForm();
+
   const [open, setOpen] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [form] = useForm();
+  const states = useGetAllState();
 
-  const { trigger, isMutating } = useSWRMutation(
-    "/WorkFlowCartable/SetStep01",
-    mutationFetcher
-  );
+  const cities = useGetAllCity(form.getFieldValue("factoryStateId"));
 
   const { data, isLoading } = useSWR(
     "/WorkFlowCartable/GetStep01",
     listFetcher
+  );
+
+  const { trigger, isMutating } = useSWRMutation(
+    "/WorkFlowCartable/SetStep01",
+    mutationFetcher
   );
 
   const { data: License, isLoading: ldLicense } = useSWR(
@@ -45,21 +51,22 @@ export default function SubmitForm() {
     listFetcher
   );
 
-  const [ProvinceCity, SetProvinceCity] = useState(null);
+  useEffect(() => {
+    console.log(data);
 
-  const { data: CityGetAll, isLoading: ldCityGetAll } = useSWR(
-    ["/BaseInfo/CityGetAll", { stateId: ProvinceCity }],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
+    form.setFieldsValue(data);
 
-  const { data: StateGetAll, isLoading: ldStateGetAll } = useSWR(
-    ["/BaseInfo/StateGetAll"],
-    ([url, arg]: [string, any]) => listFetcher(url, { arg })
-  );
-  const handleCentralOfficeProvinceChange = (value: any) => {
-    SetProvinceCity(value);
-    form.setFieldValue("factoryCityId", null);
-  };
+    if (!isLoading) {
+      setOpen(true);
+    }
+
+    // form.setFieldValue("factoryCityId", data?.cityName);
+    // console.log(data?.factoryCityId);
+    // console.log(data);
+
+    // SetProvinceCity(data?.factoryCityId);
+    // form.setFieldValue("factoryCityId", data?.factoryCityId);
+  }, [data]);
 
   const activeCartable = async (values: any) => {
     const res = await trigger(values);
@@ -67,14 +74,6 @@ export default function SubmitForm() {
       setModalVisible(true);
     }
   };
-
-  useEffect(() => {
-    form.setFieldsValue(data);
-
-    if (!isLoading) {
-      setOpen(true);
-    }
-  }, [data]);
 
   return (
     <div className="box-border w-full  p-6">
@@ -197,12 +196,12 @@ export default function SubmitForm() {
                   showSearch
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldStateGetAll}
-                  options={sortByIndex(StateGetAll, "Name")}
+                  loading={states.isLoading}
+                  options={sortByIndex(states.data, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"
-                  onChange={handleCentralOfficeProvinceChange}
+                  // onChange={handleCentralOfficeProvinceChange}
                 />
               </Form.Item>
             </Col>
@@ -218,8 +217,8 @@ export default function SubmitForm() {
                   showSearch
                   // @ts-ignore
                   filterOption={filterOption}
-                  loading={ldCityGetAll}
-                  options={sortByIndex(CityGetAll, "Name")}
+                  // loading={ldCityGetAll}
+                  options={sortByIndex(cities.data, "Name")}
                   fieldNames={{ value: "Id", label: "Name" }}
                   size="large"
                   placeholder="انتخاب کنید"

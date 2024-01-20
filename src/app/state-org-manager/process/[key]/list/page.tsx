@@ -2,8 +2,6 @@
 
 
 import React from 'react'
-import PrimaryListRequestsForm
-    from "@/app/state-general-management/process/[key]/list/components/primary-list-requests-form";
 import { Button, Space, Table, Typography } from "antd";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import Link from 'next/link';
@@ -77,7 +75,6 @@ export default function Page({ params }: { params: { key: string } }) {
 
     return (
         <>
-            <PrimaryListRequestsForm />
             <div className="box-border w-full mt-8 p-6">
                 <div className="flex justify-start items-center">
                     <Typography className='max-md:text-sm max-md:font-normal font-medium text-base p-2 text-gray-901'>لیست

@@ -7,6 +7,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
 import EditModal from "./edit-modal";
+import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 
 export default function DataTable({
   MainMember,
@@ -82,9 +83,15 @@ export default function DataTable({
       key: "4",
     },
     {
+      title: "فعال/غیر فعال",
+      dataIndex: "isActive",
+      key: "5",
+      render: (_, record: any) => <StatusColumn record={record} />,
+    },
+    {
       title: "تاریخ تولد",
       dataIndex: "birthDatePersian",
-      key: "5",
+      key: "6",
     },
     {
       title: "شماره تماس",

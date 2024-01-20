@@ -50,6 +50,7 @@ export interface GetPageMainMember {
 export interface SetEmployeeMember {
   name: string | null;
   lastName: string | null;
+  isActive: boolean | null;
   birthDate: string | null;
   nationalCode: string | null;
   currentMobile: string | null;
@@ -58,6 +59,7 @@ export interface SetEmployeeMember {
 export interface GetPageEmployee {
   uid: string | null;
   name: string | null;
+  isActive: boolean | null;
   lastName: string | null;
   nationalCode: string | null;
   birthDate: string | null;

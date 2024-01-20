@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Modal, Row } from "antd";
+import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
 import { SetEmployeeMember } from "../../../../../../interfaces/Base-info";
@@ -154,6 +154,23 @@ export default function CreateModal({
                   placeholder="وارد کنید"
                 />
               </PhoneInputs>
+            </Col>
+            <Col xs={24} md={12}>
+              <Form.Item
+                rules={[{ required: true, message: 'لطفا مقدار را انتخاب کنید' }]}
+                name="isActive"
+                label="فعال / غیر فعال"
+                initialValue={true}
+              >
+                <Select
+                  options={[
+                    { label: "فعال", value: true },
+                    { label: "غیر فعال", value: false },
+                  ]}
+                  size="large"
+                  placeholder="انتخاب کنید"
+                />
+              </Form.Item>
             </Col>
           </Row>
         </Form>

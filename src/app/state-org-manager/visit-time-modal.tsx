@@ -4,7 +4,7 @@
 import { Button, Col, Form, Input, Modal, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import React from 'react'
-import CustomDatePicker from '../../../../../components/CustomeDatePicker';
+import CustomDatePicker from '../../../components/CustomeDatePicker';
 
 
 export default function VisitTimeModal(

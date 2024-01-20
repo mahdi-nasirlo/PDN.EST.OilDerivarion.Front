@@ -545,7 +545,7 @@ body {
 }
 
 .ant-radio-group label {
-    @apply h-[50px] leading-[45px] !important;
+    @apply h-[50px] max-lg:h-[40px] !important;
 }
 
 .ant-popconfirm-buttons {

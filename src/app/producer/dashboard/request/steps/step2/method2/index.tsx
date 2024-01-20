@@ -28,7 +28,7 @@ function Index() {
         لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
       </Typography>
       <Typography className="mt-3 text-right font-medium text-base text-secondary-500 text-secondary">
-        * برای وارد کردن درصد مواد اولیه تمامی اعداد را با حجمی یا وزنی وارد
+        * برای وارد کردن درصد مواد اولیه تمامی اعداد را به صورت درصد وزنی وارد
         نمایید.
       </Typography>
 

@@ -10,37 +10,37 @@ import {
   Select,
   Spin,
   Typography,
-  notification,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import useSWRMutation from "swr/mutation";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
-
-import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { sortByIndex } from "../../../../../../lib/sortByIndex";
 import CustomeDatePicker from "../../../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../../lib/filterOption";
+import { useGetAllState } from "../../../../../../hooks/baseInfo/useGetAllState";
+import { useGetAllCity } from "../../../../../../hooks/baseInfo/useGetAllCity";
 
 export default function SubmitForm() {
+  const [form] = useForm();
   const [open, setOpen] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [stateId, setStateId] = useState<number | string>();
 
-  const [form] = useForm();
+  const states = useGetAllState();
+
+  const cities = useGetAllCity(stateId);
+
   const { trigger, isMutating } = useSWRMutation(
     "/Producer/SetBase",
     mutationFetcher
   );
   const { data, isLoading } = useSWR("/Producer/GetBase", listFetcher);
   const { data: licensce, isLoading: ldlicensce } = useSWR(
-    "/BaseInfo/LicenseTypeGetAll",
-    listFetcher
-  );
-  const { data: exporter, isLoading: ldexporter } = useSWR(
-    "/BaseInfo/LicenseIssuerTypeGetAll",
+    "/BaseInfo/LicenseTypeGetAll2",
     listFetcher
   );
 
@@ -52,14 +52,26 @@ export default function SubmitForm() {
   };
 
   useEffect(() => {
+    console.log(data);
+
     form.setFieldsValue(data);
-    if (data === false || true) {
-    }
+    setStateId(data?.factoryStateId);
 
     if (!isLoading) {
       setOpen(true);
     }
+
+    // form.setFieldValue("factoryCityId", data?.cityName);
+    // console.log(data?.factoryCityId);
+    // console.log(data);
+
+    // SetProvinceCity(data?.factoryCityId);
+    // form.setFieldValue("factoryCityId", data?.factoryCityId);
   }, [data]);
+  const handleCentralOfficeProvinceChange = (value: any) => {
+    setStateId(value);
+    form.setFieldValue("factoryCityId", null);
+  };
 
   return (
     <Spin spinning={isLoading}>
@@ -88,6 +100,19 @@ export default function SubmitForm() {
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
             <Form.Item
+              name="businessNumber"
+              label="شناسه کسب و کار"
+              rules={[
+                { required: true, message: "لطفا مقدار را وارد کنید" },
+                { pattern: /^\d{12}$/, message: "لطفاً 12 رقم وارد کنید" },
+                { pattern: /^\d*$/, message: "لطفاً فقط عدد وارد کنید" },
+              ]}
+            >
+              <Input size="large" placeholder="وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item
               name="licenseTypeId"
               label="نوع مجوز"
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -104,31 +129,19 @@ export default function SubmitForm() {
               />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="licenseIssuerTypeId"
-              label="صادر کننده"
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            >
-              <Select
-                showSearch
-                fieldNames={{ label: "Name", value: "Id" }}
-                // @ts-ignore
-                filterOption={filterOption}
-                loading={ldexporter}
-                options={sortByIndex(exporter, "Name")}
-                size="large"
-                placeholder="انتخاب کنید"
-              />
-            </Form.Item>
-          </Col>
         </Row>
         <Row gutter={[16, 0]}>
           <Col xs={24} md={12}>
             <Form.Item
               name="licenseNumber"
               label="شماره مجوز"
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              rules={[
+                { required: true, message: "لطفا مقدار را وارد کنید" },
+                {
+                  pattern: /^(?!-)\d{12}(\.\d{12})?$/,
+                  message: "شماره مجوز 12 رقمی است",
+                },
+              ]}
             >
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -143,14 +156,42 @@ export default function SubmitForm() {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={[16, 0]}>
+        <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
-              name="businessNumber"
-              label="شناسه کسب و کار"
-              rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+              name="factoryStateId"
+              label="استان"
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
-              <Input size="large" placeholder="وارد کنید" />
+              <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
+                loading={states.isLoading}
+                options={sortByIndex(states.data, "Name")}
+                fieldNames={{ value: "Id", label: "Name" }}
+                size="large"
+                placeholder="انتخاب کنید"
+                onChange={handleCentralOfficeProvinceChange}
+              />
+            </Form.Item>
+          </Col>
+          <Col xs={24} md={12}>
+            <Form.Item
+              name="factoryCityId"
+              label="شهرستان"
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            >
+              <Select
+                showSearch
+                // @ts-ignore
+                filterOption={filterOption}
+                // loading={ldCityGetAll}
+                options={sortByIndex(cities.data, "Name")}
+                fieldNames={{ value: "Id", label: "Name" }}
+                size="large"
+                placeholder="انتخاب کنید"
+              />
             </Form.Item>
           </Col>
         </Row>

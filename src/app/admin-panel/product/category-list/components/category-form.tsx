@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Input, InputNumber, Row, Select } from "antd";
+import { Col, Form, Input, InputNumber, Row, Select, Typography } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { filterOption } from "../../../../../../lib/filterOption";
 import { sortByIndex } from "../../../../../../lib/sortByIndex";
 import { CategoryProduct } from "../../../../../../interfaces/category-product";
 
-function CategoryForm({
-  row,
-}: {
-  row?: CategoryProduct;
-}) {
+function CategoryForm({ row }: { row?: CategoryProduct }) {
   const { data, isLoading } = useSWR(
     "/BaseInfo/GetAllProductionMethod",
     listFetcher
   );
 
-
-  const [hasDensity, setHasDensity] = useState(row?.hasDensity)
+  const [hasDensity, setHasDensity] = useState(row?.hasDensity);
 
   useEffect(() => {
-    setHasDensity(row?.hasDensity)
-  }, [row])
+    setHasDensity(row?.hasDensity);
+  }, [row]);
 
   return (
     <>
@@ -88,7 +83,7 @@ function CategoryForm({
               ]}
               size="large"
               placeholder="انتخاب کنید"
-              onChange={value => setHasDensity(value)}
+              onChange={(value) => setHasDensity(value)}
             />
           </Form.Item>
         </Col>
@@ -99,16 +94,31 @@ function CategoryForm({
             <Form.Item
               rules={[
                 { required: true, message: "لطفا مقدار را وارد کنید" },
-                {
+                ({ getFieldValue }) => ({
                   validator(_, value) {
                     const isInteger = Number.isInteger(parseFloat(value));
                     if (isNaN(value) || !isInteger || value < 0) {
-                      const errorMessage = isInteger ? "لطفاً عدد مثبت وارد کنید" : "لطفاً عدد وارد کنید";
+                      const errorMessage = isInteger
+                        ? "لطفاً عدد مثبت وارد کنید"
+                        : "لطفاً عدد وارد کنید";
                       return Promise.reject(new Error(errorMessage));
                     }
+
+                    if (isInteger && value === 900) {
+                      return Promise.reject("مقدار نباید برابر با 900 باشد");
+                    }
+
+                    if (parseInt(value) > getFieldValue("densityLowerLimit")) {
+                      return Promise.reject(
+                        new Error(
+                          "حداقل بازه نمی‌تواند از حداکثر بازه کمتر باشد"
+                        )
+                      );
+                    }
+
                     return Promise.resolve();
                   },
-                },
+                }),
               ]}
               name="densityLowerLimit"
               label="حداقل بازه"
@@ -131,6 +141,9 @@ function CategoryForm({
                       return Promise.reject(
                         new Error("لطفاً عدد مثبت وارد کنید")
                       );
+                    }
+                    if (value === 900) {
+                      return Promise.reject("مقدار نباید برابر با 900 باشد");
                     }
                     if (parseInt(value) > getFieldValue("densityLowerLimit")) {
                       return Promise.resolve();
@@ -175,7 +188,7 @@ function CategoryForm({
                   if (numericValue > 100) {
                     return Promise.reject(
                       new Error("حداکثر تعداد مجاز دو کاراکتر است")
-                    )
+                    );
                   }
                   return Promise.resolve();
                 },

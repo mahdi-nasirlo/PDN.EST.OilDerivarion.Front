@@ -4,6 +4,10 @@ import React from 'react'
 function CustomRadioGroup(
     { label, value, options, onChange, name, data }:
         { label: string, value: any, options: any, onChange: any, name: string, data?: any }) {
+
+    const fieldDetailLen = options?.data?.FormFieldDetails?.length
+    const widthPercent = fieldDetailLen ? 100 / fieldDetailLen : 100
+
     return (
         <Form.Item
             rules={[{ required: true, message: "لطفا انتخاب کنید" }]}
@@ -12,14 +16,19 @@ function CustomRadioGroup(
         >
             <Radio.Group
                 size='large'
-                className='w-full my-1'
+                className='w-full my-1 flex'
                 defaultValue={data}
                 value={value}
                 buttonStyle="solid"
                 onChange={onChange}
             >
                 {options.map((option: any) => (
-                    <Radio.Button className='w-1/2' key={option.value} value={option.value}>
+                    <Radio.Button
+                        key={option.value}
+                        value={option.value}
+                        className='flex items-center justify-center'
+                        style={{ width: `${widthPercent}%` }}
+                    >
                         {option.label}
                     </Radio.Button>
                 ))}

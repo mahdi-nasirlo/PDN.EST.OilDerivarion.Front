@@ -63,7 +63,7 @@ export default function EditModal({
     <>
       <Modal
         width={800}
-        title="ویرایش مدیر شرکت"
+        title="ویرایش اطلاعات مدیریتی"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}

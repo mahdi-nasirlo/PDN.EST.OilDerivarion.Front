@@ -55,7 +55,7 @@ export default function EditModal({
     <>
       <Modal
         width={800}
-        title="ویرایش عضو شرکت"
+        title="ویرایش اطلاعات پرسنلی"
         open={isEditModalVisible}
         onOk={() => form.submit()}
         onCancel={handleCancelEdit}

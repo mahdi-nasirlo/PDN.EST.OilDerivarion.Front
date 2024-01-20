@@ -78,15 +78,11 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
               },
               {
                 pattern: /^(?!-)\d+(\.\d+)?$/,
-                message: 'لطفاً عدد وارد کنید',
+                message: "لطفاً عدد وارد کنید",
               },
             ]}
           >
-            <Input
-              className="w-full"
-              size="large"
-              placeholder="وارد نمایید"
-            />
+            <Input className="w-full" size="large" placeholder="وارد نمایید" />
           </Form.Item>
         </Col>
       </Row>
@@ -319,18 +315,10 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 label="ایرانکد"
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  {
-                    validator: async (rule, value) => {
-                      if (!/^\d{16}$/.test(value)) {
-                        throw new Error("ایرانکد 16 رقمی است");
-                      }
-                    },
-                  },
+                  { pattern: /^\d{16}$/, message: "لطفاً 16 رقم وارد کنید" },
                 ]}
               >
-                <InputNumber
-                  controls={false}
-                  type="number"
+                <Input
                   className="w-full rounded-lg"
                   size="large"
                   placeholder="وارد نمایید"
@@ -349,7 +337,7 @@ const FormulationFrom = (props: { form?: FormInstance }) => {
                 <Input size="large" placeholder="وارد نمایید" />
               </Form.Item>
             </Col>
-          </Row>
+          </Row >
         </>
       )}
     </>

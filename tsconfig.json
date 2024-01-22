@@ -22,15 +22,15 @@
     "baseUrl": "./src",
     "paths": {
       "@/app/*": ["app/*"],
-      "@types/*": ["types/*"],
-      "@providers/*": ["providers/*"],
-      "@assets/*": ["assets/*"],
+      "@/types/*": ["types/*"],
+      "@/providers/*": ["providers/*"],
+      "@/assets/*": ["assets/*"],
       "@/components/*": ["components/*"],
-      "@contexts/*": ["contexts/*"],
-      "@hooks": ["hooks"],
-      "@layout/*": ["layouts/*"],
-      "@ui/*": ["components/ui/*"],
-      "@utils/*": ["utils/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/layout/*": ["layouts/*"],
+      "@/ui/*": ["components/ui/*"],
+      "@/utils/*": ["utils/*"],
       "@/lib/*": ["lib/*"],
       "@/constants/*": ["constants/*"]
     }

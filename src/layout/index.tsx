@@ -29,9 +29,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                 </Button>
                             </div>
                             <Divider className="mb-7 mt-6" />
-                            {children}
+                            
                         </Layout>
                     </Content> */}
+                    {children}
                 </Layout>
             </Layout>
         </Space>

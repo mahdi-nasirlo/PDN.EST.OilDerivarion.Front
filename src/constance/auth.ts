@@ -8,6 +8,12 @@ const ssoApi = {
                 redirectUri: z.string(),
                 ssoUrl: z.string()
         })
+    },
+    getToken: {
+        url: "/Sso/GetToken",
+        type: z.object({
+            code: z.string()
+        })
     }
 }
 

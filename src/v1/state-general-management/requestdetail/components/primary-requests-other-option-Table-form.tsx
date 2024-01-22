@@ -4,8 +4,6 @@
 import { Col, Divider, Form, Input, Row, Table, Typography } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
-import PrimaryRequestsFromulacionTable
-    from "@/app/state-general-management/requestdetail/components/primary-request-formulacion-table";
 
 
 interface DataType {
@@ -77,7 +75,7 @@ export default function PrimaryRequestsOtherOptionTableForm() {
                     </Row>
                 </Form>
             </div>
-            <PrimaryRequestsFromulacionTable />
+            {/* <PrimaryRequestsFromulacionTable /> */}
         </>
     )
 }

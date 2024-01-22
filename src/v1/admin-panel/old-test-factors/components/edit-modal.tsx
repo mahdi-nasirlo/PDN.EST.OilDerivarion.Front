@@ -4,10 +4,10 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
-import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import { convertKeysToLowerCase } from "../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
+import TestFactorForm from "./test-factor-form";
 
 function EditModal({
   editRecord,

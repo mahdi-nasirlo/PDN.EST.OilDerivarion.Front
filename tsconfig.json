@@ -21,10 +21,11 @@
     ],
     "baseUrl": "./src",
     "paths": {
+      "@/app/*": ["app/*"],
       "@types/*": ["types/*"],
       "@providers/*": ["providers/*"],
       "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
+      "@/components/*": ["components/*"],
       "@contexts/*": ["contexts/*"],
       "@hooks": ["hooks"],
       "@layout/*": ["layouts/*"],

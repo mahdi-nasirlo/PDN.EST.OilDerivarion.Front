@@ -1,9 +1,8 @@
 "use client";
 
-import stepReducer, {
-  StepAction,
-} from "@/app/producer/dashboard/request/state-managment/step-reducer";
+
 import { Dispatch, useReducer } from "react";
+import stepReducer, { StepAction } from "v1/producer/dashboard/request/state-managment/step-reducer";
 
 export interface ProcessType {
   step: number;

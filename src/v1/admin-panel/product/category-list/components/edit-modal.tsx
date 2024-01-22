@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "antd";
-import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
 import { useForm } from "antd/es/form/Form";
 import { Category } from "../../../../../../interfaces/category";
 import useSWR from "swr";
@@ -8,6 +7,7 @@ import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { convertKeysToLowerCase } from "../../../../../../lib/convertKeysToLowerCase";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
+import CategoryForm from "./category-form";
 
 export default function EditModal({
   mutate,

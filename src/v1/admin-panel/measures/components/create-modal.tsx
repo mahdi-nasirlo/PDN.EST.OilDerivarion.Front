@@ -3,7 +3,6 @@
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { CreateTestItem } from "../../../../../interfaces/TestItem";

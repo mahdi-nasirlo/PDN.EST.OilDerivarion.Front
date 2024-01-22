@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Col, Form, FormInstance, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
-import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
 import { filterOption } from "../../../../../lib/filterOption";
 import { sortByIndex } from "../../../../../lib/sortByIndex";
+import BarcodeFormInteractive from "./barcode-form-interactive";
 
 function BarcodeForm(props: {
   form: undefined | FormInstance;

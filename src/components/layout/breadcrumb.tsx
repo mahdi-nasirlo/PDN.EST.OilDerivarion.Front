@@ -1,8 +1,8 @@
 "use client"
 
-import {usePathname} from "next/navigation";
-import {Breadcrumb} from "antd";
-import {routDictionary} from "@/components/layout/rout-dictionary";
+import { usePathname } from "next/navigation";
+import { Breadcrumb } from "antd";
+import { routDictionary } from "./rout-dictionary";
 
 export default function LayoutBreadcrumb() {
     const path = usePathname();
@@ -10,7 +10,7 @@ export default function LayoutBreadcrumb() {
 
     return (
         <>
-            <Breadcrumb items={generateObjects(pathname)}/>
+            <Breadcrumb items={generateObjects(pathname)} />
         </>
     )
 }

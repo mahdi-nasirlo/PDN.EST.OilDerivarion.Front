@@ -9,10 +9,10 @@ import { Product } from "../../../../../../interfaces/product";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import EditModal from "@/app/admin-panel/product/products-list/components/edit-modal";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 import TestExpandedRowRender from "./test-expandedRowRender";
+import EditModal from "./edit-modal";
 
 export default function DataTable({
   setFilter,

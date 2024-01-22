@@ -1,5 +1,5 @@
 import React from "react";
-import {ControllerProcessType} from "@/app/producer/dashboard/request/state-managment/useControlProcess";
+import { ControllerProcessType } from "./useControlProcess";
 
 
 const StepContext = React.createContext<ControllerProcessType>({} as ControllerProcessType)

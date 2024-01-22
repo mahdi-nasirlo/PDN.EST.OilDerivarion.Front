@@ -3,9 +3,10 @@ import { Col, Form, FormInstance, Input, Select } from "antd";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import BarcodeFormLockup from "@/app/admin-panel/barcode/components/barcode-form-lockup";
 import { filterOption } from "../../../../../lib/filterOption";
 import { sortByIndex } from "../../../../../lib/sortByIndex";
+import BarcodeFormLockup from "./barcode-form-lockup";
+// import BarcodeFormLockup from "./barcode-form-lockup";
 
 function BarcodeFormInteractive(props: {
   ID: number | undefined;

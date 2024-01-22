@@ -3,7 +3,7 @@ import { TestItem } from "../../../../../interfaces/TestItem";
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import useUpdateTestFactors from "../../../../../hooks/test-factors/useUpdateTestFactors";
-import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
+import TestFactorForm from "./test-factor-form";
 
 function EditModal({
   setModalVisible,

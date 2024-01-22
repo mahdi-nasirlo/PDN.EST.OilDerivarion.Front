@@ -1,10 +1,10 @@
 "use client";
 
-import {Alert, Button, Col, Divider, Form, Input, Row, Select, Typography,} from "antd";
-import React, {useContext} from "react";
-import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
+import { Alert, Button, Col, Divider, Form, Input, Row, Select, Typography, } from "antd";
+import React, { useContext } from "react";
 import staticMessages from "../../../../../../../lib/staticMessages";
-import {useGetAllProductionMethod} from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
+import { useGetAllProductionMethod } from "../../../../../../../hooks/baseInfo/useGetAllProductionMethod";
+import StepContext from "../../state-managment/step-context";
 // import FileUpload from "../../../../../../../components/inputs/FileUpload/FileUpload";
 
 export default function Step1() {
@@ -33,15 +33,15 @@ export default function Step1() {
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}>
             <Form.Item
-                name="productionMethodId"
-                label="روش تولید"
-                rules={[{required: true, message: "لطفا مقدار را انتخاب کنید"}]}
+              name="productionMethodId"
+              label="روش تولید"
+              rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             >
               <Select
-                  options={productionMethods}
-                  loading={isLoadingProductionMethods}
-                  fieldNames={fieldNames}
-                  size="large"
+                options={productionMethods}
+                loading={isLoadingProductionMethods}
+                fieldNames={fieldNames}
+                size="large"
               />
             </Form.Item>
           </Col>

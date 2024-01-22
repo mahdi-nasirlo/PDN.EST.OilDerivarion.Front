@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Col, Form, FormInstance, Row, Select } from "antd";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import useSWR from "swr";
-import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
+// import BarcodeFormInteractive from "@/app/admin-panel/barcode/components/barcode-form-interactive";
 import { filterOption } from '../../../../../lib/filterOption';
 
 function BarcodeForm(props: { form: undefined | FormInstance }) {
@@ -46,8 +46,8 @@ function BarcodeForm(props: { form: undefined | FormInstance }) {
                     />
                 </Form.Item>
             </Col>
-            {props.form &&
-                <BarcodeFormInteractive form={props.form} ID={containerType?.Id} name={containerType?.Name} />}
+            {/* {props.form &&
+                <BarcodeFormInteractive form={props.form} ID={containerType?.Id} name={containerType?.Name} />} */}
             <Col xs={24} md={12}>
                 <Form.Item
                     name="barcodeUsePlaceTypeId"

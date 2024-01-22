@@ -6,7 +6,7 @@ import React from "react";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { CategoryProduct } from "../../../../../../interfaces/category-product";
-import CategoryForm from "@/app/admin-panel/product/category-list/components/category-form";
+import CategoryForm from "./category-form";
 
 export default function CreateModal({
   setModalVisible,

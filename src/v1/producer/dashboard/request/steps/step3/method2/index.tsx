@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Alert, Button, Col, Divider, Form, Row, Typography } from "antd";
-import SelectProductForm from "@/app/producer/dashboard/request/steps/step3/method1/select-product-form";
-import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
 import useCrudRequestDetailProduct from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailProduct";
 import { useForm } from "antd/es/form/Form";
+import StepContext from "../../../state-managment/step-context";
+import SelectProductForm from "../method1/select-product-form";
 
 const Index = () => {
   const processController = useContext(StepContext);

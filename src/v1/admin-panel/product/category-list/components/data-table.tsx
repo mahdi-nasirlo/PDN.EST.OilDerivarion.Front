@@ -8,9 +8,9 @@ import { Category } from "../../../../../../interfaces/category";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
-import EditModal from "@/app/admin-panel/product/category-list/components/edit-modal";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
+import EditModal from "./edit-modal";
 
 export default function DataTable({
   setFilter,

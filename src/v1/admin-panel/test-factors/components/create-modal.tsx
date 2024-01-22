@@ -3,8 +3,8 @@
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import TestFactorForm from "@/app/admin-panel/test-factors/components/test-factor-form";
 import useCreateTestFactors from "../../../../../hooks/test-factors/useCreateTestFactors";
+import TestFactorForm from "./test-factor-form";
 
 
 export default function CreateModal({

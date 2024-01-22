@@ -17,7 +17,6 @@ import useSWRMutation from "swr/mutation";
 import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 
-import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { sortByIndex } from "../../../../../../lib/sortByIndex";

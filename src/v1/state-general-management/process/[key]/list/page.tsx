@@ -2,8 +2,6 @@
 
 
 import React from 'react'
-import PrimaryListRequestsForm
-    from "@/app/state-general-management/process/[key]/list/components/primary-list-requests-form";
 import { Button, Space, Table, Typography } from "antd";
 import { addIndexToData } from "../../../../../../lib/addIndexToData";
 import Link from 'next/link';
@@ -11,6 +9,7 @@ import useSWR from "swr";
 import { StateOrgManager } from "../../../../../../interfaces/requestMaster";
 import { listFetcher } from "../../../../../../lib/server/listFetcher";
 import { ColumnsType } from "antd/es/table";
+import PrimaryListRequestsForm from './components/primary-list-requests-form';
 
 export default function Page({ params }: { params: { key: string } }) {
 

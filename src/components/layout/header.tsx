@@ -1,19 +1,19 @@
 "use client";
 import Image from "next/image";
-import {Button} from "antd";
-import {Header} from "antd/es/layout/layout";
-import HeaderDropdown from "@/components/layout/header-dropdown";
-import {Bars3Icon} from "@heroicons/react/24/outline";
+import { Button } from "antd";
+import { Header } from "antd/es/layout/layout";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import HeaderDropdown from "./header-dropdown";
 
 export default function LayoutHeader({
-                                         showDrawer,
-                                     }: {
+    showDrawer,
+}: {
     showDrawer: () => void;
 }) {
 
     return (
         <>
-            <div style={{position: "fixed", top: 0, left: 0, right: 0, zIndex: 100}}>
+            <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
                 <Header
                     className="lg:px-10 px-1 gap-0"
                     style={{
@@ -64,7 +64,7 @@ export default function LayoutHeader({
                             <Button
                                 className="text-primary-500"
                                 type="link"
-                                icon={<Bars3Icon width={32} height={32}/>}
+                                icon={<Bars3Icon width={32} height={32} />}
                                 onClick={showDrawer}
                             />
                         </div>

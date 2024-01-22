@@ -5,7 +5,7 @@ import React from "react";
 import { useForm } from "antd/es/form/Form";
 import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import useSWRMutation from "swr/mutation";
-import BarcodeForm from "@/app/admin-panel/barcode/components/barcode-form";
+import BarcodeForm from "./barcode-form";
 
 export default function CreateModal({
   setFilter,

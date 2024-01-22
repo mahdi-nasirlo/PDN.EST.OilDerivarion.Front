@@ -18,12 +18,12 @@ import { useForm } from "antd/es/form/Form";
 import useSWR from "swr";
 import { listFetcher } from "../../../../../lib/server/listFetcher";
 import CheckInfoModal from "./checkInfo-modal";
-import StatusModal from "@/app/producer/submit-applicant/components/statusModal";
 import CustomeDatePicker from "../../../../../components/CustomeDatePicker";
 import { sortByIndex } from "../../../../../lib/sortByIndex";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useGetAllState } from "../../../../../hooks/baseInfo/useGetAllState";
 import { useGetAllCity } from "../../../../../hooks/baseInfo/useGetAllCity";
+import StatusModal from "./statusModal";
 
 export default function SubmitForm() {
   const [form] = useForm();

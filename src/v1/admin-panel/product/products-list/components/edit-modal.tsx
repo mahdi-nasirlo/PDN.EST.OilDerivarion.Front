@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Button, Col, Form, Modal, Row } from "antd";
-import ProductForm from "@/app/admin-panel/product/products-list/components/product-form";
 import { useForm } from "antd/es/form/Form";
 import { Product } from "../../../../../../interfaces/product";
 import useUpdateProduct from "../../../../../../hooks/product/useUpdateProduct";
+import ProductForm from "./product-form";
 
 function EditModal({
   isEditModalVisible,

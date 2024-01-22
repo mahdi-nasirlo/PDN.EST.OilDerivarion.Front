@@ -1,9 +1,9 @@
 import React from "react";
-import ClientComponent from "@/app/login/components/clientComponent";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ThemeProvider from "../../../provider/theme-provider";
 import { RedirectInClient } from "./components/redirectInClient";
+import ClientComponent from "./components/clientComponent";
 
 interface PropsType {
   searchParams: {

@@ -4,6 +4,7 @@ import ThemeProvider from '@providers/theme-provider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import './globals.css'
+import { AppProgressBar } from 'next-nprogress-bar'
 
 export default function RootLayout({
   children,

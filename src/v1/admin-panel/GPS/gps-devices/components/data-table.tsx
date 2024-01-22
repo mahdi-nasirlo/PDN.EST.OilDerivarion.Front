@@ -5,13 +5,13 @@ import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useSWRMutation from "swr/mutation";
-import EditModal from "@/app/admin-panel/GPS/gps-devices/components/edit-modal";
 import StatusColumn from "../../../../../../components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../../../components/CustomeTable";
 import { mutationFetcher } from "../../../../../../lib/server/mutationFetcher";
 import { Gps } from "../../../../../../interfaces/gps";
 import Link from "next/link";
 import useBoxOpen from "../../../../../../hooks/requestGps/useBoxOpen";
+import EditModal from "./edit-modal";
 
 export default function DataTable({
   setFilter,

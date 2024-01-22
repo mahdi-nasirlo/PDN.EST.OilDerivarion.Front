@@ -1,11 +1,11 @@
 import {Dispatch, useReducer, useState} from "react";
-import stepReducer, {StepAction} from "@/app/producer/dashboard/request/state-managment/step-reducer";
 import useSWRMutation from "swr/mutation";
 import {mutationFetcher} from "../../../../../../lib/server/mutationFetcher";
-import {RequestMaster, RequestMasterForm} from "@/app/producer/dashboard/request/steps/step1";
 import useRequestDetailCompleteMaterial from "../../../../../../hooks/requestDetail/useRequestDetailCompleteMaterial";
 import useRequestDetailCompleteProduct from "../../../../../../hooks/requestDetail/useRequestDetailCompleteProduct";
 import useRequestMasterNextStep from "../../../../../../hooks/requestMaster/useRequestMasterNextStep";
+import stepReducer, { StepAction } from "./step-reducer";
+import { RequestMaster, RequestMasterForm } from "../steps/step1";
 
 export interface ControllerProcessType {
     step: number,

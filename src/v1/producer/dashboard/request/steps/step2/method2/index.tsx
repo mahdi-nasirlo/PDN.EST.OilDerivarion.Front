@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Button, Col, Divider, Form, Row, Typography } from "antd";
-import FormulationFrom from "@/app/producer/dashboard/request/steps/step2/method1/formulation-from";
 import { useForm } from "antd/es/form/Form";
-import StepContext from "@/app/producer/dashboard/request/state-managment/step-context";
-import MaterialRequestDetailTable from "@/app/producer/dashboard/request/steps/step2/method2/material-request-detail-table";
 import useCrudRequestDetailMaterial from "../../../../../../../../hooks/requestDetail/useCrudRequestDetailMaterial";
 import { mutate } from "swr";
+import StepContext from "../../../state-managment/step-context";
+import MaterialRequestDetailTable from "./material-request-detail-table";
+import FormulationFrom from "../method1/formulation-from";
 
 function Index() {
   const [form] = useForm();

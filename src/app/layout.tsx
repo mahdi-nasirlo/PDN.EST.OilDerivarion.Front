@@ -1,7 +1,9 @@
-import QueryClientProvider from '@/providers/query-client-provider'
+import AuthProvider from '@providers/auth-provider'
+import QueryClientProvider from '@providers/query-client-provider'
+import ThemeProvider from '@providers/theme-provider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-
+import './globals.css'
 
 export default function RootLayout({
   children,
@@ -11,10 +13,14 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
-        <QueryClientProvider>
-          {children}
-          <ReactQueryDevtools />
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider>
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </AuthProvider>
       </body>
     </html>
   )

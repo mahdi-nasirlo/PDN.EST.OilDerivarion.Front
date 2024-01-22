@@ -71,7 +71,7 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
 
             console.error('Request Error:', logEntry);
 
-            return {ok: isOk, status: response.status, message: responseBody?.message, data: responseBody}
+            return {ok: isOk, status: response.status, message: responseBody?.message, ...responseBody.data}
         }
     } catch (error: any) {
 
@@ -88,7 +88,7 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
             message: error?.response?.data?.message || error.message,
             status: error?.response?.status || error.status,
             ok: false,
-            data: error?.response?.data
+            ...error?.response?.data
         }
 
     }

@@ -1,15 +1,9 @@
 import { AxiosRequestConfig } from "axios";
 import { useSession } from "next-auth/react";
 import { QueryKey, useQuery as tanstackQuery, UseQueryOptions } from "@tanstack/react-query";
-import { ssoApi } from "constance/auth";
 import customFetcher from "@/utils/customeFetcher";
-import { useEffect } from "react";
+import { GeneralResponseType } from "@/types/api-response";
 
-interface QueryPropsType {
-  queryKey: QueryKey;
-  queryFn: AxiosRequestConfig;
-  config?:UseQueryOptions, 
-}
 
 const useQuery = (props: UseQueryOptions & {fn: AxiosRequestConfig}) => {
   const session = useSession();
@@ -17,7 +11,7 @@ const useQuery = (props: UseQueryOptions & {fn: AxiosRequestConfig}) => {
 
   return tanstackQuery({
     ...props,
-    queryFn: async () => await customFetcher({
+    queryFn:  ():Promise<GeneralResponseType>  => customFetcher({
       url: props.fn.url as string,
       method: props.fn.method || "POST",
       data: props.fn.data,

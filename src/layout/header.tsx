@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { Button } from "antd";
 import { Header } from "antd/es/layout/layout";
@@ -9,7 +8,7 @@ import HeaderDropdown from "./header-dropdown";
 export default function LayoutHeader({
     showDrawer,
 }: {
-    showDrawer?: () => void;
+    showDrawer: () => void;
 }) {
 
     return (

@@ -14,14 +14,14 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
-        <AuthProvider>
-          <QueryClientProvider>
-            <ThemeProvider>
-              {children}
-            </ThemeProvider>
-            <ReactQueryDevtools />
-          </QueryClientProvider>
-        </AuthProvider>
+        {/* <AuthProvider> */}
+        <QueryClientProvider>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+        {/* </AuthProvider> */}
       </body>
     </html>
   )

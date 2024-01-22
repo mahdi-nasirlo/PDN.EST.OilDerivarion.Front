@@ -29,7 +29,7 @@ function ProductForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             name="name"
             label="نام محصول"
           >

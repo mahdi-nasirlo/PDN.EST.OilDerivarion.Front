@@ -1,10 +1,8 @@
-import AuthProvider from '@providers/auth-provider'
-import QueryClientProvider from '@providers/query-client-provider'
-import ThemeProvider from '@providers/theme-provider'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
 import './globals.css'
-import { AppProgressBar } from 'next-nprogress-bar'
+import AuthProvider from '@/providers/auth-provider'
+import ThemeProvider from '@/providers/theme-provider'
+import QueryClientProvider from '@/providers/query-client-provider'
 
 export default function RootLayout({
   children,
@@ -14,14 +12,14 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
-        {/* <AuthProvider> */}
-        <QueryClientProvider>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-        {/* </AuthProvider> */}
+        <AuthProvider>
+          <QueryClientProvider>
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </AuthProvider>
       </body>
     </html>
   )

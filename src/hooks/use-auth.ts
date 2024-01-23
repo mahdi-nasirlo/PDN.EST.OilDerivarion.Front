@@ -24,10 +24,12 @@ const useGetToken = (code?: string) => {
 
     const getTokenApi = ssoApi.getToken
  
-    const {data , isLoading} = useQuery<z.infer<typeof getTokenApi.response>>({
+    const getToken = useQuery<z.infer<typeof getTokenApi.response>>({
         queryKey: [getTokenApi.url],
         queryFn: () => customFetcher({ url: getTokenApi.url, data: { code } }),
     })
+
+    const {data, isLoading} = getToken
 
     useEffect(() => {
         
@@ -43,7 +45,7 @@ const useGetToken = (code?: string) => {
 
     }, [isLoading, data])
 
-    return {data, isLoading}
+    return getToken
 }
 
 const useCheckToken = (code?: string) => {

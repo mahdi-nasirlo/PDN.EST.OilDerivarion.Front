@@ -13,11 +13,13 @@ interface PropsType {
 
 export default function Page(props: PropsType) {
 
-    const { checkToken } = useAuth({ code: props.searchParams.code })
+    const { checkToken, getToken } = useAuth({ code: props.searchParams.code })
 
     return (
-        <Spin spinning={checkToken.isLoading}>
-
+        <Spin
+            spinning={checkToken.isLoading || getToken.isLoading}
+            className="flex justify-center items-center w-full h-[100vh]"
+        >
         </Spin>
     )
 }

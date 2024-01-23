@@ -1,9 +1,11 @@
+import customFetcher from "@/utils/custome-fetcher";
+import { useQuery } from "@tanstack/react-query";
 import { ssoApi } from "constance/auth";
-import useQuery from "./use-query";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { z } from "zod";
-import { type } from "os";
-import { signIn } from "next-auth/react";
+
 
 interface propsType {
     code?: string
@@ -21,13 +23,14 @@ const useAuth = (props: propsType | undefined) => {
 const useGetToken = (code?: string) => {
 
     const getTokenApi = ssoApi.getToken
-    const {data , isLoading} = useQuery({
+ 
+    const {data , isLoading} = useQuery<z.infer<typeof getTokenApi.response>>({
         queryKey: [getTokenApi.url],
-        fn: {url: getTokenApi.url, data: {code: code}}
+        queryFn: () => customFetcher({ url: getTokenApi.url, data: { code } }),
     })
 
     useEffect(() => {
-
+        
         if (data?.success) {
             
             signIn("credentials", {
@@ -45,10 +48,13 @@ const useGetToken = (code?: string) => {
 
 const useCheckToken = (code?: string) => {
 
+    const router = useRouter()
+
     const checkTokenApi = ssoApi.checkToken
-    const checkToken = useQuery({
+
+    const checkToken = useQuery<z.infer<typeof checkTokenApi.response>>({
         queryKey: [ssoApi.checkToken, code],
-        fn: { url: checkTokenApi.url },
+        queryFn: () => customFetcher({url: checkTokenApi.url}),
         enabled: typeof code !== "string"
     })
 
@@ -56,14 +62,18 @@ const useCheckToken = (code?: string) => {
 
         if (!checkToken.data?.success) {
 
-            const validate = checkTokenApi.type.safeParse(checkToken?.data?.data)
+            const validate = checkTokenApi.response.safeParse(checkToken?.data)
             
             if (validate.success) {
 
-                const { ssoUrl, clientId, redirectUri } = validate.data
+                const { data: {clientId, redirectUri, ssoUrl} } = validate.data
                     
                 window.location.href = `${ssoUrl}?ClientId=${clientId}&RedirectUri=${window.origin}/login`
             }
+
+        } else {
+            
+            router.push("/")
 
         }
         

@@ -1,8 +1,6 @@
-
 import { GeneralResponseType } from "@/types/api-response";
 import baseAxois from "./base-axois";
 import {AxiosHeaders, AxiosInstance} from "axios";
-import {GetServerSidePropsContext} from "next";
 import getUrlWithParams from "./getUrlWithParams";
 
 type Props = {
@@ -33,15 +31,6 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
 
     const finalUrl = getUrlWithParams(BaseAxios.getUri() + url, params)
 
-    let logEntry = {
-        timestamp: new Date().toISOString(),
-        method: method || 'POST',
-        path: finalUrl,
-        status: "0",
-        message: '',
-        data: null as any,
-    };
-
     try {
         const response = await BaseAxios.request({
             url: finalUrl,
@@ -51,7 +40,7 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
                 Authorization: `Bearer ${token}`,
                 ...headers
             },
-            method: method || "GET",
+            method: method || "POST",
             data: data,
         })
 
@@ -60,30 +49,19 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
         const isOk = response.status >= 200 && response.status < 300;
 
         if (isOk) {
-            logEntry.message = 'Request successful';
+
             return responseBody;
+            
         } else {
 
-            logEntry.message = `Request failed with status: ${response.status}`;
-            logEntry.status = `${response.status}`;
-
             // if (response.status == 401) await handleError()
-
-            console.error('Request Error:', logEntry);
 
             return {ok: isOk, status: response.status, message: responseBody?.message, ...responseBody.data}
         }
     } catch (error: any) {
 
-        logEntry.message = error.message;
-        logEntry.status = `${error?.response?.status}`;
-
-        logEntry.data = JSON.stringify(error?.response?.data)
-
-        // if (error?.response?.status == 401) await handleError()
-
-        console.error('Request Network/Error:', logEntry);
-
+        // console.log(error);
+        
         return {
             message: error?.response?.data?.message || error.message,
             status: error?.response?.status || error.status,
@@ -95,4 +73,5 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
 
 }
 
+export type {Props as customFetcherType}
 export default customFetcher

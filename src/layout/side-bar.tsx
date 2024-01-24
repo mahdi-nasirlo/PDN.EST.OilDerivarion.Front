@@ -1,23 +1,19 @@
-import { useGetUserAccess } from '@/hooks/sso/use-get-user-access'
 import { Menu, MenuProps } from 'antd/lib'
 import React from 'react'
 import { useControlSidebar } from './hooks/use-control-sidebar'
 
 export default function SideBar() {
 
-    const { userAccess } = useControlSidebar()
+    const { userAccess, handleMenuOpenChange, handleMenuItemClick, pathname } = useControlSidebar()
 
     const CommonMenu = (props: MenuProps) => <Menu
+        onClick={handleMenuItemClick}
+        items={userAccess.data}
+        onOpenChange={handleMenuOpenChange}
+        mode='inline'
+        selectedKeys={[pathname]}
+        defaultSelectedKeys={[pathname]}
         {...props}
-    // items={[{ label: "test", key: "1" }]}
-    // style={style}
-    // defaultSelectedKeys={[pathname]}
-    // selectedKeys={[pathname]}
-    // openKeys={openKeys}
-    // onOpenChange={handleMenuOpenChange}
-    // className={className}
-    // mode="inline"
-    // onClick={handleMenuItemClick}
     />
 
     return (
@@ -32,7 +28,20 @@ export default function SideBar() {
                 zIndex: 99,
             }}
         >
-            <CommonMenu />
+            <CommonMenu
+                className="px-4 overflow-auto hidden lg:block"
+                style={{
+                    width: "275px",
+                    padding: "0 16px",
+                    paddingTop: "30px",
+                    paddingBottom: "30px",
+                    height: "100%",
+                }}
+            >
+                {/* {userAccess.items?.map((item) => <MenuItem>
+                {item.}
+                </MenuItem>)} */}
+            </CommonMenu>
         </div>
     )
 }

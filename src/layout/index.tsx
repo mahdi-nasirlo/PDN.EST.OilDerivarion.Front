@@ -5,6 +5,7 @@ import React from 'react'
 import LayoutHeader from './header'
 import { Content } from 'antd/lib/layout/layout'
 import SideBar from './side-bar'
+import { Typography } from 'antd'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 

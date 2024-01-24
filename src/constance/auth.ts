@@ -5,6 +5,12 @@ import { z } from "zod"
 const ssoApi = {
     getAllUserAccess: {
         url: "/Sso/GetAllUserAccess",
+        response: generalResponseZod.extend({
+                data: z.array(z.object({
+                    nameFa: z.string(),
+                    url: z.string()
+                })).or(z.null())                
+            })
     },
     getUserInfo: {
         url: "/Sso/GetUserInfo",

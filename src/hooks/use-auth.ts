@@ -95,10 +95,12 @@ const useCheckToken = (code?: string) => {
     })
 
     useEffect(() => {
+        console.log(code);
+        
         console.log(checkToken.data, code, "check token");
     }, [checkToken.data, code])
 
-    useRedirectToSso(checkToken.data)
+    // useRedirectToSso(checkToken.data)
 
     return checkToken
 }

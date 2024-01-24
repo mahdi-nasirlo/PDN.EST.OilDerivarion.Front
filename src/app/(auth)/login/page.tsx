@@ -14,6 +14,9 @@ interface PropsType {
 
 export default function Page(props: PropsType) {
 
+    console.log(props.searchParams);
+
+
     const { checkToken, getToken } = useAuth({ code: props.searchParams.code })
 
     return (

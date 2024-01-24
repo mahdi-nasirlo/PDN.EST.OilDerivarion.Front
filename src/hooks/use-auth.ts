@@ -37,6 +37,8 @@ const useGetToken = (code?: string) => {
 
         const result = getTokenApi.response.safeParse(data)
 
+        console.log(result);
+        
         console.log(getToken.data, code, "check token");
 
         if (result.success && result.data.success) {
@@ -96,7 +98,6 @@ const useCheckToken = (code?: string) => {
 
     useEffect(() => {
         console.log(code);
-        
         console.log(checkToken.data, code, "check token");
     }, [checkToken.data, code])
 

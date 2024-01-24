@@ -1,6 +1,6 @@
-import LayoutHeader from '@/components/layout/header'
 import { Layout, Space } from 'antd/lib'
-import React, { useState } from 'react'
+import React from 'react'
+import LayoutHeader from './header'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
             <Layout className="custom-layout" style={{ minHeight: "100vh" }}>
                 <LayoutHeader
-                // showDrawer={() => { }}
+                // showDrawer={() => { }} 
                 />
                 <Layout className="scrollable-content bg-gray-50" hasSider>
                     {/* <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} />

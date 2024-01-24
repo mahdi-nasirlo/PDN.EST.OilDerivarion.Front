@@ -13,6 +13,7 @@ type Props = {
     cache?: RequestCache;
     tokenFromServerSide?: string,
     token?: string,
+    notify?: boolean
 }
 
 async function customFetcher(props: Props): Promise<GeneralResponseType | any | undefined> {
@@ -24,7 +25,8 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
         data,
         headers,
         method,
-        token
+        token,
+        notify
     } = props
 
     const BaseAxios = axiosInstance || baseAxois
@@ -37,7 +39,7 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
+                Authorization: token,
                 ...headers
             },
             method: method || "POST",
@@ -48,21 +50,19 @@ async function customFetcher(props: Props): Promise<GeneralResponseType | any | 
 
         const isOk = response.status >= 200 && response.status < 300;
 
-        if (isOk) {
-
-            return responseBody;
-            
-        } else {
-
-            // if (response.status == 401) await handleError()
-
-            return {ok: isOk, status: response.status, message: responseBody?.message, ...responseBody.data}
+        return {
+            ok: isOk,
+            status: response.status,
+            success: responseBody?.success,
+            notify: notify,
+            message: responseBody?.message,
+            data: responseBody?.data
         }
+        
     } catch (error: any) {
 
-        // console.log(error);
-        
         return {
+            notify: notify || true,
             message: error?.response?.data?.message || error.message,
             status: error?.response?.status || error.status,
             ok: false,

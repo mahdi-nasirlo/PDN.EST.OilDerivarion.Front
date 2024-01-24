@@ -8,7 +8,7 @@ import HeaderDropdown from "./header-dropdown";
 export default function LayoutHeader({
     showDrawer,
 }: {
-    showDrawer: () => void;
+    showDrawer?: () => void;
 }) {
 
     return (

@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 export const getResponseData = (response: any) => {
   return response.data?.data;
 };
@@ -10,7 +11,7 @@ export const getResponseError = (error: any) => {
   return (
     error.response?.data.title ||
     error.response?.data.error ||
-    error.response?.data.msg ||
+    error.response?.data.message ||
     "خطا در برقراری ارتباط با سرور"
   );
 };

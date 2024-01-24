@@ -1,42 +1,16 @@
-import Image from "next/image";
+"use client"
 import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useState } from "react";
 import useSWR from "swr";
 
 import { signOut } from "next-auth/react";
+import { useHeaderDropdown } from "./hooks/use-header-dropwdown";
+import Image from "next/image";
 
 export default function HeaderDropdown() {
 
-  // const serverSignOut = useSignOut()
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  // const handleOk = async () => {
-  //   const logout = await serverSignOut.trigger()
-
-  //   console.log(logout, "test");
-
-  //   if (logout?.success) {
-  //     const res = await signOut()
-  //     setIsModalOpen(false);
-  //   }
-
-  // };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-
-  // const { data: GetUserInfo, isLoading: ldGetUserInfo } = useSWR(
-  //   "/Sso/GetUserInfo",
-  //   (url) => listFetcher(url)
-  // );
+  const { confirmExitModal, userInfo, logout } = useHeaderDropdown()
 
   const items: MenuProps["items"] = [
     {
@@ -57,9 +31,7 @@ export default function HeaderDropdown() {
       key: "4",
       danger: true,
       label: "خروج",
-      onClick: () => {
-        showModal();
-      },
+      onClick: confirmExitModal.open,
       icon: <LogoutOutlined />,
       theme: "dark",
     },
@@ -81,16 +53,17 @@ export default function HeaderDropdown() {
               alt="person-circle icon"
               src="/static/person-circle.svg"
             />
-            {/* {ldGetUserInfo ?
+            {userInfo.isLoading ?
               <LoadingOutlined className="text-primary-500 text-lg hidden lg:block" />
               : <div>
                 <Typography className="font-normal text-lg hidden lg:block">
-                  {GetUserInfo?.lastName}
+                  {userInfo.data?.lastName}
                 </Typography>
                 <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
-                  {GetUserInfo?.firstName}
+                  {userInfo.data?.firstName}
                 </Typography>
-              </div>} */}
+              </div>
+            }
             <Image
               className="mr-6 hidden lg:block"
               height={16}
@@ -104,18 +77,18 @@ export default function HeaderDropdown() {
       <Modal
         width={600}
         title="خروج از حساب کاربری"
-        open={isModalOpen}
-        onCancel={handleCancel}
+        open={confirmExitModal.isOpen}
+        onCancel={confirmExitModal.close}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={12} md={12}>
               <Button
-                // loading={loading}
+                loading={logout.isPending}
+                disabled={logout.isPending}
                 size="large"
                 className="w-full"
                 type="primary"
-                // loading={serverSignOut.isMutating}
-                // onClick={handleOk}
+                onClick={logout.execute}
                 danger
                 key={"submit"}>
                 خروج
@@ -123,10 +96,10 @@ export default function HeaderDropdown() {
             </Col>
             <Col xs={12} md={12}>
               <Button
-                // disabled={loading}
+                disabled={logout.isPending}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancel}
+                onClick={confirmExitModal.close}
                 key={"cancel"}>
                 انصراف
               </Button>

@@ -17,7 +17,6 @@ export default function RootLayout({
             <ThemeProvider>
               {children}
             </ThemeProvider>
-            <ReactQueryDevtools />
           </QueryClientProvider>
         </AuthProvider>
       </body>

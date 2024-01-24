@@ -3,7 +3,7 @@
 import { useAuth } from '@/hooks/use-auth'
 import { Spin } from 'antd';
 import { Result } from 'antd/lib';
-import React, { useEffect } from 'react'
+import React from 'react'
 
 interface PropsType {
     searchParams: {
@@ -20,7 +20,11 @@ export default function Page(props: PropsType) {
         <Result
             title="در حال انتقال به صفحه هستید"
             className="w-full h-[100vh]"
-            status={checkToken.isSuccess || getToken.isSuccess ? "success" : "warning"}
+            status={
+                checkToken?.isLoading || getToken.isLoading ?
+                    "info" :
+                    (checkToken.data?.success || getToken.data?.success ? "success" : "error")
+            }
             extra={
                 <Spin size='large' spinning={checkToken.isLoading || getToken.isLoading} />
             }

@@ -1,10 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import { Button } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import HeaderDropdown from "./header-dropdown";
+import HeaderDropdown from "layout/header-dropdown";
 
 export default function LayoutHeader({
     showDrawer,

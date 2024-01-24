@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("./../assets/css/font.css");
+@import url("./../assets/css/style.css");
 
 @media (prefers-color-scheme: dark) {
   :root {

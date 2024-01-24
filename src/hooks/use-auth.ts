@@ -37,7 +37,7 @@ const useGetToken = (code?: string) => {
 
         const result = getTokenApi.response.safeParse(data)
 
-        console.log(result, data);
+        console.log(getToken.data, code, "check token");
 
         if (result.success && result.data.success) {
             
@@ -93,6 +93,10 @@ const useCheckToken = (code?: string) => {
         queryFn: () => fetchWithSession({url: checkTokenApi.url}),
         enabled: typeof code !== "string",
     })
+
+    useEffect(() => {
+        console.log(checkToken.data, code, "check token");
+    }, [checkToken.data, code])
 
     useRedirectToSso(checkToken.data)
 

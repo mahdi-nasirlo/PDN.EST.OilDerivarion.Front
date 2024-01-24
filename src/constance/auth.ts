@@ -3,6 +3,9 @@ import { generalResponseZod } from "@/types/api-response"
 import { z } from "zod"
 
 const ssoApi = {
+    getAllUserAccess: {
+        url: "/Sso/GetAllUserAccess",
+    },
     getUserInfo: {
         url: "/Sso/GetUserInfo",
         response: generalResponseZod.extend({

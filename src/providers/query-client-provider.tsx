@@ -2,33 +2,52 @@
 
 import React from "react";
 import {
-    MutationCache,
     QueryCache,
     QueryClient,
     QueryClientProvider as TanstackQueryClientProvider
 } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
-// import { GeneralResponseType } from "@/types/api-response";
-// import toast from "react-hot-toast";
-// import { GeneralResponseType } from "../@types/api-response/general";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { getResponseError } from "@/utils/getResponse";
+import { notification } from "antd/lib";
+import { useRedirectToSso } from "@/hooks/use-auth";
 
 
+const notificationKey = "glNotify"
 
 const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const session = useSession()
+    const redirectToSso = useRedirectToSso(undefined)
+
+    const [api, contextHolder] = notification.useNotification();
 
     const queryClient = new QueryClient({
-        // queryCache: new QueryCache({
-        //     onSuccess: (data: unknown) => {
+        queryCache: new QueryCache({
+            onSuccess: async (data) => {
 
-        //         const result = data as GeneralResponseType
+                const result: z.infer<typeof generalResponseZod> = data as any
 
-        //         if (result?.message) {
-        //             // toast.error(result?.message)
-        //         }
-        //     },
-        // }),
+                if (!result.success) {
+                    api.error({ message: result.message })
+                }
+
+                if (result.success && result.notify) {
+                    api.success({ message: result.message })
+                }
+
+                if (result.status === 401) {
+                    redirectToSso.execute(result)
+                }
+
+            },
+            onError: (error) => {
+
+                const message = getResponseError(error);
+                api.error({ message })
+
+            }
+        }),
         // mutationCache: new MutationCache({
         //     // onMutate: () => toast.loading("loading...", { ...toastConf }),
         //     onSuccess: (data: unknown) => {
@@ -50,9 +69,10 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     return (
-        // <AuthProvider
         <TanstackQueryClientProvider client={queryClient}>
             {children}
+            {contextHolder}
+            <ReactQueryDevtools initialIsOpen={true} />
         </TanstackQueryClientProvider>
     );
 };

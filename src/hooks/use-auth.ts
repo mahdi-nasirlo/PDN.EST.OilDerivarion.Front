@@ -18,6 +18,10 @@ const useAuth = (props: propsType | undefined) => {
 
     const getToken = useGetToken(props?.code)
 
+
+    console.log(props?.code);
+    
+
     return {checkToken, getToken}
 }
 
@@ -36,10 +40,6 @@ const useGetToken = (code?: string) => {
     useEffect(() => {
 
         const result = getTokenApi.response.safeParse(data)
-
-        console.log(result);
-        
-        console.log(getToken.data, code, "check token");
 
         if (result.success && result.data.success) {
             
@@ -95,11 +95,6 @@ const useCheckToken = (code?: string) => {
         queryFn: () => fetchWithSession({url: checkTokenApi.url}),
         enabled: typeof code !== "string",
     })
-
-    useEffect(() => {
-        console.log(code);
-        console.log(checkToken.data, code, "check token");
-    }, [checkToken.data, code])
 
     // useRedirectToSso(checkToken.data)
 

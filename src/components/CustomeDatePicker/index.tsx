@@ -15,7 +15,7 @@ export default function CustomDatePicker({ value = {}, onChange }: { value?: any
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
-      className={" w-full"} // props.className +
+      className={"w-full"}
       readOnly
       ref={ref}
       value={typeof value == "string" ? value : ""}

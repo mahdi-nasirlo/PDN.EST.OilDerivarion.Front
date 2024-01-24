@@ -1,12 +1,15 @@
 import React from "react";
 import SubmitForm from "./components/submit-form";
 import DataTable from "./components/data-table";
+import { Card } from "@/components/card";
 
 const page = () => {
   return (
     <div>
-      <SubmitForm />
-      <DataTable />
+      <Card>
+        <SubmitForm />
+      </Card>
+      {/* <DataTable /> */}
     </div>
   );
 };

@@ -3,29 +3,24 @@ import fetchWithSession from "@/utils/fetch-with-session";
 import { useQuery } from "@tanstack/react-query";
 import { ssoApi } from "constance/auth";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 
+const useAuth = () => { 
 
-interface propsType {
-    code?: string
-}
+    const searchProps = useSearchParams()
 
-const useAuth = (props: propsType | undefined) => { 
+    const code = searchProps.get('code')
 
-    const checkToken = useCheckToken(props?.code)
+    const checkToken = useCheckToken(code)
 
-    const getToken = useGetToken(props?.code)
-
-
-    console.log(props?.code);
-    
+    const getToken = useGetToken(code)
 
     return {checkToken, getToken}
 }
 
-const useGetToken = (code?: string) => {
+const useGetToken = (code?: string | null) => {
 
     const getTokenApi = ssoApi.getToken
  
@@ -88,15 +83,13 @@ export const useRedirectToSso = (data: z.infer<typeof checkTokenApi.response> | 
     return {execute: (data:z.infer<typeof checkTokenApi.response> | undefined) => setState(data)}
 }
 
-const useCheckToken = (code?: string) => {
+const useCheckToken = (code?: string | null) => {
 
     const checkToken = useQuery<z.infer<typeof checkTokenApi.response>>({
         queryKey: [ssoApi.checkToken, code],
         queryFn: () => fetchWithSession({url: checkTokenApi.url}),
         enabled: typeof code !== "string",
     })
-
-    // useRedirectToSso(checkToken.data)
 
     return checkToken
 }

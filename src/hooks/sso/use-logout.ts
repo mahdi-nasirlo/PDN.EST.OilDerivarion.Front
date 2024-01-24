@@ -15,7 +15,7 @@ const useLogout = () => {
 
             await logout.mutateAsync()
 
-            router.push("https://sso.pdnsoftware.ir/logout")
+            router.push("https://sso-test.pdnsoftware.ir/logout")
 
         }, 
         ...logout

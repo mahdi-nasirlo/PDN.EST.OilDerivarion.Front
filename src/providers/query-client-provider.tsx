@@ -36,9 +36,9 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
                     api.success({ message: result.message })
                 }
 
-                // if (result.status === 401) {
-                //     redirectToSso.execute(result)
-                // }
+                if (result.status === 401) {
+                    redirectToSso.execute(result)
+                }
 
             },
             onError: (error) => {

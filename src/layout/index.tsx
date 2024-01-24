@@ -1,6 +1,10 @@
+"use client"
+
 import { Layout, Space } from 'antd/lib'
 import React from 'react'
 import LayoutHeader from './header'
+import { Content } from 'antd/lib/layout/layout'
+import SideBar from './side-bar'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
@@ -13,28 +17,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 // showDrawer={() => { }} 
                 />
                 <Layout className="scrollable-content bg-gray-50" hasSider>
-                    {/* <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} />
+                    <SideBar />
+                    {/* <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} /> */}
                     <Content
                         className="custom-content"
                         style={contentStyle}
                     >
                         <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-                            <div className="flex justify-between items-center">
-                                <LayoutBreadcrumb />
-                                <Button
-                                    type="default"
-                                    onClick={() => router.back()}
-                                >
-                                    بازگشت
-                                </Button>
-                            </div>
-                            <Divider className="mb-7 mt-6" />
-                            
+                            {children}
                         </Layout>
-                    </Content> */}
-                    {children}
+                    </Content>
                 </Layout>
             </Layout>
         </Space>
     )
 }
+
+
+const contentStyle: React.CSSProperties = {
+    position: "inherit",
+    textAlign: "center",
+    minHeight: 120,
+    lineHeight: "120px",
+    color: "#fff",
+};

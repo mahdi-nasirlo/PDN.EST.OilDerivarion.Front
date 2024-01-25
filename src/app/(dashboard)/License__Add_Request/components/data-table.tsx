@@ -10,8 +10,11 @@ import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
 import { Measure } from "../../../../../interfaces/measures";
 import StatusColumn from "@/components/CustomeTable/StatusColumn";
 import CustomeTable from "../../../../components/CustomeTable";
+import { useQuery } from "@tanstack/react-query";
+import fetchWithSession from "@/utils/fetch-with-session";
 
 export default function DataTable() {
+
   const columns: ColumnsType<Measure> = [
     {
       title: "ردیف",

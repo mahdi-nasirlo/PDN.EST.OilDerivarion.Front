@@ -9,12 +9,14 @@ import {
   Select,
 } from "antd";
 import React from "react";
-import { useForm } from "antd/es/form/Form";
 import CustomeDatePicker from "../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../lib/filterOption";
+import { useValidation } from "@/hooks/useValidation";
+import { ssoApi } from "constance/auth";
 
 export default function SubmitForm() {
-  const [form] = useForm();
+
+  const [form, rules] = useValidation(ssoApi.test.type);
 
   return (
     <Form layout="vertical" form={form}>
@@ -58,14 +60,9 @@ export default function SubmitForm() {
         <Col xs={24} md={12}>
           <Form.Item
             name="businessNumber"
-            required={false}
             hasFeedback={false}
             label="شناسه کسب و کار"
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              { pattern: /^\d{12}$/, message: "لطفاً 12 رقم وارد کنید" },
-              { pattern: /^\d*$/, message: "لطفاً فقط عدد وارد کنید" },
-            ]}
+            rules={[rules]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -75,7 +72,7 @@ export default function SubmitForm() {
             name="licenseTypeId"
             required={false}
             label="نوع مجوز"
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[rules]}
           >
             <Select
               showSearch
@@ -96,13 +93,7 @@ export default function SubmitForm() {
             name="licenseNumber"
             label="شماره مجوز"
             required={false}
-            rules={[
-              { required: true, message: "لطفا مقدار را وارد کنید" },
-              {
-                pattern: /^(?!-)\d{12}(\.\d{12})?$/,
-                message: "شماره مجوز 12 رقمی است",
-              },
-            ]}
+            rules={[rules]}
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
@@ -112,7 +103,8 @@ export default function SubmitForm() {
             name="licenseValidityDatePersin"
             label="تاریخ اعتبار مجوز"
             required={false}
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[rules]}
+          // rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <CustomeDatePicker />
           </Form.Item>
@@ -124,7 +116,8 @@ export default function SubmitForm() {
             name="factoryStateId"
             label="استان"
             required={false}
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[rules]}
+          // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
@@ -144,7 +137,8 @@ export default function SubmitForm() {
             name="factoryCityId"
             label="شهرستان"
             required={false}
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            rules={[rules]}
+          // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch

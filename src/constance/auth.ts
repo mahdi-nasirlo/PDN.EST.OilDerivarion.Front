@@ -1,7 +1,7 @@
-
 import { generalResponseZod } from "@/types/api-response"
 import { z } from "zod"
 import { errorMessage } from "./error-message"
+
 
 const ssoApi = {
     test: {

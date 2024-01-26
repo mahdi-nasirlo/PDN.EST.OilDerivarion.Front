@@ -6,6 +6,7 @@ import React, {useState} from 'react'
 import CustomeTable from "../../../../../../components/CustomeTable";
 import MultipleSelect from '../../../../../../components/MultipleSelect';
 import ChangeStatus from '../../../../../../components/inputs/ChangeStatus';
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
 
 export default function DataTable() {
 
@@ -88,8 +89,9 @@ export default function DataTable() {
     return (
         <>
             <div className="box-border w-full mt-8 p-6">
-                <div className="flex justify-between items-center">
-                    <Typography className="text-right text-[16px] font-normal">
+                <div className="flex justify-start items-center">
+                    <ViewColumnsIcon className="text-gray-900 w-5 h-5"/>
+                    <Typography className="text-right text-[16px] font-normal mr-2">
                         لیست کاربران
                     </Typography>
                 </div>

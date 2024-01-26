@@ -1,3 +1,81 @@
 .ant-form-item-explain-error {
   @apply text-right mb-4;
 }
+
+.ant-collapse-header-text {
+  @apply text-right
+}
+
+.ant-table-thead .ant-table-cell {
+  background: theme("backgroundColor.primary.500") !important;
+  color: theme("colors.white") !important;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  background: lightgray;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 255, 1);
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background: cyan;
+}
+
+.ant-table-content {
+  @apply overflow-auto overflow-y-hidden rounded-3xl border-[1.5px] border-[#E2E8F0] whitespace-nowrap !important;
+  scroll-behavior: smooth;
+  scrollbar-color: #0A4C95 rgba(194, 210, 228, 0);
+  scroll-snap-align: none;
+}
+
+.ant-table-row:nth-child(even) {
+  background-color: theme("backgroundColor.gray.50") !important;
+}
+
+.ant-table-row:nth-child(odd) {
+  background-color: theme("backgroundColor.white") !important;
+}
+
+.ant-table-thead .ant-table-cell:before {
+  @apply w-0 !important
+}
+
+.ant-table-tbody .ant-table-row .ant-table-cell:last-child:before {
+  @apply w-0
+}
+
+.ant-table-tbody .ant-table-row .ant-table-cell:before {
+  @apply bg-gray-300;
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0;
+  width: 1px;
+  height: 1.6em;
+  transform: translateY(-50%);
+  transition: background-color 0.2s;
+  content: "";
+}
+
+.ant-table-cell {
+  @apply font-medium
+}
+
+.ant-table-row:last-child .ant-table-cell {
+  border: none !important;
+}
+
+.ant-notification-notice {
+  direction: rtl;
+  font-family: IRANSans !important;
+}
+
+.ant-modal-mask {
+  background-color: rgb(255 255 255 / 0%) !important;
+  backdrop-filter: blur(1px);
+}

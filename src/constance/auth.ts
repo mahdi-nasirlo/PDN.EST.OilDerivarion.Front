@@ -1,6 +1,6 @@
-
 import { generalResponseZod } from "@/types/api-response"
 import { z } from "zod"
+
 
 const ssoApi = {
     getAllUserAccess: {

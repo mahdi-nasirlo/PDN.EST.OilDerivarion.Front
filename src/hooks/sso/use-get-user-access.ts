@@ -1,6 +1,5 @@
 import fetchWithSession from '@/utils/fetch-with-session'
 import { useQuery } from '@tanstack/react-query'
-import { MenuProps } from 'antd/lib'
 import { ItemType, MenuItemType } from 'antd/lib/menu/hooks/useItems'
 import { ssoApi } from 'constance/auth'
 import { z } from 'zod'

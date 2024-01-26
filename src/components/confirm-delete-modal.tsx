@@ -39,7 +39,7 @@ function ConfirmDeleteModal({ open, setOpen, handleDelete, title, loading }: {
                     </Col>
                 </Row>
             ]}
-            title={title}
+            title={`حذف ${title}`}
             open={open}
             onCancel={() => {
                 setOpen(false)

@@ -1,18 +1,11 @@
 "use client";
 
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  Row,
-  Select,
-} from "antd";
+import {Button, Col, Form, Input, Row, Select,} from "antd";
 import React from "react";
-import CustomeDatePicker from "../../../../components/CustomeDatePicker";
-import { filterOption } from "../../../../../lib/filterOption";
-import { useValidation } from "@/hooks/useValidation";
-import { ssoApi } from "constance/auth";
+import CustomeDatePicker from "../../../../components/custome-date-picker";
+import {filterOption} from "../../../../../lib/filterOption";
+import {useValidation} from "@/hooks/useValidation";
+import {ssoApi} from "constance/auth";
 
 export default function SubmitForm() {
 

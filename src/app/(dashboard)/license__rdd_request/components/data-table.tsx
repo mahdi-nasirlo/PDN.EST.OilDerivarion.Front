@@ -1,17 +1,10 @@
 "use client";
 
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import useSWRMutation from "swr/mutation";
-import { mutationFetcher } from "../../../../../lib/server/mutationFetcher";
-import { Measure } from "../../../../../interfaces/measures";
-import StatusColumn from "@/components/CustomeTable/StatusColumn";
-import CustomeTable from "../../../../components/CustomeTable";
-import { useQuery } from "@tanstack/react-query";
-import fetchWithSession from "@/utils/fetch-with-session";
+import {Button, Space} from "antd";
+import {ColumnsType} from "antd/es/table";
+import React from "react";
+import {Measure} from "../../../../../interfaces/measures";
+import StatusColumn from "@/components/custome-table/StatusColumn";
 
 export default function DataTable() {
 
@@ -119,7 +112,7 @@ export default function DataTable() {
   return (
     <>
       <div className="box-border w-full mt-8 p-6">
-        {/* <CustomeTable
+        {/* <custome-table
           setInitialData={}
           isLoading={}
           data={}

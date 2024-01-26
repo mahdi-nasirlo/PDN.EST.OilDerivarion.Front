@@ -2,14 +2,15 @@
 
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import React from "react";
-import CustomeDatePicker from "../../../../components/CustomeDatePicker";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useValidation } from "@/hooks/useValidation";
 import { ssoApi } from "constance/auth";
 import TransferList from "./transfer";
+import useGetStep from "@/hooks/basic/use-basic";
 
 export default function SubmitForm() {
   const [form, rules] = useValidation(ssoApi.test.type);
+  const steps = useGetStep();
 
   return (
     <Form layout="vertical" form={form}>
@@ -25,9 +26,8 @@ export default function SubmitForm() {
             <Select
               showSearch
               // @ts-ignore
-              //   filterOption={filterOption}
-              //   loading={states.isLoading}
-              //   options={sortByIndex(states.data, "Name")}
+              loading={steps.isLoading}
+              options={steps.data}
               fieldNames={{ value: "Id", label: "Name" }}
               size="large"
               placeholder="انتخاب کنید"

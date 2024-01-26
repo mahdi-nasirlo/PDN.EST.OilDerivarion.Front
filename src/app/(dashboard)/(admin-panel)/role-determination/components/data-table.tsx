@@ -1,12 +1,11 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Space, Typography } from 'antd'
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
-import StatusColumn from '../../../../../components/CustomeTable/StatusColumn';
-import CustomeTable from "../../../../../components/CustomeTable";
-import MultipleSelect from '../../../../../components/MultipleSelect';
-import ChangeStatus from '../../../../../components/inputs/ChangeStatus';
+import {Button, Col, Form, Modal, Row, Space, Typography} from 'antd'
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import CustomeTable from "../../../../../../components/CustomeTable";
+import MultipleSelect from '../../../../../../components/MultipleSelect';
+import ChangeStatus from '../../../../../../components/inputs/ChangeStatus';
 
 export default function DataTable() {
 

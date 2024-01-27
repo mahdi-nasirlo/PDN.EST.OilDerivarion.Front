@@ -35,7 +35,7 @@ const Index = (props: TProps) => {
         </Breadcrumb>
 
         {props.backLink && (
-            <Link href={props.backLink}>
+            <Link href={props.backLink} className="flex">
               <Button size="large">
                 بازگشت
               </Button>

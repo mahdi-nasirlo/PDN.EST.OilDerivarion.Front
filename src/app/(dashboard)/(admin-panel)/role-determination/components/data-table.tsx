@@ -1,13 +1,13 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Space, Typography } from 'antd'
-import { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
-import CustomeTable from '../../../../../components/custome-table'
+import {Button, Col, Form, Modal, Row, Space, Typography} from 'antd'
+import {ColumnsType} from 'antd/es/table';
+import React, {useState} from 'react'
+import CustomeTable from '../../../../../components/custom-table'
 import MultipleSelect from '../../../../../../components/MultipleSelect';
 import ChangeStatus from '../../../../../../components/inputs/ChangeStatus';
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Card } from '@/components/card';
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import {Card} from '@/components/card';
 
 export default function DataTable() {
 
@@ -92,9 +92,8 @@ export default function DataTable() {
             <Card>
                 <CustomeTable
                     header={{
-                        Icon: <ViewColumnsIcon />,
-                        Text: 'لیست کاربران',
-                        Actions: [],
+                        icon: <ViewColumnsIcon/>,
+                        text: 'لیست کاربران',
                     }}
                     setInitialData={() => { }}
                     isLoading={false}

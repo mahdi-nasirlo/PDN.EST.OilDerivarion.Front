@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Button, Table, TableProps, Typography } from "antd";
+import React, {useEffect, useState} from "react";
+import {Table, TableProps, Typography} from "antd";
 import GetPageRecordNumber from "../getPageRecordNumber";
-import { addIndexToData } from "../addIndexToData";
+import {addIndexToData} from "../addIndexToData";
 
 interface RecordeValue {
   header?: {
-    Icon: React.ReactNode;
-    Text: string
-    Actions: any[]
+    icon: React.ReactNode;
+    text: string
+    actions?: React.ReactNode
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
@@ -43,14 +43,12 @@ const Index = (props: TableProps<any> & RecordeValue) => {
         {props.header && (
           <>
             <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2">
-              {props.header.Icon && (
-                <span className="text-gray-900 w-8 h-8">{props.header.Icon}</span>
+              {props.header.icon && (
+                  <span className="text-gray-900 w-8 h-8">{props.header.icon}</span>
               )}
-              {props.header.Text}
+              {props.header.text}
             </Typography>
-            <Button>
-              test
-            </Button>
+            {props.header.actions}
           </>
         )}
       </div>

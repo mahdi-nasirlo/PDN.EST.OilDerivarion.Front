@@ -1,9 +1,9 @@
 import React from 'react'
 import EditModal from './edit-modal'
-import CustomeTable from '../../../../../../components/custome-table'
-import { ColumnsType } from 'antd/es/table';
-import { Button, Space, Typography } from 'antd';
-import { ViewColumnsIcon } from '@heroicons/react/24/outline';
+import {ColumnsType} from 'antd/es/table';
+import {Button, Space} from 'antd';
+import {ViewColumnsIcon} from '@heroicons/react/24/outline';
+import CustomTable from "@/components/custom-table";
 
 export default function DataTable() {
 
@@ -59,11 +59,11 @@ export default function DataTable() {
 
     return (
         <>
-            <CustomeTable
+            <CustomTable
                 header={{
-                    Icon: <ViewColumnsIcon />,
-                    Text: 'لیست مواد اولیه',
-                    Actions: [],
+                    icon: <ViewColumnsIcon/>,
+                    text: 'لیست مواد اولیه',
+                    actions: <Button type="primary">safkaskjdf</Button>,
                 }}
                 setInitialData={() => { }}
                 isLoading={false}

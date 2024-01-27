@@ -68,7 +68,6 @@ export default function RenderOtherCard({ index, status }: any) {
                     </Col>
                     <Col xs={24} xl={12}>
                         <Button
-
                             size="large"
                             type="default"
                             className="w-full flex items-center justify-center text-secondary-500 border-secondary-500"

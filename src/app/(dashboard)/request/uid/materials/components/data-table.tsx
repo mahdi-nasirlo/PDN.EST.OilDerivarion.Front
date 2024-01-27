@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import EditModal from './edit-modal'
-import {ColumnsType} from 'antd/es/table';
-import {Button, Space} from 'antd';
-import {ViewColumnsIcon} from '@heroicons/react/24/outline';
+import { ColumnsType } from 'antd/es/table';
+import { Button, Space } from 'antd';
+import { ViewColumnsIcon } from '@heroicons/react/24/outline';
 import CustomTable from "@/components/custom-table";
+import { PlusOutlined } from '@ant-design/icons';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 
-export default function DataTable() {
+export default function DataTable({ setVisibleModal }: any) {
 
+    const [editModal, setEditModal] = useState(false);
+
+    const [deleteModal, setDeleteModal] = useState(false);
 
     const columns: ColumnsType<any> = [
         {
@@ -15,7 +20,7 @@ export default function DataTable() {
             width: "5%",
         },
         {
-            title: "عنوان",
+            title: "نام مواد اولیه",
             dataIndex: "MaterialName",
         },
         {
@@ -35,20 +40,16 @@ export default function DataTable() {
             render: (value, record) => (
                 <Space size='small'>
                     <Button
-                        className="text-red-500 font-bold py-2 px-1"
-                    // onClick={() => {
-                    //     setDeleteVisible(true);
-                    //     setRecordToDelete(record.Uid);
-                    // }}
+                        type='link'
+                        className="text-red-500 font-bold"
+                        onClick={() => setDeleteModal(true)}
                     >
                         حذف
                     </Button>
                     <Button
-                        className="text-secondary-500 font-bold py-2 px-1"
-                    // onClick={() => {
-                    //     setDeleteVisible(true);
-                    //     setRecordToDelete(record.Uid);
-                    // }}
+                        type='link'
+                        className="text-secondary-500 font-bold"
+                        onClick={() => setEditModal(true)}
                     >
                         ویرایش
                     </Button>
@@ -61,16 +62,30 @@ export default function DataTable() {
         <>
             <CustomTable
                 header={{
-                    icon: <ViewColumnsIcon/>,
+                    icon: <ViewColumnsIcon />,
                     text: 'لیست مواد اولیه',
-                    actions: <Button type="primary">safkaskjdf</Button>,
+                    actions:
+                        <Button
+                            className="flex items-center justify-center"
+                            icon={<PlusOutlined width={16} height={16} />}
+                            type="primary"
+                            onClick={() => setVisibleModal(true)}
+                        >
+                            افزودن مواد اولیه
+                        </Button>,
                 }}
                 setInitialData={() => { }}
                 isLoading={false}
                 data={data}
                 columns={columns}
             />
-            <EditModal />
+            <EditModal editModal={editModal} setEditModal={setEditModal} />
+            <ConfirmDeleteModal
+                title='مواد اولیه'
+                open={deleteModal}
+                setOpen={setDeleteModal}
+                handleDelete={() => setDeleteModal(false)}
+            />
         </>
     )
 }

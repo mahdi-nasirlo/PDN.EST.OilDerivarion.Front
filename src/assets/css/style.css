@@ -9,3 +9,21 @@
 .DatePicker {
   @apply w-full;
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme("colors.gray.300");
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme("colors.primary.500");
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme("backgroundColor.green.500");
+}

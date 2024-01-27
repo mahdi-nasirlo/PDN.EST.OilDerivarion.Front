@@ -3,15 +3,23 @@
 import React from 'react'
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentPlusIcon } from '@heroicons/react/24/outline';
-import { Alert, Col, Divider, Form, Input, Row, Typography } from 'antd';
+import { Alert, Button, Col, Divider, Form, Input, Row, Typography } from 'antd';
 import Materials from './materials'
 import Products from './products'
 import staticMessages from '../../../../../lib/staticMessages';
 import FileUpload from '../../../../../components/inputs/FileUpload/FileUpload';
 import { Card } from '@/components/card';
+import { useRouter } from 'next/navigation';
 
 
 export default function Page() {
+
+    const router = useRouter();
+
+    const HandelSubmit = () => router.push('/request');
+    const HandelCancel = () => router.push('/request');
+
+
     return (
         <div>
             <Breadcrumb
@@ -77,6 +85,28 @@ export default function Page() {
                     <Divider />
                     <Products />
                     <Divider />
+                    <Row gutter={[12, 12]}>
+                        <Col xs={24} md={12}>
+                            <Button
+                                size="large"
+                                type="default"
+                                className="w-full bg-gray-100 text-warmGray-500"
+                                onClick={HandelCancel}
+                            >
+                                بازگشت
+                            </Button>
+                        </Col>
+                        <Col xs={24} md={12}>
+                            <Button
+                                size="large"
+                                type="primary"
+                                className="w-full"
+                                onClick={HandelSubmit}
+                            >
+                                ثبت
+                            </Button>
+                        </Col>
+                    </Row>
                 </Form>
             </Card>
         </div >

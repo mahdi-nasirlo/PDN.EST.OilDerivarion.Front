@@ -11,22 +11,6 @@
   color: theme("colors.white") !important;
 }
 
-::-webkit-scrollbar {
-  width: 15px;
-  background: lightgray;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 255, 1);
-  border-radius: 15px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 15px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-  background: cyan;
-}
-
 .ant-table-content {
   @apply overflow-auto overflow-y-hidden rounded-3xl border-[1.5px] border-[#E2E8F0] whitespace-nowrap !important;
   scroll-behavior: smooth;

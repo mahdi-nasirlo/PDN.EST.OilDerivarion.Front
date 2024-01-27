@@ -1,10 +1,11 @@
 "use client";
 
-import {Button, Space} from "antd";
-import {ColumnsType} from "antd/es/table";
+import { Button, Space } from "antd";
+import { ColumnsType } from "antd/es/table";
 import React from "react";
-import {Measure} from "../../../../../interfaces/measures";
+import { Measure } from "../../../../../interfaces/measures";
 import StatusColumn from "@/components/custome-table/StatusColumn";
+import CustomeTable from '../../../../components/custome-table'
 
 export default function DataTable() {
 
@@ -113,6 +114,11 @@ export default function DataTable() {
     <>
       <div className="box-border w-full mt-8 p-6">
         {/* <custome-table
+         header={{
+            Icon: <ViewColumnsIcon />,
+            Text: 'لیست مجوزها',
+            Actions: [],
+              }}
           setInitialData={}
           isLoading={}
           data={}

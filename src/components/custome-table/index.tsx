@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Table, TableProps } from "antd";
+import { Button, Table, TableProps, Typography } from "antd";
 import GetPageRecordNumber from "../getPageRecordNumber";
 import { addIndexToData } from "../addIndexToData";
 
 interface RecordeValue {
+  header?: {
+    Icon: React.ReactNode;
+    Text: string
+    Actions: any[]
+  }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
   data:
-    | {
-        records: any[];
-        count: number;
-      }
-    | undefined;
+  | {
+    records: any[];
+    count: number;
+  }
+  | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
@@ -34,6 +39,21 @@ const Index = (props: TableProps<any> & RecordeValue) => {
 
   return (
     <>
+      <div className="flex justify-between items-center">
+        {props.header && (
+          <>
+            <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2">
+              {props.header.Icon && (
+                <span className="text-gray-900 w-8 h-8">{props.header.Icon}</span>
+              )}
+              {props.header.Text}
+            </Typography>
+            <Button>
+              test
+            </Button>
+          </>
+        )}
+      </div>
       <Table
         {...props}
         loading={props.isLoading}
@@ -46,6 +66,11 @@ const Index = (props: TableProps<any> & RecordeValue) => {
         columns={props.columns}
         pagination={{
           total: props.data?.count,
+          showTotal: (total, range) => (
+            <Typography>
+              {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
+            </Typography>
+          ),
           onChange: async (e: any) => {
             console.log(e);
             handleChangePage(e);

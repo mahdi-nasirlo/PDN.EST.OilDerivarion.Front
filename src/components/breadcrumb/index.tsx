@@ -1,8 +1,9 @@
 "use client";
 
-import React, { CSSProperties } from "react";
-import { Button, Divider } from "antd";
-import { Breadcrumb, Typography } from "antd/lib";
+import React, {CSSProperties} from "react";
+import {Button, Divider} from "antd";
+import {Breadcrumb, Typography} from "antd/lib";
+import Link from "next/link";
 
 type TProps = {
   style?: CSSProperties;
@@ -24,15 +25,21 @@ const Index = (props: TProps) => {
       <div className="flex justify-between items-center">
         <Breadcrumb>
           {props.pages.map((item, index) => (
-            <Breadcrumb.Item key={index}>{item.label}</Breadcrumb.Item>
+              <Breadcrumb.Item key={index}>
+                {item.path ? <Link href={item.path}>
+                  {item.label}
+                </Link> : item.label}
+              </Breadcrumb.Item>
           ))}
           <Breadcrumb.Item>{props.currentPage}</Breadcrumb.Item>
         </Breadcrumb>
 
         {props.backLink && (
-          <Button size="large" href={props.backLink}>
-            بازگشت
-          </Button>
+            <Link href={props.backLink}>
+              <Button size="large">
+                بازگشت
+              </Button>
+            </Link>
         )}
       </div>
       <Divider />

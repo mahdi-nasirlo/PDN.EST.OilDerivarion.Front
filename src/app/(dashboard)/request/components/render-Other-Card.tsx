@@ -2,27 +2,31 @@ import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import { CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { ArchiveBoxArrowDownIcon } from '@heroicons/react/24/outline'
 import { Button, Col, Row, Tag, Typography } from 'antd'
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 export default function RenderOtherCard({ index, status }: any) {
 
+    const router = useRouter();
+
+    const HandelEditPackage = () => router.push('/request/uid');
 
     const [deleteModal, setDeleteModal] = useState(false);
 
     return (
         <>
-            <div className='flex flex-col justify-center'>
+            <div className='flex flex-col justify-center space-y-4'>
                 <div>{`پکیج شماره ${index + 1}`}</div>
 
                 <ArchiveBoxArrowDownIcon className='mx-auto w-[105px] h-[105px]' />
 
-                <div className="space-y-4 w-full mb-4">
+                <div className="space-y-4 w-full">
 
                     <div className="flex justify-between">
 
                         <Typography>روش تولید:</Typography>
 
-                        <Tag className='ml-0 p-1 font-bold'>بلندینگ</Tag>
+                        <Tag color='blue' className='ml-0 p-1 font-bold'>بلندینگ</Tag>
 
                     </div>
 
@@ -49,11 +53,10 @@ export default function RenderOtherCard({ index, status }: any) {
 
                     </div>
                 </div>
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 12]}>
                     <Col xs={24} xl={12}>
                         <Button
                             size="large"
-                            htmlType="submit"
                             type="default"
                             className="w-full flex items-center justify-center"
                             danger
@@ -65,11 +68,12 @@ export default function RenderOtherCard({ index, status }: any) {
                     </Col>
                     <Col xs={24} xl={12}>
                         <Button
+
                             size="large"
-                            htmlType="submit"
                             type="default"
-                            className="w-full flex items-center justify-center"
+                            className="w-full flex items-center justify-center text-secondary-500 border-secondary-500"
                             icon={<EditOutlined width={16} height={16} />}
+                            onClick={HandelEditPackage}
                         >
                             ویرایش
                         </Button>

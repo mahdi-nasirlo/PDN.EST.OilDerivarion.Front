@@ -4,11 +4,18 @@ import { Button, Col, Divider, Row } from "antd";
 import React from "react";
 import { Card } from "@/components/card";
 import CardGrid from "./card-grid";
+import { SquaresPlusIcon } from "@heroicons/react/24/outline";
+import Breadcrumb from "@/components/breadcrumb";
 
 const Page = () => {
 
     return (
         <div>
+            <Breadcrumb
+                pages={[{ label: "خانه", path: "/" }]}
+                currentPage="پکیج درخواستی"
+                titleIcon={<SquaresPlusIcon />}
+            />
             <Card>
                 <Row gutter={[24, 24]}>
                     <CardGrid />

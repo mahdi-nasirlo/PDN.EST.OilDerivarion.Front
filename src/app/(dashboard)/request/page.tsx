@@ -6,8 +6,13 @@ import { Card } from "@/components/card";
 import CardGrid from "./card-grid";
 import { SquaresPlusIcon } from "@heroicons/react/24/outline";
 import Breadcrumb from "@/components/breadcrumb";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+
+    const router = useRouter();
+
+    const HandelSubmit = () => router.push('/request/final-review');
 
     return (
         <div>
@@ -23,7 +28,12 @@ const Page = () => {
                 <Divider />
                 <Row gutter={[12, 12]}>
                     <Col xs={24} md={24}>
-                        <Button size="large" className="w-full" type="primary">
+                        <Button
+                            size="large"
+                            className="w-full"
+                            type="primary"
+                            onClick={HandelSubmit}
+                        >
                             بازبینی نهایی
                         </Button>
                     </Col>

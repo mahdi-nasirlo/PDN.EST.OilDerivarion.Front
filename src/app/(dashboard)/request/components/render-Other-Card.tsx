@@ -16,7 +16,7 @@ export default function RenderOtherCard({ index, status }: any) {
     return (
         <>
             <div className='flex flex-col justify-center space-y-4'>
-                <div>{`پکیج شماره ${index + 1}`}</div>
+                <div>{`زیر درخواست شماره ${index + 1}`}</div>
 
                 <ArchiveBoxArrowDownIcon className='mx-auto w-[105px] h-[105px]' />
 
@@ -81,7 +81,7 @@ export default function RenderOtherCard({ index, status }: any) {
             </div >
 
             <ConfirmDeleteModal
-                title='پکیج'
+                title='زیر درخواست'
                 open={deleteModal}
                 setOpen={setDeleteModal}
                 handleDelete={() => setDeleteModal(false)}

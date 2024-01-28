@@ -3,7 +3,7 @@ import { Card } from "@/components/card";
 import SubmitForm from "./components/submit-form";
 import { Alert, Divider } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
 const page = () => {
   return (
@@ -11,7 +11,7 @@ const page = () => {
       <Breadcrumb
         pages={[{ label: "خانه", path: "/" }]}
         currentPage="گزارشات مراحل"
-        titleIcon={<CheckBadgeIcon />}
+        titleIcon={<DocumentTextIcon className="w-8" />}
       />
       <Card>
         <Alert

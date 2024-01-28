@@ -1,12 +1,13 @@
 "use client";
 
-import {Col, Row, Select} from "antd";
+import { Button, Col, Row, Select, Typography } from "antd";
 import React from "react";
-import {useControlTransfer} from "../hook/use-control-transfer";
-import {Transfer} from "antd/lib";
+import { useControlTransfer } from "../hook/use-control-transfer";
+import { Transfer } from "antd/lib";
+import { title } from "process";
 
 export default function SubmitForm() {
-    const {steps, setStep, dataSource, registeredReport, handleOnChange} =
+  const { steps, setStep, dataSource, registerdReport, handleOnChange } =
     useControlTransfer();
 
   return (
@@ -30,7 +31,7 @@ export default function SubmitForm() {
           <div className="w-full mt-8">
             <Transfer
               titles={["گزارشات انتخاب نشده", "گزارشات انتخاب شده"]}
-              targetKeys={registeredReport.targetKeys}
+              targetKeys={registerdReport.targetKeys}
               dataSource={dataSource}
               showSearch
               listStyle={{
@@ -44,6 +45,11 @@ export default function SubmitForm() {
           </div>
         </Col>
       </Row>
+      <div className="flex justify-end">
+        <Button size="large" type="primary" htmlType="submit">
+          ثبت نهایی
+        </Button>
+      </div>
     </>
   );
 }

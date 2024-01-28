@@ -1,12 +1,12 @@
 "use client";
 
-import {Button, Col, Row, Select} from "antd";
+import { Button, Col, Row, Select } from "antd";
 import React from "react";
-import {useControlTransfer} from "../hook/use-control-transfer";
-import {Transfer} from "antd/lib";
+import { useControlTransfer } from "../hook/use-control-transfer";
+import { Transfer } from "antd/lib";
 
 export default function SubmitForm() {
-    const {steps, setStep, dataSource, registeredReport, handleOnChange} =
+  const { steps, setStep, dataSource, registeredReport, handleOnChange } =
     useControlTransfer();
 
   return (
@@ -44,11 +44,6 @@ export default function SubmitForm() {
           </div>
         </Col>
       </Row>
-      <div className="flex justify-end">
-        <Button size="large" type="primary" htmlType="submit">
-          ثبت نهایی
-        </Button>
-      </div>
     </>
   );
 }

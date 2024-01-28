@@ -1,34 +1,32 @@
 "use client"
-import {EditFilled, LoadingOutlined, LogoutOutlined} from "@ant-design/icons";
-import {Button, Col, Dropdown, MenuProps, Modal, Row, Typography} from "antd";
-import {useHeaderDropdown} from "./hooks/use-header-dropwdown";
+import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
+import { useHeaderDropdown } from "./hooks/use-header-dropwdown";
 import Image from "next/image";
-// import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
-// import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
-// import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
+import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
+import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
+import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
+import { SvgIcon } from "@/components/svg-icon";
 
 export default function HeaderDropdown() {
 
-  const { confirmExitModal, userInfo, logout } = useHeaderDropdown();
+  const { confirmExitModal, userGetInfo, logout } = useHeaderDropdown();
 
   const LevelProducer = () => {
-    // if (userInfo.data !== null)
-    //   return <SvgIcon
-    //     src={
-    //       userInfo.data?.firstName == ""
-    //         ? ProducerLevel3
-    //         : userInfo.data?.firstName == "1"
-    //           ? ProducerLevel2
-    //           : ProducerLevel1
-    //     }
-    //     width={24}
-    //     height={24}
-    //     alt={userInfo.data?.firstName || ""}
-    //   />
-    // else return null;
-    return null
+    if (!userGetInfo.data?.userLevelId) return null;
+    if (userGetInfo.data?.userLevelId !== null) return <SvgIcon
+      src={
+        userGetInfo.data?.userLevelId == 3
+          ? ProducerLevel3
+          : userGetInfo.data?.userLevelId == 2
+            ? ProducerLevel2
+            : ProducerLevel1
+      }
+      width={24}
+      height={24}
+      alt={userGetInfo.data?.userLevelName || ""}
+    />
   }
-
 
   const items: MenuProps["items"] = [
     {
@@ -71,20 +69,20 @@ export default function HeaderDropdown() {
               alt="person-circle icon"
               src="/static/person-circle.svg"
             />
-            {userInfo.isLoading ?
-              <LoadingOutlined className="text-primary-500 text-lg hidden lg:block" />
-              : <div>
+            {userGetInfo.isLoading ?
+              <LoadingOutlined className="text-primary-500 text-lg hidden lg:block ml-3" />
+              : <div className="ml-3">
                 <Typography className="font-normal text-lg hidden lg:block">
-                  {userInfo.data?.lastName}
+                  {userGetInfo.data?.lastName}
                 </Typography>
                 <Typography className="font-semibold text-xs hidden lg:block text-coolGray-400">
-                  {userInfo.data?.firstName}
+                  {userGetInfo.data?.firstName}
                 </Typography>
               </div>
             }
             <LevelProducer />
             <Image
-              className="mr-6 hidden lg:block"
+              className="mr-3 hidden lg:block"
               height={16}
               width={16}
               src={"/static/chevron-down.svg"}

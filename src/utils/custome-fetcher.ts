@@ -14,7 +14,8 @@ type Props = {
     tokenFromServerSide?: string,
     token?: string,
     notify?: boolean
-}
+}      
+
 
 async function customFetcher(props: Props): Promise<GeneralResponseType | any | undefined> {
 

@@ -1,12 +1,12 @@
 "use client"
 
-import { Collapse } from 'antd';
+import {Collapse} from 'antd';
 import FilterForm from './components/filter-form'
 import React from 'react'
-import DataTable from './components/data-table';
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { useControlRoleDetermination } from './hook/use-control-role-determination';
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
+import {useControlRoleDetermination} from './hook/use-control-role-determination';
+import DataTable from "@/app/(dashboard)/(admin-panel)/role_determination/components/data-table";
 
 export default function Page() {
 
@@ -25,10 +25,10 @@ export default function Page() {
                 size="large"
                 items={[{
                     label: 'فیلتر جدول ',
-                    children: <FilterForm />
+                    children: <FilterForm onFinish={users.setFilter}/>
                 }]}
             />
-            <DataTable data={users.data} />
+            <DataTable data={users.data} isLoading={users.isLoading}/>
         </>
     )
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Table, TableProps, Typography } from "antd";
-import GetPageRecordNumber from "../getPageRecordNumber";
-import { addIndexToData } from "../addIndexToData";
+import React, {useState} from "react";
+import {Table, TableProps, Typography} from "antd";
+import GetPageRecordNumber from "@/utils/getPageRecordNumber";
+import {addIndexToData} from "@/utils/addIndexToData";
 
 interface RecordeValue {
   header?: {
@@ -11,10 +11,11 @@ interface RecordeValue {
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
-  data: {
-    records: any[];
-    count: number;
-  } | any[] | undefined;
+  data: any[] | undefined
+  // data: any[] | {
+  //   records: any[];
+  //   count: number;
+  // } | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
@@ -58,7 +59,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
         //   "Row",
         //   (page - 1) * 5 + 1
         // )}
-        dataSource={props.data as []}
+        dataSource={addIndexToData(props?.data, "Row") as []}
         className="mt-6"
         columns={props.columns}
       // pagination={{

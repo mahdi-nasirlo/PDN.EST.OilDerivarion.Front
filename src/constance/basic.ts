@@ -1,5 +1,18 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+
+const GetUserBySearchItem = z.object({
+  SSO_Uid: z.string().optional(),
+  Last_name: z.string().optional(),
+  First_name: z.string().optional(),
+  National_Code: z.string().optional(),
+})
+
+const GetStateForUserItem = z.object({
+  Uid: z.string(),
+  Name: z.string(),
+  Checked: z.boolean()
+})
 
 const basicApi = {
   getStep: {
@@ -70,17 +83,48 @@ const basicApi = {
   GetUserBySearch: {
     url: "/Basic/GetUserBySearch",
     type: z.object({
-      national_Code: z.string().optional(),
+      Is_Active: z.boolean().optional(),
+      National_Code: z.string().optional(),
+      Last_name: z.string().optional(),
+      First_name: z.string().optional()
     }),
+    item: GetUserBySearchItem,
     response: generalResponseZod.extend({
-      data: z.array(
-        z.object({
-          firstName: z.string(),
-          lastName: z.string(),
-        })
-      ),
+      data: z.array(GetUserBySearchItem),
     }),
   },
+  GetAllState: {
+    url: "/Basic/GetAllState",
+    response: generalResponseZod.extend({
+      data: z.array(
+          z.object({
+            Name: z.string(),
+            Uid: z.string()
+          })
+      ),
+    }),
+    type: z.object({
+      name: z.string().optional(),
+      isActive: z.boolean()
+    }),
+  },
+  UserUpdateState: {
+    url: "/Basic/UserUpdateState",
+    type: z.object({
+      user_Uid: z.string().optional(),
+      sates_Uid: z.array(z.string())
+    })
+  },
+  GetStateForUser: {
+    url: "/Basic/GetStateForUser",
+    type: z.object({
+      user_Uid: z.string().uuid()
+    }),
+    item: GetStateForUserItem,
+    response: generalResponseZod.extend({
+      data: z.array(GetStateForUserItem)
+    })
+  }
 };
 
 export default basicApi;

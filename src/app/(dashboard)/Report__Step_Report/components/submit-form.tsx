@@ -1,52 +1,48 @@
 "use client";
 
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, Row, Select, Typography } from "antd";
 import React from "react";
-import { filterOption } from "../../../../../lib/filterOption";
-import { useValidation } from "@/hooks/useValidation";
-import { ssoApi } from "constance/auth";
-import TransferList from "./transfer";
-import useGetStep from "@/hooks/basic/use-basic";
+import { useControlTransfer } from "../hook/use-control-transfer";
+import { Transfer } from "antd/lib";
+import { title } from "process";
 
 export default function SubmitForm() {
-  const [form, rules] = useValidation(ssoApi.test.type);
-  const steps = useGetStep();
+  const { steps, setStep, dataSource, registerdReport, handleOnChange } =
+    useControlTransfer();
 
   return (
-    <Form layout="vertical" form={form}>
+    <>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
-          <Form.Item
-            name="factoryStateId"
-            label="استان"
-            required={false}
-            rules={[rules]}
-            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
-          >
-            <Select
-              showSearch
-              // @ts-ignore
-              loading={steps.isLoading}
-              options={steps.data}
-              fieldNames={{ value: "Id", label: "Name" }}
-              size="large"
-              placeholder="انتخاب کنید"
-              //   onChange={handleCentralOfficeProvinceChange}
-            />
-          </Form.Item>
+          <Select
+            className="w-full"
+            showSearch
+            loading={steps.isLoading}
+            options={steps.data}
+            onChange={(value) => setStep(value)}
+            fieldNames={steps.apiData.fieldNames}
+            size="large"
+            placeholder="انتخاب کنید"
+          />
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
-          <Form.Item
-            required={false}
-            rules={[rules]}
-            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
-          >
-            <div className="flex justify-center mt-8">
-              <TransferList />
-            </div>
-          </Form.Item>
+          <div className="w-full mt-8">
+            <Transfer
+              titles={["گزارشات انتخاب نشده", "گزارشات انتخاب شده"]}
+              targetKeys={registerdReport.targetKeys}
+              dataSource={dataSource}
+              showSearch
+              listStyle={{
+                width: "100%",
+                height: 400,
+              }}
+              operations={["به راست", "به چپ "]}
+              onChange={handleOnChange}
+              render={(item) => <div className="text-right">{item.title}</div>}
+            />
+          </div>
         </Col>
       </Row>
       <div className="flex justify-end">
@@ -54,6 +50,6 @@ export default function SubmitForm() {
           ثبت نهایی
         </Button>
       </div>
-    </Form>
+    </>
   );
 }

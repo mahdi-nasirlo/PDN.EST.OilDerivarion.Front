@@ -5,11 +5,16 @@ import basicApi from 'constance/basic'
 import { z } from 'zod'
 
 const apiData = basicApi.getStep
-const useGetStep = () =>  useQuery({
+
+const useGetStep = () =>  {
+
+    const steps = useQuery({
         queryKey: [apiData.url],
         queryFn: () => fetchWithSession({ url: apiData.url }),
-        select: (data:z.infer<typeof apiData.response>) => sortByIndex(data.data,"Name")
+        select: (data:z.infer<typeof apiData.response>) => sortByIndex(data.data, apiData.sortBy)
     })
+    return {...steps, apiData} 
+}
 
 
 export default useGetStep

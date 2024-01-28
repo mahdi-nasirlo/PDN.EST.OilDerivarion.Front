@@ -1,14 +1,13 @@
 "use client";
 
-import {Button, Col, Form, Input, Row, Select,} from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import React from "react";
 import CustomeDatePicker from "../../../../components/custome-date-picker";
-import {filterOption} from "../../../../../lib/filterOption";
-import {useValidation} from "@/hooks/useValidation";
-import {ssoApi} from "constance/auth";
+import { filterOption } from "../../../../../lib/filterOption";
+import { useValidation } from "@/hooks/use-validation";
+import { ssoApi } from "constance/auth";
 
 export default function SubmitForm() {
-
   const [form, rules] = useValidation(ssoApi.test.type);
 
   return (
@@ -97,7 +96,7 @@ export default function SubmitForm() {
             label="تاریخ اعتبار مجوز"
             required={false}
             rules={[rules]}
-          // rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            // rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <CustomeDatePicker />
           </Form.Item>
@@ -110,7 +109,7 @@ export default function SubmitForm() {
             label="استان"
             required={false}
             rules={[rules]}
-          // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
@@ -121,7 +120,7 @@ export default function SubmitForm() {
               fieldNames={{ value: "Id", label: "Name" }}
               size="large"
               placeholder="انتخاب کنید"
-            //   onChange={handleCentralOfficeProvinceChange}
+              //   onChange={handleCentralOfficeProvinceChange}
             />
           </Form.Item>
         </Col>
@@ -131,7 +130,7 @@ export default function SubmitForm() {
             label="شهرستان"
             required={false}
             rules={[rules]}
-          // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch

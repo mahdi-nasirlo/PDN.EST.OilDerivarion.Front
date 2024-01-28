@@ -1,32 +1,32 @@
 "use client"
-import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
-import { useHeaderDropdown } from "./hooks/use-header-dropwdown";
+import {EditFilled, LoadingOutlined, LogoutOutlined} from "@ant-design/icons";
+import {Button, Col, Dropdown, MenuProps, Modal, Row, Typography} from "antd";
+import {useHeaderDropdown} from "./hooks/use-header-dropwdown";
 import Image from "next/image";
-import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
-import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
-import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
-import { SvgIcon } from "@/components/svg-icon";
+// import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
+// import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
+// import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
 
 export default function HeaderDropdown() {
 
   const { confirmExitModal, userInfo, logout } = useHeaderDropdown();
 
   const LevelProducer = () => {
-    if (userInfo.data !== null)
-      return <SvgIcon
-        src={
-          userInfo.data?.firstName == ""
-            ? ProducerLevel3
-            : userInfo.data?.firstName == "1"
-              ? ProducerLevel2
-              : ProducerLevel1
-        }
-        width={24}
-        height={24}
-        alt={userInfo.data?.firstName || ""}
-      />
-    else return null;
+    // if (userInfo.data !== null)
+    //   return <SvgIcon
+    //     src={
+    //       userInfo.data?.firstName == ""
+    //         ? ProducerLevel3
+    //         : userInfo.data?.firstName == "1"
+    //           ? ProducerLevel2
+    //           : ProducerLevel1
+    //     }
+    //     width={24}
+    //     height={24}
+    //     alt={userInfo.data?.firstName || ""}
+    //   />
+    // else return null;
+    return null
   }
 
 

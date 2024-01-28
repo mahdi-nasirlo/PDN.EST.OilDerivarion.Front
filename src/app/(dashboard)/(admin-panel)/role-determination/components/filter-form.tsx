@@ -1,58 +1,38 @@
 "use client";
 
-import {Col, Form, Input, Row, Select} from "antd";
+import { Col, Form, Input, Row } from "antd";
 import React from "react";
-import {useForm} from "antd/es/form/Form";
-import ButtonFilter from "../../../../../../components/ButtonFilter";
+import { useForm } from "antd/es/form/Form";
+import ButtonFilter from "@/components/button-filter";
 
 export default function FilterForm() {
 
   const [form] = useForm();
 
+  const onFinish = (values: any) => console.log(values);
+
+
   return (
-    <Form form={form} layout="vertical">
+    <Form form={form} onFinish={onFinish} layout="vertical">
       <Row gutter={[16, 0]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={8}>
           <Form.Item name="lastName" label="نام">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={8}>
           <Form.Item name="lastName" label="نام خانوادگی">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-      </Row>
-      <Row gutter={[16, 0]}>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="NationalCode"
-            label="شماره ملی"
-            rules={[
-              {
-                pattern: /^(?!(\d)\1{9})\d{10}$/,
-                message: "شماره ملی نامعتبر است",
-              },
-            ]}
-          >
+        <Col xs={24} md={8}>
+          <Form.Item name="NationalCode" label="شماره ملی">
             <Input size="large" placeholder="وارد کنید" />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item name="IsActive" label="فعال / غیر فعال">
-            <Select
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیرفعال", value: false },
-              ]}
-              size="large"
-              placeholder="انتخاب کنید"
-            />
           </Form.Item>
         </Col>
       </Row>
       <ButtonFilter
-        unsetFilter={() => { }}
+        unsetFilter={() => form.resetFields()}
         isLoading={false}
       />
     </Form>

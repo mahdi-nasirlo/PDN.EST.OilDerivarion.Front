@@ -31,7 +31,7 @@ function TestFactorForm() {
           <Form.Item
             name="measureUid"
             label="واحد اندازه گیری"
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               loading={ldMeasure}

@@ -8,8 +8,14 @@ import MultipleSelect from '@/components/multiple-select';
 import ChangeStatus from '@/components/inputs/change-status';
 import { Card } from '@/components/card';
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { z } from 'zod';
+import basicApi from 'constance/basic';
 
-export default function DataTable() {
+interface TProps {
+    data: z.infer<typeof basicApi.GetUserBySearch.response.shape.data> | undefined
+}
+
+export default function DataTable({ data }: TProps) {
 
     const [roleModal, setRoleModal] = useState(false);
     const [StateModal, setStateModal] = useState(false);

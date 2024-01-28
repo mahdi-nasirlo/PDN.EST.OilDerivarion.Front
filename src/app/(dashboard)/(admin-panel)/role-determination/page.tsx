@@ -1,21 +1,23 @@
 "use client"
 
-import {Collapse} from 'antd';
+import { Collapse } from 'antd';
 import FilterForm from './components/filter-form'
 import React from 'react'
 import DataTable from './components/data-table';
 import Breadcrumb from "@/components/breadcrumb";
-import {DocumentTextIcon} from "@heroicons/react/24/outline";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { useControlRoleDetermination } from './hook/use-control-role-determination';
 
 export default function Page() {
 
+    const { users } = useControlRoleDetermination()
 
     return (
         <>
             <Breadcrumb
-                titleIcon={<DocumentTextIcon className="w-6 h-6 text-red-50"/>}
+                titleIcon={<DocumentTextIcon className="w-6 h-6 text-red-50" />}
                 pages={[
-                    {label: "خانه", path: "/"}
+                    { label: "خانه", path: "/" }
                 ]}
                 currentPage={"تعیین نقش"}
             />
@@ -26,7 +28,7 @@ export default function Page() {
                     children: <FilterForm />
                 }]}
             />
-            <DataTable />
+            <DataTable data={users.data} />
         </>
     )
 }

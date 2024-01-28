@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {Table, TableProps, Typography} from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, TableProps, Typography } from "antd";
 import GetPageRecordNumber from "../getPageRecordNumber";
-import {addIndexToData} from "../addIndexToData";
+import { addIndexToData } from "../addIndexToData";
 
 interface RecordeValue {
   header?: {
@@ -11,22 +11,20 @@ interface RecordeValue {
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
-  data:
-  | {
+  data: {
     records: any[];
     count: number;
-  }
-  | undefined;
+  } | any[] | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    if (props.data?.count && Math.ceil((props.data?.count || 1) / 5) < page) {
-      handleChangePage(1);
-    }
-  }, [props.data?.count, page]);
+  // useEffect(() => {
+  //   if (props.data?.count && Math.ceil((props.data?.count || 1) / 5) < page) {
+  //     handleChangePage(1);
+  //   }
+  // }, [props.data, page]);
 
   const handleChangePage = (e: number) => {
     setPage(e);
@@ -44,7 +42,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
           <>
             <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2">
               {props.header.icon && (
-                  <span className="text-gray-900 w-8 h-8">{props.header.icon}</span>
+                <span className="text-gray-900 w-8 h-8">{props.header.icon}</span>
               )}
               {props.header.text}
             </Typography>
@@ -55,35 +53,36 @@ const Index = (props: TableProps<any> & RecordeValue) => {
       <Table
         {...props}
         loading={props.isLoading}
-        dataSource={addIndexToData(
-          props.data?.records,
-          "Row",
-          (page - 1) * 5 + 1
-        )}
+        // dataSource={addIndexToData(
+        //   props.data?.records,
+        //   "Row",
+        //   (page - 1) * 5 + 1
+        // )}
+        dataSource={props.data as []}
         className="mt-6"
         columns={props.columns}
-        pagination={{
-          total: props.data?.count,
-          showTotal: (total, range) => (
-            <Typography>
-              {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
-            </Typography>
-          ),
-          onChange: async (e: any) => {
-            console.log(e);
-            handleChangePage(e);
-          },
-          defaultPageSize: 5,
-          showSizeChanger: false,
-          defaultCurrent: 1,
-          current: page,
-          style: {
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            margin: "16px 0",
-          },
-        }}
+      // pagination={{
+      //   total: props.data?.count,
+      //   showTotal: (total, range) => (
+      //     <Typography>
+      //       {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
+      //     </Typography>
+      //   ),
+      //   onChange: async (e: any) => {
+      //     console.log(e);
+      //     handleChangePage(e);
+      //   },
+      //   defaultPageSize: 5,
+      //   showSizeChanger: false,
+      //   defaultCurrent: 1,
+      //   current: page,
+      //   style: {
+      //     display: "flex",
+      //     flexDirection: "row",
+      //     justifyContent: "flex-start",
+      //     margin: "16px 0",
+      //   },
+      // }}
       />
     </>
   );

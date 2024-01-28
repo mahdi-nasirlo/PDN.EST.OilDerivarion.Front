@@ -1,6 +1,5 @@
-import { generalResponseZod } from "@/types/api-response";
-import { url } from "inspector";
-import { z } from "zod";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
 
 const basicApi = {
     getStep: {
@@ -42,9 +41,15 @@ const basicApi = {
     },
     AddReportToStep:{
         url: "/Basic/AddReportToStep",
-        type :z.object({
+        type: z.object({
             step_UID: z.string(),
             reports_UID: z.array(z.string())
+        }),
+        response: generalResponseZod.extend({
+            data: z.array(z.object({
+                UID: z.string(),
+                Form_Name: z.string()
+            })),
         })
     },   
     DeleteReportToStep:{

@@ -1,7 +1,7 @@
 import fetchWithSession from "@/utils/fetch-with-session"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import {useMutation, useQueryClient} from "@tanstack/react-query"
 import basicApi from "constance/basic"
-import { z } from "zod"
+import {z} from "zod"
 
 const apiData = basicApi.AddReportToStep
 
@@ -11,12 +11,15 @@ const useAddReportToStep = (uid:string) => {
 
     const query = useMutation({
         mutationFn: (data: z.infer<typeof apiData.type>) => fetchWithSession({url: apiData.url, data}),
-        onSuccess: () => {
-            
-            queryClient.invalidateQueries({queryKey: [basicApi.GetAvailableReportsForStep.url, uid]})
-            queryClient.invalidateQueries({queryKey: [basicApi.GetRegisteredReportsForStep.url, uid]})
+        onSuccess: async (data, variables) => {
 
-            
+            const result: z.infer<typeof apiData.response> = data
+
+            if (result.success) {
+                await queryClient.invalidateQueries({queryKey: [basicApi.GetAvailableReportsForStep.url, uid]})
+                await queryClient.invalidateQueries({queryKey: [basicApi.GetRegisteredReportsForStep.url, uid]})
+            }
+
         },
     })
 

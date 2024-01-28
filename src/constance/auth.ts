@@ -50,7 +50,8 @@ const ssoApi = {
       data: z.object({
         lastName: z.string(),
         firstName: z.string(),
-        // firstName: z.string(),
+        userLevelId: z.number().optional(),
+        userLevelName: z.string().optional(),
       }),
     }),
   },

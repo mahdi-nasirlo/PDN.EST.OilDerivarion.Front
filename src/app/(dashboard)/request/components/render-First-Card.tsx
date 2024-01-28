@@ -9,7 +9,7 @@ export default function RenderFirstCard() {
     return (
         <>
             <div className='flex flex-col justify-center space-y-4'>
-                <div>افزودن پکیج</div>
+                <div>افزودن زیر درخواست</div>
                 <ArchiveBoxArrowDownIcon className='mx-auto w-[105px] h-[105px]' />
                 <Form layout="vertical" className="w-full">
                     <Form.Item
@@ -29,7 +29,7 @@ export default function RenderFirstCard() {
                         className="w-full flex items-center justify-center"
                         icon={<PlusOutlined width={16} height={16} />}
                     >
-                        افزودن پکیج
+                        افزودن زیر درخواست
                     </Button>
                 </Form>
             </div>

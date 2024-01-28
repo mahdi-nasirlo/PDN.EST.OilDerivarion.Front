@@ -25,7 +25,7 @@ export default function Page() {
             <Breadcrumb
                 pages={[
                     { label: "خانه", path: "/" },
-                    { label: 'پکیج درخواستی', path: '/request' }
+                    { label: 'زیر درخواست ها', path: '/request' }
                 ]}
                 backLink='/request'
                 currentPage="ثبت درخواست"

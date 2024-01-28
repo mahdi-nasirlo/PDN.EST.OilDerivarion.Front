@@ -18,7 +18,7 @@ const Page = () => {
         <div>
             <Breadcrumb
                 pages={[{ label: "خانه", path: "/" }]}
-                currentPage="پکیج درخواستی"
+                currentPage="زیر درخواست ها"
                 titleIcon={<SquaresPlusIcon />}
             />
             <Card>

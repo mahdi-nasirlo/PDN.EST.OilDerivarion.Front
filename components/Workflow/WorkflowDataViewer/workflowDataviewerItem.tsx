@@ -1,11 +1,11 @@
 import React from "react";
 import { Descriptions, Spin, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { addIndexToData } from "@/components/addIndexToData";
+import { addIndexToData } from "@/utils/addIndexToData";
 
 interface PropsType {
   loading?: boolean;
-  columns?: ColumnsType<any>
+  columns?: ColumnsType<any>;
   data: WorkFlowDataViewerItemType;
 }
 
@@ -40,18 +40,18 @@ const Index = (props: PropsType) => {
 interface TablePropsType {
   extraColumns?: ColumnsType<any>;
   Header:
-  | {
-    Key: string;
-    Value: string;
-    Hidden?: boolean;
-  }[]
-  | undefined;
+    | {
+        Key: string;
+        Value: string;
+        Hidden?: boolean;
+      }[]
+    | undefined;
   Values:
-  | {
-    Name: string;
-    Type: string;
-  }[]
-  | undefined;
+    | {
+        Name: string;
+        Type: string;
+      }[]
+    | undefined;
 }
 
 const RenderTable = (props: TablePropsType) => {
@@ -59,21 +59,20 @@ const RenderTable = (props: TablePropsType) => {
     return <></>;
   }
 
-  const columns: ColumnsType<any> = props.Header
-    .filter((item) => !item.Hidden)
-    .map((item) => ({ dataIndex: item.Key, title: item.Value }))
+  const columns: ColumnsType<any> = props.Header.filter(
+    (item) => !item.Hidden
+  ).map((item) => ({ dataIndex: item.Key, title: item.Value }));
 
   if (props.extraColumns) {
     columns.unshift({
       title: "ردیف",
       dataIndex: "Row",
-      key: 'Row',
+      key: "Row",
       width: "5%",
     });
 
     columns.push(...props.extraColumns);
   }
-
 
   return (
     <>
@@ -85,7 +84,6 @@ const RenderTable = (props: TablePropsType) => {
     </>
   );
 };
-
 
 interface ModelPropsType {
   Key: string;

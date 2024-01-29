@@ -32,7 +32,7 @@ const ssoApi = {
     }),
   },
   getAllUserAccess: {
-    url: "/Sso/GetAllUserAccess",
+    url: "/Sso/GetAllUserPage",
     response: generalResponseZod.extend({
       data: z
         .array(

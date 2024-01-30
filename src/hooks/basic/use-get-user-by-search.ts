@@ -1,3 +1,4 @@
+import { mutate } from 'swr';
 import fetchWithSession from "@/utils/fetch-with-session";
 import {useQuery} from "@tanstack/react-query";
 import basicApi from "constance/basic";

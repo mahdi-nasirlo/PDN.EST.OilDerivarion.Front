@@ -5,10 +5,9 @@ import { ColumnsType } from "antd/es/table";
 import React from "react";
 import { Measure } from "../../../../../interfaces/measures";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-import CustomeTable from '../../../../components/custom-table'
+import CustomeTable from "../../../../components/custom-table";
 
 export default function DataTable() {
-
   const columns: ColumnsType<Measure> = [
     {
       title: "ردیف",

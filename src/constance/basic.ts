@@ -6,6 +6,7 @@ const GetUserBySearchItem = z.object({
   Last_name: z.string().optional(),
   First_name: z.string().optional(),
   National_Code: z.string().optional(),
+  States:z.string().optional()
 })
 
 const GetStateForUserItem = z.object({
@@ -86,7 +87,7 @@ const basicApi = {
       Is_Active: z.boolean().optional(),
       National_Code: z.string().optional(),
       Last_name: z.string().optional(),
-      First_name: z.string().optional()
+      First_name: z.string().optional(),
     }),
     item: GetUserBySearchItem,
     response: generalResponseZod.extend({

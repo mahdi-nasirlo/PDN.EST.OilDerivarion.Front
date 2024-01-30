@@ -40,10 +40,10 @@ export default function Page() {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        new Error(
-                          "پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد"
-                        )
-                      ),
+                      new Error(
+                        "پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد"
+                      )
+                    ),
               },
             ]}
           >
@@ -62,7 +62,7 @@ export default function Page() {
             <Col xs={24} md={12}>
               <Button
                 size="large"
-                onClick={() => router.push("/request/packge-list")}
+                onClick={() => router.push("/request/package-list")}
                 type="default"
                 className="bg-gray-100 w-full"
               >

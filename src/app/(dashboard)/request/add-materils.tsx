@@ -1,20 +1,53 @@
-import {
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Typography,
-} from "antd";
+import { Button, Col, Divider, Form, Input, InputNumber, Row, Select, Table, Typography } from "antd";
+import { ColumnsType } from "antd/es/table";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import { DataItemType } from "../../../../hooks/requestDetail/useGetAllProductRequestDetail";
 
 export default function Page() {
+
   const router = useRouter();
+
   const [supplyMethodStatus, setSupplyMethod] = useState(1);
+  const [deleteVisible, setDeleteVisible] = useState(false);
+
+  const handleDelete = () => setDeleteVisible(false)
+
+  const columns: ColumnsType<DataItemType> = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      width: "5%",
+    },
+    {
+      title: "عنوان",
+      dataIndex: "MaterialName",
+    },
+    {
+      title: "درصد استفاده",
+      dataIndex: "MaterialUsagePercentage",
+      render: (value) => <>{value}%</>,
+    },
+    {
+      title: "نام تامین کننده ماده اولیه",
+      dataIndex: "MaterialSupplyName",
+    },
+    {
+      title: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (value, record) => (
+        <Typography
+          className="text-red-500 cursor-pointer font-bold"
+          onClick={() => setDeleteVisible(true)}
+        >
+          حذف
+        </Typography>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -215,19 +248,37 @@ export default function Page() {
             </Row>
           </>
         )}
+        <div className="flex justify-end">
+          <Button htmlType="submit">
+            ذخیره
+          </Button>
+        </div>
         <Divider />
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={24}>
-            <Button
-              className="w-full"
-              type="primary"
-              onClick={() => router.push("/request/packge-list")}
-            >
-              انتخاب شده
-            </Button>
-          </Col>
-        </Row>
       </Form>
+      <Table
+        className="mt-3 mb-1"
+        columns={columns}
+        dataSource={[]}
+        pagination={false}
+      />
+      <ConfirmDeleteModal
+        open={deleteVisible}
+        setOpen={setDeleteVisible}
+        handleDelete={handleDelete}
+        title={"ماده اولیه"}
+      />
+      <Divider />
+      <Row gutter={[16, 16]}>
+        <Col xs={24} md={24}>
+          <Button
+            className="w-full"
+            type="primary"
+            onClick={() => router.push("/request/package-list")}
+          >
+            انتخاب شده
+          </Button>
+        </Col>
+      </Row >
     </>
   );
 }

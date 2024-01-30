@@ -24,7 +24,7 @@ export default function Page() {
   const router = useRouter();
 
   const HandelSubmit = () => router.push("/request");
-  const HandelCancel = () => router.push("/request/packge-list");
+  const HandelCancel = () => router.push("/request/package-list");
 
   return (
     <div>

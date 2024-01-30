@@ -1,23 +1,23 @@
 import React from 'react';
 import { Button, Col, Form, Modal, Row } from "antd";
 import MultipleSelect from "@/components/multiple-select";
-import { useStateAction } from "@/app/(dashboard)/(admin-panel)/role_determination/hook/use-state-action";
+import { useRoleAction } from '../hook/use-role-action';
 
-const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (arg: string | undefined) => void }) => {
+const RoleAction = ({ open, setOpen }: { open: string | undefined, setOpen: (arg: string | undefined) => void }) => {
 
     const {
         form,
         rules,
-        state,
-        updateState,
+        role,
+        updateRole,
         handleSubmit,
-        getState
-    } = useStateAction(setOpen, open)
+        getRole
+    } = useRoleAction(setOpen, open)
 
     return (
         <div>
             <Modal
-                title={'تعیین استان'}
+                title={'تعیین نقش'}
                 open={typeof open == "string"}
                 onCancel={() => setOpen(undefined)}
                 width={600}
@@ -25,8 +25,8 @@ const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (ar
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={12} md={12}>
                             <Button
-                                disabled={getState.isLoading}
-                                loading={updateState.isPending}
+                                disabled={getRole.isLoading}
+                                loading={updateRole.isPending}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -38,7 +38,7 @@ const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (ar
                         </Col>
                         <Col xs={12} md={12}>
                             <Button
-                                disabled={updateState.isPending || getState.isLoading}
+                                disabled={updateRole.isPending || getRole.isLoading}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={() => setOpen(undefined)}
@@ -52,10 +52,10 @@ const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (ar
                 <Form layout='vertical' form={form} onFinish={handleSubmit}>
                     <Row gutter={[16, 16]}>
                         <Col xs={24}>
-                            <Form.Item rules={[rules]} label="استان" name="sates_Uid">
+                            <Form.Item rules={[rules]} label="نقش" name="rolesUid">
                                 <MultipleSelect
-                                    loading={state.isLoading || getState.isLoading}
-                                    treeData={state.treeData} />
+                                    loading={role.isLoading || getRole.isLoading}
+                                    treeData={role.treeData} />
                             </Form.Item>
                         </Col>
                     </Row>
@@ -65,4 +65,4 @@ const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (ar
     );
 };
 
-export default StateAction;
+export default RoleAction;

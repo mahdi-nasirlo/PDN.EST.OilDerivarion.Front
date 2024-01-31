@@ -5,6 +5,7 @@ import {useUserUpdateState} from "@/hooks/basic/use-user-update-state";
 import {z} from "zod";
 import {useGetStateForUser} from "@/hooks/basic/use-get-state-for-user";
 import {useEffect} from "react";
+import { useGetUserBySearch } from "@/hooks/basic/use-get-user-by-search";
 
 const useStateAction = (setOpen: (arg: string | undefined) => void, open: string | undefined) => {
 
@@ -15,6 +16,8 @@ const useStateAction = (setOpen: (arg: string | undefined) => void, open: string
     const updateState = useUserUpdateState()
 
     const getState = useGetStateForUser(open)
+    
+
 
     useEffect(() => {
         console.log(getState.treeData)
@@ -32,6 +35,7 @@ const useStateAction = (setOpen: (arg: string | undefined) => void, open: string
 
         if (res.success) {
             setOpen(undefined)
+        
         }
 
     }

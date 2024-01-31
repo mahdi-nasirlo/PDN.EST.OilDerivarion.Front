@@ -5,11 +5,15 @@ import { ColumnsType } from "antd/es/table";
 import React from "react";
 import { Measure } from "../../../../../interfaces/measures";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-import CustomeTable from '../../../../components/custom-table'
+import CustomeTable from "../../../../components/custom-table";
+import useProducerInfo from "./hook/use-producer-info";
+import { z } from "zod";
+import licenseApi from "constance/license";
+import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 
 export default function DataTable() {
-
-  const columns: ColumnsType<Measure> = [
+  const { list, handleDelete } = useProducerInfo();
+  const columns: ColumnsType<z.infer<typeof licenseApi.GetRequestList.Item>> = [
     {
       title: "ردیف",
       dataIndex: "Row",
@@ -95,16 +99,18 @@ export default function DataTable() {
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          <Button type="link" className={"text-secondary-500 font-bold"}>
-            ویرایش
-          </Button>
-          {/* <Button
-            type="link"
-            className={"text-red-500 font-bold"}
-            onClick={() => handleDelete(record)}
-          >
-            حذف
-          </Button> */}
+          if (isActive === 0)
+          {
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => {
+                handleDelete();
+              }}
+            >
+              حذف
+            </Button>
+          }
         </Space>
       ),
     },
@@ -113,17 +119,16 @@ export default function DataTable() {
   return (
     <>
       <div className="box-border w-full mt-8 p-6">
-        {/* <custom-table
-         header={{
-            Icon: <ViewColumnsIcon />,
-            Text: 'لیست مجوزها',
-            Actions: [],
-              }}
-          setInitialData={}
-          isLoading={}
-          data={}
+        <CustomeTable
+          header={{
+            icon: <ViewColumnsIcon />,
+            text: "لیست مجوزها",
+          }}
+          setInitialData={() => {}}
+          isLoading={list.isLoading}
+          data={list.data}
           columns={columns}
-        /> */}
+        />
       </div>
     </>
   );

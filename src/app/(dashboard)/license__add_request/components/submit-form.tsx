@@ -1,32 +1,45 @@
 "use client";
 
 import { Button, Col, Form, Input, Row, Select } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomeDatePicker from "../../../../components/custome-date-picker";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useValidation } from "@/hooks/use-validation";
 import { ssoApi } from "constance/auth";
+import useProducerInfo from "./hook/use-producer-info";
+import licenseApi from "constance/license";
 
 export default function SubmitForm() {
-  const [form, rules] = useValidation(ssoApi.test.type);
+  const { producerInfo, License, addLicense, state } = useProducerInfo();
+
+  const [form, rules] = useValidation(licenseApi.AddRequest.type);
+  useEffect(() => {
+    if (producerInfo.data) {
+      form.setFieldsValue(producerInfo.data);
+    }
+  }, [producerInfo.data]);
 
   return (
-    <Form layout="vertical" form={form}>
+    <Form
+      layout="vertical"
+      form={form}
+      onFinish={(data) => addLicense.mutateAsync(data)}
+    >
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="firstName" label="نام">
+          <Form.Item name="representative__Name" label="نام">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="lastName" label="نام خانوادگی">
+          <Form.Item name="representative__Family" label="نام خانوادگی">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="personNationalCode" label="کدملی">
+          <Form.Item name="representative__National_ID" label="کدملی">
             <Input
               disabled
               type="number"
@@ -36,14 +49,14 @@ export default function SubmitForm() {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item name="companyName" label="نام شرکت">
+          <Form.Item name="company__Name" label="نام شرکت">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="companyNationalCode" label="شناسه ملی شرکت">
+          <Form.Item name="company__National_ID" label="شناسه ملی شرکت">
             <Input disabled size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
@@ -51,7 +64,7 @@ export default function SubmitForm() {
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="businessNumber"
+            name="company__Business_ID"
             hasFeedback={false}
             label="شناسه کسب و کار"
             rules={[rules]}
@@ -61,18 +74,17 @@ export default function SubmitForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            name="licenseTypeId"
+            name="license_Type_ID"
             required={false}
             label="نوع مجوز"
             rules={[rules]}
           >
             <Select
+              className="w-full"
               showSearch
-              fieldNames={{ label: "Name", value: "Id" }}
-              // @ts-ignore
-              filterOption={filterOption}
-              //   loading={ldLicense}
-              //   options={sortByIndex(License, "Name")}
+              loading={License.isLoading}
+              options={License.data}
+              fieldNames={License.fieldNames}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -82,7 +94,7 @@ export default function SubmitForm() {
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="licenseNumber"
+            name="license_ID"
             label="شماره مجوز"
             required={false}
             rules={[rules]}
@@ -92,11 +104,10 @@ export default function SubmitForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            name="licenseValidityDatePersin"
+            name="license_Expire_Date"
             label="تاریخ اعتبار مجوز"
             required={false}
             rules={[rules]}
-            // rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
           >
             <CustomeDatePicker />
           </Form.Item>
@@ -105,40 +116,18 @@ export default function SubmitForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="factoryStateId"
+            name="stateId"
             label="استان"
             required={false}
             rules={[rules]}
-            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
-          >
-            <Select
-              showSearch
-              // @ts-ignore
-              //   filterOption={filterOption}
-              //   loading={states.isLoading}
-              //   options={sortByIndex(states.data, "Name")}
-              fieldNames={{ value: "Id", label: "Name" }}
-              size="large"
-              placeholder="انتخاب کنید"
-              //   onChange={handleCentralOfficeProvinceChange}
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={12}>
-          <Form.Item
-            name="factoryCityId"
-            label="شهرستان"
-            required={false}
-            rules={[rules]}
-            // rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
           >
             <Select
               showSearch
               // @ts-ignore
               filterOption={filterOption}
-              // loading={ldCityGetAll}
-              //   options={sortByIndex(cities.data, "Name")}
-              fieldNames={{ value: "Id", label: "Name" }}
+              loading={state.isLoading}
+              options={state.data}
+              fieldNames={state.apiData.fieldNames}
               size="large"
               placeholder="انتخاب کنید"
             />

@@ -4,9 +4,9 @@ import { z } from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { generalResponseZod } from "@/types/api-response";
 
-const apiData = basicApi.UserUpdateState;
+const apiData = basicApi.UserUpdateRole;
 
-const useUserUpdateState = () => {
+const useUserUpdateRole = () => {
   const queryQlient = useQueryClient();
 
   return useMutation({
@@ -27,4 +27,4 @@ const useUserUpdateState = () => {
   });
 };
 
-export { useUserUpdateState };
+export { useUserUpdateRole };

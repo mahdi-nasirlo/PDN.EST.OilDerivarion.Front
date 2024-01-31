@@ -54,13 +54,6 @@ const CardList = ({data}: {
 
                         </div>
 
-                        <div className="flex justify-between">
-
-                            <Typography>تعداد مواد اولیه:</Typography>
-
-                            <Typography>0</Typography>
-
-                        </div>
 
                         <div className="flex justify-between">
 
@@ -81,6 +74,14 @@ const CardList = ({data}: {
                                 >
                                     تکمیل نشده
                                 </Tag>}
+
+                        </div>
+
+                        <div className="flex justify-between">
+
+                            <Typography>تعداد مواد اولیه:</Typography>
+
+                            <Typography>0</Typography>
 
                         </div>
 

@@ -16,15 +16,9 @@ export default function Page() {
 
     const packagePart = useGetRequestPackagePartList()
 
-    const router = useRouter();
+    const router = useRouter()
 
     const queryClient = useQueryClient()
-
-    // useEffect(() => {}, [])
-    // const HandelSubmit = () => router.push("/request/final-review");
-
-    // const HandelCansal = () => router.push("/request");
-
     return (
         <>
             <Breadcrumb
@@ -38,7 +32,7 @@ export default function Page() {
                         className="flex items-center"
                         icon={<PlusSmallIcon className="w-5 h-5"/>}
                         type="primary"
-                        // onClick={() => router.push("/request/add_material")}
+                        onClick={() => router.push("/request/add_material")}
                     >
                         مواد اولیه
                     </Button>
@@ -62,7 +56,7 @@ export default function Page() {
                             size="large"
                             className="w-full"
                             type="default"
-                            // onClick={HandelCansal}
+                            onClick={() => router.push("/request/list")}
                         >
                             بازگشت
                         </Button>
@@ -72,7 +66,7 @@ export default function Page() {
                             size="large"
                             className="w-full"
                             type="primary"
-                            // onClick={HandelSubmit}
+                            onClick={() => router.push("/request/final-review")}
                         >
                             بازبینی نهایی
                         </Button>

@@ -20,9 +20,15 @@ const useRequestPackagePartAdd = (package_UID?: string) => {
         }),
         onSuccess: async (data) => {
 
-            const queryKey = [materialApi.GetRequestPackagePartList.url]
+            const res: z.infer<typeof materialApi.RequestPackagePartAdd.response> | undefined =
+                await queryClient.getQueryData([materialApi.GetRequestPackagePartList.url])
 
-            queryClient.setQueryData(queryKey, data)
+            console.log(data)
+
+            await queryClient.setQueryData([materialApi.GetRequestPackagePartList.url], {
+                ...res,
+                data: data.data
+            })
 
         }
     })

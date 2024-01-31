@@ -96,6 +96,8 @@ const basicApi = {
   },
   GetAllState: {
     url: "/Basic/GetAllState",
+    sortBy:"Name",
+    fieldNames: { value: "Uid", label: "Name" },
     response: generalResponseZod.extend({
       data: z.array(
           z.object({

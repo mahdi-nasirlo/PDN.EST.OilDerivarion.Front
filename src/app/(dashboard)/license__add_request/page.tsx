@@ -9,7 +9,7 @@ const page = () => {
       <Card>
         <SubmitForm />
       </Card>
-      {/* <DataTable /> */}
+      <DataTable />
     </div>
   );
 };

@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import {Divider, Spin, Typography} from "antd";
 import FormBuilder, {FormSchemaType} from "../FormBuilder";
@@ -5,7 +7,6 @@ import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
 import useFormRequest from "../FormBuilder/hooks/useFormRequest";
 import FormDataTable from "./FormDataTable";
 import FormBuilderProvider from "../FormBuilder/provider/FormBuilderProvider";
-
 
 const Index = ({ categoryID, type = "single" }: { categoryID: string, type?: "many" | "single", }) => {
 

@@ -1,19 +1,26 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
 
 const GetUserBySearchItem = z.object({
-  SSO_Uid: z.string().optional(),
-  Last_name: z.string().optional(),
-  First_name: z.string().optional(),
-  National_Code: z.string().optional(),
-  States:z.string().optional()
-})
+  uid: z.string().optional(),
+  last_name: z.string().optional(),
+  first_name: z.string().optional(),
+  national_Code: z.string().optional(),
+  states: z.string().optional(),
+  roles: z.string(),
+});
 
 const GetStateForUserItem = z.object({
   Uid: z.string(),
   Name: z.string(),
-  Checked: z.boolean()
-})
+  Checked: z.boolean(),
+});
+
+const GetRolesForUserItem = z.object({
+  RoleId: z.string(),
+  RoleName: z.string(),
+  Checked: z.boolean(),
+});
 
 const basicApi = {
   getStep: {
@@ -84,10 +91,10 @@ const basicApi = {
   GetUserBySearch: {
     url: "/Basic/GetUserBySearch",
     type: z.object({
-      Is_Active: z.boolean().optional(),
-      National_Code: z.string().optional(),
-      Last_name: z.string().optional(),
-      First_name: z.string().optional(),
+      is_Active: z.boolean().optional(),
+      national_Code: z.string().optional(),
+      last_name: z.string().optional(),
+      first_name: z.string().optional(),
     }),
     item: GetUserBySearchItem,
     response: generalResponseZod.extend({
@@ -100,34 +107,64 @@ const basicApi = {
     fieldNames: { value: "Uid", label: "Name" },
     response: generalResponseZod.extend({
       data: z.array(
-          z.object({
-            Name: z.string(),
-            Uid: z.string()
-          })
+        z.object({
+          Name: z.string(),
+          Uid: z.string(),
+        })
       ),
     }),
     type: z.object({
       name: z.string().optional(),
-      isActive: z.boolean()
+      isActive: z.boolean(),
     }),
   },
   UserUpdateState: {
     url: "/Basic/UserUpdateState",
     type: z.object({
       user_Uid: z.string().optional(),
-      sates_Uid: z.array(z.string())
-    })
+      sates_Uid: z.array(z.string()),
+    }),
   },
   GetStateForUser: {
     url: "/Basic/GetStateForUser",
     type: z.object({
-      user_Uid: z.string().uuid()
+      user_Uid: z.string().uuid(),
     }),
     item: GetStateForUserItem,
     response: generalResponseZod.extend({
-      data: z.array(GetStateForUserItem)
-    })
-  }
+      data: z.array(GetStateForUserItem),
+    }),
+  },
+  GetAllRole: {
+    url: "/Basic/GetAllRole",
+    response: generalResponseZod.extend({
+      data: z.array(
+        z.object({
+          uid: z.string(),
+          name: z.string(),
+          roleKey: z.string(),
+          roleTypeName: z.string(),
+        })
+      ),
+    }),
+  },
+  UserUpdateRole: {
+    url: "/Basic/UserUpdateRole",
+    type: z.object({
+      userUid: z.string().optional(),
+      rolesUid: z.array(z.string()),
+    }),
+  },
+  GetRolesForUser: {
+    url: "/Basic/GetRolesForUser",
+    type: z.object({
+      userUid: z.string().uuid(),
+    }),
+    item: GetRolesForUserItem,
+    response: generalResponseZod.extend({
+      data: z.array(GetRolesForUserItem),
+    }),
+  },
 };
 
 export default basicApi;

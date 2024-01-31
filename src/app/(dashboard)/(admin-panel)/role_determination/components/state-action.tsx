@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 import { Button, Col, Form, Modal, Row } from "antd";
 import MultipleSelect from "@/components/multiple-select";
 import { useStateAction } from "@/app/(dashboard)/(admin-panel)/role_determination/hook/use-state-action";
-import { useControlRoleDetermination } from "../hook/use-control-role-determination";
 
-const StateAction = ({
-  open,
-  setOpen,
-}: {
-  open: string | undefined;
-  setOpen: (arg: string | undefined) => void;
-}) => {
-  const { form, rules, state, updateState, handleSubmit, getState } =
-    useStateAction(setOpen, open);
+const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (arg: string | undefined) => void }) => {
+
+  const {
+    form,
+    rules,
+    state,
+    updateState,
+    handleSubmit,
+    getState
+  } = useStateAction(setOpen, open)
 
   return (
     <div>
       <Modal
-        title={"تعیین استان"}
+        title={'تعیین استان'}
         open={typeof open == "string"}
         onCancel={() => setOpen(undefined)}
         width={600}
@@ -42,22 +42,20 @@ const StateAction = ({
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={() => setOpen(undefined)}
-                key={"cancel"}
-              >
+                key={"cancel"}>
                 انصراف
               </Button>
             </Col>
-          </Row>,
+          </Row>
         ]}
       >
-        <Form layout="vertical" form={form} onFinish={handleSubmit}>
+        <Form layout='vertical' form={form} onFinish={handleSubmit}>
           <Row gutter={[16, 16]}>
             <Col xs={24}>
               <Form.Item rules={[rules]} label="استان" name="sates_Uid">
                 <MultipleSelect
                   loading={state.isLoading || getState.isLoading}
-                  treeData={state.treeData}
-                />
+                  treeData={state.treeData} />
               </Form.Item>
             </Col>
           </Row>

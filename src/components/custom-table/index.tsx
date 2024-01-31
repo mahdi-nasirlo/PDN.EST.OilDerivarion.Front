@@ -5,7 +5,7 @@ import {addIndexToData} from "@/utils/addIndexToData";
 
 interface RecordeValue {
   header?: {
-    icon: React.ReactNode;
+    icon?: React.ReactNode;
     text: string
     actions?: React.ReactNode
   }

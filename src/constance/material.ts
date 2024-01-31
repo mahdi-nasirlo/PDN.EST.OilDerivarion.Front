@@ -63,6 +63,9 @@ const materialApi = {
     },
     RequestPackagePartAdd: {
         url: "/Material/RequestPackagePartAdd",
+        response: generalResponseZod.extend({
+            data: z.array(GetRequestPackagePartListItem)
+        }),
         type: z.object({
             part_Type: z.enum(["1", "2", "3", "4", "5"], {
                 required_error: errorMessage.required_choice

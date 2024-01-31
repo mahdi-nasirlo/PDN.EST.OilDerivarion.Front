@@ -16,6 +16,7 @@ type TProps = {
   showTitle?: boolean;
   backLink?: string;
   titleIcon?: React.ReactNode;
+  actions?: React.ReactNode[]
   title?: string;
 };
 
@@ -34,6 +35,7 @@ const Index = (props: TProps) => {
           <Breadcrumb.Item>{props.currentPage}</Breadcrumb.Item>
         </Breadcrumb>
 
+        {props.actions?.map(item => item)}
         {props.backLink && (
             <Link href={props.backLink} className="flex">
               <Button size="large">

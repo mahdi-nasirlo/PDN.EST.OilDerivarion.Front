@@ -63,3 +63,11 @@
   background-color: rgb(255 255 255 / 0%) !important;
   backdrop-filter: blur(1px);
 }
+
+.card-body-p-0 .ant-card-body {
+  @apply p-0 !important
+}
+
+.ant-descriptions-item-label {
+  @apply items-center flex !important
+}

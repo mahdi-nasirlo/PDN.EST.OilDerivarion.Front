@@ -10,9 +10,7 @@ const useGetRequestPackagePartList = () => {
     return useQuery({
         queryKey: [apiData.url],
         queryFn: () => fetchWithSession({
-            url: apiData.url, notify: false, data: {
-                // package_UID: "",
-            }
+            url: apiData.url, notify: false, data: {}
         }),
         select: (data: z.infer<typeof apiData.response>) => data.data
     })

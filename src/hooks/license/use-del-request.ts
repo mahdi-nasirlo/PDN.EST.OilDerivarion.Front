@@ -5,15 +5,13 @@ import { z } from "zod"
 
 
 const apiData=licenseApi.DelRequest
-const useDelRequest=(uid?:string)=>{
+
+const useDelRequest=()=>{
+
     const queryClient =useQueryClient()
 
-
-const data :z.infer<typeof apiData.type>={
-    uid: uid as string
-}
     const query=useMutation({
-        mutationFn: () => fetchWithSession({url: apiData.url, data, notify:true}),
+        mutationFn: (data : z.infer<typeof apiData.type>) => fetchWithSession({url: apiData.url, data, notify:true}),
         onSuccess: (data)=>{
             if (data.success) {
                 queryClient.invalidateQueries({queryKey: [licenseApi.GetRequestList.url]})

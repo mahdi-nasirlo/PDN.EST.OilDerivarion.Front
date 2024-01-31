@@ -14,7 +14,7 @@ const licenseApi = {
         data:z.object({
             representative__Name:z.string(),
             representative__Family:z.string(),
-            representative__National_ID:z.string(),
+            representative__National_Code:z.string(),
             company__Name:z.string(),
             company__National_ID:z.string()
       }),
@@ -34,7 +34,7 @@ const licenseApi = {
       AddRequest: {
         url: "/License/AddRequest",
         type:z.object({
-            representative__National_ID:z.string().optional(),
+          representative__National_Code:z.string().optional(),
             representative__Name:z.string().optional(),
             representative__Family:z.string().optional(),
             company__National_ID:z.string().optional(),
@@ -43,11 +43,11 @@ const licenseApi = {
             .regex(/^\d*$/, { message: errorMessage.number_invalid })
             .length(12, { message: "لطفا 12 رقم وارد کنید" }),
             license_Type_ID:z.number({required_error:errorMessage.required}),
-            license_ID:z.string({required_error:errorMessage.required})
+            license_Number:z.string({required_error:errorMessage.required})
             .regex(/^\d*$/, { message: errorMessage.number_invalid })
             .length(12, { message: "لطفا 12 رقم وارد کنید" }),
-            license_Expire_Date:z.string({required_error:errorMessage.required}),
-            stateId:z.string({required_error:errorMessage.required})
+            license_Expire_Date_Fa:z.string({required_error:errorMessage.required}),
+            state_Uid:z.string({required_error:errorMessage.required})
         })
        
       },

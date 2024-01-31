@@ -14,9 +14,34 @@ const MaterialGetAllItem = z.object({
     name: z.string(),
     isActive: z.boolean(),
     measureUid: z.string(),
-    measureName: z.string()
+    measureName: z.string(),
+  
 })
 
+const BasicProductMaterialList = z.object({
+    uid:z.string().uuid(),
+    name:z.string(),
+    isActive:z.boolean(),
+    measureUid:z.string().uuid(),
+    measureName:z.string(),
+    TestItems:z.string()
+})
+ 
+const BasicTestItemList =z.object({
+    name:z.string().optional(),
+    isActive:z.boolean().optional(),
+    measureUid:z.string().uuid().optional(),
+    measureName:z.string().optional(),
+    testDuration:z.string().optional(),
+    uid:z.string().uuid().optional(),
+    testMethod:z.string().optional(),
+    measure_Id:z.number().optional()
+})
+const BasicMeasureList = z.object({
+    Uid:z.string().uuid(),
+    Name:z.string(),
+    IsActive:z.boolean(),    
+})
 const materialApi = {
     MaterialGetAll: {
         url: "/Material/MaterialGetAll",
@@ -61,7 +86,52 @@ const materialApi = {
         type: z.object({
             package_UID: z.string().uuid().optional()
         })
-    }
+    },
+    BasicProductMaterialList: {
+        url: "/Basic/BasicProductMaterialList",
+        Item:BasicProductMaterialList,
+        type:z.object({
+            name:z.string(),
+            isActive:z.boolean() }),
+        response: generalResponseZod.extend({
+         data: z.array(BasicProductMaterialList)
+        }),
+    },
+    BasicProductMaterialCreate: {
+        url: "/Basic/BasicProductMaterialList",
+        Item:BasicProductMaterialList,
+        type:z.object({
+            name:z.string(),
+            isActive:z.boolean(),
+            measureUid:z.string().uuid(),
+            testItems:z.array(z.object({
+            })) 
+        }),
+    },
+    BasicTestItemList: {
+        url: "/Basic/BasicTestItemList",
+        type:z.object({
+            name:z.string(),
+            isActive:z.boolean(),
+        }),
+        Item:BasicTestItemList,
+        response: generalResponseZod.extend({
+            data: z.array(BasicTestItemList)
+           }),
+        
+    },
+    BasicMeasureList: {
+        url: "/Basic/BasicMeasureList",
+        type:z.object({
+            name:z.string(),
+            isActive:z.boolean(),
+        }),
+        Item:BasicMeasureList,
+        response: generalResponseZod.extend({
+            data: z.array(BasicMeasureList)
+           }),
+        
+    },
 }
 
 export {materialApi}

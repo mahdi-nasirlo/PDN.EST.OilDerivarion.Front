@@ -39,7 +39,7 @@ export default function SubmitForm() {
       </Row>
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
-          <Form.Item name="representative__National_ID" label="کدملی">
+          <Form.Item name="representative__National_Code" label="کدملی">
             <Input
               disabled
               type="number"
@@ -94,7 +94,7 @@ export default function SubmitForm() {
       <Row gutter={[16, 0]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="license_ID"
+            name="license_Number"
             label="شماره مجوز"
             required={false}
             rules={[rules]}
@@ -104,7 +104,7 @@ export default function SubmitForm() {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            name="license_Expire_Date"
+            name="license_Expire_Date_Fa"
             label="تاریخ اعتبار مجوز"
             required={false}
             rules={[rules]}
@@ -116,7 +116,7 @@ export default function SubmitForm() {
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
           <Form.Item
-            name="stateId"
+            name="state_Uid"
             label="استان"
             required={false}
             rules={[rules]}

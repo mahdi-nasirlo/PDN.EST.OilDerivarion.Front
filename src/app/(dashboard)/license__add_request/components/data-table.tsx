@@ -7,12 +7,12 @@ import { Measure } from "../../../../../interfaces/measures";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import CustomeTable from "../../../../components/custom-table";
 import useProducerInfo from "./hook/use-producer-info";
-import { z } from "zod";
+import { string, z } from "zod";
 import licenseApi from "constance/license";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 
 export default function DataTable() {
-  const { list, handleDelete } = useProducerInfo();
+  const { list, del } = useProducerInfo();
   const columns: ColumnsType<z.infer<typeof licenseApi.GetRequestList.Item>> = [
     {
       title: "ردیف",
@@ -22,57 +22,52 @@ export default function DataTable() {
     },
     {
       title: "نام",
-      dataIndex: "name",
+      dataIndex: "Representative__Name",
       key: "2",
     },
     {
       title: "نام خانوادگی",
-      dataIndex: "name",
+      dataIndex: "Representative__Family",
       key: "2",
     },
     {
       title: "کدملی",
-      dataIndex: "name",
+      dataIndex: "Representative__National_Code",
       key: "2",
     },
     {
       title: "نام شرکت",
-      dataIndex: "name",
+      dataIndex: "Company__Name",
       key: "2",
     },
     {
       title: "شناسه ملی شرکت",
-      dataIndex: "name",
+      dataIndex: "Company__National_ID",
       key: "2",
     },
     {
       title: "شناسه کسب وکار",
-      dataIndex: "name",
+      dataIndex: "Company__Business_ID",
       key: "2",
     },
     {
       title: "نوع مجوز",
-      dataIndex: "name",
+      dataIndex: "License_Type",
       key: "2",
     },
     {
       title: "شماره مجوز",
-      dataIndex: "name",
+      dataIndex: "License_Number",
       key: "2",
     },
     {
       title: "تاریخ اعتبار",
-      dataIndex: "name",
+      dataIndex: "License_Expire_Date_Fa",
       key: "2",
     },
     {
       title: "استان",
-      dataIndex: "name",
-      key: "2",
-    },
-    {
-      title: "شهرستان",
-      dataIndex: "name",
+      dataIndex: "State_Name",
       key: "2",
     },
     {
@@ -99,17 +94,14 @@ export default function DataTable() {
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          if (isActive === 0)
           {
             <Button
               type="link"
               className={"text-red-500 font-bold"}
               onClick={() => {
-                handleDelete();
+                // del.mutateAsync();
               }}
-            >
-              حذف
-            </Button>
+            ></Button>
           }
         </Space>
       ),

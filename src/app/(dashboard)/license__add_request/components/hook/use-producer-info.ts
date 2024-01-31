@@ -15,14 +15,14 @@ const  useProducerInfo = ()=>{
  const addLicense = useAddRequest()
  const state = useGetAllState()
  const list = useGetRequestList()
- const del = useDelRequest(delUid)
+ const del = useDelRequest()
 
- const handleDelete =(uid? :string)=>{
-    del.mutateAsync
-    setDelUid(uid)
- } 
+//  const handleDelete =(uid:string)=>{
+//     del.mutateAsync({uid: uid})
+//     // setDelUid(uid)
+//  } 
 
- return {producerInfo,License,addLicense,state,list,handleDelete}
+ return {producerInfo,License,addLicense,state,list, del}
 }
 
 export default useProducerInfo;

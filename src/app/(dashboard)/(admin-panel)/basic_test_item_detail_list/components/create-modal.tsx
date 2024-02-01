@@ -3,6 +3,7 @@ import { Button, Col, Form, Modal, Row } from 'antd';
 import { useValidation } from '@/hooks/use-validation';
 import { TestItemDetailApi } from 'constance/test-item-detail';
 import TestItemDetailForm from './test-item-detail-form';
+import useTestItemDetail from '../hook/use-test-item-detail-list';
 
 interface TProps {
     modalVisible: boolean
@@ -14,6 +15,8 @@ const formSchema = TestItemDetailApi.BasicTestItemDetailCreate.type
 export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
+
+    const { create } = useTestItemDetail();
 
     const closeModal = () => {
         setModalVisible(false);
@@ -42,14 +45,14 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                             className="w-full"
                             type="primary"
                             key={"submit"}
-                        // loading={isMutating}
+                            loading={create.isPending}
                         >
                             ثبت
                         </Button>
                     </Col>
                     <Col xs={12} md={12}>
                         <Button
-                            // loading={isMutating}
+                            disabled={create.isPending}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={closeModal}
@@ -62,8 +65,12 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
             ]}
         >
             <Form
-                // onFinish={handleFormSubmit}
-                // disabled={isMutating}
+                disabled={create.isPending}
+                onFinish={async (values) => {
+                    const res = await create.mutateAsync(values)
+                    if (res.success)
+                        setModalVisible(false)
+                }}
                 form={form}
                 layout="vertical"
             >

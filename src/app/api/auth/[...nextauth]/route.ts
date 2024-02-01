@@ -2,18 +2,55 @@ import NextAuth, {NextAuthOptions, Session, User} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import {JWT} from "next-auth/jwt";
 import {AdapterUser} from "next-auth/adapters";
+import Auth0 from "next-auth/providers/auth0";
 
 
 const authOption: NextAuthOptions = {
 
     providers: [
+//     authority : 'https://is-test.pdnsoftware.ir',
+//     silentRenew: true,
+//     useRefreshToken: true,
+//     renewTimeBeforeTokenExpiresInSeconds: 60,
+//     secureRoutes: [https://oil-test.pdnsoftware.ir],
+//      logLevel: LogLevel.Debug,
+//     autoUserInfo: false
+
+//     scope: 'openid profile offline_access oil.fullaccess',
+//     responseType: 'code',
+        Auth0({
+            clientId: "process.env.CLIENT_ID as string",
+            clientSecret: "process.env.CLIENT_SECRET as string",
+            issuer: "https://is-test.pdnsoftware.ir",
+            authorization: {params: {scope: "openid your_custom_scope"}},
+        }),
+        {
+            id: "OpenIdConnect",
+            name: "OpenIdConnect",
+            type: "oauth",
+            // wellKnown: "https://is-test.pdnsoftware.ir/.well-known/openid-configuration",
+            // issuer: "https://is-test.pdnsoftware.ir",
+            // accessTokenUrl: "https://is-test.pdnsoftware.ir",
+            authorization: {
+                url: "https://is-test.pdnsoftware.ir",
+                params: {
+                    client_id: "https://is-test.pdnsoftware.ir",
+                    redirect_uri: "https://localhost:3000/",
+                    scope: "openid profile offline_access oil.fullaccess",
+                    response_type: 'code'
+                },
+            },
+            profile(profile) {
+                return {
+                    id: profile.sub,
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.picture,
+                }
+            },
+        },
         CredentialsProvider({
-            // The name to display on the sign in form (e.g. "Sign in with...")
             name: "Credentials",
-            // `credentials` is used to generate a form on the sign in page.
-            // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-            // e.g. domain, username, password, 2FA token, etc.
-            // You can pass any HTML attribute to the <input> tag through the object.
             credentials: {
                 code: {label: "token", type: "text"},
             },
@@ -59,7 +96,7 @@ const authOption: NextAuthOptions = {
         },
     },
     pages: {
-        signIn: "/login",
+        // signIn: "/login",
         signOut: "/signout"
     }
 }

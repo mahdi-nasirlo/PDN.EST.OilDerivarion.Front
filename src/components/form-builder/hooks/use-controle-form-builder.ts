@@ -4,7 +4,7 @@ import useFormRequest from "@/components/form-builder/hooks/use-form-request";
 
 const type = formMakerApi.Get
 
-const useControlFormBuilder = (schema: z.infer<typeof type.formSchema>, formData: z.infer<typeof type.formData>, categoryKey: string) => {
+const useControlFormBuilder = (formData: z.infer<typeof type.formData>, categoryKey: string) => {
 
     const {set} = useFormRequest(categoryKey)
 
@@ -39,72 +39,72 @@ const useControlFormBuilder = (schema: z.infer<typeof type.formSchema>, formData
     //     else deleteSchema()
     // }
     //
-    // const onSetMany = (data: any, formKey: string) => {
-    //
-    //     const oldDataForm = oldData[formKey];
-    //
-    //     handleSchema(data)
-    //
-    //     if (Array.isArray(oldDataForm)) {
-    //
-    //         oldData[formKey] = [...oldDataForm, data];
-    //     } else {
-    //
-    //         oldData[formKey] = [data];
-    //     }
-    //
-    //     context.formData.onSet(validateValue(data) ? oldData : undefined);
-    //
-    // }
-    //
-    // const onUpdateMany = (data: any, formKey: string, row: number) => {
-    //
-    //     handleSchema(data)
-    //
-    //     oldData[formKey][row - 1] = data
-    //
-    //     context.formData.onSet(validateValue(data) ? oldData : undefined);
-    //
-    // }
-    //
-    // const deleteFromMany = (index: number, formKey: string) => {
-    //
-    //     const oldDataForm = oldData[formKey];
-    //
-    //     if (Array.isArray(oldDataForm)) {
-    //
-    //         if (index >= 0 && index < oldDataForm.length) {
-    //
-    //             oldDataForm.splice(index, 1);
-    //
-    //             if (Array.isArray(oldDataForm) && oldDataForm.length === 0) {
-    //                 return context.formData.onSet(null)
-    //             }
-    //
-    //             context.formData.onSet({...oldData});
-    //         } else {
-    //             console.error("Index out of bounds");
-    //         }
-    //     } else {
-    //         console.error(`Data at formKey "${formKey}" is not an array`);
-    //     }
-    //
-    // }
-    //
+    const onSetMany = async (data: any, formKey: string) => {
+
+        const oldDataForm = oldData[formKey];
+
+        if (Array.isArray(oldDataForm)) {
+
+            oldData[formKey] = [...oldDataForm, data];
+
+        } else {
+
+            oldData[formKey] = [data];
+        }
+
+        await set.mutateAsync({form_Key: formKey, form_Data: JSON.stringify(oldData)})
+
+    }
+
+    const onUpdateMany = async (data: any, formKey: string, row: number) => {
+
+        oldData[formKey][row - 1] = data
+
+        await set.mutateAsync(data ? oldData : undefined);
+
+    }
+
+    const deleteFromMany = async (index: number, formKey: string) => {
+
+
+        if (Array.isArray(oldData)) {
+            
+            if (index >= 0 && index < oldData.length) {
+
+                oldData.splice(index, 1);
+
+                if (Array.isArray(oldData) && oldData.length === 0) {
+                    return await set.mutateAsync({form_Key: formKey, form_Data: null})
+                }
+
+                await set.mutateAsync({form_Key: formKey, form_Data: {[formKey]: oldData}});
+
+            } else {
+                console.error("Index out of bounds");
+            }
+        } else {
+            console.error(`Data at formKey "${formKey}" is not an array`);
+        }
+
+    }
+
     const onSetOne = async (data: any, formKey: string) => {
+
+        console.log(data, formKey)
 
         oldData[formKey] = data;
 
-        await set.mutateAsync(oldData)
+        await set.mutateAsync({form_Key: formKey, form_Data: JSON.stringify(oldData)})
 
     }
 
     return {
         // ...context,
-        // onSetMany,
-        // deleteFromMany,
+        isLoading: set.isPending,
+        onSetMany,
+        deleteFromMany,
         onSetOne,
-        // onUpdateMany
+        onUpdateMany
     }
 };
 

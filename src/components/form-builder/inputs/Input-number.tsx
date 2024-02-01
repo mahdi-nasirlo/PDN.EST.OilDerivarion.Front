@@ -1,6 +1,5 @@
 import React from 'react';
-import {InputProps} from "antd/lib";
-import {Input} from "antd";
+import {InputNumber as AntInputNumber, InputNumberProps} from "antd";
 
 
 interface PropsType {
@@ -8,12 +7,12 @@ interface PropsType {
 }
 
 
-const InputNumber = (props: InputProps & PropsType) => {
+const InputNumber = (props: InputNumberProps & PropsType) => {
 
     const {data} = props
 
     return (
-        <Input
+        <AntInputNumber
             className="w-full"
             size="large"
             type="text"

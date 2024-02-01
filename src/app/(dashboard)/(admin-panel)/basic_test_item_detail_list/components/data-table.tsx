@@ -3,14 +3,14 @@ import { Card } from '@/components/card'
 import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
 import StatusColumn from '@/components/custom-table/StatusColumn';
-import { Button, Space, Typography } from 'antd';
+import { Button, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { TestItemApi } from 'constance/test-item';
+import { TestItemDetailApi } from 'constance/test-item-detail';
 import { z } from 'zod';
 import EditModal from './edit-modal';
 
 interface TProps {
-    data: z.infer<typeof TestItemApi.BasicTestItemGetPage.item>[] | undefined;
+    data: z.infer<typeof TestItemDetailApi.BasicTestItemDetailGetPage.item>[] | undefined;
     isLoading: boolean;
     setModalVisible: (arg: boolean) => void;
 }
@@ -21,7 +21,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
     const [editModal, setEditModal] = useState<boolean>(false);
 
     const columns: ColumnsType<
-        z.infer<typeof TestItemApi.BasicTestItemGetPage.item>
+        z.infer<typeof TestItemDetailApi.BasicTestItemDetailGetPage.item>
     > = [
             {
                 title: "ردیف",
@@ -30,42 +30,33 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                 width: "5%"
             },
             {
-                title: "نام فاکتور آزمون",
-                dataIndex: "name",
+                title: "عنوان استاندارد",
+                dataIndex: "title",
                 key: "2",
             },
             {
-                title: "واحد اندازه گیری",
-                dataIndex: "measureName",
+                title: "فاکتورهای آزمون",
+                dataIndex: "testItemName",
                 key: "3",
             },
             {
-                title: "فعال/غیر فعال ",
+                title: "شناسه استاندارد",
+                dataIndex: "referenceCode",
+                key: "4",
+            },
+            {
+                title: "فعال/غیر فعال",
                 dataIndex: "isActive",
                 key: "4",
-                render: (e, record) => <StatusColumn record={record} />
+                render: (_, record: any) => <StatusColumn record={record} />
             },
             {
-                title: "مدت زمان انجام آزمایش",
-                dataIndex: "testDuration",
-                key: "5",
-                render: (_, record) => {
-                    return (
-                        <Typography.Text>
-                            {record.testDuration !== undefined
-                                ? `${record.testDuration} ساعت`
-                                : 'تعریف نشده'}
-                        </Typography.Text>
-                    );
-                },
-            },
-            {
-                title: "جزئیات",
-                key: "جزئیات",
+                title: "عملیات",
+                key: "عملیات",
                 align: "center",
                 fixed: "right",
                 width: "10%",
-                render: (_, record) => (
+                render: (_, record: any) => (
                     <Space size="small">
                         <Button
                             type="link"
@@ -74,7 +65,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                         >
                             ویرایش
                         </Button>
-                        {/* 
+                        {/*
                             <Button
                                 type="link"
                                 className="text-red-500 font-bold"
@@ -95,7 +86,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                 <CustomTable
                     header={{
                         icon: <ViewColumnsIcon />,
-                        text: 'لیست فاکتور های آزمون',
+                        text: 'لیست استاندارد های آزمون',
                         actions: [
                             <Button
                                 key={"1"}
@@ -106,12 +97,11 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                                 onClick={() => { setModalVisible(true); }}
                             >
                                 <PlusIcon width={24} height={24} />
-                                <span className="flex">افزودن فاکتور آزمون</span>
+                                <span className="flex">افزودن استاندارد آزمون</span>
                             </Button>
                         ]
                     }}
-                    setInitialData={() => {
-                    }}
+                    setInitialData={() => { }}
                     isLoading={isLoading}
                     data={data}
                     columns={columns}

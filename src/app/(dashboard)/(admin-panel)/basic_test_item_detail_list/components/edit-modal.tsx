@@ -1,10 +1,11 @@
 import React from 'react'
 import { Button, Col, Form, Modal, Row } from 'antd'
-import { TestItemApi } from 'constance/test-item'
 import { useValidation } from '@/hooks/use-validation'
-import TestItemForm from './test-item-form'
+import { TestItemDetailApi } from 'constance/test-item-detail'
+import TestItemDetailForm from './test-item-detail-form'
 
-const formSchema = TestItemApi.BasicTestItemUpdate.type
+
+const formSchema = TestItemDetailApi.BasicTestItemDetailUpdate.type
 
 export default function EditModal({ editModal, setEditModal }: any) {
 
@@ -20,7 +21,7 @@ export default function EditModal({ editModal, setEditModal }: any) {
         <>
             <Modal
                 width={800}
-                title="ویرایش فاکتور آزمون"
+                title="ویرایش استاندارد آزمون"
                 open={editModal}
                 onCancel={closeModal}
                 footer={[
@@ -57,7 +58,7 @@ export default function EditModal({ editModal, setEditModal }: any) {
                     form={form}
                     layout="vertical"
                 >
-                    <TestItemForm rules={rules} />
+                    <TestItemDetailForm rules={rules} />
                 </Form>
             </Modal>
         </>

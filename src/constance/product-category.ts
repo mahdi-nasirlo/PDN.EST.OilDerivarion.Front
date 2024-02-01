@@ -48,6 +48,8 @@ const BasicProductCategoryGetItem = z.object({
 const productCategoryApi = {
   BasicProductCategoryList: {
     url: "/Basic/BasicProductCategoryList",
+    sortBy: "name",
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       name: z.string().optional(),
       isActive: z.boolean().optional(),

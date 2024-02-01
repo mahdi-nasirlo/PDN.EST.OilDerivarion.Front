@@ -38,6 +38,8 @@ const BasicTestItemGetItem = z.object({
 const TestItemApi = {
   BasicTestItemList: {
     url: "/Basic/BasicTestItemList",
+    sortBy: "name",
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       name: z.string().optional(),
       isActive: z.boolean().optional(),
@@ -86,7 +88,7 @@ const TestItemApi = {
   BasicTestItemUpdate: {
     url: "/Basic/BasicTestItemUpdate",
     type: z.object({
-      uid: z.string(),
+      uid: z.string().uuid(),
       name: z.string({ required_error: errorMessage.required }),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required_choice }),

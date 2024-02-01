@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Col, Form, Modal, Row } from 'antd';
-import { TestItemApi } from 'constance/test-item';
 import { useValidation } from '@/hooks/use-validation';
-import TestItemForm from './test-item-form';
+import { TestItemDetailApi } from 'constance/test-item-detail';
+import TestItemDetailForm from './test-item-detail-form';
 
-const formSchema = TestItemApi.BasicTestItemCreate.type
+const formSchema = TestItemDetailApi.BasicTestItemDetailCreate.type
 
 export default function CreateModal({ modalVisible, setModalVisible }: any) {
 
@@ -20,7 +20,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: any) {
             width={800}
             title={
                 <div>
-                    <div className="text-base mb-2">افزودن فاکتور آزمون</div>
+                    <div className="text-base mb-2">افزودن استاندارد آزمون</div>
                     <div className="font-normal text-sm">
                         لطفا اطلاعات را وارد نمایید.
                     </div>
@@ -62,7 +62,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: any) {
                 form={form}
                 layout="vertical"
             >
-                <TestItemForm rules={rules} />
+                <TestItemDetailForm rules={rules} />
 
             </Form>
         </Modal>

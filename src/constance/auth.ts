@@ -3,6 +3,7 @@ import {z} from "zod";
 import {errorMessage} from "./error-message";
 
 const ssoApi = {
+  access_token_Key: "access_token",
   test: {
     type: z.object({
       factoryCityId: z.string({

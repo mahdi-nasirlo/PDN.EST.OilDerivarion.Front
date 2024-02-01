@@ -7,13 +7,13 @@ import {
   QueryClient,
   QueryClientProvider as TanstackQueryClientProvider,
 } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { getResponseError } from "@/utils/getResponse";
-import { notification } from "antd/lib";
-import { useRedirectToSso } from "@/hooks/use-auth";
-import { message } from "antd";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {getResponseError} from "@/utils/getResponse";
+import {notification} from "antd/lib";
+import {useRedirectToSso} from "@/hooks/use-auth";
+import {ssoApi} from "../constance/auth";
 
 const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
   const redirectToSso = useRedirectToSso(undefined);
@@ -34,6 +34,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (result.status === 401) {
+          localStorage.removeItem(ssoApi.access_token_Key)
           redirectToSso.execute(result);
         }
       },

@@ -1,9 +1,11 @@
 import {getSession} from "next-auth/react";
 import {ssoApi} from "../constance/auth";
 
+const key = ssoApi.access_token_Key
+
 const getTokenFromSession = async (): Promise<string | null | undefined> => {
 
-    let lc = localStorage.getItem("access_token")
+    let lc = localStorage.getItem(key)
     
     if (lc)
         return lc
@@ -16,7 +18,7 @@ const getTokenFromSession = async (): Promise<string | null | undefined> => {
 
         const token = validate.data.access_token
 
-        localStorage.setItem("access_token", token)
+        localStorage.setItem(key, token)
 
         return token;
     }

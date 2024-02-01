@@ -14,14 +14,18 @@ import StatusColumn from "@/components/custom-table/StatusColumn";
 import useBasicMaterial from "./hook/use-basic-material";
 import EditModal from "./material-edit-action";
 
+interface TProps {
+  data: z.infer<typeof materialApi.BasicProductMaterialList.type>[] | undefined;
+  isLoading: boolean;
+  setModalVisible: (arg: boolean) => void;
+}
+
 export default function DataTable({
-  modalVisible,
+  data,
+  isLoading,
   setModalVisible,
-}: {
-  modalVisible: any;
-  setModalVisible: any;
-}) {
-  const { list, handleEdit, setGetUid, uid } = useBasicMaterial();
+}: TProps) {
+  const { handleEdit, setGetUid, uid } = useBasicMaterial();
   const columns: ColumnsType<
     z.infer<typeof materialApi.BasicProductMaterialList.Item>
   > = [
@@ -113,8 +117,8 @@ export default function DataTable({
             ],
           }}
           setInitialData={() => {}}
-          isLoading={list.isLoading}
-          data={list.data}
+          isLoading={isLoading}
+          data={data}
           columns={columns}
         />
         <EditModal modalVisible={uid} setModalVisible={setGetUid} />

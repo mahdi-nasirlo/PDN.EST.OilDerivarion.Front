@@ -30,8 +30,9 @@ const Page = () => {
         ]}
       />
       <DataTable
+        data={list.data}
+        isLoading={list.isLoading}
         setModalVisible={setModalVisible}
-        modalVisible={modalVisible}
       />
       <CreateModal
         modalVisible={modalVisible}

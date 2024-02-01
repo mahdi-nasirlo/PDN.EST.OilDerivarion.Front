@@ -138,7 +138,12 @@ export default function SubmitForm() {
         </Col>
       </Row>
       <div className="flex justify-end">
-        <Button size="large" type="primary" htmlType="submit">
+        <Button
+          size="large"
+          type="primary"
+          htmlType="submit"
+          loading={addLicense.isPending}
+        >
           ارسال درخواست
         </Button>
       </div>

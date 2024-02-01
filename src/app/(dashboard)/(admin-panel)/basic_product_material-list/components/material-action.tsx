@@ -75,7 +75,7 @@ export default function CreateModal({
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <MaterialForm rules={[rules]} />
+        <MaterialForm />
       </Form>
     </Modal>
   );

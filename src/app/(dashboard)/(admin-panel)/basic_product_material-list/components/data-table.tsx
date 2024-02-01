@@ -21,7 +21,7 @@ export default function DataTable({
   modalVisible: any;
   setModalVisible: any;
 }) {
-  const { list } = useBasicMaterial();
+  const { list, handleEdit, setGetUid, uid } = useBasicMaterial();
   const columns: ColumnsType<
     z.infer<typeof materialApi.BasicProductMaterialList.Item>
   > = [
@@ -78,7 +78,17 @@ export default function DataTable({
       align: "center",
       fixed: "right",
       width: "10%",
-      render: (_, record) => ({}),
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => setGetUid(record.uid)}
+          >
+            ویرایش
+          </Button>
+        </Space>
+      ),
     },
   ];
   return (
@@ -87,7 +97,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست مواد اولیه محصول",
+            text: "لیست مواد اولیه",
             actions: [
               <Button
                 key={"1"}
@@ -107,10 +117,7 @@ export default function DataTable({
           data={list.data}
           columns={columns}
         />
-        <EditModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
+        <EditModal modalVisible={uid} setModalVisible={setGetUid} />
       </Card>
     </>
   );

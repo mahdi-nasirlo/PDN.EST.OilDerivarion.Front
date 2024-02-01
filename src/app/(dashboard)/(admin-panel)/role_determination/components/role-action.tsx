@@ -3,7 +3,13 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import MultipleSelect from "@/components/multiple-select";
 import { useRoleAction } from '../hook/use-role-action';
 
-const RoleAction = ({ open, setOpen }: { open: string | undefined, setOpen: (arg: string | undefined) => void }) => {
+
+interface TProps {
+    open: string | undefined
+    setOpen: (arg: string | undefined) => void
+}
+
+const RoleAction = ({ open, setOpen }: TProps) => {
 
     const {
         form,

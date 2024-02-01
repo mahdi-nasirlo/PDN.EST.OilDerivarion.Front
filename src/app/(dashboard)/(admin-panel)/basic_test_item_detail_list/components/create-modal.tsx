@@ -1,14 +1,15 @@
 import React from 'react'
-import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd';
-import { productCategoryApi } from 'constance/product-category';
 import { useValidation } from '@/hooks/use-validation';
+import { TestItemDetailApi } from 'constance/test-item-detail';
+import TestItemDetailForm from './test-item-detail-form';
+
 interface TProps {
     modalVisible: boolean
     setModalVisible: (arg: boolean) => void
 }
 
-const formSchema = productCategoryApi.BasicProductCategoryCreate.type
+const formSchema = TestItemDetailApi.BasicTestItemDetailCreate.type
 
 export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
@@ -24,7 +25,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
             width={800}
             title={
                 <div>
-                    <div className="text-base mb-2">افزودن دسته بندی</div>
+                    <div className="text-base mb-2">افزودن استاندارد آزمون</div>
                     <div className="font-normal text-sm">
                         لطفا اطلاعات را وارد نمایید.
                     </div>
@@ -66,7 +67,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                 form={form}
                 layout="vertical"
             >
-                <ProductCategoryForm rules={rules} />
+                <TestItemDetailForm rules={rules} />
 
             </Form>
         </Modal>

@@ -1,5 +1,6 @@
 import { generalResponseZod } from "@/types/api-response";
 import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const BasicProductCategoryGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -30,7 +31,7 @@ const BasicProductCategoryListItem = z.object({
   densityLowerLimit: z.number().optional(),
 });
 
-const BasicProductCategoryGet = z.object({
+const BasicProductCategoryGetItem = z.object({
   uid: z.string().uuid().optional(),
   name: z.string().optional(),
   isActive: z.boolean().optional(),
@@ -47,6 +48,8 @@ const BasicProductCategoryGet = z.object({
 const productCategoryApi = {
   BasicProductCategoryList: {
     url: "/Basic/BasicProductCategoryList",
+    sortBy: "name",
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       name: z.string().optional(),
       isActive: z.boolean().optional(),
@@ -78,20 +81,22 @@ const productCategoryApi = {
     type: z.object({
       uid: z.string().uuid(),
     }),
-    item: BasicProductCategoryGet,
+    item: BasicProductCategoryGetItem,
     response: generalResponseZod.extend({
-      data: z.array(BasicProductCategoryGet),
+      data: z.array(BasicProductCategoryGetItem),
     }),
   },
 
   BasicProductCategoryCreate: {
     url: "/Basic/BasicProductCategoryCreate",
     type: z.object({
-      name: z.string(),
-      isActive: z.boolean(),
-      productionMethodId: z.number(),
-      smallCode: z.number(),
-      hasDensity: z.boolean(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      productionMethodId: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      smallCode: z.number({ required_error: errorMessage.number_invalid }),
+      hasDensity: z.boolean({ required_error: errorMessage.required_choice }),
       densityUpperLimit: z.number().optional(),
       densityLowerLimit: z.number().optional(),
     }),
@@ -101,11 +106,13 @@ const productCategoryApi = {
     url: "/Basic/BasicProductCategoryUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string(),
-      isActive: z.boolean(),
-      productionMethodId: z.number(),
-      smallCode: z.number(),
-      hasDensity: z.boolean(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      productionMethodId: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      smallCode: z.number({ required_error: errorMessage.number_invalid }),
+      hasDensity: z.boolean({ required_error: errorMessage.required_choice }),
       densityUpperLimit: z.number().optional(),
       densityLowerLimit: z.number().optional(),
     }),

@@ -1,15 +1,15 @@
 import React from 'react'
-import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd'
-import { productCategoryApi } from 'constance/product-category'
 import { useValidation } from '@/hooks/use-validation'
+import { TestItemDetailApi } from 'constance/test-item-detail'
+import TestItemDetailForm from './test-item-detail-form'
 
 interface TProps {
     editModal: boolean
     setEditModal: (arg: boolean) => void
 }
 
-const formSchema = productCategoryApi.BasicProductCategoryUpdate.type
+const formSchema = TestItemDetailApi.BasicTestItemDetailUpdate.type
 
 export default function EditModal({ editModal, setEditModal }: TProps) {
 
@@ -25,7 +25,7 @@ export default function EditModal({ editModal, setEditModal }: TProps) {
         <>
             <Modal
                 width={800}
-                title="ویرایش دسته بندی محصول"
+                title="ویرایش استاندارد آزمون"
                 open={editModal}
                 onCancel={closeModal}
                 footer={[
@@ -62,7 +62,7 @@ export default function EditModal({ editModal, setEditModal }: TProps) {
                     form={form}
                     layout="vertical"
                 >
-                    <ProductCategoryForm rules={rules} />
+                    <TestItemDetailForm rules={rules} />
                 </Form>
             </Modal>
         </>

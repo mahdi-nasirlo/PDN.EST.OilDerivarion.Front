@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, Col, Divider, Row } from "antd";
+import {Button, Col, Divider, Row} from "antd";
 import React from "react";
-import CardGrid from "./card-grid";
-import { useRouter } from "next/navigation";
-import { Card } from "@/components/card";
+import CardGrid from "../components/card-grid";
+import {useRouter} from "next/navigation";
+import {Card} from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
-import { SquaresPlusIcon } from "@heroicons/react/24/outline";
+import {SquaresPlusIcon} from "@heroicons/react/24/outline";
 
 export default function Page() {
   const router = useRouter();

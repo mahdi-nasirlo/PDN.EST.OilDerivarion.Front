@@ -4,11 +4,13 @@ import { Col, Form, Input, Row, Select } from 'antd'
 import { productCategoryApi } from 'constance/product-category'
 import React, { useState } from 'react'
 import { z } from 'zod'
-
-
 const formSchema = productCategoryApi.BasicProductCategoryGetPage.type
 
-export default function FilterForm({ onFinish }: { onFinish: (arg: z.infer<typeof formSchema>) => void }) {
+interface TProps {
+    onFinish: (arg: z.infer<typeof formSchema>) => void
+}
+
+export default function FilterForm({ onFinish }: TProps) {
 
     const [form, rules] = useValidation(formSchema)
 

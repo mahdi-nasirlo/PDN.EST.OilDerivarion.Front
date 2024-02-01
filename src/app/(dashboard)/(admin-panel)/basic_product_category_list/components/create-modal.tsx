@@ -3,10 +3,14 @@ import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd';
 import { productCategoryApi } from 'constance/product-category';
 import { useValidation } from '@/hooks/use-validation';
+interface TProps {
+    modalVisible: boolean
+    setModalVisible: (arg: boolean) => void
+}
 
 const formSchema = productCategoryApi.BasicProductCategoryCreate.type
 
-export default function CreateModal({ modalVisible, setModalVisible }: any) {
+export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 

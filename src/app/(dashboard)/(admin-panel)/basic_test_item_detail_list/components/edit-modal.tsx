@@ -4,10 +4,14 @@ import { useValidation } from '@/hooks/use-validation'
 import { TestItemDetailApi } from 'constance/test-item-detail'
 import TestItemDetailForm from './test-item-detail-form'
 
+interface TProps {
+    editModal: boolean
+    setEditModal: (arg: boolean) => void
+}
 
 const formSchema = TestItemDetailApi.BasicTestItemDetailUpdate.type
 
-export default function EditModal({ editModal, setEditModal }: any) {
+export default function EditModal({ editModal, setEditModal }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 

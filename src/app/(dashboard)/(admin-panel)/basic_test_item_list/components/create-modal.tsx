@@ -4,9 +4,14 @@ import { TestItemApi } from 'constance/test-item';
 import { useValidation } from '@/hooks/use-validation';
 import TestItemForm from './test-item-form';
 
+interface TProps {
+    modalVisible: boolean
+    setModalVisible: (arg: boolean) => void
+}
+
 const formSchema = TestItemApi.BasicTestItemCreate.type
 
-export default function CreateModal({ modalVisible, setModalVisible }: any) {
+export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 

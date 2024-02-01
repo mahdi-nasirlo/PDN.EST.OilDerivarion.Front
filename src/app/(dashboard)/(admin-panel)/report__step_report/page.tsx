@@ -11,7 +11,7 @@ const page = () => {
       <Breadcrumb
         pages={[{ label: "خانه", path: "/" }]}
         currentPage="گزارشات مراحل"
-        titleIcon={<DocumentTextIcon className="w-8" />}
+        titleIcon={<DocumentTextIcon className="w-6" />}
       />
       <Card>
         <Alert

@@ -11,10 +11,10 @@ const useBasicProductMaterialCreate =()=>{
 
 
     const query = useMutation({
-        mutationFn:(data:z.infer<typeof  apiData.type>)=>fetchWithSession({url:apiData.url,data}),
-        onSuccess:(data)=>{
+        mutationFn: (data:z.infer<typeof  apiData.type>) => fetchWithSession ({url:apiData.url,data}),
+        onSuccess: (data) => {
             if (data.success) {
-                queryClient.invalidateQueries({queryKey:[apiData.url]})
+                queryClient.invalidateQueries({queryKey:[materialApi.BasicProductMaterialList.url]})
             }  
         }
     })

@@ -12,10 +12,13 @@ import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { materialApi } from "constance/material";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import useBasicMaterial from "./hook/use-basic-material";
+import EditModal from "./material-edit-action";
 
 export default function DataTable({
+  modalVisible,
   setModalVisible,
 }: {
+  modalVisible: any;
   setModalVisible: any;
 }) {
   const { list } = useBasicMaterial();
@@ -29,7 +32,7 @@ export default function DataTable({
       width: "5%",
     },
     {
-      title: "ماده اولیه",
+      title: "نام ماده اولیه",
       dataIndex: "name",
       key: "2",
     },
@@ -45,7 +48,7 @@ export default function DataTable({
       render: (_, record: any) => <StatusColumn record={record} />,
     },
     {
-      title: "نقش",
+      title: "فاکتورهای آزمون",
       dataIndex: "TestItems",
       key: "4",
       render: (_, record) => {
@@ -75,16 +78,7 @@ export default function DataTable({
       align: "center",
       fixed: "right",
       width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <button className="text-secondary-500 font-bold py-2 px-2">
-            تعیین نقش
-          </button>
-          <button className="text-secondary-500 font-bold  py-2 px-2">
-            تعیین استان
-          </button>
-        </Space>
-      ),
+      render: (_, record) => ({}),
     },
   ];
   return (
@@ -112,6 +106,10 @@ export default function DataTable({
           isLoading={list.isLoading}
           data={list.data}
           columns={columns}
+        />
+        <EditModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
       </Card>
     </>

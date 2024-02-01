@@ -22,7 +22,6 @@ const BasicProductMaterialList = z.object({
     uid:z.string().uuid(),
     name:z.string(),
     isActive:z.boolean(),
-    measureUid:z.string().uuid(),
     measureName:z.string(),
     TestItems:z.string()
 })
@@ -94,17 +93,17 @@ const materialApi = {
         url: "/Basic/BasicProductMaterialList",
         Item:BasicProductMaterialList,
         type:z.object({
-            name:z.string(),
+            // name:z.null(),
             isActive:z.boolean() }),
         response: generalResponseZod.extend({
          data: z.array(BasicProductMaterialList)
         }),
     },
     BasicProductMaterialCreate: {
-        url: "/Basic/BasicProductMaterialList",
-        Item:BasicProductMaterialList,
+        url: "/Basic/BasicProductMaterialCreate",
+        // Item:BasicProductMaterialList,
         type:z.object({
-            name:z.string(),
+            name:z.string({required_error:errorMessage.required}),
             isActive:z.boolean(),
             measureUid:z.string().uuid(),
             testItems:z.array(z.object({
@@ -125,13 +124,33 @@ const materialApi = {
     },
     BasicMeasureList: {
         url: "/Basic/BasicMeasureList",
+        sortBy:"Name",
+        fieldNames: { value: "Uid", label: "Name" },
         type:z.object({
-            name:z.string(),
+            name:z.null(),
             isActive:z.boolean(),
         }),
+        
         Item:BasicMeasureList,
         response: generalResponseZod.extend({
             data: z.array(BasicMeasureList)
+           }),
+        
+    },
+    BasicProductMaterialGet: {
+        url: "/Basic/BasicProductMaterialGet",
+        type:z.object({
+         uid:z.string().uuid()   
+        }),
+        response: generalResponseZod.extend({
+            data:z.object({
+                    uid:z.string().uuid(),
+                    name:z.string(),
+                    isActive:z.boolean(),
+                    measureUid:z.string().uuid(),
+                    measureName:z.string(),
+                    TestItems:z.string()
+                })
            }),
         
     },

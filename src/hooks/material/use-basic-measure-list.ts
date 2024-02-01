@@ -4,23 +4,21 @@ import { useQuery } from "@tanstack/react-query"
 import licenseApi from "constance/license"
 import { ZodLazy, z } from 'zod';
 import { materialApi } from 'constance/material';
+import { sortByIndex } from '@/lib/sortByIndex';
 
-const apiData =materialApi.BasicTestItemList
-const useBasicTestItemsList =()=>{
+const apiData =materialApi.BasicMeasureList
+const useBasicMeasureList =()=>{
 const data:z.infer<typeof apiData.type> ={
     isActive:true,
-    name:""
+    name:null
 }
 const query = useQuery({
     queryKey:[apiData.url],
     queryFn:()=>fetchWithSession({url:apiData.url,data}),
-    select:(data:z.infer<typeof apiData.response>)=>data.data
+    select:(data:z.infer<typeof apiData.response>)=>sortByIndex(data.data,apiData.sortBy)
 })
-const treeData  = query.data?.map((item: any) => ({
-    value:item?.uid,
-    label: item.name,
-}))
 
-return {...query,treeData}
+
+return {...query,...apiData}
 }
-export default useBasicTestItemsList
+export default useBasicMeasureList

@@ -2,13 +2,13 @@
 
 import { Button, Col, Form, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
-import React from "react";
+import React, { useEffect } from "react";
 import MaterialForm from "./material-form";
 import useBasicMaterial from "./hook/use-basic-material";
 import { useValidation } from "@/hooks/use-validation";
 import { materialApi } from "constance/material";
 
-export default function CreateModal({
+export default function EditModal({
   modalVisible,
   setModalVisible,
 }: {
@@ -24,14 +24,20 @@ export default function CreateModal({
     form.resetFields();
   };
 
-  const { create } = useBasicMaterial();
+  const { get } = useBasicMaterial();
+
+  useEffect(() => {
+    if (get.data) {
+      form.setFieldsValue(get.data);
+    }
+  }, [get.data]);
 
   return (
     <Modal
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن ماده اولیه</div>
+          <div className="text-base mb-2">ویرایش ماده اولیه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -43,7 +49,7 @@ export default function CreateModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={12} md={12}>
             <Button
-              loading={create.isPending}
+              //   loading={create.isPending}
               size="large"
               className="w-full"
               type="primary"
@@ -69,8 +75,8 @@ export default function CreateModal({
       ]}
     >
       <Form
-        disabled={create.isPending}
-        onFinish={create.mutateAsync}
+        // disabled={create.isPending}
+        // onFinish={create.mutateAsync}
         form={form}
         layout="vertical"
         initialValues={{ testItems: [] }}

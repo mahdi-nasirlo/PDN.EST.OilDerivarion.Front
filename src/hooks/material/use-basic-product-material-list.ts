@@ -9,7 +9,6 @@ const useBasicProductMaterialList = () => {
  
     const data :z.infer<typeof apiData.type>={
     isActive:true,
-    name:""
 }
 
     const query =useQuery({

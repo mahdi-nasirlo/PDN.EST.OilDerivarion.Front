@@ -10,12 +10,15 @@ import useProducerInfo from "./hook/use-producer-info";
 import licenseApi from "constance/license";
 
 export default function SubmitForm() {
-  const { producerInfo, License, addLicense, state } = useProducerInfo();
+  const { producerInfo, license, addLicense, state } = useProducerInfo();
 
   const [form, rules] = useValidation(licenseApi.AddRequest.type);
   useEffect(() => {
     if (producerInfo.data) {
       form.setFieldsValue(producerInfo.data);
+    }
+    if (addLicense.isSuccess) {
+      form.resetFields(addLicense.data);
     }
   }, [producerInfo.data]);
 
@@ -82,9 +85,9 @@ export default function SubmitForm() {
             <Select
               className="w-full"
               showSearch
-              loading={License.isLoading}
-              options={License.data}
-              fieldNames={License.fieldNames}
+              loading={license.isLoading}
+              options={license.data}
+              fieldNames={license.fieldNames}
               size="large"
               placeholder="انتخاب کنید"
             />

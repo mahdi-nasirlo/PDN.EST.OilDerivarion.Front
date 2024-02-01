@@ -6,11 +6,8 @@ import { materialApi } from "constance/material";
 import useBasicMaterial from "./hook/use-basic-material";
 import MultipleSelect from "@/components/multiple-select";
 
-function MaterialForm() {
-  const [form, rules] = useValidation(
-    materialApi.BasicProductMaterialCreate.type
-  );
-  const test = useBasicMaterial();
+function MaterialForm({ rules }: { rules: any }) {
+  const { testItem, measure } = useBasicMaterial();
   return (
     <>
       <Row gutter={[16, 16]}>
@@ -23,7 +20,7 @@ function MaterialForm() {
           <Form.Item
             name="isActive"
             label="فعال / غیر فعال"
-            rules={[rules]}
+            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             initialValue={true}
           >
             <Select
@@ -42,11 +39,11 @@ function MaterialForm() {
           <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
-              fieldNames={{ label: "Name", value: "Uid" }}
               // @ts-ignore
               // filterOption={filterOption}
-              // options={sortByIndex(Measure, "Name")}
-              // loading={ldMeasure}
+              fieldNames={measure.fieldNames}
+              options={measure.data}
+              loading={measure.isLoading}
               size="large"
               placeholder="انتخاب کنید"
             />
@@ -55,8 +52,8 @@ function MaterialForm() {
         <Col xs={24} md={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون">
             <MultipleSelect
-              treeData={test.testItem.treeData}
-              loading={test.testItem.isLoading}
+              treeData={testItem.treeData}
+              loading={testItem.isLoading}
             />
           </Form.Item>
         </Col>

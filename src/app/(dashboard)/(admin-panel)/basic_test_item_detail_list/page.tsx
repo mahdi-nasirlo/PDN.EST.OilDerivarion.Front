@@ -19,7 +19,7 @@ export default function Page() {
     return (
         <>
             <Breadcrumb
-                titleIcon={<DocumentMagnifyingGlassIcon className="w-6" />}
+                titleIcon={<DocumentMagnifyingGlassIcon className="w-8" />}
                 pages={[
                     { label: "خانه", path: "/" },
                 ]}

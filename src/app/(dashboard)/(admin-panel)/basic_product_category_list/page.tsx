@@ -32,7 +32,7 @@ export default function Page() {
       />
       <DataTable
         data={dataPage.data}
-        isLoading={dataPage.isLoading}
+        isLoading={dataPage.isFetching || dataPage.isLoading}
         setModalVisible={setModalVisible}
       />
       <CreateModal

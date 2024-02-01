@@ -66,11 +66,6 @@ const FormDataTable = (props: PropType) => {
         )
 
     }
-    
-    //         {/*    dataSource={addIndexToData(props?.records as any || [])}*/}
-    //         {/*    pagination={false}*/}
-    //         {/*/>*/}
-
 
     return (
         <>

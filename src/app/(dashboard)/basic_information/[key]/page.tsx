@@ -1,12 +1,20 @@
 import React from 'react';
-import {Card} from "@/components/card";
 import Resource from "@/components/resource";
+import FormBuilderHistory from "@/components/form-builder/form-builder-history";
+import {Card} from "@/components/card";
 
 const Page = ({params}: { params: { key: string } }) => {
     return (
-        <Card>
-            <Resource categoryKey={params.key}/>
-        </Card>
+        <>
+            <Card>
+                <Resource categoryKey={params.key}/>
+            </Card>
+
+            <Card>
+                <FormBuilderHistory formKey={params.key}/>
+            </Card>
+
+        </>
     );
 };
 

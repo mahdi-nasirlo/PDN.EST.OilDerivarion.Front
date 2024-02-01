@@ -1,17 +1,15 @@
 import React from 'react';
 import {Modal} from "antd";
-import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
-import {FormType} from "@/components/form-builder";
-// import {FormType} from "../FormBuilder";
-// import useControlFormBuilder from "../FormBuilder/hooks/useControleFormBuilder";
+import {z} from "zod";
+import {formMakerApi} from "../../constance/form-maker";
 
 const EditModal = ({open, setOpen, schema}: {
     open?: any,
-    schema: FormType,
+    schema: z.infer<typeof formMakerApi.Get.form>,
     setOpen: (arg: any) => void
 }) => {
 
-    const formProvider = useControlFormBuilder()
+    // const formProvider = useControlFormBuilder()
 
     return (
         <Modal

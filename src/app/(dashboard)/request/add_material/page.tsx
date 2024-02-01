@@ -4,7 +4,6 @@ import React from "react";
 import {Card} from "@/components/card";
 import {BeakerIcon} from "@heroicons/react/24/outline";
 import Breadcrumb from "@/components/breadcrumb";
-import AddMaterils from "./add-materils";
 import DatatableMaterials from "@/app/(dashboard)/request/add_material/datatable-materials";
 import {Divider} from "antd";
 
@@ -19,7 +18,7 @@ const Page = () => {
                 backLink="/request"
             />
             <Card>
-                <AddMaterils/>
+                {/*<AddMaterils/>*/}
                 <Divider/>
                 <DatatableMaterials/>
             </Card>

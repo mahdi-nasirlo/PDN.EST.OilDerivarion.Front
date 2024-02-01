@@ -10,8 +10,10 @@ const useSetForm = (key?: string) => {
 
     const query = useMutation({
         mutationFn: (variables: z.infer<typeof apiData.type>) => fetchWithSession({url: apiData.url, data: variables}),
-        onSuccess: (data, variables, context) => {
+        onSuccess: (data) => {
+            console.log(data)
             queryClient.invalidateQueries({queryKey: [formMakerApi.Get.url, key]})
+            queryClient.invalidateQueries({queryKey: [formMakerApi.ProducerFormsGetDocHistory.url]})
         }
     })
 

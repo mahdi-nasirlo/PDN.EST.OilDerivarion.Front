@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect} from 'react';
-import {Button, Col, Divider, Spin, Typography} from "antd";
+import {Button, Col, Divider, Typography} from "antd";
 import {z} from "zod";
 import {formMakerApi} from "../../constance/form-maker";
 import {CheckboxOptionType, Form, Row, SelectProps} from "antd/lib";
@@ -34,14 +34,14 @@ const Index = (props: {
             </Typography.Title>
         </>}
         <Divider/>
-        <Spin spinning={props.isLoading}>
+        {/*<Spin spinning={props.isLoading}>*/}
             <RenderInputs
                 initialValues={props.initialValues}
                 item={data.FormFields}
                 onSet={props.onSet}
                 formID={data.Form_Key as string}
             />
-        </Spin>
+        {/*</Spin>*/}
     </>
 }
 
@@ -97,7 +97,7 @@ const RenderInputs = (props: {
 const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.formFields>, rules: Rule }) => {
 
     const selectOptions: SelectProps["options"] = item?.FormFieldDetails?.map((value, index) => ({
-        value: value.Value,
+        value: value.Text,
         label: value.Text
     }))
 

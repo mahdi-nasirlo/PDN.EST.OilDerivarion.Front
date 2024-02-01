@@ -22,7 +22,7 @@ const BasicProductMaterialList = z.object({
   name: z.string(),
   isActive: z.boolean(),
   measureName: z.string(),
-  TestItems: z.string(),
+  testItems: z.string(),
 });
 
 const BasicTestItemList = z.object({
@@ -148,7 +148,12 @@ const materialApi = {
           isActive: z.boolean(),
           measureUid: z.string().uuid(),
           measureName: z.string(),
-          TestItems: z.string(),
+          testItems: z.array(
+            z.object({
+              name: z.string(),
+              uid: z.string(),
+            })
+          ),
         })
       ),
     }),

@@ -53,23 +53,23 @@ export default function DataTable({
     },
     {
       title: "فاکتورهای آزمون",
-      dataIndex: "TestItems",
+      dataIndex: "testItems",
       key: "4",
       render: (_, record) => {
-        if (record.TestItems === null) {
+        if (record.testItems === null) {
           return <Typography>_</Typography>;
         }
         return (
           <Tooltip
             placement="top"
-            title={<Typography>{record.TestItems}</Typography>}
+            title={<Typography>{record.testItems}</Typography>}
           >
             <Typography.Text
               className="max-w-[180px]"
               ellipsis={true}
               style={{ width: "40px !important" }}
             >
-              {record.TestItems}
+              {record.testItems}
             </Typography.Text>
           </Tooltip>
         );

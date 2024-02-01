@@ -8,21 +8,34 @@ import { useState } from "react";
 
 const  useProducerInfo = ()=>{
 
-    const [delUid ,setDelUid]=useState<string>()
+    const [delUid, setDelUid]=useState<string | boolean>()
   
- const producerInfo = useGetProducerInfo()
- const License = useGetAvailbleTypes()
- const addLicense = useAddRequest()
- const state = useGetAllState()
- const list = useGetRequestList()
- const del = useDelRequest(delUid)
+    const producerInfo = useGetProducerInfo()
+    const license = useGetAvailbleTypes()
+    const addLicense = useAddRequest()
+    const state = useGetAllState()
+    const list = useGetRequestList()
+    const del = useDelRequest(delUid as string)
 
- const handleDelete =(uid? :string)=>{
-    del.mutateAsync
-    setDelUid(uid)
- } 
+    const handleDelete = async () => {
 
- return {producerInfo,License,addLicense,state,list,handleDelete}
+        const res = await del.mutateAsync({uid: delUid as string})
+    
+        if (res.success)
+            setDelUid(undefined)
+    }
+
+    return {
+        producerInfo,
+        setDelUid,
+        delUid,
+        license,
+        addLicense,
+        state,
+        list,
+        del,
+        handleDelete 
+    }
 }
 
 export default useProducerInfo;

@@ -4,9 +4,14 @@ import { Button, Col, Form, Modal, Row } from 'antd'
 import { productCategoryApi } from 'constance/product-category'
 import { useValidation } from '@/hooks/use-validation'
 
+interface TProps {
+    editModal: boolean
+    setEditModal: (arg: boolean) => void
+}
+
 const formSchema = productCategoryApi.BasicProductCategoryUpdate.type
 
-export default function EditModal({ editModal, setEditModal }: any) {
+export default function EditModal({ editModal, setEditModal }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 

@@ -7,7 +7,11 @@ import { z } from 'zod'
 
 const formSchema = TestItemDetailApi.BasicTestItemDetailGetPage.type
 
-export default function FilterForm({ onFinish }: { onFinish: (arg: z.infer<typeof formSchema>) => void }) {
+interface TProps {
+    onFinish: (arg: z.infer<typeof formSchema>) => void
+}
+
+export default function FilterForm({ onFinish }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 

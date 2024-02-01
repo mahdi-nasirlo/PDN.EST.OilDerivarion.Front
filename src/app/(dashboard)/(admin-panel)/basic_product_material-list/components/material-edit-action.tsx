@@ -19,19 +19,17 @@ export default function EditModal({
     materialApi.BasicProductMaterialCreate.type
   );
 
+  const { get } = useBasicMaterial();
   const CloseModal = () => {
     setModalVisible(false);
     form.resetFields();
   };
-
-  const { get } = useBasicMaterial();
-
   useEffect(() => {
     if (get.data) {
-      form.setFieldsValue(get.data);
+      form.setFieldsValue(get.data[0]);
+      console.log(get.data[0]);
     }
   }, [get.data]);
-
   return (
     <Modal
       width={800}
@@ -81,7 +79,7 @@ export default function EditModal({
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <MaterialForm rules={[rules]} />
+        <MaterialForm />
       </Form>
     </Modal>
   );

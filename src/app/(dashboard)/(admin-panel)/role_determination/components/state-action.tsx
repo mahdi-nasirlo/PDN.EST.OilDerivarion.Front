@@ -3,7 +3,12 @@ import { Button, Col, Form, Modal, Row } from "antd";
 import MultipleSelect from "@/components/multiple-select";
 import { useStateAction } from "@/app/(dashboard)/(admin-panel)/role_determination/hook/use-state-action";
 
-const StateAction = ({ open, setOpen }: { open: string | undefined, setOpen: (arg: string | undefined) => void }) => {
+interface TProps {
+  open: string | undefined
+  setOpen: (arg: string | undefined) => void
+}
+
+const StateAction = ({ open, setOpen }: TProps) => {
 
   const {
     form,

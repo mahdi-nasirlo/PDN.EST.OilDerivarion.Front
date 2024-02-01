@@ -14,14 +14,18 @@ import StatusColumn from "@/components/custom-table/StatusColumn";
 import useBasicMaterial from "./hook/use-basic-material";
 import EditModal from "./material-edit-action";
 
+interface TProps {
+  data: z.infer<typeof materialApi.BasicProductMaterialList.type>[] | undefined;
+  isLoading: boolean;
+  setModalVisible: (arg: boolean) => void;
+}
+
 export default function DataTable({
-  modalVisible,
+  data,
+  isLoading,
   setModalVisible,
-}: {
-  modalVisible: any;
-  setModalVisible: any;
-}) {
-  const { list } = useBasicMaterial();
+}: TProps) {
+  const { handleEdit, setGetUid, uid } = useBasicMaterial();
   const columns: ColumnsType<
     z.infer<typeof materialApi.BasicProductMaterialList.Item>
   > = [
@@ -78,7 +82,17 @@ export default function DataTable({
       align: "center",
       fixed: "right",
       width: "10%",
-      render: (_, record) => ({}),
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => setGetUid(record.uid)}
+          >
+            ویرایش
+          </Button>
+        </Space>
+      ),
     },
   ];
   return (
@@ -87,7 +101,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست مواد اولیه محصول",
+            text: "لیست مواد اولیه",
             actions: [
               <Button
                 key={"1"}
@@ -103,14 +117,11 @@ export default function DataTable({
             ],
           }}
           setInitialData={() => {}}
-          isLoading={list.isLoading}
-          data={list.data}
+          isLoading={isLoading}
+          data={data}
           columns={columns}
         />
-        <EditModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
+        <EditModal modalVisible={uid} setModalVisible={setGetUid} />
       </Card>
     </>
   );

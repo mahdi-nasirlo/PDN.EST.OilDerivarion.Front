@@ -4,7 +4,20 @@ import { errorMessage } from "./error-message";
 import Item from "antd/es/list/Item";
 
 const GetRequestList =z.object({
-
+  Id:z.number(),
+  Uid:z.string().uuid(),
+  Representative__National_Code:z.string(),
+  Representative__Name:z.string(),
+  Representative__Family:z.string(),
+  Company__National_ID:z.string(),
+  Company__Name:z.string(),
+  Company__Business_ID:z.string(),
+  License_Number:z.string(),
+  License_Expire_Date_Fa:z.string(),
+  Wrork_State:z.number(),
+  Wrork_State_Value:z.string(),
+  License_Type:z.string(),
+  State_Name:z.string()
 })
 
 const licenseApi = {
@@ -52,7 +65,7 @@ const licenseApi = {
        
       },
       GetRequestList: {
-        url: "/License/GetRequestList",
+        url: "/License/GetRequestListForCurrentUser",
         Item:GetRequestList,
         response: generalResponseZod.extend({
           data:z.array(GetRequestList),

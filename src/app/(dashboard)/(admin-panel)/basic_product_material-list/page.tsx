@@ -24,7 +24,10 @@ const Page = () => {
                     },
                 ]}
             /> */}
-      <DataTable setModalVisible={setModalVisible} />
+      <DataTable
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+      />
       <CreateModal
         // mutate={mutate}
         modalVisible={modalVisible}

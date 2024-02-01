@@ -68,7 +68,7 @@ const useControlFormBuilder = (formData: z.infer<typeof type.formData>, category
 
 
         if (Array.isArray(oldData)) {
-            
+
             if (index >= 0 && index < oldData.length) {
 
                 oldData.splice(index, 1);
@@ -89,8 +89,6 @@ const useControlFormBuilder = (formData: z.infer<typeof type.formData>, category
     }
 
     const onSetOne = async (data: any, formKey: string) => {
-
-        console.log(data, formKey)
 
         oldData[formKey] = data;
 

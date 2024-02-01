@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const ssoApi = {
   test: {
@@ -91,6 +91,18 @@ const ssoApi = {
       code: z.string(),
     }),
   },
+  getSession: {
+    type: z.object(
+        {
+          access_token: z.string(),
+          user: z.object({
+            name: z.string(),
+            email: z.string()
+          }),
+          expires: z.string()
+        }
+    )
+  }
 };
 
 export { ssoApi };

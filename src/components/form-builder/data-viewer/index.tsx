@@ -1,103 +1,95 @@
 import React from 'react';
 import {Descriptions, Divider} from "antd";
-import {z} from "zod";
-import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
 import {formMakerApi} from "../../../constance/form-maker";
+import {ZodErrorAlert} from "@/components/zod-error-alert";
+import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
+import FormDataTable from "@/components/resource/form-data-table";
 
 
-const Index = ({data}: { data: any }) => {
+const Index = ({data, schema}: { data: string, schema: string }) => {
 
-    let parsData: any
+    let dataValue: any
+    let schemaValue: any
+
     try {
-        parsData = JSON.parse(data)
+        dataValue = JSON.parse(data)
+        schemaValue = JSON.parse(schema).json
+        schemaValue = JSON.parse(schemaValue)
     } catch (e) {
-        parsData = {}
+        dataValue = {}
+        schemaValue = {}
     }
-    console.log("parsData", parsData);
 
+    const validateSchema = formMakerApi.Get.formSchema.safeParse(schemaValue)
+    const validateData = formMakerApi.Get.formData.safeParse(dataValue)
+
+    if (!validateData.success)
+        return <ZodErrorAlert success={false} error={validateData.error}/>
+
+    if (!validateSchema.success)
+        return <ZodErrorAlert success={false} error={validateSchema.error}/>
+
+    const {data: formData} = validateData
+    const {data: schemaData} = validateSchema
 
     let view: any[] = []
-    Object?.keys(parsData).forEach((key) => {
+
+    Object?.keys(formData).forEach((key) => {
 
         let item: any
 
         try {
 
-            item = parsData[key]
+            item = formData[key]
 
-            const schemaSearch = z.object({
-                jsonVersion: z.number(),
-                json: z.string()
-            }).safeParse(item)
+            const categoryForm = schemaData[0]
 
-            if (schemaSearch.success) {
+            let tabItem
 
-                const schemaJson = JSON.parse(schemaSearch.data.json as any)
-
-                const schemaJsonValidate = formMakerApi.Get.formSchema.safeParse(schemaJson)
-
-                if (!schemaJsonValidate.success) {
-                    view.push("schema وجود دارد ولی معتبر نیست")
-                    console.error(schemaJsonValidate.error)
-                    return
-                }
-
-                const schema = schemaJsonValidate.data
-
-                schema.map((categoryForms, index) => {
+            categoryForm?.Forms.map((form, index) => {
 
 
-                    categoryForms?.Forms.map((Form, index1) => {
+                if (form.Mode == 1) {
 
-                        // @ts-ignore
-                        let schemaValue = parsData[`${Form.Form_Key}`] || null
-
-                        let tabItem
-
-                        if (Form.Mode === 1) {
-                            const descriptionsItems: DescriptionsItemProps[] = []
+                    const descriptionsItems: DescriptionsItemProps[] = []
 
 
-                            Form.FormFields?.map((FormField, index3) => {
-                                descriptionsItems.push({
-                                    label: FormField.Title_Style,
-                                    children: schemaValue[FormField.Name]
-                                })
-                            })
-
-                            tabItem = <Descriptions className="text-right">
-                                {descriptionsItems.map((descriptionsItem, index3) => <>
-                                    <Descriptions.Item label={descriptionsItem.label}>
-                                        {descriptionsItem.children}
-                                    </Descriptions.Item>
-                                </>)}
-                            </Descriptions>
-                        }
-
-                        if (Form.Mode === 0) {
-                            tabItem = <div>
-                                {/*<Typography className="text-right font-bold text-lg mb-5">*/}
-                                {/*    {categoryForms.Title}*/}
-                                {/*</Typography>*/}
-                                {/*<div>*/}
-                                {/*    <FormDataTable schema={Form as any} records={schemaValue} delete={false}/>*/}
-                                {/*</div>*/}
-                                {index1 + 1 !== categoryForms.Forms.length && categoryForms.Forms.length > 1 &&
-                                    <Divider className="my-2"/>}
-                            </div>
-
-                        }
-
-                        view.push(<>
-                            {tabItem}
-                        </>)
-
+                    form.FormFields?.map((FormField, index3) => {
+                        descriptionsItems.push({
+                            label: FormField.Title_Style,
+                            children: schemaValue[FormField.Name]
+                        })
                     })
 
-                })
-            } else {
-                return;
-            }
+                    view.push(<Descriptions className="text-right">
+                        {descriptionsItems.map((descriptionsItem) => <>
+                            <Descriptions.Item label={descriptionsItem.label}>
+                                {descriptionsItem.children}
+                            </Descriptions.Item>
+                        </>)}
+                    </Descriptions>)
+
+                }
+
+                if (form.Mode === 0) {
+
+                    const formLen = categoryForm?.Forms.length ?? 0
+
+                    view.push(<div>
+
+                        <FormDataTable
+                            formKey={form.Form_Key as string}
+                            schema={form}
+                            formData={formData}
+                            delete={false}
+                        />
+
+                        {index + 1 !== formLen && formLen > 1 && <Divider className="my-2"/>}
+                    </div>)
+
+                }
+
+            })
 
         } catch (e) {
             console.error(e)
@@ -105,14 +97,9 @@ const Index = ({data}: { data: any }) => {
 
     });
 
-    return <>
-        {/*<Tabs*/}
-        {/*    size="large"*/}
-        {/*    type="card"*/}
-        {/*>*/}
-        {view?.map((value, index) => value)}
-        {/*</Tabs>*/}
-    </>
+
+    return view?.map((value, index) => value)
+
 };
 
 export default Index;

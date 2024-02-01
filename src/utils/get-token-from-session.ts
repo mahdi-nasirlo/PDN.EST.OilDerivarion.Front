@@ -1,14 +1,24 @@
 import {getSession} from "next-auth/react";
-import {Session} from "next-auth";
+import {ssoApi} from "../constance/auth";
 
 const getTokenFromSession = async (): Promise<string | null | undefined> => {
+
+    let lc = localStorage.getItem("access_token")
+    
+    if (lc)
+        return lc
+
     const session = await getSession();
 
-    if (session !== null) {
+    const validate = ssoApi.getSession.type.safeParse(session)
 
-        const sessionData: Session & { access_token?: string } = session
-        
-        return sessionData.access_token;
+    if (validate.success) {
+
+        const token = validate.data.access_token
+
+        localStorage.setItem("access_token", token)
+
+        return token;
     }
 
     return null;

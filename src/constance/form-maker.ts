@@ -50,6 +50,14 @@ const FormSchema = z.object({
     Forms: z.array(Forms).length(1),
 }).nullable()
 
+const ProducerFormsGetDocHistoryItem = z.object({
+    UID: z.string(),
+    last_modify_fa: z.string(),
+    last_modify: z.string(),
+    is_draft: z.string(),
+    form_is_expired: z.string()
+})
+
 const formMakerApi = {
     Get: {
         url: "/FormMaker/Get",
@@ -81,6 +89,31 @@ const formMakerApi = {
         type: z.object({
             form_Key: z.string(),
             form_Data: z.any()
+        })
+    },
+    ProducerFormsGetDocHistory: {
+        url: "/FormMaker/ProducerFormsGetDocHistory",
+        type: z.object({
+            form_Key: z.string()
+        }),
+        item: ProducerFormsGetDocHistoryItem,
+        response: generalResponseZod.extend({
+            data: z.object({
+                form_Data: z.array(ProducerFormsGetDocHistoryItem)
+            })
+        })
+    },
+    ProducerFormsGetDocSchemaByUid: {
+        url: "/FormMaker/ProducerFormsGetDocSchemaByUID",
+        type: z.object({
+            form_Key: z.string(),
+            form_UID: z.string()
+        }),
+        response: generalResponseZod.extend({
+            data: z.array(z.object({
+                form_data: z.string(),
+                Schema_Data: z.string(),
+            })).min(1)
         })
     }
 }

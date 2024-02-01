@@ -5,9 +5,9 @@ import {Divider, Spin, Typography} from "antd";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
 import {z} from "zod";
 import {formMakerApi} from "../../constance/form-maker";
-import FormBuilder from "@/components/form-builder";
 import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
+import FormBuilder from "@/components/form-builder";
 import FormDataTable from "@/components/resource/form-data-table";
 
 const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "many" | "single", }) => {
@@ -40,8 +40,6 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
         if (!validateRecords.success) {
             return <ZodErrorAlert success={false} error={validateRecords.error}/>
         }
-
-        // console.log(validateRecords.data)
 
         return (
             <>
@@ -102,7 +100,12 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
                     onSet={formProvider.onSetMany}
                 />
                 <div className="mt-8">
-                    <FormDataTable formKey={categoryKey} schema={form} formData={initialValues} delete={true}/>
+                    <FormDataTable
+                        formKey={categoryKey}
+                        schema={form}
+                        formData={initialValues}
+                        delete={true}
+                    />
                 </div>
                 {divider}
             </>
@@ -112,6 +115,7 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
 
             return <>
                 <FormBuilder
+                    key={index}
                     item={form}
                     initialValues={initialValues}
                     onSet={formProvider.onSetOne}
@@ -158,7 +162,7 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
     //         </>
     //     }
 
-    //     return <Typography>form mode is not detected</Typography>
+    // return <Typography>form mode is not detected</Typography>
     // })
 
 }

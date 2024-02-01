@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect} from 'react';
-import {Button, Col, Divider, Typography} from "antd";
+import {Button, Col, Divider, Spin, Typography} from "antd";
 import {z} from "zod";
 import {formMakerApi} from "../../constance/form-maker";
 import {CheckboxOptionType, Form, Row, SelectProps} from "antd/lib";
@@ -21,6 +21,7 @@ const Index = (props: {
     item: z.infer<typeof formMakerApi.Get.form>,
     initialValues?: any,
     title?: boolean,
+    isLoading?: boolean,
     onSet: (data: any, formID: string) => any
 }) => {
 
@@ -33,12 +34,14 @@ const Index = (props: {
             </Typography.Title>
         </>}
         <Divider/>
-        <RenderInputs
-            initialValues={props.initialValues}
-            item={data.FormFields}
-            onSet={props.onSet}
-            formID={data.Form_Key as string}
-        />
+        <Spin spinning={props.isLoading}>
+            <RenderInputs
+                initialValues={props.initialValues}
+                item={data.FormFields}
+                onSet={props.onSet}
+                formID={data.Form_Key as string}
+            />
+        </Spin>
     </>
 }
 
@@ -99,7 +102,7 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
     }))
 
     const radioGroupOptions: CheckboxOptionType[] | undefined = item.FormFieldDetails?.map((item) => ({
-        value: item.Value,
+        value: item.Text,
         label: item.Text,
         title: item.Text,
     }))
@@ -133,7 +136,7 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
     return <Col xs={12} md={8} lg={6}>
         <Form.Item
             name={item.Name}
-            label={item.FieldType}
+            label={item.Title_Style}
             rules={[rules]}
         >
             {currentInput}
@@ -154,6 +157,12 @@ const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[])
                 required_error: errorMessage.number_invalid,
                 invalid_type_error: errorMessage.number_invalid
             }).min(Min_Value).max(Max_Value)
+
+        if (FieldType === "radioBtn")
+            fieldSchema = z.string({
+                required_error: errorMessage.required_choice,
+                invalid_type_error: errorMessage.required_choice
+            })
 
         if (FieldType === "percentInput")
             fieldSchema = z.number({

@@ -10,7 +10,7 @@ const useGetForm = (key: string | undefined) => {
     const data: z.infer<typeof apiData.type> = {
         category_Key: key as string
     }
-
+    
     const query = useQuery({
         queryKey: [apiData.url, key],
         queryFn: () => fetchWithSession({url: apiData.url, data}),

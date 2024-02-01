@@ -33,6 +33,7 @@ const Forms = z.object({
     Form_ID: z.string().optional(),
     Form_Key: z.string().optional(),
     Title: z.string(),
+    Description: z.string().optional(),
     Category_ID: z.string(),
     Form_Type_ID: z.number().optional(),
     Counting_Position: z.number().optional(),
@@ -66,14 +67,20 @@ const formMakerApi = {
                     jsonVersion: z.number(),
                     json: z.string()
                 }),
-                form_Data: z.string()
+                form_Data: z.object({
+                    schema_is_last: z.boolean(),
+                    form_data: z.string(),
+                    form_is_expired: z.boolean(),
+                    last_modify: z.string()
+                })
             })
         })
     },
     Set: {
         url: "/FormMaker/Set",
         type: z.object({
-            categoryID: z.string()
+            form_Key: z.string(),
+            form_Data: z.any()
         })
     }
 }

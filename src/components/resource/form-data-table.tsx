@@ -17,12 +17,10 @@ interface PropType {
 const FormDataTable = (props: PropType) => {
 
     const {deleteFromMany} = useControlFormBuilder(props.formData, props.formKey)
-
-    const [open, setOpen] = useState()
+    //
+    // const [open, setOpen] = useState()
 
     const [delOpen, setDelOpen] = useState<number | boolean>()
-
-    // const formProvider = useControlFormBuilder()
 
     let columns: TableColumnsType<any>
 
@@ -51,9 +49,9 @@ const FormDataTable = (props: PropType) => {
                 width: "10%",
                 title: "عملیات",
                 render: (value, record, index) => <>
-                    <Button onClick={() => setOpen(record)} type="text" className="text-secondary-500 font-bold">
-                        ویرایش
-                    </Button>
+                    {/*<Button onClick={() => setOpen(record)} type="text" className="text-secondary-500 font-bold">*/}
+                    {/*    ویرایش*/}
+                    {/*</Button>*/}
                     <Button
                         type="text"
                         className="text-red-500 font-bold"
@@ -79,7 +77,12 @@ const FormDataTable = (props: PropType) => {
                 open={typeof delOpen === "number"}
                 setOpen={setDelOpen}
                 handleDelete={async () => {
-                    if (typeof delOpen === "number") await deleteFromMany(delOpen as number, props.schema.Form_Key as string)
+
+                    const res = await deleteFromMany(delOpen as number, props.schema.Form_Key as string)
+
+                    if (res?.success)
+                        setDelOpen(false)
+                    
                 }}
             />
             {/*<EditModal setOpen={setOpen} open={open} schema={props.schema}/>*/}

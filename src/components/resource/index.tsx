@@ -3,10 +3,10 @@
 import React from 'react';
 import {Divider, Spin, Typography} from "antd";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
+import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {z} from "zod";
 import {formMakerApi} from "../../constance/form-maker";
 import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
-import {ZodErrorAlert} from "@/components/zod-error-alert";
 import FormBuilder from "@/components/form-builder";
 import FormDataTable from "@/components/resource/form-data-table";
 
@@ -124,46 +124,8 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
             </>
         }
 
-        return <Typography>form mode is not detected</Typography>
+        return <Typography key={index}>form mode is not detected</Typography>
     }))
-    // return schema?.Forms?.map((Form, index) => {
-    //
-    //     let initialValues
-    //
-    //     if (records && Form?.Form_Key && Form.Form_Key in records) {
-    //         initialValues = records[Form.Form_Key]
-    //     }
-    //
-    //     if (Form?.Mode === 0) {
-    //
-    //         return <>
-    //             <FormBuilder key={index} item={Form} title={true}
-    //                          onSet={formProvider.onSetMany}/>
-    //             <div className="mt-8">
-    //                 <FormDataTable schema={Form} records={initialValues} delete={true}/>
-    //             </div>
-    //             {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
-    //                 <Divider style={{margin: "50px 0"}}/>}
-    //         </>
-    //     }
-    //
-    //     if (Form.Mode === 1) {
-    //
-    //         return <>
-    //             <FormBuilder
-    //                 key={index}
-    //                 item={Form}
-    //                 title={true}
-    //                 onSet={formProvider.onSetOne}
-    //                 initialValues={initialValues}
-    //             />
-    //             {schema?.Forms?.length > 1 && index !== schema?.Forms?.length - 1 &&
-    //                 <Divider style={{margin: "30px 0"}}/>}
-    //         </>
-    //     }
-
-    // return <Typography>form mode is not detected</Typography>
-    // })
 
 }
 

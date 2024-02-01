@@ -36,15 +36,9 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
 
     Object?.keys(formData).forEach((key) => {
 
-        let item: any
-
         try {
 
-            item = formData[key]
-
             const categoryForm = schemaData[0]
-
-            let tabItem
 
             categoryForm?.Forms.map((form, index) => {
 

@@ -3,12 +3,12 @@
 import React, {useState} from 'react';
 import {ColumnsType} from "antd/es/table";
 import {useProducerFormsGetDocHistory} from "@/hooks/form-maker/use-producer-forms-get-doc-history";
-import CustomTable from "@/components/custom-table";
-import {RectangleStackIcon} from "@heroicons/react/24/outline";
 import {z} from "zod";
 import {Button, Modal, Spin} from "antd";
 import useProducerFormsGetDocSchemaByUID from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
+import CustomTable from "@/components/custom-table";
+import {RectangleStackIcon} from "@heroicons/react/24/outline";
 
 const Index = ({formKey}: { formKey: string }) => {
 
@@ -43,7 +43,7 @@ const Index = ({formKey}: { formKey: string }) => {
     return (
         <div>
             <CustomTable
-                isLoading={historyList.isLoading}
+                isLoading={historyList.isLoading || history.isFetching}
                 setInitialData={() => {
                 }}
                 columns={columns}
@@ -60,6 +60,7 @@ const Index = ({formKey}: { formKey: string }) => {
                 onCancel={() => setFormUid(undefined)}
                 footer={[
                     <Button
+                        key={"1"}
                         type="default"
                         size="large"
                         className="bg-gray-100 text-warmGray-500"
@@ -70,7 +71,8 @@ const Index = ({formKey}: { formKey: string }) => {
                     </Button>
                 ]}
             >
-                <Spin spinning={history.isLoading}>
+                <Spin className="w-full flex justify-center items-center"
+                      spinning={history.isLoading || history.isFetching}>
                     {history.data?.length && <DataViewer
                         schema={history.data[0].Schema_Data}
                         data={history.data[0].form_data}

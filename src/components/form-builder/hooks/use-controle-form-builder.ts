@@ -1,6 +1,7 @@
 import {z} from "zod";
 import {formMakerApi} from "../../../constance/form-maker";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
+import {generalResponseZod} from "@/types/api-response";
 
 const type = formMakerApi.Get
 
@@ -64,9 +65,8 @@ const useControlFormBuilder = (formData: z.infer<typeof type.formData>, category
 
     }
 
-    const deleteFromMany = async (index: number, formKey: string) => {
-
-
+    const deleteFromMany = async (index: number, formKey: string): Promise<z.infer<typeof generalResponseZod> | undefined> => {
+        
         if (Array.isArray(oldData)) {
 
             if (index >= 0 && index < oldData.length) {
@@ -77,7 +77,7 @@ const useControlFormBuilder = (formData: z.infer<typeof type.formData>, category
                     return await set.mutateAsync({form_Key: formKey, form_Data: null})
                 }
 
-                await set.mutateAsync({form_Key: formKey, form_Data: {[formKey]: oldData}});
+                return await set.mutateAsync({form_Key: formKey, form_Data: {[formKey]: oldData}});
 
             } else {
                 console.error("Index out of bounds");

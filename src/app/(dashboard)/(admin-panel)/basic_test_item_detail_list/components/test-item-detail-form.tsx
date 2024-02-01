@@ -1,7 +1,11 @@
+import { useTestItemList } from '@/hooks/basic/test_item/use-test-item-list'
 import { Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 
 export default function TestItemDetailForm({ rules }: any) {
+
+    const TestItem = useTestItemList();
+
     return (
         <>
             <Row gutter={[16, 16]}>
@@ -50,16 +54,14 @@ export default function TestItemDetailForm({ rules }: any) {
                     >
                         <Select
                             showSearch
-                            // @ts-ignore
-                            // filterOption={filterOption}
-                            // options={sortByIndex(data, "name")}
-                            // loading={isLoading}
-                            // fieldNames={{ value: "uid", label: "name" }}
+                            options={TestItem.options}
+                            loading={TestItem.isLoading}
                             size="large"
                             placeholder="وارد کنید"
                         />
                     </Form.Item>
-                </Col>            </Row>
+                </Col>
+            </Row>
         </>
     )
 }

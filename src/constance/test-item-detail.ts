@@ -20,15 +20,6 @@ const BasicTestItemDetailGetItem = z.object({
   testItemName: z.string().optional(),
 });
 
-const BasicTestItemGetItem = z.object({
-  uid: z.string().uuid(),
-  title: z.string(),
-  isActive: z.boolean(),
-  referenceCode: z.string(),
-  testItemUid: z.string().uuid(),
-  testItemName: z.string(),
-});
-
 const TestItemDetailApi = {
   BasicTestItemDetailGetPage: {
     url: "/Basic/BasicTestItemDetailGetPage",

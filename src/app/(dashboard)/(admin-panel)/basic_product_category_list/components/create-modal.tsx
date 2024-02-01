@@ -3,6 +3,8 @@ import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd';
 import { productCategoryApi } from 'constance/product-category';
 import { useValidation } from '@/hooks/use-validation';
+import useProductCategory from '../hook/use-product-category';
+
 interface TProps {
     modalVisible: boolean
     setModalVisible: (arg: boolean) => void
@@ -13,6 +15,8 @@ const formSchema = productCategoryApi.BasicProductCategoryCreate.type
 export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
+
+    const { create } = useProductCategory();
 
     const closeModal = () => {
         setModalVisible(false);
@@ -41,14 +45,14 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                             className="w-full"
                             type="primary"
                             key={"submit"}
-                        // loading={isMutating}
+                            loading={create.isPending}
                         >
                             ثبت
                         </Button>
                     </Col>
                     <Col xs={12} md={12}>
                         <Button
-                            // loading={isMutating}
+                            disabled={create.isPending}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={closeModal}
@@ -61,8 +65,12 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
             ]}
         >
             <Form
-                // onFinish={handleFormSubmit}
-                // disabled={isMutating}
+                disabled={create.isPending}
+                onFinish={async (values) => {
+                    const res = await create.mutateAsync(values)
+                    if (res.success)
+                        setModalVisible(false)
+                }}
                 form={form}
                 layout="vertical"
             >

@@ -1,7 +1,18 @@
 import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function ProductCategoryForm({ rules }: any) {
+
+    const [hasDensity, setHasDensity] = useState(true);
+
+    const productMethods = [
+        { value: 1, label: "برش" },
+        { value: 2, label: "بلندینگ" },
+        { value: 3, label: "پیرولیز" },
+        { value: 4, label: "شیرین سازی" },
+        { value: 5, label: "کرکینگ" },
+    ];
+
     return (
         <>
             <Row gutter={[16, 16]}>
@@ -11,7 +22,7 @@ export default function ProductCategoryForm({ rules }: any) {
                         label="نام دسته بندی"
                         rules={[rules]}
                     >
-                        <Input size="large" placeholder="وارد کنید" />
+                        <Input className='w-full' size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -21,12 +32,7 @@ export default function ProductCategoryForm({ rules }: any) {
                         rules={[rules]}
                     >
                         <Select
-                            showSearch
-                            // @ts-ignore
-                            // filterOption={filterOption}
-                            // loading={isLoading}
-                            // options={sortByIndex(data, "Name")}
-                            // fieldNames={{ label: "Name", value: "Id" }}
+                            options={productMethods}
                             size="large"
                             placeholder="انتخاب کنید"
                         />
@@ -64,101 +70,56 @@ export default function ProductCategoryForm({ rules }: any) {
                             ]}
                             size="large"
                             placeholder="انتخاب کنید"
-                        // onChange={value => setHasDensity(value)}
+                            onChange={value => setHasDensity(value)}
                         />
                     </Form.Item>
                 </Col>
             </Row>
-            {/* {hasDensity && ( */}
-            <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        rules={[
-                            { required: true, message: "لطفا مقدار را وارد کنید" },
-                            {
-                                validator(_, value) {
-                                    const isInteger = Number.isInteger(parseFloat(value));
-                                    if (isNaN(value) || !isInteger || value < 0) {
-                                        const errorMessage = isInteger ? "لطفاً عدد مثبت وارد کنید" : "لطفاً عدد وارد کنید";
-                                        return Promise.reject(new Error(errorMessage));
-                                    }
-                                    return Promise.resolve();
-                                },
-                            },
-                        ]}
-                        name="densityLowerLimit"
-                        label="حداقل بازه"
-                    >
-                        <InputNumber
-                            max={50000}
-                            className="w-full"
-                            size="large"
-                            placeholder="وارد کنید"
-                        />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} md={12}>
-                    <Form.Item
-                        rules={[
-                            { required: true, message: "لطفا مقدار را وارد کنید" },
-                            ({ getFieldValue }) => ({
-                                validator(_, value) {
-                                    if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
-                                        return Promise.reject(
-                                            new Error("لطفاً عدد مثبت وارد کنید")
-                                        );
-                                    }
-                                    if (parseInt(value) > getFieldValue("densityLowerLimit")) {
-                                        return Promise.resolve();
-                                    } else {
-                                        return Promise.reject(
-                                            new Error(
-                                                "حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"
-                                            )
-                                        );
-                                    }
-                                },
-                            }),
-                        ]}
-                        name="densityUpperLimit"
-                        label="حداکثر بازه"
-                    >
-                        <InputNumber
-                            max={50000}
-                            className="w-full"
-                            size="large"
-                            placeholder="وارد کنید"
-                        />
-                    </Form.Item>
-                </Col>
-            </Row>
-            {/* )} */}
+            {hasDensity && (
+                <Row gutter={[16, 16]}>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            rules={[rules]}
+                            name="densityLowerLimit"
+                            label="حداقل بازه"
+                        >
+                            <InputNumber
+                                controls={false}
+                                className="w-full"
+                                size="large"
+                                placeholder="وارد کنید"
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            rules={[rules]}
+                            name="densityUpperLimit"
+                            label="حداکثر بازه"
+                        >
+                            <InputNumber
+                                controls={false}
+                                className="w-full"
+                                size="large"
+                                placeholder="وارد کنید"
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+            )}
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
                     <Form.Item
                         name="smallCode"
                         label="کد"
-                        rules={[
-                            { required: true, message: "لطفا مقدار را وارد کنید" },
-                            {
-                                validator(_, value) {
-                                    const numericValue = parseFloat(value);
-                                    if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
-                                        return Promise.reject(
-                                            new Error("لطفاً عدد مثبت وارد کنید")
-                                        );
-                                    }
-                                    if (numericValue > 100) {
-                                        return Promise.reject(
-                                            new Error("حداکثر تعداد مجاز دو کاراکتر است")
-                                        )
-                                    }
-                                    return Promise.resolve();
-                                },
-                            },
-                        ]}
+                        rules={[rules]}
                     >
-                        <Input size="large" placeholder="وارد کنید" />
+                        <InputNumber
+                            controls={false}
+                            className="w-full"
+                            size="large"
+                            placeholder="وارد کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>

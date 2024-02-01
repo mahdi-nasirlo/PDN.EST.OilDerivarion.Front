@@ -46,7 +46,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                 render: (_, record: any) => {
                     let color = "";
                     let name = "";
-                    if (record.HasDensity === false) {
+                    if (record.hasDensity === false) {
                         color = "red";
                         name = "ندارد";
                     } else {

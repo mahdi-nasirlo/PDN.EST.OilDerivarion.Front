@@ -2,7 +2,7 @@ import ButtonFilter from '@/components/button-filter'
 import { useValidation } from '@/hooks/use-validation'
 import { Col, Form, Input, Row, Select } from 'antd'
 import { productCategoryApi } from 'constance/product-category'
-import React from 'react'
+import React, { useState } from 'react'
 import { z } from 'zod'
 
 
@@ -11,6 +11,8 @@ const formSchema = productCategoryApi.BasicProductCategoryGetPage.type
 export default function FilterForm({ onFinish }: { onFinish: (arg: z.infer<typeof formSchema>) => void }) {
 
     const [form, rules] = useValidation(formSchema)
+
+    const [hasDensityFormItem, setHasDensityFormItem] = useState<boolean>(false)
 
     return (
         <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
@@ -43,18 +45,30 @@ export default function FilterForm({ onFinish }: { onFinish: (arg: z.infer<typeo
                                 { label: "دارد", value: true },
                                 { label: "ندارد", value: false },
                             ]}
+                            onChange={(value) => {
+                                console.log(value);
+
+                                if (value == false) {
+                                    setHasDensityFormItem(true);
+                                    form.setFieldsValue({ densityTypeId: undefined });
+                                } else
+                                    setHasDensityFormItem(false);
+                            }}
                         />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
-                    <Form.Item rules={[rules]} name="densityTypeId" label="بازه دانسیته">
+                    <Form.Item
+                        rules={[rules]}
+                        name="densityTypeId"
+                        label="بازه دانسیته"
+                    >
                         <Select
-                            showSearch
-                            // @ts-ignore
-                            // filterOption={filterOption}
-                            // loading={ldGetAllDensityType}
-                            // options={sortByIndex(GetAllDensityType, "Name")}
-                            // fieldNames={{ value: "Id", label: "Name" }}
+                            disabled={hasDensityFormItem}
+                            options={[
+                                { label: "بالاتر  از 900", value: 2 },
+                                { label: "پایین تر  از 900", value: 1 }
+                            ]}
                             size="large"
                             placeholder="انتخاب کنید"
                         />

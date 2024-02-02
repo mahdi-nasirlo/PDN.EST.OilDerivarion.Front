@@ -14,14 +14,14 @@ const BasicTestItemListItem = z.object({
 });
 
 const BasicTestItemGetPageItem = z.object({
-  uid: z.string().uuid().optional(),
-  name: z.string().optional(),
-  isActive: z.boolean().optional(),
-  measure_Id: z.number().optional(),
-  measureUid: z.string().optional(),
-  measureName: z.string().optional(),
-  testMethod: z.string().optional(),
-  testDuration: z.number().optional(),
+  uid: z.string().uuid(),
+  name: z.string(),
+  isActive: z.boolean(),
+  measure_Id: z.number(),
+  measureUid: z.string(),
+  measureName: z.string(),
+  testMethod: z.string(),
+  testDuration: z.number(),
 });
 
 const BasicTestItemGetItem = z.object({

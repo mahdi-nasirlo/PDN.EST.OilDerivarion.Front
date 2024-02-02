@@ -69,7 +69,7 @@ const FormDataTable = (props: PropType) => {
         <>
             <Table
                 columns={columns}
-                dataSource={addIndexToData(props.formData)}
+                dataSource={addIndexToData(props.formData[props.formKey])}
                 pagination={false}
             />
             <ConfirmDeleteModal
@@ -82,7 +82,7 @@ const FormDataTable = (props: PropType) => {
 
                     if (res?.success)
                         setDelOpen(false)
-                    
+
                 }}
             />
             {/*<EditModal setOpen={setOpen} open={open} schema={props.schema}/>*/}

@@ -1,7 +1,7 @@
 import {z} from "zod";
 import {generalResponseZod} from "@/types/api-response";
 
-const FormData = z.any().nullable()
+const FormData = z.any()
 
 const FormFieldDetails = z.object({
     Form_Filed_Detail_ID: z.string(),

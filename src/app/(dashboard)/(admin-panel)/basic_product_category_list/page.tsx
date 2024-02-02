@@ -7,7 +7,7 @@ import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import { Squares2X2Icon } from "@heroicons/react/24/solid";
-import useProductCategory from "./hook/use-product-category";
+import { useProductCategory } from "./hook/use-product-category";
 
 export default function Page() {
   const { dataPage } = useProductCategory();

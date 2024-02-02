@@ -6,14 +6,10 @@ import {Card} from "@/components/card";
 const Page = ({params}: { params: { key: string } }) => {
     return (
         <>
+            <FormBuilderHistory formKey={params.key}/>
             <Card>
                 <Resource categoryKey={params.key}/>
             </Card>
-
-            <Card>
-                <FormBuilderHistory formKey={params.key}/>
-            </Card>
-
         </>
     );
 };

@@ -3,7 +3,7 @@ import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd';
 import { productCategoryApi } from 'constance/product-category';
 import { useValidation } from '@/hooks/use-validation';
-import useProductCategory from '../hook/use-product-category';
+import { useProductCategory } from '../hook/use-product-category';
 
 interface TProps {
     modalVisible: boolean

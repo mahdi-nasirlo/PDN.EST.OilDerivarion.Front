@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Card } from '@/components/card'
 import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
@@ -8,6 +8,7 @@ import { ColumnsType } from 'antd/es/table';
 import { productCategoryApi } from 'constance/product-category';
 import { z } from 'zod';
 import EditModal from './edit-modal';
+import { useProductCategory } from '../hook/use-product-category';
 
 interface TProps {
     data: z.infer<typeof productCategoryApi.BasicProductCategoryGetPage.item>[] | undefined;
@@ -17,8 +18,7 @@ interface TProps {
 
 export default function DataTable({ setModalVisible, data, isLoading }: TProps) {
 
-
-    const [editModal, setEditModal] = useState<boolean>(false);
+    const { uid, setGetUid } = useProductCategory();
 
     const columns: ColumnsType<
         z.infer<typeof productCategoryApi.BasicProductCategoryGetPage.item>
@@ -100,7 +100,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                         <Button
                             type="link"
                             className="text-secondary-500 font-bold"
-                            onClick={() => setEditModal(true)}
+                            onClick={() => setGetUid(record.uid)}
                         >
                             ویرایش
                         </Button>
@@ -151,8 +151,8 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                 />
             </Card>
             <EditModal
-                editModal={editModal}
-                setEditModal={setEditModal}
+                editModalUid={uid}
+                setEditModalUid={setGetUid}
             />
         </>
     )

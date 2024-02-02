@@ -1,5 +1,5 @@
 import React from 'react';
-import {Descriptions, Divider} from "antd";
+import {Alert, Descriptions, Divider} from "antd";
 import {formMakerApi} from "../../../constance/form-maker";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
@@ -19,6 +19,9 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
         dataValue = {}
         schemaValue = {}
     }
+
+    if (!dataValue)
+        return <Alert type="error" message="data value is null"/>
 
     const validateSchema = formMakerApi.Get.formSchema.safeParse(schemaValue)
     const validateData = formMakerApi.Get.formData.safeParse(dataValue)

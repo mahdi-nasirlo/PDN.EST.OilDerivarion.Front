@@ -13,9 +13,6 @@
 
 .ant-table-content {
   @apply overflow-auto overflow-y-hidden rounded-3xl border-[1.5px] border-[#E2E8F0] whitespace-nowrap !important;
-  scroll-behavior: smooth;
-  scrollbar-color: #0A4C95 rgba(194, 210, 228, 0);
-  scroll-snap-align: none;
 }
 
 .ant-table-row:nth-child(even) {

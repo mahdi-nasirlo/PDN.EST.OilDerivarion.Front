@@ -27,3 +27,21 @@
 ::-webkit-scrollbar-thumb:hover {
   background: theme("backgroundColor.green.500");
 }
+
+/* For Firefox */
+
+* {
+  scrollbar-width: thin;
+}
+
+* {
+  scrollbar-color: theme("colors.primary.500") theme("colors.gray.300");
+}
+
+* {
+  scrollbar-3dlight-color: theme("colors.primary.500");
+  scrollbar-darkshadow-color: theme("colors.primary.500");
+  scrollbar-face-color: theme("backgroundColor.green.500");
+  scrollbar-highlight-color: theme("backgroundColor.green.500");
+  scrollbar-shadow-color: theme("backgroundColor.green.500");
+}

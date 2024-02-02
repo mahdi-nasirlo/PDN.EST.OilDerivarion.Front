@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Table, TableProps, Typography} from "antd";
-import {addIndexToData} from "@/utils/addIndexToData";
+import React, { useState } from "react";
+import { Table, TableProps, Typography } from "antd";
+import { addIndexToData } from "@/utils/addIndexToData";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
@@ -11,15 +11,15 @@ interface RecordeValue {
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
-    data: {
-        records: any[];
-        count: number;
-    } | undefined;
+  data: {
+    records: any[] | undefined;
+    count?: number;
+  } | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
 
-    const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   // useEffect(() => {
   //   if (props.data?.count && Math.ceil((props.data?.count || 1) / 5) < page) {
@@ -28,14 +28,14 @@ const Index = (props: TableProps<any> & RecordeValue) => {
   // }, [props.data, page]);
 
   const handleChangePage = (e: number) => {
-      setPage(e);
-      // props.setInitialData(GetPageRecordNumber(e))
-      props.setInitialData((prev: any) => {
-          console.log(prev)
-          delete prev.fromRecord;
-          delete prev.selectRecord;
-          return {...GetPageRecordNumber(e), ...prev};
-      });
+    setPage(e);
+    // props.setInitialData(GetPageRecordNumber(e))
+    props.setInitialData((prev: any) => {
+      console.log(prev)
+      delete prev.fromRecord;
+      delete prev.selectRecord;
+      return { ...GetPageRecordNumber(e), ...prev };
+    });
   };
 
   return (
@@ -60,23 +60,23 @@ const Index = (props: TableProps<any> & RecordeValue) => {
         className="mt-6"
         columns={props.columns}
         pagination={props.pagination ?? {
-            total: props.data?.count,
-            showTotal: (total, range) => (
-                <Typography>
-                    {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
-                </Typography>
-            ),
-            onChange: handleChangePage,
-            defaultPageSize: 5,
-            showSizeChanger: false,
-            defaultCurrent: 1,
-            current: page,
-            style: {
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                margin: "16px 0",
-            },
+          total: props.data?.count,
+          showTotal: (total, range) => (
+            <Typography>
+              {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
+            </Typography>
+          ),
+          onChange: handleChangePage,
+          defaultPageSize: 5,
+          showSizeChanger: false,
+          defaultCurrent: 1,
+          current: page,
+          style: {
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            margin: "16px 0",
+          },
         }}
       />
     </>

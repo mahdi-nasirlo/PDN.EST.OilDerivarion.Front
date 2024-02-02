@@ -74,9 +74,9 @@ export default function DataTable({ setVisibleModal }: any) {
             </Button>
           ),
         }}
-        setInitialData={() => {}}
+        setInitialData={() => { }}
         isLoading={false}
-        data={[data]}
+        data={data}
         columns={columns}
       />
       <EditModal editModal={editModal} setEditModal={setEditModal} />
@@ -90,21 +90,5 @@ export default function DataTable({ setVisibleModal }: any) {
   );
 }
 
-const data = null;
-// {
-//     records: [
-//         {
-//             Row: 1,
-//             MaterialName: 'CSO',
-//             MaterialUsagePercentage: '10',
-//             MaterialSupplyName: 'تامین کننده',
-//         },
-//         {
-//             Row: 2,
-//             MaterialName: 'اسلاک',
-//             MaterialUsagePercentage: '90',
-//             MaterialSupplyName: 'تامین کننده',
-//         },
-//     ],
-//     count: 2
-// }
+const data = { records: [], count: 0 };
+

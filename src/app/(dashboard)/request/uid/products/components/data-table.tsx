@@ -80,9 +80,9 @@ export default function DataTable({ setVisibleModal }: any) {
             </Button>
           ),
         }}
-        setInitialData={() => {}}
+        setInitialData={() => { }}
         isLoading={false}
-        data={[data]}
+        data={data}
         columns={columns}
       />
       <EditModal editModal={editModal} setEditModal={setEditModal} />
@@ -96,21 +96,4 @@ export default function DataTable({ setVisibleModal }: any) {
   );
 }
 
-const data = null;
-// {
-//     records: [
-//         {
-//             Row: 1,
-//             ProductName: 'CFO',
-//             ProductUsageExploitation: '50',
-//             ProductUsageWasted: '50',
-//         },
-//         {
-//             Row: 2,
-//             ProductName: 'هیدروژن',
-//             ProductUsageExploitation: '50',
-//             ProductUsageWasted: '50',
-//         },
-//     ],
-//     count: 2
-// }
+const data = { records: [], count: 0 };

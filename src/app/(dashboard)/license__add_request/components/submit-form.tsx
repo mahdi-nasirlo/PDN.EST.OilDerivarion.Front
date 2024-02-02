@@ -5,12 +5,15 @@ import React, { useEffect } from "react";
 import CustomeDatePicker from "../../../../components/custome-date-picker";
 import { filterOption } from "../../../../../lib/filterOption";
 import { useValidation } from "@/hooks/use-validation";
-import { ssoApi } from "constance/auth";
-import useProducerInfo from "./hook/use-producer-info";
+import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
+import useGetAllState from "@/hooks/basic/use-get-all-state";
 
 export default function SubmitForm() {
-  const { producerInfo, license, addLicense, state } = useProducerInfo();
+
+  const state = useGetAllState()
+
+  const { producerInfo, license, addLicense } = useProducerInfo();
 
   const [form, rules] = useValidation(licenseApi.AddRequest.type);
   useEffect(() => {

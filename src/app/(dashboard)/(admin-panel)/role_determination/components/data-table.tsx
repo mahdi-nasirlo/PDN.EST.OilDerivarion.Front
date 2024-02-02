@@ -1,5 +1,3 @@
-"use client";
-
 import { Space, Tooltip, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
@@ -11,11 +9,13 @@ import CustomTable from "@/components/custom-table";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import RoleAction from './role-action';
 
-interface TProps {
-  data: z.infer<typeof basicApi.GetUserBySearch.item>[] | undefined;
-  isLoading: boolean;
-}
+const apiData = basicApi.GetUserBySearch;
 
+interface TProps {
+  data: z.infer<typeof apiData.response.shape.data> | undefined;
+  isLoading: boolean;
+  setPaginate: (arg: any) => void
+}
 
 export default function DataTable({ data, isLoading }: TProps) {
 
@@ -23,7 +23,7 @@ export default function DataTable({ data, isLoading }: TProps) {
   const [StateModal, setStateModal] = useState<string>();
 
 
-  const columns: ColumnsType<z.infer<typeof basicApi.GetUserBySearch.item>> = [
+  const columns: ColumnsType<z.infer<typeof apiData.item>> = [
     {
       title: "ردیف",
       dataIndex: "Row",

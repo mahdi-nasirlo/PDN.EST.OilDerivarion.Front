@@ -2,30 +2,28 @@
 
 import { Button, Space, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import { Measure } from "../../../../../interfaces/measures";
-import StatusColumn from "@/components/custom-table/StatusColumn";
-import CustomeTable from "../../../../components/custom-table";
-import useProducerInfo from "./hook/use-producer-info";
-import { string, z } from "zod";
+import CustomTable from "../../../../components/custom-table";
+import { z } from "zod";
+import React from "react";
+import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { materialApi } from "constance/material";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+
+const apiData = licenseApi.GetRequestList;
+
 
 export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();
 
   const renderStatus = (
     _: any,
-    record: z.infer<typeof licenseApi.GetRequestList.Item>
+    record: z.infer<typeof apiData.Item>
   ) => {
     let color = "";
     let name = "";
     let icon = <></>;
-
-    console.log(record);
 
     if (record.Wrork_State !== 0) {
       if (record.Wrork_State === 1) {
@@ -66,7 +64,7 @@ export default function DataTable() {
     );
   };
 
-  const columns: ColumnsType<z.infer<typeof licenseApi.GetRequestList.Item>> = [
+  const columns: ColumnsType<z.infer<typeof apiData.Item>> = [
     {
       title: "ردیف",
       dataIndex: "Row",
@@ -154,14 +152,15 @@ export default function DataTable() {
   return (
     <>
       <div className="box-border w-full mt-8 p-6">
-        <CustomeTable
+        <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
             text: "لیست مجوزها",
           }}
-          setInitialData={() => {}}
+          setInitialData={() => { }}
           isLoading={list.isLoading}
-          data={list.data}
+          pagination={false}
+          data={{ records: list.data }}
           columns={columns}
         />
         <ConfirmDeleteModal

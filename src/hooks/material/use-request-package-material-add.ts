@@ -19,7 +19,11 @@ const useRequestPackageMaterialAdd = (package_UID?: string) => {
             }
         }),
         onSuccess: async (data) => {
+
             await queryClient.invalidateQueries({queryKey: [materialApi.RequestPackageMaterialList.url]})
+
+            // queryClient.setQueryData([materialApi.RequestPackageMaterialList.url], data.data)
+
         }
     })
 

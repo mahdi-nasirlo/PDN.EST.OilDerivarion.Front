@@ -20,15 +20,19 @@ const useRequestPackagePartAdd = (package_UID?: string) => {
         }),
         onSuccess: async (data) => {
 
-            const res: z.infer<typeof materialApi.RequestPackagePartAdd.response> | undefined =
-                await queryClient.getQueryData([materialApi.GetRequestPackagePartList.url])
+            // const res: z.infer<typeof materialApi.RequestPackagePartAdd.response> | undefined =
+            //     await queryClient.getQueryData([materialApi.GetRequestPackagePartList.url])
+            //
+            // console.log(data)
 
-            console.log(data)
+            // await queryClient.setQueryData([materialApi.GetRequestPackagePartList.url], {
+            //     ...res,
+            //     data: data.data
+            // })
 
-            await queryClient.setQueryData([materialApi.GetRequestPackagePartList.url], {
-                ...res,
-                data: data.data
-            })
+            console.log([materialApi.GetRequestPackagePartList.url])
+
+            await queryClient.invalidateQueries({queryKey: [materialApi.GetRequestPackagePartList.url]})
 
         }
     })

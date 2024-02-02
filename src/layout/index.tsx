@@ -1,15 +1,18 @@
 "use client"
 
-import { Layout, Space } from 'antd/lib'
+import {Layout, Space} from 'antd/lib'
 import React from 'react'
 import LayoutHeader from './header'
-import { Content } from 'antd/lib/layout/layout'
+import {Content} from 'antd/lib/layout/layout'
 import SideBar from './side-bar'
-import { Typography } from 'antd'
+import {AnimatePresence, motion} from "framer-motion";
+import {usePathname} from "next/navigation";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
     // const [open, setOpen] = useState(false);
+
+    const pathname = usePathname()
 
     return (
         <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
@@ -25,7 +28,33 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         style={contentStyle}
                     >
                         <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
+                            <AnimatePresence mode="wait" initial={true}>
+                                <motion.div
+                                    key={pathname}
+                                    initial="initialState"
+                                    animate="animateState"
+                                    exit="exitState"
+                                    transition={{duration: 0.2, ease: "easeOut"}}
+                                    variants={{
+                                        initialState: {
+                                            opacity: 0,
+                                            x: "10%"
+                                        },
+                                        animateState: {
+                                            opacity: 1,
+                                            x: "0%",
+                                        },
+                                        exitState: {
+                                            opacity: 0.1,
+                                            x: "-10%",
+                                            transition: {duration: 0.5, ease: "easeOut"}
+                                        }
+                                    }}
+                                    className="tw-flex-1"
+                                >
                             {children}
+                                </motion.div>
+                            </AnimatePresence>
                         </Layout>
                     </Content>
                 </Layout>

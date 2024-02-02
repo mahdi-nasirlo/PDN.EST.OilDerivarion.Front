@@ -1,6 +1,7 @@
-import { Menu, MenuProps } from 'antd/lib'
+import {Menu, MenuProps} from 'antd/lib'
 import React from 'react'
-import { useControlSidebar } from './hooks/use-control-sidebar'
+import {useControlSidebar} from './hooks/use-control-sidebar'
+import {Skeleton} from "antd";
 
 export default function SideBar() {
 
@@ -14,7 +15,27 @@ export default function SideBar() {
         selectedKeys={[pathname]}
         defaultSelectedKeys={[pathname]}
         {...props}
-    />
+    >
+        <div className="flex flex-col gap-4">
+            <Skeleton.Input className="w-full" active size="small"/>
+            <Skeleton.Input active className="w-2/3" size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input className="w-full" style={{marginTop: "8px"}} active size="small"/>
+            <Skeleton.Input className="w-full" active size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input className="w-full" style={{marginTop: "8px"}} active size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input className="w-full" active size="small"/>
+            <Skeleton.Input className="w-full" active size="small"/>
+            <Skeleton.Input className="w-full" style={{marginTop: "8px"}} active size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+            <Skeleton.Input className="w-full" active size="small"/>
+            <Skeleton.Input className="w-full" style={{marginTop: "8px"}} active size="small"/>
+            <Skeleton.Input active className="w-1/2" size="small"/>
+        </div>
+    </Menu>
 
     return (
         <div

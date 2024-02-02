@@ -128,8 +128,8 @@ const materialApi = {
     // Item:BasicProductMaterialList,
     type: z.object({
       name: z.string({ required_error: errorMessage.required }),
-      isActive: z.boolean(),
-      measureUid: z.string().uuid(),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),
     }),
   },
@@ -185,9 +185,9 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string(),
-      isActive: z.boolean(),
-      measureUid: z.string().uuid(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),
     }),
   },

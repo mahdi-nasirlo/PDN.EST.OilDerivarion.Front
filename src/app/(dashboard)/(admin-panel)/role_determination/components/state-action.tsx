@@ -22,7 +22,7 @@ const StateAction = ({ open, setOpen }: TProps) => {
   return (
     <div>
       <Modal
-        title={'تعیین استان'}
+        title={'تعیین استان کاربر'}
         open={typeof open == "string"}
         onCancel={() => setOpen(undefined)}
         width={600}

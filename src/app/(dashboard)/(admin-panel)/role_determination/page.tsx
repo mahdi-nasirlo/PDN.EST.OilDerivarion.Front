@@ -18,7 +18,7 @@ export default function Page() {
         pages={[
           { label: "خانه", path: "/" }
         ]}
-        currentPage={"تعیین نقش"}
+        currentPage={"تعیین نقش کاربران"}
       />
 
       <Collapse

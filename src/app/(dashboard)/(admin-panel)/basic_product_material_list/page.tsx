@@ -3,14 +3,16 @@
 import React, { useState } from "react";
 import { Collapse } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import { BeakerIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
-import useBasicMaterial from "./components/hook/use-basic-material";
+import { BeakerIcon } from "@heroicons/react/24/solid";
 import DataTable from "./components/data-table";
-import CreateModal from "./components/material-action";
+import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
+import { useBasicMaterialProductGetPage } from "@/hooks/material/use-basic-product-material-get-page";
 
 const Page = () => {
-  const { list } = useBasicMaterial();
+
+  const dataPage = useBasicMaterialProductGetPage();
+
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -25,14 +27,15 @@ const Page = () => {
         items={[
           {
             label: "فیلتر جستجو ",
-            children: <FilterForm onFinish={list.setFilter as any} />,
+            children: <FilterForm onFinish={dataPage.setFilter as any} />,
           },
         ]}
       />
       <DataTable
-        data={list.data}
-        isLoading={list.isLoading}
+        data={dataPage.data}
+        isLoading={dataPage.isFetching || dataPage.isLoading}
         setModalVisible={setModalVisible}
+        setPaginate={dataPage.setFilter}
       />
       <CreateModal
         modalVisible={modalVisible}

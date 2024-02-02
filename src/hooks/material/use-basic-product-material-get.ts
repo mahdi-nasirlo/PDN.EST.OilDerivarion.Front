@@ -1,7 +1,6 @@
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useQuery } from "@tanstack/react-query";
 import { materialApi } from "constance/material";
-import { useEffect } from "react";
 import { z } from "zod";
 
 const apiData = materialApi.BasicProductMaterialGet;

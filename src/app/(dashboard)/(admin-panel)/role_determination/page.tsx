@@ -20,6 +20,7 @@ export default function Page() {
         ]}
         currentPage={"تعیین نقش"}
       />
+
       <Collapse
         size="large"
         items={[{
@@ -27,7 +28,10 @@ export default function Page() {
           children: <FilterForm onFinish={users.setFilter} />
         }]}
       />
-      <DataTable data={users.data} isLoading={users.isLoading} />
+      <DataTable
+        data={users.data}
+        isLoading={users.isLoading || users.isFetching}
+      />
     </>
   )
 }

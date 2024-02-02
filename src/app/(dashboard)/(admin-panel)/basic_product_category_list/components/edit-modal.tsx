@@ -1,23 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd'
 import { productCategoryApi } from 'constance/product-category'
 import { useValidation } from '@/hooks/use-validation'
+import { useProductCategory } from '../hook/use-product-category'
+import { z } from 'zod'
 
 interface TProps {
-    editModal: boolean
-    setEditModal: (arg: boolean) => void
+    editModalUid: any
+    setEditModalUid: (arg: any) => void
 }
 
 const formSchema = productCategoryApi.BasicProductCategoryUpdate.type
 
-export default function EditModal({ editModal, setEditModal }: TProps) {
+export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
+
+    const { get, update } = useProductCategory();
+
+    useEffect(() => {
+        if (get.data) form.setFieldsValue(get.data[0])
+    }, [get.data]);
+
+    const handleSubmit = async (
+        data: z.infer<typeof productCategoryApi.BasicProductCategoryUpdate.type>
+    ) => {
+        const res = await update.mutateAsync({
+            ...data,
+            uid: editModalUid as string,
+        });
+
+        if (res.success) {
+            setEditModalUid(undefined);
+        }
+    };
 
     const [form, rules] = useValidation(formSchema);
 
 
     const closeModal = () => {
-        setEditModal(false);
+        setEditModalUid(false);
         form.resetFields();
     };
 
@@ -26,7 +47,7 @@ export default function EditModal({ editModal, setEditModal }: TProps) {
             <Modal
                 width={800}
                 title="ویرایش دسته بندی محصول"
-                open={editModal}
+                open={editModalUid}
                 onCancel={closeModal}
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -57,8 +78,8 @@ export default function EditModal({ editModal, setEditModal }: TProps) {
                 ]}
             >
                 <Form
-                    // onFinish={handleSubmit}
-                    // disabled={isLoading || isMutating}
+                    onFinish={handleSubmit}
+                    disabled={get.isLoading || get.isPending}
                     form={form}
                     layout="vertical"
                 >

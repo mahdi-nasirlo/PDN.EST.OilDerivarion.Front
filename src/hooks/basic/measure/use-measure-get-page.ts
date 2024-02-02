@@ -2,14 +2,14 @@ import fetchWithSession from "@/utils/fetch-with-session";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 import { useQuery } from "@tanstack/react-query";
 import measureApi from "constance/measure";
-import { productCategoryApi } from "constance/product-category";
 import { useState } from "react";
 import { z } from "zod";
 
-const apiData = measureApi.MeasureGetPages;
+const apiData = measureApi.BasicMeasureGetPage;
 
 const useMeasureGetPage = () => {
-  const [arg, setArg] = useState<z.infer<typeof apiData.type>>();
+  const pageData = GetPageRecordNumber();
+  const [arg, setArg] = useState<z.infer<typeof apiData.type>>(pageData);
 
   const query = useQuery({
     queryKey: [apiData.url, arg],
@@ -23,7 +23,7 @@ const useMeasureGetPage = () => {
     ...query,
     filter: arg,
     setFilter: (newArg: z.infer<typeof apiData.type>) => {
-      setArg({ ...newArg });
+      setArg({ ...newArg, ...pageData });
     },
   };
 };

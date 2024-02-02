@@ -9,8 +9,10 @@ const MeasureGetPages = z.object({
 });
 
 const measureApi = {
-  MeasureGetPages: {
+  BasicMeasureList: {
     url: "/Basic/BasicMeasureList",
+    sortBy: "name",
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       name: z.string().optional(),
       isActive: z.boolean().optional(),
@@ -20,6 +22,21 @@ const measureApi = {
       data: z.array(MeasureGetPages),
     }),
   },
+
+  BasicMeasureGetPage: {
+    url: "/Basic/MeasureGetPage",
+    type: z.object({
+      name: z.string().optional(),
+      isActive: z.boolean().optional(),
+      fromRecord: z.number(),
+      selectRecord: z.number(),
+    }),
+    Item: MeasureGetPages,
+    response: generalResponseZod.extend({
+      data: z.array(MeasureGetPages),
+    }),
+  },
+
   AddRequest: {
     url: "/License/AddRequest",
     type: z.object({

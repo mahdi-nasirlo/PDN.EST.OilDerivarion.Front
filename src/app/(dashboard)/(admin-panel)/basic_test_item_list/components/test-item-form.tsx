@@ -1,7 +1,11 @@
-import { Col, Form, Input, Row, Select } from 'antd';
+import { useMeasureList } from '@/hooks/basic/measure/use-measure-list';
+import { Col, Form, Input, InputNumber, Row, Select } from 'antd';
 import React from 'react'
 
 export default function TestItemForm({ rules }: any) {
+
+    const measureList = useMeasureList()
+
     return (
         <>
             <Row gutter={[16, 16]}>
@@ -21,12 +25,9 @@ export default function TestItemForm({ rules }: any) {
                         rules={[rules]}
                     >
                         <Select
-                            // loading={ldMeasure}
-                            // showSearch
-                            // @ts-ignore
-                            // filterOption={filterOption}
-                            // options={sortByIndex(Measure, "Name")}
-                            // fieldNames={{ value: "Uid", label: "Name" }}
+                            showSearch
+                            loading={measureList.isLoading}
+                            options={measureList.options}
                             size="large"
                             placeholder="وارد کنید"
                         />
@@ -57,7 +58,12 @@ export default function TestItemForm({ rules }: any) {
                         label="مدت زمان انجام آزمایش (ساعت)"
                         rules={[rules]}
                     >
-                        <Input size="large" placeholder="وارد کنید" />
+                        <InputNumber
+                            className='w-full'
+                            controls={false}
+                            size="large"
+                            placeholder="وارد کنید"
+                        />
                     </Form.Item>
                 </Col>
             </Row>

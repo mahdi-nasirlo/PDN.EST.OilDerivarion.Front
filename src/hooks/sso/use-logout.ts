@@ -1,6 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
-import { signOut } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import {useMutation} from "@tanstack/react-query"
+import {signOut} from "next-auth/react"
+import {useRouter} from "next/navigation"
+import {ssoApi} from "../../constance/auth";
 
 const useLogout = () => {
 
@@ -13,9 +14,14 @@ const useLogout = () => {
     return {
         execute: async () => {
 
+            localStorage.removeItem(ssoApi.access_token_Key)
+
             await logout.mutateAsync()
 
-            router.push("https://sso-test.pdnsoftware.ir/logout")
+            // router.push("https://sso-test.pdnsoftware.ir/logout")
+            //
+            // console.log("testa")
+
 
         }, 
         ...logout

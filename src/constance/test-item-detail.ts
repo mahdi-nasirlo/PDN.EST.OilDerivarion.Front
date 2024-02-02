@@ -3,12 +3,12 @@ import { z } from "zod";
 import { errorMessage } from "./error-message";
 
 const BasicTestItemDetailGetPageItem = z.object({
-  uid: z.string().uuid().optional(),
-  title: z.string().optional(),
-  isActive: z.boolean().optional(),
-  referenceCode: z.string().optional(),
-  testItemUid: z.string().uuid().optional(),
-  testItemName: z.string().optional(),
+  uid: z.string().uuid(),
+  title: z.string(),
+  isActive: z.boolean(),
+  referenceCode: z.string(),
+  testItemUid: z.string().uuid(),
+  testItemName: z.string(),
 });
 
 const BasicTestItemDetailGetItem = z.object({

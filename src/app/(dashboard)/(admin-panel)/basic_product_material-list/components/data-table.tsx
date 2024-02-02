@@ -5,8 +5,6 @@ import { ColumnsType } from "antd/es/table";
 import React from "react";
 import { Card } from "@/components/card";
 import { z } from "zod";
-import basicApi from "constance/basic";
-import StateAction from "@/app/(dashboard)/(admin-panel)/role_determination/components/state-action";
 import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { materialApi } from "constance/material";
@@ -25,7 +23,7 @@ export default function DataTable({
   isLoading,
   setModalVisible,
 }: TProps) {
-  const { handleEdit, setGetUid, uid } = useBasicMaterial();
+  const { setGetUid, uid } = useBasicMaterial();
   const columns: ColumnsType<
     z.infer<typeof materialApi.BasicProductMaterialList.Item>
   > = [

@@ -61,8 +61,8 @@ const measureApi = {
     url: "/Basic/MeasureUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string(),
-      isActive: z.boolean(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },
 };

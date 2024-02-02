@@ -25,7 +25,7 @@ const Page = () => {
         items={[
           {
             label: "فیلتر جستجو ",
-            children: <FilterForm onFinish={list.setFilter} />,
+            children: <FilterForm onFinish={list.setFilter as any} />,
           },
         ]}
       />

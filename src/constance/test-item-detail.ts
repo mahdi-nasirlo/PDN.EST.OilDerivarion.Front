@@ -31,7 +31,10 @@ const TestItemDetailApi = {
     }),
     item: BasicTestItemDetailGetPageItem,
     response: generalResponseZod.extend({
-      data: z.array(BasicTestItemDetailGetPageItem),
+      data: z.object({
+        count: z.number(),
+        records: z.array(BasicTestItemDetailGetPageItem),
+      }),
     }),
   },
 

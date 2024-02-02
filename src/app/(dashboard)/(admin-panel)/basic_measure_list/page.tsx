@@ -26,7 +26,7 @@ export default function Page() {
         items={[
           {
             label: "فیلتر جدول",
-            children: <FilterForm onFinish={list.setFilter} />,
+            children: <FilterForm onFinish={list.setFilter as any} />,
           },
         ]}
       />

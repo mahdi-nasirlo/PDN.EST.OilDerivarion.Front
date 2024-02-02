@@ -10,8 +10,9 @@ import { z } from "zod";
 import EditModal from "./edit-modal";
 import useTestItem from "../hook/use-test-item-list";
 
+const apiData = TestItemApi.BasicTestItemGetPage;
 interface TProps {
-  data: z.infer<typeof TestItemApi.BasicTestItemGetPage.item>[] | undefined;
+  data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
   modalVisible: any;

@@ -51,7 +51,7 @@ export default function EditModal({ modalVisible, setModalVisible }: TProps) {
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={12} md={12}>
               <Button
-                // loading={isLoading || isMutating}
+                loading={get.isFetching}
                 size="large"
                 className="w-full"
                 type="primary"

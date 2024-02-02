@@ -2,13 +2,14 @@ import useHandleFilter from "@/hooks/use-handle-filter";
 import fetchWithSession from "@/utils/fetch-with-session";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 import { useQuery } from "@tanstack/react-query";
+import { materialApi } from "constance/material";
 import { TestItemDetailApi } from "constance/test-item-detail";
 import { useState } from "react";
 import { z } from "zod";
 
-const apiData = TestItemDetailApi.BasicTestItemDetailGetPage;
+const apiData = materialApi.BasicProductMaterialGetPage;
 
-const useTestItemDetailGetPage = () => {
+const useBaicMaterialProductGetPage = () => {
   const { filter, setFilter } = useHandleFilter<z.infer<typeof apiData.type>>();
 
   const query = useQuery({
@@ -26,4 +27,4 @@ const useTestItemDetailGetPage = () => {
   };
 };
 
-export { useTestItemDetailGetPage };
+export default useBaicMaterialProductGetPage;

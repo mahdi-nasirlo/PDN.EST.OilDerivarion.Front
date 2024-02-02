@@ -60,7 +60,10 @@ const TestItemApi = {
     }),
     item: BasicTestItemGetPageItem,
     response: generalResponseZod.extend({
-      data: z.array(BasicTestItemGetPageItem),
+      data: z.object({
+        count: z.number(),
+        records: z.array(BasicTestItemGetPageItem),
+      }),
     }),
   },
 

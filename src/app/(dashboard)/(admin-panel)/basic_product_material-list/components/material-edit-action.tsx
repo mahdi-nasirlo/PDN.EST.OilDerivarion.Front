@@ -58,7 +58,7 @@ export default function EditModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={12} md={12}>
             <Button
-              //   loading={create.isPending}
+              loading={update.isPending}
               size="large"
               className="w-full"
               type="primary"
@@ -84,7 +84,7 @@ export default function EditModal({
       ]}
     >
       <Form
-        disabled={update.isPending}
+        disabled={update.isPending && get.isFetching}
         onFinish={handleEdit}
         form={form}
         layout="vertical"

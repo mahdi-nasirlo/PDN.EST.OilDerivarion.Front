@@ -11,9 +11,9 @@ import { materialApi } from "constance/material";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import useBasicMaterial from "./hook/use-basic-material";
 import EditModal from "./material-edit-action";
-
+const apiData = materialApi.BasicProductMaterialGetPage;
 interface TProps {
-  data: z.infer<typeof materialApi.BasicProductMaterialList.type>[] | undefined;
+  data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
 }
@@ -96,7 +96,7 @@ export default function DataTable({
   return (
     <>
       <Card className="mt-8">
-        {/* <CustomTable
+        <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
             text: "لیست مواد اولیه",
@@ -118,7 +118,7 @@ export default function DataTable({
           isLoading={isLoading}
           data={data}
           columns={columns}
-        /> */}
+        />
         <EditModal modalVisible={uid} setModalVisible={setGetUid} />
       </Card>
     </>

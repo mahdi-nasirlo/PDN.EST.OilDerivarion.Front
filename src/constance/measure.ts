@@ -33,7 +33,7 @@ const measureApi = {
     }),
     Item: MeasureGetPages,
     response: generalResponseZod.extend({
-      data: z.array(MeasureGetPages),
+      data: z.object({ records: z.array(MeasureGetPages) }),
     }),
   },
 

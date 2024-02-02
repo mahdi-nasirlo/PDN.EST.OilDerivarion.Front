@@ -33,7 +33,7 @@ export default function EditModal({
   ) => {
     data.uid = modalVisible;
     const res = await update.mutateAsync(data);
-    if (res) {
+    if (res.success) {
       setModalVisible(false);
       form.resetFields();
     }
@@ -56,7 +56,7 @@ export default function EditModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={12} md={12}>
             <Button
-              loading={update.isPending}
+              loading={get.isFetching}
               size="large"
               className="w-full"
               type="primary"

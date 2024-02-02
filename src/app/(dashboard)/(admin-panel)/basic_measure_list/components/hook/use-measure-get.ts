@@ -19,12 +19,7 @@ const useMeasureGet = () => {
     steGetUid(getUid as string);
   };
 
-  const handleEdit = () => {
-    steGetUid(getUid as string);
-  };
-
   return {
-    handleEdit,
     update,
     steGetUid,
     getUid,

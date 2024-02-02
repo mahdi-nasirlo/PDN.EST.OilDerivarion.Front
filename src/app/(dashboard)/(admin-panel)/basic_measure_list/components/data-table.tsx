@@ -76,7 +76,7 @@ export default function DataTable({
 
   return (
     <>
-      <Card>
+      <Card className="mt-8">
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
@@ -102,8 +102,8 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
+        <EditModal modalVisible={getUid} setModalVisible={steGetUid} />
       </Card>
-      <EditModal modalVisible={getUid} setModalVisible={steGetUid} />
     </>
   );
 }

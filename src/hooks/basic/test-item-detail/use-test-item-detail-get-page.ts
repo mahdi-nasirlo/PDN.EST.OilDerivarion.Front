@@ -1,9 +1,7 @@
 import useHandleFilter from "@/hooks/use-handle-filter";
 import fetchWithSession from "@/utils/fetch-with-session";
-import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 import { useQuery } from "@tanstack/react-query";
 import { TestItemDetailApi } from "constance/test-item-detail";
-import { useState } from "react";
 import { z } from "zod";
 
 const apiData = TestItemDetailApi.BasicTestItemDetailGetPage;
@@ -16,7 +14,7 @@ const useTestItemDetailGetPage = () => {
     queryFn: () =>
       fetchWithSession({ url: apiData.url, data: filter || {}, notify: false }),
     select: (data: z.infer<typeof apiData.response>) => data.data,
-    // enabled: typeof arg !== "undefined"
+    enabled: typeof filter !== "undefined",
   });
 
   return {

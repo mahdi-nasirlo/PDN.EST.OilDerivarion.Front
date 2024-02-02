@@ -1,7 +1,6 @@
 import React from 'react'
 import ProductCategoryForm from './product-category-form'
-import {Button, Col, Form, Modal, Row} from 'antd'
-import {productCategoryApi} from 'constance/product-category'
+import { Button, Col, Form, Modal, Row } from 'antd'
 import useProductCategoryEdit
     from "@/app/(dashboard)/(admin-panel)/basic_product_category_list/hook/use-product-category-edit";
 
@@ -9,8 +8,6 @@ interface TProps {
     editModalUid: any
     setEditModalUid: (arg: any) => void
 }
-
-const formSchema = productCategoryApi.BasicProductCategoryUpdate.type
 
 export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
 
@@ -66,7 +63,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
                     form={form}
                     layout="vertical"
                 >
-                    <ProductCategoryForm rules={rules} density={density}/>
+                    <ProductCategoryForm rules={rules} density={density} />
                 </Form>
             </Modal>
         </>

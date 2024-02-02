@@ -5,12 +5,12 @@ import Breadcrumb from "@/components/breadcrumb";
 import { DocumentMagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Collapse } from "antd";
 import FilterForm from "./components/filter-form";
-import useTestItemDetail from "./hook/use-test-item-detail-list";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
+import { useTestItemDetailGetPage } from "@/hooks/basic/test-item-detail/use-test-item-detail-get-page";
 
 export default function Page() {
-  const { dataPage } = useTestItemDetail();
+  const dataPage = useTestItemDetailGetPage();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
@@ -31,10 +31,10 @@ export default function Page() {
         ]}
       />
       <DataTable
-        modalVisible={modalVisible}
         data={dataPage.data}
         isLoading={dataPage.isLoading || dataPage.isFetching}
         setModalVisible={setModalVisible}
+        setPaginate={dataPage.setFilter}
       />
       <CreateModal
         modalVisible={modalVisible}

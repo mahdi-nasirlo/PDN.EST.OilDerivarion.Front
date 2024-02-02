@@ -8,70 +8,70 @@ import { ColumnsType } from "antd/es/table";
 import { TestItemDetailApi } from "constance/test-item-detail";
 import { z } from "zod";
 import EditModal from "./edit-modal";
-import useTestItemDetail from "../hook/use-test-item-detail-list";
 
 const apiData = TestItemDetailApi.BasicTestItemDetailGetPage;
 interface TProps {
   data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
-  modalVisible: any;
+  setPaginate: (arg: any) => void
 }
 
 export default function DataTable({
-  modalVisible,
+  setPaginate,
   setModalVisible,
   data,
   isLoading,
 }: TProps) {
-  const { setUid, getUid, setGetUid } = useTestItemDetail();
+
+  const [uid, setGetUid] = useState<string | boolean>();
 
   const columns: ColumnsType<
-    z.infer<typeof TestItemDetailApi.BasicTestItemDetailGetPage.item>
+    z.infer<typeof apiData.item>
   > = [
-    {
-      title: "ردیف",
-      dataIndex: "Row",
-      key: "1",
-      width: "5%",
-    },
-    {
-      title: "عنوان استاندارد",
-      dataIndex: "title",
-      key: "2",
-    },
-    {
-      title: "فاکتورهای آزمون",
-      dataIndex: "testItemName",
-      key: "3",
-    },
-    {
-      title: "شناسه استاندارد",
-      dataIndex: "referenceCode",
-      key: "4",
-    },
-    {
-      title: "فعال/غیر فعال",
-      dataIndex: "isActive",
-      key: "4",
-      render: (_, record: any) => <StatusColumn record={record} />,
-    },
-    {
-      title: "عملیات",
-      key: "عملیات",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record: any) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => setUid(record.uid)}
-          >
-            ویرایش
-          </Button>
-          {/*
+      {
+        title: "ردیف",
+        dataIndex: "Row",
+        key: "1",
+        width: "5%",
+      },
+      {
+        title: "عنوان استاندارد",
+        dataIndex: "title",
+        key: "2",
+      },
+      {
+        title: "فاکتورهای آزمون",
+        dataIndex: "testItemName",
+        key: "3",
+      },
+      {
+        title: "شناسه استاندارد",
+        dataIndex: "referenceCode",
+        key: "4",
+      },
+      {
+        title: "فعال/غیر فعال",
+        dataIndex: "isActive",
+        key: "4",
+        render: (_, record: any) => <StatusColumn record={record} />,
+      },
+      {
+        title: "عملیات",
+        key: "عملیات",
+        align: "center",
+        fixed: "right",
+        width: "10%",
+        render: (_, record: any) => (
+          <Space size="small">
+            <Button
+              type="link"
+              className="text-secondary-500 font-bold"
+              onClick={() => setGetUid(record.uid)}
+            >
+              ویرایش
+            </Button>
+            {/*
                             <Button
                                 type="link"
                                 className="text-red-500 font-bold"
@@ -80,10 +80,10 @@ export default function DataTable({
                                 حذف
                             </Button>
                         */}
-        </Space>
-      ),
-    },
-  ];
+          </Space>
+        ),
+      },
+    ];
 
   return (
     <>
@@ -108,12 +108,15 @@ export default function DataTable({
               </Button>,
             ],
           }}
-          setInitialData={() => {}}
+          setInitialData={setPaginate}
           isLoading={isLoading}
           data={data}
           columns={columns}
         />
-        <EditModal modalVisible={getUid} setModalVisible={setGetUid} />
+        <EditModal
+          editModalUid={uid}
+          setEditModalUid={setGetUid}
+        />
       </Card>
     </>
   );

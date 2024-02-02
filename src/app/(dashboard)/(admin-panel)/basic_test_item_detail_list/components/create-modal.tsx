@@ -3,7 +3,7 @@ import { Button, Col, Form, Modal, Row } from 'antd';
 import { useValidation } from '@/hooks/use-validation';
 import { TestItemDetailApi } from 'constance/test-item-detail';
 import TestItemDetailForm from './test-item-detail-form';
-import useTestItemDetail from '../hook/use-test-item-detail-list';
+import { useTestItemDetailCreate } from '@/hooks/basic/test-item-detail/use-test-item-detail-create';
 
 interface TProps {
     modalVisible: boolean
@@ -16,7 +16,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 
-    const { create } = useTestItemDetail();
+    const create = useTestItemDetailCreate();
 
     const closeModal = () => {
         setModalVisible(false);

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Table, TableProps, Typography} from "antd";
-import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 import {addIndexToData} from "@/utils/addIndexToData";
+import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
   header?: {
@@ -11,15 +11,16 @@ interface RecordeValue {
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
-  data: any[] | undefined
-  // data: any[] | {
-  //   records: any[];
-  //   count: number;
-  // } | undefined;
+    // data: any[] | undefined
+    data: {
+        records: any[];
+        count: number;
+    } | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
-  const [page, setPage] = useState(1);
+
+    const [page, setPage] = useState(1);
 
   // useEffect(() => {
   //   if (props.data?.count && Math.ceil((props.data?.count || 1) / 5) < page) {
@@ -28,12 +29,14 @@ const Index = (props: TableProps<any> & RecordeValue) => {
   // }, [props.data, page]);
 
   const handleChangePage = (e: number) => {
-    setPage(e);
-    props.setInitialData((prev: any) => {
-      delete prev.fromRecord;
-      delete prev.selectRecord;
-      return { ...GetPageRecordNumber(e), ...prev };
-    });
+      setPage(e);
+      // props.setInitialData(GetPageRecordNumber(e))
+      props.setInitialData((prev: any) => {
+          console.log(prev)
+          delete prev.fromRecord;
+          delete prev.selectRecord;
+          return {...GetPageRecordNumber(e), ...prev};
+      });
   };
 
   return (
@@ -54,36 +57,31 @@ const Index = (props: TableProps<any> & RecordeValue) => {
       <Table
         {...props}
         loading={props.isLoading}
-        // dataSource={addIndexToData(
-        //   props.data?.records,
-        //   "Row",
-        //   (page - 1) * 5 + 1
-        // )}
-        dataSource={addIndexToData(props?.data, "Row") as []}
+        dataSource={addIndexToData(props?.data?.records, "Row", (page - 1) * 5 + 1) as []}
         className="mt-6"
         columns={props.columns}
-      // pagination={{
-      //   total: props.data?.count,
-      //   showTotal: (total, range) => (
-      //     <Typography>
-      //       {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
-      //     </Typography>
-      //   ),
-      //   onChange: async (e: any) => {
-      //     console.log(e);
-      //     handleChangePage(e);
-      //   },
-      //   defaultPageSize: 5,
-      //   showSizeChanger: false,
-      //   defaultCurrent: 1,
-      //   current: page,
-      //   style: {
-      //     display: "flex",
-      //     flexDirection: "row",
-      //     justifyContent: "flex-start",
-      //     margin: "16px 0",
-      //   },
-      // }}
+        pagination={props.pagination ?? {
+            total: props.data?.count,
+            showTotal: (total, range) => (
+                <Typography>
+                    {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
+                </Typography>
+            ),
+            onChange: async (e: any) => {
+                // console.log(e);
+                handleChangePage(e);
+            },
+            defaultPageSize: 5,
+            showSizeChanger: false,
+            defaultCurrent: 1,
+            current: page,
+            style: {
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                margin: "16px 0",
+            },
+        }}
       />
     </>
   );

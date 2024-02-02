@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const BasicProductCategoryGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -14,7 +14,7 @@ const BasicProductCategoryGetPageItem = z.object({
   densityUpperLimit: z.number().optional(),
   densityLowerLimit: z.number().optional(),
   testMethod: z.string().optional(),
-});
+})
 
 const BasicProductCategoryListItem = z.object({
   id: z.number().optional(),
@@ -72,7 +72,10 @@ const productCategoryApi = {
     }),
     item: BasicProductCategoryGetPageItem,
     response: generalResponseZod.extend({
-      data: z.array(BasicProductCategoryGetPageItem),
+      data: z.object({
+        count: z.number(),
+        records: z.array(BasicProductCategoryGetPageItem)
+      }),
     }),
   },
 

@@ -3,12 +3,9 @@
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { Button, Space, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import useSWRMutation from "swr/mutation";
+import React from "react";
 import measureApi from "constance/measure";
 import CustomTable from "@/components/custom-table";
-
 import { z } from "zod";
 import { Card } from "@/components/card";
 import StatusColumn from "@/components/custom-table/StatusColumn";

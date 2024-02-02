@@ -1,12 +1,12 @@
 import { generalResponseZod } from "@/types/api-response";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { productCategoryApi } from "constance/product-category";
+import { TestItemApi } from "constance/test-item";
 import { z } from "zod";
 
-const apiData = productCategoryApi.BasicProductCategoryCreate;
+const apiData = TestItemApi.BasicTestItemCreate;
 
-const useProductCategoryCreate = () => {
+const useTestItemCreate = () => {
   const queryClient = useQueryClient();
 
   const query = useMutation({
@@ -17,11 +17,12 @@ const useProductCategoryCreate = () => {
     onSuccess: (data) => {
       if (data.success) {
         queryClient.invalidateQueries({
-          queryKey: [productCategoryApi.BasicProductCategoryGetPage.url],
+          queryKey: [TestItemApi.BasicTestItemGetPage.url],
         });
       }
     },
   });
   return query;
 };
-export { useProductCategoryCreate };
+
+export { useTestItemCreate };

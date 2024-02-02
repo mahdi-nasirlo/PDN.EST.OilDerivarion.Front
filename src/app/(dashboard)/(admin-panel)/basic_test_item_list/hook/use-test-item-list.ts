@@ -1,8 +1,11 @@
+import { useTestItemCreate } from "@/hooks/basic/test_item/use-test-item-create";
 import { useTestItemGetPage } from "@/hooks/basic/test_item/use-test-item-get-page";
 
 const useTestItem = () => {
   const dataPage = useTestItemGetPage();
 
-  return { dataPage };
+  const create = useTestItemCreate();
+
+  return { dataPage, create };
 };
 export default useTestItem;

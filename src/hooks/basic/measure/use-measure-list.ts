@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
 import { DefaultOptionType } from "rc-select/lib/Select";
-import { TestItemApi } from "constance/test-item";
+import measureApi from "constance/measure";
 
-const apiData = TestItemApi.BasicTestItemList;
+const apiData = measureApi.BasicMeasureList;
 
-const useTestItemList = () => {
+const useMeasureList = () => {
   const query = useQuery({
     queryKey: [apiData.url],
     queryFn: () =>
@@ -25,4 +25,4 @@ const useTestItemList = () => {
   return { ...query, ...apiData, options };
 };
 
-export { useTestItemList };
+export { useMeasureList };

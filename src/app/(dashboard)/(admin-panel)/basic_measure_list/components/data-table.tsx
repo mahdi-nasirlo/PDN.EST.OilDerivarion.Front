@@ -14,7 +14,7 @@ import { Card } from "@/components/card";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 
 interface TProps {
-  data: z.infer<typeof measureApi.MeasureGetPages.Item>[] | undefined;
+  data: z.infer<typeof measureApi.BasicMeasureGetPage.Item>[] | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
 }
@@ -28,7 +28,7 @@ export default function DataTable({
     setModalVisible(true);
   };
 
-  const columns: ColumnsType<z.infer<typeof measureApi.MeasureGetPages.Item>> =
+  const columns: ColumnsType<z.infer<typeof measureApi.BasicMeasureGetPage.Item>> =
     [
       {
         title: "ردیف",
@@ -58,7 +58,7 @@ export default function DataTable({
             <Button
               type="link"
               className={"text-secondary-500 font-bold"}
-              // onClick={() => setOpenEdit(record)}
+            // onClick={() => setOpenEdit(record)}
             >
               ویرایش
             </Button>
@@ -97,7 +97,7 @@ export default function DataTable({
               </Button>,
             ],
           }}
-          setInitialData={() => {}}
+          setInitialData={() => { }}
           isLoading={isLoading}
           data={data}
           columns={columns}

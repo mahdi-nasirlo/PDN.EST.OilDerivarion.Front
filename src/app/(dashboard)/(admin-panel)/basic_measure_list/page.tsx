@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/breadcrumb";
 import { Squares2X2Icon } from "@heroicons/react/24/solid";
 import DataTable from "./components/data-table";
 import useMeasureGet from "./components/hook/use-measure-get";
+import CreateModal from "./components/measure-create-action";
 
 export default function Page() {
   const { list } = useMeasureGet();
@@ -29,8 +30,13 @@ export default function Page() {
         ]}
       /> */}
       <DataTable
+        modalVisible={modalVisible}
         data={list.data}
         isLoading={list.isLoading}
+        setModalVisible={setModalVisible}
+      />
+      <CreateModal
+        modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
     </>

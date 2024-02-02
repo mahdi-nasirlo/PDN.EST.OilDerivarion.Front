@@ -12,67 +12,67 @@ import CustomTable from "@/components/custom-table";
 import { z } from "zod";
 import { Card } from "@/components/card";
 import StatusColumn from "@/components/custom-table/StatusColumn";
+import EditModal from "./measure-action-edit";
+import useMeasureGet from "./hook/use-measure-get";
 
 interface TProps {
   data: z.infer<typeof measureApi.BasicMeasureGetPage.Item>[] | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
+  modalVisible: any;
 }
 
 export default function DataTable({
   setModalVisible,
   isLoading,
   data,
+  modalVisible,
 }: TProps) {
   const showModal = () => {
     setModalVisible(true);
   };
 
-  const columns: ColumnsType<z.infer<typeof measureApi.BasicMeasureGetPage.Item>> =
-    [
-      {
-        title: "ردیف",
-        dataIndex: "Row",
-        key: "1",
-        width: "5%",
-      },
-      {
-        title: "واحد اندازه گیری",
-        dataIndex: "name",
-        key: "2",
-      },
-      {
-        title: "فعال/غیر فعال",
-        dataIndex: "isActive",
-        key: "4",
-        render: (_, record: any) => <StatusColumn record={record} />,
-      },
-      {
-        title: "عملیات",
-        key: "عملیات",
-        align: "center",
-        fixed: "right",
-        width: "10%",
-        render: (_, record) => (
-          <Space size="small">
-            <Button
-              type="link"
-              className={"text-secondary-500 font-bold"}
-            // onClick={() => setOpenEdit(record)}
-            >
-              ویرایش
-            </Button>
-            {/* <Button
+  const { setUid, getUid, steGetUid } = useMeasureGet();
+
+  const columns: ColumnsType<
+    z.infer<typeof measureApi.BasicMeasureGetPage.Item>
+  > = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      key: "1",
+      width: "5%",
+    },
+    {
+      title: "واحد اندازه گیری",
+      dataIndex: "name",
+      key: "2",
+    },
+    {
+      title: "فعال/غیر فعال",
+      dataIndex: "isActive",
+      key: "4",
+      render: (_, record: any) => <StatusColumn record={record} />,
+    },
+    {
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
             type="link"
-            className={"text-red-500 font-bold"}
-            onClick={() => handleDelete(record)}
+            className={"text-secondary-500 font-bold"}
+            onClick={() => setUid(record.uid)}
           >
-            حذف
-          </Button> */}
-          </Space>
-        ),
-      },
-    ];
+            ویرایش
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -97,25 +97,13 @@ export default function DataTable({
               </Button>,
             ],
           }}
-          setInitialData={() => { }}
+          setInitialData={() => {}}
           isLoading={isLoading}
           data={data}
           columns={columns}
         />
       </Card>
-      {/* <EditModal
-          mutate={mutate}
-          editRecords={openEdit}
-          setEditRecord={setOpenEdit}
-        /> */}
-
-      {/* <ConfirmDeleteModal
-        loading={IsDeleteMeasure}
-        open={isDeleteModalVisible}
-        setOpen={setIsDeleteModalVisible}
-        handleDelete={handleConfirmDelete}
-        title="واحد اندازه گیری"
-      /> */}
+      <EditModal modalVisible={getUid} setModalVisible={steGetUid} />
     </>
   );
 }

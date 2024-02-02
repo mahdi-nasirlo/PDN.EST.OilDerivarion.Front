@@ -124,7 +124,7 @@ const materialApi = {
   BasicMeasureList: {
     url: "/Basic/BasicMeasureList",
     sortBy: "Name",
-    fieldNames: { value: "Uid", label: "Name" },
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       name: z.null(),
       isActive: z.boolean(),

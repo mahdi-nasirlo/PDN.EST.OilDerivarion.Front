@@ -1,75 +1,74 @@
 "use client";
 
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Button, Space, Typography } from "antd";
+import { Button, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
-import React from "react";
+import React, { useState } from "react";
 import measureApi from "constance/measure";
 import CustomTable from "@/components/custom-table";
 import { z } from "zod";
 import { Card } from "@/components/card";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import EditModal from "./measure-action-edit";
-import useMeasureGet from "./hook/use-measure-get";
+
+
+const apiData = measureApi.BasicMeasureGetPage
 
 interface TProps {
-  data: z.infer<typeof measureApi.BasicMeasureGetPage.Item>[] | undefined;
+  data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
-  modalVisible: any;
+  setPaginate: (arg: any) => void
 }
 
 export default function DataTable({
   setModalVisible,
   isLoading,
   data,
-  modalVisible,
+  setPaginate,
 }: TProps) {
-  const showModal = () => {
-    setModalVisible(true);
-  };
 
-  const { setUid, getUid, steGetUid } = useMeasureGet();
+  const [uid, setGetUid] = useState<string | boolean>();
 
   const columns: ColumnsType<
-    z.infer<typeof measureApi.BasicMeasureGetPage.Item>
+    z.infer<typeof apiData.Item>
   > = [
-    {
-      title: "ردیف",
-      dataIndex: "Row",
-      key: "1",
-      width: "5%",
-    },
-    {
-      title: "واحد اندازه گیری",
-      dataIndex: "name",
-      key: "2",
-    },
-    {
-      title: "فعال/غیر فعال",
-      dataIndex: "isActive",
-      key: "4",
-      render: (_, record: any) => <StatusColumn record={record} />,
-    },
-    {
-      title: "عملیات",
-      key: "عملیات",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className={"text-secondary-500 font-bold"}
-            onClick={() => setUid(record.uid)}
-          >
-            ویرایش
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+      {
+        title: "ردیف",
+        dataIndex: "Row",
+        key: "1",
+        width: "5%",
+      },
+      {
+        title: "واحد اندازه گیری",
+        dataIndex: "name",
+        key: "2",
+      },
+      {
+        title: "فعال/غیر فعال",
+        dataIndex: "isActive",
+        key: "4",
+        render: (_, record: any) => <StatusColumn record={record} />,
+      },
+      {
+        title: "عملیات",
+        key: "عملیات",
+        align: "center",
+        fixed: "right",
+        width: "10%",
+        render: (_, record) => (
+          <Space size="small">
+            <Button
+              type="link"
+              className={"text-secondary-500 font-bold"}
+              onClick={() => setGetUid(record.uid)}
+            >
+              ویرایش
+            </Button>
+          </Space>
+        ),
+      },
+    ];
 
   return (
     <>
@@ -94,12 +93,15 @@ export default function DataTable({
               </Button>,
             ],
           }}
-          setInitialData={() => {}}
+          setInitialData={setPaginate}
           isLoading={isLoading}
           data={data}
           columns={columns}
         />
-        <EditModal modalVisible={getUid} setModalVisible={steGetUid} />
+        <EditModal
+          editModalUid={uid}
+          setEditModalUid={setGetUid}
+        />
       </Card>
     </>
   );

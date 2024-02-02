@@ -1,43 +1,26 @@
 "use client";
 
 import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
-import React, { useEffect } from "react";
-import { useValidation } from "@/hooks/use-validation";
-import measureApi from "constance/measure";
-import useMeasureGet from "./hook/use-measure-get";
-import { z } from "zod";
+import React from "react";
+import useMeasureEdit from "../hook/use-measure-edit";
 
-export default function EditModal({
-  modalVisible,
-  setModalVisible,
-}: {
-  modalVisible: any;
-  setModalVisible: any;
-}) {
-  const [form, rules] = useValidation(measureApi.MeasureUpdate.type);
 
-  const CloseModal = () => {
-    setModalVisible(false);
-    form.resetFields();
-  };
-  const { get, update } = useMeasureGet();
+interface TProps {
+  editModalUid: any
+  setEditModalUid: (arg: any) => void
+}
 
-  useEffect(() => {
-    if (get?.data) {
-      form.setFieldsValue(get?.data);
-    }
-  }, [get.data]);
+export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
 
-  const handleEdit = async (
-    data: z.infer<typeof measureApi.MeasureUpdate.type>
-  ) => {
-    data.uid = modalVisible;
-    const res = await update.mutateAsync(data);
-    if (res.success) {
-      setModalVisible(false);
-      form.resetFields();
-    }
-  };
+  const {
+    closeModal,
+    form,
+    rules,
+    update,
+    get,
+    handleSubmit,
+  } = useMeasureEdit(editModalUid, setEditModalUid)
+
 
   return (
     <Modal
@@ -50,13 +33,14 @@ export default function EditModal({
           </div>
         </div>
       }
-      open={modalVisible}
-      onCancel={CloseModal}
+      open={editModalUid}
+      onCancel={closeModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={12} md={12}>
             <Button
-              loading={get.isFetching}
+              loading={get.isFetching || update.isPending}
+              disabled={get.isFetching || update.isPending}
               size="large"
               className="w-full"
               type="primary"
@@ -68,10 +52,10 @@ export default function EditModal({
           </Col>
           <Col xs={12} md={12}>
             <Button
-              disabled={update.isPending}
+              loading={get.isFetching || update.isPending}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
-              onClick={CloseModal}
+              onClick={closeModal}
               key={"cancel"}
               htmlType="reset"
             >
@@ -82,8 +66,8 @@ export default function EditModal({
       ]}
     >
       <Form
-        disabled={update.isPending}
-        onFinish={handleEdit}
+        disabled={get.isFetching || update.isPending}
+        onFinish={handleSubmit}
         form={form}
         layout="vertical"
         initialValues={{ testItems: [] }}

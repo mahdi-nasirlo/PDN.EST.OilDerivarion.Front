@@ -1,9 +1,9 @@
 import React from 'react'
 import ProductCategoryForm from './product-category-form'
-import { Button, Col, Form, Modal, Row } from 'antd';
-import { productCategoryApi } from 'constance/product-category';
-import { useValidation } from '@/hooks/use-validation';
-import { useProductCategory } from '../hook/use-product-category';
+import {Button, Col, Form, Modal, Row} from 'antd';
+import {productCategoryApi} from 'constance/product-category';
+import {useValidation} from '@/hooks/use-validation';
+import {useProductCategoryCreate} from "@/hooks/basic/product-category/use-product-category-create";
 
 interface TProps {
     modalVisible: boolean
@@ -16,7 +16,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const [form, rules] = useValidation(formSchema);
 
-    const { create } = useProductCategory();
+    const create = useProductCategoryCreate();
 
     const closeModal = () => {
         setModalVisible(false);

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ProductCategoryForm from './product-category-form'
-import { Button, Col, Form, Modal, Row } from 'antd'
-import { productCategoryApi } from 'constance/product-category'
-import { useValidation } from '@/hooks/use-validation'
-import { useProductCategory } from '../hook/use-product-category'
-import { z } from 'zod'
+import {Button, Col, Form, Modal, Row} from 'antd'
+import {productCategoryApi} from 'constance/product-category'
+import useProductCategoryEdit
+    from "@/app/(dashboard)/(admin-panel)/basic_product_category_list/hook/use-product-category-edit";
 
 interface TProps {
     editModalUid: any
@@ -15,32 +14,15 @@ const formSchema = productCategoryApi.BasicProductCategoryUpdate.type
 
 export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
 
-    const { get, update } = useProductCategory();
-
-    useEffect(() => {
-        if (get.data) form.setFieldsValue(get.data[0])
-    }, [get.data]);
-
-    const handleSubmit = async (
-        data: z.infer<typeof productCategoryApi.BasicProductCategoryUpdate.type>
-    ) => {
-        const res = await update.mutateAsync({
-            ...data,
-            uid: editModalUid as string,
-        });
-
-        if (res.success) {
-            setEditModalUid(undefined);
-        }
-    };
-
-    const [form, rules] = useValidation(formSchema);
-
-
-    const closeModal = () => {
-        setEditModalUid(false);
-        form.resetFields();
-    };
+    const {
+        closeModal,
+        form,
+        rules,
+        update,
+        get,
+        handleSubmit,
+        density
+    } = useProductCategoryEdit(editModalUid, setEditModalUid)
 
     return (
         <>
@@ -53,7 +35,8 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={12} md={12}>
                             <Button
-                                // loading={isLoading || isMutating}
+                                loading={get.isFetching || update.isPending}
+                                disabled={get.isFetching || update.isPending}
                                 size="large"
                                 className="w-full"
                                 type="primary"
@@ -65,7 +48,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
                         </Col>
                         <Col xs={12} md={12}>
                             <Button
-                                // disabled={isLoading || isMutating}
+                                loading={get.isFetching || update.isPending}
                                 size="large"
                                 className="w-full bg-gray-100 text-warmGray-500"
                                 onClick={closeModal}
@@ -79,11 +62,11 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
             >
                 <Form
                     onFinish={handleSubmit}
-                    disabled={get.isLoading || get.isPending}
+                    disabled={get.isFetching || update.isPending}
                     form={form}
                     layout="vertical"
                 >
-                    <ProductCategoryForm rules={rules} />
+                    <ProductCategoryForm rules={rules} density={density}/>
                 </Form>
             </Modal>
         </>

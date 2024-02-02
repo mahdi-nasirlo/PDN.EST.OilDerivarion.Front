@@ -43,7 +43,7 @@ export default function Page() {
             <Card>
                 <Spin spinning={packagePart.isPending}>
                     <Row gutter={[24, 24]}>
-                        <Col xs={24} md={12} lg={8} xl={6}>
+                        <Col xs={24} md={12} xl={6}>
                             <FirstCard/>
                         </Col>
                         <CardList data={packagePart?.data}/>

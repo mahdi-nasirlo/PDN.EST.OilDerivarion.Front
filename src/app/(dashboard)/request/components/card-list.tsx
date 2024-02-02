@@ -34,7 +34,7 @@ const CardList = ({data}: {
     // });
 
     return data?.map((item, index) => (<>
-        <Col key={index} xs={24} sm={12} lg={8} xl={6}>
+        <Col key={index} xs={24} sm={12} xl={6}>
             <Card
                 className="card-body-p-0"
                 // className={`min-h-[480px] h-full py-2 flex flex-col justify-between space-y-4 font-bold text-lg border-1 shadow-md border-solid rounded-xl`}

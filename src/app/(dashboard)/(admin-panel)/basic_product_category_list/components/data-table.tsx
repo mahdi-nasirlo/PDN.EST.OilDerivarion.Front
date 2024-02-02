@@ -1,27 +1,29 @@
-import React from 'react'
-import { Card } from '@/components/card'
+import React, {useState} from 'react'
+import {Card} from '@/components/card'
 import CustomTable from "@/components/custom-table";
-import { PlusIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
+import {PlusIcon, ViewColumnsIcon} from '@heroicons/react/24/outline';
 import StatusColumn from '@/components/custom-table/StatusColumn';
-import { Button, Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { productCategoryApi } from 'constance/product-category';
-import { z } from 'zod';
+import {Button, Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import {productCategoryApi} from 'constance/product-category';
+import {z} from 'zod';
 import EditModal from './edit-modal';
-import { useProductCategory } from '../hook/use-product-category';
+
+const apiData = productCategoryApi.BasicProductCategoryGetPage
 
 interface TProps {
-    data: z.infer<typeof productCategoryApi.BasicProductCategoryGetPage.item>[] | undefined;
+    data: z.infer<typeof apiData.response.shape.data> | undefined;
     isLoading: boolean;
     setModalVisible: (arg: boolean) => void;
+    setPaginate: (arg: any) => void
 }
 
-export default function DataTable({ setModalVisible, data, isLoading }: TProps) {
-
-    const { uid, setGetUid } = useProductCategory();
+export default function DataTable({setModalVisible, data, isLoading, setPaginate}: TProps) {
+    
+    const [uid, setGetUid] = useState<string | boolean>();
 
     const columns: ColumnsType<
-        z.infer<typeof productCategoryApi.BasicProductCategoryGetPage.item>
+        z.infer<typeof apiData.item>
     > = [
             {
                 title: "ردیف",
@@ -143,8 +145,7 @@ export default function DataTable({ setModalVisible, data, isLoading }: TProps) 
                             </Button>
                         ]
                     }}
-                    setInitialData={() => {
-                    }}
+                    setInitialData={setPaginate}
                     isLoading={isLoading}
                     data={data}
                     columns={columns}

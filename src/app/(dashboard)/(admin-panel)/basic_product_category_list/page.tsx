@@ -1,44 +1,46 @@
 "use client";
 
-import { Collapse } from "antd";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
-import CreateModal from "./components/create-modal";
-import { Squares2X2Icon } from "@heroicons/react/24/solid";
-import { useProductCategory } from "./hook/use-product-category";
+import {Squares2X2Icon} from "@heroicons/react/24/solid";
+import {Collapse} from "antd";
+import FilterForm from "@/app/(dashboard)/(admin-panel)/basic_product_category_list/components/filter-form";
+import CreateModal from "@/app/(dashboard)/(admin-panel)/basic_product_category_list/components/create-modal";
+import {useProductCategoryGetPage} from "@/hooks/basic/product-category/use-product-category-get-page";
 
 export default function Page() {
-  const { dataPage } = useProductCategory();
 
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const dataPage = useProductCategoryGetPage();
 
-  return (
-    <>
-      <Breadcrumb
-        titleIcon={<Squares2X2Icon className="w-8" />}
-        pages={[{ label: "خانه", path: "/" }, { label: "محصول" }]}
-        currentPage={"لیست دسته بندی ها"}
-      />
-      <Collapse
-        size="large"
-        items={[
-          {
-            label: "فیلتر جدول",
-            children: <FilterForm onFinish={dataPage.setFilter} />,
-          },
-        ]}
-      />
-      <DataTable
-        data={dataPage.data}
-        isLoading={dataPage.isFetching || dataPage.isLoading}
-        setModalVisible={setModalVisible}
-      />
-      <CreateModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-      />
-    </>
-  );
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+    return (
+        <>
+            <Breadcrumb
+                titleIcon={<Squares2X2Icon className="w-8"/>}
+                pages={[{label: "خانه", path: "/"}, {label: "محصول"}]}
+                currentPage={"لیست دسته بندی ها"}
+            />
+            <Collapse
+                size="large"
+                items={[
+                    {
+                        label: "فیلتر جدول",
+                        children: <FilterForm onFinish={dataPage.setFilter as any}/>,
+                    },
+                ]}
+            />
+            <DataTable
+                data={dataPage.data}
+                isLoading={dataPage.isFetching || dataPage.isLoading}
+                setModalVisible={setModalVisible}
+                setPaginate={dataPage.setFilter}
+            />
+            <CreateModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+            />
+        </>
+    );
 }

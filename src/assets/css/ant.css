@@ -68,3 +68,36 @@
 .ant-descriptions-item-label {
   @apply items-center flex !important
 }
+
+.ant-select-selector {
+  @apply text-right h-12 bg-gray-100 !important
+}
+
+.ant-select-selection-item {
+  @apply flex items-center !important
+}
+
+.ant-input-number-input {
+  @apply h-12 bg-gray-100 !important
+}
+
+.ant-radio-button-wrapper {
+  @apply h-11 mt-0.5 flex items-center justify-center !important
+}
+
+.ant-radio-button-wrapper:not(.ant-radio-button-wrapper-checked) {
+  @apply bg-gray-100 !important
+}
+
+.ant-input {
+  @apply h-12 bg-gray-100 !important
+}
+
+.ant-menu-item-selected {
+  background-color: theme("backgroundColor.primary.500") !important;
+  color: theme("colors.white") !important;
+}
+
+.ant-btn-lg {
+  @apply h-12 !important
+}

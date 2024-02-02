@@ -133,7 +133,7 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
         //     break;
     }
 
-    return <Col xs={12} md={8} lg={6}>
+    return <Col xs={12} md={8} lg={8} xl={6}>
         <Form.Item
             name={item.Name}
             label={item.Title_Style}

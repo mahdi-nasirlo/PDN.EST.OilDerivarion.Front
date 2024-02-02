@@ -14,12 +14,11 @@ const useTestItemCreate = () => {
       data: z.infer<typeof apiData.type>
     ): Promise<z.infer<typeof generalResponseZod>> =>
       await fetchWithSession({ url: apiData.url, data }),
-    onSuccess: (data) => {
-      if (data.success) {
-        queryClient.invalidateQueries({
-          queryKey: [TestItemApi.BasicTestItemGetPage.url],
-        });
-      }
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [TestItemApi.BasicTestItemGetPage.url],
+        exact: false,
+      });
     },
   });
   return query;

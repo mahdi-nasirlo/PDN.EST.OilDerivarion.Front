@@ -11,12 +11,11 @@ const useMeasureCreate = () => {
   const query = useMutation({
     mutationFn: (data: z.infer<typeof apiData.type>) =>
       fetchWithSession({ url: apiData.url, data }),
-    onSuccess: (data) => {
-      if (data.success) {
-        queryClient.invalidateQueries({
-          queryKey: [measureApi.BasicMeasureGetPage.url],
-        });
-      }
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [measureApi.BasicMeasureGetPage.url],
+        exact: false,
+      });
     },
   });
 

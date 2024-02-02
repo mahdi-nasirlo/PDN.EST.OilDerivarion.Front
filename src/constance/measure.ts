@@ -1,6 +1,6 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const MeasureGetPages = z.object({
   uid: z.string(),
@@ -31,11 +31,11 @@ const measureApi = {
       fromRecord: z.number(),
       selectRecord: z.number(),
     }),
-    item: MeasureGetPages,
+    Item: MeasureGetPages,
     response: generalResponseZod.extend({
       data: z.object({
+        count: z.number(),
         records: z.array(MeasureGetPages),
-        count: z.number()
       }),
     }),
   },

@@ -24,6 +24,13 @@ const BasicProductMaterialList = z.object({
   measureName: z.string(),
   testItems: z.string(),
 });
+const BasicProductMaterialGetPageItem = z.object({
+  uid: z.string().uuid(),
+  name: z.string(),
+  isActive: z.boolean(),
+  measureName: z.string(),
+  testItems: z.string(),
+});
 
 const BasicTestItemList = z.object({
   name: z.string().optional(),
@@ -64,6 +71,22 @@ const materialApi = {
     fieldNames: { label: "name", value: "uid" },
     response: generalResponseZod.extend({
       data: z.array(MaterialGetAllItem),
+    }),
+  },
+  BasicProductMaterialGetPage: {
+    url: "/Basic/BasicProductMaterialGetPage",
+    type: z.object({
+      name: z.string().optional(),
+      isActive: z.boolean().optional(),
+      fromRecord: z.number(),
+      selectRecord: z.number(),
+    }),
+    item: BasicProductMaterialGetPageItem,
+    response: generalResponseZod.extend({
+      data: z.object({
+        count: z.number(),
+        records: z.array(BasicProductMaterialGetPageItem),
+      }),
     }),
   },
   RequestPackageList: {
@@ -129,8 +152,8 @@ const materialApi = {
     // Item:BasicProductMaterialList,
     type: z.object({
       name: z.string({ required_error: errorMessage.required }),
-      isActive: z.boolean(),
-      measureUid: z.string().uuid(),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),
     }),
   },
@@ -186,9 +209,9 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string(),
-      isActive: z.boolean(),
-      measureUid: z.string().uuid(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),
     }),
   },

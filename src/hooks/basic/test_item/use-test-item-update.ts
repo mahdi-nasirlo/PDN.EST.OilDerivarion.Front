@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { generalResponseZod } from "@/types/api-response";
-import { TestItemDetailApi } from "constance/test-item-detail";
 import { z } from "zod";
+import { TestItemApi } from "constance/test-item";
 
-const apiData = TestItemDetailApi.BasicTestItemDetailUpdate;
+const apiData = TestItemApi.BasicTestItemUpdate;
 
-const useTestItemDetailUpdate = () => {
+const useTestItemUpdate = () => {
   const queryQlient = useQueryClient();
 
   return useMutation({
@@ -19,11 +19,11 @@ const useTestItemDetailUpdate = () => {
       }),
     onSuccess: async (data) => {
       await queryQlient.invalidateQueries({
-        queryKey: [TestItemDetailApi.BasicTestItemDetailGetPage.url],
+        queryKey: [TestItemApi.BasicTestItemGetPage.url],
         exact: false,
       });
     },
   });
 };
 
-export default useTestItemDetailUpdate;
+export default useTestItemUpdate;

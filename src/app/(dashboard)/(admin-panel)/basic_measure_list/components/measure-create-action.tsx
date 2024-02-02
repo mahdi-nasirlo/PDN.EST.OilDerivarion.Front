@@ -4,8 +4,8 @@ import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
 import React from "react";
 import { useValidation } from "@/hooks/use-validation";
 import measureApi from "constance/measure";
-import useMeasureGet from "./hook/use-measure-get";
 import { z } from "zod";
+import useMeasureCreate from "@/hooks/basic/measure/use-measure-create";
 
 export default function CreateModal({
   modalVisible,
@@ -31,7 +31,8 @@ export default function CreateModal({
     }
   };
 
-  const { create } = useMeasureGet();
+  const create = useMeasureCreate();
+
   return (
     <Modal
       width={800}

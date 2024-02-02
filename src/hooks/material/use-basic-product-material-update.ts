@@ -1,25 +1,28 @@
+import { generalResponseZod } from "@/types/api-response";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { materialApi } from "constance/material";
-import { url } from "inspector";
 import { z } from "zod";
 
 const apiData = materialApi.BasicProductMaterialUpdate;
 
 const useBasicProductMaterialUpdate = () => {
-  const queryClient = useQueryClient();
+  const queryQlient = useQueryClient();
 
-  const query = useMutation({
-    mutationFn: (data: z.infer<typeof apiData.type>) =>
-      fetchWithSession({ url: apiData.url, data }),
-    onSuccess: (data) => {
-      if (data.success) {
-        queryClient.invalidateQueries({
-          queryKey: [materialApi.BasicProductMaterialList.url],
-        });
-      }
+  return useMutation({
+    mutationFn: (
+      variables: z.infer<typeof apiData.type>
+    ): Promise<z.infer<typeof generalResponseZod>> =>
+      fetchWithSession({
+        url: apiData.url,
+        data: variables,
+      }),
+    onSuccess: async (data) => {
+      await queryQlient.invalidateQueries({
+        queryKey: [materialApi.BasicProductMaterialGetPage.url],
+        exact: false,
+      });
     },
   });
-  return query;
 };
 export default useBasicProductMaterialUpdate;

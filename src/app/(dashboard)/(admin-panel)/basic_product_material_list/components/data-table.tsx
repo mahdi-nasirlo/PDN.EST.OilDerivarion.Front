@@ -1,18 +1,17 @@
 "use client";
 
-import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Button, Space } from "antd";
+import { Button, Space, Tooltip, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
-import measureApi from "constance/measure";
-import CustomTable from "@/components/custom-table";
-import { z } from "zod";
 import { Card } from "@/components/card";
+import { z } from "zod";
+import CustomTable from "@/components/custom-table";
+import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { materialApi } from "constance/material";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-import EditModal from "./measure-action-edit";
+import EditModal from "./edit-modal";
 
-
-const apiData = measureApi.BasicMeasureGetPage
+const apiData = materialApi.BasicProductMaterialGetPage;
 
 interface TProps {
   data: z.infer<typeof apiData.response.shape.data> | undefined;
@@ -21,17 +20,12 @@ interface TProps {
   setPaginate: (arg: any) => void
 }
 
-export default function DataTable({
-  setModalVisible,
-  isLoading,
-  data,
-  setPaginate,
-}: TProps) {
+export default function DataTable({ data, isLoading, setModalVisible, setPaginate }: TProps) {
 
   const [uid, setGetUid] = useState<string | boolean>();
 
   const columns: ColumnsType<
-    z.infer<typeof apiData.Item>
+    z.infer<typeof apiData.item>
   > = [
       {
         title: "ردیف",
@@ -40,16 +34,46 @@ export default function DataTable({
         width: "5%",
       },
       {
-        title: "واحد اندازه گیری",
+        title: "نام ماده اولیه",
         dataIndex: "name",
         key: "2",
       },
       {
-        title: "فعال/غیر فعال",
+        title: "واحد اندازه کیری",
+        dataIndex: "measureName",
+        key: "2",
+      },
+      {
+        title: "فعال/غیرفعال",
         dataIndex: "isActive",
-        key: "4",
+        key: "5",
         render: (_, record: any) => <StatusColumn record={record} />,
       },
+      {
+        title: "فاکتورهای آزمون",
+        dataIndex: "testItems",
+        key: "4",
+        render: (_, record) => {
+          if (record.testItems === null) {
+            return <Typography>_</Typography>;
+          }
+          return (
+            <Tooltip
+              placement="top"
+              title={<Typography>{record.testItems}</Typography>}
+            >
+              <Typography.Text
+                className="max-w-[180px]"
+                ellipsis={true}
+                style={{ width: "40px !important" }}
+              >
+                {record.testItems}
+              </Typography.Text>
+            </Tooltip>
+          );
+        },
+      },
+
       {
         title: "عملیات",
         key: "عملیات",
@@ -60,7 +84,7 @@ export default function DataTable({
           <Space size="small">
             <Button
               type="link"
-              className={"text-secondary-500 font-bold"}
+              className="text-secondary-500 font-bold"
               onClick={() => setGetUid(record.uid)}
             >
               ویرایش
@@ -69,14 +93,13 @@ export default function DataTable({
         ),
       },
     ];
-
   return (
     <>
       <Card className="mt-8">
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست واحد اندازه گیری",
+            text: "لیست مواد اولیه",
             actions: [
               <Button
                 key={"1"}
@@ -84,12 +107,10 @@ export default function DataTable({
                 size="large"
                 type="primary"
                 htmlType="submit"
-                onClick={() => {
-                  setModalVisible(true);
-                }}
+                onClick={() => setModalVisible(true)}
               >
                 <PlusIcon width={24} height={24} />
-                <span className="flex">افزودن واحد اندازه گیری</span>
+                <span className="flex">افزودن ماده اولیه</span>
               </Button>,
             ],
           }}

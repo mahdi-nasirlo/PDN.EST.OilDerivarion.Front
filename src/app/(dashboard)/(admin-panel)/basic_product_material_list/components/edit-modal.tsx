@@ -1,9 +1,7 @@
-"use client";
-
-import { Button, Col, Form, Input, Modal, Row, Select } from "antd";
+import { Button, Col, Form, Modal, Row } from "antd";
 import React from "react";
-import useMeasureEdit from "../hook/use-measure-edit";
-
+import MaterialForm from "./material-form";
+import useBasicMaterialEdit from "../hook/use-basic-material-edit";
 
 interface TProps {
   editModalUid: any
@@ -19,7 +17,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
     update,
     get,
     handleSubmit,
-  } = useMeasureEdit(editModalUid, setEditModalUid)
+  } = useBasicMaterialEdit(editModalUid, setEditModalUid)
 
 
   return (
@@ -27,7 +25,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">ویرایش واحد اندازه گیری</div>
+          <div className="text-base mb-2">ویرایش ماده اولیه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -66,36 +64,13 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
       ]}
     >
       <Form
-        disabled={get.isFetching || update.isPending}
         onFinish={handleSubmit}
+        disabled={get.isFetching || update.isPending}
         form={form}
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
-            <Form.Item rules={[rules]} name="name" label="واحد اندازه گیری">
-              <Input size="large" placeholder="وارد کنید" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} md={12}>
-            <Form.Item
-              name="isActive"
-              label="فعال / غیر فعال"
-              rules={[rules]}
-              initialValue={true}
-            >
-              <Select
-                options={[
-                  { label: "فعال", value: true },
-                  { label: "غیر فعال", value: false },
-                ]}
-                size="large"
-                placeholder="انتخاب کنید"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
+        <MaterialForm rules={rules} />
       </Form>
     </Modal>
   );

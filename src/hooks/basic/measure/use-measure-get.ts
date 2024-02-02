@@ -1,11 +1,11 @@
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useQuery } from "@tanstack/react-query";
+import measureApi from "constance/measure";
 import { z } from "zod";
-import { TestItemDetailApi } from "constance/test-item-detail";
 
-const apiData = TestItemDetailApi.BasicTestItemDetailGet;
+const apiData = measureApi.MeasureGet;
 
-const useTestItemDetailGet = (uid?: string) => {
+const useMeasureGetData = (uid?: string) => {
   const data: z.infer<typeof apiData.type> = {
     uid: uid as string,
   };
@@ -19,4 +19,4 @@ const useTestItemDetailGet = (uid?: string) => {
 
   return { ...query };
 };
-export default useTestItemDetailGet;
+export default useMeasureGetData;

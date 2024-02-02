@@ -23,7 +23,7 @@ const RoleAction = ({ open, setOpen }: TProps) => {
     return (
         <div>
             <Modal
-                title={'تعیین نقش'}
+                title={'تعیین نقش کاربر'}
                 open={typeof open == "string"}
                 onCancel={() => setOpen(undefined)}
                 width={600}

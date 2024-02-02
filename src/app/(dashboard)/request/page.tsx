@@ -10,7 +10,6 @@ import {PlusSmallIcon, SquaresPlusIcon} from "@heroicons/react/24/outline";
 import {useGetRequestPackagePartList} from "@/hooks/material/use-get-request-package-part-list";
 import CardList from "@/app/(dashboard)/request/components/card-list";
 import FirstCard from "@/app/(dashboard)/request/components/first-card";
-import {useQueryClient} from "@tanstack/react-query";
 
 export default function Page() {
 
@@ -18,7 +17,6 @@ export default function Page() {
 
     const router = useRouter()
 
-    const queryClient = useQueryClient()
     return (
         <>
             <Breadcrumb
@@ -41,9 +39,9 @@ export default function Page() {
                 titleIcon={<SquaresPlusIcon className="w-8"/>}
             />
             <Card>
-                <Spin spinning={packagePart.isPending}>
+                <Spin spinning={packagePart.isFetching}>
                     <Row gutter={[24, 24]}>
-                        <Col xs={24} md={12} xl={6}>
+                        <Col xs={24} md={12} xl={8} xxl={6}>
                             <FirstCard/>
                         </Col>
                         <CardList data={packagePart?.data}/>

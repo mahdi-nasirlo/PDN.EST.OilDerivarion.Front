@@ -12,6 +12,7 @@ const MaterialSelectField = (props: SelectProps) => {
         {...props}
         showSearch
         options={materials.options}
+        loading={materials.isLoading}
         size="large"
         placeholder="انتخاب نمایید"
         tokenSeparators={[","]}

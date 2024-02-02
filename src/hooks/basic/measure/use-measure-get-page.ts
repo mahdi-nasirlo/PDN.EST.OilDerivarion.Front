@@ -1,30 +1,26 @@
-import fetchWithSession from "@/utils/fetch-with-session";
-import GetPageRecordNumber from "@/utils/getPageRecordNumber";
-import { useQuery } from "@tanstack/react-query";
 import measureApi from "constance/measure";
-import { useState } from "react";
-import { z } from "zod";
+import {z} from "zod";
+import useHandleFilter from "@/hooks/use-handle-filter";
+import fetchWithSession from "@/utils/fetch-with-session";
+import {useQuery} from "@tanstack/react-query";
 
 const apiData = measureApi.BasicMeasureGetPage;
 
 const useMeasureGetPage = () => {
-  const pageData = GetPageRecordNumber();
-  const [arg, setArg] = useState<z.infer<typeof apiData.type>>(pageData);
+
+  const {filter, setFilter} = useHandleFilter<z.infer<typeof apiData.type>>()
 
   const query = useQuery({
-    queryKey: [apiData.url, arg],
-    queryFn: () =>
-      fetchWithSession({ url: apiData.url, data: arg || {}, notify: false }),
+    queryKey: [apiData.url, filter],
+    queryFn: () => fetchWithSession({url: apiData.url, data: filter || {}, notify: false}),
     select: (data: z.infer<typeof apiData.response>) => data.data,
-    // enabled: typeof arg !== "undefined"
+    enabled: typeof filter !== "undefined"
   });
 
   return {
     ...query,
-    filter: arg,
-    setFilter: (newArg: z.infer<typeof apiData.type>) => {
-      setArg({ ...newArg, ...pageData });
-    },
+    filter,
+    setFilter
   };
 };
 

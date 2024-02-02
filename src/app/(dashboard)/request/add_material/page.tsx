@@ -4,8 +4,9 @@ import React from "react";
 import {Card} from "@/components/card";
 import {BeakerIcon} from "@heroicons/react/24/outline";
 import Breadcrumb from "@/components/breadcrumb";
-import DatatableMaterials from "@/app/(dashboard)/request/add_material/datatable-materials";
 import {Divider} from "antd";
+import AddMaterials from "@/app/(dashboard)/request/add_material/components/add-materials";
+import DatatableMaterials from "@/app/(dashboard)/request/add_material/components/datatable-materials";
 
 const Page = () => {
 
@@ -18,7 +19,7 @@ const Page = () => {
                 backLink="/request"
             />
             <Card>
-                {/*<AddMaterils/>*/}
+                <AddMaterials/>
                 <Divider/>
                 <DatatableMaterials/>
             </Card>

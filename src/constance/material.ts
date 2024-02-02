@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
@@ -35,11 +35,28 @@ const BasicTestItemList = z.object({
   testMethod: z.string().optional(),
   measure_Id: z.number().optional(),
 });
+
 const BasicMeasureList = z.object({
   Uid: z.string().uuid(),
   Name: z.string(),
   IsActive: z.boolean(),
 });
+
+const GetAllRequestPackageRegisteredMaterialItem = z.object({
+  uid: z.string(),
+  name: z.string(),
+  isActive: z.boolean(),
+  measureUid: z.string(),
+  measureName: z.string()
+})
+
+const RequestPackageMaterialListItem = z.object({
+  Id: z.number(),
+  Uid: z.string(),
+  Material_Name: z.string(),
+  TestItems: z.string()
+})
+
 const materialApi = {
   MaterialGetAll: {
     url: "/Material/MaterialGetAll",
@@ -82,12 +99,19 @@ const materialApi = {
       }),
       material_Uid: z.string(),
     }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({}))
+    })
   },
   GetAllRequestPackageRegisteredMaterial: {
     url: "/Material/GetAllRequestPackageRegisteredMaterial",
     type: z.object({
       package_UID: z.string().uuid().optional(),
     }),
+    item: GetAllRequestPackageRegisteredMaterialItem,
+    response: generalResponseZod.extend({
+      data: z.array(GetAllRequestPackageRegisteredMaterialItem)
+    })
   },
   BasicProductMaterialList: {
     url: "/Basic/BasicProductMaterialList",
@@ -168,6 +192,37 @@ const materialApi = {
       testItems: z.array(z.object({})),
     }),
   },
+  RequestPackagePartDelete: {
+    url: "/Material/RequestPackagePartDelete",
+    type: z.object({
+      part_UID: z.string(),
+      package_UID: z.string().optional()
+    })
+  },
+  RequestPackageDelete: {
+    url: "/Material/RequestPackagePartDelete",
+    type: z.object({
+      part_UID: z.string(),
+      package_UID: z.string()
+    })
+  },
+  RequestPackageMaterialDelete: {
+    url: "/Material/RequestPackageMaterialDelete",
+    type: z.object({
+      request__Package_UID: z.string().optional(),
+      material_Uid: z.string()
+    })
+  },
+  RequestPackageMaterialList: {
+    url: "/Material/RequestPackageMaterialList",
+    type: z.object({
+      package_UID: z.string().optional()
+    }),
+    item: RequestPackageMaterialListItem,
+    response: generalResponseZod.extend({
+      data: z.array(RequestPackageMaterialListItem)
+    })
+  }
 };
 
 export { materialApi };

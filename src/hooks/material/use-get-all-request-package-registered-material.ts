@@ -11,10 +11,13 @@ const useGetAllRequestPackageRegisteredMaterial = (package_UID?: string) => {
         package_UID: package_UID
     }
 
-    return useQuery({
+    const query = useQuery({
         queryKey: [apiData.url],
-        queryFn: () => fetchWithSession({url: apiData.url, data})
+        queryFn: () => fetchWithSession({url: apiData.url, data}),
+        select: (data: z.infer<typeof apiData.response>) => data.data
     })
+
+    return {...query, ...apiData}
 }
 
 export {useGetAllRequestPackageRegisteredMaterial}

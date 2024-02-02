@@ -11,7 +11,6 @@ interface RecordeValue {
   }
   setInitialData: (arg: any) => void;
   isLoading: boolean;
-    // data: any[] | undefined
     data: {
         records: any[];
         count: number;
@@ -57,7 +56,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
       <Table
         {...props}
         loading={props.isLoading}
-        dataSource={addIndexToData(props?.data?.records, "Row", (page - 1) * 5 + 1) as []}
+        dataSource={addIndexToData(props?.data?.records || [], "Row", (page - 1) * 5 + 1) as []}
         className="mt-6"
         columns={props.columns}
         pagination={props.pagination ?? {
@@ -67,10 +66,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
                     {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
                 </Typography>
             ),
-            onChange: async (e: any) => {
-                // console.log(e);
-                handleChangePage(e);
-            },
+            onChange: handleChangePage,
             defaultPageSize: 5,
             showSizeChanger: false,
             defaultCurrent: 1,

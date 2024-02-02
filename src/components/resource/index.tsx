@@ -103,7 +103,7 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
                     <FormDataTable
                         formKey={categoryKey}
                         schema={form}
-                        formData={initialValues}
+                        formData={records}
                         delete={true}
                     />
                 </div>

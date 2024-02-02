@@ -1,5 +1,4 @@
 import fetchWithSession from "@/utils/fetch-with-session";
-import { productCategoryApi } from "constance/product-category";
 import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { TestItemApi } from "constance/test-item";

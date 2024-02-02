@@ -8,79 +8,79 @@ import { ColumnsType } from "antd/es/table";
 import { TestItemApi } from "constance/test-item";
 import { z } from "zod";
 import EditModal from "./edit-modal";
-import useTestItem from "../hook/use-test-item-list";
 
 const apiData = TestItemApi.BasicTestItemGetPage;
 interface TProps {
   data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
-  modalVisible: any;
+  setPaginate: (arg: any) => void
 }
 
 export default function DataTable({
   setModalVisible,
   data,
   isLoading,
-  modalVisible,
+  setPaginate,
 }: TProps) {
-  const { setUid, getUid, setGetUid } = useTestItem();
+
+  const [uid, setGetUid] = useState<string | boolean>();
 
   const columns: ColumnsType<
     z.infer<typeof TestItemApi.BasicTestItemGetPage.item>
   > = [
-    {
-      title: "ردیف",
-      dataIndex: "Row",
-      key: "1",
-      width: "5%",
-    },
-    {
-      title: "نام فاکتور آزمون",
-      dataIndex: "name",
-      key: "2",
-    },
-    {
-      title: "واحد اندازه گیری",
-      dataIndex: "measureName",
-      key: "3",
-    },
-    {
-      title: "فعال/غیر فعال ",
-      dataIndex: "isActive",
-      key: "4",
-      render: (e, record) => <StatusColumn record={record} />,
-    },
-    {
-      title: "مدت زمان انجام آزمایش",
-      dataIndex: "testDuration",
-      key: "5",
-      render: (_, record) => {
-        return (
-          <Typography.Text>
-            {record.testDuration !== undefined
-              ? `${record.testDuration} ساعت`
-              : "تعریف نشده"}
-          </Typography.Text>
-        );
+      {
+        title: "ردیف",
+        dataIndex: "Row",
+        key: "1",
+        width: "5%",
       },
-    },
-    {
-      title: "جزئیات",
-      key: "جزئیات",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => setUid(record.uid)}
-          >
-            ویرایش
-          </Button>
-          {/* 
+      {
+        title: "نام فاکتور آزمون",
+        dataIndex: "name",
+        key: "2",
+      },
+      {
+        title: "واحد اندازه گیری",
+        dataIndex: "measureName",
+        key: "3",
+      },
+      {
+        title: "فعال/غیر فعال ",
+        dataIndex: "isActive",
+        key: "4",
+        render: (e, record) => <StatusColumn record={record} />,
+      },
+      {
+        title: "مدت زمان انجام آزمایش",
+        dataIndex: "testDuration",
+        key: "5",
+        render: (_, record) => {
+          return (
+            <Typography.Text>
+              {record.testDuration !== undefined
+                ? `${record.testDuration} ساعت`
+                : "تعریف نشده"}
+            </Typography.Text>
+          );
+        },
+      },
+      {
+        title: "جزئیات",
+        key: "جزئیات",
+        align: "center",
+        fixed: "right",
+        width: "10%",
+        render: (_, record) => (
+          <Space size="small">
+            <Button
+              type="link"
+              className="text-secondary-500 font-bold"
+              onClick={() => setGetUid(record.uid)}
+            >
+              ویرایش
+            </Button>
+            {/* 
                             <Button
                                 type="link"
                                 className="text-red-500 font-bold"
@@ -89,10 +89,10 @@ export default function DataTable({
                                 حذف
                             </Button>
                         */}
-        </Space>
-      ),
-    },
-  ];
+          </Space>
+        ),
+      },
+    ];
 
   return (
     <>
@@ -117,12 +117,15 @@ export default function DataTable({
               </Button>,
             ],
           }}
-          setInitialData={() => {}}
+          setInitialData={setPaginate}
           isLoading={isLoading}
           data={data}
           columns={columns}
         />
-        <EditModal modalVisible={getUid} setModalVisible={setGetUid} />
+        <EditModal
+          editModalUid={uid}
+          setEditModalUid={setGetUid}
+        />
       </Card>
     </>
   );

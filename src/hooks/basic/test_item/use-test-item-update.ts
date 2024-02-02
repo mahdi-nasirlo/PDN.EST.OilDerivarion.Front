@@ -1,9 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { generalResponseZod } from "@/types/api-response";
-import { productCategoryApi } from "constance/product-category";
 import { z } from "zod";
-import test from "node:test";
 import { TestItemApi } from "constance/test-item";
 
 const apiData = TestItemApi.BasicTestItemUpdate;
@@ -19,12 +17,11 @@ const useTestItemUpdate = () => {
         url: apiData.url,
         data: variables,
       }),
-    onSuccess: (data) => {
-      if (data.success) {
-        queryQlient.invalidateQueries({
-          queryKey: [TestItemApi.BasicTestItemGetPage.url],
-        });
-      }
+    onSuccess: async (data) => {
+      await queryQlient.invalidateQueries({
+        queryKey: [TestItemApi.BasicTestItemGetPage.url],
+        exact: false,
+      });
     },
   });
 };

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import Breadcrumb from "@/components/breadcrumb";
 import { Collapse } from "antd";
 import { DocumentCheckIcon } from "@heroicons/react/24/solid";
-import useTestItem from "./hook/use-test-item-list";
 import FilterForm from "./components/filter-form";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
+import { useTestItemGetPage } from "@/hooks/basic/test_item/use-test-item-get-page";
 
 export default function Page() {
-  const { dataPage } = useTestItem();
+
+  const dataPage = useTestItemGetPage();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
@@ -31,10 +32,10 @@ export default function Page() {
         ]}
       />
       <DataTable
-        modalVisible={modalVisible}
         data={dataPage.data}
-        isLoading={dataPage.isLoading || dataPage.isFetching}
+        isLoading={dataPage.isFetching || dataPage.isLoading}
         setModalVisible={setModalVisible}
+        setPaginate={dataPage.setFilter}
       />
       <CreateModal
         modalVisible={modalVisible}

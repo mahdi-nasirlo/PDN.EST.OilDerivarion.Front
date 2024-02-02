@@ -2,6 +2,7 @@ import useBasicMeasureList from "@/hooks/material/use-basic-measure-list";
 import useBasicProductMaterialCreate from "@/hooks/material/use-basic-product-material-create";
 import useBasicProductMaterialGet from "@/hooks/material/use-basic-product-material-get";
 import useBasicProductMaterialList from "@/hooks/material/use-basic-product-material-list";
+import useBasicProductMaterialUpdate from "@/hooks/material/use-basic-product-material-update";
 import useBasicTestItemsList from "@/hooks/material/use-basic-testitems-list";
 import { useState } from "react";
 
@@ -18,11 +19,14 @@ const useBasicMaterial = () => {
 
   const get = useBasicProductMaterialGet(uid as string);
 
+  const update = useBasicProductMaterialUpdate();
+
   const handleEdit = () => {
     setUid(uid as string);
   };
 
   return {
+    update,
     list,
     testItem,
     measure,

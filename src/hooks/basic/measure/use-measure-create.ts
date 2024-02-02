@@ -1,12 +1,11 @@
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { materialApi } from "constance/material";
-import { url } from "inspector";
+import measureApi from "constance/measure";
 import { z } from "zod";
 
-const apiData = materialApi.BasicProductMaterialUpdate;
+const apiData = measureApi.MeasureCreate;
 
-const useBasicProductMaterialUpdate = () => {
+const useMeasureCreate = () => {
   const queryClient = useQueryClient();
 
   const query = useMutation({
@@ -15,11 +14,12 @@ const useBasicProductMaterialUpdate = () => {
     onSuccess: (data) => {
       if (data.success) {
         queryClient.invalidateQueries({
-          queryKey: [materialApi.BasicProductMaterialList.url],
+          queryKey: [measureApi.BasicMeasureGetPage.url],
         });
       }
     },
   });
+
   return query;
 };
-export default useBasicProductMaterialUpdate;
+export default useMeasureCreate;

@@ -33,31 +33,36 @@ const measureApi = {
     }),
     Item: MeasureGetPages,
     response: generalResponseZod.extend({
-      data: z.array(MeasureGetPages),
+      data: z.object({ records: z.array(MeasureGetPages) }),
     }),
   },
 
-  AddRequest: {
-    url: "/License/AddRequest",
+  MeasureCreate: {
+    url: "/Basic/MeasureCreate",
     type: z.object({
-      representative__National_Code: z.string().optional(),
-      representative__Name: z.string().optional(),
-      representative__Family: z.string().optional(),
-      company__National_ID: z.string().optional(),
-      company__Name: z.string().optional(),
-      company__Business_ID: z
-        .string({ required_error: errorMessage.required })
-        .regex(/^\d*$/, { message: errorMessage.number_invalid })
-        .length(12, { message: "لطفا 12 رقم وارد کنید" }),
-      license_Type_ID: z.number({ required_error: errorMessage.required }),
-      license_Number: z
-        .string({ required_error: errorMessage.required })
-        .regex(/^\d*$/, { message: errorMessage.number_invalid })
-        .length(12, { message: "لطفا 12 رقم وارد کنید" }),
-      license_Expire_Date_Fa: z.string({
-        required_error: errorMessage.required,
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required }),
+    }),
+  },
+  MeasureGet: {
+    url: "/Basic/MeasureGet",
+    type: z.object({
+      uid: z.string().uuid(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({
+        uid: z.string().uuid(),
+        name: z.string(),
+        isActive: z.boolean(),
       }),
-      state_Uid: z.string({ required_error: errorMessage.required }),
+    }),
+  },
+  MeasureUpdate: {
+    url: "/Basic/MeasureUpdate",
+    type: z.object({
+      uid: z.string().uuid(),
+      name: z.string(),
+      isActive: z.boolean(),
     }),
   },
 };

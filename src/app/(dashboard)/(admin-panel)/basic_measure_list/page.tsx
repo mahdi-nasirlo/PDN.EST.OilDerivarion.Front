@@ -3,9 +3,11 @@
 import { Collapse } from "antd";
 import React, { useState } from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import { Squares2X2Icon } from "@heroicons/react/24/solid";
+import { Squares2X2Icon, SwatchIcon } from "@heroicons/react/24/solid";
 import DataTable from "./components/data-table";
 import useMeasureGet from "./components/hook/use-measure-get";
+import CreateModal from "./components/measure-create-action";
+import FilterForm from "./components/filter-form";
 
 export default function Page() {
   const { list } = useMeasureGet();
@@ -14,23 +16,28 @@ export default function Page() {
 
   return (
     <>
-      {/* <Breadcrumb
-        titleIcon={<Squares2X2Icon className="w-8" />}
-        pages={[{ label: "خانه", path: "/" }, { label: "محصول" }]}
-        currentPage={"لیست دسته بندی ها"}
+      <Breadcrumb
+        titleIcon={<SwatchIcon className="w-8" />}
+        pages={[{ label: "خانه", path: "/" }, { label: "واحد اندازه گیری" }]}
+        currentPage={"لیست واحد اندازه گیری"}
       />
       <Collapse
         size="large"
         items={[
           {
             label: "فیلتر جدول",
-            children: <FilterForm onFinish={dataPage.setFilter} />,
+            children: <FilterForm onFinish={list.setFilter} />,
           },
         ]}
-      /> */}
+      />
       <DataTable
-        data={list.data}
+        modalVisible={modalVisible}
+        data={list.data?.records}
         isLoading={list.isLoading}
+        setModalVisible={setModalVisible}
+      />
+      <CreateModal
+        modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
     </>

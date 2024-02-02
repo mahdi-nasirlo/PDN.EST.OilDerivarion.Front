@@ -96,7 +96,7 @@ export default function DataTable({
   return (
     <>
       <Card className="mt-8">
-        <CustomTable
+        {/* <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
             text: "لیست مواد اولیه",
@@ -118,7 +118,7 @@ export default function DataTable({
           isLoading={isLoading}
           data={data}
           columns={columns}
-        />
+        /> */}
         <EditModal modalVisible={uid} setModalVisible={setGetUid} />
       </Card>
     </>

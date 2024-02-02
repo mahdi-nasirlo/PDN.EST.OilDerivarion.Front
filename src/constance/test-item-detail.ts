@@ -42,7 +42,7 @@ const TestItemDetailApi = {
     }),
     item: BasicTestItemDetailGetItem,
     response: generalResponseZod.extend({
-      data: z.array(BasicTestItemDetailGetItem),
+      data: BasicTestItemDetailGetItem,
     }),
   },
 

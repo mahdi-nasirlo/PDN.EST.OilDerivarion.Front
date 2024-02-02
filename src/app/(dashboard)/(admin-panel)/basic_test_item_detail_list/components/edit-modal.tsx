@@ -25,9 +25,8 @@ export default function EditModal({ modalVisible, setModalVisible }: TProps) {
 
   useEffect(() => {
     if (get?.data) {
-      form.setFieldsValue(get?.data[0]);
+      form.setFieldsValue(get?.data);
     }
-    console.log(modalVisible);
   }, [get.data]);
 
   const handleEdit = async (
@@ -37,6 +36,7 @@ export default function EditModal({ modalVisible, setModalVisible }: TProps) {
     const res = await update.mutateAsync(data);
     if (res) {
       setModalVisible(false);
+      form.resetFields();
     }
   };
 
@@ -51,7 +51,7 @@ export default function EditModal({ modalVisible, setModalVisible }: TProps) {
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={12} md={12}>
               <Button
-                // loading={isLoading || isMutating}
+                loading={update.isPending}
                 size="large"
                 className="w-full"
                 type="primary"

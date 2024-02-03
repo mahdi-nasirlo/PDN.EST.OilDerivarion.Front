@@ -15,6 +15,7 @@ import Select from "@/components/form-builder/inputs/select";
 import RadioBtn from "@/components/form-builder/inputs/radio-btn";
 import {updatedObject} from "../../../utils/method";
 import NaturalNumber from "@/components/form-builder/inputs/natural-number";
+import {motion} from "framer-motion";
 
 
 const Index = (props: {
@@ -76,8 +77,24 @@ const RenderInputs = (props: {
             <Row gutter={[16, 10]}>
                 {props?.item
                     ?.sort((a, b) => a.Counting_Position - b.Counting_Position)
-                    .map((value) => (
-                        <RenderInput key={value.Counting_Position} item={value} rules={rules}/>
+                    .map((value, index) => (
+                        <Col xs={12} md={8} lg={8} xl={6}>
+                            <motion.div
+                                key={index}
+                                className="relative"
+                                transition={{delay: index * 0.1, duration: 0.1, ease: "easeIn"}}
+                                initial={{
+                                    opacity: 0,
+                                    left: -12,
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    left: 0
+                                }}
+                            >
+                                <RenderInput key={value.Counting_Position} item={value} rules={rules}/>
+                            </motion.div>
+                        </Col>
                     ))}
             </Row>
             <Divider/>
@@ -133,15 +150,13 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
         //     break;
     }
 
-    return <Col xs={12} md={8} lg={8} xl={6}>
-        <Form.Item
+    return <Form.Item
             name={item.Name}
             label={item.Title_Style}
             rules={[rules]}
         >
             {currentInput}
         </Form.Item>
-    </Col>
 }
 
 const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[]) => {

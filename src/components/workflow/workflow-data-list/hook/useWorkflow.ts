@@ -19,7 +19,7 @@ const UseWorkflow = (apiUrl: string) => {
             try {
 
                 // @ts-ignore
-                const tasks = JSON.parse(data.data.tasks as string)
+                const tasks: z.infer<typeof workflowApi.dataTable.response.shape.data.shape.tasks> = JSON.parse(data.data.tasks as string)
 
                 return {...data.data, tasks}
 

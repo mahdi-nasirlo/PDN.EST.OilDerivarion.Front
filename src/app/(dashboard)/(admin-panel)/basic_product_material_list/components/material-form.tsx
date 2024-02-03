@@ -4,13 +4,13 @@ import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import MultipleSelect from "@/components/multiple-select";
 import useBasicTestItemsList from "@/hooks/material/use-basic-testitems-list";
-import useBasicMeasureList from "@/hooks/material/use-basic-measure-list";
+import { useMeasureList } from "@/hooks/basic/measure/use-measure-list";
 
 function MaterialForm({ rules }: any) {
 
   const testItem = useBasicTestItemsList();
 
-  const measure = useBasicMeasureList();
+  const measure = useMeasureList();
 
   return (
     <>
@@ -47,7 +47,7 @@ function MaterialForm({ rules }: any) {
           >
             <Select
               showSearch
-              options={measure.data}
+              options={measure.options}
               loading={measure.isLoading}
               size="large"
               placeholder="انتخاب کنید"

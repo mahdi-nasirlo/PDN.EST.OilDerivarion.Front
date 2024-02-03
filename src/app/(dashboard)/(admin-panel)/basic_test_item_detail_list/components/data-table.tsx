@@ -8,6 +8,8 @@ import { ColumnsType } from "antd/es/table";
 import { TestItemDetailApi } from "constance/test-item-detail";
 import { z } from "zod";
 import EditModal from "./edit-modal";
+import useTestItemDetailDelete from "@/hooks/basic/test-item-detail/use-test-item-detail-delete";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 const apiData = TestItemDetailApi.BasicTestItemDetailGetPage;
 interface TProps {
@@ -25,6 +27,21 @@ export default function DataTable({
 }: TProps) {
 
   const [uid, setGetUid] = useState<string | boolean>();
+
+  const [uidDelete, setUidDelete] = useState<string | boolean>();
+
+  const Delete = useTestItemDetailDelete()
+
+  const handelDelete = async () => {
+
+    const res = await Delete.mutateAsync({ uid: uidDelete as string });
+
+    if (res.success) {
+      setUidDelete(undefined);
+    }
+
+  }
+
 
   const columns: ColumnsType<
     z.infer<typeof apiData.item>
@@ -71,15 +88,13 @@ export default function DataTable({
             >
               ویرایش
             </Button>
-            {/*
-                            <Button
-                                type="link"
-                                className="text-red-500 font-bold"
-                                onClick={() => handleDelete(record)}
-                            >
-                                حذف
-                            </Button>
-                        */}
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
           </Space>
         ),
       },
@@ -113,11 +128,18 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
       </Card>
+      <EditModal
+        editModalUid={uid}
+        setEditModalUid={setGetUid}
+      />
+      <ConfirmDeleteModal
+        title='استاندارد آزمون'
+        open={uidDelete}
+        setOpen={setUidDelete}
+        handleDelete={handelDelete}
+        loading={Delete.isPending}
+      />
     </>
   );
 }

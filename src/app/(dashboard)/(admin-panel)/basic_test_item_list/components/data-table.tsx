@@ -8,6 +8,8 @@ import { ColumnsType } from "antd/es/table";
 import { TestItemApi } from "constance/test-item";
 import { z } from "zod";
 import EditModal from "./edit-modal";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import useTestItemDelete from "@/hooks/basic/test_item/use-test-item-delete";
 
 const apiData = TestItemApi.BasicTestItemGetPage;
 interface TProps {
@@ -25,6 +27,20 @@ export default function DataTable({
 }: TProps) {
 
   const [uid, setGetUid] = useState<string | boolean>();
+  const [uidDelete, setUidDelete] = useState<string | boolean>();
+
+  const Delete = useTestItemDelete()
+
+  const handelDelete = async () => {
+
+    const res = await Delete.mutateAsync({ uid: uidDelete as string });
+
+    if (res.success) {
+      setUidDelete(undefined);
+    }
+
+  }
+
 
   const columns: ColumnsType<
     z.infer<typeof TestItemApi.BasicTestItemGetPage.item>
@@ -80,15 +96,13 @@ export default function DataTable({
             >
               ویرایش
             </Button>
-            {/* 
-                            <Button
-                                type="link"
-                                className="text-red-500 font-bold"
-                                onClick={() => handleDelete(record)}
-                            >
-                                حذف
-                            </Button>
-                        */}
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
           </Space>
         ),
       },
@@ -122,11 +136,18 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
       </Card>
+      <EditModal
+        editModalUid={uid}
+        setEditModalUid={setGetUid}
+      />
+      <ConfirmDeleteModal
+        title='فاکتور آزمون'
+        open={uidDelete}
+        setOpen={setUidDelete}
+        handleDelete={handelDelete}
+        loading={Delete.isPending}
+      />
     </>
   );
 }

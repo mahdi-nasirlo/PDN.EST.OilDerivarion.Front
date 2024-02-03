@@ -98,6 +98,13 @@ const TestItemApi = {
       testDuration: z.number({ required_error: errorMessage.number_invalid }),
     }),
   },
+
+  BasicTestItemDelete: {
+    url: "/Basic/BasicTestItemDelete",
+    type: z.object({
+      uid: z.string().uuid(),
+    }),
+  },
 };
 
 export { TestItemApi };

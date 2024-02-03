@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function TestItemForm({ rules }: any) {
 
-    const measureList = useMeasureList()
+    const measure = useMeasureList()
 
     return (
         <>
@@ -26,8 +26,8 @@ export default function TestItemForm({ rules }: any) {
                     >
                         <Select
                             showSearch
-                            loading={measureList.isLoading}
-                            options={measureList.options}
+                            loading={measure.isLoading}
+                            options={measure.options}
                             size="large"
                             placeholder="وارد کنید"
                         />

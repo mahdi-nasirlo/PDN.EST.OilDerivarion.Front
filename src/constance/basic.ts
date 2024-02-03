@@ -17,9 +17,10 @@ const GetStateForUserItem = z.object({
 });
 
 const GetRolesForUserItem = z.object({
-  RoleId: z.string(),
-  RoleName: z.string(),
-  Checked: z.boolean(),
+  uid: z.string().uuid(),
+  roleKey: z.string(),
+  name: z.string(),
+  roleTypeName: z.string(),
 });
 
 const basicApi = {

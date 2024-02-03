@@ -126,8 +126,7 @@ export default function DataTable({ data, isLoading }: TProps) {
             icon: <ViewColumnsIcon />,
             text: 'لیست کاربران',
           }}
-          setInitialData={() => {
-          }}
+          setInitialData={() => { }}
           isLoading={isLoading}
           data={{ records: data }}
           columns={columns}

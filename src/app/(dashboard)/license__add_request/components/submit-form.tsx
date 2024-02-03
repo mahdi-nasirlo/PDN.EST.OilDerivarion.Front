@@ -10,8 +10,7 @@ import licenseApi from "constance/license";
 import useGetAllState from "@/hooks/basic/use-get-all-state";
 
 export default function SubmitForm() {
-
-  const state = useGetAllState()
+  const state = useGetAllState();
 
   const { producerInfo, license, addLicense } = useProducerInfo();
 

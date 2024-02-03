@@ -7,7 +7,6 @@ import useBasicTestItemsList from "@/hooks/material/use-basic-testitems-list";
 import useBasicMeasureList from "@/hooks/material/use-basic-measure-list";
 
 function MaterialForm({ rules }: any) {
-
   const testItem = useBasicTestItemsList();
 
   const measure = useBasicMeasureList();
@@ -40,13 +39,10 @@ function MaterialForm({ rules }: any) {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={12}>
-          <Form.Item
-            name="measureUid"
-            label="واحد اندازه گیری"
-            rules={[rules]}
-          >
+          <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
+              fieldNames={measure.fieldNames}
               options={measure.data}
               loading={measure.isLoading}
               size="large"

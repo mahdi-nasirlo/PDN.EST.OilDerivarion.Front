@@ -5,22 +5,18 @@ import { ColumnsType } from "antd/es/table";
 import CustomTable from "../../../../components/custom-table";
 import { z } from "zod";
 import React from "react";
-import useProducerInfo from "../hook/use-producer-info";
-import licenseApi from "constance/license";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import useProducerInfo from "../hook/use-producer-info";
+import licenseApi from "constance/license";
 
 const apiData = licenseApi.GetRequestList;
-
 
 export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();
 
-  const renderStatus = (
-    _: any,
-    record: z.infer<typeof apiData.Item>
-  ) => {
+  const renderStatus = (_: any, record: z.infer<typeof apiData.Item>) => {
     let color = "";
     let name = "";
     let icon = <></>;
@@ -32,11 +28,11 @@ export default function DataTable() {
         icon = <CloseCircleOutlined />;
       } else if (record.Wrork_State === 2) {
         color = "orange";
-        name = "رد شده";
+        name = "رد";
         icon = <CheckCircleOutlined />;
       } else if (record.Wrork_State === 3) {
         color = "success";
-        name = "فعال";
+        name = "تایید";
         icon = <CheckCircleOutlined />;
       }
 
@@ -121,16 +117,16 @@ export default function DataTable() {
       dataIndex: "State_Name",
       key: "2",
     },
-    // {
-    //   title: "توضیحات بررسی کننده",
-    //   dataIndex: "name",
-    //   key: "2",
-    // },
-    // {
-    //   title: "تاریخ بررسی ",
-    //   dataIndex: "name",
-    //   key: "2",
-    // },
+    {
+      title: "توضیحات بررسی کننده",
+      dataIndex: "Response_Message",
+      key: "2",
+    },
+    {
+      title: "تاریخ بررسی ",
+      dataIndex: "Response_DateTime",
+      key: "2",
+    },
     {
       title: "وضعیت",
       dataIndex: "Wrork_State",
@@ -157,7 +153,7 @@ export default function DataTable() {
             icon: <ViewColumnsIcon />,
             text: "لیست مجوزها",
           }}
-          setInitialData={() => { }}
+          setInitialData={() => {}}
           isLoading={list.isLoading}
           pagination={false}
           data={{ records: list.data }}

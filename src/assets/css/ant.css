@@ -69,10 +69,6 @@
   @apply items-center flex !important;
 }
 
-.ant-select-selector {
-  @apply text-right h-12 bg-gray-50 !important;
-}
-
 .ant-select-selection-item {
   @apply flex items-center !important;
 }
@@ -138,6 +134,12 @@
 
 .ant-select-selection-placeholder {
   @apply flex items-center !important;
+}
+
+.ant-select,
+.ant-select-selector {
+  @apply bg-gray-50 !important;
+  min-height: 48px !important;
 }
 
 .ant-input:focus,

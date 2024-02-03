@@ -49,7 +49,7 @@ const Index = (props: TProps) => {
         <div className="flex justify-start items-center my-5">
           {props.titleIcon && (
             <div
-              className="ml-4 flex items-center justify-center bg-blue-700 rounded-full w-11 h-11"
+              className="ml-4 flex items-center justify-center bg-CustomizeBlue-500 rounded-full w-11 h-11"
             >
               {props.titleIcon}
             </div>

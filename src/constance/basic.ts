@@ -98,10 +98,7 @@ const basicApi = {
     }),
     item: GetUserBySearchItem,
     response: generalResponseZod.extend({
-      data: z.object({
-        count: z.number(),
-        records: z.array(GetUserBySearchItem),
-      }),
+      data: z.array(GetUserBySearchItem),
     }),
   },
   GetAllState: {

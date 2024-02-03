@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
-import {Card} from '@/components/card'
+import React, { useState } from 'react'
+import { Card } from '@/components/card'
 import CustomTable from "@/components/custom-table";
-import {PlusIcon, ViewColumnsIcon} from '@heroicons/react/24/outline';
+import { PlusIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
 import StatusColumn from '@/components/custom-table/StatusColumn';
-import {Button, Space, Tag, Typography} from 'antd';
-import {ColumnsType} from 'antd/es/table';
-import {productCategoryApi} from 'constance/product-category';
-import {z} from 'zod';
+import { Button, Space, Tag, Typography } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { productCategoryApi } from 'constance/product-category';
+import { z } from 'zod';
 import EditModal from './edit-modal';
+import ConfirmDeleteModal from '@/components/confirm-delete-modal';
+import useProductCategoryDelete from '@/hooks/basic/product-category/use-product-category-delete';
 
 const apiData = productCategoryApi.BasicProductCategoryGetPage
 
@@ -18,9 +20,24 @@ interface TProps {
     setPaginate: (arg: any) => void
 }
 
-export default function DataTable({setModalVisible, data, isLoading, setPaginate}: TProps) {
-    
-    const [uid, setGetUid] = useState<string | boolean>();
+export default function DataTable({ setModalVisible, data, isLoading, setPaginate }: TProps) {
+
+    const [uidEdit, setGetUidEdit] = useState<string | boolean>();
+
+    const [uidDelete, setUidDelete] = useState<string | boolean>();
+
+    const Delete = useProductCategoryDelete()
+
+    const handelDelete = async () => {
+
+        const res = await Delete.mutateAsync({ uid: uidDelete as string });
+
+        if (res.success) {
+            setUidDelete(undefined);
+        }
+
+    }
+
 
     const columns: ColumnsType<
         z.infer<typeof apiData.item>
@@ -102,22 +119,17 @@ export default function DataTable({setModalVisible, data, isLoading, setPaginate
                         <Button
                             type="link"
                             className="text-secondary-500 font-bold"
-                            onClick={() => setGetUid(record.uid)}
+                            onClick={() => setGetUidEdit(record.uid)}
                         >
                             ویرایش
                         </Button>
-                        {/*
-                            <Button
-                                type="link"
-                                className={"text-red-500 font-bold"}
-                                onClick={() => {
-                                setIsDeleteModalVisible(true);
-                                setRecordToDelete(record);
-                                }}
-                            >
-                                حذف
-                            </Button>
-                        */}
+                        <Button
+                            type="link"
+                            className={"text-red-500 font-bold"}
+                            onClick={() => setUidDelete(record.uid)}
+                        >
+                            حذف
+                        </Button>
                     </Space>
                 ),
             },
@@ -152,8 +164,15 @@ export default function DataTable({setModalVisible, data, isLoading, setPaginate
                 />
             </Card>
             <EditModal
-                editModalUid={uid}
-                setEditModalUid={setGetUid}
+                editModalUid={uidEdit}
+                setEditModalUid={setGetUidEdit}
+            />
+            <ConfirmDeleteModal
+                title='دسته بندی محصول'
+                open={uidDelete}
+                setOpen={setUidDelete}
+                handleDelete={handelDelete}
+                loading={Delete.isPending}
             />
         </>
     )

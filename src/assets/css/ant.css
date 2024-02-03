@@ -70,7 +70,7 @@
 }
 
 .ant-select-selector {
-  @apply text-right h-12 bg-gray-100 !important
+  @apply text-right h-12 bg-gray-50 !important
 }
 
 .ant-select-selection-item {
@@ -78,7 +78,7 @@
 }
 
 .ant-input-number-input {
-  @apply h-12 bg-gray-100 !important
+  @apply h-12 bg-gray-50 !important
 }
 
 .ant-radio-button-wrapper {
@@ -86,11 +86,11 @@
 }
 
 .ant-radio-button-wrapper:not(.ant-radio-button-wrapper-checked) {
-  @apply bg-gray-100 !important
+  @apply bg-gray-50 !important
 }
 
 .ant-input {
-  @apply h-12 bg-gray-100 !important
+  @apply h-12 bg-gray-50 !important
 }
 
 .ant-menu-item-selected {
@@ -100,4 +100,58 @@
 
 .ant-btn-lg {
   @apply h-12 !important
+}
+
+.ant-select-selection-search {
+  @apply flex items-center !important
+}
+
+.ant-select-selection-placeholder {
+  @apply flex items-center !important
+}
+
+.ant-input:focus {
+  @apply border-2 border-primary-500 shadow-none !important
+}
+
+.ant-select:focus {
+  @apply bg-red-900 border-2 border-primary-500 shadow-none !important
+}
+
+.ant-table-cell-fix-left {
+  @apply shadow-lg !important
+}
+
+.ant-pagination {
+  @apply items-center !important
+}
+
+.ant-pagination-total-text {
+  @apply flex items-center !important
+}
+
+.ant-pagination .ant-pagination-item-active {
+  background-color: theme("colors.primary.500") !important;
+  border-color: theme("colors.gray.200") !important;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: theme("colors.white") !important;
+}
+
+.ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  background-color: theme("backgroundColor.gray.100") !important;
+}
+
+.ant-pagination .ant-pagination-prev .ant-pagination-item-link {
+  background-color: theme("backgroundColor.gray.100") !important;
+}
+
+.ant-pagination-item {
+  color: theme("colors.primary.500") !important;
+  background-color: theme("backgroundColor.gray.100") !important;
+}
+
+.ant-btn:hover {
+  @apply scale-105
 }

@@ -10,6 +10,8 @@ import { z } from "zod";
 import { Card } from "@/components/card";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import EditModal from "./measure-action-edit";
+import useMeasureDelete from "@/hooks/basic/measure/use-measure-delete";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 
 const apiData = measureApi.BasicMeasureGetPage
@@ -29,6 +31,21 @@ export default function DataTable({
 }: TProps) {
 
   const [uid, setGetUid] = useState<string | boolean>();
+
+  const [uidDelete, setUidDelete] = useState<string | boolean>();
+
+  const Delete = useMeasureDelete()
+
+  const handelDelete = async () => {
+
+    const res = await Delete.mutateAsync({ uid: uidDelete as string });
+
+    if (res.success) {
+      setUidDelete(undefined);
+    }
+
+  }
+
 
   const columns: ColumnsType<
     z.infer<typeof apiData.Item>
@@ -65,6 +82,13 @@ export default function DataTable({
             >
               ویرایش
             </Button>
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
           </Space>
         ),
       },
@@ -98,11 +122,18 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
       </Card>
+      <EditModal
+        editModalUid={uid}
+        setEditModalUid={setGetUid}
+      />
+      <ConfirmDeleteModal
+        title='واحد اندازه گیری'
+        open={uidDelete}
+        setOpen={setUidDelete}
+        handleDelete={handelDelete}
+        loading={Delete.isPending}
+      />
     </>
   );
 }

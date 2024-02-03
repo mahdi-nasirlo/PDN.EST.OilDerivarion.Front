@@ -246,6 +246,13 @@ const materialApi = {
       data: z.array(RequestPackageMaterialListItem),
     }),
   },
+
+  BasicProductMaterialDelete: {
+    url: "/Basic/BasicProductMaterialDelete",
+    type: z.object({
+      uid: z.string().uuid(),
+    }),
+  },
 };
 
 export { materialApi };

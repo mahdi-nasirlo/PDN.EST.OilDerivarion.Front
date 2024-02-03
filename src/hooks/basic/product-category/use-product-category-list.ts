@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
 import { DefaultOptionType } from "rc-select/lib/Select";
-import { TestItemApi } from "constance/test-item";
+import { productCategoryApi } from "constance/product-category";
 
-const apiData = TestItemApi.BasicTestItemList;
+const apiData = productCategoryApi.BasicProductCategoryList;
 
-const useTestItemList = () => {
+const useProductCategoryList = () => {
   const query = useQuery({
     queryKey: [apiData.url],
     queryFn: () =>
@@ -22,12 +22,7 @@ const useTestItemList = () => {
     value: item.uid,
   }));
 
-  const treeData = query.data?.map((item: any) => ({
-    value: item?.uid,
-    label: item.name,
-  }));
-
-  return { ...query, ...apiData, options, treeData };
+  return { ...query, ...apiData, options };
 };
 
-export { useTestItemList };
+export { useProductCategoryList };

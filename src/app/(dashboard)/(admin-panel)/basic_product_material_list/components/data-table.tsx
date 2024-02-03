@@ -10,6 +10,8 @@ import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { materialApi } from "constance/material";
 import StatusColumn from "@/components/custom-table/StatusColumn";
 import EditModal from "./edit-modal";
+import useBasicProductMaterialDelete from "@/hooks/material/use-basic-product-material-delete";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 const apiData = materialApi.BasicProductMaterialGetPage;
 
@@ -23,6 +25,20 @@ interface TProps {
 export default function DataTable({ data, isLoading, setModalVisible, setPaginate }: TProps) {
 
   const [uid, setGetUid] = useState<string | boolean>();
+
+  const [uidDelete, setUidDelete] = useState<string | boolean>();
+
+  const Delete = useBasicProductMaterialDelete()
+
+  const handelDelete = async () => {
+
+    const res = await Delete.mutateAsync({ uid: uidDelete as string });
+
+    if (res.success) {
+      setUidDelete(undefined);
+    }
+
+  }
 
   const columns: ColumnsType<
     z.infer<typeof apiData.item>
@@ -89,6 +105,13 @@ export default function DataTable({ data, isLoading, setModalVisible, setPaginat
             >
               ویرایش
             </Button>
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
           </Space>
         ),
       },
@@ -122,6 +145,13 @@ export default function DataTable({ data, isLoading, setModalVisible, setPaginat
         <EditModal
           editModalUid={uid}
           setEditModalUid={setGetUid}
+        />
+        <ConfirmDeleteModal
+          title='دسته بندی محصول'
+          open={uidDelete}
+          setOpen={setUidDelete}
+          handleDelete={handelDelete}
+          loading={Delete.isPending}
         />
       </Card>
     </>

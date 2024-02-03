@@ -68,5 +68,12 @@ const measureApi = {
       isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },
+
+  MeasureDelete: {
+    url: "/Basic/MeasureDelete",
+    type: z.object({
+      uid: z.string().uuid(),
+    }),
+  },
 };
 export default measureApi;

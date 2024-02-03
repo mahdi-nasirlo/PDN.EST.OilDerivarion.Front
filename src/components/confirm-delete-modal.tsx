@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Col, Modal, Row } from "antd";
 
 function ConfirmDeleteModal({ open, setOpen, handleDelete, title, loading }: {
-    open: boolean,
-    setOpen: (arg: boolean) => void,
+    open: any,
+    setOpen: (arg: any) => void,
     handleDelete: () => void,
     title: string,
     loading?: boolean
@@ -31,7 +31,7 @@ function ConfirmDeleteModal({ open, setOpen, handleDelete, title, loading }: {
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
                             onClick={() => {
-                                setOpen(false)
+                                setOpen(undefined && false)
                             }}
                             key={"cancel"}>
                             انصراف

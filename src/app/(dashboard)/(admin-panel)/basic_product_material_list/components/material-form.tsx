@@ -3,13 +3,13 @@
 import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import MultipleSelect from "@/components/multiple-select";
-import useBasicTestItemsList from "@/hooks/material/use-basic-testitems-list";
-import useBasicMeasureList from "@/hooks/material/use-basic-measure-list";
+import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
+import { useMeasureList } from "@/hooks/basic/measure/use-measure-list";
 
 function MaterialForm({ rules }: any) {
-  const testItem = useBasicTestItemsList();
+  const testItem = useTestItemList();
 
-  const measure = useBasicMeasureList();
+  const measure = useMeasureList();
 
   return (
     <>
@@ -42,7 +42,6 @@ function MaterialForm({ rules }: any) {
           <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
-              fieldNames={measure.fieldNames}
               options={measure.data}
               loading={measure.isLoading}
               size="large"

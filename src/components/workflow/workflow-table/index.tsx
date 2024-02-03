@@ -1,0 +1,39 @@
+import React from 'react';
+import {z} from "zod";
+import {workflowApi} from "../../../constance/workflow";
+import {ColumnsType} from "antd/es/table";
+import {Table} from "antd/lib";
+
+const Index = (props: {
+    data: z.infer<typeof workflowApi.dataTable.response.shape.data.shape.tasks.shape.Table>,
+    extraColumns?: ColumnsType<any>;
+}) => {
+
+    const columns: ColumnsType<any> = props.data.Header.filter(item => !item.Hidden)
+        .map((item) => ({dataIndex: item.Key, title: item.Value}))
+
+
+    if (props.extraColumns) {
+        columns.unshift({
+            title: "ردیف",
+            dataIndex: "Row",
+            key: "Row",
+            width: "5%",
+        });
+
+        columns.push(...props.extraColumns);
+    }
+
+    console.log(props.data.Values)
+    
+    return (
+        <div>
+            <Table
+                columns={columns}
+                dataSource={props.data.Values}
+            />
+        </div>
+    );
+};
+
+export default Index;

@@ -197,7 +197,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست فاکتور های آزمون",
+            text: "لیست آزمایشگاه ها",
             actions: [
               <Button
                 key={"1"}
@@ -210,7 +210,7 @@ export default function DataTable({
                 }}
               >
                 <PlusIcon width={24} height={24} />
-                <span className="flex">افزودن فاکتور آزمون</span>
+                <span className="flex">افزودن آزمایشگاه</span>
               </Button>,
             ],
           }}

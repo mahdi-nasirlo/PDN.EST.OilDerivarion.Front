@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import useLabGet from "./hook/use-lab-get";
 import { useLabGetPage } from "@/hooks/lab/use-lab-get-page";
 import DataTable from "./components/data-table";
+import CreateModal from "./components/create-modal";
 
 export default function Page() {
   const dataPage = useLabGetPage();
@@ -32,10 +33,10 @@ export default function Page() {
         setModalVisible={setModalVisible}
         setPaginate={dataPage.setFilter}
       />
-      {/* <CreateModal
+      <CreateModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-      />  */}
+      />
     </>
   );
 }

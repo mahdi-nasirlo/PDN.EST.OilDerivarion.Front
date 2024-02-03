@@ -3,7 +3,7 @@
 }
 
 .ant-collapse-header-text {
-  @apply text-right
+  @apply text-right;
 }
 
 .ant-table-thead .ant-table-cell {
@@ -24,11 +24,11 @@
 }
 
 .ant-table-thead .ant-table-cell:before {
-  @apply w-0 !important
+  @apply w-0 !important;
 }
 
 .ant-table-tbody .ant-table-row .ant-table-cell:last-child:before {
-  @apply w-0
+  @apply w-0;
 }
 
 .ant-table-tbody .ant-table-row .ant-table-cell:before {
@@ -44,7 +44,7 @@
 }
 
 .ant-table-cell {
-  @apply font-medium
+  @apply font-medium;
 }
 
 .ant-table-row:last-child .ant-table-cell {
@@ -62,35 +62,35 @@
 }
 
 .card-body-p-0 .ant-card-body {
-  @apply p-0 !important
+  @apply p-0 !important;
 }
 
 .ant-descriptions-item-label {
-  @apply items-center flex !important
+  @apply items-center flex !important;
 }
 
 .ant-select-selector {
-  @apply text-right h-12 bg-gray-50 !important
+  @apply text-right h-12 bg-gray-50 !important;
 }
 
 .ant-select-selection-item {
-  @apply flex items-center !important
+  @apply flex items-center !important;
 }
 
 .ant-input-number-input {
-  @apply h-12 bg-gray-50 !important
+  @apply h-12 bg-gray-50 !important;
 }
 
 .ant-radio-button-wrapper {
-  @apply h-11 mt-0.5 flex items-center justify-center !important
+  @apply h-11 mt-0.5 flex items-center justify-center !important;
 }
 
 .ant-radio-button-wrapper:not(.ant-radio-button-wrapper-checked) {
-  @apply bg-gray-50 !important
+  @apply bg-gray-50 !important;
 }
 
 .ant-input {
-  @apply h-12 bg-gray-50 !important
+  @apply h-12 bg-gray-50 !important;
 }
 
 .ant-menu-item-selected {
@@ -99,35 +99,49 @@
 }
 
 .ant-btn-lg {
-  @apply h-12 !important
+  @apply h-12 !important;
 }
 
 .ant-select-selection-search {
-  @apply flex items-center !important
+  @apply flex items-center !important;
 }
 
 .ant-select-selection-placeholder {
-  @apply flex items-center !important
+  @apply flex items-center !important;
 }
 
-.ant-input:focus {
-  @apply border-2 border-primary-500 shadow-none !important
+.ant-input:focus,
+.ant-input:hover {
+  @apply border-2 border-primary-500 shadow-none !important;
 }
 
-.ant-select:focus {
-  @apply bg-red-900 border-2 border-primary-500 shadow-none !important
+.ant-input-number:focus,
+.ant-input-number:hover,
+.ant-input-number-focused {
+  @apply border-2 border-primary-500 shadow-none !important;
+}
+
+.ant-select:focus,
+.ant-select-selector:focus,
+.ant-select-selector:hover {
+  @apply border-2 border-primary-500 shadow-none !important;
+}
+
+.ant-btn-default:hover,
+.ant-btn-default:focus {
+  @apply border-2 border-primary-500 shadow-none !important;
 }
 
 .ant-table-cell-fix-left {
-  @apply shadow-lg !important
+  @apply shadow-lg !important;
 }
 
 .ant-pagination {
-  @apply items-center !important
+  @apply items-center !important;
 }
 
 .ant-pagination-total-text {
-  @apply flex items-center !important
+  @apply flex items-center !important;
 }
 
 .ant-pagination .ant-pagination-item-active {
@@ -153,5 +167,28 @@
 }
 
 .ant-btn:hover {
-  @apply scale-105
+  @apply scale-105;
+}
+
+.ant-transfer-operation button {
+  background-color: theme("backgroundColor.CustomizeBlue.500");
+  height: 32px !important;
+}
+
+.ant-transfer-operation button:not(:disabled):hover {
+  background-color: theme("backgroundColor.blue.500") !important;
+}
+
+.ant-transfer-list-header {
+  background-color: theme("backgroundColor.primary.500") !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* .ant-transfer-list-checkbox
+.ant-checkbox-wrapper
+input:checked { */
+.ant-transfer-list-content-item-checked {
+  color: theme("backgroundColor.CustomizeBlue.500") !important;
+  border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }

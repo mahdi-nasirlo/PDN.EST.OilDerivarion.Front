@@ -69,6 +69,13 @@ const TestItemDetailApi = {
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
     }),
   },
+
+  BasicTestItemDetailDelete: {
+    url: "/Basic/BasicTestItemDetailDelete",
+    type: z.object({
+      uid: z.string().uuid(),
+    }),
+  },
 };
 
 export { TestItemDetailApi };

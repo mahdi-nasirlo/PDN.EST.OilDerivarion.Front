@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Row, Select } from "antd";
+import { Col, Row, Select } from "antd";
 import React from "react";
 import { useControlTransfer } from "../hook/use-control-transfer";
 import { Transfer } from "antd/lib";
@@ -29,6 +29,7 @@ export default function SubmitForm() {
         <Col xs={24} md={24}>
           <div className="w-full mt-8">
             <Transfer
+              operationStyle={{ gap: 20 }}
               titles={["گزارشات انتخاب نشده", "گزارشات انتخاب شده"]}
               targetKeys={registeredReport.targetKeys}
               dataSource={dataSource}

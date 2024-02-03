@@ -1,6 +1,6 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const BasicProductCategoryGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -14,7 +14,7 @@ const BasicProductCategoryGetPageItem = z.object({
   densityUpperLimit: z.number().optional(),
   densityLowerLimit: z.number().optional(),
   testMethod: z.string().optional(),
-})
+});
 
 const BasicProductCategoryListItem = z.object({
   id: z.number().optional(),
@@ -74,7 +74,7 @@ const productCategoryApi = {
     response: generalResponseZod.extend({
       data: z.object({
         count: z.number(),
-        records: z.array(BasicProductCategoryGetPageItem)
+        records: z.array(BasicProductCategoryGetPageItem),
       }),
     }),
   },
@@ -118,6 +118,13 @@ const productCategoryApi = {
       hasDensity: z.boolean({ required_error: errorMessage.required_choice }),
       densityUpperLimit: z.number().optional(),
       densityLowerLimit: z.number().optional(),
+    }),
+  },
+
+  BasicProductCategoryDelete: {
+    url: "/Basic/BasicProductCategoryDelete",
+    type: z.object({
+      uid: z.string().uuid(),
     }),
   },
 };

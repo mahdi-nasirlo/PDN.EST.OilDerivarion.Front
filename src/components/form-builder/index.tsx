@@ -78,7 +78,7 @@ const RenderInputs = (props: {
                 {props?.item
                     ?.sort((a, b) => a.Counting_Position - b.Counting_Position)
                     .map((value, index) => (
-                        <Col xs={12} md={8} lg={8} xl={6}>
+                        <Col xs={12} md={8} lg={8} xl={6} key={index}>
                             <motion.div
                                 key={index}
                                 className="relative"

@@ -7,18 +7,19 @@ import {Descriptions, Spin, Typography} from "antd";
 import WorkflowDescription from "@/components/workflow/workflow-description";
 import WorkflowTable from "@/components/workflow/workflow-table";
 import {RectangleGroupIcon} from "@heroicons/react/24/outline";
+import {ColumnsType} from "antd/es/table";
 
 const PropsType = z.object({
     apiUrl: z.string(),
-    // data: workflowApi.dataTable.response
 })
 
-const Index = (props: z.infer<typeof PropsType>) => {
+const Index = (props: z.infer<typeof PropsType> & { extraColumns?: ColumnsType<any> }) => {
 
     const {data, isFetching} = useWorkflow(props.apiUrl);
 
     if (isFetching && !data)
         return <Spin/>
+
 
     return (
         <>
@@ -45,7 +46,7 @@ const Index = (props: z.infer<typeof PropsType>) => {
                     </div>
                 )}
                 {data?.tasks.Model && <WorkflowDescription data={data.tasks.Model}/>}
-                {data?.tasks.Table && <WorkflowTable data={data.tasks.Table}/>}
+                {data?.tasks.Table && <WorkflowTable data={data.tasks.Table} extraColumns={props.extraColumns}/>}
             </Spin>
         </>
     );

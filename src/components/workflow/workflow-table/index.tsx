@@ -25,7 +25,7 @@ const Index = (props: {
         columns.push(...props.extraColumns);
     }
 
-    console.log(props.data.Values)
+    console.log(props.data.Header)
 
     return (
         <div>

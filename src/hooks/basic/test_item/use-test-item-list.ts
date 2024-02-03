@@ -22,7 +22,12 @@ const useTestItemList = () => {
     value: item.uid,
   }));
 
-  return { ...query, ...apiData, options };
+  const treeData = query.data?.map((item: any) => ({
+    value: item?.uid,
+    label: item.name,
+  }));
+
+  return { ...query, ...apiData, options, treeData };
 };
 
 export { useTestItemList };

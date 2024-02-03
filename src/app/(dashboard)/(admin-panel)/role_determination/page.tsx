@@ -4,7 +4,7 @@ import { Collapse } from 'antd';
 import FilterForm from './components/filter-form'
 import React from 'react'
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { UserPlusIcon } from '@heroicons/react/24/solid';
 import { useGetUserBySearch } from '@/hooks/basic/use-get-user-by-search';
 import DataTable from "@/app/(dashboard)/(admin-panel)/role_determination/components/data-table";
 
@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <>
       <Breadcrumb
-        titleIcon={<DocumentTextIcon className="w-8" />}
+        titleIcon={<UserPlusIcon className="w-8" />}
         pages={[
           { label: "خانه", path: "/" }
         ]}

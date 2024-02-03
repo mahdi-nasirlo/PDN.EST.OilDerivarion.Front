@@ -44,9 +44,9 @@ const BasicTestItemList = z.object({
 });
 
 const BasicMeasureList = z.object({
-  Uid: z.string().uuid(),
-  Name: z.string(),
-  IsActive: z.boolean(),
+  uid: z.string().uuid(),
+  name: z.string(),
+  isActive: z.boolean(),
 });
 
 const GetAllRequestPackageRegisteredMaterialItem = z.object({

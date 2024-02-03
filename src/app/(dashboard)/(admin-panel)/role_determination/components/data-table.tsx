@@ -117,6 +117,7 @@ export default function DataTable({ data, isLoading }: TProps) {
       ),
     },
   ];
+
   return (
     <>
       <Card className="mt-8">
@@ -128,7 +129,7 @@ export default function DataTable({ data, isLoading }: TProps) {
           setInitialData={() => {
           }}
           isLoading={isLoading}
-          data={data}
+          data={{ records: data }}
           columns={columns}
         />
       </Card>

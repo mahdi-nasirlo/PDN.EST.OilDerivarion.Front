@@ -42,6 +42,7 @@ function MaterialForm({ rules }: any) {
           <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
+              fieldNames={measure.fieldNames}
               options={measure.data}
               loading={measure.isLoading}
               size="large"

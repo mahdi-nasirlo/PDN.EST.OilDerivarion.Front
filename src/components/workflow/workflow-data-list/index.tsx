@@ -23,7 +23,7 @@ const Index = (
   return (
     <>
       <Spin spinning={isFetching}>
-        {data?.step && (
+        {/* {data?.step && (
           <div className="flex items-center mb-4">
             <Descriptions
               className="text-right"
@@ -47,7 +47,7 @@ const Index = (
               </Descriptions.Item>
             </Descriptions>
           </div>
-        )}
+        )} */}
         {data?.tasks.Model && <WorkflowDescription data={data.tasks.Model} />}
         {data?.tasks.Table && (
           <WorkflowTable

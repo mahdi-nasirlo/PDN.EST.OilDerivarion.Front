@@ -28,6 +28,12 @@
   background: theme("backgroundColor.green.500");
 }
 
+.scrollable-content {
+  overflow: auto;
+  direction: rtl;
+  height: 100vh;
+}
+
 /* For Firefox */
 
 * {
@@ -46,10 +52,23 @@
   scrollbar-shadow-color: theme("backgroundColor.green.500");
 }
 
+.sidebar-Skeleton .ant-skeleton-input,
+.ant-skeleton-title,
+.ant-skeleton-paragraph li {
+  @apply bg-slate-600 !important;
+}
+
+.sidebar-Skeleton .ant-skeleton-active {
+  animation-duration: 50s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+}
+
+
 .ant-drawer-content-wrapper {
-  @apply w-72 !important
+    @apply w-72 !important
 }
 
 .mobile-drawer .ant-drawer-wrapper-body .ant-drawer-body {
-  @apply p-0 bg-red-900 !important
+    @apply p-0 bg-red-900 !important
 }

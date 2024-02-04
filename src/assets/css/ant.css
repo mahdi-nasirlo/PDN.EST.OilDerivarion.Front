@@ -74,10 +74,6 @@
   @apply items-center flex !important;
 }
 
-.ant-select-selector {
-  @apply text-right h-12 bg-gray-50 !important;
-}
-
 .ant-select-selection-item {
   @apply flex items-center !important;
 }
@@ -98,9 +94,39 @@
   @apply h-12 bg-gray-50 !important;
 }
 
+/* start menu */
+.ant-menu {
+  @apply border-e-0 lg:border-e-[0px] !important;
+}
+
 .ant-menu-item-selected {
-  background-color: theme("backgroundColor.primary.500") !important;
-  color: theme("colors.white") !important;
+  @apply bg-gray-100  !important;
+}
+
+.ant-menu-item-selected span {
+  @apply text-gray-700  !important;
+}
+
+.ant-menu-item-selected img {
+  @apply bg-gray-100 text-gray-700 !important;
+}
+
+.ant-menu-item {
+  @apply my-3 mr-0 ml-0 w-full py-4 px-4 rounded-lg text-gray-100 !important;
+}
+
+.ant-menu-item-divider {
+  margin: 16px 0 !important;
+}
+
+/* end menu */
+
+.ant-btn-primary {
+  @apply bg-primary-500 !important;
+}
+
+.ant-btn-dangerous {
+  @apply bg-red-500 text-white !important;
 }
 
 .ant-btn-lg {
@@ -113,6 +139,12 @@
 
 .ant-select-selection-placeholder {
   @apply flex items-center !important;
+}
+
+.ant-select,
+.ant-select-selector {
+  @apply bg-gray-50 !important;
+  min-height: 48px !important;
 }
 
 .ant-input:focus,
@@ -190,10 +222,28 @@
   font-weight: bold !important;
 }
 
-/* .ant-transfer-list-checkbox
-.ant-checkbox-wrapper
-input:checked { */
-.ant-transfer-list-content-item-checked {
-  color: theme("backgroundColor.CustomizeBlue.500") !important;
+.ant-transfer-list-header .ant-checkbox-disabled .ant-checkbox-inner {
+  background-color: theme("backgroundColor.gray.200") !important;
+}
+
+.ant-transfer-list-header
+  .ant-checkbox-indeterminate
+  .ant-checkbox-inner::after {
+  background-color: theme("backgroundColor.CustomizeBlue.500") !important;
+  border-radius: 9999px !important;
+}
+.ant-transfer-list-header
+  .ant-checkbox-wrapper-checked
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
+  background-color: theme("backgroundColor.CustomizeBlue.500") !important;
+  border-color: theme("backgroundColor.CustomizeBlue.500") !important;
+}
+
+.ant-transfer-list-content-item
+  .ant-checkbox-wrapper
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
+  background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }

@@ -11,7 +11,7 @@ import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
 
-const apiData = licenseApi.GetRequestList;
+const apiData = licenseApi.GetRequestListForCurrentUser;
 
 export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();

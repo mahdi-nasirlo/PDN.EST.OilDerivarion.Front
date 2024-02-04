@@ -17,9 +17,7 @@ const useGetRoleForUser = (uid: string | undefined) => {
     enabled: typeof uid === "string",
   });
 
-  const treeData = query.data
-    ?.filter((item) => item.Checked)
-    .map((item) => item.RoleId);
+  const treeData = query.data?.map((item) => item.uid);
 
   return { ...query, treeData };
 };

@@ -29,7 +29,7 @@ export default function Page({ uid }: TProps) {
   const router = useRouter();
 
   const HandelSubmit = () => router.push("/request");
-  const HandelCancel = () => router.push("/request/package-list");
+  const HandelCancel = () => router.push("/request");
 
 
   return (
@@ -97,7 +97,7 @@ export default function Page({ uid }: TProps) {
           <Divider />
           <Products />
           <Divider />
-          <Row gutter={[12, 12]}>
+          <Row gutter={[32, 32]}>
             <Col xs={24} md={12}>
               <Button
                 size="large"

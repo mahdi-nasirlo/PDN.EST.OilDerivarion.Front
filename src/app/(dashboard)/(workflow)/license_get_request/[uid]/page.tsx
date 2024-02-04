@@ -2,14 +2,9 @@
 
 import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import WorkflowBtn from "@/components/Workflow/workflow-btn";
-
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import useSWR from "swr";
-import useGetRequest from "@/hooks/license/use-get-request";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
+import { useState } from "react";
 
 interface PropType {
   params: { uid: string };

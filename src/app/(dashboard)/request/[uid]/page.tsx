@@ -20,11 +20,17 @@ import FileUpload from "../../../../../components/inputs/FileUpload/FileUpload";
 import { Card } from "@/components/card";
 import { useRouter } from "next/navigation";
 
-export default function Page() {
+interface TProps {
+  uid: string;
+}
+
+export default function Page({ uid }: TProps) {
+
   const router = useRouter();
 
   const HandelSubmit = () => router.push("/request");
-  const HandelCancel = () => router.push("/request/package-list");
+  const HandelCancel = () => router.push("/request");
+
 
   return (
     <div>
@@ -53,6 +59,7 @@ export default function Page() {
               <Form.Item
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                 name="processDescription"
+                required={false}
                 label="شرح فرآیند تولید"
               >
                 <Input.TextArea
@@ -86,11 +93,11 @@ export default function Page() {
             </Col>
           </Row>
           <Divider />
-          <Materials />
+          <Materials uid={uid} />
           <Divider />
           <Products />
           <Divider />
-          <Row gutter={[12, 12]}>
+          <Row gutter={[32, 32]}>
             <Col xs={24} md={12}>
               <Button
                 size="large"

@@ -1,8 +1,15 @@
 import React from 'react'
 import MaterialForm from './material-form'
 import { Button, Col, Modal, Row } from 'antd'
+import { Form } from 'antd/lib';
 
-export default function CreateModal({ visibleModal, setVisibleModal }: any) {
+interface TProps {
+    uid: string,
+    visibleModal: any,
+    setVisibleModal: any
+}
+
+export default function CreateModal({ visibleModal, setVisibleModal, uid }: TProps) {
 
     const handleConfirm = () => setVisibleModal(false);
 
@@ -48,7 +55,9 @@ export default function CreateModal({ visibleModal, setVisibleModal }: any) {
                 </Row>,
             ]}
         >
-            <MaterialForm />
+            <Form layout='vertical'>
+                <MaterialForm />
+            </Form>
         </Modal>
 
     )

@@ -128,6 +128,8 @@ const materialApi = {
   },
   GetAllRequestPackageRegisteredMaterial: {
     url: "/Material/GetAllRequestPackageRegisteredMaterial",
+    sortBy: "name",
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       package_UID: z.string().uuid().optional(),
     }),

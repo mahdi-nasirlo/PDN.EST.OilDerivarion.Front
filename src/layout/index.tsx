@@ -1,27 +1,23 @@
 "use client"
 
 import {Layout, Space} from 'antd/lib'
-import React from 'react'
+import React, {useState} from 'react'
 import LayoutHeader from './header'
 import {Content} from 'antd/lib/layout/layout'
 import SideBar from './side-bar'
-import {usePathname} from "next/navigation";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
-    // const [open, setOpen] = useState(false);
-
-    const pathname = usePathname()
+    const [open, setOpen] = useState<boolean>(false);
 
     return (
         <Space direction="vertical" style={{ width: "100%" }} size={[0, 48]}>
             <Layout className="custom-layout" style={{ minHeight: "100vh" }}>
                 <LayoutHeader
-                // showDrawer={() => { }} 
+                    showDrawer={() => setOpen(prev => !prev)}
                 />
                 <Layout className="scrollable-content bg-gray-50" hasSider>
-                    <SideBar />
-                    {/* <LayoutSidebar menu={sidebarItems} onClose={onClose} open={open} /> */}
+                    <SideBar open={open} setOpen={setOpen}/>
                     <Content
                         className="custom-content"
                         style={contentStyle}
@@ -52,6 +48,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             {/*        className="tw-flex-1"*/}
                             {/*    >*/}
                             {children}
+                            {/*<Typography>*/}
+                            {/*    {JSON.stringify(open)}سیشبشسیبشسیبشسی*/}
+                            {/*</Typography>*/}
                             {/*    </motion.div>*/}
                             {/*</AnimatePresence>*/}
                         </Layout>

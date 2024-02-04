@@ -22,7 +22,7 @@ export default function Page() {
       <Breadcrumb
         pages={[
           { label: "خانه", path: "/" },
-          { label: "زیر درخواست ها", path: "/request" },
+          { label: "ثبت درخواست", path: "/request" },
         ]}
         currentPage="بازبینی نهایی درخواست"
         titleIcon={<DocumentMagnifyingGlassIcon className="w-8" />}

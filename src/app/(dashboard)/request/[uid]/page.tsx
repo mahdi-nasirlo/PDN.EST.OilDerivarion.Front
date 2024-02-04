@@ -25,12 +25,10 @@ interface TProps {
 }
 
 export default function Page({ uid }: TProps) {
-
   const router = useRouter();
 
   const HandelSubmit = () => router.push("/request");
   const HandelCancel = () => router.push("/request");
-
 
   return (
     <div>

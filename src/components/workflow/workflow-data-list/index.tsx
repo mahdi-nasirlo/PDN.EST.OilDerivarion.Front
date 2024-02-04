@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import useWorkflow from "@/components/Workflow/workflow-data-list/hook/useWorkflow";
 import { z } from "zod";
 import { Descriptions, Spin, Typography } from "antd";
-import WorkflowDescription from "@/components/Workflow/workflow-description";
-import WorkflowTable from "@/components/Workflow/workflow-table";
+import WorkflowDescription from "@/components/workflow/workflow-description";
+import WorkflowTable from "@/components/workflow/workflow-table";
 import { RectangleGroupIcon } from "@heroicons/react/24/outline";
 import { ColumnsType } from "antd/es/table";
+import UseWorkflow from "./hook/useWorkflow";
 
 const PropsType = z.object({
   apiUrl: z.string(),
@@ -16,7 +16,7 @@ const PropsType = z.object({
 const Index = (
   props: z.infer<typeof PropsType> & { extraColumns?: ColumnsType<any> }
 ) => {
-  const { data, isFetching } = useWorkflow(props.apiUrl);
+  const { data, isFetching } = UseWorkflow(props.apiUrl);
 
   if (isFetching && !data) return <Spin />;
 

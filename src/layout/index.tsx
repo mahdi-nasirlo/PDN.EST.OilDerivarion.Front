@@ -1,6 +1,6 @@
 "use client"
 
-import {Layout, Space, Typography} from 'antd/lib'
+import {Layout, Space} from 'antd/lib'
 import React, {useState} from 'react'
 import LayoutHeader from './header'
 import {Content} from 'antd/lib/layout/layout'
@@ -48,9 +48,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             {/*        className="tw-flex-1"*/}
                             {/*    >*/}
                             {children}
-                            <Typography>
-                                {JSON.stringify(open)}سیشبشسیبشسیبشسی
-                            </Typography>
+                            {/*<Typography>*/}
+                            {/*    {JSON.stringify(open)}سیشبشسیبشسیبشسی*/}
+                            {/*</Typography>*/}
                             {/*    </motion.div>*/}
                             {/*</AnimatePresence>*/}
                         </Layout>

@@ -1,7 +1,7 @@
 import {Menu, MenuProps} from 'antd/lib'
 import React from 'react'
 import {useControlSidebar} from './hooks/use-control-sidebar'
-import {Skeleton} from "antd";
+import {Drawer, Skeleton} from "antd";
 
 export default function SideBar({open, setOpen}: { open: boolean, setOpen: (arg: boolean) => void }) {
 
@@ -53,6 +53,7 @@ export default function SideBar({open, setOpen}: { open: boolean, setOpen: (arg:
                         paddingTop: "30px",
                         paddingBottom: "30px",
                         height: "100%",
+                        backgroundColor: '#1C2537'
                     }}
                 />
             </Drawer>

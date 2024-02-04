@@ -11,7 +11,6 @@ import WorkFlowStatusColumn from "../../../../../components/Workflow/WorkflowDat
 import VisitInfo from "../../../../../components/Workflow/VisitInfo/visit-info";
 
 export default function Home() {
-
   const initialValue: WorkflowDataTableContextType = {
     apiUrl: apiUrl.WorkFlowRequest.cartable.getAll.url,
     columns: [
@@ -19,7 +18,9 @@ export default function Home() {
         title: "وضعیت",
         dataIndex: "status",
         key: "5",
-        render(_, record) { return <WorkFlowStatusColumn record={record} /> }
+        render(_, record) {
+          return <WorkFlowStatusColumn record={record} />;
+        },
       },
 
       {
@@ -30,7 +31,11 @@ export default function Home() {
         width: "10%",
         render: (_, record) => (
           <Space size="small">
-            <VisitInfo CanEdit={record.CanEdit} href={"/producer/workflow-cartable/detail/" + record.TaskId}>                            مشاهده اطلاعات
+            <VisitInfo
+              CanEdit={record.CanEdit}
+              href={"license_get_request/" + record.TaskId}
+            >
+              مشاهده اطلاعات
             </VisitInfo>
           </Space>
         ),

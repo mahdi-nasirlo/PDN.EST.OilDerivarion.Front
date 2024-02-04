@@ -7,6 +7,13 @@ import WorkFlowStatusColumn from "../../../../components/Workflow/workflow-statu
 import { Space } from "antd/lib";
 import WorkflowDataTable from "@/components/Workflow/workflow-data-list";
 import VisitInfo from "../../../../components/Workflow/visit-info";
+import Breadcrumb from "@/components/breadcrumb";
+import { BeakerIcon } from "@heroicons/react/24/outline";
+import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
+import licenseApi from "constance/license";
+import { any, z } from "zod";
+
+const apiData = licenseApi.GetRequest.producer;
 
 const Page = () => {
   const extraColumns: ColumnsType = [
@@ -28,8 +35,9 @@ const Page = () => {
       render: (_, record: any) => (
         <Space size="small">
           <VisitInfo
-            CanEdit={record.CanEdit}
-            href={"/producer/step13/detail/" + record.TaskId}
+            //@ts-ignore
+            CanEdit={record.Request_Uid}
+            href={"license_get_request/" + record.Request_Uid}
           >
             مشاهده اطلاعات
           </VisitInfo>
@@ -39,12 +47,20 @@ const Page = () => {
   ];
 
   return (
-    <Card>
-      <WorkflowDataTable
-        apiUrl="/License/GetRequestList"
-        extraColumns={extraColumns}
+    <>
+      <Breadcrumb
+        titleIcon={<ClipboardDocumentListIcon className="w-8" />}
+        pages={[{ label: "خانه", path: "/" }]}
+        currentPage={"رییس اجرا استان"}
       />
-    </Card>
+
+      <Card>
+        <WorkflowDataTable
+          apiUrl="/License/GetRequestList"
+          extraColumns={extraColumns}
+        />
+      </Card>
+    </>
   );
 };
 

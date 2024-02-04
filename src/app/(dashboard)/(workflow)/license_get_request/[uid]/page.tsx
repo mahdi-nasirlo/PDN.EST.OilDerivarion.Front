@@ -2,7 +2,7 @@
 
 import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { useForm } from "antd/es/form/Form";
-import WorkflowBtn from "@/components/Workflow/workflow-btn";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
 import { useState } from "react";
 

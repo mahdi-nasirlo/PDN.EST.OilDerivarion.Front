@@ -4,12 +4,12 @@ import React from "react";
 import { Card } from "@/components/card";
 import { ColumnsType } from "antd/es/table";
 import { Space } from "antd/lib";
-import WorkflowDataTable from "@/components/Workflow/workflow-data-list";
+import WorkflowDataTable from "@/components/workflow/workflow-data-list";
 import Breadcrumb from "@/components/breadcrumb";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
-import VisitInfo from "@/components/Workflow/visit-info";
-import WorkFlowStatusColumn from "@/components/Workflow/workflow-status-columns";
+import VisitInfo from "@/components/workflow/visit-info";
+import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
 
 const apiData = licenseApi.GetRequest.producer;
 

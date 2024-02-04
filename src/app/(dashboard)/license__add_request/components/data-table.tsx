@@ -27,7 +27,7 @@ export default function DataTable() {
         name = "درحال بررسی";
         icon = <CloseCircleOutlined />;
       } else if (record.Wrork_State === 2) {
-        color = "orange";
+        color = "red";
         name = "رد";
         icon = <CheckCircleOutlined />;
       } else if (record.Wrork_State === 3) {

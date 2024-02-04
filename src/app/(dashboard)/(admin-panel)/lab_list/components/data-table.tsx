@@ -12,6 +12,8 @@ import labApi from "constance/lab";
 import EditModal from "./edit-modal";
 import useLabDelete from "@/hooks/lab/use-lab-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import GpsLabModal from "./gps-lab-modal";
+import SetLocation from "./gps-setLocation";
 
 const apiData = labApi.LabGetPage;
 interface TProps {
@@ -38,6 +40,19 @@ export default function DataTable({
     if (res.success) {
       setUidDelete(undefined);
     }
+  };
+  const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
+  const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
+
+  const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
+
+  const handleGPS = (record: z.infer<typeof apiData.Item>) => {
+    setSelectedLabUid(record.uid);
+    setIsGPSModalVisible(true);
+  };
+  const handleSetlocation = (record: z.infer<typeof apiData.Item>) => {
+    setSelectedLabUid(record.uid);
+    setIsGPSModalVisibleset(true);
   };
 
   const columns: ColumnsType<z.infer<typeof labApi.LabGetPage.Item>> = [
@@ -87,22 +102,22 @@ export default function DataTable({
         </Tooltip>
       ),
     },
-    // {
-    //   title: "موقعیت جغرافیایی",
-    //   dataIndex: "test",
-    //   key: "7",
-    //   render: (_, record) => (
-    //     <Space size="small">
-    //       <Button
-    //         type="link"
-    //         className="text-primary-500 font-bold"
-    //         onClick={() => handleGPS(record)}
-    //       >
-    //         مشاهده موقعیت
-    //       </Button>
-    //     </Space>
-    //   ),
-    // },
+    {
+      title: "موقعیت جغرافیایی",
+      dataIndex: "test",
+      key: "7",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-primary-500 font-bold"
+            onClick={() => handleGPS(record)}
+          >
+            مشاهده موقعیت
+          </Button>
+        </Space>
+      ),
+    },
     {
       title: "فاکتورهای آزمون",
       dataIndex: "testItems",
@@ -184,6 +199,13 @@ export default function DataTable({
           </Button>
           <Button
             type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => handleSetlocation(record)}
+          >
+            تعیین موقعیت آزمایشگاه
+          </Button>
+          <Button
+            type="link"
             className={"text-red-500 font-bold"}
             onClick={() => setUidDelete(record.uid)}
           >
@@ -224,6 +246,18 @@ export default function DataTable({
         />
       </Card>
       <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
+      <GpsLabModal
+        selectedLabUid={selectedLabUid}
+        setSelectedLabUid={setSelectedLabUid}
+        isGPSModalVisible={isGPSModalVisible}
+        setIsGPSModalVisible={setIsGPSModalVisible}
+      />
+      <SetLocation
+        selectedLabUid={selectedLabUid}
+        setSelectedLabUid={setSelectedLabUid}
+        isGPSModalVisibleset={isGPSModalVisibleset}
+        setIsGPSModalVisibleset={setIsGPSModalVisibleset}
+      />
       <ConfirmDeleteModal
         title="آزمایشگاه"
         open={uidDelete}

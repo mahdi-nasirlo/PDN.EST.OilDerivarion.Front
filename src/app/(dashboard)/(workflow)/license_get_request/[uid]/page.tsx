@@ -5,6 +5,8 @@ import { useForm } from "antd/es/form/Form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { on } from "events";
 
 interface PropType {
   params: { uid: string };
@@ -16,8 +18,20 @@ export default function Home(props: PropType) {
   const { data, isFetching, form, setRequest } = useLicenseGetRequest(
     props.params.uid
   );
+  const router = useRouter();
 
   const [workflowForm] = useForm();
+  const onFinish = async (values: any) => {
+    const res = await setRequest.mutateAsync({
+      ...values,
+      choice_Key: chiceKey as string,
+      request_Uid: props.params.uid,
+      description: values.description,
+    });
+    if (res) {
+      router.push("/license_get_requset_list");
+    }
+  };
 
   return (
     <>
@@ -118,17 +132,7 @@ export default function Home(props: PropType) {
         {data?.choices && (
           <>
             <Divider />
-            <Form
-              onFinish={(values) => {
-                setRequest.mutateAsync({
-                  choice_Key: chiceKey as string,
-                  request_Uid: props.params.uid,
-                  description: values.description,
-                });
-              }}
-              form={workflowForm}
-              layout="vertical"
-            >
+            <Form onFinish={onFinish} form={workflowForm} layout="vertical">
               <Row gutter={[16, 16]}>
                 <Col xs={24} md={24}>
                   <Form.Item

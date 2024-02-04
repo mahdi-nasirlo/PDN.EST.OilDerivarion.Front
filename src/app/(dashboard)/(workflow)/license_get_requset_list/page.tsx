@@ -12,8 +12,7 @@ import { BeakerIcon } from "@heroicons/react/24/outline";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
 import { any, z } from "zod";
-
-const apiData = licenseApi.GetRequest.producer;
+import { workflowApi } from "constance/workflow";
 
 const Page = () => {
   const extraColumns: ColumnsType = [
@@ -35,8 +34,7 @@ const Page = () => {
       render: (_, record: any) => (
         <Space size="small">
           <VisitInfo
-            //@ts-ignore
-            CanEdit={record.Request_Uid}
+            CanEdit={record.CanEdit}
             href={"license_get_request/" + record.Request_Uid}
           >
             مشاهده اطلاعات

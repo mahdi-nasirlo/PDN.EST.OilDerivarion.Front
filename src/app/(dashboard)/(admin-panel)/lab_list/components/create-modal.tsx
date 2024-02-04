@@ -5,15 +5,17 @@ import { useForm } from "antd/es/form/Form";
 import React from "react";
 import LaboratoryForm from "./laboratory-form";
 import useLabCreate from "@/hooks/lab/use-lab-create";
+import { useValidation } from "@/hooks/use-validation";
+import labApi from "constance/lab";
 
-export default function CreateModal({
-  modalVisible,
-  setModalVisible,
-}: {
-  modalVisible: any;
-  setModalVisible: any;
-}) {
-  const [form] = useForm();
+const apiData = labApi.LabCreate.type;
+
+interface TProps {
+  modalVisible: boolean;
+  setModalVisible: (arg: boolean) => void;
+}
+export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
+  const [form, rules] = useValidation(apiData);
   const create = useLabCreate();
 
   const CloseModal = () => {
@@ -72,7 +74,7 @@ export default function CreateModal({
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <LaboratoryForm />
+        <LaboratoryForm rules={rules} />
       </Form>
     </Modal>
   );

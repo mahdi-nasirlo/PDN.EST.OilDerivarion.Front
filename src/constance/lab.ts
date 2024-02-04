@@ -21,7 +21,7 @@ const labApi = {
     type: z.object({
       name: z.string().optional(),
       isActive: z.boolean().optional(),
-      stateId: z.number().optional(),
+      stateUId: z.string().uuid().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
     }),
@@ -39,7 +39,7 @@ const labApi = {
     type: z.object({
       name: z.string({ required_error: errorMessage.required }),
       isActive: z.boolean({ required_error: errorMessage.required }),
-      stateId: z.number(),
+      stateUId: z.string(),
       license_No: z.string({ required_error: errorMessage.required }),
       licenseExpireDatePersian: z.string({
         required_error: errorMessage.required,
@@ -47,7 +47,7 @@ const labApi = {
       tel: z.string({ required_error: errorMessage.required }),
       fax: z.string({ required_error: errorMessage.required }),
       address: z.string({ required_error: errorMessage.required }),
-      testItems: z.array(z.object({})),
+      testItems: z.any({ required_error: errorMessage.required_choice }),
     }),
   },
   LabGet: {
@@ -65,7 +65,12 @@ const labApi = {
         tel: z.string(),
         fax: z.string(),
         address: z.string(),
-        testItems: z.array(z.object({})),
+        testItems: z.array(
+          z.object({
+            name: z.string(),
+            uid: z.string(),
+          })
+        ),
       }),
     }),
   },
@@ -83,7 +88,7 @@ const labApi = {
       tel: z.string({ required_error: errorMessage.required }),
       fax: z.string({ required_error: errorMessage.required }),
       address: z.string({ required_error: errorMessage.required }),
-      testItems: z.array(z.object({})),
+      testItems: z.any({ required_error: errorMessage.required_choice }),
     }),
   },
 

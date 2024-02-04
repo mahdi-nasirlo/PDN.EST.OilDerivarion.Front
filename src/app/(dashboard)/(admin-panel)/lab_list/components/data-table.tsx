@@ -9,6 +9,9 @@ import { TestItemApi } from "constance/test-item";
 import { z } from "zod";
 import useTestItemDelete from "@/hooks/basic/test_item/use-test-item-delete";
 import labApi from "constance/lab";
+import EditModal from "./edit-modal";
+import useLabDelete from "@/hooks/lab/use-lab-delete";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 const apiData = labApi.LabGetPage;
 interface TProps {
@@ -27,7 +30,7 @@ export default function DataTable({
   const [uid, setGetUid] = useState<string | boolean>();
   const [uidDelete, setUidDelete] = useState<string | boolean>();
 
-  const Delete = useTestItemDelete();
+  const Delete = useLabDelete();
 
   const handelDelete = async () => {
     const res = await Delete.mutateAsync({ uid: uidDelete as string });
@@ -220,17 +223,14 @@ export default function DataTable({
           columns={columns}
         />
       </Card>
-      {/* <EditModal
-        editModalUid={uid}
-        setEditModalUid={setGetUid}
-      />
+      <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
       <ConfirmDeleteModal
-        title='فاکتور آزمون'
+        title="آزمایشگاه"
         open={uidDelete}
         setOpen={setUidDelete}
         handleDelete={handelDelete}
         loading={Delete.isPending}
-      /> */}
+      />
     </>
   );
 }

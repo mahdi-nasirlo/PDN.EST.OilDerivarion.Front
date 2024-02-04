@@ -22,9 +22,9 @@ const useTestItemList = () => {
     value: item.uid,
   }));
 
-  const treeData = query.data?.map((item: any) => ({
-    value: item?.uid,
+  const treeData: any[] | undefined = query.data?.map((item) => ({
     label: item.name,
+    value: item.uid,
   }));
 
   return { ...query, ...apiData, options, treeData };

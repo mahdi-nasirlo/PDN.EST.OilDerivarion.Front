@@ -1,9 +1,9 @@
 import {Menu, MenuProps} from 'antd/lib'
 import React from 'react'
 import {useControlSidebar} from './hooks/use-control-sidebar'
-import {Skeleton} from "antd";
+import {Drawer, Skeleton} from "antd";
 
-export default function SideBar() {
+export default function SideBar({open, setOpen}: { open: boolean, setOpen: (arg: boolean) => void }) {
 
     const { userAccess, handleMenuOpenChange, handleMenuItemClick, pathname } = useControlSidebar()
 
@@ -52,6 +52,18 @@ export default function SideBar() {
                 zIndex: 99,
             }}
         >
+            <Drawer className="mobile-drawer" open={open} onClose={() => setOpen(false)}>
+                <CommonMenu
+                    className="px-4 overflow-auto w-full"
+                    style={{
+                        width: "275px",
+                        padding: "0 16px",
+                        paddingTop: "30px",
+                        paddingBottom: "30px",
+                        height: "100%",
+                    }}
+                />
+            </Drawer>
             <CommonMenu
                 className="px-4 overflow-auto hidden lg:block"
                 style={{
@@ -61,11 +73,7 @@ export default function SideBar() {
                     paddingBottom: "30px",
                     height: "100%",
                 }}
-            >
-                {/* {userAccess.items?.map((item) => <MenuItem>
-                {item.}
-                </MenuItem>)} */}
-            </CommonMenu>
+            />
         </div>
     )
 }

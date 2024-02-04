@@ -28,7 +28,7 @@ const Index = (props: PropsType) => {
 
   return (
     <>
-      <div style={containerStyle()} className="grid grid-cols-4 gap-2 ">
+      <div style={containerStyle()} className="grid grid-cols-2 gap-2 ">
         {props.choices.map((btn, index) => {
           return (
             <div

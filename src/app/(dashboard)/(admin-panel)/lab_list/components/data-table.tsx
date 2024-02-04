@@ -183,8 +183,8 @@ export default function DataTable({
     //   ),
     // },
     {
-      title: "جزئیات",
-      key: "جزئیات",
+      title: "عملیات",
+      key: "عملیات",
       align: "center",
       fixed: "right",
       width: "10%",

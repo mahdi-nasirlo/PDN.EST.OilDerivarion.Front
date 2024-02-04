@@ -5,8 +5,21 @@ import React, {useState} from 'react'
 import LayoutHeader from './header'
 import {Content} from 'antd/lib/layout/layout'
 import SideBar from './side-bar'
+import i18next from "i18next";
+import translation from "@/lib/zod-i18n.json";
+import {zodI18nMap} from "zod-i18n-map";
+import {z} from "zod";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+
+    i18next.init({
+        lng: "fa",
+        resources: {
+            fa: {zod: translation},
+        },
+    })
+
+    z.setErrorMap(zodI18nMap);
 
     const [open, setOpen] = useState<boolean>(false);
 

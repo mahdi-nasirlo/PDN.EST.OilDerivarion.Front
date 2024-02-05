@@ -38,7 +38,7 @@ export default function SubmitForm() {
                 width: "100%",
                 height: 400,
               }}
-              operations={["به راست", "به چپ "]}
+              operations={["به چپ", "به راست"]}
               onChange={handleOnChange}
               render={(item) => <div className="text-right">{item.title}</div>}
             />

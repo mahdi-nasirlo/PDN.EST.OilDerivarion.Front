@@ -1,4 +1,3 @@
-import customFetcher from "@/utils/custome-fetcher";
 import fetchWithSession from "@/utils/fetch-with-session";
 import {useQuery} from "@tanstack/react-query";
 import {ssoApi} from "constance/auth";
@@ -22,14 +21,14 @@ const useAuth = () => {
 const useGetToken = (code?: string | null) => {
 
     const getTokenApi = ssoApi.getToken
- 
-    const getToken = useQuery<z.infer<typeof getTokenApi.response>>({
-        queryKey: [getTokenApi.url],
-        queryFn: () => customFetcher({ url: getTokenApi.url, data: { code } }),
-        enabled: typeof code === "string"
-    })
 
-    const {data, isLoading} = getToken
+    // const getToken = useQuery<z.infer<typeof getTokenApi.response>>({
+    //     queryKey: [getTokenApi.url],
+    //     queryFn: () => customFetcher({ url: getTokenApi.url, data: { code } }),
+    //     enabled: typeof code === "string"
+    // })
+    //
+    // const {data, isLoading} = getToken
 
     // useEffect(() => {
     //
@@ -47,7 +46,8 @@ const useGetToken = (code?: string | null) => {
     //
     // }, [isLoading, data])
 
-    return getToken
+    // return getToken
+    return undefined
 }
 
 const checkTokenApi = ssoApi.checkToken

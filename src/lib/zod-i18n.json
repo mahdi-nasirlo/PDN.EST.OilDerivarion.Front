@@ -1,113 +1,113 @@
 {
   "errors": {
-    "invalid_type": "المتوقع {{expected}}، المستلم {{received}}",
-    "invalid_type_received_undefined": "لطفا مقدار را وارد کنید",
-    "invalid_type_received_null": "لطفا مقدار را وارد کنید",
-    "invalid_literal": "قيمة حرفية غير صالحة، المتوقع {{expected}}",
-    "unrecognized_keys": "عنصر (عناصر) غير معروف في الكائن: {{- keys}}",
-    "invalid_union": "مدخل غير صالح",
-    "invalid_union_discriminator": "قيمة مميزة غير صالحة. المتوقع {{- options}}",
-    "invalid_enum_value": "قيمة تعداد غير صالحة. المتوقع {{- options}}، المستلم '{{received}}'",
-    "invalid_arguments": "معاملات الدالة غير صالحة",
-    "invalid_return_type": "نوع إرجاع دالة غير صالح",
-    "invalid_date": "تاريخ غير صالح",
-    "custom": "مدخل غير صالح",
-    "invalid_intersection_types": "تعذر دمج نتائج التقاطع",
-    "not_multiple_of": "يجب أن يكون الرقم من مضاعفات {{multipleOf}}",
-    "not_finite": "يجب ان يكون العدد محدود",
+    "invalid_type": "نوع ورودی باید از نوع {{expected}} باشد ،{{received}} معتبر نیست",
+    "invalid_type_received_undefined": "مقدار تعریف نشده است",
+    "invalid_type_received_null": "مقدار تعریف نشده است",
+    "invalid_literal": "مقدار تحت اللفظی نامعتبر، مورد انتظار {{expected}}",
+    "unrecognized_keys": "کلید {{- keys}} ناشناخته است",
+    "invalid_union": "ورودی نامتعبر است ",
+    "invalid_union_discriminator": "یک ارزش متمایز و بیانی. {{-options}} مورد انتظار",
+    "invalid_enum_value": "یک مقدار enum اکسپرس. مورد انتظار {{- options}}، دریافت '{{received}}'",
+    "invalid_arguments": "آرگومان ها نامعتبر است",
+    "invalid_return_type": "مقدار خروجی نامعتبر است",
+    "invalid_date": "تاریخ نامتعبر است ",
+    "custom": "ورودی نامتعبر است ",
+    "invalid_intersection_types": "ادغام نتایج تقاطع ممکن نیست",
+    "not_multiple_of": "عدد باید مضربی از {{multipleOf}} باشد",
+    "not_finite": "تعداد باید محدود باشد",
     "invalid_string": {
-      "email": "غير صالح {{validation}}",
-      "url": "غير صالح {{validation}}",
-      "uuid": "غير صالح {{validation}}",
-      "cuid": "غير صالح {{validation}}",
-      "regex": "غير صالح",
-      "datetime": "غير صالح {{validation}}",
-      "startsWith": "إدخال غير صالح: يجب أن يبدأ بـ {{startsWith}}",
-      "endsWith": "إدخال غير صالح: يجب أن ينتهي بـ {{endsWith}}"
+      "email": "نامتعبر است  {{validation}}",
+      "url": "نامتعبر است  {{validation}}",
+      "uuid": "نامتعبر است  {{validation}}",
+      "cuid": "نامتعبر است  {{validation}}",
+      "regex": "نامتعبر است ",
+      "datetime": "نامتعبر است  {{validation}}",
+      "startsWith": "ورودی نامتعبر است : باید با {{startsWith}} شروع شود",
+      "endsWith": "ورودی نامتعبر است : باید با {{endsWith} تمام شود"
     },
     "too_small": {
       "array": {
-        "exact": "يجب أن تحتوي المصفوفة على {{minimum}} عنصر (عناصر)",
-        "inclusive": "يجب أن تحتوي المصفوفة على {{minimum}} عنصر (عناصر) على الأقل",
-        "not_inclusive": "يجب أن تحتوي المصفوفة على أكثر من {{minimum}} عنصر (عناصر)"
+         "exact": "آرایه باید حاوی {{minimum}} عنصر باشد",
+         "inclusive": "آرایه باید حداقل شامل {{minimum}} عنصر باشد",
+         "not_inclusive": "آرایه باید بیش از {{minimum}} عنصر داشته باشد"
       },
       "string": {
-        "exact": "يجب أن تحتوي السلسلة على {{minimum}} حرف (أحرف)",
-        "inclusive": "يجب أن تحتوي السلسلة على {{minimum}} حرف (أحرف) على الأقل",
-        "not_inclusive": "يجب أن تحتوي السلسلة على أكثر من {{minimum}} حرف (أحرف)"
+         "exact": "رشته باید حاوی {{minimum}} کاراکتر باشد",
+         "inclusive": "رشته باید حداقل دارای {{minimum}} کاراکتر باشد",
+         "not_inclusive": "رشته باید بیش از {{minimum}} کاراکتر داشته باشد"
       },
       "number": {
-        "exact": "يجب أن يكون الرقم {{minimum}}",
-        "inclusive": "يجب أن يكون الرقم أكبر من أو يساوي {{minimum}}",
-        "not_inclusive": "يجب أن يكون الرقم أكبر من {{minimum}}"
+          "exact": "رقم باید {{minimum}} باشد",
+         "inclusive": "رقم باید بزرگتر یا مساوی با {{minimum}} باشد",
+         "not_inclusive": "رقم باید بیشتر از {{minimum}} باشد"
       },
       "set": {
-        "exact": "مدخل غير صالح",
-        "inclusive": "مدخل غير صالح",
-        "not_inclusive": "مدخل غير صالح"
+        "exact": "ورودی نامتعبر است ",
+        "inclusive": "ورودی نامتعبر است ",
+        "not_inclusive": "ورودی نامتعبر است "
       },
       "date": {
-        "exact": "يجب أن يكون التاريخ {{- minimum, datetime}}",
-        "inclusive": "يجب أن يكون التاريخ أكبر من أو يساوي {{- minimum, datetime}}",
-        "not_inclusive": "يجب أن يكون التاريخ أكبر من {{- minimum, datetime}}"
+        "exact": "تاریخ باید {{- minimum, datetime}} باشد",
+         "inclusive": "تاریخ باید بزرگتر یا مساوی با {{- minimum, datetime}} باشد",
+         "not_inclusive": "تاریخ باید بزرگتر از {{- minimum, datetime}} باشد"
       }
     },
     "too_big": {
       "array": {
-        "exact": "يجب أن تحتوي المصفوفة على {{maximum}} عنصر (عناصر)",
-        "inclusive": "يجب أن تحتوي المصفوفة على {{maximum}} عنصر (عناصر) كحد أقصى",
-        "not_inclusive": "يجب أن تحتوي المصفوفة على أقل من {{maximum}} عنصر (عناصر)"
+         "exact": "آرایه باید حاوی {{maximum}} عنصر باشد",
+         "inclusive": "آرایه باید حداکثر حاوی {{maximum}} عنصر باشد",
+         "not_inclusive": "آرایه باید کمتر از {{maximum}} عنصر داشته باشد"
       },
       "string": {
-        "exact": "يجب أن تحتوي السلسلة على {{maximum}} حرف (أحرف)",
-        "inclusive": "يجب أن تحتوي السلسلة على {{maximum}} حرف (أحرف) كحد أقصى",
-        "not_inclusive": "يجب أن تحتوي السلسلة على أقل من {{maximum}} حرف (أحرف)"
+        "exact": "رشته باید دارای {{maximum}} کاراکتر باشد",
+        "inclusive": "رشته باید حداکثر دارای {{maximum}} کاراکتر باشد",
+        "not_inclusive": "رشته باید کمتر از {{maximum}} کاراکتر باشد"
       },
       "number": {
-        "exact": "يجب أن يكون الرقم {{maximum}}",
-        "inclusive": "يجب أن يكون الرقم أقل من أو يساوي {{maximum}}",
-        "not_inclusive": "يجب أن يكون الرقم أقل من {{maximum}}"
+        "exact": "رقم باید {{maximum}} باشد",
+        "inclusive": "رقم باید کمتر یا مساوی با {{maximum}} باشد",
+        "not_inclusive": "رقم باید کمتر از {{maximum}} باشد"
       },
       "set": {
-        "exact": "مدخل غير صالح",
-        "inclusive": "مدخل غير صالح",
-        "not_inclusive": "مدخل غير صالح"
+        "exact": "ورودی نامتعبر است ",
+        "inclusive": "ورودی نامتعبر است ",
+        "not_inclusive": "ورودی نامتعبر است "
       },
       "date": {
-        "exact": "يجب أن يكون التاريخ {{- maximum, datetime}}",
-        "inclusive": "يجب أن يكون التاريخ أصغر من أو يساوي {{- maximum, datetime}}",
-        "not_inclusive": "يجب أن يكون التاريخ أصغر من {{- maximum, datetime}}"
+        "exact": "تاریخ باید {{- maximum, datetime}} باشد",
+        "inclusive": "تاریخ باید کمتر یا مساوی با {{- maximum, datetime}} باشد",
+        "not_inclusive": "تاریخ باید کمتر از {{- maximum, datetime}} باشد"
       }
     }
   },
   "validations": {
-    "email": "البريد الإلكتروني",
-    "url": "الرابط",
+    "email": "ایمیل",
+    "url": "پیوند",
     "uuid": "uuid",
     "cuid": "cuid",
-    "regex": "التعبير النمطي",
-    "datetime": "التاريخ والوقت"
+    "regex": "بیان منظم",
+    "datetime": "تاریخ و ساعت"
   },
   "types": {
-    "function": "دالة",
-    "number": "رقم",
-    "string": "سلسلة",
-    "nan": "مدخل غير رقمي",
+    "function": "تابع",
+    "number": "عدد",
+    "string": "حروف",
+    "nan": "ورودی غیر عددی",
     "integer": "عدد صحيح",
-    "float": "عدد عشري",
-    "boolean": "قيمة منطقية",
+    "float": "عدد اعشاری",
+    "boolean": "مقدار بولی",
     "date": "تاريخ",
-    "bigint": "عدد صحيح كبير",
-    "undefined": "غير معرف",
-    "symbol": "رمز",
-    "null": "لا شيء",
-    "array": "مصفوفة",
-    "object": "كائن",
-    "unknown": "غير معروف",
-    "promise": "برومس",
-    "void": "بدون قيمة",
-    "never": "ابدا",
-    "map": "ماب",
-    "set": "مجموعة"
+    "bigint": "عدد صحيح بزرگ",
+    "undefined": "تعریف نشده",
+    "symbol": "کد",
+    "null": "خالی",
+    "array": "آرایه",
+    "object": "شیء",
+    "unknown": "ناشناخته",
+    "promise": "وعده",
+    "void": "بدون ارزش",
+    "never": "هرگز",
+    "map": "نقشه",
+    "set": "گروه"
   }
 }

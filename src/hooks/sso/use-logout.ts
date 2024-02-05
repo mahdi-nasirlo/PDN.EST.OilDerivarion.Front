@@ -16,8 +16,8 @@ const useLogout = () => {
         execute: async () => {
 
             localStorage.removeItem(ssoApi.access_token_Key)
-
-            await logout.mutateAsync()
+            
+            // await logout.mutateAsync()
 
             router.push(process.env.NEXT_PUBLIC_SSO_URL + "/logout")
 

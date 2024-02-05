@@ -15,7 +15,11 @@ const useRequestPackageMaterialDelete = () => {
             url: apiData.url,
             data
         }),
-        onSuccess: async () => {
+        onSuccess: async (data) => {
+
+            console.log(data)
+
+            await queryClient.setQueryData([materialApi.RequestPackageMaterialList.url], data)
 
             await queryClient.invalidateQueries({
                 queryKey: [materialApi.RequestPackageMaterialList.url]

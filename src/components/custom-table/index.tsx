@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { Table, TableProps, Typography } from "antd";
-import { addIndexToData } from "@/utils/addIndexToData";
+import React, {useState} from "react";
+import {Table, TableProps, Typography} from "antd";
+import {addIndexToData} from "@/utils/addIndexToData";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
-  header?: {
-    icon?: React.ReactNode;
-    text: string
-    actions?: React.ReactNode
-  }
-  setInitialData: (arg: any) => void;
-  isLoading: boolean;
-  data: {
-    records: any[] | undefined;
-    count?: number;
-  } | undefined;
+    header?: {
+        icon?: React.ReactNode;
+        text: string
+        actions?: React.ReactNode
+    }
+    setInitialData?: (arg: any) => void;
+    isLoading: boolean;
+    data: {
+        records: any[] | undefined;
+        count?: number;
+    } | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
@@ -29,13 +29,14 @@ const Index = (props: TableProps<any> & RecordeValue) => {
 
   const handleChangePage = (e: number) => {
     setPage(e);
-    // props.setInitialData(GetPageRecordNumber(e))
-    props.setInitialData((prev: any) => {
-      console.log(prev)
-      delete prev.fromRecord;
-      delete prev.selectRecord;
-      return { ...GetPageRecordNumber(e), ...prev };
-    });
+      if (props.setInitialData) {
+          props?.setInitialData((prev: any) => {
+              console.log(prev)
+              delete prev.fromRecord;
+              delete prev.selectRecord;
+              return {...GetPageRecordNumber(e), ...prev};
+          });
+      }
   };
 
   return (
@@ -62,9 +63,14 @@ const Index = (props: TableProps<any> & RecordeValue) => {
         pagination={props.pagination ?? {
           total: props.data?.count,
           showTotal: (total, range) => (
-            <Typography>
-              {`شماره صفحه ${page} از ${Math.ceil(total / 5)}`}
-            </Typography>
+              <>
+                  <Typography>
+                      {` صفحه ${page} از ${Math.ceil(total / 5)}`}
+                  </Typography>
+                  <Typography className="mr-3 font-semibold">
+                      تعداد: {total}
+                  </Typography>
+              </>
           ),
           onChange: handleChangePage,
           defaultPageSize: 5,
@@ -74,7 +80,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
           style: {
             display: "flex",
             flexDirection: "row",
-            justifyContent: "flex-start",
+              justifyContent: "flex-end",
             margin: "16px 0",
           },
         }}

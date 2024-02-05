@@ -3,9 +3,9 @@ import {materialApi} from "../../constance/material";
 import fetchWithSession from "@/utils/fetch-with-session";
 import {z} from "zod";
 
-const apiData = materialApi.RequestPackagePartAdd
+const apiData = materialApi.RequestPackagePartMaterialAdd
 
-const useRequestPackagePartAdd = (package_UID?: string) => {
+const useRequestPackagePartMaterialAdd = (package_UID?: string) => {
 
     const queryClient = useQueryClient()
 
@@ -20,12 +20,17 @@ const useRequestPackagePartAdd = (package_UID?: string) => {
         }),
         onSuccess: async (data) => {
 
-            await queryClient.invalidateQueries({queryKey: [materialApi.GetRequestPackagePartList.url]})
+            console.log(data)
+
+            if (data.success)
+                await queryClient.setQueryData([materialApi.RequestPackagePartMaterialList.url], data)
+
+            // await queryClient.invalidateQueries({queryKey: [materialApi.RequestPackagePartMaterialList.url]})
 
         }
     })
 
-    return {...query, schema: apiData.type}
+    return {...query, ...apiData}
 }
 
-export {useRequestPackagePartAdd}
+export {useRequestPackagePartMaterialAdd}

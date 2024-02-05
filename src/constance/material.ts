@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
@@ -64,6 +64,18 @@ const RequestPackageMaterialListItem = z.object({
   TestItems: z.string(),
 });
 
+const RequestPackagePartMaterialListItem = z.object({
+  UID: z.string(),
+  material_name: z.string(),
+  Estefadeh: z.string()
+})
+
+const RequestPackagePartProductListItem = z.object({
+  UID: z.string(),
+  material_name: z.string(),
+  Estefadeh: z.string()
+})
+
 const materialApi = {
   MaterialGetAll: {
     url: "/Material/MaterialGetAll",
@@ -119,8 +131,8 @@ const materialApi = {
     type: z.object({
       request__Package_UID: z.string({
         required_error: errorMessage.required_choice,
-      }),
-      material_Uid: z.string(),
+      }).optional(),
+      material_Uid: z.string({required_error: errorMessage.required}),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.object({})),
@@ -248,12 +260,69 @@ const materialApi = {
       data: z.array(RequestPackageMaterialListItem),
     }),
   },
-
   BasicProductMaterialDelete: {
     url: "/Basic/BasicProductMaterialDelete",
     type: z.object({
       uid: z.string().uuid(),
     }),
+  },
+  RequestPackagePartMaterialList: {
+    url: "/Material/RequestPackagePartMaterialList",
+    type: z.object({
+      part_UID: z.string(),
+      package_UID: z.string().optional()
+    }),
+    item: RequestPackagePartMaterialListItem,
+    response: generalResponseZod.extend({
+      data: z.array(RequestPackagePartMaterialListItem)
+    })
+  },
+  RequestPackagePartMaterialAdd: {
+    url: "/Material/RequestPackagePartMaterialAdd",
+    type: z.object({
+      material_UID: z.string(),
+      part_Type: z.number().optional(),
+      part_UID: z.string(),
+      package_UID: z.string().optional(),
+      darsad_Estefadeh: z.number()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(RequestPackageMaterialListItem)
+    })
+  },
+  RequestPackagePartMaterialDelete: {
+    url: "/Material/RequestPackagePartMaterialDelete",
+    type: z.object({
+      material_UID: z.string(),
+      part_UID: z.string(),
+      package_UID: z.string().optional()
+    })
+  },
+  RequestPackagePartInfo: {
+    url: "/Material/RequestPackagePartInfo",
+    type: z.object({
+      part_UID: z.ostring(),
+      package_UID: z.string().optional()
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({
+        Part_Type: z.number(),
+        Status: z.number(),
+        process_description: z.string(),
+        schematic_file_UID: z.string().uuid()
+      })
+    })
+  },
+  RequestPackagePartProductList: {
+    url: "/Material/RequestPackagePartProductList",
+    type: z.object({
+      part_UID: z.string(),
+      package_UID: z.string().optional()
+    }),
+    item: RequestPackagePartProductListItem,
+    response: generalResponseZod.extend({
+      data: z.array(RequestPackagePartProductListItem)
+    })
   },
 };
 

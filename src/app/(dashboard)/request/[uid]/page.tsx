@@ -2,29 +2,21 @@
 
 import React from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentPlusIcon } from "@heroicons/react/24/outline";
-import {
-  Alert,
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Typography,
-} from "antd";
+import {DocumentPlusIcon} from "@heroicons/react/24/outline";
+import {Alert, Button, Col, Divider, Form, Input, Row, Typography,} from "antd";
 import Materials from "./materials";
 import Products from "./products";
 import staticMessages from "../../../../../lib/staticMessages";
 import FileUpload from "../../../../../components/inputs/FileUpload/FileUpload";
-import { Card } from "@/components/card";
-import { useRouter } from "next/navigation";
+import {Card} from "@/components/card";
+import {useRouter} from "next/navigation";
 
 interface TProps {
-  uid: string;
+  params: { uid: string; }
 }
 
-export default function Page({ uid }: TProps) {
+export default function Page({params: {uid}}: TProps) {
+
   const router = useRouter();
 
   const HandelSubmit = () => router.push("/request");
@@ -61,8 +53,8 @@ export default function Page({ uid }: TProps) {
                 label="شرح فرآیند تولید"
               >
                 <Input.TextArea
-                  style={{ height: 120, resize: "none" }}
-                  placeholder="وارد کنید"
+                    style={{minHeight: 80, resize: "none"}}
+                    placeholder="وارد کنید"
                 />
               </Form.Item>
             </Col>
@@ -91,9 +83,9 @@ export default function Page({ uid }: TProps) {
             </Col>
           </Row>
           <Divider />
-          <Materials uid={uid} />
+          <Materials uid={uid}/>
           <Divider />
-          <Products />
+          <Products uid={uid}/>
           <Divider />
           <Row gutter={[32, 32]}>
             <Col xs={24} md={12}>

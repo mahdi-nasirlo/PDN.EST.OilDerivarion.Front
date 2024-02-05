@@ -1,7 +1,8 @@
 import React from 'react'
 import MaterialForm from './material-form'
-import { Button, Col, Modal, Row } from 'antd'
-import { Form } from 'antd/lib';
+import {Button, Col, Modal, Row} from 'antd'
+import {Form} from 'antd/lib';
+import useUiRequestMaterialCreate from "@/app/(dashboard)/request/[uid]/materials/hook/use-ui-request-material-create";
 
 interface TProps {
     uid: string,
@@ -9,12 +10,15 @@ interface TProps {
     setVisibleModal: any
 }
 
-export default function CreateModal({ visibleModal, setVisibleModal, uid }: TProps) {
+const type = 1
 
-    const handleConfirm = () => setVisibleModal(false);
+export default function CreateModal({visibleModal, setVisibleModal, uid: partUid}: TProps) {
 
-
-    const handleCancel = () => setVisibleModal(false);
+    const {addMaterial, rules, onFinish, form, onClose, requestInfo} = useUiRequestMaterialCreate({
+        uid: partUid,
+        visibleModal,
+        setVisibleModal
+    })
 
     return (
         <Modal
@@ -28,7 +32,7 @@ export default function CreateModal({ visibleModal, setVisibleModal, uid }: TPro
                 </div>
             }
             open={visibleModal}
-            onCancel={handleCancel}
+            onCancel={onClose}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={12} md={12}>
@@ -36,8 +40,10 @@ export default function CreateModal({ visibleModal, setVisibleModal, uid }: TPro
                             size="large"
                             className="w-full"
                             type="primary"
-                            onClick={handleConfirm}
+                            onClick={() => form.submit()}
                             key={"submit"}
+                            disabled={addMaterial.isPending}
+                            loading={addMaterial.isPending || requestInfo.isFetching}
                         >
                             ثبت
                         </Button>
@@ -46,8 +52,9 @@ export default function CreateModal({ visibleModal, setVisibleModal, uid }: TPro
                         <Button
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={handleCancel}
+                            onClick={onClose}
                             key={"cancel"}
+                            disabled={addMaterial.isPending || requestInfo.isFetching}
                         >
                             انصراف
                         </Button>
@@ -55,8 +62,12 @@ export default function CreateModal({ visibleModal, setVisibleModal, uid }: TPro
                 </Row>,
             ]}
         >
-            <Form layout='vertical'>
-                <MaterialForm />
+            <Form
+                form={form}
+                layout='vertical'
+                onFinish={onFinish}
+            >
+                <MaterialForm rules={rules}/>
             </Form>
         </Modal>
 

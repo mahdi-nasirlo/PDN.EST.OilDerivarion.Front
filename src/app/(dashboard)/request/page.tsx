@@ -1,13 +1,13 @@
 "use client";
 
-import { Button, Col, Divider, Row, Spin } from "antd";
+import {Button, Col, Divider, Row, Spin} from "antd";
 import React from "react";
 // import CardGrid from "./components/card-grid";
-import { useRouter } from "next/navigation";
-import { Card } from "@/components/card";
+import {useRouter} from "next/navigation";
+import {Card} from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
-import { PlusSmallIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
-import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
+import {PlusSmallIcon, SquaresPlusIcon} from "@heroicons/react/24/outline";
+import {useGetRequestPackagePartList} from "@/hooks/material/use-get-request-package-part-list";
 import CardList from "@/app/(dashboard)/request/components/card-list";
 import FirstCard from "@/app/(dashboard)/request/components/first-card";
 
@@ -30,6 +30,7 @@ export default function Page() {
                         className="flex items-center"
                         icon={<PlusSmallIcon className="w-5 h-5" />}
                         type="primary"
+                        size="large"
                         onClick={() => router.push("/request/add_material")}
                     >
                         مواد اولیه

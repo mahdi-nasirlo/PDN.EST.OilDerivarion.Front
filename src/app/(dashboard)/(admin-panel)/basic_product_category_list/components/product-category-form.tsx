@@ -1,8 +1,8 @@
-import {Col, Form, Input, InputNumber, Row, Select} from 'antd'
-import React, {useEffect, useState} from 'react'
-import {Rule} from "rc-field-form/es/interface";
+import { Col, Form, Input, InputNumber, Row, Select } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Rule } from "rc-field-form/es/interface";
 
-export default function ProductCategoryForm({rules, density}: { rules: Rule, density?: boolean }) {
+export default function ProductCategoryForm({ rules, density }: { rules: Rule, density?: boolean }) {
 
     const [hasDensity, setHasDensity] = useState(density ?? true);
 
@@ -14,8 +14,8 @@ export default function ProductCategoryForm({rules, density}: { rules: Rule, den
         { value: 1, label: "برش" },
         { value: 2, label: "بلندینگ" },
         { value: 3, label: "پیرولیز" },
-        { value: 4, label: "شیرین سازی" },
-        { value: 5, label: "کرکینگ" },
+        { value: 4, label: "کرکینگ" },
+        { value: 5, label: "شیرین سازی" },
     ];
 
     return (

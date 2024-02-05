@@ -269,5 +269,9 @@
 }
 
 .ant-upload {
-  @apply w-full
+  @apply w-full;
+}
+
+.ant-notification-notice-message {
+  @apply mb-0 !important;
 }

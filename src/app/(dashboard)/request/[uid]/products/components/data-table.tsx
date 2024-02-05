@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import EditModal from "./edit-modal";
+import React from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import {ColumnsType} from "antd/es/table";
-import {Button, Space} from "antd";
+import {Button, Space, Tooltip, Typography} from "antd";
 import CustomTable from "@/components/custom-table";
 import {ViewColumnsIcon} from "@heroicons/react/24/outline";
 import {PlusOutlined} from "@ant-design/icons";
-import useRequestPackagePartProductList from "@/hooks/material/use-request-package-part-product-list";
 import {z} from "zod";
+import useUiRequestPackageProductList
+    from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-list";
 
 interface Tprops {
     uid: string,
@@ -16,11 +16,13 @@ interface Tprops {
 
 export default function DataTable({setVisibleModal, uid}: Tprops) {
 
-    const products = useRequestPackagePartProductList(uid)
-
-    const [editModal, setEditModal] = useState(false);
-
-    const [deleteModal, setDeleteModal] = useState(false);
+    const {
+        productDelete,
+        products,
+        deleteModal,
+        setDeleteModal,
+        handleDelete
+    } = useUiRequestPackageProductList(uid)
 
     const columns: ColumnsType<z.infer<typeof products.item>> = [
         {
@@ -32,18 +34,34 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
         {
             title: " نام محصول",
             key: "2",
-            dataIndex: "ProductName",
+            dataIndex: "name",
+            render: (_, record) => {
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{_}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[900px]"
+                            ellipsis={true}
+                            style={{width: "40px !important"}}
+                        >
+                            {_}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
         },
         {
-            title: "درصد استحصال",
+            title: "درصد استفاده",
             key: "3",
-            dataIndex: "ProductUsageExploitation",
+            dataIndex: "Estehsal",
             render: (value) => <>{value}%</>,
         },
         {
             title: "درصد هدر رفت",
             key: "4",
-            dataIndex: "ProductUsageWasted",
+            dataIndex: "HadarRaft",
             render: (value) => <>{value}%</>,
         },
         {
@@ -57,16 +75,9 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
                     <Button
                         type="link"
                         className="text-red-500 font-bold"
-                        onClick={() => setDeleteModal(true)}
+                        onClick={() => setDeleteModal(record.UID)}
                     >
                         حذف
-                    </Button>
-                    <Button
-                        type="link"
-                        className="text-secondary-500 font-bold"
-                        onClick={() => setEditModal(true)}
-                    >
-                        ویرایش
                     </Button>
                 </Space>
             ),
@@ -91,16 +102,18 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
                         </Button>
                     ),
                 }}
-                isLoading={false}
+                isLoading={products.isFetching}
                 data={{records: products.data}}
+                pagination={false}
                 columns={columns}
             />
-            <EditModal editModal={editModal} setEditModal={setEditModal}/>
+            {/*<EditModal editModal={editModal} setEditModal={setEditModal}/>*/}
             <ConfirmDeleteModal
                 title="محصول"
-                open={deleteModal}
+                open={typeof deleteModal == "string"}
                 setOpen={setDeleteModal}
-                handleDelete={() => setDeleteModal(false)}
+                loading={productDelete.isPending}
+                handleDelete={handleDelete}
             />
         </>
     );

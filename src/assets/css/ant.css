@@ -247,3 +247,7 @@
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }
+
+.ant-upload {
+  @apply w-full
+}

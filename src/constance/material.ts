@@ -76,6 +76,16 @@ const RequestPackagePartProductListItem = z.object({
   Estefadeh: z.string()
 })
 
+const GetRegisteredReportsForStepByKeyItem = z.object({
+  UID: z.string(),
+  Form_Name: z.string(),
+  Form_Key: z.string(),
+  Form_Type: z.number(),
+  Is_Report: z.boolean(),
+  Step_Key: z.string(),
+  ID: z.string()
+})
+
 const materialApi = {
   MaterialGetAll: {
     url: "/Material/MaterialGetAll",
@@ -356,6 +366,17 @@ const materialApi = {
       package_UID: z.string().optional(),
       process_description: z.string()
     })
+  },
+  GetRegisteredReportsForStepByKey: {
+    url: "/Basic/GetRegisteredReportsForStepByKey",
+    type: z.object({
+      step_Key: z.string()
+    }),
+    item: GetRegisteredReportsForStepByKeyItem,
+    response: generalResponseZod.extend({
+      data: z.array(GetRegisteredReportsForStepByKeyItem)
+    }),
+    finalKey: "Producer_Request"
   }
 };
 

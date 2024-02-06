@@ -1,0 +1,112 @@
+pool:
+  name: Build Agents
+  demands: Agent.Name -equals Oil-Production-Agent
+
+trigger:
+  tags:
+    include:
+      - v*
+
+variables:
+  project.name: std-oil-frontend-prod
+  nexus.ip.port.site: 192.168.57.50:8081
+  nexus.ip.port.infra: 192.168.57.50:8082
+  elastic.url: http://172.18.15.118:9200
+  elastic.user: elastic
+  elastic.pass: LU58q*nJ_1DXgy271YKa
+  elastic.indexname: oil-front-prod
+  oil.api.url: https://oil.isiri.gov.ir
+  oil.app.url: http://std-oil-frontend
+  map.url: https://map.isiri.gov.ir
+  auth.url: https://oil.isiri.gov.ir/login
+
+steps:
+  - task: Docker@2
+    displayName: Login
+    inputs:
+      containerRegistry: "Nexus5000"
+      command: "login"
+
+  - task: file-creator@6
+    displayName: "Create npmrc"
+    inputs:
+      filepath: .npmrc
+      filecontent: |
+        registry=http://$(nexus.ip.port.site)/repository/npm-group/
+        email=H.shahmirzadi@pdnco.ir
+        always-auth=true
+      fileoverwrite: true
+
+  - task: file-creator@6
+    displayName: "Create Dockerfile"
+    inputs:
+      filepath: 'Dockerfile'
+      filecontent: |
+        FROM $(nexus.ip.port.infra)/node:20.9.0-alpine AS base
+
+
+        ENV ELASTIC_URL=$(elastic.url) \
+            ELASTIC_USERNAME=$(elastic.user) \
+            ELASTIC_PASSWORD=$(elastic.pass) \
+            ELASTIC_INDEX_NAME=$(elastic.indexname) \
+            NEXT_PUBLIC_API_URL=$(oil.api.url) \
+            NEXT_PUBLIC_APP_URL=$(oil.app.url) \
+            MAP_BOX_URL=$(map.url) \
+            NEXTAUTH_URL=$(auth.url)
+        
+        FROM base AS restore
+        RUN npm set registry=http://$(nexus.ip.port.site)/repository/npm-group/
+        RUN npm config set fetch-retries 10
+        RUN npm config set fetch-retry-mintimeout 100000
+        RUN npm config set fetch-retry-maxtimeout 600000
+        WORKDIR /app
+        COPY package.json package-lock.json* ./
+        RUN npm ci
+        
+        FROM base AS builder
+        WORKDIR /app
+        COPY --from=restore /app/node_modules ./node_modules
+        COPY . .
+        RUN npm run build
+        
+        FROM base AS runner
+        WORKDIR /app
+        
+        ENV NODE_ENV production
+        
+        RUN addgroup --system --gid 1001 nodejs
+        RUN adduser --system --uid 1001 nextjs
+        
+        COPY --from=builder /app/public ./public
+        
+        RUN mkdir .next
+        RUN chown nextjs:nodejs .next
+        
+        COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+        COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+        
+        USER nextjs
+        
+        EXPOSE 80
+        
+        ENV PORT 80
+        ENV HOSTNAME "0.0.0.0"
+        
+        CMD ["node", "server.js"]
+      fileoverwrite: true
+
+  - task: Bash@3
+    displayName: Extract Last Tag
+    inputs:
+      targetType: inline
+      script: |
+        lastTag=$(git describe --tags --abbrev=0)
+        echo "##vso[task.setvariable variable=lastVersion]$lastTag"
+
+  - task: Docker@2
+    displayName: Build and Push Image
+    inputs:
+      containerRegistry: Nexus5000
+      repository: $(project.name)
+      command: buildAndPush
+      tags: $(lastVersion)

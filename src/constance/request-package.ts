@@ -69,7 +69,7 @@ const RequestPackageApi = {
   VisitScheduleList: {
     url: "/RequestPackage/VisitScheduleList",
     type: z.object({
-      package_UID: z.string().uuid().optional(),
+      package_UID: z.string().uuid(),
       // taskId: z.string(),
     }),
     item: VisitScheduleListItem,

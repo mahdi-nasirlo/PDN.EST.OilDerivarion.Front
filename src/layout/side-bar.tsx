@@ -1,7 +1,7 @@
 import { Menu, MenuProps } from "antd/lib";
 import React from "react";
 import { useControlSidebar } from "./hooks/use-control-sidebar";
-import { Drawer, Skeleton } from "antd";
+import { Drawer, Skeleton, Tooltip } from "antd";
 import Link from "next/link";
 
 interface TProps {
@@ -23,30 +23,41 @@ export default function SideBar({ open, setOpen }: TProps) {
     // items={userAccess.data}
     >
         {userAccess.data ? (
-            userAccess.data.map(item => (
-                <Menu.Item key={item.key} className="custom-menu-item">
-                    <Link href={item.key}>
-                        {item.label}
-                    </Link>
-                </Menu.Item>
-            ))
-        )
-            : (
-                <div className="flex flex-col gap-4 sidebar-Skeleton">
-                    <Skeleton active />
-                    <Skeleton.Input className="w-full" active size="small" />
-                    <Skeleton.Input active className="w-2/3" size="small" />
-                    <Skeleton.Input active className="w-1/2" size="small" />
-                    <Skeleton active />
-                    <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
-                    <Skeleton.Input className="w-full" active size="small" />
-                    <Skeleton.Input active className="w-1/2" size="small" />
-                    <Skeleton.Input active className="w-1/2" size="small" />
-                    <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
-                    <Skeleton.Input active className="w-1/2" size="small" />
-                    <Skeleton.Input className="w-full" active size="small" />
-                </div>
-            )}
+            userAccess.data.map(item => {
+                if (item.label.length <= 29)
+                    return <Menu.Item key={item.key} className="custom-menu-item" >
+                        <Link href={item.key}>
+                            {item.label}
+                        </Link>
+                    </Menu.Item>
+                return <Tooltip
+                    key={item.key}
+                    placement="left"
+                    title={item.label}
+                    color="geekblue"
+                >
+                    <Menu.Item key={item.key} className="custom-menu-item">
+                        <Link href={item.key}>
+                            {item.label}
+                        </Link>
+                    </Menu.Item>
+                </Tooltip>
+            })) : (
+            <div className="flex flex-col gap-4 sidebar-Skeleton">
+                <Skeleton active />
+                <Skeleton.Input className="w-full" active size="small" />
+                <Skeleton.Input active className="w-2/3" size="small" />
+                <Skeleton.Input active className="w-1/2" size="small" />
+                <Skeleton active />
+                <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
+                <Skeleton.Input className="w-full" active size="small" />
+                <Skeleton.Input active className="w-1/2" size="small" />
+                <Skeleton.Input active className="w-1/2" size="small" />
+                <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
+                <Skeleton.Input active className="w-1/2" size="small" />
+                <Skeleton.Input className="w-full" active size="small" />
+            </div>
+        )}
     </Menu >
 
     return (

@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
-import { Alert, Button, Card, Divider, Form, Input, Spin } from "antd";
-import { EstForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/est-form";
-import { SamtForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/samt-form";
-import { NaftForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/naft-form";
+import React, {useState} from "react";
+import {Alert, Button, Card, Divider, Form, Input, Spin} from "antd";
+import {EstForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/est-form";
+import {SamtForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/samt-form";
+import {NaftForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/naft-form";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import { useForm } from "antd/es/form/Form";
-import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
-import { useRouter } from "next/navigation";
+import {useForm} from "antd/es/form/Form";
+import {useGetRegisteredReportsForStepByKey} from "@/hooks/material/use-get-registered-reports-for-step-by-key";
+import {useRouter} from "next/navigation";
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/solid";
+import {DocumentTextIcon} from "@heroicons/react/24/solid";
 import RepostsMaker from "@/components/reposts-maker";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import CustomDatePicker from "@/components/custome-date-picker";
+
 export default function Page({
   params,
 }: {
@@ -74,7 +75,7 @@ export default function Page({
           لیست گزارشات
         </Divider>
         <Spin spinning={get.isFetching}>
-          <RepostsMaker reports={reposts.data} loading={reposts.isFetching} />
+          <RepostsMaker taskId={params.uid} reports={reposts.data} loading={reposts.isFetching}/>
         </Spin>
         <Divider />
         <Alert

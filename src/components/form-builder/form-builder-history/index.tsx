@@ -1,16 +1,16 @@
 "use client"
 
-import React, { useState } from 'react';
-import { ColumnsType } from "antd/es/table";
-import { useProducerFormsGetDocHistory } from "@/hooks/form-maker/use-producer-forms-get-doc-history";
-import { z } from "zod";
-import { Alert, Button, Collapse, Modal, Spin, Typography } from "antd";
+import React, {useState} from 'react';
+import {ColumnsType} from "antd/es/table";
+import {useProducerFormsGetDocHistory} from "@/hooks/form-maker/use-producer-forms-get-doc-history";
+import {z} from "zod";
+import {Alert, Button, Collapse, Modal, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUID from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import CustomTable from "@/components/custom-table";
-import { RectangleStackIcon } from "@heroicons/react/24/outline";
-import { motion } from "framer-motion";
-import { formMakerApi } from "../../../constance/form-maker";
-import { ZodErrorAlert } from "@/components/zod-error-alert";
+import {RectangleStackIcon} from "@heroicons/react/24/outline";
+import {motion} from "framer-motion";
+import {formMakerApi} from "../../../constance/form-maker";
+import {ZodErrorAlert} from "@/components/zod-error-alert";
 import DataViewer from "@/components/form-builder/data-viewer";
 
 const Index = ({ formKey }: { formKey: string }) => {
@@ -66,7 +66,7 @@ const Index = ({ formKey }: { formKey: string }) => {
 
     return (
         <div>
-            {(historyList.data?.form_Data.length ?? 0) > 0 && <motion.div
+            <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
@@ -89,9 +89,9 @@ const Index = ({ formKey }: { formKey: string }) => {
                         />
                     }]}
                 />
-            </motion.div>}
+            </motion.div>
             <Modal
-                className="min-w-[1000px]"
+                className="w-3/4"
                 open={typeof formUid == "string"}
                 title="مشاهده تاریخچه"
                 onCancel={() => setFormUid(undefined)}
@@ -111,10 +111,6 @@ const Index = ({ formKey }: { formKey: string }) => {
                 <Spin className="w-full flex justify-center items-center"
                     spinning={history.isLoading || history.isFetching}>
                     {history.data && renderTable()}
-                    {/*{history.data?.length && <DataViewer*/}
-                    {/*    schema={history.data[0].Schema_Data}*/}
-                    {/*    data={history.data[0].form_data[formKey]}*/}
-                    {/*/>}*/}
                 </Spin>
             </Modal>
         </div>

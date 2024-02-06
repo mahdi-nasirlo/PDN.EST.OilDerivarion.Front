@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Descriptions, Divider} from "antd";
+import {Descriptions, Divider} from "antd";
 import {formMakerApi} from "../../../constance/form-maker";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
@@ -8,27 +8,12 @@ import FormDataTable from "@/components/resource/form-data-table";
 
 const Index = ({data, schema}: { data: string, schema: string }) => {
 
-    let dataValue: any
-    let schemaValue: any
-
-    try {
-        dataValue = JSON.parse(data)
-        schemaValue = JSON.parse(schema).json
-        schemaValue = JSON.parse(schemaValue)
-    } catch (e) {
-        dataValue = {}
-        schemaValue = {}
-    }
-
-    if (!dataValue)
-        return <Alert type="error" message="data value is null"/>
-
-    const validateSchema = formMakerApi.Get.formSchema.safeParse(schemaValue)
-    const validateData = formMakerApi.Get.formData.safeParse(dataValue)
+    const {validateSchema, validateData} = prepareData(data, schema)
 
     if (!validateData.success)
         return <ZodErrorAlert success={false} error={validateData.error}/>
 
+    console.log(validateSchema)
     if (!validateSchema.success)
         return <ZodErrorAlert success={false} error={validateSchema.error}/>
 
@@ -50,11 +35,10 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
 
                     const descriptionsItems: DescriptionsItemProps[] = []
 
-
                     form.FormFields?.map((FormField, index3) => {
                         descriptionsItems.push({
                             label: FormField.Title_Style,
-                            children: schemaValue[FormField.Name]
+                            children: formData[`${form.Form_Key}`][FormField.Name]
                         })
                     })
 
@@ -98,5 +82,24 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
     return view?.map((value, index) => value)
 
 };
+
+export const prepareData = (data: string, schema: string) => {
+    let dataValue: any
+    let schemaValue: any
+
+    try {
+        dataValue = JSON.parse(data)
+        schemaValue = JSON.parse(schema).json
+        schemaValue = JSON.parse(schemaValue)
+    } catch (e) {
+        dataValue = {}
+        schemaValue = {}
+    }
+
+    const validateSchema = formMakerApi.Get.formSchema.safeParse(schemaValue)
+    const validateData = formMakerApi.Get.formData.safeParse(dataValue)
+
+    return {validateSchema, validateData}
+}
 
 export default Index;

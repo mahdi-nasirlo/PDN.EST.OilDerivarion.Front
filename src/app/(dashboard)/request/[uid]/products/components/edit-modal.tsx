@@ -1,6 +1,5 @@
 import React from 'react'
-import ProductForm from './product-form'
-import { Button, Col, Modal, Row } from 'antd'
+import {Button, Col, Modal, Row} from 'antd'
 
 export default function EditModal({ editModal, setEditModal }: any) {
 
@@ -41,7 +40,7 @@ export default function EditModal({ editModal, setEditModal }: any) {
                 </Row>,
             ]}
         >
-            <ProductForm />
+            {/*<ProductForm />*/}
         </Modal>
 
     )

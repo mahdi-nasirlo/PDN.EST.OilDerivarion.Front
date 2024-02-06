@@ -14,10 +14,10 @@ const useRequestPackagePartDelete = () => {
             url: apiData.url,
             data
         }),
-        onSuccess: async () => {
+        onSuccess: async (data) => {
 
-            await queryClient.invalidateQueries({queryKey: [materialApi.GetRequestPackagePartList.url]})
-
+            if (data.success)
+                await queryClient.setQueryData([materialApi.GetRequestPackagePartList.url], data)
         }
     })
 };

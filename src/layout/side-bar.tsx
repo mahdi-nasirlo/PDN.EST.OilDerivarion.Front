@@ -15,13 +15,13 @@ export default function SideBar({
 
   const CommonMenu = (props: MenuProps) => (
     <Menu
-      onClick={handleMenuItemClick}
-      items={userAccess.data}
-      onOpenChange={handleMenuOpenChange}
+      {...props}
       mode="inline"
       selectedKeys={[pathname]}
       defaultSelectedKeys={[pathname]}
-      {...props}
+      onClick={handleMenuItemClick}
+      onOpenChange={handleMenuOpenChange}
+      // items={userAccess.data}
     >
       <div className="flex flex-col gap-4 sidebar-Skeleton">
         <Skeleton active />

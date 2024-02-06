@@ -10,7 +10,7 @@ const useProducerFormsGetDocSchemaByUid = (data: z.infer<typeof apiData.type> | 
     const query = useQuery({
         queryKey: [apiData.url, data],
         queryFn: () => fetchWithSession({url: apiData.url, data}),
-        enabled: typeof data?.form_UID == "string" && typeof data?.form_Key == "string",
+        enabled: typeof data?.form_UID == "string",
         select: (data: z.infer<typeof apiData.response>) => data.data
     })
 

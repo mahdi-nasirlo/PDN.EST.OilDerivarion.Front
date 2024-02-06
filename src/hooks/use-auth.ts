@@ -1,11 +1,11 @@
 import customFetcher from "@/utils/custome-fetcher";
 import fetchWithSession from "@/utils/fetch-with-session";
-import { useQuery } from "@tanstack/react-query";
-import { ssoApi } from "constance/auth";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { z } from "zod";
+import {useQuery} from "@tanstack/react-query";
+import {ssoApi} from "constance/auth";
+import {signIn} from "next-auth/react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useEffect, useState} from "react";
+import {z} from "zod";
 
 const useAuth = () => { 
 
@@ -23,10 +23,10 @@ const useAuth = () => {
 const useGetToken = (code?: string | null) => {
 
     const getTokenApi = ssoApi.getToken
- 
+
     const getToken = useQuery<z.infer<typeof getTokenApi.response>>({
         queryKey: [getTokenApi.url],
-        queryFn: () => customFetcher({ url: getTokenApi.url, data: { code } }),
+        queryFn: () => customFetcher({url: getTokenApi.url, data: {code}}),
         enabled: typeof code === "string"
     })
 
@@ -37,13 +37,13 @@ const useGetToken = (code?: string | null) => {
         const result = getTokenApi.response.safeParse(data)
 
         if (result.success && result.data.success) {
-            
+
             signIn("credentials", {
                 code: `${data?.data.token_type} ${data?.data?.access_token}`,
                 callbackUrl: "/",
                 redirect: true,
             });
-            
+
         }
 
     }, [isLoading, data])

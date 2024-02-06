@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Col, Form, Modal, Row, Spin, Typography } from 'antd';
+import {Button, Col, Form, Modal, Row, Spin, Typography} from 'antd';
 import React from 'react'
 
 export default function ReviewDataModalAcceptAgreement(
@@ -40,7 +40,7 @@ export default function ReviewDataModalAcceptAgreement(
                 <Form>
                     <Row gutter={[16, 16]}>
                         <Col>
-                            <Spin size='large'>
+                            <Spin size='large' spinning={false}>
                                 <Typography>
                                     {`اینجانب `}
                                     <b style={{ fontWeight: 'bold' }}>

@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, Space, Tag } from "antd";
-import { ColumnsType } from "antd/es/table";
+import {Button, Space, Tag} from "antd";
+import {ColumnsType} from "antd/es/table";
 import CustomTable from "../../../../components/custom-table";
-import { z } from "zod";
+import {z} from "zod";
 import React from "react";
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
@@ -154,7 +154,7 @@ export default function DataTable() {
             text: "لیست مجوزها",
           }}
           setInitialData={() => {}}
-          isLoading={list.isLoading}
+          isLoading={list.isFetching}
           pagination={false}
           data={{ records: list.data }}
           columns={columns}

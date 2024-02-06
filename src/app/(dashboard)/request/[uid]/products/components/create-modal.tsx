@@ -1,13 +1,26 @@
 import React from 'react'
 import ProductForm from './product-form'
-import { Button, Col, Modal, Row } from 'antd';
+import {Button, Col, Modal, Row} from 'antd';
+import {Form} from "antd/lib";
+import useUiRequestPackageProductCreate
+    from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-create";
 
-export default function CreateModal({ visibleModal, setVisibleModal }: any) {
+interface TProps {
+    uid: string,
+    visibleModal: boolean,
+    setVisibleModal: (arg: any) => void
+}
 
-    const handleConfirm = () => setVisibleModal(false);
+export default function CreateModal({visibleModal, setVisibleModal, uid}: TProps) {
 
-
-    const handleCancel = () => setVisibleModal(false);
+    const {
+        onFinish,
+        addProduct,
+        requestInfo,
+        form,
+        rules,
+        onClose
+    } = useUiRequestPackageProductCreate({uid, visibleModal, setVisibleModal})
 
     return (
         <Modal
@@ -21,15 +34,17 @@ export default function CreateModal({ visibleModal, setVisibleModal }: any) {
                 </div>
             }
             open={visibleModal}
-            onCancel={handleCancel}
+            onCancel={onClose}
             footer={[
                 <Row key={"box"} gutter={[16, 16]} className="my-2">
                     <Col xs={12} md={12}>
                         <Button
                             size="large"
                             className="w-full"
+                            loading={addProduct.isPending || requestInfo.isFetching}
+                            disabled={addProduct.isPending || requestInfo.isFetching}
                             type="primary"
-                            onClick={handleConfirm}
+                            onClick={() => form.submit()}
                             key={"submit"}
                         >
                             ثبت
@@ -37,9 +52,10 @@ export default function CreateModal({ visibleModal, setVisibleModal }: any) {
                     </Col>
                     <Col xs={12} md={12}>
                         <Button
+                            disabled={addProduct.isPending || requestInfo.isFetching}
                             size="large"
                             className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={handleCancel}
+                            onClick={onClose}
                             key={"cancel"}
                         >
                             انصراف
@@ -48,7 +64,13 @@ export default function CreateModal({ visibleModal, setVisibleModal }: any) {
                 </Row>,
             ]}
         >
-            <ProductForm />
+            <Form
+                form={form}
+                layout="vertical"
+                onFinish={onFinish}
+            >
+                <ProductForm rules={rules}/>
+            </Form>
         </Modal>
     )
 }

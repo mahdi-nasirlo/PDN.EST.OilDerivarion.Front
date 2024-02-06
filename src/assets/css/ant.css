@@ -111,12 +111,32 @@
   @apply bg-gray-100 text-gray-700 !important;
 }
 
+.ant-menu-item:hover {
+  @apply border-[1.5px] border-gray-100 !important;
+}
+
+.ant-menu-item .ant-menu-title-content:active {
+  @apply font-bold text-gray-700 !important;
+}
+
 .ant-menu-item {
   @apply my-3 mr-0 ml-0 w-full py-4 px-4 rounded-lg text-gray-100 !important;
 }
 
 .ant-menu-item-divider {
   margin: 16px 0 !important;
+}
+
+.custom-menu-item {
+  animation: fadeInUp 0.9s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* end menu */
@@ -204,7 +224,7 @@
 }
 
 .ant-btn:hover {
-  @apply scale-105;
+  @apply scale-[104%];
 }
 
 .ant-transfer-operation button {
@@ -246,4 +266,12 @@
   .ant-checkbox-inner {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
+}
+
+.ant-upload {
+  @apply w-full;
+}
+
+.ant-notification-notice-message {
+  @apply mb-0 !important;
 }

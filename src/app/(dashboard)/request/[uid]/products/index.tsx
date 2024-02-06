@@ -10,7 +10,7 @@ export default function Index({uid}: { uid: string }) {
     return (
         <div>
             <DataTable setVisibleModal={setVisibleModal} uid={uid}/>
-            <CreateModal visibleModal={visibleModal} setVisibleModal={setVisibleModal} />
+            <CreateModal uid={uid} visibleModal={visibleModal} setVisibleModal={setVisibleModal}/>
         </div>
     )
 }

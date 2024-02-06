@@ -275,3 +275,7 @@
 .ant-notification-notice-message {
   @apply mb-0 !important;
 }
+
+.ant-menu-title-content .ant-tooltip-open {
+  @apply text-gray-800 !important
+}

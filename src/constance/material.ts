@@ -7,6 +7,13 @@ const GetRequestPackagePartListItem = z.object({
   Part_Type_Value: z.string(),
   Part_Type: z.enum(["1", "2", "3", "4", "5"]),
   Status: z.boolean(),
+  Products: z.string().or(z.array(z.object({
+    Estehsal: z.number(),
+    HadarRaft: z.number(),
+    name: z.string(),
+    UID: z.string(),
+    Part_ID: z.number()
+  })))
 });
 
 const MaterialGetAllItem = z.object({

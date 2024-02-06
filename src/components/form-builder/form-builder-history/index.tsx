@@ -19,7 +19,11 @@ const Index = ({ formKey }: { formKey: string }) => {
 
     const historyList = useProducerFormsGetDocHistory(formKey)
 
-    const history = useProducerFormsGetDocSchemaByUID({ form_Key: formKey, form_UID: formUid as string })
+    const history = useProducerFormsGetDocSchemaByUID({
+        form_Key: formKey,
+        form_UID: formUid as string,
+        taskId: null
+    })
 
     // if (records && form?.Form_Key && form.Form_Key in records) {
     //     initialValues = records[form.Form_Key]

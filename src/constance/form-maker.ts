@@ -107,7 +107,8 @@ const formMakerApi = {
         url: "/FormMaker/ProducerFormsGetDocSchemaByUID",
         type: z.object({
             form_Key: z.string(),
-            form_UID: z.string().optional().nullable()
+            form_UID: z.string().optional().nullable(),
+            taskId: z.string().nullable()
         }),
         response: generalResponseZod.extend({
             data: z.array(z.object({

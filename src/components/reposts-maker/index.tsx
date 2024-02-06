@@ -1,18 +1,13 @@
-import React, { useState } from "react";
-import { z } from "zod";
-import { Alert, Collapse, Empty, Spin, Typography } from "antd";
+import React, {useState} from 'react';
+import {z} from "zod";
+import {Alert, Collapse, Empty, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
-import { materialApi } from "../../constance/material";
+import {materialApi} from "../../constance/material";
 
-const Index = ({
-  reports,
-  loading,
-}: {
-  reports:
-    | z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[]
-    | undefined;
-  loading?: boolean;
+const Index = ({reports, loading}: {
+    reports: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[] | undefined,
+    loading?: boolean
 }) => {
   if (loading) return <Spin />;
 
@@ -93,6 +88,7 @@ const RenderTypeTow = ({
   const schema = useProducerFormsGetDocSchemaByUid({
     form_Key: formKey,
     form_UID: formUid,
+    taskId: ""
   });
 
   if (schema.isFetching) return <Spin />;

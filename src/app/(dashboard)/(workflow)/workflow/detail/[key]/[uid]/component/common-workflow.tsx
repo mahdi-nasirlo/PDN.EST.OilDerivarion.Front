@@ -86,13 +86,13 @@ const CommonWorkflow = ({
             <Input.TextArea className="min-h-[70px]" />
           </Form.Item>
         </Form>
-        {/* <WorkflowBtn
+        <WorkflowBtn
           choices={get.data?.choices}
           onClick={(key) => {
             form.submit();
             setChoice(key);
           }}
-        /> */}
+        />
       </Card>
     </>
   );

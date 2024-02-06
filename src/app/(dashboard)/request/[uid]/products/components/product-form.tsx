@@ -28,7 +28,7 @@ export default function ProductForm({rules}: { rules: Rule }) {
             <Col xs={23} md={12}>
                 <Form.Item
                     name="estehsal"
-                    label="درصد استفاده"
+                    label="درصد استحصال"
                     rules={[rules]}
                 >
                     <PercentageInput/>

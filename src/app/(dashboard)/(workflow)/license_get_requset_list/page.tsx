@@ -9,11 +9,16 @@ import {ClipboardDocumentListIcon} from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
 import VisitInfo from "@/components/workflow/visit-info";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
+import useGetRequestList from "@/hooks/license/use-get-request-list";
+import WorkflowTable from "@/components/workflow/workflow-table";
 
 const apiData = licenseApi.GetRequest.producer;
 
 const Page = () => {
-  const extraColumns: ColumnsType = [
+
+    const list = useGetRequestList()
+
+    const extraColumns: ColumnsType = [
     {
       title: "وضعیت",
       dataIndex: "status",
@@ -51,10 +56,10 @@ const Page = () => {
       />
 
       <Card>
-          {/*<WorkflowDataTable*/}
-          {/*  key="/License/GetRequestList"*/}
-          {/*  extraColumns={extraColumns}*/}
-          {/*/>*/}
+          <WorkflowTable
+              data={list.data?.tasks.Table}
+              extraColumns={extraColumns}
+          />
       </Card>
     </>
   );

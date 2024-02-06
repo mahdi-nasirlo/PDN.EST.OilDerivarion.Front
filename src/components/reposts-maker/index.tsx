@@ -88,6 +88,7 @@ const RenderTypeTow = ({
   const schema = useProducerFormsGetDocSchemaByUid({
     form_Key: formKey,
     form_UID: formUid,
+    taskId: ""
   });
 
   if (schema.isFetching) return <Spin />;

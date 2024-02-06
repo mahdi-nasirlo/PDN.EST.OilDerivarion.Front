@@ -6,10 +6,6 @@
   margin-bottom: 20px;
 }
 
-.DatePicker {
-  @apply w-full;
-}
-
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -64,12 +60,17 @@
   animation-iteration-count: infinite !important;
 }
 
+.DatePicker {
+  @apply w-full static !important;
+}
+.DatePicker__calendarContainer {
+  @apply absolute z-10 !important;
+}
 
 .ant-drawer-content-wrapper {
-    @apply w-72 !important
+  @apply w-72 !important;
 }
 
 .mobile-drawer .ant-drawer-wrapper-body .ant-drawer-body {
-    @apply p-0 bg-red-900 !important
+  @apply p-0 bg-red-900 !important;
 }
-

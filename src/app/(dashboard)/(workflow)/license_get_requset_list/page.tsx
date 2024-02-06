@@ -57,6 +57,7 @@ const Page = () => {
 
       <Card>
           <WorkflowTable
+              loading={list.isFetching}
               data={list.data?.tasks.Table}
               extraColumns={extraColumns}
           />

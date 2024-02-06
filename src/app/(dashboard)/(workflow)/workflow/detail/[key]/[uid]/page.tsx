@@ -4,7 +4,7 @@ import CommonWorkflow from "@/app/(dashboard)/(workflow)/workflow/detail/[key]/[
 
 const Page = ({params: {uid, key}}: { params: { uid: string, key: string } }) => {
 
-    return <CommonWorkflow uid={uid} key={key}/>
+    return <CommonWorkflow uid={uid} stepKey={key}/>
 };
 
 export default Page;

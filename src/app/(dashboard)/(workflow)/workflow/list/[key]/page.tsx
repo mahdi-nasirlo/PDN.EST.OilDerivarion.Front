@@ -50,7 +50,7 @@ const Page = ({params: {key}}: { params: { key: string } }) => {
 
     return (
         <>
-            {data?.step && <Breadcrumb
+            {data?.step[0] && <Breadcrumb
                 pages={[{label: "خانه"}]}
                 currentPage={`${data?.step[0]?.Step_Name}`}
                 titleIcon={<ClipboardDocumentListIcon className="h-8"/>}

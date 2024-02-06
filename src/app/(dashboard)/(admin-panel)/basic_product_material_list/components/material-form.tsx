@@ -3,10 +3,13 @@
 import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { useMeasureList } from "@/hooks/basic/measure/use-measure-list";
-import { TestItemsMultipeSelectField } from "@/components/fields/test-items-multiple-select-field";
+import MultipleSelect from "@/components/multiple-select";
+import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
 
 function MaterialForm({ rules }: any) {
   const measure = useMeasureList();
+  const testItem = useTestItemList();
+
 
   return (
     <>
@@ -49,7 +52,10 @@ function MaterialForm({ rules }: any) {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون">
-            <TestItemsMultipeSelectField />
+            <MultipleSelect
+              treeData={testItem.treeData}
+              loading={testItem.isLoading}
+            />
           </Form.Item>
         </Col>
       </Row>

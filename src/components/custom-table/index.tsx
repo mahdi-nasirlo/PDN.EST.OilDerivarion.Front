@@ -10,7 +10,7 @@ interface RecordeValue {
         actions?: React.ReactNode
     }
     setInitialData?: (arg: any) => void;
-    isLoading: boolean;
+    isLoading?: boolean;
     data: {
         records: any[] | undefined;
         count?: number;

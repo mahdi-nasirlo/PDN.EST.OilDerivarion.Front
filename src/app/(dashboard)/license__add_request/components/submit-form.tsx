@@ -25,7 +25,7 @@ export default function SubmitForm() {
   }, [producerInfo.data]);
 
   return (
-      <Spin spinning={license.isFetching}>
+      <Spin spinning={license.isFetching || producerInfo.isFetching}>
         <Form
             layout="vertical"
             form={form}
@@ -43,23 +43,26 @@ export default function SubmitForm() {
               </Form.Item>
             </Col>
           </Row>
+
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item name="representative__National_Code" label="کدملی">
                 <Input
-              disabled
-              type="number"
-              size="large"
-              placeholder="وارد کنید"
+                    disabled
+                    type="number"
+                    size="large"
+                    placeholder="وارد کنید"
                 />
               </Form.Item>
             </Col>
+
             <Col xs={24} md={12}>
               <Form.Item name="company__Name" label="نام شرکت">
                 <Input disabled size="large" placeholder="وارد کنید"/>
               </Form.Item>
             </Col>
           </Row>
+
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item name="company__National_ID" label="شناسه ملی شرکت">
@@ -70,50 +73,51 @@ export default function SubmitForm() {
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item
-            name="company__Business_ID"
-            hasFeedback={false}
-            label="شناسه کسب و کار"
-            rules={[rules]}
+                  name="company__Business_ID"
+                  hasFeedback={false}
+                  label="شناسه کسب و کار"
+                  rules={[rules]}
               >
                 <Input size="large" placeholder="وارد کنید"/>
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-            name="license_Type_ID"
-            required={false}
-            label="نوع مجوز"
-            rules={[rules]}
+                  name="license_Type_ID"
+                  required={false}
+                  label="نوع مجوز"
+                  rules={[rules]}
               >
                 <Select
-              className="w-full"
-              showSearch
-              loading={license.isLoading}
-              options={license.data}
-              fieldNames={license.fieldNames}
-              size="large"
-              placeholder="انتخاب کنید"
+                    className="w-full"
+                    showSearch
+                    loading={license.isLoading}
+                    options={license.data}
+                    fieldNames={license.fieldNames}
+                    size="large"
+                    placeholder="انتخاب کنید"
                 />
               </Form.Item>
             </Col>
           </Row>
+
           <Row gutter={[16, 0]}>
             <Col xs={24} md={12}>
               <Form.Item
-            name="license_Number"
-            label="شماره مجوز"
-            required={false}
-            rules={[rules]}
+                  name="license_Number"
+                  label="شماره مجوز"
+                  required={false}
+                  rules={[rules]}
               >
                 <Input size="large" placeholder="وارد کنید"/>
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-            name="license_Expire_Date_Fa"
-            label="تاریخ اعتبار مجوز"
-            required={false}
-            rules={[rules]}
+                  name="license_Expire_Date_Fa"
+                  label="تاریخ اعتبار مجوز"
+                  required={false}
+                  rules={[rules]}
               >
                 <CustomeDatePicker/>
               </Form.Item>
@@ -122,30 +126,30 @@ export default function SubmitForm() {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <Form.Item
-            name="state_Uid"
-            label="استان"
-            required={false}
-            rules={[rules]}
+                  name="state_Uid"
+                  label="استان"
+                  required={false}
+                  rules={[rules]}
               >
                 <Select
-              showSearch
-              // @ts-ignore
-              filterOption={filterOption}
-              loading={state.isLoading}
-              options={state.data}
-              fieldNames={state.apiData.fieldNames}
-              size="large"
-              placeholder="انتخاب کنید"
+                    showSearch
+                    // @ts-ignore
+                    filterOption={filterOption}
+                    loading={state.isLoading}
+                    options={state.data}
+                    fieldNames={state.apiData.fieldNames}
+                    size="large"
+                    placeholder="انتخاب کنید"
                 />
               </Form.Item>
             </Col>
           </Row>
           <div className="flex justify-end">
             <Button
-          size="large"
-          type="primary"
-          htmlType="submit"
-          loading={addLicense.isPending}
+                size="large"
+                type="primary"
+                htmlType="submit"
+                loading={addLicense.isPending}
             >
               ارسال درخواست
             </Button>

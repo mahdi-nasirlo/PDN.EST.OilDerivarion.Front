@@ -2,11 +2,12 @@ import React from 'react';
 import {z} from "zod";
 import {workflowApi} from "../../../constance/workflow";
 import {ColumnsType} from "antd/es/table";
-import {Table} from "antd/lib";
 import {addIndexToData} from "@/utils/addIndexToData";
+import CustomTable from "@/components/custom-table";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
 
 const Index = (props: {
-    data: z.infer<typeof workflowApi.dataTable.response.shape.data.shape.tasks.shape.Table>,
+    data: z.infer<typeof workflowApi.GetAllTask.response.shape.data.shape.tasks.shape.Table>,
     extraColumns?: ColumnsType<any>;
 }) => {
 
@@ -29,9 +30,13 @@ const Index = (props: {
 
     return (
         <div>
-            <Table
+            <CustomTable
+                header={{
+                    text: "لیست درخواست ها",
+                    icon: <ListBulletIcon className="h-8"/>
+                }}
                 columns={columns}
-                dataSource={addIndexToData(props.data.Values)}
+                data={{records: addIndexToData(props.data.Values)}}
             />
         </div>
     );

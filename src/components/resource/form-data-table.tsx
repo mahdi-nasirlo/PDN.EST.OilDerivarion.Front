@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
-import {Table, TableColumnsType} from "antd/lib";
+import {TableColumnsType} from "antd/lib";
 import {z} from "zod";
 import {formMakerApi} from "../../constance/form-maker";
 import {Button} from "antd";
 import {addIndexToData} from "@/utils/addIndexToData";
 import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import CustomTable from "@/components/custom-table";
 
 interface PropType {
     schema: z.infer<typeof formMakerApi.Get.form>,
     formData: z.infer<typeof formMakerApi.Get.formData>,
     delete?: boolean,
-    formKey: string
+    formKey: string,
+    isLoading?: boolean
 }
 
 const FormDataTable = (props: PropType) => {
@@ -67,10 +69,11 @@ const FormDataTable = (props: PropType) => {
 
     return (
         <>
-            <Table
+            <CustomTable
                 columns={columns}
-                dataSource={addIndexToData(props.formData[props.formKey])}
+                isLoading={props.isLoading ?? false}
                 pagination={false}
+                data={{records: addIndexToData(props.formData[props.formKey])}}
             />
             <ConfirmDeleteModal
                 title='اطلاعات پایه'

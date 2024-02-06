@@ -1,37 +1,28 @@
 import React from "react";
-import { Tag } from "antd";
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import {Tag} from "antd";
+import {CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined,} from "@ant-design/icons";
 
 const WorkFlowStatusColumn = ({ record }: { record: any }) => {
   console.log(record);
   let color = "";
   let name = "";
   let icon = <></>;
-  if (record.Wrork_State === 0) {
-    color = "red";
+  if (record.Status === 0) {
+    color = "warning";
     name = "بررسی نشده";
-    icon = <CloseCircleOutlined />;
-  } else if (record.Wrork_State === 1) {
-    color = "orange";
-    name = "درحال بررسی";
-    icon = <CheckCircleOutlined />;
-  } else if (record.Wrork_State === 2) {
-    color = "red";
-    name = "رد شده";
-    icon = <ClockCircleOutlined />;
-  } else if (record.Wrork_State === 3) {
+    icon = <ClockCircleOutlined/>;
+  } else if (record.Status === 1) {
     color = "success";
-    name = "تایید";
-    icon = <InfoCircleOutlined />;
+    name = "انجام شده";
+    icon = <CheckCircleOutlined />;
+  } else if (record.Status === 2) {
+    color = "error";
+    name = "رد شده";
+    icon = <CloseCircleOutlined/>;
   }
 
   return (
-    <Tag icon={icon} color={color}>
+      <Tag icon={icon} color={color}>
       {name}
     </Tag>
   );

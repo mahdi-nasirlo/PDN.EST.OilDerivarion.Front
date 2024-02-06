@@ -1,26 +1,28 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import useHandleFilter from "@/hooks/use-handle-filter";
+import {useQuery} from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
-import { z } from "zod";
-import { workflowApi } from "../../../../constance/workflow";
+import {z} from "zod";
+import {workflowApi} from "../../../../constance/workflow";
 
-const UseWorkflow = (apiUrl: string) => {
-  const { filter, setFilter } = useHandleFilter();
+const apiData = workflowApi.GetAllTask
+
+const useWorkflow = (data: z.infer<typeof apiData.type>) => {
+
 
   const query = useQuery({
-    queryKey: [apiUrl as string, filter],
+    queryKey: [apiData.url as string, data],
     queryFn: () =>
       fetchWithSession({
-        url: apiUrl,
+        url: apiData.url,
+        data
       }),
     select: (
-      data: z.infer<typeof workflowApi.dataTable.response>
-    ): z.infer<typeof workflowApi.dataTable.response.shape.data> | null => {
+        data: z.infer<typeof apiData.response>
+    ): z.infer<typeof apiData.response.shape.data> | null => {
       try {
         const tasks: z.infer<
-          typeof workflowApi.dataTable.response.shape.data.shape.tasks
+            typeof apiData.response.shape.data.shape.tasks
           // @ts-ignore
         > = JSON.parse(data.data.tasks as string);
 
@@ -31,7 +33,7 @@ const UseWorkflow = (apiUrl: string) => {
     },
   });
 
-  return { ...query, filter, setFilter };
+  return {...query};
 };
 
-export default UseWorkflow;
+export default useWorkflow;

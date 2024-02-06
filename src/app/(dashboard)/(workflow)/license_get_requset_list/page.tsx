@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/card";
-import { ColumnsType } from "antd/es/table";
-import { Space } from "antd/lib";
-import WorkflowDataTable from "@/components/workflow/workflow-data-list";
+import {Card} from "@/components/card";
+import {ColumnsType} from "antd/es/table";
+import {Space} from "antd/lib";
 import Breadcrumb from "@/components/breadcrumb";
-import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
+import {ClipboardDocumentListIcon} from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
 import VisitInfo from "@/components/workflow/visit-info";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
@@ -52,10 +51,10 @@ const Page = () => {
       />
 
       <Card>
-        <WorkflowDataTable
-          apiUrl="/License/GetRequestList"
-          extraColumns={extraColumns}
-        />
+          {/*<WorkflowDataTable*/}
+          {/*  key="/License/GetRequestList"*/}
+          {/*  extraColumns={extraColumns}*/}
+          {/*/>*/}
       </Card>
     </>
   );

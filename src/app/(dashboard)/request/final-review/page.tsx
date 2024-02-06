@@ -7,12 +7,12 @@ import {Button, Checkbox, Col, Divider, Form, Row} from "antd";
 import {Card} from "@/components/card";
 import {useRouter} from "next/navigation";
 import {useForm} from "antd/lib/form/Form";
-import {useGetRegisteredReportsForStepByKey} from "@/hooks/material/use-get-registered-reports-for-step-by-key";
 import {materialApi} from "../../../../constance/material";
 import RepostsMaker from "components/reposts-maker";
 import {useRequestPackageFinalization} from "@/hooks/request-package/use-request-package-finalization";
 import ReviewDataModalAcceptAgreement from "@/app/(dashboard)/request/final-review/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit from "@/app/(dashboard)/request/final-review/review-data-modal-final-submit";
+import {useRequestPackageReportList} from "@/hooks/request-package/use-request-package-report-list";
 
 export default function Page() {
 
@@ -20,7 +20,7 @@ export default function Page() {
 
     const [form] = useForm()
 
-    const reposts = useGetRegisteredReportsForStepByKey(materialApi.GetRegisteredReportsForStepByKey.finalKey)
+    const reposts = useRequestPackageReportList({step_Key: materialApi.GetRegisteredReportsForStepByKey.finalKey})
 
     const finalRequest = useRequestPackageFinalization()
 

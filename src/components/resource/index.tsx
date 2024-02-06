@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import {Divider, Spin, Typography} from "antd";
+import {Button, Divider, Spin, Typography} from "antd";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {z} from "zod";
@@ -9,6 +9,11 @@ import {formMakerApi} from "../../constance/form-maker";
 import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
 import FormBuilder from "@/components/form-builder";
 import FormDataTable from "@/components/resource/form-data-table";
+import FormBuilderHistory from "@/components/form-builder/form-builder-history";
+import {Card} from "@/components/card";
+import Breadcrumb from "@/components/breadcrumb";
+import {DocumentDuplicateIcon} from "@heroicons/react/24/outline";
+import {router} from "next/client";
 
 const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "many" | "single", }) => {
 
@@ -16,7 +21,7 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
 
     try {
 
-        if (get.isLoading && !get.data) return <Spin spinning={get.isLoading}/>
+        if (get.isLoading && !get.data) return <Card><Spin spinning={get.isLoading}/></Card>
 
         if (
             get.data === undefined ||
@@ -43,14 +48,32 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
 
         return (
             <>
-                <Spin spinning={get.isLoading ?? false}>
-                    <RenderForms
-                        categoryKey={categoryKey as string}
-                        schema={validate.data}
-                        records={validateRecords.data}
-                        type="many"
-                    />
-                </Spin>
+                <Breadcrumb
+                    pages={[{label: "خانه"}]}
+                    currentPage={validate.data[0]?.Title as string}
+                    titleIcon={<DocumentDuplicateIcon className="w-6"/>}
+                    actions={[
+                        <Button
+                            key={1}
+                            onClick={() => router.back()}
+                            size="large"
+                        >
+                            بازگشت
+                        </Button>
+                    ]}
+                />
+                <FormBuilderHistory formKey={categoryKey as string}/>
+                <Card>
+                    <Spin spinning={get.isLoading ?? false}>
+                        <RenderForms
+                            loading={get.isLoading}
+                            categoryKey={categoryKey as string}
+                            schema={validate.data}
+                            records={validateRecords.data}
+                            type="many"
+                        />
+                    </Spin>
+                </Card>
             </>
         );
     } catch (e) {
@@ -73,7 +96,7 @@ interface TProps {
 
 
 // {schema, records, type = "single", loading = false, title = false}: ComponentProps
-const RenderForms = ({schema, records, categoryKey}: TProps) => {
+const RenderForms = ({schema, records, categoryKey, loading}: TProps) => {
 
     const formProvider = useControlFormBuilder(records, categoryKey)
 
@@ -101,6 +124,8 @@ const RenderForms = ({schema, records, categoryKey}: TProps) => {
                 />
                 <div className="mt-8">
                     <FormDataTable
+                        key={index}
+                        isLoading={loading}
                         formKey={categoryKey}
                         schema={form}
                         formData={records}

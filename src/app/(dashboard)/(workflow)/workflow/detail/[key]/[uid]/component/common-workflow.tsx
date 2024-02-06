@@ -12,15 +12,15 @@ import RepostsMaker from "@/components/reposts-maker";
 import {Form} from "antd/lib";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 
-const CommonWorkflow = ({uid, key, children}: { uid: string, key: string, children?: React.ReactNode }) => {
+const CommonWorkflow = ({uid, stepKey, children}: { uid: string, stepKey: string, children?: React.ReactNode }) => {
 
-    const get = useGetTask({taskId: uid, stepKey: key})
+    const get = useGetTask({taskId: uid, stepKey: stepKey})
 
     const set = useSetTask()
 
     const [form] = useForm()
 
-    const reposts = useGetRegisteredReportsForStepByKey(key, uid)
+    const reposts = useGetRegisteredReportsForStepByKey(stepKey, uid)
 
     const router = useRouter()
 
@@ -28,12 +28,12 @@ const CommonWorkflow = ({uid, key, children}: { uid: string, key: string, childr
 
         const res = await set.mutateAsync({
             taskId: uid,
-            choiceKey: key,
+            choiceKey: stepKey,
             description: values.description
         })
 
         if (res.success) {
-            router.push(`/workflow/detail/${key}`)
+            router.push(`/workflow/detail/${stepKey}`)
         }
     }
 
@@ -66,10 +66,7 @@ const CommonWorkflow = ({uid, key, children}: { uid: string, key: string, childr
                     <RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>
                 </Spin>
                 <Divider/>
-                {children && <>
-                    {children}
-                    <Divider/>
-                </>}
+                {children}
                 <Form
                     form={form}
                     onFinish={handleSet}

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -42,7 +42,8 @@ const RequestPackageApi = {
   VisitScheduleList: {
     url: "/RequestPackage/VisitScheduleList",
     type: z.object({
-      package_UID: z.string().uuid(),
+      package_UID: z.string().uuid().optional(),
+      taskId: z.string()
     }),
     item: VisitScheduleListItem,
     response: generalResponseZod.extend({

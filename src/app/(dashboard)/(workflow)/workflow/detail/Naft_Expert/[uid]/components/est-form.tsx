@@ -2,7 +2,7 @@ import {Divider, Form, Typography} from "antd";
 import React from "react";
 import {FormTime} from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/form-time";
 
-export const EstForm = () => {
+export const EstForm = ({disable}: { disable: boolean }) => {
     return (
         <>
             <div className="mb-5">
@@ -10,8 +10,11 @@ export const EstForm = () => {
                     نماینده استاندارد
                 </Typography>
             </div>
-            <Form disabled={true} layout="vertical">
-                <FormTime/>
+            <Form
+                disabled={disable}
+                layout="vertical"
+            >
+                <FormTime disable={disable}/>
             </Form>
             <Divider/>
         </>

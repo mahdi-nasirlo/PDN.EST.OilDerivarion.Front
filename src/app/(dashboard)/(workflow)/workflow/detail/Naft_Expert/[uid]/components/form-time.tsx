@@ -2,7 +2,7 @@ import CustomDatePicker from "@/components/custome-date-picker";
 import {Button, Col, Form, Input, Row} from "antd";
 import React from "react";
 
-export const FormTime = () => {
+export const FormTime = ({disable}: { disable: boolean }) => {
     return (
         <>
             <Row gutter={[16, 16]}>
@@ -52,18 +52,19 @@ export const FormTime = () => {
                     </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={[32, 0]}>
+            {!disable && <Row gutter={[32, 0]}>
                 <Col xs={24} md={24}>
                     <Button
+                        disabled={disable}
                         className="w-full"
                         size="large"
-                        type="primary"
+                        type={disable ? "default" : "primary"}
                         htmlType="submit"
                     >
                         ثبت
                     </Button>
                 </Col>
-            </Row>
+            </Row>}
         </>
     );
 };

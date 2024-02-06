@@ -4,6 +4,7 @@ import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { useMeasureList } from "@/hooks/basic/measure/use-measure-list";
 import { TestItemsMultipeSelectField } from "@/components/fields/test-items-multiple-select-field";
+import MultipleSelect from "@/components/multiple-select";
 
 function MaterialForm({ rules }: any) {
   const measure = useMeasureList();
@@ -49,7 +50,8 @@ function MaterialForm({ rules }: any) {
         </Col>
         <Col xs={24} md={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون">
-            <TestItemsMultipeSelectField />
+            {/* <TestItemsMultipeSelectField /> */}
+            <MultipleSelect loading />
           </Form.Item>
         </Col>
       </Row>

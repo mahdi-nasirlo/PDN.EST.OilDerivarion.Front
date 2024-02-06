@@ -1,5 +1,7 @@
 import React from "react";
-import DatePicker, { DayValue, } from "@hassanmojab/react-modern-calendar-datepicker";
+import DatePicker, {
+  DayValue,
+} from "@hassanmojab/react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Input } from "antd";
 import { jalaliToGregorian } from "shamsi-date-converter";
@@ -10,9 +12,13 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomDatePicker({ value = {}, onChange }: { value?: any, onChange?: (e: any) => void }) {
-
-
+export default function CustomDatePicker({
+  value = {},
+  onChange,
+}: {
+  value?: any;
+  onChange?: (e: any) => void;
+}) {
   const renderCustomInput = ({ ref }: any) => (
     <Input
       className={"w-full"}
@@ -24,10 +30,8 @@ export default function CustomDatePicker({ value = {}, onChange }: { value?: any
   );
 
   const change = (n: DateProps | null) => {
-
     // @ts-ignore
-    if (typeof onChange == "function") onChange(dateToString(n as DateProps))
-
+    if (typeof onChange == "function") onChange(dateToString(n as DateProps));
   };
 
   return (
@@ -59,7 +63,6 @@ type MonthType = number;
 type DayType = number;
 
 function stringToDate(dateString: string): DateProps | null {
-
   if (!dateString || typeof dateString !== "string") return null;
 
   const parts = dateString.split("/");

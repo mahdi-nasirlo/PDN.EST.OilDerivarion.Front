@@ -2,10 +2,9 @@ import React from "react";
 import { Col, Form, Input, Row, Select, TreeSelect } from "antd";
 import CustomeDatePicker from "../../../../../components/custome-date-picker";
 import MultipleSelect from "@/components/multiple-select";
-import PhoneInputs from "../../../../../../components/inputs/Phone";
+import PhoneInputs from "@/components/inputs/Phone";
 import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
 import useGetAllState from "@/hooks/basic/use-get-all-state";
-import { run } from "node:test";
 
 function LaboratoryForm({ rules }: any) {
   const testItem = useTestItemList();

@@ -8,7 +8,6 @@ import {Card} from "@/components/card";
 import {useRouter} from "next/navigation";
 import {useForm} from "antd/lib/form/Form";
 import {materialApi} from "../../../../constance/material";
-import RepostsMaker from "components/reposts-maker";
 import {useRequestPackageFinalization} from "@/hooks/request-package/use-request-package-finalization";
 import ReviewDataModalAcceptAgreement from "@/app/(dashboard)/request/final-review/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit from "@/app/(dashboard)/request/final-review/review-data-modal-final-submit";
@@ -39,7 +38,7 @@ export default function Page() {
                 titleIcon={<DocumentMagnifyingGlassIcon className="w-8"/>}
             />
             <Card>
-                <RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>
+                {/*<RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>*/}
                 <Divider/>
                 <Form form={form} onFinish={async (values) => {
 

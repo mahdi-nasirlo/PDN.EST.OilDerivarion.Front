@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {z} from "zod";
 import {Alert, Collapse, Empty, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
-import {RequestPackageApi} from "../../constance/request-package";
 import DataViewer from "@/components/form-builder/data-viewer";
+import {materialApi} from "../../constance/material";
 
 const Index = ({reports, loading}: {
-    reports: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[] | undefined,
+    reports: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[] | undefined,
     loading?: boolean
 }) => {
 
@@ -21,20 +21,20 @@ const Index = ({reports, loading}: {
 
 const RenderRepost = ({report, index}: {
     index: number,
-    report: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>
+    report: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>
 }) => {
 
     const [isFirst, setIsFirst] = useState(index === 0)
 
     let ItemType
 
-    if (report.uid) {
+    if (report.UID) {
         switch (report.Form_Type) {
             // case 1:
             //     ItemType = <WorkflowDataViewer data={data}/>
             //     break;
             case 2:
-                ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.uid}/>
+                ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID}/>
                 break;
             // case 3:
             //     ItemType = <MediaTypeItems data={data}/>

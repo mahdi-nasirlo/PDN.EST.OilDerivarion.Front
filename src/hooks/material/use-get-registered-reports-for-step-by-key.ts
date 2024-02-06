@@ -5,7 +5,7 @@ import {z} from "zod";
 
 const apiData = materialApi.GetRegisteredReportsForStepByKey
 
-const useGetRegisteredReportsForStepByKey = (key: string | undefined) => {
+const useGetRegisteredReportsForStepByKey = (key: string | undefined, taskId?: string | undefined) => {
 
     const data: z.infer<typeof apiData.type> = {
         step_Key: key as string

@@ -1,17 +1,19 @@
 import {generalResponseZod} from "@/types/api-response";
 import {z} from "zod";
 
+const ChoiceItem = z.object({
+    choice_id: z.string(),
+    counting_position: z.number(),
+    keyword: z.string().nullable(),
+    label: z.string(),
+    choice_Key: z.string(),
+    color: z.string(),
+    next_Level_ID: z.string(),
+    is_Systemic: z.boolean()
+})
+
 export const workflowApi = {
-    choices: z.object({
-        choice_id: z.string(),
-        counting_position: z.number(),
-        keyword: z.string(),
-        label: z.string(),
-        choice_Key: z.string(),
-        color: z.string(),
-        next_Level_ID: z.string(),
-        is_Systemic: z.boolean(),
-    }),
+    choices: ChoiceItem,
     GetAllTask: {
         url: "/WorkFlowRequest/GetAllTask",
         type: z.object({
@@ -53,4 +55,37 @@ export const workflowApi = {
             }),
         }),
     },
+    GetTask: {
+        url: "/WorkFlowRequest/GetTask",
+        type: z.object({
+            taskId: z.string().uuid(),
+            stepKey: z.string()
+        }),
+        response: generalResponseZod.extend({
+            data: z.object({
+                choices: z.array(ChoiceItem),
+                task: z.object({
+                    task_id: z.string(),
+                    extended_data: z.string(),
+                    current_Step_id: z.string(),
+                    current_Step_Key: z.string(),
+                    current_Step_Name: z.string(),
+                    is_Finished: z.boolean(),
+                    start_Time: z.string(),
+                    current_Step_Start_Time: z.string(),
+                    is_Lock: z.boolean(),
+                    userId: z.number(),
+                    userDescription: z.string()
+                })
+            })
+        })
+    },
+    SetTask: {
+        url: "/WorkFlowRequest/SetTask",
+        type: z.object({
+            taskId: z.string(),
+            choiceKey: z.string(),
+            description: z.string()
+        })
+    }
 };

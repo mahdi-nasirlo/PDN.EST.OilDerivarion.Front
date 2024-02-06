@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import Link, { LinkProps } from "next/link";
+import Link, {LinkProps} from "next/link";
 
 interface Data {
   CanEdit: boolean;
   children: React.ReactNode;
 }
 const VisitInfo = (props: Data & LinkProps) => {
-  console.log(props);
+
   return (
     <>
       {props.CanEdit ? (

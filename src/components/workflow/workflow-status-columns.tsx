@@ -3,7 +3,6 @@ import {Tag} from "antd";
 import {CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined,} from "@ant-design/icons";
 
 const WorkFlowStatusColumn = ({ record }: { record: any }) => {
-  console.log(record);
   let color = "";
   let name = "";
   let icon = <></>;

@@ -21,7 +21,7 @@ export default function SideBar({
       defaultSelectedKeys={[pathname]}
       onClick={handleMenuItemClick}
       onOpenChange={handleMenuOpenChange}
-      // items={userAccess.data}
+      items={userAccess.data}
     >
       <div className="flex flex-col gap-4 sidebar-Skeleton">
         <Skeleton active />

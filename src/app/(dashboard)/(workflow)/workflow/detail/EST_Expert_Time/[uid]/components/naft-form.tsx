@@ -1,8 +1,12 @@
-import { Divider, Form, Typography } from "antd";
+import { Divider, Typography } from "antd";
 import React from "react";
+import { RequestPackageApi } from "../../../../../../../../constance/request-package";
+import { Form } from "antd/lib";
 import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/form-time";
+import useUiTimeSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/hook/use-ui-time-schedule";
 
-export const SamtForm = ({
+const apiData = RequestPackageApi.VisitScheduleAdd;
+export const NaftForm = ({
   disable,
   uid,
 }: {
@@ -11,9 +15,9 @@ export const SamtForm = ({
 }) => {
   return (
     <>
-      <div className="mb-5">
+      <div className="my-5">
         <Typography className="text-right text-[16px] font-bold text-orange-300">
-          نماینده صمت
+          نماینده نفت
         </Typography>
       </div>
       <Form disabled={disable} layout="vertical">

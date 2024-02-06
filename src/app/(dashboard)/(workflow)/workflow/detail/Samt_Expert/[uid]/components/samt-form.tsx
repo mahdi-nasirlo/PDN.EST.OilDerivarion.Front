@@ -1,6 +1,7 @@
 import { Divider, Form, Typography } from "antd";
 import React from "react";
 import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/form-time";
+import useUiTimeSchedule from "../hook/use-ui-time-schedule";
 
 export const SamtForm = ({
   disable,
@@ -9,6 +10,7 @@ export const SamtForm = ({
   disable: boolean;
   uid?: string;
 }) => {
+  const { form, addTime, getTime, handleSubmit } = useUiTimeSchedule({ uid });
   return (
     <>
       <div className="mb-5">
@@ -16,7 +18,12 @@ export const SamtForm = ({
           نماینده صمت
         </Typography>
       </div>
-      <Form disabled={disable} layout="vertical">
+      <Form
+        disabled={disable}
+        form={form}
+        onFinish={handleSubmit}
+        layout="vertical"
+      >
         <FormTime disable={disable} />
       </Form>
       <Divider />

@@ -1,12 +1,11 @@
 "use client";
 
-import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
-import { useForm } from "antd/es/form/Form";
+import {Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
+import {useForm} from "antd/es/form/Form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { on } from "events";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 interface PropType {
   params: { uid: string };
@@ -156,11 +155,12 @@ export default function Home(props: PropType) {
 
         {data && <Divider />}
         <WorkflowBtn
-          onClick={(key) => {
-            setChoiceKey(key);
-            workflowForm.submit();
-          }}
-          choices={data?.choices}
+            loading={setRequest.isPending}
+            onClick={(key) => {
+              setChoiceKey(key);
+              workflowForm.submit();
+            }}
+            choices={data?.choices}
         />
       </div>
     </>

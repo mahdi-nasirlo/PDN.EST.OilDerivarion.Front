@@ -1,22 +1,13 @@
 "use client";
 
 
-import { Button, Col, Form, Modal, Row } from 'antd';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import {Button, Col, Form, Modal, Row} from 'antd';
 import React from 'react'
 
 export default function ReviewDataModalFinalSubmit(
     { modalVisibleFinalSubmit, setModalVisibleFinalSubmit }:
         { modalVisibleFinalSubmit: any, setModalVisibleFinalSubmit: any }
 ) {
-
-    const router = useRouter()
-
-    const handleFormSubmit = () => {
-        router.push("/request-list");
-        setModalVisibleFinalSubmit(false);
-    };
 
 
     return (
@@ -29,20 +20,17 @@ export default function ReviewDataModalFinalSubmit(
                 footer={[
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
                         <Col xs={24} md={24}>
-                            <Link
-                                href={"/producer/dashboard/request-list"}
-                                onClick={handleFormSubmit}
-                            >
                                 <Button
                                     size="large"
                                     className="w-full"
                                     type="primary"
-                                    onClick={handleFormSubmit}
+                                    onClick={setModalVisibleFinalSubmit}
                                     key={"submit"}
                                 >
                                     ثبت
-                                </Button>
-                            </Link>
+                                </Button>.0
+
+
                         </Col>
                     </Row>
                 ]}

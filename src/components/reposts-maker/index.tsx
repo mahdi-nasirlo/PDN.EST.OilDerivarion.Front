@@ -5,9 +5,10 @@ import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-f
 import DataViewer from "@/components/form-builder/data-viewer";
 import {materialApi} from "../../constance/material";
 
-const Index = ({reports, loading}: {
+const Index = ({reports, loading, taskId}: {
     reports: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[] | undefined,
-    loading?: boolean
+    loading?: boolean,
+    taskId: string
 }) => {
 
     if (loading)
@@ -16,12 +17,19 @@ const Index = ({reports, loading}: {
     if (!Array.isArray(reports))
         return
 
-    return reports?.map((repost, index) => <RenderRepost key={index} index={index} report={repost}/>)
+    console.log(taskId)
+    return reports?.map((repost, index) => <RenderRepost
+        key={index}
+        index={index}
+        report={repost}
+        taskId={taskId}
+    />)
 };
 
-const RenderRepost = ({report, index}: {
+const RenderRepost = ({report, index, taskId}: {
     index: number,
-    report: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>
+    report: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>,
+    taskId: string
 }) => {
 
     const [isFirst, setIsFirst] = useState(index === 0)
@@ -34,7 +42,7 @@ const RenderRepost = ({report, index}: {
             //     ItemType = <WorkflowDataViewer data={data}/>
             //     break;
             case 2:
-                ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID}/>
+                ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>
                 break;
             // case 3:
             //     ItemType = <MediaTypeItems data={data}/>
@@ -66,9 +74,9 @@ const RenderRepost = ({report, index}: {
     </>
 }
 
-const RenderTypeTow = ({formKey, formUid}: { formKey: string, formUid: string }) => {
+const RenderTypeTow = ({formKey, formUid, taskId}: { formKey: string, formUid: string, taskId: string }) => {
 
-    const schema = useProducerFormsGetDocSchemaByUid({form_Key: formKey, form_UID: formUid})
+    const schema = useProducerFormsGetDocSchemaByUid({form_Key: formKey, form_UID: formUid, taskId})
 
     if (schema.isFetching)
         return <Spin/>
@@ -76,7 +84,7 @@ const RenderTypeTow = ({formKey, formUid}: { formKey: string, formUid: string })
     if (!schema.data)
         return <Empty/>
 
-    return <Spin spinning={schema.isFetching}><DataViewer data={schema.data[0].form_data}
-                                                          schema={schema.data[0].Schema_Data}/></Spin>
+    return <Spin spinning={schema.isFetching}><DataViewer data={schema.data[0]?.form_data}
+                                                          schema={schema.data[0]?.Schema_Data}/></Spin>
 }
 export default Index;

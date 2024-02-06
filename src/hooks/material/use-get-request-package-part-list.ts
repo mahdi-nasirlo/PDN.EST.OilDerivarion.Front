@@ -12,7 +12,17 @@ const useGetRequestPackagePartList = () => {
         queryFn: () => fetchWithSession({
             url: apiData.url, notify: false, data: {}
         }),
-        select: (data: z.infer<typeof apiData.response>) => data.data
+        select: (data: z.infer<typeof apiData.response>) => {
+
+            try {
+
+                return data.data.map((item) => ({...item, Products: JSON.parse(item.Products as string)}))
+
+            } catch (e) {
+                return data.data
+            }
+
+        }
     })
 }
 

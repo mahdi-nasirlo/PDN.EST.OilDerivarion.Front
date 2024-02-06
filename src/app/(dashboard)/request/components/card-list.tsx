@@ -1,16 +1,16 @@
 "use client";
 
-import { Button, Card, Col, Tag } from "antd";
-import React, { useState } from "react";
-import { Row, Typography } from "antd/lib";
-import { CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { z } from "zod";
-import { materialApi } from "../../../../constance/material";
-import { CardListTable } from "@/app/(dashboard)/request/components/card-list-table";
+import {Button, Card, Col, Tag} from "antd";
+import React, {useState} from "react";
+import {Row, Typography} from "antd/lib";
+import {CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {z} from "zod";
+import {materialApi} from "../../../../constance/material";
+import {CardListTable} from "@/app/(dashboard)/request/components/card-list-table";
 import useRequestPackagePartDelete from "@/hooks/material/use-request-package-part-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import {AnimatePresence, motion} from "framer-motion";
+import {useRouter} from "next/navigation";
 
 const CardList = ({ data }: {
     data: z.infer<typeof materialApi.GetRequestPackagePartList.response.shape.data> | undefined
@@ -32,6 +32,8 @@ const CardList = ({ data }: {
     const router = useRouter()
 
     if (data == undefined || !Array.isArray(data)) { return }
+
+    console.log(data)
 
     return (
         <>
@@ -111,7 +113,7 @@ const CardList = ({ data }: {
 
                                             </div>
 
-                                            <CardListTable />
+                                            <CardListTable data={item.Products}/>
 
                                             <Row gutter={[16, 12]}>
                                                 <Col xs={12}>

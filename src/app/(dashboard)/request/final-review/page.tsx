@@ -12,6 +12,7 @@ import {useRequestPackageFinalization} from "@/hooks/request-package/use-request
 import ReviewDataModalAcceptAgreement from "@/app/(dashboard)/request/final-review/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit from "@/app/(dashboard)/request/final-review/review-data-modal-final-submit";
 import {useRequestPackageReportList} from "@/hooks/request-package/use-request-package-report-list";
+import RepostsMaker from "@/components/reposts-maker";
 
 export default function Page() {
 
@@ -38,14 +39,15 @@ export default function Page() {
                 titleIcon={<DocumentMagnifyingGlassIcon className="w-8"/>}
             />
             <Card>
-                {/*<RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>*/}
+                {/*// @ts-ignore*/}
+                <RepostsMaker taskId={null} reports={reposts.data} loading={reposts.isFetching}/>
                 <Divider/>
                 <Form form={form} onFinish={async (values) => {
 
                     const res = await finalRequest.mutateAsync()
 
                     if (res.success)
-                        router.push("/request/list")
+                        setModalVisibleFinalSubmit(true)
 
                 }}>
                     <Form.Item
@@ -91,6 +93,7 @@ export default function Page() {
                         <Col xs={24} md={12}>
                             <Button
                                 size="large"
+                                loading={finalRequest.isPending}
                                 className="w-full "
                                 type="primary"
                                 htmlType="submit"
@@ -107,7 +110,7 @@ export default function Page() {
             />
             <ReviewDataModalFinalSubmit
                 modalVisibleFinalSubmit={modalVisibleFinalSubmit}
-                setModalVisibleFinalSubmit={setModalVisibleFinalSubmit}
+                setModalVisibleFinalSubmit={() => router.push("/request/list")}
             />
         </div>
   );

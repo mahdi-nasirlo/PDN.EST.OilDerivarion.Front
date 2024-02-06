@@ -59,11 +59,8 @@ const CommonWorkflow = ({uid, stepKey, children}: { uid: string, stepKey: string
                 />
             }
             <Card>
-                <Divider orientation="left" className="mb-6">
-                    لیست گزارشات
-                </Divider>
                 <Spin spinning={get.isFetching}>
-                    <RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>
+                    <RepostsMaker reports={reposts.data} loading={reposts.isFetching} taskId={uid}/>
                 </Spin>
                 <Divider/>
                 {children}

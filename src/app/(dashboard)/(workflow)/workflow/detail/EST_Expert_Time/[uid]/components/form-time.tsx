@@ -10,7 +10,7 @@ export const FormTime = ({ disable }: { disable: boolean }) => {
           <Form.Item
             required={false}
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="t1_Str"
+            name="est_1"
             label="زمان بازدید احتمالی اول"
           >
             <CustomDatePicker />
@@ -20,7 +20,7 @@ export const FormTime = ({ disable }: { disable: boolean }) => {
           <Form.Item
             required={false}
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="t2_Str"
+            name="est_2"
             label="زمان بازدید احتمالی دوم"
           >
             <CustomDatePicker />
@@ -30,7 +30,7 @@ export const FormTime = ({ disable }: { disable: boolean }) => {
           <Form.Item
             required={false}
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="description"
+            name="est_3"
             label="زمان بازدید احتمالی سوم"
           >
             <CustomDatePicker />
@@ -42,7 +42,7 @@ export const FormTime = ({ disable }: { disable: boolean }) => {
           <Form.Item
             required={false}
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="t3_Str"
+            name="est_description"
             label="توضیحات"
           >
             <Input.TextArea

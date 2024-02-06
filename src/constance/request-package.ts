@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {generalResponseZod} from "@/types/api-response";
+import { z } from "zod";
+import { generalResponseZod } from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -8,7 +8,24 @@ const RequestPackageReportListItem = z.object({
   Form_Name: z.string(),
 });
 
-const VisitScheduleListItem = z.object({});
+const VisitScheduleListItem = z.object({
+  visit_Type: z.number(),
+  package_UID: z.string().uuid(),
+  naft_1: z.string(),
+  naft_2: z.string(),
+  naft_3: z.string(),
+  naft_description: z.string().nullable(),
+  samt_1: z.string(),
+  samt_2: z.string(),
+  samt_3: z.string(),
+  samt_description: z.string().nullable(),
+  est_1: z.string(),
+  est_2: z.string(),
+  est_3: z.string(),
+  est_description: z.string(),
+  final_time: z.string(),
+  final_description: z.string().nullable(),
+});
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
@@ -29,10 +46,20 @@ const RequestPackageApi = {
     type: z.object({
       visit_Type: z.number(),
       package_UID: z.string().uuid(),
-      t1_Str: z.string(),
-      t2_Str: z.string(),
-      t3_Str: z.string(),
-      description: z.string(),
+      naft_1: z.string(),
+      naft_2: z.string(),
+      naft_3: z.string(),
+      naft_description: z.string(),
+      samt_1: z.string(),
+      samt_2: z.string(),
+      samt_3: z.string(),
+      samt_description: z.string(),
+      est_1: z.string(),
+      est_2: z.string(),
+      est_3: z.string(),
+      est_description: z.string(),
+      final_time: z.string(),
+      final_description: z.string(),
     }),
     // item: RequestPackageReportListItem,
     // response: generalResponseZod.extend({
@@ -43,7 +70,7 @@ const RequestPackageApi = {
     url: "/RequestPackage/VisitScheduleList",
     type: z.object({
       package_UID: z.string().uuid().optional(),
-      taskId: z.string()
+      // taskId: z.string(),
     }),
     item: VisitScheduleListItem,
     response: generalResponseZod.extend({

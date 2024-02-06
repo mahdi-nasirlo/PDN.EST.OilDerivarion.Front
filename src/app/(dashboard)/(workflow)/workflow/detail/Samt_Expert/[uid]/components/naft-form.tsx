@@ -13,8 +13,6 @@ export const NaftForm = ({
   disable: boolean;
   uid?: string;
 }) => {
-  const { form, addTime, getTime, handleSubmit } = useUiTimeSchedule({ uid });
-
   return (
     <>
       <div className="my-5">
@@ -22,12 +20,7 @@ export const NaftForm = ({
           نماینده نفت
         </Typography>
       </div>
-      <Form
-        disabled={disable}
-        form={form}
-        onFinish={handleSubmit}
-        layout="vertical"
-      >
+      <Form disabled={disable} layout="vertical">
         <FormTime disable={disable} />
       </Form>
       <Divider />

@@ -6,7 +6,7 @@ const useUiTimeSchedule = ({ uid }: { uid?: string }) => {
   const addTime = useRequestPackageVisitScheduleAdd();
 
   const getTime = useRequestPackageVisitScheduleList({
-    taskId: uid as string,
+    // taskId: uid as string,
     package_UID: uid,
   });
 
@@ -20,7 +20,7 @@ const useUiTimeSchedule = ({ uid }: { uid?: string }) => {
     });
   };
 
-  return { addTime, getTime, form, handleSubmit };
+  return { addTime, getTime, handleSubmit };
 };
 
 export default useUiTimeSchedule;

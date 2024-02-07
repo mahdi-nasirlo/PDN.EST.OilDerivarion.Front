@@ -37,7 +37,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
       onCancel={closeModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
-          <Col xs={12} md={12}>
+          <Col xs={12} sm={12}>
             <Button
               loading={create.isPending}
               size="large"
@@ -49,7 +49,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
               ثبت
             </Button>
           </Col>
-          <Col xs={12} md={12}>
+          <Col xs={12} sm={12}>
             <Button
               disabled={create.isPending}
               size="large"

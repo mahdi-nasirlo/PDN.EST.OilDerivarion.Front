@@ -25,7 +25,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
   //   onCancel={closeModal}
   //   footer={[
   //     <Row key={"box"} gutter={[16, 16]} className="my-2">
-  //       <Col xs={12} md={12}>
+  //       <Col xs={12} sm={12}>
   //         <Button
   //           loading={get.isFetching || update.isPending}
   //           disabled={get.isFetching || update.isPending}
@@ -38,7 +38,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
   //           ثبت
   //         </Button>
   //       </Col>
-  //       <Col xs={12} md={12}>
+  //       <Col xs={12} sm={12}>
   //         <Button
   //           loading={get.isFetching || update.isPending}
   //           size="large"

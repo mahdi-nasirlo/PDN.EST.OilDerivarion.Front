@@ -8,7 +8,7 @@ function GpsForm({ ruls }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="code"
@@ -17,7 +17,7 @@ function GpsForm({ ruls }: any) {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="isActive"
@@ -34,7 +34,7 @@ function GpsForm({ ruls }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="capacity"
@@ -43,7 +43,7 @@ function GpsForm({ ruls }: any) {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
             name="stateId"

@@ -1,6 +1,6 @@
-import { useGetUserAccess } from "@/hooks/sso/use-get-user-access";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import {useGetUserAccess} from "@/hooks/sso/use-get-user-access";
+import {usePathname, useRouter} from "next/navigation";
+import React, {useState} from "react";
 
 type MenuInfo = {
   key: string;
@@ -28,7 +28,7 @@ const useControlSidebar = () => {
   };
 
   const handleMenuItemClick = (info: MenuInfo) => {
-    router.push(info.key);
+    // router.push(info.key);
   };
 
   return {

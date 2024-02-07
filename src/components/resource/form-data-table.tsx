@@ -79,6 +79,7 @@ const FormDataTable = (props: PropType) => {
                 title='اطلاعات پایه'
                 open={typeof delOpen === "number"}
                 setOpen={setDelOpen}
+                loading={props.isLoading}
                 handleDelete={async () => {
 
                     const res = await deleteFromMany(delOpen as number, props.schema.Form_Key as string)

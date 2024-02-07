@@ -115,13 +115,15 @@ const RenderForms = ({schema, records, categoryKey, loading}: TProps) => {
         if (form.Mode === 0) {
 
             return <>
-                <FormBuilder
-                    key={index}
-                    item={form}
-                    title={true}
-                    isLoading={formProvider.isLoading}
-                    onSet={formProvider.onSetMany}
-                />
+                <Spin spinning={formProvider.isLoading}>
+                    <FormBuilder
+                        key={index}
+                        item={form}
+                        title={true}
+                        isLoading={formProvider.isLoading}
+                        onSet={formProvider.onSetMany}
+                    />
+                </Spin>
                 <div className="mt-8">
                     <FormDataTable
                         key={index}
@@ -139,12 +141,14 @@ const RenderForms = ({schema, records, categoryKey, loading}: TProps) => {
         if (form.Mode === 1) {
 
             return <>
-                <FormBuilder
-                    key={index}
-                    item={form}
-                    initialValues={initialValues}
-                    onSet={formProvider.onSetOne}
-                />
+                <Spin spinning={formProvider.isLoading}>
+                    <FormBuilder
+                        key={index}
+                        item={form}
+                        initialValues={initialValues}
+                        onSet={formProvider.onSetOne}
+                    />
+                </Spin>
                 {divider}
             </>
         }

@@ -1,35 +1,38 @@
-import { Button, Col, Divider, Form, Input, Row, Typography } from "antd";
+import { Divider, Form, Typography } from "antd";
 import React, { useEffect } from "react";
-import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/form-time";
-import useUiTimeSchedule from "../hook/use-ui-time-schedule";
+import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/form-time";
+import { z } from "zod";
 import { RequestPackageApi } from "constance/request-package";
+import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
 import { useValidation } from "@/hooks/use-validation";
+import { useForm } from "antd/lib/form/Form";
+import { Button, Col, Input, Row } from "antd/lib";
 import CustomDatePicker from "@/components/custome-date-picker";
+import useUiTimeSchedule2 from "../hook/use-ui-time-schedule";
 
-export const EstForm = ({
-  disable,
-  uid,
-}: {
-  disable: boolean;
-  uid?: string;
-}) => {
-  const { addTime, getTime, handleSubmit } = useUiTimeSchedule({ uid });
-  const [form, ruls] = useValidation(RequestPackageApi.VisitScheduleList.item);
+export const EstForm = ({ uid }: { uid?: string }) => {
+  const dataForm = useRequestPackageVisitScheduleList({ package_UID: uid });
+  const { handleSubmitEst } = useUiTimeSchedule2({ uid });
+
+  const [form] = useForm();
+
   useEffect(() => {
-    if (getTime?.data) {
-      form.setFieldsValue(getTime?.data[0]);
-    }
-    console.log(getTime?.data);
-  }, [getTime.data]);
+    form.setFieldsValue(dataForm.data);
+  }, [dataForm.data]);
+
   return (
     <>
-      <div className="mb-5">
+      <div className="my-5">
         <Typography className="text-right text-[16px] font-bold text-orange-300">
           نماینده استاندارد
         </Typography>
       </div>
-      <Form form={form} onFinish={handleSubmit} layout="vertical">
-        {/* <FormTime disable={disable} /> */}
+      <Form
+        form={form}
+        disabled={dataForm.data?.visit_Type !== 3}
+        layout="vertical"
+        onFinish={handleSubmitEst}
+      >
         <Row gutter={[16, 16]}>
           <Col xs={24} md={8}>
             <Form.Item
@@ -67,7 +70,7 @@ export const EstForm = ({
             <Form.Item
               required={false}
               rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              name="est_description"
+              name="naft_description"
               label="توضیحات"
             >
               <Input.TextArea
@@ -77,14 +80,13 @@ export const EstForm = ({
             </Form.Item>
           </Col>
         </Row>
-        {!disable && (
+        {dataForm.data?.visit_Type == 3 && (
           <Row gutter={[32, 0]}>
             <Col xs={24} md={24}>
               <Button
-                disabled={disable}
                 className="w-full"
                 size="large"
-                type={disable ? "default" : "primary"}
+                type={"primary"}
                 htmlType="submit"
               >
                 ثبت

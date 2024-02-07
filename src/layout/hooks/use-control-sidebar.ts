@@ -28,7 +28,7 @@ const useControlSidebar = () => {
   };
 
   const handleMenuItemClick = (info: MenuInfo) => {
-    router.push(info.key);
+    // router.push(info.key);
   };
 
   return {

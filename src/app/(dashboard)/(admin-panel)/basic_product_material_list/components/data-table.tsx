@@ -19,103 +19,103 @@ interface TProps {
   data: z.infer<typeof apiData.response.shape.data> | undefined;
   isLoading: boolean;
   setModalVisible: (arg: boolean) => void;
-  setPaginate: (arg: any) => void
+  setPaginate: (arg: any) => void;
 }
 
-export default function DataTable({ data, isLoading, setModalVisible, setPaginate }: TProps) {
-
+export default function DataTable({
+  data,
+  isLoading,
+  setModalVisible,
+  setPaginate,
+}: TProps) {
   const [uid, setGetUid] = useState<string | boolean>();
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
 
-  const Delete = useBasicProductMaterialDelete()
+  const Delete = useBasicProductMaterialDelete();
 
   const handelDelete = async () => {
-
     const res = await Delete.mutateAsync({ uid: uidDelete as string });
 
     if (res.success) {
       setUidDelete(undefined);
     }
+  };
 
-  }
+  const columns: ColumnsType<z.infer<typeof apiData.item>> = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      key: "1",
+      width: "5%",
+    },
+    {
+      title: "نام ماده اولیه",
+      dataIndex: "name",
+      key: "2",
+    },
+    {
+      title: "واحد اندازه کیری",
+      dataIndex: "measureName",
+      key: "2",
+    },
+    {
+      title: "فعال/غیرفعال",
+      dataIndex: "isActive",
+      key: "5",
+      render: (_, record: any) => <StatusColumn record={record} />,
+    },
+    {
+      title: "فاکتورهای آزمون",
+      dataIndex: "testItems",
+      key: "4",
+      render: (_, record) => {
+        if (record.testItems === null) {
+          return <Typography>_</Typography>;
+        }
+        return (
+          <Tooltip
+            placement="top"
+            title={<Typography>{record.testItems}</Typography>}
+          >
+            <Typography.Text
+              className="max-w-[180px]"
+              ellipsis={true}
+              style={{ width: "40px !important" }}
+            >
+              {record.testItems}
+            </Typography.Text>
+          </Tooltip>
+        );
+      },
+    },
 
-  const columns: ColumnsType<
-    z.infer<typeof apiData.item>
-  > = [
-      {
-        title: "ردیف",
-        dataIndex: "Row",
-        key: "1",
-        width: "5%",
-      },
-      {
-        title: "نام ماده اولیه",
-        dataIndex: "name",
-        key: "2",
-      },
-      {
-        title: "واحد اندازه کیری",
-        dataIndex: "measureName",
-        key: "2",
-      },
-      {
-        title: "فعال/غیرفعال",
-        dataIndex: "isActive",
-        key: "5",
-        render: (_, record: any) => <StatusColumn record={record} />,
-      },
-      {
-        title: "فاکتورهای آزمون",
-        dataIndex: "testItems",
-        key: "4",
-        render: (_, record) => {
-          if (record.testItems === null) {
-            return <Typography>_</Typography>;
-          }
-          return (
-            <Tooltip
-              placement="top"
-              title={<Typography>{record.testItems}</Typography>}
-            >
-              <Typography.Text
-                className="max-w-[180px]"
-                ellipsis={true}
-                style={{ width: "40px !important" }}
-              >
-                {record.testItems}
-              </Typography.Text>
-            </Tooltip>
-          );
-        },
-      },
-
-      {
-        title: "عملیات",
-        key: "عملیات",
-        align: "center",
-        fixed: "right",
-        width: "10%",
-        render: (_, record) => (
-          <Space size="small">
-            <Button
-              type="link"
-              className="text-secondary-500 font-bold"
-              onClick={() => setGetUid(record.uid)}
-            >
-              ویرایش
-            </Button>
-            <Button
-              type="link"
-              className={"text-red-500 font-bold"}
-              onClick={() => setUidDelete(record.uid)}
-            >
-              حذف
-            </Button>
-          </Space>
-        ),
-      },
-    ];
+    {
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => setGetUid(record.uid)}
+          >
+            ویرایش
+          </Button>
+          <Button
+            type="link"
+            className={"text-red-500 font-bold"}
+            onClick={() => setUidDelete(record.uid)}
+          >
+            حذف
+          </Button>
+        </Space>
+      ),
+    },
+  ];
   return (
     <>
       <Card className="mt-8">
@@ -142,12 +142,9 @@ export default function DataTable({ data, isLoading, setModalVisible, setPaginat
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
+        <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
         <ConfirmDeleteModal
-          title='دسته بندی محصول'
+          title="مواد اولیه محصول"
           open={uidDelete}
           setOpen={setUidDelete}
           handleDelete={handelDelete}

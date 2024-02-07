@@ -26,6 +26,7 @@ const VisitScheduleListItem = z.object({
   final_time: z.string(),
   final_description: z.string().nullable(),
 });
+
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
@@ -73,8 +74,26 @@ const RequestPackageApi = {
       // taskId: z.string(),
     }),
     item: VisitScheduleListItem,
+    form1: z.object({
+      naft_1: z.string(),
+      naft_2: z.string(),
+      naft_3: z.string(),
+      naft_description: z.string().nullable(),
+    }),
+    form2: z.object({
+      samt_1: z.string(),
+      samt_2: z.string(),
+      samt_3: z.string(),
+      samt_description: z.string().nullable(),
+    }),
+    form3: z.object({
+      est_1: z.string(),
+      est_2: z.string(),
+      est_3: z.string(),
+      est_description: z.string(),
+    }),
     response: generalResponseZod.extend({
-      data: z.array(VisitScheduleListItem),
+      data: VisitScheduleListItem,
     }),
   },
 };

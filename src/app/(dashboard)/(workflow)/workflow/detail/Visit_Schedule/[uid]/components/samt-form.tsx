@@ -1,26 +1,20 @@
-import { Button, Col, Divider, Form, Input, Row, Typography } from "antd";
+import { Divider, Form, Typography } from "antd";
 import React, { useEffect } from "react";
-import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Naft_Expert/[uid]/components/form-time";
-import useUiTimeSchedule from "../hook/use-ui-time-schedule";
-import { RequestPackageApi } from "constance/request-package";
-import { useValidation } from "@/hooks/use-validation";
+import { FormTime } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/form-time";
+import { Button, Col, Input, Row } from "antd/lib";
 import CustomDatePicker from "@/components/custome-date-picker";
+import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
+import { useForm } from "antd/es/form/Form";
+import useUiTimeSchedule2 from "../hook/use-ui-time-schedule";
 
-export const SamtForm = ({
-  disable,
-  uid,
-}: {
-  disable: boolean;
-  uid?: string;
-}) => {
-  const { addTime, getTime, handleSubmit } = useUiTimeSchedule({ uid });
-  const [form, ruls] = useValidation(RequestPackageApi.VisitScheduleList.item);
+export const SamtForm = ({ uid }: { uid?: string }) => {
+  const { handleSubmitSamt } = useUiTimeSchedule2({ uid });
+  const dataForm = useRequestPackageVisitScheduleList({ package_UID: uid });
+
+  const [form] = useForm();
   useEffect(() => {
-    if (getTime?.data) {
-      form.setFieldsValue(getTime?.data[0]);
-    }
-    console.log(getTime?.data);
-  }, [getTime.data]);
+    form.setFieldsValue(dataForm.data);
+  }, [dataForm.data]);
   return (
     <>
       <div className="mb-5">
@@ -29,10 +23,10 @@ export const SamtForm = ({
         </Typography>
       </div>
       <Form
-        disabled={disable}
         form={form}
-        onFinish={handleSubmit}
+        disabled={dataForm.data?.visit_Type !== 2}
         layout="vertical"
+        onFinish={handleSubmitSamt}
       >
         <Row gutter={[16, 16]}>
           <Col xs={24} md={8}>
@@ -81,14 +75,14 @@ export const SamtForm = ({
             </Form.Item>
           </Col>
         </Row>
-        {!disable && (
+
+        {dataForm.data?.visit_Type == 2 && (
           <Row gutter={[32, 0]}>
             <Col xs={24} md={24}>
               <Button
-                disabled={disable}
                 className="w-full"
                 size="large"
-                type={disable ? "default" : "primary"}
+                type={"primary"}
                 htmlType="submit"
               >
                 ثبت
@@ -96,7 +90,6 @@ export const SamtForm = ({
             </Col>
           </Row>
         )}
-        {/* <FormTime disable={disable} /> */}
       </Form>
       <Divider />
     </>

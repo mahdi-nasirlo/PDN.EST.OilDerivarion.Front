@@ -24,7 +24,15 @@ export default function Page({
 
     const router = useRouter()
 
-    const {get, handleSet, set, reposts, form, dataForm, setChoice, choice} = useUiVisitSchedule({taskId: params.uid})
+    const {
+        get,
+        handleSet,
+        reposts,
+        form,
+        dataForm,
+        setChoice,
+        set
+    } = useUiVisitSchedule({taskId: params.uid})
 
     if (!get.data && get.isFetching) {
         return (
@@ -66,6 +74,7 @@ export default function Page({
             <EstForm uid={params.uid}/>
           {dataForm.data?.visit_Type == 3 && (
               <>
+                  <Divider/>
                   <Form form={form} onFinish={handleSet} layout="vertical">
                       <Form.Item
                           label="تاریخ نهایی"
@@ -90,8 +99,12 @@ export default function Page({
                       </Form.Item>
                   </Form>
                   <WorkflowBtn
+                      loading={set.isPending}
                       choices={get.data?.choices}
-                      onClick={(choice_Key) => setChoice(choice_Key)}
+                      onClick={(choice_Key) => {
+                          setChoice(choice_Key)
+                          form.submit()
+                      }}
                   />
               </>
           )}

@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import { Collapse } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
 import { BeakerIcon } from "@heroicons/react/24/solid";
-
-import { useBasicMaterialProductGetPage } from "@/hooks/material/use-basic-product-material-get-page";
+import DataTable from "./components/data-table";
+import CreateModal from "./components/create-modal";
+// import { useBasicMaterialProductGetPage } from "@/hooks/material/use-basic-product-material-get-page";
+import { useBoxGPSGetPage } from "@/hooks/box-gps/use-box-gps-get-page";
+import FilterForm from "./components/filter-form";
 
 const Page = () => {
-  const dataPage = useBasicMaterialProductGetPage();
+  const dataPage = useBoxGPSGetPage();
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,9 +20,9 @@ const Page = () => {
       <Breadcrumb
         titleIcon={<BeakerIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"لیست مواد اولیه"}
+        currentPage={"باکس های من "}
       />
-      {/* <Collapse
+      <Collapse
         size="large"
         items={[
           {
@@ -27,8 +30,8 @@ const Page = () => {
             children: <FilterForm onFinish={dataPage.setFilter as any} />,
           },
         ]}
-      /> */}
-      {/* <DataTable
+      /> 
+       <DataTable
         data={dataPage.data}
         isLoading={dataPage.isFetching || dataPage.isLoading}
         setModalVisible={setModalVisible}
@@ -37,7 +40,7 @@ const Page = () => {
       <CreateModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-      /> */}
+      />
     </>
   );
 };

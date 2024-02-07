@@ -1,26 +1,43 @@
 import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
-import useSWR from "swr";
-import { listFetcher } from "../../../../../../lib/server/listFetcher";
-import { sortByIndex } from "../../../../../../lib/sortByIndex";
 
-function GpsForm({ ruls }: any) {
+function GpsForm({ rules }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        {/* <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[rules]}
             name="code"
             label="کد"
+          >
+            <Input size="large" placeholder="وارد کنید" />
+          </Form.Item>
+        </Col> */}
+        <Col xs={24} md={12}>
+          <Form.Item
+                   rules={[rules]}
+
+            name="name"
+            label="نام"
           >
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
           <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-            name="isActive"
+                 rules={[rules]}
+
+            name="imei"
+            label="imei"
+          >
+            <Input size="large" placeholder="وارد کنید" />
+          </Form.Item>
+        </Col>
+        {/* <Col xs={24} md={12}>
+          <Form.Item
+                      rules={[rules]}
+                      name="isActive"
             label="فعال/غیر فعال"
             initialValue={true}
           >
@@ -33,10 +50,9 @@ function GpsForm({ ruls }: any) {
               placeholder="انتخاب کنید"
             />
           </Form.Item>
-        </Col>
+        </Col> */}
         <Col xs={24} md={12}>
-          <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+          <Form.Item            rules={[rules]}
             name="capacity"
             label="ظرفیت"
           >
@@ -44,17 +60,17 @@ function GpsForm({ ruls }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item
-            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
-            name="stateId"
+          <Form.Item            rules={[rules]}
+            name="stateUId"
             label="استان"
           >
             {/* <Select
               size="large"
               placeholder="انتخاب کنید"
               fieldNames={{ label: "Name", value: "Id" }}
-              options={sortByIndex(data, 'Name')}
-              loading={isLoading}
+              options={[]}
+              // options={sortByIndex(data, 'Name')}
+              loading={false}
             /> */}
           </Form.Item>
         </Col>

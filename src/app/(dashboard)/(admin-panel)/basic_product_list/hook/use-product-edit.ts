@@ -31,6 +31,7 @@ const useProductEdit = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 

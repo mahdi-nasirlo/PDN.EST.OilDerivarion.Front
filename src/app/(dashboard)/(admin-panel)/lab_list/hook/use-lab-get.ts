@@ -35,6 +35,7 @@ const useLabGetInfo = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 

@@ -38,7 +38,7 @@ export default function CreateModal({
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن ماده اولیه</div>
+          <div className="text-base mb-2">افزودن واحد اندازه گیری</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -80,15 +80,14 @@ export default function CreateModal({
         onFinish={handleCreate}
         form={form}
         layout="vertical"
-        initialValues={{ testItems: [] }}
       >
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item rules={[rules]} name="name" label="واحد اندازه گیری">
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="isActive"
               label="فعال / غیر فعال"

@@ -21,7 +21,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="name"
                         label="نام دسته بندی"
@@ -30,7 +30,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                         <Input className='w-full' size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="productionMethodId"
                         label="روش تولید"
@@ -45,7 +45,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="isActive"
                         label="فعال / غیر فعال"
@@ -62,7 +62,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="hasDensity"
                         label="دانسیته"
@@ -82,7 +82,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
             </Row>
             {hasDensity && (
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
                             required={false}
                             rules={[
@@ -109,7 +109,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                             />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
                             required={false}
                             rules={[
@@ -147,7 +147,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                 </Row>
             )}
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         required={false}
                         name="smallCode"

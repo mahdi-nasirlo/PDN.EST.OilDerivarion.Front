@@ -13,12 +13,12 @@ function MaterialForm({ rules }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="name" label="نام ماده اولیه">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             name="isActive"
             label="فعال / غیر فعال"
@@ -37,7 +37,7 @@ function MaterialForm({ rules }: any) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
@@ -49,7 +49,7 @@ function MaterialForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون">
             <MultipleSelect
               treeData={testItem.treeData}

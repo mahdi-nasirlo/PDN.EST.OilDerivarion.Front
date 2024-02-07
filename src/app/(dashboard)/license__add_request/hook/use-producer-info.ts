@@ -3,7 +3,7 @@ import useDelRequest from "@/hooks/license/use-del-request";
 import useGetAvailbleTypes from "@/hooks/license/use-get-availble-types";
 import useGetProducerInfo from "@/hooks/license/use-get-producer-info";
 import useGetRequestListForCurrentUser from "@/hooks/license/use-get-request-list-for-current-user";
-import {useState} from "react";
+import { useState } from "react";
 
 const useProducerInfo = () => {
   const [delUid, setDelUid] = useState<string | boolean>();

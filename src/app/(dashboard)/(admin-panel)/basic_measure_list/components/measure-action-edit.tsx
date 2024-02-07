@@ -37,7 +37,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
       onCancel={closeModal}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
-          <Col xs={12} md={12}>
+          <Col xs={12} sm={12}>
             <Button
               loading={get.isFetching || update.isPending}
               disabled={get.isFetching || update.isPending}
@@ -50,7 +50,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
               ثبت
             </Button>
           </Col>
-          <Col xs={12} md={12}>
+          <Col xs={12} sm={12}>
             <Button
               loading={get.isFetching || update.isPending}
               size="large"
@@ -70,15 +70,14 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
         onFinish={handleSubmit}
         form={form}
         layout="vertical"
-        initialValues={{ testItems: [] }}
       >
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item rules={[rules]} name="name" label="واحد اندازه گیری">
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="isActive"
               label="فعال / غیر فعال"

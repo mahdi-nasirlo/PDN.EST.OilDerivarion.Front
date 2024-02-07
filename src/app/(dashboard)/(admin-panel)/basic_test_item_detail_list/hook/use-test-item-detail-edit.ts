@@ -31,6 +31,7 @@ const useTestItemDetailEdit = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 

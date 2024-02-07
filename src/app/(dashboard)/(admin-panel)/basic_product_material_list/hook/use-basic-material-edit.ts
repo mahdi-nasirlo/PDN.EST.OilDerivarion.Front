@@ -32,6 +32,7 @@ const useBasicMaterialEdit = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 

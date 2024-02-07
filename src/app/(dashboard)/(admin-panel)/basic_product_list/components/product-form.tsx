@@ -17,7 +17,7 @@ function ProductForm({ rules }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
             name="name"
@@ -26,7 +26,7 @@ function ProductForm({ rules }: any) {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
             name="productCategoryUid"
@@ -43,7 +43,7 @@ function ProductForm({ rules }: any) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             name="materials"
             label="مواد اولیه"
@@ -55,7 +55,7 @@ function ProductForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             label="فاکتور های آزمون"
             name="testItems"
@@ -69,7 +69,7 @@ function ProductForm({ rules }: any) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
             name="isActive"

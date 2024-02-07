@@ -1,13 +1,14 @@
 import React from 'react';
-import {InputNumber, InputNumberProps} from 'antd';
-
-// import {FormBuilderInputType} from '../index';
+import { InputNumber, InputNumberProps } from 'antd';
 
 
-const NaturalNumber: React.FC<InputNumberProps> = ({...props}) => {
+const NaturalNumber: React.FC<InputNumberProps> = ({ ...props }) => {
+
+
 
     return (
         <InputNumber
+            controls={false}
             className="w-full"
             size="large"
             placeholder='وارد کنید'

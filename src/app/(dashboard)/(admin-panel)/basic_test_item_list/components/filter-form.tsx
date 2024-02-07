@@ -18,12 +18,12 @@ export default function FilterForm({ onFinish }: TProps) {
     return (
         <Form onFinish={(values) => onFinish(values)} form={form} layout="vertical">
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="name" label="نام فاکتور آزمون">
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="isActive" label="فعال/غیر فعال">
                         <Select
                             options={[

@@ -21,7 +21,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="name"
                         label="نام دسته بندی"
@@ -30,7 +30,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                         <Input className='w-full' size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="productionMethodId"
                         label="روش تولید"
@@ -45,7 +45,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="isActive"
                         label="فعال / غیر فعال"
@@ -62,7 +62,7 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="hasDensity"
                         label="دانسیته"
@@ -82,9 +82,22 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
             </Row>
             {hasDensity && (
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
-                            rules={[rules]}
+                            required={false}
+                            rules={[
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                {
+                                    validator(_, value) {
+                                        const isInteger = Number.isInteger(parseFloat(value));
+                                        if (isNaN(value) || !isInteger || value < 0) {
+                                            const errorMessage = isInteger ? "لطفاً عدد مثبت وارد کنید" : "لطفاً عدد وارد کنید";
+                                            return Promise.reject(new Error(errorMessage));
+                                        }
+                                        return Promise.resolve();
+                                    },
+                                },
+                            ]}
                             name="densityLowerLimit"
                             label="حداقل بازه"
                         >
@@ -96,9 +109,30 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                             />
                         </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
-                            rules={[rules]}
+                            required={false}
+                            rules={[
+                                { required: true, message: "لطفا مقدار را وارد کنید" },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+                                            return Promise.reject(
+                                                new Error("لطفاً عدد مثبت وارد کنید")
+                                            );
+                                        }
+                                        if (parseInt(value) > getFieldValue("densityLowerLimit")) {
+                                            return Promise.resolve();
+                                        } else {
+                                            return Promise.reject(
+                                                new Error(
+                                                    "حداکثر بازه نمی‌تواند از حداقل بازه کمتر باشد"
+                                                )
+                                            );
+                                        }
+                                    },
+                                }),
+                            ]}
                             name="densityUpperLimit"
                             label="حداکثر بازه"
                         >
@@ -113,11 +147,30 @@ export default function ProductCategoryForm({ rules, density }: { rules: Rule, d
                 </Row>
             )}
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
+                        required={false}
                         name="smallCode"
                         label="کد"
-                        rules={[rules]}
+                        rules={[
+                            { required: true, message: "لطفا مقدار را وارد کنید" },
+                            {
+                                validator(_, value) {
+                                    const numericValue = parseFloat(value);
+                                    if (isNaN(numericValue) || !Number.isInteger(numericValue)) {
+                                        return Promise.reject(
+                                            new Error("لطفاً عدد مثبت وارد کنید")
+                                        );
+                                    }
+                                    if (numericValue > 100) {
+                                        return Promise.reject(
+                                            new Error("حداکثر تعداد مجاز دو کاراکتر است")
+                                        )
+                                    }
+                                    return Promise.resolve();
+                                },
+                            },
+                        ]}
                     >
                         <InputNumber
                             controls={false}

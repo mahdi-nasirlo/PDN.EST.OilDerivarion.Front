@@ -21,12 +21,12 @@ export default function FilterForm({ onFinish }: TProps) {
     return (
         <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="name" label="نام محصول">
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="productCategoryUid" label="نام دسته بندی">
                         <Select
                             showSearch
@@ -39,7 +39,7 @@ export default function FilterForm({ onFinish }: TProps) {
                 </Col>
             </Row>
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="isActive" label="فعال/غیر فعال">
                         <Select
                             options={[

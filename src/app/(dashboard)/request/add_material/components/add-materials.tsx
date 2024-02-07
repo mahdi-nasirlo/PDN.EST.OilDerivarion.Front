@@ -1,11 +1,11 @@
 import React from 'react';
-import {useValidation} from "@/hooks/use-validation";
-import {Form} from "antd/lib";
-import {Button, Col, Row, Typography} from "antd";
-import {MaterialSelectField} from "@/components/fields/material-select-field";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {materialApi} from "../../../../../constance/material";
-import {useRequestPackageMaterialAdd} from "@/hooks/material/use-request-package-material-add";
+import { useValidation } from "@/hooks/use-validation";
+import { Form } from "antd/lib";
+import { Button, Col, Row, Typography } from "antd";
+import { MaterialSelectField } from "@/components/fields/material-select-field";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { materialApi } from "../../../../../constance/material";
+import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
 
 const apiData = materialApi.RequestPackageMaterialAdd
 
@@ -26,18 +26,18 @@ const AddMaterials = () => {
     return (
         <div>
             <div className="flex justify-start items-center mb-5">
-                <PlusIcon className="w-6 ml-2 text-gray-800"/>
+                <PlusIcon className="w-6 ml-2 text-gray-800" />
                 <Typography className="text-[16px] font-semibold">افزودن مواد اولیه</Typography>
             </div>
             <Form form={form} layout="vertical" onFinish={handleSubmit}>
                 <Row gutter={[16, 10]}>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
                             name={"material_Uid"}
                             label="نام مواد اولیه"
                             rules={[rules]}
                         >
-                            <MaterialSelectField/>
+                            <MaterialSelectField />
                         </Form.Item>
                     </Col>
                 </Row>

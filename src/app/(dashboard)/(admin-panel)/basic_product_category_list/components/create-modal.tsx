@@ -1,9 +1,9 @@
 import React from 'react'
 import ProductCategoryForm from './product-category-form'
-import {Button, Col, Form, Modal, Row} from 'antd';
-import {productCategoryApi} from 'constance/product-category';
-import {useValidation} from '@/hooks/use-validation';
-import {useProductCategoryCreate} from "@/hooks/basic/product-category/use-product-category-create";
+import { Button, Col, Form, Modal, Row } from 'antd';
+import { productCategoryApi } from 'constance/product-category';
+import { useValidation } from '@/hooks/use-validation';
+import { useProductCategoryCreate } from "@/hooks/basic/product-category/use-product-category-create";
 
 interface TProps {
     modalVisible: boolean
@@ -68,8 +68,10 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                 disabled={create.isPending}
                 onFinish={async (values) => {
                     const res = await create.mutateAsync(values)
-                    if (res.success)
+                    if (res.success) {
                         setModalVisible(false)
+                        form.resetFields()
+                    }
                 }}
                 form={form}
                 layout="vertical"
@@ -77,6 +79,6 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                 <ProductCategoryForm rules={rules} />
 
             </Form>
-        </Modal>
+        </Modal >
     )
 }

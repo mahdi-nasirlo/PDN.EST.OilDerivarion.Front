@@ -1,27 +1,27 @@
 "use client"
 
 import React from 'react';
-import {Button, Divider, Spin, Typography} from "antd";
+import { Button, Divider, Spin, Typography } from "antd";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
-import {ZodErrorAlert} from "@/components/zod-error-alert";
-import {z} from "zod";
-import {formMakerApi} from "../../constance/form-maker";
+import { ZodErrorAlert } from "@/components/zod-error-alert";
+import { z } from "zod";
+import { formMakerApi } from "../../constance/form-maker";
 import useControlFormBuilder from "@/components/form-builder/hooks/use-controle-form-builder";
 import FormBuilder from "@/components/form-builder";
 import FormDataTable from "@/components/resource/form-data-table";
 import FormBuilderHistory from "@/components/form-builder/form-builder-history";
-import {Card} from "@/components/card";
+import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
-import {DocumentDuplicateIcon} from "@heroicons/react/24/outline";
-import {router} from "next/client";
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
+import { router } from "next/client";
 
-const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "many" | "single", }) => {
+const Index = ({ categoryKey, type = "single" }: { categoryKey?: string, type?: "many" | "single", }) => {
 
-    const {get} = useFormRequest(categoryKey)
+    const { get } = useFormRequest(categoryKey)
 
     try {
 
-        if (get.isLoading && !get.data) return <Card><Spin spinning={get.isLoading}/></Card>
+        if (get.isLoading && !get.data) return <Card><Spin spinning={get.isLoading} /></Card>
 
         if (
             get.data === undefined ||
@@ -34,7 +34,7 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
         const validate = get.formSchema.safeParse(schemaValue)
 
         if (!validate.success) {
-            return <ZodErrorAlert success={false} error={validate.error}/>
+            return <ZodErrorAlert success={false} error={validate.error} />
         }
 
         const records = get.data.form_Data?.form_data ? JSON.parse(get.data.form_Data?.form_data) : {}
@@ -43,15 +43,15 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
 
 
         if (!validateRecords.success) {
-            return <ZodErrorAlert success={false} error={validateRecords.error}/>
+            return <ZodErrorAlert success={false} error={validateRecords.error} />
         }
 
         return (
             <>
                 <Breadcrumb
-                    pages={[{label: "خانه"}]}
+                    pages={[{ label: "خانه", path: "/" }]}
                     currentPage={validate.data[0]?.Title as string}
-                    titleIcon={<DocumentDuplicateIcon className="w-6"/>}
+                    titleIcon={<DocumentDuplicateIcon className="w-6" />}
                     actions={[
                         <Button
                             key={1}
@@ -62,7 +62,7 @@ const Index = ({categoryKey, type = "single"}: { categoryKey?: string, type?: "m
                         </Button>
                     ]}
                 />
-                <FormBuilderHistory formKey={categoryKey as string}/>
+                <FormBuilderHistory formKey={categoryKey as string} />
                 <Card>
                     <Spin spinning={get.isLoading ?? false}>
                         <RenderForms
@@ -96,7 +96,7 @@ interface TProps {
 
 
 // {schema, records, type = "single", loading = false, title = false}: ComponentProps
-const RenderForms = ({schema, records, categoryKey, loading}: TProps) => {
+const RenderForms = ({ schema, records, categoryKey, loading }: TProps) => {
 
     const formProvider = useControlFormBuilder(records, categoryKey)
 
@@ -106,7 +106,7 @@ const RenderForms = ({schema, records, categoryKey, loading}: TProps) => {
 
         const formsLen = schema?.[0]?.Forms.length
 
-        const divider = formsLen && formsLen > 1 && index !== formsLen - 1 && <Divider style={{margin: "30px 0"}}/>
+        const divider = formsLen && formsLen > 1 && index !== formsLen - 1 && <Divider style={{ margin: "30px 0" }} />
 
         if (records && form?.Form_Key && form.Form_Key in records) {
             initialValues = records[form.Form_Key]

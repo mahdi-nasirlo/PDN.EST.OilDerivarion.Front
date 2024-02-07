@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { InputNumber as AntInputNumber, InputNumberProps } from "antd";
 
 
@@ -6,10 +6,9 @@ interface PropsType {
     data: any
 }
 
+const TemperatureInput = (props: InputNumberProps & PropsType) => {
 
-const InputNumber = (props: InputNumberProps & PropsType) => {
-
-    const { data } = props
+    const { data } = props;
 
     return (
         <AntInputNumber
@@ -21,7 +20,8 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
             placeholder={data?.Placeholder || "وارد کنید"}
             {...props}
         />
-    );
-};
+    )
+}
 
-export default InputNumber;
+
+export default TemperatureInput;

@@ -9,7 +9,7 @@ export default function TestItemForm({ rules }: any) {
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="name"
                         label="نام فاکتور آزمون"
@@ -18,7 +18,7 @@ export default function TestItemForm({ rules }: any) {
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="measureUid"
                         label="واحد اندازه گیری"
@@ -35,7 +35,7 @@ export default function TestItemForm({ rules }: any) {
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         rules={[rules]}
                         name="isActive"
@@ -52,7 +52,7 @@ export default function TestItemForm({ rules }: any) {
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="testDuration"
                         label="مدت زمان انجام آزمایش (ساعت)"

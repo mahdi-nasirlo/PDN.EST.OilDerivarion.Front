@@ -41,68 +41,68 @@ export default function DataTable({
   const columns: ColumnsType<
     z.infer<typeof TestItemApi.BasicTestItemGetPage.item>
   > = [
-    {
-      title: "ردیف",
-      dataIndex: "Row",
-      key: "1",
-      width: "5%",
-    },
-    {
-      title: "نام فاکتور آزمون",
-      dataIndex: "name",
-      key: "2",
-    },
-    {
-      title: "واحد اندازه گیری",
-      dataIndex: "measureName",
-      key: "3",
-    },
-    {
-      title: "فعال/غیر فعال ",
-      dataIndex: "isActive",
-      key: "4",
-      render: (e, record) => <StatusColumn record={record} />,
-    },
-    {
-      title: "مدت زمان انجام آزمایش",
-      dataIndex: "testDuration",
-      key: "5",
-      render: (_, record) => {
-        return (
-          <Typography.Text>
-            {record.testDuration !== undefined
-              ? `${record.testDuration} ساعت`
-              : "تعریف نشده"}
-          </Typography.Text>
-        );
+      {
+        title: "ردیف",
+        dataIndex: "Row",
+        key: "1",
+        width: "5%",
       },
-    },
-    {
-      title: "عملیات",
-      key: "عملیات",
-      align: "center",
-      fixed: "right",
-      width: "10%",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => setGetUid(record.uid)}
-          >
-            ویرایش
-          </Button>
-          <Button
-            type="link"
-            className={"text-red-500 font-bold"}
-            onClick={() => setUidDelete(record.uid)}
-          >
-            حذف
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+      {
+        title: "نام فاکتور آزمون",
+        dataIndex: "name",
+        key: "2",
+      },
+      {
+        title: "واحد اندازه گیری",
+        dataIndex: "measureName",
+        key: "3",
+      },
+      {
+        title: "فعال/غیر فعال ",
+        dataIndex: "isActive",
+        key: "4",
+        render: (e, record) => <StatusColumn record={record} />,
+      },
+      {
+        title: "مدت زمان انجام آزمایش",
+        dataIndex: "testDuration",
+        key: "5",
+        render: (_, record) => {
+          return (
+            <Typography.Text>
+              {record.testDuration !== (undefined || null)
+                ? `${record.testDuration} ساعت`
+                : "تعریف نشده"}
+            </Typography.Text>
+          );
+        },
+      },
+      {
+        title: "عملیات",
+        key: "عملیات",
+        align: "center",
+        fixed: "right",
+        width: "10%",
+        render: (_, record) => (
+          <Space size="small">
+            <Button
+              type="link"
+              className="text-secondary-500 font-bold"
+              onClick={() => setGetUid(record.uid)}
+            >
+              ویرایش
+            </Button>
+            <Button
+              type="link"
+              className={"text-red-500 font-bold"}
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
+          </Space>
+        ),
+      },
+    ];
 
   return (
     <>

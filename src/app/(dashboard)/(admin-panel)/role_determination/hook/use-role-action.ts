@@ -35,6 +35,7 @@ const useRoleAction = (
 
     if (res.success) {
       setOpen(undefined);
+      form.resetFields();
     }
   };
 

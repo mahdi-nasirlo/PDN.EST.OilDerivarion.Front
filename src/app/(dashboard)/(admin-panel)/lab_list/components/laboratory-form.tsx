@@ -13,13 +13,13 @@ function LaboratoryForm({ rules }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="name" label="نام آزمایشگاه">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
-          <PhoneInputs name="tel" label="شماره ثابت">
+        <Col xs={24} sm={12}>
+          <PhoneInputs name="tel" label="شماره تلفن ثابت">
             <Input
               type="number"
               max={11}
@@ -30,12 +30,12 @@ function LaboratoryForm({ rules }: any) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="license_No" label="مشخصه یکتای جواز">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             name="licenseExpireDatePersian"
             label="تاریخ انقضاء"
@@ -46,7 +46,7 @@ function LaboratoryForm({ rules }: any) {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون" rules={[rules]}>
             {/* <MultipleSelect
               treeData={testItem.treeData}
@@ -55,14 +55,14 @@ function LaboratoryForm({ rules }: any) {
             <TreeSelect treeCheckable treeData={testItem.treeData} />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="fax" label="فکس">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="stateUId" label="استان">
             <Select
               showSearch
@@ -76,7 +76,7 @@ function LaboratoryForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
             name="isActive"

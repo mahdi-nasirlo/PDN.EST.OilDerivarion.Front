@@ -1,21 +1,22 @@
 "use client"
 
-import React, {useEffect} from 'react';
-import {Button, Col, Divider, Typography} from "antd";
-import {z} from "zod";
-import {formMakerApi} from "../../constance/form-maker";
-import {CheckboxOptionType, Form, Row, SelectProps} from "antd/lib";
+import React, { useEffect } from 'react';
+import { Button, Col, Divider, Typography } from "antd";
+import { z } from "zod";
+import { formMakerApi } from "../../constance/form-maker";
+import { CheckboxOptionType, Form, Row, SelectProps } from "antd/lib";
 import TextInput from "@/components/form-builder/inputs/text-input";
-import {useValidation} from "@/hooks/use-validation";
-import {errorMessage} from "../../constance/error-message";
-import {Rule} from "rc-field-form/es/interface";
+import { useValidation } from "@/hooks/use-validation";
+import { errorMessage } from "../../constance/error-message";
+import { Rule } from "rc-field-form/es/interface";
 import InputNumber from "@/components/form-builder/inputs/Input-number";
 import PercentInput from "@/components/form-builder/inputs/percent-Input";
 import Select from "@/components/form-builder/inputs/select";
 import RadioBtn from "@/components/form-builder/inputs/radio-btn";
-import {updatedObject} from "../../../utils/method";
+import { updatedObject } from "../../../utils/method";
 import NaturalNumber from "@/components/form-builder/inputs/natural-number";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
+import TemperatureInput from './inputs/temperature-input';
 
 
 const Index = (props: {
@@ -34,14 +35,14 @@ const Index = (props: {
                 {data.Title}
             </Typography.Title>
         </>}
-        <Divider/>
+        <Divider />
         {/*<Spin spinning={props.isLoading}>*/}
-            <RenderInputs
-                initialValues={props.initialValues}
-                item={data.FormFields}
-                onSet={props.onSet}
-                formID={data.Form_Key as string}
-            />
+        <RenderInputs
+            initialValues={props.initialValues}
+            item={data.FormFields}
+            onSet={props.onSet}
+            formID={data.Form_Key as string}
+        />
         {/*</Spin>*/}
     </>
 }
@@ -78,11 +79,11 @@ const RenderInputs = (props: {
                 {props?.item
                     ?.sort((a, b) => a.Counting_Position - b.Counting_Position)
                     .map((value, index) => (
-                        <Col xs={12} md={8} lg={8} xl={6} key={index}>
+                        <Col xs={24} sm={12} md={8} lg={8} xl={6} key={index}>
                             <motion.div
                                 key={index}
                                 className="relative"
-                                transition={{delay: index * 0.1, duration: 0.1, ease: "easeIn"}}
+                                transition={{ delay: index * 0.1, duration: 0.1, ease: "easeIn" }}
                                 initial={{
                                     opacity: 0,
                                     left: -12,
@@ -92,12 +93,12 @@ const RenderInputs = (props: {
                                     left: 0
                                 }}
                             >
-                                <RenderInput key={value.Counting_Position} item={value} rules={rules}/>
+                                <RenderInput key={value.Counting_Position} item={value} rules={rules} />
                             </motion.div>
                         </Col>
                     ))}
             </Row>
-            <Divider/>
+            <Divider />
             {props.item.length > 0 && <div className="flex justify-end mt-5">
                 <Button
                     size="large"
@@ -111,7 +112,7 @@ const RenderInputs = (props: {
     </>
 }
 
-const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.formFields>, rules: Rule }) => {
+const RenderInput = ({ item, rules }: { item: z.infer<typeof formMakerApi.Get.formFields>, rules: Rule }) => {
 
     const selectOptions: SelectProps["options"] = item?.FormFieldDetails?.map((value, index) => ({
         value: value.Text,
@@ -128,22 +129,25 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
 
     switch (item.FieldType) {
         case "textInput":
-            currentInput = <TextInput/>;
+            currentInput = <TextInput placeholder={item.Placeholder || 'وارد کنید'} />;
             break
         case "inputNumber":
-            currentInput = <InputNumber data={item}/>
+            currentInput = <InputNumber data={item} placeholder={item.Placeholder || 'وارد کنید'} />
             break
         case "select":
-            currentInput = <Select options={selectOptions}/>
+            currentInput = <Select options={selectOptions} placeholder={item.Placeholder || 'وارد کنید'} />
             break
         case "radioBtn":
-            currentInput = <RadioBtn options={radioGroupOptions}/>
+            currentInput = <RadioBtn options={radioGroupOptions} />
             break
         case "percentInput":
-            currentInput = <PercentInput/>
+            currentInput = <PercentInput placeholder={item.Placeholder || 'وارد کنید'} />
             break
         case "naturalNumber":
-            currentInput = <NaturalNumber/>
+            currentInput = <NaturalNumber placeholder={item.Placeholder || 'وارد کنید'} />
+            break
+        case "TemperatureInput":
+            currentInput = <TemperatureInput data={item} placeholder={item.Placeholder || 'وارد کنید'} />
             break
         // default:
         //     currentInput = <Typography>فیلد مورد نظر پشتیبانی نمی شود</Typography>
@@ -151,19 +155,19 @@ const RenderInput = ({item, rules}: { item: z.infer<typeof formMakerApi.Get.form
     }
 
     return <Form.Item
-            name={item.Name}
-            label={item.Title_Style}
-            rules={[rules]}
-        >
-            {currentInput}
-        </Form.Item>
+        name={item.Name}
+        label={item.Title_Style}
+        rules={[rules]}
+    >
+        {currentInput}
+    </Form.Item>
 }
 
 const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[]) => {
 
     const fieldSchemas = fields.map(field => {
 
-        const {FieldType, Max_Value, Min_Value} = field
+        const { FieldType, Max_Value, Min_Value } = field
 
         let fieldSchema;
 
@@ -171,7 +175,7 @@ const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[])
             fieldSchema = z.number({
                 required_error: errorMessage.number_invalid,
                 invalid_type_error: errorMessage.number_invalid
-            }).min(Min_Value).max(Max_Value)
+            }).min(0.001).max(1000000)
 
         if (FieldType === "radioBtn")
             fieldSchema = z.string({
@@ -186,22 +190,28 @@ const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[])
             }).finite().min(0.01).max(100)
 
         if (FieldType === "textInput")
-            fieldSchema = z.string({required_error: errorMessage.required})
+            fieldSchema = z.string({ required_error: errorMessage.required }).max(25)
 
         if (FieldType === "select")
-            fieldSchema = z.string({required_error: errorMessage.required_choice})
+            fieldSchema = z.string({ required_error: errorMessage.required_choice })
 
         if (FieldType === "naturalNumber")
             fieldSchema = z.number({
                 required_error: errorMessage.number_invalid,
                 invalid_type_error: errorMessage.number_invalid
-            })
+            }).positive().int({ message: 'لطفا عدد صحیح وارد کنید' }).max(1000000)
+
+        if (FieldType === "TemperatureInput")
+            fieldSchema = z.number({
+                required_error: errorMessage.number_invalid,
+                invalid_type_error: errorMessage.number_invalid
+            }).min(-400).max(400)
 
         if (!field.Is_Required)
             fieldSchema = fieldSchema?.optional()
 
 
-        return {[field.Name]: fieldSchema};
+        return { [field.Name]: fieldSchema };
     });
 
     return z.object(Object.assign({}, ...fieldSchemas))

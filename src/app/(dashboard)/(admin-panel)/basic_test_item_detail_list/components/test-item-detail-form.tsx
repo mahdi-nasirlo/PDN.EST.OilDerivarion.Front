@@ -9,7 +9,7 @@ export default function TestItemDetailForm({ rules }: any) {
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="title"
                         label="عنوان استاندارد"
@@ -18,7 +18,7 @@ export default function TestItemDetailForm({ rules }: any) {
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="referenceCode"
                         label="شناسه استاندارد"
@@ -29,7 +29,7 @@ export default function TestItemDetailForm({ rules }: any) {
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="isActive"
                         label="فعال / غیر فعال"
@@ -46,7 +46,7 @@ export default function TestItemDetailForm({ rules }: any) {
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         name="testItemUid"
                         label="فاکتور آزمون"

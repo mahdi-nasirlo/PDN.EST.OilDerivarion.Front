@@ -1,12 +1,12 @@
 import React from 'react';
-import {InputNumber, InputNumberProps} from 'antd';
+import { InputNumber, InputNumberProps } from 'antd';
 
 interface PropsType {
     data: any;
 }
 
-const PercentInput: React.FC<InputNumberProps> = ({value, onChange}) => {
-// const PercentInput: React.FC<InputNumberProps & PropsType> = ({data, ...props}) => {
+const PercentInput: React.FC<InputNumberProps> = ({ value, onChange }) => {
+    // const PercentInput: React.FC<InputNumberProps & PropsType> = ({data, ...props}) => {
 
     // const rules: Rule[] = [
     //
@@ -28,12 +28,12 @@ const PercentInput: React.FC<InputNumberProps> = ({value, onChange}) => {
             value={value}
             onChange={onChange}
             max={100}
-            // controls={false}
+            controls={false}
             className="w-full"
             size="large"
             formatter={(value) => `${value}%`}
             placeholder='وارد کنید'
-            // defaultValue={data?.Default_Value as any}
+        // defaultValue={data?.Default_Value as any}
         />
     );
 };

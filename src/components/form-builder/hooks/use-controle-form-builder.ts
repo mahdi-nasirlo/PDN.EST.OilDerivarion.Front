@@ -66,18 +66,20 @@ const useControlFormBuilder = (formData: z.infer<typeof type.formData>, category
     }
 
     const deleteFromMany = async (index: number, formKey: string): Promise<z.infer<typeof generalResponseZod> | undefined> => {
-        
-        if (Array.isArray(oldData)) {
 
-            if (index >= 0 && index < oldData.length) {
+        const data = oldData[formKey]
 
-                oldData.splice(index, 1);
+        if (Array.isArray(data)) {
 
-                if (Array.isArray(oldData) && oldData.length === 0) {
+            if (index >= 0 && index < data.length) {
+
+                data.splice(index, 1);
+
+                if (Array.isArray(data) && data.length === 0) {
                     return await set.mutateAsync({form_Key: formKey, form_Data: null})
                 }
 
-                return await set.mutateAsync({form_Key: formKey, form_Data: {[formKey]: oldData}});
+                return await set.mutateAsync({form_Key: formKey, form_Data: JSON.stringify({[formKey]: data})});
 
             } else {
                 console.error("Index out of bounds");

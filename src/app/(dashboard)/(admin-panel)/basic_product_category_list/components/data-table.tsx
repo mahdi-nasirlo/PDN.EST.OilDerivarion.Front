@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Card } from '@/components/card'
+import React, {useState} from 'react'
+import {Card} from '@/components/card'
 import CustomTable from "@/components/custom-table";
-import { PlusIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
+import {PlusIcon, ViewColumnsIcon} from '@heroicons/react/24/outline';
 import StatusColumn from '@/components/custom-table/StatusColumn';
-import { Button, Space, Tag, Typography } from 'antd';
-import { ColumnsType } from 'antd/es/table';
-import { productCategoryApi } from 'constance/product-category';
-import { z } from 'zod';
+import {Button, Space, Tag, Typography} from 'antd';
+import {ColumnsType} from 'antd/es/table';
+import {productCategoryApi} from 'constance/product-category';
+import {z} from 'zod';
 import EditModal from './edit-modal';
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import useProductCategoryDelete from '@/hooks/basic/product-category/use-product-category-delete';
@@ -76,7 +76,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 },
             },
             {
-                title: "حداقل بازه دانسیته",
+                title: "حداکثر بازه دانسیته",
                 dataIndex: "densityUpperLimit",
                 key: "5",
                 render: (_, record: any) => {
@@ -87,7 +87,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 },
             },
             {
-                title: "حداکثر بازه دانسیته",
+                title: "حداقل بازه دانسیته",
                 dataIndex: "densityLowerLimit",
                 key: "6",
                 render: (_, record: any) => {

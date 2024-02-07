@@ -1,11 +1,12 @@
 import { Button, Col, Form, Modal, Row } from "antd";
 import React from "react";
 import { useValidation } from "@/hooks/use-validation";
-import { materialApi } from "constance/material";
-import useBasicProductMaterialCreate from "@/hooks/material/use-basic-product-material-create";
+import { boxGPSApi } from "constance/box-gps";
+import useBoxGPSCreate from "@/hooks/box-gps/use-box-gps-create";
+// import useBasicProductMaterialCreate from "@/hooks/material/use-basic-product-material-create";
 import GpsForm from "./gps-form";
 
-const formSchema = materialApi.BasicProductMaterialCreate.type;
+const formSchema = boxGPSApi.BoxGPSCreate.type;
 
 interface TProps {
   modalVisible: boolean;
@@ -13,7 +14,7 @@ interface TProps {
 }
 
 export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
-  const create = useBasicProductMaterialCreate();
+  const create = useBoxGPSCreate();
 
   const [form, rules] = useValidation(formSchema);
 
@@ -77,7 +78,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <GpsForm rules={rules} />
+        <GpsForm rules={rules}  />
       </Form>
     </Modal>
   );

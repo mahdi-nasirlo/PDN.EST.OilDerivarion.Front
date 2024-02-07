@@ -9,7 +9,8 @@ import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { boxGPSApi } from "constance/box-gps";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-import useBasicProductMaterialDelete from "@/hooks/material/use-basic-product-material-delete";
+// import useBasicProductMaterialDelete from "@/hooks/material/use-basic-product-material-delete";
+import useBoxGPSDelete from "@/hooks/box-gps/use-box-gps-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "./edit-modal";
 
@@ -35,7 +36,7 @@ export default function DataTable({
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
 
-  const Delete = useBasicProductMaterialDelete();
+  const Delete = useBoxGPSDelete();
 
   const handelDelete = async () => {
     const res = await Delete.mutateAsync({ uid: uidDelete as string });
@@ -149,19 +150,19 @@ export default function DataTable({
           header={{
             icon: <ViewColumnsIcon />,
             text: "لیست باگس های من",
-            // actions: [
-            //   <Button
-            //     key={"1"}
-            //     className="max-md:w-full flex justify- items-center gap-2"
-            //     size="large"
-            //     type="primary"
-            //     htmlType="submit"
-            //     onClick={() => setModalVisible(true)}
-            //   >
-            //     <PlusIcon width={24} height={24} />
-            //     <span className="flex">افزودن ماده اولیه</span>
-            //   </Button>,
-            // ],
+            actions: [
+              <Button
+                key={"1"}
+                className="max-md:w-full flex justify- items-center gap-2"
+                size="large"
+                type="primary"
+                htmlType="submit"
+                onClick={() => setModalVisible(true)}
+              >
+                <PlusIcon width={24} height={24} />
+                <span className="flex">افزودن  باکس</span>
+              </Button>,
+            ],
           }}
           setInitialData={setPaginate}
           isLoading={isLoading}

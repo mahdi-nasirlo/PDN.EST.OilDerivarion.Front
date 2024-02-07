@@ -38,7 +38,7 @@ const useUiVisitSchedule = ({taskId}: { taskId: string }) => {
         });
 
         if (res.success) {
-            router.push(`/workflow/list/Visit_Schedule}`);
+            router.push(`/workflow/list/Visit_Schedule`);
         }
     };
 

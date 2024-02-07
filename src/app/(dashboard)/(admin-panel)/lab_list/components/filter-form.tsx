@@ -22,12 +22,12 @@ export default function FilterForm({
   return (
     <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
       <Row gutter={[16, 0]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="name" label="نام آزمایشگاه">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="isActive" label="فعال / غیر فعال">
             <Select
               size="large"
@@ -41,7 +41,7 @@ export default function FilterForm({
         </Col>
       </Row>
       <Row gutter={[16, 0]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="stateUId" label="استان">
             <Select
               showSearch

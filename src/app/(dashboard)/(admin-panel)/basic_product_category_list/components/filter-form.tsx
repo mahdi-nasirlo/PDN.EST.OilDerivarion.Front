@@ -19,12 +19,12 @@ export default function FilterForm({ onFinish }: TProps) {
     return (
         <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="name" label="نام دسته بندی">
                         <Input size="large" placeholder="انتخاب کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="isActive" label="فعال/غیر فعال">
                         <Select
                             size="large"
@@ -38,7 +38,7 @@ export default function FilterForm({ onFinish }: TProps) {
                 </Col>
             </Row>
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item rules={[rules]} name="hasDensity" label="دانسیته">
                         <Select
                             size="large"
@@ -59,7 +59,7 @@ export default function FilterForm({ onFinish }: TProps) {
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} sm={12}>
                     <Form.Item
                         rules={[rules]}
                         name="densityTypeId"

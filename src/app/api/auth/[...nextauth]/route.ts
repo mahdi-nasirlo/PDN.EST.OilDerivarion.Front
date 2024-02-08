@@ -97,6 +97,7 @@ const authOption: NextAuthOptions = {
     },
     pages: {
         signIn: "/login",
+        error: "/login",
         signOut: "/signout"
     }
 }

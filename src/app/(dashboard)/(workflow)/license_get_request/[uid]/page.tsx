@@ -1,11 +1,11 @@
 "use client";
 
-import {Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
-import {useForm} from "antd/es/form/Form";
+import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
+import { useForm } from "antd/es/form/Form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface PropType {
   params: { uid: string };
@@ -47,12 +47,12 @@ export default function Home(props: PropType) {
         <Spin spinning={setRequest.isPending || isFetching}>
           <Form layout="vertical" form={form} disabled={setRequest.isPending}>
             <Row gutter={[16, 0]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="Representative__Name" label="نام">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="Representative__Family" label="نام خانوادگی">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
@@ -60,7 +60,7 @@ export default function Home(props: PropType) {
             </Row>
 
             <Row gutter={[16, 0]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item
                   name="Representative__National_Code"
                   label="کدملی"
@@ -79,38 +79,38 @@ export default function Home(props: PropType) {
                   />
                 </Form.Item>
               </Col>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="Company__Name" label="نام شرکت">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 0]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="Company__National_ID" label="شناسه ملی شرکت">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 0]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="Company__Business_ID" label="شناسه کسب و کار">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="License_Type_Name" label="نوع مجوز">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={[16, 16]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="License_Number" label="شماره مجوز">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item
                   name="License_Expire_Date_Fa"
                   label="تاریخ اعتبار مجوز"
@@ -120,7 +120,7 @@ export default function Home(props: PropType) {
               </Col>
             </Row>
             <Row gutter={[16, 0]}>
-              <Col xs={24} md={12}>
+              <Col xs={24} sm={12}>
                 <Form.Item name="State_Name" label="استان">
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
@@ -133,7 +133,7 @@ export default function Home(props: PropType) {
             <Divider />
             <Form onFinish={onFinish} form={workflowForm} layout="vertical">
               <Row gutter={[16, 16]}>
-                <Col xs={24} md={24}>
+                <Col xs={24} sm={24}>
                   <Form.Item
                     required={false}
                     rules={[
@@ -155,12 +155,12 @@ export default function Home(props: PropType) {
 
         {data && <Divider />}
         <WorkflowBtn
-            loading={setRequest.isPending}
-            onClick={(key) => {
-              setChoiceKey(key);
-              workflowForm.submit();
-            }}
-            choices={data?.choices}
+          loading={setRequest.isPending}
+          onClick={(key) => {
+            setChoiceKey(key);
+            workflowForm.submit();
+          }}
+          choices={data?.choices}
         />
       </div>
     </>

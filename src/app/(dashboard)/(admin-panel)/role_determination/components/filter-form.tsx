@@ -20,17 +20,17 @@ export default function FilterForm({ onFinish }: TProps) {
     return (
         <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
             <Row gutter={[16, 0]}>
-                <Col xs={24} md={8}>
+                <Col xs={24} sm={8}>
                     <Form.Item rules={[rules]} name="first_Name" label="نام">
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={8}>
+                <Col xs={24} sm={8}>
                     <Form.Item rules={[rules]} name="last_Name" label="نام خانوادگی">
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={8}>
+                <Col xs={24} sm={8}>
                     <Form.Item rules={[rules]} name="national_Code" label="شماره ملی">
                         <Input size="large" placeholder="وارد کنید" />
                     </Form.Item>

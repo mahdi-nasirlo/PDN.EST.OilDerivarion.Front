@@ -32,12 +32,12 @@ export default function SubmitForm() {
         onFinish={(data) => addLicense.mutateAsync(data)}
       >
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item name="representative__Name" label="نام">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item name="representative__Family" label="نام خانوادگی">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -45,7 +45,7 @@ export default function SubmitForm() {
         </Row>
 
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item name="representative__National_Code" label="کدملی">
               <Input
                 disabled
@@ -56,7 +56,7 @@ export default function SubmitForm() {
             </Form.Item>
           </Col>
 
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item name="company__Name" label="نام شرکت">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
@@ -64,14 +64,14 @@ export default function SubmitForm() {
         </Row>
 
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item name="company__National_ID" label="شناسه ملی شرکت">
               <Input disabled size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="company__Business_ID"
               hasFeedback={false}
@@ -81,7 +81,7 @@ export default function SubmitForm() {
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="license_Type_ID"
               required={false}
@@ -102,7 +102,7 @@ export default function SubmitForm() {
         </Row>
 
         <Row gutter={[16, 0]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="license_Number"
               label="شماره مجوز"
@@ -112,7 +112,7 @@ export default function SubmitForm() {
               <Input size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="license_Expire_Date_Fa"
               label="تاریخ اعتبار مجوز"
@@ -124,7 +124,7 @@ export default function SubmitForm() {
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               name="state_Uid"
               label="استان"

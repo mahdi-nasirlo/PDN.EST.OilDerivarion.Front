@@ -1,8 +1,8 @@
 import React from "react";
-import {Col, Form, Input, Row, Select} from "antd";
+import { Col, Form, Input, Row, Select } from "antd";
 import useSWR from "swr";
 // import {listFetcher} from "@/lib/server/listFetcher";
-import {sortByIndex} from "@/lib/sortByIndex";
+import { sortByIndex } from "@/lib/sortByIndex";
 
 function GpsForm() {
 
@@ -11,7 +11,7 @@ function GpsForm() {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="code"
@@ -20,7 +20,7 @@ function GpsForm() {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="isActive"
@@ -37,7 +37,7 @@ function GpsForm() {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
             name="capacity"
@@ -46,18 +46,18 @@ function GpsForm() {
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
-              rules={[{required: true, message: "لطفا مقدار را انتخاب کنید"}]}
-              name="stateId"
-              label="استان"
+            rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
+            name="stateId"
+            label="استان"
           >
             <Select
               size="large"
               placeholder="انتخاب کنید"
               fieldNames={{ label: "Name", value: "Id" }}
               options={sortByIndex([], 'Name')}
-              // loading={isLoading}
+            // loading={isLoading}
             />
           </Form.Item>
         </Col>

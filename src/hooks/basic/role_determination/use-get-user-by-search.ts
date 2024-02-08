@@ -1,11 +1,10 @@
-import { mutate } from 'swr';
 import fetchWithSession from "@/utils/fetch-with-session";
 import { useQuery } from "@tanstack/react-query";
-import basicApi from "constance/basic";
+import userRoleStateApi from "constance/user-role-state";
 import { z } from "zod";
 import { useState } from "react";
 
-const apiData = basicApi.GetUserBySearch;
+const apiData = userRoleStateApi.GetUserBySearch;
 
 const useGetUserBySearch = () => {
   const [arg, setArg] = useState<z.infer<typeof apiData.type>>();

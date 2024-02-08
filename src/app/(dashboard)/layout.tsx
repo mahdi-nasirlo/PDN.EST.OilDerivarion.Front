@@ -1,4 +1,5 @@
 import DashboardLayout from "layout"
+import ProtectedRouteProvider from "@/providers/protected-route-provider";
 
 export default function RootLayout({
   children,
@@ -7,7 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <DashboardLayout>
-      {children}
+        <ProtectedRouteProvider>
+            {children}
+        </ProtectedRouteProvider>
     </DashboardLayout>
-  )
+  );
 }

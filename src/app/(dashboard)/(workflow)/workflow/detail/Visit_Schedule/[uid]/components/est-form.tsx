@@ -30,7 +30,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           onFinish={handleSubmitEst}
         >
           <Row gutter={[16, 16]}>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -40,7 +40,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -50,7 +50,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -62,7 +62,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
-            {/* <Col xs={24} md={8}>
+            {/* <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -79,7 +79,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             </Col>
           </Row>
           <Row gutter={[16, 16]}>
-            <Col xs={24} md={24}>
+            <Col xs={24} sm={24}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}

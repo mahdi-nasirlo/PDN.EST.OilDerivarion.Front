@@ -51,6 +51,11 @@ const ssoApi = {
       data: z.object({
         lastName: z.string(),
         firstName: z.string(),
+        nationalCode: z.string(),
+        mobile: z.string(),
+        address: z.string(),
+        birthDate: z.string(),
+        postalCode: z.string(),
         userLevelId: z.number().optional(),
         userLevelName: z.string().optional(),
       }),

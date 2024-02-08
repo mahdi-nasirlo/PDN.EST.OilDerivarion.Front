@@ -1,15 +1,16 @@
 "use client";
 
-import {Button, Col, Divider, Row, Spin} from "antd";
+import { Button, Col, Divider, Row, Spin } from "antd";
 import React from "react";
 // import CardGrid from "./components/card-grid";
-import {useRouter} from "next/navigation";
-import {Card} from "@/components/card";
+import { useRouter } from "next/navigation";
+import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
-import {PlusSmallIcon, SquaresPlusIcon} from "@heroicons/react/24/outline";
-import {useGetRequestPackagePartList} from "@/hooks/material/use-get-request-package-part-list";
+import { PlusSmallIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
+import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
 import CardList from "@/app/(dashboard)/request/components/card-list";
 import FirstCard from "@/app/(dashboard)/request/components/first-card";
+import Link from "next/link";
 
 export default function Page() {
 
@@ -25,18 +26,19 @@ export default function Page() {
                     { label: "ثبت درخواست" },
                 ]}
                 actions={[
-                    <Button
-                        key="1"
-                        className="flex items-center"
-                        icon={<PlusSmallIcon className="w-5 h-5" />}
-                        type="primary"
-                        size="large"
-                        onClick={() => router.push("/request/add_material")}
-                    >
-                        مواد اولیه
-                    </Button>
+                    <Link key={'1'} href={'/request/add_material'}>
+                        <Button
+                            key="1"
+                            className="flex items-center"
+                            icon={<PlusSmallIcon className="w-5 h-5" />}
+                            type="primary"
+                            size="large"
+                        >
+                            مواد اولیه
+                        </Button>
+                    </Link>
                 ]}
-                currentPage="زیر درخواست ها"
+                currentPage="پکیج ها"
                 titleIcon={<SquaresPlusIcon className="w-8" />}
             />
             <Card>
@@ -50,7 +52,7 @@ export default function Page() {
                 </Spin>
                 <Divider />
                 <Row gutter={[12, 12]}>
-                    <Col className="flex" xs={24} md={12}>
+                    <Col className="flex" xs={24} sm={12}>
                         <Button
                             size="large"
                             className="w-full"
@@ -60,7 +62,7 @@ export default function Page() {
                             بازگشت
                         </Button>
                     </Col>
-                    <Col className="flex" xs={24} md={12}>
+                    <Col className="flex" xs={24} sm={12}>
                         <Button
                             size="large"
                             className="w-full"

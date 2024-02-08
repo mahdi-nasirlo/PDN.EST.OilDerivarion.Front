@@ -51,7 +51,7 @@ export default function FirstCard() {
                             className="w-full flex items-center justify-center"
                             icon={<PlusOutlined width={16} height={16}/>}
                         >
-                            افزودن زیر درخواست
+                            افزودن پکیج
                         </Button>
                     </Form>
                 </div>

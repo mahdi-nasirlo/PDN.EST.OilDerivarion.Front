@@ -1,17 +1,16 @@
 import { useValidation } from "@/hooks/use-validation";
-import basicApi from "../../../../../constance/basic";
-import useGetAllState from "@/hooks/basic/use-get-all-state";
-import { useUserUpdateState } from "@/hooks/basic/use-user-update-state";
+import userRoleStateApi from "../../../../../constance/user-role-state";
+import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
+import { useUserUpdateState } from "@/hooks/basic/role_determination/state/use-user-update-state";
 import { z } from "zod";
-import { useGetStateForUser } from "@/hooks/basic/use-get-state-for-user";
+import { useGetStateForUser } from "@/hooks/basic/role_determination/state/use-get-state-for-user";
 import { useEffect } from "react";
-import { useGetUserBySearch } from "@/hooks/basic/use-get-user-by-search";
 
 const useStateAction = (
   setOpen: (arg: string | undefined) => void,
   open: string | undefined
 ) => {
-  const [form, rules] = useValidation(basicApi.UserUpdateState.type);
+  const [form, rules] = useValidation(userRoleStateApi.UserUpdateState.type);
 
   const state = useGetAllState();
 
@@ -27,7 +26,7 @@ const useStateAction = (
   }, [getState.data]);
 
   const handleSubmit = async (
-    data: z.infer<typeof basicApi.UserUpdateState.type>
+    data: z.infer<typeof userRoleStateApi.UserUpdateState.type>
   ) => {
     const res = await updateState.mutateAsync({
       sates_Uid: data.sates_Uid,

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import basicApi from "../../constance/basic";
+import basicApi from "../../../../constance/user-role-state";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
 

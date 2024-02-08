@@ -28,6 +28,20 @@ const VisitScheduleListItem = z.object({
   final_description: z.string().nullable(),
 });
 
+const VisitOpinionListItem = z.object({
+  visit_Type: z.number(),
+  package_UID: z.string().uuid(),
+
+  naft_opinion_1: z.string(),
+  is_naft_peresent: z.boolean(),
+
+  samt_opinion_1: z.string(),
+  is_samt_peresent: z.boolean(),
+
+  est_opinion_1: z.string(),
+  is_est_peresent: z.boolean(),
+});
+
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
@@ -95,6 +109,44 @@ const RequestPackageApi = {
     }),
     response: generalResponseZod.extend({
       data: VisitScheduleListItem,
+    }),
+  },
+  VisitOpinionAdd: {
+    url: "/RequestPackage/VisitOpinionAdd",
+    type: z.object({
+      visit_Type: z.number(),
+      package_UID: z.string().uuid(),
+
+      naft_opinion_1: z.string(),
+      is_naft_peresent: z.boolean(),
+
+      samt_opinion_1: z.string(),
+      is_samt_peresent: z.boolean(),
+
+      est_opinion_1: z.string(),
+      is_est_peresent: z.boolean(),
+    }),
+  },
+  VisitOpinionList: {
+    url: "/RequestPackage/VisitOpinionList",
+    type: z.object({
+      package_UID: z.string().uuid().optional(),
+    }),
+    item: VisitOpinionListItem,
+    form1: z.object({
+      naft_opinion_1: z.string(),
+      is_naft_peresent: z.boolean(),
+    }),
+    form2: z.object({
+      samt_opinion_1: z.string(),
+      is_samt_peresent: z.boolean(),
+    }),
+    form3: z.object({
+      est_opinion_1: z.string(),
+      is_est_peresent: z.boolean(),
+    }),
+    response: generalResponseZod.extend({
+      data: VisitOpinionListItem,
     }),
   },
 };

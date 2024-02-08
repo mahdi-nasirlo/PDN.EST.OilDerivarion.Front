@@ -1,19 +1,23 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
   Part_Type_Value: z.string(),
   Part_Type: z.enum(["1", "2", "3", "4", "5"]),
   Status: z.boolean(),
-  Products: z.string().or(z.array(z.object({
-    Estehsal: z.number(),
-    HadarRaft: z.number(),
-    name: z.string(),
-    UID: z.string(),
-    Part_ID: z.number()
-  })))
+  Products: z.string().or(
+    z.array(
+      z.object({
+        Estehsal: z.number(),
+        HadarRaft: z.number(),
+        name: z.string(),
+        UID: z.string(),
+        Part_ID: z.number(),
+      })
+    )
+  ),
 });
 
 const MaterialGetAllItem = z.object({
@@ -22,6 +26,22 @@ const MaterialGetAllItem = z.object({
   isActive: z.boolean(),
   measureUid: z.string(),
   measureName: z.string(),
+});
+
+const BasicProductMaterialGetItem = z.object({
+  uid: z.string().uuid(),
+  name: z.string(),
+  isActive: z.boolean(),
+  measureUid: z.string().uuid(),
+  measureName: z.string(),
+  testItems: z.array(
+    z
+      .object({
+        name: z.string(),
+        uid: z.string(),
+      })
+      .optional()
+  ),
 });
 
 const BasicProductMaterialList = z.object({
@@ -36,24 +56,9 @@ const BasicProductMaterialGetPageItem = z.object({
   name: z.string(),
   isActive: z.boolean(),
   measureName: z.string(),
-  testItems: z.string(),
-});
-
-const BasicTestItemList = z.object({
-  name: z.string().optional(),
-  isActive: z.boolean().optional(),
-  measureUid: z.string().uuid().optional(),
-  measureName: z.string().optional(),
-  testDuration: z.string().optional(),
-  uid: z.string().uuid().optional(),
-  testMethod: z.string().optional(),
-  measure_Id: z.number().optional(),
-});
-
-const BasicMeasureList = z.object({
-  uid: z.string().uuid(),
-  name: z.string(),
-  isActive: z.boolean(),
+  testItems: z
+    .array(z.object({ uid: z.string(), name: z.string() }).optional())
+    .optional(),
 });
 
 const GetAllRequestPackageRegisteredMaterialItem = z.object({
@@ -74,14 +79,14 @@ const RequestPackageMaterialListItem = z.object({
 const RequestPackagePartMaterialListItem = z.object({
   UID: z.string(),
   material_name: z.string(),
-  Estefadeh: z.string()
-})
+  Estefadeh: z.string(),
+});
 
 const RequestPackagePartProductListItem = z.object({
   UID: z.string(),
   material_name: z.string(),
-  Estefadeh: z.string()
-})
+  Estefadeh: z.string(),
+});
 
 const GetRegisteredReportsForStepByKeyItem = z.object({
   UID: z.string(),
@@ -90,14 +95,14 @@ const GetRegisteredReportsForStepByKeyItem = z.object({
   Form_Type: z.number(),
   Is_Report: z.boolean(),
   Step_Key: z.string(),
-  ID: z.string()
-})
+  ID: z.string(),
+});
 
 const materialApi = {
   MaterialGetAll: {
     url: "/Material/MaterialGetAll",
     item: MaterialGetAllItem,
-    fieldNames: {label: "name", value: "uid"},
+    fieldNames: { label: "name", value: "uid" },
     response: generalResponseZod.extend({
       data: z.array(MaterialGetAllItem),
     }),
@@ -146,10 +151,12 @@ const materialApi = {
       name: z.string(),
     }),
     type: z.object({
-      request__Package_UID: z.string({
-        required_error: errorMessage.required_choice,
-      }).optional(),
-      material_Uid: z.string({required_error: errorMessage.required}),
+      request__Package_UID: z
+        .string({
+          required_error: errorMessage.required_choice,
+        })
+        .optional(),
+      material_Uid: z.string({ required_error: errorMessage.required }),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.object({})),
@@ -158,7 +165,7 @@ const materialApi = {
   GetAllRequestPackageRegisteredMaterial: {
     url: "/Material/GetAllRequestPackageRegisteredMaterial",
     sortBy: "name",
-    fieldNames: {value: "uid", label: "name"},
+    fieldNames: { value: "uid", label: "name" },
     type: z.object({
       package_UID: z.string().uuid().optional(),
     }),
@@ -182,68 +189,31 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialCreate",
     // Item:BasicProductMaterialList,
     type: z.object({
-      name: z.string({required_error: errorMessage.required}),
-      isActive: z.boolean({required_error: errorMessage.required_choice}),
-      measureUid: z.string({required_error: errorMessage.required}).uuid(),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),
     }),
   },
-  BasicTestItemList: {
-    url: "/Basic/BasicTestItemList",
-    type: z.object({
-      name: z.string(),
-      isActive: z.boolean(),
-    }),
-    Item: BasicTestItemList,
-    response: generalResponseZod.extend({
-      data: z.array(BasicTestItemList),
-    }),
-  },
-  BasicMeasureList: {
-    url: "/Basic/BasicMeasureList",
-    sortBy: "Name",
-    fieldNames: {value: "uid", label: "name"},
-    type: z.object({
-      name: z.null(),
-      isActive: z.boolean(),
-    }),
 
-    Item: BasicMeasureList,
-    response: generalResponseZod.extend({
-      data: z.array(BasicMeasureList),
-    }),
-  },
   BasicProductMaterialGet: {
     url: "/Basic/BasicProductMaterialGet",
     type: z.object({
       uid: z.string().uuid(),
     }),
+    Item: BasicProductMaterialGetItem,
     response: generalResponseZod.extend({
-      data: z.array(
-          z.object({
-            uid: z.string().uuid(),
-            name: z.string(),
-            isActive: z.boolean(),
-            measureUid: z.string().uuid(),
-            measureName: z.string(),
-            testItems: z.array(
-                z.object({
-                  name: z.string(),
-                  uid: z.string(),
-                })
-            ),
-          })
-      ),
+      data: z.array(BasicProductMaterialGetItem),
     }),
   },
   BasicProductMaterialUpdate: {
     url: "/Basic/BasicProductMaterialUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({required_error: errorMessage.required}),
-      isActive: z.boolean({required_error: errorMessage.required_choice}),
-      measureUid: z.string({required_error: errorMessage.required}).uuid(),
-      testItems: z.array(z.object({})),
+      name: z.string({ required_error: errorMessage.required }),
+      isActive: z.boolean({ required_error: errorMessage.required_choice }),
+      measureUid: z.string({ required_error: errorMessage.required }).uuid(),
+      testItems: z.array(z.string().optional()).nullable(),
     }),
   },
   RequestPackagePartDelete: {
@@ -287,12 +257,12 @@ const materialApi = {
     url: "/Material/RequestPackagePartMaterialList",
     type: z.object({
       part_UID: z.string(),
-      package_UID: z.string().optional()
+      package_UID: z.string().optional(),
     }),
     item: RequestPackagePartMaterialListItem,
     response: generalResponseZod.extend({
-      data: z.array(RequestPackagePartMaterialListItem)
-    })
+      data: z.array(RequestPackagePartMaterialListItem),
+    }),
   },
   RequestPackagePartMaterialAdd: {
     url: "/Material/RequestPackagePartMaterialAdd",
@@ -301,45 +271,45 @@ const materialApi = {
       part_Type: z.number().optional(),
       part_UID: z.string(),
       package_UID: z.string().optional(),
-      darsad_Estefadeh: z.number()
+      darsad_Estefadeh: z.number(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(RequestPackageMaterialListItem)
-    })
+      data: z.array(RequestPackageMaterialListItem),
+    }),
   },
   RequestPackagePartMaterialDelete: {
     url: "/Material/RequestPackagePartMaterialDelete",
     type: z.object({
       material_UID: z.string(),
       part_UID: z.string(),
-      package_UID: z.string().optional()
-    })
+      package_UID: z.string().optional(),
+    }),
   },
   RequestPackagePartInfo: {
     url: "/Material/RequestPackagePartInfo",
     type: z.object({
       part_UID: z.ostring(),
-      package_UID: z.string().optional()
+      package_UID: z.string().optional(),
     }),
     response: generalResponseZod.extend({
       data: z.object({
         Part_Type: z.number(),
         Status: z.number(),
         process_description: z.string(),
-        schematic_file_UID: z.string().uuid().optional()
-      })
-    })
+        schematic_file_UID: z.string().uuid().optional(),
+      }),
+    }),
   },
   RequestPackagePartProductList: {
     url: "/Material/RequestPackagePartProductList",
     type: z.object({
       part_UID: z.string(),
-      package_UID: z.string().optional()
+      package_UID: z.string().optional(),
     }),
     item: RequestPackagePartProductListItem,
     response: generalResponseZod.extend({
-      data: z.array(RequestPackagePartProductListItem)
-    })
+      data: z.array(RequestPackagePartProductListItem),
+    }),
   },
   RequestPackagePartProductAdd: {
     url: "/Material/RequestPackagePartProductAdd",
@@ -349,42 +319,42 @@ const materialApi = {
       part_UID: z.string(),
       package_UID: z.string(),
       estehsal: z.number(),
-      hadarRaft: z.number()
+      hadarRaft: z.number(),
     }),
     response: generalResponseZod.extend({
-      data: z.object({})
-    })
+      data: z.object({}),
+    }),
   },
   RequestPackagePartProductDelete: {
     url: "/Material/RequestPackagePartProductDelete",
     type: z.object({
       product_UID: z.string(),
       part_UID: z.string(),
-      package_UID: z.string().optional()
+      package_UID: z.string().optional(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.object({}))
-    })
+      data: z.array(z.object({})),
+    }),
   },
   RequestPackagePartUpdateProcessDescription: {
     url: "/Material/RequestPackagePartUpdateProcessDescription",
     type: z.object({
       part_UID: z.string(),
       package_UID: z.string().optional(),
-      process_description: z.string()
-    })
+      process_description: z.string(),
+    }),
   },
   GetRegisteredReportsForStepByKey: {
     url: "/Basic/GetRegisteredReportsForStepByKey",
     type: z.object({
-      step_Key: z.string()
+      step_Key: z.string(),
     }),
     item: GetRegisteredReportsForStepByKeyItem,
     response: generalResponseZod.extend({
-      data: z.array(GetRegisteredReportsForStepByKeyItem)
+      data: z.array(GetRegisteredReportsForStepByKeyItem),
     }),
-    finalKey: "Producer_Request"
-  }
+    finalKey: "Producer_Request",
+  },
 };
 
 export { materialApi };

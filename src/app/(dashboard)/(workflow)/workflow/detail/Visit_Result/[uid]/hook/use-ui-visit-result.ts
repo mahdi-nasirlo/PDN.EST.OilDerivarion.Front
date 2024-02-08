@@ -1,10 +1,12 @@
 import useRequestPackageVisitScheduleAdd from "@/hooks/request-package/use-request-package-visit-schedule-add";
 import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
+import useRequestPackageVisitOpinionAdd from "@/hooks/request-package/use-request-pakage-visit-opinion-add";
+import useRequestPackageVisitOpinionList from "@/hooks/request-package/use-request-pakage-visit-opinion-list";
 
 const useUiVisitResult = ({ uid }: { uid?: string }) => {
-  const addTime = useRequestPackageVisitScheduleAdd();
+  const addTime = useRequestPackageVisitOpinionAdd();
 
-  const getTime = useRequestPackageVisitScheduleList({
+  const getTime = useRequestPackageVisitOpinionList({
     package_UID: uid,
   });
 
@@ -28,6 +30,7 @@ const useUiVisitResult = ({ uid }: { uid?: string }) => {
       package_UID: uid,
       ...values,
     });
+    console.log(values);
   };
 
   return {

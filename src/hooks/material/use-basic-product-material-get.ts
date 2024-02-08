@@ -14,7 +14,13 @@ const useBasicProductMaterialGet = (uid?: string) => {
     queryKey: [apiData.url],
     queryFn: () => fetchWithSession({ url: apiData.url, data }),
     enabled: typeof uid === "string",
-    select: (data: z.infer<typeof apiData.response>) => data.data,
+    select: (data: z.infer<typeof apiData.response>) =>
+      data.data.map((item) => ({
+        ...item,
+        testItems: Array.isArray(item.testItems)
+          ? item.testItems?.map((testItem) => testItem?.uid)
+          : [],
+      })),
   });
 
   return { ...query };

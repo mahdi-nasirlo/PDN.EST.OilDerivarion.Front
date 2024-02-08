@@ -85,7 +85,7 @@ export const workflowApi = {
     type: z.object({
       taskId: z.string(),
       choiceKey: z.string().optional(),
-      description: z.string(),
+      description: z.string().optional(),
       stepKey: z.string(),
       date: z.string().optional(),
     }),

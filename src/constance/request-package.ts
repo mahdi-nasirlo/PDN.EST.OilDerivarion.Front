@@ -24,6 +24,7 @@ const VisitScheduleListItem = z.object({
   est_3: z.string(),
   est_description: z.string(),
   final_time: z.string(),
+  ReadOnly: z.boolean(),
   final_description: z.string().nullable(),
 });
 

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import basicApi from "../../constance/basic";
+import userRoleStateApi from "../../../../constance/user-role-state";
 import { z } from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { generalResponseZod } from "@/types/api-response";
 
-const apiData = basicApi.UserUpdateRole;
+const apiData = userRoleStateApi.UserUpdateState;
 
-const useUserUpdateRole = () => {
+const useUserUpdateState = () => {
   const queryQlient = useQueryClient();
 
   return useMutation({
@@ -20,11 +20,11 @@ const useUserUpdateRole = () => {
     onSuccess: (data) => {
       if (data.success) {
         queryQlient.invalidateQueries({
-          queryKey: [basicApi.GetUserBySearch.url],
+          queryKey: [userRoleStateApi.GetUserBySearch.url],
         });
       }
     },
   });
 };
 
-export { useUserUpdateRole };
+export { useUserUpdateState };

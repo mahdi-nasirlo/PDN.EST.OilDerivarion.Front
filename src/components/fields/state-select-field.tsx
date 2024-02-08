@@ -1,6 +1,6 @@
-import {SelectProps} from "antd/lib";
-import useGetAllState from "@/hooks/basic/use-get-all-state";
-import {Select} from "antd";
+import { SelectProps } from "antd/lib";
+import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
+import { Select } from "antd";
 
 
 const StateSelectField = (props: SelectProps) => {
@@ -18,4 +18,4 @@ const StateSelectField = (props: SelectProps) => {
     />
 }
 
-export {StateSelectField}
+export { StateSelectField }

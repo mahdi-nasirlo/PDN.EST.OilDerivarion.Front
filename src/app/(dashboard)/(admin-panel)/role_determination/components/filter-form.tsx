@@ -4,10 +4,10 @@ import { Col, Form, Input, Row } from "antd";
 import React from "react";
 import ButtonFilter from "@/components/button-filter";
 import { useValidation } from "@/hooks/use-validation";
-import basicApi from "../../../../../constance/basic";
+import userRoleStateApi from "../../../../../constance/user-role-state";
 import { z } from "zod";
 
-const formSchema = basicApi.GetUserBySearch.type
+const formSchema = userRoleStateApi.GetUserBySearch.type
 
 interface TProps {
     onFinish: (arg: z.infer<typeof formSchema>) => void

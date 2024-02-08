@@ -32,7 +32,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="samt_description"
+                name="samt_opinion_1"
                 label="توضیحات"
               >
                 <Input.TextArea

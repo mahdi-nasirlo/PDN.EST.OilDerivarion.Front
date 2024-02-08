@@ -33,7 +33,7 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="naft_description"
+                name="naft_opinion_1"
                 label="توضیحات"
               >
                 <Input.TextArea

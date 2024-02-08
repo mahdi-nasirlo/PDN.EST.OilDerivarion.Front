@@ -59,7 +59,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
             </Col>
             <Col xs={24} md={24}>
               <Form.Item
-                name="naft_visit_modify_date_time"
+                name="samt_visit_modify_date_time"
                 label="آخرین ویرایش"
               >
                 <Input

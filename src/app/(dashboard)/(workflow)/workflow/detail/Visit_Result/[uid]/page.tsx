@@ -1,12 +1,9 @@
 "use client";
 
 import React from "react";
-import { Alert, Form } from "antd";
-import { EstForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/est-form";
-import { SamtForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/samt-form";
-import { NaftForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/naft-form";
+
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { Button, Divider, Input, Spin } from "antd/lib";
+import { Alert, Button, Divider, Form, Input, Spin } from "antd/lib";
 import { Card } from "@/components/card";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import CustomDatePicker from "@/components/custome-date-picker";
@@ -14,12 +11,17 @@ import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
 import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
 import { useRouter } from "next/navigation";
+import useUiVisitResult from "./hook/use-ui-visit-result";
+import useUiVisitResultWorkFlow from "./hook/use-ui-visit-result-work-flow";
+import { NaftForm } from "./components/naft-form";
+import { SamtForm } from "./components/samt-form";
+import { EstForm } from "./components/est-form";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
   const { get, handleSet, reposts, form, dataForm, setChoice, set } =
-    useUiVisitSchedule({ taskId: params.uid });
+    useUiVisitResultWorkFlow({ taskId: params.uid });
 
   if (!get.data && get.isFetching) {
     return (
@@ -28,6 +30,7 @@ export default function Page({ params }: { params: { uid: string } }) {
       </Card>
     );
   }
+  const stepKey = "Visit_Result";
 
   return (
     <>
@@ -66,35 +69,18 @@ export default function Page({ params }: { params: { uid: string } }) {
         {dataForm.data?.visit_Type == 3 && (
           <>
             <Divider />
-            <Form form={form} onFinish={handleSet} layout="vertical">
-              <Form.Item
-                label="تاریخ نهایی"
-                name="date"
-                required={false}
-                rules={[
-                  { required: true, message: "لطفا مقدار را وارد نمایید" },
-                ]}
-              >
-                <CustomDatePicker />
-              </Form.Item>
-
-              <Form.Item
-                label="توضیحات"
-                name="description"
-                required={false}
-                rules={[
-                  { required: true, message: "لطفا مقدار را وارد نمایید" },
-                ]}
-              >
-                <Input.TextArea className="min-h-[70px]" />
-              </Form.Item>
-            </Form>
+            <Form form={form} onFinish={handleSet} layout="vertical"></Form>
             <WorkflowBtn
               loading={set.isPending}
               choices={get.data?.choices}
               onClick={(choice_Key) => {
                 setChoice(choice_Key);
                 form.submit();
+                const res = set.mutateAsync({
+                  taskId: params.uid,
+                  stepKey,
+                  choiceKey: choice_Key,
+                });
               }}
             />
           </>

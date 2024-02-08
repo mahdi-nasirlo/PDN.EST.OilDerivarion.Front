@@ -11,8 +11,8 @@ import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
 import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
 import { useRouter } from "next/navigation";
-import useUiVisitResult from "./hook/use-ui-visit-result";
-import useUiVisitResultWorkFlow from "./hook/use-ui-visit-result-work-flow";
+import useUiVisitResult from "./hook/use-ui-lab-visit-result";
+import useUiVisitResultWorkFlow from "./hook/use-ui-lab-visit-result-work-flow";
 import { NaftForm } from "./components/naft-form";
 import { SamtForm } from "./components/samt-form";
 import { EstForm } from "./components/est-form";
@@ -37,7 +37,7 @@ export default function Page({ params }: { params: { uid: string } }) {
       {get.data?.task && (
         <Breadcrumb
           pages={[{ label: "خانه" }]}
-          currentPage={"بررسی نتایج بازدید"}
+          currentPage={"	بررسی نتایج آزمایشگاه توسط کارگروه استان"}
           titleIcon={<DocumentTextIcon className="w-8" />}
           actions={[
             <Button key={1} size="large" onClick={() => router.back()}>
@@ -66,23 +66,21 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {dataForm.data?.visit_Type == 3 && (
+        {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
           <>
             <Divider />
             {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
             <WorkflowBtn
               loading={set.isPending}
               choices={get.data?.choices}
-              onClick={async (choice_Key) => {
+              onClick={(choice_Key) => {
                 setChoice(choice_Key);
-                const res = await set.mutateAsync({
+                form.submit();
+                const res = set.mutateAsync({
                   taskId: params.uid,
                   stepKey,
                   choiceKey: choice_Key,
                 });
-                if (res.success) {
-                  router.push(`/workflow/list/Visit_Result`);
-                }
               }}
             />
           </>

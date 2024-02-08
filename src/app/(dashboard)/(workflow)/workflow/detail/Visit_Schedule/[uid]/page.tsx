@@ -14,6 +14,7 @@ import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
 import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
 import { useRouter } from "next/navigation";
+import { ClockIcon } from "@heroicons/react/24/solid";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
@@ -34,8 +35,8 @@ export default function Page({ params }: { params: { uid: string } }) {
       {get.data?.task && (
         <Breadcrumb
           pages={[{ label: "خانه" }]}
-          currentPage={`${get.data?.task.current_Step_Name}`}
-          titleIcon={<DocumentTextIcon className="w-8" />}
+          currentPage={"تعیین زمان بازدید"}
+          titleIcon={<ClockIcon className="w-8" />}
           actions={[
             <Button key={1} size="large" onClick={() => router.back()}>
               بازگشت

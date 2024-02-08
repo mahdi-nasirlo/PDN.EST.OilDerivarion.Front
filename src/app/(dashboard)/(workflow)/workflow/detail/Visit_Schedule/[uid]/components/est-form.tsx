@@ -61,23 +61,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 16]}>
-            {/* <Col xs={24} sm={8}>
-              <Form.Item
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="est_visit_modify_date_time"
-                label="آخرین ویرایش"
-              >
-                <Input disabled placeholder="وارد کنید" />
-              </Form.Item>
-            </Col> */}
-            <Col xs={24}>
-              <Form.Item label="آخرین ویرایش" name="est_visit_modify_date_time">
-                <Input className="w-full" disabled={true} />
-              </Form.Item>
-            </Col>
-          </Row>
+
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24}>
               <Form.Item
@@ -89,6 +73,14 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 <Input.TextArea
                   style={{ height: 100, resize: "none" }}
                   placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={24}>
+              <Form.Item name="est_visit_modify_date_time" label="آخرین ویرایش">
+                <Input
+                  disabled={true}
+                  style={{ height: 100, resize: "none" }}
                 />
               </Form.Item>
             </Col>

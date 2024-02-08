@@ -41,6 +41,13 @@ const VisitOpinionListItem = z.object({
   est_opinion_1: z.string(),
   is_est_peresent: z.boolean(),
 });
+const LabVisitOpinionListItem = z.object({
+  ReadOnly: z.boolean(),
+  visit_Type: z.number(),
+  naft_opinion_2: z.string(),
+  samt_opinion_2: z.string(),
+  est_opinion_3: z.string(),
+});
 
 const RequestPackageApi = {
   RequestPackageFinalization: {
@@ -147,6 +154,38 @@ const RequestPackageApi = {
     }),
     response: generalResponseZod.extend({
       data: VisitOpinionListItem,
+    }),
+  },
+  LabVisitOpinionAdd: {
+    url: "/RequestPackage/LabVisitOpinionAdd",
+    type: z.object({
+      visit_Type: z.number(),
+      package_UID: z.string().uuid(),
+
+      naft_opinion_2: z.string(),
+
+      samt_opinion_2: z.string(),
+
+      est_opinion_3: z.string(),
+    }),
+  },
+  LabVisitOpinionList: {
+    url: "/RequestPackage/LabVisitOpinionList",
+    type: z.object({
+      package_UID: z.string().uuid().optional(),
+    }),
+    item: LabVisitOpinionListItem,
+    form1: z.object({
+      naft_opinion_2: z.string(),
+    }),
+    form2: z.object({
+      samt_opinion_2: z.string(),
+    }),
+    form3: z.object({
+      est_opinion_3: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: LabVisitOpinionListItem,
     }),
   },
 };

@@ -4,9 +4,11 @@ import { Form } from "antd/lib";
 import useUiTimeSchedule2 from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-time-schedule";
 import CustomDatePicker from "@/components/custome-date-picker";
 import { useForm } from "antd/lib/form/Form";
+import useUiVisitResult from "../hook/use-ui-lab-visit-result";
+import useUiLabVisitResult from "../hook/use-ui-lab-visit-result";
 
 export const NaftForm = ({ uid }: { uid?: string }) => {
-  const { handleSubmitNaft, getTime, addTime } = useUiTimeSchedule2({ uid });
+  const { handleSubmitNaft, getTime, addTime } = useUiLabVisitResult({ uid });
 
   const [form] = useForm();
   useEffect(() => {
@@ -17,7 +19,7 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
     <>
       <div className="my-5">
         <Typography className="text-right text-[16px] font-bold text-orange-300">
-          تاریخ های پیشنهادی نماینده نفت
+          نماینده نفت
         </Typography>
       </div>
       <Spin spinning={getTime.isFetching || addTime.isPending}>
@@ -28,58 +30,16 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
           onFinish={handleSubmitNaft}
         >
           <Row gutter={[16, 16]}>
-            <Col xs={24} sm={8}>
+            <Col xs={24} md={24}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="naft_1"
-                label="اولویت اول"
-              >
-                <CustomDatePicker />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Form.Item
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="naft_2"
-                label="اولویت دوم"
-              >
-                <CustomDatePicker />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={8}>
-              <Form.Item
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="naft_3"
-                label="اولویت سوم"
-              >
-                <CustomDatePicker />
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} sm={24}>
-              <Form.Item
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="naft_description"
+                name="naft_opinion_2"
                 label="توضیحات"
               >
                 <Input.TextArea
                   style={{ height: 100, resize: "none" }}
                   placeholder="وارد کنید"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24}>
-              <Form.Item
-                name="naft_visit_modify_date_time"
-                label="آخرین ویرایش"
-              >
-                <Input
-                  disabled={true}
-                  style={{ height: 100, resize: "none" }}
                 />
               </Form.Item>
             </Col>

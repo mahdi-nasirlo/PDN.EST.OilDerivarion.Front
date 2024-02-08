@@ -2,10 +2,11 @@ import { Form, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "antd/lib/form/Form";
 import { Alert, Button, Checkbox, Col, Input, Row } from "antd/lib";
-import useUiVisitResult from "../hook/use-ui-visit-result";
+import useUiVisitResult from "../hook/use-ui-lab-visit-result";
+import useUiLabVisitResult from "../hook/use-ui-lab-visit-result";
 
 export const EstForm = ({ uid }: { uid?: string }) => {
-  const { handleSubmitEst, getTime, addTime } = useUiVisitResult({ uid });
+  const { handleSubmitEst, getTime, addTime } = useUiLabVisitResult({ uid });
 
   const [form] = useForm();
 
@@ -21,15 +22,11 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           نماینده استاندارد
         </Typography>
       </div>
+
       <Spin spinning={getTime.isFetching || addTime.isPending}>
         <Form
-          initialValues={{
-            is_naft_peresent: true,
-            is_samt_peresent: true,
-            is_est_peresent: true,
-          }}
           form={form}
-          disabled={getTime.data?.visit_Type !== 3}
+          disabled={getTime.data?.visit_Type !== 3 || getTime.data.ReadOnly}
           layout="vertical"
           className="mb-5"
           onFinish={handleSubmitEst}
@@ -39,7 +36,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="est_opinion_1"
+                name="est_opinion_2"
                 label="توضیحات"
               >
                 <Input.TextArea
@@ -49,40 +46,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} md={8}>
-              <Form.Item
-                name="is_naft_peresent"
-                valuePropName="checked"
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-              >
-                <Checkbox>حضور نماینده نفت</Checkbox>
-              </Form.Item>
-            </Col>
-            <Col xs={24} md={8}>
-              <Form.Item
-                valuePropName="checked"
-                required={false}
-                // rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="is_samt_peresent"
-              >
-                <Checkbox>حضور نماینده صمت</Checkbox>
-              </Form.Item>
-            </Col>
-
-            <Col xs={24} md={8}>
-              <Form.Item
-                valuePropName="checked"
-                required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
-                name="is_est_peresent"
-              >
-                <Checkbox>حضور نماینده استاندارد</Checkbox>
-              </Form.Item>
-            </Col>
-          </Row>
-          {getTime.data?.visit_Type == 3 && (
+          {getTime.data?.visit_Type == 3 && !getTime.data?.ReadOnly && (
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button

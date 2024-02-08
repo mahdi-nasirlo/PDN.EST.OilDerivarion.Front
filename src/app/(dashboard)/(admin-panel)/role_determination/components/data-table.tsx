@@ -3,13 +3,13 @@ import { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import { Card } from '@/components/card';
 import { z } from 'zod';
-import basicApi from 'constance/basic';
+import userRoleStateApi from 'constance/user-role-state';
 import StateAction from "@/app/(dashboard)/(admin-panel)/role_determination/components/state-action";
 import CustomTable from "@/components/custom-table";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import RoleAction from './role-action';
 
-const apiData = basicApi.GetUserBySearch;
+const apiData = userRoleStateApi.GetUserBySearch;
 
 interface TProps {
   data: z.infer<typeof apiData.response.shape.data> | undefined;

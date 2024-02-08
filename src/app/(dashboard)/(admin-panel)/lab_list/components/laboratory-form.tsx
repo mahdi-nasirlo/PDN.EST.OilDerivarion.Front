@@ -4,7 +4,7 @@ import CustomeDatePicker from "../../../../../components/custome-date-picker";
 import MultipleSelect from "@/components/multiple-select";
 import PhoneInputs from "@/components/inputs/Phone";
 import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
-import useGetAllState from "@/hooks/basic/use-get-all-state";
+import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
 
 function LaboratoryForm({ rules }: any) {
   const testItem = useTestItemList();

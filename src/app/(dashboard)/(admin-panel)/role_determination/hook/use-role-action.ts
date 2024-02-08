@@ -1,8 +1,8 @@
 import { useValidation } from "@/hooks/use-validation";
-import basicApi from "../../../../../constance/basic";
-import useGetAllRole from "@/hooks/basic/use-get-all-role";
-import { useUserUpdateRole } from "@/hooks/basic/use-user-update-role";
-import { useGetRoleForUser } from "@/hooks/basic/use-get-role-for-user";
+import userRoleStateApi from "../../../../../constance/user-role-state";
+import useGetAllRole from "@/hooks/basic/role_determination/role/use-get-all-role";
+import { useUserUpdateRole } from "@/hooks/basic/role_determination/role/use-user-update-role";
+import { useGetRoleForUser } from "@/hooks/basic/role_determination/role/use-get-role-for-user";
 import { useEffect } from "react";
 import { z } from "zod";
 
@@ -10,7 +10,7 @@ const useRoleAction = (
   setOpen: (arg: string | undefined) => void,
   open: string | undefined
 ) => {
-  const [form, rules] = useValidation(basicApi.UserUpdateRole.type);
+  const [form, rules] = useValidation(userRoleStateApi.UserUpdateRole.type);
 
   const role = useGetAllRole();
 
@@ -26,7 +26,7 @@ const useRoleAction = (
   }, [getRole.data]);
 
   const handleSubmit = async (
-    data: z.infer<typeof basicApi.UserUpdateRole.type>
+    data: z.infer<typeof userRoleStateApi.UserUpdateRole.type>
   ) => {
     const res = await updateRole.mutateAsync({
       rolesUid: data.rolesUid,

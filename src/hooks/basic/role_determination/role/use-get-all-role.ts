@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import basicApi from "../../constance/basic";
+import userRoleStateApi from "../../../../constance/user-role-state";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
 
-const apiData = basicApi.GetAllRole;
+const apiData = userRoleStateApi.GetAllRole;
 
 const useGetAllRole = () => {
   const query = useQuery({

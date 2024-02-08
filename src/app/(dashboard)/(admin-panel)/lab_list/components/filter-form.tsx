@@ -7,7 +7,7 @@ import { materialApi } from "constance/material";
 import { z } from "zod";
 import { useValidation } from "@/hooks/use-validation";
 import labApi from "constance/lab";
-import useGetAllState from "@/hooks/basic/use-get-all-state";
+import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
 
 const dataFilter = labApi.LabGetPage.type;
 

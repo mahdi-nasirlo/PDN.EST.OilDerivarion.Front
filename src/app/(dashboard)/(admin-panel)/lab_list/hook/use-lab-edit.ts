@@ -1,5 +1,4 @@
 import useLabGet from "@/hooks/lab/use-lab-get";
-import { useLabGetPage } from "@/hooks/lab/use-lab-get-page";
 import useLabUpdate from "@/hooks/lab/use-lab-update";
 import { useValidation } from "@/hooks/use-validation";
 import labApi from "constance/lab";
@@ -8,10 +7,7 @@ import { z } from "zod";
 
 const apiData = labApi.LabUpdate;
 
-const useLabGetInfo = (
-  uid: string,
-  setUid: (arg: string | undefined) => void
-) => {
+const useLabEdit = (uid: string, setUid: (arg: string | undefined) => void) => {
   const [form, rules] = useValidation(apiData.type);
 
   const get = useLabGet(uid as string);
@@ -20,9 +16,6 @@ const useLabGetInfo = (
 
   useEffect(() => {
     if (get.data) {
-      console.log(get.data);
-
-      form.setFieldValue("testItems", get.treeDataValue);
       form.setFieldsValue(get.data);
     }
   }, [get.data]);
@@ -48,4 +41,4 @@ const useLabGetInfo = (
   return { get, form, closeModal, handleSubmit, update, rules };
 };
 
-export default useLabGetInfo;
+export default useLabEdit;

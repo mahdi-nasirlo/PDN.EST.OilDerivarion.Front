@@ -65,12 +65,9 @@ const labApi = {
         tel: z.string(),
         fax: z.string(),
         address: z.string(),
-        testItems: z.array(
-          z.object({
-            name: z.string(),
-            uid: z.string(),
-          })
-        ),
+        testItems: z
+          .array(z.object({ uid: z.string(), name: z.string() }))
+          .optional(),
       }),
     }),
   },

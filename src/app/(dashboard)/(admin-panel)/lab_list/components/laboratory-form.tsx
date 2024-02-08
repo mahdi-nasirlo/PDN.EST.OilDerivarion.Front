@@ -48,11 +48,10 @@ function LaboratoryForm({ rules }: any) {
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Form.Item name="testItems" label="فاکتور های آزمون" rules={[rules]}>
-            {/* <MultipleSelect
+            <MultipleSelect
               treeData={testItem.treeData}
               loading={testItem.isLoading}
-            /> */}
-            <TreeSelect treeCheckable treeData={testItem.treeData} />
+            />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
@@ -67,8 +66,6 @@ function LaboratoryForm({ rules }: any) {
             <Select
               showSearch
               fieldNames={state.apiData.fieldNames}
-              // @ts-ignore
-              //   filterOption={filterOption}
               loading={state.isLoading}
               options={state.data}
               size="large"

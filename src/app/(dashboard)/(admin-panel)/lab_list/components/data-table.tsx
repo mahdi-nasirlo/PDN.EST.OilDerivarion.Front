@@ -245,7 +245,10 @@ export default function DataTable({
           columns={columns}
         />
       </Card>
-      <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
+      <EditModal
+        editModalUid={uid}
+        setEditModalUid={setGetUid}
+      />
       <GpsLabModal
         selectedLabUid={selectedLabUid}
         setSelectedLabUid={setSelectedLabUid}

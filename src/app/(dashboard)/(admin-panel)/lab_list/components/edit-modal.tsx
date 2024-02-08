@@ -1,11 +1,9 @@
 "use client";
 
 import { Button, Col, Form, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
 import React from "react";
 import LaboratoryForm from "./laboratory-form";
-import useLabCreate from "@/hooks/lab/use-lab-create";
-import useLabGetInfo from "../hook/use-lab-get";
+import useLabEdit from "../hook/use-lab-edit";
 
 interface TProps {
   editModalUid: any;
@@ -13,10 +11,15 @@ interface TProps {
 }
 
 export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
-  const { closeModal, form, update, get, handleSubmit, rules } = useLabGetInfo(
-    editModalUid,
-    setEditModalUid
-  );
+
+  const {
+    closeModal,
+    form,
+    update,
+    get,
+    handleSubmit,
+    rules
+  } = useLabEdit(editModalUid, setEditModalUid);
 
   return (
     <Modal
@@ -48,7 +51,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
           </Col>
           <Col xs={12} md={12}>
             <Button
-              //   disabled={createLaboratoryRequest.isMutating}
+              loading={get.isFetching || update.isPending}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={closeModal}

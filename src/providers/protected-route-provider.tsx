@@ -3,7 +3,6 @@
 import React, {useEffect} from 'react';
 import {useGetUserAccess} from "@/hooks/sso/use-get-user-access";
 import {usePathname, useRouter} from "next/navigation";
-import {notification} from "antd/lib";
 
 const ProtectedRouteProvider = ({children}: { children: React.ReactNode }) => {
 
@@ -19,12 +18,12 @@ const ProtectedRouteProvider = ({children}: { children: React.ReactNode }) => {
 
         if (accessPages.isFetched) {
 
-            const filter = accessPages.data?.filter((item) => item.label.includes(pathname))
-
-            if (filter && Array.isArray(filter) && filter.length <= 0 && pathname !== "/") {
-                router.push("/")
-                notification.error({message: "access denise"})
-            }
+            // const filter = accessPages.data?.filter((item) => item.label.includes(pathname))
+            //
+            // if (filter && Array.isArray(filter) && filter.length <= 0 && pathname !== "/") {
+            //     router.push("/")
+            //     notification.error({message: "access denise"})
+            // }
 
             // setAccess(true)
 

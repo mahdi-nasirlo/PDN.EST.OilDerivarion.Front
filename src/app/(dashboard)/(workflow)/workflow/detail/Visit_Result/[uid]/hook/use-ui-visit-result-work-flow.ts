@@ -5,8 +5,9 @@ import { useForm } from "antd/es/form/Form";
 import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
 import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
 import { useRouter } from "next/navigation";
+import useRequestPackageVisitOpinionList from "@/hooks/request-package/use-request-pakage-visit-opinion-list";
 
-const stepKey = "Visit_Schedule";
+const stepKey = "Visit_Result";
 
 const useUiVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
   const [choice, setChoice] = useState<string>();
@@ -18,7 +19,7 @@ const useUiVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
   const [form] = useForm();
 
   const reposts = useGetRegisteredReportsForStepByKey(stepKey, taskId);
-  const dataForm = useRequestPackageVisitScheduleList({
+  const dataForm = useRequestPackageVisitOpinionList({
     package_UID: taskId,
   });
 
@@ -28,13 +29,11 @@ const useUiVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
     const res = await set.mutateAsync({
       taskId: taskId,
       stepKey,
-      description: values.description,
-      date: values.date,
       choiceKey: choice,
     });
 
     if (res.success) {
-      router.push(`/workflow/list/Visit_Schedule`);
+      router.push(`/workflow/list/Visit_Result`);
     }
   };
 

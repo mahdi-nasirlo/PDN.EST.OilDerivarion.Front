@@ -55,7 +55,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "واحد اندازه کیری",
+      title: "واحد اندازه گیری",
       dataIndex: "measureName",
       key: "2",
     },
@@ -70,26 +70,29 @@ export default function DataTable({
       dataIndex: "testItems",
       key: "4",
       render: (_, record) => {
-        if (record.testItems === null) {
+        if (record.testItems && Array.isArray(record.testItems) && record.testItems.length > 0) {
+          let testItemNames = record.testItems
+            .map(item => item?.name)
+            .join(", ");
+          return (
+            <Tooltip
+              placement="top"
+              title={<Typography>{testItemNames}</Typography>}
+            >
+              <Typography.Text
+                className="max-w-[180px]"
+                ellipsis={true}
+                style={{ maxWidth: "180px" }}
+              >
+                {testItemNames}
+              </Typography.Text>
+            </Tooltip>
+          );
+        } else {
           return <Typography>_</Typography>;
         }
-        return (
-          <Tooltip
-            placement="top"
-            title={<Typography>{record.testItems}</Typography>}
-          >
-            <Typography.Text
-              className="max-w-[180px]"
-              ellipsis={true}
-              style={{ width: "40px !important" }}
-            >
-              {record.testItems}
-            </Typography.Text>
-          </Tooltip>
-        );
       },
     },
-
     {
       title: "عملیات",
       key: "عملیات",

@@ -16,13 +16,13 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
     <>
       <div className="mb-5">
         <Typography className="text-right text-[16px] font-bold text-orange-300">
-          نماینده صمت
+          تاریخ های پیشنهادی نماینده صمت
         </Typography>
       </div>
       <Spin spinning={addTime.isPending || getTime.isFetching}>
         <Form
           form={form}
-          disabled={getTime.data?.visit_Type !== 2}
+          disabled={getTime.data?.visit_Type !== 2 || getTime.data.ReadOnly}
           layout="vertical"
           onFinish={handleSubmitSamt}
         >
@@ -32,7 +32,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                 name="samt_1"
-                label="زمان بازدید احتمالی اول"
+                label="اولویت اول"
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -42,7 +42,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                 name="samt_2"
-                label="زمان بازدید احتمالی دوم"
+                label="اولویت دوم"
               >
                 <CustomDatePicker />
               </Form.Item>
@@ -52,13 +52,23 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                 name="samt_3"
-                label="زمان بازدید احتمالی سوم"
+                label="اولویت سوم"
               >
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={[16, 16]}>
+            <Col xs={24} md={24}>
+              <Form.Item
+                name="naft_visit_modify_date_time"
+                label="آخرین ویرایش"
+              >
+                <Input
+                  disabled={true}
+                  className="w-full"
+                  placeholder="وارد کنید"
+                />
+              </Form.Item>
+            </Col>
             <Col xs={24} md={24}>
               <Form.Item
                 required={false}
@@ -74,7 +84,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
             </Col>
           </Row>
 
-          {getTime.data?.visit_Type == 2 && (
+          {getTime.data?.visit_Type == 2 && !getTime.data?.ReadOnly && (
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button

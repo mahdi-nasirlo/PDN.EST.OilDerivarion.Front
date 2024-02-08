@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Alert, Form, Typography } from "antd";
+import { Alert, Form } from "antd";
 import { EstForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/est-form";
 import { SamtForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/samt-form";
 import { NaftForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/naft-form";
@@ -63,13 +63,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {dataForm.data?.final_time && (
-          <Alert
-            message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
-            className="text-lg font-bold text-blue-800"
-          />
-        )}
-        {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
+        {dataForm.data?.visit_Type == 3 && (
           <>
             <Divider />
             <Form form={form} onFinish={handleSet} layout="vertical">

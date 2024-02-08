@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { date, z } from "zod";
 import { useEffect } from "react";
 import { useValidation } from "@/hooks/use-validation";
 import { productApi } from "constance/product";
@@ -18,10 +18,14 @@ const useProductEdit = (
   const update = useProductUpdate();
 
   useEffect(() => {
+    console.log("test", get.data);
     if (get.data) {
       form.setFieldsValue(get.data);
     }
-  }, [get.data]);
+    // if (get.data && get.data[0]) {
+    //   form.setFieldsValue(get.data[0]);
+    // }
+  }, [get.data, get.isFetching]);
 
   const handleSubmit = async (data: z.infer<typeof apiData.type>) => {
     const res = await update.mutateAsync({

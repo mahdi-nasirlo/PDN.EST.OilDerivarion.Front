@@ -28,7 +28,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
       width={800}
       title={
         <div>
-          <div className="text-base mb-2">افزودن ماده اولیه</div>
+          <div className="text-base mb-2">افزودن جعبه</div>
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
@@ -78,7 +78,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
         layout="vertical"
         initialValues={{ testItems: [] }}
       >
-        <GpsForm rules={rules}  />
+        <GpsForm rules={rules} />
       </Form>
     </Modal>
   );

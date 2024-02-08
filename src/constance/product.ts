@@ -26,8 +26,12 @@ const BasicProductGetItem = z.object({
   uid: z.string().uuid(),
   name: z.string(),
   isActive: z.boolean(),
-  materials: z.array(z.string()),
-  testItems: z.array(z.string()),
+  materials: z
+    .array(z.object({ uid: z.string(), name: z.string() }))
+    .optional(),
+  testItems: z
+    .array(z.object({ uid: z.string(), name: z.string() }))
+    .optional(),
   productCategoryName: z.number(),
   productCategoryUid: z.string(),
 });

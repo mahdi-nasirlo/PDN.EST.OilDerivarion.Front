@@ -1,6 +1,6 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const ssoApi = {
   access_token_Key: "access_token",
@@ -58,6 +58,7 @@ const ssoApi = {
         postalCode: z.string(),
         userLevelId: z.number().optional(),
         userLevelName: z.string().optional(),
+        companyName: z.string().optional(),
       }),
     }),
   },
@@ -98,17 +99,15 @@ const ssoApi = {
     }),
   },
   getSession: {
-    type: z.object(
-        {
-          access_token: z.string(),
-          user: z.object({
-            name: z.string(),
-            email: z.string()
-          }),
-          expires: z.string()
-        }
-    )
-  }
+    type: z.object({
+      access_token: z.string(),
+      user: z.object({
+        name: z.string(),
+        email: z.string(),
+      }),
+      expires: z.string(),
+    }),
+  },
 };
 
 export { ssoApi };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Space, Tooltip, Typography } from "antd";
+import { Button, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Card } from "@/components/card";
@@ -9,7 +9,6 @@ import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { boxGPSApi } from "constance/box-gps";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-// import useBasicProductMaterialDelete from "@/hooks/material/use-basic-product-material-delete";
 import useBoxGPSDelete from "@/hooks/box-gps/use-box-gps-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "./edit-modal";
@@ -32,7 +31,6 @@ export default function DataTable({
   setPaginate,
 }: TProps) {
   const [uid, setGetUid] = useState<string | boolean>();
-  console.log("data", data);
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
 
@@ -54,7 +52,7 @@ export default function DataTable({
       width: "5%",
     },
     {
-      title: "کد",
+      title: "کد جعبه",
       dataIndex: "code",
       key: "2",
     },
@@ -68,26 +66,6 @@ export default function DataTable({
       dataIndex: "stateName",
       key: "2",
     },
-    // {
-    //   title: "نام استان",
-    //   dataIndex: "stateName",
-    //   key: "2",
-    // },
-    // {
-    //   title: "نام استان",
-    //   dataIndex: "stateName",
-    //   key: "2",
-    // },
-    // {
-    //   title: "نام استان",
-    //   dataIndex: "stateName",
-    //   key: "2",
-    // },
-    // {
-    //   title: "نام استان",
-    //   dataIndex: "stateName",
-    //   key: "2",
-    // },
     {
       title: "فعال/غیر فعال ",
       dataIndex: "is_Active",
@@ -149,7 +127,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست باگس های من",
+            text: "لیست جعبه ها",
             actions: [
               <Button
                 key={"1"}
@@ -174,7 +152,7 @@ export default function DataTable({
           setEditModalUid={setGetUid}
         />
         <ConfirmDeleteModal
-          title="دسته بندی محصول"
+          title="جعبه"
           open={uidDelete}
           setOpen={setUidDelete}
           handleDelete={handelDelete}

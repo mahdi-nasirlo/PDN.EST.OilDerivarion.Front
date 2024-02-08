@@ -1,3 +1,5 @@
+"use client"
+
 import React, {useState} from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";

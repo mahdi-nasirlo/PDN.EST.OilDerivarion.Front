@@ -2,12 +2,18 @@
 
 import {Button, Col, Form, Modal, Row, Spin, Typography} from 'antd';
 import React from 'react'
+import {useGetUserInfo} from "@/hooks/sso/use-get-user-info";
 
-export default function ReviewDataModalAcceptAgreement(
-    { modalVisibleConfirmation, setModalVisibleConfirmation }:
-        { modalVisibleConfirmation: any, setModalVisibleConfirmation: any }
-) {
+interface TProps {
+    modalVisibleConfirmation: any,
+    setModalVisibleConfirmation: any
+}
 
+export default function ReviewDataModalAcceptAgreement({
+                                                           modalVisibleConfirmation,
+                                                           setModalVisibleConfirmation
+                                                       }: TProps) {
+    const dataUserInfo = useGetUserInfo()
     const closeModal = () => {
         setModalVisibleConfirmation(false);
     };
@@ -44,19 +50,19 @@ export default function ReviewDataModalAcceptAgreement(
                                 <Typography>
                                     {`اینجانب `}
                                     <b style={{ fontWeight: 'bold' }}>
-                                        {/* {`${data?.firstName} ${data?.lastName}`} */}
+                                        {`${dataUserInfo.data?.firstName} ${dataUserInfo.data?.lastName}`}
                                     </b>
                                     {` به شماره ملی `}
                                     <b style={{ fontWeight: 'bold' }}>
-                                        {/* {data?.nationalCode} */}
+                                        {dataUserInfo.data?.nationalCode}
                                     </b>
                                     {` ، سمت مدیرعامل ، شرکت `}
                                     <b style={{ fontWeight: 'bold' }}>
-                                        {/* {data?.producerName} */}
+                                        {/*{dataUserInfo.data?.producerName}*/} _____
                                     </b>
                                     {` با شناسه `}
                                     <b style={{ fontWeight: 'bold' }}>
-                                        {/* {data?.producerNationalCode} */}
+                                        {dataUserInfo.data?.postalCode}
                                     </b>
                                     {` تعهد می‌نمایم نام صحیح عنوان محصول / نام صحیح مواد اولیه مصرفی
                                      و منشا تامین آن‌ها و تصویر صحیح کلیه مدارک و مستندات بدون هیچ گونه دخل و تصرفی بارگذاری شده است

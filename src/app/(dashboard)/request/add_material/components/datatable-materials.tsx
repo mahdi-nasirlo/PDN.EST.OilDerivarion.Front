@@ -87,7 +87,7 @@ const DatatableMaterials = () => {
                         setOpen(undefined)
 
                 }}
-                title={"حذف ماده اولیه"}
+                title={"ماده اولیه"}
             />
         </div>
     );

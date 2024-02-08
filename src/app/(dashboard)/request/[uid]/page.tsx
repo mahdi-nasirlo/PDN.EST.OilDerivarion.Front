@@ -28,7 +28,7 @@ export default function Page({params: {uid}}: TProps) {
       <Breadcrumb
         pages={[
           { label: "خانه", path: "/" },
-          { label: "زیر درخواست ها", path: "/request" },
+            {label: "پکیج ها", path: "/request"},
         ]}
         backLink="/request"
         currentPage="ثبت درخواست"

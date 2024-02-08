@@ -7,9 +7,9 @@ function GpsForm({ rules }: any) {
   return (
     <>
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="code" label="کد">
-          <InputNumber
+            <InputNumber
               className="w-full"
               size="large"
               placeholder="وارد کنید"
@@ -17,17 +17,17 @@ function GpsForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="name" label="نام">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="imei" label="imei">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
             name="isActive"
@@ -44,7 +44,7 @@ function GpsForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="capacity" label="ظرفیت">
             <InputNumber
               className="w-full"
@@ -54,7 +54,7 @@ function GpsForm({ rules }: any) {
             />
           </Form.Item>
         </Col>
-        <Col xs={24} md={12}>
+        <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="stateUId" label="استان">
             <StateSelectField />
           </Form.Item>

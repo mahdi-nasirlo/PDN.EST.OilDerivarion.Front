@@ -27,7 +27,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
           onFinish={handleSubmitSamt}
         >
           <Row gutter={[16, 16]}>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -37,7 +37,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -47,7 +47,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-            <Col xs={24} md={8}>
+            <Col xs={24} sm={8}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
@@ -57,7 +57,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 <CustomDatePicker />
               </Form.Item>
             </Col>
-            <Col xs={24} md={24}>
+            <Col xs={24} sm={24}>
               <Form.Item
                 name="naft_visit_modify_date_time"
                 label="آخرین ویرایش"
@@ -69,7 +69,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} md={24}>
+            <Col xs={24} sm={24}>
               <Form.Item
                 required={false}
                 rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}

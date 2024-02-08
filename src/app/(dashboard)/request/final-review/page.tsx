@@ -62,10 +62,10 @@ export default function Page() {
                   value
                     ? Promise.resolve()
                     : Promise.reject(
-                        new Error(
-                          "پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد"
-                        )
-                      ),
+                      new Error(
+                        "پذیرش شرایط و قوانین برای ثبت درخواست ضروری می باشد"
+                      )
+                    ),
               },
             ]}
           >
@@ -82,7 +82,7 @@ export default function Page() {
           </Form.Item>
           <Divider />
           <Row gutter={[12, 12]}>
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={12}>
               <Button
                 size="large"
                 onClick={() => router.push("/request")}
@@ -92,7 +92,7 @@ export default function Page() {
                 بازگشت
               </Button>
             </Col>
-            <Col xs={24} md={12}>
+            <Col xs={24} sm={12}>
               <Button
                 size="large"
                 className="w-full "

@@ -1,14 +1,14 @@
-import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import React from "react";
 // import staticMessages from "../../../../../../../lib/staticMessages";
-import {DocumentPlusIcon} from "@heroicons/react/24/outline";
+import { DocumentPlusIcon } from "@heroicons/react/24/outline";
 import useUiRequestProductDescriptionForm
     from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-product-description-form";
 import FileUpload from "@/components/file-upload/FileUpload";
 import staticMessages from "@/lib/staticMessages";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const DescriptionForm = ({uid}: { uid: string }) => {
+const DescriptionForm = ({ uid }: { uid: string }) => {
 
     const {
         form,
@@ -29,7 +29,7 @@ const DescriptionForm = ({uid}: { uid: string }) => {
         <Typography className="text-right font-medium text-base">
             لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
         </Typography>
-        <Divider/>
+        <Divider />
         <Spin spinning={requestInfo.isFetching}>
             <Form
                 form={form}
@@ -45,7 +45,7 @@ const DescriptionForm = ({uid}: { uid: string }) => {
                             label="شرح فرآیند تولید"
                         >
                             <Input.TextArea
-                                style={{minHeight: 80, resize: "none"}}
+                                style={{ minHeight: 80, resize: "none" }}
                                 placeholder="وارد کنید"
                             />
                         </Form.Item>
@@ -70,15 +70,15 @@ const DescriptionForm = ({uid}: { uid: string }) => {
                             htmlType="submit"
                             loading={updateDesc.isPending}
                             disabled={updateDesc.isPending || requestInfo.isFetching}
-                            icon={<DocumentPlusIcon className="w-6"/>}
+                            icon={<DocumentPlusIcon className="w-6" />}
                         >
                             ثبت شرح فرایند
                         </Button>
                     </Col>
                 </Row>
-                <Divider/>
+                <Divider />
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} sm={12}>
                         <Form.Item
                             rules={[rule]}
                             name="schematic_file_UID"
@@ -86,7 +86,7 @@ const DescriptionForm = ({uid}: { uid: string }) => {
                             tooltip={<Typography>فایل باید به صورت pdf باشد</Typography>}
                         >
                             <div className="p-0 m-0 w-full">
-                                <FileUpload/>
+                                <FileUpload />
                             </div>
                         </Form.Item>
                     </Col>
@@ -96,4 +96,4 @@ const DescriptionForm = ({uid}: { uid: string }) => {
     </>
 }
 
-export {DescriptionForm}
+export { DescriptionForm }

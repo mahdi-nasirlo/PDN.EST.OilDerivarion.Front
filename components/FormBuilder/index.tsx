@@ -146,7 +146,7 @@ const RenderInput = ({ item }: { item: FormBuilderInputType }) => {
             break;
     }
 
-    return <Col xs={24} md={8}>{currentInput}</Col>
+    return <Col xs={24} sm={8}>{currentInput}</Col>
 }
 
 export default Index;

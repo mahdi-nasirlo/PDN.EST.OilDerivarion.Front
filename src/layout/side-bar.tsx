@@ -1,8 +1,9 @@
 import { Menu, MenuProps } from "antd/lib";
 import React from "react";
 import { useControlSidebar } from "./hooks/use-control-sidebar";
-import { Drawer, Skeleton, Tooltip } from "antd";
+import { Drawer, Tooltip } from "antd";
 import Link from "next/link";
+import MenuSkeleton from "./components/menu-skeleton";
 
 interface TProps {
     open: boolean;
@@ -43,20 +44,7 @@ export default function SideBar({ open, setOpen }: TProps) {
                     </Menu.Item>
                 </Tooltip>
             })) : (
-            <div className="flex flex-col gap-4 sidebar-Skeleton">
-                <Skeleton active />
-                <Skeleton.Input className="w-full" active size="small" />
-                <Skeleton.Input active className="w-2/3" size="small" />
-                <Skeleton.Input active className="w-1/2" size="small" />
-                <Skeleton active />
-                <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
-                <Skeleton.Input className="w-full" active size="small" />
-                <Skeleton.Input active className="w-1/2" size="small" />
-                <Skeleton.Input active className="w-1/2" size="small" />
-                <Skeleton.Input className="w-full" style={{ marginTop: "8px" }} active size="small" />
-                <Skeleton.Input active className="w-1/2" size="small" />
-                <Skeleton.Input className="w-full" active size="small" />
-            </div>
+            <MenuSkeleton />
         )}
     </Menu >
 

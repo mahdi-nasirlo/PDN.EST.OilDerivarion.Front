@@ -69,21 +69,18 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 dataIndex: "materials",
                 key: "5",
                 render: (_, record) => {
-                    if (record.materials && Array.isArray(record.materials) && record.materials.length > 0) {
-                        let materialNames = record.materials
-                            .map(item => item?.name)
-                            .join(", ");
+                    if (record.materials) {
                         return (
                             <Tooltip
                                 placement="top"
-                                title={<Typography>{materialNames}</Typography>}
+                                title={<Typography>{record.materials}</Typography>}
                             >
                                 <Typography.Text
                                     className="max-w-[350px]"
                                     ellipsis={true}
                                     style={{ maxWidth: "350px" }}
                                 >
-                                    {materialNames}
+                                    {record.materials}
                                 </Typography.Text>
                             </Tooltip>
                         );
@@ -97,21 +94,18 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 dataIndex: "testItems",
                 key: "6",
                 render: (_, record) => {
-                    if (record.testItems && Array.isArray(record.testItems) && record.testItems.length > 0) {
-                        let testItemNames = record.testItems
-                            .map(item => item?.name)
-                            .join(", ");
+                    if (record.testItems) {
                         return (
                             <Tooltip
                                 placement="top"
-                                title={<Typography>{testItemNames}</Typography>}
+                                title={<Typography>{record.testItems}</Typography>}
                             >
                                 <Typography.Text
                                     className="max-w-[350px]"
                                     ellipsis={true}
                                     style={{ maxWidth: "350px" }}
                                 >
-                                    {testItemNames}
+                                    {record.testItems}
                                 </Typography.Text>
                             </Tooltip>
                         );

@@ -34,14 +34,7 @@ const BasicProductMaterialGetItem = z.object({
   isActive: z.boolean(),
   measureUid: z.string().uuid(),
   measureName: z.string(),
-  testItems: z.array(
-    z
-      .object({
-        name: z.string(),
-        uid: z.string(),
-      })
-      .optional()
-  ),
+  testItems: z.array(z.object({ uid: z.string().uuid(), name: z.string() })),
 });
 
 const BasicProductMaterialList = z.object({

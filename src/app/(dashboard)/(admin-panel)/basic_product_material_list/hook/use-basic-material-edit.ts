@@ -18,6 +18,8 @@ const useBasicMaterialEdit = (
   const [form, rules] = useValidation(apiData.type);
 
   useEffect(() => {
+    console.log(get.data);
+
     if (get.data && get.data[0]) {
       form.setFieldsValue(get.data[0]);
     }

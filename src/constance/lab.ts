@@ -40,13 +40,17 @@ const labApi = {
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
       stateUId: z.string(),
-      license_No: z.string({ required_error: errorMessage.required }),
+      license_No: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
       licenseExpireDatePersian: z.string({
         required_error: errorMessage.required,
       }),
-      tel: z.string({ required_error: errorMessage.required }),
-      fax: z.string({ required_error: errorMessage.required }),
-      address: z.string({ required_error: errorMessage.required }),
+      tel: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      fax: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      address: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
       testItems: z.any({ required_error: errorMessage.required_choice }),
     }),
   },

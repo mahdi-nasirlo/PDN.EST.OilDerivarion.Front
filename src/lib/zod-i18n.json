@@ -28,8 +28,8 @@
     "too_small": {
       "array": {
          "exact": "آرایه باید حاوی {{minimum}} عنصر باشد",
-         "inclusive": "آرایه باید حداقل شامل {{minimum}} عنصر باشد",
-         "not_inclusive": "آرایه باید بیش از {{minimum}} عنصر داشته باشد"
+         "inclusive": " حداقل {{minimum}} مورد را انتخاب کنید",
+         "not_inclusive": " حداقل {{minimum}} راانتخاب کنید"
       },
       "string": {
          "exact": "رشته باید حاوی {{minimum}} کاراکتر باشد",

@@ -50,7 +50,7 @@ function MaterialForm({ rules }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="testItems" label="فاکتور های آزمون">
+          <Form.Item name="testItems" label="فاکتور های آزمون" rules={[rules]}>
             <MultipleSelect
               treeData={testItem.treeData}
               loading={testItem.isLoading}

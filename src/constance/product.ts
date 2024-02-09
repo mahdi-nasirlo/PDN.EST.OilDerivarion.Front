@@ -83,8 +83,8 @@ const productApi = {
       productCategoryUid: z.string({
         required_error: errorMessage.required_choice,
       }),
-      materials: z.array(z.string()).optional(),
-      testItems: z.array(z.string()).optional(),
+      materials: z.array(z.string()).min(1),
+      testItems: z.array(z.string()).min(1),
     }),
   },
 
@@ -97,8 +97,8 @@ const productApi = {
       productCategoryUid: z.string({
         required_error: errorMessage.required_choice,
       }),
-      materials: z.array(z.string()).optional(),
-      testItems: z.array(z.string()).optional(),
+      materials: z.array(z.string()).min(1),
+      testItems: z.array(z.string()).min(1),
     }),
   },
 

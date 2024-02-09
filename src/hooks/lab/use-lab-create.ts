@@ -17,7 +17,7 @@ const useLabCreate = () => {
       fetchWithSession({ url: apiData.url, data: variables }),
     onSuccess: async (data) => {
       await queryClient.invalidateQueries({
-        queryKey: [TestItemApi.BasicTestItemGetPage.url],
+        queryKey: [labApi.LabGetPage.url],
         exact: false,
       });
     },

@@ -129,7 +129,7 @@ export default function DataTable({
                 onClick={() => setModalVisible(true)}
               >
                 <PlusIcon width={24} height={24} />
-                <span className="flex">افزودن  باکس</span>
+                <span className="flex">افزودن جعبه</span>
               </Button>,
             ],
           }}

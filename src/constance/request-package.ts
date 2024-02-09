@@ -31,13 +31,10 @@ const VisitScheduleListItem = z.object({
 const VisitOpinionListItem = z.object({
   visit_Type: z.number(),
   package_UID: z.string().uuid(),
-
   naft_opinion_1: z.string(),
   is_naft_peresent: z.boolean(),
-
   samt_opinion_1: z.string(),
   is_samt_peresent: z.boolean(),
-
   est_opinion_1: z.string(),
   is_est_peresent: z.boolean(),
 });

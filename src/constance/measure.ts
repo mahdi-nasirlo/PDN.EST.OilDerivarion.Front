@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 
@@ -43,7 +43,7 @@ const measureApi = {
   MeasureCreate: {
     url: "/Basic/MeasureCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },
@@ -64,7 +64,7 @@ const measureApi = {
     url: "/Basic/MeasureUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },

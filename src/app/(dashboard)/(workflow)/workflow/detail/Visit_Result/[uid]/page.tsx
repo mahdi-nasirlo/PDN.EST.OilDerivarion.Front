@@ -60,7 +60,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         <Divider />
         <Alert
           className="text-blue-800 text-right"
-          message="لطفا اطلاعات خواسته شده را با دقت بررسی و سپس زمان بازدید را انتخاب نمایید."
+          message="لطفا گزارشات را با دقت بررسی و سپس نظرات خود را ثبت نمایید."
           type="info"
         />
         <NaftForm uid={params.uid} />

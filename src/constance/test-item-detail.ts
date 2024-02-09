@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 
@@ -52,7 +52,7 @@ const TestItemDetailApi = {
   BasicTestItemDetailCreate: {
     url: "/Basic/BasicTestItemDetailCreate",
     type: z.object({
-      title: z.string({ required_error: errorMessage.required }),
+      title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
       referenceCode: z.string({ required_error: errorMessage.required }),
@@ -63,7 +63,7 @@ const TestItemDetailApi = {
     url: "/Basic/BasicTestItemDetailUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      title: z.string({ required_error: errorMessage.required }),
+      title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       referenceCode: z.string({ required_error: errorMessage.required }),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),

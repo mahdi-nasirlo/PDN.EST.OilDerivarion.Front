@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 
@@ -93,7 +93,7 @@ const productCategoryApi = {
   BasicProductCategoryCreate: {
     url: "/Basic/BasicProductCategoryCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productionMethodId: z.number({
         required_error: errorMessage.required_choice,
@@ -109,7 +109,7 @@ const productCategoryApi = {
     url: "/Basic/BasicProductCategoryUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productionMethodId: z.number({
         required_error: errorMessage.required_choice,

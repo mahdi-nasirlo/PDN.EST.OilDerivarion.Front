@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 
@@ -37,7 +37,7 @@ const labApi = {
   LabCreate: {
     url: "/Lab/Create",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
       stateUId: z.string(),
       license_No: z.string({ required_error: errorMessage.required }),

@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 import Item from "antd/es/list/Item";
@@ -19,6 +19,11 @@ const GetRequestList = z.object({
   Wrork_State_Value: z.string(),
   License_Type: z.string(),
   State_Name: z.string(),
+});
+const GetRequestListItem = z.object({
+  Request_Uid: z.string(),
+  CanEdit: z.boolean(),
+  Wrork_State: z.number(),
 });
 
 const Step = z.object({
@@ -134,6 +139,7 @@ const licenseApi = {
   },
   GetRequestList: {
     url: "/License/GetRequestList",
+    Item: GetRequestListItem,
     response: generalResponseZod.extend({
       data: z.object({
         tasks: z.string().or(Task),

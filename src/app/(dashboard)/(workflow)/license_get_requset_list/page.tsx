@@ -1,33 +1,58 @@
 "use client";
 
 import React from "react";
-import {Card} from "@/components/card";
-import {ColumnsType} from "antd/es/table";
-import {Space} from "antd/lib";
+import { Card } from "@/components/card";
+import { ColumnsType } from "antd/es/table";
+import { Space, Tag } from "antd/lib";
 import Breadcrumb from "@/components/breadcrumb";
-import {ClipboardDocumentListIcon} from "@heroicons/react/24/solid";
+import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
 import VisitInfo from "@/components/workflow/visit-info";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
 import useGetRequestList from "@/hooks/license/use-get-request-list";
 import WorkflowTable from "@/components/workflow/workflow-table";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { z } from "zod";
 
-const apiData = licenseApi.GetRequest.producer;
+const apiData = licenseApi.GetRequestList.Item;
 
 const Page = () => {
+  const list = useGetRequestList();
 
-    const list = useGetRequestList()
-
-    const extraColumns: ColumnsType = [
+  const extraColumns: ColumnsType<z.infer<typeof apiData>> = [
     {
       title: "وضعیت",
-      dataIndex: "status",
+      dataIndex: "Wrork_State",
       key: "5",
-      render(_, record) {
-        return <WorkFlowStatusColumn record={record} />;
+      render(_, record: any) {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.Wrork_State === 0) {
+          color = "orange";
+          name = "در انتظار بررسی";
+          icon = <CheckCircleOutlined />;
+        } else if (record.Wrork_State === 3) {
+          color = "success";
+          name = "تایید شده";
+          icon = <CheckCircleOutlined />;
+        } else if (record.Wrork_State === 1) {
+          color = "orange";
+          name = "درحال بررسی";
+          icon = <CheckCircleOutlined />;
+        } else if (record.Wrork_State === 2) {
+          color = "red";
+          name = "ردشده";
+          icon = <CheckCircleOutlined />;
+        }
+
+        return (
+          <Tag icon={icon} color={color}>
+            {name}
+          </Tag>
+        );
       },
     },
-
     {
       title: "عملیات",
       key: "عملیات",
@@ -56,11 +81,11 @@ const Page = () => {
       />
 
       <Card>
-          <WorkflowTable
-              loading={list.isFetching}
-              data={list.data?.tasks.Table}
-              extraColumns={extraColumns}
-          />
+        <WorkflowTable
+          loading={list.isFetching}
+          data={list.data?.tasks.Table}
+          extraColumns={extraColumns}
+        />
       </Card>
     </>
   );

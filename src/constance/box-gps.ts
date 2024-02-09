@@ -1,4 +1,4 @@
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
 
@@ -51,7 +51,7 @@ const boxGPSApi = {
     type: z.object({
       code: z.number({ required_error: errorMessage.required }),
       capacity: z.number({ required_error: errorMessage.required }),
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       imei: z.string({ required_error: errorMessage.required }),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       stateUId: z.string({
@@ -65,7 +65,7 @@ const boxGPSApi = {
     type: z.object({
       uid: z.string().uuid(),
       capacity: z.number({ required_error: errorMessage.required }),
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       imei: z.string({ required_error: errorMessage.required }),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       stateUId: z.string({

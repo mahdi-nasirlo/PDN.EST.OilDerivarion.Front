@@ -6,12 +6,9 @@ import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Alert, Button, Divider, Form, Input, Spin } from "antd/lib";
 import { Card } from "@/components/card";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
-import CustomDatePicker from "@/components/custome-date-picker";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
 import { useRouter } from "next/navigation";
-import useUiVisitResult from "./hook/use-ui-lab-visit-result";
 import useUiVisitResultWorkFlow from "./hook/use-ui-lab-visit-result-work-flow";
 import { NaftForm } from "./components/naft-form";
 import { SamtForm } from "./components/samt-form";
@@ -60,7 +57,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         <Divider />
         <Alert
           className="text-blue-800 text-right"
-          message="لطفا اطلاعات خواسته شده را با دقت بررسی و سپس زمان بازدید را انتخاب نمایید."
+          message="لطفا گزارشات را با دقت بررسی و سپس نظرات خود را ثبت نمایید."
           type="info"
         />
         <NaftForm uid={params.uid} />

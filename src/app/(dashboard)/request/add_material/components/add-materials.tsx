@@ -55,6 +55,7 @@ const AddMaterials = () => {
                     </Col>
                     <Col xs={24} sm={8}>
                         <Form.Item
+                            required={false}
                             name={"materialUnitConsumption"}
                             label="میزان مصرف کل برای یک واحد تولیدی(کیلوگرم)"
                             rules={[
@@ -77,6 +78,7 @@ const AddMaterials = () => {
                     </Col>
                     <Col xs={24} sm={8}>
                         <Form.Item
+                            required={false}
                             initialValue={"داخلی"}
                             name="materialSupplyMethodId"
                             label="نحوه تامین"
@@ -97,7 +99,7 @@ const AddMaterials = () => {
                     </Col>
                 </Row>
                 <Divider />
-                <Typography className="mt-3 mb-6 text-right font-medium text-base text-secondary-500 text-secondary">
+                <Typography className="mt-3 mb-4 text-right font-medium text-base text-secondary-500 text-secondary">
                     مشخصات تامین کننده مواد اولیه
                 </Typography>
                 {supplyMethodStatus === 2 ? (
@@ -105,6 +107,7 @@ const AddMaterials = () => {
                         <Row gutter={[16, 16]}>
                             <Col xs={24} md={12}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyName"
                                     label="نام تامین کننده خارجی"
                                     rules={[
@@ -123,6 +126,7 @@ const AddMaterials = () => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
+                                    required={false}
                                     name="materialImportDeclarationNumber"
                                     label="شماره اظهارنامه واردات"
                                     rules={[
@@ -150,6 +154,7 @@ const AddMaterials = () => {
                         <Row gutter={[16, 16]}>
                             <Col xs={24} md={8}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyName"
                                     label="نام"
                                     rules={[
@@ -162,6 +167,7 @@ const AddMaterials = () => {
                             </Col>
                             <Col xs={24} md={8}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyPersonTypeId"
                                     label="شخصیت"
                                     rules={[
@@ -186,6 +192,7 @@ const AddMaterials = () => {
                             </Col>
                             <Col xs={24} md={8}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyNationalCode"
                                     label={
                                         personTypeStatus === null
@@ -229,7 +236,7 @@ const AddMaterials = () => {
                                     ]}
                                 >
                                     <Input
-                                        // value={SupplyNational}
+                                        value={SupplyNational}
                                         size="large"
                                         placeholder="وارد نمایید"
                                         type="number"
@@ -240,6 +247,7 @@ const AddMaterials = () => {
                         <Row gutter={[16, 16]}>
                             <Col xs={24} md={12}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyIranCode"
                                     label="ایرانکد"
                                     rules={[
@@ -264,6 +272,7 @@ const AddMaterials = () => {
                             </Col>
                             <Col xs={24} md={12}>
                                 <Form.Item
+                                    required={false}
                                     name="materialSupplyAddress"
                                     label="آدرس"
                                     rules={[
@@ -277,9 +286,10 @@ const AddMaterials = () => {
                         </Row>
                     </>
                 )}
-                <Row gutter={[16, 10]}>
-                    <div className="flex items-center justify-end">
+                <Row gutter={[16, 10]} className="flex items-center justify-end">
+                    <Col xs={24} xxl={2} md={4} sm={6}>
                         <Button
+                            className='w-full'
                             disabled={addMaterial.isPending}
                             loading={addMaterial.isPending}
                             size="large"
@@ -288,7 +298,7 @@ const AddMaterials = () => {
                         >
                             ثبت
                         </Button>
-                    </div>
+                    </Col>
                 </Row>
             </Form>
         </div >

@@ -9,18 +9,23 @@ const useRequestPackageMaterialAdd = (package_UID?: string) => {
 
     const queryClient = useQueryClient()
 
-    const query = useMutation({
-        mutationFn: (data: z.infer<typeof apiData.type>): Promise<z.infer<typeof apiData.response>> => fetchWithSession({
-            url: apiData.url,
-            notify: true,
-            data: {
-                ...data,
-                request__Package_UID: data.request__Package_UID ?? package_UID
-            }
-        }),
-        onSuccess: async (data) => {
-
-            // await queryClient.invalidateQueries({queryKey: [materialApi.RequestPackageMaterialList.url]})
+  const query = useMutation({
+    mutationFn: (
+      data: z.infer<typeof apiData.type>
+    ): Promise<z.infer<typeof apiData.response>> =>
+      fetchWithSession({
+        url: apiData.url,
+        notify: true,
+        data: {
+          ...data,
+          request__Package_UID: data.request__Package_UID ?? package_UID,
+        },
+      }),
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [materialApi.RequestPackageMaterialList.url],
+        exact: false,
+      });
 
             queryClient.setQueryData([materialApi.RequestPackageMaterialList.url], data)
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Col, Row, Select } from "antd";
+import { Col, Row, Select, Typography } from "antd";
 import React from "react";
 import { useControlTransfer } from "../hook/use-control-transfer";
 import { Transfer } from "antd/lib";
@@ -13,6 +13,9 @@ export default function SubmitForm() {
     <>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
+          <Typography className="flex p-2">
+            نقش
+          </Typography>
           <Select
             className="w-full"
             showSearch

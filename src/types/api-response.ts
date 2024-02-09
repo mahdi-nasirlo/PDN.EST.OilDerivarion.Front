@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import {z} from 'zod';
+import {errorMessage} from "../constance/error-message";
 
 interface GeneralResponseType {
     success: boolean,
@@ -13,6 +14,7 @@ const generalResponseZod = z.object({
     message: z.string(),
 })
 
+const notEmpty = z.string().trim().min(1, {message: errorMessage.required});
 
-export {generalResponseZod}
+export {generalResponseZod, notEmpty}
 export type {GeneralResponseType}

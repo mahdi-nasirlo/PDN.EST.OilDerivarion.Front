@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod, notEmpty} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
@@ -189,7 +189,7 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialCreate",
     // Item:BasicProductMaterialList,
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }),
+      name: z.string({required_error: errorMessage.required}).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.object({})),

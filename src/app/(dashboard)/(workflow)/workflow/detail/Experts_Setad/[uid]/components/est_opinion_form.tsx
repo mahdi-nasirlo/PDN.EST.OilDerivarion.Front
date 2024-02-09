@@ -7,9 +7,10 @@ import {RequestPackageApi} from "../../../../../../../../constance/request-packa
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
-const EstOpinionForm = ({request, uid}: {
+const EstOpinionForm = ({request, uid, visit_Type}: {
     request: z.infer<typeof RequestPackageApi.FinalResultList.item>,
-    uid: string
+    uid: string,
+    visit_Type: number,
 }) => {
 
     const {
@@ -33,11 +34,11 @@ const EstOpinionForm = ({request, uid}: {
                 <Form
                     form={form}
                     onFinish={onFinish}
-                    disabled={add.isPending || request.visit_Type !== 3}
+                    disabled={add.isPending || visit_Type !== 3}
                     layout="vertical"
                 >
                     <Row gutter={[12, 18]}>
-                        <Col sm={12}>
+                        <Col sm={24}>
                             <Form.Item
                                 label="نظر نهایی"
                                 name="est_Opinion_ID"
@@ -45,7 +46,7 @@ const EstOpinionForm = ({request, uid}: {
                                 <CommentWorkflowSelectField onChange={value => setDisplayTestItem(value)}/>
                             </Form.Item>
                         </Col>
-                        <Col sm={12}>
+                        <Col sm={24}>
                             {displayTestItem == 3 && <Form.Item
                                 label="فاکتور های آزمون"
                                 name={"est_test_item"}
@@ -72,7 +73,7 @@ const EstOpinionForm = ({request, uid}: {
                     >
                         <Input readOnly={true} disabled={true}/>
                     </Form.Item>
-                    {request.visit_Type == 3 &&
+                    {visit_Type == 3 &&
                         <Button loading={add.isPending} htmlType="submit" type="primary" className="w-full"
                                 size="large">
                             ثبت

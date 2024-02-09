@@ -10,7 +10,15 @@ const useFinalResultList = (data: z.infer<typeof apiData.type>) => {
     return useQuery({
         queryKey: [apiData.url],
         queryFn: () => fetchWithSession({url: apiData.url, data}),
-        select: (data: z.infer<typeof apiData.response>) => data.data
+        select: (data: z.infer<typeof apiData.response>) => ({
+            visit_Type: data.data.visit_Type,
+            requestPackageFinalResultList: data.data.requestPackageFinalResultList.map(item => ({
+                ...item,
+                naft_test_item: item.naft_test_item.map((item: any) => item.uid),
+                samt_test_item: item.samt_test_item.map((item: any) => item.uid),
+                est_test_item: item.est_test_item.map((item: any) => item.uid),
+            }))
+        })
     })
 };
 

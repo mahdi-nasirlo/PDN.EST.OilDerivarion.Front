@@ -58,7 +58,19 @@ const FinalResultListItem = z.object({
   samt_result_modify_date_time: z.string().optional(),
   est_Opinion_ID: z.number(),
   est_opinion_description: z.string(),
-  System_Opinion_ID: z.number(),
+  est_test_item: z.array(z.object({
+    uid: z.string(),
+    name: z.string()
+  }).or(z.string())),
+  samt_test_item: z.array(z.object({
+    uid: z.string(),
+    name: z.string()
+  }).or(z.string())),
+  naft_test_item: z.array(z.object({
+    uid: z.string(),
+    name: z.string()
+  }).or(z.string())),
+  system_Opinion_ID: z.number(),
   est_result_modify_date_time: z.string().optional(),
   system_test_item: z.string().optional(),
 })
@@ -209,7 +221,10 @@ const RequestPackageApi = {
     }),
     item: FinalResultListItem,
     response: generalResponseZod.extend({
-      data: z.array(FinalResultListItem)
+      data: z.object({
+        visit_Type: z.number(),
+        requestPackageFinalResultList: z.array(FinalResultListItem)
+      })
     })
   },
   FinalResultAdd: {

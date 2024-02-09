@@ -192,7 +192,7 @@ const materialApi = {
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required }).uuid(),
-      testItems: z.array(z.object({})),
+      testItems: z.array(z.string()).min(1),
     }),
   },
 
@@ -213,7 +213,7 @@ const materialApi = {
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required }).uuid(),
-      testItems: z.array(z.string().optional()).nullable(),
+      testItems: z.array(z.string()).min(1),
     }),
   },
   RequestPackagePartDelete: {

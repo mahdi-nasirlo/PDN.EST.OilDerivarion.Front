@@ -55,7 +55,9 @@ const TestItemDetailApi = {
       title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
-      referenceCode: z.string({ required_error: errorMessage.required }),
+      referenceCode: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
     }),
   },
 
@@ -65,7 +67,9 @@ const TestItemDetailApi = {
       uid: z.string().uuid(),
       title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
-      referenceCode: z.string({ required_error: errorMessage.required }),
+      referenceCode: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
     }),
   },

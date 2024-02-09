@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import useLabGetInfo from "./hook/use-lab-get";
 import { useLabGetPage } from "@/hooks/lab/use-lab-get-page";
 import DataTable from "./components/data-table";
 import CreateModal from "./components/create-modal";
 import FilterForm from "./components/filter-form";
 import { Collapse } from "antd";
-import { DocumentCheckIcon } from "@heroicons/react/24/outline";
 import Breadcrumb from "@/components/breadcrumb";
 import { BeakerIcon } from "@heroicons/react/24/solid";
 
@@ -21,7 +19,7 @@ export default function Page() {
       <Breadcrumb
         titleIcon={<BeakerIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"آزمایشگاه"}
+        currentPage={"لیست آزمایشگاه"}
       />
       <Collapse
         size="large"

@@ -1,8 +1,8 @@
 "use client";
 
-import {Button, Col, Form, Modal, Row, Spin, Typography} from 'antd';
+import { Button, Col, Form, Modal, Row, Spin, Typography } from 'antd';
 import React from 'react'
-import {useGetUserInfo} from "@/hooks/sso/use-get-user-info";
+import { useGetUserInfo } from "@/hooks/sso/use-get-user-info";
 
 interface TProps {
     modalVisibleConfirmation: any,
@@ -10,9 +10,9 @@ interface TProps {
 }
 
 export default function ReviewDataModalAcceptAgreement({
-                                                           modalVisibleConfirmation,
-                                                           setModalVisibleConfirmation
-                                                       }: TProps) {
+    modalVisibleConfirmation,
+    setModalVisibleConfirmation
+}: TProps) {
     const dataUserInfo = useGetUserInfo()
     const closeModal = () => {
         setModalVisibleConfirmation(false);
@@ -58,7 +58,7 @@ export default function ReviewDataModalAcceptAgreement({
                                     </b>
                                     {` ، سمت مدیرعامل ، شرکت `}
                                     <b style={{ fontWeight: 'bold' }}>
-                                        {/*{dataUserInfo.data?.producerName}*/} _____
+                                        {dataUserInfo.data?.companyName}
                                     </b>
                                     {` با شناسه `}
                                     <b style={{ fontWeight: 'bold' }}>

@@ -11,7 +11,7 @@ const useTestItemGet = (uid?: string) => {
   };
 
   const query = useQuery({
-    queryKey: [apiData.url],
+    queryKey: [apiData.url, uid],
     queryFn: () => fetchWithSession({ url: apiData.url, data }),
     enabled: typeof uid === "string",
     select: (data: z.infer<typeof apiData.response>) => data.data,

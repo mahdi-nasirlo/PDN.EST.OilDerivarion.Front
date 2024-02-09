@@ -8,7 +8,7 @@ function GpsForm({ rules }: any) {
     <>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="code" label="کد">
+          <Form.Item rules={[rules]} name="code" label="کد جعبه">
             <InputNumber
               className="w-full"
               size="large"
@@ -55,7 +55,7 @@ function GpsForm({ rules }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="stateUId" label="استان">
+          <Form.Item rules={[rules]} name="stateUid" label="استان">
             <StateSelectField />
           </Form.Item>
         </Col>

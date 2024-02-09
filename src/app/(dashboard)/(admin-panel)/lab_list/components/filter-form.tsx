@@ -46,8 +46,6 @@ export default function FilterForm({
             <Select
               showSearch
               fieldNames={state.apiData.fieldNames}
-              // @ts-ignore
-              //   filterOption={filterOption}
               loading={state.isLoading}
               options={state.data}
               size="large"

@@ -26,7 +26,7 @@ const Page = () => {
         size="large"
         items={[
           {
-            label: "فیلتر جستجو ",
+            label: "فیلتر جدول",
             children: <FilterForm onFinish={dataPage.setFilter as any} />,
           },
         ]}

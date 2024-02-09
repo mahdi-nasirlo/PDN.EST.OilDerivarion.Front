@@ -69,20 +69,27 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 dataIndex: "materials",
                 key: "5",
                 render: (_, record) => {
-                    return (
-                        <Tooltip
-                            placement="top"
-                            title={<Typography>{record.materials}</Typography>}
-                        >
-                            <Typography.Text
-                                className="max-w-[180px]"
-                                ellipsis={true}
-                                style={{ width: "40px !important" }}
+                    if (record.materials && Array.isArray(record.materials) && record.materials.length > 0) {
+                        let materialNames = record.materials
+                            .map(item => item?.name)
+                            .join(", ");
+                        return (
+                            <Tooltip
+                                placement="top"
+                                title={<Typography>{materialNames}</Typography>}
                             >
-                                {record.materials}
-                            </Typography.Text>
-                        </Tooltip>
-                    );
+                                <Typography.Text
+                                    className="max-w-[350px]"
+                                    ellipsis={true}
+                                    style={{ maxWidth: "350px" }}
+                                >
+                                    {materialNames}
+                                </Typography.Text>
+                            </Tooltip>
+                        );
+                    } else {
+                        return <Typography>_</Typography>;
+                    }
                 },
             },
             {
@@ -90,20 +97,27 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 dataIndex: "testItems",
                 key: "6",
                 render: (_, record) => {
-                    return (
-                        <Tooltip
-                            placement="top"
-                            title={<Typography>{record.testItems}</Typography>}
-                        >
-                            <Typography.Text
-                                className="max-w-[180px]"
-                                ellipsis={true}
-                                style={{ width: "40px !important" }}
+                    if (record.testItems && Array.isArray(record.testItems) && record.testItems.length > 0) {
+                        let testItemNames = record.testItems
+                            .map(item => item?.name)
+                            .join(", ");
+                        return (
+                            <Tooltip
+                                placement="top"
+                                title={<Typography>{testItemNames}</Typography>}
                             >
-                                {record.testItems}
-                            </Typography.Text>
-                        </Tooltip>
-                    );
+                                <Typography.Text
+                                    className="max-w-[350px]"
+                                    ellipsis={true}
+                                    style={{ maxWidth: "350px" }}
+                                >
+                                    {testItemNames}
+                                </Typography.Text>
+                            </Tooltip>
+                        );
+                    } else {
+                        return <Typography>_</Typography>;
+                    }
                 },
             },
             {

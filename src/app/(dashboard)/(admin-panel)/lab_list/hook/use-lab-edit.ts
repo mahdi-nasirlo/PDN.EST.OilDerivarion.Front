@@ -1,27 +1,20 @@
-import useBoxGPSGet from "@/hooks/box-gps/use-box-gps-get";
-import useBoxGPSUpdate from "@/hooks/box-gps/use-box-gps-update";
+import useLabGet from "@/hooks/lab/use-lab-get";
+import useLabUpdate from "@/hooks/lab/use-lab-update";
 import { useValidation } from "@/hooks/use-validation";
-import { boxGPSApi } from "constance/box-gps";
-
+import labApi from "constance/lab";
 import { useEffect } from "react";
 import { z } from "zod";
 
-const apiData = boxGPSApi.BoxGPSUpdate;
+const apiData = labApi.LabUpdate;
 
-const useBoxGPSDetailEdit = (
-  uid: string,
-  setUid: (arg: string | undefined) => void
-) => {
+const useLabEdit = (uid: string, setUid: (arg: string | undefined) => void) => {
   const [form, rules] = useValidation(apiData.type);
 
-  const get = useBoxGPSGet(uid as string);
+  const get = useLabGet(uid as string);
 
-  const update = useBoxGPSUpdate();
+  const update = useLabUpdate();
 
   useEffect(() => {
-
-    console.log(get.data, boxGPSApi.BoxGPSUpdate.type.shape);
-    
     if (get.data) {
       form.setFieldsValue(get.data);
     }
@@ -35,6 +28,7 @@ const useBoxGPSDetailEdit = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 
@@ -44,14 +38,7 @@ const useBoxGPSDetailEdit = (
       form.resetFields();
     }
   };
-
-  return {
-    get,
-    update,
-    form,
-    rules,
-    handleSubmit,
-    closeModal,
-  };
+  return { get, form, closeModal, handleSubmit, update, rules };
 };
-export default useBoxGPSDetailEdit;
+
+export default useLabEdit;

@@ -80,9 +80,9 @@ export default function DataTable({
               title={<Typography>{testItemNames}</Typography>}
             >
               <Typography.Text
-                className="max-w-[180px]"
+                className="max-w-[350px]"
                 ellipsis={true}
-                style={{ maxWidth: "180px" }}
+                style={{ maxWidth: "350px" }}
               >
                 {testItemNames}
               </Typography.Text>

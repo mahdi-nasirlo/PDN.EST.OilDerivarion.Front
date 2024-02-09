@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
 import { Col, Row, Select, Typography } from "antd";
-import Transfer from "antd/lib/transfer";
+import React from "react";
 import { useControlTransfer } from "../hook/use-control-transfer";
+import { Transfer } from "antd/lib";
 
 export default function SubmitForm() {
 
@@ -13,12 +15,11 @@ export default function SubmitForm() {
     handleOnChange
   } = useControlTransfer();
 
-
   return (
     <>
       <Row gutter={[16, 16]}>
         <Typography className="flex px-2">
-          مرحله
+          نقش
         </Typography>
         <Select
           className="w-full"
@@ -30,7 +31,7 @@ export default function SubmitForm() {
           size="large"
           placeholder="انتخاب کنید"
         />
-      </Row >
+      </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={24}>
           <div className="w-full mt-8">
@@ -47,7 +48,7 @@ export default function SubmitForm() {
               showSearch
               listStyle={{
                 width: "100%",
-                height: 400
+                height: 400,
               }}
               operations={["به چپ", "به راست"]}
               onChange={handleOnChange}

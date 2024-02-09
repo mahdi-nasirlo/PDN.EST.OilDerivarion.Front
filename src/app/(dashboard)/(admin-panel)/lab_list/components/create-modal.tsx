@@ -52,7 +52,7 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
           </Col>
           <Col xs={12} md={12}>
             <Button
-              //   disabled={createLaboratoryRequest.isMutating}
+              loading={create.isPending}
               size="large"
               className="w-full bg-gray-100 text-warmGray-500"
               onClick={CloseModal}

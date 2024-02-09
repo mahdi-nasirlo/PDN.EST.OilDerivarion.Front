@@ -1,20 +1,20 @@
 import React from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {ColumnsType} from "antd/es/table";
-import {Button, Space, Tooltip, Typography} from "antd";
+import { ColumnsType } from "antd/es/table";
+import { Button, Space, Tooltip, Typography } from "antd";
 import CustomTable from "@/components/custom-table";
-import {ViewColumnsIcon} from "@heroicons/react/24/outline";
-import {PlusOutlined} from "@ant-design/icons";
-import {z} from "zod";
+import { ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { PlusOutlined } from "@ant-design/icons";
+import { z } from "zod";
 import useUiRequestPackageProductList
     from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-list";
 
-interface Tprops {
+interface TProps {
     uid: string,
     setVisibleModal: (arg: any) => void
 }
 
-export default function DataTable({setVisibleModal, uid}: Tprops) {
+export default function DataTable({ setVisibleModal, uid }: TProps) {
 
     const {
         productDelete,
@@ -39,21 +39,19 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
                 return (
                     <Tooltip
                         placement="top"
-                        title={<Typography>{_}</Typography>}
+                        title={<Typography>_</Typography>}
                     >
                         <Typography.Text
                             className="max-w-[900px]"
                             ellipsis={true}
-                            style={{width: "40px !important"}}
-                        >
-                            {_}
-                        </Typography.Text>
+                            style={{ width: "40px !important" }}
+                        >_</Typography.Text>
                     </Tooltip>
                 );
             },
         },
         {
-            title: "درصد استفاده",
+            title: "درصد استحصال",
             key: "3",
             dataIndex: "Estehsal",
             render: (value) => <>{value}%</>,
@@ -88,12 +86,12 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
         <>
             <CustomTable
                 header={{
-                    icon: <ViewColumnsIcon/>,
+                    icon: <ViewColumnsIcon />,
                     text: "لیست محصولات",
                     actions: (
                         <Button
                             className="flex items-center justify-center"
-                            icon={<PlusOutlined width={16} height={16}/>}
+                            icon={<PlusOutlined width={16} height={16} />}
                             type="primary"
                             size="large"
                             onClick={() => setVisibleModal(true)}
@@ -103,7 +101,7 @@ export default function DataTable({setVisibleModal, uid}: Tprops) {
                     ),
                 }}
                 isLoading={products.isFetching}
-                data={{records: products.data}}
+                data={{ records: products.data }}
                 pagination={false}
                 columns={columns}
             />

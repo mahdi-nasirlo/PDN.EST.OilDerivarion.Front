@@ -20,7 +20,7 @@ export default function FilterForm({
     <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
       <Row gutter={[16, 0]}>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="code" label="واحد اندازه گیری ">
+          <Form.Item rules={[rules]} name="code" label="کد جعبه">
             <Input size="large" placeholder="وارد کنید" />
           </Form.Item>
         </Col>

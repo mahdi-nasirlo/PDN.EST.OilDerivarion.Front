@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { Card } from "@/components/card";
 import SubmitForm from "./components/submit-form";
@@ -5,7 +7,8 @@ import { Alert, Divider } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from "@heroicons/react/24/solid";
 
-const page = () => {
+const Page = () => {
+
   return (
     <div>
       <Breadcrumb
@@ -27,4 +30,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

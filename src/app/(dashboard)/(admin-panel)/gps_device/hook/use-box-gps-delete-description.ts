@@ -21,6 +21,7 @@ const useBoxGpsDeleteDescription = (
 
     if (res.success) {
       setUidDelete(undefined);
+      form.resetFields();
     }
   };
 

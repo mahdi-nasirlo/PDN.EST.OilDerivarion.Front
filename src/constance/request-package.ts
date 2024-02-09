@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -48,6 +48,23 @@ const LabVisitOpinionListItem = z.object({
   samt_opinion_2: z.string(),
   est_opinion_3: z.string(),
 });
+
+const FinalResultListItem = z.object({
+  visit_Type: z.number().optional(),
+  product_uid: z.string().optional(),
+  product_name: z.string().optional(),
+  Naft_Opinion_ID: z.number(),
+  naft_opinion_description: z.string(),
+  naft_result_modify_date_time: z.string().optional(),
+  Samt_Opinion_ID: z.number(),
+  samt_opinion_description: z.string(),
+  samt_result_modify_date_time: z.string().optional(),
+  est_Opinion_ID: z.number(),
+  est_opinion_description: z.string(),
+  System_Opinion_ID: z.number(),
+  est_result_modify_date_time: z.string().optional(),
+  system_test_item: z.string().optional(),
+})
 
 const RequestPackageApi = {
   RequestPackageFinalization: {
@@ -188,6 +205,34 @@ const RequestPackageApi = {
       data: LabVisitOpinionListItem,
     }),
   },
+  FinalResultList: {
+    url: "/RequestPackage/FinalResultList",
+    type: z.object({
+      package_UID: z.string()
+    }),
+    item: FinalResultListItem,
+    response: generalResponseZod.extend({
+      data: z.array(FinalResultListItem)
+    })
+  },
+  FinalResultAdd: {
+    url: "/RequestPackage/FinalResultAdd",
+    type: z.object({
+      package_UID: z.string(),
+      product_UID: z.string(),
+      visit_Type: z.number(),
+      naft_Opinion_ID: z.number(),
+      naft_opinion_description: z.string(),
+      samt_Opinion_ID: z.number(),
+      samt_opinion_description: z.string(),
+      est_Opinion_ID: z.number(),
+      est_opinion_description: z.string(),
+      naft_test_item: z.array(z.string()),
+      samt_test_item: z.array(z.string()),
+      est_test_item: z.array(z.string())
+    }),
+    response: generalResponseZod.extend({data: z.any()})
+  }
 };
 
 export { RequestPackageApi };

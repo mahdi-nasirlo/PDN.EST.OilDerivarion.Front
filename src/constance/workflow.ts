@@ -1,5 +1,5 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
 
 const ChoiceItem = z.object({
   choice_id: z.string(),
@@ -66,6 +66,7 @@ export const workflowApi = {
         choices: z.array(ChoiceItem),
         task: z.object({
           task_id: z.string(),
+          System_Opinion_ID: z.number(),
           extended_data: z.string(),
           current_Step_id: z.string(),
           current_Step_Key: z.string(),

@@ -48,8 +48,10 @@ export default function Page() {
           form={form}
           onFinish={async (values) => {
             const res = await finalRequest.mutateAsync();
-
-            if (res.success) router.push("/request/list");
+            if (res.success) {
+              setModalVisibleFinalSubmit(true);
+              router.push("/request/list");
+            }
           }}
         >
           <Form.Item
@@ -84,6 +86,7 @@ export default function Page() {
           <Row gutter={[12, 12]}>
             <Col xs={24} sm={12}>
               <Button
+                loading={finalRequest.isPending}
                 size="large"
                 onClick={() => router.push("/request")}
                 type="default"
@@ -94,6 +97,8 @@ export default function Page() {
             </Col>
             <Col xs={24} sm={12}>
               <Button
+                loading={finalRequest.isPending}
+                disabled={finalRequest.isPending}
                 size="large"
                 className="w-full "
                 type="primary"

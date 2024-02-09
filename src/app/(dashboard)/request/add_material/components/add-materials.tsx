@@ -11,16 +11,20 @@ const apiData = materialApi.RequestPackageMaterialAdd
 
 const AddMaterials = () => {
 
-    const [form, rules] = useValidation(apiData.type)
+    const [form, rules] = useValidation(apiData.type);
 
-    const addMaterial = useRequestPackageMaterialAdd()
+    const addMaterial = useRequestPackageMaterialAdd();
 
     const handleSubmit = async (values: any) => {
 
-        const res = await addMaterial.mutateAsync(values)
+        const res = await addMaterial.mutateAsync(
+            {
+                ...values,
+                package_UID: null
+            })
 
         if (res.success)
-            form.resetFields()
+            form.resetFields();
 
     }
 
@@ -56,7 +60,7 @@ const AddMaterials = () => {
                     <Col xs={24} sm={8}>
                         <Form.Item
                             required={false}
-                            name={"materialUnitConsumption"}
+                            name={"material_Unit_Consumption"}
                             label="میزان مصرف کل برای یک واحد تولیدی(کیلوگرم)"
                             rules={[
                                 {
@@ -80,7 +84,7 @@ const AddMaterials = () => {
                         <Form.Item
                             required={false}
                             initialValue={"داخلی"}
-                            name="materialSupplyMethodId"
+                            name="material_Supply_Method_Id"
                             label="نحوه تامین"
                             rules={[{ required: true, message: "لطفا مقدار را انتخاب کنید" }]}
                         >
@@ -108,7 +112,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyName"
+                                    name="material_Supply_Name"
                                     label="نام تامین کننده خارجی"
                                     rules={[
                                         {
@@ -127,7 +131,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     required={false}
-                                    name="materialImportDeclarationNumber"
+                                    name="material_Import_Declaration_Number"
                                     label="شماره اظهارنامه واردات"
                                     rules={[
                                         {
@@ -155,7 +159,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={8}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyName"
+                                    name="material_Supply_Name"
                                     label="نام"
                                     rules={[
                                         { required: true, message: "لطفا مقدار را وارد کنید" },
@@ -168,7 +172,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={8}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyPersonTypeId"
+                                    name="material_Supply_Person_Type_Id"
                                     label="شخصیت"
                                     rules={[
                                         { required: true, message: "لطفا مقدار را انتخاب کنید" },
@@ -193,7 +197,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={8}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyNationalCode"
+                                    name="material_Supply_National_Code"
                                     label={
                                         personTypeStatus === null
                                             ? "شماره ملی / شناسه ملی"
@@ -248,23 +252,15 @@ const AddMaterials = () => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyIranCode"
+                                    name="material_Supply_Iran_Code"
                                     label="ایرانکد"
                                     rules={[
                                         { required: true, message: "لطفا مقدار را وارد کنید" },
-                                        {
-                                            validator: async (rule, value) => {
-                                                if (!/^\d{16}$/.test(value)) {
-                                                    throw new Error("ایرانکد 16 رقمی است");
-                                                }
-                                            },
-                                        },
+                                        { type: 'string' }
                                     ]}
                                 >
-                                    <InputNumber
-                                        controls={false}
-                                        type="number"
-                                        className="w-full rounded-lg"
+                                    <Input
+                                        className="w-full"
                                         size="large"
                                         placeholder="وارد نمایید"
                                     />
@@ -273,7 +269,7 @@ const AddMaterials = () => {
                             <Col xs={24} md={12}>
                                 <Form.Item
                                     required={false}
-                                    name="materialSupplyAddress"
+                                    name="material_Supply_Address"
                                     label="آدرس"
                                     rules={[
                                         { required: true, message: "لطفا مقدار را وارد کنید" },

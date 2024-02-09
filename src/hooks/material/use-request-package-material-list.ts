@@ -11,8 +11,8 @@ const useRequestPackageMaterialList = () => {
   const [arg, setArg] = useState<z.infer<typeof apiData.type>>();
 
   const query = useQuery({
-    queryKey: [apiData.url, arg],
-    queryFn: () => fetchWithSession({ url: apiData.url, data: arg || {} }),
+    queryKey: [apiData.url],
+    queryFn: () => fetchWithSession({ url: apiData.url, data: {} }),
     select: (data: z.infer<typeof apiData.response>) => data.data,
   });
 

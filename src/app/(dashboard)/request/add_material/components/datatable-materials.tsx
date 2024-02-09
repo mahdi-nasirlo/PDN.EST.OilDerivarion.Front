@@ -29,22 +29,45 @@ const DatatableMaterials = () => {
         },
         {
             title: "میزان مصرف کل برای یک واحد",
-            dataIndex: "TestItems",
+            dataIndex: "Material_Unit_Consumption",
             render: (_, record) => {
-                if (!record.TestItems) {
+                if (!record.Material_Unit_Consumption) {
                     return <Typography>_</Typography>;
                 }
                 return (
                     <Tooltip
                         placement="top"
-                        title={<Typography>{record.TestItems}</Typography>}
+                        title={<Typography>{record.Material_Unit_Consumption}</Typography>}
                     >
                         <Typography.Text
                             className="max-w-[220px]"
                             ellipsis={true}
                             style={{ width: "40px !important" }}
                         >
-                            {record.TestItems}
+                            {record.Material_Unit_Consumption}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
+        },
+        {
+            title: "نام تامین کننده",
+            dataIndex: "Material_Supply_Name",
+            render: (_, record) => {
+                if (!record.Material_Supply_Name) {
+                    return <Typography>_</Typography>;
+                }
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{record.Material_Supply_Name}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[220px]"
+                            ellipsis={true}
+                            style={{ width: "40px !important" }}
+                        >
+                            {record.Material_Supply_Name}
                         </Typography.Text>
                     </Tooltip>
                 );
@@ -71,7 +94,7 @@ const DatatableMaterials = () => {
                 columns={columns}
                 dataSource={addIndexToData(materials.data)}
                 pagination={{ showSizeChanger: false }}
-                loading={materials.isFetching}
+                loading={materials.isFetching || materials.isLoading}
             />
             <ConfirmDeleteModal
                 open={typeof open === "string"}

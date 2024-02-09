@@ -5,8 +5,8 @@ import { Card } from "@/components/card";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import Breadcrumb from "@/components/breadcrumb";
 import { Divider } from "antd";
-import AddMaterials from "@/app/(dashboard)/request/add_material/components/add-materials";
-import DatatableMaterials from "@/app/(dashboard)/request/add_material/components/datatable-materials";
+import AddMaterials from "./components/add-materials";
+import DatatableMaterials from "./components/datatable-materials";
 
 
 

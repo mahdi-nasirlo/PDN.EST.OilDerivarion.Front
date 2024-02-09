@@ -67,6 +67,8 @@ const RequestPackageMaterialListItem = z.object({
   Uid: z.string(),
   Material_Name: z.string(),
   TestItems: z.string(),
+  Material_Supply_Name: z.string(),
+  Material_Unit_Consumption: z.string(),
 });
 
 const RequestPackagePartMaterialListItem = z.object({
@@ -144,12 +146,34 @@ const materialApi = {
       name: z.string(),
     }),
     type: z.object({
-      request__Package_UID: z
-        .string({
-          required_error: errorMessage.required_choice,
-        })
-        .optional(),
+      package_UID: z.string({
+        required_error: errorMessage.required_choice,
+      }),
       material_Uid: z.string({ required_error: errorMessage.required }),
+      material_Supply_Method_Id: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      material_Unit_Consumption: z.string({
+        required_error: errorMessage.required,
+      }),
+      material_Supply_Name: z.string({
+        required_error: errorMessage.required,
+      }),
+      material_Supply_Person_Type_Id: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      material_Supply_National_Code: z.string({
+        required_error: errorMessage.required,
+      }),
+      material_Supply_Iran_Code: z.string({
+        required_error: errorMessage.required,
+      }),
+      material_Supply_Address: z.string({
+        required_error: errorMessage.required,
+      }),
+      material_Import_Declaration_Number: z.string({
+        required_error: errorMessage.required,
+      }),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.object({})),

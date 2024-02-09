@@ -4,7 +4,7 @@ import useFinalResultAdd from "@/hooks/request-package/use-final-result-add";
 import {z} from "zod";
 import {RequestPackageApi} from "../../../../../../../../constance/request-package";
 
-const useUiOpinionForm = (package_UID: string, request: z.infer<typeof RequestPackageApi.FinalResultList.item>) => {
+const useUiOpinionForm = (package_UID: string, request: z.infer<typeof RequestPackageApi.FinalResultList.item>, visit_Type: any) => {
 
     const add = useFinalResultAdd()
 
@@ -17,12 +17,11 @@ const useUiOpinionForm = (package_UID: string, request: z.infer<typeof RequestPa
     }, [request])
 
     const onFinish = async (value: z.infer<typeof add.type>) => {
-
         const res = await add.mutateAsync({
             ...value,
             package_UID,
             product_UID: request.product_uid as string,
-            visit_Type: request.visit_Type as number,
+            visit_Type: visit_Type,
         })
 
     }

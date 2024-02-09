@@ -20,7 +20,7 @@ const EstOpinionForm = ({request, uid, visit_Type}: {
         form,
         onFinish,
         add
-    } = useUiOpinionForm(uid, request)
+    } = useUiOpinionForm(uid, request, visit_Type)
 
     useEffect(() => {
         setDisplayTestItem(request.Naft_Opinion_ID)
@@ -39,7 +39,7 @@ const EstOpinionForm = ({request, uid, visit_Type}: {
                     initialValues={{samt_test_item: [], est_test_item: []}}>
                     <Form.Item
                         label="نظر نهایی"
-                        name="Naft_Opinion_ID"
+                        name="naft_Opinion_ID"
                     >
                         <CommentWorkflowSelectField onChange={value => setDisplayTestItem(value)}/>
                     </Form.Item>

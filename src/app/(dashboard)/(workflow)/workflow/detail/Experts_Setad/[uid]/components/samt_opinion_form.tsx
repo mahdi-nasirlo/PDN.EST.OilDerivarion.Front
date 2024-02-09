@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { Divider, Form, Input } from "antd/lib";
-import { CommentWorkflowSelectField } from "@/components/fields/commenct-workflow-select-field";
-import { TestItemsMultipleSelectField } from "@/components/fields/test-items-multiple-select-field";
-import { z } from "zod";
-import { RequestPackageApi } from "../../../../../../../../constance/request-package";
-import { Button } from "antd";
+import React, {useEffect} from 'react';
+import {Divider, Form, Input} from "antd/lib";
+import {CommentWorkflowSelectField} from "@/components/fields/commenct-workflow-select-field";
+import {TestItemsMultipleSelectField} from "@/components/fields/test-items-multiple-select-field";
+import {z} from "zod";
+import {RequestPackageApi} from "../../../../../../../../constance/request-package";
+import {Button} from "antd";
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
@@ -20,7 +20,7 @@ const EstOpinionForm = ({ request, uid, visit_Type }: {
         form,
         add,
         onFinish
-    } = useUiOpinionForm(uid, request)
+    } = useUiOpinionForm(uid, request, visit_Type)
 
     useEffect(() => {
         setDisplayTestItem(request.Samt_Opinion_ID)
@@ -40,7 +40,7 @@ const EstOpinionForm = ({ request, uid, visit_Type }: {
                 >
                     <Form.Item
                         label="نظر نهایی"
-                        name="Samt_Opinion_ID"
+                        name="samt_Opinion_ID"
                     >
                         <CommentWorkflowSelectField onChange={value => setDisplayTestItem(value)} />
                     </Form.Item>

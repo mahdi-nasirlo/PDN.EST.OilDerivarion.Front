@@ -17,9 +17,9 @@ const Page = () => {
         <iframe
           className="w-full border-2 border-CustomizeBlue-500 rounded-md"
           src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/oil/labs`}
-          width="1500px"
-          height="650px"
-        ></iframe>
+          height="560px"
+        >
+        </iframe>
       </Card>
     </>
   );

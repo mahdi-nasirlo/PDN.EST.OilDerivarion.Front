@@ -14,6 +14,7 @@ interface TProps {
 }
 
 export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
+
   const create = useBoxGPSCreate();
 
   const [form, rules] = useValidation(formSchema);

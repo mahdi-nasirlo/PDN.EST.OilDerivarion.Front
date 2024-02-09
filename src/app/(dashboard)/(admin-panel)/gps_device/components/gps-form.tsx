@@ -55,7 +55,7 @@ function GpsForm({ rules }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="stateUId" label="استان">
+          <Form.Item rules={[rules]} name="stateUid" label="استان">
             <StateSelectField />
           </Form.Item>
         </Col>

@@ -2,13 +2,12 @@ import useBoxGPSGet from "@/hooks/box-gps/use-box-gps-get";
 import useBoxGPSUpdate from "@/hooks/box-gps/use-box-gps-update";
 import { useValidation } from "@/hooks/use-validation";
 import { boxGPSApi } from "constance/box-gps";
-
 import { useEffect } from "react";
 import { z } from "zod";
 
 const apiData = boxGPSApi.BoxGPSUpdate;
 
-const useBoxGPSDetailEdit = (
+const useBoxGPSEdit = (
   uid: string,
   setUid: (arg: string | undefined) => void
 ) => {
@@ -19,9 +18,6 @@ const useBoxGPSDetailEdit = (
   const update = useBoxGPSUpdate();
 
   useEffect(() => {
-
-    console.log(get.data, boxGPSApi.BoxGPSUpdate.type.shape);
-    
     if (get.data) {
       form.setFieldsValue(get.data);
     }
@@ -35,6 +31,7 @@ const useBoxGPSDetailEdit = (
 
     if (res.success) {
       setUid(undefined);
+      form.resetFields();
     }
   };
 
@@ -54,4 +51,4 @@ const useBoxGPSDetailEdit = (
     closeModal,
   };
 };
-export default useBoxGPSDetailEdit;
+export default useBoxGPSEdit;

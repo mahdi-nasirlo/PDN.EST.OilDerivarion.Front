@@ -9,11 +9,10 @@ import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { boxGPSApi } from "constance/box-gps";
 import StatusColumn from "@/components/custom-table/StatusColumn";
-import useBoxGPSDelete from "@/hooks/box-gps/use-box-gps-delete";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import EditModal from "./edit-modal";
 
 import Link from "next/link";
+import DeleteModal from "./delete-modal";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -30,19 +29,11 @@ export default function DataTable({
   setModalVisible,
   setPaginate,
 }: TProps) {
+
   const [uid, setGetUid] = useState<string | boolean>();
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
 
-  const Delete = useBoxGPSDelete();
-
-  const handelDelete = async () => {
-    const res = await Delete.mutateAsync({ uid: uidDelete as string });
-
-    if (res.success) {
-      setUidDelete(undefined);
-    }
-  };
 
   const columns: ColumnsType<z.infer<typeof apiData.item>> = [
     {
@@ -79,7 +70,7 @@ export default function DataTable({
       render: (_, record) => (
         <Space size="small">
           <Button type="link" className="text-primary-500 font-bold">
-            <Link href={"/admin-panel/GPS/gps-devices/location-gps-device"}>
+            <Link href={"/gps_device/location"}>
               مشاهده موقعیت
             </Link>
           </Button>
@@ -151,12 +142,9 @@ export default function DataTable({
           editModalUid={uid}
           setEditModalUid={setGetUid}
         />
-        <ConfirmDeleteModal
-          title="جعبه"
-          open={uidDelete}
-          setOpen={setUidDelete}
-          handleDelete={handelDelete}
-          loading={Delete.isPending}
+        <DeleteModal
+          uidDelete={uidDelete}
+          setUidDelete={setUidDelete}
         />
       </Card>
     </>

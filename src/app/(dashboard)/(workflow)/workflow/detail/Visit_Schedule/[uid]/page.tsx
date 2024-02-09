@@ -1,18 +1,20 @@
 "use client";
 
 import React from "react";
-import { Alert, Form, Typography } from "antd";
-import { EstForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/est-form";
-import { SamtForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/samt-form";
-import { NaftForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/naft-form";
-import { Button, Divider, Input, Spin } from "antd/lib";
-import { Card } from "@/components/card";
+import {Alert} from "antd";
+import {EstForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/est-form";
+import {SamtForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/samt-form";
+import {NaftForm} from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/naft-form";
+import {Button, Divider, Spin} from "antd/lib";
+import {Card} from "@/components/card";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
-import { useRouter } from "next/navigation";
-import { ClockIcon } from "@heroicons/react/24/solid";
+import useUiVisitSchedule
+  from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
+import {useRouter} from "next/navigation";
+import {ClockIcon} from "@heroicons/react/24/solid";
+import CalendarTime from "@/components/calendar-time/calendar-time";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
@@ -61,6 +63,7 @@ export default function Page({ params }: { params: { uid: string } }) {
           message="لطفا اطلاعات خواسته شده را با دقت بررسی و سپس زمان بازدید را انتخاب نمایید."
           type="info"
         />
+        <CalendarTime data={get.data?.listCalendar as any}/>
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
@@ -70,10 +73,9 @@ export default function Page({ params }: { params: { uid: string } }) {
             className="text-lg font-bold text-blue-800"
           />
         )}
-        {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
+        {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (get.data?.choices?.length ?? 0) > 0 && (
           <>
             <Divider />
-            {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
             <WorkflowBtn
               loading={set.isPending}
               choices={get.data?.choices}

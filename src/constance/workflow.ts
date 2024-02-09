@@ -78,6 +78,9 @@ export const workflowApi = {
           userId: z.number(),
           userDescription: z.string(),
         }),
+        listCalendar: z.array(z.object({
+          solar_fulldate: z.string()
+        }))
       }),
     }),
   },

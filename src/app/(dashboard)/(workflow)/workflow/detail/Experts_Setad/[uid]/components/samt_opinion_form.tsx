@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Form, Input} from "antd/lib";
+import {Divider, Form, Input} from "antd/lib";
 import {CommentWorkflowSelectField} from "@/components/fields/commenct-workflow-select-field";
 import {TestItemsMultipleSelectField} from "@/components/fields/test-items-multiple-select-field";
 import {z} from "zod";
@@ -8,9 +8,10 @@ import {Button} from "antd";
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
-const EstOpinionForm = ({request, uid}: {
+const EstOpinionForm = ({request, uid, visit_Type}: {
     request: z.infer<typeof RequestPackageApi.FinalResultList.item>,
-    uid: string
+    uid: string,
+    visit_Type: number
 }) => {
 
     const {
@@ -28,10 +29,13 @@ const EstOpinionForm = ({request, uid}: {
     return (
         <div>
             <div className="my-5">
+                <Divider orientation="left">
+                    نماینده نفت
+                </Divider>
                 <Form
                     form={form}
                     onFinish={onFinish}
-                    disabled={request.visit_Type !== 2 || add.isPending}
+                    disabled={visit_Type !== 2 || add.isPending}
                     layout="vertical"
                 >
                     <Form.Item
@@ -63,7 +67,7 @@ const EstOpinionForm = ({request, uid}: {
                     >
                         <Input readOnly={true} disabled={true}/>
                     </Form.Item>
-                    {request.visit_Type == 2 && <Button
+                    {visit_Type == 2 && <Button
                         loading={add.isPending}
                         type="primary"
                         className="w-full"

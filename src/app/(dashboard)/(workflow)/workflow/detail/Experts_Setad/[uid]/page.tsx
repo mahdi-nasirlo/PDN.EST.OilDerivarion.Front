@@ -75,7 +75,12 @@ const Page = ({params}: { params: { uid: string } }) => {
         </div>
 
         <Row gutter={[16, 35]} className="mb-7">
-            {requestList.data?.map((request, index) => <Col key={index} sm={24} md={12} lg={8}>
+            {requestList.data?.requestPackageFinalResultList.map((request, index) => <Col
+                key={index}
+                sm={24}
+                md={12}
+                lg={8}
+            >
                 <Card>
                     <div className="flex items-center justify-between">
                         <Typography className="ml-2 flex text-gray-400">
@@ -88,20 +93,19 @@ const Page = ({params}: { params: { uid: string } }) => {
                     <Divider orientation="left">نظر نهایی سیستمی</Divider>
                     <div className="flex items-center justify-between mt-6">
                         <Typography className="ml-2 flex text-gray-400">
-                            وضعیت سیستم:
+                            وضعیت سیستم: {request.system_Opinion_ID} as
                         </Typography>
                         <Tag
-                            color={["blue-inverse", "green-inverse", "orange-inverse", "red-inverse"][request.System_Opinion_ID]}
+                            color={["blue-inverse", "green-inverse", "orange-inverse", "red-inverse"][request.system_Opinion_ID]}
                             className="p-2 mx-0 rounded-xl">
                             {[
                                 "نامعتبر",
                                 "تایید می شود",
                                 "آزمون تکمیلی",
                                 "رد می شود"
-                            ][request.System_Opinion_ID] || "در حال رأی گیری"}
+                            ][request.system_Opinion_ID] || "در حال رأی گیری"}
                         </Tag>
                     </div>
-                    {/*<Divider orientation="left">آزمون های تکمیلی</Divider>*/}
                     <div className="flex items-center justify-between mt-6">
                         <Typography className="ml-2 flex text-gray-400">
                             آزمون های تکمیلی:
@@ -110,9 +114,9 @@ const Page = ({params}: { params: { uid: string } }) => {
                             {request.system_test_item ? request.system_test_item : "ندارد"}
                         </Typography>
                     </div>
-                    <EstOpinionForm uid={params.uid} request={request}/>
-                    <Naft_opinion_form uid={params.uid} request={request}/>
-                    <Samt_opinion_form uid={params.uid} request={request}/>
+                    <EstOpinionForm uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
+                    <Naft_opinion_form uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
+                    <Samt_opinion_form uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
                 </Card>
             </Col>)}
         </Row>

@@ -8,9 +8,10 @@ import {Button} from "antd";
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
-const EstOpinionForm = ({request, uid}: {
+const EstOpinionForm = ({request, uid, visit_Type}: {
     request: z.infer<typeof RequestPackageApi.FinalResultList.item>,
-    uid: string
+    uid: string,
+    visit_Type: number
 }) => {
 
     const {
@@ -34,7 +35,7 @@ const EstOpinionForm = ({request, uid}: {
                 <Form
                     form={form}
                     onFinish={onFinish}
-                    disabled={request.visit_Type !== 1} layout="vertical"
+                    disabled={visit_Type !== 1} layout="vertical"
                     initialValues={{samt_test_item: [], est_test_item: []}}>
                     <Form.Item
                         label="نظر نهایی"
@@ -65,7 +66,7 @@ const EstOpinionForm = ({request, uid}: {
                     >
                         <Input readOnly={true} disabled={true}/>
                     </Form.Item>
-                    {request.visit_Type == 1 && <Button
+                    {visit_Type == 1 && <Button
                         type="primary"
                         className="w-full"
                         loading={add.isPending}

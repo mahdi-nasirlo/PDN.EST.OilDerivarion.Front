@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useValidation } from "@/hooks/use-validation";
-import { Form } from "antd/lib";
-import { Button, Col, Divider, Input, Row, Select, Typography } from "antd";
-import { MaterialSelectField } from "@/components/fields/material-select-field";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { materialApi } from "../../../../../constance/material";
-import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
-import { validateNationalCode } from '@/lib/validate-national-code';
+import React, {useState} from 'react';
+import {useValidation} from "@/hooks/use-validation";
+import {Form} from "antd/lib";
+import {Button, Col, Divider, Input, Row, Select, Typography} from "antd";
+import {MaterialSelectField} from "@/components/fields/material-select-field";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {materialApi} from "../../../../../constance/material";
+import {useRequestPackageMaterialAdd} from "@/hooks/material/use-request-package-material-add";
+import {validateNationalCode} from '@/lib/validate-national-code';
 
 const apiData = materialApi.RequestPackageMaterialAdd
 
@@ -16,20 +16,23 @@ const AddMaterials = () => {
 
     const addMaterial = useRequestPackageMaterialAdd();
 
-    const handleSubmit = async (values: any) => {
 
+    const [supplyMethodStatus, setSupplyMethod] = useState<number>();
+
+
+    const handleSubmit = async (values: any) => {
         const res = await addMaterial.mutateAsync(
             {
                 ...values,
                 package_UID: null
             })
 
-        if (res.success)
+        if (res.success) {
             form.resetFields();
+            setSupplyMethod(1)
+        }
 
     }
-
-    const [supplyMethodStatus, setSupplyMethod] = useState();
 
     const [personTypeStatus, setPersonType] = useState(null);
     const [SupplyNational, SetSupplyNational] = useState<any>(null);
@@ -47,7 +50,7 @@ const AddMaterials = () => {
                 <Typography className="text-[16px] font-semibold">افزودن مواد اولیه</Typography>
             </div>
             <Divider />
-            <Form form={form} layout="vertical" onFinish={handleSubmit}>
+            <Form initialValues={{material_Supply_Method_Id: 1}} form={form} layout="vertical" onFinish={handleSubmit}>
                 <Row gutter={[16, 10]}>
                     <Col xs={24} sm={8}>
                         <Form.Item
@@ -92,8 +95,6 @@ const AddMaterials = () => {
                             <Select
                                 size="large"
                                 placeholder="انتخاب نمایید"
-                                tokenSeparators={[","]}
-                                value={supplyMethodStatus}
                                 onChange={(e) => setSupplyMethod(e)}
                                 options={[
                                     { label: 'داخلی', value: 1 },
@@ -241,6 +242,7 @@ const AddMaterials = () => {
                                         value={SupplyNational}
                                         size="large"
                                         placeholder="وارد نمایید"
+                                        type="number"
                                     />
                                 </Form.Item>
                             </Col>

@@ -1,11 +1,11 @@
 import React from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ColumnsType } from "antd/es/table";
-import { Button, Space, Tooltip, Typography } from "antd";
+import {ColumnsType} from "antd/es/table";
+import {Button, Space} from "antd";
 import CustomTable from "@/components/custom-table";
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { PlusOutlined } from "@ant-design/icons";
-import { z } from "zod";
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import {PlusOutlined} from "@ant-design/icons";
+import {z} from "zod";
 import useUiRequestPackageProductList
     from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-list";
 
@@ -35,20 +35,6 @@ export default function DataTable({ setVisibleModal, uid }: TProps) {
             title: " نام محصول",
             key: "2",
             dataIndex: "name",
-            render: (_, record) => {
-                return (
-                    <Tooltip
-                        placement="top"
-                        title={<Typography>_</Typography>}
-                    >
-                        <Typography.Text
-                            className="max-w-[900px]"
-                            ellipsis={true}
-                            style={{ width: "40px !important" }}
-                        >_</Typography.Text>
-                    </Tooltip>
-                );
-            },
         },
         {
             title: "درصد استحصال",

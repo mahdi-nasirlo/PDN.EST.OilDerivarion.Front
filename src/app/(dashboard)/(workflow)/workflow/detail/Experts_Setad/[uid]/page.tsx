@@ -7,8 +7,6 @@ import {Button, Card, Col, Divider, Row, Spin, Typography} from "antd/lib";
 import RepostsMaker from "@/components/reposts-maker";
 import {useRouter} from "next/navigation";
 import useFinalResultList from "@/hooks/request-package/use-final-result-list";
-import useGetTask from "@/hooks/workflow-request/use-get-task";
-import {useGetRegisteredReportsForStepByKey} from "@/hooks/material/use-get-registered-reports-for-step-by-key";
 import EstOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/est_opinion_form";
 import Naft_opinion_form
@@ -17,15 +15,23 @@ import Samt_opinion_form
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/samt_opinion_form";
 import {Tag} from "antd";
 
+import WorkflowBtn from "@/components/workflow/workflow-btn";
+import useUiOpinionFormWorkFlow
+    from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
+
+const stepKey = "Experts_Setad";
 const Page = ({params}: { params: { uid: string } }) => {
 
     const router = useRouter();
 
-    const get = useGetTask({taskId: params.uid, stepKey: "Experts_Setad"});
-
-    const reposts = useGetRegisteredReportsForStepByKey("Experts_Setad", params.uid);
-
     const requestList = useFinalResultList({package_UID: params.uid})
+
+
+    const {get, handleSet, reposts, form, dataForm, setChoice, set} =
+        useUiOpinionFormWorkFlow({taskId: params.uid});
+
+
+    console.log(dataForm.data)
 
     if (!get.data && get.isFetching) {
         return (
@@ -96,13 +102,13 @@ const Page = ({params}: { params: { uid: string } }) => {
                             وضعیت سیستم: {request.system_Opinion_ID} as
                         </Typography>
                         <Tag
-                            color={["blue-inverse", "green-inverse", "orange-inverse", "red-inverse"][request.system_Opinion_ID]}
+                            color={["blue-inverse", "red-inverse", "green-inverse", "orange-inverse"][request.system_Opinion_ID]}
                             className="p-2 mx-0 rounded-xl">
                             {[
                                 "نامعتبر",
+                                "رد می شود",
                                 "تایید می شود",
-                                "آزمون تکمیلی",
-                                "رد می شود"
+                                "آزمون تکمیلی"
                             ][request.system_Opinion_ID] || "در حال رأی گیری"}
                         </Tag>
                     </div>
@@ -117,8 +123,36 @@ const Page = ({params}: { params: { uid: string } }) => {
                     <EstOpinionForm uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
                     <Naft_opinion_form uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
                     <Samt_opinion_form uid={params.uid} request={request} visit_Type={requestList.data?.visit_Type}/>
+                    {/*&& !dataForm.data.ReadOnly*/}
                 </Card>
             </Col>)}
+            <Col sm={24}>
+                {
+                    dataForm.data?.visit_Type == 3 &&
+                    dataForm.data.requestPackageFinalResultList?.filter(item => Number.isInteger(item.system_Opinion_ID)).length > 0 && (
+                        <>
+                            <Divider/>
+                            <WorkflowBtn
+                                loading={set.isPending}
+                                choices={get.data?.choices}
+                                onClick={async (choice_Key) => {
+                                    setChoice(choice_Key);
+                                    form.submit();
+                                    const res = await set.mutateAsync({
+                                        taskId: params.uid,
+                                        stepKey,
+                                        choiceKey: choice_Key,
+                                    });
+
+                                    console.log(res)
+
+                                    if (res.success)
+                                        router.push("/workflow/list/" + stepKey)
+                                }}
+                            />
+                        </>
+                    )}
+            </Col>
         </Row>
     </div>
 };

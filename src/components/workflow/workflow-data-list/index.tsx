@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { z } from "zod";
-import { ColumnsType } from "antd/es/table";
+import {z} from "zod";
+import {ColumnsType} from "antd/es/table";
 import useWorkflow from "@/components/workflow/workflow-data-list/hook/useWorkflow";
-import { Spin } from "antd";
+import {Spin} from "antd";
 import WorkflowDescription from "@/components/workflow/workflow-description";
 import WorkflowTable from "@/components/workflow/workflow-table";
-import { workflowApi } from "constance/workflow";
+import {workflowApi} from "constance/workflow";
 
 const Index = (props: {
   stepKey?: string;
@@ -30,7 +30,7 @@ const Index = (props: {
 
   return (
     <>
-      <Spin spinning={isFetching || props.loading}>
+      <Spin spinning={props.loading ?? isFetching}>
         {/*{data?.step && (*/}
         {/*    <div className="flex items-center mb-4">*/}
         {/*        <Descriptions*/}

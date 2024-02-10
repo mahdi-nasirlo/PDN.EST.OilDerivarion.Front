@@ -1,55 +1,65 @@
 "use client";
 
 import React from "react";
-import {z} from "zod";
-import {ColumnsType} from "antd/es/table";
+import { z } from "zod";
+import { ColumnsType } from "antd/es/table";
 import useWorkflow from "@/components/workflow/workflow-data-list/hook/useWorkflow";
-import {Spin} from "antd";
+import { Spin } from "antd";
 import WorkflowDescription from "@/components/workflow/workflow-description";
 import WorkflowTable from "@/components/workflow/workflow-table";
+import { workflowApi } from "constance/workflow";
 
-const PropsType = z.object({
-    stepKey: z.string(),
-});
+const Index = (props: {
+  stepKey?: string;
+  loading?: boolean;
+  extraColumns?: ColumnsType<any>;
+  data?:
+    | z.infer<typeof workflowApi.GetAllTask.response.shape.data>
+    | undefined
+    | null;
+}) => {
+  const stepKey = props.stepKey ? { stepKey: props.stepKey } : undefined;
 
-const Index = (
-  props: z.infer<typeof PropsType> & { extraColumns?: ColumnsType<any> }
-) => {
+  const { data, isFetching } = useWorkflow(stepKey);
 
-    const {data, isFetching} = useWorkflow({stepKey: props.stepKey});
+  //@ts-ignore
+  const finalData: z.infer<typeof workflowApi.GetAllTask.response.shape.data> =
+    props.data ?? data;
 
-    if (isFetching && !data) return <Spin/>;
+  if (isFetching && !data) return <Spin />;
 
-    return (
-        <>
-            <Spin spinning={isFetching}>
-                {/*{data?.step && (*/}
-                {/*    <div className="flex items-center mb-4">*/}
-                {/*        <Descriptions*/}
-                {/*            className="text-right"*/}
-                {/*        >*/}
-                {/*            <Descriptions.Item span={2} label="مرحله">*/}
-                {/*                {data.step[0]?.Step_Name}*/}
-                {/*            </Descriptions.Item>*/}
-                {/*            <Descriptions.Item span={2} label="نقش">*/}
-                {/*                {data.step[0]?.Roles_of_authorized_approvers}*/}
-                {/*            </Descriptions.Item>*/}
-                {/*            <Descriptions.Item span={5} label="متن کمکی">*/}
-                {/*                {data.step[0]?.Help_Text}*/}
-                {/*            </Descriptions.Item>*/}
-                {/*        </Descriptions>*/}
-                {/*    </div>*/}
-                {/*)}*/}
-                {data?.tasks.Model && <WorkflowDescription data={data.tasks.Model}/>}
-                {data?.tasks.Table && (
-                    <WorkflowTable
-                        data={data.tasks.Table}
-                        extraColumns={props.extraColumns}
-                    />
-                )}
-            </Spin>
+  return (
+    <>
+      <Spin spinning={isFetching || props.loading}>
+        {/*{data?.step && (*/}
+        {/*    <div className="flex items-center mb-4">*/}
+        {/*        <Descriptions*/}
+        {/*            className="text-right"*/}
+        {/*        >*/}
+        {/*            <Descriptions.Item span={2} label="مرحله">*/}
+        {/*                {data.step[0]?.Step_Name}*/}
+        {/*            </Descriptions.Item>*/}
+        {/*            <Descriptions.Item span={2} label="نقش">*/}
+        {/*                {data.step[0]?.Roles_of_authorized_approvers}*/}
+        {/*            </Descriptions.Item>*/}
+        {/*            <Descriptions.Item span={5} label="متن کمکی">*/}
+        {/*                {data.step[0]?.Help_Text}*/}
+        {/*            </Descriptions.Item>*/}
+        {/*        </Descriptions>*/}
+        {/*    </div>*/}
+        {/*)}*/}
+        {finalData?.tasks.Model && (
+          <WorkflowDescription data={finalData.tasks.Model} />
+        )}
+        {finalData?.tasks.Table && (
+          <WorkflowTable
+            data={finalData.tasks.Table}
+            extraColumns={props.extraColumns}
+          />
+        )}
+      </Spin>
     </>
-    );
+  );
 };
 
 export default Index;

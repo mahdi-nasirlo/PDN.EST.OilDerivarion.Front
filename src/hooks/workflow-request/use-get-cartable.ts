@@ -1,21 +1,16 @@
-"use client";
-
+import { workflowApi } from "../../constance/workflow";
 import { useQuery } from "@tanstack/react-query";
-import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
-import { workflowApi } from "../../../../constance/workflow";
+import fetchWithSession from "@/utils/fetch-with-session";
+
+const url = workflowApi.GetCartable.url;
 
 const apiData = workflowApi.GetAllTask;
 
-const useWorkflow = (data?: z.infer<typeof apiData.type>) => {
-  const query = useQuery({
-    queryKey: [apiData.url as string, data],
-    queryFn: () =>
-      fetchWithSession({
-        url: apiData.url,
-        data,
-      }),
-    enabled: typeof data?.stepKey == "string",
+const useGetCartable = () => {
+  return useQuery({
+    queryKey: [url],
+    queryFn: () => fetchWithSession({ url: url }),
     select: (
       data: z.infer<typeof apiData.response>
     ): z.infer<typeof apiData.response.shape.data> | null => {
@@ -31,8 +26,6 @@ const useWorkflow = (data?: z.infer<typeof apiData.type>) => {
       }
     },
   });
-
-  return { ...query };
 };
 
-export default useWorkflow;
+export default useGetCartable;

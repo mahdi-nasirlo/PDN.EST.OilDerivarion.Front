@@ -50,10 +50,10 @@ const FinalResultListItem = z.object({
   visit_Type: z.number().optional(),
   product_uid: z.string().optional(),
   product_name: z.string().optional(),
-  Naft_Opinion_ID: z.number(),
+  naft_Opinion_ID: z.number(),
   naft_opinion_description: z.string(),
   naft_result_modify_date_time: z.string().optional(),
-  Samt_Opinion_ID: z.number(),
+  samt_Opinion_ID: z.number(),
   samt_opinion_description: z.string(),
   samt_result_modify_date_time: z.string().optional(),
   est_Opinion_ID: z.number(),
@@ -73,6 +73,7 @@ const FinalResultListItem = z.object({
   system_Opinion_ID: z.number(),
   est_result_modify_date_time: z.string().optional(),
   system_test_item: z.string().optional(),
+  // ReadOnly: z.any()
 })
 
 const RequestPackageApi = {

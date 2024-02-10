@@ -12,6 +12,7 @@ const useFinalResultList = (data: z.infer<typeof apiData.type>) => {
         queryFn: () => fetchWithSession({url: apiData.url, data}),
         select: (data: z.infer<typeof apiData.response>) => ({
             visit_Type: data.data.visit_Type,
+            // ReadOnly: data.data.ReadOnly,
             requestPackageFinalResultList: data.data.requestPackageFinalResultList.map(item => ({
                 ...item,
                 naft_test_item: item.naft_test_item.map((item: any) => item.uid),

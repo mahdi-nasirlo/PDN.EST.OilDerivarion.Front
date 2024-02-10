@@ -23,7 +23,8 @@ const EstOpinionForm = ({ request, uid, visit_Type }: {
     } = useUiOpinionForm(uid, request, visit_Type)
 
     useEffect(() => {
-        setDisplayTestItem(request.Samt_Opinion_ID)
+        console.log(request)
+        setDisplayTestItem(request.samt_Opinion_ID)
     }, [request])
 
     return (

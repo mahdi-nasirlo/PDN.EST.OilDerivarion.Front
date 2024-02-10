@@ -1,5 +1,5 @@
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
 
 const ChoiceItem = z.object({
   choice_id: z.string(),
@@ -78,9 +78,11 @@ export const workflowApi = {
           userId: z.number(),
           userDescription: z.string(),
         }),
-        listCalendar: z.array(z.object({
-          solar_fulldate: z.string()
-        }))
+        listCalendar: z.array(
+          z.object({
+            solar_fulldate: z.string(),
+          })
+        ),
       }),
     }),
   },
@@ -92,6 +94,12 @@ export const workflowApi = {
       description: z.string().optional(),
       stepKey: z.string(),
       date: z.string().optional(),
+    }),
+  },
+  GetCartable: {
+    url: "/WorkFlowRequest/GetCartable",
+    response: generalResponseZod.extend({
+      data: z.object({}),
     }),
   },
 };

@@ -1,12 +1,12 @@
 "use client";
 
-import {Button, Space, Tag} from "antd";
-import {ColumnsType} from "antd/es/table";
+import { Button, Space, Tag } from "antd";
+import { ColumnsType } from "antd/es/table";
 import CustomTable from "../../../../components/custom-table";
-import {z} from "zod";
+import { z } from "zod";
 import React from "react";
-import {ViewColumnsIcon} from "@heroicons/react/24/outline";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
+import { ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
@@ -78,7 +78,7 @@ export default function DataTable() {
       key: "2",
     },
     {
-      title: "کدملی",
+      title: "شماره ملی",
       dataIndex: "Representative__National_Code",
       key: "2",
     },
@@ -153,7 +153,7 @@ export default function DataTable() {
             icon: <ViewColumnsIcon />,
             text: "لیست مجوزها",
           }}
-          setInitialData={() => {}}
+          setInitialData={() => { }}
           isLoading={list.isFetching}
           pagination={false}
           data={{ records: list.data }}

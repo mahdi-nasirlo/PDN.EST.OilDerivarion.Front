@@ -6,6 +6,7 @@ import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { validateNationalCode } from "@/lib/validate-national-code";
 
 interface PropType {
   params: { uid: string };
@@ -63,12 +64,18 @@ export default function Home(props: PropType) {
               <Col xs={24} sm={12}>
                 <Form.Item
                   name="Representative__National_Code"
-                  label="کدملی"
+                  label="شماره ملی"
                   rules={[
+                    { required: true, message: 'لطفا مقدار را وارد کنید' },
                     {
-                      pattern: /^(?!(\d)\1{9})\d{10}$/,
-                      message: "شماره ملی نامعتبر است",
-                    },
+                      validator(rule, value, callback) {
+                        if (value && !validateNationalCode(value)) {
+                          callback('کد ملی وارد شده معتبر نیست');
+                        } else {
+                          callback();
+                        }
+                      }
+                    }
                   ]}
                 >
                   <Input

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useValidation } from "@/hooks/use-validation";
 import { Form } from "antd/lib";
-import { Button, Col, Divider, Input, InputNumber, Row, Select, Typography } from "antd";
+import { Button, Col, Divider, Input, Row, Select, Typography } from "antd";
 import { MaterialSelectField } from "@/components/fields/material-select-field";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { materialApi } from "../../../../../constance/material";
 import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
+import { validateNationalCode } from '@/lib/validate-national-code';
 
 const apiData = materialApi.RequestPackageMaterialAdd
 
@@ -36,7 +37,7 @@ const AddMaterials = () => {
     const handleFactoryProvinceChange = (value: any, e: any) => {
         setPersonType(e);
         SetSupplyNational(value);
-        form.setFieldValue("materialSupplyNationalCode", null);
+        form.setFieldValue("material_Supply_National_Code", null);
     };
 
     return (
@@ -217,11 +218,8 @@ const AddMaterials = () => {
                                                     return Promise.reject(new Error("لطفا عدد وارد کنید"));
                                                 }
                                                 if (personTypeStatus === 1) {
-                                                    const nationalIdRegex = /^(?!(\d)\1{9})\d{10}$/;
-                                                    if (!nationalIdRegex.test(value)) {
-                                                        return Promise.reject(
-                                                            new Error("شماره ملی نامعتبر است")
-                                                        );
+                                                    if (!validateNationalCode(value)) {
+                                                        return Promise.reject(new Error("شماره ملی نامعتبر است"));
                                                     }
                                                 }
                                                 if (personTypeStatus === 1 && value.length !== 10) {
@@ -243,7 +241,6 @@ const AddMaterials = () => {
                                         value={SupplyNational}
                                         size="large"
                                         placeholder="وارد نمایید"
-                                        type="number"
                                     />
                                 </Form.Item>
                             </Col>

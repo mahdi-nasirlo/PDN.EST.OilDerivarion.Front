@@ -8,10 +8,9 @@ import Breadcrumb from "@/components/breadcrumb";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
 import licenseApi from "constance/license";
 import VisitInfo from "@/components/workflow/visit-info";
-import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
 import useGetRequestList from "@/hooks/license/use-get-request-list";
 import WorkflowTable from "@/components/workflow/workflow-table";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined } from "@ant-design/icons";
 import { z } from "zod";
 
 const apiData = licenseApi.GetRequestList.Item;
@@ -77,7 +76,7 @@ const Page = () => {
       <Breadcrumb
         titleIcon={<ClipboardDocumentListIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"رییس اجرا استان"}
+        currentPage={"لیست درخواست مجوز ها"}
       />
 
       <Card>

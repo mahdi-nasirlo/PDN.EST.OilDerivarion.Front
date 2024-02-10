@@ -19,7 +19,7 @@ export default function Page() {
     <>
       <Breadcrumb
         titleIcon={<SwatchIcon className="w-8" />}
-        pages={[{ label: "خانه", path: "/" }, { label: "واحد اندازه گیری" }]}
+        pages={[{ label: "خانه", path: "/" }]}
         currentPage={"لیست واحد اندازه گیری"}
       />
       <Collapse

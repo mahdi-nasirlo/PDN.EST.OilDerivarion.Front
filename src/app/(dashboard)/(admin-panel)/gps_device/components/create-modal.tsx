@@ -3,7 +3,6 @@ import React from "react";
 import { useValidation } from "@/hooks/use-validation";
 import { boxGPSApi } from "constance/box-gps";
 import useBoxGPSCreate from "@/hooks/box-gps/use-box-gps-create";
-// import useBasicProductMaterialCreate from "@/hooks/material/use-basic-product-material-create";
 import GpsForm from "./gps-form";
 
 const formSchema = boxGPSApi.BoxGPSCreate.type;
@@ -77,7 +76,6 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
         }}
         form={form}
         layout="vertical"
-        initialValues={{ testItems: [] }}
       >
         <GpsForm rules={rules} />
       </Form>

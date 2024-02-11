@@ -6,6 +6,7 @@ import ButtonFilter from "@/components/button-filter";
 import { boxGPSApi } from "constance/box-gps";
 import { z } from "zod";
 import { useValidation } from "@/hooks/use-validation";
+import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
 
 const dataFilter = boxGPSApi.BoxGPSGetPage.type;
 
@@ -14,8 +15,9 @@ export default function FilterForm({
 }: {
   onFinish: (arg: z.infer<typeof dataFilter>) => void;
 }) {
-  const [form, rules] = useValidation(dataFilter);
 
+  const [form, rules] = useValidation(dataFilter);
+  const BoxGpsStatus = useBoxGpsStatusList()
   return (
     <Form form={form} onFinish={(values) => onFinish(values)} layout="vertical">
       <Row gutter={[16, 0]}>
@@ -25,14 +27,13 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="isActive" label="فعال / غیر فعال">
+          <Form.Item rules={[rules]} name="device_Status" label="وضعیت">
             <Select
               size="large"
-              options={[
-                { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
-              ]}
-              placeholder="انتخاب کنید"
+              showSearch
+              placeholder="وارد کنید"
+              options={BoxGpsStatus.options}
+              loading={BoxGpsStatus.isLoading}
             />
           </Form.Item>
         </Col>

@@ -2,8 +2,12 @@ import React from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import { StateSelectField } from "@/components/fields/state-select-field";
 import { InputNumber } from "antd/lib";
+import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
 
 function GpsForm({ rules }: any) {
+
+  const BoxGpsStatus = useBoxGpsStatusList();
+
   return (
     <>
       <Row gutter={[16, 16]}>
@@ -30,27 +34,29 @@ function GpsForm({ rules }: any) {
         <Col xs={24} sm={12}>
           <Form.Item
             rules={[rules]}
-            name="isActive"
-            label="فعال/غیر فعال"
-            initialValue={true}
+            name="device_Status"
+            label="وضعیت"
           >
             <Select
-              options={[
-                { value: true, label: "فعال" },
-                { value: false, label: "غیر فعال" },
-              ]}
               size="large"
+              showSearch
               placeholder="انتخاب کنید"
+              options={BoxGpsStatus.options}
+              loading={BoxGpsStatus.isLoading}
             />
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="capacity" label="ظرفیت">
-            <InputNumber
+            <Select
               className="w-full"
               size="large"
-              placeholder="وارد کنید"
-              type="number"
+              placeholder="انتخاب کنید"
+              options={[
+                { value: 4, label: 4 },
+                { value: 6, label: 6 },
+                { value: 8, label: 8 },
+              ]}
             />
           </Form.Item>
         </Col>

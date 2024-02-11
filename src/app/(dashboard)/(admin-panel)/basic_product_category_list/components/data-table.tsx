@@ -72,7 +72,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                         color = "success";
                         name = "دارد";
                     }
-                    return <Tag color={color}>{name}</Tag>;
+                    return <Tag className='p-1' color={color}>{name}</Tag>;
                 },
             },
             {

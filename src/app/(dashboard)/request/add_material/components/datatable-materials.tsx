@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { z } from "zod";
-import { ColumnsType } from "antd/es/table";
-import { ListBulletIcon } from "@heroicons/react/24/solid";
+import React, {useState} from 'react';
+import {z} from "zod";
+import {ColumnsType} from "antd/es/table";
+import {ListBulletIcon} from "@heroicons/react/24/solid";
 import CustomHeader from "@/components/custom-header";
-import { Table } from "antd/lib";
-import { addIndexToData } from "@/utils/addIndexToData";
-import { Button, Tooltip, Typography } from "antd";
+import {Table} from "antd/lib";
+import {addIndexToData} from "@/utils/addIndexToData";
+import {Button, Tooltip, Typography} from "antd";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useRequestPackageMaterialDelete from "@/hooks/material/use-request-package-material-delete";
 import useRequestPackageMaterialList from "@/hooks/material/use-request-package-material-list";
 
-const DatatableMaterials = () => {
+const DatatableMaterials = ({package_uid}: { package_uid?: string }) => {
 
     const [open, setOpen] = useState<string | undefined | boolean>()
 
-    const materials = useRequestPackageMaterialList()
+    const materials = useRequestPackageMaterialList({package_UID: package_uid})
 
     const deleteMaterial = useRequestPackageMaterialDelete()
 
@@ -102,7 +102,10 @@ const DatatableMaterials = () => {
                 loading={deleteMaterial.isPending}
                 handleDelete={async () => {
 
-                    const res = await deleteMaterial.mutateAsync({ material_Uid: open as string })
+                    const res = await deleteMaterial.mutateAsync({
+                        material_Uid: open as string,
+                        request__Package_UID: package_uid
+                    })
 
                     if (res.success)
                         setOpen(undefined)

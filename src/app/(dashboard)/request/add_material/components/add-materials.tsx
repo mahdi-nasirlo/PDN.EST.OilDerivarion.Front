@@ -10,7 +10,7 @@ import {validateNationalCode} from '@/lib/validate-national-code';
 
 const apiData = materialApi.RequestPackageMaterialAdd
 
-const AddMaterials = () => {
+const AddMaterials = ({package_uid}: { package_uid?: string }) => {
 
     const [form, rules] = useValidation(apiData.type);
 
@@ -24,7 +24,7 @@ const AddMaterials = () => {
         const res = await addMaterial.mutateAsync(
             {
                 ...values,
-                package_UID: null
+                package_UID: package_uid
             })
 
         if (res.success) {

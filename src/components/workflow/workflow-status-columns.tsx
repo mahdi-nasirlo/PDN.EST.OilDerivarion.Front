@@ -26,7 +26,7 @@ const WorkFlowStatusColumn = ({ record }: { record: any }) => {
 
   return (
     <Tag icon={icon} color={color}>
-      {name} {record.Status}
+      {name}
     </Tag>
   );
 };

@@ -6,7 +6,7 @@ import {DefaultOptionType} from "antd/es/select";
 
 const apiData = materialApi.RequestPackageMaterialList;
 
-const useRequestPackageMaterialList = (data: z.infer<typeof apiData.type>) => {
+const useRequestPackageMaterialList = (data?: z.infer<typeof apiData.type>) => {
 
   const query = useQuery({
     queryKey: [apiData.url, data],

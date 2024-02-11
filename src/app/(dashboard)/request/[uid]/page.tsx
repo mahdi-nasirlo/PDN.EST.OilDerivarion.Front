@@ -29,7 +29,7 @@ export default function Page({params: {uid}}: TProps) {
                     {label: "ویرایش درخواست"},
                 ]}
                 actions={[
-                    <Link key={'1'} href={'/request/add_material'}>
+                    <Link key={'1'} href={`/request/add_material/${uid}`}>
                         <Button
                             key="1"
                             className="flex items-center"

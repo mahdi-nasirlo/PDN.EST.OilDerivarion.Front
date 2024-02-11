@@ -1,6 +1,6 @@
-import { generalResponseZod, notEmpty } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod, notEmpty} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
@@ -124,6 +124,9 @@ const materialApi = {
   GetRequestPackagePartList: {
     url: "/Material/GetRequestPackagePartList",
     item: GetRequestPackagePartListItem,
+    type: z.object({
+      package_UID: z.string()
+    }),
     response: generalResponseZod.extend({
       data: z.array(GetRequestPackagePartListItem),
     }),

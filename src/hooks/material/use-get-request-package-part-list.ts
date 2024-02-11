@@ -5,12 +5,12 @@ import {z} from "zod";
 
 const apiData = materialApi.GetRequestPackagePartList
 
-const useGetRequestPackagePartList = () => {
+const useGetRequestPackagePartList = (data?: z.infer<typeof apiData.type>) => {
 
     return useQuery({
-        queryKey: [apiData.url],
+        queryKey: [apiData.url, data],
         queryFn: () => fetchWithSession({
-            url: apiData.url, notify: false, data: {}
+            url: apiData.url, notify: false, data: data ?? {}
         }),
         select: (data: z.infer<typeof apiData.response>) => {
 

@@ -11,8 +11,10 @@ import useRequestPackagePartDelete from "@/hooks/material/use-request-package-pa
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import {AnimatePresence, motion} from "framer-motion";
 import {useRouter} from "next/navigation";
+import {toKeyAlias} from "@babel/types";
 
-const CardList = ({ data }: {
+const CardList = ({data, package_UID}: {
+    package_UID?: string
     data: z.infer<typeof materialApi.GetRequestPackagePartList.response.shape.data> | undefined
 }) => {
 
@@ -22,7 +24,7 @@ const CardList = ({ data }: {
 
     const handleDelete = async () => {
 
-        const res = await deletePart.mutateAsync({ part_UID: open as string })
+        const res = await deletePart.mutateAsync({part_UID: open as string, package_UID})
 
         if (res.success)
             setOpen(undefined)
@@ -134,7 +136,7 @@ const CardList = ({ data }: {
                                                         type="primary"
                                                         className="w-full flex items-center justify-center"
                                                         icon={<EditOutlined width={16} height={16} />}
-                                                        onClick={() => router.push(`/request/${item.UID}`)}
+                                                        onClick={() => router.push(`/request/edit/${item.UID}${package_UID ? "/" + package_UID : ""}`)}
                                                     >
                                                         ویرایش
                                                     </Button>

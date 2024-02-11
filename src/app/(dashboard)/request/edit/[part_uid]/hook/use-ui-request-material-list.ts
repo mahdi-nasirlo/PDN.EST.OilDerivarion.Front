@@ -4,11 +4,12 @@ import {useState} from "react";
 
 interface TProps {
     uid: string,
+    package_uid?: string
 }
 
-const useUiRequestMaterialCreate = ({uid}: TProps) => {
+const useUiRequestMaterialCreate = ({uid, package_uid}: TProps) => {
 
-    const materials = useRequestPackagePartMaterialList(uid)
+    const materials = useRequestPackagePartMaterialList(uid, package_uid)
 
     const deleteMaterial = useRequestPackagePartMaterialDelete()
 
@@ -18,6 +19,7 @@ const useUiRequestMaterialCreate = ({uid}: TProps) => {
 
     const onDelete = async () => {
         const res = await deleteMaterial.mutateAsync({
+            package_UID: package_uid,
             material_UID: deleteModal as string,
             part_UID: uid,
         })

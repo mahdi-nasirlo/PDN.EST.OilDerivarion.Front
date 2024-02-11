@@ -4,16 +4,17 @@ import {useValidation} from "@/hooks/use-validation";
 import {z} from "zod";
 
 interface TProps {
-    uid: string,
+    partUid: string,
     visibleModal: any,
     setVisibleModal: any
+    package_uid?: string
 }
 
-const useUiRequestMaterialCreate = ({uid, visibleModal, setVisibleModal}: TProps) => {
+const useUiRequestMaterialCreate = ({partUid, package_uid, visibleModal, setVisibleModal}: TProps) => {
 
-    const requestInfo = useRequestPackageInfo(uid)
+    const requestInfo = useRequestPackageInfo(partUid)
 
-    const addMaterial = useRequestPackagePartMaterialAdd()
+    const addMaterial = useRequestPackagePartMaterialAdd(package_uid)
 
     const [form, rules] = useValidation(addMaterial.type)
 
@@ -27,7 +28,7 @@ const useUiRequestMaterialCreate = ({uid, visibleModal, setVisibleModal}: TProps
     const onFinish = async (values: z.infer<typeof addMaterial.type>) => {
 
         const res = await addMaterial.mutateAsync({
-            part_UID: uid,
+            part_UID: partUid,
             darsad_Estefadeh: values.darsad_Estefadeh,
             material_UID: values.material_UID,
             part_Type: requestInfo.data?.Part_Type

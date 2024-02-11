@@ -18,12 +18,12 @@ const useRequestPackagePartAdd = (package_UID?: string) => {
                 package_UID: data.package_UID ?? package_UID
             }
         }),
-        onSuccess: async (data) => {
+        onSuccess: async (data, variables) => {
 
             if (data.success)
                 await queryClient.setQueryData([materialApi.GetRequestPackagePartList.url], data)
 
-            // await queryClient.invalidateQueries({queryKey: [materialApi.GetRequestPackagePartList.url]})
+            await queryClient.invalidateQueries({queryKey: [materialApi.GetRequestPackagePartList.url]})
             
         }
     })

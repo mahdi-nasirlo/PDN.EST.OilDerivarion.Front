@@ -7,9 +7,9 @@ import {materialApi} from "../../../../constance/material";
 import {productMethods} from "../../../../constance/product-method";
 import {useRequestPackagePartAdd} from "@/hooks/material/use-request-package-part-add";
 
-export default function FirstCard() {
+export default function FirstCard({package_UID}: { package_UID?: string }) {
 
-    const addPart = useRequestPackagePartAdd()
+    const addPart = useRequestPackagePartAdd(package_UID)
 
     const [form, rules] = useValidation(materialApi.RequestPackagePartAdd.type)
 

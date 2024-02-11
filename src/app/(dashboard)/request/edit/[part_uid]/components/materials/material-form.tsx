@@ -1,12 +1,12 @@
 import useRequestPackageMaterialList from '@/hooks/material/use-request-package-material-list'
-import { Col, Form, Row, Select } from 'antd'
+import {Col, Form, Row, Select} from 'antd'
 import React from 'react'
-import { Rule } from "rc-field-form/es/interface";
+import {Rule} from "rc-field-form/es/interface";
 import PercentageInput from "@/components/inputs/percentage-input";
 
-export default function MaterialForm({ rules }: { rules: Rule }) {
+export default function MaterialForm({rules, package_uid}: { rules: Rule, package_uid?: string }) {
 
-    const MaterialPackage = useRequestPackageMaterialList()
+    const MaterialPackage = useRequestPackageMaterialList({package_UID: package_uid})
 
     return (
         <Row gutter={[16, 10]}>

@@ -3,15 +3,16 @@ import ProductForm from './product-form'
 import {Button, Col, Modal, Row} from 'antd';
 import {Form} from "antd/lib";
 import useUiRequestPackageProductCreate
-    from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-create";
+    from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-package-product-create";
 
 interface TProps {
     uid: string,
+    package_uid?: string
     visibleModal: boolean,
-    setVisibleModal: (arg: any) => void
+    setVisibleModal: (arg: any) => void,
 }
 
-export default function CreateModal({visibleModal, setVisibleModal, uid}: TProps) {
+export default function CreateModal({visibleModal, setVisibleModal, uid, package_uid}: TProps) {
 
     const {
         onFinish,
@@ -20,7 +21,7 @@ export default function CreateModal({visibleModal, setVisibleModal, uid}: TProps
         form,
         rules,
         onClose
-    } = useUiRequestPackageProductCreate({uid, visibleModal, setVisibleModal})
+    } = useUiRequestPackageProductCreate({uid, visibleModal, setVisibleModal, package_uid})
 
     return (
         <Modal

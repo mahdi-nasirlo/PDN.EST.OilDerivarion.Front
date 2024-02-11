@@ -7,13 +7,14 @@ interface TProps {
     uid: string,
     visibleModal: any,
     setVisibleModal: any
+    package_uid?: string
 }
 
-const useUiRequestPackageProductCreate = ({uid, visibleModal, setVisibleModal}: TProps) => {
+const useUiRequestPackageProductCreate = ({uid, visibleModal, setVisibleModal, package_uid}: TProps) => {
 
     const requestInfo = useRequestPackagePartInfo(uid)
 
-    const addProduct = useRequestPackagePartProductAdd(uid)
+    const addProduct = useRequestPackagePartProductAdd(uid, package_uid)
 
     const [form, rules] = useValidation(addProduct.type)
 

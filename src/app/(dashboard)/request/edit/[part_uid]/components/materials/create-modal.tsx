@@ -2,20 +2,21 @@ import React from 'react'
 import MaterialForm from './material-form'
 import {Button, Col, Modal, Row} from 'antd'
 import {Form} from 'antd/lib';
-import useUiRequestMaterialCreate from "@/app/(dashboard)/request/[uid]/materials/hook/use-ui-request-material-create";
+import useUiRequestMaterialCreate from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-material-create";
 
 interface TProps {
-    uid: string,
+    partUid: string,
     visibleModal: any,
-    setVisibleModal: any
+    setVisibleModal: any,
+    package_uid?: string
 }
 
-const type = 1
 
-export default function CreateModal({visibleModal, setVisibleModal, uid: partUid}: TProps) {
+export default function CreateModal({visibleModal, setVisibleModal, partUid, package_uid}: TProps) {
 
     const {addMaterial, rules, onFinish, form, onClose, requestInfo} = useUiRequestMaterialCreate({
-        uid: partUid,
+        partUid,
+        package_uid,
         visibleModal,
         setVisibleModal
     })
@@ -67,7 +68,7 @@ export default function CreateModal({visibleModal, setVisibleModal, uid: partUid
                 layout='vertical'
                 onFinish={onFinish}
             >
-                <MaterialForm rules={rules}/>
+                <MaterialForm rules={rules} package_uid={package_uid}/>
             </Form>
         </Modal>
 

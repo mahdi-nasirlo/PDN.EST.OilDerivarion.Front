@@ -1,18 +1,16 @@
-import { materialApi } from "../../constance/material";
-import { useQuery } from "@tanstack/react-query";
+import {materialApi} from "../../constance/material";
+import {useQuery} from "@tanstack/react-query";
 import fetchWithSession from "@/utils/fetch-with-session";
-import { z } from "zod";
-import { DefaultOptionType } from "antd/es/select";
-import { useState } from "react";
+import {z} from "zod";
+import {DefaultOptionType} from "antd/es/select";
 
 const apiData = materialApi.RequestPackageMaterialList;
 
-const useRequestPackageMaterialList = () => {
-  const [arg, setArg] = useState<z.infer<typeof apiData.type>>();
+const useRequestPackageMaterialList = (data: z.infer<typeof apiData.type>) => {
 
   const query = useQuery({
-    queryKey: [apiData.url],
-    queryFn: () => fetchWithSession({ url: apiData.url, data: {} }),
+    queryKey: [apiData.url, data],
+    queryFn: () => fetchWithSession({url: apiData.url, data}),
     select: (data: z.infer<typeof apiData.response>) => data.data,
   });
 

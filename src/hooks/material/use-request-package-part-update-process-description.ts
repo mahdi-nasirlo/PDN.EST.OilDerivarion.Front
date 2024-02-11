@@ -1,5 +1,5 @@
 import {materialApi} from "../../constance/material";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {z} from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 
@@ -7,8 +7,15 @@ const apiData = materialApi.RequestPackagePartUpdateProcessDescription
 
 const useRequestPackagePartUpdateProcessDescription = () => {
 
+    const queryClient = useQueryClient()
+
     const query = useMutation({
-        mutationFn: (data: z.infer<typeof apiData.type>) => fetchWithSession({url: apiData.url, data})
+        mutationFn: (data: z.infer<typeof apiData.type>) => fetchWithSession({url: apiData.url, data}),
+        onSuccess: (data) => {
+
+            queryClient.setQueryData([materialApi.RequestPackagePartInfo], data)
+
+        }
     })
 
     return {...query, ...apiData}

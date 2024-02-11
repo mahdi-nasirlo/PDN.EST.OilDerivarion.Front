@@ -9,8 +9,8 @@ const apiData = materialApi.RequestPackagePartInfo;
 const useRequestPackageInfo = (part_UID: string, package_UID?: string | undefined) => {
 
     const data: z.infer<typeof apiData.type> = {
-        package_UID,
-        part_UID
+        part_UID,
+        package_UID
     }
 
     const query = useQuery({

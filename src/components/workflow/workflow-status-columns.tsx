@@ -1,10 +1,6 @@
 import React from "react";
-import { Tag } from "antd";
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import {Tag} from "antd";
+import {CheckCircleOutlined, CloseCircleOutlined,} from "@ant-design/icons";
 
 const WorkFlowStatusColumn = ({ record }: { record: any }) => {
   let color = "";
@@ -30,7 +26,7 @@ const WorkFlowStatusColumn = ({ record }: { record: any }) => {
 
   return (
     <Tag icon={icon} color={color}>
-      {name}
+      {name} {record.Status}
     </Tag>
   );
 };

@@ -1,56 +1,46 @@
 import React from "react";
-import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import {ColumnsType} from "antd/es/table";
 import {Button, Space} from "antd";
-import CustomTable from "@/components/custom-table";
 import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import CustomTable from "@/components/custom-table";
 import {PlusOutlined} from "@ant-design/icons";
+import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import {z} from "zod";
-import useUiRequestPackageProductList
-    from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-package-product-list";
+import useUiRequestMaterialList from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-material-list";
 
-interface TProps {
-    uid: string,
-    setVisibleModal: (arg: any) => void
-}
-
-export default function DataTable({ setVisibleModal, uid }: TProps) {
+export default function DataTable({setVisibleModal, partUid, package_uid}: {
+    setVisibleModal: (arg: any) => void,
+    partUid: string,
+    package_uid?: string
+}) {
 
     const {
-        productDelete,
-        products,
+        deleteMaterial,
         deleteModal,
         setDeleteModal,
-        handleDelete
-    } = useUiRequestPackageProductList(uid)
+        setEditModal,
+        editModal,
+        materials,
+        onDelete
+    } = useUiRequestMaterialList({uid: partUid, package_uid})
 
-    const columns: ColumnsType<z.infer<typeof products.item>> = [
+    const columns: ColumnsType<z.infer<typeof materials.item>> = [
         {
             title: "ردیف",
-            key: "1",
             dataIndex: "Row",
             width: "5%",
         },
         {
-            title: " نام محصول",
-            key: "2",
-            dataIndex: "name",
+            title: "نام مواد اولیه",
+            dataIndex: "material_name",
         },
         {
-            title: "درصد استحصال",
-            key: "3",
-            dataIndex: "Estehsal",
-            render: (value) => <>{value}%</>,
-        },
-        {
-            title: "درصد هدر رفت",
-            key: "4",
-            dataIndex: "HadarRaft",
-            render: (value) => <>{value}%</>,
+            title: "درصد استفاده",
+            dataIndex: "Estefadeh",
+            render: (value, record) => `${value}%`
         },
         {
             title: "عملیات",
-            key: "3",
             align: "center",
             fixed: "right",
             width: "10%",
@@ -72,33 +62,36 @@ export default function DataTable({ setVisibleModal, uid }: TProps) {
         <>
             <CustomTable
                 header={{
-                    icon: <ViewColumnsIcon />,
-                    text: "لیست محصولات",
+                    icon: <ViewColumnsIcon/>,
+                    text: "لیست مواد اولیه",
                     actions: (
                         <Button
                             className="flex items-center justify-center"
-                            icon={<PlusOutlined width={16} height={16} />}
+                            icon={<PlusOutlined width={16} height={16}/>}
                             type="primary"
                             size="large"
                             onClick={() => setVisibleModal(true)}
                         >
-                            افزودن محصول
+                            افزودن مواد اولیه
                         </Button>
                     ),
                 }}
-                isLoading={products.isFetching}
-                data={{ records: products.data }}
+                isLoading={materials.isFetching}
                 pagination={false}
+                data={{records: materials.data}}
                 columns={columns}
             />
             {/*<EditModal editModal={editModal} setEditModal={setEditModal}/>*/}
             <ConfirmDeleteModal
-                title="محصول"
-                open={typeof deleteModal == "string"}
+                title="مواد اولیه"
+                open={typeof deleteModal === "string"}
                 setOpen={setDeleteModal}
-                loading={productDelete.isPending}
-                handleDelete={handleDelete}
+                loading={deleteMaterial.isPending}
+                handleDelete={onDelete}
             />
         </>
     );
 }
+
+
+

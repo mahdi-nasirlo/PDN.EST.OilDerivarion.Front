@@ -1,14 +1,13 @@
-import { Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
+import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
 import React from "react";
-// import staticMessages from "../../../../../../../lib/staticMessages";
-import { DocumentPlusIcon } from "@heroicons/react/24/outline";
-import useUiRequestProductDescriptionForm
-    from "@/app/(dashboard)/request/[uid]/products/hook/use-ui-request-product-description-form";
+import {DocumentPlusIcon} from "@heroicons/react/24/outline";
 import FileUpload from "@/components/file-upload/FileUpload";
 import staticMessages from "@/lib/staticMessages";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import useUiRequestProductDescriptionForm
+    from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-product-description-form";
 
-const DescriptionForm = ({ uid }: { uid: string }) => {
+const DescriptionForm = ({uid, package_uid}: { uid: string, package_uid?: string }) => {
 
     const {
         form,
@@ -16,7 +15,7 @@ const DescriptionForm = ({ uid }: { uid: string }) => {
         updateDesc,
         requestInfo,
         onFinish
-    } = useUiRequestProductDescriptionForm(uid)
+    } = useUiRequestProductDescriptionForm(uid, package_uid)
 
     const router = useRouter()
 

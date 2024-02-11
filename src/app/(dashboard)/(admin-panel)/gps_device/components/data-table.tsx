@@ -8,9 +8,8 @@ import { z } from "zod";
 import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { boxGPSApi } from "constance/box-gps";
-import StatusColumn from "@/components/custom-table/StatusColumn";
+import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import EditModal from "./edit-modal";
-
 import Link from "next/link";
 import DeleteModal from "./delete-modal";
 
@@ -43,35 +42,40 @@ export default function DataTable({
       width: "5%",
     },
     {
+      title: "نام",
+      dataIndex: "name",
+      key: "2",
+    },
+    {
       title: "کد جعبه",
       dataIndex: "code",
-      key: "2",
+      key: "3",
     },
     {
       title: "ظرفیت",
       dataIndex: "capacity",
-      key: "2",
+      key: "4",
     },
     {
       title: "نام استان",
       dataIndex: "stateName",
-      key: "2",
+      key: "5",
     },
     {
-      title: "فعال/غیر فعال ",
-      dataIndex: "is_Active",
-      key: "3",
-      render: (e, record) => <StatusColumn record={record} />,
+      title: "وضعیت",
+      dataIndex: "device_Statusس",
+      key: "6",
+      render: (e, record) => <StatusColumnBox record={record} />,
     },
     {
-      title: "مکان یابی",
+      title: "تاریخچه سفر ها",
       dataIndex: "confirmedRequest",
-      key: "4",
+      key: "7",
       render: (_, record) => (
         <Space size="small">
           <Button type="link" className="text-primary-500 font-bold">
-            <Link href={"/gps_device/location"}>
-              مشاهده موقعیت
+            <Link href={"/gps_device/travel_history"}>
+              مشاهده
             </Link>
           </Button>
         </Space>
@@ -85,14 +89,16 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          {/* <Button
-            type="link"
-            className="text-primary-500 font-bold"
+          {record.device_Status !== 2 && (
+            <Button
+              type="link"
+              className="text-primary-500 font-bold"
             // loading={openBox.isMutating}
-            onClick={() => openBox.trigger()}
-          >
-            بازکردن درب دستگاه
-          </Button> */}
+            // onClick={() => openBox.trigger()}
+            >
+              بازکردن درب دستگاه
+            </Button>
+          )}
           <Button
             type="link"
             className="text-secondary-500 font-bold"
@@ -135,7 +141,7 @@ export default function DataTable({
           }}
           setInitialData={setPaginate}
           isLoading={isLoading}
-          data={{ records: data }}
+          data={data}
           columns={columns}
         />
         <EditModal

@@ -46,7 +46,7 @@ const Page = () => {
         }
 
         return (
-          <Tag icon={icon} color={color}>
+          <Tag className='p-1' icon={icon} color={color}>
             {name}
           </Tag>
         );

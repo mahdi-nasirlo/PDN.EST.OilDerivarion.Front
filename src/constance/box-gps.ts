@@ -6,9 +6,9 @@ const BoxGPSGetPageItem = z.object({
   uid: z.string().uuid().optional(),
   code: z.number().optional(),
   capacity: z.number().optional(),
-  is_Active: z.boolean().optional(),
   stateName: z.string().optional(),
   stateId: z.number().optional(),
+  device_Status: z.number().optional(),
 });
 
 const boxGPSApi = {
@@ -16,17 +16,16 @@ const boxGPSApi = {
     url: "/BoxGPS/GetPage",
     type: z.object({
       code: z.string().optional(),
-      isActive: z.boolean().optional(),
+      device_Status: z.number().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
     }),
     item: BoxGPSGetPageItem,
     response: generalResponseZod.extend({
-      // data: z.object({
-      //     // count: z.number(),
-      //     records: z.array(BoxGPSGetPageItem),
-      // }),
-      data: z.array(BoxGPSGetPageItem),
+      data: z.object({
+        count: z.number(),
+        records: z.array(BoxGPSGetPageItem),
+      }),
     }),
   },
 
@@ -40,9 +39,9 @@ const boxGPSApi = {
         uid: z.string().uuid().optional(),
         code: z.number().optional(),
         capacity: z.number().optional(),
-        is_Active: z.boolean().optional(),
         stateName: z.string().optional(),
         stateId: z.number().optional(),
+        device_Status: z.number().optional(),
       }),
     }),
   },
@@ -53,8 +52,10 @@ const boxGPSApi = {
       capacity: z.number({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       imei: z.string({ required_error: errorMessage.required }),
-      isActive: z.boolean({ required_error: errorMessage.required_choice }),
-      stateUId: z.string({
+      device_Status: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      stateUid: z.string({
         required_error: errorMessage.required_choice,
       }),
     }),
@@ -67,8 +68,10 @@ const boxGPSApi = {
       capacity: z.number({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       imei: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      isActive: z.boolean({ required_error: errorMessage.required_choice }),
-      stateUId: z.string({
+      device_Status: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+      stateUid: z.string({
         required_error: errorMessage.required_choice,
       }),
     }),
@@ -81,6 +84,24 @@ const boxGPSApi = {
       descripton: z.string({ required_error: errorMessage.required }),
       status: z.number({ required_error: errorMessage.required_choice }),
       test: z.boolean().optional(),
+    }),
+  },
+
+  GetAllStatusBox: {
+    url: "/BoxGPS/GetAllStatus",
+    sortBy: "name",
+    fieldNames: { value: "id", label: "name" },
+    Item: z.object({
+      id: z.string().uuid().optional(),
+      name: z.number().optional(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(
+        z.object({
+          id: z.string().optional(),
+          name: z.number().optional(),
+        })
+      ),
     }),
   },
 };

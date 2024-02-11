@@ -70,7 +70,7 @@ export default function Page({params: {uid}}: TProps) {
                             size="large"
                             className="w-full"
                             type="primary"
-                            onClick={() => router.push("/request/final-review")}
+                            onClick={() => router.push(`/request/final-review${uid ? `/${uid}` : ""}`)}
                         >
                             بازبینی نهایی
                         </Button>

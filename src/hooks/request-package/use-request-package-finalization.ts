@@ -8,7 +8,8 @@ const apiData = RequestPackageApi.RequestPackageFinalization
 
 const useRequestPackageFinalization = () => {
     return useMutation({
-        mutationFn: async (): Promise<z.infer<typeof generalResponseZod>> => await fetchWithSession({url: apiData.url})
+        mutationFn: async (data: z.infer<typeof apiData.type>): Promise<z.infer<typeof generalResponseZod>> =>
+            await fetchWithSession({url: apiData.url, data})
     })
 }
 

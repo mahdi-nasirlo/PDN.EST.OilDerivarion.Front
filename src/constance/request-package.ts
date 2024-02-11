@@ -79,6 +79,9 @@ const FinalResultListItem = z.object({
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
+    type: z.object({
+      uid: z.string().optional()
+    })
   },
   RequestPackageReportList: {
     url: "/RequestPackage/RequestPackageReportList",

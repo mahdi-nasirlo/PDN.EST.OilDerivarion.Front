@@ -4,8 +4,9 @@ import React, { useEffect, useRef } from "react";
 
 interface PropsType {
   SecondReload: number;
-  height: string;
-
+  height?: string;
+  width?: string;
+  className?: React.HtmlHTMLAttributes<HTMLDivElement>
 }
 
 export default function Index(props: PropsType) {
@@ -27,14 +28,16 @@ export default function Index(props: PropsType) {
   }, []);
 
   return (
-    <iframe
-      style={{ marginBottom: 10 }}
-      ref={iframeRef}
-      height={props.height}
-      className="w-full h-full border-solid"
-      src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
-    >
+    <div className="min-h-[500px] max-h-full">
+      <iframe
+        ref={iframeRef}
+        // height={props.height ? props.height : "100%"}
+        // width={props.width ? props.width : "100%"}
+        className="w-full h-full border-2 border-CustomizeBlue-500 rounded-md"
+        src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
+      >
 
-    </iframe >
+      </iframe >
+    </div>
   );
 }

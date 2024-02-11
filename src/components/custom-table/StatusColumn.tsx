@@ -6,18 +6,18 @@ const StatusColumn = ({ record }: { record: any }) => {
   let color = "";
   let name = "";
   let icon = <></>;
-  if (record.isActive === false) {
-    color = "red";
-    name = "غیرفعال";
-    icon = <CloseCircleOutlined />;
-  } else {
+  if (record.isActive === true) {
     color = "success";
     name = "فعال";
     icon = <CheckCircleOutlined />;
+  } else {
+    color = "red";
+    name = "غیرفعال";
+    icon = <CloseCircleOutlined />;
   }
 
   return (
-    <Tag icon={icon} color={color}>
+    <Tag className='p-1' icon={icon} color={color}>
       {name}
     </Tag>
   );

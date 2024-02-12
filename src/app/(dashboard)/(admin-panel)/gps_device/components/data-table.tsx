@@ -12,6 +12,7 @@ import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import EditModal from "./edit-modal";
 import Link from "next/link";
 import DeleteModal from "./delete-modal";
+import useBoxOpen from "@/hooks/box-gps/use-box-open";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -28,11 +29,11 @@ export default function DataTable({
   setModalVisible,
   setPaginate,
 }: TProps) {
+  const openBox = useBoxOpen();
 
   const [uid, setGetUid] = useState<string | boolean>();
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
-
 
   const columns: ColumnsType<z.infer<typeof apiData.item>> = [
     {
@@ -74,9 +75,7 @@ export default function DataTable({
       render: (_, record) => (
         <Space size="small">
           <Button type="link" className="text-primary-500 font-bold">
-            <Link href={"/gps_device/travel_history"}>
-              مشاهده
-            </Link>
+            <Link href={"/gps_device/travel_history"}>مشاهده</Link>
           </Button>
         </Space>
       ),
@@ -93,8 +92,8 @@ export default function DataTable({
             <Button
               type="link"
               className="text-primary-500 font-bold"
-            // loading={openBox.isMutating}
-            // onClick={() => openBox.trigger()}
+              // loading={openBox.isPending}
+              // onClick={() => openBox.mutateAsync()}
             >
               بازکردن درب دستگاه
             </Button>
@@ -110,7 +109,6 @@ export default function DataTable({
             type="link"
             className="text-red-500 font-bold"
             onClick={() => setUidDelete(record.uid)}
-
           >
             حذف
           </Button>
@@ -144,14 +142,8 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
-        <DeleteModal
-          uidDelete={uidDelete}
-          setUidDelete={setUidDelete}
-        />
+        <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
+        <DeleteModal uidDelete={uidDelete} setUidDelete={setUidDelete} />
       </Card>
     </>
   );

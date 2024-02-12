@@ -248,6 +248,79 @@ const RequestPackageApi = {
       est_test_item: z.array(z.string())
     }),
     response: generalResponseZod.extend({data: z.any()})
+  },
+  BoxList: {
+    url: "/RequestPackage/BoxList",
+    type: z.object({
+      package_UID: z.string()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        box_ID: z.number(),
+        box_usage_type: z.number(),
+        box_UID: z.string(),
+        capacity: z.number(),
+        samples: z.array(z.object({
+          Name: z.string(),
+          UID: z.string()
+        })).or(z.string()).nullable()
+      }))
+    })
+  },
+  BoxAdd: {
+    url: "/RequestPackage/BoxAdd",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      box_usage_type: z.number()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({}))
+    })
+  },
+  BoxGetAvailableList: {
+    url: "/RequestPackage/BoxGetAvailableList",
+    fieldName: {value: "UID", label: "Name"},
+    type: z.object({
+      package_UID: z.string(),
+      state_ID: z.number().optional()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        UID: z.string(),
+        Status: z.number().optional(),
+        Name: z.string()
+      }))
+    })
+  },
+  BoxSampleAdd: {
+    url: "/RequestPackage/BoxSampleAdd",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      sample_UID: z.string()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({}))
+    })
+  },
+  BoxSampleGetAvailableList: {
+    url: "/RequestPackage/BoxSampleGetAvailableList",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string()
+    }),
+    fieldName: {value: "Sample_UID", label: "Name"},
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        Sample_UID: z.string(),
+        Name: z.string()
+      }))
+    })
+  },
+
+  BoxSampleDelete: {
+    url: "/RequestPackage/BoxSampleDelete"
   }
 };
 

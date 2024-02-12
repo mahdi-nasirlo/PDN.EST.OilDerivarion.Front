@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomTable from "@/components/custom-table";
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Button } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { PrinterIcon } from "@heroicons/react/24/solid";
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import {Button} from "antd";
+import {PrinterIcon} from "@heroicons/react/24/solid";
+import useBoxListPrint from "@/hooks/request-package/use-box-list-print";
 
-export default function LastCheckTable() {
-  const columns: any = [
+export default function LastCheckTable({package_UID}: { package_UID: string }) {
+
+    const printList = useBoxListPrint({package_UID})
+
+    const columns: any = [
     {
       title: "ردیف",
       dataIndex: "Row",

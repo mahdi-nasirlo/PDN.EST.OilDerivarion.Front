@@ -28,16 +28,14 @@ export default function Index(props: PropsType) {
   }, []);
 
   return (
-    <div className="min-h-[500px] max-h-full">
-      <iframe
-        ref={iframeRef}
-        // height={props.height ? props.height : "100%"}
-        // width={props.width ? props.width : "100%"}
-        className="w-full h-full border-2 border-CustomizeBlue-500 rounded-md"
-        src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
-      >
+    <iframe
+      ref={iframeRef}
+      height={props.height ? props.height : "100%"}
+      width={props.width ? props.width : "100%"}
+      className="border-2 border-CustomizeBlue-500 rounded-md"
+      src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
+    >
 
-      </iframe >
-    </div>
+    </iframe >
   );
 }

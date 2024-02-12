@@ -12,6 +12,7 @@ import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import EditModal from "./edit-modal";
 import Link from "next/link";
 import DeleteModal from "./delete-modal";
+import useBoxOpen from "@/hooks/box-gps/use-box-open";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -74,9 +75,7 @@ export default function DataTable({
       render: (_, record) => (
         <Space size="small">
           <Button type="link" className="text-primary-500 font-bold">
-            <Link href={"/gps_device/travel_history"}>
-              مشاهده
-            </Link>
+            <Link href={"/gps_device/travel_history"}>مشاهده</Link>
           </Button>
         </Space>
       ),
@@ -89,6 +88,7 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
+          {record.device_Status !== 2 && (
             <Button
               type="link"
               className="text-primary-500 font-bold"
@@ -98,6 +98,7 @@ export default function DataTable({
             >
               بازکردن درب دستگاه
             </Button>
+          )}
           <Button
             type="link"
             className="text-secondary-500 font-bold"

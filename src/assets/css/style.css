@@ -63,6 +63,7 @@
 .DatePicker {
   @apply w-full static !important;
 }
+
 .DatePicker__calendarContainer {
   @apply absolute z-10 !important;
 }
@@ -75,3 +76,6 @@
   @apply p-0 bg-red-900 !important;
 }
 
+input[type="number"] {
+  -moz-appearance: textfield;
+}

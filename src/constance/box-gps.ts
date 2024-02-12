@@ -1,6 +1,8 @@
+import { AxiosInstance } from "axios";
 import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
+import mapAxios from "@/utils/map-axios";
 
 const BoxGPSGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -65,15 +67,14 @@ const boxGPSApi = {
     url: "/BoxGPS/Update",
     type: z.object({
       uid: z.string().uuid(),
-      capacity: z.number({ required_error: errorMessage.required }),
+      code: z.number({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      imei: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),
-      stateUid: z.string({
-        required_error: errorMessage.required_choice,
-      }),
+      stateUid: z.string().optional(),
+      capacity: z.number().optional(),
+      imei: z.string().optional(),
     }),
   },
 
@@ -102,6 +103,45 @@ const boxGPSApi = {
           name: z.number().optional(),
         })
       ),
+    }),
+  },
+
+  BoxGPSGetPageForExpert: {
+    url: "/BoxGPS/GetPageForExpert",
+    type: z.object({
+      code: z.string().optional(),
+      device_Status: z.number().optional(),
+      fromRecord: z.number(),
+      selectRecord: z.number(),
+    }),
+    item: BoxGPSGetPageItem,
+    response: generalResponseZod.extend({
+      data: z.object({
+        count: z.number(),
+        records: z.array(BoxGPSGetPageItem),
+      }),
+    }),
+  },
+
+  BoxGPSUpdateForExpert: {
+    url: "/BoxGPS/Update",
+    type: z.object({
+      uid: z.string().uuid(),
+      stateUid: z.string().optional(),
+      imei: z.string().optional(),
+      capacity: z.number().optional(),
+      code: z.number(),
+      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      device_Status: z.number({
+        required_error: errorMessage.required_choice,
+      }),
+    }),
+  },
+  BoxOpn: {
+    url: "/Oil/boxOpen",
+    type: z.object({
+      device: z.string(),
+      code: z.number(),
     }),
   },
 };

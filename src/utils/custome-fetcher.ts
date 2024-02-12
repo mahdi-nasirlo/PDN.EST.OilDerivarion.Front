@@ -4,7 +4,7 @@ import { AxiosHeaders, AxiosInstance } from "axios";
 import getUrlWithParams from "./getUrlWithParams";
 
 type Props = {
-  url?: string;
+  url: string;
   axiosInstance?: AxiosInstance;
   params?: Record<string, string | number>;
   data?: any;

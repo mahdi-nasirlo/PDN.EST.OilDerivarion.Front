@@ -59,14 +59,13 @@ export default function Page() {
                 ]}
                 currentPage={"موقعیت جعبه"}
             />
-            <div className='lg:flex max-lg:space-y-8 w-full h-full gap-8'>
+            <div className='lg:flex max-lg:space-y-8 w-full gap-8 min-h-[640px]'>
                 <Table
-                    className='min-h-full'
                     pagination={false}
                     dataSource={data}
                     columns={columns}
                 />
-                <Card>
+                <Card className='mb-0 relative'>
                     {dataRow &&
                         <>
                             <div className="flex flex-col items-start space-y-3">
@@ -82,11 +81,11 @@ export default function Page() {
                             <Divider />
                         </>
                     }
-                    <div className="w-full border-2 border-CustomizeBlue-500 rounded-md">
-                        <MapViewer width='100%' height="560px" SecondReload={30} />
+                    <div className='absolute top-36 bottom-8 left-8 right-8 overflow-hidden'>
+                        <MapViewer height='100%' width='100%' SecondReload={30} />
                     </div>
                 </Card>
-            </div >
+            </div>
         </>
     )
 }
@@ -137,6 +136,54 @@ const data = [
         Description: "در حال ارسال به آزمایشگاه"
     }, {
         Row: 11,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 12,
+        Type: "نمونه اصلی",
+        Description: "در حال ارسال به آزمایشگاه"
+    }, {
+        Row: 13,
         Type: "نمونه اصلی",
         Description: "در حال ارسال به آزمایشگاه"
     }, {

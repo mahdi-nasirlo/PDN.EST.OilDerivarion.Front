@@ -59,13 +59,13 @@ export default function Page() {
                 ]}
                 currentPage={"موقعیت جعبه"}
             />
-            <div className='lg:flex max-lg:space-y-8 w-full gap-8'>
+            <div className='lg:flex max-lg:space-y-8 w-full gap-8 min-h-[640px]'>
                 <Table
                     pagination={false}
                     dataSource={data}
                     columns={columns}
                 />
-                <Card className='mb-0'>
+                <Card className='mb-0 relative'>
                     {dataRow &&
                         <>
                             <div className="flex flex-col items-start space-y-3">
@@ -81,13 +81,14 @@ export default function Page() {
                             <Divider />
                         </>
                     }
-                    <MapViewer width='100%' SecondReload={30} />
+                    <div className='absolute top-36 bottom-8 left-8 right-8 overflow-hidden'>
+                        <MapViewer height='100%' width='100%' SecondReload={30} />
+                    </div>
                 </Card>
             </div>
         </>
     )
 }
-
 
 
 const data = [
@@ -101,109 +102,5 @@ const data = [
         Type: "نمونه اصلی",
         Description: "در حال ارسال به آزمایشگاه"
     },
-    {
-        Row: 3,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 4,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 5,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 6,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 7,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 8,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 9,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 10,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 11,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 12,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 13,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 14,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 15,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 16,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 17,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 18,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 19,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 20,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 21,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 22,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 23,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 24,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 25,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 26,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 27,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }, {
-        Row: 28,
-        Type: "نمونه اصلی",
-        Description: "در حال ارسال به آزمایشگاه"
-    }
+
 ]

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
@@ -11,6 +11,7 @@ import { boxGPSApi } from "constance/box-gps";
 import Link from "next/link";
 import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import StatusBoxAction from "./status-box-action";
+import useBoxOpen from "@/hooks/box-gps/use-box-open";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -20,11 +21,8 @@ interface TProps {
   setPaginate: (arg: any) => void;
 }
 
-export default function DataTable({
-  data,
-  isLoading,
-  setPaginate,
-}: TProps) {
+export default function DataTable({ data, isLoading, setPaginate }: TProps) {
+  const openBox = useBoxOpen();
 
   const [uidStatus, setUidStatus] = useState<string>();
 
@@ -49,7 +47,7 @@ export default function DataTable({
       title: "وضعیت",
       dataIndex: "device_Status",
       key: "4",
-      render: (e, record) => <StatusColumnBox record={record} />
+      render: (e, record) => <StatusColumnBox record={record} />,
     },
     {
       title: "تاریخچه سفر ها",
@@ -58,9 +56,7 @@ export default function DataTable({
       render: (_, record) => (
         <Space size="small">
           <Button type="link" className="text-primary-500 font-bold">
-            <Link href={"/status_box_list_state/travel_history"}>
-              مشاهده
-            </Link>
+            <Link href={"/status_box_list_state/travel_history"}>مشاهده</Link>
           </Button>
         </Space>
       ),
@@ -77,8 +73,8 @@ export default function DataTable({
             <Button
               type="link"
               className="text-primary-500 font-bold"
-            // loading={openBox.isMutating}
-            // onClick={() => openBox.trigger()}
+              // loading={openBox.isPending}
+              // onClick={() => openBox.mutateAsync()}
             >
               بازکردن درب دستگاه
             </Button>
@@ -108,10 +104,7 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <StatusBoxAction
-          open={uidStatus}
-          setOpen={setUidStatus}
-        />
+        <StatusBoxAction open={uidStatus} setOpen={setUidStatus} />
       </Card>
     </>
   );

@@ -135,6 +135,13 @@ const boxGPSApi = {
       }),
     }),
   },
+  BoxOpn: {
+    // url: "/BoxGPS/Update",
+    type: z.object({
+      device: z.string(),
+      code: z.number(),
+    }),
+  },
 };
 
 export { boxGPSApi };

@@ -318,9 +318,16 @@ const RequestPackageApi = {
       }))
     })
   },
-
   BoxSampleDelete: {
-    url: "/RequestPackage/BoxSampleDelete"
+    url: "/RequestPackage/BoxSampleDelete",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      sample_UID: z.string()
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({})
+    })
   }
 };
 

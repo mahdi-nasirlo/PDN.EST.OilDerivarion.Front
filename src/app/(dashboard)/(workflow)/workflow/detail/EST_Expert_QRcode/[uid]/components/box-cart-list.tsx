@@ -11,17 +11,18 @@ import {errorMessage} from "../../../../../../../../constance/error-message";
 
 const BoxCartList = ({package_UID}: { package_UID: string }) => {
 
-    const {boxList} = useUiWorkflowSampleAdd({package_UID})
+    const {boxList, deleteSample} = useUiWorkflowSampleAdd({package_UID})
+
 
     return boxList?.data?.map((item, index) => {
-
-            console.log(item)
 
             return <Col key={index} xs={24} sm={12} xl={8} xxl={6}>
                 <motion.div
                     key={index}
                     className="relative"
-                    transition={{delay: index / 5}}
+                    transition={{
+                        delay: index / 5,
+                    }}
                     initial={{
                         scale: 0,
                         opacity: 0,
@@ -32,7 +33,7 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
                         scale: 1,
                         opacity: 1,
                         bottom: 0,
-                        left: 0
+                        left: 0,
                     }}
                     exit={{
                         scale: 0,
@@ -48,27 +49,44 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
                             className="font-semibold text-lg"> جعبه {["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]} </Typography>
                         <div className="flex flex-col justify-between min-h-[600px]">
                             <Row gutter={[6, 12]}>
-                                {item.samples?.map((item: any, index: number) => <Col
+                                {item.samples?.map((sample: any, index: number) => <Col
                                     key={index}
                                     sm={12}
                                     className="p-0 flex items-center justify-center"
                                 >
-                                    <Popover title="حذف آیتم" content={<>
-                                        <Typography>از حذف ماده اولیه {item.name} مطمئن هستید؟</Typography>
-                                        <div className="flex justify-end">
-                                            <Button danger className="mt-3 border-red-500">حذف</Button>
-                                        </div>
-                                    </>}>
-                                        <Button
-                                            shape="circle"
-                                            type="default"
-                                            // style={{backgroundImage: "url(/static/hashor.svg"}}
-                                            className="diagonal-lines hover:border-8 w-36 h-36 text-sm border-8 border-primary-500 flex flex-col items-center justify-center space-y-2.5"
-                                            key={index}
-                                        >
-                                            {item.name}
-                                        </Button>
-                                    </Popover>
+                                    <motion.div
+                                        key={index}
+                                        transition={{delay: index * 0.8, staggerDirection: 0.2, duration: 0.4}}
+                                        initial={{y: 20, opacity: 0}}
+                                        animate={{y: 0, opacity: 1}}
+                                    >
+                                        <Popover title="حذف آیتم" content={<>
+                                            <Typography>از حذف ماده اولیه {sample.name} مطمئن هستید؟</Typography>
+                                            <div className="flex justify-end">
+                                                <Button danger className="mt-3 border-red-500 hover:border-red-500"
+                                                        loading={deleteSample.isPending}
+                                                        disabled={deleteSample.isPending}
+                                                        onClick={() => deleteSample.mutateAsync({
+                                                            package_UID,
+                                                            box_UID: item.box_UID,
+                                                            sample_UID: sample.Uid
+                                                        })}
+                                                >
+                                                    حذف
+                                                </Button>
+                                            </div>
+                                        </>}>
+                                            <Button
+                                                shape="circle"
+                                                type="default"
+                                                // style={{backgroundImage: "url(/static/hashor.svg"}}
+                                                className="diagonal-lines hover:border-8 w-36 h-36 text-sm border-8 border-primary-500 flex flex-col items-center justify-center space-y-2.5"
+                                                key={index}
+                                            >
+                                                {sample.name}
+                                            </Button>
+                                        </Popover>
+                                    </motion.div>
                                 </Col>)}
 
                                 {Array.from({length: (item?.capacity - (item.samples?.length ?? 0)) ?? 0}).map((value, index) => {
@@ -78,15 +96,23 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
                                         sm={12}
                                         className="p-0 flex items-center justify-center"
                                     >
-                                        {index == 0 ? <AddSample package_UID={package_UID} box_UID={item.box_UID}/> :
-                                            <Button
-                                                shape="circle"
-                                                type="dashed"
-                                                disabled
-                                                className="w-36 h-36 opacity-60"
-                                            >
+                                        <motion.div
+                                            key={index}
+                                            transition={{delay: index * 0.8, staggerDirection: 0.2, duration: 0.4}}
+                                            initial={{y: 20, opacity: 0}}
+                                            animate={{y: 0, opacity: 1}}
+                                        >
+                                            {index == 0 ?
+                                                <AddSample package_UID={package_UID} box_UID={item.box_UID}/> :
+                                                <Button
+                                                    shape="circle"
+                                                    type="dashed"
+                                                    disabled
+                                                    className="w-36 h-36 opacity-60"
+                                                >
 
-                                            </Button>}
+                                                </Button>}
+                                        </motion.div>
                                     </Col>
                                 })}
                             </Row>

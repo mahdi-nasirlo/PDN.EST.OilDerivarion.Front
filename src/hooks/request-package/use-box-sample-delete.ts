@@ -3,7 +3,7 @@ import {RequestPackageApi} from "../../constance/request-package";
 import {z} from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 
-const apiData = RequestPackageApi.FinalResultAdd
+const apiData = RequestPackageApi.BoxSampleDelete
 
 const useBoxSampleDelete = () => {
 
@@ -16,7 +16,7 @@ const useBoxSampleDelete = () => {
         }),
         onSuccess: (data) => {
 
-            queryClient.setQueryData([RequestPackageApi.FinalResultList.url], data)
+            queryClient.setQueryData([RequestPackageApi.BoxList.url], data)
 
         }
     })

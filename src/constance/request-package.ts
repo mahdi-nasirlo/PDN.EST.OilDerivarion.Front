@@ -76,6 +76,17 @@ const FinalResultListItem = z.object({
   // ReadOnly: z.any()
 })
 
+const BoxListItem = z.object({
+  box_ID: z.number(),
+  box_usage_type: z.number(),
+  box_UID: z.string(),
+  capacity: z.number(),
+  samples: z.array(z.object({
+    name: z.string(),
+    UID: z.string()
+  })).or(z.string()).nullable()
+})
+
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
@@ -254,17 +265,9 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string()
     }),
+    item: BoxListItem,
     response: generalResponseZod.extend({
-      data: z.array(z.object({
-        box_ID: z.number(),
-        box_usage_type: z.number(),
-        box_UID: z.string(),
-        capacity: z.number(),
-        samples: z.array(z.object({
-          Name: z.string(),
-          UID: z.string()
-        })).or(z.string()).nullable()
-      }))
+      data: z.array(BoxListItem)
     })
   },
   BoxAdd: {

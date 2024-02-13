@@ -12,7 +12,7 @@ const BoxCardAdd = ({package_uid}: { package_uid: string }) => {
     return <Col xs={24} md={12} xl={8} xxl={6}>
         <Spin spinning={boxAdd.isPending}>
             <div
-                className='min-h-[708px] w-full border-2 border-dashed border-primary-500 p-4 rounded-2xl flex flex-col justify-between space-y-4'
+                className='min-h-[717px] w-full border-2 border-dashed border-primary-500 p-4 rounded-2xl flex flex-col justify-between space-y-4'
             >
                 <Typography className="font-semibold text-lg">افزودن جعبه</Typography>
                 <PlusIcon className='mx-auto w-[105px] h-[105px] text-gray-700'/>

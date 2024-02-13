@@ -61,6 +61,8 @@ export default function SideBar({ open, setOpen }: TProps) {
             }}
         >
             <Drawer
+                headerStyle={{ direction: "ltr", }}
+                title={<div className="flex justify-end ">مشتقات نفتی - استاندارد</div>}
                 className="mobile-drawer"
                 open={open}
                 onClose={() => setOpen(false)}
@@ -88,6 +90,6 @@ export default function SideBar({ open, setOpen }: TProps) {
                     backgroundColor: "#1C2537",
                 }}
             />
-        </div>
+        </div >
     );
 }

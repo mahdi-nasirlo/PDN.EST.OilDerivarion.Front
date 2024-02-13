@@ -70,22 +70,24 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
       render: (_, record) => (
         <Space size="small">
           {record.device_Status !== 2 && (
-            <Button
-              type="link"
-              className="text-primary-500 font-bold"
+            <>
+              <Button
+                type="link"
+                className="text-primary-500 font-bold"
               // loading={openBox.isPending}
               // onClick={() => openBox.mutateAsync()}
-            >
-              بازکردن درب دستگاه
-            </Button>
+              >
+                بازکردن درب دستگاه
+              </Button>
+              <Button
+                type="link"
+                className="text-secondary-500 font-bold"
+                onClick={() => setUidStatus(record.uid)}
+              >
+                تغییر وضعیت
+              </Button>
+            </>
           )}
-          <Button
-            type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => setUidStatus(record.uid)}
-          >
-            تغییر وضعیت
-          </Button>
         </Space>
       ),
     },

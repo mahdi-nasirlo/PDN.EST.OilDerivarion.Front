@@ -1,13 +1,13 @@
 "use client";
 
-import {Button, Space} from "antd";
-import {ColumnsType} from "antd/es/table";
-import React, {useState} from "react";
-import {Card} from "@/components/card";
-import {z} from "zod";
+import { Button, Space } from "antd";
+import { ColumnsType } from "antd/es/table";
+import React, { useState } from "react";
+import { Card } from "@/components/card";
+import { z } from "zod";
 import CustomTable from "@/components/custom-table";
-import {PlusIcon, ViewColumnsIcon} from "@heroicons/react/24/outline";
-import {boxGPSApi} from "constance/box-gps";
+import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { boxGPSApi } from "constance/box-gps";
 import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import EditModal from "./edit-modal";
 import Link from "next/link";
@@ -89,28 +89,29 @@ export default function DataTable({
       render: (_, record) => (
         <Space size="small">
           {record.device_Status !== 2 && (
-            <Button
-              type="link"
-              className="text-primary-500 font-bold"
-              disabled={record.device_Status !== 2}
-            // loading={openBox.isMutating}
-            // onClick={() => openBox.trigger()}
-            >
-              بازکردن درب دستگاه
-            </Button>
+            <>
+              <Button
+                type="link"
+                className="text-primary-500 font-bold"
+                disabled={record.device_Status !== 2}
+              // loading={openBox.isMutating}
+              // onClick={() => openBox.trigger()}
+              >
+                بازکردن درب دستگاه
+              </Button>
+              <Button
+                type="link"
+                className="text-secondary-500 font-bold"
+                onClick={() => setGetUid(record.uid)}
+              >
+                ویرایش
+              </Button>
+            </>
           )}
-          <Button
-            type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => setGetUid(record.uid)}
-          >
-            ویرایش
-          </Button>
           <Button
             type="link"
             className="text-red-500 font-bold"
             onClick={() => setUidDelete(record.uid)}
-
           >
             حذف
           </Button>

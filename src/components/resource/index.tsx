@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { Button, Divider, Spin, Typography } from "antd";
+import { Divider, Spin, Typography } from "antd";
 import useFormRequest from "@/components/form-builder/hooks/use-form-request";
 import { ZodErrorAlert } from "@/components/zod-error-alert";
 import { z } from "zod";
@@ -13,7 +13,6 @@ import FormBuilderHistory from "@/components/form-builder/form-builder-history";
 import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
-import { router } from "next/client";
 
 const Index = ({ categoryKey, type = "single" }: { categoryKey?: string, type?: "many" | "single", }) => {
 
@@ -51,16 +50,8 @@ const Index = ({ categoryKey, type = "single" }: { categoryKey?: string, type?: 
                 <Breadcrumb
                     pages={[{ label: "خانه", path: "/" }]}
                     currentPage={validate.data[0]?.Title as string}
-                    titleIcon={<DocumentDuplicateIcon className="w-6" />}
-                    actions={[
-                        <Button
-                            key={1}
-                            onClick={() => router.back()}
-                            size="large"
-                        >
-                            بازگشت
-                        </Button>
-                    ]}
+                    titleIcon={<DocumentDuplicateIcon className="w-8" />}
+                    backLink='/'
                 />
                 <FormBuilderHistory formKey={categoryKey as string} />
                 <Card>

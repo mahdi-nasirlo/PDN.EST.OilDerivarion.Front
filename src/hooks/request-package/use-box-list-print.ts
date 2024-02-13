@@ -1,12 +1,18 @@
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { RequestPackageApi } from "../../constance/request-package";
+import { z } from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 
-const useBoxListPrint = (data: { package_UID: string }) => {
+const apiData = RequestPackageApi.BoxListPrint;
 
-    return useQuery({
-        queryKey: ["/RequestPackage/BoxListPrint"],
-        queryFn: () => fetchWithSession({url: "/RequestPackage/BoxListPrint", data})
-    })
+const useBoxListPrint = (data: z.infer<typeof apiData.type>) => {
+  const query = useQuery({
+    queryKey: [apiData.url, data],
+    queryFn: () => fetchWithSession({ url: apiData.url, data }),
+    select: (data: z.infer<typeof apiData.response>) => data.data,
+  });
+
+  return { ...query, ...apiData };
 };
 
 export default useBoxListPrint;

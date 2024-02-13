@@ -280,3 +280,7 @@
 .ant-form-item-explain-error {
   @apply mb-0 !important
 }
+
+.ant-pagination{
+  @apply print:hidden !important
+}

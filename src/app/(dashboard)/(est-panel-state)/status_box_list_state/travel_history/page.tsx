@@ -59,7 +59,7 @@ export default function Page() {
                 ]}
                 currentPage={"موقعیت جعبه"}
             />
-            <div className='lg:flex max-lg:space-y-8 w-full gap-8 min-h-[640px]'>
+            <div className='lg:flex max-lg:space-y-8 w-full gap-8 min-h-[632px]'>
                 <Table
                     pagination={false}
                     dataSource={data}

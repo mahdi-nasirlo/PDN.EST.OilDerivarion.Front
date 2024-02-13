@@ -381,6 +381,22 @@ const RequestPackageApi = {
       data: z.object({}),
     }),
   },
+  BoxListPrint: {
+    url: "/RequestPackage/BoxListPrint",
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({
+        Production_Method: z.string(),
+        Sample_Type: z.string(),
+        name: z.string(),
+        Box_Type: z.string(),
+        Box_Data: z.string(),
+        Sample_Code: z.string(),
+      }),
+    }),
+  },
 };
 
 export { RequestPackageApi };

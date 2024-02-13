@@ -370,7 +370,6 @@ const RequestPackageApi = {
       ),
     }),
   },
-
   BoxSampleDelete: {
     url: "/RequestPackage/BoxSampleDelete",
     type: z.object({
@@ -378,15 +377,8 @@ const RequestPackageApi = {
       box_UID: z.string(),
       sample_UID: z.string(),
     }),
-  },
-  BoxListPrint: {
-    url: "/RequestPackage/BoxListPrint",
-    type: z.object({
-      package_UID: z.string(),
-    }),
-    Item: boxListPrintItem,
     response: generalResponseZod.extend({
-      data: z.array(boxListPrintItem),
+      data: z.object({}),
     }),
   },
 };

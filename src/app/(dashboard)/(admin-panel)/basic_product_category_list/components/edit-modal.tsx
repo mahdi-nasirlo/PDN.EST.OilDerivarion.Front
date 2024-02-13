@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd'
 import useProductCategoryEdit
@@ -11,6 +11,8 @@ interface TProps {
 
 export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
 
+    const [hasDensity, setHasDensity] = useState(false);
+
     const {
         closeModal,
         form,
@@ -19,7 +21,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
         get,
         handleSubmit,
         density
-    } = useProductCategoryEdit(editModalUid, setEditModalUid)
+    } = useProductCategoryEdit(editModalUid, setEditModalUid, setHasDensity)
 
     return (
         <>
@@ -63,7 +65,12 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
                     form={form}
                     layout="vertical"
                 >
-                    <ProductCategoryForm rules={rules} density={density} />
+                    <ProductCategoryForm
+                        rules={rules}
+                        density={density}
+                        hasDensity={hasDensity}
+                        setHasDensity={setHasDensity}
+                    />
                 </Form>
             </Modal>
         </>

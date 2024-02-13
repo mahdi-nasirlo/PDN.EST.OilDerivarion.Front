@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { productCategoryApi } from "../../../../../constance/product-category";
+import { productCategoryApi } from "constance/product-category";
 import { useValidation } from "@/hooks/use-validation";
 import useBasicProductCategoryGet from "@/hooks/basic/product-category/use-product-category-get";
 import { useProductCategoryUpdate } from "@/hooks/basic/product-category/use-product-category-update";
@@ -9,7 +9,8 @@ const apiData = productCategoryApi.BasicProductCategoryUpdate;
 
 const useProductCategoryEdit = (
   uid: string,
-  setUid: (arg: string | undefined) => void
+  setUid: (arg: string | undefined) => void,
+  setHasDensity: any
 ) => {
   const [form, rules] = useValidation(apiData.type);
 
@@ -23,7 +24,7 @@ const useProductCategoryEdit = (
     if (get.data && get.data[0]) {
       form.setFieldsValue(get.data[0]);
       setDensity(get.data[0].hasDensity);
-      console.log(get.data[0].hasDensity);
+      setHasDensity(density);
     }
   }, [get.data]);
 
@@ -35,6 +36,7 @@ const useProductCategoryEdit = (
 
     if (res.success) {
       setUid(undefined);
+      setHasDensity(false);
       form.resetFields();
     }
   };
@@ -42,6 +44,7 @@ const useProductCategoryEdit = (
   const closeModal = () => {
     if (!get.isLoading) {
       setUid(undefined);
+      setHasDensity(false);
       form.resetFields();
     }
   };

@@ -1,15 +1,20 @@
 import { Col, Form, Input, InputNumber, Row, Select } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Rule } from "rc-field-form/es/interface";
+
+interface TProps {
+  rules: Rule;
+  density?: boolean;
+  hasDensity: boolean;
+  setHasDensity: any;
+}
 
 export default function ProductCategoryForm({
   rules,
   density,
-}: {
-  rules: Rule;
-  density?: boolean;
-}) {
-  const [hasDensity, setHasDensity] = useState(density ?? true);
+  hasDensity,
+  setHasDensity
+}: TProps) {
 
   useEffect(() => {
     setHasDensity(density ?? false);

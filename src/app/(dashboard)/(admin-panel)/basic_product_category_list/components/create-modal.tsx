@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCategoryForm from './product-category-form'
 import { Button, Col, Form, Modal, Row } from 'antd';
 import { productCategoryApi } from 'constance/product-category';
@@ -18,8 +18,11 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
 
     const create = useProductCategoryCreate();
 
+    const [hasDensity, setHasDensity] = useState(false);
+
     const closeModal = () => {
         setModalVisible(false);
+        setHasDensity(false)
         form.resetFields();
     };
 
@@ -76,8 +79,11 @@ export default function CreateModal({ modalVisible, setModalVisible }: TProps) {
                 form={form}
                 layout="vertical"
             >
-                <ProductCategoryForm rules={rules} />
-
+                <ProductCategoryForm
+                    rules={rules}
+                    hasDensity={hasDensity}
+                    setHasDensity={setHasDensity}
+                />
             </Form>
         </Modal >
     )

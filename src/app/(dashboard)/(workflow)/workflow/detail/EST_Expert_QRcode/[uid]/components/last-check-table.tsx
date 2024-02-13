@@ -6,7 +6,7 @@ import { PrinterIcon } from "@heroicons/react/24/solid";
 import useBoxListPrint from "@/hooks/request-package/use-box-list-print";
 import { RequestPackageApi } from "constance/request-package";
 import { useReactToPrint } from "react-to-print";
-import { z } from "zod";
+import { any, z } from "zod";
 import { ColumnType } from "antd/lib/table";
 
 const apiData = RequestPackageApi.BoxListPrint;
@@ -107,7 +107,7 @@ export default function LastCheckTable({
           }}
           // setInitialData={[]}
           isLoading={boxListPrint.isLoading}
-          data={{ records: boxListPrint.data || [] }}
+          data={{ records: boxListPrint.data || ([] as any) }}
           columns={columns}
         />
       </div>

@@ -85,7 +85,7 @@ export default function LastCheckTable({
 
   return (
     <>
-      <div ref={componentRef} className="print:peer-target:landscape:flex">
+      <div ref={componentRef}>
         <CustomTable
           ref={componentRef}
           header={{

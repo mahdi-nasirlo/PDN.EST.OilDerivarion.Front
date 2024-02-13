@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
-import {useValidation} from "@/hooks/use-validation";
-import {Form} from "antd/lib";
-import {Button, Col, Divider, Input, Row, Select, Typography} from "antd";
-import {MaterialSelectField} from "@/components/fields/material-select-field";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {materialApi} from "../../../../../constance/material";
-import {useRequestPackageMaterialAdd} from "@/hooks/material/use-request-package-material-add";
-import {validateNationalCode} from '@/lib/validate-national-code';
+import React, { useState } from 'react';
+import { useValidation } from "@/hooks/use-validation";
+import { Form } from "antd/lib";
+import { Button, Col, Divider, Input, Row, Select, Typography } from "antd";
+import { MaterialSelectField } from "@/components/fields/material-select-field";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { materialApi } from "../../../../../constance/material";
+import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
+import { validateNationalCode } from '@/lib/validate-national-code';
 
 const apiData = materialApi.RequestPackageMaterialAdd
 
-const AddMaterials = ({package_uid}: { package_uid?: string }) => {
+const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
 
     const [form, rules] = useValidation(apiData.type);
 
@@ -50,7 +50,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                 <Typography className="text-[16px] font-semibold">افزودن مواد اولیه</Typography>
             </div>
             <Divider />
-            <Form initialValues={{material_Supply_Method_Id: 1}} form={form} layout="vertical" onFinish={handleSubmit}>
+            <Form initialValues={{ material_Supply_Method_Id: 1 }} form={form} layout="vertical" onFinish={handleSubmit}>
                 <Row gutter={[16, 10]}>
                     <Col xs={24} sm={8}>
                         <Form.Item
@@ -111,7 +111,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                 {supplyMethodStatus === 2 ? (
                     <>
                         <Row gutter={[16, 16]}>
-                            <Col xs={24} md={12}>
+                            <Col xs={24} sm={12}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_Name"
@@ -130,7 +130,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                                     />
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={12}>
+                            <Col xs={24} sm={12}>
                                 <Form.Item
                                     required={false}
                                     name="material_Import_Declaration_Number"
@@ -158,7 +158,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                 ) : (
                     <>
                         <Row gutter={[16, 16]}>
-                            <Col xs={24} md={8}>
+                            <Col xs={24} sm={8}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_Name"
@@ -171,7 +171,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                                     <Input size="large" placeholder="وارد نمایید" />
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={8}>
+                            <Col xs={24} sm={8}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_Person_Type_Id"
@@ -196,7 +196,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                                     />
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={8}>
+                            <Col xs={24} sm={8}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_National_Code"
@@ -248,7 +248,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                             </Col>
                         </Row>
                         <Row gutter={[16, 16]}>
-                            <Col xs={24} md={12}>
+                            <Col xs={24} sm={12}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_Iran_Code"
@@ -265,7 +265,7 @@ const AddMaterials = ({package_uid}: { package_uid?: string }) => {
                                     />
                                 </Form.Item>
                             </Col>
-                            <Col xs={24} md={12}>
+                            <Col xs={24} sm={12}>
                                 <Form.Item
                                     required={false}
                                     name="material_Supply_Address"

@@ -128,7 +128,7 @@ const boxGPSApi = {
     type: z.object({
       uid: z.string().uuid(),
       stateUid: z.string().optional(),
-      imei: z.string().optional(),
+      imei: z.string(),
       capacity: z.number().optional(),
       code: z.number(),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),

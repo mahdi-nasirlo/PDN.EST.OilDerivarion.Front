@@ -1,8 +1,11 @@
-import { Form, Spin, Typography } from "antd";
-import React, { useEffect, useState } from "react";
-import { useForm } from "antd/lib/form/Form";
-import { Alert, Button, Checkbox, Col, Input, Row } from "antd/lib";
+import {Form, Spin, Typography} from "antd";
+import React, {useEffect} from "react";
+import {useForm} from "antd/lib/form/Form";
+import {Checkbox, Col, Divider, Input, Row} from "antd/lib";
 import useUiVisitResult from "../hook/use-ui-visit-result";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
+import useUiVisitResultWorkFlow
+  from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Result/[uid]/hook/use-ui-visit-result-work-flow";
 
 export const EstForm = ({ uid }: { uid?: string }) => {
   const { handleSubmitEst, getTime, addTime } = useUiVisitResult({ uid });
@@ -13,7 +16,9 @@ export const EstForm = ({ uid }: { uid?: string }) => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
 
-  const [state, setState] = useState<boolean>(false);
+  const {get, set, choice, setChoice} =
+      useUiVisitResultWorkFlow({taskId: uid as string});
+
   return (
     <>
       <div className="my-5">
@@ -32,7 +37,18 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           disabled={getTime.data?.visit_Type !== 3}
           layout="vertical"
           className="mb-5"
-          onFinish={handleSubmitEst}
+          onFinish={async (values) => {
+
+            const res = await set.mutateAsync({
+              taskId: uid as string,
+              stepKey: "Visit_Result",
+              choiceKey: choice,
+            });
+
+            if (res.success) {
+              await handleSubmitEst(values)
+            }
+          }}
         >
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
@@ -83,18 +99,17 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             </Col>
           </Row>
           {getTime.data?.visit_Type == 3 && (
-            <Row gutter={[32, 0]}>
-              <Col xs={24} md={24}>
-                <Button
-                  className="w-full"
-                  size="large"
-                  type={"primary"}
-                  htmlType="submit"
-                >
-                  ثبت
-                </Button>
-              </Col>
-            </Row>
+              <>
+                <Divider/>
+                <WorkflowBtn
+                    loading={set.isPending}
+                    choices={get.data?.choices}
+                    onClick={async (choice_Key) => {
+                      setChoice(choice_Key)
+                      form.submit()
+                    }}
+                />
+              </>
           )}
         </Form>
       </Spin>

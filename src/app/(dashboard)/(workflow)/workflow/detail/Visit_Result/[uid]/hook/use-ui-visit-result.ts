@@ -1,5 +1,3 @@
-import useRequestPackageVisitScheduleAdd from "@/hooks/request-package/use-request-package-visit-schedule-add";
-import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
 import useRequestPackageVisitOpinionAdd from "@/hooks/request-package/use-request-pakage-visit-opinion-add";
 import useRequestPackageVisitOpinionList from "@/hooks/request-package/use-request-pakage-visit-opinion-list";
 
@@ -25,6 +23,10 @@ const useUiVisitResult = ({ uid }: { uid?: string }) => {
     });
   };
   const handleSubmitEst = async (values: any) => {
+
+    //   if (res.success) {
+    //     router.push(`/workflow/list/Visit_Result`);
+    //   }
     const res = await addTime.mutateAsync({
       visit_Type: 3,
       package_UID: uid,

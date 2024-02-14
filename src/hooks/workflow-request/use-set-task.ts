@@ -11,7 +11,8 @@ const useSetTask = () => {
     return useMutation({
         mutationFn: async (data: z.infer<typeof apiData.type>): Promise<z.infer<typeof generalResponseZod>> => await fetchWithSession({
             url: apiData.url,
-            data
+            data,
+            notify: false
         })
     })
 };

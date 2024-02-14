@@ -121,7 +121,6 @@ export default function DataTable() {
                     icon: <ViewColumnsIcon />,
                     text: 'لیست ارجاع ها',
                 }}
-                setInitialData={() => { }}
                 isLoading={false}
                 data={data}
                 columns={columns}

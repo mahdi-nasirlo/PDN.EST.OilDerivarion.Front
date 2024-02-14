@@ -70,17 +70,21 @@ const CommonWorkflow = ({
         />
       )}
       <Card>
-        <Divider orientation="left" className="mb-6">
-          لیست گزارشات
-        </Divider>
-        <Spin spinning={get.isFetching}>
-          <RepostsMaker
-            reports={reposts.data}
-            loading={reposts.isFetching}
-            taskId={uid}
-          />
-        </Spin>
-        <Divider />
+        {reposts.data?.length !== 0 && (
+          <>
+            <Divider orientation="left" className="mb-6">
+              لیست گزارشات
+            </Divider>
+            <Spin spinning={get.isFetching}>
+              <RepostsMaker
+                taskId={uid}
+                reports={reposts.data}
+                loading={reposts.isFetching}
+              />
+            </Spin>
+            <Divider />
+          </>
+        )}
         {children}
         <Form form={form} onFinish={handleSet} layout="vertical">
           <Form.Item

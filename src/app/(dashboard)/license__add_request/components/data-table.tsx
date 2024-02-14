@@ -153,7 +153,6 @@ export default function DataTable() {
             icon: <ViewColumnsIcon />,
             text: "لیست مجوزها",
           }}
-          setInitialData={() => { }}
           isLoading={list.isFetching}
           pagination={false}
           data={{ records: list.data }}

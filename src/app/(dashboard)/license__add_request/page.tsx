@@ -13,7 +13,7 @@ const Page = () => {
       <Breadcrumb
         titleIcon={<ClipboardDocumentCheckIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"اطلاعات مجوز تولید کننده"}
+        currentPage={"اطلاعات مجوز"}
       />
       <Card>
         <SubmitForm />

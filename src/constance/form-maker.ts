@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 
 const FormData = z.any();
 
@@ -134,6 +134,25 @@ const formMakerApi = {
         .min(1),
     }),
   },
+  GetDoc2: {
+    url: "/FormMaker/GetDoc2",
+    type: z.object({
+      form_Key: z.string(),
+      uid: z.string(),
+      package_Uid: z.string(),
+      isLastStep: z.string().optional()
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({
+        header: z.array(z.object({
+          key: z.string(),
+          value: z.string(),
+          hidden: z.boolean().nullable()
+        })),
+        values: z.array(z.any())
+      })
+    })
+  }
 };
 
 export { formMakerApi };

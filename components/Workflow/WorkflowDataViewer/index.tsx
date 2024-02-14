@@ -1,29 +1,31 @@
 import React from 'react';
-import WorkflowDataviewerItem, {WorkFlowDataViewerItemType} from "./workflowDataviewerItem";
 import {Spin} from "antd";
+import {z} from "zod";
+import {formMakerApi} from "../../../src/constance/form-maker";
+import {useGetDoc2} from "@/hooks/form-maker/use-get-doc2";
+import {Table} from "antd/lib";
 import {ColumnType} from "antd/lib/table";
-import {ColumnGroupType} from "rc-table/lib/interface";
 
 
-const Index = (props: { data: string, loading?: boolean, columns?: (ColumnGroupType<any> | ColumnType<any>)[] }) => {
+const Index = (props: z.infer<typeof formMakerApi.GetDoc2.type> & { loading?: boolean }) => {
+
+    const form = useGetDoc2({
+        form_Key: props.form_Key,
+        package_Uid: props.package_Uid,
+        uid: props.uid
+    })
 
     if (props.loading) {
         return <Spin/>
     }
 
-    let data: WorkFlowDataViewerItemType
+    const columns: ColumnType<any>[] = []
 
-    try {
-        data = JSON.parse(props.data)
-    } catch (e) {
-        data = {} as WorkFlowDataViewerItemType
-    }
+    form.data?.header.map((item) => {
+        if (!item.hidden) columns.push({dataIndex: item.key, title: item.value})
+    })
 
-    return (
-        <>
-            <WorkflowDataviewerItem data={data} columns={props.columns}/>
-        </>
-    );
+    return <Table columns={columns} dataSource={form.data?.values}/>
 };
 
 export default Index;

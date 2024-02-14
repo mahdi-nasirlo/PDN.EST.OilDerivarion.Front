@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import {useForm} from "antd/lib/form/Form";
-import {useGetRegisteredReportsForStepByKey} from "@/hooks/material/use-get-registered-reports-for-step-by-key";
-import {useRouter} from "next/navigation";
-import {Card} from "@/components/card";
-import {Button, Divider, Input, Spin} from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
+import { useRouter } from "next/navigation";
+import { Card } from "@/components/card";
+import { Button, Divider, Input, Spin } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import {DocumentTextIcon} from "@heroicons/react/24/outline";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import RepostsMaker from "@/components/reposts-maker";
-import {Form} from "antd/lib";
+import { Form } from "antd/lib";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 
 const CommonWorkflow = ({
@@ -74,7 +74,11 @@ const CommonWorkflow = ({
           لیست گزارشات
         </Divider>
         <Spin spinning={get.isFetching}>
-          <RepostsMaker reports={reposts.data} loading={reposts.isFetching} taskId={uid}/>
+          <RepostsMaker
+            reports={reposts.data}
+            loading={reposts.isFetching}
+            taskId={uid}
+          />
         </Spin>
         <Divider />
         {children}

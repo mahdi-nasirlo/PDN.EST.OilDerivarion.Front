@@ -28,7 +28,7 @@ export default function Page() {
         {
             title: "محصول",
             dataIndex: "test1",
-            key: "4",
+            key: "3",
         },
         {
             title: "کد درخواست",
@@ -38,17 +38,17 @@ export default function Page() {
         {
             title: "هزینه",
             dataIndex: "test3",
-            key: "4",
+            key: "5",
         },
         {
             title: "تاریخ پرداخت",
             dataIndex: "test4",
-            key: "4",
+            key: "6",
         },
         {
             title: "وضعیت",
             dataIndex: "isActive",
-            key: "4",
+            key: "7",
             align: "center",
             fixed: "right",
             width: "10%",
@@ -84,7 +84,7 @@ export default function Page() {
             />
             <Card>
                 <CustomTable
-                    data={{ records: [] }}
+                    data={{ records: data }}
                     columns={columns}
                     header={{
                         icon: <ViewColumnsIcon />,
@@ -107,3 +107,25 @@ export default function Page() {
         </>
     )
 }
+
+
+const data = [
+    {
+        Row: '1',
+        test: 'پکیج 101',
+        test1: 'تست',
+        test2: '6565456',
+        test3: '200,00 تومان',
+        test4: '1403/02/15',
+        isActive: true
+    },
+    {
+        Row: '2',
+        test: 'پکیج 101',
+        test1: 'تست',
+        test2: '6565456',
+        test3: '200,00 تومان',
+        test4: '1403/02/15',
+        isActive: false
+    }
+]

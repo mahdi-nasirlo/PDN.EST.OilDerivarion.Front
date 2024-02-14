@@ -92,7 +92,7 @@ export default function Page() {
                         actions: [
                             <Button
                                 key={"1"}
-                                className="max-md:w-full flex justify- items-center gap-2"
+                                className="flex justify- items-center gap-2"
                                 size="large"
                                 type="primary"
                                 htmlType="submit"
@@ -112,7 +112,7 @@ export default function Page() {
 const data = [
     {
         Row: '1',
-        test: 'پکیج 101',
+        name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
         test3: '200,00 تومان',
@@ -121,7 +121,7 @@ const data = [
     },
     {
         Row: '2',
-        test: 'پکیج 101',
+        name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
         test3: '200,00 تومان',

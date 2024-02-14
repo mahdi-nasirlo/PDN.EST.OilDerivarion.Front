@@ -391,6 +391,16 @@ const RequestPackageApi = {
       }),
     }),
   },
+  BoxDelete: {
+    url: "/RequestPackage/BoxDelete",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({}),
+    }),
+  },
 };
 
 export { RequestPackageApi };

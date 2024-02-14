@@ -53,7 +53,7 @@ const boxGPSApi = {
       code: z.number({ required_error: errorMessage.required }),
       capacity: z.number({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      imei: z.string({ required_error: errorMessage.required }),
+      imei: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),
@@ -74,7 +74,7 @@ const boxGPSApi = {
       }),
       stateUid: z.string().optional(),
       capacity: z.number().optional(),
-      imei: z.string().optional(),
+      imei: z.string().optional().pipe(notEmpty),
     }),
   },
 

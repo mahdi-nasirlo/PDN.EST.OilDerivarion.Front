@@ -102,11 +102,16 @@ const BoxListItem = z.object({
   box_usage_type: z.number(),
   box_UID: z.string(),
   capacity: z.number(),
-  samples: z.array(z.object({
-    name: z.string(),
-    UID: z.string()
-  })).or(z.string()).nullable()
-})
+  samples: z
+    .array(
+      z.object({
+        name: z.string(),
+        UID: z.string(),
+      })
+    )
+    .or(z.string())
+    .nullable(),
+});
 
 const RequestPackageApi = {
   RequestPackageFinalization: {
@@ -277,30 +282,30 @@ const RequestPackageApi = {
       est_opinion_description: z.string(),
       naft_test_item: z.array(z.string()),
       samt_test_item: z.array(z.string()),
-      est_test_item: z.array(z.string())
+      est_test_item: z.array(z.string()),
     }),
-    response: generalResponseZod.extend({data: z.any()})
+    response: generalResponseZod.extend({ data: z.any() }),
   },
   BoxList: {
     url: "/RequestPackage/BoxList",
     type: z.object({
-      package_UID: z.string()
+      package_UID: z.string(),
     }),
     item: BoxListItem,
     response: generalResponseZod.extend({
-      data: z.array(BoxListItem)
-    })
+      data: z.array(BoxListItem),
+    }),
   },
   BoxAdd: {
     url: "/RequestPackage/BoxAdd",
     type: z.object({
       package_UID: z.string(),
       box_UID: z.string(),
-      box_usage_type: z.number()
+      box_usage_type: z.number(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.object({}))
-    })
+      data: z.array(z.object({})),
+    }),
   },
   BoxGetAvailableList: {
     url: "/RequestPackage/BoxGetAvailableList",

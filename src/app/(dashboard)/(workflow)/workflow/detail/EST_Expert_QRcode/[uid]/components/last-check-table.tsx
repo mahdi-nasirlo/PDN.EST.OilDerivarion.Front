@@ -22,7 +22,7 @@ export default function LastCheckTable({
     content: () => componentRef.current,
   });
 
-  const columns: ColumnType<z.infer<typeof apiData.Item>>[] = [
+  const columnsPrint: ColumnType<z.infer<typeof apiData.Item>>[] = [
     {
       title: "ردیف",
       dataIndex: "Row",
@@ -74,7 +74,6 @@ export default function LastCheckTable({
       title: "بارکد بطری",
       dataIndex: "Sample_Code",
       key: "6",
-      render: () => "423443-23423k234-klj23l4j23-lkj23k4j23lk4jjkl",
     },
     // {
     //   title: "روش تولید",
@@ -82,34 +81,111 @@ export default function LastCheckTable({
     //   key: "7",
     // },
   ];
+  const columns: ColumnType<z.infer<typeof apiData.Item>>[] = [
+    {
+      title: "ردیف",
+      dataIndex: "Row",
+      key: "1",
+      width: "5%",
+    },
+
+    {
+      title: "نام",
+      dataIndex: "name",
+      key: "2",
+      width: "20%",
+    },
+
+    {
+      title: "مواد اولیه/محصولات",
+      dataIndex: "Sample_Type",
+      key: "3",
+    },
+    {
+      title: "نوع جعبه",
+      dataIndex: "Box_Type",
+      key: "4",
+    },
+    {
+      title: "ظرفیت جعبه",
+      dataIndex: "Box_Data",
+      key: "5",
+    },
+    {
+      title: "بارکد بطری",
+      dataIndex: "Sample_Code",
+      key: "6",
+    },
+    {
+      title: "روش تولید",
+      dataIndex: "Production_Method",
+      key: "7",
+    },
+  ];
 
   return (
     <>
       <div ref={componentRef}>
-        <CustomTable
-          ref={componentRef}
-          header={{
-            icon: <ViewColumnsIcon className="print:hidden" />,
-            text: "بررسی نهایی",
-            actions: [
-              <Button
-                key={"1"}
-                className="max-md:w-full flex justify- items-center gap-2 print:hidden"
-                size="large"
-                type="primary"
-                htmlType="submit"
-                onClick={handlePrint}
-              >
-                <PrinterIcon className="print:hidden" width={24} height={24} />
-                <span className="flex">چاپ</span>
-              </Button>,
-            ],
-          }}
-          // setInitialData={[]}
-          isLoading={boxListPrint.isLoading}
-          data={{ records: boxListPrint.data || ([] as any) }}
-          columns={columns}
-        />
+        <div className="print:hidden">
+          <CustomTable
+            ref={componentRef}
+            header={{
+              icon: <ViewColumnsIcon className="print:hidden" />,
+              text: "بررسی نهایی",
+              actions: [
+                <Button
+                  key={"1"}
+                  className="max-md:w-full flex justify- items-center gap-2 print:hidden"
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  onClick={handlePrint}
+                >
+                  <PrinterIcon
+                    className="print:hidden"
+                    width={24}
+                    height={24}
+                  />
+                  <span className="flex">چاپ</span>
+                </Button>,
+              ],
+            }}
+            // setInitialData={[]}
+            isLoading={boxListPrint.isLoading}
+            data={{ records: boxListPrint.data || ([] as any) }}
+            columns={columns}
+          />
+        </div>
+        <div className="hidden print:block">
+          <CustomTable
+            ref={componentRef}
+            header={{
+              icon: <ViewColumnsIcon className="print:hidden" />,
+              text: "بررسی نهایی",
+              actions: [
+                <Button
+                  key={"1"}
+                  className="max-md:w-full flex justify- items-center gap-2 print:hidden"
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  onClick={handlePrint}
+                >
+                  <PrinterIcon
+                    className="print:hidden"
+                    width={24}
+                    height={24}
+                  />
+                  <span className="flex">چاپ</span>
+                </Button>,
+              ],
+            }}
+            // setInitialData={[]}
+            isLoading={boxListPrint.isLoading}
+            data={{ records: boxListPrint.data || ([] as any) }}
+            columns={columnsPrint}
+          />
+        </div>
       </div>
     </>
   );

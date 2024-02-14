@@ -63,6 +63,7 @@ export default function Home(props: PropType) {
             <Row gutter={[16, 0]}>
               <Col xs={24} sm={12}>
                 <Form.Item
+                  required={false}
                   name="Representative__National_Code"
                   label="شماره ملی"
                   rules={[

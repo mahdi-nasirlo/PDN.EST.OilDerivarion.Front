@@ -3,12 +3,13 @@
 import { Card } from '@/components/card';
 import { CheckCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { DocumentChartBarIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
-import { Button, Space, Tag } from 'antd';
+import { Space, Tag, Typography } from 'antd';
 import Breadcrumb from '@/components/breadcrumb'
 import CustomTable from '@/components/custom-table'
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import { z } from 'zod';
+import Link from 'next/link';
 
 export default function Page() {
     const columns: ColumnsType<z.infer<any>> = [
@@ -74,13 +75,21 @@ export default function Page() {
             width: "10%",
             render: (_, record: any) => (
                 <Space size="small">
-                    <Button
+                    {record.isActive !== (0 | 1 | 2) ? <Link
                         type="link"
                         className={"text-primary-500 font-bold"}
+                        href={record.isActive == 0 ? `/payment_management/${record.uid}/visit_invoice`
+                            : record.isActive == 1 ? `/payment_management/${record.uid}/lab_invoice`
+                                : `/payment_management/${record.uid}/product_code_Invoice`}
                     >
                         پرداخت
-                    </Button>
-                </Space>
+                    </Link> : <Typography
+                        className={"text-gray-400 font-bold cursor-not-allowed"}
+                    >
+                        پرداخت شده
+                    </Typography>
+                    }
+                </Space >
             )
         },
     ];
@@ -111,6 +120,7 @@ export default function Page() {
 const data = [
     {
         Row: '1',
+        uid: "123456",
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
@@ -118,6 +128,7 @@ const data = [
     },
     {
         Row: '2',
+        uid: "654321",
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
@@ -125,6 +136,7 @@ const data = [
     },
     {
         Row: '3',
+        uid: "987654",
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
@@ -132,6 +144,7 @@ const data = [
     },
     {
         Row: '4',
+        uid: '96385274',
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',

@@ -39,15 +39,16 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           className="mb-5"
           onFinish={async (values) => {
 
-            const res = await set.mutateAsync({
-              taskId: uid as string,
-              stepKey: "Visit_Result",
-              choiceKey: choice,
-            });
-
+            const res = await handleSubmitEst(values)
+            
             if (res.success) {
-              await handleSubmitEst(values)
+              await set.mutateAsync({
+                taskId: uid as string,
+                stepKey: "Visit_Result",
+                choiceKey: choice,
+              });
             }
+
           }}
         >
           <Row gutter={[16, 16]}>

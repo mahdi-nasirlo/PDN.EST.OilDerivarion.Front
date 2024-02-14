@@ -2,20 +2,16 @@
 
 import React from "react";
 
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { Alert, Button, Divider, Form, Input, Spin } from "antd/lib";
-import { Card } from "@/components/card";
-import WorkflowBtn from "@/components/workflow/workflow-btn";
-import CustomDatePicker from "@/components/custome-date-picker";
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
+import {Alert, Button, Divider, Spin} from "antd/lib";
+import {Card} from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import useUiVisitSchedule from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-visit-schedule";
-import { useRouter } from "next/navigation";
-import useUiVisitResult from "./hook/use-ui-visit-result";
+import {useRouter} from "next/navigation";
 import useUiVisitResultWorkFlow from "./hook/use-ui-visit-result-work-flow";
-import { NaftForm } from "./components/naft-form";
-import { SamtForm } from "./components/samt-form";
-import { EstForm } from "./components/est-form";
+import {NaftForm} from "./components/naft-form";
+import {SamtForm} from "./components/samt-form";
+import {EstForm} from "./components/est-form";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
@@ -66,27 +62,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {dataForm.data?.visit_Type == 3 && (
-          <>
-            <Divider />
-            {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
-            <WorkflowBtn
-              loading={set.isPending}
-              choices={get.data?.choices}
-              onClick={async (choice_Key) => {
-                setChoice(choice_Key);
-                const res = await set.mutateAsync({
-                  taskId: params.uid,
-                  stepKey,
-                  choiceKey: choice_Key,
-                });
-                if (res.success) {
-                  router.push(`/workflow/list/Visit_Result`);
-                }
-              }}
-            />
-          </>
-        )}
+
       </Card>
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Spin} from "antd";
+import {Empty, Spin} from "antd";
 import {z} from "zod";
 import {formMakerApi} from "../../../src/constance/form-maker";
 import {useGetDoc2} from "@/hooks/form-maker/use-get-doc2";
@@ -19,9 +19,13 @@ const Index = (props: z.infer<typeof formMakerApi.GetDoc2.type> & { loading?: bo
         return <Spin/>
     }
 
+    if (!props.loading && !Array.isArray(form.data?.header)) {
+        return <Empty/>
+    }
+    
     const columns: ColumnType<any>[] = []
 
-    form.data?.header.map((item) => {
+    form.data?.header?.map((item) => {
         if (!item.hidden) columns.push({dataIndex: item.key, title: item.value})
     })
 

@@ -1,13 +1,13 @@
-import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
+import { Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import React from "react";
-import {DocumentPlusIcon} from "@heroicons/react/24/outline";
+import { DocumentPlusIcon } from "@heroicons/react/24/outline";
 import FileUpload from "@/components/file-upload/FileUpload";
 import staticMessages from "@/lib/staticMessages";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import useUiRequestProductDescriptionForm
     from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-product-description-form";
 
-const DescriptionForm = ({uid, package_uid}: { uid: string, package_uid?: string }) => {
+const DescriptionForm = ({ uid, package_uid }: { uid: string, package_uid?: string }) => {
 
     const {
         form,
@@ -77,7 +77,7 @@ const DescriptionForm = ({uid, package_uid}: { uid: string, package_uid?: string
                 </Row>
                 <Divider />
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} sm={12}>
+                    <Col xs={24} sm={24}>
                         <Form.Item
                             rules={[rule]}
                             name="schematic_file_UID"

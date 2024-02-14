@@ -146,7 +146,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                         actions: [
                             <Button
                                 key={"1"}
-                                className="max-md:w-full flex justify- items-center gap-2"
+                                className="flex justify- items-center gap-2"
                                 size="large"
                                 type="primary"
                                 htmlType="submit"

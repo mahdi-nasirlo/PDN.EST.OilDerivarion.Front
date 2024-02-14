@@ -23,16 +23,11 @@ const useUiVisitResult = ({ uid }: { uid?: string }) => {
     });
   };
   const handleSubmitEst = async (values: any) => {
-
-    //   if (res.success) {
-    //     router.push(`/workflow/list/Visit_Result`);
-    //   }
-    const res = await addTime.mutateAsync({
+    return await addTime.mutateAsync({
       visit_Type: 3,
       package_UID: uid,
       ...values,
-    });
-    console.log(values);
+    })
   };
 
   return {

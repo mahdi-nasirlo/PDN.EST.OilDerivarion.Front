@@ -10,13 +10,10 @@ import Breadcrumb from "@/components/breadcrumb";
 import WorkflowDataTable from "@/components/workflow/workflow-data-list";
 import { Card } from "@/components/card";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
-import { Button } from "antd";
-import { useRouter } from "next/navigation";
 
 const Page = ({ params: { key } }: { params: { key: string } }) => {
   const { data } = useWorkflow({ stepKey: key });
 
-  const router = useRouter();
 
   const extraColumns: ColumnsType = [
     {
@@ -54,11 +51,7 @@ const Page = ({ params: { key } }: { params: { key: string } }) => {
           pages={[{ label: "خانه" }]}
           currentPage={`${data?.step[0]?.Step_Name}`}
           titleIcon={<ClipboardDocumentListIcon className="h-8" />}
-          actions={[
-            <Button key={1} size="large" onClick={() => router.back()}>
-              بازگشت
-            </Button>,
-          ]}
+          backLink="/"
         />
       )}
       <Card>

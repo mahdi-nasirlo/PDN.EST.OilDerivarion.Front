@@ -28,7 +28,7 @@ export default function SideBar({ open, setOpen }: TProps) {
           if (item.label.length <= 29)
             return (
               <Menu.Item key={item.key} className="custom-menu-item">
-                <Link href={item.key}>{item.label}</Link>
+                <link href={item.key}>{item.label}</link>
               </Menu.Item>
             );
           return (

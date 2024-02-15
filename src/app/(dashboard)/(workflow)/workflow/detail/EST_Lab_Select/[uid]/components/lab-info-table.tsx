@@ -1,23 +1,20 @@
 import React, { useRef } from "react";
 import CustomTable from "@/components/custom-table";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Button, Typography } from "antd";
+import { Button, Divider, Typography } from "antd";
 import { PrinterIcon } from "@heroicons/react/24/solid";
 import useBoxListPrint from "@/hooks/request-package/use-box-list-print";
 import { RequestPackageApi } from "constance/request-package";
 import { useReactToPrint } from "react-to-print";
-import { any, z } from "zod";
+import { z } from "zod";
 import { ColumnType } from "antd/lib/table";
-import { Card, Descriptions, Divider } from "antd/lib";
+import useLabBoxListPrint from "@/hooks/request-package/use-lab-box-list-print";
+import { Card, Descriptions } from "antd/lib";
 
-const apiData = RequestPackageApi.BoxListPrint;
+const apiData = RequestPackageApi.LabBoxListPrint;
 
-export default function LastCheckTable({
-  package_UID,
-}: {
-  package_UID: string;
-}) {
-  const boxListPrint = useBoxListPrint({ package_UID });
+export default function LabInfoTable({ package_UID }: { package_UID: string }) {
+  const labboxListPrint = useLabBoxListPrint({ package_UID });
   const componentRef = useRef<any>();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -32,35 +29,40 @@ export default function LastCheckTable({
     },
 
     {
-      title: "نام",
+      title: "نوع نمونه",
       dataIndex: "name",
       key: "2",
       width: "20%",
     },
 
     {
-      title: "مواد اولیه/محصولات",
+      title: "نام نمونه",
       dataIndex: "Sample_Type",
       key: "3",
     },
     {
-      title: "نوع جعبه",
-      dataIndex: "Box_Type",
-      key: "4",
+      title: "روش تولید",
+      dataIndex: "Production_Method",
+      key: "7",
     },
     {
-      title: "ظرفیت جعبه",
-      dataIndex: "Box_Data",
+      title: "کد محرنامه قدیم",
+      dataIndex: "Sample_Code_Asli_Ghadim",
       key: "5",
     },
     {
-      title: "بارکد بطری",
-      dataIndex: "Sample_Code",
+      title: "کد محرنامه جدید",
+      dataIndex: "Sample_Code_Asli_Jadid",
+      key: "5",
+    },
+    {
+      title: "نام آزمایشگاه",
+      dataIndex: "Lab_Name",
       key: "6",
     },
     {
-      title: "روش تولید",
-      dataIndex: "Production_Method",
+      title: "آدرس آزمایشگاه",
+      dataIndex: "Lab_Address",
       key: "7",
     },
   ];
@@ -93,8 +95,8 @@ export default function LastCheckTable({
               ],
             }}
             // setInitialData={[]}
-            isLoading={boxListPrint.isLoading}
-            data={{ records: boxListPrint.data || ([] as any) }}
+            isLoading={labboxListPrint.isLoading}
+            data={{ records: labboxListPrint.data || ([] as any) }}
             columns={columns}
           />
         </div>
@@ -105,7 +107,7 @@ export default function LastCheckTable({
           title=""
           className="print:block w-full hover:shadow-lg transition duration-300 relative font-bold"
         >
-          {boxListPrint.data?.map((boxCard, index) => (
+          {labboxListPrint.data?.map((boxCard, index) => (
             <div key={index} className="print:block">
               <Card title={boxCard.Sample_Type}>
                 <Descriptions>
@@ -122,16 +124,25 @@ export default function LastCheckTable({
 
                 <Divider />
 
-                <Descriptions title="اطلاعات جعبه">
-                  <Descriptions.Item label="نوع جعبه" className="w-full">
-                    {boxCard.Box_Type}
+                <Descriptions title="اطلاعات آزمایشگاه">
+                  <Descriptions.Item label="نام آزمایشگاه">
+                    {boxCard.Lab_Name}
                   </Descriptions.Item>
-                  <Descriptions.Item label="ظرفیت جعبه" className="w-full">
-                    {boxCard.Box_Data}
+                  <Descriptions.Item label="آدرس آزمایشگاه">
+                    {boxCard.Lab_Address}
                   </Descriptions.Item>
-                  <br />
-                  <Descriptions.Item label="بارکد بطری">
-                    {boxCard.Sample_Code}
+                </Descriptions>
+
+                <Divider />
+
+                <Descriptions>
+                  <Descriptions.Item label="کد محرمانه قدیم" className="w-full">
+                    {boxCard.Sample_Code_Asli_Ghadim}
+                  </Descriptions.Item>
+                </Descriptions>
+                <Descriptions>
+                  <Descriptions.Item label="کد محرمانه جدید" className="w-full">
+                    {boxCard.Sample_Code_Asli_Jadid}
                   </Descriptions.Item>
                 </Descriptions>
               </Card>

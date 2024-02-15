@@ -1,23 +1,20 @@
 "use client";
 
 import React from "react";
-import {ColumnsType} from "antd/es/table";
+import { ColumnsType } from "antd/es/table";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
-import {Space} from "antd/lib";
+import { Space } from "antd/lib";
 import useWorkflow from "@/components/workflow/workflow-data-list/hook/useWorkflow";
 import Breadcrumb from "@/components/breadcrumb";
 import WorkflowDataTable from "@/components/workflow/workflow-data-list";
-import {Card} from "@/components/card";
-import {ClipboardDocumentListIcon} from "@heroicons/react/24/solid";
-import {Button} from "antd";
-import {useRouter} from "next/navigation";
+import { Card } from "@/components/card";
+import { ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 const Page = () => {
 
-    const {data} = useWorkflow({stepKey: "Visit_Schedule"});
+    const { data } = useWorkflow({ stepKey: "Visit_Schedule" });
 
-    const router = useRouter();
 
     const extraColumns: ColumnsType = [
         {
@@ -25,7 +22,7 @@ const Page = () => {
             dataIndex: "status",
             key: "5",
             render(_, record) {
-                return <WorkFlowStatusColumn record={record}/>;
+                return <WorkFlowStatusColumn record={record} />;
             },
         },
 
@@ -52,18 +49,14 @@ const Page = () => {
         <>
             {data?.step && (
                 <Breadcrumb
-                    pages={[{label: "خانه"}]}
+                    pages={[{ label: "خانه" }]}
                     currentPage={`${data?.step[0]?.Step_Name}`}
-                    titleIcon={<ClipboardDocumentListIcon className="h-8"/>}
-                    actions={[
-                        <Button key={1} size="large" onClick={() => router.back()}>
-                            بازگشت
-                        </Button>,
-                    ]}
+                    titleIcon={<ClipboardDocumentListIcon className="h-8" />}
+                    backLink="/"
                 />
             )}
             <Card>
-                <WorkflowDataTable stepKey="Visit_Schedule" extraColumns={extraColumns}/>
+                <WorkflowDataTable stepKey="Visit_Schedule" extraColumns={extraColumns} />
             </Card>
         </>
     );

@@ -24,44 +24,20 @@ export default function SideBar({ open, setOpen }: TProps) {
       onOpenChange={handleMenuOpenChange}
     >
       {userAccess.data ? (
-        userAccess.data.map((item) => {
-          if (item.label.length <= 29)
-            return (
-              <Menu.Item key={item.key} className="custom-menu-item">
+        userAccess.data.map((item) => (
+          <Menu.Item key={item.key} className="custom-menu-item">
+            {item.label.length >= 28 ? (
+              <Tooltip title={item.label} placement="left" color="geekblue">
                 <Link href={item.key}>{item.label}</Link>
-              </Menu.Item>
-            );
-          return (
-            <Tooltip
-              key={item.key}
-              placement="left"
-              title={item.label}
-              color="geekblue"
-            >
-              <Menu.Item key={item.key} className="custom-menu-item">
-                <Link href={item.key}>{item.label}</Link>
-              </Menu.Item>
-            </Tooltip>
-          );
-        })
+              </Tooltip>
+            ) : (
+              <Link href={item.key}>{item.label}</Link>
+            )}
+          </Menu.Item>
+        ))
       ) : (
         <MenuSkeleton />
       )}
-      {/* {userAccess.data ? (
-            userAccess.data.map(item => (
-                <Menu.Item key={item.key} className="custom-menu-item">
-                    {item.label.length >= 28 ? (
-                        <Tooltip title={item.label} placement="left" color="geekblue" >
-                            <Link href={item.key}>{item.label}</Link>
-                        </Tooltip>
-                    ) : (
-                        <Link href={item.key}>{item.label}</Link>
-                    )}
-                </Menu.Item >
-            ))
-        ) : (
-            <MenuSkeleton />
-        )} */}
     </Menu>
   );
 

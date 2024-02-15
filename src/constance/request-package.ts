@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {generalResponseZod} from "@/types/api-response";
+import { z } from "zod";
+import { generalResponseZod } from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -472,6 +472,7 @@ const RequestPackageApi = {
       package_UID: z.string(),
       box_UID: z.string(),
       sample_UID: z.string(),
+      lab_Uid: z.string(),
     }),
     response: generalResponseZod.extend({
       data: z.object({}),
@@ -482,7 +483,7 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string(),
       box_UIDID: z.string(),
-      lab_UID: z.string()
+      lab_UID: z.string(),
     }),
     response: generalResponseZod.extend({
       data: z.object({}),

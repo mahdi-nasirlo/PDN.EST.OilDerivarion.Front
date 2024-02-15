@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -514,6 +514,18 @@ const RequestPackageApi = {
           Lab_Address: z.string(),
         })
       ),
+    }),
+  },
+  LabBoxSampleAdd: {
+    url: "/RequestPackage/LabBoxSampleAdd",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      lab_UID: z.string(),
+      sample_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({})),
     }),
   },
 };

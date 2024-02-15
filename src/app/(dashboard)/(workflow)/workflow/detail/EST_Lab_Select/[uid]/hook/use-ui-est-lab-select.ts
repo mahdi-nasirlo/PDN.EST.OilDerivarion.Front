@@ -7,7 +7,6 @@ import {useEffect, useState} from "react";
 import useLabBoxAdd from "@/hooks/request-package/use-lab-box-add";
 import {useForm} from "antd/lib/form/Form";
 import useLabBoxDelete from "@/hooks/request-package/use-lab-box-delete";
-import useLabBoxSampleAdd from "@/hooks/request-package/use-lab-box-sample-add";
 
 const apiData = RequestPackageApi.LabBoxGetAvailableList
 
@@ -22,8 +21,6 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
     const labList = useLabList({package_UID: data.package_UID})
 
     const deleteLabBox = useLabBoxDelete({package_UID: data.package_UID, lab_UID: lab_UID as string})
-
-    const addSampleLabBox = useLabBoxSampleAdd({package_UID: data.package_UID, lab_UID: lab_UID as string})
 
     const labBoxList = useLabBoxList({package_UID: data.package_UID, lab_UID: lab_UID as string})
 
@@ -57,7 +54,6 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
         form,
         labBoxList,
         deleteLabBox,
-        addSampleLabBox
     }
 };
 

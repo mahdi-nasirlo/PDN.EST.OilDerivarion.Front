@@ -11,13 +11,12 @@ import {z} from "zod";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useUiEstLabSelect
     from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
+import useLabBoxSampleGetAvailableList from "@/hooks/request-package/use-lab-box-sample-get-available-list";
+import useLabBoxSampleAdd from "@/hooks/request-package/use-lab-box-sample-add";
 
 const BoxCartList = ({package_UID}: { package_UID: string }) => {
-    // const { boxList, deleteSample, deletebox } = useUiWorkflowSampleAdd({
-    //   package_UID,
-    // });
 
-    const {labBoxList, deleteLabBox} = useUiEstLabSelect({package_UID: package_UID})
+    const {labBoxList, deleteLabBox, lab_UID} = useUiEstLabSelect({package_UID: package_UID})
 
     const [openUidDelete, setOpenUidDelete] = useState<string | boolean>(false);
 
@@ -78,7 +77,7 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
         }).map((value, index) =>
             views.push(
                 index == 0 ? (
-                    <AddSample package_UID={package_UID}/>
+                    <AddSample package_UID={package_UID} box_UID={item.box_UID} lab_UID={lab_UID as string}/>
                 ) : (
                     <Button
                         shape="circle"
@@ -101,6 +100,7 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
                                 transition={{delay: (index + cardIndex) * 0.4, duration: 0.2}}
                                 initial={{y: 20, opacity: 0}}
                                 animate={{y: 0, opacity: 1}}
+                                exit={{y: 20, opacity: 0, scale: 0}}
                             >
                                 {item}
                             </motion.div>
@@ -162,12 +162,12 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
                     handleDelete={async () => {
 
                         const res = await deleteLabBox.mutateAsync({
-                            box_UIDID: item.box_UID,
+                            box_UID: item.box_UID,
                         });
 
-                        // if (res) {
-                        //     setOpenUidDelete(false);
-                        // }
+                        if (res) {
+                            setOpenUidDelete(false);
+                        }
                     }}
                 />
             </>
@@ -175,11 +175,13 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
     });
 };
 
-const AddSample = ({package_UID}: { package_UID: string }) => {
+const AddSample = ({package_UID, box_UID, lab_UID}: { package_UID: string, box_UID: string, lab_UID: string }) => {
 
-    const {boxAvailable, addSampleLabBox} = useUiEstLabSelect({package_UID: package_UID})
+    const addSampleLabBox = useLabBoxSampleAdd({lab_UID, package_UID, box_UID})
 
     const [addPop, setAddPop] = useState<boolean>();
+
+    const availableSample = useLabBoxSampleGetAvailableList({package_UID, box_UID, lab_UID})
 
     return (
         <Popover
@@ -208,8 +210,8 @@ const AddSample = ({package_UID}: { package_UID: string }) => {
                     >
                         <Select
                             className="w-full"
-                            options={boxAvailable.data}
-                            fieldNames={boxAvailable.fieldName}
+                            options={availableSample.data}
+                            fieldNames={availableSample.fieldName}
                         />
                     </Form.Item>
                     <div className="flex justify-end">

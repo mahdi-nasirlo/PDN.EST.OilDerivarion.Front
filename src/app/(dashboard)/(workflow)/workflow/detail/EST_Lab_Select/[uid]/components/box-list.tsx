@@ -23,7 +23,7 @@ const BoxList = ({package_UID}: { package_UID: string }) => {
             </Col>
         </Row>
         <Divider/>
-        <Row gutter={[16, 12]}>
+        <Row gutter={[16, 12]} className="mb-5">
             <BoxCardAdd package_uid={package_UID}/>
             <BoxCartList package_UID={package_UID}/>
         </Row>

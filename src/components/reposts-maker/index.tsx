@@ -4,7 +4,6 @@ import {Alert, Collapse, Empty, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
 import {materialApi} from "../../constance/material";
-import WorkflowDataViewer from "../../../components/Workflow/WorkflowDataViewer";
 
 const Index = ({reports, loading, taskId}: {
   reports: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[] | undefined,
@@ -35,7 +34,7 @@ const RenderRepost = ({
   if (report.UID) {
     switch (report.Form_Type) {
         case 1:
-            ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
+            // ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
             break;
       case 2:
           ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>;

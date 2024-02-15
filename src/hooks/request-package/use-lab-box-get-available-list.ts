@@ -8,7 +8,7 @@ const apiData = RequestPackageApi.LabBoxGetAvailableList
 const useLabBoxGetAvailableList = (data: z.infer<typeof apiData.type>) => {
 
     const query = useQuery({
-        queryKey: [apiData.type],
+        queryKey: [apiData.url],
         queryFn: () => fetchWithSession({url: apiData.url, data}),
         select: (data: z.infer<typeof apiData.response>) => data.data
     })

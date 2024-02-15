@@ -3,9 +3,13 @@ import {z} from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 import {RequestPackageApi} from "../../constance/request-package";
 
-const apiData = RequestPackageApi.BoxSampleAdd;
+const apiData = RequestPackageApi.LabBoxSampleAdd;
 
-const useBoxSampleAdd = ({package_UID, lab_UID}: { package_UID: string, lab_UID: string }) => {
+const useBoxSampleAdd = ({package_UID, lab_UID, box_UID}: {
+    package_UID: string,
+    lab_UID: string,
+    box_UID: string
+}) => {
 
     const queryClient = useQueryClient()
 
@@ -16,12 +20,18 @@ const useBoxSampleAdd = ({package_UID, lab_UID}: { package_UID: string, lab_UID:
             data: {
                 ...data,
                 lab_UID: lab_UID,
-                package_UID: package_UID
+                package_UID: package_UID,
+                box_UID: box_UID
             }
         }),
         onSuccess: async (data) => {
 
-            await queryClient.invalidateQueries({queryKey: [RequestPackageApi.BoxList.url], exact: false})
+            await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data)
+
+            await queryClient.invalidateQueries({
+                queryKey: [RequestPackageApi.LabBoxSampleGetAvailableList.url],
+                exact: false
+            })
 
         }
     })

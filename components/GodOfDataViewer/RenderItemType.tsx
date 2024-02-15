@@ -6,7 +6,6 @@ import getTokenFromSession from "../../lib/server/getToken";
 import {Collapse, Empty, notification, Spin, Typography} from "antd";
 import useSWR from "swr";
 import handleError from "../../lib/server/handleError";
-import WorkflowDataViewer from "../Workflow/WorkflowDataViewer";
 import DataViewer from "../FormBuilder/DataViewer";
 import MediaTypeItems from "../Workflow/WorkflowDataViewer/MediaTypeItems";
 
@@ -21,7 +20,7 @@ export const RenderItemType = (props: z.infer<typeof TabType>) => {
 
     switch (props.type) {
         case "1":
-            ItemType = <WorkflowDataViewer data={data}/>
+            // ItemType = <WorkflowDataViewer data={data}/>
             break;
         case "2":
             ItemType = <DataViewer data={data}/>

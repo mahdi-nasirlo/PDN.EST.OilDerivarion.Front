@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import CustomTable from "../../CustomeTable";
 import useWorkflow from "./useWorkflow";
-import { Steps } from "../../../interfaces/steps";
-import { Descriptions, Typography } from "antd";
-import WorkflowDataViewer from "../WorkflowDataViewer";
+import {Typography} from "antd";
 
 const Index = () => {
   const { columns, fetch } = useWorkflow();
@@ -39,17 +36,17 @@ const Index = () => {
   // };
 
   const dataTable = () => {
-    try {
-      return (
-        <WorkflowDataViewer
-          columns={columns}
-          data={fetch.data?.tasks}
-          loading={fetch.isLoading}
-        />
-      );
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   return (
+    //     // <WorkflowDataViewer
+    //     //   columns={columns}
+    //     //   data={fetch.data?.tasks}
+    //     //   loading={fetch.isLoading}
+    //     // />
+    //   );
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
   return (

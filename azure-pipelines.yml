@@ -24,7 +24,7 @@ steps:
   - task: Docker@2
     displayName: Login
     inputs:
-      containerRegistry: "Nexus5000"
+      containerRegistry: "Nexus5000-PDN.EST.OilDerivation"
       command: "login"
 
   - task: file-creator@6
@@ -106,7 +106,7 @@ steps:
   - task: Docker@2
     displayName: Build and Push Image
     inputs:
-      containerRegistry: Nexus5000
+      containerRegistry: Nexus5000-PDN.EST.OilDerivation
       repository: $(project.name)
       command: buildAndPush
       tags: $(lastVersion)

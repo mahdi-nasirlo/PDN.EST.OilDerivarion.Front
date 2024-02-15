@@ -38,33 +38,33 @@ export default function DashboardLayout({
           <SideBar open={open} setOpen={setOpen} />
           <Content className="custom-content" style={contentStyle}>
             <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-              {/* <AnimatePresence mode="wait" initial={true}>
-                                <motion.div
-                                    key={pathname}
-                                    initial="initialState"
-                                    animate="animateState"
-                                    exit="exitState"
-                                    transition={{duration: 0.2, ease: "easeOut"}}
-                                    variants={{
-                                        initialState: {
-                                            opacity: 0,
-                                            x: "10px"
-                                        },
-                                        animateState: {
-                                            opacity: 1,
-                                            x: "0%",
-                                        },
-                                        exitState: {
-                                            opacity: 0.1,
-                                            x: "-10px",
-                                            scale: 0.8,
-                                        }
-                                    }}
-                                    className="tw-flex-1"
-                                >
-                            {children}
-                                </motion.div>
-                            </AnimatePresence> */}
+              {/* <AnimatePresence mode="wait" initial={true}> */}
+              <motion.div
+                key={pathname}
+                initial="initialState"
+                animate="animateState"
+                exit="exitState"
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                variants={{
+                  initialState: {
+                    opacity: 0,
+                    x: "10px",
+                  },
+                  animateState: {
+                    opacity: 1,
+                    x: "0%",
+                  },
+                  exitState: {
+                    opacity: 0.1,
+                    x: "-10px",
+                    scale: 0.8,
+                  },
+                }}
+                className="tw-flex-1"
+              >
+                {children}
+              </motion.div>
+              {/* </AnimatePresence>  */}
             </Layout>
           </Content>
         </Layout>

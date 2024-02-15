@@ -1,6 +1,5 @@
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
-import Item from "antd/es/list/Item";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -396,6 +395,89 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string(),
       box_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({}),
+    }),
+  },
+  LabBoxGetAvailableList: {
+    url: "/RequestPackage/LabBoxGetAvailableList",
+    type: z.object({
+      package_UID: z.string()
+    }),
+    fieldName: {value: "UID", label: "Name"},
+    response: generalResponseZod.extend({
+      data: z.array(z.object({UID: z.string(), Name: z.string()}))
+    })
+  },
+  LabList: {
+    url: "/RequestPackage/LabList",
+    fieldName: {value: "Uid", label: "Name"},
+    type: z.object({
+      package_UID: z.string()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        Name: z.string(),
+        Uid: z.string()
+      }))
+    })
+  },
+  LabBoxList: {
+    url: "/RequestPackage/LabBoxList",
+    type: z.object({
+      package_UID: z.string(),
+      lab_UID: z.string()
+    }),
+    item: BoxListItem,
+    response: generalResponseZod.extend({
+      data: z.array(BoxListItem)
+    })
+  },
+  LabBoxAdd: {
+    url: "/RequestPackage/LabBoxAdd",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      lab_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({})),
+    }),
+  },
+  LabBoxSampleGetAvailableList: {
+    url: "/RequestPackage/LabBoxSampleGetAvailableList",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      lab_UID: z.string()
+    }),
+    fieldName: {value: "Sample_UID", label: "Name"},
+    response: generalResponseZod.extend({
+      data: z.array(
+          z.object({
+            Sample_UID: z.string(),
+            Name: z.string(),
+          })
+      ),
+    }),
+  },
+  LabBoxSampleDelete: {
+    url: "/RequestPackage/LabBoxSampleDelete",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string(),
+      sample_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({}),
+    }),
+  },
+  LabBoxDelete: {
+    url: "/RequestPackage/LabBoxDelete",
+    type: z.object({
+      package_UID: z.string(),
+      box_UIDID: z.string(),
     }),
     response: generalResponseZod.extend({
       data: z.object({}),

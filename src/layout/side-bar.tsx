@@ -23,6 +23,29 @@ export default function SideBar({ open, setOpen }: TProps) {
         onOpenChange={handleMenuOpenChange}
     >
         {userAccess.data ? (
+            userAccess.data.map(item => {
+                if (item.label.length <= 29)
+                    return <Menu.Item key={item.key} className="custom-menu-item" >
+                        <Link href={item.key}>
+                            {item.label}
+                        </Link>
+                    </Menu.Item>
+                return <Tooltip
+                    key={item.key}
+                    placement="left"
+                    title={item.label}
+                    color="geekblue"
+                >
+                    <Menu.Item key={item.key} className="custom-menu-item">
+                        <Link href={item.key}>
+                            {item.label}
+                        </Link>
+                    </Menu.Item>
+                </Tooltip>
+            })) : (
+            <MenuSkeleton />
+        )}
+        {/* {userAccess.data ? (
             userAccess.data.map(item => (
                 <Menu.Item key={item.key} className="custom-menu-item">
                     {item.label.length >= 28 ? (
@@ -36,7 +59,7 @@ export default function SideBar({ open, setOpen }: TProps) {
             ))
         ) : (
             <MenuSkeleton />
-        )}
+        )} */}
     </Menu >
 
     return (

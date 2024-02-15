@@ -478,6 +478,7 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string(),
       box_UIDID: z.string(),
+      lab_UID: z.string()
     }),
     response: generalResponseZod.extend({
       data: z.object({}),

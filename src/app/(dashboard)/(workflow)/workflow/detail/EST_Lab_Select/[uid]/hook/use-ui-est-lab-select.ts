@@ -21,7 +21,7 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
 
     const labList = useLabList({package_UID: data.package_UID})
 
-    const deleteLabBox = useLabBoxDelete()
+    const deleteLabBox = useLabBoxDelete({package_UID: data.package_UID, lab_UID: lab_UID as string})
 
     const addSampleLabBox = useLabBoxSampleAdd({package_UID: data.package_UID, lab_UID: lab_UID as string})
 

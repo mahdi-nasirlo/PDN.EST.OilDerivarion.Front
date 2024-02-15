@@ -28,7 +28,7 @@ export default function SideBar({ open, setOpen }: TProps) {
           if (item.label.length <= 29)
             return (
               <Menu.Item key={item.key} className="custom-menu-item">
-                <link href={item.key}>{item.label}</link>
+                <Link href={item.key}>{item.label}</Link>
               </Menu.Item>
             );
           return (
@@ -39,7 +39,7 @@ export default function SideBar({ open, setOpen }: TProps) {
               color="geekblue"
             >
               <Menu.Item key={item.key} className="custom-menu-item">
-                <link href={item.key}>{item.label}</link>
+                <Link href={item.key}>{item.label}</Link>
               </Menu.Item>
             </Tooltip>
           );

@@ -14,13 +14,15 @@ const useBoxOpen = () => {
     code: 1234,
     device: "861100068416631",
   };
+  const fullUrl = `${apiData.url}?device=${data.device}`;
 
   return useMutation({
     mutationFn: async () =>
       await fetchWithSession({
-        url: apiData.url,
+        url: fullUrl,
         data,
         axiosInstance: mapAxios,
+        method: "GET",
       }),
     // onSuccess: async (data) => {
     //   await queryClient.invalidateQueries({

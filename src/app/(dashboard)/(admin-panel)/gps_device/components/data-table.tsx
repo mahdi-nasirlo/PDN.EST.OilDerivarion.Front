@@ -29,11 +29,10 @@ export default function DataTable({
   setModalVisible,
   setPaginate,
 }: TProps) {
-
   const [uid, setGetUid] = useState<string | boolean>();
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
-
+  const openBox = useBoxOpen();
 
   const columns: ColumnsType<z.infer<typeof apiData.item>> = [
     {
@@ -94,8 +93,8 @@ export default function DataTable({
                 type="link"
                 className="text-primary-500 font-bold"
                 disabled={record.device_Status !== 2}
-              // loading={openBox.isMutating}
-              // onClick={() => openBox.trigger()}
+                loading={openBox.isPending}
+                onClick={() => openBox.mutateAsync()}
               >
                 بازکردن درب دستگاه
               </Button>
@@ -145,14 +144,8 @@ export default function DataTable({
           data={data}
           columns={columns}
         />
-        <EditModal
-          editModalUid={uid}
-          setEditModalUid={setGetUid}
-        />
-        <DeleteModal
-          uidDelete={uidDelete}
-          setUidDelete={setUidDelete}
-        />
+        <EditModal editModalUid={uid} setEditModalUid={setGetUid} />
+        <DeleteModal uidDelete={uidDelete} setUidDelete={setUidDelete} />
       </Card>
     </>
   );

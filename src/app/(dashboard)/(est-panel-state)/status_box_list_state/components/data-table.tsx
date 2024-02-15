@@ -74,8 +74,8 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
               <Button
                 type="link"
                 className="text-primary-500 font-bold"
-              // loading={openBox.isPending}
-              // onClick={() => openBox.mutateAsync()}
+                loading={openBox.isPending}
+                onClick={() => openBox.mutateAsync()}
               >
                 بازکردن درب دستگاه
               </Button>

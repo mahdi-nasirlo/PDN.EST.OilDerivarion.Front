@@ -3,14 +3,12 @@
 import React from 'react'
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from '@heroicons/react/24/solid';
-import { Collapse } from 'antd';
-import FilterForm from './components/filter-form';
+import { Alert } from 'antd';
 import DataTable from './components/data-table';
 
 
 export default function Page() {
 
-    const TEst = (values: any) => { console.log(values) }
     return (
         <>
             <Breadcrumb
@@ -18,14 +16,10 @@ export default function Page() {
                 pages={[{ label: "خانه", path: "/" }]}
                 currentPage={"لیست های ارجاع شده"}
             />
-            <Collapse
-                size="large"
-                items={[
-                    {
-                        label: "فیلتر جدول",
-                        children: <FilterForm onFinish={TEst} />,
-                    },
-                ]}
+            <Alert
+                type='info'
+                className='w-full my-3 text-blue-800 text-right'
+                message="برای ثبت نتیجه هر یک از مواد داخل جعبه باید تمامی جعبه های ارسال شده در وضعیت باز شده قرار گیرند."
             />
             <DataTable
             // data={dataPage.data}

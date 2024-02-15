@@ -3,11 +3,9 @@
 import React from 'react'
 import TimeForm from './components/time-form'
 import { Card } from '@/components/card'
-import { Button, Col, Divider, Form, Row, Typography } from 'antd'
+import { Button, Col, Divider, Row, Typography } from 'antd'
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon, ViewColumnsIcon } from '@heroicons/react/24/outline'
-import { Input, Select } from 'antd/lib'
-import CustomTable from '@/components/custom-table'
+import { DocumentTextIcon } from '@heroicons/react/24/outline'
 import ResultForm from './components/result-form'
 import FactorForm from './components/factor-form'
 
@@ -18,7 +16,7 @@ export default function Page() {
                 titleIcon={<DocumentTextIcon className="w-8" />}
                 pages={[
                     { label: "خانه", path: "/" },
-                    { label: "لیست های ارجاع شده", path: '/referred_boxes_list' }
+                    { label: "لیست جعبه های درخواست", path: '/referred_boxes_list' }
                 ]}
                 currentPage={"ثبت نتیجه"}
                 backLink='/referred_boxes_list'

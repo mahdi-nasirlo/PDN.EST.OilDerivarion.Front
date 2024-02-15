@@ -78,7 +78,7 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
         }).map((value, index) =>
             views.push(
                 index == 0 ? (
-                    <AddSample package_UID={package_UID} box_UID={item.box_UID}/>
+                    <AddSample package_UID={package_UID}/>
                 ) : (
                     <Button
                         shape="circle"
@@ -163,7 +163,6 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
 
                         const res = await deleteLabBox.mutateAsync({
                             box_UIDID: item.box_UID,
-                            package_UID: package_UID,
                         });
 
                         // if (res) {
@@ -176,18 +175,9 @@ const BoxCartList = ({package_UID}: { package_UID: string }) => {
     });
 };
 
-const AddSample = ({
-                       package_UID,
-                       box_UID,
-                   }: {
-    package_UID: string;
-    box_UID: string;
-}) => {
+const AddSample = ({package_UID}: { package_UID: string }) => {
 
     const {boxAvailable, addSampleLabBox} = useUiEstLabSelect({package_UID: package_UID})
-    // const available = useLabBoxSampleGetAvailableList({package_UID, box_UID });
-
-    // const addSample = useBoxSampleAdd({package_UID, box_UID});
 
     const [addPop, setAddPop] = useState<boolean>();
 

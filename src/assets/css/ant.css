@@ -116,7 +116,11 @@
 }
 
 .ant-menu-item:hover {
-  @apply border-[1.5px] border-gray-100 !important;
+  @apply border-[1px] border-gray-50 border-opacity-50 bg-gray-100 bg-opacity-10 !important;
+}
+
+.ant-menu-item-selected:hover {
+  @apply bg-gray-100 bg-opacity-40 !important
 }
 
 .ant-menu-item .ant-menu-title-content:active {
@@ -274,13 +278,13 @@
 }
 
 .ant-menu-title-content .ant-tooltip-open {
-  @apply text-gray-800 !important
+  @apply text-gray-50 !important
 }
 
 .ant-form-item-explain-error {
   @apply mb-0 !important
 }
 
-.ant-pagination{
+.ant-pagination {
   @apply print:hidden !important
 }

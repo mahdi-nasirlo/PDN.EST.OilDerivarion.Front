@@ -1,20 +1,23 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {RequestPackageApi} from "../../constance/request-package";
-import {z} from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 
 const apiData = RequestPackageApi.LabBoxDelete;
 
-const useLabBoxDelete = () => {
+const useLabBoxDelete = ({package_UID, lab_UID}: { package_UID: string, lab_UID: string }) => {
 
     const queryClient = useQueryClient();
 
     const query = useMutation({
         mutationFn: async (
-            data: z.infer<typeof apiData.type>
+            data: { box_UIDID: string }
         ): Promise<typeof apiData.response> => await fetchWithSession({
             url: apiData.url,
-            data,
+            data: {
+                ...data,
+                package_UID,
+                lab_UID,
+            },
         }),
         onSuccess: async (data) => {
             await queryClient.setQueryData([RequestPackageApi.BoxList.url], data);

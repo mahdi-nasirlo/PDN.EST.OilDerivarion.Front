@@ -12,7 +12,7 @@ interface TProps {
 
 export default function SideBar({ open, setOpen }: TProps) {
 
-    const { userAccess, handleMenuOpenChange, handleMenuItemClick, pathname } = useControlSidebar()
+    const { userAccess, handleMenuOpenChange, handleMenuItemClick, pathname } = useControlSidebar();
 
     const CommonMenu = (props: MenuProps) => <Menu
         {...props}
@@ -21,29 +21,20 @@ export default function SideBar({ open, setOpen }: TProps) {
         defaultSelectedKeys={[pathname]}
         onClick={handleMenuItemClick}
         onOpenChange={handleMenuOpenChange}
-    // items={userAccess.data}
     >
         {userAccess.data ? (
-            userAccess.data.map(item => {
-                if (item.label.length <= 29)
-                    return <Menu.Item key={item.key} className="custom-menu-item" >
-                        <Link href={item.key}>
-                            {item.label}
-                        </Link>
-                    </Menu.Item>
-                return <Tooltip
-                    key={item.key}
-                    placement="left"
-                    title={item.label}
-                    color="geekblue"
-                >
-                    <Menu.Item key={item.key} className="custom-menu-item">
-                        <Link href={item.key}>
-                            {item.label}
-                        </Link>
-                    </Menu.Item>
-                </Tooltip>
-            })) : (
+            userAccess.data.map(item => (
+                <Menu.Item key={item.key} className="custom-menu-item">
+                    {item.label.length >= 28 ? (
+                        <Tooltip title={item.label} placement="left" color="geekblue" >
+                            <Link href={item.key}>{item.label}</Link>
+                        </Tooltip>
+                    ) : (
+                        <Link href={item.key}>{item.label}</Link>
+                    )}
+                </Menu.Item >
+            ))
+        ) : (
             <MenuSkeleton />
         )}
     </Menu >

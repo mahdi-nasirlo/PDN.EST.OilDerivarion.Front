@@ -23,12 +23,11 @@ export default function Page({ params }: { params: { uid: string } }) {
             />
 
             <Card>
-                <Typography>{params.uid}</Typography>
                 <TimeForm />
             </Card >
 
             <Card>
-                <FactorForm />
+                <FactorForm package_UID={params.uid} />
             </Card>
 
             <Card>

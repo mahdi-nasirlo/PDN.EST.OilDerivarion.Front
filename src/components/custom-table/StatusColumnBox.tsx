@@ -13,13 +13,13 @@ export default function StatusColumnBox({ record }: TProps) {
     if (record.device_Status === 1) {
         color = "success";
         name = "آماده به کار";
-    } else if (record.device_Status === 2) {
-        color = "warning";
-        name = "در حال ارسال به آزمایشگاه";
 
-    } else if (record.device_Status === 3) {
+    } else if (record.device_Status === 2) {
         color = "processing";
         name = "در حال ارسال برای بازدید";
+    } else if (record.device_Status === 3) {
+        color = "warning";
+        name = "در حال ارسال به آزمایشگاه";
     }
     else if (record.device_Status === 6) {
         color = "default";

@@ -6,15 +6,17 @@ import { DocumentTextIcon } from '@heroicons/react/24/solid';
 import { Alert } from 'antd';
 import DataTable from './components/data-table';
 
+const stepKey = "Lab_Test";
 
-export default function Page() {
+export default function Page({ params }: { params: { uid: string } }) {
 
     return (
         <>
             <Breadcrumb
                 titleIcon={<DocumentTextIcon className="w-8" />}
-                pages={[{ label: "خانه", path: "/" }]}
-                currentPage={"لیست های ارجاع شده"}
+                pages={[{ label: "خانه", path: "/" }, { label: "اقدام آزمایش", path: `/workflow/list/${stepKey}` }]}
+                currentPage={"لیست جعبه های درخواست"}
+                backLink={`/workflow/list/${stepKey}`}
             />
             <Alert
                 type='info'

@@ -87,7 +87,7 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          {record.device_Status !== 2 && (
+          {record.device_Status !== 3 && (
             <>
               <Button
                 type="link"
@@ -98,13 +98,15 @@ export default function DataTable({
               >
                 بازکردن درب دستگاه
               </Button>
-              <Button
-                type="link"
-                className="text-secondary-500 font-bold"
-                onClick={() => setGetUid(record.uid)}
-              >
-                ویرایش
-              </Button>
+              {record.device_Status !== 2 && (
+                <Button
+                  type="link"
+                  className="text-secondary-500 font-bold"
+                  onClick={() => setGetUid(record.uid)}
+                >
+                  ویرایش
+                </Button>
+              )}
             </>
           )}
           <Button

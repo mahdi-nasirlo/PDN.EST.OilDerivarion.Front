@@ -69,7 +69,7 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          {record.device_Status !== 2 && (
+          {record.device_Status !== 3 && (
             <>
               <Button
                 type="link"
@@ -79,13 +79,15 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
               >
                 بازکردن درب دستگاه
               </Button>
-              <Button
-                type="link"
-                className="text-secondary-500 font-bold"
-                onClick={() => setUidStatus(record.uid)}
-              >
-                تغییر وضعیت
-              </Button>
+              {record.device_Status !== 2 && (
+                <Button
+                  type="link"
+                  className="text-secondary-500 font-bold"
+                  onClick={() => setUidStatus(record.uid)}
+                >
+                  تغییر وضعیت
+                </Button>
+              )}
             </>
           )}
         </Space>

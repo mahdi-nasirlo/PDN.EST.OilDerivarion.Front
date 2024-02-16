@@ -1,77 +1,75 @@
-import React from 'react'
-import ProductForm from './product-form'
-import {Button, Col, Modal, Row} from 'antd';
-import {Form} from "antd/lib";
-import useUiRequestPackageProductCreate
-    from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-package-product-create";
+import React from "react";
+import ProductForm from "./product-form";
+import { Button, Col, Modal, Row } from "antd";
+import { Form } from "antd/lib";
+import useUiRequestPackageProductCreate from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-package-product-create";
 
 interface TProps {
-    uid: string,
-    package_uid?: string
-    visibleModal: boolean,
-    setVisibleModal: (arg: any) => void,
+  uid: string;
+  package_uid?: string;
+  visibleModal: boolean;
+  setVisibleModal: (arg: any) => void;
 }
 
-export default function CreateModal({visibleModal, setVisibleModal, uid, package_uid}: TProps) {
+export default function CreateModal({
+  visibleModal,
+  setVisibleModal,
+  uid,
+  package_uid,
+}: TProps) {
+  const { onFinish, addProduct, requestInfo, form, rules, onClose } =
+    useUiRequestPackageProductCreate({
+      uid,
+      visibleModal,
+      setVisibleModal,
+      package_uid,
+    });
 
-    const {
-        onFinish,
-        addProduct,
-        requestInfo,
-        form,
-        rules,
-        onClose
-    } = useUiRequestPackageProductCreate({uid, visibleModal, setVisibleModal, package_uid})
-
-    return (
-        <Modal
-            width={800}
-            title={
-                <div>
-                    <div className="text-base mb-2">افزودن محصول</div>
-                    <div className="font-normal text-sm">
-                        لطفا اطلاعات را وارد نمایید.
-                    </div>
-                </div>
-            }
-            open={visibleModal}
-            onCancel={onClose}
-            footer={[
-                <Row key={"box"} gutter={[16, 16]} className="my-2">
-                    <Col xs={12} md={12}>
-                        <Button
-                            size="large"
-                            className="w-full"
-                            loading={addProduct.isPending || requestInfo.isFetching}
-                            disabled={addProduct.isPending || requestInfo.isFetching}
-                            type="primary"
-                            onClick={() => form.submit()}
-                            key={"submit"}
-                        >
-                            ثبت
-                        </Button>
-                    </Col>
-                    <Col xs={12} md={12}>
-                        <Button
-                            disabled={addProduct.isPending || requestInfo.isFetching}
-                            size="large"
-                            className="w-full bg-gray-100 text-warmGray-500"
-                            onClick={onClose}
-                            key={"cancel"}
-                        >
-                            انصراف
-                        </Button>
-                    </Col>
-                </Row>,
-            ]}
-        >
-            <Form
-                form={form}
-                layout="vertical"
-                onFinish={onFinish}
+  return (
+    <Modal
+      width={800}
+      title={
+        <div>
+          <div className="text-base mb-2">افزودن محصول</div>
+          <div className="font-normal text-sm">
+            لطفا اطلاعات را وارد نمایید.
+          </div>
+        </div>
+      }
+      open={visibleModal}
+      onCancel={onClose}
+      footer={[
+        <Row key={"box"} gutter={[16, 16]} className="my-2">
+          <Col xs={12} md={12}>
+            <Button
+              size="large"
+              className="w-full"
+              loading={addProduct.isPending || requestInfo.isFetching}
+              disabled={addProduct.isPending || requestInfo.isFetching}
+              type="primary"
+              onClick={() => form.submit()}
+              key={"submit"}
             >
-                <ProductForm rules={rules}/>
-            </Form>
-        </Modal>
-    )
+              ثبت
+            </Button>
+          </Col>
+          <Col xs={12} md={12}>
+            <Button
+              disabled={addProduct.isPending || requestInfo.isFetching}
+              size="large"
+              className="w-full bg-gray-100 text-warmGray-500"
+              onClick={onClose}
+              key={"cancel"}
+            >
+              انصراف
+            </Button>
+          </Col>
+        </Row>,
+      ]}
+    >
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+        <ProductForm uid={uid} package_uid={package_uid} rules={rules} />
+      </Form>
+    </Modal>
+  );
 }

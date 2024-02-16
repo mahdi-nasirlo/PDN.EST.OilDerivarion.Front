@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const apiData = baseInfoApi.SetPersonContact;
 
-const useBaseInfoSetMainMember = () => {
+const useSetPersonContact = () => {
   const queryClient = useQueryClient();
 
   const query = useMutation({
@@ -22,4 +22,4 @@ const useBaseInfoSetMainMember = () => {
 
   return query;
 };
-export default useBaseInfoSetMainMember;
+export default useSetPersonContact;

@@ -12,6 +12,7 @@ import DisplayForm from "./components/display-form";
 import { Card } from "@/components/card";
 import { Button, Typography } from "antd/lib";
 import { Divider } from "antd";
+import EditModal from "./components/edit-modal";
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -41,6 +42,7 @@ export default function Page() {
         </div>
         <Divider />
         <DisplayForm />
+        <EditModal />
       </Card>
     </>
   );

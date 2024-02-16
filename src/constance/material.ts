@@ -1,12 +1,13 @@
-import {generalResponseZod, notEmpty} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
   Part_Type_Value: z.string(),
   Part_Type: z.enum(["1", "2", "3", "4", "5"]),
   Status: z.boolean(),
+  Material_Count: z.number(),
   Products: z.string().or(
     z.array(
       z.object({
@@ -125,7 +126,7 @@ const materialApi = {
     url: "/Material/GetRequestPackagePartList",
     item: GetRequestPackagePartListItem,
     type: z.object({
-      package_UID: z.string()
+      package_UID: z.string(),
     }),
     response: generalResponseZod.extend({
       data: z.array(GetRequestPackagePartListItem),

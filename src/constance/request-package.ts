@@ -112,6 +112,16 @@ const BoxListItem = z.object({
     .nullable(),
 });
 
+const LabBox2ListItem = z.object({
+  IMEI: z.string(),
+  Capacity: z.number(),
+  Name: z.string(),
+  UID: z.string(),
+  Is_Opened: z.boolean(),
+  Is_Opened_Value: z.string(),
+  Is_Recordbble: z.boolean(),
+});
+
 const RequestPackageApi = {
   RequestPackageFinalization: {
     url: "/RequestPackage/RequestPackageFinalization",
@@ -527,6 +537,44 @@ const RequestPackageApi = {
     }),
     response: generalResponseZod.extend({
       data: z.array(z.object({})),
+    }),
+  },
+  LabGetOTP: {
+    url: "/RequestPackage/LabGetOTP",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string().optional(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+  LabBox2List: {
+    url: "/RequestPackage/LabBox2List",
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    Item: LabBox2ListItem,
+    response: generalResponseZod.extend({
+      data: z.array(LabBox2ListItem),
+    }),
+  },
+  LabSampleList: {
+    url: "/RequestPackage/LabSampleList",
+    fieldName: { value: "Sample_Code", label: "Sample_Code" },
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({ Sample_Code: z.string() })),
+    }),
+  },
+  LabSampleTestItemList: {
+    url: "/RequestPackage/LabSampleTestItemList",
+    type: z.object({ package_UID: z.string(), sample_Code: z.string() }),
+    item: BoxListItem,
+    response: generalResponseZod.extend({
+      data: z.array(BoxListItem),
     }),
   },
 };

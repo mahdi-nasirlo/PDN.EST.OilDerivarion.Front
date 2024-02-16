@@ -1,3 +1,4 @@
+import useLabGetOTP from '@/hooks/request-package/use-lab-get-otp';
 import { FieldTimeOutlined } from '@ant-design/icons'
 import { Button, Col, Form, Input, Modal, Row } from 'antd'
 import { useForm } from 'antd/es/form/Form'
@@ -7,11 +8,16 @@ import Countdown, { zeroPad } from "react-countdown";
 interface TProps {
     openOptModal: string | undefined
     setOpenOptModal: (arg: any) => void
+    package_UID: string
 }
 
-export default function OptModal({ openOptModal, setOpenOptModal }: TProps) {
+export default function OptModal({ openOptModal, setOpenOptModal, package_UID }: TProps) {
+
 
     const [form] = useForm()
+
+    const LabGetOTP = useLabGetOTP({ package_UID: package_UID, box_UID: openOptModal })
+
 
     function timerColor(total: any) {
         if (total <= 30000) {
@@ -22,24 +28,6 @@ export default function OptModal({ openOptModal, setOpenOptModal }: TProps) {
             return "flex items-center text-primary-500";
         }
     }
-
-    // const [countdownValue, setCountdownValue] = useState(Date.now() + 120000)
-
-    // useEffect(() => {
-    //     if (typeof openOptModal == "string") {
-    //         const savedCountdownValue = localStorage.getItem('countdownValue')
-    //     }
-    // }, [])
-
-    // const renderer = ({ hours, minutes, seconds, completed }: any) => {
-    //     if (completed) {
-    //         // Render a completed state
-    //         return <></>
-    //     } else {
-    //         // Render a countdown
-    //         return <span>{hours}:{minutes}:{seconds}</span>;
-    //     }
-    // };
 
     return (
 
@@ -54,7 +42,7 @@ export default function OptModal({ openOptModal, setOpenOptModal }: TProps) {
                 </ div>
             }
             open={typeof openOptModal == "string"}
-            onCancel={setOpenOptModal}
+            onCancel={() => setOpenOptModal(undefined)}
             footer={
                 [
                     <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -75,6 +63,7 @@ export default function OptModal({ openOptModal, setOpenOptModal }: TProps) {
                 ]}
         >
             <Form
+                disabled={LabGetOTP?.isFetching}
                 onFinish={(values) => setOpenOptModal(false)}
                 form={form}
                 layout='vertical'
@@ -90,16 +79,12 @@ export default function OptModal({ openOptModal, setOpenOptModal }: TProps) {
                             );
                         }}
                         date={Date.now() + 120000}
+                        onComplete={() => setOpenOptModal(undefined)}
                     />
-
-                    {/* <Countdown
-                        date={Date.now() + 5000}
-                        renderer={renderer}
-                    />, */}
                 </Form.Item>
                 <Form.Item
                     label="کد otp"
-                    name="otpCode"
+                    name="Test"
                     required={false}
                     rules={[{ required: true }]}
                 >

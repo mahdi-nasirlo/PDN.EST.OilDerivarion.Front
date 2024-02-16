@@ -5,10 +5,13 @@ import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from '@heroicons/react/24/solid';
 import { Alert } from 'antd';
 import DataTable from './components/data-table';
+import useRequestPackageLabBox2List from '@/hooks/request-package/use-request-package-lab-box-2-list';
 
 const stepKey = "Lab_Test";
 
 export default function Page({ params }: { params: { uid: string } }) {
+
+    const listboxForRequest = useRequestPackageLabBox2List({ package_UID: params.uid })
 
     return (
         <>
@@ -24,10 +27,9 @@ export default function Page({ params }: { params: { uid: string } }) {
                 message="برای ثبت نتیجه هر یک از مواد داخل جعبه باید تمامی جعبه های ارسال شده در وضعیت باز شده قرار گیرند."
             />
             <DataTable
-            // data={dataPage.data}
-            // isLoading={dataPage.isFetching || dataPage.isLoading}
-            // setModalVisible={setModalVisible}
-            // setPaginate={dataPage.setFilter}
+                package_UID={params.uid}
+                data={listboxForRequest.data}
+                isLoading={listboxForRequest.isFetching || listboxForRequest.isLoading}
             />
         </>
     )

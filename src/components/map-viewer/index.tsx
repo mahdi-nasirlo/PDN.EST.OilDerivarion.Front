@@ -6,11 +6,10 @@ interface PropsType {
   SecondReload: number;
   height?: string;
   width?: string;
-  className?: React.HtmlHTMLAttributes<HTMLDivElement>
+  className?: React.HtmlHTMLAttributes<HTMLDivElement>;
 }
 
 export default function Index(props: PropsType) {
-
   const iframeRef = useRef(null);
 
   const refreshIframe = () => {
@@ -33,9 +32,7 @@ export default function Index(props: PropsType) {
       height={props.height ? props.height : "100%"}
       width={props.width ? props.width : "100%"}
       className="border-2 border-CustomizeBlue-500 rounded-md"
-      src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=C8A4E7DB-5783-4CEB-8DF0-C0EC1BF0C5DA`}
-    >
-
-    </iframe >
+      src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=861100068416631`}
+    ></iframe>
   );
 }

@@ -92,13 +92,13 @@ export default function DataTable({
               <Button
                 type="link"
                 className="text-primary-500 font-bold"
-                disabled={record.device_Status !== 2}
+                disabled={record.device_Status != 6}
                 loading={openBox.isPending}
                 onClick={() => openBox.mutateAsync()}
               >
                 بازکردن درب دستگاه
               </Button>
-              {record.device_Status !== 2 && (
+              {record.device_Status !== 6 && (
                 <Button
                   type="link"
                   className="text-secondary-500 font-bold"

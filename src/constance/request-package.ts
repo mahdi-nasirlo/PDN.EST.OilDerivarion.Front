@@ -549,6 +549,17 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  LabCheckOtp: {
+    url: "/RequestPackage/LabCheckOtp",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string().optional(),
+      otp: z.number(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
   LabBox2List: {
     url: "/RequestPackage/LabBox2List",
     type: z.object({

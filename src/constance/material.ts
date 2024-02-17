@@ -71,6 +71,7 @@ const RequestPackageMaterialListItem = z.object({
   TestItems: z.string(),
   Material_Supply_Name: z.string(),
   Material_Unit_Consumption: z.string(),
+  Material_DDL_Name: z.string(),
 });
 
 const RequestPackagePartMaterialListItem = z.object({

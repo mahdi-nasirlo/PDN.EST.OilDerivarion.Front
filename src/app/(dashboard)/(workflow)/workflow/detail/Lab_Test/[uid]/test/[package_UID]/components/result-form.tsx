@@ -12,10 +12,10 @@ export default function ResultForm({
   someData,
   someDataTest_Item,
 }: any) {
-  const testFactorStandards = useLabSampleTestItemDetail({
-    sample_Code: someData,
-    test_Item_Result_UID: someDataTest_Item,
-  });
+  // const testFactorStandards = useLabSampleTestItemDetail({
+  //   sample_Code: someData,
+  //   test_Item_Result_UID: someDataTest_Item,
+  // });
 
   const testRsult = useLabSampleTestItemDetailUpdate();
 

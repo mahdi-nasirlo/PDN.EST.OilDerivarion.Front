@@ -80,7 +80,9 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           options={LabSampleList.data}
           placeholder="انتخاب کنید"
           value={Battle}
-          onChange={(e) => setBattle(e)}
+          onChange={(e) => {
+            setBattle(e), window.location.reload();
+          }}
         />
       </Form.Item>
       <CustomTable

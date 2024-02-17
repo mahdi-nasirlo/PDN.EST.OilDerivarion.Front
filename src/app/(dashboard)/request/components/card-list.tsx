@@ -2,7 +2,7 @@
 
 import { Button, Card, Col, Tag } from "antd";
 import React, { useState } from "react";
-import { Row, Typography } from "antd/lib";
+import { Alert, Row, Typography } from "antd/lib";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -117,6 +117,18 @@ const CardList = ({
                           </Tag>
                         )}
                       </div>
+                      {item.Status_Message != null && (
+                        <div className="flex justify-between">
+                          <>
+                            <Typography>خطا:</Typography>
+                            <Alert
+                              className="text-sm"
+                              message={item.Status_Message}
+                              type="error"
+                            />
+                          </>
+                        </div>
+                      )}
 
                       <div className="flex justify-between">
                         <Typography>تعداد مواد اولیه:</Typography>

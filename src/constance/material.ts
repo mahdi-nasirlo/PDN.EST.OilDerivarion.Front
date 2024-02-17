@@ -8,6 +8,7 @@ const GetRequestPackagePartListItem = z.object({
   Part_Type: z.enum(["1", "2", "3", "4", "5"]),
   Status: z.boolean(),
   Material_Count: z.number(),
+  Status_Message: z.string(),
   Products: z.string().or(
     z.array(
       z.object({

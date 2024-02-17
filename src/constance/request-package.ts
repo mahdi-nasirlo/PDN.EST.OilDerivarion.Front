@@ -588,6 +588,53 @@ const RequestPackageApi = {
       data: z.array(BoxListItem),
     }),
   },
+  LabSampleTestItemDetailUpdate: {
+    url: "/RequestPackage/LabSampleTestItemDetailUpdate",
+    fieldName: {
+      value: "test_Item_Result_UID",
+      label: "test_Factor_Standards",
+    },
+    type: z.object({
+      sample_Code: z.string(),
+      test_Item_Result_UID: z.string(),
+      result_Test: z.string(),
+      result_Range: z.number(),
+      result_Desc: z.string(),
+      result_Min_Accept: z.number(),
+      result_Max_Accept: z.number(),
+      result_Renew_Unit_FK: z.number(),
+      result_Renewable: z.number(),
+      test_Factor_Standards: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(
+        z.any()
+        // z.object({
+        //   TestMethod: z.string().optional(),
+        //   TestDuration: z.string().optional(),
+        //   Measure_Id: z.number().optional(),
+        //   Result_Test: z.string().optional(),
+        //   Result_Range: z.number().optional(),
+        //   Result_Desc: z.number().optional(),
+        //   Result_Min_Accept: z.number().optional(),
+        //   Result_Max_Accept: z.number().optional(),
+        //   Result_Renew_Unit_FK: z.number().optional(),
+        //   Result_Renewable: z.number().optional(),
+        //   Test_Factor_Standards: z.string().optional(),
+        // })
+      ),
+    }),
+  },
+  LabSampleTestItemDetail: {
+    url: "/RequestPackage/LabSampleTestItemDetail",
+    type: z.object({
+      sample_Code: z.string(),
+      test_Item_Result_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
 };
 
 export { RequestPackageApi };

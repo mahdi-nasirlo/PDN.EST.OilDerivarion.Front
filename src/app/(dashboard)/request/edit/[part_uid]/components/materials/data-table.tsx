@@ -67,10 +67,8 @@ export default function DataTable({
           header={{
           icon: <ViewColumnsIcon />,
             text: " لیست مواد اولیه",
-            discretion: <Typography className={"text-gray-500 font-normal"}>( مجموع درصد استفاده در روش
-              بلندینگ 99 و در
-              سایر روش ها
-              100 باشد )</Typography>,
+            discretion: <Typography className={"text-gray-500 font-normal"}> ( مجموع درصد استفاده باید100 باشد
+              ) </Typography>,
             actions: (
                 <Button
                     className="flex items-center justify-center"

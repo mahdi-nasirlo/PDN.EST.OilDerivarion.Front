@@ -236,7 +236,7 @@
 }
 
 .ant-btn:hover {
-  @apply scale-[104%];
+  @apply scale-[102%];
 }
 
 .ant-transfer-operation button {

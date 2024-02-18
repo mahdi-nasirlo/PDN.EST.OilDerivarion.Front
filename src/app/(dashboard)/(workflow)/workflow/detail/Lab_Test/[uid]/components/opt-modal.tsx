@@ -3,11 +3,10 @@ import useLabGetOTP from "@/hooks/request-package/use-lab-get-otp";
 import { useValidation } from "@/hooks/use-validation";
 import { FieldTimeOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Modal, Row } from "antd";
-import { useForm } from "antd/es/form/Form";
-import { RequestPackageApi } from "constance/request-package";
 import React from "react";
-import Countdown, { zeroPad } from "react-countdown";
+import { RequestPackageApi } from "constance/request-package";
 import { z } from "zod";
+import Countdown, { zeroPad } from "react-countdown";
 
 interface TProps {
   openOptModal: string | undefined;
@@ -29,7 +28,7 @@ export default function OptModal({
 
   const LabCheckOtp = useLabCheckOtp();
 
-  const handleSumbitOtp = async (
+  const handleSubmitOtp = async (
     values: z.infer<typeof RequestPackageApi.LabCheckOtp.type>
   ) => {
     const res = await LabCheckOtp.mutateAsync({
@@ -70,8 +69,8 @@ export default function OptModal({
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24}>
             <Button
-              // loading={get.isFetching || update.isPending}
-              // disabled={get.isFetching || update.isPending}
+              loading={LabGetOTP.isFetching || LabCheckOtp.isPending}
+              disabled={LabGetOTP.isFetching || LabCheckOtp.isPending}
               size="large"
               className="w-full"
               type="primary"
@@ -86,7 +85,7 @@ export default function OptModal({
     >
       <Form
         disabled={LabGetOTP?.isFetching}
-        onFinish={handleSumbitOtp}
+        onFinish={handleSubmitOtp}
         form={form}
         layout="vertical"
       >
@@ -108,7 +107,7 @@ export default function OptModal({
           label="کد otp"
           name="Test"
           required={false}
-          rules={[{ required: true }]}
+          rules={[rules]}
         >
           <Input className="w-full" size="large" />
         </Form.Item>

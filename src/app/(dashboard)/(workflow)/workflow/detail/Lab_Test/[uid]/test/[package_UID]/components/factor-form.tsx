@@ -1,6 +1,6 @@
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { Col, Divider, Form, Row, Select } from "antd/lib";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
 import { Button, Space, Typography } from "antd";
@@ -8,25 +8,19 @@ import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
-import { useValidation } from "@/hooks/use-validation";
-import { RequestPackageApi } from "constance/request-package";
+
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
   const { LabSampleList, Battle, setBattle, LabSampleTestItemList } =
     useBattleSelect({ package_UID });
-  const testRsult = useLabSampleTestItemDetailUpdate();
 
-  const [someData, setSomeData] = useState();
-  const [someDataTest_Item, setSomeDataTest_Item] = useState();
-  const [form, rules] = useValidation(
-    RequestPackageApi.LabSampleTestItemDetailUpdate.type
-  );
+  const testResultUpdate = useLabSampleTestItemDetailUpdate();
 
-  const Handle = () => {
-    useEffect(() => {
-      form.setFieldsValue(testRsult.data?.data[0]);
-    }, [testRsult.data?.data]);
-  };
+  const [formData, setFormData] = useState({
+    Sample_Code_2_1: undefined,
+    Test_Item_Result_UID: undefined,
+  });
+
 
   const columns: ColumnsType<any> = [
     {
@@ -42,6 +36,8 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
     },
     {
       title: "وضعیت",
+      dataIndex: "Status",
+      key: "3"
     },
     {
       title: "عملیات",
@@ -54,68 +50,62 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           <Button
             type="link"
             className="text-secondary-500 font-bold"
-            onClick={() => {
-              setSomeDataTest_Item(record.Test_Item_Result_UID);
-              setSomeData(record.Sample_Code_2_1);
-              Handle;
-            }}
+            onClick={() => (setFormData({
+              Test_Item_Result_UID: record.Test_Item_Result_UID,
+              Sample_Code_2_1: record.Sample_Code_2_1
+            })
+            )}
           >
             ثبت نتیجه
           </Button>
-        </Space>
+        </Space >
       ),
     },
   ];
 
   return (
     <>
-      <Form.Item
-        labelCol={{ span: 24 }}
-        className="w-full md:w-1/2"
-        label="بطری"
-      >
-        <Select
-          fieldNames={LabSampleList.fieldName}
-          loading={LabSampleList.isFetching}
-          options={LabSampleList.data}
-          placeholder="انتخاب کنید"
-          value={Battle}
-          onChange={(e) => {
-            setBattle(e), window.location.reload();
+      <Card>
+        <Form.Item
+          labelCol={{ span: 24 }}
+          className="w-full md:w-1/2"
+          label="بطری"
+        >
+          <Select
+            value={Battle}
+            onChange={(e) => setBattle(e)}
+            placeholder="انتخاب کنید"
+            fieldNames={LabSampleList.fieldName}
+            options={LabSampleList.data}
+            loading={LabSampleList.isFetching}
+          />
+        </Form.Item>
+        <CustomTable
+          header={{
+            text: "لیست فاکتور های آزمون",
+            icon: <ViewColumnsIcon className="h-8" />,
           }}
+          data={{ records: LabSampleTestItemList.data }}
+          columns={columns}
+          isLoading={testResultUpdate.isPending || LabSampleTestItemList.isLoading || LabSampleTestItemList.isFetching}
         />
-      </Form.Item>
-      <CustomTable
-        data={{ records: LabSampleTestItemList.data }}
-        columns={columns}
-        header={{
-          text: "لیست فاکتور های آزمون",
-          icon: <ViewColumnsIcon className="h-8" />,
-        }}
-      />
-      {/* <Card> */}
-      <div className="mt-6">
-        <ResultForm
-          rules={rules}
-          form={form}
-          someData={someData}
-          someDataTest_Item={someDataTest_Item}
-        />
+      </Card>
+      <Card className="mt-6">
+        <ResultForm formData={formData} />
         <Divider />
         <Row gutter={[16, 10]} className="flex justify-center items-center">
-          {/* <Col xl={2} lg={3} sm={4} xs={6}>
+          <Col xl={2} lg={3} sm={4} xs={6}>
             <Typography className="text-right font-bold text-secondary-500">
               فاکتور 1 از 10
             </Typography>
-          </Col> */}
-          {/* <Col xl={22} lg={21} sm={20} xs={18} className="flex">
+          </Col>
+          <Col xl={22} lg={21} sm={20} xs={18} className="flex">
             <Button size="large" type="primary" className="w-full">
-              workflow(ثبت نهایی)
+              تصمیم گیری شود(ثبت نهایی)
             </Button>
-          </Col> */}
+          </Col>
         </Row>
-      </div>
-      {/* </Card> */}
+      </Card>
     </>
   );
 }

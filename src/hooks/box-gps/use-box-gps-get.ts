@@ -14,7 +14,7 @@ const useBoxGPSGet = (uid?: string) => {
     queryKey: [apiData.url, uid],
     queryFn: () => fetchWithSession({ url: apiData.url, data }),
     enabled: typeof uid === "string",
-    select: (data: z.infer<typeof apiData.response>) => data.data,
+    select: (data: z.infer<typeof apiData.response> | any) => data.data,
   });
 
   return { ...query };

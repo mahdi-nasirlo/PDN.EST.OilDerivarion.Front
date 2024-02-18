@@ -11,7 +11,7 @@ const useLabSampleTestItemDetailUpdate = () => {
   const query = useMutation({
     mutationFn: (
       data: z.infer<typeof apiData.type>
-    ): Promise<z.infer<typeof apiData.response>> =>
+    ): Promise<z.infer<typeof apiData.type>> =>
       fetchWithSession({
         url: apiData.url,
         notify: true,

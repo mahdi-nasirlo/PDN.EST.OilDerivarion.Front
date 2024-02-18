@@ -1,54 +1,75 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import TimeForm from "./components/time-form";
 import { Card } from "@/components/card";
-import { Button, Col, Divider, Row, Typography } from "antd";
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import ResultForm from "./components/result-form";
 import FactorForm from "./components/factor-form";
-import CommonWorkflow from "@/app/(dashboard)/(workflow)/workflow/detail/[key]/[uid]/component/common-workflow";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
+import useGetTask from "@/hooks/workflow-request/use-get-task";
+import { Spin } from "antd";
+import useSetTask from "@/hooks/workflow-request/use-set-task";
+import { useRouter } from "next/navigation";
+
+
+const stepKey = "Lab_Test";
 
 export default function Page({ params }: { params: { uid: string } }) {
+
+
+  const get = useGetTask({ taskId: params.uid, stepKey: stepKey });
+
+  const [choice, setChoice] = useState<string>();
+
+  const set = useSetTask();
+
+  const router = useRouter();
+
+  const handleSet = async () => {
+    const res = await set.mutateAsync({
+      taskId: params.uid,
+      stepKey: stepKey,
+      choiceKey: choice,
+    });
+
+    if (res.success) {
+      router.push(`/workflow/list/${stepKey}`);
+    }
+  };
+
+  if (!get.data && get.isFetching)
+    return (
+      <Card className="min-h-[150px]">
+        <Spin />
+      </Card>
+    );
+
   return (
     <>
       <Breadcrumb
         titleIcon={<DocumentTextIcon className="w-8" />}
         pages={[
           { label: "خانه", path: "/" },
-          { label: "لیست جعبه های درخواست" },
+          { label: "لیست جعبه های درخواست", path: `/workflow/detail/${stepKey}/${params.uid}` },
         ]}
         currentPage={"ثبت نتیجه"}
-        backLink="/referred_boxes_list"
+        backLink={`/workflow/detail/${stepKey}/${params.uid}`}
       />
 
       <Card>
         <TimeForm />
       </Card>
 
-      <Card>
-        <FactorForm package_UID={params.uid} />
-        {/* <WorkflowBtn
-                                loading={set.isPending}
-                                choices={get.data?.choices}
-                                onClick={async (choice_Key) => {
-                                    setChoice(choice_Key);
-                                    form.submit();
-                                    const res = await set.mutateAsync({
-                                        taskId: params.uid,
-                                        stepKey,
-                                        choiceKey: choice_Key,
-                                    });
+      <FactorForm package_UID={params.uid} />
 
-                                    console.log(res)
-
-                                    if (res.success)
-                                        router.push("/workflow/list/" + stepKey)
-                                }}
-                            /> */}
-      </Card>
-      <CommonWorkflow uid={params.uid} stepKey={"Lab_Test"}></CommonWorkflow>
+      <WorkflowBtn
+        choices={get.data?.choices}
+        onClick={(key) => {
+          setChoice(key);
+          handleSet();
+        }}
+      />
     </>
   );
 }

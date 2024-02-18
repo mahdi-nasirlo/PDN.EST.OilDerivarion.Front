@@ -97,7 +97,11 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          <Button disabled={!record.Is_Recordbble} type="link">
+          <Button
+            className={!record.Is_Recordbble ? "text-gray-500 px-4 font-bold" : "text-secondary-500 font-bold"}
+            disabled={!record.Is_Recordbble}
+            type="link"
+          >
             <Link
               href={`/workflow/detail/Lab_Test/${package_UID}/test/${package_UID}`}
             >

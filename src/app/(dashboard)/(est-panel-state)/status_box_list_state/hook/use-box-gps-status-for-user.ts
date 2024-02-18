@@ -24,7 +24,7 @@ const useBoxGpsStatusForUser = ({ uid, setUid }: TProps) => {
     }
   }, [get.data]);
 
-  const handleSubmit = async (data: z.infer<typeof apiData.type>) => {
+  const handleSubmit = async (data: z.infer<any>) => {
     const res = await update.mutateAsync({
       ...data,
       uid: uid as string,

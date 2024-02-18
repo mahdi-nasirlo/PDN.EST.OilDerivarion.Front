@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { generalResponseZod } from "@/types/api-response";
+import { errorMessage } from "./error-message";
 
 const RequestPackageReportListItem = z.object({
   uid: z.string().nullable(),
@@ -554,7 +555,10 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string(),
       box_UID: z.string().optional(),
-      otp: z.number(),
+      otp: z.number({
+        required_error: errorMessage.required,
+        invalid_type_error: errorMessage.number_invalid,
+      }),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.any()),
@@ -590,10 +594,6 @@ const RequestPackageApi = {
   },
   LabSampleTestItemDetailUpdate: {
     url: "/RequestPackage/LabSampleTestItemDetailUpdate",
-    fieldName: {
-      value: "test_Item_Result_UID",
-      label: "test_Factor_Standards",
-    },
     type: z.object({
       sample_Code: z.string(),
       test_Item_Result_UID: z.string(),
@@ -606,24 +606,6 @@ const RequestPackageApi = {
       result_Renewable: z.number(),
       test_Factor_Standards: z.string(),
     }),
-    response: generalResponseZod.extend({
-      data: z.array(
-        z.any()
-        // z.object({
-        //   TestMethod: z.string().optional(),
-        //   TestDuration: z.string().optional(),
-        //   Measure_Id: z.number().optional(),
-        //   Result_Test: z.string().optional(),
-        //   Result_Range: z.number().optional(),
-        //   Result_Desc: z.number().optional(),
-        //   Result_Min_Accept: z.number().optional(),
-        //   Result_Max_Accept: z.number().optional(),
-        //   Result_Renew_Unit_FK: z.number().optional(),
-        //   Result_Renewable: z.number().optional(),
-        //   Test_Factor_Standards: z.string().optional(),
-        // })
-      ),
-    }),
   },
   LabSampleTestItemDetail: {
     url: "/RequestPackage/LabSampleTestItemDetail",
@@ -632,7 +614,23 @@ const RequestPackageApi = {
       test_Item_Result_UID: z.string(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.any()),
+      data: z.array(
+        z.object({
+          method: z.array(z.object({ uid: z.string(), title: z.string() })),
+          name: z.string().optional(),
+          testMethod: z.string().optional(),
+          testDuration: z.any(),
+          measure_Id: z.number().optional(),
+          result_Test: z.string().optional(),
+          result_Range: z.number().optional(),
+          result_Desc: z.string().optional(),
+          result_Min_Accept: z.number().optional(),
+          result_Max_Accept: z.number().optional(),
+          result_Renew_Unit_FK: z.number().optional(),
+          result_Renewable: z.number().optional(),
+          test_Factor_Standards: z.any(),
+        })
+      ),
     }),
   },
 };

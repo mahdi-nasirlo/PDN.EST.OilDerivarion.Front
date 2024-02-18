@@ -1,6 +1,6 @@
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { Col, Divider, Form, Row, Select } from "antd/lib";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
 import { Button, Space, Typography } from "antd";
@@ -11,8 +11,13 @@ import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sa
 
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
-  const { LabSampleList, Battle, setBattle, LabSampleTestItemList } =
-    useBattleSelect({ package_UID });
+
+  const {
+    Battle,
+    setBattle,
+    LabSampleList,
+    LabSampleTestItemList
+  } = useBattleSelect({ package_UID });
 
   const testResultUpdate = useLabSampleTestItemDetailUpdate();
 
@@ -21,6 +26,12 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
     Test_Item_Result_UID: undefined,
   });
 
+  useEffect(() => {
+    setFormData({
+      Sample_Code_2_1: undefined,
+      Test_Item_Result_UID: undefined,
+    })
+  }, [(Battle)])
 
   const columns: ColumnsType<any> = [
     {

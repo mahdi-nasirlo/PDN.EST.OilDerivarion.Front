@@ -1,23 +1,13 @@
-import {
-  Alert,
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Spin,
-  Typography,
-} from "antd";
+import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography,} from "antd";
 import React from "react";
-import { DocumentPlusIcon } from "@heroicons/react/24/outline";
+import {DocumentPlusIcon} from "@heroicons/react/24/outline";
 import FileUpload from "@/components/file-upload/FileUpload";
 import staticMessages from "@/lib/staticMessages";
-import { useRouter } from "next/navigation";
-import useUiRequestProductDescriptionForm from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-product-description-form";
-import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
-import { materialApi } from "constance/material";
-import { z } from "zod";
+import {useRouter} from "next/navigation";
+import useUiRequestProductDescriptionForm
+  from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-product-description-form";
+import {materialApi} from "constance/material";
+import {z} from "zod";
 
 const DescriptionForm = ({
   data,
@@ -96,19 +86,9 @@ const DescriptionForm = ({
             </Col>
           </Row>
           <Row gutter={[16, 12]} className="flex justify-end mb-6">
-            <Col xs={12}>
+            <Col xs={24} xxl={3} md={5} sm={7}>
               <Button
-                className="w-full bg-gray-50"
-                size="large"
-                type="default"
-                onClick={() => router.push("/request")}
-              >
-                بازگشت به لیست پکیج ها
-              </Button>
-            </Col>
-            <Col xs={12}>
-              <Button
-                className="flex items-center justify-center w-full"
+                  className="flex items-center justify-center w-full"
                 type="primary"
                 size="large"
                 htmlType="submit"

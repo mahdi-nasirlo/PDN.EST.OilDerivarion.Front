@@ -1,16 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button, Col, Form, Popover, Row, Select, Typography } from "antd/lib";
-import { motion } from "framer-motion";
-import { Card } from "@/components/card";
-import { PlusSmallIcon, TrashIcon } from "@heroicons/react/24/outline";
-import useUiWorkflowSampleAdd from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Expert_QRcode/[uid]/hook/use-ui-workflow-sample-add";
+import React, {useState} from "react";
+import {Button, Col, Form, Popover, Row, Select, Typography} from "antd/lib";
+import {motion} from "framer-motion";
+import {Card} from "@/components/card";
+import {PlusSmallIcon, TrashIcon} from "@heroicons/react/24/outline";
+import useUiWorkflowSampleAdd
+    from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Expert_QRcode/[uid]/hook/use-ui-workflow-sample-add";
 import useBoxSampleGetAvailableList from "@/hooks/request-package/use-box-sample-get-available-list";
 import useBoxSampleAdd from "@/hooks/request-package/use-box-sample-add";
-import { errorMessage } from "../../../../../../../../constance/error-message";
-import { RequestPackageApi } from "../../../../../../../../constance/request-package";
-import { z } from "zod";
+import {errorMessage} from "../../../../../../../../constance/error-message";
+import {RequestPackageApi} from "../../../../../../../../constance/request-package";
+import {z} from "zod";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 
 const BoxCartList = ({ package_UID }: { package_UID: string }) => {
@@ -59,11 +60,11 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             <Button
               shape="circle"
               type="default"
-              style={{ backgroundImage: "url(/static/pattern.png" }}
+              style={{backgroundImage: "url(/static/pattern.png"}}
               className="bg-center bg-cover hover:border-8 w-36 h-36 text-sm border-8 border-primary-500 flex flex-col items-center justify-center space-y-2.5"
               key={index}
             >
-              <Typography className="bg-white p-1 rounded-lg shadow-sm">
+                <Typography className="bg-white p-1 rounded-lg shadow-sm whitespace-break-spaces">
                 {sample.name}
               </Typography>
             </Button>
@@ -141,7 +142,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
           >
             <Card className="relative min-h-[717px] w-full border-2 bg-gray-50 p-4 rounded-2xl space-y-4">
               <Typography className="font-semibold text-lg">
-                جعبه {["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]}{" "}
+                  جعبه {["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]}
               </Typography>
 
               <TrashIcon
@@ -235,10 +236,10 @@ const AddSample = ({
       <Button
         shape="circle"
         type="dashed"
-        className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500"
+        className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500 whitespace-break-spaces"
       >
         <PlusSmallIcon className="w-5 h-5" />
-        افزودن مواد اولیه
+          افزودن مواد اولیه / محصول
       </Button>
     </Popover>
   );

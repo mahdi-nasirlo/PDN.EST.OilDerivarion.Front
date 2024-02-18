@@ -1,22 +1,16 @@
 "use client";
 
-import { Button, Card, Col, Tag } from "antd";
-import React, { useState } from "react";
-import { Alert, Row, Tooltip, Typography } from "antd/lib";
-import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
-import { z } from "zod";
-import { materialApi } from "../../../../constance/material";
-import { CardListTable } from "@/app/(dashboard)/request/components/card-list-table";
+import {Button, Card, Col, Tag} from "antd";
+import React, {useState} from "react";
+import {Alert, Row, Tooltip, Typography} from "antd/lib";
+import {CheckCircleOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined,} from "@ant-design/icons";
+import {z} from "zod";
+import {materialApi} from "../../../../constance/material";
+import {CardListTable} from "@/app/(dashboard)/request/components/card-list-table";
 import useRequestPackagePartDelete from "@/hooks/material/use-request-package-part-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { toKeyAlias } from "@babel/types";
+import {AnimatePresence, motion} from "framer-motion";
+import {useRouter} from "next/navigation";
 
 const CardList = ({
   data,
@@ -144,12 +138,29 @@ const CardList = ({
                       <div className="flex justify-between">
                         <Typography>تعداد مواد اولیه:</Typography>
 
-                        <Typography>{item.Material_Count}</Typography>
+                        <Typography className={"px-2"}>{item.Material_Count}</Typography>
                       </div>
 
-                      <CardListTable data={item.Products} />
+                      <CardListTable data={item.Products}/>
 
                       <Row gutter={[16, 12]}>
+                        <Col xs={12}>
+                          <Button
+                              size="large"
+                              type="primary"
+                              className="w-full flex items-center justify-center"
+                              icon={<EditOutlined width={16} height={16}/>}
+                              onClick={() =>
+                                  router.push(
+                                      `/request/edit/${item.UID}${
+                                          package_UID ? "/" + package_UID : ""
+                                      }`
+                                  )
+                              }
+                          >
+                            ویرایش
+                          </Button>
+                        </Col>
                         <Col xs={12}>
                           <Button
                             size="large"
@@ -160,23 +171,6 @@ const CardList = ({
                             onClick={() => setOpen(item.UID)}
                           >
                             حذف
-                          </Button>
-                        </Col>
-                        <Col xs={12}>
-                          <Button
-                            size="large"
-                            type="primary"
-                            className="w-full flex items-center justify-center"
-                            icon={<EditOutlined width={16} height={16} />}
-                            onClick={() =>
-                              router.push(
-                                `/request/edit/${item.UID}${
-                                  package_UID ? "/" + package_UID : ""
-                                }`
-                              )
-                            }
-                          >
-                            ویرایش
                           </Button>
                         </Col>
                       </Row>

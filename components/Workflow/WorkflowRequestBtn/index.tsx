@@ -1,8 +1,8 @@
-import {Choice} from "../../../interfaces/requestDetail";
-import {Button, Input} from "antd";
+import { Choice } from "../../../interfaces/requestDetail";
+import { Button, Input } from "antd";
 import useSWRMutation from "swr/mutation";
-import {mutationFetcher} from "../../../lib/server/mutationFetcher";
-import {useRouter} from "next/navigation";
+import { mutationFetcher } from "../../../lib/server/mutationFetcher";
+import { useRouter } from "next/navigation";
 
 interface PropsType {
     hasDescription?: boolean;
@@ -53,7 +53,7 @@ const Index = (props: PropsType) => {
 
     return (
         <>
-            {props.hasDescription && <Input.TextArea className="mt-2 mb-4"/>}
+            {props.hasDescription && <Input.TextArea style={{ resize: "none" }} className="mt-2 mb-4" />}
             <div style={containerStyle()} className="grid grid-cols-4 gap-2 ">
                 {/*<div*/}
                 {/*  style={{ height: "fit-content" }}*/}
@@ -72,7 +72,7 @@ const Index = (props: PropsType) => {
 
                     return (
                         <div
-                            style={{height: "fit-content"}}
+                            style={{ height: "fit-content" }}
                             className="flex justify-center"
                             key={index}
                         >
@@ -104,8 +104,8 @@ interface HookReturn {
     trigger: (choiceKey: string, description: string) => any;
 }
 
-const useClickWorkFlowBtn = ({apiUrl, taskId}: HookType): HookReturn => {
-    const {trigger, isMutating, data} = useSWRMutation(
+const useClickWorkFlowBtn = ({ apiUrl, taskId }: HookType): HookReturn => {
+    const { trigger, isMutating, data } = useSWRMutation(
         apiUrl || null,
         mutationFetcher
     );
@@ -118,7 +118,7 @@ const useClickWorkFlowBtn = ({apiUrl, taskId}: HookType): HookReturn => {
         });
     };
 
-    return {trigger: handleTrigger, isMutating, data};
+    return { trigger: handleTrigger, isMutating, data };
 };
 
 export default Index;

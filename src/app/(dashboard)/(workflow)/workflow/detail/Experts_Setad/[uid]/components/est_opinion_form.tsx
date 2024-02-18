@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
-import {Button, Col, Divider, Form, Input, Row} from "antd/lib";
-import {CommentWorkflowSelectField} from "@/components/fields/commenct-workflow-select-field";
-import {TestItemsMultipleSelectField} from "@/components/fields/test-items-multiple-select-field";
-import {z} from "zod";
-import {RequestPackageApi} from "../../../../../../../../constance/request-package";
+import React, { useEffect } from 'react';
+import { Button, Col, Divider, Form, Input, Row } from "antd/lib";
+import { CommentWorkflowSelectField } from "@/components/fields/commenct-workflow-select-field";
+import { TestItemsMultipleSelectField } from "@/components/fields/test-items-multiple-select-field";
+import { z } from "zod";
+import { RequestPackageApi } from "../../../../../../../../constance/request-package";
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
-const EstOpinionForm = ({request, uid, visit_Type}: {
+const EstOpinionForm = ({ request, uid, visit_Type }: {
     request: z.infer<typeof RequestPackageApi.FinalResultList.item>,
     uid: string,
     visit_Type: number,
@@ -43,7 +43,7 @@ const EstOpinionForm = ({request, uid, visit_Type}: {
                                 label="نظر نهایی"
                                 name="est_Opinion_ID"
                             >
-                                <CommentWorkflowSelectField onChange={value => setDisplayTestItem(value)}/>
+                                <CommentWorkflowSelectField onChange={value => setDisplayTestItem(value)} />
                             </Form.Item>
                         </Col>
                         <Col sm={24}>
@@ -51,19 +51,19 @@ const EstOpinionForm = ({request, uid, visit_Type}: {
                                 label="فاکتور های آزمون"
                                 name={"est_test_item"}
                             >
-                                <TestItemsMultipleSelectField/>
+                                <TestItemsMultipleSelectField />
                             </Form.Item>}
                         </Col>
                     </Row>
 
                     <Form.Item
                         required={false}
-                        rules={[{required: true, message: "لطفا مقدار را وارد کنید"}]}
+                        rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
                         name="est_opinion_description"
                         label="توضیحات"
                     >
                         <Input.TextArea
-                            style={{height: 100, resize: "none"}}
+                            style={{ resize: "none" }}
                             placeholder="وارد کنید"
                         />
                     </Form.Item>
@@ -71,11 +71,11 @@ const EstOpinionForm = ({request, uid, visit_Type}: {
                         label="آخرین ویرایش"
                         name="est_result_modify_date_time"
                     >
-                        <Input readOnly={true} disabled={true}/>
+                        <Input readOnly={true} disabled={true} />
                     </Form.Item>
                     {visit_Type == 3 &&
                         <Button loading={add.isPending} htmlType="submit" type="primary" className="w-full"
-                                size="large">
+                            size="large">
                             ثبت
                         </Button>}
                 </Form>

@@ -27,8 +27,8 @@ const DescriptionForm = ({
   uid: string;
   package_uid?: string;
   data:
-    | z.infer<typeof materialApi.GetRequestPackagePartList.response.shape.data>
-    | undefined;
+  | z.infer<typeof materialApi.GetRequestPackagePartList.response.shape.data>
+  | undefined;
 }) => {
   const { form, rule, updateDesc, requestInfo, onFinish } =
     useUiRequestProductDescriptionForm(uid, package_uid);
@@ -80,6 +80,7 @@ const DescriptionForm = ({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item
+                className="mb-10"
                 rules={[rule]}
                 name="process_description"
                 required={false}
@@ -88,7 +89,7 @@ const DescriptionForm = ({
                 <Input.TextArea
                   showCount
                   minLength={50}
-                  style={{ minHeight: 80, resize: "none" }}
+                  style={{ resize: "none" }}
                   placeholder="وارد کنید"
                 />
               </Form.Item>

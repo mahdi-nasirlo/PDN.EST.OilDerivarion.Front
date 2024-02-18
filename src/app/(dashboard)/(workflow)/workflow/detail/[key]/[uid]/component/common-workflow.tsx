@@ -93,7 +93,9 @@ const CommonWorkflow = ({
             required={false}
             rules={[{ required: true, message: "لطفا مقدار را وارد نمایید" }]}
           >
-            <Input.TextArea className="min-h-[70px]" />
+            <Input.TextArea
+              style={{ resize: "none" }}
+              placeholder="وارد کنید" />
           </Form.Item>
         </Form>
         <WorkflowBtn

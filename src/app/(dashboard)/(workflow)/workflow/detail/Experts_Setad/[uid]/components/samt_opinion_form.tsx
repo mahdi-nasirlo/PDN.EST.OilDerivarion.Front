@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
-import {Divider, Form, Input} from "antd/lib";
-import {CommentWorkflowSelectField} from "@/components/fields/commenct-workflow-select-field";
-import {TestItemsMultipleSelectField} from "@/components/fields/test-items-multiple-select-field";
-import {z} from "zod";
-import {RequestPackageApi} from "../../../../../../../../constance/request-package";
-import {Button} from "antd";
+import React, { useEffect } from 'react';
+import { Divider, Form, Input } from "antd/lib";
+import { CommentWorkflowSelectField } from "@/components/fields/commenct-workflow-select-field";
+import { TestItemsMultipleSelectField } from "@/components/fields/test-items-multiple-select-field";
+import { z } from "zod";
+import { RequestPackageApi } from "../../../../../../../../constance/request-package";
+import { Button } from "antd";
 import useUiOpinionForm
     from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form";
 
@@ -58,7 +58,7 @@ const EstOpinionForm = ({ request, uid, visit_Type }: {
                         label="توضیحات"
                     >
                         <Input.TextArea
-                            style={{ height: 100, resize: "none" }}
+                            style={{ resize: "none" }}
                             placeholder="وارد کنید"
                         />
                     </Form.Item>

@@ -5,7 +5,6 @@ import { InputNumber } from "antd/lib";
 import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
 
 function GpsForm({ rules }: any) {
-
   const BoxGpsStatus = useBoxGpsStatusList();
 
   return (
@@ -13,7 +12,7 @@ function GpsForm({ rules }: any) {
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="code" label="کد جعبه">
-            <InputNumber
+            <Input
               className="w-full"
               size="large"
               placeholder="وارد کنید"
@@ -32,11 +31,7 @@ function GpsForm({ rules }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item
-            rules={[rules]}
-            name="device_Status"
-            label="وضعیت"
-          >
+          <Form.Item rules={[rules]} name="device_Status" label="وضعیت">
             <Select
               size="large"
               showSearch

@@ -117,23 +117,19 @@ const CardList = ({
                           </Tag>
                         )}
                       </div>
-                      <div className="flex justify-between">
-                        {/* <Typography>خطا:</Typography> */}
 
-                        {item.Status_Message != null ? (
+                      {/* <Typography>خطا:</Typography> */}
+
+                      {item.Status_Message != null && (
+                        <div className="flex justify-between">
                           <Alert
                             className="text-sm"
                             message={item.Status_Message}
                             type="error"
                           />
-                        ) : (
-                          <Alert
-                            className="text-sm"
-                            message={"خطایی وجود ندارد"}
-                            type="info"
-                          />
-                        )}
-                      </div>
+                        </div>
+                      )}
+
                       {/* <div className="flex justify-between">
                         <Typography>خطا:</Typography>
                         {item.Status_Message != null && (

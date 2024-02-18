@@ -38,12 +38,12 @@ const boxGPSApi = {
     }),
     response: generalResponseZod.extend({
       data: z.object({
-        uid: z.string().uuid().optional(),
-        code: z.number().optional(),
-        capacity: z.number().optional(),
-        stateName: z.string().optional(),
-        stateId: z.number().optional(),
-        device_Status: z.number().optional(),
+        uid: z.string().uuid(),
+        code: z.string(),
+        capacity: z.number(),
+        stateName: z.string(),
+        stateId: z.number(),
+        device_Status: z.number(),
       }),
     }),
   },
@@ -67,14 +67,14 @@ const boxGPSApi = {
     url: "/BoxGPS/Update",
     type: z.object({
       uid: z.string().uuid(),
-      code: z.number({ required_error: errorMessage.required }),
+      code: z.string({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),
-      stateUid: z.string().optional(),
-      capacity: z.number().optional(),
-      imei: z.string().optional().pipe(notEmpty),
+      stateUid: z.string(),
+      capacity: z.number(),
+      imei: z.string().pipe(notEmpty),
     }),
   },
 

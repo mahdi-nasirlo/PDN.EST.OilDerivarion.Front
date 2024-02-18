@@ -50,7 +50,7 @@ const boxGPSApi = {
   BoxGPSCreate: {
     url: "/BoxGPS/Create",
     type: z.object({
-      code: z.number({ required_error: errorMessage.required }),
+      code: z.string({ required_error: errorMessage.required }),
       capacity: z.number({ required_error: errorMessage.required }),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       imei: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
@@ -130,7 +130,7 @@ const boxGPSApi = {
       stateUid: z.string().optional(),
       imei: z.string(),
       capacity: z.number().optional(),
-      code: z.number(),
+      code: z.string().optional(),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,

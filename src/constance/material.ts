@@ -364,7 +364,7 @@ const materialApi = {
     type: z.object({
       part_UID: z.string(),
       package_UID: z.string().optional(),
-      process_description: z.string(),
+      process_description: z.string().min(50),
     }),
   },
   GetRegisteredReportsForStepByKey: {

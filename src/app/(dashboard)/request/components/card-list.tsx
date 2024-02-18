@@ -2,7 +2,7 @@
 
 import { Button, Card, Col, Tag } from "antd";
 import React, { useState } from "react";
-import { Alert, Row, Typography } from "antd/lib";
+import { Alert, Row, Tooltip, Typography } from "antd/lib";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -80,7 +80,7 @@ const CardList = ({
                   // bodyStyle={{width: "100%", height: "100%"}}
                 >
                   <div className="h-full p-4 min-h-[520px] flex flex-col justify-between">
-                    <Typography className="font-semibold text-lg">{`پکیج شماره ${
+                    <Typography className="font-semibold text-lg">{` شماره ${
                       index + 1
                     }`}</Typography>
 
@@ -120,35 +120,27 @@ const CardList = ({
 
                       {/* <Typography>خطا:</Typography> */}
 
-                      {item.Status_Message != null && (
+                      {item.Status_Message != "" && (
                         <div className="flex justify-between">
-                          <Alert
-                            className="text-sm"
-                            message={item.Status_Message}
-                            type="error"
-                          />
-                        </div>
-                      )}
-
-                      {/* <div className="flex justify-between">
-                        <Typography>خطا:</Typography>
-                        {item.Status_Message != null && (
-                          <>
+                          <Tooltip
+                            placement="top"
+                            title={
+                              <Typography>{item.Status_Message}</Typography>
+                            }
+                          >
                             <Alert
-                              className="text-sm"
-                              message={item.Status_Message}
+                              message={
+                                item.Status_Message.length > 30
+                                  ? `${item.Status_Message.substring(0, 30)}...`
+                                  : item.Status_Message
+                              }
+                              className="text-sm text-ellipsis"
+                              // description={item.Status_Message}
                               type="error"
                             />
-                          </>
-                        ):(
-                          <Alert
-                          className="text-sm"
-                          message={item.Status_Message}
-                          type="error"
-                        />
-                        )}
-                      </div> */}
-
+                          </Tooltip>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <Typography>تعداد مواد اولیه:</Typography>
 

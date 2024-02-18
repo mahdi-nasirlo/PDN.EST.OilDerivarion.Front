@@ -130,11 +130,11 @@ const CardList = ({
                           >
                             <Alert
                               message={
-                                item.Status_Message.length > 30
-                                  ? `${item.Status_Message.substring(0, 30)}...`
+                                item.Status_Message?.length > 40
+                                  ? `${item.Status_Message.substring(0, 40)}...`
                                   : item.Status_Message
                               }
-                              className="text-sm text-ellipsis"
+                              className="text-sm text-ellipsis w-full text-right"
                               // description={item.Status_Message}
                               type="error"
                             />

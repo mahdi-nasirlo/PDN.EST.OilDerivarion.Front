@@ -38,9 +38,9 @@ const DescriptionForm = ({
   return (
     <>
       <Alert
-        className="border-none w-full text-right text-base font-normal text-red-500 mb-6"
+        className="border-none w-full text-right text-base font-normal text-CustomizeBlue-500 mb-6"
         message={staticMessages.formAlert}
-        type="error"
+        type="info"
       />
       {data?.map((item, index) => (
         <>
@@ -48,18 +48,22 @@ const DescriptionForm = ({
             <>
               <div className="mb-3">
                 {item.Status_Message != "" && (
-                  <div className="flex justify-between">
-                    <Alert
-                      message={
-                        item.Status_Message != ""
-                          ? "موارد نیازمند به ویرایش"
-                          : null
-                      }
-                      className="text-sm w-full"
-                      description={item.Status_Message}
-                      type="error"
-                    />
-                  </div>
+                  <>
+                    <Divider />
+                    <div className="flex justify-between">
+                      <Alert
+                        message={
+                          item.Status_Message != ""
+                            ? "موارد نیازمند به ویرایش"
+                            : null
+                        }
+                        className="text-sm w-full"
+                        description={item.Status_Message}
+                        type="error"
+                      />
+                    </div>
+                    <Divider />
+                  </>
                 )}
               </div>
             </>
@@ -82,6 +86,7 @@ const DescriptionForm = ({
                 label="شرح فرآیند تولید"
               >
                 <Input.TextArea
+                  showCount
                   minLength={50}
                   style={{ minHeight: 80, resize: "none" }}
                   placeholder="وارد کنید"

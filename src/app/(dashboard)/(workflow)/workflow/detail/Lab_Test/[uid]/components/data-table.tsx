@@ -9,7 +9,6 @@ import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import OptModal from "./opt-modal";
 import { RequestPackageApi } from "constance/request-package";
-import useRequestPackageLabBox2List from "@/hooks/request-package/use-request-package-lab-box-2-list";
 
 const apiData = RequestPackageApi.LabBox2List;
 
@@ -20,10 +19,8 @@ interface TProps {
 }
 
 export default function DataTable({ package_UID, data, isLoading }: TProps) {
+
   const [openOptModal, setOpenOptModal] = useState<string | undefined>();
-  const listboxForRequest = useRequestPackageLabBox2List({
-    package_UID: package_UID,
-  });
 
   const columns: ColumnsType<z.infer<typeof apiData.Item>> = [
     {
@@ -121,7 +118,7 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
           text: "لیست ارجاع ها",
         }}
         isLoading={isLoading}
-        data={{ records: listboxForRequest.data }}
+        data={{ records: data }}
         columns={columns}
       />
       <OptModal

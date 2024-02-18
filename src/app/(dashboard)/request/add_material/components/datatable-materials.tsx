@@ -74,6 +74,97 @@ const DatatableMaterials = ({package_uid}: { package_uid?: string }) => {
             },
         },
         {
+            title: "شماره ملی/شناسه ملی",
+            dataIndex: "Material_Supply_National_Code",
+            render: (_, record) => {
+                if (!record.Material_Supply_National_Code) {
+                    return <Typography>_</Typography>;
+                }
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{record.Material_Supply_National_Code}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[220px]"
+                            ellipsis={true}
+                            style={{width: "40px !important"}}
+                        >
+                            {record.Material_Supply_National_Code}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
+        },
+        {
+            title: "ایرانکد",
+            dataIndex: "Material_Supply_Iran_Code",
+            render: (_, record) => {
+                if (!record.Material_Supply_Iran_Code) {
+                    return <Typography>_</Typography>;
+                }
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{record.Material_Supply_Iran_Code}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[220px]"
+                            ellipsis={true}
+                            style={{width: "40px !important"}}
+                        >
+                            {record.Material_Supply_Iran_Code}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
+        },
+        {
+            title: "شماره اظهارنامه واردات",
+            dataIndex: "Material_Import_Declaration_Number",
+            render: (_, record) => {
+                if (!record.Material_Import_Declaration_Number) {
+                    return <Typography>_</Typography>;
+                }
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{record.Material_Import_Declaration_Number}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[220px]"
+                            ellipsis={true}
+                            style={{width: "40px !important"}}
+                        >
+                            {record.Material_Import_Declaration_Number}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
+        }, {
+            title: "آدرس",
+            dataIndex: "Material_Supply_Address",
+            render: (_, record) => {
+                if (!record.Material_Supply_Address) {
+                    return <Typography>_</Typography>;
+                }
+                return (
+                    <Tooltip
+                        placement="top"
+                        title={<Typography>{record.Material_Supply_Address}</Typography>}
+                    >
+                        <Typography.Text
+                            className="max-w-[220px]"
+                            ellipsis={true}
+                            style={{width: "40px !important"}}
+                        >
+                            {record.Material_Supply_Address}
+                        </Typography.Text>
+                    </Tooltip>
+                );
+            },
+        },
+        {
             title: "عملیات",
             render: (value, record) => (<>
                 <Button

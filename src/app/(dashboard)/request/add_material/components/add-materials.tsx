@@ -156,6 +156,25 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
                 </Form.Item>
               </Col>
             </Row>
+            <Row gutter={[16, 16]}>
+              <Col xs={24} sm={12}>
+                <Form.Item
+                  required={false}
+                  name="material_Supply_Iran_Code"
+                  label="ایرانکد"
+                  rules={[
+                    { required: true, message: "لطفا مقدار را وارد کنید" },
+                    { type: "string" },
+                  ]}
+                >
+                  <Input
+                    className="w-full"
+                    size="large"
+                    placeholder="وارد نمایید"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
           </>
         ) : (
           <>

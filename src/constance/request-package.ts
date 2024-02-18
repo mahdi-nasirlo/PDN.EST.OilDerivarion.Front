@@ -635,6 +635,16 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  MaterialListDDL: {
+    url: "/RequestPackage/MaterialListDDL",
+    type: z.object({
+      package_UID: z.string().optional(),
+      part_UID: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
 };
 
 export { RequestPackageApi };

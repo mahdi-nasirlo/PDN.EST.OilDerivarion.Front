@@ -80,7 +80,7 @@ const CardList = ({
                   // bodyStyle={{width: "100%", height: "100%"}}
                 >
                   <div className="h-full p-4 min-h-[520px] flex flex-col justify-between">
-                    <Typography className="font-semibold text-lg">{` شماره ${
+                    <Typography className="font-semibold text-lg">{` درخواست شماره ${
                       index + 1
                     }`}</Typography>
 
@@ -192,7 +192,7 @@ const CardList = ({
         open={typeof open === "string"}
         setOpen={setOpen}
         handleDelete={handleDelete}
-        title={"حذف پکیج"}
+        title={"درخواست"}
         loading={deletePart.isPending}
       />
     </>

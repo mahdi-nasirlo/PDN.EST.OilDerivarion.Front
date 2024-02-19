@@ -98,15 +98,15 @@ export default function DataTable({
               >
                 بازکردن درب دستگاه
               </Button>
-              {/* {record.device_Status !== 6 && ( */}
-              <Button
-                type="link"
-                className="text-secondary-500 font-bold"
-                onClick={() => setGetUid(record.uid)}
-              >
-                ویرایش
-              </Button>
-              {/* )} */}
+              {record.device_Status !== 6 && (
+                <Button
+                  type="link"
+                  className="text-secondary-500 font-bold"
+                  onClick={() => setGetUid(record.uid)}
+                >
+                  ویرایش
+                </Button>
+              )}
             </>
           )}
           <Button

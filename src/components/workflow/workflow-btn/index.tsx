@@ -1,6 +1,4 @@
-import { Button, Input } from "antd";
-import useSWRMutation from "swr/mutation";
-import { useRouter } from "next/navigation";
+import { Button } from "antd";
 import { z } from "zod";
 import { workflowApi } from "constance/workflow";
 
@@ -28,7 +26,7 @@ const Index = (props: PropsType) => {
 
   return (
     <>
-      <div style={containerStyle()} className="grid grid-cols-2 gap-2 ">
+      <div style={containerStyle()} className="grid grid-cols-2 gap-4">
         {props.choices.map((btn, index) => {
           return (
             <div

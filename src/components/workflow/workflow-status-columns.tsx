@@ -1,6 +1,6 @@
 import React from "react";
 import { Tag } from "antd";
-import { CheckCircleOutlined, CloseCircleOutlined, } from "@ant-design/icons";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 const WorkFlowStatusColumn = ({ record }: { record: any }) => {
   let color = "";
@@ -20,12 +20,16 @@ const WorkFlowStatusColumn = ({ record }: { record: any }) => {
     icon = <CheckCircleOutlined />;
   } else if (record.Status === 3) {
     color = "red";
-    name = "خطا";
+    name = "رد شده";
+    icon = <CheckCircleOutlined />;
+  } else if (record.Status === 5) {
+    color = "success";
+    name = "به اتمام رسید";
     icon = <CheckCircleOutlined />;
   }
 
   return (
-    <Tag className='p-1' icon={icon} color={color}>
+    <Tag className="p-1" icon={icon} color={color}>
       {name}
     </Tag>
   );

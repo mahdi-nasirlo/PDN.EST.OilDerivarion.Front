@@ -643,6 +643,28 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  RequestPackagePartUpdateSchematic: {
+    url: "/RequestPackage/RequestPackagePartUpdateSchematic",
+    type: z.object({
+      package_UID: z.string().uuid().optional(),
+      part_UID: z.string().uuid(),
+      file_Content_Base64: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+  PartProductListDDl: {
+    url: "/RequestPackage/PartProductListDDl",
+    type: z.object({
+      package_UID: z.string().uuid().optional(),
+      part_UID: z.string().uuid().optional(),
+      density: z.number(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
 };
 
 export { RequestPackageApi };

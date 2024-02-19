@@ -34,7 +34,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             content={
               <>
                 <Typography>
-                  از حذف ماده اولیه {sample.name} مطمئن هستید؟
+                  از حذف ماده اولیه/ محصول {sample.name} مطمئن هستید؟
                 </Typography>
                 <div className="flex justify-end">
                   <Button
@@ -209,7 +209,7 @@ const AddSample = ({
               },
             ]}
             className="w-96"
-            label="مواد اولیه"
+            label="مواد اولیه/ محصول"
             labelCol={{ span: 24 }}
           >
             <Select
@@ -238,7 +238,7 @@ const AddSample = ({
         className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500"
       >
         <PlusSmallIcon className="w-5 h-5" />
-        افزودن مواد اولیه
+        افزودن مواد اولیه/ محصول
       </Button>
     </Popover>
   );

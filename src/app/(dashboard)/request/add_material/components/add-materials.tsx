@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import {useValidation} from "@/hooks/use-validation";
-import {Form} from "antd/lib";
-import {Button, Col, Divider, Input, Row, Select, Typography} from "antd";
-import {MaterialSelectField} from "@/components/fields/material-select-field";
-import {PlusIcon} from "@heroicons/react/24/outline";
-import {materialApi} from "../../../../../constance/material";
-import {useRequestPackageMaterialAdd} from "@/hooks/material/use-request-package-material-add";
-import {validateNationalCode} from "@/lib/validate-national-code";
+import React, { useState } from "react";
+import { useValidation } from "@/hooks/use-validation";
+import { Form } from "antd/lib";
+import { Button, Col, Divider, Input, Row, Select, Typography } from "antd";
+import { MaterialSelectField } from "@/components/fields/material-select-field";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { materialApi } from "../../../../../constance/material";
+import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
+import { validateNationalCode } from "@/lib/validate-national-code";
 
 const apiData = materialApi.RequestPackageMaterialAdd;
 
@@ -18,8 +18,14 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
   const [supplyMethodStatus, setSupplyMethod] = useState<number>();
 
   const handleSubmit = async (values: any) => {
+
+    let material_Supply_Iran_Code =
+      values.material_Supply_Iran_Code
+        ? values.material_Supply_Iran_Code.toString()
+        : undefined
+
     const res = await addMaterial.mutateAsync({
-      material_Supply_Iran_Code: values.material_Supply_Iran_Code.toString(),
+      material_Supply_Iran_Code,
       ...values,
       package_UID: package_uid,
     });
@@ -211,8 +217,8 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
                     personTypeStatus === null
                       ? "شماره ملی / شناسه ملی"
                       : personTypeStatus === 2
-                      ? "شناسه ملی"
-                      : "شماره ملی"
+                        ? "شناسه ملی"
+                        : "شماره ملی"
                   }
                   rules={[
                     {
@@ -261,29 +267,29 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12}>
                 <Form.Item
-                    required={false}
-                    name="material_Supply_Iran_Code"
-                    label="ایرانکد"
-                    rules={[
-                      {
-                        required: true,
-                        message: "لطفا مقدار را وارد کنید"
+                  required={false}
+                  name="material_Supply_Iran_Code"
+                  label="ایرانکد"
+                  rules={[
+                    {
+                      required: true,
+                      message: "لطفا مقدار را وارد کنید"
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        const hasLetters = /[a-zA-Z]/.test(value);
+                        if (hasLetters || value.length !== 16) {
+                          return Promise.reject('مقدار باید عدد 16 رقمی باشد');
+                        }
+                        return Promise.resolve();
                       },
-                      ({getFieldValue}) => ({
-                        validator(rule, value) {
-                          const hasLetters = /[a-zA-Z]/.test(value);
-                          if (hasLetters || value.length !== 16) {
-                            return Promise.reject('مقدار باید عدد 16 رقمی باشد');
-                          }
-                          return Promise.resolve();
-                        },
-                      }),
-                    ]}
+                    }),
+                  ]}
                 >
                   <Input
-                      className="w-full"
-                      size="large"
-                      placeholder="وارد نمایید"
+                    className="w-full"
+                    size="large"
+                    placeholder="وارد نمایید"
                   />
                 </Form.Item>
               </Col>

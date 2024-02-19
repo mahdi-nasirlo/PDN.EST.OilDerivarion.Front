@@ -2,11 +2,11 @@
 
 import React from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import { PencilIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
-import { Button, Col, Divider, Row, Spin, } from "antd";
-import { Card } from "@/components/card";
-import { useRouter } from "next/navigation";
-import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
+import {PencilIcon, PlusSmallIcon} from "@heroicons/react/24/outline";
+import {Button, Col, Divider, Row, Spin,} from "antd";
+import {Card} from "@/components/card";
+import {useRouter} from "next/navigation";
+import {useGetRequestPackagePartList} from "@/hooks/material/use-get-request-package-part-list";
 import Link from "next/link";
 import FirstCard from "@/app/(dashboard)/request/components/first-card";
 import CardList from "@/app/(dashboard)/request/components/card-list";
@@ -41,7 +41,7 @@ export default function Page({ params: { uid } }: TProps) {
                         </Button>
                     </Link>
                 ]}
-                currentPage="ویرایش پکیج ها"
+                currentPage="ویرایش پکیج درخواست"
                 titleIcon={<PencilIcon className="w-8" />}
             />
             <Card>

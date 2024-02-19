@@ -96,7 +96,7 @@ function LaboratoryForm({ rules }: any) {
           <Form.Item rules={[rules]} name="address" label="آدرس">
             <Input.TextArea
               size="large"
-              style={{ height: 70, resize: "none" }}
+              style={{ resize: "none" }}
               placeholder="وارد کنید"
             />
           </Form.Item>

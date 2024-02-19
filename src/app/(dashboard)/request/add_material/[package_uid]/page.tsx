@@ -14,10 +14,10 @@ const Page = ({params: {package_uid}}: { params: { package_uid: string } }) => {
     return (
         <div>
             <Breadcrumb
-                pages={[{label: "خانه", path: "/"}]}
+                pages={[{label: "خانه", path: "/"}, {label: "پکیج درخواست", path: `/request/${package_uid}`}]}
                 currentPage="لیست مواد اولیه"
                 titleIcon={<BeakerIcon className="w-8"/>}
-                backLink="/request"
+                backLink={`/request/${package_uid}`}
             />
             <Card>
                 <AddMaterials package_uid={package_uid}/>

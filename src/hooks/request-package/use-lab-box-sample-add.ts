@@ -26,12 +26,13 @@ const useBoxSampleAdd = ({package_UID, lab_UID, box_UID}: {
         }),
         onSuccess: async (data) => {
 
-            await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data)
-
             await queryClient.invalidateQueries({
                 queryKey: [RequestPackageApi.LabBoxSampleGetAvailableList.url],
                 exact: false
             })
+            
+            await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data)
+
 
         }
     })

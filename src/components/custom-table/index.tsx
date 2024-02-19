@@ -1,6 +1,6 @@
-import React, { Ref, useState } from "react";
-import { Table, TableProps, Typography } from "antd";
-import { addIndexToData } from "@/utils/addIndexToData";
+import React, {Ref, useState} from "react";
+import {Table, TableProps, Typography} from "antd";
+import {addIndexToData} from "@/utils/addIndexToData";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
@@ -9,6 +9,7 @@ interface RecordeValue {
     icon?: React.ReactNode;
     text: string;
     actions?: React.ReactNode;
+      discretion?: React.ReactNode
   };
   setInitialData?: (arg: any) => void;
   isLoading?: boolean;
@@ -52,14 +53,15 @@ const Index = (props: TableProps<any> & RecordeValue) => {
                   {props.header.icon}
                 </span>
               )}
-              {props.header.text}
+                {props.header.text}
+                {props.header.discretion}
             </Typography>
             {props.header.actions}
           </>
         )}
       </div>
       <Table
-        {...props}
+          {...props}
         ref={props.ref}
         loading={props.isLoading}
         dataSource={

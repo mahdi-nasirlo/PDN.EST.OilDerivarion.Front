@@ -20,10 +20,11 @@ const useLabBoxDelete = ({package_UID, lab_UID}: { package_UID: string, lab_UID:
             },
         }),
         onSuccess: async (data) => {
+            
+            await queryClient.invalidateQueries({queryKey: [RequestPackageApi.LabBoxGetAvailableList.url]})
 
             await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data);
 
-            await queryClient.invalidateQueries({queryKey: [RequestPackageApi.LabBoxGetAvailableList.url]})
 
         },
     });

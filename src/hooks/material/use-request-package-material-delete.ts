@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {z} from "zod";
+import {generalResponseZod} from "@/types/api-response";
 import fetchWithSession from "@/utils/fetch-with-session";
-import { materialApi } from "../../constance/material";
+import {materialApi} from "../../constance/material";
 
 const apiData = materialApi.RequestPackageMaterialDelete;
 
@@ -18,15 +18,14 @@ const useRequestPackageMaterialDelete = () => {
         data,
       }),
     onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [materialApi.RequestPackageMaterialList.url],
+        exact: false,
+      });
       await queryClient.setQueryData(
         [materialApi.RequestPackageMaterialList.url],
         data
       );
-
-      await queryClient.invalidateQueries({
-        queryKey: [materialApi.RequestPackageMaterialAdd.url],
-        exact: false,
-      });
     },
   });
 };

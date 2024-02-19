@@ -63,7 +63,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
               className="bg-center bg-cover hover:border-8 w-36 h-36 text-sm border-8 border-primary-500 flex flex-col items-center justify-center space-y-2.5"
               key={index}
             >
-              <Typography className="bg-white p-1 rounded-lg shadow-sm">
+              <Typography className="bg-white p-1 rounded-lg shadow-sm whitespace-break-spaces">
                 {sample.name}
               </Typography>
             </Button>
@@ -245,10 +245,10 @@ const AddSample = ({
       <Button
         shape="circle"
         type="dashed"
-        className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500"
+        className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500 whitespace-break-spaces"
       >
         <PlusSmallIcon className="w-5 h-5" />
-        افزودن مواد اولیه/ محصول
+        افزودن مواد اولیه / محصول
       </Button>
     </Popover>
   );

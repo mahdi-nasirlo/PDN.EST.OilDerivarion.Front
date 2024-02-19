@@ -84,7 +84,7 @@ export default function DeleteModal({ uidDelete, setUidDelete }: TProps) {
                         >
                             <Input.TextArea
                                 className='w-full'
-                                style={{ height: 100, resize: "none" }}
+                                style={{ resize: "none" }}
                                 placeholder="وارد کنید"
                             />
                         </Form.Item>

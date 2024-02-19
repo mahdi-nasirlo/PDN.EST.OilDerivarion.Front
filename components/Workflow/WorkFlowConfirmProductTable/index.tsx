@@ -1,9 +1,9 @@
 "use client"
 
-import React, {useEffect, useState} from 'react';
-import {Button, Form, Input, Popconfirm, Select, Table, Tooltip, Typography} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Input, Popconfirm, Select, Table, Tooltip, Typography } from 'antd';
 import useGetExpertOpinionTypeGetAll from "../../../hooks/baseInfo/useGetExpertOpinionTypeGetAll";
-import {addIndexToData} from "../../../lib/addIndexToData";
+import { addIndexToData } from "../../../lib/addIndexToData";
 
 interface Item {
     Uid: string,
@@ -25,14 +25,14 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
-                                                       editing,
-                                                       dataIndex,
-                                                       title,
-                                                       record,
-                                                       index,
-                                                       children,
-                                                       ...restProps
-                                                   }) => {
+    editing,
+    dataIndex,
+    title,
+    record,
+    index,
+    children,
+    ...restProps
+}) => {
 
 
     let inputNode
@@ -41,12 +41,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     switch (dataIndex) {
         case "Description":
-            inputNode = <Input.TextArea rows={2}/>
+            inputNode = <Input.TextArea style={{ resize: "none" }} rows={2} />
             break;
         case "ExpertOpinionTypeName":
             inputNode = <Select
                 labelInValue
-                fieldNames={{label: "Name", value: "Id"}}
+                fieldNames={{ label: "Name", value: "Id" }}
                 loading={expertOpinionType.isLoading}
                 options={expertOpinionType.data}
             />
@@ -58,7 +58,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
             {editing ? (
                 <Form.Item
                     name={dataIndex}
-                    style={{margin: 0}}
+                    style={{ margin: 0 }}
                     rules={[
                         {
                             required: true,
@@ -75,7 +75,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const Index = ({trigger, dataSource, isLoading}: {
+const Index = ({ trigger, dataSource, isLoading }: {
     uid: string,
     trigger: (arg: any) => any,
     dataSource: any,
@@ -94,7 +94,7 @@ const Index = ({trigger, dataSource, isLoading}: {
     const isEditing = (record: Item) => record.Uid === editingKey;
 
     const edit = (record: Partial<Item>) => {
-        form.setFieldsValue({name: '', age: '', address: '', ...record});
+        form.setFieldsValue({ name: '', age: '', address: '', ...record });
         setEditingKey(record.Uid as string);
     };
 
@@ -172,7 +172,7 @@ const Index = ({trigger, dataSource, isLoading}: {
                     <Typography.Text
                         className="w-[100px]"
                         ellipsis={true}
-                        style={{width: "40px !important"}}
+                        style={{ width: "40px !important" }}
                     >
                         {record.Description}
                     </Typography.Text>
@@ -193,17 +193,17 @@ const Index = ({trigger, dataSource, isLoading}: {
                 return editable ? (
                     <span>
                         <Popconfirm title="مطمئن هستید؟" onConfirm={cancel}>
-                          <Button size="small" type="text">انصراف</Button>
+                            <Button size="small" type="text">انصراف</Button>
                         </Popconfirm>
                         <Button size="small" type="primary"
-                                onClick={() => save(record.Uid)}
-                                style={{marginRight: 8}}>
-                          ذخیره
+                            onClick={() => save(record.Uid)}
+                            style={{ marginRight: 8 }}>
+                            ذخیره
                         </Button>
                     </span>
                 ) : (
                     <Button type="text" className="text-secondary-500" disabled={editingKey !== ''}
-                            onClick={() => edit(record)}>
+                        onClick={() => edit(record)}>
                         ویرایش
                     </Button>
                 );

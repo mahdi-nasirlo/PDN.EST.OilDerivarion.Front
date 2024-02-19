@@ -143,6 +143,7 @@ const DescriptionForm = ({
           <Row gutter={[16, 16]}>
             <Col xs={24} md={24}>
               <Form.Item
+                className="mb-10"
                 rules={[rule]}
                 name="process_description"
                 required={false}
@@ -151,24 +152,14 @@ const DescriptionForm = ({
                 <Input.TextArea
                   showCount
                   minLength={50}
-                  style={{ minHeight: 80, resize: "none" }}
+                  style={{ resize: "none" }}
                   placeholder="وارد کنید"
                 />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={[16, 12]} className="flex justify-end mb-6">
-            <Col xs={12}>
-              <Button
-                className="w-full bg-gray-50"
-                size="large"
-                type="default"
-                onClick={() => router.push("/request")}
-              >
-                بازگشت به لیست پکیج ها
-              </Button>
-            </Col>
-            <Col xs={12}>
+            <Col xs={24} xxl={3} md={5} sm={7}>
               <Button
                 className="flex items-center justify-center w-full"
                 type="primary"

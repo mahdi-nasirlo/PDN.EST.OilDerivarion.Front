@@ -1,11 +1,11 @@
 import React from "react";
-import { ColumnsType } from "antd/es/table";
-import { Button, Space } from "antd";
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
+import {ColumnsType} from "antd/es/table";
+import {Button, Space, Typography} from "antd";
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
 import CustomTable from "@/components/custom-table";
-import { PlusOutlined } from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { z } from "zod";
+import {z} from "zod";
 import useUiRequestMaterialList from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-material-list";
 
 export default function DataTable({
@@ -64,12 +64,14 @@ export default function DataTable({
   return (
     <>
       <CustomTable
-        header={{
+          header={{
           icon: <ViewColumnsIcon />,
-          text: " لیست مواد اولیه ( مجموع درصد استفاده در روش بلندینگ 99 و در سایر روش ها 100 باشد )",
-          actions: (
-            <Button
-              className="flex items-center justify-center"
+            text: " لیست مواد اولیه",
+            discretion: <Typography className={"text-gray-500 font-normal"}> ( مجموع درصد استفاده باید100 باشد
+              ) </Typography>,
+            actions: (
+                <Button
+                    className="flex items-center justify-center"
               icon={<PlusOutlined width={16} height={16} />}
               type="primary"
               size="large"

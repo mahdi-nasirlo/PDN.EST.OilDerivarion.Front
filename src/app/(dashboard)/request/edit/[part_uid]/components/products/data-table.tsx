@@ -1,12 +1,13 @@
 import React from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { ColumnsType } from "antd/es/table";
-import { Button, Space } from "antd";
+import {ColumnsType} from "antd/es/table";
+import {Button, Space, Typography} from "antd";
 import CustomTable from "@/components/custom-table";
-import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { PlusOutlined } from "@ant-design/icons";
-import { z } from "zod";
-import useUiRequestPackageProductList from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-package-product-list";
+import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import {PlusOutlined} from "@ant-design/icons";
+import {z} from "zod";
+import useUiRequestPackageProductList
+  from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-package-product-list";
 
 interface TProps {
   uid: string;
@@ -71,7 +72,9 @@ export default function DataTable({
       <CustomTable
         header={{
           icon: <ViewColumnsIcon />,
-          text: " لیست محصولات ( مجموع درصد استحصال و هدر رفت باید 100 باشد )",
+          text: " لیست محصولات",
+          discretion: <Typography className={"text-gray-500 font-normal"}>( مجموع درصد استحصال و هدر رفت باید 100
+            باشد)</Typography>,
           actions: (
             <Button
               className="flex items-center justify-center"

@@ -36,7 +36,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 label="توضیحات"
               >
                 <Input.TextArea
-                  style={{ height: 100, resize: "none" }}
+                  style={{ resize: "none" }}
                   placeholder="وارد کنید"
                 />
               </Form.Item>

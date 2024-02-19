@@ -98,6 +98,10 @@
   @apply h-12 bg-gray-50 !important;
 }
 
+.ant-input-textarea-affix-wrapper .ant-input {
+  @apply flex h-20 text-right !important;
+}
+
 /* start menu */
 .ant-menu {
   @apply border-e-0 lg:border-e-[0px] !important;
@@ -232,7 +236,7 @@
 }
 
 .ant-btn:hover {
-  @apply scale-[104%];
+  @apply scale-[102%];
 }
 
 .ant-transfer-operation button {

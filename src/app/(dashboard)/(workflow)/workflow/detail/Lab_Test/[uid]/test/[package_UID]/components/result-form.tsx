@@ -103,7 +103,7 @@ export default function ResultForm({ formData }: any) {
 
               <Col xs={24} sm={16}>
                 <Form.Item rules={[rules]} name="result_Desc" label="توضیحات">
-                  <Input.TextArea />
+                  <Input.TextArea style={{ resize: "none" }} />
                 </Form.Item>
               </Col>
             </Row>

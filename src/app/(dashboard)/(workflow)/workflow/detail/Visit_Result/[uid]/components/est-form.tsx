@@ -1,7 +1,7 @@
-import {Form, Spin, Typography} from "antd";
-import React, {useEffect} from "react";
-import {useForm} from "antd/lib/form/Form";
-import {Checkbox, Col, Divider, Input, Row} from "antd/lib";
+import { Form, Spin, Typography } from "antd";
+import React, { useEffect } from "react";
+import { useForm } from "antd/lib/form/Form";
+import { Checkbox, Col, Divider, Input, Row } from "antd/lib";
 import useUiVisitResult from "../hook/use-ui-visit-result";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useUiVisitResultWorkFlow
@@ -16,8 +16,8 @@ export const EstForm = ({ uid }: { uid?: string }) => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
 
-  const {get, set, choice, setChoice} =
-      useUiVisitResultWorkFlow({taskId: uid as string});
+  const { get, set, choice, setChoice } =
+    useUiVisitResultWorkFlow({ taskId: uid as string });
 
   return (
     <>
@@ -40,7 +40,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           onFinish={async (values) => {
 
             const res = await handleSubmitEst(values)
-            
+
             if (res.success) {
               await set.mutateAsync({
                 taskId: uid as string,
@@ -60,7 +60,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 label="توضیحات"
               >
                 <Input.TextArea
-                  style={{ height: 100, resize: "none" }}
+                  style={{ resize: "none" }}
                   placeholder="وارد کنید"
                 />
               </Form.Item>
@@ -100,17 +100,17 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             </Col>
           </Row>
           {getTime.data?.visit_Type == 3 && (
-              <>
-                <Divider/>
-                <WorkflowBtn
-                    loading={set.isPending}
-                    choices={get.data?.choices}
-                    onClick={async (choice_Key) => {
-                      setChoice(choice_Key)
-                      form.submit()
-                    }}
-                />
-              </>
+            <>
+              <Divider />
+              <WorkflowBtn
+                loading={set.isPending}
+                choices={get.data?.choices}
+                onClick={async (choice_Key) => {
+                  setChoice(choice_Key)
+                  form.submit()
+                }}
+              />
+            </>
           )}
         </Form>
       </Spin>

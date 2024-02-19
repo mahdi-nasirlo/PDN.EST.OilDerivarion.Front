@@ -9,6 +9,7 @@ const CardListTable = ({data}: {
     console.log(data)
 
     return <Table
+        
         dataSource={data as []}
         pagination={false}
         columns={[

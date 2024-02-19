@@ -1,6 +1,6 @@
-import { generalResponseZod, notEmpty } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod, notEmpty} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const GetRequestPackagePartListItem = z.object({
   UID: z.string(),
@@ -72,6 +72,10 @@ const RequestPackageMaterialListItem = z.object({
   Material_Supply_Name: z.string(),
   Material_Unit_Consumption: z.string(),
   Material_DDL_Name: z.string(),
+  Material_Supply_National_Code: z.string(),
+  Material_Supply_Iran_Code: z.string(),
+  Material_Import_Declaration_Number: z.string(),
+  Material_Supply_Address: z.string()
 });
 
 const RequestPackagePartMaterialListItem = z.object({

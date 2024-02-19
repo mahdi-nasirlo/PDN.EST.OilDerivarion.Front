@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { generalResponseZod } from "@/types/api-response";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { errorMessage } from "./error-message";
 
 const RequestPackageReportListItem = z.object({
-  uid: z.string().nullable(),
+  UID: z.string().nullable(),
   Form_Key: z.string(),
   Form_Type: z.number(),
   Form_Name: z.string(),
@@ -389,7 +389,6 @@ const RequestPackageApi = {
       package_UID: z.string(),
     }),
     Item: z.object({
-      Production_Method: z.string(),
       Sample_Type: z.string(),
       name: z.string(),
       Box_Type: z.string(),
@@ -399,7 +398,6 @@ const RequestPackageApi = {
     response: generalResponseZod.extend({
       data: z.array(
         z.object({
-          Production_Method: z.string(),
           Sample_Type: z.string(),
           name: z.string(),
           Box_Type: z.string(),
@@ -601,18 +599,25 @@ const RequestPackageApi = {
   LabSampleTestItemDetailUpdate: {
     url: "/RequestPackage/LabSampleTestItemDetailUpdate",
     type: z.object({
-      sample_Code: z.string(),
-      test_Item_Result_UID: z.string(),
-      result_Test: z.string(),
+      sample_Code: z.string().uuid(),
+      test_Item_Result_UID: z.string().uuid(),
+      result_Test: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
       result_Range: z.number(),
-      result_Desc: z.string(),
+      result_Desc: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
       result_Min_Accept: z.number(),
       result_Max_Accept: z.number(),
       result_Renew_Unit_FK: z.number(),
       result_Renewable: z.number(),
-      test_Factor_Standards: z.string(),
+      test_Factor_Standards: z
+        .string({ required_error: errorMessage.required })
+        .pipe(notEmpty),
     }),
   },
+
   LabSampleTestItemDetail: {
     url: "/RequestPackage/LabSampleTestItemDetail",
     type: z.object({
@@ -634,7 +639,7 @@ const RequestPackageApi = {
           result_Max_Accept: z.number().optional(),
           result_Renew_Unit_FK: z.number().optional(),
           result_Renewable: z.number().optional(),
-          test_Factor_Standards: z.any(),
+          test_Factor_Standards: z.string(),
         })
       ),
     }),

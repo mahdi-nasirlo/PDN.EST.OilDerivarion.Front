@@ -1,22 +1,21 @@
 "use client";
 
 import React from "react";
-
-import {DocumentTextIcon} from "@heroicons/react/24/outline";
-import {Alert, Button, Divider, Spin} from "antd/lib";
-import {Card} from "@/components/card";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Alert, Button, Divider, Spin } from "antd/lib";
+import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import useUiVisitResultWorkFlow from "./hook/use-ui-visit-result-work-flow";
-import {NaftForm} from "./components/naft-form";
-import {SamtForm} from "./components/samt-form";
-import {EstForm} from "./components/est-form";
+import { NaftForm } from "./components/naft-form";
+import { SamtForm } from "./components/samt-form";
+import { EstForm } from "./components/est-form";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
-  const { get, handleSet, reposts, form, dataForm, setChoice, set } =
+  const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiVisitResultWorkFlow({ taskId: params.uid });
 
   if (!get.data && get.isFetching) {
@@ -49,8 +48,8 @@ export default function Page({ params }: { params: { uid: string } }) {
         <Spin spinning={get.isFetching}>
           <RepostsMaker
             taskId={params.uid}
-            reports={reposts.data}
-            loading={reposts.isFetching}
+            reports={reports.data}
+            loading={reports.isFetching}
           />
         </Spin>
         <Divider />

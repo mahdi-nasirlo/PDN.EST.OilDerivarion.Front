@@ -1,12 +1,12 @@
 import React from 'react';
-import {z} from "zod";
-import {Alert, Collapse, Empty, Spin, Typography} from "antd";
+import { z } from "zod";
+import { Alert, Collapse, Empty, Spin, Typography } from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
-import {materialApi} from "../../constance/material";
+import { RequestPackageApi } from 'constance/request-package';
 
-const Index = ({reports, loading, taskId}: {
-  reports: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>[] | undefined,
+const Index = ({ reports, loading, taskId }: {
+  reports: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[] | undefined,
   loading?: boolean,
   taskId: string
 }) => {
@@ -14,30 +14,31 @@ const Index = ({reports, loading, taskId}: {
 
   if (!Array.isArray(reports)) return;
 
-  return reports?.map((repost, index) => (
-      <RenderRepost key={index} index={index} report={repost} taskId={taskId}/>
+  return reports?.map((report, index) => (
+    <RenderReport key={index} index={index} report={report} taskId={taskId} />
   ));
 };
 
-const RenderRepost = ({
-                        report,
-                        index,
-                        taskId
+const RenderReport = ({
+  report,
+  index,
+  taskId
 }: {
   index: number;
   taskId: string,
-  report: z.infer<typeof materialApi.GetRegisteredReportsForStepByKey.item>;
+  report: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>;
 }) => {
 
   let ItemType;
 
   if (report.UID) {
     switch (report.Form_Type) {
-        case 1:
-            // ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
-            break;
+      case 1:
+        ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId} />;
+        // ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
+        break;
       case 2:
-          ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>;
+        ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId} />;
         break;
       // case 3:
       //     ItemType = <MediaTypeItems data={data}/>
@@ -74,32 +75,32 @@ const RenderRepost = ({
 };
 
 const RenderTypeTow = ({
-                         formKey,
-                         formUid,
-                         taskId
-                       }: {
+  formKey,
+  formUid,
+  taskId
+}: {
   formKey: string;
   formUid: string;
   taskId: string
 }) => {
 
-    const schema = useProducerFormsGetDocSchemaByUid({
-        form_Key: formKey,
-        form_UID: formUid,
-        taskId: taskId
-    });
+  const schema = useProducerFormsGetDocSchemaByUid({
+    form_Key: formKey,
+    form_UID: formUid,
+    taskId: taskId
+  });
 
-  if (schema.isFetching) return <Spin/>;
+  if (schema.isFetching) return <Spin />;
 
-  if (!schema.data) return <Empty/>;
+  if (!schema.data) return <Empty />;
 
   return (
-      <Spin spinning={schema.isFetching}>
-        <DataViewer
-            data={schema.data[0]?.form_data}
-            schema={schema.data[0]?.Schema_Data}
-        />
-      </Spin>
+    <Spin spinning={schema.isFetching}>
+      <DataViewer
+        data={schema.data[0]?.form_data}
+        schema={schema.data[0]?.Schema_Data}
+      />
+    </Spin>
   );
 };
 export default Index;

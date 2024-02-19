@@ -2,10 +2,9 @@ import { useState } from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
 import { useForm } from "antd/es/form/Form";
-import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
-import useRequestPackageVisitScheduleList from "@/hooks/request-package/use-request-package-visit-schedule-list";
 import { useRouter } from "next/navigation";
 import useRequestPackageVisitOpinionList from "@/hooks/request-package/use-request-pakage-visit-opinion-list";
+import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 
 const stepKey = "Visit_Result";
 
@@ -18,7 +17,10 @@ const useUiVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
 
   const [form] = useForm();
 
-  const reposts = useGetRegisteredReportsForStepByKey(stepKey, taskId);
+  const reports = useRequestPackageReportList({
+    step_Key: stepKey,
+    package_UID: taskId,
+  });
   const dataForm = useRequestPackageVisitOpinionList({
     package_UID: taskId,
   });
@@ -37,7 +39,16 @@ const useUiVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
     }
   };
 
-  return { handleSet, dataForm, reposts, form, set, get, choice, setChoice };
+  return {
+    handleSet,
+    dataForm,
+    reports,
+    form,
+    set,
+    get,
+    choice,
+    setChoice,
+  };
 };
 
 export default useUiVisitResultWorkFlow;

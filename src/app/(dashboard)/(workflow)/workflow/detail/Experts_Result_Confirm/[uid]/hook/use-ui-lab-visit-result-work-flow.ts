@@ -1,23 +1,26 @@
-import {useState} from "react";
+import { useState } from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import {useForm} from "antd/es/form/Form";
-import {useGetRegisteredReportsForStepByKey} from "@/hooks/material/use-get-registered-reports-for-step-by-key";
-import {useRouter} from "next/navigation";
+import { useForm } from "antd/es/form/Form";
+import { useRouter } from "next/navigation";
 import useRequestPackageLabVisitOpinionList from "@/hooks/request-package/use-request-pakage-lab-visit-opinion-list";
+import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 
 const stepKey = "Experts_Setad";
 
 const useUiLabVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
   const [choice, setChoice] = useState<string>();
 
-  const get = useGetTask({taskId: taskId, stepKey: stepKey});
+  const get = useGetTask({ taskId: taskId, stepKey: stepKey });
 
   const set = useSetTask();
 
   const [form] = useForm();
 
-  const reposts = useGetRegisteredReportsForStepByKey(stepKey, taskId);
+  const reports = useRequestPackageReportList({
+    step_Key: stepKey,
+    package_UID: taskId,
+  });
 
   const dataForm = useRequestPackageLabVisitOpinionList({
     package_UID: taskId,
@@ -37,7 +40,16 @@ const useUiLabVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
     }
   };
 
-  return { handleSet, dataForm, reposts, form, set, get, choice, setChoice };
+  return {
+    handleSet,
+    dataForm,
+    reports,
+    form,
+    set,
+    get,
+    choice,
+    setChoice,
+  };
 };
 
 export default useUiLabVisitResultWorkFlow;

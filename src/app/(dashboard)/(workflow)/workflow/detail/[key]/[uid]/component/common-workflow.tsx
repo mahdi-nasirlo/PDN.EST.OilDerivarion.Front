@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
 import { useForm } from "antd/lib/form/Form";
-import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/card";
 import { Button, Divider, Input, Spin } from "antd";
@@ -13,6 +12,7 @@ import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import RepostsMaker from "@/components/reposts-maker";
 import { Form } from "antd/lib";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
+import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 
 const CommonWorkflow = ({
   uid,
@@ -31,7 +31,7 @@ const CommonWorkflow = ({
 
   const [form] = useForm();
 
-  const reposts = useGetRegisteredReportsForStepByKey(stepKey, uid);
+  const reports = useRequestPackageReportList({ step_Key: stepKey, package_UID: uid });
 
   const router = useRouter();
 
@@ -70,7 +70,7 @@ const CommonWorkflow = ({
         />
       )}
       <Card>
-        {reposts.data?.length !== 0 && (
+        {reports.data?.length !== 0 && (
           <>
             <Divider orientation="left" className="mb-6">
               لیست گزارشات
@@ -78,8 +78,8 @@ const CommonWorkflow = ({
             <Spin spinning={get.isFetching}>
               <RepostsMaker
                 taskId={uid}
-                reports={reposts.data}
-                loading={reposts.isFetching}
+                reports={reports.data}
+                loading={reports.isFetching}
               />
             </Spin>
             <Divider />

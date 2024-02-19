@@ -11,7 +11,6 @@ import EstOpinionForm from "@/app/(dashboard)/(workflow)/workflow/detail/Experts
 import Naft_opinion_form from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/naft_opinion_form";
 import Samt_opinion_form from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/samt_opinion_form";
 import { Tag } from "antd";
-
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useUiOpinionFormWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
 
@@ -21,7 +20,7 @@ const Page = ({ params }: { params: { uid: string } }) => {
 
   const requestList = useFinalResultList({ package_UID: params.uid });
 
-  const { get, handleSet, reposts, form, dataForm, setChoice, set } =
+  const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiOpinionFormWorkFlow({ taskId: params.uid });
 
   console.log(dataForm.data);
@@ -56,8 +55,8 @@ const Page = ({ params }: { params: { uid: string } }) => {
           <Spin spinning={get.isFetching}>
             <RepostsMaker
               taskId={params.uid}
-              reports={reposts.data}
-              loading={reposts.isFetching}
+              reports={reports.data}
+              loading={reports.isFetching}
             />
           </Spin>
         </div>

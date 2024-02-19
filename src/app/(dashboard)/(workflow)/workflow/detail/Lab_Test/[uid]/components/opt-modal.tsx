@@ -101,6 +101,7 @@ export default function OptModal({
             }}
             date={Date.now() + 120000}
             onComplete={() => setOpenOptModal(undefined)}
+            onStart={() => LabGetOTP.isSuccess}
           />
         </Form.Item>
         <Form.Item label="کد otp" name="Test" required={false} rules={[rules]}>

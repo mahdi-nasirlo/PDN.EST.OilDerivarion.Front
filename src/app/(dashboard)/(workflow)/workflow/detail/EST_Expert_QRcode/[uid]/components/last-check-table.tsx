@@ -58,11 +58,6 @@ export default function LastCheckTable({
       dataIndex: "Sample_Code",
       key: "6",
     },
-    {
-      title: "روش تولید",
-      dataIndex: "Production_Method",
-      key: "7",
-    },
   ];
 
   return (
@@ -105,7 +100,7 @@ export default function LastCheckTable({
           title=""
           className="print:block w-full hover:shadow-lg transition duration-300 relative font-bold"
         >
-          {boxListPrint.data?.map((boxCard, index) => (
+          {boxListPrint?.data?.map((boxCard, index) => (
             <div key={index} className="print:block">
               <Card title={boxCard.Sample_Type}>
                 <Descriptions>
@@ -114,9 +109,6 @@ export default function LastCheckTable({
                   </Descriptions.Item>
                   <Descriptions.Item label="نام نمونه">
                     {boxCard.Sample_Type}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="روش تولید">
-                    {boxCard.Production_Method}
                   </Descriptions.Item>
                 </Descriptions>
 

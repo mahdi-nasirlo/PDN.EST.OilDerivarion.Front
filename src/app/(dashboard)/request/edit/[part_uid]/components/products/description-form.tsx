@@ -1,15 +1,12 @@
-import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography,} from "antd";
 import React from "react";
-import {ArrowUpOnSquareIcon} from "@heroicons/react/24/outline";
-import staticMessages from "@/lib/staticMessages";
-import {useRouter} from "next/navigation";
-import {materialApi} from "constance/material";
-import {z} from "zod";
+import { Button, Col, Divider, Form, Input, Row, Spin, Typography, } from "antd";
+import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import {RequestPackageApi} from "constance/request-package";
-import {Upload, UploadProps} from "antd/lib";
-import {UploadChangeParam} from "antd/es/upload";
-import {CloudDownloadOutlined, FileAddOutlined} from "@ant-design/icons";
+import { z } from "zod";
+import { RequestPackageApi } from "constance/request-package";
+import { Upload, UploadProps } from "antd/lib";
+import { UploadChangeParam } from "antd/es/upload";
+import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 
 const props: UploadProps = {
@@ -38,19 +35,11 @@ const props: UploadProps = {
   },
 };
 
-const DescriptionForm = ({
-  data,
-  uid,
-  package_uid,
-}: {
-  uid: string;
-  package_uid?: string;
-  data:
-    | z.infer<typeof materialApi.GetRequestPackagePartList.response.shape.data>
-    | undefined;
-}) => {
+const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: string; }) => {
+
   const { form, rule, updateDesc, requestInfo, onFinish } =
     useUiRequestProductDescriptionForm(uid, package_uid);
+
   const [fileList, setFileList] = React.useState<any[]>([]);
 
   const handleChange = async (info: UploadChangeParam) => {
@@ -59,6 +48,7 @@ const DescriptionForm = ({
     console.log(base64Image);
     setFileList([info.file]);
   };
+
   const convertToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
@@ -67,7 +57,7 @@ const DescriptionForm = ({
       reader.readAsDataURL(file);
     });
   };
-  const router = useRouter();
+
   const upload = useRequestPakagePartUpdateShcematic();
 
   const HandleUpload = async (
@@ -87,40 +77,6 @@ const DescriptionForm = ({
 
   return (
     <>
-      <Alert
-        className="border-none w-full text-right text-base font-normal text-CustomizeBlue-500 mb-6"
-        message={staticMessages.formAlert}
-        type="info"
-      />
-      {data?.map((item, index) => (
-        <>
-          {item.UID == uid && (
-            <>
-              <div className="mb-3">
-                {item.Status_Message != "" && (
-                  <>
-                    <Divider />
-                    <div className="flex justify-between">
-                      <Alert
-                        message={
-                          item.Status_Message != ""
-                            ? "موارد نیازمند به ویرایش"
-                            : null
-                        }
-                        className="text-sm w-full"
-                        description={item.Status_Message}
-                        type="error"
-                      />
-                    </div>
-                    <Divider />
-                  </>
-                )}
-              </div>
-            </>
-          )}
-        </>
-      ))}
-
       <Typography className="text-right font-medium text-base">
         لطفا اطلاعات خواسته شده را با دقت وارد نمایید.
       </Typography>
@@ -148,8 +104,8 @@ const DescriptionForm = ({
           <div className={"flex w-full justify-end"}>
             <Col xs={24} xxl={3} md={6} sm={8}>
               <Button
-                  className="flex items-center justify-center w-full"
-                  icon={<FileAddOutlined height={16} width={16}/>}
+                className="flex items-center justify-center w-full"
+                icon={<FileAddOutlined height={16} width={16} />}
                 type="primary"
                 size="large"
                 htmlType="submit"

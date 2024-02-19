@@ -76,20 +76,26 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={24}>
-              <Form.Item name="est_visit_modify_date_time" label="آخرین ویرایش">
-                <Input
-                  disabled={true}
-                  style={{ height: 100, resize: "none" }}
-                />
-              </Form.Item>
-            </Col>
+            {getTime.data?.est_visit_modify_date_time != "" && (
+              <Col xs={24} sm={24}>
+                <Form.Item
+                  name="est_visit_modify_date_time"
+                  label="آخرین ویرایش"
+                >
+                  <Input
+                    disabled={true}
+                    style={{ height: 100, resize: "none" }}
+                  />
+                </Form.Item>
+              </Col>
+            )}
           </Row>
 
           {getTime.data?.visit_Type == 3 && !getTime.data?.ReadOnly && (
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                  onClick={async () => await window.location.reload()}
                   className="w-full"
                   size="large"
                   type={"primary"}

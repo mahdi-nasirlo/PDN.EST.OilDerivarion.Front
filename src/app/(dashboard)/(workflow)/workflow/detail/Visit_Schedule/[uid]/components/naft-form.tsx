@@ -72,23 +72,26 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={24}>
-              <Form.Item
-                name="naft_visit_modify_date_time"
-                label="آخرین ویرایش"
-              >
-                <Input
-                  disabled={true}
-                  style={{ height: 100, resize: "none" }}
-                />
-              </Form.Item>
-            </Col>
+            {getTime.data?.naft_visit_modify_date_time != "" && (
+              <Col xs={24} sm={24}>
+                <Form.Item
+                  name="naft_visit_modify_date_time"
+                  label="آخرین ویرایش"
+                >
+                  <Input
+                    disabled={true}
+                    style={{ height: 100, resize: "none" }}
+                  />
+                </Form.Item>
+              </Col>
+            )}
           </Row>
 
           {getTime.data?.visit_Type == 1 && !getTime.data?.ReadOnly && (
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                  onClick={async () => await window.location.reload()}
                   className="w-full"
                   size="large"
                   type={"primary"}

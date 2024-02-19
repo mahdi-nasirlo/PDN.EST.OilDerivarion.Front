@@ -46,6 +46,12 @@ export default function Page({ params }: { params: { uid: string } }) {
         />
       )}
       <Card>
+        {dataForm.data?.final_time && (
+          <Alert
+            message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
+            className="text-lg font-bold text-blue-800"
+          />
+        )}
         <Divider orientation="left" className="mb-6">
           لیست گزارشات
         </Divider>
@@ -66,12 +72,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {dataForm.data?.final_time && (
-          <Alert
-            message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
-            className="text-lg font-bold text-blue-800"
-          />
-        )}
+
         {dataForm.data?.visit_Type == 3 &&
           !dataForm.data.ReadOnly &&
           (get.data?.choices?.length ?? 0) > 0 && (

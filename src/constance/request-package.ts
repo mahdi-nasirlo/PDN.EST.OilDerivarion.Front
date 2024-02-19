@@ -3,7 +3,7 @@ import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { errorMessage } from "./error-message";
 
 const RequestPackageReportListItem = z.object({
-  uid: z.string().nullable(),
+  UID: z.string().nullable(),
   Form_Key: z.string(),
   Form_Type: z.number(),
   Form_Name: z.string(),

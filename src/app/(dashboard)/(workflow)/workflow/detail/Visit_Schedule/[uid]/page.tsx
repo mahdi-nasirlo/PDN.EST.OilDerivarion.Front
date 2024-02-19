@@ -18,7 +18,7 @@ import CalendarTime from "@/components/calendar-time/calendar-time";
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
-  const { get, handleSet, reposts, form, dataForm, setChoice, set } =
+  const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiVisitSchedule({ taskId: params.uid });
 
   if (!get.data && get.isFetching) {
@@ -58,8 +58,8 @@ export default function Page({ params }: { params: { uid: string } }) {
         <Spin spinning={get.isFetching}>
           <RepostsMaker
             taskId={params.uid}
-            reports={reposts.data}
-            loading={reposts.isFetching}
+            reports={reports.data}
+            loading={reports.isFetching}
           />
         </Spin>
         <Divider />

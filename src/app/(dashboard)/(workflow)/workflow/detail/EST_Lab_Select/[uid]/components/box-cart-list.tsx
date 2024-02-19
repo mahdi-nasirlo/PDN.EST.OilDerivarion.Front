@@ -1,16 +1,16 @@
 "use client";
 
-import React, {useState} from "react";
-import {Button, Col, Form, Popover, Row, Select, Typography} from "antd/lib";
-import {motion} from "framer-motion";
-import {Card} from "@/components/card";
-import {PlusSmallIcon, TrashIcon} from "@heroicons/react/24/outline";
-import {errorMessage} from "../../../../../../../../constance/error-message";
-import {RequestPackageApi} from "../../../../../../../../constance/request-package";
-import {z} from "zod";
+import React, { useState } from "react";
+import { Button, Col, Form, Popover, Row, Select, Typography } from "antd/lib";
+import { motion } from "framer-motion";
+import { Card } from "@/components/card";
+import { PlusSmallIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { errorMessage } from "../../../../../../../../constance/error-message";
+import { RequestPackageApi } from "../../../../../../../../constance/request-package";
+import { z } from "zod";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useUiEstLabSelect
-    from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
+  from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
 import useLabBoxSampleGetAvailableList from "@/hooks/request-package/use-lab-box-sample-get-available-list";
 import useLabBoxSampleAdd from "@/hooks/request-package/use-lab-box-sample-add";
 
@@ -30,7 +30,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
-            title="حذف آیتم"
+            title="حذف نمونه"
             content={
               <>
                 <Typography>
@@ -249,7 +249,7 @@ const AddSample = ({
         className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500 whitespace-break-spaces"
       >
         <PlusSmallIcon className="w-5 h-5" />
-          افزودن نمونه
+        افزودن نمونه
       </Button>
     </Popover>
   );

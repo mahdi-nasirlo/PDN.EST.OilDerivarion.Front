@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useValidation } from "@/hooks/use-validation";
-import { Form } from "antd/lib";
-import { Button, Col, Divider, Input, Row, Select, Typography } from "antd";
-import { MaterialSelectField } from "@/components/fields/material-select-field";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { materialApi } from "../../../../../constance/material";
-import { useRequestPackageMaterialAdd } from "@/hooks/material/use-request-package-material-add";
-import { validateNationalCode } from "@/lib/validate-national-code";
+import React, {useState} from "react";
+import {useValidation} from "@/hooks/use-validation";
+import {Form} from "antd/lib";
+import {Button, Col, Divider, Input, Row, Select, Typography} from "antd";
+import {MaterialSelectField} from "@/components/fields/material-select-field";
+import {PlusIcon} from "@heroicons/react/24/outline";
+import {materialApi} from "../../../../../constance/material";
+import {useRequestPackageMaterialAdd} from "@/hooks/material/use-request-package-material-add";
+import {validateNationalCode} from "@/lib/validate-national-code";
 
 const apiData = materialApi.RequestPackageMaterialAdd;
 
@@ -19,6 +19,7 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
 
   const handleSubmit = async (values: any) => {
     const res = await addMaterial.mutateAsync({
+      material_Supply_Iran_Code: values.material_Supply_Iran_Code.toString(),
       ...values,
       package_UID: package_uid,
     });
@@ -74,8 +75,12 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
                   message: "لطفا مقدار را وارد کنید",
                 },
                 {
-                  pattern: /^(?!-)\d+(\.\d+)?$/,
+                  pattern: /^(?!0+(\.0+)?$)-?\d+(\.\d+)?$/,
                   message: "لطفاً عدد وارد کنید",
+                },
+                {
+                  pattern: /^\d{1,20}(\.\d+)?$/,
+                  message: "مقدار باید کمتر از 20 رقم باشد",
                 },
               ]}
             >
@@ -256,18 +261,29 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={12}>
                 <Form.Item
-                  required={false}
-                  name="material_Supply_Iran_Code"
-                  label="ایرانکد"
-                  rules={[
-                    { required: true, message: "لطفا مقدار را وارد کنید" },
-                    { type: "string" },
-                  ]}
+                    required={false}
+                    name="material_Supply_Iran_Code"
+                    label="ایرانکد"
+                    rules={[
+                      {
+                        required: true,
+                        message: "لطفا مقدار را وارد کنید"
+                      },
+                      ({getFieldValue}) => ({
+                        validator(rule, value) {
+                          const hasLetters = /[a-zA-Z]/.test(value);
+                          if (hasLetters || value.length !== 16) {
+                            return Promise.reject('مقدار باید عدد 16 رقمی باشد');
+                          }
+                          return Promise.resolve();
+                        },
+                      }),
+                    ]}
                 >
                   <Input
-                    className="w-full"
-                    size="large"
-                    placeholder="وارد نمایید"
+                      className="w-full"
+                      size="large"
+                      placeholder="وارد نمایید"
                   />
                 </Form.Item>
               </Col>

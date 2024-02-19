@@ -1,6 +1,6 @@
 import React from "react";
 import { z } from "zod";
-import { Button, Col, Divider, Form, Input, Row, Spin, Typography, } from "antd";
+import { Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
 import { RequestPackageApi } from "constance/request-package";
@@ -8,35 +8,43 @@ import { Upload, UploadProps } from "antd/lib";
 import { UploadChangeParam } from "antd/es/upload";
 import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
+import { preventDefault } from "ol/events/Event";
+import { url } from "inspector";
+import Image from "next/image";
 
 const props: UploadProps = {
   listType: "picture",
-  beforeUpload(file) {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const img = document.createElement("img");
-        img.src = reader.result as string;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext("2d")!;
-          ctx.drawImage(img, 0, 0);
-          ctx.fillStyle = "green";
-          ctx.textBaseline = "middle";
-          ctx.font = "33px Arial";
-          ctx.fillText("Ant Design", 20, 20);
-          canvas.toBlob((result) => resolve(result as any));
-        };
-      };
-    });
-  },
+  // beforeUpload(file) {
+  //   return new Promise((resolve) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => {
+  //       const img = document.createElement("img");
+  //       img.src = reader.result as string;
+  //       img.onload = () => {
+  //         const canvas = document.createElement("canvas");
+  //         canvas.width = img.naturalWidth;
+  //         canvas.height = img.naturalHeight;
+  //         const ctx = canvas.getContext("2d")!;
+  //         ctx.drawImage(img, 0, 0);
+  //         ctx.fillStyle = "green";
+  //         ctx.textBaseline = "middle";
+  //         ctx.font = "33px Arial";
+  //         ctx.fillText("Ant Design", 20, 20);
+  //         canvas.toBlob((result) => resolve(result as any));
+  //       };
+  //     };
+  //   });
+  // },
 };
 
-const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: string; }) => {
-
+const DescriptionForm = ({
+  uid,
+  package_uid,
+}: {
+  uid: string;
+  package_uid?: string;
+}) => {
   const { form, rule, updateDesc, requestInfo, onFinish } =
     useUiRequestProductDescriptionForm(uid, package_uid);
 
@@ -60,11 +68,7 @@ const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: stri
 
   const upload = useRequestPakagePartUpdateShcematic();
 
-  const HandleUpload = async (
-    values: z.infer<
-      typeof RequestPackageApi.RequestPackagePartUpdateSchematic.type
-    >
-  ) => {
+  const HandleUpload = async (values: any) => {
     if (fileList.length > 0) {
       const file = fileList[0].originFileObj as File;
       const base64Image = await convertToBase64(file);
@@ -143,7 +147,8 @@ const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: stri
               >
                 <div className="p-0 m-0 w-full">
                   <Upload
-                    className="w-full"
+                    customRequest={HandleUpload}
+                    className="upload-list-inline w-full"
                     {...props}
                     fileList={fileList}
                     onChange={handleChange}
@@ -151,7 +156,7 @@ const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: stri
                     listType="picture"
                     type="select"
 
-                  // showUploadList={{ showRemoveIcon: false }}
+                    // showUploadList={{ showRemoveIcon: false }}
                   >
                     <Button
                       size="large"

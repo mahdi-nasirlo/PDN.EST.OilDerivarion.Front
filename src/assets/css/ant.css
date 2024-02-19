@@ -292,3 +292,13 @@
 .ant-pagination {
   @apply print:hidden !important
 }
+.ant-upload-list-item {
+  border: 2px solid green !important; /* Change the border color to green */
+ }  
+ .ant-upload-list-item {
+  color:  green  !important;
+} 
+ .ant-upload-list-item-name {
+  color:  green  !important;
+} 
+

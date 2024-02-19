@@ -1,15 +1,25 @@
-import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography,} from "antd";
+import {
+  Alert,
+  Button,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Spin,
+  Typography,
+} from "antd";
 import React from "react";
-import {ArrowUpOnSquareIcon} from "@heroicons/react/24/outline";
+import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import staticMessages from "@/lib/staticMessages";
-import {useRouter} from "next/navigation";
-import {materialApi} from "constance/material";
-import {z} from "zod";
+import { useRouter } from "next/navigation";
+import { materialApi } from "constance/material";
+import { z } from "zod";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import {RequestPackageApi} from "constance/request-package";
-import {Upload, UploadProps} from "antd/lib";
-import {UploadChangeParam} from "antd/es/upload";
-import {CloudDownloadOutlined, FileAddOutlined} from "@ant-design/icons";
+import { RequestPackageApi } from "constance/request-package";
+import { Tooltip, Upload, UploadProps } from "antd/lib";
+import { UploadChangeParam } from "antd/es/upload";
+import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 
 const props: UploadProps = {
@@ -148,8 +158,8 @@ const DescriptionForm = ({
           <div className={"flex w-full justify-end"}>
             <Col xs={24} xxl={3} md={6} sm={8}>
               <Button
-                  className="flex items-center justify-center w-full"
-                  icon={<FileAddOutlined height={16} width={16}/>}
+                className="flex items-center justify-center w-full"
+                icon={<FileAddOutlined height={16} width={16} />}
                 type="primary"
                 size="large"
                 htmlType="submit"
@@ -191,6 +201,11 @@ const DescriptionForm = ({
                     {...props}
                     fileList={fileList}
                     onChange={handleChange}
+                    // showUploadList={false}
+                    listType="picture"
+                    type="select"
+
+                    // showUploadList={{ showRemoveIcon: false }}
                   >
                     <Button
                       size="large"

@@ -1,11 +1,13 @@
 import useLabSampleTestItemDetail from "@/hooks/request-package/use-lab-sample-test-item-detail";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
 import { useValidation } from "@/hooks/use-validation";
-import { Alert, Select, Spin } from "antd";
+import { Alert, InputNumber, Select, Spin } from "antd";
 import { Button, Col, Form, Input, Row } from "antd/lib";
 import { RequestPackageApi } from "constance/request-package";
 import React, { useEffect } from "react";
 import { z } from "zod";
+
+const LabSampleTestItemDetailUpdateApi = RequestPackageApi.LabSampleTestItemDetailUpdate;
 
 export default function ResultForm({ formData }: any) {
 
@@ -14,23 +16,12 @@ export default function ResultForm({ formData }: any) {
     test_Item_Result_UID: formData.Test_Item_Result_UID,
   });
 
-  useEffect(() => {
-    if (testFactorStandards.data && testFactorStandards.data[0]) {
-      form.setFieldsValue(testFactorStandards.data[0]);
-    }
-  }, [testFactorStandards.data || formData]);
-
-
-  const [form, rules] = useValidation(
-    RequestPackageApi.LabSampleTestItemDetailUpdate.type
-  );
-
   const testResultUpdate = useLabSampleTestItemDetailUpdate();
 
+  const [form, rules] = useValidation(LabSampleTestItemDetailUpdateApi.type);
 
-  const handleSubmitTestResult = async (
-    values: z.infer<typeof RequestPackageApi.LabSampleTestItemDetailUpdate.type>
-  ) => {
+  const handleSubmitTestResult = async (values: z.infer<typeof LabSampleTestItemDetailUpdateApi.type>) => {
+
     await testResultUpdate.mutateAsync({
       ...values,
       sample_Code: formData.Sample_Code_2_1,
@@ -38,6 +29,11 @@ export default function ResultForm({ formData }: any) {
     });
   };
 
+  useEffect(() => {
+    if (testFactorStandards.data && testFactorStandards.data[0]) {
+      form.setFieldsValue(testFactorStandards.data[0]);
+    }
+  }, [testFactorStandards.data || formData]);
 
   return (
     <>
@@ -53,19 +49,19 @@ export default function ResultForm({ formData }: any) {
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="محدوده" name="result_Range">
-                  <Input size="large" placeholder="وارد کنید" />
+                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="حداقل قابل قبول" name="result_Min_Accept">
-                  <Input size="large" placeholder="وارد کنید" />
+                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="حداکثر قابل قبول" name="result_Max_Accept">
-                  <Input size="large" placeholder="وارد کنید" />
+                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
@@ -91,13 +87,13 @@ export default function ResultForm({ formData }: any) {
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="واحد تجدید پذیر" name="result_Renew_Unit_FK">
-                  <Input size="large" placeholder="وارد کنید" />
+                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="تجدید پذیر" name="result_Renewable">
-                  <Input size="large" placeholder="وارد کنید" />
+                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 

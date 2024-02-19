@@ -30,7 +30,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
-            title="حذف آیتم"
+            title="حذف نمونه"
             content={
               <>
                 <Typography>
@@ -238,7 +238,7 @@ const AddSample = ({
         className="w-36 h-36 font-medium flex flex-col items-center justify-center bg-gray-50 border-2 border-dashed border-primary-500 whitespace-break-spaces"
       >
         <PlusSmallIcon className="w-5 h-5" />
-        افزودن مواد اولیه / محصول
+        افزودن نمونه
       </Button>
     </Popover>
   );

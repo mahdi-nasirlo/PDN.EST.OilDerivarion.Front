@@ -1,28 +1,15 @@
-import {
-  Alert,
-  Button,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Spin,
-  Typography,
-} from "antd";
+import {Alert, Button, Col, Divider, Form, Input, Row, Spin, Typography,} from "antd";
 import React from "react";
-import {
-  ArrowUpOnSquareIcon,
-  DocumentPlusIcon,
-} from "@heroicons/react/24/outline";
+import {ArrowUpOnSquareIcon} from "@heroicons/react/24/outline";
 import staticMessages from "@/lib/staticMessages";
-import { useRouter } from "next/navigation";
-import { materialApi } from "constance/material";
-import { z } from "zod";
+import {useRouter} from "next/navigation";
+import {materialApi} from "constance/material";
+import {z} from "zod";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { RequestPackageApi } from "constance/request-package";
-import { Upload, UploadProps } from "antd/lib";
-import { UploadChangeParam } from "antd/es/upload";
-import { CloudDownloadOutlined } from "@ant-design/icons";
+import {RequestPackageApi} from "constance/request-package";
+import {Upload, UploadProps} from "antd/lib";
+import {UploadChangeParam} from "antd/es/upload";
+import {CloudDownloadOutlined, FileAddOutlined} from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 
 const props: UploadProps = {
@@ -158,21 +145,21 @@ const DescriptionForm = ({
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={[16, 12]} className="flex justify-end mb-6">
-            <Col xs={24} xxl={3} md={5} sm={7}>
+          <div className={"flex w-full justify-end"}>
+            <Col xs={24} xxl={3} md={6} sm={8}>
               <Button
-                className="flex items-center justify-center w-full"
+                  className="flex items-center justify-center w-full"
+                  icon={<FileAddOutlined height={16} width={16}/>}
                 type="primary"
                 size="large"
                 htmlType="submit"
                 loading={updateDesc.isPending}
                 disabled={updateDesc.isPending || requestInfo.isFetching}
-                icon={<DocumentPlusIcon className="w-6" />}
               >
-                ثبت شرح فرایند
+                ثبت شرح فرآیند
               </Button>
             </Col>
-          </Row>
+          </div>
           <Divider />
           {/* <Row gutter={[16, 16]}>
             <Col xs={24} sm={24}>

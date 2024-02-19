@@ -46,7 +46,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
     <>
       <div className="flex justify-between items-center">
         {props.header && (
-          <>
+            <div className={"flex w-full justify-between max-md:flex-col max-md:gap-y-2"}>
             <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2 print:hidden">
               {props.header.icon && (
                 <span className="text-gray-900 w-8 h-8">
@@ -57,7 +57,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
                 {props.header.discretion}
             </Typography>
             {props.header.actions}
-          </>
+            </div>
         )}
       </div>
       <Table

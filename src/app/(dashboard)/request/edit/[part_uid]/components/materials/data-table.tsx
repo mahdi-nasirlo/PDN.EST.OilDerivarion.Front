@@ -1,6 +1,6 @@
 import React from "react";
 import {ColumnsType} from "antd/es/table";
-import {Button, Space, Typography} from "antd";
+import {Button, Col, Space, Typography} from "antd";
 import {ViewColumnsIcon} from "@heroicons/react/24/outline";
 import CustomTable from "@/components/custom-table";
 import {PlusOutlined} from "@ant-design/icons";
@@ -70,16 +70,18 @@ export default function DataTable({
             discretion: <Typography className={"text-gray-500 font-normal"}> ( مجموع درصد استفاده باید100 باشد
               ) </Typography>,
             actions: (
-                <Button
-                    className="flex items-center justify-center"
-              icon={<PlusOutlined width={16} height={16} />}
-              type="primary"
-              size="large"
-              onClick={() => setVisibleModal(true)}
-            >
-              افزودن مواد اولیه
-            </Button>
-          ),
+                <Col xs={24} xxl={3} md={6} sm={8}>
+                  <Button
+                      className="flex items-center justify-center w-full"
+                      icon={<PlusOutlined width={16} height={16}/>}
+                      type="primary"
+                      size="large"
+                      onClick={() => setVisibleModal(true)}
+                  >
+                    افزودن مواد اولیه
+                  </Button>
+                </Col>
+            ),
         }}
         isLoading={materials.isFetching}
         pagination={false}

@@ -73,7 +73,7 @@ const RequestPackageMaterialListItem = z.object({
   Material_Unit_Consumption: z.string(),
   Material_DDL_Name: z.string(),
   Material_Supply_National_Code: z.string(),
-  Material_Supply_Iran_Code: z.string(),
+  Material_Supply_Iran_Code: z.any(),
   Material_Import_Declaration_Number: z.string(),
   Material_Supply_Address: z.string()
 });
@@ -175,7 +175,7 @@ const materialApi = {
       material_Supply_National_Code: z.string({
         required_error: errorMessage.required,
       }),
-      material_Supply_Iran_Code: z.string({
+      material_Supply_Iran_Code: z.any({
         required_error: errorMessage.required,
       }),
       material_Supply_Address: z.string({
@@ -298,7 +298,7 @@ const materialApi = {
       part_Type: z.number().optional(),
       part_UID: z.string(),
       package_UID: z.string().optional(),
-      darsad_Estefadeh: z.number(),
+      darsad_Estefadeh: z.number().min(0.0001),
     }),
     response: generalResponseZod.extend({
       data: z.array(RequestPackageMaterialListItem),
@@ -345,8 +345,8 @@ const materialApi = {
       part_Type: z.number(),
       part_UID: z.string(),
       package_UID: z.string(),
-      estehsal: z.number(),
-      hadarRaft: z.number(),
+      estehsal: z.number().min(0.0001),
+      hadarRaft: z.number().min(0.0001),
     }),
     response: generalResponseZod.extend({
       data: z.object({}),

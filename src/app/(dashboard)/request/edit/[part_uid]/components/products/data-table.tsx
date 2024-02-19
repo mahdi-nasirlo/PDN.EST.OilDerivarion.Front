@@ -1,7 +1,7 @@
 import React from "react";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import {ColumnsType} from "antd/es/table";
-import {Button, Space, Typography} from "antd";
+import {Button, Col, Space, Typography} from "antd";
 import CustomTable from "@/components/custom-table";
 import {ViewColumnsIcon} from "@heroicons/react/24/outline";
 import {PlusOutlined} from "@ant-design/icons";
@@ -76,8 +76,9 @@ export default function DataTable({
           discretion: <Typography className={"text-gray-500 font-normal"}>( مجموع درصد استحصال و هدر رفت باید 100
             باشد)</Typography>,
           actions: (
-            <Button
-              className="flex items-center justify-center"
+              <Col xs={24} xxl={3} md={6} sm={8}>
+                <Button
+                    className="flex items-center justify-center w-full"
               icon={<PlusOutlined width={16} height={16} />}
               type="primary"
               size="large"
@@ -85,6 +86,7 @@ export default function DataTable({
             >
               افزودن محصول
             </Button>
+              </Col>
           ),
         }}
         isLoading={products.isFetching}

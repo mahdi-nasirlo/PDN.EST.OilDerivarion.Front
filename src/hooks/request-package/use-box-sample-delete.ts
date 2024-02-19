@@ -17,6 +17,10 @@ const useBoxSampleDelete = () => {
         data,
       }),
     onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.BoxListPrint.url],
+        exact: false,
+      });
       await queryClient.setQueryData([RequestPackageApi.BoxList.url], data);
     },
   });

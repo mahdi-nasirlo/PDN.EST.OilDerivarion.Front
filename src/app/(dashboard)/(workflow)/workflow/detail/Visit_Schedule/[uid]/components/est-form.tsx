@@ -95,7 +95,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
-                  onClick={async () => await window.location.reload()}
+                  // onClick={async () => await window.location.reload()}
                   className="w-full"
                   size="large"
                   type={"primary"}

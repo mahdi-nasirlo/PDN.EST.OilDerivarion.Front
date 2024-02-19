@@ -16,7 +16,9 @@ const BoxCardAdd = ({ package_uid }: { package_uid: string }) => {
           <PlusIcon className="mx-auto w-[105px] h-[105px] text-gray-700" />
           <Form
             form={form}
-            onFinish={async (values) => boxAdd.mutateAsync(values)}
+            onFinish={async (values) => {
+              boxAdd.mutateAsync(values), form.resetFields();
+            }}
             layout="vertical"
             className="w-full"
             disabled={boxAdd.isPending}

@@ -159,12 +159,12 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
           loading={deletebox.isPending}
           open={openUidDelete}
           setOpen={setOpenUidDelete}
-          handleDelete={() => {
-            deletebox.mutateAsync({
+          handleDelete={async () => {
+            const res = await deletebox.mutateAsync({
               box_UID: item.box_UID,
               package_UID,
             });
-            if (deletebox.isSuccess) {
+            if (res) {
               setOpenUidDelete(false);
             }
           }}

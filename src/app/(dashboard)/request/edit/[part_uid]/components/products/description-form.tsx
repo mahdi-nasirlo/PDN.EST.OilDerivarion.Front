@@ -1,8 +1,8 @@
 import React from "react";
+import { z } from "zod";
 import { Button, Col, Divider, Form, Input, Row, Spin, Typography, } from "antd";
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { z } from "zod";
 import { RequestPackageApi } from "constance/request-package";
 import { Upload, UploadProps } from "antd/lib";
 import { UploadChangeParam } from "antd/es/upload";
@@ -147,6 +147,11 @@ const DescriptionForm = ({ uid, package_uid }: { uid: string; package_uid?: stri
                     {...props}
                     fileList={fileList}
                     onChange={handleChange}
+                    // showUploadList={false}
+                    listType="picture"
+                    type="select"
+
+                  // showUploadList={{ showRemoveIcon: false }}
                   >
                     <Button
                       size="large"

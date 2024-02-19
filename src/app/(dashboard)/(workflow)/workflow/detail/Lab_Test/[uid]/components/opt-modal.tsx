@@ -103,12 +103,7 @@ export default function OptModal({
             onComplete={() => setOpenOptModal(undefined)}
           />
         </Form.Item>
-        <Form.Item
-          label="کد otp"
-          name="Test"
-          required={false}
-          rules={[rules]}
-        >
+        <Form.Item label="کد otp" name="Test" required={false} rules={[rules]}>
           <Input className="w-full" size="large" />
         </Form.Item>
       </Form>

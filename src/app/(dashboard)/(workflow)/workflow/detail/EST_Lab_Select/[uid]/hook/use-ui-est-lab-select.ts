@@ -43,11 +43,14 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
   const labBoxAdd = useLabBoxAdd(data.package_UID);
 
   const handleAddBox = async ({ box_UID }: { box_UID: string }) => {
-    await labBoxAdd.mutateAsync({
+    const res = await labBoxAdd.mutateAsync({
       package_UID: data.package_UID,
       lab_UID: lab_UID as string,
       box_UID: box_UID,
     });
+    if (res) {
+      form.resetFields();
+    }
   };
 
   return {

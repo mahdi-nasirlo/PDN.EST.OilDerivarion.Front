@@ -208,7 +208,7 @@ const AddSample = ({
                 message: errorMessage.required_choice,
               },
             ]}
-            className="w-96"
+            className="max-sm:w-80 max-md:w-96 w-[420px]"
             label="مواد اولیه/ محصول"
             labelCol={{ span: 24 }}
           >

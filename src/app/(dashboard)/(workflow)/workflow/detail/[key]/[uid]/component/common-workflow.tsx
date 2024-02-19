@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import { useForm } from "antd/lib/form/Form";
-import { useGetRegisteredReportsForStepByKey } from "@/hooks/material/use-get-registered-reports-for-step-by-key";
-import { useRouter } from "next/navigation";
-import { Card } from "@/components/card";
-import { Button, Divider, Input, Spin } from "antd";
+import {useForm} from "antd/lib/form/Form";
+import {useRouter} from "next/navigation";
+import {Card} from "@/components/card";
+import {Button, Divider, Input, Spin} from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
 import RepostsMaker from "@/components/reposts-maker";
-import { Form } from "antd/lib";
+import {Form} from "antd/lib";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
+import {useRequestPackageReportList} from "@/hooks/request-package/use-request-package-report-list";
 
 const CommonWorkflow = ({
   uid,
@@ -31,7 +31,7 @@ const CommonWorkflow = ({
 
   const [form] = useForm();
 
-  const reposts = useGetRegisteredReportsForStepByKey(stepKey, uid);
+  const reposts = useRequestPackageReportList({step_Key: stepKey, package_UID: uid});
 
   const router = useRouter();
 
@@ -78,7 +78,7 @@ const CommonWorkflow = ({
             <Spin spinning={get.isFetching}>
               <RepostsMaker
                 taskId={uid}
-                reports={reposts.data}
+                reports={reposts?.data}
                 loading={reposts.isFetching}
               />
             </Spin>

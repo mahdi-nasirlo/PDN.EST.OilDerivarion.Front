@@ -20,6 +20,8 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
 
   const [openUidDelete, setOpenUidDelete] = useState<string>();
 
+  const [deletePop, setDeletePop] = useState<boolean>();
+
   const renderCircles = (
     item: z.infer<typeof RequestPackageApi.BoxList.item>,
     cardIndex: number = 0
@@ -30,6 +32,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
+            open={deletePop}
             trigger="click"
             title="حذف نمونه"
             content={
@@ -43,14 +46,15 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
                     className="mt-3 border-red-500 hover:border-red-500"
                     loading={labDeleteSample.isPending}
                     disabled={labDeleteSample.isPending}
-                    onClick={() =>
-                      labDeleteSample.mutateAsync({
+                    onClick={async () => {
+                      const res = await labDeleteSample.mutateAsync({
                         package_UID,
                         box_UID: item.box_UID,
                         sample_UID: sample.UID,
                         lab_Uid: lab_UID as string,
                       })
-                    }
+                      if (res.status) setDeletePop(false)
+                    }}
                   >
                     حذف
                   </Button>

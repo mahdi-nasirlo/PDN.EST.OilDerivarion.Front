@@ -13,7 +13,7 @@ const Index = ({data}: PropsType) => {
 
 
     const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
-    
+
     if (!data) {
         return <Empty/>
     }
@@ -30,12 +30,12 @@ const Index = ({data}: PropsType) => {
 
         for (let key in validateData.data.Table.Values) {
 
-            const column = cardData.Table.Header.find((item) => item.Key = key)
+            const column = cardData.Table.Header.find((item) => item.Key == key)
 
             const value = cardData?.Table?.Values?.[key]
 
             if (!column?.Hidden) view.push(<Descriptions.Item
-                span={typeof value == "string" ? Math.round(value.length / 18) : 6}
+                span={typeof value == "string" ? 3 : 6}
                 label={column?.Value}
             >
                 {value}

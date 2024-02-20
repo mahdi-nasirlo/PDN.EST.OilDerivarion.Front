@@ -27,15 +27,16 @@ const Index = ({data}: PropsType) => {
 
         const view: React.ReactNode[] = []
 
-        view.push(<Descriptions column={6}>
-            {cardData.Model?.map((item, index) => (<Descriptions.Item
-                key={index}
-                span={typeof item.Value == "string" ? 3 : 6}
-                label={item.Key}
-            >
-                {item.Value}
-            </Descriptions.Item>))}
-        </Descriptions>)
+        // console.log(cardData)
+        // view.push(<Descriptions column={6}>
+        //     {cardData.Model?.map((item, index) => (<Descriptions.Item
+        //         key={index}
+        //         span={typeof item.Value == "string" ? 3 : 6}
+        //         label={item.Key}
+        //     >
+        //         {item.Value}
+        //     </Descriptions.Item>))}
+        // </Descriptions>)
 
 
         cardData.ListTable?.map(item => {
@@ -59,25 +60,29 @@ const Index = ({data}: PropsType) => {
             </Card>)
         })
 
+        const desc: React.ReactNode[] = []
+
         for (let key in validateData.data.Table?.Values) {
 
             const column = cardData.Table?.Header?.find((item) => item.Key == key)
 
             const value = cardData?.Table?.Values?.[key]
 
-            view.push(<Descriptions
-                className="text-right text-secondary-500"
-                column={6}
-                title={validateData.data.Title}
+            desc.push(<Descriptions.Item
+                span={6}
+                label={column?.Value}
             >
-                {!column?.Hidden && column?.Value && <Descriptions.Item
-                    span={6}
-                    label={column?.Value}
-                >
-                    {value}
-                </Descriptions.Item>}
-            </Descriptions>)
+                {value}
+            </Descriptions.Item>)
 
+            view.push(<Card className="bg-gray-100">
+                <Descriptions
+                    className="text-right text-secondary-500"
+                    column={6}
+                    title={validateData.data.Title}>
+                    {desc}
+                </Descriptions>
+            </Card>)
         }
 
         return view

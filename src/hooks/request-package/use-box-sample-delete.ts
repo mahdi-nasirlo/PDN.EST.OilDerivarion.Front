@@ -11,12 +11,16 @@ const useBoxSampleDelete = () => {
   const query = useMutation({
     mutationFn: (
       data: z.infer<typeof apiData.type>
-    ): Promise<typeof apiData.response> =>
+    ): Promise<z.infer<typeof apiData.response>> =>
       fetchWithSession({
         url: apiData.url,
         data,
       }),
     onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.BoxSampleGetAvailableList.url],
+        exact: false,
+      });
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.BoxListPrint.url],
         exact: false,

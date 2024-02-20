@@ -11,7 +11,7 @@ const useLabBoxSampleDelete = () => {
   const query = useMutation({
     mutationFn: (
       data: z.infer<typeof apiData.type>
-    ): Promise<typeof apiData.response> =>
+    ): Promise<z.infer<typeof apiData.response>> =>
       fetchWithSession({
         url: apiData.url,
         data,

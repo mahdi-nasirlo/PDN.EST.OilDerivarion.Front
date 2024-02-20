@@ -109,13 +109,15 @@ export default function DataTable({
               )}
             </>
           )}
-          <Button
-            type="link"
-            className="text-red-500 font-bold"
-            onClick={() => setUidDelete(record.uid)}
-          >
-            حذف
-          </Button>
+          {record.device_Status !== 6 && (
+            <Button
+              type="link"
+              className="text-red-500 font-bold"
+              onClick={() => setUidDelete(record.uid)}
+            >
+              حذف
+            </Button>
+          )}
         </Space>
       ),
     },

@@ -32,7 +32,10 @@ export default function Index(props: PropsType) {
       height={props.height ? props.height : "100%"}
       width={props.width ? props.width : "100%"}
       className="border-2 border-CustomizeBlue-500 rounded-md"
-      src={process.env.MAP_BOX_URL + `/oil/boxonmap?device=861100068416631`}
+      src={
+        process.env.NEXT_PUBLIC_MAP_LAB_URL +
+        `/oil/boxonmap?device=861100068416631`
+      }
     ></iframe>
   );
 }

@@ -9,8 +9,6 @@ import { UploadChangeParam } from "antd/es/upload";
 import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 import { preventDefault } from "ol/events/Event";
-import { url } from "inspector";
-import Image from "next/image";
 
 const props: UploadProps = {
   listType: "picture",

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Descriptions, Divider} from "antd";
 import {formMakerApi} from "../../../constance/form-maker";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {DescriptionsItemProps} from "antd/lib/descriptions/Item";
+import {Descriptions, Divider} from "antd/lib";
 import FormDataTable from "@/components/resource/form-data-table";
 
 
@@ -13,7 +13,6 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
     if (!validateData.success)
         return <ZodErrorAlert success={false} error={validateData.error}/>
 
-    console.log(validateSchema)
     if (!validateSchema.success)
         return <ZodErrorAlert success={false} error={validateSchema.error}/>
 
@@ -80,20 +79,20 @@ const Index = ({data, schema}: { data: string, schema: string }) => {
 
 
     return view?.map((value, index) => value)
-
+    
 };
 
-export const prepareData = (data: string, schema: string) => {
+export const prepareData = (data: string, schema: any) => {
     let dataValue: any
     let schemaValue: any
 
     try {
-        dataValue = JSON.parse(data)
-        schemaValue = JSON.parse(schema).json
-        schemaValue = JSON.parse(schemaValue)
+        dataValue = data
+        schemaValue = JSON.parse(schema.json)
     } catch (e) {
+        console.log(e)
         dataValue = {}
-        schemaValue = {}
+        schemaValue = []
     }
 
     const validateSchema = formMakerApi.Get.formSchema.safeParse(schemaValue)

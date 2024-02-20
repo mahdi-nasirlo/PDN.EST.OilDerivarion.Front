@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "filepond/dist/filepond.min.css";
 import "./style.stylesheet.css";
 import { Button, Upload } from "antd";
@@ -8,6 +8,8 @@ import { RcFile, UploadChangeParam } from "antd/es/upload";
 import useUpload from "@/hooks/file/use-uplod";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
 import { info, log } from "console";
+import useDownload from "@/hooks/file/use-download";
+import { url } from "inspector";
 
 const defualtProps: UploadProps = {
   listType: "picture",
@@ -34,23 +36,18 @@ const defualtProps: UploadProps = {
   },
 };
 
-const FileUpload = (props: UploadProps & { payload?: any }) => {
-  const [fileList, setFileList] = React.useState<any[]>([]);
+const FileUpload = (
+  props: UploadProps & { payload?: any; defaultFiles?: string }
+) => {
+  const [fileList, setFileList] = React.useState<UploadFile[]>([]);
 
   const handleChange = async (info: UploadChangeParam) => {
     setFileList(info.fileList);
   };
 
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      let reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
   const upload = useRequestPakagePartUpdateShcematic();
+
+  const download = useDownload();
 
   const handleUpload = async (options: any) => {
     if (fileList.length > 0) {
@@ -68,10 +65,35 @@ const FileUpload = (props: UploadProps & { payload?: any }) => {
     else options.onError();
   };
 
+  const setFiles = async () => {
+    if (props.defaultFiles) {
+      const res = await download.mutateAsync({
+        uid: props.defaultFiles,
+      });
+
+      setFileList([
+        {
+          name: "شماتیک فرآیند",
+          uid: "",
+          thumbUrl: res?.data?.File_Content_Base64,
+        },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(props.defaultFiles);
+
+    setFiles();
+  }, [props.defaultFiles]);
+
   return (
     <>
       <Upload
+        accept="image/*"
         className="w-full"
+        multiple={false}
+        maxCount={1}
         {...props}
         {...defualtProps}
         fileList={fileList}
@@ -88,6 +110,15 @@ const FileUpload = (props: UploadProps & { payload?: any }) => {
       </Upload>
     </>
   );
+};
+
+const convertToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file as any);
+  });
 };
 
 export default FileUpload;

@@ -7,6 +7,7 @@ import { UploadChangeParam } from "antd/es/upload";
 import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 import FileUpload from "@/components/file-upload/FileUpload";
+import FormItem from "antd/lib/form/FormItem";
 
 const props: UploadProps = {
   listType: "picture",
@@ -106,14 +107,19 @@ const DescriptionForm = ({
             <Col xs={24} sm={24}>
               <Form.Item
                 rules={[rule]}
-                name="file_Content_Base64"
+                name="schematic_file_UID"
                 label="نمودار شماتیک فرآیند"
                 tooltip={<Typography>فایل باید به صورت عکس باشد</Typography>}
               >
                 <div className="p-0 m-0 w-full">
                   <FileUpload
-                    payload={{ part_UID: uid, package_UID: package_uid }}
+                    payload={{
+                      part_UID: uid,
+                      package_UID: package_uid,
+                    }}
+                    defaultFiles={requestInfo.data?.schematic_file_UID}
                   />
+
                   {/* <Upload
                     accept="image/*"
                     // customRequest={HandleUpload}

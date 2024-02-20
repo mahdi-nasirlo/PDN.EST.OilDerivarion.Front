@@ -133,6 +133,17 @@ const formMakerApi = {
         )
         .min(1),
     }),
+    type1Res: z.object({
+      Title: z.string().nullable(),
+      Table: z.object({
+        Header: z.array(z.object({
+          Key: z.string(),
+          Value: z.string(),
+          Hidden: z.boolean()
+        })),
+        Values: z.record(z.string(), z.string().or(z.number())).nullable()
+      })
+    })
   },
   GetDoc2: {
     url: "/FormMaker/GetDoc2",

@@ -1,9 +1,10 @@
 import React from 'react';
-import { z } from "zod";
-import { Alert, Collapse, Empty, Spin, Typography } from "antd";
+import {z} from "zod";
+import {Alert, Collapse, Empty, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
-import { RequestPackageApi } from 'constance/request-package';
+import {RequestPackageApi} from 'constance/request-package';
+import WorkflowDataViewer from "@/components/workflow/WorkflowDataViewer";
 
 const Index = ({ reports, loading, taskId }: {
   reports: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[] | undefined,
@@ -34,7 +35,7 @@ const RenderReport = ({
   if (report.UID) {
     switch (report.Form_Type) {
       case 1:
-        ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId} />;
+        ItemType = <RenderTypeOne formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>;
         // ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
         break;
       case 2:
@@ -74,15 +75,29 @@ const RenderReport = ({
   );
 };
 
-const RenderTypeTow = ({
-  formKey,
-  formUid,
-  taskId
-}: {
+interface PropType {
   formKey: string;
   formUid: string;
   taskId: string
-}) => {
+}
+
+const RenderTypeOne = ({taskId, formUid, formKey}: PropType) => {
+
+  const schema = useProducerFormsGetDocSchemaByUid({
+    form_Key: formKey,
+    form_UID: formUid,
+    taskId: taskId
+  });
+
+  if (schema.isFetching) return <Spin/>;
+
+  console.log(schema.data)
+  if (!schema.data?.length) return <Empty/>
+
+  return schema.data.map((item, index) => <WorkflowDataViewer key={index} data={item.form_data}/>)
+}
+
+const RenderTypeTow = ({formKey, formUid, taskId}: PropType) => {
 
   const schema = useProducerFormsGetDocSchemaByUid({
     form_Key: formKey,
@@ -96,10 +111,11 @@ const RenderTypeTow = ({
 
   return (
     <Spin spinning={schema.isFetching}>
-      <DataViewer
-        data={schema.data[0]?.form_data}
-        schema={schema.data[0]?.Schema_Data}
-      />
+      {schema.data.map((item, index) => <DataViewer
+          key={index}
+          data={item.form_data}
+          schema={item.Schema_Data}
+      />)}
     </Spin>
   );
 };

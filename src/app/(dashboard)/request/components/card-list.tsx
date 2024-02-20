@@ -81,7 +81,7 @@ const CardList = ({
                         <Typography>روش تولید:</Typography>
 
                         <Tag
-                          color="volcano-inverse"
+                          color="blue-inverse"
                           className="ml-0 p-1 font-bold"
                         >
                           {item.Part_Type_Value}
@@ -126,7 +126,7 @@ const CardList = ({
                                   ? `${item.Status_Message.substring(0, 40)}...`
                                   : item.Status_Message
                               }
-                              className="text-sm text-ellipsis w-full text-right"
+                              className="text-sm text-ellipsis w-full text-right text-red-500"
                               // description={item.Status_Message}
                               type="error"
                             />

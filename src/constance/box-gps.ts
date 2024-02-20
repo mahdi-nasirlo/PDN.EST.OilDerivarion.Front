@@ -1,8 +1,6 @@
-import { AxiosInstance } from "axios";
-import { generalResponseZod, notEmpty } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
-import mapAxios from "@/utils/map-axios";
+import {generalResponseZod, notEmpty} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const BoxGPSGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -67,7 +65,7 @@ const boxGPSApi = {
     url: "/BoxGPS/Update",
     type: z.object({
       uid: z.string().uuid(),
-      code: z.string({ required_error: errorMessage.required }),
+      code: z.number({required_error: errorMessage.required}),
       name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,

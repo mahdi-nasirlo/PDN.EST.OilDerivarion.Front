@@ -1,8 +1,8 @@
 import React from "react";
-import { Col, Form, Input, Row, Select } from "antd";
-import { StateSelectField } from "@/components/fields/state-select-field";
-import { InputNumber } from "antd/lib";
-import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
+import {Col, Form, Input, Row, Select} from "antd";
+import {StateSelectField} from "@/components/fields/state-select-field";
+import {InputNumber} from "antd/lib";
+import {useBoxGpsStatusList} from "@/hooks/box-gps/use-box-gps-status";
 
 function GpsForm({ rules }: any) {
   const BoxGpsStatus = useBoxGpsStatusList();
@@ -12,7 +12,7 @@ function GpsForm({ rules }: any) {
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="code" label="کد جعبه">
-            <Input
+            <InputNumber
               className="w-full"
               size="large"
               placeholder="وارد کنید"

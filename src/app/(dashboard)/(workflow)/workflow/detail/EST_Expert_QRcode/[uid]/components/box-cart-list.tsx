@@ -30,6 +30,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
+            trigger="click"
             title="حذف نمونه"
             content={
               <>
@@ -82,9 +83,8 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
           <Button
             shape="circle"
             type="dashed"
-            disabled
-            className="w-36 h-36 opacity-60"
-          ></Button>
+            className="w-36 h-36 opacity-60 bg-gray-100 cursor-default"
+          />
         )
       )
     );

@@ -7,9 +7,9 @@ import { UploadFile, UploadProps } from "antd/lib";
 import { RcFile, UploadChangeParam } from "antd/es/upload";
 import useUpload from "@/hooks/file/use-uplod";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { info } from "console";
+import { info, log } from "console";
 
-const props: UploadProps = {
+const defualtProps: UploadProps = {
   listType: "picture",
   beforeUpload(file) {
     return new Promise((resolve) => {
@@ -27,7 +27,6 @@ const props: UploadProps = {
           ctx.fillStyle = "red";
           ctx.textBaseline = "middle";
           ctx.font = "33px Arial";
-          ctx.fillText("Ant Design", 20, 20);
           canvas.toBlob((result) => resolve(result as any));
         };
       };
@@ -35,16 +34,13 @@ const props: UploadProps = {
   },
 };
 
-const FileUpload = () => {
-  const { mutateAsync } = useUpload();
-
+const FileUpload = (props: UploadProps & { payload?: any }) => {
   const [fileList, setFileList] = React.useState<any[]>([]);
 
   const handleChange = async (info: UploadChangeParam) => {
-    let file = info.file.originFileObj as File;
-    let base64Image = await convertToBase64(file);
-    console.log(base64Image);
+    setFileList(info.fileList);
   };
+
   const convertToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
@@ -54,61 +50,33 @@ const FileUpload = () => {
     });
   };
 
-  // const handleOnChange = (e: UploadChangeParam) => {
-  //   setFileList(e.fileList);
-  // };
+  const upload = useRequestPakagePartUpdateShcematic();
 
-  // props.customRequest = async (options) => {
-  //   try {
-  //     console.log(options);
+  const handleUpload = async (options: any) => {
+    if (fileList.length > 0) {
+      const file = fileList[0].originFileObj as File;
+      const base64Image = await convertToBase64(file);
+      options.file_Content_Base64 = base64Image;
+    }
 
-  //     const file = new FormData();
+    // values.part_UID = uid;
+    options = { ...options, ...props.payload };
 
-  //     file.append("file", options.file as RcFile, "tesxt.png");
+    const res = await upload.mutateAsync(options);
 
-  //     // const res = await mutateAsync(file)
-  //     //
-  //     // if (res.success) {
-  //     //     // @ts-ignore
-  //     //     options.onSuccess()
-  //     // } else {
-  //     //     // @ts-ignore
-  //     //     options.onError()
-  //     // }
-
-  //     // const token = await getTokenFromSession()
-  //     //
-  //     // const res: z.infer<typeof generalResponseZod> = await fetch(process.env.NEXT_PUBLIC_API_URL + fileApi.Upload.url, {
-  //     //     method: 'POST',
-  //     //     body: file,
-  //     //     headers: {
-  //     //         "Authorization": token || "",
-  //     //     }
-  //     // })
-
-  //     // if (res.success) {
-  //     // @ts-ignore
-  //     options?.onSuccess();
-  //     // }
-  //     // if (res.status >= 200 && res.status < 300) {
-  //     //     // @ts-ignore
-  //     //     options?.onSuccess()
-  //     // } else {
-  //     //     // @ts-ignore
-  //     //     options.onError()
-  //     // }
-  //   } catch (e) {
-  //     console.log();
-  //   }
-  // };
+    if (res.success) options?.onSuccess();
+    else options.onError();
+  };
 
   return (
     <>
       <Upload
         className="w-full"
         {...props}
+        {...defualtProps}
         fileList={fileList}
         onChange={handleChange}
+        customRequest={handleUpload}
       >
         <Button
           size="large"

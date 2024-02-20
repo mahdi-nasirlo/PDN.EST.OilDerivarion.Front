@@ -1,10 +1,11 @@
 import React from 'react';
-import {InputNumber, InputNumberProps} from 'antd';
+import { InputNumber, InputNumberProps } from 'antd';
 
-const PercentageInput: React.FC<InputNumberProps> = ({value, onChange}) => {
+const PercentageInput: React.FC<InputNumberProps> = ({ value, onChange }) => {
 
     return (
         <InputNumber
+            controls={false}
             value={value}
             onChange={onChange}
             max={100}

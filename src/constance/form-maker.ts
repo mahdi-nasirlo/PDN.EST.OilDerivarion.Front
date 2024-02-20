@@ -140,9 +140,23 @@ const formMakerApi = {
           Key: z.string(),
           Value: z.string(),
           Hidden: z.boolean()
-        })),
+        })).nullable(),
         Values: z.record(z.string(), z.string().or(z.number())).nullable()
-      })
+      }).nullable(),
+      Model: z.array(z.object({
+        Key: z.string(),
+        Value: z.string().or(z.number()),
+        Hidden: z.boolean()
+      })).nullable(),
+      ListTable: z.array(z.object({
+        Title: z.string().optional(),
+        Header: z.array(z.object({
+          Key: z.string(),
+          Value: z.string(),
+          Hidden: z.boolean()
+        })).or(z.undefined()).nullable(),
+        Values: z.array(z.any())
+      }).nullable()).optional()
     })
   },
   GetDoc2: {

@@ -9,6 +9,7 @@ import useUpload from "@/hooks/file/use-uplod";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
 import { info, log } from "console";
 import useDownload from "@/hooks/file/use-download";
+import { url } from "inspector";
 
 const defualtProps: UploadProps = {
   listType: "picture",

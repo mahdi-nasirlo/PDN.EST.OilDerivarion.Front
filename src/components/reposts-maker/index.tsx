@@ -91,7 +91,6 @@ const RenderTypeOne = ({taskId, formUid, formKey}: PropType) => {
 
   if (schema.isFetching) return <Spin/>;
 
-  console.log(schema.data)
   if (!schema.data?.length) return <Empty/>
 
   return schema.data.map((item, index) => <WorkflowDataViewer key={index} data={item.form_data}/>)

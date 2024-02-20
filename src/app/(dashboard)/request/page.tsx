@@ -40,6 +40,7 @@ export default function Page() {
       />
       <Card>
         <Alert
+          type="warning"
           message={
             <Typography>
               لطفا قبل از افزودن پکیج مورد نظر از طریق&nbsp;
@@ -47,10 +48,8 @@ export default function Page() {
               نیاز خود نمایید
             </Typography>
           }
-          //   description=""
-          type="warning"
-          className="mb-3"
         />
+        <Divider />
         <Spin spinning={packagePart.isFetching}>
           <Row gutter={[24, 24]}>
             <Col xs={24} md={12} xl={8} xxl={6}>

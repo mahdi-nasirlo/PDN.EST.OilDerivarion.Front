@@ -18,7 +18,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
     package_UID,
   });
 
-  const [openUidDelete, setOpenUidDelete] = useState<string | boolean>(false);
+  const [openUidDelete, setOpenUidDelete] = useState<string>();
 
   const renderCircles = (
     item: z.infer<typeof RequestPackageApi.BoxList.item>,
@@ -111,6 +111,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
   };
 
   return boxList?.data?.map((item, index) => {
+
     return (
       <>
         <Col key={index} xs={24} sm={12} xl={8} xxl={6}>
@@ -147,28 +148,30 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
               <TrashIcon
                 color="red"
                 className="w-6 absolute left-2 top-2 cursor-pointer animate-bounce"
-                onClick={() => setOpenUidDelete(true)}
+                onClick={() => setOpenUidDelete(item.box_UID)}
               />
               {/*<div className="min-h-[600px]">*/}
               {renderCircles(item, index)}
             </Card>
           </motion.div>
+          <ConfirmDeleteModal
+            key={index}
+            title="جعبه"
+            loading={deletebox.isPending}
+            open={typeof openUidDelete == "string"}
+            setOpen={setOpenUidDelete}
+            handleDelete={async () => {
+
+              const res = await deletebox.mutateAsync({
+                box_UID: openUidDelete as string,
+                package_UID,
+              });
+              if (res) {
+                setOpenUidDelete(undefined);
+              }
+            }}
+          />
         </Col>
-        <ConfirmDeleteModal
-          title="جعبه"
-          loading={deletebox.isPending}
-          open={openUidDelete}
-          setOpen={setOpenUidDelete}
-          handleDelete={async () => {
-            const res = await deletebox.mutateAsync({
-              box_UID: item.box_UID,
-              package_UID,
-            });
-            if (res) {
-              setOpenUidDelete(false);
-            }
-          }}
-        />
       </>
     );
   });

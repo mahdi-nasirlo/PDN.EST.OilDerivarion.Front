@@ -510,7 +510,6 @@ const RequestPackageApi = {
       package_UID: z.string(),
     }),
     Item: z.object({
-      Production_Method: z.string(),
       Sample_Type: z.string(),
       name: z.string(),
       Sample_Code_Asli_Ghadim: z.string(),
@@ -521,7 +520,6 @@ const RequestPackageApi = {
     response: generalResponseZod.extend({
       data: z.array(
         z.object({
-          Production_Method: z.string(),
           Sample_Type: z.string(),
           name: z.string(),
           Sample_Code_Asli_Ghadim: z.string(),

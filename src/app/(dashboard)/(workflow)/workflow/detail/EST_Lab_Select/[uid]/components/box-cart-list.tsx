@@ -18,7 +18,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
   const { labBoxList, deleteLabBox, lab_UID, labDeleteSample } =
     useUiEstLabSelect({ package_UID: package_UID });
 
-  const [openUidDelete, setOpenUidDelete] = useState<string | boolean>(false);
+  const [openUidDelete, setOpenUidDelete] = useState<string>();
 
   const renderCircles = (
     item: z.infer<typeof RequestPackageApi.BoxList.item>,
@@ -30,6 +30,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
+            trigger="click"
             title="حذف نمونه"
             content={
               <>
@@ -87,9 +88,8 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
           <Button
             shape="circle"
             type="dashed"
-            disabled
-            className="w-36 h-36 opacity-60"
-          ></Button>
+            className="w-36 h-36 opacity-60 bg-gray-100 cursor-default"
+          />
         )
       )
     );
@@ -153,27 +153,27 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
               <TrashIcon
                 color="red"
                 className="w-6 absolute left-2 top-2 cursor-pointer animate-bounce"
-                onClick={() => setOpenUidDelete(true)}
+                onClick={() => setOpenUidDelete(item.box_UID)}
               />
               {renderCircles(item, index)}
             </Card>
           </motion.div>
+          <ConfirmDeleteModal
+            key={index}
+            title="جعبه"
+            loading={deleteLabBox.isPending}
+            open={typeof openUidDelete == "string"}
+            setOpen={setOpenUidDelete}
+            handleDelete={async () => {
+              const res = await deleteLabBox.mutateAsync({
+                box_UID: openUidDelete as string,
+              });
+              if (res) {
+                setOpenUidDelete(undefined);
+              }
+            }}
+          />
         </Col>
-        <ConfirmDeleteModal
-          title="جعبه"
-          loading={deleteLabBox.isPending}
-          open={openUidDelete}
-          setOpen={setOpenUidDelete}
-          handleDelete={async () => {
-            const res = await deleteLabBox.mutateAsync({
-              box_UID: item.box_UID,
-            });
-
-            if (res) {
-              setOpenUidDelete(false);
-            }
-          }}
-        />
       </>
     );
   });

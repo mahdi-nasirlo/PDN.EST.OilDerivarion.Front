@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import CustomTable from "@/components/custom-table";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
-import { Button, Divider, Typography } from "antd";
+import { Button, Divider } from "antd";
 import { PrinterIcon } from "@heroicons/react/24/solid";
-import useBoxListPrint from "@/hooks/request-package/use-box-list-print";
 import { RequestPackageApi } from "constance/request-package";
 import { useReactToPrint } from "react-to-print";
 import { z } from "zod";
@@ -14,8 +13,11 @@ import { Card, Descriptions } from "antd/lib";
 const apiData = RequestPackageApi.LabBoxListPrint;
 
 export default function LabInfoTable({ package_UID }: { package_UID: string }) {
-  const labboxListPrint = useLabBoxListPrint({ package_UID });
+
+  const labBoxListPrint = useLabBoxListPrint({ package_UID });
+
   const componentRef = useRef<any>();
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -27,28 +29,20 @@ export default function LabInfoTable({ package_UID }: { package_UID: string }) {
       key: "1",
       width: "5%",
     },
-
-    {
-      title: "نوع نمونه",
-      dataIndex: "name",
-      key: "2",
-      width: "20%",
-    },
-
     {
       title: "نام نمونه",
+      dataIndex: "name",
+      key: "2",
+    },
+    {
+      title: "نوع نمونه",
       dataIndex: "Sample_Type",
       key: "3",
     },
     {
-      title: "روش تولید",
-      dataIndex: "Production_Method",
-      key: "7",
-    },
-    {
       title: "کد محرنامه قدیم",
       dataIndex: "Sample_Code_Asli_Ghadim",
-      key: "5",
+      key: "4",
     },
     {
       title: "کد محرنامه جدید",
@@ -94,9 +88,8 @@ export default function LabInfoTable({ package_UID }: { package_UID: string }) {
                 </Button>,
               ],
             }}
-            // setInitialData={[]}
-            isLoading={labboxListPrint.isLoading}
-            data={{ records: labboxListPrint.data || ([] as any) }}
+            isLoading={labBoxListPrint.isLoading}
+            data={{ records: labBoxListPrint.data || ([] as any) }}
             columns={columns}
           />
         </div>
@@ -107,23 +100,18 @@ export default function LabInfoTable({ package_UID }: { package_UID: string }) {
           title=""
           className="print:block w-full hover:shadow-lg transition duration-300 relative font-bold"
         >
-          {labboxListPrint.data?.map((boxCard, index) => (
+          {labBoxListPrint.data?.map((boxCard, index) => (
             <div key={index} className="print:block">
               <Card title={boxCard.Sample_Type}>
                 <Descriptions>
-                  <Descriptions.Item label="نوع نمونه">
+                  <Descriptions.Item label="نام نمونه">
                     {boxCard.name}
                   </Descriptions.Item>
-                  <Descriptions.Item label="نام نمونه">
+                  <Descriptions.Item label="نوع نمونه">
                     {boxCard.Sample_Type}
                   </Descriptions.Item>
-                  <Descriptions.Item label="روش تولید">
-                    {boxCard.Production_Method}
-                  </Descriptions.Item>
                 </Descriptions>
-
                 <Divider />
-
                 <Descriptions title="اطلاعات آزمایشگاه">
                   <Descriptions.Item label="نام آزمایشگاه">
                     {boxCard.Lab_Name}
@@ -132,9 +120,7 @@ export default function LabInfoTable({ package_UID }: { package_UID: string }) {
                     {boxCard.Lab_Address}
                   </Descriptions.Item>
                 </Descriptions>
-
                 <Divider />
-
                 <Descriptions>
                   <Descriptions.Item label="کد محرمانه قدیم" className="w-full">
                     {boxCard.Sample_Code_Asli_Ghadim}

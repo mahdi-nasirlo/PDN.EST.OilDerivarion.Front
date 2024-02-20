@@ -59,7 +59,7 @@ const CommonWorkflow = ({
     <>
       {get.data?.task && (
         <Breadcrumb
-          pages={[{ label: "خانه" }]}
+          pages={[{ label: "خانه", path: "/" }]}
           currentPage={`${get.data?.task.current_Step_Name}`}
           titleIcon={<DocumentTextIcon className="w-8" />}
           actions={[

@@ -48,7 +48,7 @@ const Page = ({ params: { key } }: { params: { key: string } }) => {
     <>
       {data?.step && (
         <Breadcrumb
-          pages={[{ label: "خانه" }]}
+          pages={[{ label: "خانه", path: "/" }]}
           currentPage={`${data?.step[0]?.Step_Name}`}
           titleIcon={<ClipboardDocumentListIcon className="h-8" />}
           backLink="/"

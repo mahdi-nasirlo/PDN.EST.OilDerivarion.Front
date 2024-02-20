@@ -134,7 +134,7 @@ const formMakerApi = {
         .min(1),
     }),
     type1Res: z.object({
-      Title: z.string(),
+      Title: z.string().nullable(),
       Table: z.object({
         Header: z.array(z.object({
           Key: z.string(),

@@ -1,14 +1,12 @@
 import React from "react";
-import { z } from "zod";
 import { Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { RequestPackageApi } from "constance/request-package";
 import { Upload, UploadProps } from "antd/lib";
 import { UploadChangeParam } from "antd/es/upload";
 import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
-import { preventDefault } from "ol/events/Event";
+import FileUpload from "@/components/file-upload/FileUpload";
 
 const props: UploadProps = {
   listType: "picture",
@@ -45,37 +43,6 @@ const DescriptionForm = ({
 }) => {
   const { form, rule, updateDesc, requestInfo, onFinish } =
     useUiRequestProductDescriptionForm(uid, package_uid);
-
-  const [fileList, setFileList] = React.useState<any[]>([]);
-
-  const handleChange = async (info: UploadChangeParam) => {
-    let file = info.file.originFileObj as File;
-    let base64Image = await convertToBase64(file);
-    console.log(base64Image);
-    setFileList([info.file]);
-  };
-
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      let reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const upload = useRequestPakagePartUpdateShcematic();
-
-  const HandleUpload = async (values: any) => {
-    if (fileList.length > 0) {
-      const file = fileList[0].originFileObj as File;
-      const base64Image = await convertToBase64(file);
-      values.file_Content_Base64 = base64Image;
-    }
-    console.log("Form values:", values);
-    values.part_UID = uid;
-    upload.mutateAsync(values);
-  };
 
   return (
     <>
@@ -134,7 +101,7 @@ const DescriptionForm = ({
             </Col>
           </Row> */}
         </Form>
-        <Form layout="vertical" onFinish={HandleUpload}>
+        <Form layout="vertical">
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24}>
               <Form.Item
@@ -144,16 +111,19 @@ const DescriptionForm = ({
                 tooltip={<Typography>فایل باید به صورت عکس باشد</Typography>}
               >
                 <div className="p-0 m-0 w-full">
-                  <Upload
-                    customRequest={HandleUpload}
-                    className="upload-list-inline w-full"
-                    {...props}
+                  <FileUpload
+                    payload={{ part_UID: uid, package_UID: package_uid }}
+                  />
+                  {/* <Upload
+                    accept="image/*"
+                    // customRequest={HandleUpload}
+                    // className="uplo w-full"
+                    // {...props}
                     fileList={fileList}
                     onChange={handleChange}
                     // showUploadList={false}
                     listType="picture"
-                    type="select"
-
+                    // type="select"
                     // showUploadList={{ showRemoveIcon: false }}
                   >
                     <Button
@@ -163,11 +133,11 @@ const DescriptionForm = ({
                     >
                       بارگزاری نمایید
                     </Button>
-                  </Upload>
+                  </Upload> */}
                 </div>
               </Form.Item>
             </Col>
-            <Col xs={24} sm={24}>
+            {/* <Col xs={24} sm={24}>
               <Button
                 className="flex items-center justify-center w-full"
                 type="primary"
@@ -179,7 +149,7 @@ const DescriptionForm = ({
               >
                 ثبت بارگزاری
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Form>
       </Spin>

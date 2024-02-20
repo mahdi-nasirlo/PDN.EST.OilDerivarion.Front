@@ -11,11 +11,12 @@ interface PropsType {
 
 const Index = ({data}: PropsType) => {
 
+
+    const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
+    
     if (!data) {
         return <Empty/>
     }
-
-    const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
 
     if (!validateData.success) {
         return <ZodErrorAlert success={false} error={validateData.error}/>
@@ -39,7 +40,7 @@ const Index = ({data}: PropsType) => {
             >
                 {value}
             </Descriptions.Item>)
-            
+
         }
 
         return view

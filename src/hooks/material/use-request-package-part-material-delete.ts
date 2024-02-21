@@ -3,6 +3,7 @@ import fetchWithSession from "@/utils/fetch-with-session";
 import { materialApi } from "../../constance/material";
 import { z } from "zod";
 import { generalResponseZod } from "@/types/api-response";
+import { RequestPackageApi } from "constance/request-package";
 
 const apiData = materialApi.RequestPackagePartMaterialDelete;
 
@@ -23,13 +24,16 @@ const useRequestPackagePartMaterialDelete = () => {
         exact: false,
       });
 
-      console.log(data);
-
       if (data?.success)
         await queryClient.setQueryData(
           [materialApi.RequestPackagePartMaterialList.url],
           data
         );
+
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.PartProductListDDl.url],
+        exact: false,
+      });
 
       // await queryClient.invalidateQueries({queryKey: [materialApi.RequestPackagePartMaterialList.url]})
     },

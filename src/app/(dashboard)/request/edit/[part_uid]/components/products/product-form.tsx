@@ -3,30 +3,16 @@ import { Form } from "antd/lib";
 import PercentageInput from "@/components/inputs/percentage-input";
 import { Rule } from "rc-field-form/es/interface";
 import { Col, Row, Select } from "antd";
-import useUiRequestPackageProductCreate from "../../hook/use-ui-request-package-product-create";
 import useRequestPakagePartProductListDDl from "@/hooks/request-package/use-request-pakage-part-product-list-ddl";
 
 interface TProps {
   rules: Rule;
   uid: string;
   package_uid?: string;
-  visibleModal?: boolean;
-  setVisibleModal?: (arg: any) => void;
+  form: any;
 }
-export default function ProductForm({
-  rules,
-  uid,
-  package_uid,
-  visibleModal,
-  setVisibleModal,
-}: TProps) {
-  const { onFinish, addProduct, requestInfo, form, onClose } =
-    useUiRequestPackageProductCreate({
-      uid,
-      visibleModal,
-      setVisibleModal,
-      package_uid,
-    });
+export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
+
   const [density, setDensity] = useState<number>(0);
 
   const productListDDl = useRequestPakagePartProductListDDl({
@@ -46,7 +32,10 @@ export default function ProductForm({
               { value: 1, label: "دانسیته بالای 900" },
             ]}
             value={density}
-            onChange={(e) => setDensity(e)}
+            onChange={(e) => {
+              setDensity(e);
+              form.setFieldsValue({ product_UID: undefined });
+            }}
             placeholder="انتخاب نمایید"
             tokenSeparators={[","]}
           />

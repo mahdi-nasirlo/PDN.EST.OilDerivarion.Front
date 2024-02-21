@@ -12,18 +12,21 @@ interface TProps {
 }
 
 export default function CreateModal({
-  visibleModal,
-  setVisibleModal,
   uid,
   package_uid,
+  visibleModal,
+  setVisibleModal,
 }: TProps) {
-  const { onFinish, addProduct, requestInfo, form, rules, onClose } =
-    useUiRequestPackageProductCreate({
-      uid,
-      visibleModal,
-      setVisibleModal,
-      package_uid,
-    });
+
+
+  const {
+    onFinish,
+    addProduct,
+    requestInfo,
+    form,
+    rules,
+    onClose
+  } = useUiRequestPackageProductCreate({ uid, package_uid, setVisibleModal });
 
   return (
     <Modal
@@ -68,7 +71,12 @@ export default function CreateModal({
       ]}
     >
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <ProductForm uid={uid} package_uid={package_uid} rules={rules} />
+        <ProductForm
+          uid={uid}
+          form={form}
+          rules={rules}
+          package_uid={package_uid}
+        />
       </Form>
     </Modal>
   );

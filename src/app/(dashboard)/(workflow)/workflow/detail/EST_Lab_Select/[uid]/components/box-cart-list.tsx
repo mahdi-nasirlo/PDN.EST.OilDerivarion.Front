@@ -13,6 +13,7 @@ import useUiEstLabSelect
   from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
 import useLabBoxSampleGetAvailableList from "@/hooks/request-package/use-lab-box-sample-get-available-list";
 import useLabBoxSampleAdd from "@/hooks/request-package/use-lab-box-sample-add";
+import { filterOption } from "@/lib/filterOption";
 
 const BoxCartList = ({ package_UID }: { package_UID: string }) => {
   const { labBoxList, deleteLabBox, lab_UID, labDeleteSample } =
@@ -228,7 +229,9 @@ const AddSample = ({
             labelCol={{ span: 24 }}
           >
             <Select
+              showSearch
               className="w-full"
+              filterOption={filterOption}
               options={availableSample.data}
               fieldNames={availableSample.fieldName}
             />

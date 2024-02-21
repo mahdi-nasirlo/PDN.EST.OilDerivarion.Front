@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useValidation } from "@/hooks/use-validation";
 import labApi from "constance/lab";
 import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
+import { filterOption } from "@/lib/filterOption";
 
 const dataFilter = labApi.LabGetPage.type;
 
@@ -45,11 +46,12 @@ export default function FilterForm({
           <Form.Item rules={[rules]} name="stateUId" label="استان">
             <Select
               showSearch
-              fieldNames={state.apiData.fieldNames}
-              loading={state.isLoading}
-              options={state.data}
               size="large"
               placeholder="انتخاب کنید"
+              filterOption={filterOption}
+              loading={state.isLoading}
+              options={state.data}
+              fieldNames={state.apiData.fieldNames}
             />
           </Form.Item>
         </Col>

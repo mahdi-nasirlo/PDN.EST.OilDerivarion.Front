@@ -4,6 +4,7 @@ import { Col, Row, Select, Typography } from "antd";
 import React from "react";
 import { useControlTransfer } from "../hook/use-control-transfer";
 import { Transfer } from "antd/lib";
+import { filterOption } from "@/lib/filterOption";
 
 export default function SubmitForm() {
 
@@ -22,14 +23,15 @@ export default function SubmitForm() {
           نقش
         </Typography>
         <Select
-          className="w-full"
           showSearch
-          loading={steps.isLoading}
+          size="large"
+          className="w-full"
+          placeholder="انتخاب کنید"
+          filterOption={(input, option) => filterOption(input, option, steps.apiData.fieldNames.label)}
           options={steps.data}
+          loading={steps.isLoading}
           onChange={(value) => setStep(value)}
           fieldNames={steps.apiData.fieldNames}
-          size="large"
-          placeholder="انتخاب کنید"
         />
       </Row>
       <Row gutter={[16, 16]}>

@@ -3,11 +3,11 @@
 import { Button, Col, Form, Input, Row, Select, Spin } from "antd";
 import React, { useEffect } from "react";
 import CustomeDatePicker from "../../../../components/custome-date-picker";
-import { filterOption } from "../../../../../lib/filterOption";
 import { useValidation } from "@/hooks/use-validation";
 import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
 import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
+import { filterOption } from "@/lib/filterOption";
 
 export default function SubmitForm() {
   const state = useGetAllState();
@@ -89,13 +89,14 @@ export default function SubmitForm() {
               rules={[rules]}
             >
               <Select
-                className="w-full"
                 showSearch
-                loading={license.isLoading}
-                options={license.data}
-                fieldNames={license.fieldNames}
                 size="large"
+                className="w-full"
                 placeholder="انتخاب کنید"
+                options={license.data}
+                loading={license.isLoading}
+                fieldNames={license.fieldNames}
+                filterOption={(input, option) => filterOption(input, option, license.fieldNames.label)}
               />
             </Form.Item>
           </Col>

@@ -12,6 +12,7 @@ import { errorMessage } from "../../../../../../../../constance/error-message";
 import { RequestPackageApi } from "../../../../../../../../constance/request-package";
 import { z } from "zod";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
+import { filterOption } from "@/lib/filterOption";
 
 const BoxCartList = ({ package_UID }: { package_UID: string }) => {
   const { boxList, deleteSample, deletebox } = useUiWorkflowSampleAdd({
@@ -220,9 +221,11 @@ const AddSample = ({
             labelCol={{ span: 24 }}
           >
             <Select
+              showSearch
               className="w-full"
               options={available.data}
               fieldNames={available.fieldName}
+              filterOption={filterOption}
             />
           </Form.Item>
           <div className="flex justify-end">

@@ -1,4 +1,5 @@
 import { useMeasureList } from '@/hooks/basic/measure/use-measure-list';
+import { filterOption } from '@/lib/filterOption';
 import { Col, Form, Input, InputNumber, Row, Select } from 'antd';
 import React from 'react'
 
@@ -26,10 +27,11 @@ export default function TestItemForm({ rules }: any) {
                     >
                         <Select
                             showSearch
-                            loading={measure.isLoading}
-                            options={measure.options}
                             size="large"
                             placeholder="وارد کنید"
+                            filterOption={filterOption}
+                            loading={measure.isLoading}
+                            options={measure.options}
                         />
                     </Form.Item>
                 </Col>

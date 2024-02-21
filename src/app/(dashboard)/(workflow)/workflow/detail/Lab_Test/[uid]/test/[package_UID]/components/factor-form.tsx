@@ -10,6 +10,7 @@ import { Card } from "@/components/card";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
 import { RequestPackageApi } from "constance/request-package";
 import { z } from "zod";
+import { filterOption } from "@/lib/filterOption";
 
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
@@ -86,11 +87,13 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           label="بطری"
         >
           <Select
+            showSearch
             value={Battle}
-            onChange={(e) => setBattle(e)}
             placeholder="انتخاب کنید"
-            fieldNames={LabSampleList.fieldName}
+            filterOption={(input, option) => filterOption(input, option, LabSampleList.fieldName.label)}
+            onChange={(e) => setBattle(e)}
             options={LabSampleList.data}
+            fieldNames={LabSampleList.fieldName}
             loading={LabSampleList.isFetching}
           />
         </Form.Item>

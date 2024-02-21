@@ -3,6 +3,7 @@ import { Col, Form, Input, Row, Select } from "antd";
 import { StateSelectField } from "@/components/fields/state-select-field";
 import { InputNumber } from "antd/lib";
 import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
+import { filterOption } from "@/lib/filterOption";
 
 function GpsForm({ rules }: any) {
   const BoxGpsStatus = useBoxGpsStatusList();
@@ -37,6 +38,7 @@ function GpsForm({ rules }: any) {
               size="large"
               showSearch
               placeholder="انتخاب کنید"
+              filterOption={filterOption}
               options={BoxGpsStatus.options}
               loading={BoxGpsStatus.isLoading}
             />

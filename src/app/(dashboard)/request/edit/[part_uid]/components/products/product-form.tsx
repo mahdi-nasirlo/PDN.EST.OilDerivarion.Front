@@ -4,6 +4,7 @@ import PercentageInput from "@/components/inputs/percentage-input";
 import { Rule } from "rc-field-form/es/interface";
 import { Col, Row, Select } from "antd";
 import useRequestPakagePartProductListDDl from "@/hooks/request-package/use-request-pakage-part-product-list-ddl";
+import { filterOption } from "@/lib/filterOption";
 
 interface TProps {
   rules: Rule;
@@ -48,6 +49,7 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
             size="large"
             tokenSeparators={[","]}
             placeholder="انتخاب نمایید"
+            filterOption={filterOption}
             options={productListDDl.options}
             loading={productListDDl.isFetching}
           />

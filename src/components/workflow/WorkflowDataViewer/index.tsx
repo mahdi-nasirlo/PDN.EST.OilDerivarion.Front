@@ -11,6 +11,8 @@ interface PropsType {
 
 const Index = ({data}: PropsType) => {
 
+    console.log(data)
+
     const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
 
     if (!data) {
@@ -38,52 +40,56 @@ const Index = ({data}: PropsType) => {
         //     </Descriptions.Item>))}
         // </Descriptions>)
 
+        cardData.map((item) => {
 
-        cardData.ListTable?.map(item => {
+            item.ListTable?.map(table => {
 
-            const columns: TableColumnsType<any> | undefined = item?.Header?.map((column) => ({
-                dataIndex: column.Key,
-                title: column.Value
-            }))
+                const columns: TableColumnsType<any> | undefined = table?.Header?.map((column) => ({
+                    dataIndex: column.Key,
+                    title: column.Value
+                }))
 
-            console.log(columns, item?.Values)
-            view.push(<Card className="bg-gray-100">
-                <Typography className="text-right text-lg font-semibold">
-                    {item?.Title}
-                </Typography>
-                <div className="w-full">
-                    <Table
-                        columns={columns}
-                        dataSource={item?.Values}
-                    />
-                </div>
-            </Card>)
+                view.push(<Card className="bg-gray-100">
+                    <Typography className="text-right text-lg font-semibold">
+                        {table?.Title}
+                    </Typography>
+                    <div className="w-full">
+                        <Table
+                            columns={columns}
+                            dataSource={table?.Values}
+                        />
+                    </div>
+                </Card>)
+
+            })
+
+            const desc: React.ReactNode[] = []
+
+            for (let key in item.Table?.Values) {
+
+                const column = item.Table?.Header?.find((item) => item.Key == key)
+
+                const value = item.Table?.Values?.[key]
+
+                desc.push(<Descriptions.Item
+                    span={6}
+                    label={column?.Value}
+                >
+                    {value}
+                </Descriptions.Item>)
+
+                view.push(<Card className="bg-gray-100">
+                    <Descriptions
+                        className="text-right text-secondary-500"
+                        column={6}
+                        title={item.Title}>
+                        {desc}
+                    </Descriptions>
+                </Card>)
+                
+            }
+
         })
-
-        const desc: React.ReactNode[] = []
-
-        for (let key in validateData.data.Table?.Values) {
-
-            const column = cardData.Table?.Header?.find((item) => item.Key == key)
-
-            const value = cardData?.Table?.Values?.[key]
-
-            desc.push(<Descriptions.Item
-                span={6}
-                label={column?.Value}
-            >
-                {value}
-            </Descriptions.Item>)
-
-            view.push(<Card className="bg-gray-100">
-                <Descriptions
-                    className="text-right text-secondary-500"
-                    column={6}
-                    title={validateData.data.Title}>
-                    {desc}
-                </Descriptions>
-            </Card>)
-        }
 
         return view
     }

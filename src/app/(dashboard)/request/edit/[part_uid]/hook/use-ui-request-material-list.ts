@@ -13,8 +13,6 @@ const useUiRequestMaterialCreate = ({ uid, package_uid }: TProps) => {
 
   const deleteMaterial = useRequestPackagePartMaterialDelete();
 
-  const [editModal, setEditModal] = useState(false);
-
   const [deleteModal, setDeleteModal] = useState<string | boolean>(false);
 
   const onDelete = async () => {
@@ -29,8 +27,6 @@ const useUiRequestMaterialCreate = ({ uid, package_uid }: TProps) => {
   return {
     materials,
     deleteMaterial,
-    editModal,
-    setEditModal,
     deleteModal,
     setDeleteModal,
     onDelete,

@@ -11,14 +11,18 @@ import Products from "@/app/(dashboard)/request/edit/[part_uid]/components/produ
 import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
 import staticMessages from "@/lib/staticMessages";
 import { WarningFilled } from "@ant-design/icons";
+import useRequestPackageInfo from "@/hooks/material/use-request-package-part-info";
+import { Tag } from "antd/lib";
+import { z } from "zod";
+import { materialApi } from "constance/material";
 
 interface TProps {
   params: { part_uid: string; package_uid: string };
 }
 
 export default function Page({ params: { part_uid, package_uid } }: TProps) {
-
   const packagePart = useGetRequestPackagePartList();
+  const requestInfo = useRequestPackageInfo(part_uid);
 
   return (
     <div>
@@ -30,6 +34,22 @@ export default function Page({ params: { part_uid, package_uid } }: TProps) {
         backLink="/request"
         currentPage="ویرایش درخواست"
         titleIcon={<DocumentPlusIcon className="w-8" />}
+        extera={[
+          <>
+            {requestInfo.data?.Part_Type && (
+              <div className="flex justify-between">
+                <Typography key={1}>روش تولید:</Typography>
+                <Tag color="blue-inverse" className="mx-2">
+                  {
+                    ["برش", "بلندینگ", "پیرولیز", "شیرین سازی", "کرکینگ"][
+                      requestInfo.data?.Part_Type - 1
+                    ]
+                  }
+                </Tag>
+              </div>
+            )}
+          </>,
+        ]}
       />
       <Card>
         <Alert
@@ -48,24 +68,29 @@ export default function Page({ params: { part_uid, package_uid } }: TProps) {
                       showIcon
                       type="error"
                       className="text-sm w-full text-red-500"
-                      icon={<WarningFilled width={24} height={24} className="text-red-500" />}
+                      icon={
+                        <WarningFilled
+                          width={24}
+                          height={24}
+                          className="text-red-500"
+                        />
+                      }
                       message={
                         <Typography className="font-bold text-lg text-red-500">
-                          {item.Status_Message != "" ? "موارد نیازمند به ویرایش" : null}
+                          {item.Status_Message != ""
+                            ? "موارد نیازمند به ویرایش"
+                            : null}
                         </Typography>
                       }
-                      description={
-                        item.Status_Message
-                          .split('-')
-                          .slice(1)
-                          .map((part, index) => (
-                            <span key={index}>
-                              {index > 0 && <br />}
-                              {'- '}
-                              {part.trim()}
-                            </span>
-                          ))
-                      }
+                      description={item.Status_Message.split("-")
+                        .slice(1)
+                        .map((part, index) => (
+                          <span key={index}>
+                            {index > 0 && <br />}
+                            {"- "}
+                            {part.trim()}
+                          </span>
+                        ))}
                     />
                     <Divider />
                   </>
@@ -73,14 +98,13 @@ export default function Page({ params: { part_uid, package_uid } }: TProps) {
               </>
             )}
           </>
-        ))
-        }
+        ))}
         <DescriptionForm uid={part_uid} />
         <Divider />
         <Materials uid={part_uid} />
         <Divider />
         <Products uid={part_uid} />
       </Card>
-    </div >
+    </div>
   );
 }

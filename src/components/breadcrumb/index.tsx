@@ -16,8 +16,9 @@ type TProps = {
   showTitle?: boolean;
   backLink?: string;
   titleIcon?: React.ReactNode;
-  actions?: React.ReactNode[]
+  actions?: React.ReactNode[];
   title?: string;
+  extera?: React.ReactNode;
 };
 
 const Index = (props: TProps) => {
@@ -27,36 +28,37 @@ const Index = (props: TProps) => {
         <Breadcrumb>
           {props.pages.map((item, index) => (
             <Breadcrumb.Item key={index}>
-              {item.path ? <Link href={item.path}>
-                {item.label}
-              </Link> : item.label}
+              {item.path ? (
+                <Link href={item.path}>{item.label}</Link>
+              ) : (
+                item.label
+              )}
             </Breadcrumb.Item>
           ))}
           <Breadcrumb.Item>{props.currentPage}</Breadcrumb.Item>
         </Breadcrumb>
 
-        {props.actions?.map(item => item)}
+        {props.actions?.map((item) => item)}
         {props.backLink && (
           <Link href={props.backLink} className="flex">
-            <Button size="large">
-              بازگشت
-            </Button>
+            <Button size="large">بازگشت</Button>
           </Link>
         )}
       </div>
       <Divider />
       {(props.showTitle ?? true) && (
-        <div className="flex justify-start items-center my-5">
-          {props.titleIcon && (
-            <div
-              className="ml-4 flex items-center justify-center bg-CustomizeBlue-500 rounded-full w-11 h-11"
-            >
-              {props.titleIcon}
-            </div>
-          )}
-          <Typography className="font-normal text-3xl">
-            {props?.title || props.currentPage}
-          </Typography>
+        <div className="flex justify-between items-center my-5">
+          <div className="flex items-center">
+            {props.titleIcon && (
+              <div className="ml-4 flex items-center justify-center bg-CustomizeBlue-500 rounded-full w-11 h-11">
+                {props.titleIcon}
+              </div>
+            )}
+            <Typography className="font-normal text-3xl">
+              {props?.title || props.currentPage}
+            </Typography>
+          </div>
+          <div>{props.extera}</div>
         </div>
       )}
     </div>

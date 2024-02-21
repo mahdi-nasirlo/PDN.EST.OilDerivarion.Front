@@ -73,12 +73,13 @@ const Index = ({data}: PropsType) => {
 
                 const value = item.Table?.Values?.[key]
 
-                desc.push(<Descriptions.Item
-                    span={6}
-                    label={column?.Value}
-                >
-                    {value}
-                </Descriptions.Item>)
+                if (column?.Value)
+                    desc.push(<Descriptions.Item
+                        span={6}
+                        label={column?.Value}
+                    >
+                        {value}
+                    </Descriptions.Item>)
 
             }
 

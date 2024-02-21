@@ -1,24 +1,28 @@
-import {Table} from "antd/lib";
-import {z} from "zod";
-import {materialApi} from "../../../../constance/material";
+import { Table } from "antd/lib";
+import { z } from "zod";
+import { materialApi } from "../../../../constance/material";
 
-const CardListTable = ({data}: {
-    data: z.infer<typeof materialApi.GetRequestPackagePartList.item.shape.Products> | undefined
+const CardListTable = ({
+  data,
+}: {
+  data:
+    | z.infer<typeof materialApi.GetRequestPackagePartList.item.shape.Products>
+    | undefined;
 }) => {
+  console.log(data);
 
-    console.log(data)
-
-    return <Table
-        
-        dataSource={data as []}
-        pagination={false}
-        columns={[
-            {
-                title: "نام محصول",
-                dataIndex: "name"
-            }
-        ]}
+  return (
+    <Table
+      dataSource={data as []}
+      pagination={false}
+      columns={[
+        {
+          title: "نام محصول",
+          dataIndex: "Name",
+        },
+      ]}
     />
-}
+  );
+};
 
-export {CardListTable}
+export { CardListTable };

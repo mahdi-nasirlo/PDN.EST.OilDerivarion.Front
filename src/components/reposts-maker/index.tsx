@@ -91,9 +91,9 @@ const RenderTypeOne = ({taskId, formUid, formKey}: PropType) => {
 
   if (schema.isFetching) return <Spin/>;
 
-  if (!schema.data?.length) return <Empty/>
+  // if (!schema.data?.length) return <Empty/>
 
-  return schema.data.map((item, index) => <WorkflowDataViewer key={index} data={item.form_data}/>)
+  return <WorkflowDataViewer data={schema.data?.form_data}/>
 }
 
 const RenderTypeTow = ({formKey, formUid, taskId}: PropType) => {
@@ -110,11 +110,10 @@ const RenderTypeTow = ({formKey, formUid, taskId}: PropType) => {
 
   return (
     <Spin spinning={schema.isFetching}>
-      {schema.data.map((item, index) => <DataViewer
-          key={index}
-          data={item.form_data}
-          schema={item.Schema_Data}
-      />)}
+      <DataViewer
+          data={schema.data.form_data}
+          schema={schema.data.Schema_Data}
+      />
     </Spin>
   );
 };

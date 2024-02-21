@@ -61,7 +61,7 @@ const Index = ({ formKey }: { formKey: string }) => {
 
             const { data } = dataTable
 
-            return <DataViewer data={data[0].form_data} schema={data[0].Schema_Data} />
+            return <DataViewer data={data.form_data} schema={data.Schema_Data}/>
 
         } catch (e: unknown) {
             return <Alert message={""} />

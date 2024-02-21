@@ -82,11 +82,11 @@ const Index = ({data}: PropsType) => {
 
             }
 
-            view.push(<Card className="bg-gray-100">
+            if (desc.length > 0) view.push(<Card className="bg-gray-100">
                 <Descriptions
                     className="text-right text-secondary-500"
                     column={6}
-                    title={item.Title}>
+                >
                     {desc}
                 </Descriptions>
             </Card>)

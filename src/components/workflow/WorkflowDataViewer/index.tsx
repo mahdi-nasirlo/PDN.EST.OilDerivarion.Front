@@ -29,18 +29,20 @@ const Index = ({data}: PropsType) => {
 
         const view: React.ReactNode[] = []
 
-        // console.log(cardData)
-        // view.push(<Descriptions column={6}>
-        //     {cardData.Model?.map((item, index) => (<Descriptions.Item
-        //         key={index}
-        //         span={typeof item.Value == "string" ? 3 : 6}
-        //         label={item.Key}
-        //     >
-        //         {item.Value}
-        //     </Descriptions.Item>))}
-        // </Descriptions>)
 
         cardData.map((item) => {
+
+            view.push(<Typography className="mb-5 font-semibold text-lg text-right">{item.Title}</Typography>)
+
+            view.push(<Descriptions column={6}>
+                {item.Model?.map((item, index) => (<Descriptions.Item
+                    key={index}
+                    span={typeof item.Value == "string" ? 3 : 6}
+                    label={item.Key}
+                >
+                    {item.Value}
+                </Descriptions.Item>))}
+            </Descriptions>)
 
             item.ListTable?.map(table => {
 
@@ -50,7 +52,7 @@ const Index = ({data}: PropsType) => {
                 }))
 
                 view.push(<Card className="bg-gray-100">
-                    <Typography className="text-right text-lg font-semibold">
+                    <Typography className="text-right text-lg font-semibold mb-3">
                         {table?.Title}
                     </Typography>
                     <div className="w-full">
@@ -78,16 +80,16 @@ const Index = ({data}: PropsType) => {
                     {value}
                 </Descriptions.Item>)
 
-                view.push(<Card className="bg-gray-100">
-                    <Descriptions
-                        className="text-right text-secondary-500"
-                        column={6}
-                        title={item.Title}>
-                        {desc}
-                    </Descriptions>
-                </Card>)
-                
             }
+
+            view.push(<Card className="bg-gray-100">
+                <Descriptions
+                    className="text-right text-secondary-500"
+                    column={6}
+                    title={item.Title}>
+                    {desc}
+                </Descriptions>
+            </Card>)
 
         })
 

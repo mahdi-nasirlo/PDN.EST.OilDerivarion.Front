@@ -13,8 +13,8 @@ const useLabSampleTestItemList = (data: z.infer<typeof apiData.type>) => {
     select: (data: z.infer<typeof apiData.response>) => {
       return data.data.map((item) => ({
         ...item,
-        samples:
-          typeof item.samples === "string" ? JSON.parse(item.samples) : [],
+        // samples:
+        // typeof item.samples === "string" ? JSON.parse(item.samples) : [],
       }));
     },
   });

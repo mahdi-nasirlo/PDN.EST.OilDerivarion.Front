@@ -5,6 +5,7 @@ import MultipleSelect from "@/components/multiple-select";
 import PhoneInputs from "@/components/inputs/Phone";
 import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
 import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
+import { filterOption } from "@/lib/filterOption";
 
 function LaboratoryForm({ rules }: any) {
   const testItem = useTestItemList();
@@ -65,11 +66,12 @@ function LaboratoryForm({ rules }: any) {
           <Form.Item rules={[rules]} name="stateUId" label="استان">
             <Select
               showSearch
-              fieldNames={state.apiData.fieldNames}
-              loading={state.isLoading}
-              options={state.data}
               size="large"
               placeholder="انتخاب کنید"
+              filterOption={filterOption}
+              options={state.data}
+              loading={state.isLoading}
+              fieldNames={state.apiData.fieldNames}
             />
           </Form.Item>
         </Col>

@@ -1,11 +1,11 @@
 import React from "react";
-import {ColumnsType} from "antd/es/table";
-import {Button, Col, Space, Typography} from "antd";
-import {ViewColumnsIcon} from "@heroicons/react/24/outline";
+import { ColumnsType } from "antd/es/table";
+import { Button, Col, Space, Typography } from "antd";
+import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import CustomTable from "@/components/custom-table";
-import {PlusOutlined} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import {z} from "zod";
+import { z } from "zod";
 import useUiRequestMaterialList from "@/app/(dashboard)/request/edit/[part_uid]/hook/use-ui-request-material-list";
 
 export default function DataTable({
@@ -21,8 +21,6 @@ export default function DataTable({
     deleteMaterial,
     deleteModal,
     setDeleteModal,
-    setEditModal,
-    editModal,
     materials,
     onDelete,
   } = useUiRequestMaterialList({ uid: partUid, package_uid });
@@ -64,24 +62,24 @@ export default function DataTable({
   return (
     <>
       <CustomTable
-          header={{
+        header={{
           icon: <ViewColumnsIcon />,
-            text: " لیست مواد اولیه",
-            discretion: <Typography className={"text-gray-500 font-normal"}> ( مجموع درصد استفاده باید100 باشد
-              ) </Typography>,
-            actions: (
-                <Col xs={24} xxl={3} md={6} sm={8}>
-                  <Button
-                      className="flex items-center justify-center w-full"
-                      icon={<PlusOutlined width={16} height={16}/>}
-                      type="primary"
-                      size="large"
-                      onClick={() => setVisibleModal(true)}
-                  >
-                    افزودن مواد اولیه
-                  </Button>
-                </Col>
-            ),
+          text: " لیست مواد اولیه",
+          discretion: <Typography className={"text-gray-500 font-normal"}> ( مجموع درصد استفاده باید100 باشد
+            ) </Typography>,
+          actions: (
+            <Col xs={24} xxl={3} md={6} sm={8}>
+              <Button
+                className="flex items-center justify-center w-full"
+                icon={<PlusOutlined width={16} height={16} />}
+                type="primary"
+                size="large"
+                onClick={() => setVisibleModal(true)}
+              >
+                افزودن مواد اولیه
+              </Button>
+            </Col>
+          ),
         }}
         isLoading={materials.isFetching}
         pagination={false}

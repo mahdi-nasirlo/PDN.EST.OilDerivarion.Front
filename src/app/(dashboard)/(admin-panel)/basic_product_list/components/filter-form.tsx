@@ -1,6 +1,7 @@
 import ButtonFilter from '@/components/button-filter'
 import { useProductCategoryList } from '@/hooks/basic/product-category/use-product-category-list'
 import { useValidation } from '@/hooks/use-validation'
+import { filterOption } from '@/lib/filterOption'
 import { Col, Form, Input, Row, Select } from 'antd'
 import { productApi } from 'constance/product'
 import React from 'react'
@@ -30,10 +31,11 @@ export default function FilterForm({ onFinish }: TProps) {
                     <Form.Item rules={[rules]} name="productCategoryUid" label="نام دسته بندی">
                         <Select
                             showSearch
-                            loading={productCategory.isLoading}
-                            options={productCategory.options}
                             size="large"
                             placeholder="انتخاب کنید"
+                            filterOption={filterOption}
+                            loading={productCategory.isLoading}
+                            options={productCategory.options}
                         />
                     </Form.Item>
                 </Col>

@@ -18,12 +18,11 @@ const useLabCheckOtp = () => {
         data,
       }),
     onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabBox2List.url],
+        exact: false,
+      });
       await queryClient.setQueryData([RequestPackageApi.LabGetOTP.url], data);
-
-      // await queryClient.invalidateQueries({
-      //     queryKey: [RequestPackageApi.LabBoxSampleGetAvailableList.url],
-      //     exact: false
-      // })
     },
   });
 

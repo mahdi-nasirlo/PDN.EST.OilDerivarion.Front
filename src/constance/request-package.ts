@@ -589,14 +589,26 @@ const RequestPackageApi = {
   LabSampleTestItemList: {
     url: "/RequestPackage/LabSampleTestItemList",
     type: z.object({ package_UID: z.string(), sample_Code: z.string() }),
-    item: BoxListItem,
+    item: z.object({
+      Sample_Code: z.string().uuid(),
+      test_Item_Result_UID: z.string().uuid().optional(),
+      Name: z.string().optional(),
+      Test_Item_Count: z.number().optional(),
+    }),
     response: generalResponseZod.extend({
-      data: z.array(BoxListItem),
+      data: z.array(
+        z.object({
+          test_Item_Result_UID: z.string().uuid(),
+          Name: z.string(),
+          Test_Item_Count: z.number(),
+        })
+      ),
     }),
   },
   LabSampleTestItemDetailUpdate: {
     url: "/RequestPackage/LabSampleTestItemDetailUpdate",
     type: z.object({
+      package_UID: z.string().uuid(),
       sample_Code: z.string().uuid(),
       test_Item_Result_UID: z.string().uuid(),
       result_Test: z
@@ -619,8 +631,9 @@ const RequestPackageApi = {
   LabSampleTestItemDetail: {
     url: "/RequestPackage/LabSampleTestItemDetail",
     type: z.object({
-      sample_Code: z.string(),
-      test_Item_Result_UID: z.string(),
+      package_UID: z.string().uuid(),
+      sample_Code: z.string().uuid(),
+      test_Item_Result_UID: z.string().uuid(),
     }),
     response: generalResponseZod.extend({
       data: z.array(

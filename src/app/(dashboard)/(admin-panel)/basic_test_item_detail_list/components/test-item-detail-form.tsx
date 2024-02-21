@@ -1,4 +1,5 @@
 import { useTestItemList } from '@/hooks/basic/test_item/use-test-item-list'
+import { filterOption } from '@/lib/filterOption';
 import { Col, Form, Input, Row, Select } from 'antd'
 import React from 'react'
 
@@ -54,10 +55,11 @@ export default function TestItemDetailForm({ rules }: any) {
                     >
                         <Select
                             showSearch
-                            options={TestItem.options}
-                            loading={TestItem.isLoading}
                             size="large"
                             placeholder="وارد کنید"
+                            filterOption={filterOption}
+                            options={TestItem.options}
+                            loading={TestItem.isLoading}
                         />
                     </Form.Item>
                 </Col>

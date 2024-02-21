@@ -11,6 +11,8 @@ interface PropsType {
 
 const Index = ({data}: PropsType) => {
 
+    console.log(data)
+
     const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
 
     if (!data) {
@@ -27,63 +29,70 @@ const Index = ({data}: PropsType) => {
 
         const view: React.ReactNode[] = []
 
-        // console.log(cardData)
-        // view.push(<Descriptions column={6}>
-        //     {cardData.Model?.map((item, index) => (<Descriptions.Item
-        //         key={index}
-        //         span={typeof item.Value == "string" ? 3 : 6}
-        //         label={item.Key}
-        //     >
-        //         {item.Value}
-        //     </Descriptions.Item>))}
-        // </Descriptions>)
 
+        cardData.map((item) => {
 
-        cardData.ListTable?.map(item => {
+            view.push(<Typography className="mb-5 font-semibold text-lg text-right">{item.Title}</Typography>)
 
-            const columns: TableColumnsType<any> | undefined = item?.Header?.map((column) => ({
-                dataIndex: column.Key,
-                title: column.Value
-            }))
+            view.push(<Descriptions column={6}>
+                {item.Model?.map((item, index) => (<Descriptions.Item
+                    key={index}
+                    span={typeof item.Value == "string" ? 3 : 6}
+                    label={item.Key}
+                >
+                    {item.Value}
+                </Descriptions.Item>))}
+            </Descriptions>)
 
-            console.log(columns, item?.Values)
-            view.push(<Card className="bg-gray-100">
-                <Typography className="text-right text-lg font-semibold">
-                    {item?.Title}
-                </Typography>
-                <div className="w-full">
-                    <Table
-                        columns={columns}
-                        dataSource={item?.Values}
-                    />
-                </div>
-            </Card>)
-        })
+            item.ListTable?.map(table => {
 
-        const desc: React.ReactNode[] = []
+                const columns: TableColumnsType<any> | undefined = table?.Header?.map((column) => ({
+                    dataIndex: column.Key,
+                    title: column.Value
+                }))
 
-        for (let key in validateData.data.Table?.Values) {
+                view.push(<Card className="bg-gray-100">
+                    <Typography className="text-right text-lg font-semibold mb-3">
+                        {table?.Title}
+                    </Typography>
+                    <div className="w-full">
+                        <Table
+                            columns={columns}
+                            dataSource={table?.Values}
+                        />
+                    </div>
+                </Card>)
 
-            const column = cardData.Table?.Header?.find((item) => item.Key == key)
+            })
 
-            const value = cardData?.Table?.Values?.[key]
+            const desc: React.ReactNode[] = []
 
-            desc.push(<Descriptions.Item
-                span={6}
-                label={column?.Value}
-            >
-                {value}
-            </Descriptions.Item>)
+            for (let key in item.Table?.Values) {
 
-            view.push(<Card className="bg-gray-100">
+                const column = item.Table?.Header?.find((item) => item.Key == key)
+
+                const value = item.Table?.Values?.[key]
+
+                if (column?.Value)
+                    desc.push(<Descriptions.Item
+                        span={6}
+                        label={column?.Value}
+                    >
+                        {value}
+                    </Descriptions.Item>)
+
+            }
+
+            if (desc.length > 0) view.push(<Card className="bg-gray-100">
                 <Descriptions
                     className="text-right text-secondary-500"
                     column={6}
-                    title={validateData.data.Title}>
+                >
                     {desc}
                 </Descriptions>
             </Card>)
-        }
+
+        })
 
         return view
     }

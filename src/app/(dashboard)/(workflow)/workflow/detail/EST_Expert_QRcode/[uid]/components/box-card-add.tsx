@@ -3,6 +3,7 @@ import useUiWorkflowBoxAdd from "@/app/(dashboard)/(workflow)/workflow/detail/ES
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { filterOption } from "@/lib/filterOption";
 
 const BoxCardAdd = ({ package_uid }: { package_uid: string }) => {
   const { boxAdd, form, rules, availableBox } =
@@ -30,12 +31,14 @@ const BoxCardAdd = ({ package_uid }: { package_uid: string }) => {
               rules={[rules]}
             >
               <Select
+                showSearch
+                size="large"
+                className="w-full"
+                placeholder="انتخاب کنید"
+                filterOption={filterOption}
                 options={availableBox.data}
                 loading={availableBox.isFetching}
                 fieldNames={availableBox.fieldName}
-                placeholder="انتخاب کنید"
-                size="large"
-                className="w-full"
               />
             </Form.Item>
             <Form.Item

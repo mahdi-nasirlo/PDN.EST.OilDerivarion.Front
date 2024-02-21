@@ -4,6 +4,7 @@ import { useProductCategoryList } from "@/hooks/basic/product-category/use-produ
 import { useMaterialGetAll } from "@/hooks/material/use-material-get-all";
 import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
 import MultipleSelect from "@/components/multiple-select";
+import { filterOption } from "@/lib/filterOption";
 
 function ProductForm({ rules }: any) {
 
@@ -34,10 +35,11 @@ function ProductForm({ rules }: any) {
           >
             <Select
               showSearch
-              loading={productCategory.isLoading}
-              options={productCategory.options}
               size="large"
               placeholder="انتخاب کنید"
+              filterOption={filterOption}
+              loading={productCategory.isLoading}
+              options={productCategory.options}
             />
           </Form.Item>
         </Col>

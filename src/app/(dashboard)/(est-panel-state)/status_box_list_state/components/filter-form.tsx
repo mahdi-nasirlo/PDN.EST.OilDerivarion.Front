@@ -7,6 +7,7 @@ import { boxGPSApi } from "constance/box-gps";
 import { z } from "zod";
 import { useValidation } from "@/hooks/use-validation";
 import { useBoxGpsStatusList } from "@/hooks/box-gps/use-box-gps-status";
+import { filterOption } from "@/lib/filterOption";
 
 const dataFilter = boxGPSApi.BoxGPSGetPage.type;
 
@@ -33,6 +34,7 @@ export default function FilterForm({
               showSearch
               size="large"
               placeholder="وارد کنید"
+              filterOption={filterOption}
               options={BoxGpsStatus.options}
               loading={BoxGpsStatus.isLoading}
             />

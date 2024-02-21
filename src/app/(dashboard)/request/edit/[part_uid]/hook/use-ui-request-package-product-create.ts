@@ -5,14 +5,12 @@ import useRequestPackagePartInfo from "@/hooks/material/use-request-package-part
 
 interface TProps {
   uid: string;
-  visibleModal: any;
   setVisibleModal: any;
   package_uid?: string;
 }
 
 const useUiRequestPackageProductCreate = ({
   uid,
-  visibleModal,
   setVisibleModal,
   package_uid,
 }: TProps) => {

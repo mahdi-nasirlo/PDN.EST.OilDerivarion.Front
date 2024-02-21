@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Form, Modal, Row, Select } from "antd";
 import { useBoxGpsStatusList } from '@/hooks/box-gps/use-box-gps-status';
 import useBoxGpsStatusForUser from '../hook/use-box-gps-status-for-user';
+import { filterOption } from '@/lib/filterOption';
 
 interface TProps {
     open: string | undefined
@@ -67,6 +68,7 @@ const StatusBoxAction = ({ open, setOpen }: TProps) => {
                                     placeholder="وارد کنید"
                                     options={BoxGpsStatus.options}
                                     loading={BoxGpsStatus.isLoading}
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -79,6 +81,7 @@ const StatusBoxAction = ({ open, setOpen }: TProps) => {
                                     placeholder="وارد کنید"
                                     options={BoxGpsStatus.options}
                                     loading={BoxGpsStatus.isLoading}
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -90,6 +93,7 @@ const StatusBoxAction = ({ open, setOpen }: TProps) => {
                                     placeholder="وارد کنید"
                                     options={BoxGpsStatus.options}
                                     loading={BoxGpsStatus.isLoading}
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>

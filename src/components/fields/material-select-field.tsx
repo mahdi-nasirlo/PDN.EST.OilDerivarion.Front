@@ -1,7 +1,8 @@
-import {Select} from "antd";
+import { Select } from "antd";
 import React from "react";
-import {SelectProps} from "antd/lib";
-import {useMaterialGetAll} from "@/hooks/material/use-material-get-all";
+import { SelectProps } from "antd/lib";
+import { useMaterialGetAll } from "@/hooks/material/use-material-get-all";
+import { filterOption } from "@/lib/filterOption";
 
 
 const MaterialSelectField = (props: SelectProps) => {
@@ -12,6 +13,7 @@ const MaterialSelectField = (props: SelectProps) => {
         {...props}
         showSearch
         options={materials.options}
+        filterOption={filterOption}
         loading={materials.isLoading}
         size="large"
         placeholder="انتخاب نمایید"
@@ -19,4 +21,4 @@ const MaterialSelectField = (props: SelectProps) => {
     />
 }
 
-export {MaterialSelectField}
+export { MaterialSelectField }

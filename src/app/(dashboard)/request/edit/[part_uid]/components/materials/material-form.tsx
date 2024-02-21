@@ -4,6 +4,7 @@ import React from "react";
 import { Rule } from "rc-field-form/es/interface";
 import PercentageInput from "@/components/inputs/percentage-input";
 import useMaterialDDlList from "@/hooks/request-package/use-material-list-ddl";
+import { filterOption } from "@/lib/filterOption";
 
 export default function MaterialForm({
   rules,
@@ -27,10 +28,12 @@ export default function MaterialForm({
       <Col xs={24} sm={12}>
         <Form.Item name="material_UID" label="نام مواد اولیه" rules={[rules]}>
           <Select
-            options={materialsDdl.options}
-            loading={materialsDdl.isLoading}
+            showSearch
             size="large"
             placeholder="انتخاب کنید"
+            filterOption={filterOption}
+            options={materialsDdl.options}
+            loading={materialsDdl.isLoading}
           />
         </Form.Item>
       </Col>

@@ -3,7 +3,6 @@ import fetchWithSession from "@/utils/fetch-with-session";
 import { z } from "zod";
 import { DefaultOptionType } from "antd/es/select";
 import { RequestPackageApi } from "constance/request-package";
-import { useState } from "react";
 
 const apiData = RequestPackageApi.PartProductListDDl;
 

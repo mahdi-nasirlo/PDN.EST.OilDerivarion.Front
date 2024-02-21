@@ -8,6 +8,9 @@ import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
+import { RequestPackageApi } from "constance/request-package";
+import { z } from "zod";
+import { filterOption } from "@/lib/filterOption";
 
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
@@ -21,19 +24,19 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
 
   const testResultUpdate = useLabSampleTestItemDetailUpdate();
 
-  const [formData, setFormData] = useState({
-    Sample_Code_2_1: undefined,
-    Test_Item_Result_UID: undefined,
+  const [formData, setFormData] = useState<any>({
+    Sample_Code: undefined,
+    test_Item_Result_UID: undefined,
   });
 
   useEffect(() => {
     setFormData({
-      Sample_Code_2_1: undefined,
-      Test_Item_Result_UID: undefined,
+      Sample_Code: undefined,
+      test_Item_Result_UID: undefined,
     })
   }, [(Battle)])
 
-  const columns: ColumnsType<any> = [
+  const columns: ColumnsType<z.infer<typeof RequestPackageApi.LabSampleTestItemList.item>> = [
     {
       title: "#",
       dataIndex: "Row",
@@ -61,11 +64,12 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           <Button
             type="link"
             className="text-secondary-500 font-bold"
-            onClick={() => (setFormData({
-              Test_Item_Result_UID: record.Test_Item_Result_UID,
-              Sample_Code_2_1: record.Sample_Code_2_1
-            })
-            )}
+            onClick={() => {
+              setFormData({
+                test_Item_Result_UID: record.test_Item_Result_UID,
+                Sample_Code: record.Sample_Code,
+              })
+            }}
           >
             ثبت نتیجه
           </Button>
@@ -83,11 +87,13 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           label="بطری"
         >
           <Select
+            showSearch
             value={Battle}
-            onChange={(e) => setBattle(e)}
             placeholder="انتخاب کنید"
-            fieldNames={LabSampleList.fieldName}
+            filterOption={(input, option) => filterOption(input, option, LabSampleList.fieldName.label)}
+            onChange={(e) => setBattle(e)}
             options={LabSampleList.data}
+            fieldNames={LabSampleList.fieldName}
             loading={LabSampleList.isFetching}
           />
         </Form.Item>
@@ -96,13 +102,13 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
             text: "لیست فاکتور های آزمون",
             icon: <ViewColumnsIcon className="h-8" />,
           }}
-          data={{ records: LabSampleTestItemList.data }}
+          data={{ records: LabSampleTestItemList.data || [] }}
           columns={columns}
           isLoading={testResultUpdate.isPending || LabSampleTestItemList.isLoading || LabSampleTestItemList.isFetching}
         />
       </Card>
       <Card className="mt-6">
-        <ResultForm formData={formData} />
+        <ResultForm formData={formData} package_UID={package_UID} />
         <Divider />
         <Row gutter={[16, 10]} className="flex justify-center items-center">
           <Col xl={2} lg={3} sm={4} xs={6}>
@@ -116,7 +122,7 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
             </Button>
           </Col>
         </Row>
-      </Card>
+      </Card >
     </>
   );
 }

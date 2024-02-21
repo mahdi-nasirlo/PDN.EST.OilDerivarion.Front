@@ -5,6 +5,7 @@ import { Col, Form, Input, Row, Select } from "antd";
 import { useMeasureList } from "@/hooks/basic/measure/use-measure-list";
 import MultipleSelect from "@/components/multiple-select";
 import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
+import { filterOption } from "@/lib/filterOption";
 
 function MaterialForm({ rules }: any) {
   const measure = useMeasureList();
@@ -41,11 +42,12 @@ function MaterialForm({ rules }: any) {
           <Form.Item name="measureUid" label="واحد اندازه گیری" rules={[rules]}>
             <Select
               showSearch
-              fieldNames={measure.fieldNames}
+              size="large"
+              filterOption={filterOption}
+              placeholder="انتخاب کنید"
               options={measure.data}
               loading={measure.isLoading}
-              size="large"
-              placeholder="انتخاب کنید"
+              fieldNames={measure.fieldNames}
             />
           </Form.Item>
         </Col>

@@ -124,16 +124,12 @@ const formMakerApi = {
       taskId: z.string().nullable(),
     }),
     response: generalResponseZod.extend({
-      data: z
-        .array(
-          z.object({
+      data: z.object({
             form_data: z.string(),
             Schema_Data: z.string(),
-          })
-        )
-        .min(1),
+      }),
     }),
-    type1Res: z.object({
+    type1Res: z.array(z.object({
       Title: z.string().nullable(),
       Table: z.object({
         Header: z.array(z.object({
@@ -157,7 +153,7 @@ const formMakerApi = {
         })).or(z.undefined()).nullable(),
         Values: z.array(z.any())
       }).nullable()).optional()
-    })
+    }))
   },
   GetDoc2: {
     url: "/FormMaker/GetDoc2",

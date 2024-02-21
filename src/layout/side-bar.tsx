@@ -26,7 +26,7 @@ export default function SideBar({ open, setOpen }: TProps) {
       {userAccess.data ? (
         userAccess.data.map((item) => (
           <Menu.Item key={item.key} className="custom-menu-item">
-            {item.label.length >= 28 ? (
+            {item.label.length >= 27 ? (
               <Tooltip title={item.label} placement="left" color="geekblue">
                 <Link href={item.key}>{item.label}</Link>
               </Tooltip>

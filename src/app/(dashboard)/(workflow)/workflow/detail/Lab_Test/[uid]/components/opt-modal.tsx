@@ -91,6 +91,10 @@ export default function OptModal({
       >
         <Form.Item className="flex justify-center m-0">
           <Countdown
+            date={Date.now() + 120000}
+            autoStart={false}
+            onStart={() => LabGetOTP.isSuccess}
+            onComplete={() => setOpenOptModal(undefined)}
             renderer={({ minutes, seconds, total }: any) => {
               return (
                 <span className={timerColor(total)}>
@@ -99,9 +103,6 @@ export default function OptModal({
                 </span>
               );
             }}
-            date={Date.now() + 120000}
-            onComplete={() => setOpenOptModal(undefined)}
-            onStart={() => LabGetOTP.isSuccess}
           />
         </Form.Item>
         <Form.Item label="کد otp" name="Test" required={false} rules={[rules]}>

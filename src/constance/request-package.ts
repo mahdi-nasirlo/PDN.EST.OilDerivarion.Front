@@ -591,14 +591,14 @@ const RequestPackageApi = {
     type: z.object({ package_UID: z.string(), sample_Code: z.string() }),
     item: z.object({
       Sample_Code: z.string().uuid(),
-      Result_UID: z.string().uuid().optional(),
+      test_Item_Result_UID: z.string().uuid().optional(),
       Name: z.string().optional(),
       Test_Item_Count: z.number().optional(),
     }),
     response: generalResponseZod.extend({
       data: z.array(
         z.object({
-          Result_UID: z.string().uuid(),
+          test_Item_Result_UID: z.string().uuid(),
           Name: z.string(),
           Test_Item_Count: z.number(),
         })
@@ -610,7 +610,7 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string().uuid(),
       sample_Code: z.string().uuid(),
-      Result_UID: z.string().uuid(),
+      test_Item_Result_UID: z.string().uuid(),
       result_Test: z
         .string({ required_error: errorMessage.required })
         .pipe(notEmpty),
@@ -633,7 +633,7 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string().uuid(),
       sample_Code: z.string().uuid(),
-      Result_UID: z.string().uuid(),
+      test_Item_Result_UID: z.string().uuid(),
     }),
     response: generalResponseZod.extend({
       data: z.array(

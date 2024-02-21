@@ -14,7 +14,7 @@ export default function ResultForm({ formData, package_UID }: any) {
   const testFactorStandards = useLabSampleTestItemDetail({
     package_UID: package_UID,
     sample_Code: formData.Sample_Code,
-    Result_UID: formData.Result_UID,
+    test_Item_Result_UID: formData.test_Item_Result_UID,
   });
 
   const testResultUpdate = useLabSampleTestItemDetailUpdate();
@@ -27,7 +27,7 @@ export default function ResultForm({ formData, package_UID }: any) {
       ...values,
       package_UID: package_UID,
       sample_Code: formData.Sample_Code,
-      Result_UID: formData.Result_UID,
+      test_Item_Result_UID: formData.test_Item_Result_UID,
     });
   };
 
@@ -39,7 +39,7 @@ export default function ResultForm({ formData, package_UID }: any) {
 
   return (
     <>
-      {(formData.Sample_Code && formData.Result_UID) ?
+      {(formData.Sample_Code && formData.test_Item_Result_UID) ?
         <Spin spinning={testFactorStandards.isFetching && testFactorStandards.isLoading}>
           <Form layout="vertical" form={form} onFinish={handleSubmitTestResult}>
             <Row gutter={[16, 12]}>

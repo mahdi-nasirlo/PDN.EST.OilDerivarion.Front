@@ -2,23 +2,24 @@
 
 import React from "react";
 
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
-import { Alert, Button, Divider, Form, Input, Spin } from "antd/lib";
-import { Card } from "@/components/card";
-import WorkflowBtn from "@/components/workflow/workflow-btn";
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
+import {Alert, Button, Divider, Spin} from "antd/lib";
+import {Card} from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 import useUiVisitResultWorkFlow from "./hook/use-ui-lab-visit-result-work-flow";
-import { NaftForm } from "./components/naft-form";
-import { SamtForm } from "./components/samt-form";
-import { EstForm } from "./components/est-form";
+import {NaftForm} from "./components/naft-form";
+import {SamtForm} from "./components/samt-form";
+import {EstForm} from "./components/est-form";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
   const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiVisitResultWorkFlow({ taskId: params.uid });
+
+  // reports.data?.[0]
 
   if (!get.data && get.isFetching) {
     return (

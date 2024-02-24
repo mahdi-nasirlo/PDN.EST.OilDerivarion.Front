@@ -1,15 +1,16 @@
 import React from 'react';
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentMagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Card } from "@/components/card";
+import {DocumentMagnifyingGlassIcon} from "@heroicons/react/24/outline";
+import {Card} from "@/components/card";
 import RepostsMaker from "@/components/reposts-maker";
-import { Button, Checkbox, Col, Divider, Form, Row } from "antd";
+import {Button, Checkbox, Col, Divider, Form, Row} from "antd";
 import ReviewDataModalAcceptAgreement
     from "@/app/(dashboard)/request/final-review/components/review-data-modal-accept-agreement";
 import ReviewDataModalFinalSubmit
     from "@/app/(dashboard)/request/final-review/components/review-data-modal-final-submit";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 import useUiRequestFinalReview from "@/app/(dashboard)/request/final-review/hooks/use-ui-request-final-review";
+import WorkflowProvider from "@/providers/workflow-provider";
 
 const Index = ({ package_UID }: { package_UID?: string }) => {
 
@@ -39,8 +40,9 @@ const Index = ({ package_UID }: { package_UID?: string }) => {
                 titleIcon={<DocumentMagnifyingGlassIcon className="w-8" />}
             />
             <Card>
-                {/* @ts-ignore */}
-                <RepostsMaker reports={reposts.data} loading={reposts.isFetching} />
+                <WorkflowProvider>
+                    <RepostsMaker reports={reposts.data} loading={reposts.isFetching}/>
+                </WorkflowProvider>
                 <Divider />
                 <Form
                     form={form}

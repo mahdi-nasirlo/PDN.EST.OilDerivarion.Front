@@ -1,34 +1,36 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {z} from "zod";
 import {Alert, Collapse, Empty, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUid from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import DataViewer from "@/components/form-builder/data-viewer";
 import {RequestPackageApi} from 'constance/request-package';
 import WorkflowDataViewer from "@/components/workflow/WorkflowDataViewer";
+import {CheckIcon} from "@heroicons/react/24/outline";
+import {WorkflowContext} from "@/providers/workflow-provider";
 
-const Index = ({ reports, loading, taskId }: {
+const Index = ({reports, loading, taskId, setStatus}: {
   reports: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[] | undefined,
   loading?: boolean,
-  taskId: string
+  taskId: string,
+  setStatus?: (arg: []) => void
 }) => {
   if (loading) return <Spin />;
 
   if (!Array.isArray(reports)) return;
 
   return reports?.map((report, index) => (
-    <RenderReport key={index} index={index} report={report} taskId={taskId} />
+      <RenderReport key={index} index={index} report={report} taskId={taskId} setStatus={setStatus}/>
   ));
 };
 
-const RenderReport = ({
-  report,
-  index,
-  taskId
-}: {
+const RenderReport = ({report, index, taskId}: {
   index: number;
   taskId: string,
   report: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>;
+  setStatus?: (arg: []) => void
 }) => {
+
+  const {value, setValue} = useContext(WorkflowContext)
 
   let ItemType;
 
@@ -36,7 +38,6 @@ const RenderReport = ({
     switch (report.Form_Type) {
       case 1:
         ItemType = <RenderTypeOne formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>;
-        // ItemType = <WorkflowDataViewer form_Key={report.Form_Key} uid={report.UID} package_Uid={taskId}/>
         break;
       case 2:
         ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId} />;
@@ -56,6 +57,58 @@ const RenderReport = ({
     );
   }
 
+  let existHistory = (): any[] => {
+
+    const lc = localStorage.getItem(taskId)
+
+    try {
+
+      if (lc) {
+
+        const json = JSON.parse(lc)
+
+        if (z.array(z.string()).safeParse(json).success) {
+          return json
+        }
+
+        return []
+      }
+
+      return []
+
+    } catch (e) {
+
+      console.log(e)
+
+      return []
+    }
+
+  }
+
+  useEffect(() => saveStatusHistory(index === 0 ? ["0"] : undefined), [])
+
+  const [historyState, setHistoryState] = useState<string[]>(existHistory())
+
+  const saveStatusHistory = (e?: string | string[]) => {
+
+    let history: any[] = []
+
+    history = history.concat(existHistory())
+
+    if (e && !history.includes(report.Form_Key))
+      history.push(report.Form_Key)
+
+    setHistoryState(history)
+
+    setValue({...value, [taskId]: history})
+
+    localStorage.setItem(taskId, JSON.stringify(history))
+
+  }
+
+  const genExtra = () => (historyState.find((item) => item == report.Form_Key) &&
+      <CheckIcon className="w-8 text-primary-500"/>)
+
   return (
     <>
       <Collapse
@@ -63,11 +116,12 @@ const RenderReport = ({
         style={{ margin: "16px 0" }}
         className="my-3"
         size="large"
+        onChange={saveStatusHistory}
         items={[
           {
             label: report.Form_Name,
             children: ItemType,
-            // children: isLoading ? <Spin/> : <div>{data ? ItemType : <Empty/>}</div>
+            extra: genExtra()
           },
         ]}
       />

@@ -13,7 +13,13 @@ const useSetTask = () => {
             url: apiData.url,
             data,
             notify: false
-        })
+        }),
+        onSuccess: (data, variables) => {
+
+            if (data.success)
+                localStorage.removeItem(variables.taskId)
+
+        }
     })
 };
 

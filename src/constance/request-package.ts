@@ -594,6 +594,7 @@ const RequestPackageApi = {
       test_Item_Result_UID: z.string().uuid().optional(),
       Name: z.string().optional(),
       Test_Item_Count: z.number().optional(),
+      Is_Recorded: z.boolean().optional(),
     }),
     response: generalResponseZod.extend({
       data: z.array(
@@ -601,6 +602,7 @@ const RequestPackageApi = {
           test_Item_Result_UID: z.string().uuid(),
           Name: z.string(),
           Test_Item_Count: z.number(),
+          Is_Recorded: z.boolean().optional(),
         })
       ),
     }),

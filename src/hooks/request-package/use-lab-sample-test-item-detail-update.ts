@@ -19,9 +19,13 @@ const useLabSampleTestItemDetailUpdate = () => {
       }),
     onSuccess: async (data) => {
       await queryClient.setQueryData(
-        [RequestPackageApi.LabSampleTestItemList.url],
+        [RequestPackageApi.LabSampleTestItemDetailUpdate.url],
         data
       );
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabSampleTestItemList.url],
+        exact: false,
+      });
     },
   });
 

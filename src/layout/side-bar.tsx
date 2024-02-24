@@ -1,7 +1,7 @@
 import { Menu, MenuProps } from "antd/lib";
 import React from "react";
 import { useControlSidebar } from "./hooks/use-control-sidebar";
-import { Drawer, Tooltip } from "antd";
+import { Drawer, Tooltip, Typography } from "antd";
 import Link from "next/link";
 import MenuSkeleton from "./components/menu-skeleton";
 
@@ -28,7 +28,11 @@ export default function SideBar({ open, setOpen }: TProps) {
           <Menu.Item key={item.key} className="custom-menu-item">
             {item.label.length >= 27 ? (
               <Tooltip title={item.label} placement="left" color="geekblue">
-                <Link href={item.key}>{item.label}</Link>
+                <Typography>
+                  <Link href={item.key}>
+                    {item.label}
+                  </Link>
+                </Typography>
               </Tooltip>
             ) : (
               <Link href={item.key}>{item.label}</Link>
@@ -37,8 +41,9 @@ export default function SideBar({ open, setOpen }: TProps) {
         ))
       ) : (
         <MenuSkeleton />
-      )}
-    </Menu>
+      )
+      }
+    </Menu >
   );
 
   return (

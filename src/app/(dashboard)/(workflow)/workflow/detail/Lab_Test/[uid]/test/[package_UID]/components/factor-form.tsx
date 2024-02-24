@@ -3,7 +3,7 @@ import { Col, Divider, Form, Row, Select } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
-import { Button, Space, Typography } from "antd";
+import { Button, Space, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
@@ -11,6 +11,7 @@ import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sa
 import { RequestPackageApi } from "constance/request-package";
 import { z } from "zod";
 import { filterOption } from "@/lib/filterOption";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
@@ -52,8 +53,27 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
     },
     {
       title: "وضعیت",
-      dataIndex: "Status",
-      key: "3"
+      dataIndex: "Is_Recorded",
+      key: "3",
+      render: (_, record) => {
+        let color = "";
+        let name = "";
+        let icon = <></>;
+        if (record.Is_Recorded === false) {
+          color = "red";
+          name = "ثبت نشده";
+          icon = <CloseCircleOutlined />;
+        } else {
+          color = "success";
+          name = "ثبت شده";
+          icon = <CheckCircleOutlined />;
+        }
+        return (
+          <Tag icon={icon} color={color}>
+            {name}
+          </Tag>
+        );
+      }
     },
     {
       title: "عملیات",

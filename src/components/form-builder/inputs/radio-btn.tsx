@@ -10,7 +10,7 @@ const RadioBtn: React.FC<RadioGroupProps> = ({value, onChange, ...props}) => {
 
     const fieldDetailLen = props?.options?.length
     const widthPercent = fieldDetailLen ? 100 / fieldDetailLen : 100
-
+    
     return (
         <Radio.Group
             value={value}
@@ -29,8 +29,7 @@ const RadioBtn: React.FC<RadioGroupProps> = ({value, onChange, ...props}) => {
                 key={index}
             >
                 {(value as CheckboxOptionType).label}
-            </Radio.Button>)
-            }
+            </Radio.Button>)}
         </Radio.Group>
     );
 };

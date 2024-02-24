@@ -1,21 +1,20 @@
 "use client"
 
-import React, { useEffect } from 'react';
-import { Button, Col, Divider, Typography } from "antd";
-import { z } from "zod";
-import { formMakerApi } from "../../constance/form-maker";
-import { CheckboxOptionType, Form, Row, SelectProps } from "antd/lib";
+import React, {useEffect} from 'react';
+import {Button, Col, Divider, Typography} from "antd";
+import {z} from "zod";
+import {formMakerApi} from "../../constance/form-maker";
+import {CheckboxOptionType, Form, Row, SelectProps} from "antd/lib";
 import TextInput from "@/components/form-builder/inputs/text-input";
-import { useValidation } from "@/hooks/use-validation";
-import { errorMessage } from "../../constance/error-message";
-import { Rule } from "rc-field-form/es/interface";
+import {useValidation} from "@/hooks/use-validation";
+import {errorMessage} from "../../constance/error-message";
+import {Rule} from "rc-field-form/es/interface";
 import InputNumber from "@/components/form-builder/inputs/Input-number";
 import PercentInput from "@/components/form-builder/inputs/percent-Input";
 import Select from "@/components/form-builder/inputs/select";
 import RadioBtn from "@/components/form-builder/inputs/radio-btn";
-import { updatedObject } from "../../../utils/method";
 import NaturalNumber from "@/components/form-builder/inputs/natural-number";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import TemperatureInput from './inputs/temperature-input';
 
 
@@ -62,8 +61,8 @@ const RenderInputs = (props: {
 
     useEffect(() => {
         if (props.initialValues) {
-
-            form.setFieldsValue(updatedObject(props.initialValues))
+            
+            form.setFieldsValue(props.initialValues)
 
         }
     }, [props.initialValues])

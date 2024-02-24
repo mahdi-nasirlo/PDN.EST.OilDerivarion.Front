@@ -57,11 +57,11 @@ export default function Page({ params }: { params: { uid: string } }) {
         backLink={`/workflow/detail/${stepKey}/${params.uid}`}
       />
 
+      <FactorForm package_UID={params.uid} />
+
       <Card>
         <TimeForm />
       </Card>
-
-      <FactorForm package_UID={params.uid} />
 
       <WorkflowBtn
         choices={get.data?.choices}

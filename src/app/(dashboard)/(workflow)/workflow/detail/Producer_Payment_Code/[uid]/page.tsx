@@ -7,7 +7,9 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
     <CommonWorkflow
       uid={uid}
       stepKey={"Producer_Payment_Code"}
-    ></CommonWorkflow>
+    >
+
+    </CommonWorkflow>
   );
 };
 

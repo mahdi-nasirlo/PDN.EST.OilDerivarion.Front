@@ -2,7 +2,7 @@ import React from 'react';
 import {formMakerApi} from "../../../constance/form-maker";
 import {ZodErrorAlert} from "@/components/zod-error-alert";
 import {Empty} from "antd";
-import {Descriptions, Table, TableColumnsType, Typography} from "antd/lib";
+import {Descriptions, Divider, Table, TableColumnsType, Typography} from "antd/lib";
 import {Card} from "@/components/card";
 
 interface PropsType {
@@ -28,7 +28,7 @@ const Index = ({data}: PropsType) => {
         const view: React.ReactNode[] = []
 
 
-        cardData.map((item) => {
+        cardData.map((item, cardIndex) => {
 
             view.push(<Typography className="mb-5 font-semibold text-lg text-right">{item.Title}</Typography>)
 
@@ -89,7 +89,10 @@ const Index = ({data}: PropsType) => {
                     {desc}
                 </Descriptions>
             </Card>)
-
+            
+            if (cardIndex !== (cardData.length - 1)) {
+                view.push(<Divider/>)
+            }
         })
 
         return view

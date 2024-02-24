@@ -7,11 +7,12 @@ import {RequestPackageApi} from 'constance/request-package';
 import WorkflowDataViewer from "@/components/workflow/WorkflowDataViewer";
 import {CheckIcon} from "@heroicons/react/24/outline";
 import {WorkflowContext} from "@/providers/workflow-provider";
+import {Card} from "@/components/card";
 
 const Index = ({reports, loading, taskId, setStatus}: {
   reports: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[] | undefined,
   loading?: boolean,
-  taskId: string,
+  taskId?: string,
   setStatus?: (arg: []) => void
 }) => {
   if (loading) return <Spin />;
@@ -25,7 +26,7 @@ const Index = ({reports, loading, taskId, setStatus}: {
 
 const RenderReport = ({report, index, taskId}: {
   index: number;
-  taskId: string,
+  taskId?: string,
   report: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>;
   setStatus?: (arg: []) => void
 }) => {
@@ -40,7 +41,9 @@ const RenderReport = ({report, index, taskId}: {
         ItemType = <RenderTypeOne formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>;
         break;
       case 2:
-        ItemType = <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId} />;
+        ItemType = <Card className="bg-gray-100">
+          <RenderTypeTow formKey={report.Form_Key} formUid={report.UID} taskId={taskId}/>
+        </Card>;
         break;
       // case 3:
       //     ItemType = <MediaTypeItems data={data}/>
@@ -59,7 +62,7 @@ const RenderReport = ({report, index, taskId}: {
 
   let existHistory = (): any[] => {
 
-    const lc = localStorage.getItem(taskId)
+    const lc = localStorage.getItem(`${taskId}`)
 
     try {
 
@@ -95,14 +98,14 @@ const RenderReport = ({report, index, taskId}: {
 
     history = history.concat(existHistory())
 
-    if (e && !history.includes(report.Form_Key))
+    if (e && history)
       history.push(report.Form_Key)
 
     setHistoryState(history)
 
-    setValue({...value, [taskId]: history})
+    setValue({...value, [`${taskId}`]: history})
 
-    localStorage.setItem(taskId, JSON.stringify(history))
+    localStorage.setItem(`${taskId}`, JSON.stringify(history))
 
   }
 

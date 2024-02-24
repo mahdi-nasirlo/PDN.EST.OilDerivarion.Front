@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import { useForm } from "antd/lib/form/Form";
-import { useRouter } from "next/navigation";
-import { Card } from "@/components/card";
-import { Button, Divider, Input, Spin } from "antd";
+import {useForm} from "antd/lib/form/Form";
+import {useRouter} from "next/navigation";
+import {Card} from "@/components/card";
+import {Button, Divider, Input, Spin} from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
 import RepostsMaker from "@/components/reposts-maker";
-import { Form } from "antd/lib";
+import {Form} from "antd/lib";
+import {useRequestPackageReportList} from "@/hooks/request-package/use-request-package-report-list";
+import {useCheckReportSeen} from "@/providers/workflow-provider";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
-import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 
 const CommonWorkflow = ({
   uid,
@@ -23,6 +24,8 @@ const CommonWorkflow = ({
   stepKey: string;
   children?: React.ReactNode;
 }) => {
+
+
   const [choice, setChoice] = useState<string>();
 
   const get = useGetTask({ taskId: uid, stepKey: stepKey });
@@ -32,6 +35,8 @@ const CommonWorkflow = ({
   const [form] = useForm();
 
   const reports = useRequestPackageReportList({ step_Key: stepKey, package_UID: uid });
+
+  const {isSeenReport} = useCheckReportSeen(uid, reports.data)
 
   const router = useRouter();
 
@@ -70,6 +75,7 @@ const CommonWorkflow = ({
         />
       )}
       <Card>
+
         {reports.data?.length !== 0 && (
           <>
             <Divider orientation="left" className="mb-6">
@@ -86,26 +92,28 @@ const CommonWorkflow = ({
           </>
         )}
         {children}
-        <Form form={form} onFinish={handleSet} layout="vertical">
-          <Form.Item
-            label="توضیحات"
-            name="description"
-            required={false}
-            rules={[{ required: true, message: "لطفا مقدار را وارد نمایید" }]}
-          >
-            <Input.TextArea
-              style={{ resize: "none" }}
-              placeholder="وارد کنید" />
-          </Form.Item>
-        </Form>
-        <WorkflowBtn
-          loading={set.isPending || get.isFetching}
-          choices={get.data?.choices}
-          onClick={(key) => {
-            form.submit();
-            setChoice(key);
-          }}
-        />
+        {isSeenReport && <>
+          <Form form={form} onFinish={handleSet} layout="vertical">
+            <Form.Item
+                label="توضیحات"
+                name="description"
+                required={false}
+                rules={[{required: true, message: "لطفا مقدار را وارد نمایید"}]}
+            >
+              <Input.TextArea
+                  style={{resize: "none"}}
+                  placeholder="وارد کنید"/>
+            </Form.Item>
+          </Form>
+          <WorkflowBtn
+              loading={set.isPending || get.isFetching}
+              choices={get.data?.choices}
+              onClick={(key) => {
+                form.submit();
+                setChoice(key);
+              }}
+          />
+        </>}
       </Card>
     </>
   );

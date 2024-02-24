@@ -11,8 +11,6 @@ interface PropsType {
 
 const Index = ({data}: PropsType) => {
 
-    console.log(data)
-
     const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
 
     if (!data) {

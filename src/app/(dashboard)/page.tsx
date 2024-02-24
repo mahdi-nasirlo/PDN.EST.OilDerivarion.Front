@@ -5,47 +5,35 @@ import Breadcrumb from "@/components/breadcrumb";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Card } from "@/components/card";
 import { motion } from "framer-motion";
-import { Alert, Button, Carousel, Spin } from "antd";
-import { Ref, useRef, useState } from "react";
-import { CarouselRef } from "antd/es/carousel";
+import { Alert, Spin } from "antd";
 
 
 export default function Page() {
-  const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const carouselRef = useRef<Ref<CarouselRef> | undefined>(null)
-
-  const contentStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '160px',
-    color: '#fff',
-    background: '#364d79',
-  };
-
-  const nextStep = () => {
-    const next = (currentStep + 1) % 4;
-    setCurrentStep(next);
-  };
+  const pages = useGetUserAccess()
 
   return (
-    <Card>
-      {/* <Carousel ref={carouselRef} autoplay={false} dots={false}> */}
-      <div>
-        <h3 style={contentStyle}>fwefwef = 1</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>mjhymhjmjh = 2</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>qwdrefvervrt = 3</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>89659045 = 4</h3>
-      </div>
-      {/* </Carousel> */}
-      <Button onClick={nextStep}>Next</Button>
-    </Card >
+    <>
+      <Breadcrumb
+        pages={[]}
+        currentPage={"خانه"}
+        titleIcon={<HomeIcon className="w-8" />}
+      />
+      <Card className="flex justify-center items-center h-[66vh]">
+        {(pages.isLoading || pages.isFetching) && <Spin spinning={pages.isLoading} />}
+        {!pages.isFetching && (!Array.isArray(pages.data) || pages.data.length == 0) &&
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Alert
+              type="warning"
+              className="font-bold text-md w-full"
+              message="اشخاص حقیقی فاقد شرکت،  قادر به ثبت نام و استفاده از سامانه نمی باشد" />
+          </motion.div>
+        }
+      </Card>
+    </>
   );
 }

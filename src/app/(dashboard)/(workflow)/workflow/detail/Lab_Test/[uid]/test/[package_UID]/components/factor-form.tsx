@@ -3,7 +3,7 @@ import { Col, Divider, Form, Row, Select } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
-import { Button, Space, Tag, Typography } from "antd";
+import { Button, Input, Space, Spin, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
@@ -12,11 +12,13 @@ import { RequestPackageApi } from "constance/request-package";
 import { z } from "zod";
 import { filterOption } from "@/lib/filterOption";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import useLabSampleTestItemDetailFinalUpdate from "@/hooks/request-package/use-lab-sample-testItem-detail-final-update";
 
 
 export default function FactorForm({ package_UID }: { package_UID: string }) {
 
   const {
+    form,
     Battle,
     setBattle,
     LabSampleList,
@@ -25,10 +27,23 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
 
   const testResultUpdate = useLabSampleTestItemDetailUpdate();
 
+
+  const LabSampleTestItemDetailFinalUpdate = useLabSampleTestItemDetailFinalUpdate()
+
+
+  const handelLabSampleTestItemDetailFinalUpdate = async () => {
+    await LabSampleTestItemDetailFinalUpdate.mutateAsync({
+      package_UID: package_UID,
+      sample_Code: Battle?.Sample_Code,
+    });
+  };
+
+
   const [formData, setFormData] = useState<any>({
     Sample_Code: undefined,
     test_Item_Result_UID: undefined,
-    Factor_Name: undefined
+    Factor_Name: undefined,
+
   });
 
   useEffect(() => {
@@ -84,8 +99,9 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
       render: (_, record) => (
         <Space size="small">
           <Button
+            disabled={Battle?.Lab_Is_Finished}
             type="link"
-            className="text-secondary-500 font-bold"
+            className={`${Battle?.Lab_Is_Finished ? "text-gray-400" : "text-secondary-500"} font-bold`}
             onClick={() => {
               setFormData({
                 test_Item_Result_UID: record.test_Item_Result_UID,
@@ -104,22 +120,58 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
   return (
     <>
       <Card>
-        <Form.Item
-          labelCol={{ span: 24 }}
-          className="w-full md:w-1/2"
-          label="بطری"
-        >
-          <Select
-            showSearch
-            value={Battle}
-            placeholder="انتخاب کنید"
-            filterOption={(input, option) => filterOption(input, option, LabSampleList.fieldName.label)}
-            onChange={(e) => setBattle(e)}
-            options={LabSampleList.data}
-            fieldNames={LabSampleList.fieldName}
-            loading={LabSampleList.isFetching}
-          />
-        </Form.Item>
+        <Spin spinning={LabSampleTestItemDetailFinalUpdate.isPending || LabSampleList.isFetching}>
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={handelLabSampleTestItemDetailFinalUpdate}
+          >
+            <Row gutter={[16, 16]}>
+              <Col xs={24} sm={8}>
+                <Form.Item
+                  label="بطری"
+                >
+                  <Select
+                    showSearch
+                    value={Battle?.Sample_Code}
+                    placeholder="انتخاب کنید"
+                    filterOption={(input, option) => filterOption(input, option, LabSampleList.fieldName.label)}
+                    onChange={(e) => setBattle({
+                      Sample_Code: e,
+                      Lab_Is_Finished: LabSampleList.data?.find(item => item.Sample_Code == e)?.Lab_Is_Finished
+                    })}
+                    options={LabSampleList.data}
+                    fieldNames={LabSampleList.fieldName}
+                    loading={LabSampleList.isFetching}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={8}>
+                <Form.Item
+                  label="وضعیت"
+                >
+                  <Input
+                    disabled
+                    value={Battle?.Lab_Is_Finished ? "ثبت شده" : "ثبت نشده"}
+                  />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={8} className="flex items-center mt-2">
+                <Button
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  className="w-full"
+                  disabled={Battle?.Lab_Is_Finished}
+                  loading={LabSampleTestItemDetailFinalUpdate.isPending}
+                >
+                  ثبت نهایی
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </Spin>
+        <Divider />
         <CustomTable
           header={{
             text: "لیست فاکتور های آزمون",
@@ -129,22 +181,13 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
           columns={columns}
           isLoading={testResultUpdate.isPending || LabSampleTestItemList.isLoading || LabSampleTestItemList.isFetching}
         />
-      </Card>
+      </Card >
       <Card className="mt-6">
-        <ResultForm formData={formData} package_UID={package_UID} />
-        <Divider />
-        <Row gutter={[16, 10]} className="flex justify-center items-center">
-          <Col xl={2} lg={3} sm={4} xs={6}>
-            <Typography className="text-right font-bold text-secondary-500">
-              فاکتور 1 از 10
-            </Typography>
-          </Col>
-          <Col xl={22} lg={21} sm={20} xs={18} className="flex">
-            <Button size="large" type="primary" className="w-full">
-              تصمیم گیری شود(ثبت نهایی)
-            </Button>
-          </Col>
-        </Row>
+        <ResultForm
+          formData={formData}
+          setFormData={setFormData}
+          package_UID={package_UID}
+        />
       </Card >
     </>
   );

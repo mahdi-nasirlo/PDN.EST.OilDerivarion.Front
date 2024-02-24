@@ -10,7 +10,10 @@ const apiData = RequestPackageApi.LabSampleList;
 const useBattleSelect = (data: z.infer<typeof apiData.type>) => {
   const [form] = useForm();
 
-  const [Battle, setBattle] = useState<string>();
+  const [Battle, setBattle] = useState<{
+    Sample_Code: string | undefined;
+    Lab_Is_Finished: boolean | undefined;
+  }>();
 
   const LabSampleList = useRequestPackageLabSampleList({
     package_UID: data.package_UID,
@@ -18,13 +21,14 @@ const useBattleSelect = (data: z.infer<typeof apiData.type>) => {
 
   const LabSampleTestItemList = useLabSampleTestItemList({
     package_UID: data.package_UID,
-    sample_Code: Battle as string,
+    sample_Code: Battle?.Sample_Code as string,
   });
 
   useEffect(() => {
-    if (Array.isArray(LabSampleList.data) && LabSampleList.data.length > 0) {
-      setBattle(LabSampleList.data[0].Sample_Code);
-    }
+    setBattle({
+      Lab_Is_Finished: LabSampleList.data?.[0].Lab_Is_Finished,
+      Sample_Code: LabSampleList.data?.[0].Sample_Code,
+    });
   }, [LabSampleList.data]);
 
   return {

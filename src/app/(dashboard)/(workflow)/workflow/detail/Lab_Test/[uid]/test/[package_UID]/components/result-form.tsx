@@ -9,7 +9,7 @@ import { z } from "zod";
 
 const LabSampleTestItemDetailUpdateApi = RequestPackageApi.LabSampleTestItemDetailUpdate;
 
-export default function ResultForm({ formData, package_UID }: any) {
+export default function ResultForm({ formData, setFormData, package_UID }: any) {
 
   const testFactorStandards = useLabSampleTestItemDetail({
     package_UID: package_UID,
@@ -23,12 +23,20 @@ export default function ResultForm({ formData, package_UID }: any) {
 
   const handleSubmitTestResult = async (values: z.infer<typeof LabSampleTestItemDetailUpdateApi.type>) => {
 
-    await testResultUpdate.mutateAsync({
+    const res = await testResultUpdate.mutateAsync({
       ...values,
       package_UID: package_UID,
       sample_Code: formData.Sample_Code,
       test_Item_Result_UID: formData.test_Item_Result_UID,
     });
+    if (res.success) {
+      setFormData({
+        Factor_Name: undefined,
+        Sample_Code: undefined,
+        test_Item_Result_UID: undefined,
+      })
+
+    }
   };
 
   useEffect(() => {

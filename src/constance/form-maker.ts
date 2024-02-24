@@ -121,7 +121,7 @@ const formMakerApi = {
     type: z.object({
       form_Key: z.string(),
       form_UID: z.string().optional().nullable(),
-      taskId: z.string().nullable(),
+      taskId: z.string().nullable().optional(),
     }),
     response: generalResponseZod.extend({
       data: z.object({

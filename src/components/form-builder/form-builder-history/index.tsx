@@ -4,14 +4,12 @@ import React, {useState} from 'react';
 import {ColumnsType} from "antd/es/table";
 import {useProducerFormsGetDocHistory} from "@/hooks/form-maker/use-producer-forms-get-doc-history";
 import {z} from "zod";
-import {Alert, Button, Collapse, Modal, Spin, Typography} from "antd";
+import {Button, Collapse, Modal, Spin, Typography} from "antd";
 import useProducerFormsGetDocSchemaByUID from "@/hooks/form-maker/use-producer-forms-get-doc-schema-by-UID";
 import CustomTable from "@/components/custom-table";
 import {RectangleStackIcon} from "@heroicons/react/24/outline";
 import {motion} from "framer-motion";
-import {formMakerApi} from "../../../constance/form-maker";
-import {ZodErrorAlert} from "@/components/zod-error-alert";
-import DataViewer from "@/components/form-builder/data-viewer";
+import {RenderTypeTow} from "@/components/reposts-maker"
 
 const Index = ({ formKey }: { formKey: string }) => {
 
@@ -51,22 +49,6 @@ const Index = ({ formKey }: { formKey: string }) => {
         }
     ]
 
-    const renderTable = () => {
-
-        try {
-            const dataTable = formMakerApi.ProducerFormsGetDocSchemaByUid.response.shape.data.safeParse(history.data)
-
-            if (!dataTable.success)
-                return <ZodErrorAlert success={false} error={dataTable.error} />
-
-            const { data } = dataTable
-
-            return <DataViewer data={data.form_data} schema={data.Schema_Data}/>
-
-        } catch (e: unknown) {
-            return <Alert message={""} />
-        }
-    }
 
     return (
         <div>
@@ -114,7 +96,7 @@ const Index = ({ formKey }: { formKey: string }) => {
             >
                 <Spin className="w-full flex justify-center items-center"
                     spinning={history.isLoading || history.isFetching}>
-                    {history.data && renderTable()}
+                    {history.data && <RenderTypeTow formKey={formKey} formUid={formUid as string}/>}
                 </Spin>
             </Modal>
         </div>

@@ -63,10 +63,10 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
+        {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
           <>
             <Divider />
-            {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
+            <Form form={form} onFinish={handleSet} layout="vertical"></Form>
             <WorkflowBtn
               loading={set.isPending}
               choices={get.data?.choices}
@@ -81,7 +81,7 @@ export default function Page({ params }: { params: { uid: string } }) {
               }}
             />
           </>
-        )}
+        )} */}
       </Card>
     </>
   );

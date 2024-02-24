@@ -27,12 +27,14 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
   const [formData, setFormData] = useState<any>({
     Sample_Code: undefined,
     test_Item_Result_UID: undefined,
+    Factor_Name: undefined
   });
 
   useEffect(() => {
     setFormData({
       Sample_Code: undefined,
       test_Item_Result_UID: undefined,
+      Factor_Name: undefined
     })
   }, [(Battle)])
 
@@ -68,6 +70,7 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
               setFormData({
                 test_Item_Result_UID: record.test_Item_Result_UID,
                 Sample_Code: record.Sample_Code,
+                Factor_Name: record.Name
               })
             }}
           >

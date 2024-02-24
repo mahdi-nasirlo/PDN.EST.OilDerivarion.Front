@@ -1,7 +1,7 @@
 import useLabSampleTestItemDetail from "@/hooks/request-package/use-lab-sample-test-item-detail";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
 import { useValidation } from "@/hooks/use-validation";
-import { Alert, InputNumber, Select, Spin } from "antd";
+import { Alert, Divider, InputNumber, Select, Spin, Typography } from "antd";
 import { Button, Col, Form, Input, Row } from "antd/lib";
 import { RequestPackageApi } from "constance/request-package";
 import React, { useEffect } from "react";
@@ -41,6 +41,10 @@ export default function ResultForm({ formData, package_UID }: any) {
     <>
       {(formData.Sample_Code && formData.test_Item_Result_UID) ?
         <Spin spinning={testFactorStandards.isFetching && testFactorStandards.isLoading}>
+          <Typography className="text-right font-bold text-CustomizeBlue-500">
+            {`ثبت نتیجه فاکتور آزمون ${formData?.Factor_Name}`}
+          </Typography>
+          <Divider />
           <Form layout="vertical" form={form} onFinish={handleSubmitTestResult}>
             <Row gutter={[16, 12]}>
               <Col xs={24} sm={8}>

@@ -78,7 +78,7 @@ const RenderReport = ({
 interface PropType {
   formKey: string;
   formUid: string;
-  taskId: string
+  taskId?: string
 }
 
 const RenderTypeOne = ({taskId, formUid, formKey}: PropType) => {
@@ -96,7 +96,7 @@ const RenderTypeOne = ({taskId, formUid, formKey}: PropType) => {
   return <WorkflowDataViewer data={schema.data?.form_data}/>
 }
 
-const RenderTypeTow = ({formKey, formUid, taskId}: PropType) => {
+export const RenderTypeTow = ({formKey, formUid, taskId}: PropType) => {
 
   const schema = useProducerFormsGetDocSchemaByUid({
     form_Key: formKey,

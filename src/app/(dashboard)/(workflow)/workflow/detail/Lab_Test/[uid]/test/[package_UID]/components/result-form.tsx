@@ -1,6 +1,7 @@
 import useLabSampleTestItemDetail from "@/hooks/request-package/use-lab-sample-test-item-detail";
 import useLabSampleTestItemDetailUpdate from "@/hooks/request-package/use-lab-sample-test-item-detail-update";
 import { useValidation } from "@/hooks/use-validation";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Alert, Divider, InputNumber, Select, Spin, Typography } from "antd";
 import { Button, Col, Form, Input, Row } from "antd/lib";
 import { RequestPackageApi } from "constance/request-package";
@@ -9,7 +10,7 @@ import { z } from "zod";
 
 const LabSampleTestItemDetailUpdateApi = RequestPackageApi.LabSampleTestItemDetailUpdate;
 
-export default function ResultForm({ formData, package_UID }: any) {
+export default function ResultForm({ formData, setFormData, package_UID }: any) {
 
   const testFactorStandards = useLabSampleTestItemDetail({
     package_UID: package_UID,
@@ -23,12 +24,20 @@ export default function ResultForm({ formData, package_UID }: any) {
 
   const handleSubmitTestResult = async (values: z.infer<typeof LabSampleTestItemDetailUpdateApi.type>) => {
 
-    await testResultUpdate.mutateAsync({
+    const res = await testResultUpdate.mutateAsync({
       ...values,
       package_UID: package_UID,
       sample_Code: formData.Sample_Code,
       test_Item_Result_UID: formData.test_Item_Result_UID,
     });
+    if (res.success) {
+      setFormData({
+        Factor_Name: undefined,
+        Sample_Code: undefined,
+        test_Item_Result_UID: undefined,
+        Lab_Is_Finished: undefined
+      })
+    }
   };
 
   useEffect(() => {
@@ -41,11 +50,30 @@ export default function ResultForm({ formData, package_UID }: any) {
     <>
       {(formData.Sample_Code && formData.test_Item_Result_UID) ?
         <Spin spinning={testFactorStandards.isFetching && testFactorStandards.isLoading}>
-          <Typography className="text-right font-bold text-CustomizeBlue-500">
-            {`ثبت نتیجه فاکتور آزمون ${formData?.Factor_Name}`}
-          </Typography>
+          <div className="flex justify-between items-center">
+            <Typography className="text-right font-bold text-CustomizeBlue-500">
+              {`ثبت نتیجه فاکتور آزمون ${formData?.Factor_Name}`}
+            </Typography>
+            <Button
+              type="link"
+              className="text-CustomizeBlue-500"
+              onClick={() => setFormData({
+                Factor_Name: undefined,
+                Sample_Code: undefined,
+                test_Item_Result_UID: undefined,
+                Lab_Is_Finished: undefined
+              })}
+            >
+              <XMarkIcon width={24} height={24} />
+            </Button>
+          </div>
           <Divider />
-          <Form layout="vertical" form={form} onFinish={handleSubmitTestResult}>
+          <Form
+            form={form}
+            layout="vertical"
+            disabled={formData.Lab_Is_Finished}
+            onFinish={handleSubmitTestResult}
+          >
             <Row gutter={[16, 12]}>
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} name="result_Test" label="نتیجه آزمون">
@@ -109,26 +137,28 @@ export default function ResultForm({ formData, package_UID }: any) {
                 </Form.Item>
               </Col>
             </Row>
-            <Row gutter={[16, 10]} className="flex items-center justify-end">
-              <Col xs={24} xxl={2} md={4} sm={6}>
-                <Button
-                  loading={testResultUpdate.isPending}
-                  className="w-full"
-                  size="large"
-                  type="primary"
-                  htmlType="submit"
-                >
-                  ثبت
-                </Button>
-              </Col>
-            </Row>
+            {!formData.Lab_Is_Finished &&
+              <Row gutter={[16, 10]} className="flex items-center justify-end">
+                <Col xs={24} xxl={2} md={4} sm={6}>
+                  <Button
+                    loading={testResultUpdate.isPending}
+                    className="w-full"
+                    size="large"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    ثبت
+                  </Button>
+                </Col>
+              </Row>
+            }
           </Form>
         </Spin>
         :
         <Alert
           type="info"
-          className="w-full my-3 text-blue-800 text-center"
-          message="با انتخاب و کلیک هر یک از ثبت نتیجه های فاکتور آزمون ، فرم ثبت نتیجه آن نمایش داده می شود."
+          className="w-full my-3 text-blue-800 text-right"
+          message="با انتخاب و کلیک هر یک از دکمه های مشاهده نتیجه یا ثبت نتیجه فاکتور های آزمون ، فرم فاکتور آزمون آن نمایش داده می شود."
         />
       }
     </>

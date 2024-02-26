@@ -3,9 +3,9 @@ import { z } from "zod";
 import fetchWithSession from "@/utils/fetch-with-session";
 import { RequestPackageApi } from "../../constance/request-package";
 
-const apiData = RequestPackageApi.LabSampleTestItemDetailUpdate;
+const apiData = RequestPackageApi.LabSampleTestItemDetailFinalUpdate;
 
-const useLabSampleTestItemDetailUpdate = () => {
+const useLabSampleTestItemDetailFinalUpdate = () => {
   const queryClient = useQueryClient();
 
   const query = useMutation({
@@ -19,9 +19,15 @@ const useLabSampleTestItemDetailUpdate = () => {
       }),
     onSuccess: async (data) => {
       await queryClient.setQueryData(
-        [RequestPackageApi.LabSampleTestItemDetailUpdate.url],
+        [RequestPackageApi.LabSampleTestItemDetailFinalUpdate.url],
         data
       );
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabSampleList.url],
+        exact: false,
+      });
+      console.log("LabSampleList");
+
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.LabSampleTestItemList.url],
         exact: false,
@@ -32,4 +38,4 @@ const useLabSampleTestItemDetailUpdate = () => {
   return { ...query, ...apiData };
 };
 
-export default useLabSampleTestItemDetailUpdate;
+export default useLabSampleTestItemDetailFinalUpdate;

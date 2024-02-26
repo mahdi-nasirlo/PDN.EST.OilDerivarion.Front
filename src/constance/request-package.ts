@@ -583,7 +583,9 @@ const RequestPackageApi = {
       package_UID: z.string(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.object({ Sample_Code: z.string() })),
+      data: z.array(
+        z.object({ Sample_Code: z.string(), Lab_Is_Finished: z.boolean() })
+      ),
     }),
   },
   LabSampleTestItemList: {
@@ -609,6 +611,7 @@ const RequestPackageApi = {
   },
   LabSampleTestItemDetailUpdate: {
     url: "/RequestPackage/LabSampleTestItemDetailUpdate",
+    response: generalResponseZod,
     type: z.object({
       package_UID: z.string().uuid(),
       sample_Code: z.string().uuid(),
@@ -684,6 +687,16 @@ const RequestPackageApi = {
       package_UID: z.string().uuid().optional(),
       part_UID: z.string().uuid().optional(),
       density: z.number(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+  LabSampleTestItemDetailFinalUpdate: {
+    url: "/RequestPackage/LabSampleTestItemDetailFinalUpdate",
+    type: z.object({
+      package_UID: z.string(),
+      sample_Code: z.string().optional(),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.any()),

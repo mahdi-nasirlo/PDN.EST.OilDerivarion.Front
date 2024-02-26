@@ -152,17 +152,17 @@ const RequestPackageApi = {
       naft_1: z.string(),
       naft_2: z.string(),
       naft_3: z.string(),
-      naft_description: z.string(),
+      naft_description: z.string().max(500),
       samt_1: z.string(),
       samt_2: z.string(),
       samt_3: z.string(),
-      samt_description: z.string(),
+      samt_description: z.string().max(500),
       est_1: z.string(),
       est_2: z.string(),
       est_3: z.string(),
-      est_description: z.string(),
+      est_description: z.string().max(500),
       final_time: z.string(),
-      final_description: z.string(),
+      final_description: z.string().max(500),
     }),
     // item: RequestPackageReportListItem,
     // response: generalResponseZod.extend({
@@ -207,13 +207,13 @@ const RequestPackageApi = {
       visit_Type: z.number(),
       package_UID: z.string().uuid(),
 
-      naft_opinion_1: z.string(),
+      naft_opinion_1: z.string().max(500),
       is_naft_peresent: z.boolean(),
 
-      samt_opinion_1: z.string(),
+      samt_opinion_1: z.string().max(500),
       is_samt_peresent: z.boolean(),
 
-      est_opinion_1: z.string(),
+      est_opinion_1: z.string().max(500),
       is_est_peresent: z.boolean(),
     }),
   },
@@ -245,11 +245,11 @@ const RequestPackageApi = {
       visit_Type: z.number(),
       package_UID: z.string().uuid(),
 
-      naft_opinion_2: z.string(),
+      naft_opinion_2: z.string().max(500),
 
-      samt_opinion_2: z.string(),
+      samt_opinion_2: z.string().max(500),
 
-      est_opinion_3: z.string(),
+      est_opinion_3: z.string().max(500),
     }),
   },
   LabVisitOpinionList: {
@@ -291,11 +291,11 @@ const RequestPackageApi = {
       product_UID: z.string(),
       visit_Type: z.number(),
       naft_Opinion_ID: z.number(),
-      naft_opinion_description: z.string(),
+      naft_opinion_description: z.string().max(500),
       samt_Opinion_ID: z.number(),
-      samt_opinion_description: z.string(),
+      samt_opinion_description: z.string().max(500),
       est_Opinion_ID: z.number(),
-      est_opinion_description: z.string(),
+      est_opinion_description: z.string().max(500),
       naft_test_item: z.array(z.string()),
       samt_test_item: z.array(z.string()),
       est_test_item: z.array(z.string()),
@@ -618,10 +618,12 @@ const RequestPackageApi = {
       test_Item_Result_UID: z.string().uuid(),
       result_Test: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       result_Range: z.number(),
       result_Desc: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       result_Min_Accept: z.number(),
       result_Max_Accept: z.number(),

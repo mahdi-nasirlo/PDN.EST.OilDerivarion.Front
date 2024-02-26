@@ -1,6 +1,6 @@
-import {generalResponseZod, notEmpty} from "@/types/api-response";
-import {z} from "zod";
-import {errorMessage} from "./error-message";
+import { generalResponseZod, notEmpty } from "@/types/api-response";
+import { z } from "zod";
+import { errorMessage } from "./error-message";
 
 const BoxGPSGetPageItem = z.object({
   uid: z.string().uuid().optional(),
@@ -15,7 +15,7 @@ const boxGPSApi = {
   BoxGPSGetPage: {
     url: "/BoxGPS/GetPage",
     type: z.object({
-      code: z.string().optional(),
+      code: z.string().max(50).optional(),
       device_Status: z.number().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -50,8 +50,14 @@ const boxGPSApi = {
     type: z.object({
       code: z.number({ required_error: errorMessage.required }),
       capacity: z.number({ required_error: errorMessage.required }),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      imei: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
+      imei: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),
@@ -65,14 +71,17 @@ const boxGPSApi = {
     url: "/BoxGPS/Update",
     type: z.object({
       uid: z.string().uuid(),
-      code: z.number({required_error: errorMessage.required}),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      code: z.number({ required_error: errorMessage.required }),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),
       stateUid: z.string(),
       capacity: z.number(),
-      imei: z.string().pipe(notEmpty),
+      imei: z.string().max(50).pipe(notEmpty),
     }),
   },
 
@@ -80,7 +89,7 @@ const boxGPSApi = {
     url: "/BoxGPS/Delete",
     type: z.object({
       uid: z.string().uuid(),
-      descripton: z.string({ required_error: errorMessage.required }),
+      descripton: z.string({ required_error: errorMessage.required }).max(50),
       status: z.number({ required_error: errorMessage.required_choice }),
       test: z.boolean().optional(),
     }),
@@ -107,7 +116,7 @@ const boxGPSApi = {
   BoxGPSGetPageForExpert: {
     url: "/BoxGPS/GetPageForExpert",
     type: z.object({
-      code: z.string().optional(),
+      code: z.string().max(50).optional(),
       device_Status: z.number().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -126,10 +135,13 @@ const boxGPSApi = {
     type: z.object({
       uid: z.string().uuid(),
       stateUid: z.string().optional(),
-      imei: z.string(),
+      imei: z.string().max(50),
       capacity: z.number().optional(),
-      code: z.string().optional(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      code: z.string().max(50).optional(),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       device_Status: z.number({
         required_error: errorMessage.required_choice,
       }),

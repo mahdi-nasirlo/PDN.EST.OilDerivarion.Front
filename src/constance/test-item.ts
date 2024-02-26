@@ -53,7 +53,7 @@ const TestItemApi = {
   BasicTestItemGetPage: {
     url: "/Basic/BasicTestItemGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -81,7 +81,10 @@ const TestItemApi = {
   BasicTestItemCreate: {
     url: "/Basic/BasicTestItemCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required_choice }),
       testDuration: z.number({ required_error: errorMessage.number_invalid }),
@@ -92,7 +95,10 @@ const TestItemApi = {
     url: "/Basic/BasicTestItemUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required_choice }),
       testDuration: z.number({ required_error: errorMessage.number_invalid }),

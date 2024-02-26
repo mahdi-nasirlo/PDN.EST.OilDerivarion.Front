@@ -46,7 +46,10 @@ const EstOpinionForm = ({
           )}
           <Form.Item
             required={false}
-            rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+            rules={[
+              { required: true, message: "لطفا مقدار را وارد کنید" },
+              { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+            ]}
             name="samt_opinion_description"
             label="توضیحات"
           >

@@ -63,7 +63,7 @@ const productCategoryApi = {
   BasicProductCategoryGetPage: {
     url: "/Basic/BasicProductCategoryGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       hasDensity: z.boolean().optional(),
       densityTypeId: z.number().optional(),
@@ -93,7 +93,10 @@ const productCategoryApi = {
   BasicProductCategoryCreate: {
     url: "/Basic/BasicProductCategoryCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productionMethodId: z.number({
         required_error: errorMessage.required_choice,
@@ -109,7 +112,10 @@ const productCategoryApi = {
     url: "/Basic/BasicProductCategoryUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productionMethodId: z.number({
         required_error: errorMessage.required_choice,

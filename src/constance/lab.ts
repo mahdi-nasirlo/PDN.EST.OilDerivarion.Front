@@ -19,7 +19,7 @@ const labApi = {
   LabGetPage: {
     url: "/Lab/GetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       stateUId: z.string().uuid().optional(),
       fromRecord: z.number(),
@@ -37,19 +37,27 @@ const labApi = {
   LabCreate: {
     url: "/Lab/Create",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
       stateUId: z.string({ required_error: errorMessage.required_choice }),
       license_No: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       licenseExpireDatePersian: z.string({
         required_error: errorMessage.required,
       }),
       tel: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      fax: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      fax: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       address: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       testItems: z.array(z.string()).min(1),
     }),
@@ -79,19 +87,27 @@ const labApi = {
     url: "/Lab/Update",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
       stateId: z.number(),
       license_No: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       licenseExpireDatePersian: z.string({
         required_error: errorMessage.required,
       }),
       tel: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
-      fax: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      fax: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       address: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       testItems: z.array(z.string()).min(1),
     }),

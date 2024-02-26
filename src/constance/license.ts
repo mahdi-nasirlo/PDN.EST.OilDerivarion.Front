@@ -1,7 +1,6 @@
-import { generalResponseZod, notEmpty } from "@/types/api-response";
+import { generalResponseZod } from "@/types/api-response";
 import { z } from "zod";
 import { errorMessage } from "./error-message";
-import Item from "antd/es/list/Item";
 import { workflowApi } from "./workflow";
 
 const GetRequestList = z.object({
@@ -166,7 +165,7 @@ const licenseApi = {
     type: z.object({
       request_Uid: z.string(),
       choice_Key: z.string(),
-      description: z.string(),
+      description: z.string().max(500),
     }),
   },
 };

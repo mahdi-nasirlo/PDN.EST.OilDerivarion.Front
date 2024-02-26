@@ -55,12 +55,15 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             <Col xs={24} md={24}>
               <Form.Item
                 required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                ]}
                 name="est_opinion_1"
                 label="توضیحات"
               >
                 <Input.TextArea
-                  style={{ resize: "none" }}
+                  style={{ resize: "none", minHeight: 85 }}
                   placeholder="وارد کنید"
                 />
               </Form.Item>

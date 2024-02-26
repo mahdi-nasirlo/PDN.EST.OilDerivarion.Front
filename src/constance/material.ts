@@ -112,7 +112,7 @@ const materialApi = {
   BasicProductMaterialGetPage: {
     url: "/Basic/BasicProductMaterialGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -166,9 +166,11 @@ const materialApi = {
       material_Unit_Consumption: z.string({
         required_error: errorMessage.required,
       }),
-      material_Supply_Name: z.string({
-        required_error: errorMessage.required,
-      }),
+      material_Supply_Name: z
+        .string({
+          required_error: errorMessage.required,
+        })
+        .max(50),
       material_Supply_Person_Type_Id: z.number({
         required_error: errorMessage.required_choice,
       }),
@@ -178,9 +180,11 @@ const materialApi = {
       material_Supply_Iran_Code: z.any({
         required_error: errorMessage.required,
       }),
-      material_Supply_Address: z.string({
-        required_error: errorMessage.required,
-      }),
+      material_Supply_Address: z
+        .string({
+          required_error: errorMessage.required,
+        })
+        .max(50),
       material_Import_Declaration_Number: z.string({
         required_error: errorMessage.required,
       }),
@@ -204,7 +208,7 @@ const materialApi = {
   BasicProductMaterialList: {
     url: "/Basic/BasicProductMaterialList",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
     }),
     Item: BasicProductMaterialList,
@@ -216,7 +220,10 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialCreate",
     // Item:BasicProductMaterialList,
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.string()).min(1),
@@ -237,7 +244,10 @@ const materialApi = {
     url: "/Basic/BasicProductMaterialUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required }).uuid(),
       testItems: z.array(z.string()).min(1),

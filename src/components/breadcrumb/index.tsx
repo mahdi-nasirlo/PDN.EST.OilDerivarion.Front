@@ -25,7 +25,7 @@ const Index = (props: TProps) => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <Breadcrumb>
+        <Breadcrumb className="cursor-default">
           {props.pages.map((item, index) => (
             <Breadcrumb.Item key={index}>
               {item.path ? (
@@ -47,7 +47,7 @@ const Index = (props: TProps) => {
       </div>
       <Divider />
       {(props.showTitle ?? true) && (
-        <div className="flex justify-between items-center my-5">
+        <div className="flex justify-between items-center my-5 cursor-default">
           <div className="flex items-center">
             {props.titleIcon && (
               <div className="ml-4 flex items-center justify-center bg-CustomizeBlue-500 rounded-full w-11 h-11">

@@ -61,7 +61,10 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
             <Col xs={24} sm={24}>
               <Form.Item
                 required={false}
-                rules={[{ required: true, message: "لطفا مقدار را وارد کنید" }]}
+                rules={[
+                  { required: true, message: "لطفا مقدار را وارد کنید" },
+                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                ]}
                 name="samt_description"
                 label="توضیحات"
               >

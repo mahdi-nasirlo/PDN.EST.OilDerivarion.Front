@@ -50,7 +50,7 @@ const productApi = {
   BasicProductGetPage: {
     url: "/Basic/ProductGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -78,7 +78,10 @@ const productApi = {
   BasicProductCreate: {
     url: "/Basic/ProductCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productCategoryUid: z.string({
         required_error: errorMessage.required_choice,
@@ -92,7 +95,10 @@ const productApi = {
     url: "/Basic/ProductUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       productCategoryUid: z.string({
         required_error: errorMessage.required_choice,

@@ -1,6 +1,6 @@
-import React, {Ref, useState} from "react";
-import {Table, TableProps, Typography} from "antd";
-import {addIndexToData} from "@/utils/addIndexToData";
+import React, { Ref, useState } from "react";
+import { Table, TableProps, Typography } from "antd";
+import { addIndexToData } from "@/utils/addIndexToData";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
@@ -9,16 +9,16 @@ interface RecordeValue {
     icon?: React.ReactNode;
     text: string;
     actions?: React.ReactNode;
-      discretion?: React.ReactNode
+    discretion?: React.ReactNode
   };
   setInitialData?: (arg: any) => void;
   isLoading?: boolean;
   data:
-    | {
-        records: any[] | undefined;
-        count?: number;
-      }
-    | undefined;
+  | {
+    records: any[] | undefined;
+    count?: number;
+  }
+  | undefined;
 }
 
 const Index = (props: TableProps<any> & RecordeValue) => {
@@ -46,22 +46,22 @@ const Index = (props: TableProps<any> & RecordeValue) => {
     <>
       <div className="flex justify-between items-center">
         {props.header && (
-            <div className={"flex w-full justify-between max-md:flex-col max-md:gap-y-2"}>
-            <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2 print:hidden">
+          <div className={"flex w-full justify-between max-md:flex-col max-md:gap-y-2"}>
+            <Typography className="flex items-center gap-2 text-right text-[16px] font-bold mr-2 print:hidden cursor-default">
               {props.header.icon && (
                 <span className="text-gray-900 w-8 h-8">
                   {props.header.icon}
                 </span>
               )}
-                {props.header.text}
-                {props.header.discretion}
+              {props.header.text}
+              {props.header.discretion}
             </Typography>
             {props.header.actions}
-            </div>
+          </div>
         )}
       </div>
       <Table
-          {...props}
+        {...props}
         ref={props.ref}
         loading={props.isLoading}
         dataSource={
@@ -78,11 +78,11 @@ const Index = (props: TableProps<any> & RecordeValue) => {
             total: props.data?.count,
             showTotal: (total, range) => (
               <>
+                <Typography className="m-3 font-semibold print:hidden">
+                  تعداد: {total}
+                </Typography>
                 <Typography className="print:hidden">
                   {` صفحه ${page} از ${Math.ceil(total / 5)}`}
-                </Typography>
-                <Typography className="mr-3 font-semibold print:hidden">
-                  تعداد: {total}
                 </Typography>
               </>
             ),

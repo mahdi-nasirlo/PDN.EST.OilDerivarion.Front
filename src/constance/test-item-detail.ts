@@ -24,7 +24,7 @@ const TestItemDetailApi = {
   BasicTestItemDetailGetPage: {
     url: "/Basic/BasicTestItemDetailGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -52,11 +52,15 @@ const TestItemDetailApi = {
   BasicTestItemDetailCreate: {
     url: "/Basic/BasicTestItemDetailCreate",
     type: z.object({
-      title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      title: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
       referenceCode: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
     }),
   },
@@ -65,10 +69,14 @@ const TestItemDetailApi = {
     url: "/Basic/BasicTestItemDetailUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      title: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      title: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       referenceCode: z
         .string({ required_error: errorMessage.required })
+        .max(50)
         .pipe(notEmpty),
       testItemUid: z.string({ required_error: errorMessage.required_choice }),
     }),

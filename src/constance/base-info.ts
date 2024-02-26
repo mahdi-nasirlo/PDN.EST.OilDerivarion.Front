@@ -1,5 +1,5 @@
 import { generalResponseZod } from "@/types/api-response";
-import { boolean, z } from "zod";
+import { z } from "zod";
 
 const GetAllMainMemberItem = z.object({
   uid: z.string().uuid(),
@@ -26,8 +26,8 @@ const baseInfoApi = {
   SetMainMember: {
     url: "/BaseInfo/SetMainMember",
     type: z.object({
-      first_Name: z.string(),
-      last_Name: z.string(),
+      first_Name: z.string().max(50),
+      last_Name: z.string().max(50),
       birthDate: z.string(),
       national_Code: z.string(),
       company_Role_Id: z.number(),
@@ -61,11 +61,11 @@ const baseInfoApi = {
     type: z.object({
       factoryStateId: z.string(),
       factoryCityId: z.string(),
-      factoryAddressDetail: z.string(),
+      factoryAddressDetail: z.string().max(50),
       factoryPhone: z.string(),
       centralOfficeStateId: z.string().uuid(),
       centralOfficeCityId: z.string().uuid(),
-      centralOfficeAddressDetail: z.string(),
+      centralOfficeAddressDetail: z.string().max(50),
       centralOfficePhone: z.string(),
     }),
   },
@@ -73,7 +73,7 @@ const baseInfoApi = {
     url: "/Basic/GetCityByState",
     item: GetAllMainMemberItem,
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       stateUid: z.string().uuid(),
     }),

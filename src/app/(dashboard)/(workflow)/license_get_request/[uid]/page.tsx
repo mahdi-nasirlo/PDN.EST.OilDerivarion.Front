@@ -156,12 +156,13 @@ export default function Home(props: PropType) {
                     required={false}
                     rules={[
                       { required: true, message: "لطفا مقدار را وارد کنید" },
+                      { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
                     ]}
                     name="description"
                     label="توضیحات"
                   >
                     <Input.TextArea
-                      style={{ resize: "none" }}
+                      style={{ resize: "none", minHeight: 85 }}
                       placeholder="وارد کنید"
                     />
                   </Form.Item>

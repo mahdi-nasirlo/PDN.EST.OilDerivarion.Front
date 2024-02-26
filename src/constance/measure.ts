@@ -14,7 +14,7 @@ const measureApi = {
     sortBy: "name",
     fieldNames: { value: "uid", label: "name" },
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
     }),
     Item: MeasureGetPages,
@@ -26,7 +26,7 @@ const measureApi = {
   BasicMeasureGetPage: {
     url: "/Basic/MeasureGetPage",
     type: z.object({
-      name: z.string().optional(),
+      name: z.string().max(50).optional(),
       isActive: z.boolean().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -43,7 +43,10 @@ const measureApi = {
   MeasureCreate: {
     url: "/Basic/MeasureCreate",
     type: z.object({
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },
@@ -64,7 +67,10 @@ const measureApi = {
     url: "/Basic/MeasureUpdate",
     type: z.object({
       uid: z.string().uuid(),
-      name: z.string({ required_error: errorMessage.required }).pipe(notEmpty),
+      name: z
+        .string({ required_error: errorMessage.required })
+        .max(50)
+        .pipe(notEmpty),
       isActive: z.boolean({ required_error: errorMessage.required }),
     }),
   },

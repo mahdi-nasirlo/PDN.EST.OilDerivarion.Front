@@ -2,8 +2,6 @@
 
 import { Button, Col, Divider, Row, Spin, Typography } from "antd";
 import React from "react";
-// import CardGrid from "./components/card-grid";
-import { useRouter } from "next/navigation";
 import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import { PlusSmallIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
@@ -16,7 +14,6 @@ import { Alert } from "antd/lib";
 export default function Page() {
   const packagePart = useGetRequestPackagePartList();
 
-  const router = useRouter();
 
   return (
     <>
@@ -61,24 +58,26 @@ export default function Page() {
         <Divider />
         <Row gutter={[12, 12]}>
           <Col className="flex" xs={24} sm={12}>
-            <Button
-              size="large"
-              className="w-full"
-              type="default"
-              onClick={() => router.push("/request/list")}
-            >
-              بازگشت
-            </Button>
+            <Link href={"/request/list"} className="w-full flex">
+              <Button
+                size="large"
+                className="w-full"
+                type="default"
+              >
+                بازگشت
+              </Button>
+            </Link>
           </Col>
           <Col className="flex" xs={24} sm={12}>
-            <Button
-              size="large"
-              className="w-full"
-              type="primary"
-              onClick={() => router.push("/request/final-review")}
-            >
-              بازبینی نهایی
-            </Button>
+            <Link className="w-full flex" href={"/request/final-review"}>
+              <Button
+                size="large"
+                className="w-full"
+                type="primary"
+              >
+                بازبینی نهایی
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Card>

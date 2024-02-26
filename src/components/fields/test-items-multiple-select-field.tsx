@@ -1,13 +1,14 @@
-import {TreeSelect, TreeSelectProps} from "antd/lib";
+import { TreeSelect, TreeSelectProps } from "antd/lib";
 import React from "react";
-import {useTestItemList} from "@/hooks/basic/test_item/use-test-item-list";
+import { useTestItemList } from "@/hooks/basic/test_item/use-test-item-list";
 
 const TestItemsMultipleSelectField: React.FC<TreeSelectProps> = (props) => {
 
-    const testItem = useTestItemList();
+  const testItem = useTestItemList();
 
   return (
     <TreeSelect
+      size="large"
       allowClear
       treeCheckable
       filterTreeNode={(input, node) =>
@@ -20,4 +21,4 @@ const TestItemsMultipleSelectField: React.FC<TreeSelectProps> = (props) => {
   );
 };
 
-export {TestItemsMultipleSelectField};
+export { TestItemsMultipleSelectField };

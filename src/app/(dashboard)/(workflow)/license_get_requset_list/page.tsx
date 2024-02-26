@@ -77,8 +77,8 @@ const Page = () => {
         titleIcon={<ClipboardDocumentListIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
         currentPage={"لیست درخواست مجوز ها"}
+        backLink="/"
       />
-
       <Card>
         <WorkflowTable
           loading={list.isFetching}

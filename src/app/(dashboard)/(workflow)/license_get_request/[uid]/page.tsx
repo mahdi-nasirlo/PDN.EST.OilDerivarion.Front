@@ -1,13 +1,15 @@
 "use client";
 
-import { Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
+import { Col, Divider, Form, Input, Row, Spin } from "antd";
 import { useForm } from "antd/es/form/Form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useLicenseGetRequest from "./hook/use-licese-get-request";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { validateNationalCode } from "@/lib/validate-national-code";
-
+import Breadcrumb from "@/components/breadcrumb"
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Card } from "@/components/card";
 interface PropType {
   params: { uid: string };
 }
@@ -33,18 +35,26 @@ export default function Home(props: PropType) {
     }
   };
 
+  if (!data && isFetching)
+    return (
+      <Card className="min-h-[150px]">
+        <Spin />
+      </Card>
+    );
+
+
   return (
     <>
-      <div className="box-border w-full p-6">
-        <div className="flex justify-between flex-col">
-          <div className="flex items-center gap-3">
-            <Typography className="font-bold">
-              داده های تجمیعی درخواست
-            </Typography>
-          </div>
-          <Divider />
-        </div>
-
+      <Breadcrumb
+        titleIcon={<DocumentTextIcon className="w-8" />}
+        currentPage={"داده های تجمیعی درخواست"}
+        backLink="/license_get_requset_list"
+        pages={[
+          { label: "خانه", path: "/" },
+          { label: "لیست درخواست مجوز ها", path: "/license_get_requset_list" }
+        ]}
+      />
+      <Card>
         <Spin spinning={setRequest.isPending || isFetching}>
           <Form layout="vertical" form={form} disabled={setRequest.isPending}>
             <Row gutter={[16, 0]}>
@@ -170,7 +180,7 @@ export default function Home(props: PropType) {
           }}
           choices={data?.choices}
         />
-      </div>
+      </Card >
     </>
   );
 }

@@ -10,7 +10,7 @@ import { CardListTable } from "@/app/(dashboard)/request/components/card-list-ta
 import useRequestPackagePartDelete from "@/hooks/material/use-request-package-part-delete";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const CardList = ({
   data,
@@ -33,8 +33,6 @@ const CardList = ({
 
     if (res.success) setOpen(undefined);
   };
-
-  const router = useRouter();
 
   if (data == undefined || !Array.isArray(data)) {
     return;
@@ -143,20 +141,19 @@ const CardList = ({
 
                       <Row gutter={[16, 12]}>
                         <Col xs={12}>
-                          <Button
-                            size="large"
-                            type="primary"
-                            className="w-full flex items-center justify-center"
-                            icon={<EditOutlined width={16} height={16} />}
-                            onClick={() =>
-                              router.push(
-                                `/request/edit/${item.UID}${package_UID ? "/" + package_UID : ""
-                                }`
-                              )
-                            }
+                          <Link
+                            className="w-full flex"
+                            href={`/request/edit/${item.UID}${package_UID ? "/" + package_UID : ""}`}
                           >
-                            ویرایش
-                          </Button>
+                            <Button
+                              size="large"
+                              type="primary"
+                              className="w-full flex items-center justify-center"
+                              icon={<EditOutlined width={16} height={16} />}
+                            >
+                              ویرایش
+                            </Button>
+                          </Link>
                         </Col>
                         <Col xs={12}>
                           <Button

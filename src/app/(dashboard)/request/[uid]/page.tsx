@@ -2,14 +2,13 @@
 
 import React from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import {PencilIcon, PlusSmallIcon} from "@heroicons/react/24/outline";
-import {Button, Col, Divider, Row, Spin,} from "antd";
-import {Card} from "@/components/card";
-import {useRouter} from "next/navigation";
-import {useGetRequestPackagePartList} from "@/hooks/material/use-get-request-package-part-list";
-import Link from "next/link";
+import { PencilIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { Button, Col, Divider, Row, Spin, } from "antd";
+import { Card } from "@/components/card";
+import { useGetRequestPackagePartList } from "@/hooks/material/use-get-request-package-part-list";
 import FirstCard from "@/app/(dashboard)/request/components/first-card";
 import CardList from "@/app/(dashboard)/request/components/card-list";
+import Link from "next/link";
 
 interface TProps {
     params: { uid: string; }
@@ -18,8 +17,6 @@ interface TProps {
 export default function Page({ params: { uid } }: TProps) {
 
     const packagePart = useGetRequestPackagePartList({ package_UID: uid })
-
-    const router = useRouter()
 
     return (
         <>
@@ -37,7 +34,7 @@ export default function Page({ params: { uid } }: TProps) {
                             type="primary"
                             size="large"
                         >
-                            مواد اولیه
+                            افزودن مواد اولیه
                         </Button>
                     </Link>
                 ]}
@@ -56,24 +53,26 @@ export default function Page({ params: { uid } }: TProps) {
                 <Divider />
                 <Row gutter={[12, 12]}>
                     <Col className="flex" xs={24} sm={12}>
-                        <Button
-                            size="large"
-                            className="w-full"
-                            type="default"
-                            onClick={() => router.push("/request/list")}
-                        >
-                            بازگشت
-                        </Button>
+                        <Link className="w-full flex" href={"/request/list"}>
+                            <Button
+                                size="large"
+                                className="w-full"
+                                type="default"
+                            >
+                                بازگشت
+                            </Button>
+                        </Link>
                     </Col>
                     <Col className="flex" xs={24} sm={12}>
-                        <Button
-                            size="large"
-                            className="w-full"
-                            type="primary"
-                            onClick={() => router.push(`/request/final-review${uid ? `/${uid}` : ""}`)}
-                        >
-                            بازبینی نهایی
-                        </Button>
+                        <Link className="w-full flex" href={`/request/final-review${uid ? `/${uid}` : ""}`}>
+                            <Button
+                                size="large"
+                                className="w-full"
+                                type="primary"
+                            >
+                                بازبینی نهایی
+                            </Button>
+                        </Link>
                     </Col>
                 </Row>
             </Card>

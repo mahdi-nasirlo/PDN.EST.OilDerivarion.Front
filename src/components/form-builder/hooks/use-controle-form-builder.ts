@@ -1,13 +1,13 @@
 import {z} from "zod";
 import {formMakerApi} from "../../../constance/form-maker";
-import useFormRequest from "@/components/form-builder/hooks/use-form-request";
 import {generalResponseZod} from "@/types/api-response";
+import {useSetForm} from "@/hooks/form-maker/use-set-form";
 
 const type = formMakerApi.Get
 
 const useControlFormBuilder = (formData: z.infer<typeof type.formData>, categoryKey: string) => {
 
-    const {set} = useFormRequest(categoryKey)
+    const set = useSetForm(categoryKey)
 
     const oldData: z.infer<typeof type.formData> = formData || {}
 

@@ -88,11 +88,11 @@ const CommonWorkflow = ({
                 loading={reports.isFetching}
               />
             </Spin>
-            <Divider />
           </>
         )}
         {children}
         {isSeenReport && <>
+          <Divider/>
           <Form form={form} onFinish={handleSet} layout="vertical">
             <Form.Item
                 label="توضیحات"

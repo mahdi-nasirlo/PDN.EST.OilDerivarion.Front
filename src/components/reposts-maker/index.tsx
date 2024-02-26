@@ -98,7 +98,7 @@ const RenderReport = ({report, index, taskId}: {
 
     history = history.concat(existHistory())
 
-    if (e && history)
+    if (e && history && !history.includes(report.Form_Key))
       history.push(report.Form_Key)
 
     setHistoryState(history)

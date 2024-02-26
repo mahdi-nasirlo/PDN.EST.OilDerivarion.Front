@@ -1,27 +1,14 @@
 "use client";
 
 import React from "react";
-import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import FactorForm from "./components/factor-form";
-import useGetTask from "@/hooks/workflow-request/use-get-task";
-import { Spin } from "antd";
 
 const stepKey = "Lab_Test";
 
 export default function Page({ params }: { params: { uid: string } }) {
 
-
-  const get = useGetTask({ taskId: params.uid, stepKey: stepKey });
-
-
-  if (!get.data && get.isFetching)
-    return (
-      <Card className="min-h-[150px]">
-        <Spin />
-      </Card>
-    );
 
   return (
     <>

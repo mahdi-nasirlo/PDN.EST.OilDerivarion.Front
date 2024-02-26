@@ -3,7 +3,7 @@ import { Col, Divider, Form, Row, Select } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
-import { Button, Input, Space, Spin, Tag, Typography } from "antd";
+import { Button, Input, Space, Spin, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
@@ -43,16 +43,18 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
     Sample_Code: undefined,
     test_Item_Result_UID: undefined,
     Factor_Name: undefined,
-
+    Lab_Is_Finished: Battle?.Lab_Is_Finished
   });
 
   useEffect(() => {
     setFormData({
       Sample_Code: undefined,
       test_Item_Result_UID: undefined,
-      Factor_Name: undefined
+      Factor_Name: undefined,
+      Lab_Is_Finished: Battle?.Lab_Is_Finished
     })
   }, [(Battle)])
+
 
   const columns: ColumnsType<z.infer<typeof RequestPackageApi.LabSampleTestItemList.item>> = [
     {
@@ -98,20 +100,37 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          <Button
-            disabled={Battle?.Lab_Is_Finished}
-            type="link"
-            className={`${Battle?.Lab_Is_Finished ? "text-gray-400" : "text-secondary-500"} font-bold`}
-            onClick={() => {
-              setFormData({
-                test_Item_Result_UID: record.test_Item_Result_UID,
-                Sample_Code: record.Sample_Code,
-                Factor_Name: record.Name
-              })
-            }}
-          >
-            ثبت نتیجه
-          </Button>
+          {
+            (Battle?.Lab_Is_Finished || record.Is_Recorded) ?
+              <Button
+                type="link"
+                className={"text-CustomizeBlue-500 font-bold"}
+                onClick={() => {
+                  setFormData({
+                    test_Item_Result_UID: record.test_Item_Result_UID,
+                    Sample_Code: record.Sample_Code,
+                    Factor_Name: record.Name,
+                    Lab_Is_Finished: Battle?.Lab_Is_Finished
+                  })
+                }}
+              >
+                مشاهده
+              </Button> :
+              <Button
+                type="link"
+                className={"text-secondary-500 font-bold"}
+                onClick={() => {
+                  setFormData({
+                    test_Item_Result_UID: record.test_Item_Result_UID,
+                    Sample_Code: record.Sample_Code,
+                    Factor_Name: record.Name,
+                    Lab_Is_Finished: Battle?.Lab_Is_Finished
+                  })
+                }}
+              >
+                ثبت نتیجه
+              </Button>
+          }
         </Space >
       ),
     },

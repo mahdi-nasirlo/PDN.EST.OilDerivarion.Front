@@ -2,21 +2,22 @@
 
 import React from "react";
 
-import {DocumentTextIcon} from "@heroicons/react/24/outline";
-import {Alert, Button, Divider, Spin} from "antd/lib";
-import {Card} from "@/components/card";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Alert, Button, Divider, Form, Spin } from "antd/lib";
+import { Card } from "@/components/card";
 import Breadcrumb from "@/components/breadcrumb";
 import RepostsMaker from "@/components/reposts-maker";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import useUiVisitResultWorkFlow from "./hook/use-ui-lab-visit-result-work-flow";
-import {NaftForm} from "./components/naft-form";
-import {SamtForm} from "./components/samt-form";
-import {EstForm} from "./components/est-form";
+import { NaftForm } from "./components/naft-form";
+import { SamtForm } from "./components/samt-form";
+import { EstForm } from "./components/est-form";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
-  const { get, handleSet, reports, form, dataForm, setChoice, set } =
+  const { get, reports, form, dataForm, setChoice, set, choice } =
     useUiVisitResultWorkFlow({ taskId: params.uid });
 
   // reports.data?.[0]
@@ -28,7 +29,7 @@ export default function Page({ params }: { params: { uid: string } }) {
       </Card>
     );
   }
-  const stepKey = "Visit_Result";
+  const stepKey = "Experts_Result_Confirm";
 
   return (
     <>
@@ -64,25 +65,28 @@ export default function Page({ params }: { params: { uid: string } }) {
         <NaftForm uid={params.uid} />
         <SamtForm uid={params.uid} />
         <EstForm uid={params.uid} />
-        {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && (
-          <>
-            <Divider />
-            <Form form={form} onFinish={handleSet} layout="vertical"></Form>
-            <WorkflowBtn
-              loading={set.isPending}
-              choices={get.data?.choices}
-              onClick={(choice_Key) => {
-                setChoice(choice_Key);
-                form.submit();
-                const res = set.mutateAsync({
-                  taskId: params.uid,
-                  stepKey,
-                  choiceKey: choice_Key,
-                });
-              }}
-            />
-          </>
-        )} */}
+        {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && ( */}
+        <>
+          <Divider />
+          {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
+          <WorkflowBtn
+            loading={set.isPending}
+            choices={get.data?.choices}
+            onClick={async (choice_Key) => {
+              setChoice(choice_Key);
+              form.submit();
+              const res = await set.mutateAsync({
+                taskId: params.uid,
+                stepKey,
+                choiceKey: choice_Key,
+              });
+              if (res.success) {
+                router.push(`/workflow/list/Experts_Result_Confirm`);
+              }
+            }}
+          />
+        </>
+        {/* // )} */}
       </Card>
     </>
   );

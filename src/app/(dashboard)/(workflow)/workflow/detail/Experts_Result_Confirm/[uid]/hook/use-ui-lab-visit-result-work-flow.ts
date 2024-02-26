@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import useRequestPackageLabVisitOpinionList from "@/hooks/request-package/use-request-pakage-lab-visit-opinion-list";
 import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 
-const stepKey = "Experts_Setad";
+const stepKey = "Experts_Result_Confirm";
 
 const useUiLabVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
   const [choice, setChoice] = useState<string>();
@@ -28,20 +28,19 @@ const useUiLabVisitResultWorkFlow = ({ taskId }: { taskId: string }) => {
 
   const router = useRouter();
 
-  const handleSet = async (values: any) => {
-    const res = await set.mutateAsync({
-      taskId: taskId,
-      stepKey,
-      choiceKey: choice,
-    });
+  // const handleSet = async (values: any) => {
+  //   const res = await set.mutateAsync({
+  //     taskId: taskId,
+  //     stepKey,
+  //     choiceKey: choice,
+  //   });
 
-    if (res.success) {
-      router.push(`/workflow/list/Visit_Result`);
-    }
-  };
+  //   if (res.success) {
+  //     router.push(`/workflow/list/Experts_Result_Confirm`);
+  //   }
+  // };
 
   return {
-    handleSet,
     dataForm,
     reports,
     form,

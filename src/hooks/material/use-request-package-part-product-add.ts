@@ -29,8 +29,6 @@ const useRequestPackagePartProductAdd = (
         exact: false,
       });
 
-      console.log(data);
-
       if (data.success)
         await queryClient.setQueryData(
           [materialApi.RequestPackagePartProductList.url],

@@ -7,13 +7,13 @@ import {
   QueryClient,
   QueryClientProvider as TanstackQueryClientProvider,
 } from "@tanstack/react-query";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import {generalResponseZod} from "@/types/api-response";
-import {z} from "zod";
-import {getResponseError} from "@/utils/getResponse";
-import {notification} from "antd/lib";
-import {useRedirectToSso} from "@/hooks/use-auth";
-import {ssoApi} from "../constance/auth";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { generalResponseZod } from "@/types/api-response";
+import { z } from "zod";
+import { getResponseError } from "@/utils/getResponse";
+import { notification } from "antd/lib";
+import { useRedirectToSso } from "@/hooks/use-auth";
+import { ssoApi } from "../constance/auth";
 
 const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
   const redirectToSso = useRedirectToSso(undefined);
@@ -46,8 +46,6 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
     mutationCache: new MutationCache({
       onSuccess: (data: unknown) => {
         const result: z.infer<typeof generalResponseZod> = data as any;
-
-        console.log(result.success);
 
         if (result.success) {
           api.success({ message: result.message });

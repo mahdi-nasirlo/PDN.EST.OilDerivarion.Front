@@ -109,8 +109,8 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
                     return Promise.reject(new Error(errorMessage));
                   }
                   const sum = parseFloat(value) + estehsalFieldValue
-                  if (sum < 100 || sum > 100) {
-                    return Promise.reject(new Error("جمع درصد استحصال و درصد هدر رفت باید 100 باشد"));
+                  if (sum > 100) {
+                    return Promise.reject(new Error("جمع استحصال و هدر رفت نمی تواند بیشتر از 100 باشد"));
                   } else {
                     return Promise.resolve();
                   }

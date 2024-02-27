@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "antd/lib";
-import PercentageInput from "@/components/inputs/percentage-input";
 import { Rule } from "rc-field-form/es/interface";
-import { Col, Row, Select } from "antd";
+import { Col, FormInstance, InputNumber, Row, Select } from "antd";
 import useRequestPakagePartProductListDDl from "@/hooks/request-package/use-request-pakage-part-product-list-ddl";
 import { filterOption } from "@/lib/filterOption";
 
@@ -10,8 +9,9 @@ interface TProps {
   rules: Rule;
   uid: string;
   package_uid?: string;
-  form: any;
+  form: FormInstance;
 }
+
 export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
 
   const [density, setDensity] = useState<number>(0);
@@ -25,7 +25,7 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
   return (
     <Row gutter={[16, 12]}>
       <Col xs={23} sm={12}>
-        <Form.Item label="دانسیته" initialValue={0}>
+        <Form.Item label="دانسیته" initialValue={0} rules={[rules]}>
           <Select
             size="large"
             options={[
@@ -43,7 +43,7 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
         </Form.Item>
       </Col>
       <Col xs={23} sm={12}>
-        <Form.Item name="product_UID" label="محصول">
+        <Form.Item name="product_UID" label="محصول" rules={[rules]}>
           <Select
             showSearch
             size="large"
@@ -57,15 +57,78 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
       </Col>
 
       <Col xs={24} sm={12}>
-        <Form.Item name="estehsal" label="درصد استحصال" rules={[rules]}>
-          <PercentageInput />
+        <Form.Item
+          required={false}
+          name="estehsal"
+          label="درصد استحصال"
+          rules={[
+            { required: true, message: "مقدار تعریف نشده است" },
+            {
+              validator: (_, value) => {
+                const isInteger = Number.parseFloat(value);
+                if ((value == undefined) || !isInteger || (value < 0)) {
+                  const errorMessage = isInteger
+                    ? "لطفا عدد مثبت وارد کنید"
+                    : (value == 0)
+                      ? "درصد استحصال نمی تواند صفر باشد"
+                      : "لطفا عدد وارد کنید";
+                  return Promise.reject(new Error(errorMessage));
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
+        >
+          <InputNumber
+            controls={false}
+            max={100}
+            className="w-full"
+            size="large"
+            formatter={(value) => `${value}%`}
+            placeholder='وارد کنید'
+          />
+
         </Form.Item>
       </Col>
       <Col xs={24} sm={12}>
-        <Form.Item name="hadarRaft" label="درصد هدر رفت" rules={[rules]}>
-          <PercentageInput />
+        <Form.Item
+          required={false}
+          name="hadarRaft"
+          label="درصد هدر رفت"
+          rules={[
+            { required: true, message: "مقدار تعریف نشده است" },
+            ({ getFieldValue }) => ({
+              validator: (_, value) => {
+                const estehsalFieldValue = getFieldValue("estehsal");
+                if (typeof estehsalFieldValue === 'number' && !isNaN(estehsalFieldValue)) {
+                  const isInteger2 = Number.isFinite(value)
+                  if (isNaN(value) || !isInteger2 || (value < 0)) {
+                    const errorMessage = isInteger2
+                      ? "لطفا عدد مثبت وارد کنید"
+                      : "لطفا عدد وارد کنید";
+                    return Promise.reject(new Error(errorMessage));
+                  }
+                  const sum = parseFloat(value) + estehsalFieldValue
+                  if (sum < 100 || sum > 100) {
+                    return Promise.reject(new Error("جمع درصد استحصال و درصد هدر رفت باید 100 باشد"));
+                  } else {
+                    return Promise.resolve();
+                  }
+                }
+              },
+            }),
+          ]}
+        >
+          <InputNumber
+            controls={false}
+            max={100}
+            className="w-full"
+            size="large"
+            formatter={(value) => `${value}%`}
+            placeholder='وارد کنید'
+          />
         </Form.Item>
       </Col>
-    </Row>
+    </Row >
   );
 }

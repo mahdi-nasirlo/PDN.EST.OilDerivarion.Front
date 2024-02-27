@@ -1,17 +1,17 @@
-import {Form, Spin, Typography} from "antd";
-import React, {useEffect} from "react";
-import {useForm} from "antd/lib/form/Form";
-import {Button, Col, Input, Row} from "antd/lib";
+import { Form, Spin, Typography } from "antd";
+import React, { useEffect } from "react";
+import { useForm } from "antd/lib/form/Form";
+import { Button, Col, Input, Row } from "antd/lib";
 import CustomDatePicker from "@/components/custome-date-picker";
 import useUiTimeSchedule2 from "../hook/use-ui-time-schedule";
-import {useCheckReportSeen} from "@/providers/workflow-provider";
+import { useCheckReportSeen } from "@/providers/workflow-provider";
 
-export const EstForm = ({uid, reports}: { uid?: string, reports: any }) => {
+export const EstForm = ({ uid, reports }: { uid?: string; reports: any }) => {
   const { handleSubmitEst, getTime, addTime } = useUiTimeSchedule2({ uid });
 
   const [form] = useForm();
 
-  const {isSeenReport} = useCheckReportSeen(uid as string, reports)
+  const { isSeenReport } = useCheckReportSeen(uid as string, reports);
 
   useEffect(() => {
     form.setFieldsValue(getTime.data);
@@ -71,7 +71,10 @@ export const EstForm = ({uid, reports}: { uid?: string, reports: any }) => {
                 required={false}
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                  {
+                    max: 500,
+                    message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                  },
                 ]}
                 name="est_description"
                 label="توضیحات"
@@ -101,7 +104,7 @@ export const EstForm = ({uid, reports}: { uid?: string, reports: any }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
-                    disabled={!isSeenReport}
+                  disabled={!isSeenReport}
                   // onClick={async () => await window.location.reload()}
                   className="w-full"
                   size="large"

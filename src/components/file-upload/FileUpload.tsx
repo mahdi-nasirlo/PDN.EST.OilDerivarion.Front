@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "filepond/dist/filepond.min.css";
 import "./style.stylesheet.css";
 import { Button, Upload } from "antd";
 import { CloudDownloadOutlined } from "@ant-design/icons";
 import { UploadFile, UploadProps } from "antd/lib";
-import { RcFile, UploadChangeParam } from "antd/es/upload";
-import useUpload from "@/hooks/file/use-uplod";
-import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { info, log } from "console";
+import { UploadChangeParam } from "antd/es/upload";
 import useDownload from "@/hooks/file/use-download";
-import { url } from "inspector";
+import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
 
 const defualtProps: UploadProps = {
   listType: "picture",
@@ -82,30 +79,32 @@ const FileUpload = (
   };
 
   useEffect(() => {
-    console.log(props.defaultFiles);
-
+    // console.log(props.defaultFiles);
     setFiles();
   }, [props.defaultFiles]);
 
   return (
     <>
       <Upload
-        accept="image/*"
-        className="w-full"
-        multiple={false}
-        maxCount={1}
         {...props}
         {...defualtProps}
+        className="w-full"
+        accept="image/*"
+        maxCount={1}
+        multiple={false}
         fileList={fileList}
         onChange={handleChange}
         customRequest={handleUpload}
+        disabled={download.isPending || upload.isPending}
       >
         <Button
           size="large"
-          className="w-full text-right bg-gray-100"
+          loading={download.isPending || upload.isPending}
+          disabled={download.isPending || upload.isPending}
+          className="w-full text-right flex-row-reverse justify-between flex items-center bg-gray-100"
           icon={<CloudDownloadOutlined />}
         >
-          بارگزاری نمایید
+          نمودار مورد نظر را انتخاب نمایید
         </Button>
       </Upload>
     </>

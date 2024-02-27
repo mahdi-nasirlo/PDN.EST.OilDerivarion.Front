@@ -51,6 +51,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         </Divider>
         <Spin spinning={get.isFetching}>
           <RepostsMaker
+            stepKey={stepKey}
             taskId={params.uid}
             reports={reports.data}
             loading={reports.isFetching}

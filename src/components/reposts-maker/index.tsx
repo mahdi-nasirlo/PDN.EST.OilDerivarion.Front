@@ -14,7 +14,9 @@ const Index = ({
   loading,
   taskId,
   setStatus,
+  stepKey,
 }: {
+  stepKey?: string | undefined;
   reports:
     | z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[]
     | undefined;
@@ -37,6 +39,7 @@ const Index = ({
         <RenderReport
           key={index}
           index={index}
+          stepKey={stepKey}
           report={report}
           taskId={taskId}
           setStatus={setStatus}
@@ -50,9 +53,11 @@ const RenderReport = ({
   report,
   index,
   taskId,
+  stepKey,
 }: {
   index: number;
   taskId?: string;
+  stepKey?: string;
   report: z.infer<typeof RequestPackageApi.RequestPackageReportList.item>;
   setStatus?: (arg: []) => void;
 }) => {
@@ -97,8 +102,10 @@ const RenderReport = ({
     );
   }
 
+  const lcKey = `${stepKey}_${taskId}`;
+
   let existHistory = (): any[] => {
-    const lc = localStorage.getItem(`${taskId}`);
+    const lc = localStorage.getItem(lcKey);
 
     try {
       if (lc) {
@@ -133,9 +140,9 @@ const RenderReport = ({
 
     setHistoryState(history);
 
-    setValue({ ...value, [`${taskId}`]: history });
+    setValue({ ...value, [lcKey]: history });
 
-    localStorage.setItem(`${taskId}`, JSON.stringify(history));
+    localStorage.setItem(lcKey, JSON.stringify(history));
   };
 
   const genExtra = () =>

@@ -2,21 +2,17 @@
 
 import React from "react";
 import Breadcrumb from "@/components/breadcrumb";
-import {DocumentTextIcon} from "@heroicons/react/24/outline";
-import {Button, Card, Col, Divider, Row, Spin, Typography} from "antd/lib";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Button, Card, Col, Divider, Row, Spin, Typography } from "antd/lib";
 import RepostsMaker from "@/components/reposts-maker";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import useFinalResultList from "@/hooks/request-package/use-final-result-list";
-import EstOpinionForm
-    from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/est_opinion_form";
-import Naft_opinion_form
-    from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/naft_opinion_form";
-import Samt_opinion_form
-    from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/samt_opinion_form";
-import {Tag} from "antd";
+import EstOpinionForm from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/est_opinion_form";
+import Naft_opinion_form from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/naft_opinion_form";
+import Samt_opinion_form from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/components/samt_opinion_form";
+import { Tag } from "antd";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
-import useUiOpinionFormWorkFlow
-    from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
+import useUiOpinionFormWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
 
 const stepKey = "Experts_Setad";
 const Page = ({ params }: { params: { uid: string } }) => {
@@ -58,6 +54,7 @@ const Page = ({ params }: { params: { uid: string } }) => {
           </Divider>
           <Spin spinning={get.isFetching}>
             <RepostsMaker
+              stepKey={stepKey}
               taskId={params.uid}
               reports={reports.data}
               loading={reports.isFetching}

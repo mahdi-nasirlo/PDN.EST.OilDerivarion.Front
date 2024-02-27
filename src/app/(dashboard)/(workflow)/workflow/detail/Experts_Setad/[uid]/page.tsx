@@ -13,8 +13,10 @@ import Samt_opinion_form from "@/app/(dashboard)/(workflow)/workflow/detail/Expe
 import { Tag } from "antd";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useUiOpinionFormWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
+import { useCheckReportSeen } from "@/providers/workflow-provider";
 
 const stepKey = "Experts_Setad";
+
 const Page = ({ params }: { params: { uid: string } }) => {
   const router = useRouter();
 
@@ -22,6 +24,11 @@ const Page = ({ params }: { params: { uid: string } }) => {
 
   const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiOpinionFormWorkFlow({ taskId: params.uid });
+
+  const { isSeenReport } = useCheckReportSeen(
+    stepKey + "_" + params.uid,
+    reports.data
+  );
 
   console.log(dataForm.data);
 
@@ -146,6 +153,7 @@ const Page = ({ params }: { params: { uid: string } }) => {
                 <Divider />
                 <WorkflowBtn
                   loading={set.isPending}
+                  disable={!isSeenReport}
                   choices={get.data?.choices}
                   onClick={async (choice_Key) => {
                     setChoice(choice_Key);

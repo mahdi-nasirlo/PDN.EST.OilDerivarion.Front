@@ -13,14 +13,20 @@ import { NaftForm } from "./components/naft-form";
 import { SamtForm } from "./components/samt-form";
 import { EstForm } from "./components/est-form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
+import { useCheckReportSeen } from "@/providers/workflow-provider";
 
 export default function Page({ params }: { params: { uid: string } }) {
+  const stepKey = "Experts_Result_Confirm";
+
   const router = useRouter();
 
   const { get, reports, form, dataForm, setChoice, set, choice } =
     useUiVisitResultWorkFlow({ taskId: params.uid });
 
-  // reports.data?.[0]
+  const { isSeenReport } = useCheckReportSeen(
+    stepKey + "_" + params.uid,
+    reports.data
+  );
 
   if (!get.data && get.isFetching) {
     return (
@@ -29,7 +35,6 @@ export default function Page({ params }: { params: { uid: string } }) {
       </Card>
     );
   }
-  const stepKey = "Experts_Result_Confirm";
 
   return (
     <>
@@ -72,6 +77,7 @@ export default function Page({ params }: { params: { uid: string } }) {
           {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
           <WorkflowBtn
             loading={set.isPending}
+            disable={!isSeenReport}
             choices={get.data?.choices}
             onClick={async (choice_Key) => {
               setChoice(choice_Key);

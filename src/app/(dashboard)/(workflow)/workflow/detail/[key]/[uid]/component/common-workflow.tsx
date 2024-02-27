@@ -37,7 +37,12 @@ const CommonWorkflow = ({
     package_UID: uid,
   });
 
-  const { isSeenReport } = useCheckReportSeen(uid, reports.data);
+  console.log(stepKey + uid);
+
+  const { isSeenReport } = useCheckReportSeen(
+    stepKey + "_" + uid,
+    reports.data
+  );
 
   const router = useRouter();
 
@@ -79,7 +84,7 @@ const CommonWorkflow = ({
         {reports.data?.length !== 0 && (
           <>
             <Divider orientation="left" className="mb-6">
-              لیست گزارشات {stepKey}
+              لیست گزارشات
             </Divider>
             <Spin spinning={get.isFetching}>
               <RepostsMaker

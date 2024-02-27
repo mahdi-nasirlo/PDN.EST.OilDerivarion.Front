@@ -17,12 +17,17 @@ import CalendarTime from "@/components/calendar-time/calendar-time";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
 
 export default function Page({ params }: { params: { uid: string } }) {
+  const stepKey = "Visit_Schedule";
+
   const router = useRouter();
 
   const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiVisitSchedule({ taskId: params.uid });
 
-  const { isSeenReport } = useCheckReportSeen(params.uid, reports.data);
+  const { isSeenReport } = useCheckReportSeen(
+    stepKey + "_" + params.uid,
+    reports.data
+  );
 
   if (!get.data && get.isFetching) {
     return (
@@ -31,8 +36,6 @@ export default function Page({ params }: { params: { uid: string } }) {
       </Card>
     );
   }
-
-  const stepKey = "Visit_Schedule";
 
   return (
     <>

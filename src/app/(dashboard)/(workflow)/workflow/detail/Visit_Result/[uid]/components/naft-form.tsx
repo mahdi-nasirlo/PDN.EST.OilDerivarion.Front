@@ -10,6 +10,7 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
   const { handleSubmitNaft, getTime, addTime } = useUiVisitResult({ uid });
 
   const [form] = useForm();
+
   useEffect(() => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
@@ -34,7 +35,10 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                  {
+                    max: 500,
+                    message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                  },
                 ]}
                 name="naft_opinion_1"
                 label="توضیحات"

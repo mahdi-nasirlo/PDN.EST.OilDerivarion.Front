@@ -11,7 +11,10 @@ export const EstForm = ({ uid, reports }: { uid?: string; reports: any }) => {
 
   const [form] = useForm();
 
-  const { isSeenReport } = useCheckReportSeen(uid as string, reports);
+  const { isSeenReport } = useCheckReportSeen(
+    ("Visit_Schedule_" + uid) as string,
+    reports
+  );
 
   useEffect(() => {
     form.setFieldsValue(getTime.data);

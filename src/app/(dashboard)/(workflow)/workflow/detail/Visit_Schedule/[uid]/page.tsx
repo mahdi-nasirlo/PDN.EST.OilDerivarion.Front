@@ -59,7 +59,7 @@ export default function Page({ params }: { params: { uid: string } }) {
           />
         )}
         <Divider orientation="left" className="mb-6">
-          لیست گزارشات
+          لیست گزارشات {JSON.stringify(isSeenReport)}
         </Divider>
         <Spin spinning={get.isFetching}>
           <RepostsMaker

@@ -19,9 +19,13 @@ const Index = ({reports, loading, taskId, setStatus}: {
 
   if (!Array.isArray(reports)) return;
 
-  return reports?.map((report, index) => (
-      <RenderReport key={index} index={index} report={report} taskId={taskId} setStatus={setStatus}/>
-  ));
+  return <>
+    <Alert className="font-medium text-amber-600" type="warning"
+           message="به منظور فعال شدن مرحله فعلی باید تمام گزارشات مندرج در صفحه مشهاده و برسی گردد"/>
+    {reports?.map((report, index) => (
+        <RenderReport key={index} index={index} report={report} taskId={taskId} setStatus={setStatus}/>
+    ))}
+  </>;
 };
 
 const RenderReport = ({report, index, taskId}: {
@@ -93,7 +97,7 @@ const RenderReport = ({report, index, taskId}: {
   const [historyState, setHistoryState] = useState<string[]>(existHistory())
 
   const saveStatusHistory = (e?: string | string[]) => {
-
+    
     let history: any[] = []
 
     history = history.concat(existHistory())

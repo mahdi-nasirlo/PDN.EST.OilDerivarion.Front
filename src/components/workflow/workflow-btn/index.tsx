@@ -1,11 +1,12 @@
-import { z } from "zod";
-import { Button } from "antd";
-import { workflowApi } from "constance/workflow";
+import {z} from "zod";
+import {Button} from "antd";
+import {workflowApi} from "constance/workflow";
 
 interface PropsType {
   loading?: boolean;
   choices: z.infer<typeof workflowApi.choices>[] | undefined;
   onClick: (key: string) => any;
+  disable?: boolean
 }
 
 const Index = (props: PropsType) => {
@@ -34,7 +35,7 @@ const Index = (props: PropsType) => {
                 key={index}
                 danger={btn.color === "false"}
                 loading={props.loading}
-                disabled={props.loading}
+                disabled={props.loading || props.disable}
                 onClick={() => {
                   props?.onClick(btn.choice_Key);
                 }}

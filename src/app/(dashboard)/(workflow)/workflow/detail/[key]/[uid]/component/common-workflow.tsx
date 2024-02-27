@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 import useGetTask from "@/hooks/workflow-request/use-get-task";
 import useSetTask from "@/hooks/workflow-request/use-set-task";
-import { useForm } from "antd/lib/form/Form";
-import { useRouter } from "next/navigation";
-import { Card } from "@/components/card";
-import { Button, Divider, Input, Spin } from "antd";
+import {useForm} from "antd/lib/form/Form";
+import {useRouter} from "next/navigation";
+import {Card} from "@/components/card";
+import {Button, Divider, Input, Spin} from "antd";
 import Breadcrumb from "@/components/breadcrumb";
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import {DocumentTextIcon} from "@heroicons/react/24/outline";
 import RepostsMaker from "@/components/reposts-maker";
-import { Form } from "antd/lib";
-import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
-import { useCheckReportSeen } from "@/providers/workflow-provider";
+import {Form} from "antd/lib";
+import {useRequestPackageReportList} from "@/hooks/request-package/use-request-package-report-list";
+import {useCheckReportSeen} from "@/providers/workflow-provider";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 
 const CommonWorkflow = ({
@@ -91,9 +91,8 @@ const CommonWorkflow = ({
           </>
         )}
         {children}
-        {isSeenReport && <>
           <Divider />
-          <Form form={form} onFinish={handleSet} layout="vertical">
+        <Form disabled={!isSeenReport} form={form} onFinish={handleSet} layout="vertical">
             <Form.Item
               label="توضیحات"
               name="description"
@@ -110,13 +109,13 @@ const CommonWorkflow = ({
           </Form>
           <WorkflowBtn
             loading={set.isPending || get.isFetching}
+            disable={!isSeenReport}
             choices={get.data?.choices}
             onClick={(key) => {
               form.submit();
               setChoice(key);
             }}
           />
-        </>}
       </Card>
     </>
   );

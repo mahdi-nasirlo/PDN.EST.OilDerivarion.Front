@@ -1,6 +1,6 @@
-import { generalResponseZod } from "@/types/api-response";
-import { z } from "zod";
-import { errorMessage } from "./error-message";
+import {generalResponseZod} from "@/types/api-response";
+import {z} from "zod";
+import {errorMessage} from "./error-message";
 
 const ssoApi = {
   access_token_Key: "access_token",
@@ -52,6 +52,7 @@ const ssoApi = {
         lastName: z.string(),
         firstName: z.string(),
         nationalCode: z.string(),
+        username: z.string(),
         mobile: z.string(),
         address: z.string(),
         birthDate: z.string(),

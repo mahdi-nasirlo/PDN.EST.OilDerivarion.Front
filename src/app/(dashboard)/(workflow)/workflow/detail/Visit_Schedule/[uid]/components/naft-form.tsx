@@ -1,14 +1,19 @@
-import { Button, Col, Divider, Input, Row, Spin, Typography } from "antd";
-import React, { useEffect } from "react";
-import { Form } from "antd/lib";
-import useUiTimeSchedule2 from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-time-schedule";
+import {Button, Col, Divider, Input, Row, Spin, Typography} from "antd";
+import React, {useEffect} from "react";
+import {Form} from "antd/lib";
+import useUiTimeSchedule2
+  from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/hook/use-ui-time-schedule";
 import CustomDatePicker from "@/components/custome-date-picker";
-import { useForm } from "antd/lib/form/Form";
+import {useForm} from "antd/lib/form/Form";
+import {useCheckReportSeen} from "@/providers/workflow-provider";
 
-export const NaftForm = ({ uid }: { uid?: string }) => {
+export const NaftForm = ({uid, reports}: { uid?: string, reports: any }) => {
   const { handleSubmitNaft, getTime, addTime } = useUiTimeSchedule2({ uid });
 
   const [form] = useForm();
+
+  const {isSeenReport} = useCheckReportSeen(uid as string, reports)
+
   useEffect(() => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
@@ -95,6 +100,7 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
               <Col xs={24} md={24}>
                 <Button
                   // onClick={async () => await window.location.reload()}
+                    disabled={!isSeenReport}
                   className="w-full"
                   size="large"
                   type={"primary"}

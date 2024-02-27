@@ -1,17 +1,22 @@
-import { Divider, Form, Typography } from "antd";
-import React, { useEffect } from "react";
-import { Button, Col, Input, Row, Spin } from "antd/lib";
+import {Divider, Form, Typography} from "antd";
+import React, {useEffect} from "react";
+import {Button, Col, Input, Row, Spin} from "antd/lib";
 import CustomDatePicker from "@/components/custome-date-picker";
-import { useForm } from "antd/es/form/Form";
+import {useForm} from "antd/es/form/Form";
 import useUiTimeSchedule2 from "../hook/use-ui-time-schedule";
+import {useCheckReportSeen} from "@/providers/workflow-provider";
 
-export const SamtForm = ({ uid }: { uid?: string }) => {
+export const SamtForm = ({uid, reports}: { uid?: string, reports: any }) => {
   const { handleSubmitSamt, addTime, getTime } = useUiTimeSchedule2({ uid });
 
+  const {isSeenReport} = useCheckReportSeen(uid as string, reports)
+
   const [form] = useForm();
+
   useEffect(() => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
+
   return (
     <>
       <div className="mb-5">
@@ -94,6 +99,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
               <Col xs={24} md={24}>
                 <Button
                   // onClick={async () => await window.location.reload()}
+                    disabled={!isSeenReport}
                   className="w-full"
                   size="large"
                   type={"primary"}

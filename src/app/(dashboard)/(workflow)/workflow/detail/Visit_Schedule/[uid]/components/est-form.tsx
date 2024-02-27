@@ -1,14 +1,17 @@
-import { Form, Spin, Typography } from "antd";
-import React, { useEffect } from "react";
-import { useForm } from "antd/lib/form/Form";
-import { Button, Col, Input, Row } from "antd/lib";
+import {Form, Spin, Typography} from "antd";
+import React, {useEffect} from "react";
+import {useForm} from "antd/lib/form/Form";
+import {Button, Col, Input, Row} from "antd/lib";
 import CustomDatePicker from "@/components/custome-date-picker";
 import useUiTimeSchedule2 from "../hook/use-ui-time-schedule";
+import {useCheckReportSeen} from "@/providers/workflow-provider";
 
-export const EstForm = ({ uid }: { uid?: string }) => {
+export const EstForm = ({uid, reports}: { uid?: string, reports: any }) => {
   const { handleSubmitEst, getTime, addTime } = useUiTimeSchedule2({ uid });
 
   const [form] = useForm();
+
+  const {isSeenReport} = useCheckReportSeen(uid as string, reports)
 
   useEffect(() => {
     form.setFieldsValue(getTime.data);
@@ -98,6 +101,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                    disabled={!isSeenReport}
                   // onClick={async () => await window.location.reload()}
                   className="w-full"
                   size="large"

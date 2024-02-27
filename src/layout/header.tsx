@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import { Button } from "antd";
-import { Header } from "antd/es/layout/layout";
-import { Bars3Icon } from "@heroicons/react/24/outline";
+import {Button} from "antd";
+import {Header} from "antd/es/layout/layout";
+import {Bars3Icon} from "@heroicons/react/24/outline";
 import HeaderDropdown from "./header-dropdown";
 
 export default function LayoutHeader({
@@ -31,20 +31,20 @@ export default function LayoutHeader({
           }}
         >
           <span className="flex items-center">
-            <Image
-              height={24}
-              width={24}
-              alt="bell icon"
-              src="/static/bell.svg"
-              className="ml-4 hidden lg:block"
-            />
-            <Image
-              className="mr-4 ml-8 hidden lg:block"
-              height={24}
-              width={24}
-              alt="chat-bubble-oval-left-ellipsis icon"
-              src="/static/chat-bubble-oval-left-ellipsis.svg"
-            />
+            {/*<Image*/}
+              {/*  height={24}*/}
+              {/*  width={24}*/}
+              {/*  alt="bell icon"*/}
+              {/*  src="/static/bell.svg"*/}
+              {/*  className="ml-4 hidden lg:block"*/}
+              {/*/>*/}
+              {/*<Image*/}
+              {/*  className="mr-4 ml-8 hidden lg:block"*/}
+              {/*  height={24}*/}
+              {/*  width={24}*/}
+              {/*  alt="chat-bubble-oval-left-ellipsis icon"*/}
+              {/*  src="/static/chat-bubble-oval-left-ellipsis.svg"*/}
+              {/*/>*/}
             <HeaderDropdown />
           </span>
           {/* <Input

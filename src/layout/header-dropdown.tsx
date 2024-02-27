@@ -1,19 +1,24 @@
 "use client"
-import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
-import { useHeaderDropdown } from "./hooks/use-header-dropwdown";
+import {EditFilled, LoadingOutlined, LogoutOutlined} from "@ant-design/icons";
+import {Badge, Button, Col, Dropdown, MenuProps, Modal, Row, Typography} from "antd";
+import {useHeaderDropdown} from "./hooks/use-header-dropwdown";
 import Image from "next/image";
 import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
 import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
 import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
-import { SvgIcon } from "@/components/svg-icon";
+import {SvgIcon} from "@/components/svg-icon";
 
 export default function HeaderDropdown() {
 
-  const { confirmExitModal, userGetInfo, logout } = useHeaderDropdown();
+  const {
+    confirmExitModal,
+    userGetInfo,
+    logout,
+    unReadMessageCount,
+    userMessage
+  } = useHeaderDropdown();
 
   const LevelProducer = () => {
-    if (!userGetInfo.data?.userLevelId) return null;
     if (userGetInfo.data?.userLevelId !== null) return <SvgIcon
       src={
         userGetInfo.data?.userLevelId == 3
@@ -55,6 +60,25 @@ export default function HeaderDropdown() {
 
   return (
     <>
+      <Badge count={unReadMessageCount.data}>
+        <Dropdown menu={{
+          items: userMessage.data?.map((item) => ({
+            key: item.Id,
+            label: <div className="bg-gray-100 px-4">
+              <div className="font-medium text-right">{item.Subject}</div>
+              <div className="text-right">{item.Body}</div>
+            </div>
+          }))
+        }}>
+          <Image
+              className="mr-4 ml-8"
+              height={24}
+              width={24}
+              alt="chat-bubble-oval-left-ellipsis icon"
+              src="/static/chat-bubble-oval-left-ellipsis.svg"
+          />
+        </Dropdown>
+      </Badge>
       <div className="hover:bg-gray-50 rounded-lg p-1">
         <Dropdown
           trigger={['click']}

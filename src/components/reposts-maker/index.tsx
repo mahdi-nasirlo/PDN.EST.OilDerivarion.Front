@@ -31,7 +31,7 @@ const Index = ({
       <Alert
         className="font-medium text-amber-600"
         type="warning"
-        message="به منظور فعال شدن مرحله فعلی باید تمام گزارشات مندرج در صفحه مشاهده و برسی گردد"
+        message="به منظور فعال شدن مرحله فعلی باید تمام گزارشات مندرج در صفحه مشاهده و بررسی گردد"
       />
       {reports?.map((report, index) => (
         <RenderReport

@@ -6,7 +6,13 @@ import CustomDatePicker from "@/components/custome-date-picker";
 import { useForm } from "antd/lib/form/Form";
 import useUiVisitResult from "../hook/use-ui-visit-result";
 
-export const NaftForm = ({ uid }: { uid?: string }) => {
+export const NaftForm = ({
+  uid,
+  isSeenReport,
+}: {
+  uid?: string;
+  isSeenReport: boolean;
+}) => {
   const { handleSubmitNaft, getTime, addTime } = useUiVisitResult({ uid });
 
   const [form] = useForm();
@@ -55,6 +61,7 @@ export const NaftForm = ({ uid }: { uid?: string }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                  disabled={!isSeenReport}
                   className="w-full"
                   size="large"
                   type={"primary"}

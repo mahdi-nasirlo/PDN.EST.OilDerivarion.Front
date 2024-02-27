@@ -4,10 +4,16 @@ import { useForm } from "antd/lib/form/Form";
 import { Checkbox, Col, Divider, Input, Row } from "antd/lib";
 import useUiVisitResult from "../hook/use-ui-visit-result";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
-import useUiVisitResultWorkFlow
-  from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Result/[uid]/hook/use-ui-visit-result-work-flow";
+import useUiVisitResultWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Result/[uid]/hook/use-ui-visit-result-work-flow";
+import { useCheckReportSeen } from "@/providers/workflow-provider";
 
-export const EstForm = ({ uid }: { uid?: string }) => {
+export const EstForm = ({
+  uid,
+  isSeenReport,
+}: {
+  uid?: string;
+  isSeenReport: boolean;
+}) => {
   const { handleSubmitEst, getTime, addTime } = useUiVisitResult({ uid });
 
   const [form] = useForm();
@@ -16,8 +22,9 @@ export const EstForm = ({ uid }: { uid?: string }) => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
 
-  const { get, set, choice, setChoice } =
-    useUiVisitResultWorkFlow({ taskId: uid as string });
+  const { get, set, choice, setChoice } = useUiVisitResultWorkFlow({
+    taskId: uid as string,
+  });
 
   return (
     <>
@@ -38,8 +45,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
           layout="vertical"
           className="mb-5"
           onFinish={async (values) => {
-
-            const res = await handleSubmitEst(values)
+            const res = await handleSubmitEst(values);
 
             if (res.success) {
               await set.mutateAsync({
@@ -48,7 +54,6 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 choiceKey: choice,
               });
             }
-
           }}
         >
           <Row gutter={[16, 16]}>
@@ -57,7 +62,10 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                  {
+                    max: 500,
+                    message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                  },
                 ]}
                 name="est_opinion_1"
                 label="توضیحات"
@@ -106,11 +114,12 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             <>
               <Divider />
               <WorkflowBtn
+                disable={!isSeenReport}
                 loading={set.isPending}
                 choices={get.data?.choices}
                 onClick={async (choice_Key) => {
-                  setChoice(choice_Key)
-                  form.submit()
+                  setChoice(choice_Key);
+                  form.submit();
                 }}
               />
             </>

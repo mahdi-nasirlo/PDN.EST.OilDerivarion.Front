@@ -5,7 +5,13 @@ import { Alert, Button, Checkbox, Col, Input, Row } from "antd/lib";
 import useUiVisitResult from "../hook/use-ui-lab-visit-result";
 import useUiLabVisitResult from "../hook/use-ui-lab-visit-result";
 
-export const EstForm = ({ uid }: { uid?: string }) => {
+export const EstForm = ({
+  uid,
+  isSeenReport,
+}: {
+  uid?: string;
+  isSeenReport: boolean;
+}) => {
   const { handleSubmitEst, getTime, addTime } = useUiLabVisitResult({ uid });
 
   const [form] = useForm();
@@ -37,7 +43,10 @@ export const EstForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                  {
+                    max: 500,
+                    message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                  },
                 ]}
                 name="est_opinion_2"
                 label="توضیحات"
@@ -53,6 +62,7 @@ export const EstForm = ({ uid }: { uid?: string }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                  disabled={!isSeenReport}
                   className="w-full"
                   size="large"
                   type={"primary"}

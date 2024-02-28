@@ -38,9 +38,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             title="حذف نمونه"
             content={
               <>
-                <Typography>
-                  از حذف ماده اولیه/ محصول {sample.name} مطمئن هستید؟
-                </Typography>
+                <Typography>از حذف ماده {sample.name} مطمئن هستید؟</Typography>
                 <div className="flex justify-end">
                   <Button
                     danger

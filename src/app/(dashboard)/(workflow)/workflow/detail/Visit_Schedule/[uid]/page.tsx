@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Alert } from "antd";
 import { EstForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/est-form";
 import { SamtForm } from "@/app/(dashboard)/(workflow)/workflow/detail/Visit_Schedule/[uid]/components/samt-form";
@@ -15,8 +15,14 @@ import { useRouter } from "next/navigation";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import CalendarTime from "@/components/calendar-time/calendar-time";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
+import { report } from "process";
 
 export default function Page({ params }: { params: { uid: string } }) {
+
+  const paragraphRef = useRef(null);
+
+  const [state, setState] = useState(true)
+
   const stepKey = "Visit_Schedule";
 
   const router = useRouter();
@@ -28,6 +34,16 @@ export default function Page({ params }: { params: { uid: string } }) {
     stepKey + "_" + params.uid,
     reports.data
   );
+
+  useEffect(() => {
+
+    //@ts-ignore
+    paragraphRef?.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    })
+
+  }, [get.isFetching])
 
   if (!get.data && get.isFetching) {
     return (
@@ -52,11 +68,18 @@ export default function Page({ params }: { params: { uid: string } }) {
         />
       )}
       <Card>
-        {dataForm.data?.final_time && (
-          <Alert
-            message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
-            className="text-lg font-bold text-blue-800"
-          />
+
+        {/* dataForm.data?.final_time */}
+        {state && (
+          <div
+            ref={paragraphRef}
+            className="mt-5"
+          >
+            <Alert
+              message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
+              className="text-lg font-bold text-blue-800"
+            />
+          </div>
         )}
         <Divider orientation="left" className="mb-6">
           لیست گزارشات

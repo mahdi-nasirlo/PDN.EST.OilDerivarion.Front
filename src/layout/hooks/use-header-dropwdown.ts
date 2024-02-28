@@ -10,21 +10,13 @@ const useHeaderDropdown = () => {
 
   const userGetInfo = useGetUserInfo();
 
-  const unReadMessageCount = useUnReadMessageCount(userGetInfo.data?.nationalCode)
-
-  const userMessage = useGetUserMessage({
-    userName: userGetInfo.data?.nationalCode as string,
-    uid: "d5424eea-102a-434c-af94-67fdfb292be4",
-    direction: false
-  })
-
   const logout = useLogout();
 
   return {
     userGetInfo,
     logout,
-    unReadMessageCount,
-    userMessage,
+    // unReadMessageCount,
+    // userMessage,
     confirmExitModal: {
       isOpen: openConfirmExitModal,
       open: () => setOpenConfirmExitModal(true),

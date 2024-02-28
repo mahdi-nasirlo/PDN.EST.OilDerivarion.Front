@@ -1,13 +1,9 @@
-import React from "react";
-import { Button, Col, Divider, Form, Input, Row, Spin, Typography } from "antd";
-import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
-import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
-import { Upload, UploadProps } from "antd/lib";
-import { UploadChangeParam } from "antd/es/upload";
-import { CloudDownloadOutlined, FileAddOutlined } from "@ant-design/icons";
+import React, {useEffect} from "react";
+import {Button, Col, Divider, Form, Input, Row, Spin, Typography} from "antd";
+import {UploadProps} from "antd/lib";
+import {FileAddOutlined} from "@ant-design/icons";
 import useUiRequestProductDescriptionForm from "../../hook/use-ui-request-product-description-form";
 import FileUpload from "@/components/file-upload/FileUpload";
-import FormItem from "antd/lib/form/FormItem";
 
 const props: UploadProps = {
   listType: "picture",
@@ -44,6 +40,10 @@ const DescriptionForm = ({
 }) => {
   const { form, rule, updateDesc, requestInfo, onFinish } =
     useUiRequestProductDescriptionForm(uid, package_uid);
+
+  useEffect(() => {
+    console.log(requestInfo.data?.schematic_file_UID)
+  }, [requestInfo.data?.schematic_file_UID])
 
   return (
     <>
@@ -119,27 +119,6 @@ const DescriptionForm = ({
                     }}
                     defaultFiles={requestInfo.data?.schematic_file_UID}
                   />
-
-                  {/* <Upload
-                    accept="image/*"
-                    // customRequest={HandleUpload}
-                    // className="uplo w-full"
-                    // {...props}
-                    fileList={fileList}
-                    onChange={handleChange}
-                    // showUploadList={false}
-                    listType="picture"
-                    // type="select"
-                    // showUploadList={{ showRemoveIcon: false }}
-                  >
-                    <Button
-                      size="large"
-                      className="w-full text-right bg-gray-100"
-                      icon={<CloudDownloadOutlined />}
-                    >
-                      بارگزاری نمایید
-                    </Button>
-                  </Upload> */}
                 </div>
               </Form.Item>
             </Col>

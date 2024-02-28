@@ -93,7 +93,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست اطلاعات مدیریتی",
+            text: "لیست اعضای واحد تولیدی",
             actions: [
               <Button
                 key={"1"}

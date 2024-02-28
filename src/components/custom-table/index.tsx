@@ -1,6 +1,6 @@
-import React, { Ref, useState } from "react";
-import { Table, TableProps, Typography } from "antd";
-import { addIndexToData } from "@/utils/addIndexToData";
+import React, {Ref, useState} from "react";
+import {Table, TableProps, Typography} from "antd";
+import {addIndexToData} from "@/utils/addIndexToData";
 import GetPageRecordNumber from "@/utils/getPageRecordNumber";
 
 interface RecordeValue {
@@ -31,14 +31,15 @@ const Index = (props: TableProps<any> & RecordeValue) => {
   // }, [props.data, page]);
 
   const handleChangePage = (e: number) => {
-    setPage(e);
-    if (props.setInitialData) {
-      props?.setInitialData((prev: any) => {
-        console.log(prev);
-        delete prev.fromRecord;
-        delete prev.selectRecord;
-        return { ...GetPageRecordNumber(e), ...prev };
-      });
+
+      setPage(e);
+      if (props.setInitialData) {
+          props?.setInitialData((prev: any) => {
+              console.log(prev);
+              delete prev.fromRecord;
+              delete prev.selectRecord;
+              return {...GetPageRecordNumber(e), ...prev};
+          });
     }
   };
 
@@ -68,7 +69,7 @@ const Index = (props: TableProps<any> & RecordeValue) => {
           addIndexToData(
             props?.data?.records || [],
             "Row",
-            (page - 1) * 5 + 1
+              props.setInitialData ? (page - 1) * 5 + 1 : 1
           ) as []
         }
         className="mt-6"

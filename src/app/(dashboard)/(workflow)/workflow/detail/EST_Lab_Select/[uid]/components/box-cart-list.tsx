@@ -9,8 +9,7 @@ import { errorMessage } from "../../../../../../../../constance/error-message";
 import { RequestPackageApi } from "../../../../../../../../constance/request-package";
 import { z } from "zod";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import useUiEstLabSelect
-  from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
+import useUiEstLabSelect from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/hook/use-ui-est-lab-select";
 import useLabBoxSampleGetAvailableList from "@/hooks/request-package/use-lab-box-sample-get-available-list";
 import useLabBoxSampleAdd from "@/hooks/request-package/use-lab-box-sample-add";
 import { filterOption } from "@/lib/filterOption";
@@ -21,7 +20,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
 
   const [openUidDelete, setOpenUidDelete] = useState<string>();
 
-  const [deletePop, setDeletePop] = useState<boolean>();
+  const [deletePop, setDeletePop] = useState<string | undefined>();
 
   const renderCircles = (
     item: z.infer<typeof RequestPackageApi.BoxList.item>,
@@ -33,7 +32,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
-            open={deletePop}
+            open={deletePop == sample.UID}
             trigger="click"
             title="حذف نمونه"
             content={
@@ -53,8 +52,8 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
                         box_UID: item.box_UID,
                         sample_UID: sample.UID,
                         lab_Uid: lab_UID as string,
-                      })
-                      if (res.status) setDeletePop(false)
+                      });
+                      if (res.success) setDeletePop(undefined);
                     }}
                   >
                     حذف
@@ -64,6 +63,12 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             }
           >
             <Button
+              onClick={() => {
+                console.log(deletePop);
+                setDeletePop(
+                  typeof deletePop == "string" ? undefined : sample.UID
+                );
+              }}
               shape="circle"
               type="default"
               style={{ backgroundImage: "url(/static/pattern.png" }}

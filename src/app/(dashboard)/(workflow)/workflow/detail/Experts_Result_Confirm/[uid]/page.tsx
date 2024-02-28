@@ -77,7 +77,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         />
         {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && ( */}
         <>
-          <Divider />
+          {/* <Divider /> */}
           {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
           {/* <WorkflowBtn
             loading={set.isPending}

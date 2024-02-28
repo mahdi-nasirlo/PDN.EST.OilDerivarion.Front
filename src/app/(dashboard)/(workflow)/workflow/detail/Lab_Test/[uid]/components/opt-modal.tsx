@@ -1,12 +1,12 @@
 import useLabCheckOtp from "@/hooks/request-package/use-lab-check-otp";
 import useLabGetOTP from "@/hooks/request-package/use-lab-get-otp";
 import { useValidation } from "@/hooks/use-validation";
-import { FieldTimeOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Modal, Row } from "antd";
-import React from "react";
+import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Modal, Row, Typography } from "antd";
 import { RequestPackageApi } from "constance/request-package";
-import { z } from "zod";
 import Countdown, { zeroPad } from "react-countdown";
+import React from "react";
+import { z } from "zod";
 
 interface TProps {
   openOptModal: string | undefined;
@@ -64,7 +64,10 @@ export default function OptModal({
         </div>
       }
       open={typeof openOptModal == "string"}
-      onCancel={() => setOpenOptModal(undefined)}
+      onCancel={() => {
+        setOpenOptModal(undefined)
+        form.resetFields()
+      }}
       footer={[
         <Row key={"box"} gutter={[16, 16]} className="my-2">
           <Col xs={24}>
@@ -90,22 +93,29 @@ export default function OptModal({
         layout="vertical"
       >
         <Form.Item className="flex justify-center m-0">
-          <Countdown
-            date={Date.now() + 120000}
-            autoStart={false}
-            onStart={() => LabGetOTP.isSuccess}
-            onComplete={() => setOpenOptModal(undefined)}
-            renderer={({ minutes, seconds, total }: any) => {
-              return (
-                <span className={timerColor(total)}>
-                  {zeroPad(minutes)}:{zeroPad(seconds)}
-                  <FieldTimeOutlined className="p-1 m-1" />
-                </span>
-              );
-            }}
-          />
+          {LabGetOTP?.isFetching ?
+            <Typography className="text-gray-500">
+              در حال ارسال پیامک
+              <LoadingOutlined width={24} height={24} className="mr-3" />
+            </Typography>
+            :
+            <Countdown
+              date={Date.now() + 120000}
+              autoStart={false}
+              onStart={() => LabGetOTP.isSuccess}
+              onComplete={() => setOpenOptModal(undefined)}
+              renderer={({ minutes, seconds, total }: any) => {
+                return (
+                  <span className={timerColor(total)}>
+                    {zeroPad(minutes)}:{zeroPad(seconds)}
+                    <FieldTimeOutlined className="p-1 m-1" />
+                  </span>
+                );
+              }}
+            />
+          }
         </Form.Item>
-        <Form.Item label="کد otp" name="Test" required={false} rules={[rules]}>
+        <Form.Item label="کد otp" name="otp" required={false} rules={[rules]}>
           <Input className="w-full" size="large" />
         </Form.Item>
       </Form>

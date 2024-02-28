@@ -1,15 +1,14 @@
 "use client"
 
 import { Card } from '@/components/card';
-import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { DocumentChartBarIcon, ViewColumnsIcon } from '@heroicons/react/24/outline';
-import { Space, Tag, Tooltip, Typography } from 'antd';
+import { Button, Space, Tag, Tooltip, Typography } from 'antd';
 import Breadcrumb from '@/components/breadcrumb'
 import CustomTable from '@/components/custom-table'
 import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 import { z } from 'zod';
-import Link from 'next/link';
 
 interface PropType {
     params: { TaskId: string };
@@ -27,7 +26,7 @@ export default function Page(props: PropType) {
         {
             title: "عنوان پرداخت",
             dataIndex: "StepName",
-            key: "5",
+            key: "2",
             render: (_, record: any) => {
                 let name = "";
                 if (record.StepName === 0) {
@@ -50,35 +49,37 @@ export default function Page(props: PropType) {
         {
             title: "وضعیت",
             dataIndex: "Status",
-            key: "5",
+            key: "3",
             render: (_, record: any) => {
                 let color = "";
                 let name = "";
                 let icon = <></>;
-                if (record.Status === 0) {
-                    name = "پرداخت نشده";
-                    icon = <CloseCircleOutlined />
-                    color = 'red'
-                } else if (record.Status === 1) {
+                if (record.Status === true) {
                     name = "پرداخت شده"
                     color = 'success'
                     icon = <CheckCircleOutlined />
                 } else {
-                    name = "در انتظار پرداخت";
-                    icon = <ClockCircleOutlined />
-                    color = 'warning'
+                    name = "پرداخت نشده";
+                    icon = <CloseCircleOutlined />
+                    color = 'red'
                 }
                 return (
-                    <Tag className='p-1' icon={icon} color={color}>
+                    <Tag className='p-1' icon={icon} color={color} >
                         {name}
-                    </Tag>
-                );
-            },
+                    </Tag >
+                )
+            }
+        },
+        {
+            title: "ملبغ",
+            dataIndex: "Amount",
+            key: "4",
+            width: "5%",
         },
         {
             title: "توضیحات",
             dataIndex: "desorption",
-            key: "4",
+            key: "5",
             width: "50%",
             render: (_, record) => (
                 <Tooltip
@@ -102,19 +103,28 @@ export default function Page(props: PropType) {
             width: "10%",
             render: (_, record: any) => (
                 <Space size="small">
-                    {record.isActive !== (0 | 1 | 2) ? <Link
-                        type="link"
-                        className={"text-primary-500 font-bold"}
-                        href={record.isActive == 0 ? `/payment_management/${record.uid}/visit_invoice`
-                            : record.isActive == 1 ? `/payment_management/${record.uid}/lab_invoice`
-                                : `/payment_management/${record.uid}/product_code_Invoice`}
-                    >
-                        پرداخت
-                    </Link> : <Typography
-                        className={"text-gray-400 font-bold cursor-not-allowed"}
-                    >
-                        پرداخت شده
-                    </Typography>
+                    {record.Status !== true ?
+                        <>
+                            <Button
+                                type='link'
+                                onClick={() => console.log("پرداخت")}
+                                className={"text-primary-500 font-bold"}
+                            >
+                                پرداخت
+                            </Button>
+                            <Button
+                                type='link'
+                                onClick={() => console.log("استعلام")}
+                                className={"text-primary-500 font-bold"}
+                            >
+                                استعلام
+                            </Button>
+                        </>
+                        : <Typography
+                            className={"text-gray-400 font-bold cursor-not-allowed"}
+                        >
+                            پرداخت شده
+                        </Typography>
                     }
                 </Space >
             )
@@ -154,27 +164,31 @@ const data = [
         uid: "123456",
         StepName: 0,
         desorption: 'توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
-        Status: 1
+        Amount: "50.0000 ریال",
+        Status: true
     },
     {
         Row: '2',
         uid: "654321",
         StepName: 1,
         desorption: 'توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
-        Status: 2
+        Amount: "50.0000 ریال",
+        Status: false
     },
     {
         Row: '3',
         uid: "987654",
         StepName: 2,
         desorption: ' توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
-        Status: 0
+        Amount: "50.0000 ریال",
+        Status: false
     },
     {
         Row: '4',
         uid: '96385274',
         StepName: 3,
         desorption: 'توضیحات 6565456 /payment_management/${record.uid}/lab_invoice',
-        Status: 0
+        Amount: "50.0000 ریال",
+        Status: false
     }
 ]

@@ -7,7 +7,7 @@ import WorkflowDataTable from "@/components/workflow/workflow-data-list";
 import { ColumnsType } from "antd/lib/table";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
 import Breadcrumb from "@/components/breadcrumb";
-import { Space } from "antd";
+import { Space, Typography } from "antd";
 import Link from "next/link";
 import { FolderIcon } from "@heroicons/react/24/solid";
 
@@ -25,9 +25,41 @@ const Page = () => {
       },
     },
     {
+      title: "وضعیت پرداختی",
+      dataIndex: "Not_Paid_Count",
+      key: "5",
+      align: "center",
+      width: "10%",
+      render(_, record) {
+        if (record.Not_Paid_Count >= 1 && record.Not_Paid_Count <= 4) {
+          return (
+            <Space size="small" >
+              <Link
+                className="text-CustomizeBlue-500 font-bold"
+                href={`list/${record.TaskId}/payment_management/`}
+              >
+                نیاز به پرداخت
+              </Link>
+            </Space >
+          )
+        } else {
+          return (
+            <Space size="small">
+              <Typography className="text-gray-400 font-bold">
+                عدم نیاز به پرداخت
+              </Typography>
+            </Space>
+          );
+        }
+      },
+    },
+    {
       title: "وضعیت عملیاتی",
       dataIndex: "StatusOperation",
       key: "5",
+      align: "center",
+      fixed: "right",
+      width: "10%",
       render(_, record) {
         if (record.StatusOperation === 0) {
           return (
@@ -52,10 +84,10 @@ const Page = () => {
           return (
             <Space size="small">
               <Link
-                className="text-CustomizeBlue-500 font-bold"
-                href={`list/${record.TaskId}/payment_management/`}
+                className="text-secondary-500 font-bold"
+                href={`/request/TaskId`}
               >
-                پرداخت
+                مشاهده تاریخچه
               </Link>
             </Space>
           )
@@ -63,7 +95,6 @@ const Page = () => {
       },
     },
   ];
-
 
   return (
     <>

@@ -14,7 +14,7 @@ export default function Page() {
       <Breadcrumb
         titleIcon={<ClipboardDocumentCheckIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"لیست اطلاعات مدیریتی تولید کننده"}
+        currentPage={"لیست اطلاعات اعضای واحد تولیدی"}
       />
       <DataTable
         setModalVisible={setModalVisible}

@@ -1,19 +1,18 @@
 "use client";
 
 import React from "react";
-import {Card} from "@/components/card";
+import { Card } from "@/components/card";
 import useGetCartable from "@/hooks/workflow-request/use-get-cartable";
 import WorkflowDataTable from "@/components/workflow/workflow-data-list";
-import {ColumnsType} from "antd/lib/table";
+import { ColumnsType } from "antd/lib/table";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
-import {Button} from "antd/lib";
 import Breadcrumb from "@/components/breadcrumb";
-import {Space} from "antd";
+import { Space } from "antd";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
-import {FolderIcon} from "@heroicons/react/24/solid";
+import { FolderIcon } from "@heroicons/react/24/solid";
 
 const Page = () => {
+
   const list = useGetCartable();
 
   const extraColumns: ColumnsType<any> = [
@@ -50,24 +49,29 @@ const Page = () => {
             </Space>
           );
         } else if (record.StatusOperation === 2) {
-          return <div>---</div>;
+          return (
+            <Space size="small">
+              <Link
+                className="text-CustomizeBlue-500 font-bold"
+                href={`list/${record.TaskId}/payment_management/`}
+              >
+                پرداخت
+              </Link>
+            </Space>
+          )
         }
       },
     },
   ];
 
-  const router = useRouter();
+
   return (
     <>
       <Breadcrumb
         titleIcon={<FolderIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
         currentPage={"لیست پکیج درخواست ها"}
-        actions={[
-          <Button key={1} size="large" onClick={() => router.push("/request")}>
-            بازگشت
-          </Button>,
-        ]}
+        backLink="/request"
       />
       <Card>
         <WorkflowDataTable

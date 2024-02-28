@@ -9,6 +9,7 @@
 .ant-table-thead .ant-table-cell {
   background: theme("backgroundColor.primary.500") !important;
   color: theme("colors.white") !important;
+  cursor: default !important
 }
 
 .ant-table {

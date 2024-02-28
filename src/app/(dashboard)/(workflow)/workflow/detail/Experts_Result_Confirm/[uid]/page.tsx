@@ -70,12 +70,16 @@ export default function Page({ params }: { params: { uid: string } }) {
         />
         <NaftForm uid={params.uid} isSeenReport={isSeenReport} />
         <SamtForm uid={params.uid} isSeenReport={isSeenReport} />
-        <EstForm uid={params.uid} isSeenReport={isSeenReport} />
+        <EstForm
+          uid={params.uid}
+          isSeenReport={isSeenReport}
+          stepKey={stepKey}
+        />
         {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && ( */}
         <>
           <Divider />
           {/* <Form form={form} onFinish={handleSet} layout="vertical"></Form> */}
-          <WorkflowBtn
+          {/* <WorkflowBtn
             loading={set.isPending}
             disable={!isSeenReport}
             choices={get.data?.choices}
@@ -91,7 +95,7 @@ export default function Page({ params }: { params: { uid: string } }) {
                 router.push(`/workflow/list/Experts_Result_Confirm`);
               }
             }}
-          />
+          /> */}
         </>
         {/* // )} */}
       </Card>

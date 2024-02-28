@@ -21,7 +21,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
 
   const [openUidDelete, setOpenUidDelete] = useState<string>();
 
-  const [deletePop, setDeletePop] = useState<boolean>();
+  const [deletePop, setDeletePop] = useState<string | undefined>();
 
   const renderCircles = (
     item: z.infer<typeof RequestPackageApi.BoxList.item>,
@@ -33,14 +33,12 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
       item.samples?.map((sample, index) =>
         views.push(
           <Popover
-            open={deletePop}
+            open={deletePop == sample.UID}
             trigger="click"
             title="حذف نمونه"
             content={
               <>
-                <Typography>
-                  از حذف ماده اولیه/ محصول {sample.name} مطمئن هستید؟
-                </Typography>
+                <Typography>از حذف ماده {sample.name} مطمئن هستید؟</Typography>
                 <div className="flex justify-end">
                   <Button
                     danger
@@ -52,8 +50,8 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
                         package_UID,
                         box_UID: item.box_UID,
                         sample_UID: sample.UID,
-                      })
-                      if (res.success) setDeletePop(false)
+                      });
+                      if (res.success) setDeletePop(undefined);
                     }}
                   >
                     حذف
@@ -63,6 +61,11 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             }
           >
             <Button
+              onClick={() => {
+                setDeletePop(
+                  typeof deletePop == "string" ? undefined : sample.UID
+                );
+              }}
               shape="circle"
               type="default"
               style={{ backgroundImage: "url(/static/pattern.png" }}
@@ -73,7 +76,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
                 {sample.name}
               </Typography>
             </Button>
-          </Popover >
+          </Popover>
         )
       );
     }
@@ -116,7 +119,6 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
   };
 
   return boxList?.data?.map((item, index) => {
-
     return (
       <>
         <Col key={index} xs={24} sm={12} xl={8} xxl={6}>
@@ -166,7 +168,6 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
             open={typeof openUidDelete == "string"}
             setOpen={setOpenUidDelete}
             handleDelete={async () => {
-
               const res = await deletebox.mutateAsync({
                 box_UID: openUidDelete as string,
                 package_UID,

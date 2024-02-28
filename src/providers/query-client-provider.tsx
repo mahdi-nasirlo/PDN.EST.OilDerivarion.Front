@@ -34,7 +34,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (result.status === 401) {
-          localStorage.removeItem(ssoApi.access_token_Key)
+          localStorage.removeItem(ssoApi.access_token_Key);
           redirectToSso.execute(result);
         }
       },

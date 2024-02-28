@@ -11,13 +11,19 @@ import useUiVisitResultWorkFlow from "./hook/use-ui-visit-result-work-flow";
 import { NaftForm } from "./components/naft-form";
 import { SamtForm } from "./components/samt-form";
 import { EstForm } from "./components/est-form";
+import { useCheckReportSeen } from "@/providers/workflow-provider";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
 
   const { get, handleSet, reports, form, dataForm, setChoice, set } =
     useUiVisitResultWorkFlow({ taskId: params.uid });
+  const stepKey = "Visit_Result";
 
+  const { isSeenReport } = useCheckReportSeen(
+    (stepKey + "_" + params.uid) as string,
+    reports.data
+  );
   if (!get.data && get.isFetching) {
     return (
       <Card className="min-h-[150px]">
@@ -25,7 +31,6 @@ export default function Page({ params }: { params: { uid: string } }) {
       </Card>
     );
   }
-  const stepKey = "Visit_Result";
 
   return (
     <>
@@ -59,9 +64,9 @@ export default function Page({ params }: { params: { uid: string } }) {
           message="لطفا گزارشات را با دقت بررسی و سپس نظرات خود را ثبت نمایید."
           type="info"
         />
-        <NaftForm uid={params.uid} />
-        <SamtForm uid={params.uid} />
-        <EstForm uid={params.uid} />
+        <NaftForm uid={params.uid} isSeenReport={isSeenReport} />
+        <SamtForm uid={params.uid} isSeenReport={isSeenReport} />
+        <EstForm uid={params.uid} isSeenReport={isSeenReport} />
       </Card>
     </>
   );

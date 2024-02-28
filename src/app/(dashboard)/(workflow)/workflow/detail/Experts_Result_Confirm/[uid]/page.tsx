@@ -68,9 +68,9 @@ export default function Page({ params }: { params: { uid: string } }) {
           message="لطفا گزارشات را با دقت بررسی و سپس نظرات خود را ثبت نمایید."
           type="info"
         />
-        <NaftForm uid={params.uid} />
-        <SamtForm uid={params.uid} />
-        <EstForm uid={params.uid} />
+        <NaftForm uid={params.uid} isSeenReport={isSeenReport} />
+        <SamtForm uid={params.uid} isSeenReport={isSeenReport} />
+        <EstForm uid={params.uid} isSeenReport={isSeenReport} />
         {/* {dataForm.data?.visit_Type == 3 && !dataForm.data.ReadOnly && ( */}
         <>
           <Divider />

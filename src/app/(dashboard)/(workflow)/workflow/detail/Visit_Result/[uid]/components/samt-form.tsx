@@ -6,7 +6,13 @@ import { useForm } from "antd/es/form/Form";
 import useUiTimeSchedule2 from "../hook/use-ui-visit-result";
 import useUiVisitResult from "../hook/use-ui-visit-result";
 
-export const SamtForm = ({ uid }: { uid?: string }) => {
+export const SamtForm = ({
+  uid,
+  isSeenReport,
+}: {
+  uid?: string;
+  isSeenReport: boolean;
+}) => {
   const { handleSubmitSamt, addTime, getTime } = useUiVisitResult({ uid });
 
   const [form] = useForm();
@@ -33,7 +39,10 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
                 required={false}
                 rules={[
                   { required: true, message: "لطفا مقدار را وارد کنید" },
-                  { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                  {
+                    max: 500,
+                    message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                  },
                 ]}
                 name="samt_opinion_1"
                 label="توضیحات"
@@ -50,6 +59,7 @@ export const SamtForm = ({ uid }: { uid?: string }) => {
             <Row gutter={[32, 0]}>
               <Col xs={24} md={24}>
                 <Button
+                  disabled={!isSeenReport}
                   className="w-full"
                   size="large"
                   type={"primary"}

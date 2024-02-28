@@ -152,7 +152,11 @@ const formMakerApi = {
           Hidden: z.boolean()
         })).or(z.undefined()).nullable(),
         Values: z.array(z.any())
-      }).nullable()).optional()
+      }).nullable()).optional(),
+      Media: z.object({
+        Images: z.array(z.string()).optional(),
+        Videos: z.array(z.string()).optional()
+      }).optional().nullable()
     }))
   },
   GetDoc2: {

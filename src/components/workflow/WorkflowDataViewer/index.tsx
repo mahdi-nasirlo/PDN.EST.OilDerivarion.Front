@@ -1,24 +1,28 @@
-import React from 'react';
-import {formMakerApi} from "../../../constance/form-maker";
-import {ZodErrorAlert} from "@/components/zod-error-alert";
-import {Empty} from "antd";
-import {Descriptions, Divider, Table, TableColumnsType, Typography} from "antd/lib";
-import {Card} from "@/components/card";
+import React, { useEffect } from 'react';
+import { formMakerApi } from "../../../constance/form-maker";
+import { ZodErrorAlert } from "@/components/zod-error-alert";
+import { Empty, Image } from "antd";
+import { Descriptions, Divider, Table, TableColumnsType, Typography } from "antd/lib";
+import { Card } from "@/components/card";
+import { useQueries } from '@tanstack/react-query';
+import fetchWithSession from '@/utils/fetch-with-session';
+import { fileApi } from 'constance/file';
+import { z } from 'zod';
 
 interface PropsType {
     data: string,
 }
 
-const Index = ({data}: PropsType) => {
+const Index = ({ data }: PropsType) => {
 
     const validateData = formMakerApi.ProducerFormsGetDocSchemaByUid.type1Res.safeParse(data)
 
     if (!data) {
-        return <Empty/>
+        return <Empty />
     }
 
     if (!validateData.success) {
-        return <ZodErrorAlert success={false} error={validateData.error}/>
+        return <ZodErrorAlert success={false} error={validateData.error} />
     }
 
     const renderCard = () => {
@@ -89,9 +93,21 @@ const Index = ({data}: PropsType) => {
                     {desc}
                 </Descriptions>
             </Card>)
-            
+
+            if (item.Media?.Images) {
+                view.push(<RenderImages imagesUid={item.Media?.Images} />)
+            }
+            // item.Media?.Images((image, index) => <Image
+            //     key={index}
+            //     loading='lazy'
+            //     // src={base64Image}
+            //     width="100%"
+            //     height="100%"
+            //     alt={`Base64 Image ${index + 1}`}
+            // />)
+
             if (cardIndex !== (cardData.length - 1)) {
-                view.push(<Divider/>)
+                view.push(<Divider />)
             }
         })
 
@@ -100,5 +116,35 @@ const Index = ({data}: PropsType) => {
 
     return renderCard()
 };
+
+const apiDonwload = fileApi.Download
+
+const RenderImages = ({ imagesUid }: { imagesUid: string[] }) => {
+
+    const imageQueries = useQueries({
+        queries: imagesUid.map(image => ({
+            queryKey: [apiDonwload.url, image],
+            queryFn: () => fetchWithSession({
+                url: apiDonwload.url, data: {
+                    uid: image
+                }
+            }),
+            // select: (data: z.infer<typeof apiDonwload.response>) => data.data.File_Content_Base64
+        }))
+    })
+
+    // useEffect(() => {
+    //     console.log(imageQueries[0].data.data.File_Content_Base64);
+    // }, [imageQueries])
+
+    return imageQueries.map((image, index) => <Image
+        key={index}
+        loading='lazy'
+        src={image.data?.data?.File_Content_Base64}
+        width="100%"
+        height="100%"
+        alt={`Base64 Image ${index + 1}`}
+    />)
+}
 
 export default Index;

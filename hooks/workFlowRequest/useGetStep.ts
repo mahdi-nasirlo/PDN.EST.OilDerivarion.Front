@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { listFetcher } from "../../lib/server/listFetcher";
-import { Choice } from "../../interfaces/requestDetail";
 
 export interface ApiTabType {
   name: string;
@@ -15,7 +14,7 @@ interface CalendarData {
   gregorian_day: number;
 }
 interface DataFetchType {
-  choices: Choice[];
+  choices: any[];
   tabs: ApiTabType[];
   task: {
     processId: string;
@@ -28,20 +27,20 @@ interface DataFetchType {
   };
   calendar?: CalendarData[] | undefined;
   producer: {
-    firstName: string,
-    lastName: string,
-    personNationalCode: string,
-    producerStatusId: number,
-    producerStatusName:string,
-    requestRejectionDescription: string,
-    companyName: string,
-    companyNationalCode: string,
-    businessNumber: string,
-    operationLicense: string,
-    establishmentPermit: string,
-    requestDescription: string,
-    requestImage: string
-},
+    firstName: string;
+    lastName: string;
+    personNationalCode: string;
+    producerStatusId: number;
+    producerStatusName: string;
+    requestRejectionDescription: string;
+    companyName: string;
+    companyNationalCode: string;
+    businessNumber: string;
+    operationLicense: string;
+    establishmentPermit: string;
+    requestDescription: string;
+    requestImage: string;
+  };
 }
 
 const useGetStep = ({ taskId, apiUrl }: { taskId: string; apiUrl: string }) => {

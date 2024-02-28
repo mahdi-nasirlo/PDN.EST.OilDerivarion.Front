@@ -156,7 +156,7 @@ const formMakerApi = {
       Media: z.object({
         Images: z.array(z.string()).optional(),
         Videos: z.array(z.string()).optional()
-      }).optional()
+      }).optional().nullable()
     }))
   },
   GetDoc2: {

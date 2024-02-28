@@ -19,7 +19,6 @@ interface TProps {
 }
 
 export default function DataTable({ package_UID, data, isLoading }: TProps) {
-
   const [openOptModal, setOpenOptModal] = useState<string | undefined>();
 
   const columns: ColumnsType<z.infer<typeof apiData.Item>> = [
@@ -35,7 +34,7 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
       key: "2",
     },
     {
-      title: "تعداد بطری",
+      title: "ظرفیت",
       dataIndex: "Capacity",
       key: "3",
     },
@@ -95,7 +94,11 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
       render: (_, record) => (
         <Space size="small">
           <Button
-            className={!record.Is_Recordbble ? "text-gray-500 px-4 font-bold" : "text-secondary-500 font-bold"}
+            className={
+              !record.Is_Recordbble
+                ? "text-gray-500 px-4 font-bold"
+                : "text-secondary-500 font-bold"
+            }
             disabled={!record.Is_Recordbble}
             type="link"
           >

@@ -1,4 +1,4 @@
-import { Choice } from "../../../interfaces/requestDetail";
+// import { Choice } from "../../../interfaces/requestDetail";
 import { Button, Input } from "antd";
 import useSWRMutation from "swr/mutation";
 import { mutationFetcher } from "../../../lib/server/mutationFetcher";
@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 interface PropsType {
     hasDescription?: boolean;
     loading?: boolean;
-    choices: Choice[];
+    choices: any[];
     nextStepUrl: string;
     taskId: string;
     onClick?: (key: string) => any;

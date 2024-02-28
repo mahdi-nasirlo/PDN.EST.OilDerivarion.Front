@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import "filepond/dist/filepond.min.css";
 import "./style.stylesheet.css";
-import { Button, Upload } from "antd";
-import { CloudDownloadOutlined } from "@ant-design/icons";
-import { UploadFile, UploadProps } from "antd/lib";
-import { UploadChangeParam } from "antd/es/upload";
+import {Button, Upload} from "antd";
+import {CloudDownloadOutlined} from "@ant-design/icons";
+import {UploadFile, UploadProps} from "antd/lib";
+import {UploadChangeParam} from "antd/es/upload";
 import useDownload from "@/hooks/file/use-download";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
 
@@ -75,13 +75,18 @@ const FileUpload = (
           thumbUrl: res?.data?.File_Content_Base64,
         },
       ]);
+    } else {
+      setFileList([])
     }
   };
 
   useEffect(() => {
-    // console.log(props.defaultFiles);
-    setFiles();
-  }, [props.defaultFiles]);
+    setFiles().then()
+  }, [props.defaultFiles])
+  // useEffect(() => {
+  //   // console.log(props.defaultFiles);
+  //   setFiles();
+  // }, [props.defaultFiles]);
 
   return (
     <>

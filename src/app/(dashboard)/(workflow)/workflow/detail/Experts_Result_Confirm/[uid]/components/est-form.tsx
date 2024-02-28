@@ -1,14 +1,19 @@
 import { Form, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "antd/lib/form/Form";
-import { Alert, Button, Checkbox, Col, Input, Row } from "antd/lib";
+import { Alert, Button, Checkbox, Col, Divider, Input, Row } from "antd/lib";
 import useUiVisitResult from "../hook/use-ui-lab-visit-result";
 import useUiLabVisitResult from "../hook/use-ui-lab-visit-result";
+import useUiLabVisitResultWorkFlow from "../hook/use-ui-lab-visit-result-work-flow";
+import WorkflowBtn from "@/components/workflow/workflow-btn";
+import { useRouter } from "next/navigation";
 
 export const EstForm = ({
+  stepKey,
   uid,
   isSeenReport,
 }: {
+  stepKey: string;
   uid?: string;
   isSeenReport: boolean;
 }) => {
@@ -16,9 +21,13 @@ export const EstForm = ({
 
   const [form] = useForm();
 
+  const { get, set, choice, setChoice } = useUiLabVisitResultWorkFlow({
+    taskId: uid as string,
+  });
   useEffect(() => {
     form.setFieldsValue(getTime.data);
   }, [getTime.data]);
+  const router = useRouter();
 
   const [state, setState] = useState<boolean>(false);
   return (
@@ -72,6 +81,28 @@ export const EstForm = ({
                 </Button>
               </Col>
             </Row>
+          )}
+          {getTime.data?.visit_Type == 3 && (
+            <>
+              <Divider />
+              <WorkflowBtn
+                loading={set.isPending}
+                disable={!isSeenReport}
+                choices={get.data?.choices}
+                onClick={async (choice_Key) => {
+                  setChoice(choice_Key);
+                  form.submit();
+                  const res = await set.mutateAsync({
+                    taskId: uid as string,
+                    stepKey,
+                    choiceKey: choice_Key,
+                  });
+                  if (res.success) {
+                    router.push(`/workflow/list/Experts_Result_Confirm`);
+                  }
+                }}
+              />
+            </>
           )}
         </Form>
       </Spin>

@@ -2,7 +2,7 @@ import useLabCheckOtp from "@/hooks/request-package/use-lab-check-otp";
 import useLabGetOTP from "@/hooks/request-package/use-lab-get-otp";
 import { useValidation } from "@/hooks/use-validation";
 import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Modal, Row, Typography } from "antd";
+import { Button, Col, Form, Input, InputNumber, Modal, Row, Typography } from "antd";
 import { RequestPackageApi } from "constance/request-package";
 import Countdown, { zeroPad } from "react-countdown";
 import React from "react";
@@ -116,7 +116,7 @@ export default function OptModal({
           }
         </Form.Item>
         <Form.Item label="کد otp" name="otp" required={false} rules={[rules]}>
-          <Input className="w-full" size="large" />
+          <InputNumber controls={false} className="w-full" size="large" />
         </Form.Item>
       </Form>
     </Modal>

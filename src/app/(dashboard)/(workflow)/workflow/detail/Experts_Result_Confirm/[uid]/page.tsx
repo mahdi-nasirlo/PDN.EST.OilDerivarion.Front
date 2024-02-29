@@ -14,6 +14,7 @@ import { SamtForm } from "./components/samt-form";
 import { EstForm } from "./components/est-form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
+import LabResult from "../../components/lab-report";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const stepKey = "Experts_Result_Confirm";
@@ -62,6 +63,16 @@ export default function Page({ params }: { params: { uid: string } }) {
             loading={reports.isFetching}
           />
         </Spin>
+
+        <div className="mt-8">
+          <Divider orientation="left" className="mb-6">
+            نتایج آزمون
+          </Divider>
+          <Spin spinning={get.isFetching}>
+            <LabResult package_UID={params.uid} />
+          </Spin>
+        </div>
+
         <Divider />
         <Alert
           className="text-blue-800 text-right"

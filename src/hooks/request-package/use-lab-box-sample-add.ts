@@ -40,8 +40,15 @@ const useBoxSampleAdd = ({
         queryKey: [RequestPackageApi.LabBoxListPrint.url],
         exact: false,
       });
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabBoxList.url],
+        exact: false,
+      });
 
-      await queryClient.setQueryData([RequestPackageApi.LabBoxList.url, variable.lab_UID], data);
+      await queryClient.setQueryData(
+        [RequestPackageApi.LabBoxList.url, variable.lab_UID],
+        data
+      );
     },
   });
 

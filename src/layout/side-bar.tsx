@@ -30,7 +30,6 @@ export default function SideBar({ open, setOpen }: TProps) {
               <Tooltip
                 title={item.label}
                 color="geekblue"
-                className="flex flex-wrap"
                 placement={open ? "bottom" : "left"}
               >
                 <Typography>

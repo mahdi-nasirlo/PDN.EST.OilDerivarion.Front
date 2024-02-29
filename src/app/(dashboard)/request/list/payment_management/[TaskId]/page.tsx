@@ -29,18 +29,20 @@ export default function Page(props: PropType) {
         },
         {
             title: "عنوان پرداخت",
-            dataIndex: "StepName",
+            dataIndex: "Payment_Type",
             key: "2",
-            render: (_, record: any) => {
+            render: (_, record) => {
                 let name = "";
-                if (record.StepName === 1) {
+                if (record.Payment_Type === 1) {
                     name = "در انتظار پرداخت هزینه بازدید";
-                } else if (record.StepName === 2) {
+                } else if (record.Payment_Type === 2) {
                     name = "در انتظار پرداخت هزینه پست";
-                } else if (record.StepName === 3) {
+                } else if (record.Payment_Type === 3) {
                     name = "در انتظار پرداخت هزینه آزمایش"
-                } else {
+                } else if (record.Payment_Type === 4) {
                     name = "در انتظار پرداخت هزینه صدور کد رهگیری"
+                } else {
+                    name = "هزینه نامعلوم"
                 }
                 return (
                     <Typography>
@@ -66,6 +68,11 @@ export default function Page(props: PropType) {
             dataIndex: "Amount",
             key: "4",
             width: "5%",
+            render: (_, record) => (
+                <Typography>
+                    {record.Amount} ریال
+                </Typography>
+            )
         },
         {
             title: "توضیحات",

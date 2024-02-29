@@ -1,50 +1,46 @@
-"use client"
+"use client";
 import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
 import { useHeaderDropdown } from "./hooks/use-header-dropwdown";
 import Image from "next/image";
 // import ProducerLevel1 from '../../public/static/producer-level/Producer-level-1.svg'
-import ProducerLevel2 from '../../public/static/producer-level/Producer-level-2.svg'
-import ProducerLevel3 from '../../public/static/producer-level/Producer-level-3.svg'
+import ProducerLevel2 from "../../public/static/producer-level/Producer-level-2.svg";
+import ProducerLevel3 from "../../public/static/producer-level/Producer-level-3.svg";
 import { SvgIcon } from "@/components/svg-icon";
 import MessageListDropdown from "./message-list-dropdown";
 import Link from "next/link";
 
 export default function HeaderDropdown() {
-
   const { confirmExitModal, userGetInfo, logout } = useHeaderDropdown();
 
   const LevelProducer = () => {
     if (userGetInfo.isLoading || userGetInfo.isFetching) {
-      return null
+      return null;
     }
-    if (userGetInfo.data?.userLevelId !== null) return (
-      <div className="hidden lg:block">
-        <SvgIcon
-          width={24}
-          height={24}
-          alt={userGetInfo.data?.userLevelName || ""}
-          src={
-            userGetInfo.data?.userLevelId == 3
-              ? ProducerLevel3
-              : userGetInfo.data?.userLevelId == 2
+    if (userGetInfo.data?.userLevelId !== null)
+      return (
+        <div className="hidden lg:block">
+          <SvgIcon
+            width={24}
+            height={24}
+            alt={userGetInfo.data?.userLevelName || ""}
+            src={
+              userGetInfo.data?.userLevelId == 3
+                ? ProducerLevel3
+                : userGetInfo.data?.userLevelId == 2
                 ? ProducerLevel2
                 : ProducerLevel2 // -->  ProducerLevel1
-          }
-        />
-      </div>
-    )
-  }
+            }
+          />
+        </div>
+      );
+  };
 
   const items: MenuProps["items"] = [
     {
       key: "2",
       label: (
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          href="/"
-        >
+        <Link target="_blank" rel="noopener noreferrer" href="/">
           ویرایش اطلاعات کاربری
         </Link>
       ),
@@ -62,14 +58,13 @@ export default function HeaderDropdown() {
     },
   ];
 
-
   return (
     <>
       <MessageListDropdown />
       <div className="hover:bg-gray-50 rounded-lg p-1">
         <Dropdown
           placement="bottom"
-          trigger={['click']}
+          trigger={["click"]}
           className="flex items-center cursor-pointer gap-4"
           menu={{ items }}
         >
@@ -80,9 +75,10 @@ export default function HeaderDropdown() {
               alt="person-circle icon"
               src="/static/person-circle.svg"
             />
-            {userGetInfo.isLoading || userGetInfo.isFetching ?
+            {userGetInfo.isLoading || userGetInfo.isFetching ? (
               <LoadingOutlined className="text-primary-500 text-lg hidden lg:block" />
-              : <div>
+            ) : (
+              <div>
                 <Typography className="font-normal text-lg hidden lg:block">
                   {userGetInfo.data?.lastName}
                 </Typography>
@@ -90,7 +86,7 @@ export default function HeaderDropdown() {
                   {userGetInfo.data?.firstName}
                 </Typography>
               </div>
-            }
+            )}
             <LevelProducer />
             <Image
               height={20}
@@ -118,7 +114,8 @@ export default function HeaderDropdown() {
                 type="primary"
                 onClick={logout.execute}
                 danger
-                key={"submit"}>
+                key={"submit"}
+              >
                 خروج
               </Button>
             </Col>
@@ -129,11 +126,12 @@ export default function HeaderDropdown() {
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={confirmExitModal.close}
-                key={"cancel"}>
+                key={"cancel"}
+              >
                 انصراف
               </Button>
             </Col>
-          </Row>
+          </Row>,
         ]}
       >
         <p>آیا از خروج خود اطمینان دارید؟</p>

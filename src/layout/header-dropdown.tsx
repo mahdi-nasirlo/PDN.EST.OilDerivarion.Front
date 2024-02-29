@@ -60,7 +60,7 @@ export default function HeaderDropdown() {
 
   return (
     <>
-      {/* <MessageListDropdown /> */}
+      <MessageListDropdown />
       <div className="hover:bg-gray-50 rounded-lg p-1">
         <Dropdown
           placement="bottom"

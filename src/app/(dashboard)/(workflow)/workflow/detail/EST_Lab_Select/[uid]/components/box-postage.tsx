@@ -141,6 +141,7 @@ export default function BoxPostage({ package_UID }: TProps) {
             <CustomTable
                 columns={columns}
                 data={{ records: PaymentPostList.data }}
+                loading={PaymentPostList.isFetching || PaymentPostList.isLoading}
             />
             <ConfirmDeleteModal
                 title="هزینه پست"

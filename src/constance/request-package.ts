@@ -704,6 +704,52 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  PaymentPostAdd: {
+    url: "/RequestPackage/PaymentPostAdd",
+    type: z.object({
+      package_UID: z.string(),
+      amount: z.number({
+        required_error: errorMessage.required,
+        invalid_type_error: errorMessage.number_invalid,
+      }),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+
+  PaymentPostList: {
+    url: "/RequestPackage/PaymentPostList",
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    item: z.object({
+      UID: z.string().uuid().optional(),
+      Amount: z.number().optional(),
+      Create_DT: z.string().optional(),
+      Is_Paid: z.boolean().optional(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(
+        z.object({
+          UID: z.string().uuid().optional(),
+          Amount: z.number().optional(),
+          Create_DT: z.string().optional(),
+          Is_Paid: z.boolean().optional(),
+        })
+      ),
+    }),
+  },
+  PaymentPostDelete: {
+    url: "/RequestPackage/PaymentPostDelete",
+    type: z.object({
+      package_UID: z.string().uuid(),
+      payment_UID: z.string().uuid(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.object({}),
+    }),
+  },
 };
 
 export { RequestPackageApi };

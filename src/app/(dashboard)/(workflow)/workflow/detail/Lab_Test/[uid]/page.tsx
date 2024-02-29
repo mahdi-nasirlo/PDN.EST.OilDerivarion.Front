@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { uid: string } }) {
       <Alert
         type="info"
         className="w-full my-3 text-blue-800 text-right"
-        message="برای ثبت نتیجه هر یک از مواد داخل جعبه باید تمامی جعبه های ارسال شده در وضعیت باز شده قرار گیرند."
+        message="برای فعال شدن ثبت نتیجه آزمون مواد داخل جعبه باید تمامی جعبه های ارسال شده در وضعیت باز شده قرار گیرند."
       />
       <DataTable
         package_UID={params.uid}

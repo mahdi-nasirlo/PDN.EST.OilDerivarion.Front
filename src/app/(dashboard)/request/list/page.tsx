@@ -36,7 +36,7 @@ const Page = () => {
             <Space size="small" >
               <Link
                 className="text-CustomizeBlue-500 font-bold"
-                href={`list/${record.TaskId}/payment_management/`}
+                href={`list/payment_management/${record.TaskId}`}
               >
                 نیاز به پرداخت
               </Link>

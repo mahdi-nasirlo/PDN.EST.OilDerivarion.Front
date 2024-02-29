@@ -750,6 +750,38 @@ const RequestPackageApi = {
       data: z.object({}),
     }),
   },
+  PaymentList: {
+    url: "/RequestPackage/PaymentList",
+    type: z.object({
+      package_UID: z.string().uuid(),
+    }),
+    item: z.object({
+      UID: z.string().uuid(),
+      Amount: z.number().optional(),
+      Create_DT: z.string().optional(),
+      Description: z.string().optional(),
+      Payment_Type: z.number(),
+      Is_Paid: z.boolean().optional(),
+      Paid_DT: z.string().optional(),
+      Is_Used: z.string().optional(),
+      Used_DT: z.string().optional(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(
+        z.object({
+          UID: z.string().uuid(),
+          Amount: z.number().optional(),
+          Create_DT: z.string().optional(),
+          Description: z.string().optional(),
+          Payment_Type: z.number(),
+          Is_Paid: z.boolean().optional(),
+          Paid_DT: z.string().optional(),
+          Is_Used: z.string().optional(),
+          Used_DT: z.string().optional(),
+        })
+      ),
+    }),
+  },
 };
 
 export { RequestPackageApi };

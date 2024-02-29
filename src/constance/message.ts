@@ -12,9 +12,8 @@ const messageApi = {
         })
     },
     GetUserMessage: {
-        url: "/Messaeg/GetUserMessage",
+        url: "/Messaeg/GetMessageList",
         type: z.object({
-            uid: z.string(),
             userName: z.string(),
             direction: z.boolean()
         }),

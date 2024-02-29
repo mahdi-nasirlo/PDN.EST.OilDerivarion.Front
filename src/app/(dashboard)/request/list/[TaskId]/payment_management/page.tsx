@@ -14,7 +14,7 @@ interface PropType {
     params: { TaskId: string };
 }
 
-export default function Page(props: PropType) {
+export default function Page({ params: { TaskId } }: PropType) {
 
     const columns: ColumnsType<z.infer<any>> = [
         {
@@ -29,12 +29,11 @@ export default function Page(props: PropType) {
             key: "2",
             render: (_, record: any) => {
                 let name = "";
-                if (record.StepName === 0) {
+                if (record.StepName === 1) {
                     name = "در انتظار پرداخت هزینه بازدید";
-                } else if (record.StepName === 1) {
-                    name = "در انتظار پرداخت هزینه پست";
                 } else if (record.StepName === 2) {
-
+                    name = "در انتظار پرداخت هزینه پست";
+                } else if (record.StepName === 3) {
                     name = "در انتظار پرداخت هزینه آزمایش"
                 } else {
                     name = "در انتظار پرداخت هزینه صدور کد رهگیری"
@@ -135,11 +134,11 @@ export default function Page(props: PropType) {
         <>
             <Breadcrumb
                 titleIcon={<DocumentChartBarIcon className="w-8" />}
-                currentPage={"پرداخت ها"}
                 pages={[
                     { label: "خانه", path: "/" },
                     { label: "لیست پکیج درخواست ها", path: "/request/list" }
                 ]}
+                currentPage={"پرداخت ها"}
                 backLink='/request/list'
             />
             <Card>
@@ -162,7 +161,7 @@ const data = [
     {
         Row: '1',
         uid: "123456",
-        StepName: 0,
+        StepName: 1,
         desorption: 'توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
         Amount: "50.0000 ریال",
         Status: true
@@ -170,7 +169,7 @@ const data = [
     {
         Row: '2',
         uid: "654321",
-        StepName: 1,
+        StepName: 2,
         desorption: 'توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
         Amount: "50.0000 ریال",
         Status: false
@@ -178,7 +177,7 @@ const data = [
     {
         Row: '3',
         uid: "987654",
-        StepName: 2,
+        StepName: 3,
         desorption: ' توضیحات 6565456/payment_management/${record.uid}/lab_invoice',
         Amount: "50.0000 ریال",
         Status: false
@@ -186,7 +185,7 @@ const data = [
     {
         Row: '4',
         uid: '96385274',
-        StepName: 3,
+        StepName: 4,
         desorption: 'توضیحات 6565456 /payment_management/${record.uid}/lab_invoice',
         Amount: "50.0000 ریال",
         Status: false

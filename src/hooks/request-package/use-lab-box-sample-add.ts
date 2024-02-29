@@ -35,6 +35,7 @@ const useBoxSampleAdd = ({
         queryKey: [RequestPackageApi.LabBoxSampleGetAvailableList.url],
         exact: false,
       });
+
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.LabBoxListPrint.url],
         exact: false,

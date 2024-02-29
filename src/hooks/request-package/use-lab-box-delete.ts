@@ -1,3 +1,4 @@
+import { log } from "console";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RequestPackageApi } from "../../constance/request-package";
 import fetchWithSession from "@/utils/fetch-with-session";
@@ -25,13 +26,18 @@ const useLabBoxDelete = ({
           lab_UID,
         },
       }),
-    onSuccess: async (data) => {
+    onSuccess: async (data, variable) => {
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.LabBoxGetAvailableList.url],
         exact: false,
       });
 
-      await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data);
+      console.log([RequestPackageApi.LabBoxList.url, lab_UID], data);
+
+      await queryClient.setQueryData(
+        [RequestPackageApi.LabBoxList.url, lab_UID],
+        data
+      );
     },
   });
 

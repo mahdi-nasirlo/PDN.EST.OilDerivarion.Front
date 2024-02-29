@@ -32,13 +32,11 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
     lab_UID: lab_UID as string,
   });
 
-  const labDeleteSample = useLabBoxSampleDelete();
-
-  useEffect(() => {
-    if (Array.isArray(labList.data) && labList.data.length > 0) {
-      setLab_UID(labList.data[0].Uid);
-    }
-  }, [labList.data]);
+  // useEffect(() => {
+  //   if (Array.isArray(labList.data) && labList.data.length > 0) {
+  //     setLab_UID(labList.data[0].Uid);
+  //   }
+  // }, [labList.data]);
 
   const labBoxAdd = useLabBoxAdd(data.package_UID);
 
@@ -63,7 +61,6 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
     form,
     labBoxList,
     deleteLabBox,
-    labDeleteSample,
   };
 };
 

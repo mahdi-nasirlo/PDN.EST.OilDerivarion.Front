@@ -37,8 +37,6 @@ const CommonWorkflow = ({
     package_UID: uid,
   });
 
-  console.log(stepKey + uid);
-
   const { isSeenReport } = useCheckReportSeen(
     stepKey + "_" + uid,
     reports.data

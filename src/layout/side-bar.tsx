@@ -1,9 +1,9 @@
-import { Menu, MenuProps } from "antd/lib";
 import React from "react";
-import { useControlSidebar } from "./hooks/use-control-sidebar";
-import { Drawer, Tooltip, Typography } from "antd";
 import Link from "next/link";
+import { Menu, MenuProps } from "antd/lib";
+import { Drawer, Tooltip, Typography } from "antd";
 import MenuSkeleton from "./components/menu-skeleton";
+import { useControlSidebar } from "./hooks/use-control-sidebar";
 
 interface TProps {
   open: boolean;
@@ -27,7 +27,12 @@ export default function SideBar({ open, setOpen }: TProps) {
         userAccess.data.map((item) => (
           <Menu.Item key={item.key} className="custom-menu-item">
             {item.label.length >= 27 ? (
-              <Tooltip title={item.label} placement="left" color="geekblue">
+              <Tooltip
+                title={item.label}
+                color="geekblue"
+                className="flex flex-wrap"
+                placement={open ? "bottom" : "left"}
+              >
                 <Typography>
                   <Link href={item.key}>
                     {item.label}

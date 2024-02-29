@@ -16,7 +16,7 @@ const useLabBoxSampleDelete = () => {
         url: apiData.url,
         data,
       }),
-    onSuccess: async (data) => {
+    onSuccess: async (data, variable) => {
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.LabBoxSampleGetAvailableList.url],
         exact: false,
@@ -25,7 +25,7 @@ const useLabBoxSampleDelete = () => {
         queryKey: [RequestPackageApi.LabBoxListPrint.url],
         exact: false,
       });
-      await queryClient.setQueryData([RequestPackageApi.LabBoxList.url], data);
+      await queryClient.setQueryData([RequestPackageApi.LabBoxList.url, variable.lab_Uid], data);
     },
   });
 

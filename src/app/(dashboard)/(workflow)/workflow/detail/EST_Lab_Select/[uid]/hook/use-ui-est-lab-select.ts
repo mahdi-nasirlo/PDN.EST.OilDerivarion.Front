@@ -32,11 +32,12 @@ const useUiEstLabSelect = (data: z.infer<typeof apiData.type>) => {
     lab_UID: lab_UID as string,
   });
 
-  // useEffect(() => {
-  //   if (Array.isArray(labList.data) && labList.data.length > 0) {
-  //     setLab_UID(labList.data[0].Uid);
-  //   }
-  // }, [labList.data]);
+  useEffect(() => {
+    if (Array.isArray(labList.data) && labList.data.length > 0 && lab_UID == undefined) {
+      console.log("test");
+      setLab_UID(labList.data[0].Uid);
+    }
+  }, [labList.data]);
 
   const labBoxAdd = useLabBoxAdd(data.package_UID);
 

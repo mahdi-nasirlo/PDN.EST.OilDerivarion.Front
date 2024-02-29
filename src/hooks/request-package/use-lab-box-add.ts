@@ -25,8 +25,9 @@ const useLabBoxAdd = (package_UID: string) => {
       await queryClient.invalidateQueries({
         queryKey: [RequestPackageApi.LabBoxGetAvailableList.url],
       });
-
-      console.log([RequestPackageApi.LabBoxList.url, variable.lab_UID], data);
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabBoxList.url],
+      });
 
       await queryClient.setQueryData(
         [RequestPackageApi.LabBoxList.url, variable.lab_UID],

@@ -11,20 +11,20 @@ import {
   Typography,
 } from "antd/lib";
 import React, { useState } from "react";
-import BoxCardAdd from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/components/box-card-add";
-import BoxCartList from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/components/add-sample";
 import { filterOption } from "@/lib/filterOption";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { RequestPackageApi } from "constance/request-package";
 import { Card } from "@/components/card";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import AddSample from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Select/[uid]/components/add-sample";
 import useLabBoxSampleDelete from "@/hooks/request-package/use-lab-box-sample-delete";
+import { PlusOutlined } from "@ant-design/icons";
+import { errorMessage } from "constance/error-message";
 
 const BoxList = ({ package_UID }: { package_UID: string }) => {
-  const { labList, setLab_UID, lab_UID, labBoxList, deleteLabBox } =
+  const { labList, labBoxAdd, boxAvailable, form, handleAddBox, setLab_UID, lab_UID, labBoxList, deleteLabBox } =
     useUiEstLabSelect({
       package_UID,
     });
@@ -33,7 +33,6 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
 
   return (
     <>
-      <Typography>{lab_UID}</Typography>
       <Row>
         <Col sm={12}>
           <Form.Item labelCol={{ span: 24 }} label="انتخاب آزمایشگاه">
@@ -57,7 +56,49 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
       <Divider />
       <Spin spinning={labBoxList.isFetching}>
         <Row gutter={[16, 12]} className="mb-5">
-          <BoxCardAdd package_uid={package_UID} />
+          <Col xs={24} md={12} xl={8} xxl={6}>
+            <Spin spinning={labBoxAdd.isPending}>
+              <div
+                className="min-h-[717px] w-full border-2 border-dashed border-primary-500 p-4 rounded-2xl flex flex-col justify-between space-y-4">
+                <Typography className="font-semibold text-lg">افزودن جعبه</Typography>
+                <PlusIcon className="mx-auto w-[105px] h-[105px] text-gray-700" />
+                <Form
+                  form={form}
+                  onFinish={handleAddBox}
+                  layout="vertical"
+                  className="w-full"
+                  disabled={labBoxAdd.isPending}
+                >
+                  <Form.Item
+                    label="جعبه"
+                    name="box_UID"
+                    required={false}
+                    rules={[{ required: true, message: errorMessage.required_choice }]}
+                  >
+                    <Select
+                      showSearch
+                      size="large"
+                      className="w-full"
+                      placeholder="انتخاب کنید"
+                      filterOption={filterOption}
+                      options={boxAvailable.data}
+                      loading={boxAvailable.isFetching}
+                      fieldNames={boxAvailable.fieldName}
+                    />
+                  </Form.Item>
+                  <Button
+                    size="large"
+                    htmlType="submit"
+                    type="primary"
+                    className="w-full flex items-center justify-center"
+                    icon={<PlusOutlined width={16} height={16} />}
+                  >
+                    افزودن جعبه
+                  </Button>
+                </Form>
+              </div>
+            </Spin>
+          </Col>
           {labBoxList?.data?.map((item, index) => {
             return (
               <>
@@ -89,7 +130,7 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
                   >
                     <Card className="relative min-h-[717px] w-full border-2 bg-gray-50 p-4 rounded-2xl space-y-4">
                       <Typography className="font-semibold text-lg">
-                        جعبه{openUidDelete}
+                        جعبه{" "}
                         {
                           ["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]
                         }{" "}

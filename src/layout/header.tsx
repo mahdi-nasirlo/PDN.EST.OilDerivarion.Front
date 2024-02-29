@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
-import {Button} from "antd";
-import {Header} from "antd/es/layout/layout";
-import {Bars3Icon} from "@heroicons/react/24/outline";
+import { Button } from "antd";
+import { Header } from "antd/es/layout/layout";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import HeaderDropdown from "./header-dropdown";
 
-export default function LayoutHeader({
-  showDrawer,
-}: {
+interface TProps {
   showDrawer: () => void;
-}) {
+}
+
+export default function LayoutHeader({ showDrawer }: TProps) {
+
   return (
     <>
       <div
@@ -30,21 +31,7 @@ export default function LayoutHeader({
             gap: 64,
           }}
         >
-          <span className="flex items-center">
-            {/*<Image*/}
-              {/*  height={24}*/}
-              {/*  width={24}*/}
-              {/*  alt="bell icon"*/}
-              {/*  src="/static/bell.svg"*/}
-              {/*  className="ml-4 hidden lg:block"*/}
-              {/*/>*/}
-              {/*<Image*/}
-              {/*  className="mr-4 ml-8 hidden lg:block"*/}
-              {/*  height={24}*/}
-              {/*  width={24}*/}
-              {/*  alt="chat-bubble-oval-left-ellipsis icon"*/}
-              {/*  src="/static/chat-bubble-oval-left-ellipsis.svg"*/}
-              {/*/>*/}
+          <span className="flex items-center justify-center gap-4">
             <HeaderDropdown />
           </span>
           {/* <Input
@@ -57,18 +44,16 @@ export default function LayoutHeader({
           <Image
             src="/static/logo.svg"
             alt="standad logo"
-            height={49}
+            height={52}
             width={200}
           />
-          <div className="lg:hidden mr-3">
-            <div className="flex lg:hidden">
-              <Button
-                className="text-primary-500"
-                type="link"
-                icon={<Bars3Icon width={32} height={32} />}
-                onClick={showDrawer}
-              />
-            </div>
+          <div className="flex mr-3 lg:hidden">
+            <Button
+              className="text-primary-500"
+              type="link"
+              icon={<Bars3Icon width={32} height={32} />}
+              onClick={showDrawer}
+            />
           </div>
         </Header>
       </div>

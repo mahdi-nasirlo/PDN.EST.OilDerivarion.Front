@@ -69,9 +69,7 @@ export default function SideBar({ open, setOpen }: TProps) {
           className="px-4 overflow-auto w-full"
           style={{
             width: "275px",
-            padding: "0 16px",
-            paddingTop: "30px",
-            paddingBottom: "30px",
+            padding: "16px 16px",
             height: "100%",
             backgroundColor: "#1C2537",
           }}
@@ -81,9 +79,7 @@ export default function SideBar({ open, setOpen }: TProps) {
         className="px-4 overflow-auto hidden lg:block"
         style={{
           width: "275px",
-          padding: "0 16px",
-          paddingTop: "30px",
-          paddingBottom: "30px",
+          padding: "16px 16px",
           height: "100%",
           backgroundColor: "#1C2537",
         }}

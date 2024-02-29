@@ -9,14 +9,15 @@ import i18next from "i18next";
 import translation from "@/lib/zod-i18n.json";
 import { zodI18nMap } from "zod-i18n-map";
 import { z } from "zod";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-export default function DashboardLayout({
-  children,
-}: {
+interface TProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function DashboardLayout({ children }: TProps) {
+
   const pathname = usePathname();
 
   i18next.init({
@@ -38,7 +39,6 @@ export default function DashboardLayout({
           <SideBar open={open} setOpen={setOpen} />
           <Content className="custom-content" style={contentStyle}>
             <Layout className=" bg-gray-50 lg:mx-10 mx-5 mt-[125px] lg:mr-[310px] mb-8">
-              {/* <AnimatePresence mode="wait" initial={true}> */}
               <motion.div
                 key={pathname}
                 initial="initialState"
@@ -64,7 +64,6 @@ export default function DashboardLayout({
               >
                 {children}
               </motion.div>
-              {/* </AnimatePresence>  */}
             </Layout>
           </Content>
         </Layout>

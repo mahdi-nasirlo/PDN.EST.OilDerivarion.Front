@@ -68,9 +68,7 @@ export default function Page({ params }: { params: { uid: string } }) {
         />
       )}
       <Card>
-
-        {/* dataForm.data?.final_time */}
-        {state && (
+        {dataForm.data?.final_time && (
           <div
             ref={paragraphRef}
             className="mt-5"

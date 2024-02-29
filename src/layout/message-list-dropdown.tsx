@@ -16,8 +16,8 @@ export default function MessageListDropdown() {
 
   const userMessage = useGetUserMessage({
     userName: userGetInfo.data?.nationalCode as string,
-    uid: "d5424eea-102a-434c-af94-67fdfb292be4",
-    direction: false,
+    // uid: "d5424eea-102a-434c-af94-67fdfb292be4",
+    direction: true,
   });
 
   return (

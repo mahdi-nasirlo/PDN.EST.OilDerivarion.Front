@@ -31,6 +31,10 @@ const useLabBoxDelete = ({
         queryKey: [RequestPackageApi.LabBoxGetAvailableList.url],
         exact: false,
       });
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabBoxList.url, lab_UID],
+        exact: false,
+      });
 
       console.log([RequestPackageApi.LabBoxList.url, lab_UID], data);
 

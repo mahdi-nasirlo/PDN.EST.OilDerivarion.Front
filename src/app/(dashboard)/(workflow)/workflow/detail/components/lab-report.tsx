@@ -22,7 +22,7 @@ export default function LabResult({ package_UID }: { package_UID: string }) {
                         className='text-right text-secondary-500'
                         title={`${result.Sample_Name} _ ${result.Sample_Type_Value}`}
                     >
-                        <Descriptions.Item span={2} label="عنوان آزمون">
+                        <Descriptions.Item span={2} label="عنوان فاکتور آزمون">
                             {result.Name}
                         </Descriptions.Item>
                         <Descriptions.Item span={2} label="استاندارد آزمون">

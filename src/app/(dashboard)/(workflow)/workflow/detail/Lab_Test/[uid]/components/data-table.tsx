@@ -105,7 +105,7 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
             <Link
               href={`/workflow/detail/Lab_Test/${package_UID}/test/${package_UID}`}
             >
-              ثبت نتیجه
+              ثبت نتیجه آزمون
             </Link>
           </Button>
         </Space>
@@ -118,7 +118,7 @@ export default function DataTable({ package_UID, data, isLoading }: TProps) {
       <CustomTable
         header={{
           icon: <ViewColumnsIcon />,
-          text: "لیست ارجاع ها",
+          text: "لیست جعبه های درخواست",
         }}
         isLoading={isLoading}
         data={{ records: data }}

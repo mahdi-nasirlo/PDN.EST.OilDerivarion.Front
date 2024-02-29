@@ -3,7 +3,7 @@ import { Col, Divider, Form, Row, Select } from "antd/lib";
 import React, { useEffect, useState } from "react";
 import CustomTable from "@/components/custom-table";
 import useBattleSelect from "../hook/use-battle-select";
-import { Button, Input, Space, Spin, Tag } from "antd";
+import { Alert, Button, Input, Space, Spin, Tag, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import ResultForm from "./result-form";
 import { Card } from "@/components/card";
@@ -128,7 +128,7 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
                   })
                 }}
               >
-                ثبت نتیجه
+                ثبت نتیجه آزمون
               </Button>
           }
         </Space >
@@ -139,6 +139,12 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
   return (
     <>
       <Card>
+        <Alert
+          type="warning"
+          className="text-amber-600 text-right"
+          message={'بعد از اتمام ثبت نتیجه آزمون برای همه فاکتورهای یک بطری، با انتخاب کد بطری اقدام به "ثبت نهایی" برای همان بطری نمایید. ( ثبت نهایی برای هر بطری به صورت مجزا صورت می گیرد )'}
+        />
+        <Divider />
         <Spin spinning={LabSampleTestItemDetailFinalUpdate.isPending || LabSampleList.isFetching}>
           <Form
             form={form}
@@ -148,7 +154,12 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
             <Row gutter={[16, 16]}>
               <Col xs={24} sm={8}>
                 <Form.Item
-                  label="بطری"
+                  label="کد بطری"
+                  tooltip={
+                    <Typography>
+                      با انتخاب هر بطری لیست فاکتورهای آزمون مربوط به ماده داخل بطری فعال می شود.
+                    </Typography>
+                  }
                 >
                   <Select
                     showSearch
@@ -168,10 +179,16 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
               <Col xs={24} sm={8}>
                 <Form.Item
                   label="وضعیت"
+                  tooltip={
+                    <Typography>
+                      بعد از ثبت نهایی نتیجه آزمون هر بطری امکان تغییر در نتیجه ثبت شده وجود ندارد.
+                    </Typography>
+                  }
                 >
                   <Input
                     disabled
                     value={Battle?.Lab_Is_Finished ? "ثبت شده" : "ثبت نشده"}
+                    className={`${Battle?.Lab_Is_Finished ? "text-primary-500" : "text-red-500"}`}
                   />
                 </Form.Item>
               </Col>

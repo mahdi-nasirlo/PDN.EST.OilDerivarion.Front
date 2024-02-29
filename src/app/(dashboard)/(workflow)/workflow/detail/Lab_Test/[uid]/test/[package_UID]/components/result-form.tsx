@@ -158,7 +158,7 @@ export default function ResultForm({ formData, setFormData, package_UID }: any) 
         <Alert
           type="info"
           className="w-full my-3 text-blue-800 text-right"
-          message="با انتخاب و کلیک هر یک از دکمه های مشاهده نتیجه یا ثبت نتیجه فاکتور های آزمون ، فرم فاکتور آزمون آن نمایش داده می شود."
+          message="برای ثبت نتیجه آزمون هر فاکتور یا تغییر آن ، قبل از ثبت نهایی ، از گزینه  ثبت نتیجه آزمون و یا مشاهده در بخش عملیات استفاده نمایید."
         />
       }
     </>

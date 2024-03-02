@@ -6,7 +6,7 @@ const fileApi = {
     url: "/File/Upload",
   },
   Download: {
-    url: "/File/Download",
+    url: process.env.NEXT_PUBLIC_API_URL +"/api/downloadfile/download",
     type: z.object({
       uid: z.string(),
     }),

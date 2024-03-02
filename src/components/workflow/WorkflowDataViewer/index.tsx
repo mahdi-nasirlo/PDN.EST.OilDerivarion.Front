@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { formMakerApi } from "../../../constance/form-maker";
 import { ZodErrorAlert } from "@/components/zod-error-alert";
 import { Empty, Image } from "antd";
-import { Descriptions, Divider, Table, TableColumnsType, Typography } from "antd/lib";
+import { Col, Descriptions, Divider, Row, Table, TableColumnsType, Typography } from "antd/lib";
 import { Card } from "@/components/card";
 import { useQueries } from '@tanstack/react-query';
 import fetchWithSession from '@/utils/fetch-with-session';
 import { fileApi } from 'constance/file';
-import { z } from 'zod';
 
 interface PropsType {
     data: string,
@@ -97,17 +96,44 @@ const Index = ({ data }: PropsType) => {
                 </Descriptions>
             </Card>)
 
-            if (item.Media?.Images) {
-                view.push(<RenderImages imagesUid={item.Media?.Images} />)
-            }
-            // item.Media?.Images((image, index) => <Image
-            //     key={index}
-            //     loading='lazy'
-            //     // src={base64Image}
-            //     width="100%"
-            //     height="100%"
-            //     alt={`Base64 Image ${index + 1}`}
-            // />)
+            const imageView: React.ReactNode[] = []
+
+            item.Media?.Images?.map((image, index) => imageView.push(<Col span={4}>
+                <Image
+                    key={index}
+                    loading='lazy'
+                    src={`${apiDonwload.url}?id=${image}`}
+                    width="100%"
+                    height="100%"
+                    alt={`Base64 Image ${index + 1}`}
+                />
+            </Col>))
+
+            let videoView: React.ReactNode[] = []
+
+            item.Media?.Videos?.map((video, index) => videoView.push(<Col span={4}>
+                <Image
+                    alt="Base64 move"
+                    width="100%"
+                    preview={{
+                        imageRender: () => (
+                            <video
+                                autoPlay
+                                width="100%"
+                                controls
+                                src={`${apiDonwload.url}?id=${video}`}
+                            />
+                        ),
+                        toolbarRender: () => null,
+                    }}
+                    src="https://placehold.co/600x400?text=video"
+                />
+            </Col>))
+
+            view.push(<Row gutter={[12, 16]}>
+                {imageView}
+                {videoView}
+            </Row>)
 
             if (cardIndex !== (cardData.length - 1)) {
                 view.push(<Divider />)

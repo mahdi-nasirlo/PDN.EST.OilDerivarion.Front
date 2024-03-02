@@ -52,6 +52,11 @@ export default function DataTable({
       key: "3",
     },
     {
+      title: "imei ",
+      dataIndex: "iMEI",
+      key: "3",
+    },
+    {
       title: "ظرفیت",
       dataIndex: "capacity",
       key: "4",
@@ -87,7 +92,7 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          {record.device_Status !== 3 && (
+          {record.iMEI === "861100068416631" && (
             <>
               <Button
                 type="link"
@@ -98,17 +103,20 @@ export default function DataTable({
               >
                 بازکردن درب دستگاه
               </Button>
-              {record.device_Status !== 6 && (
-                <Button
-                  type="link"
-                  className="text-secondary-500 font-bold"
-                  onClick={() => setGetUid(record.uid)}
-                >
-                  ویرایش
-                </Button>
-              )}
             </>
           )}
+          {record.device_Status !== 6 && (
+            <>
+              <Button
+                type="link"
+                className="text-secondary-500 font-bold"
+                onClick={() => setGetUid(record.uid)}
+              >
+                ویرایش
+              </Button>
+            </>
+          )}
+
           {record.device_Status !== 6 && (
             <Button
               type="link"

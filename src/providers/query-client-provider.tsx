@@ -25,7 +25,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
       onSuccess: async (data) => {
         const result: z.infer<typeof generalResponseZod> = data as any;
 
-        const isSqlException = result.message.includes("SqlException")
+        const isSqlException = result.message?.includes("SqlException")
 
         if (isSqlException) {
           console.error("SqlException", result.message);
@@ -53,7 +53,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
       onSuccess: (data: unknown) => {
         const result: z.infer<typeof generalResponseZod> = data as any;
 
-        const isSqlException = result.message.includes("SqlException")
+        const isSqlException = result.message?.includes("SqlException")
 
         if (isSqlException) {
           console.error("SqlException", result.message);

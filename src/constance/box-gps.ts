@@ -9,6 +9,7 @@ const BoxGPSGetPageItem = z.object({
   stateName: z.string().optional(),
   stateId: z.number().optional(),
   device_Status: z.number().optional(),
+  iMEI: z.string(),
 });
 
 const boxGPSApi = {

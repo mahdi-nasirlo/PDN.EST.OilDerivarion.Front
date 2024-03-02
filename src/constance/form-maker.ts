@@ -141,7 +141,7 @@ const formMakerApi = {
       }).nullable(),
       Model: z.array(z.object({
         Key: z.string(),
-        Value: z.string().or(z.number()),
+        Value: z.string().or(z.number()).optional(),
         Hidden: z.boolean()
       })).nullable(),
       ListTable: z.array(z.object({

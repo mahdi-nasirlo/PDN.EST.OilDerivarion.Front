@@ -1,12 +1,13 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "filepond/dist/filepond.min.css";
 import "./style.stylesheet.css";
-import {Button, Upload} from "antd";
-import {CloudDownloadOutlined} from "@ant-design/icons";
-import {UploadFile, UploadProps} from "antd/lib";
-import {UploadChangeParam} from "antd/es/upload";
+import { Button, Upload } from "antd";
+import { CloudDownloadOutlined } from "@ant-design/icons";
+import { UploadFile, UploadProps } from "antd/lib";
+import { UploadChangeParam } from "antd/es/upload";
 import useDownload from "@/hooks/file/use-download";
 import useRequestPakagePartUpdateShcematic from "@/hooks/request-package/use-request-pakage-part-update-schematic";
+import { fileApi } from "constance/file";
 
 const defualtProps: UploadProps = {
   listType: "picture",
@@ -64,15 +65,15 @@ const FileUpload = (
 
   const setFiles = async () => {
     if (props.defaultFiles) {
-      const res = await download.mutateAsync({
-        uid: props.defaultFiles,
-      });
+      // const res = await download.mutateAsync({
+      //   uid: props.defaultFiles,
+      // });
 
       setFileList([
         {
           name: "شماتیک فرآیند",
           uid: "",
-          thumbUrl: res?.data?.File_Content_Base64,
+          thumbUrl: `${fileApi.Download.url}?id=${props.defaultFiles}`,
         },
       ]);
     } else {

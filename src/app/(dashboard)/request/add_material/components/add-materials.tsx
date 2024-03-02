@@ -18,11 +18,9 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
   const [supplyMethodStatus, setSupplyMethod] = useState<number>();
 
   const handleSubmit = async (values: any) => {
-
-    let material_Supply_Iran_Code =
-      values.material_Supply_Iran_Code
-        ? values.material_Supply_Iran_Code.toString()
-        : undefined
+    let material_Supply_Iran_Code = values.material_Supply_Iran_Code
+      ? values.material_Supply_Iran_Code.toString()
+      : undefined;
 
     const res = await addMaterial.mutateAsync({
       material_Supply_Iran_Code,
@@ -217,8 +215,8 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
                     personTypeStatus === null
                       ? "شماره ملی / شناسه ملی"
                       : personTypeStatus === 2
-                        ? "شناسه ملی"
-                        : "شماره ملی"
+                      ? "شناسه ملی"
+                      : "شماره ملی"
                   }
                   rules={[
                     {
@@ -273,13 +271,13 @@ const AddMaterials = ({ package_uid }: { package_uid?: string }) => {
                   rules={[
                     {
                       required: true,
-                      message: "لطفا مقدار را وارد کنید"
+                      message: "لطفا مقدار را وارد کنید",
                     },
                     ({ getFieldValue }) => ({
                       validator(rule, value) {
                         const hasLetters = /[a-zA-Z]/.test(value);
                         if (hasLetters || value.length !== 16) {
-                          return Promise.reject('مقدار باید عدد 16 رقمی باشد');
+                          return Promise.reject("مقدار باید عدد 16 رقمی باشد");
                         }
                         return Promise.resolve();
                       },

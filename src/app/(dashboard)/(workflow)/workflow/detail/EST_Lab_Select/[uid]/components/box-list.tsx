@@ -24,10 +24,19 @@ import { PlusOutlined } from "@ant-design/icons";
 import { errorMessage } from "constance/error-message";
 
 const BoxList = ({ package_UID }: { package_UID: string }) => {
-  const { labList, labBoxAdd, boxAvailable, form, handleAddBox, setLab_UID, lab_UID, labBoxList, deleteLabBox } =
-    useUiEstLabSelect({
-      package_UID,
-    });
+  const {
+    labList,
+    labBoxAdd,
+    boxAvailable,
+    form,
+    handleAddBox,
+    setLab_UID,
+    lab_UID,
+    labBoxList,
+    deleteLabBox,
+  } = useUiEstLabSelect({
+    package_UID,
+  });
 
   const [openUidDelete, setOpenUidDelete] = useState<string>();
 
@@ -58,9 +67,10 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
         <Row gutter={[16, 12]} className="mb-5">
           <Col xs={24} md={12} xl={8} xxl={6}>
             <Spin spinning={labBoxAdd.isPending}>
-              <div
-                className="min-h-[717px] w-full border-2 border-dashed border-primary-500 p-4 rounded-2xl flex flex-col justify-between space-y-4">
-                <Typography className="font-semibold text-lg">افزودن جعبه</Typography>
+              <div className="min-h-[717px] w-full border-2 border-dashed border-primary-500 p-4 rounded-2xl flex flex-col justify-between space-y-4">
+                <Typography className="font-semibold text-lg">
+                  افزودن جعبه
+                </Typography>
                 <PlusIcon className="mx-auto w-[105px] h-[105px] text-gray-700" />
                 <Form
                   form={form}
@@ -73,7 +83,9 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
                     label="جعبه"
                     name="box_UID"
                     required={false}
-                    rules={[{ required: true, message: errorMessage.required_choice }]}
+                    rules={[
+                      { required: true, message: errorMessage.required_choice },
+                    ]}
                   >
                     <Select
                       showSearch
@@ -130,11 +142,10 @@ const BoxList = ({ package_UID }: { package_UID: string }) => {
                   >
                     <Card className="relative min-h-[717px] w-full border-2 bg-gray-50 p-4 rounded-2xl space-y-4">
                       <Typography className="font-semibold text-lg">
-                        جعبه{" "}
-                        {
-                          ["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]
-                        }{" "}
+                        جعبه
+                        {["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]}
                       </Typography>
+                      <Typography>{item.box_info}</Typography>
 
                       <TrashIcon
                         color="red"

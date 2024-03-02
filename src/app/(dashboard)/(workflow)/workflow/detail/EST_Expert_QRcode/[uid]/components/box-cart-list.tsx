@@ -151,6 +151,7 @@ const BoxCartList = ({ package_UID }: { package_UID: string }) => {
               <Typography className="font-semibold text-lg">
                 جعبه {["اصلی", "شاهد 1", "شاهد 2"][item.box_usage_type - 1]}
               </Typography>
+              <Typography>{item.box_info}</Typography>
 
               <TrashIcon
                 color="red"

@@ -6,11 +6,14 @@ import { RequestPackageApi } from "../../constance/request-package";
 const apiData = RequestPackageApi.LabList;
 
 const useLabList = (data: z.infer<typeof apiData.type>) => {
-  const queryClient = useQueryClient();
+  const fetchConfig = { url: apiData.url, data };
 
   const query = useQuery({
     queryKey: [apiData.url],
-    queryFn: () => fetchWithSession({ url: apiData.url, data }),
+    queryFn: async () =>
+      await fetchWithSession(fetchConfig).then(
+        async (res) => await fetchWithSession(fetchConfig)
+      ),
     select: (data: z.infer<typeof apiData.response>) => data.data,
   });
   return { ...query, ...apiData };

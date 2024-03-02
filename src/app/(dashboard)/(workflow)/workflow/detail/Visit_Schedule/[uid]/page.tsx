@@ -19,10 +19,9 @@ import { report } from "process";
 import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 
 export default function Page({ params }: { params: { uid: string } }) {
-
   const paragraphRef = useRef(null);
 
-  const [state, setState] = useState(true)
+  const [state, setState] = useState(true);
 
   const stepKey = "Visit_Schedule";
 
@@ -37,14 +36,12 @@ export default function Page({ params }: { params: { uid: string } }) {
   );
 
   useEffect(() => {
-
     //@ts-ignore
     paragraphRef?.current?.scrollIntoView({
       behavior: "smooth",
-      block: "start"
-    })
-
-  }, [get.isFetching])
+      block: "start",
+    });
+  }, [get.isFetching]);
 
   if (!get.data && get.isFetching) {
     return (
@@ -70,14 +67,19 @@ export default function Page({ params }: { params: { uid: string } }) {
       )}
       <WorkFlowSteps tasId={params.uid} />
       <Card>
-        {dataForm.data?.final_time && (
-          <div
-            ref={paragraphRef}
-            className="mt-5"
-          >
+        {dataForm.data?.final_time ? (
+          <div ref={paragraphRef} className="mt-5">
             <Alert
               message={`${dataForm.data?.final_time}  زمانبندی مشترک یافت شد`}
               className="text-lg font-bold text-blue-800"
+            />
+          </div>
+        ) : (
+          <div ref={paragraphRef} className="mt-5">
+            <Alert
+              type="error"
+              message={`زمانبندی مشترک یافت نشد`}
+              className="text-lg font-bold text-red-800"
             />
           </div>
         )}

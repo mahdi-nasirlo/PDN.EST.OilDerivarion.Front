@@ -25,8 +25,14 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
       onSuccess: async (data) => {
         const result: z.infer<typeof generalResponseZod> = data as any;
 
+        const isSqlException = result.message.includes("SqlException")
+
+        if (isSqlException) {
+          console.error("SqlException", result.message);
+        }
+
         if (!result.success) {
-          api.error({ message: result.message });
+          api.error({ message: isSqlException ? "خطایی رخ داده است،  لطفا با پشتیبان تماس بگیرید" : result.message });
         }
 
         if (result.success && result.notify) {
@@ -47,12 +53,18 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
       onSuccess: (data: unknown) => {
         const result: z.infer<typeof generalResponseZod> = data as any;
 
+        const isSqlException = result.message.includes("SqlException")
+
+        if (isSqlException) {
+          console.error("SqlException", result.message);
+        }
+
         if (result.success) {
           api.success({ message: result.message });
         }
 
         if (!result.success) {
-          api.error({ message: result.message });
+          api.error({ message: isSqlException ? "خطایی رخ داده است،  لطفا با پشتیبان تماس بگیرید" : result.message });
         }
       },
     }),

@@ -11,6 +11,15 @@ const GetAllMainMemberItem = z.object({
   mobile: z.string(),
   is_Management: z.boolean(),
 });
+const GetProducerProductCodes = z.object({
+  Product_Name: z.string(),
+  Product_Code: z.string(),
+  Product_Order_Number: z.number(),
+  Is_Paid: z.boolean(),
+  Create_DT:z.string(),
+  Paid_DT: z.string(),
+  Amount:z.number()
+})
 
 const baseInfoApi = {
   GetAllMainMember: {
@@ -79,6 +88,13 @@ const baseInfoApi = {
     }),
     response: generalResponseZod.extend({
       data: z.array(z.object({})),
+    }),
+  },
+    GetProducerProductCodes: {
+    url: "/Producer/GetProducerProductCodes",
+    item: GetProducerProductCodes,
+    response: generalResponseZod.extend({
+      data: z.array(GetProducerProductCodes),
     }),
   },
 };

@@ -80,15 +80,17 @@ const Page = () => {
               </Link>
             </Space>
           );
-        } else if (record.StatusOperation === 2) {
+        }
+        else if (record.StatusOperation === 2) {
           return (
             <Space size="small">
-              <Link
+              ____
+              {/* <Link
                 className="text-secondary-500 font-bold"
                 href={`/request/TaskId`}
               >
                 مشاهده تاریخچه
-              </Link>
+              </Link> */}
             </Space>
           )
         }

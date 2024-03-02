@@ -9,7 +9,7 @@
 .ant-table-thead .ant-table-cell {
   background: theme("backgroundColor.primary.500") !important;
   color: theme("colors.white") !important;
-  cursor: default !important
+  cursor: default !important;
 }
 
 .ant-table {
@@ -269,17 +269,25 @@
   background-color: theme("backgroundColor.gray.200") !important;
 }
 
-.ant-transfer-list-header .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+.ant-transfer-list-header
+  .ant-checkbox-indeterminate
+  .ant-checkbox-inner::after {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-radius: 9999px !important;
 }
 
-.ant-transfer-list-header .ant-checkbox-wrapper-checked .ant-checkbox-checked .ant-checkbox-inner {
+.ant-transfer-list-header
+  .ant-checkbox-wrapper-checked
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }
 
-.ant-transfer-list-content-item .ant-checkbox-wrapper .ant-checkbox-checked .ant-checkbox-inner {
+.ant-transfer-list-content-item
+  .ant-checkbox-wrapper
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }
@@ -293,15 +301,19 @@
 }
 
 .ant-menu-title-content .ant-tooltip-open {
-  @apply text-gray-50 !important
+  @apply text-gray-50 !important;
 }
 
 .ant-form-item-explain-error {
-  @apply mb-0 !important
+  @apply mb-0 !important;
 }
 
 .ant-pagination {
-  @apply print:hidden !important
+  @apply print:hidden !important;
+}
+
+.ant-badge-count {
+  direction: ltr;
 }
 
 /* .ant-upload-list-item {

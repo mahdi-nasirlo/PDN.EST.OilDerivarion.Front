@@ -14,6 +14,7 @@ import { Tag } from "antd";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useUiOpinionFormWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
+import LabResult from "../../components/lab-report";
 
 const stepKey = "Experts_Setad";
 
@@ -66,6 +67,15 @@ const Page = ({ params }: { params: { uid: string } }) => {
               reports={reports.data}
               loading={reports.isFetching}
             />
+          </Spin>
+        </div>
+
+        <div className="mt-8">
+          <Divider orientation="left" className="mb-6">
+            نتایج آزمون
+          </Divider>
+          <Spin spinning={get.isFetching}>
+            <LabResult package_UID={params.uid} />
           </Spin>
         </div>
       </Card>

@@ -15,6 +15,7 @@ import { EstForm } from "./components/est-form";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
 import LabResult from "../../components/lab-report";
+import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const stepKey = "Experts_Result_Confirm";
@@ -51,6 +52,7 @@ export default function Page({ params }: { params: { uid: string } }) {
           ]}
         />
       )}
+      <WorkFlowSteps tasId={params.uid} />
       <Card>
         <Divider orientation="left" className="mb-6">
           لیست گزارشات

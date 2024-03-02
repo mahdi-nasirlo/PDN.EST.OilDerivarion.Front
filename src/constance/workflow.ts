@@ -102,4 +102,32 @@ export const workflowApi = {
       data: z.object({}),
     }),
   },
+  GetAllHistory: {
+    url: "/WorkFlowRequest/GetAllHistory", 
+    type: z.object({
+      taskId: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        Task_history_id: z.string(),
+            Task_id: z.string(),
+            Process_ID: z.string(),
+            Process_name: z.string(),
+            Current_Step_Name: z.string(),
+            Step_id: z.number(),
+            Step_Name: z.string(),
+            Choice_id: z.number(),
+            Choice_Key: z.string(),
+            Label: z.string(),
+            Description_text: z.string().nullable(),
+            Role: z.string().nullable(),
+            UserId: z.number(),
+            UserDescription: z.string(),
+            Status: z.number(),
+            Creator_id: z.string(),
+            Start_Time: z.string(),
+            End_Time: z.string()
+      })),
+    }),
+  }
 };

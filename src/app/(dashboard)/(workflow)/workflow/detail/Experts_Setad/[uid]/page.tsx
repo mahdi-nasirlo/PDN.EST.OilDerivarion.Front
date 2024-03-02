@@ -15,6 +15,7 @@ import WorkflowBtn from "@/components/workflow/workflow-btn";
 import useUiOpinionFormWorkFlow from "@/app/(dashboard)/(workflow)/workflow/detail/Experts_Setad/[uid]/hook/use-ui-opinion-form-work-flow";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
 import LabResult from "../../components/lab-report";
+import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 
 const stepKey = "Experts_Setad";
 
@@ -55,6 +56,7 @@ const Page = ({ params }: { params: { uid: string } }) => {
           ]}
         />
       )}
+      <WorkFlowSteps tasId={params.uid} />
       <Card>
         <div>
           <Divider orientation="left" className="mb-6">

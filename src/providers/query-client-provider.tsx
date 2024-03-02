@@ -51,6 +51,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
     }),
     mutationCache: new MutationCache({
       onSuccess: (data: unknown) => {
+
         const result: z.infer<typeof generalResponseZod> = data as any;
 
         const isSqlException = result.message?.includes("SqlException")

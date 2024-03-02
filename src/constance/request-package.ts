@@ -102,6 +102,7 @@ const boxListPrintItem = z.object({
 
 const BoxListItem = z.object({
   box_ID: z.number(),
+  box_info: z.string(),
   box_usage_type: z.number(),
   box_UID: z.string(),
   capacity: z.number(),

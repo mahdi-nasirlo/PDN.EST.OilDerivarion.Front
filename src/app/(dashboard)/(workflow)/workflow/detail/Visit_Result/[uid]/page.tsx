@@ -12,6 +12,7 @@ import { NaftForm } from "./components/naft-form";
 import { SamtForm } from "./components/samt-form";
 import { EstForm } from "./components/est-form";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
+import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function Page({ params }: { params: { uid: string } }) {
           ]}
         />
       )}
+      <WorkFlowSteps tasId={params.uid} />
       <Card>
         <Divider orientation="left" className="mb-6">
           لیست گزارشات

@@ -14,6 +14,7 @@ import { Form } from "antd/lib";
 import { useRequestPackageReportList } from "@/hooks/request-package/use-request-package-report-list";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
 import WorkflowBtn from "@/components/workflow/workflow-btn";
+import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 
 const CommonWorkflow = ({
   uid,
@@ -78,7 +79,10 @@ const CommonWorkflow = ({
           ]}
         />
       )}
-      <Card>
+      <div className="mb-5">
+        <WorkFlowSteps tasId={uid} />
+      </div>
+      <Card className="mt-2">
         {reports.data?.length !== 0 && (
           <>
             <Divider orientation="left" className="mb-6">

@@ -7,7 +7,7 @@ import WorkflowDataTable from "@/components/workflow/workflow-data-list";
 import { ColumnsType } from "antd/lib/table";
 import WorkFlowStatusColumn from "@/components/workflow/workflow-status-columns";
 import Breadcrumb from "@/components/breadcrumb";
-import { Space, Typography } from "antd";
+import { Space } from "antd";
 import Link from "next/link";
 import { FolderIcon } from "@heroicons/react/24/solid";
 
@@ -38,17 +38,20 @@ const Page = () => {
                 className="text-CustomizeBlue-500 font-bold"
                 href={`list/payment_management/${record.TaskId}`}
               >
-                نیاز به پرداخت
+                پرداخت صورت حساب
               </Link>
             </Space >
           )
         } else {
           return (
-            <Space size="small">
-              <Typography className="text-gray-400 font-bold">
-                عدم نیاز به پرداخت
-              </Typography>
-            </Space>
+            <Space size="small" >
+              <Link
+                className="text-CustomizeBlue-500 font-bold"
+                href={`list/payment_management/${record.TaskId}`}
+              >
+                مشاهده پرداخت ها
+              </Link>
+            </Space >
           );
         }
       },

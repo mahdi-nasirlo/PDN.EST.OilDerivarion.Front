@@ -732,7 +732,7 @@ const RequestPackageApi = {
   PaymentPostList: {
     url: "/RequestPackage/PaymentPostList",
     type: z.object({
-      package_UID: z.string(),
+      package_UID: z.string().uuid(),
     }),
     item: z.object({
       UID: z.string().uuid().optional(),
@@ -793,10 +793,22 @@ const RequestPackageApi = {
       ),
     }),
   },
+
+  PaymentPaid: {
+    url: "/RequestPackage/PaymentPaid",
+    type: z.object({
+      package_UID: z.string().uuid(),
+      payment_UID: z.string().uuid(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+
   LabReport: {
     url: "/RequestPackage/LabReport",
     type: z.object({
-      package_UID: z.string(),
+      package_UID: z.string().uuid(),
     }),
     response: generalResponseZod.extend({
       data: z.array(

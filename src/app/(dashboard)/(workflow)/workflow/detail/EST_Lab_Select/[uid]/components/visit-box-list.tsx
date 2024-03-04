@@ -87,24 +87,7 @@ export default function VisitBoxList({ package_UID }: { package_UID: string }) {
         <CustomTable
           header={{
             icon: <ViewColumnsIcon className="print:hidden" />,
-            text: "بررسی جعبه های ارسال شده برای بازدید",
-            //   actions: [
-            //     <Button
-            //       key={"1"}
-            //       className="max-md:w-full flex justify- items-center gap-2 print:hidden"
-            //       size="large"
-            //       type="primary"
-            //       htmlType="submit"
-            //       onClick={handlePrint}
-            //     >
-            //       <PrinterIcon
-            //         className="print:hidden"
-            //         width={24}
-            //         height={24}
-            //       />
-            //       <span className="flex">چاپ</span>
-            //     </Button>,
-            //   ],
+            text: "بازکردن درب جعبه های بازدید",
           }}
           isLoading={boxList.isLoading}
           data={{ records: boxList.data || ([] as any) }}

@@ -17,6 +17,10 @@ const useBoxDeviceOpen = () => {
         queryKey: [RequestPackageApi.BoxDeviceListForOpen.url],
         exact: false,
       });
+      await queryClient.invalidateQueries({
+        queryKey: [RequestPackageApi.LabBoxGetAvailableList.url],
+        exact: false,
+      });
     },
   });
 

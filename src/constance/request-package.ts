@@ -722,7 +722,7 @@ const RequestPackageApi = {
   PaymentPostList: {
     url: "/RequestPackage/PaymentPostList",
     type: z.object({
-      package_UID: z.string(),
+      package_UID: z.string().uuid(),
     }),
     item: z.object({
       UID: z.string().uuid().optional(),
@@ -783,42 +783,56 @@ const RequestPackageApi = {
       ),
     }),
   },
+
+  PaymentPaid: {
+    url: "/RequestPackage/PaymentPaid",
+    type: z.object({
+      package_UID: z.string().uuid(),
+      payment_UID: z.string().uuid(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
+
   LabReport: {
     url: "/RequestPackage/LabReport",
     type: z.object({
-      package_UID: z.string()
+      package_UID: z.string().uuid(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.object({
-        Sample_Name: z.string(),
-        Package_ID: z.number(),
-        Sample_ID: z.number(),
-        Is_Product: z.boolean(),
-        Sample_Type_Value: z.string(),
-        Sample_Type: z.number(),
-        Test_Item_Count: z.number(),
-        Name: z.string(),
-        Title: z.string(),
-        Result_Test: z.string(),
-        Result_Range: z.number(),
-        Result_Desc: z.string(),
-        Result_Min_Accept: z.number(),
-        Result_Max_Accept: z.number(),
-        Result_Renew_Unit_FK: z.number(),
-        Result_Renewable: z.number(),
-        Material_Id: z.string().optional().nullable(),
-        Material_Supply_Method_Id: z.string().optional().nullable(),
-        Material_Unit_Consumption: z.string().optional().nullable(),
-        Material_Import_Declaration_Number: z.string().optional().nullable(),
-        Material_Supply_Name: z.string().optional().nullable(),
-        Material_Supply_Person_Type_Id: z.string().optional().nullable(),
-        Material_Supply_National_Code: z.string().optional().nullable(),
-        Material_Supply_Iran_Code: z.string().optional().nullable(),
-        Material_Supply_Address: z.string().optional().nullable(),
-        Material_Usage_Percentage: z.string().optional().nullable()
-      }))
-    })
-  }
+      data: z.array(
+        z.object({
+          Sample_Name: z.string(),
+          Package_ID: z.number(),
+          Sample_ID: z.number(),
+          Is_Product: z.boolean(),
+          Sample_Type_Value: z.string(),
+          Sample_Type: z.number(),
+          Test_Item_Count: z.number(),
+          Name: z.string(),
+          Title: z.string(),
+          Result_Test: z.string(),
+          Result_Range: z.number(),
+          Result_Desc: z.string(),
+          Result_Min_Accept: z.number(),
+          Result_Max_Accept: z.number(),
+          Result_Renew_Unit_FK: z.number(),
+          Result_Renewable: z.number(),
+          Material_Id: z.string().optional().nullable(),
+          Material_Supply_Method_Id: z.string().optional().nullable(),
+          Material_Unit_Consumption: z.string().optional().nullable(),
+          Material_Import_Declaration_Number: z.string().optional().nullable(),
+          Material_Supply_Name: z.string().optional().nullable(),
+          Material_Supply_Person_Type_Id: z.string().optional().nullable(),
+          Material_Supply_National_Code: z.string().optional().nullable(),
+          Material_Supply_Iran_Code: z.string().optional().nullable(),
+          Material_Supply_Address: z.string().optional().nullable(),
+          Material_Usage_Percentage: z.string().optional().nullable(),
+        })
+      ),
+    }),
+  },
 };
 
 export { RequestPackageApi };

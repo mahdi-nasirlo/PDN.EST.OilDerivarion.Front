@@ -152,7 +152,6 @@ const boxGPSApi = {
     url: "/Oil/boxOpen",
     type: z.object({
       device: z.string(),
-      code: z.number(),
     }),
   },
 };

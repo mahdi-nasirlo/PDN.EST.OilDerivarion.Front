@@ -1,12 +1,22 @@
 import { z } from "zod";
 import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { errorMessage } from "./error-message";
+import Item from "antd/es/list/Item";
 
 const RequestPackageReportListItem = z.object({
   UID: z.string().nullable(),
   Form_Key: z.string(),
   Form_Type: z.number(),
   Form_Name: z.string(),
+});
+const boxForOpen = z.object({
+  box_usage_type: z.number(),
+  box_UID: z.string(),
+  Capacity: z.number(),
+  box_info: z.string(),
+  Device_Status: z.number(),
+  IMEI: z.string(),
+  Is_Opened: z.boolean().optional(),
 });
 
 const VisitScheduleListItem = z.object({
@@ -786,39 +796,62 @@ const RequestPackageApi = {
   LabReport: {
     url: "/RequestPackage/LabReport",
     type: z.object({
-      package_UID: z.string()
+      package_UID: z.string(),
     }),
     response: generalResponseZod.extend({
-      data: z.array(z.object({
-        Sample_Name: z.string(),
-        Package_ID: z.number(),
-        Sample_ID: z.number(),
-        Is_Product: z.boolean(),
-        Sample_Type_Value: z.string(),
-        Sample_Type: z.number(),
-        Test_Item_Count: z.number(),
-        Name: z.string(),
-        Title: z.string(),
-        Result_Test: z.string(),
-        Result_Range: z.number(),
-        Result_Desc: z.string(),
-        Result_Min_Accept: z.number(),
-        Result_Max_Accept: z.number(),
-        Result_Renew_Unit_FK: z.number(),
-        Result_Renewable: z.number(),
-        Material_Id: z.string().optional().nullable(),
-        Material_Supply_Method_Id: z.string().optional().nullable(),
-        Material_Unit_Consumption: z.string().optional().nullable(),
-        Material_Import_Declaration_Number: z.string().optional().nullable(),
-        Material_Supply_Name: z.string().optional().nullable(),
-        Material_Supply_Person_Type_Id: z.string().optional().nullable(),
-        Material_Supply_National_Code: z.string().optional().nullable(),
-        Material_Supply_Iran_Code: z.string().optional().nullable(),
-        Material_Supply_Address: z.string().optional().nullable(),
-        Material_Usage_Percentage: z.string().optional().nullable()
-      }))
-    })
-  }
+      data: z.array(
+        z.object({
+          Sample_Name: z.string(),
+          Package_ID: z.number(),
+          Sample_ID: z.number(),
+          Is_Product: z.boolean(),
+          Sample_Type_Value: z.string(),
+          Sample_Type: z.number(),
+          Test_Item_Count: z.number(),
+          Name: z.string(),
+          Title: z.string(),
+          Result_Test: z.string(),
+          Result_Range: z.number(),
+          Result_Desc: z.string(),
+          Result_Min_Accept: z.number(),
+          Result_Max_Accept: z.number(),
+          Result_Renew_Unit_FK: z.number(),
+          Result_Renewable: z.number(),
+          Material_Id: z.string().optional().nullable(),
+          Material_Supply_Method_Id: z.string().optional().nullable(),
+          Material_Unit_Consumption: z.string().optional().nullable(),
+          Material_Import_Declaration_Number: z.string().optional().nullable(),
+          Material_Supply_Name: z.string().optional().nullable(),
+          Material_Supply_Person_Type_Id: z.string().optional().nullable(),
+          Material_Supply_National_Code: z.string().optional().nullable(),
+          Material_Supply_Iran_Code: z.string().optional().nullable(),
+          Material_Supply_Address: z.string().optional().nullable(),
+          Material_Usage_Percentage: z.string().optional().nullable(),
+        })
+      ),
+    }),
+  },
+  BoxDeviceListForOpen: {
+    url: "/RequestPackage/BoxDeviceListForOpen",
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    Item: boxForOpen,
+    response: generalResponseZod.extend({
+      data: z.array(boxForOpen),
+    }),
+  },
+  BoxDeviceOpen: {
+    url: "/RequestPackage/BoxDeviceOpen",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string().uuid(),
+    }),
+    // Item: boxForOpen,
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
 };
 
 export { RequestPackageApi };

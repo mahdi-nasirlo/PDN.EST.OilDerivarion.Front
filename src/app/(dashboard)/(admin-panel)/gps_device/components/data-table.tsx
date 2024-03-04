@@ -4,7 +4,7 @@ import { Button, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Card } from "@/components/card";
-import { z } from "zod";
+import { record, z } from "zod";
 import CustomTable from "@/components/custom-table";
 import { PlusIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { boxGPSApi } from "constance/box-gps";
@@ -13,6 +13,7 @@ import EditModal from "./edit-modal";
 import Link from "next/link";
 import DeleteModal from "./delete-modal";
 import useBoxOpen from "@/hooks/box-gps/use-box-open";
+import useBasicOpenBasic from "@/hooks/box-gps/use-basic-open-box";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -32,7 +33,12 @@ export default function DataTable({
   const [uid, setGetUid] = useState<string | boolean>();
 
   const [uidDelete, setUidDelete] = useState<string | boolean>();
+  const [open, setOpen] = useState("");
   const openBox = useBoxOpen();
+  const boxOpen = useBasicOpenBasic();
+  const handleOpen = (record: z.infer<typeof apiData.item>) => {
+    boxOpen.mutateAsync({ imei: record.iMEI });
+  };
 
   const columns: ColumnsType<z.infer<typeof apiData.item>> = [
     {
@@ -68,7 +74,7 @@ export default function DataTable({
     },
     {
       title: "وضعیت",
-      dataIndex: "device_Statusس",
+      dataIndex: "device_Status",
       key: "6",
       render: (e, record) => <StatusColumnBox record={record} />,
     },
@@ -92,19 +98,17 @@ export default function DataTable({
       width: "10%",
       render: (_, record) => (
         <Space size="small">
-          {record.iMEI === "861100068416631" && (
-            <>
-              <Button
-                type="link"
-                className="text-primary-500 font-bold"
-                disabled={record.device_Status != 6}
-                loading={openBox.isPending}
-                onClick={() => openBox.mutateAsync()}
-              >
-                بازکردن درب دستگاه
-              </Button>
-            </>
-          )}
+          <>
+            <Button
+              type="link"
+              className="text-primary-500 font-bold"
+              // disabled={record.device_Status != 6}
+              loading={boxOpen.isPending}
+              onClick={() => handleOpen(record)}
+            >
+              بازکردن درب دستگاه
+            </Button>
+          </>
           {record.device_Status !== 6 && (
             <>
               <Button

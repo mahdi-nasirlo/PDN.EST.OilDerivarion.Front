@@ -16,10 +16,10 @@ const GetProducerProductCodes = z.object({
   Product_Code: z.string(),
   Product_Order_Number: z.number(),
   Is_Paid: z.boolean(),
-  Create_DT:z.string(),
+  Create_DT: z.string(),
   Paid_DT: z.string(),
-  Amount:z.number()
-})
+  Amount: z.number(),
+});
 
 const baseInfoApi = {
   GetAllMainMember: {
@@ -90,11 +90,17 @@ const baseInfoApi = {
       data: z.array(z.object({})),
     }),
   },
-    GetProducerProductCodes: {
+  GetProducerProductCodes: {
     url: "/Producer/GetProducerProductCodes",
     item: GetProducerProductCodes,
     response: generalResponseZod.extend({
       data: z.array(GetProducerProductCodes),
+    }),
+  },
+  OpenBox: {
+    url: "/Basic/OpenBox",
+    type: z.object({
+      imei: z.string(),
     }),
   },
 };

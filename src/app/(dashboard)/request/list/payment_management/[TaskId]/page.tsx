@@ -11,6 +11,7 @@ import React from 'react'
 import { z } from 'zod';
 import usePaymentList from '@/hooks/request-package/use-payment-list';
 import { RequestPackageApi } from 'constance/request-package';
+import usePaymentPaid from '@/hooks/request-package/use-payment-paid';
 
 interface PropType {
     params: { TaskId: string };
@@ -19,6 +20,16 @@ interface PropType {
 export default function Page(props: PropType) {
 
     const PaymentList = usePaymentList({ package_UID: props.params.TaskId })
+
+    const PaymentPaid = usePaymentPaid();
+
+    const handlePayment = async (record: z.infer<typeof RequestPackageApi.PaymentList.item>) => {
+        await PaymentPaid.mutateAsync({
+            package_UID: props.params.TaskId,
+            payment_UID: record.UID
+        });
+    };
+
 
     const columns: ColumnsType<z.infer<typeof RequestPackageApi.PaymentList.item>> = [
         {
@@ -91,7 +102,7 @@ export default function Page(props: PropType) {
                         {record.Description}
                     </Typography.Text>
                 </Tooltip>
-            )
+            ),
         },
         {
             title: "وضعیت",
@@ -135,9 +146,9 @@ export default function Page(props: PropType) {
             align: "center",
             fixed: "right",
             width: "10%",
-            render: (_, record: any) => (
+            render: (_, record) => (
                 <Space size="small">
-                    {record.Status !== true ?
+                    {record.Is_Paid !== true ?
                         <>
                             <Button
                                 type='link'
@@ -148,7 +159,8 @@ export default function Page(props: PropType) {
                             </Button>
                             <Button
                                 type='link'
-                                onClick={() => console.log("استعلام")}
+                                loading={PaymentPaid.isPending}
+                                onClick={() => handlePayment(record)}
                                 className={"text-primary-500 font-bold"}
                             >
                                 استعلام
@@ -178,13 +190,13 @@ export default function Page(props: PropType) {
             />
             <Card>
                 <CustomTable
-                    loading={PaymentList.isLoading || PaymentList.isFetching}
-                    data={{ records: PaymentList.data }}
-                    columns={columns}
                     header={{
                         icon: <ViewColumnsIcon />,
                         text: "لیست پرداخت ها",
                     }}
+                    columns={columns}
+                    data={{ records: PaymentList.data }}
+                    isLoading={PaymentList.isLoading || PaymentList.isFetching}
                 />
             </Card>
         </>

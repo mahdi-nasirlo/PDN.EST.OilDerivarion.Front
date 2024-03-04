@@ -316,6 +316,10 @@
   direction: ltr;
 }
 
+.ant-tooltip-inner {
+    width: fit-content;
+}
+
 /* .ant-upload-list-item {
   border: 2px solid green !important; 
  }  

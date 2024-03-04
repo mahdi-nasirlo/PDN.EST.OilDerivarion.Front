@@ -42,7 +42,7 @@ export default function Page({ params }: { params: { uid: string } }) {
       {get.data?.task && (
         <Breadcrumb
           pages={[{ label: "خانه" }]}
-          currentPage={"	بررسی نتایج آزمایشگاه توسط کارگروه استان"}
+          currentPage={"بررسی نتایج آزمایشگاه توسط کارگروه استان"}
           titleIcon={<DocumentTextIcon className="w-8" />}
           actions={[
             <Button key={1} size="large" onClick={() => router.back()}>

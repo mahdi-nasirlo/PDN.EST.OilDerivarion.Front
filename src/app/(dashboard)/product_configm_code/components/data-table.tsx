@@ -8,6 +8,8 @@ import baseInfoApi from "constance/base-info";
 import { z } from "zod";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { Tag } from "antd/lib";
+import { Typography } from "antd";
+import ToRial from "@/lib/to-Rial";
 
 const apiData = baseInfoApi.GetProducerProductCodes;
 
@@ -60,7 +62,12 @@ export default function DataTable() {
     },
     {
       dataIndex: "Amount",
-      title: "هزینه پرداخت",
+      title: "مبلغ پرداخت",
+      render: (_, record) => (
+        <Typography>
+          {ToRial(record.Amount)}
+        </Typography>
+      )
     },
   ];
 

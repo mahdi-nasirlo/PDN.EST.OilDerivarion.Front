@@ -32,9 +32,10 @@ const PercentInput: React.FC<InputNumberProps & PropsType> = ({ data, ...props }
         >
             <InputNumber
                 max={100}
-                controls={false}
-                className="w-full"
+                maxLength={15}
                 size="large"
+                className="w-full"
+                controls={false}
                 formatter={(value) => `${value}%`}
                 placeholder='وارد کنید'
                 defaultValue={data?.Default_Value as any}

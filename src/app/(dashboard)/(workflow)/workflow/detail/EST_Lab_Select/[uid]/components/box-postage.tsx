@@ -120,6 +120,7 @@ export default function BoxPostage({ package_UID }: TProps) {
                             <InputNumber
                                 size='large'
                                 controls={false}
+                                maxLength={20}
                                 className='w-full'
                                 placeholder='وارد کنید'
                                 formatter={(value) => ToRial(value)}

@@ -5,6 +5,7 @@ const PercentageInput: React.FC<InputNumberProps> = ({ value, onChange }) => {
 
     return (
         <InputNumber
+            maxLength={15}
             controls={false}
             value={value}
             onChange={onChange}

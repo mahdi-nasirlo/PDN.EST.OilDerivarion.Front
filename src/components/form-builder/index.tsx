@@ -1,20 +1,20 @@
 "use client"
 
-import React, {useEffect} from 'react';
-import {Button, Col, Divider, Typography} from "antd";
-import {z} from "zod";
-import {formMakerApi} from "../../constance/form-maker";
-import {CheckboxOptionType, Form, Row, SelectProps} from "antd/lib";
+import React, { useEffect } from 'react';
+import { Button, Col, Divider, Typography } from "antd";
+import { z } from "zod";
+import { formMakerApi } from "../../constance/form-maker";
+import { CheckboxOptionType, Form, Row, SelectProps } from "antd/lib";
 import TextInput from "@/components/form-builder/inputs/text-input";
-import {useValidation} from "@/hooks/use-validation";
-import {errorMessage} from "../../constance/error-message";
-import {Rule} from "rc-field-form/es/interface";
+import { useValidation } from "@/hooks/use-validation";
+import { errorMessage } from "../../constance/error-message";
+import { Rule } from "rc-field-form/es/interface";
 import InputNumber from "@/components/form-builder/inputs/Input-number";
 import PercentInput from "@/components/form-builder/inputs/percent-Input";
 import Select from "@/components/form-builder/inputs/select";
 import RadioBtn from "@/components/form-builder/inputs/radio-btn";
 import NaturalNumber from "@/components/form-builder/inputs/natural-number";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import TemperatureInput from './inputs/temperature-input';
 
 
@@ -61,7 +61,7 @@ const RenderInputs = (props: {
 
     useEffect(() => {
         if (props.initialValues) {
-            
+
             form.setFieldsValue(props.initialValues)
 
         }
@@ -174,7 +174,7 @@ const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[])
             fieldSchema = z.number({
                 required_error: errorMessage.number_invalid,
                 invalid_type_error: errorMessage.number_invalid
-            }).min(0.001).max(1000000)
+            }).min(0.001)
 
         if (FieldType === "radioBtn")
             fieldSchema = z.string({
@@ -198,7 +198,7 @@ const createValidation = (fields: z.infer<typeof formMakerApi.Get.formFields>[])
             fieldSchema = z.number({
                 required_error: errorMessage.number_invalid,
                 invalid_type_error: errorMessage.number_invalid
-            }).positive().int({ message: 'لطفا عدد صحیح وارد کنید' }).max(1000000)
+            }).positive().int({ message: 'لطفا عدد صحیح وارد کنید' })
 
         if (FieldType === "TemperatureInput")
             fieldSchema = z.number({

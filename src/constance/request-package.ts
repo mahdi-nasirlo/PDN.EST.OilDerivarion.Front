@@ -719,10 +719,12 @@ const RequestPackageApi = {
     url: "/RequestPackage/PaymentPostAdd",
     type: z.object({
       package_UID: z.string(),
-      amount: z.number({
-        required_error: errorMessage.required,
-        invalid_type_error: errorMessage.number_invalid,
-      }),
+      amount: z
+        .number({
+          required_error: errorMessage.required,
+          invalid_type_error: errorMessage.number_invalid,
+        })
+        .positive(),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.any()),

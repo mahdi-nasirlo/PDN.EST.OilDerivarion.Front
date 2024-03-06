@@ -61,6 +61,7 @@ export default function TestItemForm({ rules }: any) {
                         rules={[rules]}
                     >
                         <InputNumber
+                            maxLength={9}
                             className='w-full'
                             controls={false}
                             size="large"

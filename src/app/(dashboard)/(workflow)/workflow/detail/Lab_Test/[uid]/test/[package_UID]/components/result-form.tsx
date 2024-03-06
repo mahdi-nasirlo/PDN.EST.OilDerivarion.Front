@@ -83,19 +83,19 @@ export default function ResultForm({ formData, setFormData, package_UID }: any) 
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="محدوده" name="result_Range">
-                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
+                  <InputNumber maxLength={15} controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="حداقل قابل قبول" name="result_Min_Accept">
-                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
+                  <InputNumber maxLength={15} controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="حداکثر قابل قبول" name="result_Max_Accept">
-                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
+                  <InputNumber maxLength={15} controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
@@ -121,13 +121,13 @@ export default function ResultForm({ formData, setFormData, package_UID }: any) 
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="واحد تجدید پذیر" name="result_Renew_Unit_FK">
-                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
+                  <InputNumber maxLength={15} controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 
               <Col xs={24} sm={8}>
                 <Form.Item rules={[rules]} label="تجدید پذیر" name="result_Renewable">
-                  <InputNumber controls={false} className="w-full" size="large" placeholder="وارد کنید" />
+                  <InputNumber maxLength={15} controls={false} className="w-full" size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
 

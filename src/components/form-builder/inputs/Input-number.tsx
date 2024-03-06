@@ -13,6 +13,7 @@ const InputNumber = (props: InputNumberProps & PropsType) => {
 
     return (
         <AntInputNumber
+            maxLength={15}
             controls={false}
             className="w-full"
             size="large"

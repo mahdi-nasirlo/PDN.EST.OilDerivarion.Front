@@ -833,6 +833,20 @@ const RequestPackageApi = {
       ),
     }),
   },
+  report: {
+    url: "/RequestPackage/Report",
+    type: z.object({
+      report_Name: z.string()
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+        Type_1: z.number(),
+        Type_2: z.number(),
+        Type_3: z.number(),
+        Type_4: z.number()
+      })).length(1)
+    })
+  }
 };
 
 export { RequestPackageApi };

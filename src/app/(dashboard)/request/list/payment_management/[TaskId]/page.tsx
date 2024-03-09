@@ -12,6 +12,7 @@ import { z } from 'zod';
 import usePaymentList from '@/hooks/request-package/use-payment-list';
 import { RequestPackageApi } from 'constance/request-package';
 import usePaymentPaid from '@/hooks/request-package/use-payment-paid';
+import ToRial from '@/lib/to-Rial';
 
 interface PropType {
     params: { TaskId: string };
@@ -66,7 +67,7 @@ export default function Page(props: PropType) {
             title: "زمان ایجاد فاکتور",
             dataIndex: "Create_DT",
             align: "center",
-            key: "5",
+            key: "2",
             render: (_, record) => {
                 if (record.Create_DT == null) {
                     return <Typography>_</Typography>
@@ -77,18 +78,18 @@ export default function Page(props: PropType) {
         {
             title: "ملبغ",
             dataIndex: "Amount",
-            key: "4",
+            key: "3",
             width: "5%",
             render: (_, record) => (
                 <Typography>
-                    {record.Amount} ریال
+                    {ToRial(record.Amount)}
                 </Typography>
             )
         },
         {
             title: "توضیحات",
             dataIndex: "Description",
-            key: "5",
+            key: "4",
             width: "50%",
             render: (_, record) => (
                 <Tooltip
@@ -107,7 +108,7 @@ export default function Page(props: PropType) {
         {
             title: "وضعیت",
             dataIndex: "Is_Paid",
-            key: "3",
+            key: "5",
             render: (_, record) => {
                 let color = "";
                 let name = "";
@@ -132,7 +133,7 @@ export default function Page(props: PropType) {
             title: "تاریخ پرداخت",
             dataIndex: "Paid_DT",
             align: "center",
-            key: "5",
+            key: "6",
             render: (_, record) => {
                 if (record.Paid_DT == null) {
                     return <Typography>_</Typography>
@@ -142,7 +143,7 @@ export default function Page(props: PropType) {
         },
         {
             title: "عملیات",
-            key: "6",
+            key: "7",
             align: "center",
             fixed: "right",
             width: "10%",

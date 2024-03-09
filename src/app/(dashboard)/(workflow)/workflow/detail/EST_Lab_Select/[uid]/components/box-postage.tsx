@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { z } from 'zod';
 import usePaymentPostAdd from '@/hooks/request-package/use-payment-post-add';
 import { useValidation } from '@/hooks/use-validation';
-import { Button, Col, Form, InputNumber, Row, Space, Tag } from 'antd'
+import { Button, Col, Form, InputNumber, Row, Space, Tag, Typography } from 'antd'
 import { RequestPackageApi } from 'constance/request-package';
 import CustomTable from "@/components/custom-table"
 import usePaymentPostList from '@/hooks/request-package/use-payment-post-list';
@@ -10,6 +10,7 @@ import { ColumnsType } from 'antd/es/table';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import ConfirmDeleteModal from '@/components/confirm-delete-modal';
 import usePaymentPostDelete from '@/hooks/request-package/use-payment-post-delete';
+import ToRial from '@/lib/to-Rial';
 
 interface TProps {
     package_UID: string
@@ -50,9 +51,9 @@ export default function BoxPostage({ package_UID }: TProps) {
             dataIndex: "Amount",
             key: "2",
             render: (_, record) => (
-                <>
-                    {record.Amount} ریال
-                </>
+                <Typography>
+                    {ToRial(record.Amount)}
+                </Typography>
             )
         },
         {
@@ -112,15 +113,17 @@ export default function BoxPostage({ package_UID }: TProps) {
                         <Form.Item
                             required={false}
                             name="amount"
-                            label="هزینه پست (ریال)"
+                            label="هزینه پست"
                             labelCol={{ style: { marginTop: "6px" } }}
                             rules={[rules]}
                         >
                             <InputNumber
                                 size='large'
                                 controls={false}
+                                maxLength={20}
                                 className='w-full'
                                 placeholder='وارد کنید'
+                                formatter={(value) => ToRial(value)}
                             />
                         </Form.Item>
                     </Col>

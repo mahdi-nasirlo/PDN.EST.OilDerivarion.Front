@@ -1,12 +1,22 @@
 import { z } from "zod";
 import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { errorMessage } from "./error-message";
+import Item from "antd/es/list/Item";
 
 const RequestPackageReportListItem = z.object({
   UID: z.string().nullable(),
   Form_Key: z.string(),
   Form_Type: z.number(),
   Form_Name: z.string(),
+});
+const boxForOpen = z.object({
+  box_usage_type: z.number(),
+  box_UID: z.string(),
+  Capacity: z.number(),
+  box_info: z.string(),
+  Device_Status: z.number(),
+  IMEI: z.string(),
+  Is_Opened: z.boolean().optional(),
 });
 
 const VisitScheduleListItem = z.object({
@@ -709,10 +719,12 @@ const RequestPackageApi = {
     url: "/RequestPackage/PaymentPostAdd",
     type: z.object({
       package_UID: z.string(),
-      amount: z.number({
-        required_error: errorMessage.required,
-        invalid_type_error: errorMessage.number_invalid,
-      }),
+      amount: z
+        .number({
+          required_error: errorMessage.required,
+          invalid_type_error: errorMessage.number_invalid,
+        })
+        .positive(),
     }),
     response: generalResponseZod.extend({
       data: z.array(z.any()),
@@ -846,7 +858,28 @@ const RequestPackageApi = {
         Type_4: z.number()
       })).length(1)
     })
-  }
+  },
+  BoxDeviceListForOpen: {
+    url: "/RequestPackage/BoxDeviceListForOpen",
+    type: z.object({
+      package_UID: z.string(),
+    }),
+    Item: boxForOpen,
+    response: generalResponseZod.extend({
+      data: z.array(boxForOpen),
+    }),
+  },
+  BoxDeviceOpen: {
+    url: "/RequestPackage/BoxDeviceOpen",
+    type: z.object({
+      package_UID: z.string(),
+      box_UID: z.string().uuid(),
+    }),
+    // Item: boxForOpen,
+    response: generalResponseZod.extend({
+      data: z.array(z.any()),
+    }),
+  },
 };
 
 export { RequestPackageApi };

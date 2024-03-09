@@ -25,6 +25,7 @@ const PercentInput: React.FC<InputNumberProps> = ({ value, onChange }) => {
     }
     return (
         <InputNumber
+            maxLength={15}
             value={value}
             onChange={onChange}
             max={100}

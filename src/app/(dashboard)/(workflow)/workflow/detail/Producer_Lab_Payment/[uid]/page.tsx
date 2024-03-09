@@ -10,6 +10,7 @@ import { Divider, Tag, Tooltip, Typography } from "antd";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import CustomTable from "@/components/custom-table"
+import ToRial from "@/lib/to-Rial";
 
 
 const Page = ({ params: { uid } }: { params: { uid: string } }) => {
@@ -52,7 +53,7 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
       title: "زمان ایجاد فاکتور",
       dataIndex: "Create_DT",
       align: "center",
-      key: "5",
+      key: "3",
       render: (_, record) => {
         if (record.Create_DT == null) {
           return <Typography>_</Typography>
@@ -67,7 +68,7 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
       width: "5%",
       render: (_, record) => (
         <Typography>
-          {record.Amount} ریال
+          {ToRial(record.Amount)}
         </Typography>
       )
     },
@@ -93,7 +94,7 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
     {
       title: "وضعیت",
       dataIndex: "Is_Paid",
-      key: "3",
+      key: "6",
       render: (_, record) => {
         let color = "";
         let name = "";
@@ -118,7 +119,7 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
       title: "تاریخ پرداخت",
       dataIndex: "Paid_DT",
       align: "center",
-      key: "5",
+      key: "7",
       render: (_, record) => {
         if (record.Paid_DT == null) {
           return <Typography>_</Typography>

@@ -6,10 +6,11 @@ import { DocumentChartBarIcon } from '@heroicons/react/24/solid'
 import { Card } from '@/components/card'
 import CustomTable from '@/components/custom-table'
 import { PrinterIcon, ViewColumnsIcon } from '@heroicons/react/24/outline'
-import { Button, Tag } from 'antd'
+import { Button, Tag, Typography } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { z } from 'zod'
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import ToRial from '@/lib/to-Rial'
 
 export default function Page() {
 
@@ -36,9 +37,14 @@ export default function Page() {
             key: "4",
         },
         {
-            title: "هزینه",
+            title: "مبلغ",
             dataIndex: "test3",
             key: "5",
+            render: (_, record: any) => (
+                <Typography>
+                    {ToRial(record.test3)}
+                </Typography>
+            )
         },
         {
             title: "تاریخ پرداخت",
@@ -115,7 +121,7 @@ const data = [
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
-        test3: '200,00 تومان',
+        test3: '20000',
         test4: '1403/02/15',
         isActive: true
     },
@@ -124,7 +130,7 @@ const data = [
         name: 'پکیج 101',
         test1: 'تست',
         test2: '6565456',
-        test3: '200,00 تومان',
+        test3: '20000',
         test4: '1403/02/15',
         isActive: false
     }

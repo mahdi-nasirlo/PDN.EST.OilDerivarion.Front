@@ -8,6 +8,7 @@ const NaturalNumber: React.FC<InputNumberProps> = ({ ...props }) => {
 
     return (
         <InputNumber
+            maxLength={15}
             controls={false}
             className="w-full"
             size="large"

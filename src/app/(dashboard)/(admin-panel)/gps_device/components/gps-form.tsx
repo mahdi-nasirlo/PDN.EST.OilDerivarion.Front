@@ -14,11 +14,11 @@ function GpsForm({ rules }: any) {
         <Col xs={24} sm={12}>
           <Form.Item rules={[rules]} name="code" label="کد جعبه">
             <InputNumber
+              maxLength={9}
               controls={false}
               className="w-full"
               size="large"
               placeholder="وارد کنید"
-              type="number"
             />
           </Form.Item>
         </Col>

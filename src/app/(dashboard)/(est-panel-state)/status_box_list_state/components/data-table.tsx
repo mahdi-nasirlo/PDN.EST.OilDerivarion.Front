@@ -12,6 +12,7 @@ import Link from "next/link";
 import StatusColumnBox from "@/components/custom-table/StatusColumnBox";
 import StatusBoxAction from "./status-box-action";
 import useBoxOpen from "@/hooks/box-gps/use-box-open";
+import useBasicOpenBasic from "@/hooks/box-gps/use-basic-open-box";
 
 const apiData = boxGPSApi.BoxGPSGetPage;
 
@@ -24,6 +25,10 @@ interface TProps {
 export default function DataTable({ data, isLoading, setPaginate }: TProps) {
   const openBox = useBoxOpen();
 
+  const boxOpen = useBasicOpenBasic();
+  const handleOpen = (record: z.infer<typeof apiData.item>) => {
+    boxOpen.mutateAsync({ imei: record.iMEI });
+  };
   const [uidStatus, setUidStatus] = useState<string>();
 
   const columns: ColumnsType<z.infer<typeof apiData.item>> = [
@@ -75,7 +80,7 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
                 type="link"
                 className="text-primary-500 font-bold"
                 loading={openBox.isPending}
-                onClick={() => openBox.mutateAsync()}
+                onClick={() => handleOpen(record)}
               >
                 بازکردن درب دستگاه
               </Button>

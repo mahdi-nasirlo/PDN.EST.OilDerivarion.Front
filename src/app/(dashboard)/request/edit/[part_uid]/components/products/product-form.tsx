@@ -80,6 +80,7 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
           ]}
         >
           <InputNumber
+            maxLength={15}
             controls={false}
             max={100}
             className="w-full"
@@ -120,6 +121,7 @@ export default function ProductForm({ rules, uid, package_uid, form }: TProps) {
           ]}
         >
           <InputNumber
+            maxLength={15}
             controls={false}
             max={100}
             className="w-full"

@@ -6,6 +6,7 @@ import { BoxList } from "@/app/(dashboard)/(workflow)/workflow/detail/EST_Lab_Se
 import { Divider } from "antd";
 import LabInfoTable from "./components/lab-info-table";
 import BoxPostage from "./components/box-postage";
+import VisitBoxList from "./components/visit-box-list";
 
 const Page = ({ params: { uid } }: { params: { uid: string } }) => {
   return (
@@ -14,6 +15,8 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
       <LabInfoTable package_UID={uid} />
       <Divider />
       <BoxList package_UID={uid} />
+      <Divider />
+      <VisitBoxList package_UID={uid} />
       <Divider />
       <BoxPostage package_UID={uid} />
     </CommonWorkflow>

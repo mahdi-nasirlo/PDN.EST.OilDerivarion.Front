@@ -106,6 +106,7 @@ export default function ProductCategoryForm({
               label="حداقل بازه"
             >
               <InputNumber
+                maxLength={15}
                 controls={false}
                 className="w-full"
                 size="large"
@@ -141,6 +142,7 @@ export default function ProductCategoryForm({
               label="حداکثر بازه"
             >
               <InputNumber
+                maxLength={15}
                 controls={false}
                 className="w-full"
                 size="large"
@@ -177,6 +179,7 @@ export default function ProductCategoryForm({
             ]}
           >
             <InputNumber
+              maxLength={15}
               controls={false}
               className="w-full"
               size="large"

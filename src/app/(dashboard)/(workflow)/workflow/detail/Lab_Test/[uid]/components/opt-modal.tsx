@@ -116,7 +116,12 @@ export default function OptModal({
           }
         </Form.Item>
         <Form.Item label="کد otp" name="otp" required={false} rules={[rules]}>
-          <InputNumber controls={false} className="w-full" size="large" />
+          <InputNumber
+            size="large"
+            controls={false}
+            className="w-full"
+            maxLength={15}
+          />
         </Form.Item>
       </Form>
     </Modal>

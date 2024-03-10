@@ -1,6 +1,7 @@
 import {useGetUserAccess} from "@/hooks/sso/use-get-user-access";
+import { useGetUserInfo } from "@/hooks/sso/use-get-user-info";
 import {usePathname, useRouter} from "next/navigation";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 type MenuInfo = {
   key: string;
@@ -13,7 +14,7 @@ type MenuInfo = {
 const useControlSidebar = () => {
   const router = useRouter();
 
-  const userAccess = useGetUserAccess();
+  const userAccess = useGetUserInfo();
 
   const pathname = usePathname();
 
@@ -26,6 +27,12 @@ const useControlSidebar = () => {
       setOpenKeys([keys[1]]);
     }
   };
+
+  useEffect(() => {
+    console.log(userAccess.data?.data?.valueOrDefault.permissions
+);
+    
+  }, [userAccess.data])
 
   const handleMenuItemClick = (info: MenuInfo) => {
     // router.push(info.key);

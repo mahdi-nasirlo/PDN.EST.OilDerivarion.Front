@@ -49,7 +49,7 @@ async function fetchWithSession(
       success: responseBody?.success,
       notify: notify,
       message: responseBody?.message,
-      data: responseBody?.data,
+      data: responseBody,
     };
   } catch (error: any) {
     return {

@@ -1,6 +1,7 @@
 import {generalResponseZod} from "@/types/api-response";
 import {z} from "zod";
 import {errorMessage} from "./error-message";
+import ssoAxois from "@/utils/sso-axios";
 
 const ssoApi = {
   access_token_Key: "access_token",
@@ -46,7 +47,8 @@ const ssoApi = {
     }),
   },
   getUserInfo: {
-    url: "/Sso/GetUserInfo",
+    url: "/UserGov/GetUserClientInfo",
+    instance: ssoAxois,
     response: generalResponseZod.extend({
       data: z.object({
         lastName: z.string(),

@@ -39,10 +39,10 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
           api.success({ message: result.message });
         }
 
-        if (result.status === 401) {
-          localStorage.removeItem(ssoApi.access_token_Key);
-          redirectToSso.execute(result);
-        }
+        // if (result.status === 401) {
+        //   localStorage.removeItem(ssoApi.access_token_Key);
+        //   redirectToSso.execute(result);
+        // }
       },
       onError: (error) => {
         const message = getResponseError(error);

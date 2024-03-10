@@ -1,42 +1,22 @@
 "use client"
 
-import React, {useEffect} from 'react';
-import {useGetUserAccess} from "@/hooks/sso/use-get-user-access";
-import {usePathname, useRouter} from "next/navigation";
+import React from 'react';
+import { useAuth } from 'oidc-react';
 
-const ProtectedRouteProvider = ({children}: { children: React.ReactNode }) => {
+const ProtectedRouteProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const pathname = usePathname()
+    const { userData, signIn, isLoading } = useAuth()
 
-    const router = useRouter()
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
-    const accessPages = useGetUserAccess()
+    if (userData) {
+        return children
+    }
 
-    // const [access, setAccess] = useState(false)
+    signIn()
 
-    useEffect(() => {
-
-        if (accessPages.isFetched) {
-
-            // const filter = accessPages.data?.filter((item) => item.label.includes(pathname))
-            //
-            // if (filter && Array.isArray(filter) && filter.length <= 0 && pathname !== "/") {
-            //     router.push("/")
-            //     notification.error({message: "access denise"})
-            // }
-
-            // setAccess(true)
-
-        }
-
-    }, [accessPages.data, accessPages.isFetching, pathname])
-
-    return children
-    // return access ? children : <div
-    //     className="w-full flex rounded-lg bg-no-repeat bg-cover bg-bottom "
-    // >
-    //     <Spin className="w-full h-full"/>
-    // </div>
 };
 
 export default ProtectedRouteProvider;

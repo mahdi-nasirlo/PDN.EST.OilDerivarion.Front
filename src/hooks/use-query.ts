@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { useSession } from "next-auth/react";
 import { QueryKey, useQuery as tanstackQuery, UseQueryOptions } from "@tanstack/react-query";
-import customFetcher from "@/utils/custome-fetcher";
+import customFetcher from "@/utils/fetch-with-session";
 import { GeneralResponseType } from "@/types/api-response";
 
 

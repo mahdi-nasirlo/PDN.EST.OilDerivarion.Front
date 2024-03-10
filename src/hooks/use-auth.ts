@@ -1,4 +1,4 @@
-import customFetcher from "@/utils/custome-fetcher";
+import customFetcher from "@/utils/fetch-with-session";
 import fetchWithSession from "@/utils/fetch-with-session";
 import {useQuery} from "@tanstack/react-query";
 import {ssoApi} from "constance/auth";

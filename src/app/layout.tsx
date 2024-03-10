@@ -1,7 +1,7 @@
-import AuthProvider from '@/providers/auth-provider'
 import ThemeProvider from '@/providers/theme-provider'
 import QueryClientProvider from '@/providers/query-client-provider'
 import './globals.css'
+import OidcAuthProvider from '@/providers/oidc-auth-provider'
 
 export default function RootLayout({
   children,
@@ -11,13 +11,13 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body>
-        <AuthProvider>
-          <ThemeProvider>
-            <QueryClientProvider>
+        <ThemeProvider>
+          <QueryClientProvider>
+            <OidcAuthProvider>
               {children}
-            </QueryClientProvider>
-          </ThemeProvider>
-        </AuthProvider>
+            </OidcAuthProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
       </body>
     </html >
   )

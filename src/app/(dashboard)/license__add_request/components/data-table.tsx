@@ -4,17 +4,32 @@ import { Button, Space, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import CustomTable from "../../../../components/custom-table";
 import { z } from "zod";
-import React from "react";
+import React, { useState } from "react";
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
 import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
+import GpsLabModal from "../../(admin-panel)/lab_list/components/gps-lab-modal";
+import GpsProducerModal from "./gps-lab-modal";
+import SetLocation from "./set-producer-location";
 
 const apiData = licenseApi.GetRequestListForCurrentUser;
 
 export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();
+  const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
+  const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
+  const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
+
+  const handleGPS = (record: z.infer<typeof apiData.Item>) => {
+    setSelectedLabUid(record.Uid);
+    setIsGPSModalVisible(true);
+  };
+  const handleSetlocation = (record: z.infer<typeof apiData.Item>) => {
+    setSelectedLabUid(record.Uid);
+    setIsGPSModalVisibleset(true);
+  };
 
   const renderStatus = (_: any, record: z.infer<typeof apiData.Item>) => {
     let color = "";
@@ -37,7 +52,7 @@ export default function DataTable() {
       }
 
       return (
-        <Tag className='p-1' icon={icon} color={color}>
+        <Tag className="p-1" icon={icon} color={color}>
           {name}
         </Tag>
       );
@@ -118,6 +133,22 @@ export default function DataTable() {
       key: "2",
     },
     {
+      title: "موقعیت جغرافیایی",
+      dataIndex: "test",
+      key: "7",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-primary-500 font-bold"
+            onClick={() => handleGPS(record)}
+          >
+            مشاهده موقعیت
+          </Button>
+        </Space>
+      ),
+    },
+    {
       title: "توضیحات بررسی کننده",
       dataIndex: "Response_Message",
       key: "2",
@@ -143,6 +174,24 @@ export default function DataTable() {
 
     //   ),
     // },
+    {
+      title: "عملیات",
+      key: "عملیات",
+      align: "center",
+      fixed: "right",
+      width: "10%",
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="link"
+            className="text-secondary-500 font-bold"
+            onClick={() => handleSetlocation(record)}
+          >
+            تعیین موقعیت واحد تولیدی
+          </Button>
+        </Space>
+      ),
+    },
   ];
 
   return (
@@ -164,6 +213,18 @@ export default function DataTable() {
           setOpen={setDelUid}
           handleDelete={handleDelete}
           title="درخواست"
+        />
+        <SetLocation
+          selectedLabUid={selectedLabUid}
+          setSelectedLabUid={setSelectedLabUid}
+          isGPSModalVisibleset={isGPSModalVisibleset}
+          setIsGPSModalVisibleset={setIsGPSModalVisibleset}
+        />
+        <GpsProducerModal
+          selectedLabUid={selectedLabUid}
+          setSelectedLabUid={setSelectedLabUid}
+          isGPSModalVisible={isGPSModalVisible}
+          setIsGPSModalVisible={setIsGPSModalVisible}
         />
       </div>
     </>

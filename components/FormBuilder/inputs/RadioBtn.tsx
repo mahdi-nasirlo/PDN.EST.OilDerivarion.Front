@@ -38,16 +38,19 @@ const RadioBtn = (props: RadioButtonProps & PropsType) => {
         >
             <Radio.Group
                 size='large'
-                className='w-full'
+                className='w-full flex'
                 // defaultValue={defaultValue}
                 buttonStyle="solid"
             >
                 {props.data.FormFieldDetails?.map((value, index) => {
                     return (<>
-                        <Radio.Button style={{ width: `${widthPercent}%` }} key={index} value={value.Text}>
-                            <span>
-                                {value.Text}
-                            </span>
+                        <Radio.Button
+                            key={index}
+                            value={value.Text}
+                            style={{ width: `${widthPercent}%` }}
+                            className='flex items-center justify-center'
+                        >
+                            {value.Text}
                         </Radio.Button>
                     </>)
                 })}

@@ -18,3 +18,453 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+<<<<<<< HEAD
+=======
+
+.ant-pagination .ant-pagination-item-active {
+
+}
+
+/* scrollbar style */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: theme("colors.gray.300");
+}
+
+::-webkit-scrollbar-thumb {
+    background: theme("colors.primary.500");
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: theme("backgroundColor.green.500");
+}
+
+.scrollable-content {
+    overflow: auto;
+    direction: rtl;
+    height: 100vh;
+}
+
+/* scrollbar style */
+
+.text-secondary {
+    color: theme('textColor.secondary.500') !important;
+}
+
+.box-border {
+    border-radius: 16px !important;
+    border: 1px solid var(--gray-200, #e2e8f0) !important;
+    background: var(--black-white-white, #fff) !important;
+    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.05) !important;
+    margin-bottom: 20px;
+}
+
+.ant-input,
+.ant-picker,
+.ant-input-number-input,
+.ant-select-selector {
+    /* background-color: theme("backgroundColor.gray.50") !important; */
+    border-radius: 8px !important;
+    text-align: right !important;
+}
+
+.ant-input,
+.ant-picker {
+    @apply lg:py-[10px] !important
+}
+
+.ant-input-number {
+    @apply lg:py-[5px] !important
+}
+
+
+.ant-btn-dangerous {
+    @apply bg-red-500 text-white !important
+}
+
+.ant-btn {
+    height: unset !important;
+    @apply lg:px-6 lg:py-3 !important
+}
+
+.ant-select {
+    height: auto !important;
+}
+
+.ant-select-selector {
+    @apply h-full lg:py-[4.2px] !important;
+}
+
+.ant-select:not(.ant-select-customize-input)
+.ant-select-selector {
+    background-color: theme("backgroundColor.white") !important;
+}
+
+.ant-form-item-explain-error {
+    color: red !important;
+    font-size: 14px !important;
+    display: flex !important;
+    direction: rtl !important;
+}
+
+.ant-form-item-required::before {
+    display: none !important;
+}
+
+.ant-collapse-header-text {
+    text-align: start;
+}
+
+.ant-menu {
+    @apply border-e-0 lg:border-e-[0px] !important
+}
+
+
+.ant-menu-item {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 14px 16px !important;
+    border-radius: 8px !important;
+}
+
+.ant-menu-item-divider {
+    margin: 16px 0 !important;
+}
+
+.ant-menu-item-selected {
+    background-color: theme("backgroundColor.primary.500") !important;
+    color: theme("colors.white") !important;
+}
+
+.ant-menu-item-selected img {
+    background-color: theme("backgroundColor.primary.500") !important;
+    color: theme("colors.white") !important;
+    /* filter: brightness(0) invert(1); */
+}
+
+.ant-steps-icon-dot::after {
+    margin: 10px !important;
+}
+
+.ant-drawer-mask {
+    @apply opacity-75 !important
+}
+
+.ant-alert-error .ant-alert-content .ant-alert-message {
+    color: theme("colors.red.500") !important;
+}
+
+.ant-alert-error {
+    border: unset !important;
+}
+
+.management-info-form-submit {
+    background-color: theme("backgroundColor.orange.500") !important;
+}
+
+.secondary-btn {
+    background-color: theme("backgroundColor.orange.500") !important;
+}
+
+.btn-error {
+    background-color: theme("colors.red.500") !important;
+}
+
+/* table styles */
+
+.ant-table-content {
+    @apply overflow-auto overflow-y-hidden rounded-xl whitespace-nowrap !important
+}
+
+.ant-table-thead .ant-table-cell {
+    background: theme("backgroundColor.primary.500") !important;
+    color: theme("colors.white") !important;
+}
+
+.ant-table-row:nth-child(even) {
+    background-color: theme("backgroundColor.gray.50") !important;
+}
+
+.ant-table-row:nth-child(odd) {
+    background-color: theme("backgroundColor.white") !important;
+}
+
+.ant-table-cell {
+    font-weight: 500;
+}
+
+.ant-table-row:last-child {
+    border: 2px solid red !important;
+    border-radius: theme("borderRadius.xl") !important;
+}
+
+.ant-table-expanded-row,
+.ant-table-expanded-row-level-1 {
+    @apply bg-gray-50 !important
+}
+
+.action-btn-edit {
+    color: theme("colors.primary.500") !important;
+}
+
+.action-btn-delete {
+    color: theme("colors.red.500");
+}
+
+.ant-table-row:last-child .ant-table-cell {
+    border-bottom: unset !important;
+}
+
+
+/*request-list style*/
+.btn-filter {
+    background-color: theme("colors.primary.500") !important;
+}
+
+.btn-delete-filter {
+    background-color: theme("colors.red.500") !important;
+}
+
+
+/* .ant-table-container {
+  border-radius: 16px !important;
+  border: 1px solid var(--gray-200, #e2e8f0) !important;
+  background: var(--black-white-white, #fff) !important;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.05) !important;
+} */
+
+
+.ant-modal-mask {
+    background-color: rgb(255 255 255 / 0%) !important;
+    backdrop-filter: blur(1px);
+}
+
+.ant-pagination
+.ant-pagination-item-active {
+    @apply h-full lg:py-[4.2px] !important;
+    background-color: theme("colors.primary.500") !important;
+    border-color: theme("colors.gray.200") !important;
+}
+
+.ant-pagination
+.ant-pagination-item-active a {
+    color: theme("colors.white") !important;
+}
+
+.ant-pagination
+.ant-pagination-next
+.ant-pagination-item-link {
+    @apply h-full lg:py-[4.2px] lg:h-10 !important;
+    background-color: theme("backgroundColor.gray.50") !important;
+}
+
+.ant-pagination
+.ant-pagination-prev
+.ant-pagination-item-link {
+    @apply h-full lg:py-[4.2px] lg:h-10 !important;
+    background-color: theme("backgroundColor.gray.50") !important;
+}
+
+.ant-pagination-item {
+    @apply h-full lg:py-[4.2px] !important;
+    color: theme("colors.primary.500") !important;
+    background-color: theme("backgroundColor.gray.50") !important;
+}
+
+/*production-process*/
+.message-info {
+    color: theme("colors.red.500") !important;
+}
+
+/*ant file upload*/
+.ant-upload {
+    @apply w-full
+}
+
+.ant-upload button {
+    @apply w-full bg-gray-50 rounded-b-xl h-[73px] flex flex-row-reverse justify-between items-center
+}
+
+
+/*form style*/
+.ant-form-item-label.required::before {
+    display: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .ant-divider {
+        margin: 20px 0 !important;
+
+    }
+}
+
+
+/*btn*/
+/* .export-btn-excel{
+ color: theme("colors.primary.500") !important;
+} */
+
+
+.action-btn-info {
+    color: theme("colors.primary.500") !important;
+}
+
+
+.reject-btn {
+    color: theme("colors.white") !important;
+}
+
+.action-btn-edit-admin {
+    color: theme("backgroundColor.orange.500");
+}
+
+.action-btn-delete-admin {
+    color: theme("colors.red.500");
+
+}
+
+.ant-notification-notice {
+    direction: rtl;
+    font-family: IRANSans !important;
+}
+
+.ant-form-item-control-input-content {
+    @apply flex
+
+}
+
+.ant-menu-submenu-title {
+    padding: 14px !important;
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+.ant-menu-light > .ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+    background-color: theme("backgroundColor.white") !important;
+    margin-right: 16px !important;
+}
+
+/*.cahrt-btn {*/
+/*    background-color: theme("colors.orange.500");*/
+/*}*/
+
+.ant-input-group > .ant-input:first-child, .ant-input-group .ant-input-group-addon:first-child {
+    @apply rounded-e-none !important
+}
+
+/* start collapse style */
+
+.ant-collapse-header {
+    @apply flex items-center !important
+}
+
+/* end collapse style */
+
+/* start switch style */
+
+/*.ant-switch {*/
+/*    @apply bg-gray-200 !important*/
+/*}*/
+/* switch */
+.ant-switch {
+    background: #71717a !important;
+}
+
+.ant-switch-checked {
+    background: theme("backgroundColor.primary.500") !important;
+}
+
+.ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon {
+
+    border: 2px solid theme("colors.primary.500");
+    height: 20px;
+    width: 20px;
+
+
+}
+
+.ant-table-wrapper .ant-table-row-expand-icon-cell .ant-table-row-expand-icon:hover {
+    border-color: #4ade80;
+}
+
+.DatePicker {
+    @apply w-full !important
+}
+
+.ant-input-status-success {
+    @apply w-full max-lg:py-[6.5px] !important
+}
+
+.ant-tooltip-inner {
+    background-color: white !important;
+    color: black !important;
+}
+
+.ant-radio-group label {
+    @apply h-[50px] max-lg:h-[40px] !important;
+}
+
+.ant-popconfirm-buttons {
+    @apply justify-start flex-row-reverse !important
+}
+
+.ant-popconfirm-buttons button {
+    @apply p-1 px-2 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.workflow-request-item {
+    @apply overflow-hidden
+}
+
+.ant-input-disabled {
+    cursor: default !important
+}
+
+.workflow-request-icon {
+    @apply flex items-center justify-center h-10 w-10 bg-gray-50 border-[1.5px] border-primary-500 rounded-full;
+}
+
+.workflow-request-divider {
+    @apply absolute right-[61px] top-[-2px];
+}
+
+.workflow-request-divider-danger {
+    @apply bg-red-500
+}
+
+.workflow-request-divider-process {
+    @apply bg-gray-100
+}
+
+.workflow-request-divider-success {
+    @apply bg-primary-500
+}
+
+.workflow-request-Test-icon {
+    @apply text-white !important
+}
+
+.workflow-request-danger-icon-wrapper {
+    @apply bg-red-500 border-0 rounded-full h-10 w-10 flex items-center justify-center
+}
+
+.workflow-request-success-icon-wrapper {
+    @apply bg-primary-500 border-0 rounded-full h-10 w-10 flex items-center justify-center
+}
+>>>>>>> stage

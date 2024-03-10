@@ -43,6 +43,14 @@ const useCrudRequestDetailMaterial = (): RequestDetailMaterialType => {
         if (value?.materialImportDeclarationNumber) {
             value.materialImportDeclarationNumber =
                 value?.materialImportDeclarationNumber.toString();
+        } 
+        
+        if (value?.materialUsagePercentage) {
+            value.materialUsagePercentage =  value?.materialUsagePercentage.toString()
+        }
+        
+        if (value?.materialSupplyIranCode) {
+            value.materialSupplyIranCode =  value?.materialSupplyIranCode.toString()
         }
 
         value.materialSupplyIranCode = value.materialSupplyIranCode;

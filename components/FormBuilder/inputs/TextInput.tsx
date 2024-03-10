@@ -27,7 +27,7 @@ const TextInput = (props: InputProps & PropsType) => {
             label={data?.Title_Style}
             rules={rules}
         >
-            <Input {...props} defaultValue={data?.Default_Value} />
+            <Input size='large' {...props} defaultValue={data?.Default_Value} />
         </FormItem>
     );
 };

@@ -10,12 +10,16 @@ interface DateProps {
   day?: DayType;
 }
 
-export default function CustomDatePicker({ value = {}, onChange }: { value?: any, onChange?: (e: any) => void }) {
+export default function CustomDatePicker(
+  { value = {}, onChange }:
+    { value?: any, onChange?: (e: any) => void }
+) {
 
 
   const renderCustomInput = ({ ref }: any) => (
     <Input
-      className={" w-full"} // props.className +
+      size="large"
+      className={"w-full"} // props.className +
       readOnly
       ref={ref}
       value={typeof value == "string" ? value : ""}

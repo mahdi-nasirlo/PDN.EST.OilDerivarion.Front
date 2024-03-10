@@ -13,9 +13,8 @@ export default function ProductCategoryForm({
   rules,
   density,
   hasDensity,
-  setHasDensity
+  setHasDensity,
 }: TProps) {
-
   useEffect(() => {
     setHasDensity(density ?? false);
   }, [density]);

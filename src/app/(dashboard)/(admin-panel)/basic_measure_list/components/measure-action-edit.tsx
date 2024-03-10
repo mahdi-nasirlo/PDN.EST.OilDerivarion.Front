@@ -31,8 +31,7 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
           <div className="font-normal text-sm">
             لطفا اطلاعات را وارد نمایید.
           </div>
-        </div>
-      }
+        </div>}
       open={editModalUid}
       onCancel={closeModal}
       footer={[

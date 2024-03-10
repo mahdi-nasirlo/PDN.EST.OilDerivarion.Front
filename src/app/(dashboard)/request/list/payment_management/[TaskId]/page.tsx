@@ -76,7 +76,7 @@ export default function Page(props: PropType) {
             }
         },
         {
-            title: "ملبغ",
+            title: "مبلغ",
             dataIndex: "Amount",
             key: "3",
             width: "5%",

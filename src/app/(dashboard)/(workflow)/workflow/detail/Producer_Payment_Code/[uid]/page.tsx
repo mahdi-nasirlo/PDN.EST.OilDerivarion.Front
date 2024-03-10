@@ -60,7 +60,7 @@ const Page = ({ params: { uid } }: { params: { uid: string } }) => {
       }
     },
     {
-      title: "ملبغ",
+      title: "مبلغ",
       dataIndex: "Amount",
       key: "4",
       width: "5%",

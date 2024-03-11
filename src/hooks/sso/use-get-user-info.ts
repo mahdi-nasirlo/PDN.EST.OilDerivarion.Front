@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const apiData = ssoApi.getUserInfo
 
-const useGetUserInfo = () => useQuery({
+const useGetUserInfo = () => useQuery<z.infer<typeof apiData.response>>({
     queryKey: [apiData.url],
     queryFn: () => fetchWithSession({ url: apiData.url, notify: false, axiosInstance: ssoAxois }),
     // select: (data: z.infer<typeof apiData.response>) => data.data

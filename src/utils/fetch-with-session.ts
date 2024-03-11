@@ -49,7 +49,8 @@ async function fetchWithSession(
       success: responseBody?.success,
       notify: notify,
       message: responseBody?.message,
-      data: responseBody,
+      result: responseBody,
+      data: responseBody?.data,
     };
   } catch (error: any) {
     return {

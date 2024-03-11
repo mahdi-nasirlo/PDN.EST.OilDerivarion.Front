@@ -3,17 +3,18 @@
 import React from 'react'
 import { AuthProvider, AuthProviderProps } from "oidc-react"
 
-const authConfig: AuthProviderProps = {
-    authority: process.env.NEXT_PUBLIC_OPIC_AUTHORITY,
-    responseType: "code",
-    loadUserInfo: false,
-    clientId: process.env.NEXT_PUBLIC_OPIC_CLIENT_ID,
-    scope: process.env.NEXT_PUBLIC_OPIC_SCOPE,
-    autoSignIn: false,
-    redirectUri: window.location.origin // your call back url
-}
+// const authConfig: AuthProviderProps = {
+//     authority: process.env.NEXT_PUBLIC_OPIC_AUTHORITY,
+//     responseType: "code",
+//     loadUserInfo: false,
+//     clientId: process.env.NEXT_PUBLIC_OPIC_CLIENT_ID,
+//     scope: process.env.NEXT_PUBLIC_OPIC_SCOPE,
+//     autoSignIn: false,
+//     redirectUri: window.location.origin // your call back url
+// }
 
 export default function OidcAuthProvider({ children }: { children: React.ReactNode }) {
+
     return (
         <AuthProvider
             // {...authConfig}

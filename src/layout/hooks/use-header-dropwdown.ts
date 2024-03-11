@@ -3,20 +3,22 @@ import {useLogout} from "@/hooks/sso/use-logout";
 import {useState} from "react";
 import useUnReadMessageCount from "@/hooks/message/useUnReadMessageCount";
 import useGetUserMessage from "@/hooks/message/useGetUserMessage";
+import { useAuth } from "oidc-react";
 
 const useHeaderDropdown = () => {
+
+  const {data} = useGetUserInfo()
 
   const [openConfirmExitModal, setOpenConfirmExitModal] = useState(false);
 
   const userGetInfo = useGetUserInfo();
 
-  const logout = useLogout();
+   const { signOutRedirect } = useAuth()
 
   return {
     userGetInfo,
-    logout,
-    // unReadMessageCount,
-    // userMessage,
+    signOutRedirect,
+    userInfo: data?.result?.value,
     confirmExitModal: {
       isOpen: openConfirmExitModal,
       open: () => setOpenConfirmExitModal(true),

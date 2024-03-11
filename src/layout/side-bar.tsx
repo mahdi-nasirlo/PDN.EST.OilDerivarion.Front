@@ -4,6 +4,7 @@ import { Menu, MenuProps } from "antd/lib";
 import { Drawer, Tooltip, Typography } from "antd";
 import MenuSkeleton from "./components/menu-skeleton";
 import { useControlSidebar } from "./hooks/use-control-sidebar";
+import { it } from "node:test";
 
 interface TProps {
   open: boolean;
@@ -23,26 +24,8 @@ export default function SideBar({ open, setOpen }: TProps) {
       onClick={handleMenuItemClick}
       onOpenChange={handleMenuOpenChange}
     >
-      {JSON.stringify(userAccess.data?.data?.valueOrDefault.permission)}
-      {userAccess.data?.data?.valueOrDefault.permissions?.map((item: any) => (
-        <Menu.Item key={item.key} className="custom-menu-item">
-          {/* {JSON.stringify(item.url)} */}
-          {/* {item?.label?.length >= 27 ? (
-            <Tooltip
-              title={item?.label}
-              color="geekblue"
-              placement={open ? "bottom" : "left"}
-            >
-              <Typography>
-                <Link href={item?.key}>
-                  {item?.label}
-                </Link>
-              </Typography>
-            </Tooltip>
-          ) : (
-            <Link href={item?.key}>{item?.label}</Link>
-          )} */}
-
+      {userAccess.data?.result?.value?.permissions?.map((item) => (
+        <Menu.Item key={item.url} className="custom-menu-item">
           {item?.persianName?.length >= 27 ? (
             <Tooltip
               title={item?.persianName}
@@ -50,23 +33,16 @@ export default function SideBar({ open, setOpen }: TProps) {
               placement={open ? "bottom" : "left"}
             >
               <Typography>
-                <Typography key={item?.id}>
+                <Link key={item?.id} href={item.url}>
                   {item?.persianName}
-                </Typography>
+                </Link>
               </Typography>
             </Tooltip>
           ) : (
-            <Typography>{item?.persianName}</Typography>
+            <Link href={item.url}>{item?.persianName}</Link>
           )}
         </Menu.Item>
-      ))
-      }
-      {/* {userAccess.data ? (
-        
-      ) : (
-        <MenuSkeleton />
-      )
-      } */}
+      ))}
     </Menu >
   );
 

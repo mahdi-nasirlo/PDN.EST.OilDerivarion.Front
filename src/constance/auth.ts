@@ -50,19 +50,32 @@ const ssoApi = {
     url: "/UserGov/GetUserClientInfo",
     instance: ssoAxois,
     response: generalResponseZod.extend({
-      data: z.object({
-        lastName: z.string(),
-        firstName: z.string(),
-        nationalCode: z.string(),
-        username: z.string(),
-        mobile: z.string(),
-        address: z.string(),
-        birthDate: z.string(),
-        postalCode: z.string(),
-        userLevelId: z.number().optional(),
-        userLevelName: z.string().optional(),
-        companyName: z.string().optional(),
+      result: z.object({
+        value: z.object({
+        userInfo: z.object({
+          lastName: z.string(),
+          firstName: z.string(),
+          nationalCode: z.string(),
+          username: z.string(),
+          mobile: z.string(),
+          address: z.string(),
+          birthDate: z.string(),
+          postalCode: z.string(),
+          userLevelId: z.number().optional(),
+          userLevelName: z.string().optional(),
+          companyName: z.string().optional(),
+        }), 
+        permissions: z.array(z.object({
+          id: z.number().optional(),
+          name: z.string().nullable(),
+          persianName: z.string(),
+          parentPermissionId: z.number().optional(),
+          typeId: z.number(),
+          url: z.string(),
+          accessId: z.number()
+        }))
       }),
+      })
     }),
   },
   logout: {

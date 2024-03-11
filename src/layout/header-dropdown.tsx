@@ -9,31 +9,35 @@ import ProducerLevel3 from "../../public/static/producer-level/Producer-level-3.
 import { SvgIcon } from "@/components/svg-icon";
 import MessageListDropdown from "./message-list-dropdown";
 import Link from "next/link";
+import { useAuth } from "oidc-react";
 
 export default function HeaderDropdown() {
-  const { confirmExitModal, userGetInfo, logout } = useHeaderDropdown();
+
+
+
+  const { confirmExitModal, userGetInfo, signOutRedirect, userInfo } = useHeaderDropdown();
 
   const LevelProducer = () => {
     if (userGetInfo.isLoading || userGetInfo.isFetching) {
       return null;
     }
-    if (userGetInfo.data?.userLevelId !== null)
-      return (
-        <div className="hidden lg:block">
-          <SvgIcon
-            width={24}
-            height={24}
-            alt={userGetInfo.data?.userLevelName || ""}
-            src={
-              userGetInfo.data?.userLevelId == 3
-                ? ProducerLevel3
-                : userGetInfo.data?.userLevelId == 2
-                ? ProducerLevel2
-                : ProducerLevel2 // -->  ProducerLevel1
-            }
-          />
-        </div>
-      );
+    // if (userGetInfo.data?.userLevelId !== null)
+    //   return (
+    //     <div className="hidden lg:block">
+    //       <SvgIcon
+    //         width={24}
+    //         height={24}
+    //         alt={userGetInfo.data?.userLevelName || ""}
+    //         src={
+    //           userGetInfo.data?.userLevelId == 3
+    //             ? ProducerLevel3
+    //             : userGetInfo.data?.userLevelId == 2
+    //               ? ProducerLevel2
+    //               : ProducerLevel2 // -->  ProducerLevel1
+    //         }
+    //       />
+    //     </div>
+    //   );
   };
 
   const items: MenuProps["items"] = [
@@ -80,10 +84,10 @@ export default function HeaderDropdown() {
             ) : (
               <div>
                 <Typography className="font-normal text-lg hidden lg:block">
-                  {userGetInfo.data?.lastName}
+                  {userInfo?.userInfo.firstName} {userInfo?.userInfo.lastName}
                 </Typography>
                 <Typography className="font-semibold text-sm hidden lg:block text-coolGray-400">
-                  {userGetInfo.data?.firstName}
+                  {userInfo?.userInfo.nationalCode}
                 </Typography>
               </div>
             )}
@@ -107,12 +111,10 @@ export default function HeaderDropdown() {
           <Row key={"box"} gutter={[16, 16]} className="my-2">
             <Col xs={12} md={12}>
               <Button
-                loading={logout.isPending}
-                disabled={logout.isPending}
                 size="large"
                 className="w-full"
                 type="primary"
-                onClick={logout.execute}
+                onClick={() => signOutRedirect()}
                 danger
                 key={"submit"}
               >
@@ -121,8 +123,6 @@ export default function HeaderDropdown() {
             </Col>
             <Col xs={12} md={12}>
               <Button
-                loading={logout.isPending}
-                disabled={logout.isPending}
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
                 onClick={confirmExitModal.close}

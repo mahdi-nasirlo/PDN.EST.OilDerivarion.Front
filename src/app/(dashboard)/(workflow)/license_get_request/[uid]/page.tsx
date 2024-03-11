@@ -51,7 +51,7 @@ export default function Home(props: PropType) {
         backLink="/license_get_requset_list"
         pages={[
           { label: "خانه", path: "/" },
-          { label: "لیست درخواست مجوز ها", path: "/license_get_requset_list" }
+          { label: "لیست درخواست مجوزها", path: "/license_get_requset_list" }
         ]}
       />
       <Card>

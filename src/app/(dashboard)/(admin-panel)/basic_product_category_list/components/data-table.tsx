@@ -103,7 +103,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 key: "7",
             },
             {
-                title: "فعال / غیر فعال ",
+                title: "فعال / غیرفعال ",
                 dataIndex: "isActive",
                 key: "8",
                 render: (_, record) => <StatusColumn record={record} />

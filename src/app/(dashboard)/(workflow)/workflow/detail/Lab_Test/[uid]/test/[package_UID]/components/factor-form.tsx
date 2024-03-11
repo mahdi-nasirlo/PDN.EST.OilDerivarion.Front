@@ -210,7 +210,7 @@ export default function FactorForm({ package_UID }: { package_UID: string }) {
         <Divider />
         <CustomTable
           header={{
-            text: "لیست فاکتور های آزمون",
+            text: "لیست فاکتورهای آزمون",
             icon: <ViewColumnsIcon className="h-8" />,
           }}
           data={{ records: LabSampleTestItemList.data || [] }}

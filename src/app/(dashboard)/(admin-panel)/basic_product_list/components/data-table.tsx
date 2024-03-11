@@ -59,7 +59,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 key: "3",
             },
             {
-                title: "فعال/غیر فعال ",
+                title: "فعال/غیرفعال ",
                 dataIndex: "isActive",
                 key: "4",
                 render: (_, record) => <StatusColumn record={record} />,
@@ -90,7 +90,7 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 },
             },
             {
-                title: "فاکتور های آزمون",
+                title: "فاکتورهای آزمون",
                 dataIndex: "testItems",
                 key: "6",
                 render: (_, record) => {

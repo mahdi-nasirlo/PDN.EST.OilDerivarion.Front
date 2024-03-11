@@ -41,7 +41,7 @@ export default function TestItemForm({ rules }: any) {
                     <Form.Item
                         rules={[rules]}
                         name="isActive"
-                        label="فعال/غیر فعال"
+                        label="فعال/غیرفعال"
                         initialValue={true}
                     >
                         <Select

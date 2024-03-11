@@ -12,7 +12,7 @@ export default function page() {
             <Breadcrumb
                 titleIcon={<ClipboardDocumentCheckIcon className="w-8" />}
                 pages={[{ label: "خانه", path: "/" }]}
-                currentPage={"کد های محصول تایید شده"}
+                currentPage={"کدهای محصول تایید شده"}
             />
             <Card>
                 <DataTable />

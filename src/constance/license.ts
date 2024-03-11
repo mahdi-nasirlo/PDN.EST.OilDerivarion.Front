@@ -18,6 +18,7 @@ const GetRequestList = z.object({
   Wrork_State_Value: z.string(),
   License_Type: z.string(),
   State_Name: z.string(),
+  ProducerUID: z.string().uuid(),
 });
 const GetRequestListItem = z.object({
   Request_Uid: z.string(),

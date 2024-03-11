@@ -48,7 +48,7 @@ function LaboratoryForm({ rules }: any) {
       </Row>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
-          <Form.Item name="testItems" label="فاکتور های آزمون" rules={[rules]}>
+          <Form.Item name="testItems" label="فاکتورهای آزمون" rules={[rules]}>
             <MultipleSelect
               treeData={testItem.treeData}
               loading={testItem.isLoading}
@@ -79,13 +79,13 @@ function LaboratoryForm({ rules }: any) {
           <Form.Item
             rules={[rules]}
             name="isActive"
-            label="فعال / غیر فعال"
+            label="فعال / غیرفعال"
             initialValue={true}
           >
             <Select
               options={[
                 { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
+                { label: "غیرفعال", value: false },
               ]}
               size="large"
               placeholder="انتخاب کنید"

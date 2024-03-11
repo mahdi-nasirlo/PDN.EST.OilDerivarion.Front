@@ -53,7 +53,7 @@ export default function ProductCategoryForm({
         <Col xs={24} sm={12}>
           <Form.Item
             name="isActive"
-            label="فعال / غیر فعال"
+            label="فعال / غیرفعال"
             rules={[rules]}
             initialValue={true}
           >

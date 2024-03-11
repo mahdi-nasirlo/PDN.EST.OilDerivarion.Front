@@ -40,7 +40,7 @@ const EstOpinionForm = ({
             />
           </Form.Item>
           {displayTestItem == 3 && (
-            <Form.Item label="فاکتور های آزمون" name={"naft_test_item"}>
+            <Form.Item label="فاکتورهای آزمون" name={"naft_test_item"}>
               <TestItemsMultipleSelectField />
             </Form.Item>
           )}

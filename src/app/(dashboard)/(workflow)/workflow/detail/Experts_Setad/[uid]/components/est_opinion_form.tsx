@@ -42,7 +42,7 @@ const EstOpinionForm = ({
             </Col>
             <Col sm={24}>
               {displayTestItem == 3 && (
-                <Form.Item label="فاکتور های آزمون" name={"est_test_item"}>
+                <Form.Item label="فاکتورهای آزمون" name={"est_test_item"}>
                   <TestItemsMultipleSelectField />
                 </Form.Item>
               )}

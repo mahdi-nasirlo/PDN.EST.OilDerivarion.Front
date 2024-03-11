@@ -22,14 +22,14 @@ function MaterialForm({ rules }: any) {
         <Col xs={24} sm={12}>
           <Form.Item
             name="isActive"
-            label="فعال / غیر فعال"
+            label="فعال / غیرفعال"
             rules={[rules]}
             initialValue={true}
           >
             <Select
               options={[
                 { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
+                { label: "غیرفعال", value: false },
               ]}
               size="large"
               placeholder="انتخاب کنید"
@@ -52,7 +52,7 @@ function MaterialForm({ rules }: any) {
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item name="testItems" label="فاکتور های آزمون" rules={[rules]}>
+          <Form.Item name="testItems" label="فاکتورهای آزمون" rules={[rules]}>
             <MultipleSelect
               treeData={testItem.treeData}
               loading={testItem.isLoading}

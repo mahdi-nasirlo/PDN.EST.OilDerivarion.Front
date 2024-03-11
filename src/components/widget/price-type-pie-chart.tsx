@@ -8,8 +8,11 @@ import { useRequestPackageReport } from '@/hooks/request-package/use-request-pac
 
 Chart.register(ArcElement, Tooltip, Legend)
 
+interface TProps {
+    className?: string
+}
 
-export default function PriceTypePieChart() {
+export default function PriceTypePieChart({ className }: TProps) {
 
     const { data } = useRequestPackageReport({ report_Name: "paymentPie" })
 
@@ -22,7 +25,7 @@ export default function PriceTypePieChart() {
         ],
         datasets: [
             {
-                label: '',
+                label: 'تعداد',
                 data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -40,12 +43,13 @@ export default function PriceTypePieChart() {
             },
         ],
     };
+
     return (
         <>
             <Pie
                 data={chartData}
+                className={className}
                 options={{
-
                     plugins: {
                         legend: {
                             labels: {
@@ -55,10 +59,9 @@ export default function PriceTypePieChart() {
                             }
                         },
                         title: {
-                            font: { family: "IRANSansfanum" }
+                            font: { family: "IRANSansfanum" },
                         },
                         tooltip: {
-
                             textDirection: "rtl",
                             titleFont: {
                                 family: "IRANSansfanum"
@@ -69,9 +72,10 @@ export default function PriceTypePieChart() {
                             bodyFont: {
                                 family: "IRANSansfanum"
                             }
-                        }
+                        },
                     },
-                    font: { family: "IRANSansfanum" }
+                    responsive: true,
+                    font: { family: "IRANSansfanum" },
                 }} />
         </>
     )

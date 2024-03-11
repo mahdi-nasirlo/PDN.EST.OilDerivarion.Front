@@ -26,12 +26,12 @@ export default function FilterForm({
           </Form.Item>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item rules={[rules]} name="isActive" label="فعال / غیر فعال">
+          <Form.Item rules={[rules]} name="isActive" label="فعال / غیرفعال">
             <Select
               size="large"
               options={[
                 { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
+                { label: "غیرفعال", value: false },
               ]}
               placeholder="انتخاب کنید"
             />

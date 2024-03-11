@@ -68,7 +68,7 @@ export default function DataTable({
         key: "4",
       },
       {
-        title: "فعال/غیر فعال",
+        title: "فعال/غیرفعال",
         dataIndex: "isActive",
         key: "4",
         render: (_, record: any) => <StatusColumn record={record} />,
@@ -106,7 +106,7 @@ export default function DataTable({
         <CustomTable
           header={{
             icon: <ViewColumnsIcon />,
-            text: "لیست استاندارد های آزمون",
+            text: "لیست استانداردهای آزمون",
             actions: [
               <Button
                 key={"1"}

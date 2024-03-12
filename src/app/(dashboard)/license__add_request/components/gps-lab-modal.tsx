@@ -9,18 +9,17 @@ import { z } from "zod";
 const ResposeGet = mapApi.GetLocation.response.shape.data;
 
 export default function GpsProducerModal({
-  selectedLabUid,
+  producerUid,
   setSelectedLabUid,
   isGPSModalVisible,
   setIsGPSModalVisible,
 }: {
-  selectedLabUid: any;
+  producerUid: any;
   setSelectedLabUid: any;
   isGPSModalVisible: any;
   setIsGPSModalVisible: any;
 }) {
-  const setLocation = useSetLocation();
-  const getLocation = useGetLocation(selectedLabUid, 1);
+  const getLocation = useGetLocation(producerUid, 1);
   const handleCancelGPS = () => {
     setIsGPSModalVisible(false);
     setSelectedLabUid(null);

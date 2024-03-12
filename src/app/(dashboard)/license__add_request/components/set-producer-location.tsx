@@ -1,6 +1,8 @@
 import useSetLocation from "@/hooks/map/use-set-location";
 import { Col, Modal, Row } from "antd";
-import React from "react";
+import { notification } from "antd/lib";
+import React, { useEffect } from "react";
+import useGetPostMessage from "../hook/use-get-post-message";
 
 export default function SetLocation({
   selectedLabUid,
@@ -14,18 +16,17 @@ export default function SetLocation({
   setIsGPSModalVisibleset: any;
 }) {
   const setLocation = useSetLocation();
-  const handleCancelGPS = () => {
-    setIsGPSModalVisibleset(false);
-    setSelectedLabUid(null);
-    window.location.reload();
-  };
 
-  window.addEventListener("message", async (event) => {
+  const setLocationHandle = async (event: any) => {
+    // console.log(event, selectedLabUid);
+
     if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-      // try {
-      const data = JSON.parse(event.data);
+      // console.log(selectedLabUid);
 
+      const data = JSON.parse(event.data);
       if (selectedLabUid) {
+        //   console.log(selectedLabUid);
+
         await setLocation.mutateAsync({
           uid: selectedLabUid,
           address_Lat: data.latitude,
@@ -33,20 +34,26 @@ export default function SetLocation({
           type: 1,
         });
       }
-      // } catch (error) {
-      //   // console.log(error);
-
-      //   notification.error({
-      //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-      //   });
-      // }
     }
-  });
+  };
+
+  useEffect(() => {
+    window.addEventListener("message", setLocationHandle);
+    return () => {
+      window.removeEventListener("message", setLocationHandle);
+    };
+  }, []);
+
+  const handleCancelGPS = () => {
+    setIsGPSModalVisibleset(false);
+    setSelectedLabUid(null);
+  };
+  // console.log(selectedLabUid);
 
   return (
     <>
       <Modal
-        title="تعیین موقعیت واحد تولیدی"
+        title={"تعیین موقعیت واحد تولیدی" + selectedLabUid}
         open={isGPSModalVisibleset}
         onCancel={handleCancelGPS}
         width={800}

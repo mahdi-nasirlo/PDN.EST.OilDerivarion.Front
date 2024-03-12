@@ -42,7 +42,7 @@ export default function Page() {
             ],
             form: form,
             onFinish: (value) => console.log(value, "هزینه انجام آزمایش به ازای نفر و ساعت"),
-            data: "20000000"
+            data: "2500000"
         },
         {
             label: "هزینه کد محصول",

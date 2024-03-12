@@ -20,11 +20,11 @@ export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();
   const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
   const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
-  const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
+  const [selectedLabUid, setSelectedLabUid] = useState<string | null>();
   const [producerUid, setProducerUid] = useState<string | null>();
 
   const handleGPS = (record: z.infer<typeof apiData.Item>) => {
-    setSelectedLabUid(record.ProducerUID);
+    setProducerUid(record.ProducerUID);
     setIsGPSModalVisible(true);
   };
   const handleSetlocation = (record: z.infer<typeof apiData.Item>) => {
@@ -222,7 +222,7 @@ export default function DataTable() {
           setIsGPSModalVisibleset={setIsGPSModalVisibleset}
         />
         <GpsProducerModal
-          selectedLabUid={selectedLabUid}
+          producerUid={producerUid}
           setSelectedLabUid={setSelectedLabUid}
           isGPSModalVisible={isGPSModalVisible}
           setIsGPSModalVisible={setIsGPSModalVisible}

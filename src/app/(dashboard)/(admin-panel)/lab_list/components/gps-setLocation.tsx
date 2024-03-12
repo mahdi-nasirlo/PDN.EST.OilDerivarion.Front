@@ -21,37 +21,37 @@ export default function SetLocation({
   const setLocation = useSetLocation();
   console.log(selectedLabUid);
 
-  useEffect(() => {
-    window.addEventListener(
-      "message",
-      async (event) => {
-        console.log(event);
+  // useEffect(() => {
+  window.addEventListener(
+    "message",
+    async (event) => {
+      console.log(event);
 
-        if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-          // try {
-          console.log("test", event);
+      if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+        // try {
+        console.log("test", event);
 
-          const data = JSON.parse(event.data);
+        const data = JSON.parse(event.data);
 
-          if (selectedLabUid == true) {
-            await setLocation.mutateAsync({
-              uid: selectedLabUid,
-              address_Lat: data.latitude,
-              address_Long: data.longitude,
-              type: 2,
-            });
-          }
-
-          // } catch (error) {
-          //   notification.error({
-          //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-          //   });
-          // }
+        if (selectedLabUid == true) {
+          await setLocation.mutateAsync({
+            uid: selectedLabUid,
+            address_Lat: data.latitude,
+            address_Long: data.longitude,
+            type: 2,
+          });
         }
-      },
-      false
-    );
-  }, []);
+
+        // } catch (error) {
+        //   notification.error({
+        //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
+        //   });
+        // }
+      }
+    },
+    false
+  );
+  // }, []);
 
   return (
     <>

@@ -17,6 +17,7 @@ import { useCheckReportSeen } from "@/providers/workflow-provider";
 import LabResult from "../../components/lab-report";
 import WorkFlowSteps from "@/components/workflow/work-flow-steps";
 import LabResultTable from "../../components/lab-result-table";
+import SetadTestResultData from "./components/setad_test_result_data";
 
 const stepKey = "Experts_Setad";
 
@@ -82,6 +83,9 @@ const Page = ({ params }: { params: { uid: string } }) => {
             <Divider />
             <LabResultTable package_UID={params.uid} />
           </Spin>
+        </div>
+        <div className="mt-4">
+          <SetadTestResultData taskId={params.uid} />
         </div>
       </Card>
 

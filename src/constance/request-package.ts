@@ -885,6 +885,22 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  GetReportSetad: {
+    url: "/RequestPackage/GetReportSetad",
+    type: z.object({
+        taskId: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+          headers: z.array(z
+            .object({
+              Col_Name: z.string()
+            })),
+          values: z
+            .array(z.any())
+      }))
+    })
+  }
 };
 
 export { RequestPackageApi };

@@ -31,7 +31,7 @@ export default function Page() {
             ],
             form: form,
             onFinish: (value) => console.log(value, "هزینه بازدید"),
-            data: "19000000"
+            data: "1900000"
         },
         {
             label: "هزینه انجام آزمایش به ازای نفر و ساعت",

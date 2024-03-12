@@ -14,6 +14,7 @@ const useGetLocation = (uid?: string, type?: number) => {
   const query = useQuery({
     queryKey: [apiData.url, uid],
     queryFn: () => fetchWithSession({ url: apiData.url, data }),
+    select: (data: z.infer<typeof apiData.response>) => data.data,
     enabled: typeof uid === "string" && typeof type === "number",
   });
 

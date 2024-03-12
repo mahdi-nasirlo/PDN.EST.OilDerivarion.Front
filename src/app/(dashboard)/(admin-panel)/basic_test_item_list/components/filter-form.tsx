@@ -24,11 +24,11 @@ export default function FilterForm({ onFinish }: TProps) {
                     </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
-                    <Form.Item rules={[rules]} name="isActive" label="فعال/غیر فعال">
+                    <Form.Item rules={[rules]} name="isActive" label="فعال/غیرفعال">
                         <Select
                             options={[
                                 { label: "فعال", value: true },
-                                { label: "غیر فعال", value: false },
+                                { label: "غیرفعال", value: false },
                             ]}
                             size="large"
                             placeholder="انتخاب کنید"

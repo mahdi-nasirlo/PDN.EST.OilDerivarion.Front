@@ -25,7 +25,7 @@ export default function Page() {
       <Collapse
         size="large"
         items={[{
-          label: 'فیلتر جدول',
+          label: 'جستجو',
           children: <FilterForm onFinish={users.setFilter} />
         }]}
       />

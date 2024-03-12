@@ -79,7 +79,7 @@ export default function DataTable({
       render: (e, record) => <StatusColumnBox record={record} />,
     },
     {
-      title: "تاریخچه سفر ها",
+      title: "تاریخچه سفرها",
       dataIndex: "confirmedRequest",
       key: "7",
       render: (_, record) => (

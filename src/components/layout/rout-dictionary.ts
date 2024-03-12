@@ -123,10 +123,10 @@ export const routDictionary: Items = {
     title: "پنل کارشناس استان",
   },
   "producer-list": {
-    title: "لیست تولید کننده ها",
+    title: "لیست تولیدکننده ها",
   },
   "producer-details": {
-    title: "جزئیات تولید کنندگان",
+    title: "جزئیات تولیدکنندگان",
   },
   "experts-list": {
     title: "لیست کارشناسان",
@@ -250,7 +250,7 @@ export const routDictionary: Items = {
     title: "فاکتورهای آزمون",
   },
   "test-feature": {
-    title: "استاندارد های آزمون",
+    title: "استانداردهای آزمون",
   },
   "test-result": {
     title: "لیست نتایج آزمون ها",
@@ -259,7 +259,7 @@ export const routDictionary: Items = {
     title: "ثبت نتایج آزمایشگاه",
   },
   "production-unit": {
-    title: "تولید کننده",
+    title: "تولیدکننده",
   },
   GPS: {
     title: "لیست GPS ها",
@@ -277,13 +277,13 @@ export const routDictionary: Items = {
     title: "موقعیت GPS",
   },
   measures: {
-    title: "واحد های اندازه گیری",
+    title: "واحدهای اندازه گیری",
   },
   "producer-info": {
-    title: "اطلاعات تولید کننده",
+    title: "اطلاعات تولیدکننده",
   },
   barcode: {
-    title: "لیست بارکد ها",
+    title: "لیست بارکدها",
   },
 
   // end admin panel

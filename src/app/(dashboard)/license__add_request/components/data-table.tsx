@@ -21,13 +21,14 @@ export default function DataTable() {
   const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
   const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
   const [selectedLabUid, setSelectedLabUid] = useState<string | null>(null);
+  const [producerUid, setProducerUid] = useState<string | null>();
 
   const handleGPS = (record: z.infer<typeof apiData.Item>) => {
-    setSelectedLabUid(record.Uid);
+    setSelectedLabUid(record.ProducerUID);
     setIsGPSModalVisible(true);
   };
   const handleSetlocation = (record: z.infer<typeof apiData.Item>) => {
-    setSelectedLabUid(record.Uid);
+    setSelectedLabUid(record.ProducerUID);
     setIsGPSModalVisibleset(true);
   };
 

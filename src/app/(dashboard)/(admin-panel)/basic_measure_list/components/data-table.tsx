@@ -54,7 +54,7 @@ export default function DataTable({
       key: "2",
     },
     {
-      title: "فعال/غیر فعال",
+      title: "فعال/غیرفعال",
       dataIndex: "isActive",
       key: "4",
       render: (_, record: any) => <StatusColumn record={record} />,

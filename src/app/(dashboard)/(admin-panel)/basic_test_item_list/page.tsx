@@ -20,13 +20,13 @@ export default function Page() {
       <Breadcrumb
         titleIcon={<DocumentCheckIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"فاکتور های آزمون"}
+        currentPage={"فاکتورهای آزمون"}
       />
       <Collapse
         size="large"
         items={[
           {
-            label: "فیلتر جدول",
+            label: "جستجو",
             children: <FilterForm onFinish={dataPage.setFilter as any} />,
           },
         ]}

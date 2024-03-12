@@ -96,7 +96,9 @@ export default function SubmitForm() {
                 options={license.data}
                 loading={license.isLoading}
                 fieldNames={license.fieldNames}
-                filterOption={(input, option) => filterOption(input, option, license.fieldNames.label)}
+                filterOption={(input, option) =>
+                  filterOption(input, option, license.fieldNames.label)
+                }
               />
             </Form.Item>
           </Col>

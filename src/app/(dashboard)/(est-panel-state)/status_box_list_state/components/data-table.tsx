@@ -55,7 +55,7 @@ export default function DataTable({ data, isLoading, setPaginate }: TProps) {
       render: (e, record) => <StatusColumnBox record={record} />,
     },
     {
-      title: "تاریخچه سفر ها",
+      title: "تاریخچه سفرها",
       dataIndex: "confirmedRequest",
       key: "5",
       render: (_, record) => (

@@ -42,11 +42,11 @@ export default function FilterForm({ onFinish }: TProps) {
             </Row>
             <Row gutter={[16, 0]}>
                 <Col xs={24} sm={12}>
-                    <Form.Item rules={[rules]} name="isActive" label="فعال/غیر فعال">
+                    <Form.Item rules={[rules]} name="isActive" label="فعال/غیرفعال">
                         <Select
                             options={[
                                 { label: "فعال", value: true },
-                                { label: "غیر فعال", value: false },
+                                { label: "غیرفعال", value: false },
                             ]}
                             size="large"
                             placeholder="انتخاب کنید"

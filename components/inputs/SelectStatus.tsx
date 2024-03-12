@@ -1,12 +1,12 @@
 import React from 'react';
-import {Form, Select} from "antd";
+import { Form, Select } from "antd";
 
 const SelectStatus = () => {
     return (
         <Select
             options={[
-                {label: "فعال", value: true},
-                {label: "غیر فعال", value: false},
+                { label: "فعال", value: true },
+                { label: "غیرفعال", value: false },
             ]}
             size="large"
             placeholder="انتخاب کنید"
@@ -16,8 +16,8 @@ const SelectStatus = () => {
 
 export const SelectStatusFormItem = () => {
     return (
-        <Form.Item name="IsActive" label="فعال/غیر فعال">
-            <SelectStatus/>
+        <Form.Item name="IsActive" label="فعال/غیرفعال">
+            <SelectStatus />
         </Form.Item>
     );
 };

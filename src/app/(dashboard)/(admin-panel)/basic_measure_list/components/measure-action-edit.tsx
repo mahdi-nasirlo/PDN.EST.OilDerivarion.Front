@@ -79,14 +79,14 @@ export default function EditModal({ editModalUid, setEditModalUid }: TProps) {
           <Col xs={24} sm={12}>
             <Form.Item
               name="isActive"
-              label="فعال / غیر فعال"
+              label="فعال / غیرفعال"
               rules={[rules]}
               initialValue={true}
             >
               <Select
                 options={[
                   { label: "فعال", value: true },
-                  { label: "غیر فعال", value: false },
+                  { label: "غیرفعال", value: false },
                 ]}
                 size="large"
                 placeholder="انتخاب کنید"

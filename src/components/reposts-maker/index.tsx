@@ -18,8 +18,8 @@ const Index = ({
 }: {
   stepKey?: string | undefined;
   reports:
-    | z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[]
-    | undefined;
+  | z.infer<typeof RequestPackageApi.RequestPackageReportList.item>[]
+  | undefined;
   loading?: boolean;
   taskId?: string;
   setStatus?: (arg: []) => void;
@@ -97,7 +97,7 @@ const RenderReport = ({
     ItemType = (
       <Alert
         type="error"
-        message="این بخش از اطلاعات پایه تولید کننده تکمیل نشده است."
+        message="این بخش از اطلاعات پایه تولیدکننده تکمیل نشده است."
       />
     );
   }

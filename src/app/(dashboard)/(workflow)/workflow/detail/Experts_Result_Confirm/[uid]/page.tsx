@@ -16,6 +16,7 @@ import WorkflowBtn from "@/components/workflow/workflow-btn";
 import { useCheckReportSeen } from "@/providers/workflow-provider";
 import LabResult from "../../components/lab-report";
 import WorkFlowSteps from "@/components/workflow/work-flow-steps";
+import LabResultTable from "../../components/lab-result-table";
 
 export default function Page({ params }: { params: { uid: string } }) {
   const stepKey = "Experts_Result_Confirm";
@@ -66,12 +67,14 @@ export default function Page({ params }: { params: { uid: string } }) {
           />
         </Spin>
 
-        <div className="mt-8">
+        <div className="mt-4">
           <Divider orientation="left" className="mb-6">
             نتایج آزمون
           </Divider>
           <Spin spinning={get.isFetching}>
             <LabResult package_UID={params.uid} />
+            <Divider />
+            <LabResultTable package_UID={params.uid} />
           </Spin>
         </div>
 

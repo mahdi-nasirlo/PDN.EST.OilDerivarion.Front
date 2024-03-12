@@ -10,3 +10,29 @@ export default function useGetPostMessage(uid: string) {
   //   };
   // }, []);
 }
+// const setLocationHandle = async (event: any) => {
+//   // console.log(event, selectedLabUid);
+
+//   if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+//     // console.log(selectedLabUid);
+
+//     const data = JSON.parse(event.data);
+//     if (selectedLabUid) {
+//     //   console.log(selectedLabUid);
+
+//     await setLocation.mutateAsync({
+//       uid: selectedLabUid,
+//       address_Lat: data.latitude,
+//       address_Long: data.longitude,
+//       type: 1,
+//     });
+//     }
+//   }
+// };
+
+// useEffect(() => {
+//   window.addEventListener("message", setLocationHandle);
+//   return () => {
+//     window.removeEventListener("message", setLocationHandle);
+//   };
+// }, []);

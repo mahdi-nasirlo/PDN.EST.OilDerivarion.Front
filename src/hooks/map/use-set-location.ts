@@ -14,7 +14,7 @@ const useSetLocation = () => {
     mutationFn: async (
       data: z.infer<typeof apiData.type>
     ): Promise<z.infer<typeof generalResponseZod>> =>
-      await fetchWithSession({ url: apiData.url, data }),
+      await fetchWithSession({ url: apiData.url, data, notify: false }),
   });
 };
 export default useSetLocation;

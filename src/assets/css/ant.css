@@ -52,7 +52,7 @@
   @apply font-medium;
 }
 
-.ant-table-row:last-child .ant-table-cell {
+.ant-table- :last-child .ant-table-cell {
   border: none !important;
 }
 
@@ -269,17 +269,25 @@
   background-color: theme("backgroundColor.gray.200") !important;
 }
 
-.ant-transfer-list-header .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+.ant-transfer-list-header
+  .ant-checkbox-indeterminate
+  .ant-checkbox-inner::after {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-radius: 9999px !important;
 }
 
-.ant-transfer-list-header .ant-checkbox-wrapper-checked .ant-checkbox-checked .ant-checkbox-inner {
+.ant-transfer-list-header
+  .ant-checkbox-wrapper-checked
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }
 
-.ant-transfer-list-content-item .ant-checkbox-wrapper .ant-checkbox-checked .ant-checkbox-inner {
+.ant-transfer-list-content-item
+  .ant-checkbox-wrapper
+  .ant-checkbox-checked
+  .ant-checkbox-inner {
   background-color: theme("backgroundColor.CustomizeBlue.500") !important;
   border-color: theme("backgroundColor.CustomizeBlue.500") !important;
 }
@@ -325,7 +333,7 @@
   display: none !important;
 } */
 .message-box-tab-panel .ant-tabs-nav {
-  @apply mb-0 !important
+  @apply mb-0 !important;
 }
 
 .message-box-tab-panel .ant-tabs-content-holder .ant-tabs-content {

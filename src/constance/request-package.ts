@@ -851,8 +851,8 @@ const RequestPackageApi = {
     type: z.object({
       report_Name: z.string(),
     }),
-    response: generalResponseZod.extend({
-      data: z
+    productcode:z.array(z.object({ Product_Name: z.string(), Tedad: z.number() })),
+    paymentPie:z
         .array(
           z.object({
             Type_1: z.number(),
@@ -861,8 +861,7 @@ const RequestPackageApi = {
             Type_4: z.number(),
           })
         )
-        .length(1),
-    }),
+        .length(1)
   },
   BoxDeviceListForOpen: {
     url: "/RequestPackage/BoxDeviceListForOpen",

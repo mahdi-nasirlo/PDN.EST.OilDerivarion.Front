@@ -13,39 +13,39 @@ interface TProps {
     className?: string
 }
 
-export default function PriceTypePieChart({ className }: TProps) {
+export default function ProductCodePieChart({ className }: TProps) {
 
     const [validData, setValidData] = useState<any>()
 
-    const { data } = useRequestPackageReport({ report_Name: "paymentPie" })
+    const [titles, setTitle] = useState<any>()
+
+    const { data } = useRequestPackageReport({ report_Name: "productcode" })
 
     const select = () => {
 
-        const validate = RequestPackageApi.report.paymentPie.safeParse(data?.data)
+        const validate = RequestPackageApi.report.productcode.safeParse(data?.data)
 
         if (validate.success) {
 
             const { data } = validate
 
-            return setValidData([data[0].Type_1, data[0].Type_2, data[0].Type_3, data[0].Type_4])
+            setTitle(data.map(item => item.Product_Name))
+
+            return setValidData(data.map(item => item.Tedad))
         }
+
+        setTitle([])
 
         return setValidData([])
     }
 
     useEffect(() => {
-        console.log(data);
-
         select()
     }, [data])
 
+
     const chartData = {
-        labels: [
-            'هزینه بازدید',
-            'هزینه پست',
-            'هزینه انجام آزمایش',
-            'هزینه صدور کد محصول',
-        ],
+        labels: titles,
         datasets: [
             {
                 label: 'تعداد',

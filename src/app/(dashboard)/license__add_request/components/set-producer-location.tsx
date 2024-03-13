@@ -21,14 +21,37 @@ export default function SetLocation({
     // window.location.reload();
   };
   // console.log(selectedLabUid);
+  // // useEffect(() =>
+  // window.addEventListener(
+  //   "message",
+  //   async (event) => {
+  //     if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+  //       // try {
 
-  // useEffect(() => {
-  window.addEventListener(
-    "message",
-    async (event) => {
+  //       const data = JSON.parse(event.data);
+
+  //       if (selectedLabUid) {
+  //         await setLocation.mutateAsync({
+  //           uid: selectedLabUid,
+  //           address_Lat: data.latitude,
+  //           address_Long: data.longitude,
+  //           type: 1,
+  //         });
+  //       }
+
+  //       // } catch (error) {
+  //       //   notification.error({
+  //       //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
+  //       //   });
+  //       // }
+  //     }
+  //   },
+  //   false
+  // );
+  // }, []);
+  useEffect(() => {
+    const handleMessage = async (event: any) => {
       if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-        // try {
-
         const data = JSON.parse(event.data);
 
         if (selectedLabUid) {
@@ -39,43 +62,15 @@ export default function SetLocation({
             type: 1,
           });
         }
-
-        // } catch (error) {
-        //   notification.error({
-        //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-        //   });
-        // }
       }
-    },
-    false
-  );
-  // }, []);
-  // const setLocationHandle = async (event: any) => {
-  //   // console.log(event, selectedLabUid);
+    };
 
-  //   if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-  //     // console.log(selectedLabUid);
+    window.addEventListener("message", handleMessage);
 
-  //     const data = JSON.parse(event.data);
-  //     if (selectedLabUid) {
-  //       //   console.log(selectedLabUid);
-
-  //       await setLocation.mutateAsync({
-  //         uid: selectedLabUid,
-  //         address_Lat: data.latitude,
-  //         address_Long: data.longitude,
-  //         type: 1,
-  //       });
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("message", setLocationHandle);
-  //   return () => {
-  //     window.removeEventListener("message", setLocationHandle);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [selectedLabUid, setLocation]);
 
   return (
     <>

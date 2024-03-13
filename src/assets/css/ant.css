@@ -320,18 +320,6 @@
   width: fit-content;
 }
 
-/* .ant-upload-list-item {
-  border: 2px solid green !important; 
- }  
- .ant-upload-list-item {
-  color:  green  !important;
-} 
- .ant-upload-list-item-name {
-  color:  green  !important;
-} 
-.ant-upload-list-item .ant-tooltip {
-  display: none !important;
-} */
 .message-box-tab-panel .ant-tabs-nav {
   @apply mb-0 !important;
 }

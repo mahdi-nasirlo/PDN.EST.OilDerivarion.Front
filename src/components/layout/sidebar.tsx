@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { Drawer, Menu, MenuProps, Skeleton } from "antd";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import useSsoGetAllUserAccess from "../../../hooks/sso/useSsoGetAllUserAccess";
 import Link from "next/link";
+import { useGetUserAccess } from "@/hooks/sso/use-get-user-access";
 
 export default function LayoutSidebar({
   menu,
@@ -34,7 +34,7 @@ export default function LayoutSidebar({
     }
   };
 
-  const menus = useSsoGetAllUserAccess();
+  const menus = useGetUserAccess();
 
   const CommonMenu = ({
     style = {},
@@ -53,7 +53,7 @@ export default function LayoutSidebar({
         className={className}
         mode="inline"
         onClick={handleMenuItemClick}
-        // items={menu}
+      // items={menu}
       >
         {menus.isLoading &&
           Array.from({ length: 10 }).map((value, index) => (

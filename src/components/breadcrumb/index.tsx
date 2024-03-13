@@ -54,7 +54,7 @@ const Index = (props: TProps) => {
                 {props.titleIcon}
               </div>
             )}
-            <Typography className="font-normal text-3xl">
+            <Typography className="font-normal text-right max-md:text-2xl text-3xl">
               {props?.title || props.currentPage}
             </Typography>
           </div>

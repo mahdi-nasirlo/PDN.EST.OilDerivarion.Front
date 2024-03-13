@@ -1,11 +1,8 @@
 import Image from "next/image";
-import { EditFilled, LoadingOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, MenuProps, Modal, Row, Typography } from "antd";
+import { EditFilled, LogoutOutlined } from "@ant-design/icons";
+import { Button, Col, Dropdown, MenuProps, Modal, Row } from "antd";
 import { useState } from "react";
-import useSWR from "swr";
-import { listFetcher } from "../../../lib/server/listFetcher";
-import useSignOut from "../../../hooks/sso/useSginout";
-import { signOut } from "next-auth/react";
+
 
 export default function HeaderDropdown() {
 

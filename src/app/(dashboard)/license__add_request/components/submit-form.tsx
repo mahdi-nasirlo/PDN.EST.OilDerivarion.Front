@@ -8,19 +8,23 @@ import useProducerInfo from "../hook/use-producer-info";
 import licenseApi from "constance/license";
 import useGetAllState from "@/hooks/basic/role_determination/state/use-get-all-state";
 import { filterOption } from "@/lib/filterOption";
+import SetLocation from "./set-producer-location";
 
 export default function SubmitForm() {
   const state = useGetAllState();
 
-  const { producerInfo, license, addLicense } = useProducerInfo();
-
   const [form, rules] = useValidation(licenseApi.AddRequest.type);
+
+  const { producerInfo, license, addLicense, addLicenseHandle } =
+    useProducerInfo(form);
+
   useEffect(() => {
     if (producerInfo.data) {
       form.setFieldsValue(producerInfo.data);
     }
+
     if (addLicense.isSuccess) {
-      form.resetFields(addLicense.data);
+      form.resetFields();
     }
   }, [producerInfo.data]);
 
@@ -29,7 +33,7 @@ export default function SubmitForm() {
       <Form
         layout="vertical"
         form={form}
-        onFinish={(data) => addLicense.mutateAsync(data)}
+        onFinish={(data) => addLicenseHandle(data)}
       >
         <Row gutter={[16, 0]}>
           <Col xs={24} sm={12}>
@@ -144,6 +148,31 @@ export default function SubmitForm() {
                 size="large"
                 placeholder="انتخاب کنید"
               />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={[16, 0]}>
+          <Col xs={24} className="mb-2">
+            <SetLocation form={form} />
+          </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item
+              name="Lat"
+              label="عرض چغرافیایی"
+              required={false}
+              rules={[rules]}
+            >
+              <Input readOnly size="large" placeholder="وارد کنید" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item
+              name="Long"
+              label="طول جغرافیایی"
+              required={false}
+              rules={[rules]}
+            >
+              <Input readOnly size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
         </Row>

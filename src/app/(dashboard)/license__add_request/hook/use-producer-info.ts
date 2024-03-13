@@ -3,9 +3,10 @@ import useDelRequest from "@/hooks/license/use-del-request";
 import useGetAvailbleTypes from "@/hooks/license/use-get-availble-types";
 import useGetProducerInfo from "@/hooks/license/use-get-producer-info";
 import useGetRequestListForCurrentUser from "@/hooks/license/use-get-request-list-for-current-user";
+import { FormInstance } from "antd";
 import { useState } from "react";
 
-const useProducerInfo = () => {
+const useProducerInfo = (form?: FormInstance) => {
   const [delUid, setDelUid] = useState<string | boolean>();
 
   const producerInfo = useGetProducerInfo();
@@ -20,12 +21,20 @@ const useProducerInfo = () => {
     if (res.success) setDelUid(undefined);
   };
 
+  const addLicenseHandle = async (data: any) => {
+    const res = await addLicense.mutateAsync(data);
+
+    if (res) {
+    }
+  };
+
   return {
     producerInfo,
     setDelUid,
     delUid,
     license,
     addLicense,
+    addLicenseHandle,
     list,
     del,
     handleDelete,

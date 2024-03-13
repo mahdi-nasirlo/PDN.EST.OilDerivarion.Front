@@ -16,7 +16,6 @@ export default function SetLocation({
   const handleCancelGPS = () => {
     setIsGPSModalVisibleset(false);
     setSelectedLabUid(null);
-    window.location.reload();
   };
   const setLocation = useSetLocation();
   console.log(selectedLabUid);
@@ -29,11 +28,11 @@ export default function SetLocation({
 
       if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
         // try {
-        console.log("test", event);
+        console.log(event.data);
 
         const data = JSON.parse(event.data);
 
-        if (selectedLabUid == true) {
+        if (selectedLabUid) {
           await setLocation.mutateAsync({
             uid: selectedLabUid,
             address_Lat: data.latitude,
@@ -56,7 +55,7 @@ export default function SetLocation({
   return (
     <>
       <Modal
-        title="تعیین موقعیت آزمایشگاه"
+        title={"تعیین موقعیت آزمایشگاه"}
         open={isGPSModalVisibleset}
         onCancel={handleCancelGPS}
         width={800}

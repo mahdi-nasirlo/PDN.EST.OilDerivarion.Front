@@ -1,60 +1,19 @@
-import useGetLocation from "@/hooks/map/use-get-location";
-import useSetLocation from "@/hooks/map/use-set-location";
+import React from "react";
 import { Button, Col, Modal, Row } from "antd";
-import { Spin, notification } from "antd/lib";
-import mapApi from "constance/map";
-import React, { useEffect, useRef, useState } from "react";
-import { z } from "zod";
 
-const ResposeGet = mapApi.GetLocation.response.shape.data;
+interface TProps {
+  lat: string | number | undefined;
+  long: string | number | undefined;
+  setLong: (arg: any) => void;
+}
 
-export default function GpsProducerModal({
-  producerUid,
-  setSelectedLabUid,
-  isGPSModalVisible,
-  setIsGPSModalVisible,
-}: {
-  producerUid: any;
-  setSelectedLabUid: any;
-  isGPSModalVisible: any;
-  setIsGPSModalVisible: any;
-}) {
-  const getLocation = useGetLocation(producerUid, 1);
-  const handleCancelGPS = () => {
-    setIsGPSModalVisible(false);
-    setSelectedLabUid(null);
-  };
-
-  const map: z.infer<typeof ResposeGet> | undefined = getLocation.data;
-
-  // window.addEventListener("message", (event) => {
-  //   if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-  //     try {
-  //       console.log(event.data);
-
-  //       console.log(JSON.parse(event.data));
-  //       const data: z.infer<typeof ResposeGet> = JSON.parse(event.data);
-  //       setLocation.mutateAsync({
-  //         uid: selectedLabUid,
-  //         address_Lat: data.latitude,
-  //         address_Long: data.longitude,
-  //         type: 1,
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-
-  //       notification.error({
-  //         message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-  //       });
-  //     }
-  //   }
-  // });
+export default function GpsProducerModal({ lat, long, setLong }: TProps) {
   return (
     <>
       <Modal
         title="مشاهده موقعیت"
-        open={isGPSModalVisible}
-        onCancel={handleCancelGPS}
+        open={typeof long !== "undefined"}
+        onCancel={() => setLong(undefined)}
         width={800}
         footer={[
           <Row key={"box"} gutter={[16, 16]} className="my-2">
@@ -62,7 +21,7 @@ export default function GpsProducerModal({
               <Button
                 size="large"
                 className="w-full bg-gray-100 text-warmGray-500"
-                onClick={handleCancelGPS}
+                onClick={() => setLong(undefined)}
                 key={"cancel"}
               >
                 برگشت
@@ -73,15 +32,12 @@ export default function GpsProducerModal({
       >
         <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
-            {getLocation.isFetching ? (
-              <Spin className="flex justify-center" />
-            ) : (
-              <iframe
-                src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?title=موقعیت واحد تولیدی&latitude=${map?.address_Lat}&longitude=${map?.address_Long}&show_ballon=0&balloon_content=محل دقیق واحد تولیدی`}
-                aria-hidden="false"
-                className="w-full h-[480px] border-solid"
-              ></iframe>
-            )}
+            <iframe
+              style={{ overflowX: "hidden" }}
+              src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=14&title=موقعیت واحد تولیدی&latitude=${lat}&longitude=${long}&show_ballon=0&balloon_content=محل دقیق واحد تولیدی`}
+              aria-hidden="false"
+              className="w-full h-[480px] border-solid"
+            ></iframe>
           </Col>
         </Row>
       </Modal>

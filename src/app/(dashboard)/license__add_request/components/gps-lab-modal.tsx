@@ -1,21 +1,13 @@
-import useGetLocation from "@/hooks/map/use-get-location";
-import useSetLocation from "@/hooks/map/use-set-location";
+import React from "react";
 import { Button, Col, Modal, Row } from "antd";
-import { Spin, notification } from "antd/lib";
-import mapApi from "constance/map";
-import { lang } from "jalali-moment";
-import React, { useEffect, useRef, useState } from "react";
-import { late, z } from "zod";
 
-export default function GpsProducerModal({
-  lat,
-  long,
-  setLong,
-}: {
+interface TProps {
   lat: string | number | undefined;
   long: string | number | undefined;
   setLong: (arg: any) => void;
-}) {
+}
+
+export default function GpsProducerModal({ lat, long, setLong }: TProps) {
   return (
     <>
       <Modal
@@ -41,7 +33,8 @@ export default function GpsProducerModal({
         <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <iframe
-              src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=2&title=موقعیت واحد تولیدی&latitude=${lat}&longitude=${long}&show_ballon=0&balloon_content=محل دقیق واحد تولیدی`}
+              style={{ overflowX: "hidden" }}
+              src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=14&title=موقعیت واحد تولیدی&latitude=${lat}&longitude=${long}&show_ballon=0&balloon_content=محل دقیق واحد تولیدی`}
               aria-hidden="false"
               className="w-full h-[480px] border-solid"
             ></iframe>

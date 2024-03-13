@@ -12,14 +12,12 @@ const useAddRequest = () => {
   const query = useMutation({
     mutationFn: (
       data: z.infer<typeof apiData.type>
-    ): Promise<typeof generalResponseZod> =>
+    ): Promise<z.infer<typeof generalResponseZod>> =>
       fetchWithSession({ url: apiData.url, data }),
     onSuccess: (success) => {
-      if (success) {
-        queryClient.invalidateQueries({
-          queryKey: [licenseApi.GetRequestListForCurrentUser.url],
-        });
-      }
+      queryClient.invalidateQueries({
+        queryKey: [licenseApi.GetRequestListForCurrentUser.url],
+      });
     },
   });
   return query;

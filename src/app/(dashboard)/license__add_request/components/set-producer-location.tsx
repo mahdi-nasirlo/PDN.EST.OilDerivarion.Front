@@ -1,5 +1,5 @@
-import { FormInstance } from "antd/lib";
 import React, { useEffect } from "react";
+import { FormInstance } from "antd/lib";
 
 export default function SetLocation({ form }: { form: FormInstance }) {
   useEffect(() => {
@@ -25,8 +25,8 @@ export default function SetLocation({ form }: { form: FormInstance }) {
   return (
     <>
       <iframe
-        style={{ overflow: "hidden" }}
-        src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/getpointfrommap?zoom=5&latitude=35.72387338825216&longitude=51.431163210478864`}
+        style={{ overflowX: "hidden" }}
+        src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/getpointfrommap?zoom=14&latitude=35.72387338825216&longitude=51.431163210478864`}
         aria-hidden="false"
         className="w-full h-[480px] border-solid"
       ></iframe>

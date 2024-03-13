@@ -175,14 +175,6 @@ export default function SubmitForm() {
               <Input readOnly size="large" placeholder="وارد کنید" />
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12}>
-            <iframe
-              style={{ overflow: "hidden" }}
-              src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/getpointfrommap?zoom=2&latitude=${producerInfo.data?.Lat}&longitude=${producerInfo.data?.Long}`}
-              aria-hidden="false"
-              className="w-full h-[480px] border-solid"
-            ></iframe>
-          </Col>
         </Row>
         <div className="flex justify-end">
           <Button

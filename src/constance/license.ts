@@ -75,6 +75,8 @@ const Producer = z.object({
   License_Type_Name: z.string(),
   State_Uid: z.string(),
   State_Name: z.string(),
+  Lat: z.string(),
+  Long: z.string(),
 });
 
 const licenseApi = {

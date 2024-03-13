@@ -19,6 +19,8 @@ const GetRequestList = z.object({
   License_Type: z.string(),
   State_Name: z.string(),
   ProducerUID: z.string().uuid(),
+  Lat: z.number().or(z.string()),
+  Long: z.number().or(z.string()),
 });
 const GetRequestListItem = z.object({
   Request_Uid: z.string(),
@@ -122,6 +124,8 @@ const licenseApi = {
         required_error: errorMessage.required,
       }),
       state_Uid: z.string({ required_error: errorMessage.required }),
+      Lat: z.string(),
+      Long: z.string(),
     }),
   },
   GetRequestListForCurrentUser: {

@@ -18,18 +18,12 @@ const apiData = licenseApi.GetRequestListForCurrentUser;
 
 export default function DataTable() {
   const { list, del, handleDelete, setDelUid, delUid } = useProducerInfo();
-  const [isGPSModalVisible, setIsGPSModalVisible] = useState(false);
-  const [isGPSModalVisibleset, setIsGPSModalVisibleset] = useState(false);
-  const [selectedLabUid, setSelectedLabUid] = useState<string | null>();
-  const [producerUid, setProducerUid] = useState<string | null>();
+  const [lat, setLat] = useState<string | number>();
+  const [long, setLong] = useState<string | number>();
 
   const handleGPS = (record: z.infer<typeof apiData.Item>) => {
-    setProducerUid(record.ProducerUID);
-    setIsGPSModalVisible(true);
-  };
-  const handleSetlocation = (record: z.infer<typeof apiData.Item>) => {
-    setSelectedLabUid(record.ProducerUID);
-    setIsGPSModalVisibleset(true);
+    setLong(record.Long);
+    setLat(record.Lat);
   };
 
   const renderStatus = (_: any, record: z.infer<typeof apiData.Item>) => {
@@ -133,22 +127,22 @@ export default function DataTable() {
       dataIndex: "State_Name",
       key: "2",
     },
-    {
-      title: "موقعیت جغرافیایی",
-      dataIndex: "test",
-      key: "7",
-      render: (_, record) => (
-        <Space size="small">
-          <Button
-            type="link"
-            className="text-primary-500 font-bold"
-            onClick={() => handleGPS(record)}
-          >
-            مشاهده موقعیت
-          </Button>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "موقعیت جغرافیایی",
+    //   dataIndex: "test",
+    //   key: "7",
+    //   render: (_, record) => (
+    //     <Space size="small">
+    //       <Button
+    //         type="link"
+    //         className="text-primary-500 font-bold"
+    //         onClick={() => handleGPS(record)}
+    //       >
+    //         مشاهده موقعیت
+    //       </Button>
+    //     </Space>
+    //   ),
+    // },
     {
       title: "توضیحات بررسی کننده",
       dataIndex: "Response_Message",
@@ -185,10 +179,10 @@ export default function DataTable() {
         <Space size="small">
           <Button
             type="link"
-            className="text-secondary-500 font-bold"
-            onClick={() => handleSetlocation(record)}
+            className="text-primary-500 font-bold"
+            onClick={() => handleGPS(record)}
           >
-            تعیین موقعیت واحد تولیدی
+            مشاهده موقعیت
           </Button>
         </Space>
       ),
@@ -215,18 +209,7 @@ export default function DataTable() {
           handleDelete={handleDelete}
           title="درخواست"
         />
-        <SetLocation
-          selectedLabUid={selectedLabUid}
-          setSelectedLabUid={setSelectedLabUid}
-          isGPSModalVisibleset={isGPSModalVisibleset}
-          setIsGPSModalVisibleset={setIsGPSModalVisibleset}
-        />
-        <GpsProducerModal
-          producerUid={producerUid}
-          setSelectedLabUid={setSelectedLabUid}
-          isGPSModalVisible={isGPSModalVisible}
-          setIsGPSModalVisible={setIsGPSModalVisible}
-        />
+        <GpsProducerModal lat={lat} long={long} setLong={setLong} />
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import useSetLocation from "@/hooks/map/use-set-location";
 import { Col, Modal, Row } from "antd";
-import React from "react";
+import { Spin, Typography, notification } from "antd/lib";
+import React, { useEffect } from "react";
 
 export default function SetLocation({
   selectedLabUid,
@@ -17,36 +18,69 @@ export default function SetLocation({
   const handleCancelGPS = () => {
     setIsGPSModalVisibleset(false);
     setSelectedLabUid(null);
-    window.location.reload();
+    // window.location.reload();
   };
+  // console.log(selectedLabUid);
 
-  window.addEventListener("message", async (event) => {
-    if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-      // try {
-      const data = JSON.parse(event.data);
+  // useEffect(() => {
+  window.addEventListener(
+    "message",
+    async (event) => {
+      if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+        // try {
 
-      if (selectedLabUid) {
-        await setLocation.mutateAsync({
-          uid: selectedLabUid,
-          address_Lat: data.latitude,
-          address_Long: data.longitude,
-          type: 1,
-        });
+        const data = JSON.parse(event.data);
+
+        if (selectedLabUid) {
+          await setLocation.mutateAsync({
+            uid: selectedLabUid,
+            address_Lat: data.latitude,
+            address_Long: data.longitude,
+            type: 1,
+          });
+        }
+
+        // } catch (error) {
+        //   notification.error({
+        //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
+        //   });
+        // }
       }
-      // } catch (error) {
-      //   // console.log(error);
+    },
+    false
+  );
+  // }, []);
+  // const setLocationHandle = async (event: any) => {
+  //   // console.log(event, selectedLabUid);
 
-      //   notification.error({
-      //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-      //   });
-      // }
-    }
-  });
+  //   if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+  //     // console.log(selectedLabUid);
+
+  //     const data = JSON.parse(event.data);
+  //     if (selectedLabUid) {
+  //       //   console.log(selectedLabUid);
+
+  //       await setLocation.mutateAsync({
+  //         uid: selectedLabUid,
+  //         address_Lat: data.latitude,
+  //         address_Long: data.longitude,
+  //         type: 1,
+  //       });
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("message", setLocationHandle);
+  //   return () => {
+  //     window.removeEventListener("message", setLocationHandle);
+  //   };
+  // }, []);
 
   return (
     <>
       <Modal
-        title="تعیین موقعیت واحد تولیدی"
+        title={"تعیین موقعیت واحد تولیدی"}
         open={isGPSModalVisibleset}
         onCancel={handleCancelGPS}
         width={800}
@@ -55,6 +89,7 @@ export default function SetLocation({
         <Row gutter={[16, 16]}>
           <Col xs={24} md={24}>
             <iframe
+              style={{ overflow: "hidden" }}
               src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/getpointfrommap`}
               aria-hidden="false"
               className="w-full h-[480px] border-solid"

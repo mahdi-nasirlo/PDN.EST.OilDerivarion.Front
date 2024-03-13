@@ -1,6 +1,6 @@
 import useSetLocation from "@/hooks/map/use-set-location";
 import { Button, Col, Modal, Row, notification } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function SetLocation({
   selectedLabUid,
@@ -16,30 +16,46 @@ export default function SetLocation({
   const handleCancelGPS = () => {
     setIsGPSModalVisibleset(false);
     setSelectedLabUid(null);
-    window.location.reload();
   };
   const setLocation = useSetLocation();
   console.log(selectedLabUid);
 
-  window.addEventListener("message", async (event) => {
-    if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-      const data = JSON.parse(event.data);
-      console.log(selectedLabUid);
-      if (selectedLabUid) {
-        await setLocation.mutateAsync({
-          uid: selectedLabUid,
-          address_Lat: data.latitude,
-          address_Long: data.longitude,
-          type: 2,
-        });
+  // useEffect(() => {
+  window.addEventListener(
+    "message",
+    async (event) => {
+      console.log(event);
+
+      if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+        // try {
+        console.log(event.data);
+
+        const data = JSON.parse(event.data);
+
+        if (selectedLabUid) {
+          await setLocation.mutateAsync({
+            uid: selectedLabUid,
+            address_Lat: data.latitude,
+            address_Long: data.longitude,
+            type: 2,
+          });
+        }
+
+        // } catch (error) {
+        //   notification.error({
+        //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
+        //   });
+        // }
       }
-    }
-  });
+    },
+    false
+  );
+  // }, []);
 
   return (
     <>
       <Modal
-        title="تعیین موقعیت آزمایشگاه"
+        title={"تعیین موقعیت آزمایشگاه"}
         open={isGPSModalVisibleset}
         onCancel={handleCancelGPS}
         width={800}

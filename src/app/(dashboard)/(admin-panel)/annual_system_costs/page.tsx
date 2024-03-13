@@ -53,7 +53,7 @@ export default function Page() {
             ],
             form: form,
             onFinish: (value) => console.log(value, "هزینه کد محصول"),
-            data: "8000000"
+            data: "9500000"
         },
     ]
 

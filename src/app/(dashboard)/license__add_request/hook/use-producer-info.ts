@@ -24,7 +24,15 @@ const useProducerInfo = (form?: FormInstance) => {
   const addLicenseHandle = async (data: any) => {
     const res = await addLicense.mutateAsync(data);
 
-    if (res) {
+    if (res.success) {
+      form?.setFieldValue("Long", undefined);
+      form?.setFieldValue("Lat", undefined);
+      form?.setFieldValue("state_Uid", undefined);
+      form?.setFieldValue("license_Expire_Date_Fa", undefined);
+      form?.setFieldValue("license_Number", undefined);
+      form?.setFieldValue("license_Type_ID", undefined);
+      form?.setFieldValue("company__Business_ID", undefined);
+      form?.setFieldValue("company__National_ID", undefined);
     }
   };
 

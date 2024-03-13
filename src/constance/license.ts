@@ -87,6 +87,8 @@ const licenseApi = {
         representative__National_Code: z.string(),
         company__Name: z.string(),
         company__National_ID: z.string(),
+        Lat: z.string(),
+        Long: z.string(),
       }),
     }),
   },

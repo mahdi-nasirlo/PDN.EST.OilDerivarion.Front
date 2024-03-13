@@ -1,7 +1,7 @@
+import React from 'react'
 import { useMeasureList } from '@/hooks/basic/measure/use-measure-list';
 import { filterOption } from '@/lib/filterOption';
 import { Col, Form, Input, InputNumber, Row, Select } from 'antd';
-import React from 'react'
 
 export default function TestItemForm({ rules }: any) {
 
@@ -70,6 +70,43 @@ export default function TestItemForm({ rules }: any) {
                     </Form.Item>
                 </Col>
             </Row>
+            <Row gutter={[16, 16]}>
+                <Col xs={24} sm={12}>
+                    <Form.Item
+                        rules={[rules]}
+                        name="result_Type"
+                        label="ثبت نتیجه"
+                        initialValue={1}
+                    >
+                        <Select
+                            options={[
+                                { label: "بازه عددی", value: 2 },
+                                { label: "توضیحات متنی", value: 1 },
+                            ]}
+                            size="large"
+                            placeholder="انتخاب کنید"
+                        />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} sm={12}>
+                    <Form.Item
+                        rules={[rules]}
+                        name="need_Process"
+                        label="انجام محاسبه آزمایش"
+                        initialValue={false}
+                    >
+                        <Select
+                            options={[
+                                { label: "دارد", value: true },
+                                { label: "ندارد", value: false },
+                            ]}
+                            size="large"
+                            placeholder="انتخاب کنید"
+                        />
+                    </Form.Item>
+                </Col>
+            </Row>
+
         </>
     )
 }

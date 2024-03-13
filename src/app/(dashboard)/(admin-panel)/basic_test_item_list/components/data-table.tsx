@@ -61,7 +61,42 @@ export default function DataTable({
         title: "فعال/غیرفعال ",
         dataIndex: "isActive",
         key: "4",
-        render: (e, record) => <StatusColumn record={record} />,
+        render: (_, record) => <StatusColumn record={record} />,
+      },
+      {
+        title: "ثبت نتیجه",
+        dataIndex: "result_Type",
+        render: (_, record) => {
+          let name = "";
+          if (record.result_Type === 2) {
+            name = "بازه عددی"
+          } else {
+            name = "توضیحات متنی"
+          }
+          return (
+            <Typography className='p-1'>
+              {name}
+            </Typography>
+          );
+        }
+      },
+      {
+        title: "انجام محاسبه آزمایش",
+        dataIndex: "need_Process",
+        render: (_, record) => {
+          let name = "";
+          if (record.need_Process === true) {
+            name = "دارد"
+          } else {
+            name = "ندارد"
+          }
+          return (
+            <Typography className='p-1'>
+              {name}
+            </Typography>
+          );
+        }
+
       },
       {
         title: "مدت زمان انجام آزمایش",

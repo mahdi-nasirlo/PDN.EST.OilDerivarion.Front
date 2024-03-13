@@ -55,11 +55,6 @@ export default function LabResultTable({
       key: "3",
     },
     {
-      title: "توضیحات",
-      dataIndex: "Result_Desc",
-      key: "4",
-    },
-    {
       title: "حداقل بازه قابل قبول",
       dataIndex: "Result_Min_Accept",
       key: "5",
@@ -78,6 +73,11 @@ export default function LabResultTable({
       title: "تجدید پذیر",
       dataIndex: "Result_Renewable",
       key: "5",
+    },
+    {
+      title: "توضیحات",
+      dataIndex: "Result_Desc",
+      key: "4",
     },
     {
       title: "نام تامین کننده",
@@ -129,6 +129,7 @@ export default function LabResultTable({
           text: "لیست نتایج آزمون",
         }}
         isLoading={isFetching}
+        pagination={false}
         data={{ records: data }}
         columns={columns}
       />

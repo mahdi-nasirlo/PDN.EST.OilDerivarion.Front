@@ -7,7 +7,7 @@ import useLicenseGetRequest from "./hook/use-licese-get-request";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { validateNationalCode } from "@/lib/validate-national-code";
-import Breadcrumb from "@/components/breadcrumb"
+import Breadcrumb from "@/components/breadcrumb";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Card } from "@/components/card";
 interface PropType {
@@ -42,7 +42,6 @@ export default function Home(props: PropType) {
       </Card>
     );
 
-
   return (
     <>
       <Breadcrumb
@@ -51,7 +50,7 @@ export default function Home(props: PropType) {
         backLink="/license_get_requset_list"
         pages={[
           { label: "خانه", path: "/" },
-          { label: "لیست درخواست مجوزها", path: "/license_get_requset_list" }
+          { label: "لیست درخواست مجوزها", path: "/license_get_requset_list" },
         ]}
       />
       <Card>
@@ -77,16 +76,16 @@ export default function Home(props: PropType) {
                   name="Representative__National_Code"
                   label="شماره ملی"
                   rules={[
-                    { required: true, message: 'لطفا مقدار را وارد کنید' },
+                    { required: true, message: "لطفا مقدار را وارد کنید" },
                     {
                       validator(rule, value, callback) {
                         if (value && !validateNationalCode(value)) {
-                          callback('کد ملی وارد شده معتبر نیست');
+                          callback("کد ملی وارد شده معتبر نیست");
                         } else {
                           callback();
                         }
-                      }
-                    }
+                      },
+                    },
                   ]}
                 >
                   <Input
@@ -143,6 +142,14 @@ export default function Home(props: PropType) {
                   <Input disabled size="large" placeholder="وارد کنید" />
                 </Form.Item>
               </Col>
+              <Col xs={24}>
+                <iframe
+                  style={{ overflowX: "hidden" }}
+                  src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=14&latitude=${data?.producer?.Lat}&longitude=${data?.producer?.Long}&title=موقعیت واحد تولیدی&balloon_content=موقعیت واحد تولیدی`}
+                  aria-hidden="false"
+                  className="w-full h-[480px] border-solid"
+                ></iframe>
+              </Col>
             </Row>
           </Form>
         </Spin>
@@ -156,7 +163,10 @@ export default function Home(props: PropType) {
                     required={false}
                     rules={[
                       { required: true, message: "لطفا مقدار را وارد کنید" },
-                      { max: 500, message: "رشته باید حداکثر دارای 500 کاراکتر باشد" }
+                      {
+                        max: 500,
+                        message: "رشته باید حداکثر دارای 500 کاراکتر باشد",
+                      },
                     ]}
                     name="description"
                     label="توضیحات"
@@ -181,7 +191,7 @@ export default function Home(props: PropType) {
           }}
           choices={data?.choices}
         />
-      </Card >
+      </Card>
     </>
   );
 }

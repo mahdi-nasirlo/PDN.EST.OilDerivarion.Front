@@ -22,6 +22,8 @@ const BasicTestItemGetPageItem = z.object({
   measureName: z.string(),
   testMethod: z.string(),
   testDuration: z.number(),
+  result_Type: z.number(),
+  need_Process: z.boolean(),
 });
 
 const BasicTestItemGetItem = z.object({
@@ -33,6 +35,8 @@ const BasicTestItemGetItem = z.object({
   measureName: z.string(),
   testMethod: z.string(),
   testDuration: z.number(),
+  result_Type: z.number(),
+  need_Process: z.boolean(),
 });
 
 const TestItemApi = {
@@ -88,6 +92,8 @@ const TestItemApi = {
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required_choice }),
       testDuration: z.number({ required_error: errorMessage.number_invalid }),
+      result_Type: z.number({ required_error: errorMessage.required_choice }),
+      need_Process: z.boolean({ required_error: errorMessage.required_choice }),
     }),
   },
 
@@ -102,6 +108,8 @@ const TestItemApi = {
       isActive: z.boolean({ required_error: errorMessage.required_choice }),
       measureUid: z.string({ required_error: errorMessage.required_choice }),
       testDuration: z.number({ required_error: errorMessage.number_invalid }),
+      result_Type: z.number({ required_error: errorMessage.required_choice }),
+      need_Process: z.boolean({ required_error: errorMessage.required_choice }),
     }),
   },
 

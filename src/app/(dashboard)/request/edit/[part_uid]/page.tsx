@@ -13,8 +13,7 @@ import staticMessages from "@/lib/staticMessages";
 import { WarningFilled } from "@ant-design/icons";
 import useRequestPackageInfo from "@/hooks/material/use-request-package-part-info";
 import { Tag } from "antd/lib";
-import { z } from "zod";
-import { materialApi } from "constance/material";
+
 
 interface TProps {
   params: { part_uid: string; package_uid: string };
@@ -37,12 +36,12 @@ export default function Page({ params: { part_uid, package_uid } }: TProps) {
         extera={[
           <>
             {requestInfo.data?.Part_Type && (
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <Typography key={1}>روش تولید:</Typography>
-                <Tag color="blue-inverse" className="mx-2">
+                <Tag color="blue-inverse" className="mx-2 px-2 p-1">
                   {
                     ["برش", "بلندینگ", "پیرولیز", "شیرین سازی", "کرکینگ"][
-                      requestInfo.data?.Part_Type - 1
+                    requestInfo.data?.Part_Type - 1
                     ]
                   }
                 </Tag>

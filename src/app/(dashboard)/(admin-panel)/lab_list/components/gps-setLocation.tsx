@@ -21,15 +21,39 @@ export default function SetLocation({
   console.log(selectedLabUid);
 
   // useEffect(() => {
-  window.addEventListener(
-    "message",
-    async (event) => {
-      console.log(event);
+  // window.addEventListener(
+  //   "message",
+  //   async (event) => {
+  //     console.log(event);
 
+  //     if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
+  //       // try {
+  //       console.log(event.data);
+
+  //       const data = JSON.parse(event.data);
+
+  //       if (selectedLabUid) {
+  //         await setLocation.mutateAsync({
+  //           uid: selectedLabUid,
+  //           address_Lat: data.latitude,
+  //           address_Long: data.longitude,
+  //           type: 2,
+  //         });
+  //       }
+
+  //       // } catch (error) {
+  //       //   notification.error({
+  //       //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
+  //       //   });
+  //       // }
+  //     }
+  //   },
+  //   false
+  // );
+  // }, []);
+  useEffect(() => {
+    const handleMessage = async (event: any) => {
       if (event.origin === process.env.NEXT_PUBLIC_MAP_LAB_URL) {
-        // try {
-        console.log(event.data);
-
         const data = JSON.parse(event.data);
 
         if (selectedLabUid) {
@@ -40,17 +64,15 @@ export default function SetLocation({
             type: 2,
           });
         }
-
-        // } catch (error) {
-        //   notification.error({
-        //     message: "خطایی رخ داده است لطفا با پشتیبان تماس بگیرید",
-        //   });
-        // }
       }
-    },
-    false
-  );
-  // }, []);
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [selectedLabUid, setLocation]);
 
   return (
     <>

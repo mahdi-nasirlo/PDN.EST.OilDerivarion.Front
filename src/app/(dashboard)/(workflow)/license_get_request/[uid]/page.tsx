@@ -144,8 +144,8 @@ export default function Home(props: PropType) {
               </Col>
               <Col xs={24}>
                 <iframe
-                  style={{ overflow: "hidden" }}
-                  src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=2&latitude=${data?.producer?.Lat}&longitude=${data?.producer?.Long}&title=موقعیت واحد تولیدی&balloon_content=موقعیت واحد تولیدی`}
+                  style={{ overflowX: "hidden" }}
+                  src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=14&latitude=${data?.producer?.Lat}&longitude=${data?.producer?.Long}&title=موقعیت واحد تولیدی&balloon_content=موقعیت واحد تولیدی`}
                   aria-hidden="false"
                   className="w-full h-[480px] border-solid"
                 ></iframe>

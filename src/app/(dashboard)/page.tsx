@@ -6,11 +6,13 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { Card } from "@/components/card";
 import { motion } from "framer-motion";
 import { Alert, Spin } from "antd";
+import ProductCodePieChart from "@/components/widget/product-code-pie-chart";
 import PriceTypePieChart from "@/components/widget/price-type-pie-chart";
+import ProductCodeBarChart from "@/components/widget/product-code-bar-chart";
 
 export default function Page() {
 
-  const pages = useGetUserAccess()
+  const pages = useGetUserAccess();
 
   return (
     <>
@@ -31,12 +33,31 @@ export default function Page() {
             className="font-bold text-md w-full"
             message="اشخاص حقیقی فاقد شرکت،  قادر به ثبت نام و استفاده از سامانه نمی باشد" />
         </motion.div>
-      </Card> : <Card>
-        <div className="max-w-lg">
-          <PriceTypePieChart />
-        </div>
-      </Card>}
-
+      </Card> :
+        <>
+          <div>
+            <Card>
+              <div className="col-span-12">
+                <div className="flex items-center">
+                  <ProductCodeBarChart className='max-h-[500px]' />
+                </div>
+              </div>
+            </Card>
+          </div>
+          <div className="flex max-lg:gap-0 gap-6 w-full">
+            <Card className="w-1/2">
+              <div>
+                <ProductCodePieChart className='max-h-[500px]' />
+              </div>
+            </Card>
+            <Card className="w-1/2">
+              <div>
+                <PriceTypePieChart className='max-h-[500px]' />
+              </div>
+            </Card>
+          </div>
+        </>
+      }
     </>
   );
 }

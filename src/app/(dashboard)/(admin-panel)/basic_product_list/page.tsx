@@ -27,7 +27,7 @@ export default function Page() {
                 size="large"
                 items={[
                     {
-                        label: "فیلتر جدول",
+                        label: "جستجو",
                         children: <FilterForm onFinish={dataPage.setFilter as any} />,
                     },
                 ]}

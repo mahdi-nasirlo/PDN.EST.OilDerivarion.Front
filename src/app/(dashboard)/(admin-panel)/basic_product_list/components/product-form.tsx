@@ -59,7 +59,7 @@ function ProductForm({ rules }: any) {
         </Col>
         <Col xs={24} sm={12}>
           <Form.Item
-            label="فاکتور های آزمون"
+            label="فاکتورهای آزمون"
             name="testItems"
             rules={[rules]}
           >
@@ -75,13 +75,13 @@ function ProductForm({ rules }: any) {
           <Form.Item
             rules={[rules]}
             name="isActive"
-            label="فعال/غیر فعال"
+            label="فعال/غیرفعال"
             initialValue={true}
           >
             <Select
               options={[
                 { label: "فعال", value: true },
-                { label: "غیر فعال", value: false },
+                { label: "غیرفعال", value: false },
               ]}
               size="large"
               placeholder="انتخاب کنید"

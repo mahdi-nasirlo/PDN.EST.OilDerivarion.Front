@@ -3,6 +3,35 @@ import { generalResponseZod, notEmpty } from "@/types/api-response";
 import { errorMessage } from "./error-message";
 import Item from "antd/es/list/Item";
 
+const LabResult = z.object({
+  Sample_Name: z.string(),
+  Package_ID: z.number(),
+  Sample_ID: z.number(),
+  Is_Product: z.boolean(),
+  Sample_Type_Value: z.string(),
+  Sample_Type: z.number(),
+  Test_Item_Count: z.number(),
+  Name: z.string(),
+  Title: z.string(),
+  Result_Test: z.string(),
+  Result_Range: z.number(),
+  Result_Desc: z.string(),
+  Result_Min_Accept: z.number(),
+  Result_Max_Accept: z.number(),
+  Result_Renew_Unit_FK: z.number(),
+  Result_Renewable: z.number(),
+  Material_Id: z.string().optional().nullable(),
+  Material_Supply_Method_Id: z.string().optional().nullable(),
+  Material_Unit_Consumption: z.string().optional().nullable(),
+  Material_Import_Declaration_Number: z.string().optional().nullable(),
+  Material_Supply_Name: z.string().optional().nullable(),
+  Material_Supply_Person_Type_Id: z.string().optional().nullable(),
+  Material_Supply_National_Code: z.string().optional().nullable(),
+  Material_Supply_Iran_Code: z.string().optional().nullable(),
+  Material_Supply_Address: z.string().optional().nullable(),
+  Material_Usage_Percentage: z.string().optional().nullable(),
+});
+
 const RequestPackageReportListItem = z.object({
   UID: z.string().nullable(),
   Form_Key: z.string(),
@@ -812,52 +841,27 @@ const RequestPackageApi = {
     type: z.object({
       package_UID: z.string().uuid(),
     }),
+    Item: LabResult,
     response: generalResponseZod.extend({
-      data: z.array(
-        z.object({
-          Sample_Name: z.string(),
-          Package_ID: z.number(),
-          Sample_ID: z.number(),
-          Is_Product: z.boolean(),
-          Sample_Type_Value: z.string(),
-          Sample_Type: z.number(),
-          Test_Item_Count: z.number(),
-          Name: z.string(),
-          Title: z.string(),
-          Result_Test: z.string(),
-          Result_Range: z.number(),
-          Result_Desc: z.string(),
-          Result_Min_Accept: z.number(),
-          Result_Max_Accept: z.number(),
-          Result_Renew_Unit_FK: z.number(),
-          Result_Renewable: z.number(),
-          Material_Id: z.string().optional().nullable(),
-          Material_Supply_Method_Id: z.string().optional().nullable(),
-          Material_Unit_Consumption: z.string().optional().nullable(),
-          Material_Import_Declaration_Number: z.string().optional().nullable(),
-          Material_Supply_Name: z.string().optional().nullable(),
-          Material_Supply_Person_Type_Id: z.string().optional().nullable(),
-          Material_Supply_National_Code: z.string().optional().nullable(),
-          Material_Supply_Iran_Code: z.string().optional().nullable(),
-          Material_Supply_Address: z.string().optional().nullable(),
-          Material_Usage_Percentage: z.string().optional().nullable(),
-        })
-      ),
+      data: z.array(LabResult),
     }),
   },
   report: {
     url: "/RequestPackage/Report",
     type: z.object({
-      report_Name: z.string()
+      report_Name: z.string(),
     }),
-    response: generalResponseZod.extend({
-      data: z.array(z.object({
-        Type_1: z.number(),
-        Type_2: z.number(),
-        Type_3: z.number(),
-        Type_4: z.number()
-      })).length(1)
-    })
+    productcode:z.array(z.object({ Product_Name: z.string(), Tedad: z.number() })),
+    paymentPie:z
+        .array(
+          z.object({
+            Type_1: z.number(),
+            Type_2: z.number(),
+            Type_3: z.number(),
+            Type_4: z.number(),
+          })
+        )
+        .length(1)
   },
   BoxDeviceListForOpen: {
     url: "/RequestPackage/BoxDeviceListForOpen",
@@ -880,6 +884,22 @@ const RequestPackageApi = {
       data: z.array(z.any()),
     }),
   },
+  GetReportSetad: {
+    url: "/RequestPackage/GetReportSetad",
+    type: z.object({
+        taskId: z.string(),
+    }),
+    response: generalResponseZod.extend({
+      data: z.array(z.object({
+          headers: z.array(z
+            .object({
+              Col_Name: z.string()
+            })),
+          values: z
+            .array(z.any())
+      }))
+    })
+  }
 };
 
 export { RequestPackageApi };

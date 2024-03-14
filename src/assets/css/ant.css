@@ -52,7 +52,7 @@
   @apply font-medium;
 }
 
-.ant-table-row:last-child .ant-table-cell {
+.ant-table- :last-child .ant-table-cell {
   border: none !important;
 }
 
@@ -317,18 +317,13 @@
 }
 
 .ant-tooltip-inner {
-    width: fit-content;
+  width: fit-content;
 }
 
-/* .ant-upload-list-item {
-  border: 2px solid green !important; 
- }  
- .ant-upload-list-item {
-  color:  green  !important;
-} 
- .ant-upload-list-item-name {
-  color:  green  !important;
-} 
-.ant-upload-list-item .ant-tooltip {
-  display: none !important;
-} */
+.message-box-tab-panel .ant-tabs-nav {
+  @apply mb-0 !important;
+}
+
+.message-box-tab-panel .ant-tabs-content-holder .ant-tabs-content {
+  @apply rounded-b-md p-1.5 overflow-y-auto overflow-x-hidden max-h-72 !important;
+}

@@ -76,7 +76,7 @@ const Page = () => {
       <Breadcrumb
         titleIcon={<ClipboardDocumentListIcon className="w-8" />}
         pages={[{ label: "خانه", path: "/" }]}
-        currentPage={"لیست درخواست مجوز ها"}
+        currentPage={"لیست درخواست مجوزها"}
         backLink="/"
       />
       <Card>

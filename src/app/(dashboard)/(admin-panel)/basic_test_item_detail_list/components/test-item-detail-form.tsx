@@ -33,7 +33,7 @@ export default function TestItemDetailForm({ rules }: any) {
                 <Col xs={24} sm={12}>
                     <Form.Item
                         name="isActive"
-                        label="فعال / غیر فعال"
+                        label="فعال / غیرفعال"
                         rules={[rules]}
                         initialValue={true}
                     >
@@ -41,7 +41,7 @@ export default function TestItemDetailForm({ rules }: any) {
                             size="large"
                             options={[
                                 { label: "فعال", value: true },
-                                { label: "غیر فعال", value: false },
+                                { label: "غیرفعال", value: false },
                             ]}
                             placeholder="انتخاب کنید"
                         />

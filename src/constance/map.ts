@@ -14,7 +14,12 @@ const mapApi = {
       longitude: z.number(),
     }),
     response: generalResponseZod.extend({
-      data: z.object({ latitude: z.number(), longitude: z.number() }),
+      data: z.object({
+        name: z.string(),
+        address: z.string(),
+        address_Lat: z.number(),
+        address_Long: z.number(),
+      }),
     }),
   },
 

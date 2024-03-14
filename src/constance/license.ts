@@ -18,6 +18,9 @@ const GetRequestList = z.object({
   Wrork_State_Value: z.string(),
   License_Type: z.string(),
   State_Name: z.string(),
+  ProducerUID: z.string().uuid(),
+  Lat: z.number().or(z.string()),
+  Long: z.number().or(z.string()),
 });
 const GetRequestListItem = z.object({
   Request_Uid: z.string(),
@@ -72,6 +75,8 @@ const Producer = z.object({
   License_Type_Name: z.string(),
   State_Uid: z.string(),
   State_Name: z.string(),
+  Lat: z.string(),
+  Long: z.string(),
 });
 
 const licenseApi = {
@@ -84,6 +89,8 @@ const licenseApi = {
         representative__National_Code: z.string(),
         company__Name: z.string(),
         company__National_ID: z.string(),
+        Lat: z.string(),
+        Long: z.string(),
       }),
     }),
   },
@@ -121,6 +128,8 @@ const licenseApi = {
         required_error: errorMessage.required,
       }),
       state_Uid: z.string({ required_error: errorMessage.required }),
+      Lat: z.string(),
+      Long: z.string(),
     }),
   },
   GetRequestListForCurrentUser: {

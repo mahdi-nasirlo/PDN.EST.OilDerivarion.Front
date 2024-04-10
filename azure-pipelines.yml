@@ -11,7 +11,7 @@ variables:
   project.name: std-oil-frontend-prod
   nexus.ip.port.site: 192.168.57.50:8081
   nexus.ip.port.infra: 192.168.57.50:8082
-  elastic.url: http://172.18.15.118:9200
+  elastic.url: https://172.18.15.118:9200
   elastic.user: elastic
   elastic.pass: LU58q*nJ_1DXgy271YKa
   elastic.indexname: oil-front-prod

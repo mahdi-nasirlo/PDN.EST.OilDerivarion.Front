@@ -49,6 +49,8 @@ steps:
             NEXT_PUBLIC_API_URL=$(oil.api.url) \
             NEXT_PUBLIC_SSO_URL=$(sso.url) \
             NEXT_PUBLIC_MAP_LAB_URL=$(map.url)
+            NEXTAUTH_SECRET=9xZgnhTJ7lsfzOnHbwwpB/mzeC7FZWYO0zOEZrbY+Jc=
+            NEXTAUTH_URL=$(oil.api.url)
 
         FROM base AS restore
         RUN npm set registry=http://$(nexus.ip.port.site)/repository/npm-group/

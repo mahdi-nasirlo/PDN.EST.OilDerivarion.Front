@@ -36,7 +36,7 @@ export default function GpsProducerModal({ lat, long, setLong }: TProps) {
               style={{ overflowX: "hidden" }}
               src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/ShowPointOnMap?zoom=14&title=موقعیت واحد تولیدی&latitude=${lat}&longitude=${long}&show_ballon=0&balloon_content=محل دقیق واحد تولیدی`}
               aria-hidden="false"
-              className="w-full h-[480px] border-solid"
+              className="w-full h-[480px] border-solid border-2 border-CustomizeBlue-500 rounded-lg"
             ></iframe>
           </Col>
         </Row>

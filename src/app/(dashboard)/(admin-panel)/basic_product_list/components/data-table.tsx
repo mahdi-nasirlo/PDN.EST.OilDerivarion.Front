@@ -95,17 +95,18 @@ export default function DataTable({ setModalVisible, data, isLoading, setPaginat
                 key: "6",
                 render: (_, record) => {
                     if (record.testItems) {
+                        let list = record.testItems.replace(/&#x0D;/g, ' ').replace("&#x0D", " ")
                         return (
                             <Tooltip
                                 placement="top"
-                                title={<Typography>{record.testItems}</Typography>}
+                                title={<Typography>{list}</Typography>}
                             >
                                 <Typography.Text
                                     className="max-w-[350px]"
                                     ellipsis={true}
                                     style={{ maxWidth: "350px" }}
                                 >
-                                    {record.testItems}
+                                    {list}
                                 </Typography.Text>
                             </Tooltip>
                         );

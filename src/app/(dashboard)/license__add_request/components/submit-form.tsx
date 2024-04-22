@@ -152,13 +152,13 @@ export default function SubmitForm() {
           </Col>
         </Row>
         <Row gutter={[16, 0]}>
-          <Col xs={24} className="mb-2">
+          <Col xs={24} className="mb-3">
             <SetLocation form={form} />
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
               name="Lat"
-              label="عرض چغرافیایی"
+              label="عرض جغرافیایی"
               required={false}
               rules={[rules]}
             >

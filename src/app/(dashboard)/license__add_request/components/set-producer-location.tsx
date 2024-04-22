@@ -28,7 +28,7 @@ export default function SetLocation({ form }: { form: FormInstance }) {
         style={{ overflowX: "hidden" }}
         src={`${process.env.NEXT_PUBLIC_MAP_LAB_URL}/map/getpointfrommap?zoom=14&latitude=35.72387338825216&longitude=51.431163210478864`}
         aria-hidden="false"
-        className="w-full h-[480px] border-solid"
+        className="w-full h-[480px] border-solid border-2 border-CustomizeBlue-500 rounded-lg"
       ></iframe>
     </>
   );

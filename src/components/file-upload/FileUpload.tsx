@@ -95,7 +95,7 @@ const FileUpload = (
         {...props}
         {...defualtProps}
         className="w-full"
-        accept="image/*"
+        accept=".jpg"
         maxCount={1}
         multiple={false}
         fileList={fileList}

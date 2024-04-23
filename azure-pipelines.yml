@@ -17,6 +17,7 @@ variables:
   elastic.indexname: oil-front-prod
   oil.api.url: https://oil.isiri.gov.ir
   map.url: https://map.isiri.gov.ir
+  sso.url: https://oilsso.isiri.gov.ir
 
 steps:
   - task: Docker@2

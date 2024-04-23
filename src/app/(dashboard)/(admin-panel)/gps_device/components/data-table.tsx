@@ -48,13 +48,13 @@ export default function DataTable({
       width: "5%",
     },
     {
-      title: "نام",
-      dataIndex: "name",
+      title: "کد جعبه",
+      dataIndex: "code",
       key: "2",
     },
     {
-      title: "کد جعبه",
-      dataIndex: "code",
+      title: "نام",
+      dataIndex: "name",
       key: "3",
     },
     {

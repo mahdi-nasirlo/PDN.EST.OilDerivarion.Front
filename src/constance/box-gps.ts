@@ -16,7 +16,7 @@ const boxGPSApi = {
   BoxGPSGetPage: {
     url: "/BoxGPS/GetPage",
     type: z.object({
-      code: z.string().max(50).optional(),
+      code: z.number().optional(),
       device_Status: z.number().optional(),
       fromRecord: z.number(),
       selectRecord: z.number(),
@@ -38,7 +38,7 @@ const boxGPSApi = {
     response: generalResponseZod.extend({
       data: z.object({
         uid: z.string().uuid(),
-        code: z.string(),
+        code: z.number(),
         capacity: z.number(),
         stateName: z.string(),
         stateId: z.number(),

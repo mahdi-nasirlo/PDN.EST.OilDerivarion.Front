@@ -27,19 +27,19 @@
     },
     "too_small": {
       "array": {
-         "exact": "آرایه باید حاوی {{minimum}} عنصر باشد",
-         "inclusive": " حداقل {{minimum}} مورد را انتخاب کنید",
-         "not_inclusive": " حداقل {{minimum}} راانتخاب کنید"
+        "exact": "آرایه باید حاوی {{minimum}} عنصر باشد",
+        "inclusive": " حداقل {{minimum}} مورد را انتخاب کنید",
+        "not_inclusive": " حداقل {{minimum}} راانتخاب کنید"
       },
       "string": {
-         "exact": "رشته باید حاوی {{minimum}} کاراکتر باشد",
-         "inclusive": "شرح فرایند تولید باید حداقل دارای {{minimum}} کاراکتر باشد",
-         "not_inclusive": "رشته باید بیش از {{minimum}} کاراکتر داشته باشد"
+        "exact": " باید حاوی {{minimum}} کاراکتر باشد",
+        "inclusive": " باید حداقل دارای {{minimum}} کاراکتر باشد",
+        "not_inclusive": " باید بیش از {{minimum}} کاراکتر داشته باشد"
       },
       "number": {
-          "exact": "رقم باید {{minimum}} باشد",
-         "inclusive": "رقم باید بزرگتر یا مساوی با {{minimum}} باشد",
-         "not_inclusive": "رقم باید بیشتر از {{minimum}} باشد"
+        "exact": "رقم باید {{minimum}} باشد",
+        "inclusive": "رقم باید بزرگتر یا مساوی با {{minimum}} باشد",
+        "not_inclusive": "رقم باید بیشتر از {{minimum}} باشد"
       },
       "set": {
         "exact": "ورودی نامتعبر است ",
@@ -48,20 +48,20 @@
       },
       "date": {
         "exact": "تاریخ باید {{- minimum, datetime}} باشد",
-         "inclusive": "تاریخ باید بزرگتر یا مساوی با {{- minimum, datetime}} باشد",
-         "not_inclusive": "تاریخ باید بزرگتر از {{- minimum, datetime}} باشد"
+        "inclusive": "تاریخ باید بزرگتر یا مساوی با {{- minimum, datetime}} باشد",
+        "not_inclusive": "تاریخ باید بزرگتر از {{- minimum, datetime}} باشد"
       }
     },
     "too_big": {
       "array": {
-         "exact": "آرایه باید حاوی {{maximum}} عنصر باشد",
-         "inclusive": "آرایه باید حداکثر حاوی {{maximum}} عنصر باشد",
-         "not_inclusive": "آرایه باید کمتر از {{maximum}} عنصر داشته باشد"
+        "exact": "آرایه باید حاوی {{maximum}} عنصر باشد",
+        "inclusive": "آرایه باید حداکثر حاوی {{maximum}} عنصر باشد",
+        "not_inclusive": "آرایه باید کمتر از {{maximum}} عنصر داشته باشد"
       },
       "string": {
-        "exact": "رشته باید دارای {{maximum}} کاراکتر باشد",
-        "inclusive": "رشته باید حداکثر دارای {{maximum}} کاراکتر باشد",
-        "not_inclusive": "رشته باید کمتر از {{maximum}} کاراکتر باشد"
+        "exact": " باید دارای {{maximum}} کاراکتر باشد",
+        "inclusive": " باید حداکثر دارای {{maximum}} کاراکتر باشد",
+        "not_inclusive": " باید کمتر از {{maximum}} کاراکتر باشد"
       },
       "number": {
         "exact": "رقم باید {{maximum}} باشد",

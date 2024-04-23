@@ -57,7 +57,7 @@ const labApi = {
         .pipe(notEmpty),
       address: z
         .string({ required_error: errorMessage.required })
-        .max(50)
+        .max(250)
         .pipe(notEmpty),
       testItems: z.array(z.string()).min(1),
     }),
@@ -107,7 +107,7 @@ const labApi = {
         .pipe(notEmpty),
       address: z
         .string({ required_error: errorMessage.required })
-        .max(50)
+        .max(250)
         .pipe(notEmpty),
       testItems: z.array(z.string()).min(1),
     }),
